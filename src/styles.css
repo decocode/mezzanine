@@ -1,0 +1,6 @@
+/*
+  Mezzanine structural styles.
+  Component CSS lives here (or is imported from here) and only ever
+  references design tokens (CSS custom properties) — never raw values.
+  Each consuming app supplies its own token values in its own theme file.
+*/

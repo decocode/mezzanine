@@ -1,0 +1,33 @@
+{
+  "ci": {
+    "collect": {
+      "staticDistDir": "./site-dist",
+      "isSinglePageApplication": true,
+      "numberOfRuns": 3,
+      "url": [
+        "http://localhost/"
+      ],
+      "settings": {
+        "onlyCategories": ["performance"],
+        "chromeFlags": "--headless --no-sandbox"
+      }
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["error", { "minScore": 0.65 }],
+        "largest-contentful-paint": ["error", { "maxNumericValue": 5000 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.25 }],
+        "total-blocking-time": ["error", { "maxNumericValue": 800 }],
+        "first-contentful-paint": ["warn", { "maxNumericValue": 3000 }],
+        "speed-index": ["warn", { "maxNumericValue": 5000 }],
+        "total-byte-weight": ["warn", { "maxNumericValue": 4000000 }],
+        "resource-summary:script:size": ["warn", { "maxNumericValue": 650000 }],
+        "resource-summary:image:size": ["warn", { "maxNumericValue": 3000000 }]
+      }
+    },
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "./reports/lighthouse/mobile"
+    }
+  }
+}

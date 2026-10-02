@@ -1,0 +1,58 @@
+{
+  "name": "@decocode/mezzanine",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Mezzanine — an accessible, token-themed React Aria design system by DecoCode Ltd.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/mezzanine.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:lib && npm run build:site",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "build:site": "tsc -b && vite build",
+    "typecheck": "tsc -b",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "lighthouse": "npm run build:site && npm run lighthouse:mobile:run && npm run lighthouse:desktop:run",
+    "lighthouse:mobile": "npm run build:site && npm run lighthouse:mobile:run",
+    "lighthouse:mobile:run": "node scripts/run-lighthouse.mjs autorun --config=./lighthouserc.mobile.json",
+    "lighthouse:desktop": "npm run build:site && npm run lighthouse:desktop:run",
+    "lighthouse:desktop:run": "node scripts/run-lighthouse.mjs autorun --config=./lighthouserc.desktop.json",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed"
+  },
+  "peerDependencies": {
+    "react": "^19.2.8",
+    "react-aria-components": "^1.21.1",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxlint": "^1.81.0",
+    "react": "^19.2.8",
+    "react-aria-components": "^1.21.1",
+    "react-dom": "^19.2.8",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  }
+}

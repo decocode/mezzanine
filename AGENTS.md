@@ -1,0 +1,59 @@
+# Agent instructions
+
+This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It contains two things: the publishable component library (`@decocode/mezzanine`) in `src/`, and the showcase site for mezzanine.fly.dev in `site/`. Read `MAP.md` for the file layout and `README.md` for setup commands.
+
+## Stack and conventions
+
+- Use React with TypeScript.
+- Use `react-aria-components` for interactive controls so keyboard and focus behavior stays accessible.
+- Use npm and keep `package-lock.json` in sync with `package.json`.
+- Keep configuration minimal and follow the existing Vite and Oxlint setup.
+
+## Library and showcase boundaries
+
+- `src/` is the published package. Everything a consuming app can use is exported from `src/index.ts`. Do not import from `site/` inside `src/`.
+- `site/` is the showcase. It imports the library as `@decocode/mezzanine` (resolved to `src/index.ts` by an alias), never by relative paths into `src/`, so it consumes the library the way apps do.
+- `react`, `react-dom`, and `react-aria-components` are peer dependencies. Do not bundle them. If library code imports another package directly (for example `react-aria`, `react-stately`, or `@internationalized/date`), it must be listed in `package.json`.
+- Library components contain no product-specific content, branding, copy, or imagery. Anything belonging to a single product stays in that product's repository.
+- Library CSS references design tokens (CSS custom properties) only, never raw color, font, or size values. Each consuming app supplies token values in its own theme file. Name tokens by purpose, not appearance (for example `--color-accent`, not `--color-yellow`).
+- Treat changes to exported component names, props, token names, or CSS class names as breaking changes for consuming apps. Call them out explicitly.
+
+## Scope and understandability
+
+- Make only the requested change and the smallest changes needed to make it work. Do not add speculative features, sample content, dependencies, or abstractions.
+- Before editing, identify the files involved and what each change is for. Ask about a material design decision that has not been specified.
+- Give each file one clear responsibility. Create a new folder or shared module only when the current work needs it.
+- Use literal, descriptive names for files, variables, and functions. Avoid abbreviations and vague names whose purpose cannot be understood in context.
+- Update `MAP.md` when a source file is added, moved, or removed, and state that file's purpose.
+- After a change, explain what each changed file does, why it changed, and how the result was checked.
+
+## UI and logic files
+
+- Keep `.tsx` files focused on rendering, component composition, React Aria wiring, and local display state. Simple conditions and `map` calls that directly render UI can stay there.
+- Put nonvisual calculations, sorting, transformations, and reusable decisions in clearly named `.ts` files. Longer or shared content lists can also live in `.ts` files.
+- Extract logic when it becomes nontrivial, mixes responsibilities, needs reuse, or takes more than one sentence to explain. Keep short, single-use values near the component that displays them.
+- Avoid creating a paired `.ts` file for every component or a generic `utils.ts` file.
+
+## Components, accessibility, and responsive design
+
+- Target WCAG 2.2 Level AA across the library and showcase. Do not claim compliance without checking the finished components and interactions.
+- Build mobile first: make the narrow layout work before adding wider-screen styles. Check content and controls at 320 CSS pixels, with text enlarged to 200%, and without unintended horizontal page scrolling.
+- Use `react-aria-components` for interactive patterns it supports. Consult the official React Aria documentation for each component, use its compositional parts and built-in behavior, and do not recreate its keyboard, pointer, touch, or focus handling.
+- Give component wrappers a clear name for the UI pattern they present. When that name differs from the underlying React Aria component, note the React Aria component used. Follow React Aria prop conventions such as `onPress`, `isDisabled`, and `isPending` where those props are supported. Keep wrapper props close to the underlying component API, and pass `className` through so consuming apps have an escape hatch.
+- Use semantic HTML for page structure and static content. Give every control an accessible name, prefer visible labels, and provide text alternatives for meaningful images.
+- Keep focus visible. Check keyboard operation, focus order, screen reader labels, touch target size, color contrast, and reduced-motion behavior for each completed interaction.
+
+## Before finishing a code change
+
+- Run `npm run lint` and `npm run build` when library, showcase, or configuration code changes. `npm run build` builds both the package and the showcase.
+- Scan staged changes with `gitleaks git --staged --redact .` before a commit. The configured hook runs this automatically.
+- Update `MAP.md` if the project structure or main entry points change.
+- Report any check that could not run.
+
+## Publishing and deployment status
+
+The package is marked `"private": true` and has not been published. Do not publish it, change its version, or remove `private` unless the user asks.
+
+The showcase is planned for mezzanine.fly.dev but is not yet deployed. There is no `Dockerfile`, `nginx.conf`, or `fly.toml` yet. Do not create a Fly app or deploy unless the user asks.
+
+Preserve unrelated user changes and do not create a commit unless requested.

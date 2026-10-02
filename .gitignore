@@ -1,0 +1,10 @@
+node_modules
+dist
+site-dist
+playwright-report
+test-results
+.lighthouseci
+reports
+*.tsbuildinfo
+.DS_Store
+*.local
