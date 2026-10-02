@@ -1,0 +1,11 @@
+node_modules
+dist
+site-dist
+reports
+playwright-report
+test-results
+.lighthouseci
+.git
+.env
+.env.*
+*.log

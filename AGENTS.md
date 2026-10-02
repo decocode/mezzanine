@@ -1,6 +1,6 @@
 # Agent instructions
 
-This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It contains two things: the publishable component library (`@decocode/mezzanine`) in `src/`, and the showcase site for mezzanine.fly.dev in `site/`. Read `MAP.md` for the file layout and `README.md` for setup commands.
+This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It contains two things: the component library (`@decocode/mezzanine`) in `src/`, and the showcase site for mezzanine.fly.dev in `site/`. Read `MAP.md` for the file layout and `README.md` for setup commands.
 
 ## Stack and conventions
 
@@ -11,7 +11,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 
 ## Library and showcase boundaries
 
-- `src/` is the published package. Everything a consuming app can use is exported from `src/index.ts`. Do not import from `site/` inside `src/`.
+- `src/` is the package. Everything a consuming app can use is exported from `src/index.ts`. Do not import from `site/` inside `src/`.
 - `site/` is the showcase. It imports the library as `@decocode/mezzanine` (resolved to `src/index.ts` by an alias), never by relative paths into `src/`, so it consumes the library the way apps do.
 - `react`, `react-dom`, and `react-aria-components` are peer dependencies. Do not bundle them. If library code imports another package directly (for example `react-aria`, `react-stately`, or `@internationalized/date`), it must be listed in `package.json`.
 - Library components contain no product-specific content, branding, copy, or imagery. Anything belonging to a single product stays in that product's repository.
@@ -48,12 +48,15 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Run `npm run lint` and `npm run build` when library, showcase, or configuration code changes. `npm run build` builds both the package and the showcase.
 - Scan staged changes with `gitleaks git --staged --redact .` before a commit. The configured hook runs this automatically.
 - Update `MAP.md` if the project structure or main entry points change.
+- When a showcase route is added or removed, update the allowed routes in `nginx.conf` and the URLs in the Lighthouse configs.
 - Report any check that could not run.
 
-## Publishing and deployment status
+## Licence, publishing, and deployment status
 
-The package is marked `"private": true` and has not been published. Do not publish it, change its version, or remove `private` unless the user asks.
+The repository is public but all rights are reserved (see `LICENSE`). Do not add an open-source licence or change the licence terms unless the user asks.
 
-The showcase is planned for mezzanine.fly.dev but is not yet deployed. There is no `Dockerfile`, `nginx.conf`, or `fly.toml` yet. Do not create a Fly app or deploy unless the user asks.
+The package is marked `"private": true` and is not published to npm. Do not publish it, change its version, or remove `private` unless the user asks.
+
+The showcase is deployed to mezzanine.fly.dev from the Fly.io app `mezzanine` in the DecoCode Ltd organization, using `Dockerfile`, `nginx.conf`, and `fly.toml`. It is pre-launch and sends a `noindex` header. Do not deploy, change the Fly app, or remove the `noindex` header unless the user asks.
 
 Preserve unrelated user changes and do not create a commit unless requested.

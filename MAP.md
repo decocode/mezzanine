@@ -5,7 +5,7 @@
 Mezzanine has two parts that share this repository:
 
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
-- **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`.
+- **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
 The library currently exports no components. Components and showcase pages arrive in the extraction from the decocode repository.
 
@@ -25,6 +25,9 @@ The library currently exports no components. Components and showcase pages arriv
 | `tsconfig.app.json` | Type checking for `src/` and `site/`, including the package-name path |
 | `tsconfig.node.json` | Type checking for Vite and Playwright configuration files |
 | `tsconfig.lib.json` | Emits the package's type declarations into `dist/` |
+| `Dockerfile`, `.dockerignore` | Production image: builds the showcase and serves `site-dist/` with nginx |
+| `nginx.conf` | Static server for the showcase: allowed routes, real 404s, caching, gzip, and the pre-launch `noindex` header |
+| `fly.toml` | Fly.io app `mezzanine`, London region, and HTTP service settings |
 | `.githooks/pre-commit` | Gitleaks scan of staged changes |
 | `.github/workflows/gitleaks.yml` | Gitleaks scan of the full history for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
@@ -49,6 +52,7 @@ The library currently exports no components. Components and showcase pages arriv
 | `npm run lighthouse` | Build the showcase and run the mobile and desktop Lighthouse performance audits |
 | `npm run lighthouse:mobile` | Build the showcase and run the mobile Lighthouse audit |
 | `npm run lighthouse:desktop` | Build the showcase and run the desktop Lighthouse audit |
+| `fly deploy` | Build the Docker image and deploy the showcase to mezzanine.fly.dev |
 | `gitleaks git --staged --redact .` | Scan staged changes |
 
-`dist/`, `site-dist/`, `reports/`, and `node_modules/` are generated and ignored by Git. Deployment to mezzanine.fly.dev is not yet set up.
+`dist/`, `site-dist/`, `reports/`, and `node_modules/` are generated and ignored by Git.
