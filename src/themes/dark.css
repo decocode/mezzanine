@@ -18,11 +18,6 @@
 
   --color-border: var(--color-gray-500);
 
-  --color-primary: var(--color-violet-700);
-  --color-primary-hover: var(--color-violet-800);
-  --color-primary-pressed: var(--color-violet-900);
-  --color-on-primary: var(--color-gray-50);
-
   --button-primary-background: var(--color-violet-700);
   --button-primary-background-hovered: var(--color-violet-800);
   --button-primary-background-pressed: var(--color-violet-900);
@@ -46,6 +41,12 @@
   --button-destructive-background-pressed: var(--color-danger-900);
   --button-destructive-content: var(--color-danger-50);
   --button-destructive-border: var(--color-danger-900);
+
+  --table-row-background-selected: var(--color-violet-700);
+  --table-row-background-selected-hovered: var(--color-violet-800);
+  --table-row-background-selected-pressed: var(--color-violet-900);
+  --table-row-content-selected: var(--color-gray-50);
+  --table-drop-target-color: var(--color-violet-700);
 
   --color-focus: var(--color-info-500);
 }
@@ -71,11 +72,6 @@
 
     --color-border: var(--color-gray-500);
 
-    --color-primary: var(--color-violet-700);
-    --color-primary-hover: var(--color-violet-800);
-    --color-primary-pressed: var(--color-violet-900);
-    --color-on-primary: var(--color-gray-50);
-
     --button-primary-background: var(--color-violet-700);
     --button-primary-background-hovered: var(--color-violet-800);
     --button-primary-background-pressed: var(--color-violet-900);
@@ -99,6 +95,12 @@
     --button-destructive-background-pressed: var(--color-danger-900);
     --button-destructive-content: var(--color-danger-50);
     --button-destructive-border: var(--color-danger-900);
+
+    --table-row-background-selected: var(--color-violet-700);
+    --table-row-background-selected-hovered: var(--color-violet-800);
+    --table-row-background-selected-pressed: var(--color-violet-900);
+    --table-row-content-selected: var(--color-gray-50);
+    --table-drop-target-color: var(--color-violet-700);
 
     --color-focus: var(--color-info-500);
   }

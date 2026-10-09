@@ -21,11 +21,6 @@
 
   --color-border: var(--color-gray-950);
 
-  --color-primary: var(--color-gray-950);
-  --color-primary-hover: var(--color-gray-800);
-  --color-primary-pressed: var(--color-gray-700);
-  --color-on-primary: var(--color-gray-50);
-
   --button-primary-background: var(--color-gray-950);
   --button-primary-background-hovered: var(--color-gray-800);
   --button-primary-background-pressed: var(--color-gray-700);
@@ -49,6 +44,12 @@
   --button-destructive-background-pressed: var(--color-danger-900);
   --button-destructive-content: var(--color-danger-50);
   --button-destructive-border: var(--color-danger-900);
+
+  --table-row-background-selected: var(--color-gray-950);
+  --table-row-background-selected-hovered: var(--color-gray-800);
+  --table-row-background-selected-pressed: var(--color-gray-700);
+  --table-row-content-selected: var(--color-gray-50);
+  --table-drop-target-color: var(--color-gray-950);
 
   --color-focus: var(--color-info-700);
 }

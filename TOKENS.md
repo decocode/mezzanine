@@ -1,8 +1,8 @@
 # Mezzanine token guide
 
 A design token is a named design decision. Mezzanine components ask for the
-role they need, such as `--color-primary`, rather than a product-specific value
-such as a particular blue or purple.
+role they need, such as `--button-primary-background`, rather than a
+product-specific value such as a particular blue or purple.
 
 The source of truth is the CSS in [`src/tokens.css`](src/tokens.css) and
 [`src/themes/`](src/themes/). This document explains that implementation; it
@@ -43,7 +43,7 @@ A product changes the appearance by overriding the same semantic names:
 
 ```css
 :root {
-  --color-primary: var(--product-blue-700);
+  --button-primary-background: var(--product-blue-700);
   --font-family-heading: 'Example Display', system-ui, sans-serif;
 }
 ```
@@ -53,20 +53,27 @@ Mezzanine component CSS must not depend on product palette names such as
 
 ## Naming rule
 
-Token names use this pattern where applicable:
+Foundation token names use this pattern where applicable:
 
 ```text
 --category-role-state
 ```
 
+Component token names add the component and, where needed, its variant and
+property:
+
+```text
+--component-variant-property-state
+```
+
 Examples:
 
-- `--color-primary-hover` is the primary-action color while hovered.
+- `--button-primary-background-hovered` is the Primary Button background while hovered.
 - `--color-text-inverse` is text placed on an inverse surface.
 - `--font-family-body` is the normal reading and interface font.
 
-Names describe purpose rather than appearance. Mezzanine therefore uses
-`--color-primary`, not `--color-blue` or `--color-purple`.
+Names describe purpose rather than appearance. Component CSS therefore asks
+for `--button-primary-background`, not `--color-violet-700`.
 
 ## Current color inventory
 
@@ -110,22 +117,19 @@ monochrome presentation and does not use the Violet palette for actions.
 | `--color-text-inverse` | Text placed on an inverse surface |
 | `--color-border` | Outlines and dividing lines |
 
-### Actions, links and focus
+### Links and focus
 
 | Token | Meaning |
 | --- | --- |
-| `--color-primary` | The normal primary-action color |
-| `--color-primary-hover` | A hovered primary action |
-| `--color-primary-pressed` | A pressed primary action |
-| `--color-on-primary` | Text or icons placed on a primary color |
 | `--color-link` | The normal link color |
 | `--color-link-hover` | A hovered link |
 | `--color-link-pressed` | A pressed link |
 | `--color-focus` | The keyboard-focus indicator color |
 
-Primary, Link and Focus are separate roles. Light and Dark draw Primary and
-Link from the Violet palette, while Focus remains tied to the Info palette.
-There is no generic Accent token.
+Link and Focus are separate roles. Light and Dark draw Link from the Violet
+palette, while Focus remains tied to the Info palette. Primary actions are
+defined by their components rather than a generic color role. There is no
+generic Accent token.
 
 ### Semantic color palettes
 
@@ -181,6 +185,11 @@ Mezzanine already has a general spacing, radius or elevation foundation.
 | `--table-focus-ring-width` | Keyboard-focus indicator width |
 | `--table-focus-ring-offset` | Keyboard-focus indicator position |
 | `--table-disabled-opacity` | Visual treatment for a disabled row |
+| `--table-row-background-selected` | Selected-row background |
+| `--table-row-background-selected-hovered` | Selected-row background while hovered |
+| `--table-row-background-selected-pressed` | Selected-row background while pressed |
+| `--table-row-content-selected` | Content on a selected row |
+| `--table-drop-target-color` | Drop-target indicator color |
 
 Button uses an approved color-role contract so the official themes can define
 its appearance without tying the component to particular palette values.
@@ -193,9 +202,13 @@ its appearance without tying the component to particular palette values.
 | `--button-{variant}-content` | Label and icon color |
 | `--button-{variant}-border` | Border color |
 | `--opacity-disabled` | Shared disabled-state opacity, currently `0.5` |
-| `--button-min-height` | Minimum target height |
-| `--button-padding-block` | Vertical space inside the Button |
-| `--button-padding-inline` | Horizontal space inside the Button |
+| `--button-{size}-min-height` | Minimum target height for Small, Medium, Large or Extra Large |
+| `--button-{size}-padding-block` | Vertical space for Small, Medium, Large or Extra Large |
+| `--button-{size}-padding-inline` | Horizontal space for Small, Medium, Large or Extra Large |
+| `--button-{size}-font-size` | Label size for Small, Medium, Large or Extra Large |
+| `--button-{size}-line-height` | Label line height for Small, Medium, Large or Extra Large |
+| `--button-{size}-icon-size` | Icon size for Small, Medium, Large or Extra Large |
+| `--button-content-gap` | Space between an icon and the Button label |
 | `--button-border-width` | Border width |
 | `--button-border-radius` | Corner radius |
 | `--button-focus-ring-width` | Keyboard-focus indicator width |

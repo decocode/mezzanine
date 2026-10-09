@@ -63,16 +63,16 @@
 }
 
 .react-aria-Row[data-selected] .react-aria-Cell {
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+  background: var(--table-row-background-selected);
+  color: var(--table-row-content-selected);
 }
 
 .react-aria-Row[data-selected][data-hovered] .react-aria-Cell {
-  background: var(--color-primary-hover);
+  background: var(--table-row-background-selected-hovered);
 }
 
 .react-aria-Row[data-selected][data-pressed] .react-aria-Cell {
-  background: var(--color-primary-pressed);
+  background: var(--table-row-background-selected-pressed);
 }
 
 .react-aria-Row[data-disabled] {
@@ -95,7 +95,7 @@
 
 .react-aria-Table[data-drop-target],
 .react-aria-TableBody[data-drop-target] {
-  outline: var(--table-focus-ring-width) solid var(--color-primary);
+  outline: var(--table-focus-ring-width) solid var(--table-drop-target-color);
   outline-offset: var(--table-focus-ring-offset);
 }
 

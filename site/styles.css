@@ -417,7 +417,7 @@ a:focus-visible {
 }
 
 .sidebar-navigation-link[aria-current='page'] {
-  border-inline-start-color: var(--color-primary);
+  border-inline-start-color: var(--color-link);
   background: var(--color-surface-pressed);
 }
 
@@ -459,8 +459,9 @@ a:focus-visible {
   justify-content: center;
   min-height: 2.75rem;
   padding: 0.75rem 1rem;
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+  border: var(--button-border-width) solid var(--button-primary-border);
+  background: var(--button-primary-background);
+  color: var(--button-primary-content);
   font-size: var(--font-size-label-large);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
@@ -470,13 +471,13 @@ a:focus-visible {
 }
 
 .landing-primary-cta[data-hovered] {
-  background: var(--color-primary-hover);
-  color: var(--color-on-primary);
+  background: var(--button-primary-background-hovered);
+  color: var(--button-primary-content);
 }
 
 .landing-primary-cta[data-pressed] {
-  background: var(--color-primary-pressed);
-  color: var(--color-on-primary);
+  background: var(--button-primary-background-pressed);
+  color: var(--button-primary-content);
 }
 
 .landing-primary-cta[data-focus-visible] {
@@ -688,13 +689,17 @@ code {
   font-size: 0.75rem;
 }
 
-.color-role-table {
+.token-table {
   max-width: 100%;
   overflow-x: auto;
 }
 
-.color-role-table .react-aria-Table {
+.token-table .react-aria-Table {
   min-width: 64rem;
+}
+
+.button-token-table .react-aria-Table {
+  min-width: 32rem;
 }
 
 .typography-list {
@@ -732,13 +737,104 @@ code {
   overflow-x: auto;
 }
 
-.button-variants > h2 {
+.button-variants,
+.button-sizes,
+.button-content {
+  margin-bottom: 3rem;
+}
+
+.button-variants > h2,
+.button-sizes > h2,
+.button-content > h2,
+.button-tokens > h2 {
   margin: 0 0 2rem;
 }
 
 .button-variants-table {
   max-width: 100%;
   overflow-x: auto;
+}
+
+.button-sizes-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.button-content-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.button-content-table .react-aria-Table {
+  min-width: 40rem;
+}
+
+.button-sizes-table .react-aria-Table {
+  min-width: 40rem;
+}
+
+.button-size-heading {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.button-size-heading code {
+  color: var(--color-text-muted);
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  margin: 0;
+  padding: 1px;
+  background: var(--color-border);
+  list-style: none;
+}
+
+.icon-grid li {
+  display: grid;
+  justify-items: start;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 1rem;
+  background: var(--color-page);
+}
+
+.icon-sample {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-link);
+}
+
+.icon-sample svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-loading {
+  animation: icon-loading-spin 1s linear infinite;
+}
+
+@keyframes icon-loading-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-loading {
+    animation: none;
+  }
+}
+
+.icon-grid code {
+  max-width: 100%;
+  color: var(--color-text-muted);
 }
 
 .button-variants-table .react-aria-Table {
@@ -764,7 +860,6 @@ code {
 }
 
 .button-state-heading code,
-.button-variant-heading code,
 .button-variant-heading > span {
   color: var(--color-text-muted);
   font-weight: var(--font-weight-regular);

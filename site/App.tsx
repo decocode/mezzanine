@@ -2,15 +2,20 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { Breadcrumb, Breadcrumbs, Link } from 'react-aria-components'
 import {
   Button,
+  type ButtonSize,
   type ButtonVariant,
+  ArrowRightIcon,
   Cell,
   Column,
+  DownloadIcon,
+  PlusIcon,
   Row,
   Table,
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
 import {
+  buttonTokens,
   colorShadeSteps,
   colorTokenGroups,
   foundationColorPalettes,
@@ -19,6 +24,7 @@ import {
   type ColorPaletteDefinition,
 } from './foundationData'
 import { chooseSwatchTextTone } from './colorContrast'
+import { iconDefinitions } from './iconDefinitions'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 import {
@@ -60,19 +66,19 @@ const buttonVariants: {
     name: 'Secondary',
     variant: 'secondary',
     label: 'Button',
-    usage: 'Supporting actions alongside a primary action, such as Cancel or View details.',
+    usage: 'Supporting actions alongside a primary action.',
   },
   {
     name: 'Tertiary',
     variant: 'tertiary',
     label: 'Button',
-    usage: 'Actions that should draw less attention than primary or secondary actions.',
+    usage: 'Actions that should draw less attention than primary or secondary.',
   },
   {
     name: 'Destructive',
     variant: 'destructive',
     label: 'Delete',
-    usage: 'Actions that delete or remove something. Confirm irreversible actions before using them.',
+    usage: 'Actions that delete or remove something. Using the semantic "Danger" color palette is recommended.',
   },
 ]
 
@@ -87,6 +93,17 @@ const buttonStates: {
   { name: 'Focused', state: 'focused', reactAriaState: 'data-focus-visible' },
   { name: 'Pending', state: 'pending', reactAriaState: 'isPending' },
   { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled' },
+]
+
+const buttonSizes: {
+  label: string
+  size: ButtonSize
+  usage: string
+}[] = [
+  { label: 'Small', size: 'sm', usage: 'Compact interfaces where space is limited.' },
+  { label: 'Medium', size: 'md', usage: 'The default size for most actions.' },
+  { label: 'Large', size: 'lg', usage: 'Prominent actions in forms and page sections.' },
+  { label: 'Extra large', size: 'xl', usage: 'Highly prominent actions in heroes and landing pages.' },
 ]
 
 function useTokenValue(token: string, refreshKey: string) {
@@ -320,7 +337,7 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
         <h2 id="color-roles-heading" className="mezzanine-text-heading-medium">
           Color roles
         </h2>
-        <div className="color-role-table">
+        <div className="token-table">
           <Table aria-label="Color roles">
             <TableHeader>
               <Column id="role" isRowHeader>Role</Column>
@@ -454,7 +471,6 @@ function ButtonPage() {
                   <Cell>
                     <span className="button-variant-heading">
                       <strong>{name}</strong>
-                      <code>{`variant="${variant}"`}</code>
                       <span>{usage}</span>
                     </span>
                   </Cell>
@@ -468,6 +484,110 @@ function ButtonPage() {
             </TableBody>
           </Table>
         </div>
+      </section>
+      <section aria-labelledby="button-sizes-heading" className="button-sizes">
+        <h2 id="button-sizes-heading" className="mezzanine-text-heading-medium">
+          Sizes
+        </h2>
+        <div className="button-sizes-table">
+          <Table aria-label="Button sizes">
+            <TableHeader>
+              <Column id="size" isRowHeader>Size</Column>
+              <Column id="example">Example</Column>
+              <Column id="usage">Use</Column>
+            </TableHeader>
+            <TableBody>
+              {buttonSizes.map(({ label, size, usage }) => (
+                <Row id={size} key={size}>
+                  <Cell>
+                    <span className="button-size-heading">
+                      <strong>{label}</strong>
+                      <code>{size}</code>
+                    </span>
+                  </Cell>
+                  <Cell><Button size={size}>Button</Button></Cell>
+                  <Cell>{usage}</Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+      <section aria-labelledby="button-content-heading" className="button-content">
+        <h2 id="button-content-heading" className="mezzanine-text-heading-medium">
+          Content
+        </h2>
+        <div className="button-content-table">
+          <Table aria-label="Button content">
+            <TableHeader>
+              <Column id="content" isRowHeader>Content</Column>
+              <Column id="example">Example</Column>
+              <Column id="usage">Use</Column>
+            </TableHeader>
+            <TableBody>
+              <Row id="leading-icon">
+                <Cell><strong>Leading icon</strong></Cell>
+                <Cell><Button iconLeading={<PlusIcon />}>Button</Button></Cell>
+                <Cell>Places an icon before the label.</Cell>
+              </Row>
+              <Row id="trailing-icon">
+                <Cell><strong>Trailing icon</strong></Cell>
+                <Cell><Button iconTrailing={<ArrowRightIcon />}>Button</Button></Cell>
+                <Cell>Places an icon after the label.</Cell>
+              </Row>
+              <Row id="icon-only">
+                <Cell><strong>Icon only</strong></Cell>
+                <Cell>
+                  <Button aria-label="Download" iconLeading={<DownloadIcon />} />
+                </Cell>
+                <Cell>Requires an accessible name that describes the action.</Cell>
+              </Row>
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+      <section aria-labelledby="button-tokens-heading" className="button-tokens">
+        <h2 id="button-tokens-heading" className="mezzanine-text-heading-medium">
+          CSS tokens
+        </h2>
+        <div className="token-table button-token-table">
+          <Table aria-label="Button CSS tokens">
+            <TableHeader>
+              <Column id="token" isRowHeader>CSS token</Column>
+            </TableHeader>
+            <TableBody>
+              {buttonTokens.map((buttonToken) => (
+                <Row id={buttonToken.token} key={buttonToken.token}>
+                  <Cell><code>{buttonToken.token}</code></Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+    </>
+  )
+}
+
+function IconsPage() {
+  return (
+    <>
+      <PageHeading
+        description="Mezzanine's icon library provides a consistent, brand-agnostic set of interface symbols. New icons will be added as real product needs arise."
+        groupLabel="Foundations"
+        title="Icons"
+      />
+      <section aria-labelledby="icons-heading">
+        <h2 id="icons-heading" className="mezzanine-text-heading-medium">Icon set</h2>
+        <ul className="icon-grid">
+          {iconDefinitions.map(({ componentName, icon, name }) => (
+            <li key={componentName}>
+              <span aria-hidden="true" className="icon-sample">{icon}</span>
+              <strong>{name}</strong>
+              <code>{componentName}</code>
+            </li>
+          ))}
+        </ul>
       </section>
     </>
   )
@@ -492,6 +612,8 @@ function ImplementedPage({ page, refreshKey }: { page: SitePageDefinition; refre
       return <ColorPage refreshKey={refreshKey} />
     case 'typography':
       return <TypographyPage />
+    case 'icons':
+      return <IconsPage />
     case 'button':
       return <ButtonPage />
     case 'table':

@@ -38,7 +38,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
       { id: 'elevation', label: 'Elevation', path: '/elevation', status: 'empty' },
       { id: 'textures', label: 'Textures', path: '/textures', status: 'empty' },
       { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'empty' },
-      { id: 'icons', label: 'Icons', path: '/icons', status: 'empty' },
+      { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
     ],
   },
   {

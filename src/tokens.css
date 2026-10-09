@@ -152,9 +152,31 @@
   --text-transform-label: none;
 
   /* Button: component-specific structure, shared by every theme. */
-  --button-min-height: 2.75rem;
-  --button-padding-block: 0.5rem;
-  --button-padding-inline: 1rem;
+  --button-small-min-height: 2.75rem;
+  --button-small-padding-block: 0.5rem;
+  --button-small-padding-inline: 0.875rem;
+  --button-small-font-size: 0.75rem;
+  --button-small-line-height: 1.33;
+  --button-small-icon-size: 1rem;
+  --button-medium-min-height: 3rem;
+  --button-medium-padding-block: 0.625rem;
+  --button-medium-padding-inline: 1rem;
+  --button-medium-font-size: 0.875rem;
+  --button-medium-line-height: 1.43;
+  --button-medium-icon-size: 1.125rem;
+  --button-large-min-height: 3.25rem;
+  --button-large-padding-block: 0.75rem;
+  --button-large-padding-inline: 1.25rem;
+  --button-large-font-size: 1rem;
+  --button-large-line-height: 1.5;
+  --button-large-icon-size: 1.25rem;
+  --button-extra-large-min-height: 3.5rem;
+  --button-extra-large-padding-block: 0.875rem;
+  --button-extra-large-padding-inline: 1.5rem;
+  --button-extra-large-font-size: 1.125rem;
+  --button-extra-large-line-height: 1.56;
+  --button-extra-large-icon-size: 1.5rem;
+  --button-content-gap: 0.5rem;
   --button-border-width: 0.0625rem;
   --button-border-radius: 0;
   --button-focus-ring-width: 0.1875rem;

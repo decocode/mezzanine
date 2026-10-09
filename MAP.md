@@ -7,15 +7,17 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The library currently exports React Aria `Button` and the `Table` family, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Button` and the `Table` family, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
 | Path | Purpose |
 | --- | --- |
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
-| `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants and pending-state progress |
+| `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants, sizes, icon content and pending-state progress |
 | `src/components/Button.css` | Token-led styling for Button variants and React Aria interaction states |
+| `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
+| `src/icons/StudioIcons.tsx` | Public action, navigation, transport and sequencer icons imported from Rhythm Directives' active icon modules |
 | `src/components/Table.ts` | Public React Aria Table, TableHeader, Column, Row, TableBody and Cell exports and their prop types |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
 | `src/tokens.css` | Shared typography token contract and entry point for the three official color themes |
@@ -32,6 +34,7 @@ The library currently exports React Aria `Button` and the `Table` family, three 
 | `site/SidebarDisclosureItem.tsx` | Reusable React Aria disclosure anatomy for each sidebar navigation group |
 | `site/siteNavigation.ts` | Single source of truth for approved IA groups, routes, labels, and implementation status |
 | `site/foundationData.ts` | Names and plain-language descriptions for the implemented tokens and typography styles shown by the showcase |
+| `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
