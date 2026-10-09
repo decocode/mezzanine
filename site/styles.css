@@ -732,6 +732,51 @@ code {
   overflow-x: auto;
 }
 
+.button-variants > h2 {
+  margin: 0 0 2rem;
+}
+
+.button-variants-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.button-variants-table .react-aria-Table {
+  width: max-content;
+  min-width: 72rem;
+}
+
+.button-variants-table .react-aria-Column:first-child,
+.button-variants-table .react-aria-Cell:first-child {
+  width: 15rem;
+  min-width: 15rem;
+}
+
+.button-variants-table .react-aria-Column:not(:first-child),
+.button-variants-table .react-aria-Cell:not(:first-child) {
+  min-width: 9rem;
+}
+
+.button-state-heading,
+.button-variant-heading {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.button-state-heading code,
+.button-variant-heading code,
+.button-variant-heading > span {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-regular);
+  text-transform: none;
+}
+
+.button-variant-heading > span {
+  margin-top: 0.5rem;
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+}
+
 .empty-page-status {
   margin: 0;
   color: var(--color-text-muted);

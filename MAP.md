@@ -7,13 +7,15 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The library currently exports the React Aria `Table` family, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Button` and the `Table` family, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
 | Path | Purpose |
 | --- | --- |
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
+| `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants and pending-state progress |
+| `src/components/Button.css` | Token-led styling for Button variants and React Aria interaction states |
 | `src/components/Table.ts` | Public React Aria Table, TableHeader, Column, Row, TableBody and Cell exports and their prop types |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
 | `src/tokens.css` | Shared typography token contract and entry point for the three official color themes |
@@ -31,7 +33,6 @@ The library currently exports the React Aria `Table` family, three official colo
 | `site/siteNavigation.ts` | Single source of truth for approved IA groups, routes, labels, and implementation status |
 | `site/foundationData.ts` | Names and plain-language descriptions for the implemented tokens and typography styles shown by the showcase |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
-| `site/colorRoleMappings.ts` | Reads each official theme's implemented CSS to match color roles to their palette tokens for documentation |
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |

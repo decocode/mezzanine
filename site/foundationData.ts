@@ -17,8 +17,8 @@ interface TypographyStyleDefinition {
 }
 
 export interface ColorPaletteDefinition {
-  description: string
-  id: 'neutral' | 'violet' | 'info' | 'success' | 'warning' | 'danger'
+  description?: string
+  id: 'gray' | 'violet' | 'info' | 'success' | 'warning' | 'danger'
   label: string
 }
 
@@ -26,14 +26,12 @@ export const colorShadeSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900,
 
 export const foundationColorPalettes: ColorPaletteDefinition[] = [
   {
-    id: 'neutral',
-    label: 'Neutral',
-    description: "These values can be replaced with your brand's neutral palette.",
+    id: 'gray',
+    label: 'Gray',
   },
   {
     id: 'violet',
     label: 'Violet',
-    description: "These values can be replaced with one of your brand's color palettes.",
   },
 ]
 
@@ -81,13 +79,29 @@ export const colorTokenGroups: ColorTokenGroup[] = [
     ],
   },
   {
-    id: 'status',
-    label: 'Status',
+    id: 'button',
+    label: 'Button',
     tokens: [
-      { token: '--color-info', label: 'Information', description: 'Helpful neutral information.' },
-      { token: '--color-success', label: 'Success', description: 'A successful result.' },
-      { token: '--color-warning', label: 'Warning', description: 'A situation requiring caution.' },
-      { token: '--color-danger', label: 'Danger', description: 'An error or destructive consequence.' },
+      { token: '--button-primary-background', label: 'Button primary background', description: 'Primary Button background.' },
+      { token: '--button-primary-background-hovered', label: 'Button primary background hovered', description: 'Primary Button background when hovered.' },
+      { token: '--button-primary-background-pressed', label: 'Button primary background pressed', description: 'Primary Button background when pressed.' },
+      { token: '--button-primary-content', label: 'Button primary content', description: 'Primary Button label and icon.' },
+      { token: '--button-primary-border', label: 'Button primary border', description: 'Primary Button border.' },
+      { token: '--button-secondary-background', label: 'Button secondary background', description: 'Secondary Button background.' },
+      { token: '--button-secondary-background-hovered', label: 'Button secondary background hovered', description: 'Secondary Button background when hovered.' },
+      { token: '--button-secondary-background-pressed', label: 'Button secondary background pressed', description: 'Secondary Button background when pressed.' },
+      { token: '--button-secondary-content', label: 'Button secondary content', description: 'Secondary Button label and icon.' },
+      { token: '--button-secondary-border', label: 'Button secondary border', description: 'Secondary Button border.' },
+      { token: '--button-tertiary-background', label: 'Button tertiary background', description: 'Tertiary Button background.' },
+      { token: '--button-tertiary-background-hovered', label: 'Button tertiary background hovered', description: 'Tertiary Button background when hovered.' },
+      { token: '--button-tertiary-background-pressed', label: 'Button tertiary background pressed', description: 'Tertiary Button background when pressed.' },
+      { token: '--button-tertiary-content', label: 'Button tertiary content', description: 'Tertiary Button label and icon.' },
+      { token: '--button-tertiary-border', label: 'Button tertiary border', description: 'Tertiary Button border.' },
+      { token: '--button-destructive-background', label: 'Button destructive background', description: 'Destructive Button background.' },
+      { token: '--button-destructive-background-hovered', label: 'Button destructive background hovered', description: 'Destructive Button background when hovered.' },
+      { token: '--button-destructive-background-pressed', label: 'Button destructive background pressed', description: 'Destructive Button background when pressed.' },
+      { token: '--button-destructive-content', label: 'Button destructive content', description: 'Destructive Button label and icon.' },
+      { token: '--button-destructive-border', label: 'Button destructive border', description: 'Destructive Button border.' },
     ],
   },
 ]

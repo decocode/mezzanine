@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { Breadcrumb, Breadcrumbs, Link } from 'react-aria-components'
 import {
+  Button,
+  type ButtonVariant,
   Cell,
   Column,
   Row,
@@ -16,10 +18,6 @@ import {
   typographyStyles,
   type ColorPaletteDefinition,
 } from './foundationData'
-import {
-  readColorRoleMappings,
-  type ColorRoleMappings,
-} from './colorRoleMappings'
 import { chooseSwatchTextTone } from './colorContrast'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
@@ -39,10 +37,57 @@ interface AppProps {
 }
 
 interface PageHeadingProps {
-  description?: string | string[]
+  description?: ReactNode | ReactNode[]
   groupLabel: string
   title: string
 }
+
+type ButtonPreviewState = 'enabled' | 'hovered' | 'pressed' | 'focused' | 'pending' | 'disabled'
+
+const buttonVariants: {
+  name: string
+  variant: ButtonVariant
+  label: string
+  usage: string
+}[] = [
+  {
+    name: 'Primary',
+    variant: 'primary',
+    label: 'Button',
+    usage: 'The most important action on a screen. Use one primary action per view.',
+  },
+  {
+    name: 'Secondary',
+    variant: 'secondary',
+    label: 'Button',
+    usage: 'Supporting actions alongside a primary action, such as Cancel or View details.',
+  },
+  {
+    name: 'Tertiary',
+    variant: 'tertiary',
+    label: 'Button',
+    usage: 'Actions that should draw less attention than primary or secondary actions.',
+  },
+  {
+    name: 'Destructive',
+    variant: 'destructive',
+    label: 'Delete',
+    usage: 'Actions that delete or remove something. Confirm irreversible actions before using them.',
+  },
+]
+
+const buttonStates: {
+  name: string
+  state: ButtonPreviewState
+  reactAriaState: string
+}[] = [
+  { name: 'Enabled', state: 'enabled', reactAriaState: 'default' },
+  { name: 'Hover', state: 'hovered', reactAriaState: 'data-hovered' },
+  { name: 'Pressed', state: 'pressed', reactAriaState: 'data-pressed' },
+  { name: 'Focused', state: 'focused', reactAriaState: 'data-focus-visible' },
+  { name: 'Pending', state: 'pending', reactAriaState: 'isPending' },
+  { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled' },
+]
 
 function useTokenValue(token: string, refreshKey: string) {
   const [value, setValue] = useState('')
@@ -83,8 +128,8 @@ function ColorPaletteStep({
         style={{
           backgroundColor: `var(${token})`,
           color: textTone === 'dark'
-            ? 'var(--color-neutral-950)'
-            : 'var(--color-neutral-50)',
+            ? 'var(--color-gray-950)'
+            : 'var(--color-gray-50)',
         }}
       >
         <strong className="color-palette-step-number">{step}</strong>
@@ -102,8 +147,8 @@ function ColorPaletteScale({
   paletteId: ColorPaletteDefinition['id']
   refreshKey: string
 }) {
-  const darkTextValue = useTokenValue('--color-neutral-950', refreshKey)
-  const lightTextValue = useTokenValue('--color-neutral-50', refreshKey)
+  const darkTextValue = useTokenValue('--color-gray-950', refreshKey)
+  const lightTextValue = useTokenValue('--color-gray-50', refreshKey)
 
   return (
     <div className="color-palette-viewport" tabIndex={0}>
@@ -136,7 +181,9 @@ function ColorPalette({
         <h4 id={`${palette.id}-palette-heading`} className="mezzanine-text-title-medium">
           {palette.label}
         </h4>
-        <p className="mezzanine-text-body-small">{palette.description}</p>
+        {palette.description && (
+          <p className="mezzanine-text-body-small">{palette.description}</p>
+        )}
       </div>
       <ColorPaletteScale paletteId={palette.id} refreshKey={refreshKey} />
     </section>
@@ -144,9 +191,9 @@ function ColorPalette({
 }
 
 function PageHeading({ description, groupLabel, title }: PageHeadingProps) {
-  const descriptionParagraphs = typeof description === 'string'
-    ? [description]
-    : description
+  const descriptionParagraphs = Array.isArray(description)
+    ? description
+    : [description]
 
   return (
     <div className="page-heading-group">
@@ -163,8 +210,8 @@ function PageHeading({ description, groupLabel, title }: PageHeadingProps) {
       <h1 className="mezzanine-text-heading-large">{title}</h1>
       {description && (
         <div className="page-description">
-          {descriptionParagraphs?.map((paragraph) => (
-            <p className="mezzanine-text-body-large" key={paragraph}>{paragraph}</p>
+          {descriptionParagraphs.map((paragraph, index) => (
+            <p className="mezzanine-text-body-large" key={index}>{paragraph}</p>
           ))}
         </div>
       )}
@@ -201,20 +248,25 @@ function IntroductionPage() {
 }
 
 function ColorPage({ refreshKey }: { refreshKey: string }) {
-  const [roleMappings, setRoleMappings] = useState<ColorRoleMappings>({})
-
-  useEffect(() => {
-    const frame = requestAnimationFrame(() => {
-      setRoleMappings(readColorRoleMappings())
-    })
-
-    return () => cancelAnimationFrame(frame)
-  }, [refreshKey])
-
   return (
     <>
       <PageHeading
-        description="Color establishes visual hierarchy, conveys meaning, and distinguishes interface states. Mezzanine keeps brand colors separate from colors that communicate meaning. This lets different brands express their own unique visual identity without impacting usability."
+        description={(
+          <>
+            Color establishes visual hierarchy, conveys meaning, and distinguishes interface
+            states. Mezzanine keeps brand colors separate from colors that communicate meaning.
+            This lets different brands express their own unique visual identity without impacting
+            usability. The default color combinations aim to meet{' '}
+            <Link
+              href="https://www.w3.org/TR/WCAG22/#conformance-reqs"
+              rel="noreferrer"
+              target="_blank"
+            >
+              WCAG 2.2 Level AA
+            </Link>{' '}
+            contrast requirements.
+          </>
+        )}
         groupLabel="Foundations"
         title="Color"
       />
@@ -228,8 +280,8 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
           </h3>
           <p className="mezzanine-text-body-medium color-category-description">
             Core colors are the palettes your brand can use to communicate its distinct visual
-            identity. Mezzanine&apos;s default core colors are a simple monochrome scale and a violet
-            scale.
+            identity. Mezzanine&apos;s own brand colors are gray and violet, and so are used as the
+            default palettes for the Design System.
           </p>
           {foundationColorPalettes.map((palette) => (
             <section
@@ -243,9 +295,6 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
               >
                 {palette.label}
               </h4>
-              <p className="mezzanine-text-body-small color-palette-category-description">
-                {palette.description}
-              </p>
               <ColorPaletteScale paletteId={palette.id} refreshKey={refreshKey} />
             </section>
           ))}
@@ -271,37 +320,24 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
         <h2 id="color-roles-heading" className="mezzanine-text-heading-medium">
           Color roles
         </h2>
-        {colorTokenGroups.map((group) => (
-          <section className="token-group" aria-labelledby={`${group.id}-heading`} key={group.id}>
-            <h3 id={`${group.id}-heading`} className="mezzanine-text-heading-small">
-              {group.label}
-            </h3>
-            <div className="color-role-table">
-              <Table aria-label={`${group.label} color roles`}>
-                <TableHeader>
-                  <Column id="role" isRowHeader>Role</Column>
-                  <Column id="token">CSS token</Column>
-                  <Column id="meaning">What it controls</Column>
-                  <Column id="light">Light</Column>
-                  <Column id="dark">Dark</Column>
-                  <Column id="wireframe">Wireframe</Column>
-                </TableHeader>
-                <TableBody>
-                  {group.tokens.map((colorToken) => (
-                    <Row id={colorToken.token} key={colorToken.token}>
-                      <Cell><strong>{colorToken.label}</strong></Cell>
-                      <Cell><code>{colorToken.token}</code></Cell>
-                      <Cell>{colorToken.description}</Cell>
-                      <Cell><code>{roleMappings[colorToken.token]?.light ?? '—'}</code></Cell>
-                      <Cell><code>{roleMappings[colorToken.token]?.dark ?? '—'}</code></Cell>
-                      <Cell><code>{roleMappings[colorToken.token]?.wireframe ?? '—'}</code></Cell>
-                    </Row>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </section>
-        ))}
+        <div className="color-role-table">
+          <Table aria-label="Color roles">
+            <TableHeader>
+              <Column id="role" isRowHeader>Role</Column>
+              <Column id="token">CSS token</Column>
+              <Column id="meaning">What it controls</Column>
+            </TableHeader>
+            <TableBody>
+              {colorTokenGroups.flatMap((group) => group.tokens).map((colorToken) => (
+                <Row id={colorToken.token} key={colorToken.token}>
+                  <Cell><strong>{colorToken.label}</strong></Cell>
+                  <Cell><code>{colorToken.token}</code></Cell>
+                  <Cell>{colorToken.description}</Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </section>
     </>
   )
@@ -364,6 +400,79 @@ function TablePage() {
   )
 }
 
+function ButtonStateExample({
+  label,
+  state,
+  variant,
+}: {
+  label: string
+  state: ButtonPreviewState
+  variant: ButtonVariant
+}) {
+  return (
+    <Button
+      data-preview-state={state === 'enabled' || state === 'pending' || state === 'disabled'
+        ? undefined
+        : state}
+      isDisabled={state === 'disabled'}
+      isPending={state === 'pending'}
+      variant={variant}
+    >
+      {label}
+    </Button>
+  )
+}
+
+function ButtonPage() {
+  return (
+    <>
+      <PageHeading
+        description="Buttons trigger actions and guide people through tasks. Their variant and state show which action matters most."
+        groupLabel="Components"
+        title="Button"
+      />
+      <section aria-labelledby="button-variants-heading" className="button-variants">
+        <h2 id="button-variants-heading" className="mezzanine-text-heading-medium">
+          Variants
+        </h2>
+        <div className="button-variants-table">
+          <Table aria-label="Button variants and states">
+            <TableHeader>
+              <Column id="variant" isRowHeader>Variant</Column>
+              {buttonStates.map(({ name, reactAriaState, state }) => (
+                <Column id={state} key={state}>
+                  <span className="button-state-heading">
+                    <span>{name}</span>
+                    <code>{reactAriaState}</code>
+                  </span>
+                </Column>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {buttonVariants.map(({ label, name, usage, variant }) => (
+                <Row id={variant} key={variant}>
+                  <Cell>
+                    <span className="button-variant-heading">
+                      <strong>{name}</strong>
+                      <code>{`variant="${variant}"`}</code>
+                      <span>{usage}</span>
+                    </span>
+                  </Cell>
+                  {buttonStates.map(({ state }) => (
+                    <Cell key={state}>
+                      <ButtonStateExample label={label} state={state} variant={variant} />
+                    </Cell>
+                  ))}
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+    </>
+  )
+}
+
 function EmptyPage({ page }: { page: SitePageDefinition }) {
   const group = findSiteNavigationGroup(page.id)
 
@@ -383,6 +492,8 @@ function ImplementedPage({ page, refreshKey }: { page: SitePageDefinition; refre
       return <ColorPage refreshKey={refreshKey} />
     case 'typography':
       return <TypographyPage />
+    case 'button':
+      return <ButtonPage />
     case 'table':
       return <TablePage />
     default:

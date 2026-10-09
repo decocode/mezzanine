@@ -45,7 +45,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     id: 'components',
     label: 'Components',
     pages: [
-      { id: 'button', label: 'Button', path: '/button', status: 'empty' },
+      { id: 'button', label: 'Button', path: '/button', status: 'implemented' },
       { id: 'link', label: 'Link', path: '/link', status: 'empty' },
       { id: 'card', label: 'Card', path: '/card', status: 'empty' },
       { id: 'table', label: 'Table', path: '/table', status: 'implemented' },

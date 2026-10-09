@@ -6,4 +6,5 @@
 */
 
 @import './typography.css';
+@import './components/Button.css';
 @import './components/Table.css';

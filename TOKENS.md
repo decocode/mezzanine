@@ -85,10 +85,10 @@ step number alone.
 
 | Token | Meaning |
 | --- | --- |
-| `--color-neutral-{50–950}` | Mezzanine's default neutral palette |
+| `--color-gray-{50–950}` | Mezzanine's default gray palette |
 | `--color-violet-{50–950}` | Mezzanine's default violet palette |
 
-Light and Dark use both palettes. Wireframe uses the Neutral palette for its
+Light and Dark use both palettes. Wireframe uses the Gray palette for its
 monochrome presentation and does not use the Violet palette for actions.
 
 ### Page and surfaces
@@ -127,11 +127,12 @@ Primary, Link and Focus are separate roles. Light and Dark draw Primary and
 Link from the Violet palette, while Focus remains tied to the Info palette.
 There is no generic Accent token.
 
-### Status
+### Semantic color palettes
 
 Mezzanine currently includes four 11-step semantic color scales, from `50` to
 `950`. Their defaults use familiar blue, green, amber and red families with a
-softened character. Each role token currently references shade `700`.
+softened character. Precise semantic roles will be added when implemented
+components require them.
 
 | Token | Meaning |
 | --- | --- |
@@ -139,10 +140,6 @@ softened character. Each role token currently references shade `700`.
 | `--color-success-{50–950}` | Successful-outcome scale |
 | `--color-warning-{50–950}` | Caution and warning scale |
 | `--color-danger-{50–950}` | Error and destructive-action scale |
-| `--color-info` | References `--color-info-700` |
-| `--color-success` | References `--color-success-700` |
-| `--color-warning` | References `--color-warning-700` |
-| `--color-danger` | References `--color-danger-700` |
 
 All official themes use these conventional blue, green, amber and red status
 scales. Wireframe therefore remains monochrome except for semantic status and
@@ -172,8 +169,8 @@ The complete 15-style typography foundation is documented in
 
 ## Current component tokens
 
-Table is the first implemented component. Its component-specific tokens keep
-the shared structure easy to identify and override without pretending that
+Button and Table are implemented components. Their component-specific tokens
+keep shared structure easy to identify and override without pretending that
 Mezzanine already has a general spacing, radius or elevation foundation.
 
 | Token | Meaning |
@@ -184,6 +181,32 @@ Mezzanine already has a general spacing, radius or elevation foundation.
 | `--table-focus-ring-width` | Keyboard-focus indicator width |
 | `--table-focus-ring-offset` | Keyboard-focus indicator position |
 | `--table-disabled-opacity` | Visual treatment for a disabled row |
+
+Button uses an approved color-role contract so the official themes can define
+its appearance without tying the component to particular palette values.
+
+| Token | Meaning |
+| --- | --- |
+| `--button-{variant}-background` | Enabled background for Primary, Secondary, Tertiary or Destructive |
+| `--button-{variant}-background-hovered` | Background while React Aria reports `data-hovered` |
+| `--button-{variant}-background-pressed` | Background while React Aria reports `data-pressed` |
+| `--button-{variant}-content` | Label and icon color |
+| `--button-{variant}-border` | Border color |
+| `--opacity-disabled` | Shared disabled-state opacity, currently `0.5` |
+| `--button-min-height` | Minimum target height |
+| `--button-padding-block` | Vertical space inside the Button |
+| `--button-padding-inline` | Horizontal space inside the Button |
+| `--button-border-width` | Border width |
+| `--button-border-radius` | Corner radius |
+| `--button-focus-ring-width` | Keyboard-focus indicator width |
+| `--button-focus-ring-offset` | Keyboard-focus indicator position |
+| `--button-progress-size` | Pending indicator size |
+| `--button-progress-stroke-width` | Pending indicator stroke width |
+| `--button-progress-border-radius` | Pending indicator shape |
+
+Button focus uses the shared `--color-focus` role. Pending retains the enabled
+colors while displaying progress. Disabled Buttons retain their variant colors
+at `--opacity-disabled` and do not add elevation.
 
 ## What is not currently a Mezzanine foundation
 

@@ -13,18 +13,18 @@
 :where(:root) {
   /* Every palette follows the same perceptual lightness curve. */
 
-  /* Mezzanine's default neutral scale. */
-  --color-neutral-50: #FAFAFA;
-  --color-neutral-100: #F2F2F2;
-  --color-neutral-200: #DEDEDE;
-  --color-neutral-300: #C4C4C4;
-  --color-neutral-400: #A8A8A8;
-  --color-neutral-500: #8C8C8C;
-  --color-neutral-600: #6F6F6F;
-  --color-neutral-700: #585858;
-  --color-neutral-800: #404040;
-  --color-neutral-900: #292929;
-  --color-neutral-950: #121212;
+  /* Mezzanine's default gray scale. */
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F2F2F2;
+  --color-gray-200: #DEDEDE;
+  --color-gray-300: #C4C4C4;
+  --color-gray-400: #A8A8A8;
+  --color-gray-500: #8C8C8C;
+  --color-gray-600: #6F6F6F;
+  --color-gray-700: #585858;
+  --color-gray-800: #404040;
+  --color-gray-900: #292929;
+  --color-gray-950: #121212;
 
   /* Mezzanine's default violet scale. */
   --color-violet-50: #FAF9FF;
@@ -88,6 +88,9 @@
   --color-danger-900: #4F0B0D;
   --color-danger-950: #2A0002;
 
+  /* Shared disabled-state treatment for interactive components. */
+  --opacity-disabled: 0.5;
+
   /* Mezzanine uses system fonts by default and downloads no font files. */
   --font-family-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-family-heading: var(--font-family-body);
@@ -147,6 +150,18 @@
   --line-height-label-small: 1.45;
   --letter-spacing-label: normal;
   --text-transform-label: none;
+
+  /* Button: component-specific structure, shared by every theme. */
+  --button-min-height: 2.75rem;
+  --button-padding-block: 0.5rem;
+  --button-padding-inline: 1rem;
+  --button-border-width: 0.0625rem;
+  --button-border-radius: 0;
+  --button-focus-ring-width: 0.1875rem;
+  --button-focus-ring-offset: 0.1875rem;
+  --button-progress-size: 1.25rem;
+  --button-progress-stroke-width: 0.125rem;
+  --button-progress-border-radius: 50%;
 
   /* Table: component-specific structure, shared by every theme. */
   --table-border-width: 0.0625rem;

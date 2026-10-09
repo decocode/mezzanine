@@ -3,6 +3,13 @@
 import './tokens.css'
 import './styles.css'
 
+export { Button } from './components/Button'
+
+export type {
+  ButtonProps,
+  ButtonVariant,
+} from './components/Button'
+
 export {
   Cell,
   Column,
