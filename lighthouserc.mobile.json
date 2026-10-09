@@ -10,7 +10,8 @@
         "http://localhost/color",
         "http://localhost/typography",
         "http://localhost/table",
-        "http://localhost/button"
+        "http://localhost/button",
+        "http://localhost/navigation-tree"
       ],
       "settings": {
         "onlyCategories": ["performance"],

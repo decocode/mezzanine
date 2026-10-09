@@ -14,6 +14,7 @@ export type {
   ColumnRenderProps,
   RowProps,
   RowRenderProps,
+  SortDescriptor,
   TableBodyProps,
   TableBodyRenderProps,
   TableHeaderProps,

@@ -185,6 +185,48 @@
   --button-progress-stroke-width: 0.125rem;
   --button-progress-border-radius: 50%;
 
+  /* Checkbox: component-specific structure, shared by every theme. */
+  --checkbox-size: 1.25rem;
+  --checkbox-icon-size: 1rem;
+  --checkbox-content-gap: 0.5rem;
+  --checkbox-border-width: 0.0625rem;
+  --checkbox-border-radius: 0;
+  --checkbox-focus-ring-width: 0.1875rem;
+  --checkbox-focus-ring-offset: 0.1875rem;
+
+  /* Link: component-specific structure, shared by every theme. */
+  --link-underline-thickness: 0.0625rem;
+  --link-underline-offset: 0.1875rem;
+  --link-focus-ring-width: 0.1875rem;
+  --link-focus-ring-offset: 0.1875rem;
+
+  /* RadioGroup: component-specific structure, shared by every theme. */
+  --radio-group-gap: 0.75rem;
+  --radio-group-horizontal-gap: 1.5rem;
+  --radio-field-gap-block: 0.25rem;
+  --radio-content-gap: 0.5rem;
+  --radio-indicator-size: 1.25rem;
+  --radio-selection-size: 0.625rem;
+  --radio-border-width: 0.0625rem;
+  --radio-indicator-border-radius: 50%;
+  --radio-selection-border-radius: 50%;
+  --radio-focus-ring-width: 0.1875rem;
+  --radio-focus-ring-offset: 0.1875rem;
+
+  /* Disclosure: component-specific structure, shared by every theme. */
+  --disclosure-group-gap: 0;
+  --disclosure-border-width: 0.0625rem;
+  --disclosure-trigger-min-height: 3rem;
+  --disclosure-trigger-padding-block: 0.75rem;
+  --disclosure-trigger-padding-inline: 0.75rem;
+  --disclosure-trigger-gap: 1rem;
+  --disclosure-panel-padding-block: 1rem;
+  --disclosure-panel-padding-inline: 0.75rem;
+  --disclosure-icon-size: 1.25rem;
+  --disclosure-focus-ring-width: 0.1875rem;
+  --disclosure-focus-ring-offset: -0.1875rem;
+  --disclosure-motion-duration: 180ms;
+
   /* Table: component-specific structure, shared by every theme. */
   --table-border-width: 0.0625rem;
   --table-cell-padding-block: 0.75rem;
@@ -192,4 +234,28 @@
   --table-focus-ring-width: 0.1875rem;
   --table-focus-ring-offset: -0.1875rem;
   --table-disabled-opacity: 0.5;
+
+  /* ToggleButton: component-specific structure, shared by every theme. */
+  --toggle-button-min-height: 2.75rem;
+  --toggle-button-padding-block: 0.5rem;
+  --toggle-button-padding-inline: 0.875rem;
+  --toggle-button-border-width: 0.0625rem;
+  --toggle-button-border-radius: 0;
+  --toggle-button-focus-ring-width: 0.1875rem;
+  --toggle-button-focus-ring-offset: 0.1875rem;
+  --toggle-button-group-gap: 0.5rem;
+
+  /* NavigationTree: component-specific structure, shared by every theme. */
+  --navigation-tree-gap: 0.25rem;
+  --navigation-tree-item-min-height: 2.75rem;
+  --navigation-tree-item-padding-block: 0;
+  --navigation-tree-item-padding-inline: 0.75rem;
+  --navigation-tree-item-gap: 0.5rem;
+  --navigation-tree-indent: 1.25rem;
+  --navigation-tree-current-indicator-width: 0.1875rem;
+  --navigation-tree-focus-ring-width: 0.1875rem;
+  --navigation-tree-focus-ring-offset: -0.1875rem;
+  --navigation-tree-chevron-size: 1.25rem;
+  --navigation-tree-header-padding-block: 0.5rem;
+  --navigation-tree-motion-duration: 180ms;
 }

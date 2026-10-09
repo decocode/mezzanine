@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The library currently exports React Aria `Button` and the `Table` family, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the composed `IconButton` and `DisclosureHeader` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
@@ -16,10 +16,24 @@ The library currently exports React Aria `Button` and the `Table` family, the ic
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
 | `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants, sizes, icon content and pending-state progress |
 | `src/components/Button.css` | Token-led styling for Button variants and React Aria interaction states |
+| `src/components/IconButton.tsx` | Public composed icon-only Button requiring a label that can be hidden, above or below |
+| `src/components/IconButton.css` | Token-led layout and visible-label styling for IconButton |
+| `src/components/Checkbox.tsx` | Public React Aria Checkbox wrapper with selected and indeterminate indicators |
+| `src/components/Checkbox.css` | Token-led styling for Checkbox states and interaction feedback |
+| `src/components/Link.ts` | Public React Aria Link export and prop types |
+| `src/components/Link.css` | Token-led styling for Link interaction states |
+| `src/components/NavigationTree.ts` | Public React Aria NavigationTree family exports and prop types |
+| `src/components/NavigationTree.css` | Token-led styling for NavigationTree hierarchy, routes and interaction states |
+| `src/components/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
+| `src/components/RadioGroup.css` | Token-led styling for RadioGroup, RadioField, RadioButton and SelectionIndicator |
+| `src/components/Disclosure.tsx` | Public React Aria Disclosure family plus the composed DisclosureHeader trigger pattern |
+| `src/components/Disclosure.css` | Token-led styling for Disclosure, DisclosureGroup and DisclosureHeader states |
 | `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
 | `src/icons/StudioIcons.tsx` | Public action, navigation, transport and sequencer icons imported from Rhythm Directives' active icon modules |
 | `src/components/Table.ts` | Public React Aria Table, TableHeader, Column, Row, TableBody and Cell exports and their prop types |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
+| `src/components/ToggleButton.ts` | Public current React Aria ToggleButton and ToggleButtonGroup exports and prop types |
+| `src/components/ToggleButton.css` | Token-led styling for ToggleButton states and ToggleButtonGroup layout |
 | `src/tokens.css` | Shared typography token contract and entry point for the three official color themes |
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
 | `src/themes/dark.css` | Neutral Dark theme, including automatic device-preference handling |
@@ -32,9 +46,10 @@ The library currently exports React Aria `Button` and the `Table` family, the ic
 | `site/Header.tsx` | Responsive showcase header with React Aria links, theme Select and Disclosure hamburger menu |
 | `site/Sidebar.tsx` | Responsive React Aria sidebar navigation, including the mobile Browse sections disclosure |
 | `site/SidebarDisclosureItem.tsx` | Reusable React Aria disclosure anatomy for each sidebar navigation group |
-| `site/siteNavigation.ts` | Single source of truth for approved IA groups, routes, labels, and implementation status |
+| `site/siteNavigation.ts` | Single source of truth for approved IA groups, routes, labels, implementation status and verified React Aria documentation matches |
 | `site/foundationData.ts` | Names and plain-language descriptions for the implemented tokens and typography styles shown by the showcase |
 | `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
+| `site/tableExampleData.ts` | Table anatomy content, example rows and sorting logic used by the Table documentation page |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |

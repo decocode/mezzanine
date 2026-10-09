@@ -1,0 +1,82 @@
+.react-aria-DisclosureGroup {
+  display: grid;
+  gap: var(--disclosure-group-gap);
+}
+
+.react-aria-Disclosure {
+  border-block-end: var(--disclosure-border-width) solid var(--color-border);
+  color: var(--color-text);
+}
+
+.react-aria-Disclosure > .react-aria-Heading {
+  margin: 0;
+}
+
+.mezzanine-disclosure-trigger {
+  display: flex;
+  gap: var(--disclosure-trigger-gap);
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--disclosure-trigger-min-height);
+  padding: var(--disclosure-trigger-padding-block) var(--disclosure-trigger-padding-inline);
+  border: 0;
+  background: var(--disclosure-trigger-background);
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-title-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-title-small);
+  text-align: start;
+  cursor: pointer;
+}
+
+.mezzanine-disclosure-trigger[data-hovered] {
+  background: var(--color-surface-hover);
+}
+
+.mezzanine-disclosure-trigger[data-pressed] {
+  background: var(--color-surface-pressed);
+}
+
+.mezzanine-disclosure-trigger[data-focus-visible] {
+  outline: var(--disclosure-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--disclosure-focus-ring-offset);
+}
+
+.mezzanine-disclosure-chevron {
+  width: var(--disclosure-icon-size);
+  height: var(--disclosure-icon-size);
+  flex: none;
+  transition: rotate var(--disclosure-motion-duration) ease-out;
+}
+
+.react-aria-Disclosure[data-expanded] .mezzanine-disclosure-chevron {
+  rotate: 180deg;
+}
+
+.react-aria-DisclosurePanel {
+  padding: 0 var(--disclosure-panel-padding-inline) var(--disclosure-panel-padding-block);
+  color: var(--color-text-muted);
+}
+
+.react-aria-Disclosure[data-disabled] {
+  opacity: var(--opacity-disabled);
+}
+
+.react-aria-Disclosure[data-disabled] .mezzanine-disclosure-trigger {
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mezzanine-disclosure-chevron {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .react-aria-Disclosure,
+  .mezzanine-disclosure-trigger {
+    forced-color-adjust: auto;
+  }
+}

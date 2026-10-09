@@ -1,4 +1,10 @@
-import { Button, Disclosure, DisclosureGroup, DisclosurePanel, Heading, Link } from 'react-aria-components'
+import { Button, Heading } from 'react-aria-components'
+import {
+  Disclosure,
+  DisclosureGroup,
+  DisclosurePanel,
+  Link,
+} from '@decocode/mezzanine'
 import { SidebarDisclosureItem } from './SidebarDisclosureItem'
 import {
   findSiteNavigationGroup,

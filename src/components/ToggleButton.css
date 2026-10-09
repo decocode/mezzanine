@@ -1,0 +1,71 @@
+.react-aria-ToggleButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--toggle-button-min-height);
+  padding: var(--toggle-button-padding-block) var(--toggle-button-padding-inline);
+  border: var(--toggle-button-border-width) solid var(--toggle-button-border);
+  border-radius: var(--toggle-button-border-radius);
+  background: var(--toggle-button-background);
+  color: var(--toggle-button-content);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-large);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-large);
+  text-align: center;
+  text-transform: var(--text-transform-label);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.react-aria-ToggleButton[data-hovered] {
+  background: var(--toggle-button-background-hovered);
+}
+
+.react-aria-ToggleButton[data-pressed] {
+  background: var(--toggle-button-background-pressed);
+}
+
+.react-aria-ToggleButton[data-selected] {
+  border-color: var(--toggle-button-border-selected);
+  background: var(--toggle-button-background-selected);
+  color: var(--toggle-button-content-selected);
+}
+
+.react-aria-ToggleButton[data-selected][data-hovered] {
+  background: var(--toggle-button-background-selected-hovered);
+}
+
+.react-aria-ToggleButton[data-selected][data-pressed] {
+  background: var(--toggle-button-background-selected-pressed);
+}
+
+.react-aria-ToggleButton[data-focus-visible] {
+  outline: var(--toggle-button-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--toggle-button-focus-ring-offset);
+}
+
+.react-aria-ToggleButton[data-disabled] {
+  opacity: var(--opacity-disabled);
+  cursor: default;
+}
+
+.react-aria-ToggleButtonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--toggle-button-group-gap);
+  align-items: center;
+}
+
+.react-aria-ToggleButtonGroup[data-orientation='vertical'] {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media (forced-colors: active) {
+  .react-aria-ToggleButton,
+  .react-aria-ToggleButtonGroup {
+    forced-color-adjust: auto;
+  }
+}

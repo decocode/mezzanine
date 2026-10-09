@@ -173,9 +173,61 @@ The complete 15-style typography foundation is documented in
 
 ## Current component tokens
 
-Button and Table are implemented components. Their component-specific tokens
+Button, Checkbox, Link, RadioGroup, Disclosure, NavigationTree, Table,
+ToggleButton and ToggleButtonGroup are implemented components. Their component-specific tokens
 keep shared structure easy to identify and override without pretending that
 Mezzanine already has a general spacing, radius or elevation foundation.
+
+Link uses shared semantic colors and component tokens for its underline and
+focus treatment.
+
+| Token | Meaning |
+| --- | --- |
+| `--link-underline-thickness` | Link underline thickness |
+| `--link-underline-offset` | Space between Link text and its underline |
+| `--link-focus-ring-width` | Keyboard-focus indicator width |
+| `--link-focus-ring-offset` | Keyboard-focus indicator position |
+
+RadioGroup uses structural tokens for its layout and indicator, plus theme
+tokens for its interactive colors.
+
+| Token | Meaning |
+| --- | --- |
+| `--radio-group-gap` | Space between vertically arranged RadioGroup content |
+| `--radio-group-horizontal-gap` | Space between horizontally arranged RadioField options |
+| `--radio-field-gap-block` | Vertical space between a RadioButton and its description |
+| `--radio-content-gap` | Space between a Radio indicator and label |
+| `--radio-indicator-size` | Radio indicator width and height |
+| `--radio-selection-size` | Selected mark width and height |
+| `--radio-border-width` | Radio indicator border width |
+| `--radio-indicator-border-radius` | Radio indicator shape |
+| `--radio-selection-border-radius` | Selected mark shape |
+| `--radio-focus-ring-width` | Keyboard-focus indicator width |
+| `--radio-focus-ring-offset` | Keyboard-focus indicator position |
+| `--radio-background` | Unselected Radio indicator background |
+| `--radio-background-hovered` | Radio indicator background while hovered |
+| `--radio-selection` | Selected mark and selected indicator border color |
+| `--radio-border` | Unselected Radio indicator border color |
+| `--radio-border-invalid` | Invalid Radio indicator border color |
+
+Disclosure uses structural tokens for its trigger, panel, grouping and
+interaction feedback.
+
+| Token | Meaning |
+| --- | --- |
+| `--disclosure-group-gap` | Space between items in a DisclosureGroup |
+| `--disclosure-border-width` | Divider width between Disclosure items |
+| `--disclosure-trigger-min-height` | Minimum height of a DisclosureHeader trigger |
+| `--disclosure-trigger-padding-block` | Vertical space inside a DisclosureHeader trigger |
+| `--disclosure-trigger-padding-inline` | Horizontal space inside a DisclosureHeader trigger |
+| `--disclosure-trigger-gap` | Space between a Disclosure label and chevron |
+| `--disclosure-panel-padding-block` | Bottom space inside a DisclosurePanel |
+| `--disclosure-panel-padding-inline` | Horizontal space inside a DisclosurePanel |
+| `--disclosure-icon-size` | DisclosureHeader chevron size |
+| `--disclosure-focus-ring-width` | Keyboard-focus indicator width |
+| `--disclosure-focus-ring-offset` | Keyboard-focus indicator position |
+| `--disclosure-motion-duration` | DisclosureHeader chevron rotation duration |
+| `--disclosure-trigger-background` | Default DisclosureHeader trigger background |
 
 | Token | Meaning |
 | --- | --- |
@@ -189,7 +241,79 @@ Mezzanine already has a general spacing, radius or elevation foundation.
 | `--table-row-background-selected-hovered` | Selected-row background while hovered |
 | `--table-row-background-selected-pressed` | Selected-row background while pressed |
 | `--table-row-content-selected` | Content on a selected row |
+| `--table-header-background` | Table header background |
 | `--table-drop-target-color` | Drop-target indicator color |
+
+ToggleButton uses structural tokens for its control and grouping, plus theme
+tokens for its unselected and selected interaction states.
+
+| Token | Meaning |
+| --- | --- |
+| `--toggle-button-min-height` | Minimum ToggleButton target height |
+| `--toggle-button-padding-block` | Vertical space inside a ToggleButton |
+| `--toggle-button-padding-inline` | Horizontal space inside a ToggleButton |
+| `--toggle-button-border-width` | ToggleButton border width |
+| `--toggle-button-border-radius` | ToggleButton corner radius |
+| `--toggle-button-focus-ring-width` | Keyboard-focus indicator width |
+| `--toggle-button-focus-ring-offset` | Keyboard-focus indicator position |
+| `--toggle-button-group-gap` | Space between ToggleButtons in a ToggleButtonGroup |
+| `--toggle-button-background` | Unselected ToggleButton background |
+| `--toggle-button-background-hovered` | Unselected background while hovered |
+| `--toggle-button-background-pressed` | Unselected background while pressed |
+| `--toggle-button-content` | Unselected label and icon color |
+| `--toggle-button-border` | Unselected border color |
+| `--toggle-button-background-selected` | Selected ToggleButton background |
+| `--toggle-button-background-selected-hovered` | Selected background while hovered |
+| `--toggle-button-background-selected-pressed` | Selected background while pressed |
+| `--toggle-button-content-selected` | Selected label and icon color |
+| `--toggle-button-border-selected` | Selected border color |
+
+NavigationTree uses structural tokens for hierarchy, route indication and its
+expandable-item chevron, plus theme tokens for interaction and current-route
+states.
+
+| Token | Meaning |
+| --- | --- |
+| `--navigation-tree-gap` | Space between NavigationTree rows and sections |
+| `--navigation-tree-item-min-height` | Minimum height of a navigation item |
+| `--navigation-tree-item-padding-block` | Vertical space inside a navigation item |
+| `--navigation-tree-item-padding-inline` | Base horizontal space inside a navigation item |
+| `--navigation-tree-item-gap` | Space between item content and controls |
+| `--navigation-tree-indent` | Additional indentation for each nested level |
+| `--navigation-tree-current-indicator-width` | Width of the current-route indicator |
+| `--navigation-tree-focus-ring-width` | Keyboard-focus indicator width |
+| `--navigation-tree-focus-ring-offset` | Keyboard-focus indicator position |
+| `--navigation-tree-chevron-size` | Expand-and-collapse chevron size |
+| `--navigation-tree-header-padding-block` | Vertical space around a section header |
+| `--navigation-tree-motion-duration` | Chevron rotation duration |
+| `--navigation-tree-item-background` | Default item background |
+| `--navigation-tree-item-background-hovered` | Item background while hovered |
+| `--navigation-tree-item-background-pressed` | Item background while pressed |
+| `--navigation-tree-item-background-current` | Current-route item background |
+| `--navigation-tree-item-content` | Default item content color |
+| `--navigation-tree-item-content-current` | Current-route item content color |
+| `--navigation-tree-current-indicator` | Current-route indicator color |
+| `--navigation-tree-header-content` | Section header content color |
+
+Checkbox uses component tokens for its indicator while its visible label uses
+the shared text roles.
+
+| Token | Meaning |
+| --- | --- |
+| `--checkbox-size` | Width and height of the selection indicator |
+| `--checkbox-icon-size` | Size of the check or indeterminate icon |
+| `--checkbox-content-gap` | Space between the indicator and visible label |
+| `--checkbox-border-width` | Indicator border width |
+| `--checkbox-border-radius` | Indicator corner radius |
+| `--checkbox-focus-ring-width` | Keyboard-focus indicator width |
+| `--checkbox-focus-ring-offset` | Keyboard-focus indicator position |
+| `--checkbox-background` | Unselected indicator background |
+| `--checkbox-background-hovered` | Unselected indicator background while hovered |
+| `--checkbox-background-selected` | Selected or indeterminate indicator background |
+| `--checkbox-background-selected-hovered` | Selected or indeterminate indicator background while hovered |
+| `--checkbox-content-selected` | Check or indeterminate icon color |
+| `--checkbox-border` | Unselected indicator border color |
+| `--checkbox-border-invalid` | Invalid indicator border color |
 
 Button uses an approved color-role contract so the official themes can define
 its appearance without tying the component to particular palette values.

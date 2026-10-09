@@ -1,0 +1,113 @@
+.react-aria-NavigationTree {
+  display: grid;
+  gap: var(--navigation-tree-gap);
+  color: var(--navigation-tree-item-content);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+}
+
+.react-aria-NavigationTreeItem {
+  display: flex;
+  gap: var(--navigation-tree-item-gap);
+  align-items: center;
+  min-height: var(--navigation-tree-item-min-height);
+  padding-block: var(--navigation-tree-item-padding-block);
+  padding-inline-end: var(--navigation-tree-item-padding-inline);
+  padding-inline-start: calc(
+    var(--navigation-tree-item-padding-inline) +
+    (var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent)
+  );
+  border-inline-start: var(--navigation-tree-current-indicator-width) solid transparent;
+  background: var(--navigation-tree-item-background);
+  font-size: var(--font-size-body-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body-small);
+}
+
+.react-aria-NavigationTreeItem .react-aria-Link {
+  display: flex;
+  min-width: 0;
+  min-height: var(--navigation-tree-item-min-height);
+  flex: 1;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.react-aria-NavigationTreeItem[data-hovered] {
+  background: var(--navigation-tree-item-background-hovered);
+}
+
+.react-aria-NavigationTreeItem[data-pressed] {
+  background: var(--navigation-tree-item-background-pressed);
+}
+
+.react-aria-NavigationTreeItem[data-has-child-items] {
+  color: var(--navigation-tree-header-content);
+  font-size: var(--font-size-label-medium);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-medium);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-NavigationTreeItem[data-current] {
+  border-inline-start-color: var(--navigation-tree-current-indicator);
+  background: var(--navigation-tree-item-background-current);
+  color: var(--navigation-tree-item-content-current);
+}
+
+.react-aria-NavigationTreeItem[data-focus-visible] {
+  outline: var(--navigation-tree-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--navigation-tree-focus-ring-offset);
+}
+
+.react-aria-NavigationTreeItem .react-aria-Link[data-focus-visible] {
+  outline: none;
+}
+
+.react-aria-NavigationTreeItem[data-disabled] {
+  opacity: var(--opacity-disabled);
+}
+
+.react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] svg {
+  width: var(--navigation-tree-chevron-size);
+  height: var(--navigation-tree-chevron-size);
+  rotate: 0deg;
+  transition: rotate var(--navigation-tree-motion-duration) ease-out;
+}
+
+.react-aria-NavigationTreeItem[data-expanded] .react-aria-Button[slot='chevron'] svg {
+  rotate: 180deg;
+}
+
+.react-aria-NavigationTreeSection {
+  display: grid;
+  gap: var(--navigation-tree-gap);
+}
+
+.react-aria-NavigationTreeHeader {
+  padding: var(--navigation-tree-header-padding-block) var(--navigation-tree-item-padding-inline);
+  color: var(--navigation-tree-header-content);
+  font-size: var(--font-size-label-large);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-large);
+  text-transform: var(--text-transform-label);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] svg {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .react-aria-NavigationTree,
+  .react-aria-NavigationTreeItem,
+  .react-aria-NavigationTreeItem .react-aria-Link,
+  .react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] {
+    forced-color-adjust: auto;
+  }
+}

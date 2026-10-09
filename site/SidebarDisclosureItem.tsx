@@ -1,6 +1,10 @@
 import type { ReactNode } from 'react'
-import { ChevronDownIcon } from '@decocode/mezzanine'
-import { Button, Disclosure, DisclosurePanel, Heading } from 'react-aria-components'
+import {
+  ChevronDownIcon,
+  Disclosure,
+  DisclosurePanel,
+} from '@decocode/mezzanine'
+import { Button, Heading } from 'react-aria-components'
 
 interface SidebarDisclosureItemProps {
   children: ReactNode

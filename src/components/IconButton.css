@@ -1,0 +1,24 @@
+.mezzanine-icon-button {
+  display: inline-flex;
+  gap: calc(var(--button-content-gap) / 2);
+  align-items: center;
+}
+
+.mezzanine-icon-button[data-label-position='above'] {
+  flex-direction: column;
+}
+
+.mezzanine-icon-button[data-label-position='below'] {
+  flex-direction: column-reverse;
+}
+
+.mezzanine-icon-button-label {
+  color: var(--color-text-muted);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-small);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-small);
+  text-align: center;
+  text-transform: var(--text-transform-label);
+}

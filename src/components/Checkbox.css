@@ -1,0 +1,69 @@
+.react-aria-Checkbox {
+  display: inline-flex;
+  gap: var(--checkbox-content-gap);
+  align-items: center;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+  cursor: pointer;
+}
+
+.mezzanine-checkbox-indicator {
+  display: grid;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  flex: none;
+  place-items: center;
+  border: var(--checkbox-border-width) solid var(--checkbox-border);
+  border-radius: var(--checkbox-border-radius);
+  background: var(--checkbox-background);
+  color: transparent;
+}
+
+.mezzanine-checkbox-indicator svg {
+  width: var(--checkbox-icon-size);
+  height: var(--checkbox-icon-size);
+}
+
+.react-aria-Checkbox[data-hovered] .mezzanine-checkbox-indicator {
+  background: var(--checkbox-background-hovered);
+}
+
+.react-aria-Checkbox[data-selected] .mezzanine-checkbox-indicator,
+.react-aria-Checkbox[data-indeterminate] .mezzanine-checkbox-indicator {
+  border-color: var(--checkbox-background-selected);
+  background: var(--checkbox-background-selected);
+  color: var(--checkbox-content-selected);
+}
+
+.react-aria-Checkbox[data-selected][data-hovered] .mezzanine-checkbox-indicator,
+.react-aria-Checkbox[data-indeterminate][data-hovered] .mezzanine-checkbox-indicator {
+  border-color: var(--checkbox-background-selected-hovered);
+  background: var(--checkbox-background-selected-hovered);
+}
+
+.react-aria-Checkbox[data-invalid] .mezzanine-checkbox-indicator {
+  border-color: var(--checkbox-border-invalid);
+}
+
+.react-aria-Checkbox[data-focus-visible] .mezzanine-checkbox-indicator {
+  outline: var(--checkbox-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--checkbox-focus-ring-offset);
+}
+
+.react-aria-Checkbox[data-disabled] {
+  opacity: var(--opacity-disabled);
+  cursor: default;
+}
+
+.react-aria-Checkbox[data-readonly] {
+  cursor: default;
+}
+
+@media (forced-colors: active) {
+  .react-aria-Checkbox,
+  .mezzanine-checkbox-indicator {
+    forced-color-adjust: auto;
+  }
+}

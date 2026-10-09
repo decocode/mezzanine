@@ -4,6 +4,7 @@ export interface SitePageDefinition {
   id: string
   label: string
   path: string
+  reactAriaPage?: string
   status: SitePageStatus
 }
 
@@ -45,26 +46,26 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     id: 'components',
     label: 'Components',
     pages: [
-      { id: 'button', label: 'Button', path: '/button', status: 'implemented' },
-      { id: 'link', label: 'Link', path: '/link', status: 'empty' },
+      { id: 'button', label: 'Button', path: '/button', reactAriaPage: 'Button', status: 'implemented' },
+      { id: 'link', label: 'Link', path: '/link', reactAriaPage: 'Link', status: 'implemented' },
       { id: 'card', label: 'Card', path: '/card', status: 'empty' },
-      { id: 'table', label: 'Table', path: '/table', status: 'implemented' },
+      { id: 'table', label: 'Table', path: '/table', reactAriaPage: 'Table', status: 'implemented' },
       { id: 'carousel', label: 'Carousel', path: '/carousel', status: 'empty' },
       { id: 'image-viewer', label: 'Image Viewer', path: '/image-viewer', status: 'empty' },
-      { id: 'tag-group', label: 'TagGroup', path: '/tag-group', status: 'empty' },
-      { id: 'toggle-button', label: 'ToggleButton', path: '/toggle-button', status: 'empty' },
-      { id: 'toggle-button-group', label: 'ToggleButtonGroup', path: '/toggle-button-group', status: 'empty' },
-      { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'empty' },
-      { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'empty' },
-      { id: 'radio-group', label: 'RadioGroup', path: '/radio-group', status: 'empty' },
-      { id: 'text-field', label: 'TextField', path: '/text-field', status: 'empty' },
-      { id: 'text-area', label: 'TextArea', path: '/text-area', status: 'empty' },
+      { id: 'tag-group', label: 'TagGroup', path: '/tag-group', reactAriaPage: 'TagGroup', status: 'empty' },
+      { id: 'toggle-button', label: 'ToggleButton', path: '/toggle-button', reactAriaPage: 'ToggleButton', status: 'implemented' },
+      { id: 'disclosure', label: 'Disclosure', path: '/disclosure', reactAriaPage: 'Disclosure', status: 'implemented' },
+      { id: 'checkbox', label: 'Checkbox', path: '/checkbox', reactAriaPage: 'Checkbox', status: 'implemented' },
+      { id: 'radio-group', label: 'RadioGroup', path: '/radio-group', reactAriaPage: 'RadioGroup', status: 'implemented' },
+      { id: 'text-field', label: 'TextField', path: '/text-field', reactAriaPage: 'TextField', status: 'empty' },
+      { id: 'text-area', label: 'TextArea', path: '/text-area', reactAriaPage: 'TextField', status: 'empty' },
     ],
   },
   {
     id: 'navigation',
     label: 'Navigation',
     pages: [
+      { id: 'navigation-tree', label: 'NavigationTree', path: '/navigation-tree', reactAriaPage: 'NavigationTree', status: 'implemented' },
       { id: 'header', label: 'Header', path: '/header', status: 'empty' },
       { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'empty' },
       { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },

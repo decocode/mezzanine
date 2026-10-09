@@ -45,10 +45,47 @@
   --button-destructive-content: var(--color-danger-50);
   --button-destructive-border: var(--color-danger-900);
 
+  --checkbox-background: transparent;
+  --checkbox-background-hovered: var(--color-gray-100);
+  --checkbox-background-selected: var(--color-gray-950);
+  --checkbox-background-selected-hovered: var(--color-gray-800);
+  --checkbox-content-selected: var(--color-gray-50);
+  --checkbox-border: var(--color-gray-950);
+  --checkbox-border-invalid: var(--color-danger-700);
+
+  --radio-background: transparent;
+  --radio-background-hovered: var(--color-gray-100);
+  --radio-selection: var(--color-gray-950);
+  --radio-border: var(--color-gray-950);
+  --radio-border-invalid: var(--color-danger-700);
+
+  --toggle-button-background: transparent;
+  --toggle-button-background-hovered: var(--color-gray-100);
+  --toggle-button-background-pressed: var(--color-gray-200);
+  --toggle-button-content: var(--color-gray-950);
+  --toggle-button-border: var(--color-gray-950);
+  --toggle-button-background-selected: var(--color-gray-950);
+  --toggle-button-background-selected-hovered: var(--color-gray-800);
+  --toggle-button-background-selected-pressed: var(--color-gray-700);
+  --toggle-button-content-selected: var(--color-gray-50);
+  --toggle-button-border-selected: var(--color-gray-950);
+
+  --navigation-tree-item-background: transparent;
+  --navigation-tree-item-background-hovered: var(--color-surface-hover);
+  --navigation-tree-item-background-pressed: var(--color-surface-pressed);
+  --navigation-tree-item-background-current: var(--color-surface-pressed);
+  --navigation-tree-item-content: var(--color-text);
+  --navigation-tree-item-content-current: var(--color-text);
+  --navigation-tree-current-indicator: var(--color-link);
+  --navigation-tree-header-content: var(--color-text-muted);
+
+  --disclosure-trigger-background: transparent;
+
   --table-row-background-selected: var(--color-gray-950);
   --table-row-background-selected-hovered: var(--color-gray-800);
   --table-row-background-selected-pressed: var(--color-gray-700);
   --table-row-content-selected: var(--color-gray-50);
+  --table-header-background: var(--color-gray-100);
   --table-drop-target-color: var(--color-gray-950);
 
   --color-focus: var(--color-info-700);
