@@ -1,0 +1,67 @@
+/* Explicit dark selection. */
+:where(:root[data-theme='dark']) {
+  color-scheme: dark;
+
+  --color-page: #0D1117;
+  --color-surface: #161B22;
+  --color-surface-hover: #21262D;
+  --color-surface-pressed: #30363D;
+  --color-surface-inverse: #F0F3F6;
+
+  --color-text: #F0F3F6;
+  --color-text-muted: #B1BAC4;
+  --color-text-inverse: #1F2328;
+
+  --color-link: #58A6FF;
+  --color-link-hover: #79C0FF;
+  --color-link-pressed: #A5D6FF;
+
+  --color-border: #6E7681;
+
+  --color-primary: #1F6FEB;
+  --color-primary-hover: #1158C7;
+  --color-primary-pressed: #0D419D;
+  --color-on-primary: #FFFFFF;
+
+  --color-info: var(--color-info-700);
+  --color-success: var(--color-success-700);
+  --color-warning: var(--color-warning-700);
+  --color-danger: var(--color-danger-700);
+
+  --color-focus: var(--color-info-700);
+}
+
+/* System follows a dark device preference. Light remains the fallback. */
+@media (prefers-color-scheme: dark) {
+  :where(:root:not([data-theme]), :root[data-theme='system']) {
+    color-scheme: dark;
+
+    --color-page: #0D1117;
+    --color-surface: #161B22;
+    --color-surface-hover: #21262D;
+    --color-surface-pressed: #30363D;
+    --color-surface-inverse: #F0F3F6;
+
+    --color-text: #F0F3F6;
+    --color-text-muted: #B1BAC4;
+    --color-text-inverse: #1F2328;
+
+    --color-link: #58A6FF;
+    --color-link-hover: #79C0FF;
+    --color-link-pressed: #A5D6FF;
+
+    --color-border: #6E7681;
+
+    --color-primary: #1F6FEB;
+    --color-primary-hover: #1158C7;
+    --color-primary-pressed: #0D419D;
+    --color-on-primary: #FFFFFF;
+
+    --color-info: var(--color-info-700);
+    --color-success: var(--color-success-700);
+    --color-warning: var(--color-warning-700);
+    --color-danger: var(--color-danger-700);
+
+    --color-focus: var(--color-info-700);
+  }
+}

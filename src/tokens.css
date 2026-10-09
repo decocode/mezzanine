@@ -1,88 +1,74 @@
 /*
-  Mezzanine token contract and default values.
+  Mezzanine shared token contract.
 
-  Every token name in this file is part of Mezzanine's public contract:
-  components reference these names, and each consuming app sets them in its
-  own theme file. Renaming or removing a token is a breaking change.
-
-  The values here are only defaults. The initial colors, elevation and font
-  families come from DecoCode; typography uses a general-purpose web scale.
-  A consuming product can override every value in its own theme.
-
-  :where(:root) gives these defaults zero specificity, so any app that sets
-  the same names on :root overrides them, whatever order the stylesheets load.
+  Theme-specific color values live in src/themes/. The tokens in this file are
+  shared by every official theme. Components and public text styles consume
+  these names rather than product-specific values.
 */
+
+@import './themes/light.css';
+@import './themes/dark.css';
+@import './themes/wireframe.css';
+
 :where(:root) {
-  /* Page: the color behind everything. */
-  --color-page: #F8F7FA;
+  /* Semantic scales imported unchanged from DecoCode for review. */
+  --color-info-50: #F1F6FE;
+  --color-info-100: #E3EEFD;
+  --color-info-200: #C5DBFA;
+  --color-info-300: #9FC3F4;
+  --color-info-400: #71A4EA;
+  --color-info-500: #4383DB;
+  --color-info-600: #2A70D1;
+  --color-info-700: #155FC4;
+  --color-info-800: #124E9F;
+  --color-info-900: #0F3B78;
+  --color-info-950: #09274F;
 
-  /* Surfaces: things that sit on the page, such as cards, inputs and the
-     tertiary button. */
-  --color-surface: #FFFFFF;
-  --color-surface-hover: #E8E7EA;
-  --color-surface-pressed: #D4D2D8;
+  --color-success-50: #EFFBF8;
+  --color-success-100: #DAF5EE;
+  --color-success-200: #B7EBDE;
+  --color-success-300: #86DDCA;
+  --color-success-400: #4FC8AF;
+  --color-success-500: #1FAB95;
+  --color-success-600: #008F80;
+  --color-success-700: #007D70;
+  --color-success-800: #00665D;
+  --color-success-900: #004C47;
+  --color-success-950: #00332F;
 
-  /* Inverse surface: a dark patch on a light page, such as a tooltip. */
-  --color-surface-inverse: #2A2B28;
+  --color-warning-50: #FFF8ED;
+  --color-warning-100: #FFEDD2;
+  --color-warning-200: #FFD9A3;
+  --color-warning-300: #FFC16D;
+  --color-warning-400: #F8A536;
+  --color-warning-500: #DF7D13;
+  --color-warning-600: #C76300;
+  --color-warning-700: #B14F00;
+  --color-warning-800: #914000;
+  --color-warning-900: #6E3100;
+  --color-warning-950: #482100;
 
-  /* Text. */
-  --color-text: #2A2B28;
-  --color-text-inverse: #FFFFFF;
+  --color-danger-50: #FFF3F7;
+  --color-danger-100: #FFE5EE;
+  --color-danger-200: #FFC7DC;
+  --color-danger-300: #F99FC1;
+  --color-danger-400: #EC71A0;
+  --color-danger-500: #DC4B84;
+  --color-danger-600: #CA2F70;
+  --color-danger-700: #B82064;
+  --color-danger-800: #941B52;
+  --color-danger-900: #70163F;
+  --color-danger-950: #490F2A;
 
-  /* Links. */
-  --color-link: #504C66;
-  --color-link-hover: #645D7E;
-  --color-link-pressed: #2A2837;
-
-  /* Lines. */
-  --color-border: #87838F;
-
-  /* Primary action. "Strong" is the darkest partner, used for borders and
-     pressed shadows. "On primary" is the text sitting on top. */
-  --color-primary: #504C66;
-  --color-primary-hover: #3E3A50;
-  --color-primary-pressed: #645D7E;
-  --color-primary-strong: #2A2837;
-  --color-on-primary: #FFFFFF;
-
-  /* Secondary action. */
-  --color-secondary: #B8D3E2;
-  --color-secondary-hover: #98BED4;
-  --color-secondary-pressed: #D3E3EE;
-  --color-secondary-strong: #1C303D;
-  --color-on-secondary: #1C303D;
-
-  /* Messages. Danger also has action states for destructive buttons. */
-  --color-info: #155FC4;
-  --color-success: #007D70;
-  --color-warning: #B14F00;
-  --color-danger: #B82064;
-  --color-danger-hover: #941B52;
-  --color-danger-pressed: #70163F;
-  --color-danger-strong: #490F2A;
-  --color-on-danger: #FFFFFF;
-
-  /* Focus: the keyboard focus ring. */
-  --color-focus: #155FC4;
-  --color-focus-glow: color-mix(in srgb, var(--color-focus) 50%, transparent);
-  --shadow-focus-ring: 0 0 12px 5px var(--color-focus-glow);
-
-  /* Font families. Mezzanine names the roles but does not download font files.
-     The showcase and each consuming product are responsible for loading any
-     non-system fonts they choose. */
-  --font-family-body: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-family-heading: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  /* Mezzanine uses system fonts by default and downloads no font files. */
+  --font-family-body: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-heading: var(--font-family-body);
   --font-family-monospace: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
 
-  /* Font weights. */
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
-
-  /* Typography foundation. Each role has large, medium and small styles.
-     Sizes use rem so they respond to the user's browser text settings. Line
-     heights are unitless so they continue to scale with an overridden size. */
 
   /* Display: short, expressive hero and marketing text. */
   --font-size-display-large: 4.5rem;
@@ -91,7 +77,7 @@
   --line-height-display-medium: 1.2;
   --font-size-display-small: 3rem;
   --line-height-display-small: 1.25;
-  --letter-spacing-display: 0.02em;
+  --letter-spacing-display: normal;
   --text-transform-display: none;
 
   /* Heading: page and section hierarchy. */
@@ -101,7 +87,7 @@
   --line-height-heading-medium: 1.27;
   --font-size-heading-small: 1.5rem;
   --line-height-heading-small: 1.33;
-  --letter-spacing-heading: 0.02em;
+  --letter-spacing-heading: normal;
   --text-transform-heading: none;
 
   /* Title: headings inside cards, panels, dialogs and other components. */
@@ -134,32 +120,11 @@
   --letter-spacing-label: normal;
   --text-transform-label: none;
 
-  /* Elevation: hard, print-style offset shadows. Negative levels are inset. */
-  --elevation-shadow-color: color-mix(in srgb, #504C5A 45%, transparent);
-  --elevation-minus-2: inset 4px 4px 0 var(--elevation-shadow-color);
-  --elevation-minus-1: inset 2px 2px 0 var(--elevation-shadow-color);
-  --elevation-0: none;
-  --elevation-1: -2px 2px 0 var(--elevation-shadow-color);
-  --elevation-2: -4px 4px 0 var(--elevation-shadow-color);
-  --elevation-3: -7px 7px 0 var(--elevation-shadow-color);
-  --elevation-4: -10px 10px 0 var(--elevation-shadow-color);
-
-  /* Spacing, 4px base unit. Name = px / 4, so --space-4 is always 16px. */
-  --space-1: 0.25rem;   /* 4px */
-  --space-2: 0.5rem;    /* 8px */
-  --space-3: 0.75rem;   /* 12px */
-  --space-4: 1rem;      /* 16px */
-  --space-5: 1.25rem;   /* 20px */
-  --space-6: 1.5rem;    /* 24px */
-  --space-7: 1.75rem;   /* 28px */
-  --space-8: 2rem;      /* 32px */
-  --space-9: 2.25rem;   /* 36px */
-  --space-10: 2.5rem;   /* 40px */
-  --space-12: 3rem;     /* 48px */
-  --space-13: 3.25rem;  /* 52px */
-  --space-14: 3.5rem;   /* 56px */
-  --space-16: 4rem;     /* 64px */
-  --space-20: 5rem;     /* 80px */
-  --space-24: 6rem;     /* 96px */
-  --space-28: 7rem;     /* 112px */
+  /* Table: component-specific structure, shared by every theme. */
+  --table-border-width: 0.0625rem;
+  --table-cell-padding-block: 0.75rem;
+  --table-cell-padding-inline: 1rem;
+  --table-focus-ring-width: 0.1875rem;
+  --table-focus-ring-offset: -0.1875rem;
+  --table-disabled-opacity: 0.5;
 }

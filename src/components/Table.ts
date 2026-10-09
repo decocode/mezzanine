@@ -1,8 +1,3 @@
-// Mezzanine public entry point.
-// Every component the package exposes is exported from here.
-import './tokens.css'
-import './styles.css'
-
 export {
   Cell,
   Column,
@@ -10,7 +5,7 @@ export {
   Table,
   TableBody,
   TableHeader,
-} from './components/Table'
+} from 'react-aria-components/Table'
 
 export type {
   CellProps,
@@ -24,4 +19,4 @@ export type {
   TableHeaderProps,
   TableProps,
   TableRenderProps,
-} from './components/Table'
+} from 'react-aria-components/Table'

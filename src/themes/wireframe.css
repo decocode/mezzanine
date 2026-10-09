@@ -1,0 +1,35 @@
+/*
+  Wireframe is intentionally monochrome except for semantic status colors and
+  the blue keyboard-focus color. It is selected explicitly, never by the OS.
+*/
+:where(:root[data-theme='wireframe']) {
+  color-scheme: light;
+
+  --color-page: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F2F2F2;
+  --color-surface-pressed: #E5E5E5;
+  --color-surface-inverse: #000000;
+
+  --color-text: #000000;
+  --color-text-muted: #555555;
+  --color-text-inverse: #FFFFFF;
+
+  --color-link: #000000;
+  --color-link-hover: #333333;
+  --color-link-pressed: #000000;
+
+  --color-border: #000000;
+
+  --color-primary: #000000;
+  --color-primary-hover: #333333;
+  --color-primary-pressed: #555555;
+  --color-on-primary: #FFFFFF;
+
+  --color-info: var(--color-info-700);
+  --color-success: var(--color-success-700);
+  --color-warning: var(--color-warning-700);
+  --color-danger: var(--color-danger-700);
+
+  --color-focus: var(--color-info-700);
+}

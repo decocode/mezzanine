@@ -2,8 +2,9 @@
 
 An accessible, token-themed design system built on React Aria Components, by DecoCode Ltd.
 
-Mezzanine provides behaviour, accessibility and structure. Each product supplies its own look by
-defining the design tokens (CSS custom properties) in its own theme file.
+Mezzanine provides behaviour, accessibility, structure and three neutral themes: Light, Dark and
+Wireframe. Products can use those defaults or supply their own look by overriding the design tokens
+(CSS custom properties) in a product theme file.
 
 Used by: [decocode.fly.dev](https://decocode.fly.dev)
 Showcase: [mezzanine.fly.dev](https://mezzanine.fly.dev)
@@ -32,9 +33,13 @@ Showcase: [mezzanine.fly.dev](https://mezzanine.fly.dev)
 ## How DecoCode products use it
 
 ```ts
-import '@decocode/mezzanine/styles.css' // Mezzanine structure
-import './theme.css'                    // the product's own token values
-import { Button } from '@decocode/mezzanine'
+import '@decocode/mezzanine/styles.css' // Mezzanine structure and default themes
+import './theme.css'                    // optional product token overrides
+import { Table, TableHeader, Column, Row, TableBody, Cell } from '@decocode/mezzanine'
 ```
+
+Set `data-theme="light"`, `data-theme="dark"`, or `data-theme="wireframe"` on the root HTML element
+to choose an explicit theme. Use `data-theme="system"` (or no attribute) to follow the device's
+Light/Dark preference, with Light as the fallback.
 
 The package is `private` and is not published to npm.

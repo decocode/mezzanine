@@ -5,7 +5,12 @@
       "isSinglePageApplication": true,
       "numberOfRuns": 3,
       "url": [
-        "http://localhost/"
+        "http://localhost/",
+        "http://localhost/introduction",
+        "http://localhost/color",
+        "http://localhost/typography",
+        "http://localhost/table",
+        "http://localhost/button"
       ],
       "settings": {
         "preset": "desktop",

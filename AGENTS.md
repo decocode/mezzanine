@@ -5,7 +5,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 ## Stack and conventions
 
 - Use React with TypeScript.
-- Use `react-aria-components` for interactive controls so keyboard and focus behavior stays accessible.
+- Use `react-aria-components` for supported interface patterns in both the library and the showcase so keyboard, focus, pointer, touch, and accessibility behavior come from the same foundation.
 - Use npm and keep `package-lock.json` in sync with `package.json`.
 - Keep configuration minimal and follow the existing Vite and Oxlint setup.
 
@@ -22,13 +22,17 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 
 - `src/` is the source of truth for what Mezzanine currently contains. The showcase documents the library; it must not design, extend, or simulate it.
 - Only document components, variants, states, tokens, behaviours, and rules that are implemented in the library and available through its public API.
-- Do not invent or embellish content to make the showcase appear more complete. Do not add placeholder pages, “coming soon” navigation items, speculative examples, or undocumented conventions.
+- Do not invent or embellish content to make the showcase appear more complete. The approved information architecture may include an empty route before its subject is implemented, but that page must say `Not implemented`, contain no speculative examples or rules, and be visibly marked `Empty` in navigation.
 - Before adding showcase content, verify the corresponding implementation and its agreed behaviour in the repository. If something is missing or ambiguous, stop and ask the user before defining or documenting it.
 - Showcase examples must render the real exported library components. Do not create showcase-only replicas, variants, styles, or behaviours.
+- Build the showcase itself from React Aria Components wherever React Aria provides the interface pattern. If Mezzanine already exports that component, the showcase must import the Mezzanine export rather than importing the same component directly from `react-aria-components`.
+- A direct `react-aria-components` import is allowed in the showcase only while Mezzanine has no corresponding public export, and must not be wrapped or styled as though it were an implemented Mezzanine component.
+- Component comparison matrices and other tabular showcase content must use Mezzanine's exported `Table` parts. Do not use a native `<table>` as a shortcut once `Table` is available.
+- Native semantic HTML remains appropriate for static page structure and content when React Aria does not provide a corresponding component.
 - Display token values from the implemented token source wherever possible. Do not manually duplicate values in showcase code.
 - Neutral sample text or data may be used to demonstrate an existing component, but it must not imply that an unimplemented feature, rule, or variant exists.
 - If the showcase or written documentation disagrees with the implemented public library, treat the library as authoritative and correct the documentation.
-- A foundation or component should appear in showcase navigation only after it has been agreed, implemented, exported where applicable, and checked.
+- An implemented foundation or component may be presented as documentation only after it has been agreed, implemented, exported where applicable, and checked. An approved empty IA destination is not evidence that its named subject exists in Mezzanine.
 
 ## React Aria alignment and naming
 

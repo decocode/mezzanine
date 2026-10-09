@@ -1,8 +1,9 @@
 # Mezzanine typography
 
 Mezzanine uses a general-purpose type ramp that can support product interfaces,
-content websites and marketing pages. It is not limited to the text treatments
-currently used by DecoCode.
+content websites and marketing pages. Its default Heading and Body roles use
+the same system-font stack and require no font download. Product themes can
+replace either family without changing the named styles.
 
 The ramp has five roles. Each role has large, medium and small styles:
 
@@ -38,21 +39,21 @@ values without changing the style names.
 
 | Style | Class | Default size | Default family and weight |
 | --- | --- | ---: | --- |
-| Display large | `mezzanine-text-display-large` | 72px | Heading, regular |
-| Display medium | `mezzanine-text-display-medium` | 60px | Heading, regular |
-| Display small | `mezzanine-text-display-small` | 48px | Heading, regular |
-| Heading large | `mezzanine-text-heading-large` | 36px | Heading, regular |
-| Heading medium | `mezzanine-text-heading-medium` | 30px | Heading, regular |
-| Heading small | `mezzanine-text-heading-small` | 24px | Heading, regular |
-| Title large | `mezzanine-text-title-large` | 20px | Body, semibold |
-| Title medium | `mezzanine-text-title-medium` | 18px | Body, semibold |
-| Title small | `mezzanine-text-title-small` | 16px | Body, semibold |
-| Body large | `mezzanine-text-body-large` | 18px | Body, regular |
-| Body medium | `mezzanine-text-body-medium` | 16px | Body, regular |
-| Body small | `mezzanine-text-body-small` | 14px | Body, regular |
-| Label large | `mezzanine-text-label-large` | 14px | Body, semibold |
-| Label medium | `mezzanine-text-label-medium` | 12px | Body, semibold |
-| Label small | `mezzanine-text-label-small` | 11px | Body, semibold |
+| Display large | `mezzanine-text-display-large` | 72px | System, regular |
+| Display medium | `mezzanine-text-display-medium` | 60px | System, regular |
+| Display small | `mezzanine-text-display-small` | 48px | System, regular |
+| Heading large | `mezzanine-text-heading-large` | 36px | System, regular |
+| Heading medium | `mezzanine-text-heading-medium` | 30px | System, regular |
+| Heading small | `mezzanine-text-heading-small` | 24px | System, regular |
+| Title large | `mezzanine-text-title-large` | 20px | System, semibold |
+| Title medium | `mezzanine-text-title-medium` | 18px | System, semibold |
+| Title small | `mezzanine-text-title-small` | 16px | System, semibold |
+| Body large | `mezzanine-text-body-large` | 18px | System, regular |
+| Body medium | `mezzanine-text-body-medium` | 16px | System, regular |
+| Body small | `mezzanine-text-body-small` | 14px | System, regular |
+| Label large | `mezzanine-text-label-large` | 14px | System, semibold |
+| Label medium | `mezzanine-text-label-medium` | 12px | System, semibold |
+| Label small | `mezzanine-text-label-small` | 11px | System, semibold |
 
 `body-medium` is the default style for normal reading. `label-small` is only
 for brief, supplementary text in space-constrained components. Important
@@ -119,8 +120,9 @@ weight 500 does not load that weight.
 
 ## Product themes
 
-The tokens are defaults, not fixed branding. For example, a product can change
-the two family roles and make headings uppercase:
+The system-font tokens are defaults, not fixed branding. For example, the
+separate DecoCode product theme can introduce its own two family roles and
+make headings uppercase:
 
 ```css
 :root {
@@ -131,10 +133,10 @@ the two family roles and make headings uppercase:
 }
 ```
 
-Mezzanine does not download fonts. The showcase and each consuming product are
-responsible for loading any non-system font files they use, including every
-required weight and style. If a font does not load, the fallback stack must
-still remain readable and must not break the layout.
+Mezzanine does not download fonts. A consuming product is responsible for
+loading any non-system font files it chooses, including every required weight
+and style. If a font does not load, the fallback stack must still remain
+readable and must not break the layout.
 
 ## Accessibility requirements
 

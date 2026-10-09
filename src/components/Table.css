@@ -1,0 +1,108 @@
+.react-aria-Table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+}
+
+.react-aria-Column,
+.react-aria-Cell {
+  padding: var(--table-cell-padding-block) var(--table-cell-padding-inline);
+  border-bottom: var(--table-border-width) solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.react-aria-Column {
+  border-top: var(--table-border-width) solid var(--color-border);
+  background: var(--color-surface);
+  font-size: var(--font-size-label-large);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-large);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-Column:first-child,
+.react-aria-Cell:first-child {
+  border-inline-start: var(--table-border-width) solid var(--color-border);
+}
+
+.react-aria-Column:last-child,
+.react-aria-Cell:last-child {
+  border-inline-end: var(--table-border-width) solid var(--color-border);
+}
+
+.react-aria-Column[data-allows-sorting] {
+  cursor: pointer;
+}
+
+.react-aria-TableHeader[data-hovered] .react-aria-Column,
+.react-aria-Column[data-hovered],
+.react-aria-Cell[data-hovered],
+.react-aria-Row[data-hovered] .react-aria-Cell {
+  background: var(--color-surface-hover);
+}
+
+.react-aria-Column[data-pressed],
+.react-aria-Column[data-resizing],
+.react-aria-Cell[data-pressed],
+.react-aria-Row[data-pressed] .react-aria-Cell {
+  background: var(--color-surface-pressed);
+}
+
+.react-aria-TableBody[data-empty] {
+  color: var(--color-text-muted);
+}
+
+.react-aria-Row[data-selection-mode] {
+  cursor: pointer;
+}
+
+.react-aria-Row[data-selected] .react-aria-Cell {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.react-aria-Row[data-selected][data-hovered] .react-aria-Cell {
+  background: var(--color-primary-hover);
+}
+
+.react-aria-Row[data-selected][data-pressed] .react-aria-Cell {
+  background: var(--color-primary-pressed);
+}
+
+.react-aria-Row[data-disabled] {
+  opacity: var(--table-disabled-opacity);
+}
+
+.react-aria-Cell[data-disabled] {
+  opacity: var(--table-disabled-opacity);
+}
+
+.react-aria-Table[data-focus-visible],
+.react-aria-Column[data-focus-visible],
+.react-aria-Row[data-focus-visible] .react-aria-Cell,
+.react-aria-Row[data-focus-visible-within] .react-aria-Cell,
+.react-aria-Cell[data-focus-visible],
+.react-aria-Cell[data-focus-visible-within-row] {
+  outline: var(--table-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--table-focus-ring-offset);
+}
+
+.react-aria-Table[data-drop-target],
+.react-aria-TableBody[data-drop-target] {
+  outline: var(--table-focus-ring-width) solid var(--color-primary);
+  outline-offset: var(--table-focus-ring-offset);
+}
+
+@media (forced-colors: active) {
+  .react-aria-Table,
+  .react-aria-Column,
+  .react-aria-Cell {
+    forced-color-adjust: auto;
+  }
+}
