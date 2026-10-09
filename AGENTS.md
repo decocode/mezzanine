@@ -18,6 +18,30 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Library CSS references design tokens (CSS custom properties) only, never raw color, font, or size values. Each consuming app supplies token values in its own theme file. Name tokens by purpose, not appearance (for example `--color-accent`, not `--color-yellow`).
 - Treat changes to exported component names, props, token names, or CSS class names as breaking changes for consuming apps. Call them out explicitly.
 
+## Showcase accuracy and source of truth
+
+- `src/` is the source of truth for what Mezzanine currently contains. The showcase documents the library; it must not design, extend, or simulate it.
+- Only document components, variants, states, tokens, behaviours, and rules that are implemented in the library and available through its public API.
+- Do not invent or embellish content to make the showcase appear more complete. Do not add placeholder pages, “coming soon” navigation items, speculative examples, or undocumented conventions.
+- Before adding showcase content, verify the corresponding implementation and its agreed behaviour in the repository. If something is missing or ambiguous, stop and ask the user before defining or documenting it.
+- Showcase examples must render the real exported library components. Do not create showcase-only replicas, variants, styles, or behaviours.
+- Display token values from the implemented token source wherever possible. Do not manually duplicate values in showcase code.
+- Neutral sample text or data may be used to demonstrate an existing component, but it must not imply that an unimplemented feature, rule, or variant exists.
+- If the showcase or written documentation disagrees with the implemented public library, treat the library as authoritative and correct the documentation.
+- A foundation or component should appear in showcase navigation only after it has been agreed, implemented, exported where applicable, and checked.
+
+## React Aria alignment and naming
+
+- React Aria Components is the behavioural and naming foundation for Mezzanine's atomic components. Before implementing or revising one, consult the current official React Aria documentation for that component.
+- When a Mezzanine atomic component directly corresponds to a React Aria component, use the exact React Aria component name for the Mezzanine export, file, documentation title, and showcase navigation entry. For example, use `ToggleButton`, `ToggleButtonGroup`, `Toast`, `Table`, `Switch`, and `Slider`, not product-specific or invented replacements.
+- Compose the same documented React Aria parts and follow its prop names, event names, controlled and uncontrolled conventions, slots, render props, state model, keyboard behaviour, focus behaviour, and accessibility semantics as closely as possible. Do not replace React Aria conventions with a pre-existing DecoCode API merely to avoid revising that component.
+- Use the official Vanilla CSS example for the corresponding React Aria component as the implementation baseline. Preserve its component anatomy, selectors, documented state data attributes, orientation and placement attributes, interaction-state coverage, forced-colour handling, and reduced-motion handling where applicable. Express Mezzanine's visual values through its implemented design tokens rather than copying an example theme's literal colours, type, spacing, radii, or shadows.
+- Keep React Aria prop conventions such as `onPress`, `isDisabled`, `isPending`, `isSelected`, and `onSelectionChange` where the underlying component supports them. Do not introduce aliases for the same concepts.
+- Do not omit a documented React Aria state or behaviour because the current DecoCode version lacks it. If supporting it requires an unresolved design decision, stop and ask the user before implementation.
+- Any deviation from the corresponding React Aria component's name, anatomy, API, state selectors, or behaviour requires the user's explicit agreement and must be documented with the reason.
+- More advanced Mezzanine patterns that compose multiple primitives may use bespoke, purpose-based names. Their underlying atomic parts should still use the matching React Aria components and conventions.
+- Treat migrated DecoCode components as inputs to review, not as the naming authority. Rename or revise them during migration when they conflict with React Aria conventions.
+
 ## Scope and understandability
 
 - Make only the requested change and the smallest changes needed to make it work. Do not add speculative features, sample content, dependencies, or abstractions.
@@ -39,7 +63,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Target WCAG 2.2 Level AA across the library and showcase. Do not claim compliance without checking the finished components and interactions.
 - Build mobile first: make the narrow layout work before adding wider-screen styles. Check content and controls at 320 CSS pixels, with text enlarged to 200%, and without unintended horizontal page scrolling.
 - Use `react-aria-components` for interactive patterns it supports. Consult the official React Aria documentation for each component, use its compositional parts and built-in behavior, and do not recreate its keyboard, pointer, touch, or focus handling.
-- Give component wrappers a clear name for the UI pattern they present. When that name differs from the underlying React Aria component, note the React Aria component used. Follow React Aria prop conventions such as `onPress`, `isDisabled`, and `isPending` where those props are supported. Keep wrapper props close to the underlying component API, and pass `className` through so consuming apps have an escape hatch.
+- Give advanced component wrappers a clear, purpose-based name for the composed UI pattern they present, and document the React Aria primitives they use. Atomic components follow the exact naming and API rules in “React Aria alignment and naming”. Keep wrapper props close to the underlying component APIs, and pass `className` through so consuming apps have an escape hatch.
 - Use semantic HTML for page structure and static content. Give every control an accessible name, prefer visible labels, and provide text alternatives for meaningful images.
 - Keep focus visible. Check keyboard operation, focus order, screen reader labels, touch target size, color contrast, and reduced-motion behavior for each completed interaction.
 
