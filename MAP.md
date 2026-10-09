@@ -13,11 +13,14 @@ The library currently exports no components. Components and showcase pages arriv
 
 | Path | Purpose |
 | --- | --- |
-| `src/index.ts` | Public entry point of the package; imports the library styles and exports every component |
-| `src/styles.css` | Library structural styles; references design tokens only |
+| `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
+| `src/tokens.css` | The token contract: every token name components may use, with default values that consuming apps override in their own themes |
+| `src/styles.css` | Library stylesheet entry point; imports typography and, as components arrive, their structural styles |
+| `src/typography.css` | Fifteen public text-style classes with predictable single-class specificity, assembled from typography tokens |
 | `site/index.html` | HTML shell for the showcase site |
 | `site/main.tsx` | Showcase browser entry point |
 | `site/App.tsx` | Placeholder showcase page that imports the library through its package name |
+| `site/content/color.md` | Draft plain-language copy for the Color foundation page, possibly for tooltips |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |
 | `vite.config.ts` | Showcase build: React plugin, `site/` root, package-name alias, `site-dist/` output |
 | `vite.lib.config.ts` | Package build: library mode, external peer dependencies, `dist/` output |
@@ -34,6 +37,8 @@ The library currently exports no components. Components and showcase pages arriv
 | `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Lighthouse page coverage of the showcase, device profiles, performance assertions, and local report destinations |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
+| `TOKENS.md` | Plain-language guide to the token model, current token inventory, naming rules, and decisions to resolve before component extraction |
+| `TYPOGRAPHY.md` | Typography roles, named styles, defaults, pattern mappings, theming guidance, and accessibility checks |
 | `README.md` | Overview, licence note, local setup, and how DecoCode products use the package |
 | `AGENTS.md` | Instructions for coding agents |
 

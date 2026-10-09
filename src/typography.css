@@ -1,0 +1,141 @@
+/*
+  Mezzanine named text styles.
+
+  These classes contain no product-specific values. Each recipe is assembled
+  from the public tokens in tokens.css so a consuming product can replace the
+  appearance without changing the style name or the component that uses it.
+
+  Each selector has the specificity of one class. An explicitly applied text
+  style therefore wins over a global element rule, while a product class can
+  still override it without specificity workarounds.
+*/
+
+:is(
+  .mezzanine-text-display-large,
+  .mezzanine-text-display-medium,
+  .mezzanine-text-display-small
+) {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-display);
+  text-transform: var(--text-transform-display);
+}
+
+:is(.mezzanine-text-display-large) {
+  font-size: var(--font-size-display-large);
+  line-height: var(--line-height-display-large);
+}
+
+:is(.mezzanine-text-display-medium) {
+  font-size: var(--font-size-display-medium);
+  line-height: var(--line-height-display-medium);
+}
+
+:is(.mezzanine-text-display-small) {
+  font-size: var(--font-size-display-small);
+  line-height: var(--line-height-display-small);
+}
+
+:is(
+  .mezzanine-text-heading-large,
+  .mezzanine-text-heading-medium,
+  .mezzanine-text-heading-small
+) {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-heading);
+  text-transform: var(--text-transform-heading);
+}
+
+:is(.mezzanine-text-heading-large) {
+  font-size: var(--font-size-heading-large);
+  line-height: var(--line-height-heading-large);
+}
+
+:is(.mezzanine-text-heading-medium) {
+  font-size: var(--font-size-heading-medium);
+  line-height: var(--line-height-heading-medium);
+}
+
+:is(.mezzanine-text-heading-small) {
+  font-size: var(--font-size-heading-small);
+  line-height: var(--line-height-heading-small);
+}
+
+:is(
+  .mezzanine-text-title-large,
+  .mezzanine-text-title-medium,
+  .mezzanine-text-title-small
+) {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-title);
+  text-transform: var(--text-transform-title);
+}
+
+:is(.mezzanine-text-title-large) {
+  font-size: var(--font-size-title-large);
+  line-height: var(--line-height-title-large);
+}
+
+:is(.mezzanine-text-title-medium) {
+  font-size: var(--font-size-title-medium);
+  line-height: var(--line-height-title-medium);
+}
+
+:is(.mezzanine-text-title-small) {
+  font-size: var(--font-size-title-small);
+  line-height: var(--line-height-title-small);
+}
+
+:is(
+  .mezzanine-text-body-large,
+  .mezzanine-text-body-medium,
+  .mezzanine-text-body-small
+) {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  text-transform: var(--text-transform-body);
+}
+
+:is(.mezzanine-text-body-large) {
+  font-size: var(--font-size-body-large);
+  line-height: var(--line-height-body-large);
+}
+
+:is(.mezzanine-text-body-medium) {
+  font-size: var(--font-size-body-medium);
+  line-height: var(--line-height-body-medium);
+}
+
+:is(.mezzanine-text-body-small) {
+  font-size: var(--font-size-body-small);
+  line-height: var(--line-height-body-small);
+}
+
+:is(
+  .mezzanine-text-label-large,
+  .mezzanine-text-label-medium,
+  .mezzanine-text-label-small
+) {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: var(--text-transform-label);
+}
+
+:is(.mezzanine-text-label-large) {
+  font-size: var(--font-size-label-large);
+  line-height: var(--line-height-label-large);
+}
+
+:is(.mezzanine-text-label-medium) {
+  font-size: var(--font-size-label-medium);
+  line-height: var(--line-height-label-medium);
+}
+
+:is(.mezzanine-text-label-small) {
+  font-size: var(--font-size-label-small);
+  line-height: var(--line-height-label-small);
+}

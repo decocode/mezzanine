@@ -4,3 +4,5 @@
   references design tokens (CSS custom properties) — never raw values.
   Each consuming app supplies its own token values in its own theme file.
 */
+
+@import './typography.css';
