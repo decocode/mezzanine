@@ -11,10 +11,16 @@ import {
 import {
   colorShadeSteps,
   colorTokenGroups,
+  foundationColorPalettes,
   semanticColorPalettes,
   typographyStyles,
   type ColorPaletteDefinition,
 } from './foundationData'
+import {
+  readColorRoleMappings,
+  type ColorRoleMappings,
+} from './colorRoleMappings'
+import { chooseSwatchTextTone } from './colorContrast'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
 import {
@@ -30,13 +36,6 @@ import {
 
 interface AppProps {
   initialThemeSelection: ThemeSelection
-}
-
-interface TokenSwatchProps {
-  description: string
-  label: string
-  refreshKey: string
-  token: string
 }
 
 interface PageHeadingProps {
@@ -60,49 +59,67 @@ function useTokenValue(token: string, refreshKey: string) {
   return value
 }
 
-function TokenSwatch({ description, label, refreshKey, token }: TokenSwatchProps) {
-  const value = useTokenValue(token, refreshKey)
-
-  return (
-    <li className="token-card">
-      <span
-        aria-hidden="true"
-        className="token-swatch"
-        style={{ backgroundColor: `var(${token})` }}
-      />
-      <div className="token-details">
-        <strong>{label}</strong>
-        <span>{description}</span>
-        <code>{token}</code>
-        <code>{value}</code>
-      </div>
-    </li>
-  )
-}
-
 function ColorPaletteStep({
+  darkTextValue,
+  lightTextValue,
   paletteId,
   refreshKey,
   step,
 }: {
+  darkTextValue: string
+  lightTextValue: string
   paletteId: ColorPaletteDefinition['id']
   refreshKey: string
   step: number
 }) {
   const token = `--color-${paletteId}-${step}`
   const value = useTokenValue(token, refreshKey)
+  const textTone = chooseSwatchTextTone(value, darkTextValue, lightTextValue)
 
   return (
     <li className="color-palette-step">
       <span
-        aria-hidden="true"
         className="color-palette-swatch"
-        style={{ backgroundColor: `var(${token})` }}
-      />
-      <strong>{step}</strong>
+        style={{
+          backgroundColor: `var(${token})`,
+          color: textTone === 'dark'
+            ? 'var(--color-neutral-950)'
+            : 'var(--color-neutral-50)',
+        }}
+      >
+        <strong className="color-palette-step-number">{step}</strong>
+      </span>
       <code>{token}</code>
       <code>{value}</code>
     </li>
+  )
+}
+
+function ColorPaletteScale({
+  paletteId,
+  refreshKey,
+}: {
+  paletteId: ColorPaletteDefinition['id']
+  refreshKey: string
+}) {
+  const darkTextValue = useTokenValue('--color-neutral-950', refreshKey)
+  const lightTextValue = useTokenValue('--color-neutral-50', refreshKey)
+
+  return (
+    <div className="color-palette-viewport" tabIndex={0}>
+      <ol className="color-palette-scale">
+        {colorShadeSteps.map((step) => (
+          <ColorPaletteStep
+            darkTextValue={darkTextValue}
+            key={step}
+            lightTextValue={lightTextValue}
+            paletteId={paletteId}
+            refreshKey={refreshKey}
+            step={step}
+          />
+        ))}
+      </ol>
+    </div>
   )
 }
 
@@ -121,18 +138,7 @@ function ColorPalette({
         </h4>
         <p className="mezzanine-text-body-small">{palette.description}</p>
       </div>
-      <div className="color-palette-viewport" tabIndex={0}>
-        <ol className="color-palette-scale">
-          {colorShadeSteps.map((step) => (
-            <ColorPaletteStep
-              key={step}
-              paletteId={palette.id}
-              refreshKey={refreshKey}
-              step={step}
-            />
-          ))}
-        </ol>
-      </div>
+      <ColorPaletteScale paletteId={palette.id} refreshKey={refreshKey} />
     </section>
   )
 }
@@ -195,10 +201,20 @@ function IntroductionPage() {
 }
 
 function ColorPage({ refreshKey }: { refreshKey: string }) {
+  const [roleMappings, setRoleMappings] = useState<ColorRoleMappings>({})
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setRoleMappings(readColorRoleMappings())
+    })
+
+    return () => cancelAnimationFrame(frame)
+  }, [refreshKey])
+
   return (
     <>
       <PageHeading
-        description="Each token names a job. Switch themes to see that job keep its meaning while its value changes."
+        description="Color establishes visual hierarchy, conveys meaning, and distinguishes interface states. Mezzanine keeps brand colors separate from colors that communicate meaning. This lets different brands express their own unique visual identity without impacting usability."
         groupLabel="Foundations"
         title="Color"
       />
@@ -206,11 +222,39 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
         <h2 id="color-palettes-heading" className="mezzanine-text-heading-medium">
           Color palettes
         </h2>
+        <section className="core-color-palettes" aria-labelledby="core-color-palettes-heading">
+          <h3 id="core-color-palettes-heading" className="mezzanine-text-heading-small">
+            Core colors
+          </h3>
+          <p className="mezzanine-text-body-medium color-category-description">
+            Core colors are the palettes your brand can use to communicate its distinct visual
+            identity. Mezzanine&apos;s default core colors are a simple monochrome scale and a violet
+            scale.
+          </p>
+          {foundationColorPalettes.map((palette) => (
+            <section
+              className="color-palette-category"
+              aria-labelledby={`${palette.id}-color-palette-heading`}
+              key={palette.id}
+            >
+              <h4
+                id={`${palette.id}-color-palette-heading`}
+                className="mezzanine-text-title-medium"
+              >
+                {palette.label}
+              </h4>
+              <p className="mezzanine-text-body-small color-palette-category-description">
+                {palette.description}
+              </p>
+              <ColorPaletteScale paletteId={palette.id} refreshKey={refreshKey} />
+            </section>
+          ))}
+        </section>
         <section className="semantic-color-palettes" aria-labelledby="semantic-color-palettes-heading">
           <h3 id="semantic-color-palettes-heading" className="mezzanine-text-heading-small">
             Semantic colors
           </h3>
-          <p className="mezzanine-text-body-medium semantic-color-description">
+          <p className="mezzanine-text-body-medium color-category-description">
             Semantic colors communicate meaning, not just appearance. Traffic lights are a familiar
             real-world example: green means go, amber warns you to take care, and red means stop. In
             an interface, the same principle helps people quickly recognise information, successful
@@ -223,22 +267,42 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
           </div>
         </section>
       </section>
-      {colorTokenGroups.map((group) => (
-        <section className="token-group" aria-labelledby={`${group.id}-heading`} key={group.id}>
-          <h2 id={`${group.id}-heading`} className="mezzanine-text-heading-medium">
-            {group.label}
-          </h2>
-          <ul className="token-grid">
-            {group.tokens.map((colorToken) => (
-              <TokenSwatch
-                {...colorToken}
-                key={colorToken.token}
-                refreshKey={refreshKey}
-              />
-            ))}
-          </ul>
-        </section>
-      ))}
+      <section className="color-roles" aria-labelledby="color-roles-heading">
+        <h2 id="color-roles-heading" className="mezzanine-text-heading-medium">
+          Color roles
+        </h2>
+        {colorTokenGroups.map((group) => (
+          <section className="token-group" aria-labelledby={`${group.id}-heading`} key={group.id}>
+            <h3 id={`${group.id}-heading`} className="mezzanine-text-heading-small">
+              {group.label}
+            </h3>
+            <div className="color-role-table">
+              <Table aria-label={`${group.label} color roles`}>
+                <TableHeader>
+                  <Column id="role" isRowHeader>Role</Column>
+                  <Column id="token">CSS token</Column>
+                  <Column id="meaning">What it controls</Column>
+                  <Column id="light">Light</Column>
+                  <Column id="dark">Dark</Column>
+                  <Column id="wireframe">Wireframe</Column>
+                </TableHeader>
+                <TableBody>
+                  {group.tokens.map((colorToken) => (
+                    <Row id={colorToken.token} key={colorToken.token}>
+                      <Cell><strong>{colorToken.label}</strong></Cell>
+                      <Cell><code>{colorToken.token}</code></Cell>
+                      <Cell>{colorToken.description}</Cell>
+                      <Cell><code>{roleMappings[colorToken.token]?.light ?? '—'}</code></Cell>
+                      <Cell><code>{roleMappings[colorToken.token]?.dark ?? '—'}</code></Cell>
+                      <Cell><code>{roleMappings[colorToken.token]?.wireframe ?? '—'}</code></Cell>
+                    </Row>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </section>
+        ))}
+      </section>
     </>
   )
 }

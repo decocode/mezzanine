@@ -30,6 +30,8 @@ The library currently exports the React Aria `Table` family, three official colo
 | `site/SidebarDisclosureItem.tsx` | Reusable React Aria disclosure anatomy for each sidebar navigation group |
 | `site/siteNavigation.ts` | Single source of truth for approved IA groups, routes, labels, and implementation status |
 | `site/foundationData.ts` | Names and plain-language descriptions for the implemented tokens and typography styles shown by the showcase |
+| `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
+| `site/colorRoleMappings.ts` | Reads each official theme's implemented CSS to match color roles to their palette tokens for documentation |
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |

@@ -5,26 +5,26 @@
 :where(:root[data-theme='wireframe']) {
   color-scheme: light;
 
-  --color-page: #FFFFFF;
-  --color-surface: #FFFFFF;
-  --color-surface-hover: #F2F2F2;
-  --color-surface-pressed: #E5E5E5;
-  --color-surface-inverse: #000000;
+  --color-page: var(--color-neutral-50);
+  --color-surface: var(--color-neutral-50);
+  --color-surface-hover: var(--color-neutral-100);
+  --color-surface-pressed: var(--color-neutral-200);
+  --color-surface-inverse: var(--color-neutral-950);
 
-  --color-text: #000000;
-  --color-text-muted: #555555;
-  --color-text-inverse: #FFFFFF;
+  --color-text: var(--color-neutral-950);
+  --color-text-muted: var(--color-neutral-600);
+  --color-text-inverse: var(--color-neutral-50);
 
-  --color-link: #000000;
-  --color-link-hover: #333333;
-  --color-link-pressed: #000000;
+  --color-link: var(--color-neutral-950);
+  --color-link-hover: var(--color-neutral-800);
+  --color-link-pressed: var(--color-neutral-950);
 
-  --color-border: #000000;
+  --color-border: var(--color-neutral-950);
 
-  --color-primary: #000000;
-  --color-primary-hover: #333333;
-  --color-primary-pressed: #555555;
-  --color-on-primary: #FFFFFF;
+  --color-primary: var(--color-neutral-950);
+  --color-primary-hover: var(--color-neutral-800);
+  --color-primary-pressed: var(--color-neutral-700);
+  --color-on-primary: var(--color-neutral-50);
 
   --color-info: var(--color-info-700);
   --color-success: var(--color-success-700);

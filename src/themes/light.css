@@ -7,26 +7,26 @@
 :where(:root[data-theme='light']) {
   color-scheme: light;
 
-  --color-page: #FFFFFF;
-  --color-surface: #F6F8FA;
-  --color-surface-hover: #E8EBEF;
-  --color-surface-pressed: #D8DDE3;
-  --color-surface-inverse: #1F2328;
+  --color-page: var(--color-neutral-50);
+  --color-surface: var(--color-neutral-100);
+  --color-surface-hover: var(--color-neutral-200);
+  --color-surface-pressed: var(--color-neutral-300);
+  --color-surface-inverse: var(--color-neutral-900);
 
-  --color-text: #1F2328;
-  --color-text-muted: #59636E;
-  --color-text-inverse: #FFFFFF;
+  --color-text: var(--color-neutral-900);
+  --color-text-muted: var(--color-neutral-600);
+  --color-text-inverse: var(--color-neutral-50);
 
-  --color-link: #175CD3;
-  --color-link-hover: #124AA8;
-  --color-link-pressed: #0E397F;
+  --color-link: var(--color-violet-700);
+  --color-link-hover: var(--color-violet-800);
+  --color-link-pressed: var(--color-violet-900);
 
-  --color-border: #8C959F;
+  --color-border: var(--color-neutral-500);
 
-  --color-primary: #175CD3;
-  --color-primary-hover: #124AA8;
-  --color-primary-pressed: #0E397F;
-  --color-on-primary: #FFFFFF;
+  --color-primary: var(--color-violet-700);
+  --color-primary-hover: var(--color-violet-800);
+  --color-primary-pressed: var(--color-violet-900);
+  --color-on-primary: var(--color-neutral-50);
 
   --color-info: var(--color-info-700);
   --color-success: var(--color-success-700);

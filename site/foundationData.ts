@@ -1,10 +1,10 @@
-interface ColorTokenDefinition {
+export interface ColorTokenDefinition {
   description: string
   label: string
   token: string
 }
 
-interface ColorTokenGroup {
+export interface ColorTokenGroup {
   id: string
   label: string
   tokens: ColorTokenDefinition[]
@@ -18,11 +18,24 @@ interface TypographyStyleDefinition {
 
 export interface ColorPaletteDefinition {
   description: string
-  id: 'info' | 'success' | 'warning' | 'danger'
+  id: 'neutral' | 'violet' | 'info' | 'success' | 'warning' | 'danger'
   label: string
 }
 
 export const colorShadeSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
+
+export const foundationColorPalettes: ColorPaletteDefinition[] = [
+  {
+    id: 'neutral',
+    label: 'Neutral',
+    description: "These values can be replaced with your brand's neutral palette.",
+  },
+  {
+    id: 'violet',
+    label: 'Violet',
+    description: "These values can be replaced with one of your brand's color palettes.",
+  },
+]
 
 export const semanticColorPalettes: ColorPaletteDefinition[] = [
   { id: 'info', label: 'Info', description: 'Information and keyboard focus' },

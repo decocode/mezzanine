@@ -72,6 +72,25 @@ Names describe purpose rather than appearance. Mezzanine therefore uses
 
 Every official theme defines the same color roles.
 
+### Palette scales
+
+Mezzanine includes two foundational 11-step palettes, from `50` to `950`.
+Roles select a step from these palettes so a product can change the palette
+without changing what each role means.
+
+Every palette follows the same perceptual lightness curve. In the showcase,
+shade numbers use dark text from `50` to `500` and inverse text from `600` to
+`950`; the switch is still verified from the actual contrast rather than the
+step number alone.
+
+| Token | Meaning |
+| --- | --- |
+| `--color-neutral-{50–950}` | Mezzanine's default neutral palette |
+| `--color-violet-{50–950}` | Mezzanine's default violet palette |
+
+Light and Dark use both palettes. Wireframe uses the Neutral palette for its
+monochrome presentation and does not use the Violet palette for actions.
+
 ### Page and surfaces
 
 | Token | Meaning |
@@ -104,14 +123,15 @@ Every official theme defines the same color roles.
 | `--color-link-pressed` | A pressed link |
 | `--color-focus` | The keyboard-focus indicator color |
 
-Primary, Link and Focus are separate roles even when a theme gives them values
-from the same blue family. There is no generic Accent token.
+Primary, Link and Focus are separate roles. Light and Dark draw Primary and
+Link from the Violet palette, while Focus remains tied to the Info palette.
+There is no generic Accent token.
 
 ### Status
 
 Mezzanine currently includes four 11-step semantic color scales, from `50` to
-`950`. Their initial values were imported unchanged from DecoCode for review.
-Each role token currently references shade `700`.
+`950`. Their defaults use familiar blue, green, amber and red families with a
+softened character. Each role token currently references shade `700`.
 
 | Token | Meaning |
 | --- | --- |
