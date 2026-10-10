@@ -1,16 +1,20 @@
-import { Button, Heading } from 'react-aria-components'
+import { Button as ReactAriaButton, Heading } from 'react-aria-components'
 import {
+  Button,
+  ChevronDownIcon,
   Disclosure,
-  DisclosureGroup,
   DisclosurePanel,
   Link,
+  NavigationTree,
+  NavigationTreeItem,
+  NavigationTreeItemContent,
 } from '@decocode/mezzanine'
-import { SidebarDisclosureItem } from './SidebarDisclosureItem'
 import {
   findSiteNavigationGroup,
   siteNavigationGroups,
   type SitePageDefinition,
 } from './siteNavigation'
+import { useAnimatedNavigationTree } from './useAnimatedNavigationTree'
 
 interface SidebarProps {
   currentPage: SitePageDefinition
@@ -34,31 +38,59 @@ function BrowseIcon() {
 
 function SidebarNavigation({ currentPage }: SidebarProps) {
   const currentGroup = findSiteNavigationGroup(currentPage.id)
+  const {
+    closingKeys,
+    expandedKeys,
+    onExpandedChange,
+    openingKeys,
+  } = useAnimatedNavigationTree(currentGroup ? [currentGroup.id] : [])
 
   return (
-    <DisclosureGroup
-      allowsMultipleExpanded
-      className="sidebar-navigation-groups"
-      defaultExpandedKeys={currentGroup ? [currentGroup.id] : []}
+    <NavigationTree
+      aria-label="Mezzanine documentation"
+      className="react-aria-NavigationTree animated-navigation-tree"
+      expandedKeys={expandedKeys}
+      onExpandedChange={onExpandedChange}
+      selectedRoute={currentPage.path}
     >
       {siteNavigationGroups.map((group) => (
-        <SidebarDisclosureItem id={group.id} key={group.id} title={group.label}>
+        <NavigationTreeItem
+          className={`react-aria-NavigationTreeItem sidebar-navigation-tree-group${closingKeys.has(group.id) ? ' is-closing' : ''}`}
+          id={group.id}
+          key={group.id}
+          textValue={group.label}
+        >
+          <NavigationTreeItemContent>
+            <Link>{group.label}</Link>
+            <Button
+              aria-label={`Expand or collapse ${group.label}`}
+              iconLeading={<ChevronDownIcon />}
+              size="sm"
+              slot="chevron"
+              variant="tertiary"
+            />
+          </NavigationTreeItemContent>
           {group.pages.map((page) => (
-            <Link
-              aria-current={currentPage.id === page.id ? 'page' : undefined}
-              className="sidebar-navigation-link"
+            <NavigationTreeItem
+              className={`react-aria-NavigationTreeItem animated-navigation-tree-item${openingKeys.has(group.id) ? ' is-opening' : ''}${closingKeys.has(group.id) ? ' is-closing' : ''}`}
               href={page.path}
+              id={page.id}
               key={page.id}
+              textValue={page.label}
             >
-              <span>{page.label}</span>
-              {page.status === 'empty' && (
-                <span className="sidebar-page-status">Empty</span>
-              )}
-            </Link>
+              <NavigationTreeItemContent>
+                <Link>
+                  <span>{page.label}</span>
+                  {page.status === 'empty' && (
+                    <span className="sidebar-page-status">Empty</span>
+                  )}
+                </Link>
+              </NavigationTreeItemContent>
+            </NavigationTreeItem>
           ))}
-        </SidebarDisclosureItem>
+        </NavigationTreeItem>
       ))}
-    </DisclosureGroup>
+    </NavigationTree>
   )
 }
 
@@ -67,10 +99,10 @@ export function Sidebar({ currentPage }: SidebarProps) {
     <nav aria-label="Mezzanine sections" className="site-sidebar">
       <Disclosure className="mobile-sidebar">
         <Heading className="mobile-sidebar-heading" level={2}>
-          <Button className="sidebar-browse-trigger" slot="trigger">
+          <ReactAriaButton className="sidebar-browse-trigger" slot="trigger">
             <BrowseIcon />
             Browse sections
-          </Button>
+          </ReactAriaButton>
         </Heading>
         <DisclosurePanel className="mobile-sidebar-panel">
           <SidebarNavigation currentPage={currentPage} />

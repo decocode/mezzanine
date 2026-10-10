@@ -18,6 +18,14 @@
 
   --color-border: var(--color-gray-500);
 
+  --elevation-shadow-color: rgb(0 0 0 / 72%);
+  --elevation-highlight-color: color-mix(in srgb, var(--color-gray-50) 12%, transparent);
+  --elevation-inset: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
+  --elevation-flat: none;
+  --elevation-raised: 0 2px 4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
+  --elevation-floating: 0 8px 16px -4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
+  --elevation-overlay: 0 16px 32px -8px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
+
   --button-primary-background: var(--color-violet-700);
   --button-primary-background-hovered: var(--color-violet-800);
   --button-primary-background-pressed: var(--color-violet-900);
@@ -108,6 +116,14 @@
     --color-link-pressed: var(--color-violet-100);
 
     --color-border: var(--color-gray-500);
+
+    --elevation-shadow-color: rgb(0 0 0 / 72%);
+    --elevation-highlight-color: color-mix(in srgb, var(--color-gray-50) 12%, transparent);
+    --elevation-inset: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
+    --elevation-flat: none;
+    --elevation-raised: 0 2px 4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
+    --elevation-floating: 0 8px 16px -4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
+    --elevation-overlay: 0 16px 32px -8px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
 
     --button-primary-background: var(--color-violet-700);
     --button-primary-background-hovered: var(--color-violet-800);

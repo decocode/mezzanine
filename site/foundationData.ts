@@ -16,6 +16,34 @@ interface TypographyStyleDefinition {
   sample: string
 }
 
+export interface MotionTimingDefinition {
+  description: string
+  duration: string
+  easing: string
+  id: string
+  label: string
+}
+
+export interface MotionTokenDefinition {
+  description: string
+  token: string
+  value: string
+}
+
+export interface MotionPatternDefinition {
+  id: string
+  movement: string
+  name: string
+  reducedMotion: string
+  scope: string
+}
+
+export interface ElevationDefinition {
+  description: string
+  label: string
+  token: string
+}
+
 export interface ColorPaletteDefinition {
   description?: string
   id: 'gray' | 'violet' | 'info' | 'success' | 'warning' | 'danger'
@@ -40,6 +68,34 @@ export const semanticColorPalettes: ColorPaletteDefinition[] = [
   { id: 'success', label: 'Success', description: 'Successful outcomes' },
   { id: 'warning', label: 'Warning', description: 'Cautions and warnings' },
   { id: 'danger', label: 'Danger', description: 'Errors and destructive actions' },
+]
+
+export const elevationDefinitions: ElevationDefinition[] = [
+  {
+    token: '--elevation-inset',
+    label: 'Inset',
+    description: 'Content that appears pressed into or recessed within a surface.',
+  },
+  {
+    token: '--elevation-flat',
+    label: 'Flat',
+    description: 'Content that sits directly on its surrounding surface without a shadow.',
+  },
+  {
+    token: '--elevation-raised',
+    label: 'Raised',
+    description: 'A surface that needs subtle separation from the content beneath it.',
+  },
+  {
+    token: '--elevation-floating',
+    label: 'Floating',
+    description: 'Temporary content positioned above nearby interface content.',
+  },
+  {
+    token: '--elevation-overlay',
+    label: 'Overlay',
+    description: 'Content that sits above the main interface and needs the strongest separation.',
+  },
 ]
 
 export const colorTokenGroups: ColorTokenGroup[] = [
@@ -140,4 +196,79 @@ export const typographyStyles: TypographyStyleDefinition[] = [
   { className: 'mezzanine-text-label-large', label: 'Label large', sample: 'Control label' },
   { className: 'mezzanine-text-label-medium', label: 'Label medium', sample: 'Compact label' },
   { className: 'mezzanine-text-label-small', label: 'Label small', sample: 'Supplementary label' },
+]
+
+export const motionTimingDefinitions: MotionTimingDefinition[] = [
+  {
+    id: 'interface-transition',
+    label: 'Interface transition',
+    description: 'Short changes that help people follow an interface opening, closing, or changing state.',
+    duration: '180ms',
+    easing: 'ease-out',
+  },
+  {
+    id: 'continuous-loading',
+    label: 'Continuous loading',
+    description: 'Repeated rotation that communicates an action is still in progress.',
+    duration: '1s',
+    easing: 'linear',
+  },
+]
+
+export const motionTokenDefinitions: MotionTokenDefinition[] = [
+  {
+    token: '--disclosure-motion-duration',
+    value: '180ms',
+    description: 'Controls Disclosure chevron rotation.',
+  },
+  {
+    token: '--navigation-tree-motion-duration',
+    value: '180ms',
+    description: 'Controls NavigationTree chevron rotation and child-row motion.',
+  },
+]
+
+export const motionPatternDefinitions: MotionPatternDefinition[] = [
+  {
+    id: 'disclosure-chevron',
+    name: 'Disclosure chevron',
+    scope: 'Library component',
+    movement: 'Rotates 180 degrees when its Disclosure opens.',
+    reducedMotion: 'Rotation happens immediately.',
+  },
+  {
+    id: 'navigation-tree',
+    name: 'NavigationTree',
+    scope: 'Library chevron; Sidebar and documentation example rows',
+    movement: 'Rotates its chevron and reveals or collapses child rows by changing height, spacing, opacity, and position.',
+    reducedMotion: 'The hierarchy changes immediately.',
+  },
+  {
+    id: 'button-progress',
+    name: 'Pending Button indicator',
+    scope: 'Library component',
+    movement: 'Rotates one complete turn every second while an action is pending.',
+    reducedMotion: 'The indicator remains visible without rotating.',
+  },
+  {
+    id: 'header-navigation',
+    name: 'Mobile Header navigation',
+    scope: 'Showcase layout',
+    movement: 'Fades in while moving down by 0.375rem when opened.',
+    reducedMotion: 'The navigation appears immediately.',
+  },
+  {
+    id: 'page-scrolling',
+    name: 'Page scrolling',
+    scope: 'Showcase layout',
+    movement: 'Scrolls smoothly when following a link to a place on the same page.',
+    reducedMotion: 'The page moves immediately.',
+  },
+  {
+    id: 'loading-icon-preview',
+    name: 'Loading icon preview',
+    scope: 'Showcase documentation only',
+    movement: 'Rotates the LoadingIcon one complete turn every second.',
+    reducedMotion: 'The icon remains visible without rotating.',
+  },
 ]

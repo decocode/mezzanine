@@ -171,18 +171,39 @@ stack. The default requires no font download.
 The complete 15-style typography foundation is documented in
 [`TYPOGRAPHY.md`](TYPOGRAPHY.md).
 
+## Current elevation inventory
+
+Elevation tokens describe the spatial relationship between surfaces rather
+than a numbered shadow strength. Every official theme defines the same roles
+and may vary the shared shadow opacity.
+
+| Token | Meaning |
+| --- | --- |
+| `--elevation-shadow-color` | Theme-specific neutral color shared by elevation shadows |
+| `--elevation-highlight-color` | Subtle edge highlight that keeps elevated surfaces visible in Dark theme |
+| `--elevation-inset` | Content pressed into or recessed within a surface |
+| `--elevation-flat` | Content with no shadow separation |
+| `--elevation-raised` | Subtle separation from the surface beneath |
+| `--elevation-floating` | Temporary content above nearby interface content |
+| `--elevation-overlay` | The strongest separation above the main interface |
+
+Keyboard focus is not an elevation role. Components continue to use the
+separate `--color-focus` token for visible focus indicators.
+
 ## Current component tokens
 
 Button, Checkbox, Link, RadioGroup, Disclosure, NavigationTree, Table,
 ToggleButton and ToggleButtonGroup are implemented components. Their component-specific tokens
 keep shared structure easy to identify and override without pretending that
-Mezzanine already has a general spacing, radius or elevation foundation.
+Mezzanine already has a general spacing or radius foundation.
 
 Link uses shared semantic colors and component tokens for its underline and
 focus treatment.
 
 | Token | Meaning |
 | --- | --- |
+| `--link-content-gap` | Space between Link text and an icon |
+| `--link-icon-size` | Size of an icon inside a Link |
 | `--link-underline-thickness` | Link underline thickness |
 | `--link-underline-offset` | Space between Link text and its underline |
 | `--link-focus-ring-width` | Keyboard-focus indicator width |
@@ -347,7 +368,7 @@ at `--opacity-disabled` and do not add elevation.
 
 ## What is not currently a Mezzanine foundation
 
-The library does not currently define public spacing, elevation, radius, shape,
+The library does not currently define public spacing, radius, shape,
 breakpoint or responsive-behavior tokens. DecoCode values for those areas are
 not Mezzanine defaults. They will only be added after their cross-product rules
 are discussed, agreed and implemented.

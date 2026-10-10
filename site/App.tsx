@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { Breadcrumb, Breadcrumbs } from 'react-aria-components'
 import {
+  Breadcrumb,
+  Breadcrumbs,
   Button,
   type ButtonSize,
   type ButtonVariant,
@@ -40,7 +41,11 @@ import {
   buttonTokens,
   colorShadeSteps,
   colorTokenGroups,
+  elevationDefinitions,
   foundationColorPalettes,
+  motionPatternDefinitions,
+  motionTimingDefinitions,
+  motionTokenDefinitions,
   semanticColorPalettes,
   typographyStyles,
   type ColorPaletteDefinition,
@@ -64,6 +69,7 @@ import {
   tableAnatomy,
   tableExampleRows,
 } from './tableExampleData'
+import { useAnimatedNavigationTree } from './useAnimatedNavigationTree'
 
 interface AppProps {
   initialThemeSelection: ThemeSelection
@@ -77,6 +83,7 @@ interface PageHeadingProps {
 }
 
 type ButtonPreviewState = 'enabled' | 'hovered' | 'pressed' | 'focused' | 'pending' | 'disabled'
+type LinkPreviewState = 'default' | 'hovered' | 'pressed' | 'focused' | 'current' | 'disabled'
 
 const buttonVariants: {
   name: string
@@ -120,6 +127,19 @@ const buttonStates: {
   { name: 'Pressed', state: 'pressed', reactAriaState: 'data-pressed' },
   { name: 'Focused', state: 'focused', reactAriaState: 'data-focus-visible' },
   { name: 'Pending', state: 'pending', reactAriaState: 'isPending' },
+  { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled' },
+]
+
+const linkStates: {
+  name: string
+  state: LinkPreviewState
+  reactAriaState: string
+}[] = [
+  { name: 'Default', state: 'default', reactAriaState: 'default' },
+  { name: 'Hover', state: 'hovered', reactAriaState: 'data-hovered' },
+  { name: 'Pressed', state: 'pressed', reactAriaState: 'data-pressed' },
+  { name: 'Focused', state: 'focused', reactAriaState: 'data-focus-visible' },
+  { name: 'Current page', state: 'current', reactAriaState: 'aria-current="page"' },
   { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled' },
 ]
 
@@ -243,11 +263,11 @@ function PageHeading({ description, groupLabel, reactAriaPage, title }: PageHead
   return (
     <div className="page-heading-group">
       <nav aria-label="Breadcrumbs" className="page-breadcrumb-navigation">
-        <Breadcrumbs className="page-breadcrumbs">
-          <Breadcrumb className="page-breadcrumb">
+        <Breadcrumbs>
+          <Breadcrumb>
             <span>{groupLabel}</span>
           </Breadcrumb>
-          <Breadcrumb className="page-breadcrumb">
+          <Breadcrumb>
             <span>{title}</span>
           </Breadcrumb>
         </Breadcrumbs>
@@ -262,7 +282,8 @@ function PageHeading({ description, groupLabel, reactAriaPage, title }: PageHead
       )}
       {reactAriaPage && (
         <Link
-          className="react-aria-documentation-link"
+          aria-label={`View ${title} on React Aria (opens in a new tab)`}
+          className="react-aria-Link react-aria-documentation-link"
           href={`https://react-aria.adobe.com/${reactAriaPage}`}
           rel="noreferrer"
           target="_blank"
@@ -314,11 +335,13 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
             This lets different brands express their own unique visual identity without impacting
             usability. The default color combinations aim to meet{' '}
             <Link
+              aria-label="WCAG 2.2 Level AA (opens in a new tab)"
               href="https://www.w3.org/TR/WCAG22/#conformance-reqs"
               rel="noreferrer"
               target="_blank"
             >
               WCAG 2.2 Level AA
+              <ExternalLinkIcon />
             </Link>{' '}
             contrast requirements.
           </>
@@ -422,6 +445,163 @@ function TypographyPage() {
   )
 }
 
+function ElevationPage() {
+  return (
+    <>
+      <PageHeading
+        description="Elevation communicates whether a surface is inset, flat, raised, floating, or overlaying other content. Mezzanine uses neutral shadows that product themes can replace without changing these role names."
+        groupLabel="Foundations"
+        title="Elevation"
+      />
+      <section aria-labelledby="elevation-roles-heading" className="component-section">
+        <h2 id="elevation-roles-heading" className="mezzanine-text-heading-medium">
+          Elevation roles
+        </h2>
+        <p className="component-section-description">
+          The names describe the relationship between surfaces rather than a numbered strength.
+        </p>
+        <ol className="elevation-role-list">
+          {elevationDefinitions.map((elevation) => (
+            <li className="elevation-role-card" key={elevation.token}>
+              <span
+                aria-hidden="true"
+                className="elevation-role-sample"
+                data-elevation={elevation.label.toLowerCase()}
+                style={{ boxShadow: `var(${elevation.token})` }}
+              />
+              <strong>{elevation.label}</strong>
+              <code>{elevation.token}</code>
+              <p>{elevation.description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+      <section aria-labelledby="elevation-theming-heading" className="component-section">
+        <h2 id="elevation-theming-heading" className="mezzanine-text-heading-medium">
+          Theming elevation
+        </h2>
+        <p className="component-section-description">
+          Light, Dark, and Wireframe use the same elevation roles with different shadow opacity.
+          A product theme can replace the shadow values while components continue to request the
+          same spatial relationship.
+        </p>
+      </section>
+      <section aria-labelledby="elevation-focus-heading" className="component-section">
+        <h2 id="elevation-focus-heading" className="mezzanine-text-heading-medium">
+          Focus is not elevation
+        </h2>
+        <p className="component-section-description">
+          Keyboard focus remains a separate interaction state using <code>--color-focus</code>.
+          Elevation must not be used as the only way to show which control has focus.
+        </p>
+      </section>
+    </>
+  )
+}
+
+function MotionPage() {
+  return (
+    <>
+      <PageHeading
+        description="Motion helps people understand when interface content opens, closes, or remains busy. This page records the motion that Mezzanine currently uses."
+        groupLabel="Foundations"
+        title="Motion"
+      />
+      <section aria-labelledby="motion-timing-heading" className="component-section">
+        <h2 id="motion-timing-heading" className="mezzanine-text-heading-medium">
+          Timing and easing
+        </h2>
+        <p className="component-section-description">
+          Mezzanine currently uses one short transition and one continuous loading cycle.
+        </p>
+        <div className="table-example">
+          <Table aria-label="Motion timing and easing" className="motion-timing-table">
+            <TableHeader>
+              <Column id="timing" isRowHeader>Timing</Column>
+              <Column id="duration">Duration</Column>
+              <Column id="easing">Easing</Column>
+            </TableHeader>
+            <TableBody>
+              {motionTimingDefinitions.map((timing) => (
+                <Row id={timing.id} key={timing.id}>
+                  <Cell>
+                    <strong>{timing.label}</strong>
+                    <span className="table-supporting-text">{timing.description}</span>
+                  </Cell>
+                  <Cell><code>{timing.duration}</code></Cell>
+                  <Cell><code>{timing.easing}</code></Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+      <section aria-labelledby="motion-tokens-heading" className="component-section">
+        <h2 id="motion-tokens-heading" className="mezzanine-text-heading-medium">
+          CSS tokens
+        </h2>
+        <p className="component-section-description">
+          These are the motion tokens that exist in Mezzanine today.
+        </p>
+        <div className="table-example">
+          <Table aria-label="Motion CSS tokens" className="motion-token-table">
+            <TableHeader>
+              <Column id="token" isRowHeader>Token</Column>
+              <Column id="value">Value</Column>
+              <Column id="purpose">Purpose</Column>
+            </TableHeader>
+            <TableBody>
+              {motionTokenDefinitions.map((motionToken) => (
+                <Row id={motionToken.token} key={motionToken.token}>
+                  <Cell><code>{motionToken.token}</code></Cell>
+                  <Cell><code>{motionToken.value}</code></Cell>
+                  <Cell>{motionToken.description}</Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+      <section aria-labelledby="motion-patterns-heading" className="component-section">
+        <h2 id="motion-patterns-heading" className="mezzanine-text-heading-medium">
+          Current motion patterns
+        </h2>
+        <div className="table-example">
+          <Table aria-label="Current motion patterns" className="motion-patterns-table">
+            <TableHeader>
+              <Column id="pattern" isRowHeader>Pattern</Column>
+              <Column id="movement">Movement</Column>
+              <Column id="reduced-motion">Reduced motion</Column>
+            </TableHeader>
+            <TableBody>
+              {motionPatternDefinitions.map((pattern) => (
+                <Row id={pattern.id} key={pattern.id}>
+                  <Cell>
+                    <strong>{pattern.name}</strong>
+                    <span className="table-supporting-text">{pattern.scope}</span>
+                  </Cell>
+                  <Cell>{pattern.movement}</Cell>
+                  <Cell>{pattern.reducedMotion}</Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+      <section aria-labelledby="reduced-motion-heading" className="component-section">
+        <h2 id="reduced-motion-heading" className="mezzanine-text-heading-medium">
+          Reduced motion
+        </h2>
+        <p className="component-section-description">
+          Mezzanine follows the device&apos;s <code>prefers-reduced-motion</code> setting. When a
+          person asks for less motion, animations and smooth scrolling are removed while the
+          interface continues to change state and communicate progress.
+        </p>
+      </section>
+    </>
+  )
+}
+
 function CheckboxPage() {
   return (
     <>
@@ -479,10 +659,77 @@ function LinkPage() {
         <h2 id="link-states-heading" className="mezzanine-text-heading-medium">
           Link states
         </h2>
-        <div className="component-example link-examples">
-          <Link href="/introduction">Standard link</Link>
-          <Link aria-current="page" href="/link">Current page</Link>
-          <Link href="/introduction" isDisabled>Disabled link</Link>
+        <div className="link-states-table">
+          <Table aria-label="Link states">
+            <TableHeader>
+              <Column aria-label="Component" id="component" isRowHeader />
+              {linkStates.map(({ name, reactAriaState, state }) => (
+                <Column id={state} key={state}>
+                  <span className="component-state-heading">
+                    <span>{name}</span>
+                    <code>{reactAriaState}</code>
+                  </span>
+                </Column>
+              ))}
+            </TableHeader>
+            <TableBody>
+              <Row id="link">
+                <Cell><strong>Link</strong></Cell>
+                {linkStates.map(({ state }) => (
+                  <Cell key={state}>
+                    <Link
+                      aria-current={state === 'current' ? 'page' : undefined}
+                      data-preview-state={state === 'hovered' || state === 'pressed' || state === 'focused'
+                        ? state
+                        : undefined}
+                      href={state === 'current' ? '/link' : '/introduction'}
+                      isDisabled={state === 'disabled'}
+                    >
+                      Link
+                    </Link>
+                  </Cell>
+                ))}
+              </Row>
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+      <section aria-labelledby="link-content-heading" className="component-section">
+        <h2 id="link-content-heading" className="mezzanine-text-heading-medium">
+          Link content
+        </h2>
+        <p className="component-section-description">
+          When a Link opens a page in a new browser tab, add the External Link trailing icon to
+          warn people before their browser context changes. Its accessible name must also include
+          “opens in a new tab”.
+        </p>
+        <div className="link-content-table">
+          <Table aria-label="Link content">
+            <TableHeader>
+              <Column id="content" isRowHeader>Content</Column>
+              <Column id="example">Example</Column>
+            </TableHeader>
+            <TableBody>
+              <Row id="text-only">
+                <Cell><strong>Text only</strong></Cell>
+                <Cell><Link href="/introduction">Link</Link></Cell>
+              </Row>
+              <Row id="trailing-icon">
+                <Cell><strong>Trailing icon</strong></Cell>
+                <Cell>
+                  <Link
+                    aria-label="View Link on React Aria (opens in a new tab)"
+                    href="https://react-aria.adobe.com/Link"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <span>View Link on React Aria</span>
+                    <ExternalLinkIcon />
+                  </Link>
+                </Cell>
+              </Row>
+            </TableBody>
+          </Table>
         </div>
       </section>
     </>
@@ -567,7 +814,8 @@ function DisclosurePage() {
           multiple disclosures open simultaneously instead.
         </p>
         <Link
-          className="react-aria-documentation-link"
+          aria-label="View DisclosureGroup on React Aria (opens in a new tab)"
+          className="react-aria-Link react-aria-documentation-link"
           href="https://react-aria.adobe.com/DisclosureGroup"
           rel="noreferrer"
           target="_blank"
@@ -814,7 +1062,7 @@ function ButtonPage() {
               <Column aria-label="Button variant" id="variant" isRowHeader />
               {buttonStates.map(({ name, reactAriaState, state }) => (
                 <Column id={state} key={state}>
-                  <span className="button-state-heading">
+                  <span className="component-state-heading">
                     <span>{name}</span>
                     <code>{reactAriaState}</code>
                   </span>
@@ -1052,7 +1300,8 @@ function ToggleButtonPage() {
           multiple selection.
         </p>
         <Link
-          className="react-aria-documentation-link"
+          aria-label="View ToggleButtonGroup on React Aria (opens in a new tab)"
+          className="react-aria-Link react-aria-documentation-link"
           href="https://react-aria.adobe.com/ToggleButtonGroup"
           rel="noreferrer"
           target="_blank"
@@ -1101,6 +1350,13 @@ function ToggleButtonPage() {
 }
 
 function NavigationTreePage() {
+  const {
+    closingKeys,
+    expandedKeys,
+    onExpandedChange,
+    openingKeys,
+  } = useAnimatedNavigationTree(['resources'])
+
   return (
     <>
       <PageHeading
@@ -1121,7 +1377,9 @@ function NavigationTreePage() {
           <nav aria-label="Example documentation">
             <NavigationTree
               aria-label="Example documentation pages"
-              defaultExpandedKeys={['resources']}
+              className="react-aria-NavigationTree animated-navigation-tree"
+              expandedKeys={expandedKeys}
+              onExpandedChange={onExpandedChange}
               selectedRoute="/navigation-tree"
             >
               <NavigationTreeItem
@@ -1134,6 +1392,7 @@ function NavigationTreePage() {
                 </NavigationTreeItemContent>
               </NavigationTreeItem>
               <NavigationTreeItem
+                className={`react-aria-NavigationTreeItem${closingKeys.has('resources') ? ' is-closing' : ''}`}
                 href="/navigation-tree#resources"
                 id="resources"
                 textValue="Resources"
@@ -1149,6 +1408,7 @@ function NavigationTreePage() {
                   />
                 </NavigationTreeItemContent>
                 <NavigationTreeItem
+                  className={`react-aria-NavigationTreeItem animated-navigation-tree-item${openingKeys.has('resources') ? ' is-opening' : ''}${closingKeys.has('resources') ? ' is-closing' : ''}`}
                   href="/navigation-tree#guides"
                   id="guides"
                   textValue="Guides"
@@ -1158,6 +1418,7 @@ function NavigationTreePage() {
                   </NavigationTreeItemContent>
                 </NavigationTreeItem>
                 <NavigationTreeItem
+                  className={`react-aria-NavigationTreeItem animated-navigation-tree-item${openingKeys.has('resources') ? ' is-opening' : ''}${closingKeys.has('resources') ? ' is-closing' : ''}`}
                   href="/navigation-tree#tutorials"
                   id="tutorials"
                   textValue="Tutorials"
@@ -1184,6 +1445,65 @@ function NavigationTreePage() {
   )
 }
 
+function BreadcrumbsPage() {
+  return (
+    <>
+      <PageHeading
+        description="Breadcrumbs show where the current page sits within a hierarchy and help people move back to a previous level."
+        groupLabel="Navigation"
+        reactAriaPage="Breadcrumbs"
+        title="Breadcrumbs"
+      />
+      <section aria-labelledby="breadcrumbs-example-heading" className="component-section">
+        <h2 id="breadcrumbs-example-heading" className="mezzanine-text-heading-medium">
+          Example
+        </h2>
+        <div className="component-example breadcrumbs-examples">
+          <div>
+            <h3 className="mezzanine-text-title-medium">Hierarchy</h3>
+            <p className="mezzanine-text-body-small">
+              Earlier levels are links. The final item identifies the current page and is not a
+              link.
+            </p>
+            <nav aria-label="Hierarchy example breadcrumbs">
+              <Breadcrumbs>
+                <Breadcrumb>
+                  <Link href="/">Homepage</Link>
+                </Breadcrumb>
+                <Breadcrumb>
+                  <Link href="/introduction">Parent page</Link>
+                </Breadcrumb>
+                <Breadcrumb>
+                  <span>Current page</span>
+                </Breadcrumb>
+              </Breadcrumbs>
+            </nav>
+          </div>
+          <div>
+            <h3 className="mezzanine-text-title-medium">Disabled</h3>
+            <p className="mezzanine-text-body-small">
+              A disabled Breadcrumbs list shows the hierarchy but none of its links can be used.
+            </p>
+            <nav aria-label="Disabled example breadcrumbs">
+              <Breadcrumbs isDisabled>
+                <Breadcrumb>
+                  <Link href="/">Homepage</Link>
+                </Breadcrumb>
+                <Breadcrumb>
+                  <Link href="/introduction">Parent page</Link>
+                </Breadcrumb>
+                <Breadcrumb>
+                  <span>Current page</span>
+                </Breadcrumb>
+              </Breadcrumbs>
+            </nav>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
+
 function ImplementedPage({ page, refreshKey }: { page: SitePageDefinition; refreshKey: string }) {
   switch (page.id) {
     case 'introduction':
@@ -1192,6 +1512,10 @@ function ImplementedPage({ page, refreshKey }: { page: SitePageDefinition; refre
       return <ColorPage refreshKey={refreshKey} />
     case 'typography':
       return <TypographyPage />
+    case 'elevation':
+      return <ElevationPage />
+    case 'motion':
+      return <MotionPage />
     case 'icons':
       return <IconsPage />
     case 'button':
@@ -1200,6 +1524,8 @@ function ImplementedPage({ page, refreshKey }: { page: SitePageDefinition; refre
       return <ToggleButtonPage />
     case 'navigation-tree':
       return <NavigationTreePage />
+    case 'breadcrumbs':
+      return <BreadcrumbsPage />
     case 'link':
       return <LinkPage />
     case 'disclosure':

@@ -11,6 +11,17 @@ export type {
   ButtonVariant,
 } from './components/Button'
 
+export {
+  Breadcrumb,
+  Breadcrumbs,
+} from './components/Breadcrumbs'
+
+export type {
+  BreadcrumbProps,
+  BreadcrumbRenderProps,
+  BreadcrumbsProps,
+} from './components/Breadcrumbs'
+
 export { Checkbox } from './components/Checkbox'
 
 export type { CheckboxProps } from './components/Checkbox'

@@ -9,8 +9,11 @@
         "http://localhost/introduction",
         "http://localhost/color",
         "http://localhost/typography",
+        "http://localhost/elevation",
+        "http://localhost/motion",
         "http://localhost/table",
         "http://localhost/button",
+        "http://localhost/breadcrumbs",
         "http://localhost/navigation-tree"
       ],
       "settings": {

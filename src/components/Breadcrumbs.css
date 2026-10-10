@@ -1,0 +1,24 @@
+.react-aria-Breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  margin: 0;
+  padding: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-label-large);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-label-large);
+  list-style: none;
+}
+
+.react-aria-Breadcrumb {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  min-width: 0;
+}
+
+.react-aria-Breadcrumb + .react-aria-Breadcrumb::before {
+  color: var(--color-text-muted);
+  content: '/';
+}

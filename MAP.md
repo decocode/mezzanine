@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The library currently exports React Aria `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the composed `IconButton` and `DisclosureHeader` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the composed `IconButton` and `DisclosureHeader` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
@@ -16,6 +16,8 @@ The library currently exports React Aria `Button`, `Checkbox`, `Link`, `RadioGro
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
 | `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants, sizes, icon content and pending-state progress |
 | `src/components/Button.css` | Token-led styling for Button variants and React Aria interaction states |
+| `src/components/Breadcrumbs.ts` | Public React Aria Breadcrumbs and Breadcrumb exports and prop types |
+| `src/components/Breadcrumbs.css` | Token-led layout and separator styling for Breadcrumbs |
 | `src/components/IconButton.tsx` | Public composed icon-only Button requiring a label that can be hidden, above or below |
 | `src/components/IconButton.css` | Token-led layout and visible-label styling for IconButton |
 | `src/components/Checkbox.tsx` | Public React Aria Checkbox wrapper with selected and indeterminate indicators |
@@ -44,10 +46,10 @@ The library currently exports React Aria `Button`, `Checkbox`, `Link`, `RadioGro
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
 | `site/App.tsx` | Route-aware showcase shell, landing hero, implemented documentation content, and explicit empty-page state |
 | `site/Header.tsx` | Responsive showcase header with React Aria links, theme Select and Disclosure hamburger menu |
-| `site/Sidebar.tsx` | Responsive React Aria sidebar navigation, including the mobile Browse sections disclosure |
-| `site/SidebarDisclosureItem.tsx` | Reusable React Aria disclosure anatomy for each sidebar navigation group |
+| `site/Sidebar.tsx` | Responsive NavigationTree sidebar, including the mobile Browse sections disclosure |
+| `site/useAnimatedNavigationTree.ts` | Shared expansion state and reduced-motion handling for NavigationTree reveal and collapse motion |
 | `site/siteNavigation.ts` | Single source of truth for approved IA groups, routes, labels, implementation status and verified React Aria documentation matches |
-| `site/foundationData.ts` | Names and plain-language descriptions for the implemented tokens and typography styles shown by the showcase |
+| `site/foundationData.ts` | Names and plain-language descriptions for the implemented color, typography and motion foundations shown by the showcase |
 | `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/tableExampleData.ts` | Table anatomy content, example rows and sorting logic used by the Table documentation page |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
