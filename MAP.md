@@ -62,6 +62,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/tableExampleData.ts` | Table anatomy content, example rows and sorting logic used by the Table documentation page |
 | `site/radioGroupDocumentation.tsx` | Verified anatomy, state descriptions with inline code markup, and component token names for the RadioGroup documentation page |
+| `site/componentTokenDocumentation.ts` | Verified Tabs and Dialog/Modal token names and descriptions for their documentation tables |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
@@ -87,6 +88,11 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `AGENTS.md` | Instructions for coding agents |
 
 ## Commands
+
+Typography retains its overview at `/typography`. Its child pages are
+`/typography/text-styles` (full-width text-style specimens and line heights) and
+`/typography/prose` (lists and inline code). These pages are rendered by
+`site/App.tsx`; `site/siteNavigation.ts` defines the linked parent and children.
 
 | Command | Purpose |
 | --- | --- |

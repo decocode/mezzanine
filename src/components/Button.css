@@ -152,7 +152,7 @@
   border: var(--button-progress-stroke-width) solid currentColor;
   border-inline-end-color: transparent;
   border-radius: var(--button-progress-border-radius);
-  animation: mezzanine-button-progress-spin 1s linear infinite;
+  animation: mezzanine-button-progress-spin var(--button-progress-motion-duration) linear infinite;
 }
 
 @keyframes mezzanine-button-progress-spin {

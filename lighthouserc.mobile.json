@@ -9,6 +9,8 @@
         "http://localhost/introduction",
         "http://localhost/color",
         "http://localhost/typography",
+        "http://localhost/typography/text-styles",
+        "http://localhost/typography/prose",
         "http://localhost/shape",
         "http://localhost/spacing",
         "http://localhost/elevation",

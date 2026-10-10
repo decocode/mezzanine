@@ -29,7 +29,6 @@ export interface MotionTimingDefinition {
 export interface MotionTokenDefinition {
   description: ReactNode
   token: string
-  value: string
 }
 
 export interface MotionPatternDefinition {
@@ -208,24 +207,25 @@ export const buttonTokens: ColorTokenDefinition[] = [
   { token: '--button-progress-size', label: 'Button progress size', description: 'Width and height of the pending-state progress indicator.' },
   { token: '--button-progress-stroke-width', label: 'Button progress stroke width', description: 'Thickness of the pending-state progress indicator.' },
   { token: '--button-progress-border-radius', label: 'Button progress corner radius', description: 'Rounding of the pending-state progress indicator.' },
+  { token: '--button-progress-motion-duration', label: 'Button progress duration', description: 'Duration of one loading-indicator rotation; animation stops with reduced motion.' },
 ]
 
 export const typographyStyles: TypographyStyleDefinition[] = [
-  { className: 'mz-text-display-large', label: 'Display large', purpose: 'Very prominent, short text in a spacious hero.' },
-  { className: 'mz-text-display-medium', label: 'Display medium', purpose: 'Prominent, short text in a hero or marketing section.' },
-  { className: 'mz-text-display-small', label: 'Display small', purpose: 'Short display text where less space is available.' },
-  { className: 'mz-text-heading-large', label: 'Heading large', purpose: 'A page title or top-level content heading.' },
-  { className: 'mz-text-heading-medium', label: 'Heading medium', purpose: 'A major section heading.' },
-  { className: 'mz-text-heading-small', label: 'Heading small', purpose: 'A subsection heading.' },
-  { className: 'mz-text-title-large', label: 'Title large', purpose: 'A prominent component or panel title.' },
-  { className: 'mz-text-title-medium', label: 'Title medium', purpose: 'A standard component or panel title.' },
-  { className: 'mz-text-title-small', label: 'Title small', purpose: 'A compact component or grouped-content title.' },
-  { className: 'mz-text-body-large', label: 'Body large', purpose: 'Introductory copy that needs additional prominence.' },
-  { className: 'mz-text-body-medium', label: 'Body medium', purpose: 'Paragraphs and ordinary interface content.' },
-  { className: 'mz-text-body-small', label: 'Body small', purpose: 'Supporting information, descriptions, and captions.' },
-  { className: 'mz-text-label-large', label: 'Label large', purpose: 'Standard controls and navigation labels.' },
-  { className: 'mz-text-label-medium', label: 'Label medium', purpose: 'Compact controls, badges, and metadata.' },
-  { className: 'mz-text-label-small', label: 'Label small', purpose: 'Supplementary labels where space is constrained.' },
+  { className: 'mz-text-display-lg', label: 'Display large', purpose: 'Very prominent, short text in a spacious hero.' },
+  { className: 'mz-text-display-md', label: 'Display medium', purpose: 'Prominent, short text in a hero or marketing section.' },
+  { className: 'mz-text-display-sm', label: 'Display small', purpose: 'Short display text where less space is available.' },
+  { className: 'mz-text-heading-lg', label: 'Heading large', purpose: 'A page title or top-level content heading.' },
+  { className: 'mz-text-heading-md', label: 'Heading medium', purpose: 'A major section heading.' },
+  { className: 'mz-text-heading-sm', label: 'Heading small', purpose: 'A subsection heading.' },
+  { className: 'mz-text-title-lg', label: 'Title large', purpose: 'A prominent component or panel title.' },
+  { className: 'mz-text-title-md', label: 'Title medium', purpose: 'A standard component or panel title.' },
+  { className: 'mz-text-title-sm', label: 'Title small', purpose: 'A compact component or grouped-content title.' },
+  { className: 'mz-text-body-lg', label: 'Body large', purpose: 'Introductory copy that needs additional prominence.' },
+  { className: 'mz-text-body-md', label: 'Body medium', purpose: 'Paragraphs and ordinary interface content.' },
+  { className: 'mz-text-body-sm', label: 'Body small', purpose: 'Supporting information, descriptions, and captions.' },
+  { className: 'mz-text-label-lg', label: 'Label large', purpose: 'Standard controls and navigation labels.' },
+  { className: 'mz-text-label-md', label: 'Label medium', purpose: 'Compact controls, badges, and metadata.' },
+  { className: 'mz-text-label-sm', label: 'Label small', purpose: 'Supplementary labels where space is constrained.' },
 ]
 
 export const motionTimingDefinitions: MotionTimingDefinition[] = [
@@ -247,23 +247,27 @@ export const motionTimingDefinitions: MotionTimingDefinition[] = [
 
 export const motionTokenDefinitions: MotionTokenDefinition[] = [
   {
+    token: '--button-progress-motion-duration',
+    description: <>Controls one rotation of the <code>Button</code> loading indicator.</>,
+  },
+  {
+    token: '--tab-motion-duration',
+    description: <>Controls movement of the <code>Tab</code> selection indicator.</>,
+  },
+  {
     token: '--modal-motion-duration',
-    value: '180ms',
     description: <>Controls <code>Modal</code> and <code>ModalOverlay</code> entry and exit.</>,
   },
   {
     token: '--modal-enter-scale',
-    value: '0.98',
     description: <><code>Modal</code> scale at the start of entry and end of exit.</>,
   },
   {
     token: '--disclosure-motion-duration',
-    value: '180ms',
     description: <>Controls <code>Disclosure</code> chevron rotation.</>,
   },
   {
     token: '--navigation-tree-motion-duration',
-    value: '180ms',
     description: <>Controls <code>NavigationTree</code> chevron rotation and child-row motion.</>,
   },
 ]

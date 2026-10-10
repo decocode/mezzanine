@@ -253,6 +253,7 @@
   --button-progress-size: 1.25rem;
   --button-progress-stroke-width: 0.125rem;
   --button-progress-border-radius: 50%;
+  --button-progress-motion-duration: 1s;
 
   /* Checkbox: component-specific structure, shared by every theme. */
   --checkbox-size: 1.25rem;

@@ -56,8 +56,10 @@ Mezzanine component CSS must not depend on product palette names such as
 Size segments use `xs`, `sm`, `md`, `lg` and `xl` where those levels exist.
 Typography currently uses `sm`, `md` and `lg`; Button uses `sm`, `md`, `lg` and `xl`.
 This replaces the spelled-out size segments in those public token names; consumers
-must update their references and overrides. Values and typography CSS class names
-are unchanged. `--font-weight-medium` remains a weight name, not a size level.
+must update their references and overrides. Typography CSS classes use the same
+abbreviations: for example, `mz-text-body-md`. This also replaces the previous
+spelled-out class suffixes; consuming apps must update their class names.
+Values are unchanged. `--font-weight-medium` remains a weight name, not a size level.
 
 Foundation token names use this pattern where applicable:
 
@@ -320,6 +322,9 @@ semantic color palettes.
 Link uses shared semantic colors and component tokens for its underline and
 focus treatment.
 
+Breadcrumbs uses `--space-1` between wrapped rows and `--space-2` between
+items and between each separator and its label. It has no separate spacing tokens.
+
 | Token | Meaning |
 | --- | --- |
 | `--link-content-gap` | Space between Link text and an icon |
@@ -481,10 +486,15 @@ its appearance without tying the component to particular palette values.
 | `--button-progress-size` | Pending indicator size |
 | `--button-progress-stroke-width` | Pending indicator stroke width |
 | `--button-progress-border-radius` | Pending indicator shape |
+| `--button-progress-motion-duration` | Duration of one pending-indicator rotation; defaults to `1s`, disabled with reduced motion |
 
 Button focus uses the shared `--color-focus` role. Pending retains the enabled
 colors while displaying progress. Disabled Buttons retain their variant colors
 at `--opacity-disabled` and do not add elevation.
+
+The documentation site's navigation animation reads `--navigation-tree-motion-duration`
+from the root element for both CSS motion and JavaScript completion timing.
+Root theme overrides can use `ms` or `s`; reduced motion bypasses the animation.
 
 ## What is not currently a Mezzanine foundation
 

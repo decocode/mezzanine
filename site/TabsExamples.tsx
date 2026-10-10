@@ -1,5 +1,6 @@
 import { Cell, Column, Row, Table, TableBody, TableHeader, Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
 import { TableOfContents } from './TableOfContents'
+import { tabsTokens } from './componentTokenDocumentation'
 
 export function TabsExamples() {
   return (
@@ -10,9 +11,10 @@ export function TabsExamples() {
         { id: 'tabs-anatomy-heading', label: 'Anatomy' },
         { id: 'tabs-props-heading', label: 'Props' },
         { id: 'tabs-usage-heading', label: 'Usage and accessibility' },
+        { id: 'tabs-tokens-heading', label: 'CSS tokens' },
       ]} />
       <section aria-labelledby="tabs-example-heading" className="component-section">
-        <h2 id="tabs-example-heading" className="mz-text-heading-medium">Example</h2>
+        <h2 id="tabs-example-heading" className="mz-text-heading-md">Example</h2>
         <p className="component-section-description">
           Select a <code>Tab</code> to show its matching <code>TabPanel</code>. Arrow keys
           move between available tabs and select them automatically. The fourth tab is disabled.
@@ -33,7 +35,7 @@ export function TabsExamples() {
         </div>
       </section>
       <section aria-labelledby="tabs-vertical-heading" className="component-section">
-        <h2 id="tabs-vertical-heading" className="mz-text-heading-medium">Vertical tabs</h2>
+        <h2 id="tabs-vertical-heading" className="mz-text-heading-md">Vertical tabs</h2>
         <p className="component-section-description">
           Set <code>orientation="vertical"</code> to stack the tabs. This example also uses
           {' '}<code>keyboardActivation="manual"</code>: Up and Down move focus; Enter or Space selects.
@@ -54,7 +56,7 @@ export function TabsExamples() {
         </div>
       </section>
       <section aria-labelledby="tabs-anatomy-heading" className="component-section">
-        <h2 id="tabs-anatomy-heading" className="mz-text-heading-medium">Anatomy</h2>
+        <h2 id="tabs-anatomy-heading" className="mz-text-heading-md">Anatomy</h2>
         <div className="documentation-table">
           <Table aria-label="Tabs anatomy">
             <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
@@ -68,7 +70,7 @@ export function TabsExamples() {
         </div>
       </section>
       <section aria-labelledby="tabs-props-heading" className="component-section">
-        <h2 id="tabs-props-heading" className="mz-text-heading-medium">Props</h2>
+        <h2 id="tabs-props-heading" className="mz-text-heading-md">Props</h2>
         <p className="component-section-description">These are common React Aria props; the components retain their underlying APIs.</p>
         <div className="documentation-table documentation-props-table">
           <Table aria-label="Tabs props">
@@ -87,14 +89,28 @@ export function TabsExamples() {
         </div>
       </section>
       <section aria-labelledby="tabs-usage-heading" className="component-section">
-        <h2 id="tabs-usage-heading" className="mz-text-heading-medium">Usage and accessibility</h2>
-        <ul>
+        <h2 id="tabs-usage-heading" className="mz-text-heading-md">Usage and accessibility</h2>
+        <ul className="mz-text-body-md">
           <li>Use tabs for related sections shown one at a time, not for independent on/off choices.</li>
           <li>React Aria supplies tab/panel relationships, roving focus and keyboard selection. Do not add custom arrow-key handlers.</li>
           <li>Tab moves into the selected tab, then into its panel. Arrow keys follow the orientation; Home and End move to the first and last available tabs.</li>
           <li>Horizontal tab lists scroll when space is limited. Vertical panels move below the list when there is not enough room beside it. Keep labels short and meaningful.</li>
           <li>Keyboard focus has an outline, selection has an underline, and indicator motion respects reduced-motion preferences.</li>
         </ul>
+      </section>
+      <section aria-labelledby="tabs-tokens-heading" className="component-section">
+        <h2 id="tabs-tokens-heading" className="mz-text-heading-md">CSS tokens</h2>
+        <p className="component-section-description"><code>Tabs</code> also uses shared typography, focus colour, disabled opacity and radius tokens.</p>
+        <div className="documentation-table">
+          <Table aria-label="Tabs CSS tokens">
+            <TableHeader><Column isRowHeader>CSS token</Column><Column>Purpose</Column></TableHeader>
+            <TableBody>
+              {tabsTokens.map(({ token, description }) => (
+                <Row id={token} key={token}><Cell><code>{token}</code></Cell><Cell>{description}</Cell></Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </section>
     </>
   )

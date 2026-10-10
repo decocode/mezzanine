@@ -658,29 +658,41 @@ a:focus-visible {
   width: 50%;
 }
 
-.typography-meta {
-  display: flex;
-  gap: 0.5rem;
-  flex-direction: column;
+.typography-specimens {
+  display: grid;
+  gap: var(--space-8);
+  margin-block-start: var(--space-8);
+}
+
+.typography-specimen {
+  min-width: 0;
+  padding-block-end: var(--space-8);
+  border-block-end: 1px solid var(--color-border);
+}
+
+.typography-specimen-details {
+  display: grid;
+  gap: var(--space-2);
+  margin-block-end: var(--space-4);
+  max-inline-size: 65ch;
+}
+
+.typography-specimen-details > :is(h3, p) {
+  margin: 0;
+}
+
+.typography-specimen-details > p {
   color: var(--color-text-muted);
 }
 
-.typography-table .react-aria-Table {
-  /* Keep full-size typography specimens readable alongside their descriptions. */
-  min-width: 40rem;
+.typography-specimen-details code {
+  display: inline-block;
+  max-inline-size: 100%;
+  vertical-align: top;
 }
 
-.typography-table .react-aria-Column:first-child,
-.typography-table .react-aria-Cell:first-child {
-  width: 25%;
-}
-
-.typography-table .react-aria-Column:nth-child(2),
-.typography-table .react-aria-Cell:nth-child(2) {
-  width: 40%;
-}
-
-.typography-table .react-aria-Cell p {
+.typography-specimen-sample {
+  /* Preserve the public text style's size and line height at every width. */
   overflow-wrap: anywhere;
   margin: 0;
 }
@@ -892,7 +904,7 @@ a:focus-visible {
 }
 
 .typography-guidance,
-.component-section :where(ul, ol):is(.mz-text-body-large, .mz-text-body-medium, .mz-text-body-small) {
+.component-section :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm) {
   max-inline-size: 65ch;
 }
 

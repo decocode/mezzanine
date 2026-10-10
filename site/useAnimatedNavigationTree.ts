@@ -1,7 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Key } from 'react-aria-components'
 
-const navigationTreeMotionDuration = 180
+function getNavigationTreeMotionDuration() {
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue('--navigation-tree-motion-duration').trim()
+  const duration = Number.parseFloat(value)
+  if (!Number.isFinite(duration) || duration < 0) return 0
+  if (value.endsWith('ms')) return duration
+  if (value.endsWith('s')) return duration * 1000
+  return 0
+}
 
 function removeKey(keys: Set<Key>, key: Key) {
   const nextKeys = new Set(keys)
@@ -26,7 +34,7 @@ export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
     const timer = setTimeout(() => {
       motionTimers.current.delete(key)
       onMotionEnd()
-    }, navigationTreeMotionDuration)
+    }, getNavigationTreeMotionDuration())
 
     motionTimers.current.set(key, timer)
   }, [])

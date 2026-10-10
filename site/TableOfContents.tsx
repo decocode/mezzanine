@@ -44,7 +44,7 @@ export function TableOfContents({
       aria-labelledby={headingId}
       className={['table-of-contents', className].filter(Boolean).join(' ')}
     >
-      <Heading className="mz-text-heading-small" id={headingId}>{heading}</Heading>
+      <Heading className="mz-text-heading-sm" id={headingId}>{heading}</Heading>
       <TableOfContentsList sections={sections} />
     </nav>
   )

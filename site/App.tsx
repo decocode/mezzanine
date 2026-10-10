@@ -173,6 +173,10 @@ function useTokenValue(token: string, refreshKey: string) {
   return value
 }
 
+function TokenValue({ token, refreshKey }: { token: string; refreshKey: string }) {
+  return <code>{useTokenValue(token, refreshKey)}</code>
+}
+
 function ColorPaletteStep({
   darkTextValue,
   lightTextValue,
@@ -247,11 +251,11 @@ function ColorPalette({
   return (
     <section className="color-palette" aria-labelledby={`${palette.id}-palette-heading`}>
       <div className="color-palette-heading">
-        <h4 id={`${palette.id}-palette-heading`} className="mz-text-title-medium">
+        <h4 id={`${palette.id}-palette-heading`} className="mz-text-title-md">
           {palette.label}
         </h4>
         {palette.description && (
-          <p className="mz-text-body-small">{palette.description}</p>
+          <p className="mz-text-body-sm">{palette.description}</p>
         )}
       </div>
       <ColorPaletteScale paletteId={palette.id} refreshKey={refreshKey} />
@@ -260,7 +264,7 @@ function ColorPalette({
           <DisclosureHeader level={5}>{palette.details.label}</DisclosureHeader>
           <DisclosurePanel>
             {palette.details.content.map((paragraph) => (
-              <p className="mz-text-body-small" key={paragraph}>{paragraph}</p>
+              <p className="mz-text-body-sm" key={paragraph}>{paragraph}</p>
             ))}
           </DisclosurePanel>
         </Disclosure>
@@ -318,11 +322,11 @@ function PageHeading({ description, reactAriaPage, title }: PageHeadingProps) {
 
   return (
     <div className="page-heading-group">
-      <h1 className="mz-text-heading-large">{headingLabels[title] ?? title}</h1>
+      <h1 className="mz-text-heading-lg">{headingLabels[title] ?? title}</h1>
       {description && (
         <div className="page-description">
           {descriptionParagraphs.map((paragraph, index) => (
-            <p className="mz-text-body-large" key={index}>{paragraph}</p>
+            <p className="mz-text-body-lg" key={index}>{paragraph}</p>
           ))}
         </div>
       )}
@@ -346,9 +350,9 @@ function LandingPage() {
   return (
     <main className="landing-page" id="main-content">
       <section className="landing-hero" aria-labelledby="landing-heading">
-        <p className="mz-text-label-large section-label">Design system by DecoCode</p>
-        <h1 id="landing-heading" className="mz-text-display-large">Mezzanine</h1>
-        <p className="mz-text-body-large landing-hero-description">
+        <p className="mz-text-label-lg section-label">Design system by DecoCode</p>
+        <h1 id="landing-heading" className="mz-text-display-lg">Mezzanine</h1>
+        <p className="mz-text-body-lg landing-hero-description">
           An accessible React Aria design system with neutral defaults that products can theme.
         </p>
         <Link className="landing-primary-cta" href="/introduction">Documentation</Link>
@@ -405,7 +409,7 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
         { id: 'color-roles-heading', label: 'Color roles' },
       ]} />
       <section className="component-section color-palettes" aria-labelledby="color-palettes-heading">
-        <h2 id="color-palettes-heading" className="mz-text-heading-medium">
+        <h2 id="color-palettes-heading" className="mz-text-heading-md">
           Color palettes
         </h2>
         <p className="component-section-description">
@@ -413,7 +417,7 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
           implemented token values for the current theme.
         </p>
         <section className="core-color-palettes" aria-labelledby="core-color-palettes-heading">
-          <h3 id="core-color-palettes-heading" className="mz-text-heading-small">
+          <h3 id="core-color-palettes-heading" className="mz-text-heading-sm">
             Core colors
           </h3>
           <p className="component-section-description">
@@ -429,7 +433,7 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
             >
               <h4
                 id={`${palette.id}-color-palette-heading`}
-                className="mz-text-title-medium"
+                className="mz-text-title-md"
               >
                 {palette.label}
               </h4>
@@ -438,7 +442,7 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
           ))}
         </section>
         <section className="semantic-color-palettes" aria-labelledby="semantic-color-palettes-heading">
-          <h3 id="semantic-color-palettes-heading" className="mz-text-heading-small">
+          <h3 id="semantic-color-palettes-heading" className="mz-text-heading-sm">
             Semantic colors
           </h3>
           <p className="component-section-description">
@@ -456,7 +460,7 @@ function ColorPage({ refreshKey }: { refreshKey: string }) {
         </section>
       </section>
       <section className="component-section color-roles" aria-labelledby="color-roles-heading">
-        <h2 id="color-roles-heading" className="mz-text-heading-medium">
+        <h2 id="color-roles-heading" className="mz-text-heading-md">
           Color roles
         </h2>
         <p className="component-section-description">
@@ -494,7 +498,7 @@ function SpacingPage({ refreshKey }: { refreshKey: string }) {
         title="Spacing"
       />
       <section aria-labelledby="spacing-scale-heading" className="component-section">
-        <h2 id="spacing-scale-heading" className="mz-text-heading-medium">
+        <h2 id="spacing-scale-heading" className="mz-text-heading-md">
           Spacing scale
         </h2>
         <p className="component-section-description">
@@ -516,9 +520,7 @@ function SpacingPage({ refreshKey }: { refreshKey: string }) {
   )
 }
 
-function TypographyPage({ refreshKey }: { refreshKey: string }) {
-  const bodyLineHeight = useTokenValue('--line-height-body-md', refreshKey)
-  const listItemSpacing = useTokenValue('--space-2', refreshKey)
+function TypographyPage() {
   return (
     <>
       <PageHeading
@@ -528,14 +530,31 @@ function TypographyPage({ refreshKey }: { refreshKey: string }) {
         ]}
         title="Typography"
       />
+      <section className="component-section" aria-labelledby="typography-text-styles-heading">
+        <h2 id="typography-text-styles-heading" className="mz-text-heading-md">Text styles</h2>
+        <p className="component-section-description">The individual styles for display text, headings, titles, body copy and labels, with their paired line heights.</p>
+        <Link href="/typography/text-styles">Explore text styles</Link>
+      </section>
+      <section className="component-section" aria-labelledby="typography-prose-heading">
+        <h2 id="typography-prose-heading" className="mz-text-heading-md">Prose</h2>
+        <p className="component-section-description">How typography works within longer-form content, including list spacing and inline code.</p>
+        <Link href="/typography/prose">Explore prose</Link>
+      </section>
+    </>
+  )
+}
+
+function TextStylesPage({ refreshKey }: { refreshKey: string }) {
+  const bodyLineHeight = useTokenValue('--line-height-body-md', refreshKey)
+  return (
+    <>
+      <PageHeading title="Text styles" description="Fifteen text styles pair font size, weight and line height across five roles: Display, Heading, Title, Body and Label." />
       <TableOfContents sections={[
         { id: 'text-styles-heading', label: 'Text styles' },
         { id: 'line-height-heading', label: 'Line height' },
-        { id: 'lists-heading', label: 'Lists' },
-        { id: 'inline-code-heading', label: 'Inline code' },
       ]} />
       <section aria-labelledby="text-styles-heading" className="component-section">
-        <h2 id="text-styles-heading" className="mz-text-heading-medium">
+        <h2 id="text-styles-heading" className="mz-text-heading-md">
           Text styles
         </h2>
         <p className="component-section-description">
@@ -544,87 +563,103 @@ function TypographyPage({ refreshKey }: { refreshKey: string }) {
         </p>
         <p className="component-section-description">
           The <code>mz-</code> prefix identifies CSS classes supplied by Mezzanine and helps
-          prevent clashes with a product&apos;s own class names. For example, <code>mz-text-body-medium</code>
+          prevent clashes with a product&apos;s own class names. For example, <code>mz-text-body-md</code>
           {' '}applies the Body medium style.
         </p>
-        <div className="documentation-table typography-table">
-          <Table aria-label="Text styles">
-            <TableHeader>
-              <Column id="style" isRowHeader>Style</Column>
-              <Column id="example">Example</Column>
-              <Column id="purpose">Purpose</Column>
-            </TableHeader>
-            <TableBody>
-              {typographyStyles.map((style) => (
-                <Row id={style.className} key={style.className}>
-                  <Cell>
-                    <div className="typography-meta">
-                      <strong>{style.label}</strong>
-                      <code>{style.className}</code>
-                    </div>
-                  </Cell>
-                  <Cell><p className={style.className}>This is an example</p></Cell>
-                  <Cell>{style.purpose}</Cell>
-                </Row>
-              ))}
-            </TableBody>
-          </Table>
+        <div className="typography-specimens">
+          {typographyStyles.map((style) => (
+            <section aria-labelledby={`${style.className}-heading`} className="typography-specimen" key={style.className}>
+              <div className="typography-specimen-details">
+                <h3 id={`${style.className}-heading`} className="mz-text-title-lg">{style.label}</h3>
+                <p><code>{style.className}</code></p>
+                <p className="mz-text-body-md">{style.purpose}</p>
+              </div>
+              <p className={`typography-specimen-sample ${style.className}`}>Aa Bb Cc</p>
+            </section>
+          ))}
         </div>
       </section>
       <section aria-labelledby="line-height-heading" className="component-section">
-        <h2 id="line-height-heading" className="mz-text-heading-medium">Line height</h2>
-        <p className="component-section-description mz-text-body-medium">
+        <h2 id="line-height-heading" className="mz-text-heading-md">Line height</h2>
+        <p className="component-section-description mz-text-body-md">
           Line height controls the distance between lines within a paragraph or list item.
           Space between paragraphs or list items is a separate layout decision.
         </p>
         <div className="typography-guidance">
-          <h3 className="mz-text-title-large">How it works</h3>
-          <p className="mz-text-body-medium">A unitless line height multiplies the text’s font size. For example, a value of 1.5 with 16px text gives each line a 24px-high line box—not 24px of empty space between lines. Mezzanine uses unitless values so line height scales when the text size changes.</p>
-          <h3 className="mz-text-title-large">Using Mezzanine’s text styles</h3>
-          <p className="mz-text-body-medium">Each text style applies its font size and matching line height automatically. Use <code>mz-text-body-medium</code> for normal reading; its current line-height value is <code>{bodyLineHeight}</code>. Headings and labels have their own values. You do not need to set line height separately.</p>
+          <h3 className="mz-text-title-lg">How it works</h3>
+          <p className="mz-text-body-md">A unitless line height multiplies the text’s font size. For example, a value of 1.5 with 16px text gives each line a 24px-high line box—not 24px of empty space between lines. Mezzanine uses unitless values so line height scales when the text size changes.</p>
+          <h3 className="mz-text-title-lg">Using Mezzanine’s text styles</h3>
+          <p className="mz-text-body-md">Each text style applies its font size and matching line height automatically. Use <code>mz-text-body-md</code> for normal reading; its current line-height value is <code>{bodyLineHeight}</code>. Headings and labels have their own values. You do not need to set line height separately.</p>
         </div>
       </section>
+    </>
+  )
+}
+
+function ProsePage({ refreshKey }: { refreshKey: string }) {
+  const listItemSpacing = useTokenValue('--space-2', refreshKey)
+  return (
+    <>
+      <PageHeading title="Prose" description="Mezzanine’s styling for longer-form content. Lists share the body text styles and spacing tokens; inline code has a distinct treatment within the surrounding text." />
+      <p className="component-section-description mz-text-body-md">The library includes body-styled lists and inline code, but does not yet provide a complete prose container. The section spacing and reading widths on this documentation site are site layout styles, not part of the library.</p>
+      <TableOfContents sections={[
+        { id: 'lists-heading', label: 'Lists', children: [
+          { id: 'unordered-list-heading', label: 'Unordered lists' },
+          { id: 'ordered-list-heading', label: 'Ordered lists' },
+        ] },
+        { id: 'inline-code-heading', label: 'Inline code' },
+      ]} />
       <section aria-labelledby="lists-heading" className="component-section">
-        <h2 id="lists-heading" className="mz-text-heading-medium">Lists</h2>
-        <p className="component-section-description mz-text-body-medium">Unordered lists use bullet points; ordered lists use numbers. Both share the chosen body style’s line height, with <code>--space-2</code> between items (currently <code>{listItemSpacing}</code>) and <code>--space-6</code> indentation at each level. Wrapped lines align with the item text.</p>
-        <p className="component-section-description mz-text-body-medium">Apply a body text class, such as <code>mz-text-body-medium</code>, to the list to use these styles. Nested lists inherit the same styling.</p>
-        <h3 className="mz-text-title-large">Unordered list example</h3>
-        <div className="component-example">
-          <ul className="mz-text-body-medium">
-            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-            <li>Sed do eiusmod tempor incididunt.
-              <ul>
-                <li>Ut enim ad minim veniam.</li>
-                <li>Quis nostrud exercitation ullamco laboris.</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <h3 className="mz-text-title-large">Ordered list example</h3>
-        <div className="component-example">
-          <ol className="mz-text-body-medium">
-            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-            <li>Sed do eiusmod tempor incididunt.
-              <ol>
-                <li>Ut enim ad minim veniam.</li>
-                <li>Quis nostrud exercitation ullamco laboris.</li>
-              </ol>
-            </li>
-          </ol>
-        </div>
+        <h2 id="lists-heading" className="mz-text-heading-md">Lists</h2>
+        <p className="component-section-description mz-text-body-md">Unordered lists use bullet points; ordered lists use numbers. Both share the chosen body style’s line height, with <code>--space-2</code> between items (currently <code>{listItemSpacing}</code>) and <code>--space-6</code> indentation at each level. Wrapped lines align with the item text.</p>
+        <p className="component-section-description mz-text-body-md">Apply a body text class, such as <code>mz-text-body-md</code>, to the list to use these styles. Nested lists inherit the same styling.</p>
+        <section aria-labelledby="unordered-list-heading">
+          <h3 id="unordered-list-heading" className="mz-text-heading-sm">Unordered lists</h3>
+          <p className="component-section-description mz-text-body-md">An unordered list uses <code>&lt;ul&gt;</code> to group related items whose order is not significant. Filled bullet points mark the first level; nested items use hollow bullet points and an additional indent.</p>
+          <h4 className="mz-text-title-lg">Example</h4>
+          <div className="component-example">
+            <ul className="mz-text-body-md">
+              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              <li>Sed do eiusmod tempor incididunt.
+                <ul>
+                  <li>Ut enim ad minim veniam.</li>
+                  <li>Quis nostrud exercitation ullamco laboris.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section aria-labelledby="ordered-list-heading">
+          <h3 id="ordered-list-heading" className="mz-text-heading-sm">Ordered lists</h3>
+          <p className="component-section-description mz-text-body-md">An ordered list uses <code>&lt;ol&gt;</code> to group items in a meaningful sequence, such as steps or rankings. Numbered markers use the same body style as the list text. Nested lists are indented and restart numbering at 1.</p>
+          <h4 className="mz-text-title-lg">Example</h4>
+          <div className="component-example">
+            <ol className="mz-text-body-md">
+              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+              <li>Sed do eiusmod tempor incididunt.
+                <ol>
+                  <li>Ut enim ad minim veniam.</li>
+                  <li>Quis nostrud exercitation ullamco laboris.</li>
+                </ol>
+              </li>
+            </ol>
+          </div>
+        </section>
       </section>
       <section aria-labelledby="inline-code-heading" className="component-section">
-        <h2 id="inline-code-heading" className="mz-text-heading-medium">
+        <h2 id="inline-code-heading" className="mz-text-heading-md">
           Inline code
         </h2>
         <p className="component-section-description">
-          Inline code distinguishes tokens, property names, values, and other technical text from
-          the sentence around them. Use the semantic <code>&lt;code&gt;</code> element rather than
-          using this treatment for ordinary emphasis.
+          Inline code uses <code>&lt;code&gt;</code> to identify tokens, property names, values and
+          other technical text within a sentence. A monospace font and contrasting background
+          distinguish it from the surrounding text.
         </p>
+        <p className="component-section-description">Code inside <code>&lt;pre&gt;</code> retains the monospace font without the inline background or padding. Code-block layout is supplied by the consuming app.</p>
+        <h4 className="mz-text-title-lg">Example</h4>
         <div className="component-example">
-          <p className="mz-text-body-medium">
-            For example, the <code>--space-4</code> token stores <code>1rem</code> by default.
+          <p className="mz-text-body-md">
+            The <code>--space-4</code> token stores <code>1rem</code> by default.
           </p>
         </div>
       </section>
@@ -655,7 +690,7 @@ function ShapePage({ refreshKey }: { refreshKey: string }) {
         { id: 'radius-usage-heading', label: 'Using the scale' },
       ]} />
       <section className="component-section" aria-labelledby="radius-levels-heading">
-        <h2 id="radius-levels-heading" className="mz-text-heading-medium">Corner radius</h2>
+        <h2 id="radius-levels-heading" className="mz-text-heading-md">Corner radius</h2>
         <p className="component-section-description">
           Small through Extra large use <code>rem</code>, so they respond to the root font size.
           None keeps square corners. Full uses a deliberately large radius to produce pill ends.
@@ -666,7 +701,7 @@ function ShapePage({ refreshKey }: { refreshKey: string }) {
         </ol>
       </section>
       <section className="component-section" aria-labelledby="radius-corners-heading">
-        <h2 id="radius-corners-heading" className="mz-text-heading-medium">Individual corners</h2>
+        <h2 id="radius-corners-heading" className="mz-text-heading-md">Individual corners</h2>
         <p className="component-section-description">
           Choose a radius for each corner independently. Leave the other corners at None to round
           just one corner, or combine levels to round an edge or create an asymmetric shape.
@@ -679,7 +714,7 @@ function ShapePage({ refreshKey }: { refreshKey: string }) {
         </p>
       </section>
       <section className="component-section" aria-labelledby="radius-usage-heading">
-        <h2 id="radius-usage-heading" className="mz-text-heading-medium">Using the scale</h2>
+        <h2 id="radius-usage-heading" className="mz-text-heading-md">Using the scale</h2>
         <p className="component-section-description">
           Reference a level from a component token, for example <code>--button-border-radius: var(--radius-sm)</code>.
           Adding this scale does not change existing component corners; their current defaults remain intact.
@@ -706,7 +741,7 @@ function ElevationPage() {
         { id: 'elevation-focus-heading', label: 'Focus is not elevation' },
       ]} />
       <section aria-labelledby="elevation-roles-heading" className="component-section">
-        <h2 id="elevation-roles-heading" className="mz-text-heading-medium">
+        <h2 id="elevation-roles-heading" className="mz-text-heading-md">
           Elevation roles
         </h2>
         <p className="component-section-description">
@@ -729,7 +764,7 @@ function ElevationPage() {
         </ol>
       </section>
       <section aria-labelledby="elevation-theming-heading" className="component-section">
-        <h2 id="elevation-theming-heading" className="mz-text-heading-medium">
+        <h2 id="elevation-theming-heading" className="mz-text-heading-md">
           Theming elevation
         </h2>
         <p className="component-section-description">
@@ -740,7 +775,7 @@ function ElevationPage() {
         </p>
       </section>
       <section aria-labelledby="elevation-focus-heading" className="component-section">
-        <h2 id="elevation-focus-heading" className="mz-text-heading-medium">
+        <h2 id="elevation-focus-heading" className="mz-text-heading-md">
           Focus is not elevation
         </h2>
         <p className="component-section-description">
@@ -752,7 +787,7 @@ function ElevationPage() {
   )
 }
 
-function MotionPage() {
+function MotionPage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
       <PageHeading
@@ -766,7 +801,7 @@ function MotionPage() {
         { id: 'reduced-motion-heading', label: 'Reduced motion' },
       ]} />
       <section aria-labelledby="motion-timing-heading" className="component-section">
-        <h2 id="motion-timing-heading" className="mz-text-heading-medium">
+        <h2 id="motion-timing-heading" className="mz-text-heading-md">
           Timing and easing
         </h2>
         <p className="component-section-description">
@@ -796,7 +831,7 @@ function MotionPage() {
         </div>
       </section>
       <section aria-labelledby="motion-tokens-heading" className="component-section">
-        <h2 id="motion-tokens-heading" className="mz-text-heading-medium">
+        <h2 id="motion-tokens-heading" className="mz-text-heading-md">
           CSS tokens
         </h2>
         <p className="component-section-description">
@@ -813,7 +848,7 @@ function MotionPage() {
               {motionTokenDefinitions.map((motionToken) => (
                 <Row id={motionToken.token} key={motionToken.token}>
                   <Cell><code>{motionToken.token}</code></Cell>
-                  <Cell><code>{motionToken.value}</code></Cell>
+                  <Cell><TokenValue token={motionToken.token} refreshKey={refreshKey} /></Cell>
                   <Cell>{motionToken.description}</Cell>
                 </Row>
               ))}
@@ -822,7 +857,7 @@ function MotionPage() {
         </div>
       </section>
       <section aria-labelledby="motion-patterns-heading" className="component-section">
-        <h2 id="motion-patterns-heading" className="mz-text-heading-medium">
+        <h2 id="motion-patterns-heading" className="mz-text-heading-md">
           Current motion patterns
         </h2>
         <p className="component-section-description">
@@ -852,7 +887,7 @@ function MotionPage() {
         </div>
       </section>
       <section aria-labelledby="reduced-motion-heading" className="component-section">
-        <h2 id="reduced-motion-heading" className="mz-text-heading-medium">
+        <h2 id="reduced-motion-heading" className="mz-text-heading-md">
           Reduced motion
         </h2>
         <p className="component-section-description">
@@ -878,7 +913,7 @@ function CheckboxPage() {
         { id: 'checkbox-states-heading', label: 'States' },
       ]} />
       <section aria-labelledby="checkbox-example-heading" className="component-section">
-        <h2 id="checkbox-example-heading" className="mz-text-heading-medium">Example</h2>
+        <h2 id="checkbox-example-heading" className="mz-text-heading-md">Example</h2>
         <p className="component-section-description">
           Select or clear the <code>Checkbox</code> using its label or the Space key when focused.
         </p>
@@ -887,7 +922,7 @@ function CheckboxPage() {
         </div>
       </section>
       <section aria-labelledby="checkbox-states-heading" className="component-section">
-        <h2 id="checkbox-states-heading" className="mz-text-heading-medium">
+        <h2 id="checkbox-states-heading" className="mz-text-heading-md">
           States
         </h2>
         <div className="documentation-table documentation-comparison-table">
@@ -935,7 +970,7 @@ function LinkPage() {
         { id: 'link-content-heading', label: 'Content' },
       ]} />
       <section aria-labelledby="link-example-heading" className="component-section">
-        <h2 id="link-example-heading" className="mz-text-heading-medium">Example</h2>
+        <h2 id="link-example-heading" className="mz-text-heading-md">Example</h2>
         <p className="component-section-description">
           This <code>Link</code> uses an <code>href</code> to navigate to another section on this page.
         </p>
@@ -944,7 +979,7 @@ function LinkPage() {
         </div>
       </section>
       <section aria-labelledby="link-states-heading" className="component-section">
-        <h2 id="link-states-heading" className="mz-text-heading-medium">
+        <h2 id="link-states-heading" className="mz-text-heading-md">
           States
         </h2>
         <div className="documentation-table documentation-comparison-table">
@@ -980,7 +1015,7 @@ function LinkPage() {
         </div>
       </section>
       <section aria-labelledby="link-content-heading" className="component-section">
-        <h2 id="link-content-heading" className="mz-text-heading-medium">
+        <h2 id="link-content-heading" className="mz-text-heading-md">
           Content
         </h2>
         <p className="component-section-description">
@@ -1038,7 +1073,7 @@ function RadioGroupPage() {
         { id: 'radio-group-references-heading', label: 'Related references' },
       ]} />
       <section aria-labelledby="radio-group-example-heading" className="component-section">
-        <h2 id="radio-group-example-heading" className="mz-text-heading-medium">
+        <h2 id="radio-group-example-heading" className="mz-text-heading-md">
           Example
         </h2>
         <p className="component-section-description">
@@ -1074,7 +1109,7 @@ function RadioGroupPage() {
         </div>
       </section>
       <section aria-labelledby="radio-group-anatomy-heading" className="component-section">
-        <h2 id="radio-group-anatomy-heading" className="mz-text-heading-medium">Anatomy</h2>
+        <h2 id="radio-group-anatomy-heading" className="mz-text-heading-md">Anatomy</h2>
         <p className="component-section-description">
           Compose these exported parts inside a <code>RadioGroup</code>. Each <code>RadioField</code> supplies the value
           for its <code>RadioButton</code>; descriptions and validation feedback are optional.
@@ -1097,7 +1132,7 @@ function RadioGroupPage() {
         </div>
       </section>
       <section aria-labelledby="radio-group-states-heading" className="component-section">
-        <h2 id="radio-group-states-heading" className="mz-text-heading-medium">States</h2>
+        <h2 id="radio-group-states-heading" className="mz-text-heading-md">States</h2>
         <p className="component-section-description">
           Selection belongs to the group. Pointer and keyboard states follow the <code>RadioButton</code>
           being used. Try selection, hover and keyboard focus in the Example above; read-only
@@ -1125,7 +1160,7 @@ function RadioGroupPage() {
           </Table>
         </div>
         <section aria-labelledby="radio-group-read-only-heading">
-          <h3 id="radio-group-read-only-heading" className="mz-text-heading-small">Read only</h3>
+          <h3 id="radio-group-read-only-heading" className="mz-text-heading-sm">Read only</h3>
           <p className="component-section-description">The selected option can receive focus, but the selection cannot change.</p>
           <div className="component-example">
             <RadioGroup defaultValue="option-a" isReadOnly>
@@ -1136,7 +1171,7 @@ function RadioGroupPage() {
           </div>
         </section>
         <section aria-labelledby="radio-group-validation-heading">
-          <h3 id="radio-group-validation-heading" className="mz-text-heading-small">Validation</h3>
+          <h3 id="radio-group-validation-heading" className="mz-text-heading-sm">Validation</h3>
           <p className="component-section-description">This required group starts invalid. Select an option to clear the validation feedback.</p>
           <div className="component-example">
             <RadioGroup value={validationValue} onChange={setValidationValue} isRequired isInvalid={validationValue === null} validationBehavior="aria">
@@ -1150,7 +1185,7 @@ function RadioGroupPage() {
         </section>
       </section>
       <section aria-labelledby="radio-group-usage-heading" className="component-section">
-        <h2 id="radio-group-usage-heading" className="mz-text-heading-medium">Usage and accessibility</h2>
+        <h2 id="radio-group-usage-heading" className="mz-text-heading-md">Usage and accessibility</h2>
         <p className="component-section-description">
           Use a visible <code>Label</code> for the group and a clear label inside each <code>RadioButton</code>. Give each
           <code>RadioField</code> a unique <code>value</code>. Use <code>defaultValue</code> for an initial
@@ -1163,7 +1198,7 @@ function RadioGroupPage() {
         </p>
       </section>
       <section aria-labelledby="radio-group-tokens-heading" className="component-section">
-        <h2 id="radio-group-tokens-heading" className="mz-text-heading-medium">CSS tokens</h2>
+        <h2 id="radio-group-tokens-heading" className="mz-text-heading-md">CSS tokens</h2>
         <p className="component-section-description">
           These component tokens control layout and indicator appearance. <code>RadioGroup</code> also uses
           shared typography, text, focus colour and disabled-opacity tokens.
@@ -1186,7 +1221,7 @@ function RadioGroupPage() {
         </div>
       </section>
       <section aria-labelledby="radio-group-references-heading" className="component-section">
-        <h2 id="radio-group-references-heading" className="mz-text-heading-medium">Related references</h2>
+        <h2 id="radio-group-references-heading" className="mz-text-heading-md">Related references</h2>
         <ul className="component-reference-links">
           <li>
             <Link href="https://react-aria.adobe.com/RadioGroup" target="_blank" rel="noreferrer"
@@ -1215,7 +1250,7 @@ function DisclosurePage() {
         { id: 'disclosure-group-heading', label: 'DisclosureGroup' },
       ]} />
       <section aria-labelledby="disclosure-basic-heading" className="component-section">
-        <h2 id="disclosure-basic-heading" className="mz-text-heading-medium">
+        <h2 id="disclosure-basic-heading" className="mz-text-heading-md">
           Example
         </h2>
         <p className="component-section-description">
@@ -1231,7 +1266,7 @@ function DisclosurePage() {
         </div>
       </section>
       <section aria-labelledby="disclosure-group-heading" className="component-section">
-        <h2 id="disclosure-group-heading" className="mz-text-heading-medium">
+        <h2 id="disclosure-group-heading" className="mz-text-heading-md">
           DisclosureGroup
         </h2>
         <p className="component-section-description">
@@ -1295,7 +1330,7 @@ function TablePage() {
         { id: 'table-responsive-heading', label: 'Responsive behaviour' },
       ]} />
       <section aria-labelledby="table-selection-heading" className="component-section">
-        <h2 id="table-selection-heading" className="mz-text-heading-medium">
+        <h2 id="table-selection-heading" className="mz-text-heading-md">
           Example
         </h2>
         <p className="component-section-description">
@@ -1304,7 +1339,7 @@ function TablePage() {
         </p>
         <div className="table-example-group">
           <div>
-            <h3 id="table-single-selection-heading" className="mz-text-heading-small">Single selection</h3>
+            <h3 id="table-single-selection-heading" className="mz-text-heading-sm">Single selection</h3>
             <p className="component-section-description">Row C is disabled in this example.</p>
             <div className="component-example documentation-table">
               <Table
@@ -1333,7 +1368,7 @@ function TablePage() {
             </div>
           </div>
           <div>
-            <h3 id="table-multiple-selection-heading" className="mz-text-heading-small">Multiple selection</h3>
+            <h3 id="table-multiple-selection-heading" className="mz-text-heading-sm">Multiple selection</h3>
             <div className="component-example documentation-table">
               <Table
                 aria-label="Table with multiple row selection"
@@ -1362,7 +1397,7 @@ function TablePage() {
         </div>
       </section>
       <section aria-labelledby="table-anatomy-heading" className="component-section">
-        <h2 id="table-anatomy-heading" className="mz-text-heading-medium">Anatomy</h2>
+        <h2 id="table-anatomy-heading" className="mz-text-heading-md">Anatomy</h2>
         <p className="component-section-description">
           A table is assembled from six React Aria components. Selection and sorting are optional.
         </p>
@@ -1384,7 +1419,7 @@ function TablePage() {
         </div>
       </section>
       <section aria-labelledby="table-sorting-heading" className="component-section">
-        <h2 id="table-sorting-heading" className="mz-text-heading-medium">
+        <h2 id="table-sorting-heading" className="mz-text-heading-md">
           Sorting
         </h2>
         <p className="component-section-description">Select a column heading to change the order of its rows.</p>
@@ -1424,7 +1459,7 @@ function TablePage() {
         </div>
       </section>
       <section aria-labelledby="table-empty-heading" className="component-section">
-        <h2 id="table-empty-heading" className="mz-text-heading-medium">
+        <h2 id="table-empty-heading" className="mz-text-heading-md">
           Empty state
         </h2>
         <p className="component-section-description">Use an empty state to explain clearly when the table has no rows to display.</p>
@@ -1440,7 +1475,7 @@ function TablePage() {
         </div>
       </section>
       <section aria-labelledby="table-responsive-heading" className="component-section">
-        <h2 id="table-responsive-heading" className="mz-text-heading-medium">
+        <h2 id="table-responsive-heading" className="mz-text-heading-md">
           Responsive behaviour
         </h2>
         <p className="component-section-description">
@@ -1487,7 +1522,7 @@ function BadgePage() {
         { id: 'badge-variants-heading', label: 'Variants' },
       ]} />
       <section aria-labelledby="badge-examples-heading" className="component-section">
-        <h2 id="badge-examples-heading" className="mz-text-heading-medium">
+        <h2 id="badge-examples-heading" className="mz-text-heading-md">
           Example
         </h2>
         <p className="component-section-description">
@@ -1498,7 +1533,7 @@ function BadgePage() {
         </div>
       </section>
       <section aria-labelledby="badge-variants-heading" className="component-section">
-        <h2 id="badge-variants-heading" className="mz-text-heading-medium">Variants</h2>
+        <h2 id="badge-variants-heading" className="mz-text-heading-md">Variants</h2>
         <p className="component-section-description">
           The <code>variant</code> prop selects a core or semantic colour treatment.
         </p>
@@ -1545,7 +1580,7 @@ function ButtonPage() {
         { id: 'button-references-heading', label: 'Related references' },
       ]} />
       <section aria-labelledby="button-example-heading" className="component-section">
-        <h2 id="button-example-heading" className="mz-text-heading-medium">Example</h2>
+        <h2 id="button-example-heading" className="mz-text-heading-md">Example</h2>
         <p className="component-section-description">
           <code>Button</code> defaults to the primary variant and medium size. Activate this example to
           see its <code>onPress</code> handler update the count.
@@ -1556,7 +1591,7 @@ function ButtonPage() {
         </div>
       </section>
       <section aria-labelledby="button-content-heading" className="component-section">
-        <h2 id="button-content-heading" className="mz-text-heading-medium">
+        <h2 id="button-content-heading" className="mz-text-heading-md">
           Anatomy
         </h2>
         <p className="component-section-description">
@@ -1572,7 +1607,7 @@ function ButtonPage() {
             </TableBody>
           </Table>
         </div>
-        <h3 id="button-content-examples-heading" className="mz-text-heading-small">Content</h3>
+        <h3 id="button-content-examples-heading" className="mz-text-heading-sm">Content</h3>
         <div className="documentation-table documentation-comparison-table">
           <Table aria-label="Button content">
             <TableHeader>
@@ -1645,7 +1680,7 @@ function ButtonPage() {
           </Table>
         </div>
       <section aria-labelledby="button-sizes-heading">
-        <h3 id="button-sizes-heading" className="mz-text-heading-small">
+        <h3 id="button-sizes-heading" className="mz-text-heading-sm">
           Sizes
         </h3>
         <div className="documentation-table documentation-comparison-table">
@@ -1673,7 +1708,7 @@ function ButtonPage() {
       </section>
       </section>
       <section aria-labelledby="button-variants-heading" className="component-section">
-        <h2 id="button-variants-heading" className="mz-text-heading-medium">
+        <h2 id="button-variants-heading" className="mz-text-heading-md">
           States
         </h2>
         <div className="documentation-table">
@@ -1691,11 +1726,11 @@ function ButtonPage() {
         </div>
       </section>
       <section aria-labelledby="button-variant-examples-heading" className="component-section">
-        <h2 id="button-variant-examples-heading" className="mz-text-heading-medium">Hierarchy</h2>
+        <h2 id="button-variant-examples-heading" className="mz-text-heading-md">Hierarchy</h2>
         <p className="component-section-description">
           Button hierarchy communicates the relative importance of actions.
         </p>
-        <ul className="component-section-description mz-text-body-medium">
+        <ul className="component-section-description mz-text-body-md">
           <li><strong>Primary:</strong> emphasises the main action.</li>
           <li><strong>Secondary:</strong> supports the main action.</li>
           <li><strong>Tertiary:</strong> gives lower-priority actions less visual emphasis.</li>
@@ -1735,7 +1770,7 @@ function ButtonPage() {
         </div>
       </section>
       <section aria-labelledby="button-usage-heading" className="component-section">
-        <h2 id="button-usage-heading" className="mz-text-heading-medium">Usage and accessibility</h2>
+        <h2 id="button-usage-heading" className="mz-text-heading-md">Usage and accessibility</h2>
         <p className="component-section-description">
           Use <code>Button</code> for an action and <code>Link</code> for navigation. Handle activation with
           {' '}<code>onPress</code>; React Aria supports pointer, touch, Enter and Space activation.
@@ -1749,7 +1784,7 @@ function ButtonPage() {
         </p>
       </section>
       <section aria-labelledby="button-tokens-heading" className="component-section">
-        <h2 id="button-tokens-heading" className="mz-text-heading-medium">
+        <h2 id="button-tokens-heading" className="mz-text-heading-md">
           CSS tokens
         </h2>
         <p className="component-section-description">
@@ -1775,7 +1810,7 @@ function ButtonPage() {
         </div>
       </section>
       <section aria-labelledby="button-references-heading" className="component-section">
-        <h2 id="button-references-heading" className="mz-text-heading-medium">Related references</h2>
+        <h2 id="button-references-heading" className="mz-text-heading-md">Related references</h2>
         <ul className="component-reference-links">
           <li>
             <Link href="https://react-aria.adobe.com/Button" target="_blank" rel="noreferrer"
@@ -1799,7 +1834,7 @@ function IconsPage() {
         title="Icons"
       />
       <section aria-labelledby="icons-heading" className="component-section">
-        <h2 id="icons-heading" className="mz-text-heading-medium">Icon set</h2>
+        <h2 id="icons-heading" className="mz-text-heading-md">Icon set</h2>
         <ul className="icon-grid">
           {iconDefinitions.map(({ componentName, icon, name }) => (
             <li key={componentName}>
@@ -1821,7 +1856,7 @@ function EmptyPage({ page }: { page: SitePageDefinition }) {
         reactAriaPage={page.reactAriaPage}
         title={page.label}
       />
-      <p className="mz-text-body-medium empty-page-status">Not implemented</p>
+      <p className="mz-text-body-md empty-page-status">Not implemented</p>
     </>
   )
 }
@@ -1843,7 +1878,7 @@ function ToggleButtonPage() {
         ] },
       ]} />
       <section aria-labelledby="toggle-button-example-heading" className="component-section">
-        <h2 id="toggle-button-example-heading" className="mz-text-heading-medium">Example</h2>
+        <h2 id="toggle-button-example-heading" className="mz-text-heading-md">Example</h2>
         <p className="component-section-description">
           Press the <code>ToggleButton</code> to select it, then press it again to clear the selection.
         </p>
@@ -1852,7 +1887,7 @@ function ToggleButtonPage() {
         </div>
       </section>
       <section aria-labelledby="toggle-button-states-heading" className="component-section">
-        <h2 id="toggle-button-states-heading" className="mz-text-heading-medium">
+        <h2 id="toggle-button-states-heading" className="mz-text-heading-md">
           States
         </h2>
         <div className="documentation-table documentation-comparison-table">
@@ -1879,7 +1914,7 @@ function ToggleButtonPage() {
         </div>
       </section>
       <section aria-labelledby="toggle-button-group-heading" className="component-section">
-        <h2 id="toggle-button-group-heading" className="mz-text-heading-medium">
+        <h2 id="toggle-button-group-heading" className="mz-text-heading-md">
           Toggle button group
         </h2>
         <p className="component-section-description">
@@ -1898,7 +1933,7 @@ function ToggleButtonPage() {
         </Link>
         <div className="toggle-button-group-examples">
           <section aria-labelledby="single-selection-heading">
-            <h3 id="single-selection-heading" className="mz-text-heading-small">
+            <h3 id="single-selection-heading" className="mz-text-heading-sm">
               Single selection
             </h3>
             <div className="component-example">
@@ -1915,7 +1950,7 @@ function ToggleButtonPage() {
             </div>
           </section>
           <section aria-labelledby="multiple-selection-heading">
-            <h3 id="multiple-selection-heading" className="mz-text-heading-small">
+            <h3 id="multiple-selection-heading" className="mz-text-heading-sm">
               Multiple selection
             </h3>
             <div className="component-example">
@@ -1952,7 +1987,7 @@ function NavigationTreePage() {
         title="NavigationTree"
       />
       <section aria-labelledby="navigation-tree-example-heading" className="component-section">
-        <h2 id="navigation-tree-example-heading" className="mz-text-heading-medium">
+        <h2 id="navigation-tree-example-heading" className="mz-text-heading-md">
           Example
         </h2>
         <p className="component-section-description">
@@ -2078,12 +2113,12 @@ function BreadcrumbsPage() {
         title="Breadcrumbs"
       />
       <section aria-labelledby="breadcrumbs-example-heading" className="component-section">
-        <h2 id="breadcrumbs-example-heading" className="mz-text-heading-medium">
+        <h2 id="breadcrumbs-example-heading" className="mz-text-heading-md">
           Example
         </h2>
         <div className="component-example breadcrumbs-examples">
           <div>
-            <h3 className="mz-text-heading-small">Hierarchy</h3>
+            <h3 className="mz-text-heading-sm">Hierarchy</h3>
             <p className="component-section-description">
               Earlier levels are links. The final item identifies the current page and is not a
               link.
@@ -2103,7 +2138,7 @@ function BreadcrumbsPage() {
             </nav>
           </div>
           <div>
-            <h3 className="mz-text-heading-small">Disabled</h3>
+            <h3 className="mz-text-heading-sm">Disabled</h3>
             <p className="component-section-description">
               A disabled <code>Breadcrumbs</code> list shows the hierarchy but none of its links can be used.
             </p>
@@ -2158,7 +2193,7 @@ function TableOfContentsPage() {
         { id: 'table-of-contents-references-heading', label: 'Related references' },
       ]} />
       <section aria-labelledby="table-of-contents-example-heading" className="component-section">
-        <h2 id="table-of-contents-example-heading" className="mz-text-heading-medium">Example</h2>
+        <h2 id="table-of-contents-example-heading" className="mz-text-heading-md">Example</h2>
         <p className="component-section-description">
           Parent links lead to sections; indented child links lead to their subsections.
           All links stay visible. Try a child link in the example to jump to its heading.
@@ -2171,11 +2206,11 @@ function TableOfContentsPage() {
           />
           {exampleSections.map(({ id, label, children }) => (
             <section aria-labelledby={id} key={id}>
-              <h3 className="mz-text-heading-small" id={id}>{label}</h3>
+              <h3 className="mz-text-heading-sm" id={id}>{label}</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               {children.map((child) => (
                 <section aria-labelledby={child.id} key={child.id}>
-                  <h4 className="mz-text-title-medium" id={child.id}>{child.label}</h4>
+                  <h4 className="mz-text-title-md" id={child.id}>{child.label}</h4>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                 </section>
               ))}
@@ -2189,7 +2224,7 @@ function TableOfContentsPage() {
         </p>
       </section>
       <section aria-labelledby="table-of-contents-props-heading" className="component-section">
-        <h2 id="table-of-contents-props-heading" className="mz-text-heading-medium">Props</h2>
+        <h2 id="table-of-contents-props-heading" className="mz-text-heading-md">Props</h2>
         <div className="documentation-table documentation-props-table">
           <Table aria-label="Table of Contents props">
             <TableHeader>
@@ -2223,7 +2258,7 @@ function TableOfContentsPage() {
         </div>
       </section>
       <section aria-labelledby="table-of-contents-usage-heading" className="component-section">
-        <h2 id="table-of-contents-usage-heading" className="mz-text-heading-medium">Usage and accessibility</h2>
+        <h2 id="table-of-contents-usage-heading" className="mz-text-heading-md">Usage and accessibility</h2>
         <p className="component-section-description">
           Place the component after the page introduction. Match link labels to the section
           headings and give each destination a unique ID. Nest children to match the heading
@@ -2237,7 +2272,7 @@ function TableOfContentsPage() {
         </p>
       </section>
       <section aria-labelledby="table-of-contents-references-heading" className="component-section">
-        <h2 id="table-of-contents-references-heading" className="mz-text-heading-medium">Related references</h2>
+        <h2 id="table-of-contents-references-heading" className="mz-text-heading-md">Related references</h2>
         <ul className="component-reference-links">
           <li><Link href="/link">Link — the underlying interactive component</Link></li>
           <li><Link href="/button">Button — documentation example</Link></li>
@@ -2255,7 +2290,11 @@ function ImplementedPage({ page, refreshKey }: { page: SitePageDefinition; refre
     case 'color':
       return <ColorPage refreshKey={refreshKey} />
     case 'typography':
-      return <TypographyPage refreshKey={refreshKey} />
+      return <TypographyPage />
+    case 'text-styles':
+      return <TextStylesPage refreshKey={refreshKey} />
+    case 'prose':
+      return <ProsePage refreshKey={refreshKey} />
     case 'spacing':
       return <SpacingPage refreshKey={refreshKey} />
     case 'shape':
@@ -2263,7 +2302,7 @@ function ImplementedPage({ page, refreshKey }: { page: SitePageDefinition; refre
     case 'elevation':
       return <ElevationPage />
     case 'motion':
-      return <MotionPage />
+      return <MotionPage refreshKey={refreshKey} />
     case 'icons':
       return <IconsPage />
     case 'badge':

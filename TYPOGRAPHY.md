@@ -5,19 +5,23 @@ content websites and marketing pages. Its default Heading and Body roles use
 the same system-font stack and require no font download. Product themes can
 replace either family without changing the named styles.
 
-The ramp has five roles. Each role has large, medium and small styles:
+The ramp has five roles. Each role has `lg`, `md` and `sm` styles:
 
 ```text
-display-large    display-medium    display-small
-heading-large    heading-medium    heading-small
-title-large      title-medium      title-small
-body-large       body-medium       body-small
-label-large      label-medium      label-small
+display-lg    display-md    display-sm
+heading-lg    heading-md    heading-sm
+title-lg      title-md      title-sm
+body-lg       body-md       body-sm
+label-lg      label-md      label-sm
 ```
 
 Public typography classes begin with `mz-`, which is short for Mezzanine. The
 namespace identifies the library that supplied the class and helps prevent a
 product's own class names from clashing with it.
+
+Size suffixes now match the tokens: `small` → `sm`, `medium` → `md`, and
+`large` → `lg`. This is a breaking class-name change; update consuming apps.
+The previous class names are not retained as aliases. Visual values are unchanged.
 
 These are visual styles, not HTML elements. A heading's HTML level still comes
 from its position in the document outline.
@@ -33,8 +37,8 @@ from its position in the document outline.
 | Label | Controls, navigation, tabs, badges and compact metadata |
 
 The size word describes prominence within the role. It does not create a
-single ladder across all roles. For example, `title-large` can be smaller than
-`heading-small` because component titles and page headings do different jobs.
+single ladder across all roles. For example, `title-lg` can be smaller than
+`heading-sm` because component titles and page headings do different jobs.
 
 ## Default styles
 
@@ -43,23 +47,23 @@ values without changing the style names.
 
 | Style | Class | Default size | Default family and weight |
 | --- | --- | ---: | --- |
-| Display large | `mz-text-display-large` | 72px | System, regular |
-| Display medium | `mz-text-display-medium` | 60px | System, regular |
-| Display small | `mz-text-display-small` | 48px | System, regular |
-| Heading large | `mz-text-heading-large` | 36px | System, regular |
-| Heading medium | `mz-text-heading-medium` | 30px | System, regular |
-| Heading small | `mz-text-heading-small` | 24px | System, regular |
-| Title large | `mz-text-title-large` | 20px | System, semibold |
-| Title medium | `mz-text-title-medium` | 18px | System, semibold |
-| Title small | `mz-text-title-small` | 16px | System, semibold |
-| Body large | `mz-text-body-large` | 18px | System, regular |
-| Body medium | `mz-text-body-medium` | 16px | System, regular |
-| Body small | `mz-text-body-small` | 14px | System, regular |
-| Label large | `mz-text-label-large` | 14px | System, semibold |
-| Label medium | `mz-text-label-medium` | 12px | System, semibold |
-| Label small | `mz-text-label-small` | 11px | System, semibold |
+| Display large | `mz-text-display-lg` | 72px | System, regular |
+| Display medium | `mz-text-display-md` | 60px | System, regular |
+| Display small | `mz-text-display-sm` | 48px | System, regular |
+| Heading large | `mz-text-heading-lg` | 36px | System, regular |
+| Heading medium | `mz-text-heading-md` | 30px | System, regular |
+| Heading small | `mz-text-heading-sm` | 24px | System, regular |
+| Title large | `mz-text-title-lg` | 20px | System, semibold |
+| Title medium | `mz-text-title-md` | 18px | System, semibold |
+| Title small | `mz-text-title-sm` | 16px | System, semibold |
+| Body large | `mz-text-body-lg` | 18px | System, regular |
+| Body medium | `mz-text-body-md` | 16px | System, regular |
+| Body small | `mz-text-body-sm` | 14px | System, regular |
+| Label large | `mz-text-label-lg` | 14px | System, semibold |
+| Label medium | `mz-text-label-md` | 12px | System, semibold |
+| Label small | `mz-text-label-sm` | 11px | System, semibold |
 
-`body-medium` is the default style for normal reading. `label-small` is only
+`body-md` is the default style for normal reading. `label-sm` is only
 for brief, supplementary text in space-constrained components. Important
 instructions, errors and content required to complete a task must use a larger
 style.
@@ -70,8 +74,8 @@ Importing `@decocode/mezzanine` or `@decocode/mezzanine/styles.css` makes the
 classes available:
 
 ```tsx
-<h1 className="mz-text-heading-large">Account settings</h1>
-<p className="mz-text-body-medium">Manage your profile and security.</p>
+<h1 className="mz-text-heading-lg">Account settings</h1>
+<p className="mz-text-body-md">Manage your profile and security.</p>
 ```
 
 The class controls typography without adding colour or container layout.
@@ -94,13 +98,20 @@ when text size changes. CSS also accepts pixel values, but they are not
 Mezzanine's convention.
 
 Each named text style applies its font size and paired
-`--line-height-{role}-{size}` token automatically. Use `mz-text-body-medium`
+`--line-height-{role}-{size}` token automatically. Use `mz-text-body-md`
 for normal reading; its `--line-height-body-md` default is `1.5`.
 Other styles, including headings and labels, use their own paired values.
 There is no need to set line height separately. The Typography showcase
-reads the current body-medium value from CSS.
+reads the current body-md value from CSS.
 
 ## Lists
+
+The library supplies body-styled lists and inline code, not a complete prose
+container. The documentation site's section spacing and reading widths are
+site-only layout rules; importing Mezzanine does not apply them to an app.
+The site uses `--space-12` between major sections, `--space-8` before
+subsections, and `--space-4` between headings, copy and examples and inside
+example frames.
 
 Unordered lists use bullet points; ordered lists use numbers. Both share the
 same body typography and spacing.
@@ -108,8 +119,8 @@ The showcase constrains body-styled prose lists to a reading width of `65ch`.
 List markers sit outside the text so wrapped lines align with the item text,
 not with the marker.
 
-For prose lists, apply `mz-text-body-large`, `mz-text-body-medium` or
-`mz-text-body-small` directly to a semantic `ul` or `ol`:
+For prose lists, apply `mz-text-body-lg`, `mz-text-body-md` or
+`mz-text-body-sm` directly to a semantic `ul` or `ol`:
 
 - List items inherit the chosen body style's line height.
 - Adjacent items have `--space-2` between them (currently `0.5rem`).
@@ -120,12 +131,12 @@ For prose lists, apply `mz-text-body-large`, `mz-text-body-medium` or
 - Avoid fixed-height prose containers so enlarged or re-spaced text can reflow.
 
 ```tsx
-<ul className="mz-text-body-medium">
+<ul className="mz-text-body-md">
   <li>Lorem ipsum dolor sit amet.</li>
   <li>Consectetur adipiscing elit.</li>
 </ul>
 
-<ol className="mz-text-body-medium">
+<ol className="mz-text-body-md">
   <li>Lorem ipsum dolor sit amet.</li>
   <li>Consectetur adipiscing elit.</li>
 </ol>
@@ -145,23 +156,29 @@ prose.
 Inline code is not a general emphasis style. Use `strong` or `em` when the text
 is important or stressed but is not technical code.
 
+Code inside `pre` retains the monospace font but does not receive the inline
+background, padding, radius, wrapping, font size or line-height treatment.
+Code-block layout belongs to the consuming app. This corrects the previous
+global `code` rule: consumers that relied on its box styling inside `pre`
+must now supply their own code-block styles.
+
 ## Pattern mappings
 
 Common patterns should reuse the foundation instead of creating new sizes:
 
 | Pattern | Start with |
 | --- | --- |
-| Page title | `heading-large` |
-| Section heading | `heading-medium` |
-| Component heading | `title-medium` |
-| Introductory copy | `body-large` |
-| Supporting text or validation message | `body-small` |
-| Image caption | `body-small` |
-| Button, tab or form label | `label-large` |
-| Badge or compact metadata | `label-medium` or, when necessary, `label-small` |
-| Section label | `label-medium` |
-| Quote | `body-large` or `heading-small` |
-| Metric | `display-small` |
+| Page title | `heading-lg` |
+| Section heading | `heading-md` |
+| Component heading | `title-md` |
+| Introductory copy | `body-lg` |
+| Supporting text or validation message | `body-sm` |
+| Image caption | `body-sm` |
+| Button, tab or form label | `label-lg` |
+| Badge or compact metadata | `label-md` or, when necessary, `label-sm` |
+| Section label | `label-md` |
+| Quote | `body-lg` or `heading-sm` |
+| Metric | `display-sm` |
 | Inline code | Semantic `<code>` element |
 
 A pattern should become its own shared style only after more than one product

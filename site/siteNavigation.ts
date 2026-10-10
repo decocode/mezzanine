@@ -34,9 +34,19 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
   {
     id: 'foundations',
     label: 'Foundations',
+    groups: [
+      {
+        id: 'typography',
+        label: 'Typography',
+        path: '/typography',
+        pages: [
+          { id: 'text-styles', label: 'Text styles', path: '/typography/text-styles', status: 'implemented' },
+          { id: 'prose', label: 'Prose', path: '/typography/prose', status: 'implemented' },
+        ],
+      },
+    ],
     pages: [
       { id: 'color', label: 'Color', path: '/color', status: 'implemented' },
-      { id: 'typography', label: 'Typography', path: '/typography', status: 'implemented' },
       { id: 'elevation', label: 'Elevation', path: '/elevation', status: 'implemented' },
       { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
       { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
@@ -111,6 +121,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
 
 function collectSitePages(groups: SiteNavigationGroup[]): SitePageDefinition[] {
   return groups.flatMap((group) => [
+    ...(group.path ? [{ id: group.id, label: group.label, path: group.path, status: 'implemented' as const }] : []),
     ...collectSitePages(group.groups ?? []),
     ...group.pages,
   ])
@@ -135,7 +146,7 @@ export function findSiteNavigationGroups(
   groups: SiteNavigationGroup[] = siteNavigationGroups,
 ): SiteNavigationGroup[] {
   for (const group of groups) {
-    if (group.pages.some((page) => page.id === pageId)) return [group]
+    if (group.id === pageId || group.pages.some((page) => page.id === pageId)) return [group]
     const childGroups = findSiteNavigationGroups(pageId, group.groups ?? [])
     if (childGroups.length > 0) return [group, ...childGroups]
   }
