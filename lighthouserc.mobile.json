@@ -9,12 +9,20 @@
         "http://localhost/introduction",
         "http://localhost/color",
         "http://localhost/typography",
+        "http://localhost/shape",
+        "http://localhost/spacing",
         "http://localhost/elevation",
         "http://localhost/motion",
+        "http://localhost/badge",
         "http://localhost/table",
         "http://localhost/button",
+        "http://localhost/dialog",
         "http://localhost/breadcrumbs",
-        "http://localhost/navigation-tree"
+        "http://localhost/navigation-tree",
+        "http://localhost/table-of-contents",
+        "http://localhost/tabs",
+        "http://localhost/pagination",
+        "http://localhost/menu"
       ],
       "settings": {
         "onlyCategories": ["performance"],

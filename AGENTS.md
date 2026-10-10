@@ -31,6 +31,8 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Native semantic HTML remains appropriate for static page structure and content when React Aria does not provide a corresponding component.
 - Display token values from the implemented token source wherever possible. Do not manually duplicate values in showcase code.
 - Neutral sample text or data may be used to demonstrate an existing component, but it must not imply that an unimplemented feature, rule, or variant exists.
+- Prefer descriptive teaching labels in showcase examples, such as `Toggle A`, `Column A`, `Row A`, and `Current page`, so the component anatomy and state are easy to identify. Use realistic product copy only when that content is itself necessary to demonstrate the agreed behaviour.
+- When React Aria names a component part or concept, use that exact term in teaching labels and explanatory copy. Do not replace it with plainer product language: the showcase is a working reference that helps the user learn the React Aria code vocabulary.
 - If the showcase or written documentation disagrees with the implemented public library, treat the library as authoritative and correct the documentation.
 - An implemented foundation or component may be presented as documentation only after it has been agreed, implemented, exported where applicable, and checked. An approved empty IA destination is not evidence that its named subject exists in Mezzanine.
 

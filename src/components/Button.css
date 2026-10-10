@@ -21,39 +21,39 @@
 }
 
 .react-aria-Button[data-size='sm'] {
-  --button-min-height: var(--button-small-min-height);
-  --button-padding-block: var(--button-small-padding-block);
-  --button-padding-inline: var(--button-small-padding-inline);
-  --button-font-size: var(--button-small-font-size);
-  --button-line-height: var(--button-small-line-height);
-  --button-icon-size: var(--button-small-icon-size);
+  --button-min-height: var(--button-sm-min-height);
+  --button-padding-block: var(--button-sm-padding-block);
+  --button-padding-inline: var(--button-sm-padding-inline);
+  --button-font-size: var(--button-sm-font-size);
+  --button-line-height: var(--button-sm-line-height);
+  --button-icon-size: var(--button-sm-icon-size);
 }
 
 .react-aria-Button[data-size='md'] {
-  --button-min-height: var(--button-medium-min-height);
-  --button-padding-block: var(--button-medium-padding-block);
-  --button-padding-inline: var(--button-medium-padding-inline);
-  --button-font-size: var(--button-medium-font-size);
-  --button-line-height: var(--button-medium-line-height);
-  --button-icon-size: var(--button-medium-icon-size);
+  --button-min-height: var(--button-md-min-height);
+  --button-padding-block: var(--button-md-padding-block);
+  --button-padding-inline: var(--button-md-padding-inline);
+  --button-font-size: var(--button-md-font-size);
+  --button-line-height: var(--button-md-line-height);
+  --button-icon-size: var(--button-md-icon-size);
 }
 
 .react-aria-Button[data-size='lg'] {
-  --button-min-height: var(--button-large-min-height);
-  --button-padding-block: var(--button-large-padding-block);
-  --button-padding-inline: var(--button-large-padding-inline);
-  --button-font-size: var(--button-large-font-size);
-  --button-line-height: var(--button-large-line-height);
-  --button-icon-size: var(--button-large-icon-size);
+  --button-min-height: var(--button-lg-min-height);
+  --button-padding-block: var(--button-lg-padding-block);
+  --button-padding-inline: var(--button-lg-padding-inline);
+  --button-font-size: var(--button-lg-font-size);
+  --button-line-height: var(--button-lg-line-height);
+  --button-icon-size: var(--button-lg-icon-size);
 }
 
 .react-aria-Button[data-size='xl'] {
-  --button-min-height: var(--button-extra-large-min-height);
-  --button-padding-block: var(--button-extra-large-padding-block);
-  --button-padding-inline: var(--button-extra-large-padding-inline);
-  --button-font-size: var(--button-extra-large-font-size);
-  --button-line-height: var(--button-extra-large-line-height);
-  --button-icon-size: var(--button-extra-large-icon-size);
+  --button-min-height: var(--button-xl-min-height);
+  --button-padding-block: var(--button-xl-padding-block);
+  --button-padding-inline: var(--button-xl-padding-inline);
+  --button-font-size: var(--button-xl-font-size);
+  --button-line-height: var(--button-xl-line-height);
+  --button-icon-size: var(--button-xl-icon-size);
 }
 
 .mezzanine-button-content {

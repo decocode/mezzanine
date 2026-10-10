@@ -2,24 +2,22 @@
 :where(:root[data-theme='dark']) {
   color-scheme: dark;
 
-  --color-page: var(--color-gray-950);
-  --color-surface: var(--color-gray-900);
-  --color-surface-hover: var(--color-gray-800);
-  --color-surface-pressed: var(--color-gray-700);
-  --color-surface-inverse: var(--color-gray-50);
+  --color-page: var(--color-neutral-950);
+  --color-surface: var(--color-neutral-900);
+  --color-surface-hover: var(--color-neutral-800);
+  --color-surface-pressed: var(--color-neutral-700);
 
-  --color-text: var(--color-gray-50);
-  --color-text-muted: var(--color-gray-300);
-  --color-text-inverse: var(--color-gray-900);
+  --color-text: var(--color-neutral-50);
+  --color-text-muted: var(--color-neutral-300);
 
   --color-link: var(--color-violet-300);
   --color-link-hover: var(--color-violet-200);
   --color-link-pressed: var(--color-violet-100);
 
-  --color-border: var(--color-gray-500);
+  --color-border: var(--color-neutral-500);
 
   --elevation-shadow-color: rgb(0 0 0 / 72%);
-  --elevation-highlight-color: color-mix(in srgb, var(--color-gray-50) 12%, transparent);
+  --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
   --elevation-inset: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
   --elevation-flat: none;
   --elevation-raised: 0 2px 4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
@@ -29,7 +27,7 @@
   --button-primary-background: var(--color-violet-700);
   --button-primary-background-hovered: var(--color-violet-800);
   --button-primary-background-pressed: var(--color-violet-900);
-  --button-primary-content: var(--color-gray-50);
+  --button-primary-content: var(--color-neutral-50);
   --button-primary-border: var(--color-violet-900);
 
   --button-secondary-background: transparent;
@@ -54,14 +52,14 @@
   --checkbox-background-hovered: var(--color-violet-950);
   --checkbox-background-selected: var(--color-violet-700);
   --checkbox-background-selected-hovered: var(--color-violet-800);
-  --checkbox-content-selected: var(--color-gray-50);
-  --checkbox-border: var(--color-gray-300);
+  --checkbox-content-selected: var(--color-neutral-50);
+  --checkbox-border: var(--color-neutral-300);
   --checkbox-border-invalid: var(--color-danger-400);
 
   --radio-background: transparent;
   --radio-background-hovered: var(--color-violet-950);
   --radio-selection: var(--color-violet-300);
-  --radio-border: var(--color-gray-300);
+  --radio-border: var(--color-neutral-300);
   --radio-border-invalid: var(--color-danger-400);
 
   --toggle-button-background: transparent;
@@ -72,8 +70,8 @@
   --toggle-button-background-selected: var(--color-violet-700);
   --toggle-button-background-selected-hovered: var(--color-violet-800);
   --toggle-button-background-selected-pressed: var(--color-violet-900);
-  --toggle-button-content-selected: var(--color-gray-50);
-  --toggle-button-border-selected: var(--color-violet-900);
+  --toggle-button-content-selected: var(--color-neutral-50);
+  --toggle-button-border-selected: var(--toggle-button-border);
 
   --navigation-tree-item-background: transparent;
   --navigation-tree-item-background-hovered: var(--color-surface-hover);
@@ -89,8 +87,8 @@
   --table-row-background-selected: var(--color-violet-700);
   --table-row-background-selected-hovered: var(--color-violet-800);
   --table-row-background-selected-pressed: var(--color-violet-900);
-  --table-row-content-selected: var(--color-gray-50);
-  --table-header-background: var(--color-gray-900);
+  --table-row-content-selected: var(--color-neutral-50);
+  --table-header-background: var(--color-neutral-900);
   --table-drop-target-color: var(--color-violet-700);
 
   --color-focus: var(--color-info-500);
@@ -101,24 +99,22 @@
   :where(:root:not([data-theme]), :root[data-theme='system']) {
     color-scheme: dark;
 
-    --color-page: var(--color-gray-950);
-    --color-surface: var(--color-gray-900);
-    --color-surface-hover: var(--color-gray-800);
-    --color-surface-pressed: var(--color-gray-700);
-    --color-surface-inverse: var(--color-gray-50);
+    --color-page: var(--color-neutral-950);
+    --color-surface: var(--color-neutral-900);
+    --color-surface-hover: var(--color-neutral-800);
+    --color-surface-pressed: var(--color-neutral-700);
 
-    --color-text: var(--color-gray-50);
-    --color-text-muted: var(--color-gray-300);
-    --color-text-inverse: var(--color-gray-900);
+    --color-text: var(--color-neutral-50);
+    --color-text-muted: var(--color-neutral-300);
 
     --color-link: var(--color-violet-300);
     --color-link-hover: var(--color-violet-200);
     --color-link-pressed: var(--color-violet-100);
 
-    --color-border: var(--color-gray-500);
+    --color-border: var(--color-neutral-500);
 
     --elevation-shadow-color: rgb(0 0 0 / 72%);
-    --elevation-highlight-color: color-mix(in srgb, var(--color-gray-50) 12%, transparent);
+    --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
     --elevation-inset: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
     --elevation-flat: none;
     --elevation-raised: 0 2px 4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
@@ -128,7 +124,7 @@
     --button-primary-background: var(--color-violet-700);
     --button-primary-background-hovered: var(--color-violet-800);
     --button-primary-background-pressed: var(--color-violet-900);
-    --button-primary-content: var(--color-gray-50);
+    --button-primary-content: var(--color-neutral-50);
     --button-primary-border: var(--color-violet-900);
 
     --button-secondary-background: transparent;
@@ -153,14 +149,14 @@
     --checkbox-background-hovered: var(--color-violet-950);
     --checkbox-background-selected: var(--color-violet-700);
     --checkbox-background-selected-hovered: var(--color-violet-800);
-    --checkbox-content-selected: var(--color-gray-50);
-    --checkbox-border: var(--color-gray-300);
+    --checkbox-content-selected: var(--color-neutral-50);
+    --checkbox-border: var(--color-neutral-300);
     --checkbox-border-invalid: var(--color-danger-400);
 
     --radio-background: transparent;
     --radio-background-hovered: var(--color-violet-950);
     --radio-selection: var(--color-violet-300);
-    --radio-border: var(--color-gray-300);
+    --radio-border: var(--color-neutral-300);
     --radio-border-invalid: var(--color-danger-400);
 
     --toggle-button-background: transparent;
@@ -171,8 +167,8 @@
     --toggle-button-background-selected: var(--color-violet-700);
     --toggle-button-background-selected-hovered: var(--color-violet-800);
     --toggle-button-background-selected-pressed: var(--color-violet-900);
-    --toggle-button-content-selected: var(--color-gray-50);
-    --toggle-button-border-selected: var(--color-violet-900);
+    --toggle-button-content-selected: var(--color-neutral-50);
+    --toggle-button-border-selected: var(--toggle-button-border);
 
     --navigation-tree-item-background: transparent;
     --navigation-tree-item-background-hovered: var(--color-surface-hover);
@@ -188,8 +184,8 @@
     --table-row-background-selected: var(--color-violet-700);
     --table-row-background-selected-hovered: var(--color-violet-800);
     --table-row-background-selected-pressed: var(--color-violet-900);
-    --table-row-content-selected: var(--color-gray-50);
-    --table-header-background: var(--color-gray-900);
+    --table-row-content-selected: var(--color-neutral-50);
+    --table-header-background: var(--color-neutral-900);
     --table-drop-target-color: var(--color-violet-700);
 
     --color-focus: var(--color-info-500);

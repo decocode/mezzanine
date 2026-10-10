@@ -5,9 +5,9 @@
   margin: 0;
   padding: 0;
   color: var(--color-text-muted);
-  font-size: var(--font-size-label-large);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-label-large);
+  line-height: var(--line-height-label-lg);
   list-style: none;
 }
 

@@ -4,8 +4,8 @@
   align-items: center;
   color: var(--color-text);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-body-medium);
-  line-height: var(--line-height-body-medium);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
   cursor: pointer;
 }
 

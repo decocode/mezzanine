@@ -53,6 +53,12 @@ Mezzanine component CSS must not depend on product palette names such as
 
 ## Naming rule
 
+Size segments use `xs`, `sm`, `md`, `lg` and `xl` where those levels exist.
+Typography currently uses `sm`, `md` and `lg`; Button uses `sm`, `md`, `lg` and `xl`.
+This replaces the spelled-out size segments in those public token names; consumers
+must update their references and overrides. Values and typography CSS class names
+are unchanged. `--font-weight-medium` remains a weight name, not a size level.
+
 Foundation token names use this pattern where applicable:
 
 ```text
@@ -69,7 +75,7 @@ property:
 Examples:
 
 - `--button-primary-background-hovered` is the Primary Button background while hovered.
-- `--color-text-inverse` is text placed on an inverse surface.
+- `--color-text-muted` is supporting text that should be less prominent than normal text.
 - `--font-family-body` is the normal reading and interface font.
 
 Names describe purpose rather than appearance. Component CSS therefore asks
@@ -81,9 +87,9 @@ Every official theme defines the same color roles.
 
 ### Palette scales
 
-Mezzanine includes two foundational 11-step palettes, from `50` to `950`.
-Roles select a step from these palettes so a product can change the palette
-without changing what each role means.
+Mezzanine includes an 11-step Violet core palette, from `50` to `950`.
+Roles select a step from a core or semantic palette so a product can change
+the palette without changing what each role means.
 
 Every palette follows the same perceptual lightness curve. In the showcase,
 shade numbers use dark text from `50` to `500` and inverse text from `600` to
@@ -92,11 +98,11 @@ step number alone.
 
 | Token | Meaning |
 | --- | --- |
-| `--color-gray-{50–950}` | Mezzanine's default gray palette |
 | `--color-violet-{50–950}` | Mezzanine's default violet palette |
 
-Light and Dark use both palettes. Wireframe uses the Gray palette for its
-monochrome presentation and does not use the Violet palette for actions.
+Light and Dark use the Violet core palette and the Neutral semantic palette.
+Wireframe uses Neutral for its monochrome presentation and does not use Violet
+for actions.
 
 ### Page and surfaces
 
@@ -106,7 +112,6 @@ monochrome presentation and does not use the Violet palette for actions.
 | `--color-surface` | Content placed on the page, such as a panel or input |
 | `--color-surface-hover` | A hovered interactive surface |
 | `--color-surface-pressed` | A pressed interactive surface |
-| `--color-surface-inverse` | A deliberately contrasting surface |
 
 ### Text and lines
 
@@ -114,7 +119,6 @@ monochrome presentation and does not use the Violet palette for actions.
 | --- | --- |
 | `--color-text` | Normal reading and interface text |
 | `--color-text-muted` | Supporting and secondary text |
-| `--color-text-inverse` | Text placed on an inverse surface |
 | `--color-border` | Outlines and dividing lines |
 
 ### Links and focus
@@ -133,21 +137,21 @@ generic Accent token.
 
 ### Semantic color palettes
 
-Mezzanine currently includes four 11-step semantic color scales, from `50` to
-`950`. Their defaults use familiar blue, green, amber and red families with a
-softened character. Precise semantic roles will be added when implemented
-components require them.
+Mezzanine includes five 11-step semantic color scales, from `50` to `950`.
+Their defaults use familiar gray, blue, green, amber and red families with a
+softened character.
 
 | Token | Meaning |
 | --- | --- |
+| `--color-neutral-{50–950}` | Statuses without positive or negative meaning |
 | `--color-info-{50–950}` | Information and keyboard-focus scale |
 | `--color-success-{50–950}` | Successful-outcome scale |
 | `--color-warning-{50–950}` | Caution and warning scale |
 | `--color-danger-{50–950}` | Error and destructive-action scale |
 
-All official themes use these conventional blue, green, amber and red status
-scales. Wireframe therefore remains monochrome except for semantic status and
-focus colors.
+All official themes use these conventional neutral, blue, green, amber and red
+status scales. Wireframe therefore remains monochrome except for semantic status
+and focus colors.
 
 ## Current typography inventory
 
@@ -167,9 +171,54 @@ stack. The default requires no font download.
 | `--line-height-{role}-{size}` | The line height paired with that style |
 | `--letter-spacing-{role}` | Tracking shared by a role's three sizes |
 | `--text-transform-{role}` | Casing shared by a role's three sizes |
+| `--inline-code-padding-block` | Vertical space inside an Inline code box |
+| `--inline-code-padding-inline` | Horizontal space inside an Inline code box |
+| `--inline-code-border-radius` | Inline code corner radius |
 
-The complete 15-style typography foundation is documented in
+The complete 15-style typography foundation and Inline code pattern are documented in
 [`TYPOGRAPHY.md`](TYPOGRAPHY.md).
+
+## Current spacing inventory
+
+Mezzanine uses a 4px base spacing scale. The number in a spacing token name is
+the number of 4px units it represents, so `--space-4` equals 16px. Values are
+stored in `rem` so they can respond to a product's root font size; the pixel
+values below assume the common browser default of `1rem = 16px` and are shown
+only as a familiar reference.
+
+| Token | Stored value | Reference value |
+| --- | --- | --- |
+| `--space-0` | `0` | 0px |
+| `--space-1` | `0.25rem` | 4px |
+| `--space-2` | `0.5rem` | 8px |
+| `--space-3` | `0.75rem` | 12px |
+| `--space-4` | `1rem` | 16px |
+| `--space-5` | `1.25rem` | 20px |
+| `--space-6` | `1.5rem` | 24px |
+| `--space-8` | `2rem` | 32px |
+| `--space-10` | `2.5rem` | 40px |
+| `--space-12` | `3rem` | 48px |
+| `--space-16` | `4rem` | 64px |
+| `--space-20` | `5rem` | 80px |
+| `--space-24` | `6rem` | 96px |
+
+## Current shape inventory
+
+Corner-radius levels use `rem` to follow the root font size. None is unitless zero;
+Full is a deliberately oversized radius for pill ends, not an incremental level.
+
+| Token | Stored value |
+| --- | --- |
+| `--radius-none` | `0` |
+| `--radius-sm` | `0.25rem` |
+| `--radius-md` | `0.5rem` |
+| `--radius-lg` | `0.75rem` |
+| `--radius-xl` | `1rem` |
+| `--radius-full` | `9999rem` |
+
+Existing component radius defaults are unchanged. Products can opt in by referencing
+a level from a component token, such as `--button-border-radius: var(--radius-sm)`.
+For a circle, use `50%` on a square element; on a rectangle it produces an ellipse.
 
 ## Current elevation inventory
 
@@ -192,10 +241,81 @@ separate `--color-focus` token for visible focus indicators.
 
 ## Current component tokens
 
-Button, Checkbox, Link, RadioGroup, Disclosure, NavigationTree, Table,
+Tabs uses semantic text, link, border and surface colours across the official themes.
+
+| Token | Meaning |
+| --- | --- |
+| `--tabs-content-gap` | Space between the tab list and its panel |
+| `--tabs-border-width`, `--tabs-border` | Tab-list divider thickness and colour |
+| `--tabs-content` | Panel text colour |
+| `--tabs-focus-ring-width`, `--tabs-focus-ring-offset` | Keyboard-focus outline thickness and position |
+| `--tab-min-height` | Minimum tab target height |
+| `--tab-padding-block`, `--tab-padding-inline` | Tab padding |
+| `--tab-content`, `--tab-content-selected` | Default and selected tab text colours |
+| `--tab-background-hovered`, `--tab-background-pressed` | Pointer interaction backgrounds |
+| `--tab-indicator`, `--tab-indicator-width` | Selection indicator colour and thickness |
+| `--tab-motion-duration` | Selection indicator movement duration; disabled with reduced motion |
+| `--tab-panel-padding` | Space inside the content panel |
+| `--tab-panel-preferred-width` | Preferred panel width before a vertical layout wraps the panel below the list |
+
+Modal and Dialog use the existing neutral surface, text, border, focus and overlay
+elevation roles. Their component tokens are shared across all three themes and can
+be overridden independently by a consuming product.
+
+| Token | Meaning |
+| --- | --- |
+| `--modal-z-index` | Overlay stacking level |
+| `--modal-viewport-padding` | Minimum space between the modal and viewport edges |
+| `--modal-max-width` | Maximum modal width |
+| `--modal-border-width` | Modal border thickness |
+| `--modal-border-radius` | Modal corner shape |
+| `--modal-backdrop` | Background behind the modal |
+| `--modal-background` | Modal surface color |
+| `--modal-content` | Modal text color |
+| `--modal-border` | Modal border color |
+| `--modal-motion-duration` | Entry and exit duration |
+| `--modal-enter-scale` | Modal scale at the start of entry and end of exit |
+| `--dialog-padding` | Space inside the dialog |
+| `--dialog-content-gap` | Separation between the title, content and actions |
+| `--dialog-actions-gap` | Separation between action buttons |
+| `--dialog-focus-ring-width` | Width of the dialog's keyboard focus indicator |
+
+Badge, Button, Checkbox, Link, RadioGroup, Disclosure, Dialog, Modal, NavigationTree, Table,
 ToggleButton and ToggleButtonGroup are implemented components. Their component-specific tokens
 keep shared structure easy to identify and override without pretending that
-Mezzanine already has a general spacing or radius foundation.
+component-specific spacing decisions are part of the shared spacing scale.
+Component radius tokens remain independent of the shared radius scale until a
+product explicitly connects them.
+
+Badge uses structural and color-role tokens for a compact, non-interactive
+status label. Neutral is the default, Violet uses Mezzanine's core palette, and
+the `info`, `success`, `warning` and `danger` variants use the matching
+semantic color palettes.
+
+| Token | Meaning |
+| --- | --- |
+| `--badge-padding-block` | Vertical space inside a Badge |
+| `--badge-padding-inline` | Horizontal space inside a Badge |
+| `--badge-border-width` | Badge border width |
+| `--badge-border-radius` | Badge corner radius |
+| `--badge-neutral-background` | Neutral Badge background color |
+| `--badge-neutral-content` | Neutral Badge text color |
+| `--badge-neutral-border` | Neutral Badge border color |
+| `--badge-violet-background` | Violet Badge background color |
+| `--badge-violet-content` | Violet Badge text color |
+| `--badge-violet-border` | Violet Badge border color |
+| `--badge-info-background` | Informational Badge background color |
+| `--badge-info-content` | Informational Badge text color |
+| `--badge-info-border` | Informational Badge border color |
+| `--badge-success-background` | Successful Badge background color |
+| `--badge-success-content` | Successful Badge text color |
+| `--badge-success-border` | Successful Badge border color |
+| `--badge-warning-background` | Warning Badge background color |
+| `--badge-warning-content` | Warning Badge text color |
+| `--badge-warning-border` | Warning Badge border color |
+| `--badge-danger-background` | Danger Badge background color |
+| `--badge-danger-content` | Danger Badge text color |
+| `--badge-danger-border` | Danger Badge border color |
 
 Link uses shared semantic colors and component tokens for its underline and
 focus treatment.
@@ -368,10 +488,10 @@ at `--opacity-disabled` and do not add elevation.
 
 ## What is not currently a Mezzanine foundation
 
-The library does not currently define public spacing, radius, shape,
-breakpoint or responsive-behavior tokens. DecoCode values for those areas are
-not Mezzanine defaults. They will only be added after their cross-product rules
-are discussed, agreed and implemented.
+Beyond corner radius, the library does not currently define other public shape,
+breakpoint or responsive-behavior tokens. DecoCode values for those areas are not Mezzanine
+defaults. They will only be added after their cross-product rules are discussed,
+agreed and implemented.
 
 ## Adding a token
 

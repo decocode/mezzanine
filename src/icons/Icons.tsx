@@ -89,3 +89,20 @@ export function EmailIcon(iconProps: IconProps) {
 export function LoadingIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><circle cx="12" cy="12" r="8" strokeDasharray="14 50" /></StrokeIcon>
 }
+
+export function MoonIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z" /></StrokeIcon>
+}
+
+export function PlaceholderIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><rect height="18" width="18" x="3" y="3" /><path d="M3 3l18 18M21 3 3 21" /></StrokeIcon>
+}
+
+export function SunIcon(iconProps: IconProps) {
+  return (
+    <StrokeIcon {...iconProps}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1" />
+    </StrokeIcon>
+  )
+}

@@ -11,7 +11,9 @@ export interface SitePageDefinition {
 export interface SiteNavigationGroup {
   id: string
   label: string
+  path?: string
   pages: SitePageDefinition[]
+  groups?: SiteNavigationGroup[]
 }
 
 export const landingPage: SitePageDefinition = {
@@ -24,7 +26,7 @@ export const landingPage: SitePageDefinition = {
 export const siteNavigationGroups: SiteNavigationGroup[] = [
   {
     id: 'get-started',
-    label: 'Get Started',
+    label: 'Get started',
     pages: [
       { id: 'introduction', label: 'Introduction', path: '/introduction', status: 'implemented' },
     ],
@@ -38,60 +40,85 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
       { id: 'elevation', label: 'Elevation', path: '/elevation', status: 'implemented' },
       { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
       { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
-      { id: 'shapes', label: 'Shapes', path: '/shapes', status: 'empty' },
+      { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'implemented' },
+      { id: 'shape', label: 'Shape', path: '/shape', status: 'implemented' },
       { id: 'textures', label: 'Textures', path: '/textures', status: 'empty' },
-      { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'empty' },
     ],
   },
   {
     id: 'components',
     label: 'Components',
+    groups: [
+      {
+        id: 'navigation',
+        label: 'Navigation',
+        pages: [
+          { id: 'link', label: 'Link', path: '/link', reactAriaPage: 'Link', status: 'implemented' },
+          { id: 'breadcrumbs', label: 'Breadcrumbs', path: '/breadcrumbs', reactAriaPage: 'Breadcrumbs', status: 'implemented' },
+          { id: 'navigation-tree', label: 'Navigation tree', path: '/navigation-tree', reactAriaPage: 'NavigationTree', status: 'implemented' },
+          { id: 'table-of-contents', label: 'Table of contents', path: '/table-of-contents', status: 'implemented' },
+          { id: 'tabs', label: 'Tabs', path: '/tabs', reactAriaPage: 'Tabs', status: 'implemented' },
+          { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
+          { id: 'menu', label: 'Menu', path: '/menu', reactAriaPage: 'Menu', status: 'empty' },
+          { id: 'header', label: 'Header', path: '/header', status: 'empty' },
+          { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'empty' },
+          { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },
+        ],
+      },
+      {
+        id: 'actions-and-controls',
+        label: 'Actions and controls',
+        pages: [
+          { id: 'button', label: 'Button', path: '/button', reactAriaPage: 'Button', status: 'implemented' },
+          { id: 'toggle-button', label: 'Toggle button', path: '/toggle-button', reactAriaPage: 'ToggleButton', status: 'implemented' },
+        ],
+      },
+      {
+        id: 'forms-and-input',
+        label: 'Forms and input',
+        pages: [
+          { id: 'checkbox', label: 'Checkbox', path: '/checkbox', reactAriaPage: 'Checkbox', status: 'implemented' },
+          { id: 'radio-group', label: 'RadioGroup', path: '/radio-group', reactAriaPage: 'RadioGroup', status: 'implemented' },
+          { id: 'text-field', label: 'TextField', path: '/text-field', reactAriaPage: 'TextField', status: 'empty' },
+          { id: 'text-area', label: 'TextArea', path: '/text-area', reactAriaPage: 'TextField', status: 'empty' },
+        ],
+      },
+      {
+        id: 'overlays',
+        label: 'Overlays',
+        pages: [
+          { id: 'dialog', label: 'Dialog', path: '/dialog', reactAriaPage: 'Modal', status: 'implemented' },
+        ],
+      },
+      {
+        id: 'cards',
+        label: 'Cards',
+        pages: [
+          { id: 'card', label: 'Card', path: '/card', status: 'empty' },
+        ],
+      },
+    ],
     pages: [
-      { id: 'button', label: 'Button', path: '/button', reactAriaPage: 'Button', status: 'implemented' },
-      { id: 'link', label: 'Link', path: '/link', reactAriaPage: 'Link', status: 'implemented' },
+      { id: 'badge', label: 'Badge', path: '/badge', status: 'implemented' },
       { id: 'table', label: 'Table', path: '/table', reactAriaPage: 'Table', status: 'implemented' },
-      { id: 'toggle-button', label: 'ToggleButton', path: '/toggle-button', reactAriaPage: 'ToggleButton', status: 'implemented' },
       { id: 'disclosure', label: 'Disclosure', path: '/disclosure', reactAriaPage: 'Disclosure', status: 'implemented' },
-      { id: 'checkbox', label: 'Checkbox', path: '/checkbox', reactAriaPage: 'Checkbox', status: 'implemented' },
-      { id: 'radio-group', label: 'RadioGroup', path: '/radio-group', reactAriaPage: 'RadioGroup', status: 'implemented' },
-      { id: 'card', label: 'Card', path: '/card', status: 'empty' },
       { id: 'carousel', label: 'Carousel', path: '/carousel', status: 'empty' },
       { id: 'image-viewer', label: 'Image Viewer', path: '/image-viewer', status: 'empty' },
       { id: 'tag-group', label: 'TagGroup', path: '/tag-group', reactAriaPage: 'TagGroup', status: 'empty' },
-      { id: 'text-field', label: 'TextField', path: '/text-field', reactAriaPage: 'TextField', status: 'empty' },
-      { id: 'text-area', label: 'TextArea', path: '/text-area', reactAriaPage: 'TextField', status: 'empty' },
-    ],
-  },
-  {
-    id: 'navigation',
-    label: 'Navigation',
-    pages: [
-      { id: 'breadcrumbs', label: 'Breadcrumbs', path: '/breadcrumbs', reactAriaPage: 'Breadcrumbs', status: 'implemented' },
-      { id: 'navigation-tree', label: 'NavigationTree', path: '/navigation-tree', reactAriaPage: 'NavigationTree', status: 'implemented' },
-      { id: 'header', label: 'Header', path: '/header', status: 'empty' },
-      { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'empty' },
-      { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },
-    ],
-  },
-  {
-    id: 'content-blocks',
-    label: 'Content Blocks',
-    pages: [
-      { id: 'hero-section', label: 'Hero Section', path: '/hero-section', status: 'empty' },
-    ],
-  },
-  {
-    id: 'brand-assets',
-    label: 'Brand Assets',
-    pages: [
-      { id: 'logo', label: 'Logo', path: '/logo', status: 'empty' },
     ],
   },
 ]
 
+function collectSitePages(groups: SiteNavigationGroup[]): SitePageDefinition[] {
+  return groups.flatMap((group) => [
+    ...collectSitePages(group.groups ?? []),
+    ...group.pages,
+  ])
+}
+
 export const sitePages = [
   landingPage,
-  ...siteNavigationGroups.flatMap((group) => group.pages),
+  ...collectSitePages(siteNavigationGroups),
 ]
 
 export function findSitePage(pathname: string) {
@@ -100,7 +127,17 @@ export function findSitePage(pathname: string) {
 }
 
 export function findSiteNavigationGroup(pageId: string) {
-  return siteNavigationGroups.find((group) => (
-    group.pages.some((page) => page.id === pageId)
-  ))
+  return findSiteNavigationGroups(pageId).at(-1)
+}
+
+export function findSiteNavigationGroups(
+  pageId: string,
+  groups: SiteNavigationGroup[] = siteNavigationGroups,
+): SiteNavigationGroup[] {
+  for (const group of groups) {
+    if (group.pages.some((page) => page.id === pageId)) return [group]
+    const childGroups = findSiteNavigationGroups(pageId, group.groups ?? [])
+    if (childGroups.length > 0) return [group, ...childGroups]
+  }
+  return []
 }

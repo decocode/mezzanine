@@ -2,17 +2,19 @@ import { useState } from 'react'
 import {
   Button,
   Heading,
-  Label,
-  ListBox,
-  ListBoxItem,
-  Popover,
-  Select,
-  SelectValue,
 } from 'react-aria-components'
-import { Disclosure, DisclosurePanel, Link } from '@decocode/mezzanine'
+import {
+  Disclosure,
+  DisclosurePanel,
+  Link,
+  MoonIcon,
+  PlaceholderIcon,
+  SunIcon,
+  ToggleButton,
+  ToggleButtonGroup,
+} from '@decocode/mezzanine'
 import {
   isThemeSelection,
-  themeSelections,
   type ThemeSelection,
 } from './themeSelection'
 
@@ -45,38 +47,38 @@ function MenuIcon() {
   )
 }
 
-function ThemeSelect({ onThemeSelectionChange, themeSelection }: ThemeControlProps) {
+function getDisplayedThemeSelection(themeSelection: ThemeSelection) {
+  if (themeSelection !== 'system') return themeSelection
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+function ThemeToggleButtonGroup({ onThemeSelectionChange, themeSelection }: ThemeControlProps) {
+  const displayedThemeSelection = getDisplayedThemeSelection(themeSelection)
+
   return (
-    <Select
+    <ToggleButtonGroup
       aria-label="Theme"
-      className="theme-select"
-      onSelectionChange={(key) => {
-        if (typeof key === 'string' && isThemeSelection(key)) {
-          onThemeSelectionChange(key)
+      className="theme-toggle-group"
+      disallowEmptySelection
+      onSelectionChange={(keys) => {
+        const selectedKey = keys.values().next().value
+        if (typeof selectedKey === 'string' && isThemeSelection(selectedKey)) {
+          onThemeSelectionChange(selectedKey)
         }
       }}
-      selectedKey={themeSelection}
+      selectedKeys={[displayedThemeSelection]}
+      selectionMode="single"
     >
-      <Label>Theme</Label>
-      <Button>
-        <SelectValue />
-        <span aria-hidden="true">▾</span>
-      </Button>
-      <Popover className="theme-popover" placement="bottom end">
-        <ListBox items={themeSelections} className="theme-listbox">
-          {(item) => (
-            <ListBoxItem id={item.id} textValue={item.label}>
-              {({ isSelected }) => (
-                <>
-                  <span>{item.label}</span>
-                  {isSelected && <span aria-hidden="true">✓</span>}
-                </>
-              )}
-            </ListBoxItem>
-          )}
-        </ListBox>
-      </Popover>
-    </Select>
+      <ToggleButton aria-label="Light theme" id="light">
+        <SunIcon />
+      </ToggleButton>
+      <ToggleButton aria-label="Dark theme" id="dark">
+        <MoonIcon />
+      </ToggleButton>
+      <ToggleButton aria-label="Wireframe theme" id="wireframe">
+        <PlaceholderIcon />
+      </ToggleButton>
+    </ToggleButtonGroup>
   )
 }
 
@@ -95,7 +97,7 @@ function HeaderNavigation({
       >
         Docs
       </Link>
-      <ThemeSelect
+      <ThemeToggleButtonGroup
         onThemeSelectionChange={onThemeSelectionChange}
         themeSelection={themeSelection}
       />

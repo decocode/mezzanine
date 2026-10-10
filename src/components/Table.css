@@ -3,8 +3,8 @@
   border-collapse: collapse;
   color: var(--color-text);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-body-medium);
-  line-height: var(--line-height-body-medium);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
 }
 
 .react-aria-Column,
@@ -20,10 +20,10 @@
 .react-aria-Column {
   border-top: var(--table-border-width) solid var(--color-border);
   background: var(--table-header-background);
-  font-size: var(--font-size-label-large);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-large);
+  line-height: var(--line-height-label-lg);
   text-transform: var(--text-transform-label);
 }
 

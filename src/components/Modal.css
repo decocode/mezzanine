@@ -1,0 +1,72 @@
+/* Follows React Aria's vanilla modal layout and viewport variables. */
+.react-aria-ModalOverlay {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: var(--page-width);
+  height: var(--page-height);
+  overflow: clip;
+  z-index: var(--modal-z-index);
+  background: var(--modal-backdrop);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+}
+
+.react-aria-Modal {
+  position: sticky;
+  box-sizing: border-box;
+  top: calc(var(--visual-viewport-height) / 2);
+  margin-left: 50vw;
+  translate: -50% -50%;
+  width: calc(100vw - var(--modal-viewport-padding) * 2);
+  max-width: var(--modal-max-width);
+  max-height: calc(var(--visual-viewport-height) - var(--modal-viewport-padding) * 2);
+  border: var(--modal-border-width) solid var(--modal-border);
+  border-radius: var(--modal-border-radius);
+  background: var(--modal-background);
+  color: var(--modal-content);
+  box-shadow: var(--elevation-overlay);
+}
+
+.react-aria-ModalOverlay[data-entering] {
+  animation: mezzanine-modal-fade var(--modal-motion-duration) ease-out;
+}
+
+.react-aria-ModalOverlay[data-exiting] {
+  animation: mezzanine-modal-fade var(--modal-motion-duration) reverse ease-in;
+}
+
+.react-aria-Modal[data-entering] {
+  animation: mezzanine-modal-zoom var(--modal-motion-duration) ease-out;
+}
+
+.react-aria-Modal[data-exiting] {
+  animation: mezzanine-modal-zoom var(--modal-motion-duration) reverse ease-in;
+}
+
+@keyframes mezzanine-modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mezzanine-modal-zoom {
+  from { transform: scale(var(--modal-enter-scale)); }
+  to { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .react-aria-ModalOverlay[data-entering],
+  .react-aria-ModalOverlay[data-exiting],
+  .react-aria-Modal[data-entering],
+  .react-aria-Modal[data-exiting] {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .react-aria-ModalOverlay,
+  .react-aria-Modal {
+    forced-color-adjust: auto;
+  }
+}

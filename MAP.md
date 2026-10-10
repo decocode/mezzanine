@@ -7,13 +7,15 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the composed `IconButton` and `DisclosureHeader` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `IconButton` and `DisclosureHeader` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
 | Path | Purpose |
 | --- | --- |
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
+| `src/components/Badge.tsx` | Public non-interactive Badge with core and semantic color variants, rendered as a semantic span |
+| `src/components/Badge.css` | Token-led styling for Neutral, Violet, Info, Success, Warning and Danger Badges |
 | `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants, sizes, icon content and pending-state progress |
 | `src/components/Button.css` | Token-led styling for Button variants and React Aria interaction states |
 | `src/components/Breadcrumbs.ts` | Public React Aria Breadcrumbs and Breadcrumb exports and prop types |
@@ -29,29 +31,37 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/RadioGroup.css` | Token-led styling for RadioGroup, RadioField, RadioButton and SelectionIndicator |
 | `src/components/Disclosure.tsx` | Public React Aria Disclosure family plus the composed DisclosureHeader trigger pattern |
+| `src/components/Dialog.ts`, `src/components/Dialog.css` | Public React Aria Dialog, DialogTrigger and Heading exports; token-led content, title, focus and action-footer styling |
+| `src/components/Modal.ts`, `src/components/Modal.css` | Public React Aria Modal and ModalOverlay exports; token-led backdrop, responsive container and reduced-motion-aware entry/exit styling |
 | `src/components/Disclosure.css` | Token-led styling for Disclosure, DisclosureGroup and DisclosureHeader states |
 | `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
 | `src/icons/StudioIcons.tsx` | Public action, navigation, transport and sequencer icons imported from Rhythm Directives' active icon modules |
 | `src/components/Table.ts` | Public React Aria Table, TableHeader, Column, Row, TableBody and Cell exports and their prop types |
+| `src/components/Tabs.tsx`, `src/components/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
+| `site/TabsExamples.tsx` | Tabs examples, anatomy, props and keyboard guidance for the existing `/tabs` route |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
 | `src/components/ToggleButton.ts` | Public current React Aria ToggleButton and ToggleButtonGroup exports and prop types |
 | `src/components/ToggleButton.css` | Token-led styling for ToggleButton states and ToggleButtonGroup layout |
-| `src/tokens.css` | Shared typography token contract and entry point for the three official color themes |
+| `src/tokens.css` | Shared typography, spacing and corner-radius token contract and entry point for the three official color themes |
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
 | `src/themes/dark.css` | Neutral Dark theme, including automatic device-preference handling |
 | `src/themes/wireframe.css` | Monochrome Wireframe theme with semantic status colors and blue focus |
 | `src/styles.css` | Library stylesheet entry point; imports typography and, as components arrive, their structural styles |
-| `src/typography.css` | Fifteen public text-style classes with predictable single-class specificity, assembled from typography tokens |
+| `src/typography.css` | Fifteen public text-style classes and the Inline code element pattern, assembled from typography tokens |
 | `site/index.html` | HTML shell for the showcase site |
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
 | `site/App.tsx` | Route-aware showcase shell, landing hero, implemented documentation content, and explicit empty-page state |
-| `site/Header.tsx` | Responsive showcase header with React Aria links, theme Select and Disclosure hamburger menu |
-| `site/Sidebar.tsx` | Responsive NavigationTree sidebar, including the mobile Browse sections disclosure |
+| `site/Header.tsx` | Responsive showcase header with React Aria links, an icon-only Mezzanine ToggleButtonGroup theme switcher and Disclosure hamburger menu |
+| `site/Sidebar.tsx` | Responsive nested NavigationTree sidebar, expanding the current page's ancestor groups, including the mobile Browse sections disclosure |
+| `site/TableOfContents.tsx` | Reusable site-level Contents navigation with nested child links and a configurable heading, composing Mezzanine Link with section anchors; documented at `/table-of-contents` under Navigation |
+| `site/DialogExamples.tsx` | Modal and confirmation-dialog examples, anatomy and accessibility guidance for `/dialog` under Components → Overlays |
+| `site/ShapeCornerExample.tsx` | Independent single-select corner-radius ToggleButtonGroups, defaulting to none, with a live shape preview and resulting CSS |
 | `site/useAnimatedNavigationTree.ts` | Shared expansion state and reduced-motion handling for NavigationTree reveal and collapse motion |
-| `site/siteNavigation.ts` | Single source of truth for approved IA groups, routes, labels, implementation status and verified React Aria documentation matches |
-| `site/foundationData.ts` | Names and plain-language descriptions for the implemented color, typography and motion foundations shown by the showcase |
+| `site/siteNavigation.ts` | Single source of truth for nested IA groups, routes, labels, implementation status and verified React Aria documentation matches; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with remaining pages awaiting categorisation |
+| `site/foundationData.tsx` | Names and descriptions, with inline code markup for component references, for the implemented color, typography, spacing, corner-radius and motion foundations shown by the showcase |
 | `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/tableExampleData.ts` | Table anatomy content, example rows and sorting logic used by the Table documentation page |
+| `site/radioGroupDocumentation.tsx` | Verified anatomy, state descriptions with inline code markup, and component token names for the RadioGroup documentation page |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |

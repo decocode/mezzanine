@@ -24,9 +24,9 @@
   background: var(--disclosure-trigger-background);
   color: var(--color-text);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-title-small);
+  font-size: var(--font-size-title-sm);
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-title-small);
+  line-height: var(--line-height-title-sm);
   text-align: start;
   cursor: pointer;
 }

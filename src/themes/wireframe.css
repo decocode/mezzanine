@@ -5,23 +5,21 @@
 :where(:root[data-theme='wireframe']) {
   color-scheme: light;
 
-  --color-page: var(--color-gray-50);
-  --color-surface: var(--color-gray-50);
-  --color-surface-hover: var(--color-gray-100);
-  --color-surface-pressed: var(--color-gray-200);
-  --color-surface-inverse: var(--color-gray-950);
+  --color-page: var(--color-neutral-50);
+  --color-surface: var(--color-neutral-50);
+  --color-surface-hover: var(--color-neutral-100);
+  --color-surface-pressed: var(--color-neutral-200);
 
-  --color-text: var(--color-gray-950);
-  --color-text-muted: var(--color-gray-600);
-  --color-text-inverse: var(--color-gray-50);
+  --color-text: var(--color-neutral-950);
+  --color-text-muted: var(--color-neutral-600);
 
-  --color-link: var(--color-gray-950);
-  --color-link-hover: var(--color-gray-800);
-  --color-link-pressed: var(--color-gray-950);
+  --color-link: var(--color-neutral-950);
+  --color-link-hover: var(--color-neutral-800);
+  --color-link-pressed: var(--color-neutral-950);
 
-  --color-border: var(--color-gray-950);
+  --color-border: var(--color-neutral-950);
 
-  --elevation-shadow-color: color-mix(in srgb, var(--color-gray-950) 20%, transparent);
+  --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) 20%, transparent);
   --elevation-highlight-color: transparent;
   --elevation-inset: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
   --elevation-flat: none;
@@ -29,22 +27,22 @@
   --elevation-floating: 0 4px 8px -2px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
   --elevation-overlay: 0 12px 24px -6px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
 
-  --button-primary-background: var(--color-gray-950);
-  --button-primary-background-hovered: var(--color-gray-800);
-  --button-primary-background-pressed: var(--color-gray-700);
-  --button-primary-content: var(--color-gray-50);
-  --button-primary-border: var(--color-gray-950);
+  --button-primary-background: var(--color-neutral-950);
+  --button-primary-background-hovered: var(--color-neutral-800);
+  --button-primary-background-pressed: var(--color-neutral-700);
+  --button-primary-content: var(--color-neutral-50);
+  --button-primary-border: var(--color-neutral-950);
 
   --button-secondary-background: transparent;
-  --button-secondary-background-hovered: var(--color-gray-100);
-  --button-secondary-background-pressed: var(--color-gray-200);
-  --button-secondary-content: var(--color-gray-950);
-  --button-secondary-border: var(--color-gray-950);
+  --button-secondary-background-hovered: var(--color-neutral-100);
+  --button-secondary-background-pressed: var(--color-neutral-200);
+  --button-secondary-content: var(--color-neutral-950);
+  --button-secondary-border: var(--color-neutral-950);
 
   --button-tertiary-background: transparent;
-  --button-tertiary-background-hovered: var(--color-gray-100);
-  --button-tertiary-background-pressed: var(--color-gray-200);
-  --button-tertiary-content: var(--color-gray-950);
+  --button-tertiary-background-hovered: var(--color-neutral-100);
+  --button-tertiary-background-pressed: var(--color-neutral-200);
+  --button-tertiary-content: var(--color-neutral-950);
   --button-tertiary-border: transparent;
 
   --button-destructive-background: var(--color-danger-700);
@@ -54,29 +52,29 @@
   --button-destructive-border: var(--color-danger-900);
 
   --checkbox-background: transparent;
-  --checkbox-background-hovered: var(--color-gray-100);
-  --checkbox-background-selected: var(--color-gray-950);
-  --checkbox-background-selected-hovered: var(--color-gray-800);
-  --checkbox-content-selected: var(--color-gray-50);
-  --checkbox-border: var(--color-gray-950);
+  --checkbox-background-hovered: var(--color-neutral-100);
+  --checkbox-background-selected: var(--color-neutral-950);
+  --checkbox-background-selected-hovered: var(--color-neutral-800);
+  --checkbox-content-selected: var(--color-neutral-50);
+  --checkbox-border: var(--color-neutral-950);
   --checkbox-border-invalid: var(--color-danger-700);
 
   --radio-background: transparent;
-  --radio-background-hovered: var(--color-gray-100);
-  --radio-selection: var(--color-gray-950);
-  --radio-border: var(--color-gray-950);
+  --radio-background-hovered: var(--color-neutral-100);
+  --radio-selection: var(--color-neutral-950);
+  --radio-border: var(--color-neutral-950);
   --radio-border-invalid: var(--color-danger-700);
 
   --toggle-button-background: transparent;
-  --toggle-button-background-hovered: var(--color-gray-100);
-  --toggle-button-background-pressed: var(--color-gray-200);
-  --toggle-button-content: var(--color-gray-950);
-  --toggle-button-border: var(--color-gray-950);
-  --toggle-button-background-selected: var(--color-gray-950);
-  --toggle-button-background-selected-hovered: var(--color-gray-800);
-  --toggle-button-background-selected-pressed: var(--color-gray-700);
-  --toggle-button-content-selected: var(--color-gray-50);
-  --toggle-button-border-selected: var(--color-gray-950);
+  --toggle-button-background-hovered: var(--color-neutral-100);
+  --toggle-button-background-pressed: var(--color-neutral-200);
+  --toggle-button-content: var(--color-neutral-950);
+  --toggle-button-border: var(--color-neutral-950);
+  --toggle-button-background-selected: var(--color-neutral-950);
+  --toggle-button-background-selected-hovered: var(--color-neutral-800);
+  --toggle-button-background-selected-pressed: var(--color-neutral-700);
+  --toggle-button-content-selected: var(--color-neutral-50);
+  --toggle-button-border-selected: var(--toggle-button-border);
 
   --navigation-tree-item-background: transparent;
   --navigation-tree-item-background-hovered: var(--color-surface-hover);
@@ -89,12 +87,12 @@
 
   --disclosure-trigger-background: transparent;
 
-  --table-row-background-selected: var(--color-gray-950);
-  --table-row-background-selected-hovered: var(--color-gray-800);
-  --table-row-background-selected-pressed: var(--color-gray-700);
-  --table-row-content-selected: var(--color-gray-50);
-  --table-header-background: var(--color-gray-100);
-  --table-drop-target-color: var(--color-gray-950);
+  --table-row-background-selected: var(--color-neutral-950);
+  --table-row-background-selected-hovered: var(--color-neutral-800);
+  --table-row-background-selected-pressed: var(--color-neutral-700);
+  --table-row-content-selected: var(--color-neutral-50);
+  --table-header-background: var(--color-neutral-100);
+  --table-drop-target-color: var(--color-neutral-950);
 
   --color-focus: var(--color-info-700);
 }

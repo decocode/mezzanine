@@ -3,8 +3,8 @@
   gap: var(--navigation-tree-gap);
   color: var(--navigation-tree-item-content);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-body-medium);
-  line-height: var(--line-height-body-medium);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
 }
 
 .react-aria-NavigationTreeItem {
@@ -20,9 +20,9 @@
   );
   border-inline-start: var(--navigation-tree-current-indicator-width) solid transparent;
   background: var(--navigation-tree-item-background);
-  font-size: var(--font-size-body-small);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-body-small);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body-sm);
 }
 
 .react-aria-NavigationTreeItem .react-aria-Link {
@@ -40,23 +40,72 @@
   background: var(--navigation-tree-item-background-hovered);
 }
 
+.react-aria-NavigationTreeItem[data-has-child-items][data-hovered] {
+  background: var(--navigation-tree-item-background);
+}
+
 .react-aria-NavigationTreeItem[data-pressed] {
   background: var(--navigation-tree-item-background-pressed);
 }
 
 .react-aria-NavigationTreeItem[data-has-child-items] {
   color: var(--navigation-tree-header-content);
-  font-size: var(--font-size-label-medium);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-medium);
-  text-transform: var(--text-transform-label);
+  font-weight: var(--font-weight-semibold);
+}
+
+.react-aria-NavigationTreeItem[data-has-child-items].mezzanine-navigation-tree-item-has-link {
+  color: var(--navigation-tree-item-content);
+}
+
+.react-aria-NavigationTreeItem[data-has-child-items].mezzanine-navigation-tree-item-has-link .react-aria-Link[data-hovered] {
+  color: var(--color-link-hover);
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--link-underline-thickness);
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--navigation-tree-item-min-height);
+  justify-content: stretch;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle .mezzanine-button-content {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.react-aria-NavigationTreeItem:has(.mezzanine-navigation-tree-group-toggle[data-hovered]) {
+  background: var(--navigation-tree-item-background-hovered);
+}
+
+.react-aria-NavigationTreeItem:has(.mezzanine-navigation-tree-group-toggle[data-pressed]) {
+  background: var(--navigation-tree-item-background-pressed);
+}
+
+.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle[data-hovered],
+.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle[data-pressed] {
+  background: transparent;
 }
 
 .react-aria-NavigationTreeItem[data-current] {
   border-inline-start-color: var(--navigation-tree-current-indicator);
   background: var(--navigation-tree-item-background-current);
   color: var(--navigation-tree-item-content-current);
+  font-weight: var(--font-weight-semibold);
 }
 
 .react-aria-NavigationTreeItem[data-focus-visible] {
@@ -91,10 +140,10 @@
 .react-aria-NavigationTreeHeader {
   padding: var(--navigation-tree-header-padding-block) var(--navigation-tree-item-padding-inline);
   color: var(--navigation-tree-header-content);
-  font-size: var(--font-size-label-large);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-large);
+  line-height: var(--line-height-label-lg);
   text-transform: var(--text-transform-label);
 }
 

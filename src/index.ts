@@ -1,7 +1,16 @@
 // Mezzanine public entry point.
 // Every component the package exposes is exported from here.
+export { Tabs, TabList, Tab, TabPanel } from './components/Tabs'
+export type {
+  TabsProps, TabsRenderProps, TabListProps, TabListRenderProps,
+  TabProps, TabRenderProps, TabPanelProps, TabPanelRenderProps,
+} from './components/Tabs'
 import './tokens.css'
 import './styles.css'
+
+export { Badge } from './components/Badge'
+
+export type { BadgeProps, BadgeVariant } from './components/Badge'
 
 export { Button } from './components/Button'
 
@@ -25,6 +34,19 @@ export type {
 export { Checkbox } from './components/Checkbox'
 
 export type { CheckboxProps } from './components/Checkbox'
+
+export { Dialog, DialogTrigger, Heading } from './components/Dialog'
+
+export type {
+  DialogProps,
+  DialogRenderProps,
+  DialogTriggerProps,
+  HeadingProps,
+} from './components/Dialog'
+
+export { Modal, ModalOverlay } from './components/Modal'
+
+export type { ModalOverlayProps, ModalRenderProps } from './components/Modal'
 
 export {
   Disclosure,
@@ -122,7 +144,10 @@ export {
   LoadingIcon,
   LocationIcon,
   MenuIcon,
+  MoonIcon,
+  PlaceholderIcon,
   ResetIcon,
+  SunIcon,
   TrustIcon,
 } from './icons/Icons'
 

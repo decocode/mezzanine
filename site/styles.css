@@ -73,10 +73,10 @@ a:focus-visible {
   background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-label-large);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-large);
+  line-height: var(--line-height-label-lg);
   text-transform: var(--text-transform-label);
   cursor: pointer;
 }
@@ -138,10 +138,10 @@ a:focus-visible {
   padding: 0.5rem 0.75rem;
   background: transparent;
   color: var(--color-text);
-  font-size: var(--font-size-label-large);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-large);
+  line-height: var(--line-height-label-lg);
   text-decoration: none;
   text-transform: var(--text-transform-label);
 }
@@ -154,84 +154,19 @@ a:focus-visible {
   background: var(--color-surface-pressed);
 }
 
-.theme-select {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.25rem 0.5rem;
-  align-items: stretch;
+.theme-toggle-group {
   margin-top: 0.5rem;
 }
 
-.theme-select > .react-aria-Label {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-label-medium);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-label-medium);
-}
-
-.theme-select > .react-aria-Button {
-  display: flex;
-  gap: 0.75rem;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  min-width: 0;
+.theme-toggle-group .react-aria-ToggleButton {
+  width: 2.75rem;
   min-height: 2.75rem;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.375rem;
-  background: var(--color-surface);
-  color: var(--color-text);
-  font: inherit;
-  cursor: pointer;
+  padding: 0;
 }
 
-.theme-select > .react-aria-Button[data-hovered] {
-  background: var(--color-surface-hover);
-}
-
-.theme-select > .react-aria-Button[data-pressed] {
-  background: var(--color-surface-pressed);
-}
-
-.theme-select > .react-aria-Button[data-focus-visible] {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
-}
-
-.theme-popover {
-  min-width: var(--trigger-width);
-  border: 1px solid var(--color-border);
-  border-radius: 0.375rem;
-  background: var(--color-surface);
-  color: var(--color-text);
-}
-
-.theme-listbox {
-  padding: 0.25rem;
-  outline: none;
-}
-
-.theme-listbox .react-aria-ListBoxItem {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 2.75rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 0.25rem;
-  outline: none;
-  cursor: pointer;
-}
-
-.theme-listbox .react-aria-ListBoxItem[data-focused],
-.theme-listbox .react-aria-ListBoxItem[data-pressed] {
-  background: var(--color-surface-hover);
-}
-
-.theme-listbox .react-aria-ListBoxItem[data-focus-visible] {
-  outline: 3px solid var(--color-focus);
-  outline-offset: -3px;
+.theme-toggle-group .react-aria-ToggleButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 @keyframes header-navigation-reveal {
@@ -296,10 +231,10 @@ a:focus-visible {
   background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-label-large);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-large);
+  line-height: var(--line-height-label-lg);
   text-align: start;
   text-transform: var(--text-transform-label);
   cursor: pointer;
@@ -340,15 +275,7 @@ a:focus-visible {
 }
 
 .site-sidebar .react-aria-NavigationTreeItem[data-level='1'][data-has-child-items]:not(:first-child) {
-  margin-block-start: 0.5rem;
-}
-
-.animated-navigation-tree {
-  gap: 0;
-}
-
-.animated-navigation-tree > .react-aria-NavigationTreeItem:not(:first-child) {
-  margin-block-start: var(--navigation-tree-gap);
+  margin-block-start: var(--space-2);
 }
 
 .animated-navigation-tree-item {
@@ -373,15 +300,13 @@ a:focus-visible {
   from {
     min-height: 0;
     max-height: 0;
-    margin-block-start: 0;
     opacity: 0;
-    transform: translateY(calc(-1 * var(--navigation-tree-gap)));
+    transform: translateY(calc(-1 * var(--space-1)));
   }
 
   to {
     min-height: var(--navigation-tree-item-min-height);
     max-height: var(--navigation-tree-item-min-height);
-    margin-block-start: var(--navigation-tree-gap);
     opacity: 1;
     transform: translateY(0);
   }
@@ -391,7 +316,6 @@ a:focus-visible {
   from {
     min-height: var(--navigation-tree-item-min-height);
     max-height: var(--navigation-tree-item-min-height);
-    margin-block-start: var(--navigation-tree-gap);
     opacity: 1;
     transform: translateY(0);
   }
@@ -399,18 +323,9 @@ a:focus-visible {
   to {
     min-height: 0;
     max-height: 0;
-    margin-block-start: 0;
     opacity: 0;
-    transform: translateY(calc(-1 * var(--navigation-tree-gap)));
+    transform: translateY(calc(-1 * var(--space-1)));
   }
-}
-
-.sidebar-page-status {
-  flex: none;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-label-small);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-label-small);
 }
 
 .landing-page {
@@ -446,10 +361,10 @@ a:focus-visible {
   border: var(--button-border-width) solid var(--button-primary-border);
   background: var(--button-primary-background);
   color: var(--button-primary-content);
-  font-size: var(--font-size-label-large);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-large);
+  line-height: var(--line-height-label-lg);
   text-decoration: none;
   text-transform: var(--text-transform-label);
 }
@@ -482,11 +397,7 @@ a:focus-visible {
 
 .page-heading-group {
   max-width: 58rem;
-  margin-bottom: 3rem;
-}
-
-.page-breadcrumb-navigation {
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-12);
 }
 
 .page-heading-group h1 {
@@ -529,17 +440,17 @@ a:focus-visible {
 }
 
 .color-palettes > h2 {
-  margin: 0 0 2rem;
+  margin: 0 0 var(--space-4);
 }
 
 .color-palette-category > h4,
 .core-color-palettes > h3,
 .semantic-color-palettes > h3 {
-  margin: 0 0 0.75rem;
+  margin: 0 0 var(--space-4);
 }
 
 .core-color-palettes {
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-8);
 }
 
 .core-color-palettes > .color-palette-category:last-child {
@@ -552,12 +463,6 @@ a:focus-visible {
 
 .color-palette-category-description {
   margin: 0 0 1rem;
-  color: var(--color-text-muted);
-}
-
-.color-category-description {
-  max-width: 44rem;
-  margin: 0 0 2rem;
   color: var(--color-text-muted);
 }
 
@@ -583,6 +488,18 @@ a:focus-visible {
 .color-palette-heading p {
   margin-top: 0.25rem;
   color: var(--color-text-muted);
+}
+
+.color-palette-disclosure {
+  margin-top: 0.5rem;
+}
+
+.color-palette-disclosure p {
+  margin: 0;
+}
+
+.color-palette-disclosure p + p {
+  margin-top: 0.5rem;
 }
 
 .color-palette-viewport {
@@ -630,62 +547,115 @@ a:focus-visible {
   line-height: 1;
 }
 
-.color-palette-step code {
+.spacing-scale-list {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  list-style: none;
+  overflow: hidden;
+}
+
+.spacing-scale-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: end;
+  padding: 0.75rem 1rem;
+}
+
+.spacing-scale-item + .spacing-scale-item {
+  border-top: 1px solid var(--color-border);
+}
+
+.spacing-scale-example {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.spacing-scale-bar {
+  display: block;
+  min-width: 1px;
+  max-width: 100%;
+  height: 1.5rem;
+  background: var(--color-violet-300);
+  border: 1px solid var(--color-violet-700);
+}
+
+.spacing-scale-not-applicable {
   color: var(--color-text-muted);
+  font-size: var(--font-size-body-sm);
+  line-height: 1.5rem;
+}
+
+.spacing-scale-value {
+  display: grid;
+  justify-items: end;
+  gap: 0.125rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.spacing-scale-rem {
+  color: var(--color-text);
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+}
+
+.spacing-scale-pixels {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
 }
 
 .color-roles > h2 {
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
 }
 
 .token-group + .token-group {
-  margin-top: 3rem;
+  margin-top: var(--space-8);
 }
 
 .token-group h3 {
   margin: 0 0 1rem;
 }
 
-code {
-  overflow-wrap: anywhere;
-  font-family: var(--font-family-monospace);
-  font-size: 0.75rem;
-}
-
-.token-table {
+/* Documentation controls layout; Mezzanine supplies table appearance and states. */
+.documentation-table {
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
   overflow-x: auto;
+  /* Keep cell and example focus rings inside the scrollable area. */
+  padding: calc(var(--table-focus-ring-width) + var(--table-focus-ring-offset) + var(--space-1));
 }
 
-.token-table .react-aria-Table {
-  min-width: 64rem;
-}
-
-.button-token-table .react-aria-Table {
-  min-width: 32rem;
-}
-
-.typography-list {
-  display: grid;
-  gap: 1px;
-  overflow: hidden;
-  margin: 0;
-  padding: 1px;
-  background: var(--color-border);
-  list-style: none;
-}
-
-.typography-card {
-  display: grid;
-  gap: 1.5rem;
-  min-width: 0;
-  padding: clamp(1rem, 4vw, 2rem);
-  background: var(--color-surface);
-}
-
-.typography-card p {
+.documentation-table .react-aria-Column,
+.documentation-table .react-aria-Cell {
   overflow-wrap: anywhere;
-  margin: 0;
+}
+
+.documentation-table code {
+  /* Grid and flex metadata must not stretch the inline-code background. */
+  width: fit-content;
+  max-width: 100%;
+}
+
+:is(.documentation-props-table, .documentation-anatomy-table) .react-aria-Table {
+  /* Scroll on narrow screens instead of crushing names or descriptions. */
+  min-width: 28rem;
+}
+
+:is(.documentation-props-table, .documentation-anatomy-table) .react-aria-Column:first-child,
+:is(.documentation-props-table, .documentation-anatomy-table) .react-aria-Cell:first-child {
+  width: 25%;
+  white-space: nowrap;
+}
+
+/* Prefer equal columns, while automatic table layout leaves room for controls. */
+.documentation-comparison-table .react-aria-Column,
+.documentation-comparison-table .react-aria-Cell {
+  width: 50%;
 }
 
 .typography-meta {
@@ -693,6 +663,77 @@ code {
   gap: 0.5rem;
   flex-direction: column;
   color: var(--color-text-muted);
+}
+
+.typography-table .react-aria-Table {
+  /* Keep full-size typography specimens readable alongside their descriptions. */
+  min-width: 40rem;
+}
+
+.typography-table .react-aria-Column:first-child,
+.typography-table .react-aria-Cell:first-child {
+  width: 25%;
+}
+
+.typography-table .react-aria-Column:nth-child(2),
+.typography-table .react-aria-Cell:nth-child(2) {
+  width: 40%;
+}
+
+.typography-table .react-aria-Cell p {
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+.shape-corner-preview {
+  width: 100%;
+  height: 10rem;
+  margin-bottom: var(--space-6);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.shape-corner-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+}
+
+.shape-corner-control {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.shape-corner-code {
+  margin: var(--space-2) 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.radius-scale-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.radius-scale-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.radius-scale-sample {
+  width: 100%;
+  height: 6rem;
+  margin-bottom: var(--space-2);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
 }
 
 .elevation-role-list {
@@ -721,79 +762,37 @@ code {
 
 .elevation-role-card code {
   overflow-wrap: anywhere;
-  color: var(--color-text-muted);
 }
 
 .elevation-role-card p {
   margin: 0;
   color: var(--color-text-muted);
-  font-size: var(--font-size-body-small);
-  line-height: var(--line-height-body-small);
-}
-
-.table-example {
-  max-width: 48rem;
-  overflow-x: auto;
-}
-
-.table-example .react-aria-Table {
-  min-width: 32rem;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
 }
 
 .table-supporting-text {
   display: block;
   margin-top: 0.25rem;
   color: var(--color-text-muted);
-  font-size: var(--font-size-body-small);
+  font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-body-small);
-}
-
-.motion-timing-table .react-aria-Column:nth-child(2),
-.motion-timing-table .react-aria-Cell:nth-child(2),
-.motion-timing-table .react-aria-Column:nth-child(3),
-.motion-timing-table .react-aria-Cell:nth-child(3) {
-  width: 7rem;
-  white-space: nowrap;
-}
-
-.motion-token-table .react-aria-Column:first-child,
-.motion-token-table .react-aria-Cell:first-child {
-  width: 20rem;
-  white-space: nowrap;
-}
-
-.motion-token-table .react-aria-Column:nth-child(2),
-.motion-token-table .react-aria-Cell:nth-child(2) {
-  width: 7rem;
-  white-space: nowrap;
-}
-
-.table-example .motion-patterns-table {
-  min-width: 64rem;
-}
-
-.table-section {
-  margin-bottom: 3rem;
-}
-
-.table-section > h2 {
-  margin-bottom: 1rem;
-}
-
-.table-section > p,
-.table-example-note {
-  max-width: 48rem;
-  color: var(--color-text-muted);
+  line-height: var(--line-height-body-sm);
 }
 
 .table-example-group {
   display: grid;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
+  margin-block-start: var(--space-8);
 }
 
 .table-example-group h3 {
-  margin-bottom: 1rem;
+  margin: 0 0 var(--space-4);
+}
+
+.table-example-group > div {
+  min-width: 0;
 }
 
 .table-selection-example .react-aria-Column:first-child,
@@ -804,53 +803,146 @@ code {
   vertical-align: middle;
 }
 
-.checkbox-states {
-  margin-bottom: 3rem;
+.table-of-contents {
+  margin-bottom: var(--space-12);
 }
 
-.checkbox-states > h2 {
-  margin-bottom: 2rem;
+.table-of-contents > :is(h2, h3) {
+  margin: 0 0 var(--space-4);
 }
 
-.checkbox-states-table .react-aria-Table {
-  table-layout: fixed;
+.table-of-contents ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.checkbox-states-table .react-aria-Column:first-child,
-.checkbox-states-table .react-aria-Cell:first-child {
-  width: 50%;
+.table-of-contents ul ul {
+  margin-top: 0.25rem;
+  padding-inline-start: 1.25rem;
+}
+
+.table-of-contents li {
+  min-width: 0;
+}
+
+.table-of-contents .react-aria-Link {
+  min-height: 2rem;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.component-section :is(h2, h3, h4)[id],
+.table-of-contents-example :is(h3, h4)[id] {
+  /* Keep anchor destinations clear of the sticky site header. */
+  scroll-margin-top: 6rem;
+}
+
+.table-of-contents-example {
+  margin-bottom: 1rem;
+}
+
+.table-of-contents-example section + section {
+  margin-top: 2rem;
+}
+
+.table-of-contents-example section > :is(h3, h4) {
+  margin: 0 0 0.5rem;
+}
+
+.table-of-contents-example section > p {
+  margin: 0 0 1rem;
 }
 
 .component-section {
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-12);
 }
 
 .component-section > h2 {
-  margin-bottom: 1rem;
+  margin: 0 0 var(--space-4);
+  overflow-wrap: anywhere;
+}
+
+/* Documentation hierarchy only: do not reach into demonstrated components. */
+.component-section > :is(h3, h4),
+.typography-guidance > h3 {
+  margin: var(--space-8) 0 var(--space-4);
+}
+
+.component-section > section {
+  margin-block-start: var(--space-8);
+}
+
+.component-section > section > :is(h3, h4) {
+  margin: 0 0 var(--space-4);
+}
+
+.component-section > :last-child,
+.component-section > section > :last-child {
+  margin-block-end: 0;
 }
 
 .component-section-description {
   max-width: 44rem;
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
   color: var(--color-text-muted);
 }
 
+.typography-guidance,
+.component-section :where(ul, ol):is(.mz-text-body-large, .mz-text-body-medium, .mz-text-body-small) {
+  max-inline-size: 65ch;
+}
+
+.typography-guidance > p {
+  margin: 0;
+}
+
 .component-example {
+  min-width: 0;
   max-width: 40rem;
-  margin-top: 1.5rem;
-  padding: 1rem;
+  margin-top: var(--space-4);
+  padding: var(--space-4);
   border: 1px solid var(--color-border);
   background: var(--color-page);
 }
 
+/* The frame supplies outer spacing; retain spacing within nested prose lists. */
+.component-example > :is(p, ul, ol):first-child {
+  margin-block-start: 0;
+}
+
+.component-example > :is(p, ul, ol):last-child {
+  margin-block-end: 0;
+}
+
+.component-example.documentation-table > .react-aria-Table {
+  /* Preserve readable example columns; the documentation wrapper scrolls. */
+  min-width: 28rem;
+}
+
+.component-example-feedback {
+  margin: 1rem 0 0;
+}
+
+.component-reference-links {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 44rem;
+  margin: 0;
+  padding-inline-start: 1.25rem;
+}
+
 .breadcrumbs-examples {
   display: grid;
-  gap: 2rem;
+  gap: var(--space-8);
 }
 
 .breadcrumbs-examples h3,
 .breadcrumbs-examples p {
-  margin: 0 0 0.75rem;
+  margin: 0 0 var(--space-4);
 }
 
 .breadcrumbs-examples p {
@@ -858,105 +950,18 @@ code {
   color: var(--color-text-muted);
 }
 
-.disclosure-group-example {
-  margin-top: 1rem;
-}
-
-.toggle-button-states-table .react-aria-Table {
-  table-layout: fixed;
-}
-
-.toggle-button-states-table .react-aria-Column:first-child,
-.toggle-button-states-table .react-aria-Cell:first-child {
-  width: 50%;
-}
-
 .toggle-button-group-examples {
   display: grid;
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
 }
 
 .toggle-button-group-examples h3 {
-  margin: 0;
+  margin: 0 0 var(--space-4);
 }
 
 .navigation-tree-example {
   max-width: 24rem;
-}
-
-.table-example-note {
-  margin-top: 0.75rem;
-  font-size: var(--font-size-body-small);
-  line-height: var(--line-height-body-small);
-}
-
-.button-variants,
-.button-sizes,
-.button-content {
-  margin-bottom: 3rem;
-}
-
-.button-variants > h2,
-.button-sizes > h2,
-.button-content > h2,
-.button-tokens > h2 {
-  margin: 0 0 2rem;
-}
-
-.button-variants-table {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.link-states-table {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.link-content-table {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.link-content-table .react-aria-Table {
-  min-width: 40rem;
-  table-layout: fixed;
-}
-
-.link-content-table .react-aria-Column,
-.link-content-table .react-aria-Cell {
-  width: 50%;
-}
-
-.button-sizes-table {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.button-content-table {
-  max-width: 100%;
-  overflow-x: auto;
-}
-
-.button-content-table .react-aria-Table,
-.button-sizes-table .react-aria-Table {
-  min-width: 40rem;
-  table-layout: fixed;
-}
-
-.button-content-table .react-aria-Column:first-child,
-.button-content-table .react-aria-Cell:first-child,
-.button-sizes-table .react-aria-Column:first-child,
-.button-sizes-table .react-aria-Cell:first-child {
-  width: 66.6667%;
-}
-
-.button-content-table .react-aria-Column:last-child,
-.button-content-table .react-aria-Cell:last-child,
-.button-sizes-table .react-aria-Column:last-child,
-.button-sizes-table .react-aria-Cell:last-child {
-  width: 33.3333%;
 }
 
 .icon-grid {
@@ -1011,48 +1016,42 @@ code {
 
 .icon-grid code {
   max-width: 100%;
-  color: var(--color-text-muted);
 }
 
-.button-variants-table .react-aria-Table {
+.documentation-state-matrix .react-aria-Table {
   width: max-content;
-  min-width: 72rem;
+  min-width: 100%;
 }
 
-.link-states-table .react-aria-Table {
-  width: max-content;
-  min-width: 65rem;
-}
-
-.button-variants-table .react-aria-Column:first-child,
-.button-variants-table .react-aria-Cell:first-child {
+.documentation-state-matrix .react-aria-Column:first-child,
+.documentation-state-matrix .react-aria-Cell:first-child {
   width: 15rem;
   min-width: 15rem;
 }
 
-.button-variants-table .react-aria-Column:not(:first-child),
-.button-variants-table .react-aria-Cell:not(:first-child) {
+.documentation-state-matrix .react-aria-Column:not(:first-child),
+.documentation-state-matrix .react-aria-Cell:not(:first-child) {
   min-width: 9rem;
 }
 
 .component-state-heading,
-.button-table-item-heading {
+.table-item-heading {
   display: grid;
   gap: 0.25rem;
 }
 
 .component-state-heading code,
-.button-table-item-heading > code,
-.button-table-item-heading > span {
-  color: var(--color-text-muted);
+.table-item-heading > code,
+.table-item-heading > span {
   font-weight: var(--font-weight-regular);
   text-transform: none;
 }
 
-.button-table-item-heading > span {
+.table-item-heading > span {
+  color: var(--color-text-muted);
   margin-top: 0.5rem;
-  font-size: var(--font-size-body-small);
-  line-height: var(--line-height-body-small);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
 }
 
 .empty-page-status {
@@ -1062,8 +1061,8 @@ code {
 
 @media (max-width: 30rem) {
   .landing-hero h1 {
-    font-size: var(--font-size-display-small);
-    line-height: var(--line-height-display-small);
+    font-size: var(--font-size-display-sm);
+    line-height: var(--line-height-display-sm);
   }
 
 }
@@ -1089,21 +1088,14 @@ code {
     align-items: center;
   }
 
-  .theme-select {
-    grid-template-columns: auto auto;
-    align-items: center;
+  .theme-toggle-group {
     margin-top: 0;
     margin-inline-start: 0.5rem;
   }
 
-  .theme-select > .react-aria-Button {
-    width: auto;
-    min-width: 7.5rem;
-  }
-
   .site-layout {
     display: grid;
-    grid-template-columns: 15rem minmax(0, 1fr);
+    grid-template-columns: 17.5rem minmax(0, 1fr);
   }
 
   .mobile-sidebar {
@@ -1116,7 +1108,7 @@ code {
     display: block;
     align-self: start;
     height: calc(100dvh - 4rem);
-    padding: 2rem 1rem;
+    padding: 2rem var(--space-2);
     overflow-y: auto;
     border-inline-end: 1px solid var(--color-border);
     scrollbar-gutter: stable;
@@ -1127,10 +1119,6 @@ code {
     padding-inline: clamp(2rem, 5vw, 5rem);
   }
 
-  .typography-card {
-    grid-template-columns: 12rem minmax(0, 1fr);
-    align-items: baseline;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

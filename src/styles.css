@@ -6,13 +6,17 @@
 */
 
 @import './typography.css';
+@import './components/Badge.css';
 @import './components/Breadcrumbs.css';
 @import './components/Button.css';
 @import './components/Checkbox.css';
+@import './components/Dialog.css';
 @import './components/Disclosure.css';
 @import './components/IconButton.css';
 @import './components/Link.css';
+@import './components/Modal.css';
 @import './components/NavigationTree.css';
 @import './components/RadioGroup.css';
 @import './components/Table.css';
+@import './components/Tabs.css';
 @import './components/ToggleButton.css';

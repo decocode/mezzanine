@@ -2,9 +2,9 @@ import type { SortDescriptor } from '@decocode/mezzanine'
 
 export interface TableExampleRow {
   id: string
-  name: string
-  type: string
-  updated: string
+  columnA: string
+  columnB: string
+  columnC: string
 }
 
 export const tableAnatomy = [
@@ -17,12 +17,12 @@ export const tableAnatomy = [
 ] as const
 
 export const tableExampleRows: TableExampleRow[] = [
-  { id: 'brand-guidelines', name: 'Brand guidelines', type: 'Document', updated: '2026-09-18' },
-  { id: 'component-library', name: 'Component library', type: 'Project', updated: '2026-10-04' },
-  { id: 'research-notes', name: 'Research notes', type: 'Document', updated: '2026-08-27' },
+  { id: 'row-a', columnA: 'Row A', columnB: 'Cell A2', columnC: 'Cell A3' },
+  { id: 'row-b', columnA: 'Row B', columnB: 'Cell B2', columnC: 'Cell B3' },
+  { id: 'row-c', columnA: 'Row C', columnB: 'Cell C2', columnC: 'Cell C3' },
 ]
 
-type SortableTableColumn = 'name' | 'type' | 'updated'
+type SortableTableColumn = 'columnA' | 'columnB' | 'columnC'
 
 export function sortTableExampleRows(
   rows: TableExampleRow[],

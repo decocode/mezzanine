@@ -15,6 +15,10 @@ body-large       body-medium       body-small
 label-large      label-medium      label-small
 ```
 
+Public typography classes begin with `mz-`, which is short for Mezzanine. The
+namespace identifies the library that supplied the class and helps prevent a
+product's own class names from clashing with it.
+
 These are visual styles, not HTML elements. A heading's HTML level still comes
 from its position in the document outline.
 
@@ -39,21 +43,21 @@ values without changing the style names.
 
 | Style | Class | Default size | Default family and weight |
 | --- | --- | ---: | --- |
-| Display large | `mezzanine-text-display-large` | 72px | System, regular |
-| Display medium | `mezzanine-text-display-medium` | 60px | System, regular |
-| Display small | `mezzanine-text-display-small` | 48px | System, regular |
-| Heading large | `mezzanine-text-heading-large` | 36px | System, regular |
-| Heading medium | `mezzanine-text-heading-medium` | 30px | System, regular |
-| Heading small | `mezzanine-text-heading-small` | 24px | System, regular |
-| Title large | `mezzanine-text-title-large` | 20px | System, semibold |
-| Title medium | `mezzanine-text-title-medium` | 18px | System, semibold |
-| Title small | `mezzanine-text-title-small` | 16px | System, semibold |
-| Body large | `mezzanine-text-body-large` | 18px | System, regular |
-| Body medium | `mezzanine-text-body-medium` | 16px | System, regular |
-| Body small | `mezzanine-text-body-small` | 14px | System, regular |
-| Label large | `mezzanine-text-label-large` | 14px | System, semibold |
-| Label medium | `mezzanine-text-label-medium` | 12px | System, semibold |
-| Label small | `mezzanine-text-label-small` | 11px | System, semibold |
+| Display large | `mz-text-display-large` | 72px | System, regular |
+| Display medium | `mz-text-display-medium` | 60px | System, regular |
+| Display small | `mz-text-display-small` | 48px | System, regular |
+| Heading large | `mz-text-heading-large` | 36px | System, regular |
+| Heading medium | `mz-text-heading-medium` | 30px | System, regular |
+| Heading small | `mz-text-heading-small` | 24px | System, regular |
+| Title large | `mz-text-title-large` | 20px | System, semibold |
+| Title medium | `mz-text-title-medium` | 18px | System, semibold |
+| Title small | `mz-text-title-small` | 16px | System, semibold |
+| Body large | `mz-text-body-large` | 18px | System, regular |
+| Body medium | `mz-text-body-medium` | 16px | System, regular |
+| Body small | `mz-text-body-small` | 14px | System, regular |
+| Label large | `mz-text-label-large` | 14px | System, semibold |
+| Label medium | `mz-text-label-medium` | 12px | System, semibold |
+| Label small | `mz-text-label-small` | 11px | System, semibold |
 
 `body-medium` is the default style for normal reading. `label-small` is only
 for brief, supplementary text in space-constrained components. Important
@@ -66,16 +70,80 @@ Importing `@decocode/mezzanine` or `@decocode/mezzanine/styles.css` makes the
 classes available:
 
 ```tsx
-<h1 className="mezzanine-text-heading-large">Account settings</h1>
-<p className="mezzanine-text-body-medium">Manage your profile and security.</p>
+<h1 className="mz-text-heading-large">Account settings</h1>
+<p className="mz-text-body-medium">Manage your profile and security.</p>
 ```
 
-The class controls typography only. It does not add colour, margins or other
-layout decisions.
+The class controls typography without adding colour or container layout.
+On prose lists, body text classes also apply the indentation and item spacing
+described below. Other elements retain their existing margins.
 
 The style class must not determine the semantic element. Choose `h1`, `h2`,
 `p`, `span`, `label` or another element for its meaning and structure, then
 apply the visual style.
+
+## Line height
+
+Line height separates lines within a paragraph or list item. Margins separate
+paragraphs and list items; do not increase line height just to separate bullets.
+
+A unitless line height multiplies the element's font size. For example, `1.5`
+with `16px` text gives a `24px` line box, not `24px` of empty space between
+lines. Mezzanine uses unitless values so line height scales
+when text size changes. CSS also accepts pixel values, but they are not
+Mezzanine's convention.
+
+Each named text style applies its font size and paired
+`--line-height-{role}-{size}` token automatically. Use `mz-text-body-medium`
+for normal reading; its `--line-height-body-md` default is `1.5`.
+Other styles, including headings and labels, use their own paired values.
+There is no need to set line height separately. The Typography showcase
+reads the current body-medium value from CSS.
+
+## Lists
+
+Unordered lists use bullet points; ordered lists use numbers. Both share the
+same body typography and spacing.
+The showcase constrains body-styled prose lists to a reading width of `65ch`.
+List markers sit outside the text so wrapped lines align with the item text,
+not with the marker.
+
+For prose lists, apply `mz-text-body-large`, `mz-text-body-medium` or
+`mz-text-body-small` directly to a semantic `ul` or `ol`:
+
+- List items inherit the chosen body style's line height.
+- Adjacent items have `--space-2` between them (currently `0.5rem`).
+- Nested lists use the same item gap, `--space-2` above the nested list,
+  and `--space-6` indentation at each level.
+- Navigation, menus and component lists without these body text classes
+  (or a body-styled list ancestor) are not targeted by these rules.
+- Avoid fixed-height prose containers so enlarged or re-spaced text can reflow.
+
+```tsx
+<ul className="mz-text-body-medium">
+  <li>Lorem ipsum dolor sit amet.</li>
+  <li>Consectetur adipiscing elit.</li>
+</ul>
+
+<ol className="mz-text-body-medium">
+  <li>Lorem ipsum dolor sit amet.</li>
+  <li>Consectetur adipiscing elit.</li>
+</ol>
+```
+
+## Inline code
+
+Use the semantic `<code>` element for a token, property name, value or other
+technical text within a sentence. Mezzanine gives it a subtle theme-aware box
+and uses the monospace font family so it remains distinct from the surrounding
+prose.
+
+```html
+<p>The <code>--space-4</code> token stores <code>1rem</code> by default.</p>
+```
+
+Inline code is not a general emphasis style. Use `strong` or `em` when the text
+is important or stressed but is not technical code.
 
 ## Pattern mappings
 
@@ -94,7 +162,7 @@ Common patterns should reuse the foundation instead of creating new sizes:
 | Section label | `label-medium` |
 | Quote | `body-large` or `heading-small` |
 | Metric | `display-small` |
-| Code | `body-small` with `--font-family-monospace` |
+| Inline code | Semantic `<code>` element |
 
 A pattern should become its own shared style only after more than one product
 demonstrates that it needs a distinct, stable treatment.

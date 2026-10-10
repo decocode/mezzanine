@@ -1,5 +1,6 @@
 import { Button as ReactAriaButton, Heading } from 'react-aria-components'
 import {
+  Badge,
   Button,
   ChevronDownIcon,
   Disclosure,
@@ -10,8 +11,9 @@ import {
   NavigationTreeItemContent,
 } from '@decocode/mezzanine'
 import {
-  findSiteNavigationGroup,
+  findSiteNavigationGroups,
   siteNavigationGroups,
+  type SiteNavigationGroup,
   type SitePageDefinition,
 } from './siteNavigation'
 import { useAnimatedNavigationTree } from './useAnimatedNavigationTree'
@@ -37,42 +39,57 @@ function BrowseIcon() {
 }
 
 function SidebarNavigation({ currentPage }: SidebarProps) {
-  const currentGroup = findSiteNavigationGroup(currentPage.id)
+  const currentGroups = findSiteNavigationGroups(currentPage.id)
   const {
     closingKeys,
     expandedKeys,
     onExpandedChange,
     openingKeys,
-  } = useAnimatedNavigationTree(currentGroup ? [currentGroup.id] : [])
+  } = useAnimatedNavigationTree(currentGroups.map((group) => group.id))
 
-  return (
-    <NavigationTree
-      aria-label="Mezzanine documentation"
-      className="react-aria-NavigationTree animated-navigation-tree"
-      expandedKeys={expandedKeys}
-      onExpandedChange={onExpandedChange}
-      selectedRoute={currentPage.path}
-    >
-      {siteNavigationGroups.map((group) => (
+  function renderGroup(group: SiteNavigationGroup, ancestorIds: string[] = []) {
+    const parentIsOpening = ancestorIds.some((id) => openingKeys.has(id))
+    const parentIsClosing = ancestorIds.some((id) => closingKeys.has(id))
+    const childrenAreOpening = parentIsOpening || openingKeys.has(group.id)
+    const childrenAreClosing = parentIsClosing || closingKeys.has(group.id)
+
+    return (
         <NavigationTreeItem
-          className={`react-aria-NavigationTreeItem sidebar-navigation-tree-group${closingKeys.has(group.id) ? ' is-closing' : ''}`}
+          className={`react-aria-NavigationTreeItem sidebar-navigation-tree-group${group.path ? ' mezzanine-navigation-tree-item-has-link' : ''}${parentIsOpening || parentIsClosing ? ' animated-navigation-tree-item' : ''}${parentIsOpening ? ' is-opening' : ''}${childrenAreClosing ? ' is-closing' : ''}`}
+          href={group.path}
           id={group.id}
           key={group.id}
           textValue={group.label}
         >
           <NavigationTreeItemContent>
-            <Link>{group.label}</Link>
-            <Button
-              aria-label={`Expand or collapse ${group.label}`}
-              iconLeading={<ChevronDownIcon />}
-              size="sm"
-              slot="chevron"
-              variant="tertiary"
-            />
+            {group.path ? (
+              <>
+                <Link>{group.label}</Link>
+                <Button
+                  aria-label={`Expand or collapse ${group.label}`}
+                  iconLeading={<ChevronDownIcon />}
+                  size="sm"
+                  slot="chevron"
+                  variant="tertiary"
+                />
+              </>
+            ) : (
+              <Button
+                aria-label={`Expand or collapse ${group.label}`}
+                className="mezzanine-navigation-tree-group-toggle"
+                iconTrailing={<ChevronDownIcon />}
+                size="sm"
+                slot="chevron"
+                variant="tertiary"
+              >
+                {group.label}
+              </Button>
+            )}
           </NavigationTreeItemContent>
+          {group.groups?.map((childGroup) => renderGroup(childGroup, [...ancestorIds, group.id]))}
           {group.pages.map((page) => (
             <NavigationTreeItem
-              className={`react-aria-NavigationTreeItem animated-navigation-tree-item${openingKeys.has(group.id) ? ' is-opening' : ''}${closingKeys.has(group.id) ? ' is-closing' : ''}`}
+              className={`react-aria-NavigationTreeItem animated-navigation-tree-item${childrenAreOpening ? ' is-opening' : ''}${childrenAreClosing ? ' is-closing' : ''}`}
               href={page.path}
               id={page.id}
               key={page.id}
@@ -82,14 +99,25 @@ function SidebarNavigation({ currentPage }: SidebarProps) {
                 <Link>
                   <span>{page.label}</span>
                   {page.status === 'empty' && (
-                    <span className="sidebar-page-status">Empty</span>
+                    <Badge variant="info">WIP</Badge>
                   )}
                 </Link>
               </NavigationTreeItemContent>
             </NavigationTreeItem>
           ))}
         </NavigationTreeItem>
-      ))}
+    )
+  }
+
+  return (
+    <NavigationTree
+      aria-label="Mezzanine documentation"
+      className="react-aria-NavigationTree animated-navigation-tree"
+      expandedKeys={expandedKeys}
+      onExpandedChange={onExpandedChange}
+      selectedRoute={currentPage.path}
+    >
+      {siteNavigationGroups.map((group) => renderGroup(group))}
     </NavigationTree>
   )
 }
