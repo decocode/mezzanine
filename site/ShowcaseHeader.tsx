@@ -1,10 +1,5 @@
-import { useState } from 'react'
 import {
-  Button,
-  Heading,
-  MenuIcon,
-  Disclosure,
-  DisclosurePanel,
+  Header,
   Link,
   MoonIcon,
   PlaceholderIcon,
@@ -22,11 +17,11 @@ interface ThemeControlProps {
   themeSelection: ThemeSelection
 }
 
-interface HeaderProps extends ThemeControlProps {
+interface ShowcaseHeaderProps extends ThemeControlProps {
   currentPath: string
 }
 
-interface HeaderNavigationProps extends HeaderProps {
+interface HeaderNavigationProps extends ShowcaseHeaderProps {
   onNavigate?: () => void
 }
 
@@ -88,57 +83,29 @@ function HeaderNavigation({
   )
 }
 
-export function Header({
+export function ShowcaseHeader({
   currentPath,
   onThemeSelectionChange,
   themeSelection,
-}: HeaderProps) {
-  const [isMenuExpanded, setIsMenuExpanded] = useState(false)
-  const closeMenu = () => setIsMenuExpanded(false)
-
+}: ShowcaseHeaderProps) {
   return (
-    <header className="global-header">
+    <Header brand={(
       <Link
         aria-current={currentPath === '/' ? 'page' : undefined}
         className="site-name"
         href="/"
-        onPress={closeMenu}
       >
         Mezzanine
       </Link>
-
-      <Disclosure
-        className="mobile-navigation"
-        isExpanded={isMenuExpanded}
-        onExpandedChange={setIsMenuExpanded}
-      >
-        <Heading className="mobile-navigation-heading" level={2}>
-          <Button
-            className="menu-trigger"
-            iconLeading={<MenuIcon />}
-            slot="trigger"
-            variant="secondary"
-          >
-            Menu
-          </Button>
-        </Heading>
-        <DisclosurePanel className="mobile-navigation-panel">
-          <HeaderNavigation
-            currentPath={currentPath}
-            onNavigate={closeMenu}
-            onThemeSelectionChange={onThemeSelectionChange}
-            themeSelection={themeSelection}
-          />
-        </DisclosurePanel>
-      </Disclosure>
-
-      <div className="desktop-navigation">
+    )}>
+      {({ closeMenu }) => (
         <HeaderNavigation
           currentPath={currentPath}
+          onNavigate={closeMenu}
           onThemeSelectionChange={onThemeSelectionChange}
           themeSelection={themeSelection}
         />
-      </div>
-    </header>
+      )}
+    </Header>
   )
 }

@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `IconButton`, `DisclosureHeader`, `TableOfContents` and `PageHeading` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `IconButton`, `DisclosureHeader`, `TableOfContents`, `PageHeading` and `Header` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
@@ -82,7 +82,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/CheckboxPage.tsx` | Checkbox example and selection states; loaded only when its route is requested |
 | `site/pages/RadioGroupPage.tsx` | RadioGroup anatomy, states, validation and token reference; loaded only when its route is requested |
 | `site/pages/TablePage.tsx` | Table selection, sorting, empty-state and anatomy examples; loaded only when its route is requested |
-| `site/Header.tsx` | Responsive showcase header with React Aria links, an icon-only Mezzanine ToggleButtonGroup theme switcher and Disclosure hamburger menu |
+| `src/components/Header.tsx` | Public sticky header with supplied branding/navigation and a React Aria Disclosure mobile menu |
+| `src/components/Header.css` | Token-based header layout, text-size-aware container breakpoint and reduced-motion-aware menu panel |
+| `site/ShowcaseHeader.tsx` | Supplies Mezzanine branding, Docs link and theme controls to the library Header |
 | `site/Sidebar.tsx` | Responsive nested NavigationTree sidebar, expanding the current page's ancestor groups, including the mobile Browse sections disclosure |
 | `src/components/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |
 | `src/components/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from '@decocode/mezzanine'
-import { Header } from './Header'
+import { ShowcaseHeader } from './ShowcaseHeader'
 import { Sidebar } from './Sidebar'
 import { DocumentationHeading } from './DocumentationHeading'
 import { DocumentationPage } from './DocumentationPage'
@@ -78,7 +78,7 @@ export function App({ initialThemeSelection }: AppProps) {
     return (
       <>
         <title>Page not found | Mezzanine</title>
-        <Header
+        <ShowcaseHeader
           currentPath={currentPath}
           onThemeSelectionChange={setThemeSelection}
           themeSelection={themeSelection}
@@ -93,7 +93,7 @@ export function App({ initialThemeSelection }: AppProps) {
       <>
         <title>Mezzanine</title>
         <Link className="skip-link" href="#main-content">Skip to main content</Link>
-        <Header
+        <ShowcaseHeader
           currentPath={currentPath}
           onThemeSelectionChange={setThemeSelection}
           themeSelection={themeSelection}
@@ -107,7 +107,7 @@ export function App({ initialThemeSelection }: AppProps) {
     <>
       <title>{`${currentPage.label} | Mezzanine`}</title>
       <Link className="skip-link" href="#main-content">Skip to main content</Link>
-      <Header
+      <ShowcaseHeader
         currentPath={currentPath}
         onThemeSelectionChange={setThemeSelection}
         themeSelection={themeSelection}

@@ -247,6 +247,23 @@ and may vary the shared shadow opacity.
 Keyboard focus is not an elevation role. Components continue to use the
 separate `--color-focus` token for visible focus indicators.
 
+## Header tokens
+
+Header provides a sticky container and a compact Disclosure menu. Applications supply
+branding and navigation; the menu label defaults to Menu and can be changed.
+Its own container switches to desktop navigation at 48rem, relative to the root text size.
+
+| Token | Meaning |
+| --- | --- |
+| `--header-z-index` | Header stacking order |
+| `--header-border-width` | Header, trigger and panel border thickness |
+| `--header-min-height` | Minimum height of the content row |
+| `--header-wide-padding-inline` | Horizontal padding in the desktop layout |
+| `--header-menu-min-height` | Minimum mobile trigger height |
+| `--header-focus-ring-width`, `--header-focus-ring-offset` | Menu trigger focus outline |
+| `--header-panel-max-height` | Maximum panel height before it scrolls |
+| `--header-motion-duration`, `--header-motion-offset` | Panel entry timing and initial vertical displacement; disabled with reduced motion |
+
 ## Page heading tokens
 
 PageHeading retains the existing page introduction appearance. Its heading uses

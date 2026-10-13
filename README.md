@@ -68,3 +68,26 @@ to choose an explicit theme. Use `data-theme="system"` (or no attribute) to foll
 Light/Dark preference, with Light as the fallback.
 
 The package is `private` and is not published to npm.
+
+## Reusable Header
+
+`Header` supplies the sticky layout and mobile disclosure menu. Pass your branding
+as `brand` and your navigation as children. Use `menuLabel` to replace the default
+“Menu” text, and `className` to add application-specific styling.
+
+```tsx
+import { Header, Link } from '@decocode/mezzanine'
+
+<Header brand={<Link href="/">My application</Link>}>
+  {({ closeMenu }) => (
+    <nav aria-label="Main navigation">
+      <Link href="/about" onPress={closeMenu}>About</Link>
+    </nav>
+  )}
+</Header>
+```
+
+The children appear in separate mobile and desktop containers; CSS exposes only
+one at a time. Avoid hard-coded HTML IDs inside this repeated content; use React’s
+`useId` in child components when IDs are needed. Branding, navigation content,
+link presentation and theme controls belong to the consuming application.

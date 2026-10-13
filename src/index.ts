@@ -233,3 +233,6 @@ export type { TableOfContentsProps, TableOfContentsSection } from './components/
 
 export { PageHeading } from './components/PageHeading'
 export type { PageHeadingProps } from './components/PageHeading'
+
+export { Header } from './components/Header'
+export type { HeaderProps, HeaderRenderProps } from './components/Header'
