@@ -1,5 +1,5 @@
 import { PageHeading } from '@decocode/mezzanine'
-import { spacingScaleSteps } from '../content/foundationData'
+import { spacingScaleSteps } from '../content/spacingContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 
 function SpacingScaleItem({

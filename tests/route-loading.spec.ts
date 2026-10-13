@@ -19,7 +19,7 @@ for (const sitePage of sitePages) {
     const expectedPage = sitePage.id.split('-').map((word) => (
       word[0].toUpperCase() + word.slice(1)
     )).join('') + 'Page'
-    expect(pageChunks).toEqual(sitePage.status === 'implemented' && sitePage.id !== 'home'
+    expect(pageChunks).toEqual(sitePage.status === 'implemented'
       ? [expectedPage]
       : [])
     expect(errors).toEqual([])

@@ -1,8 +1,8 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { TableOfContents } from '@decocode/mezzanine'
 import { tableOfContentsContent } from '../content/tableOfContentsContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function TableOfContentsPage() {
   const exampleSections = [
@@ -35,7 +35,7 @@ export default function TableOfContentsPage() {
           title: 'Example',
           content: (<>
             {tableOfContentsContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample className="table-of-contents-example">
+            <ExampleZone className="table-of-contents-example">
               <TableOfContents
                 heading="Example contents"
                 headingLevel={3}
@@ -53,7 +53,7 @@ export default function TableOfContentsPage() {
                   ))}
                 </section>
               ))}
-            </ComponentExample>
+            </ExampleZone>
             <p className="component-section-description">{tableOfContentsContent.exampleParagraphs[1]}</p>
           </>),
         },
@@ -65,14 +65,14 @@ export default function TableOfContentsPage() {
               id: 'table-of-contents-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="TableOfContents anatomy" nameColumn="Component" rows={tableOfContentsContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="TableOfContents anatomy" nameColumn="Component" rows={tableOfContentsContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {
               id: 'table-of-contents-props-heading',
               title: 'Props',
               content: (<>
-                <ComponentReferenceTable aria-label="Table of Contents props" nameColumn="Prop" rows={tableOfContentsContent.propsRows} className="documentation-props-table" />
+                <DocsTable aria-label="Table of Contents props" nameColumn="Prop" rows={tableOfContentsContent.propsRows} className="documentation-props-table" />
               </>),
             },
             {

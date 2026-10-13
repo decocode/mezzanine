@@ -1,8 +1,8 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { badgeContent } from '../content/badgeContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function BadgePage() {
   return (
@@ -17,9 +17,9 @@ export default function BadgePage() {
           title: 'Example',
           content: (<>
             {badgeContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <Badge>Badge label</Badge>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -53,7 +53,7 @@ export default function BadgePage() {
               id: 'badge-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="Badge anatomy" nameColumn="Component" rows={badgeContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="Badge anatomy" nameColumn="Component" rows={badgeContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {

@@ -1,5 +1,5 @@
 import { PageHeading } from '@decocode/mezzanine'
-import { iconDefinitions } from '../content/iconDefinitions'
+import { iconDefinitions } from '../content/iconsContent'
 
 export default function IconsPage() {
   return (

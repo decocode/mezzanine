@@ -95,6 +95,23 @@ Migration: `Navbar`, `NavbarProps`, `NavbarRenderProps`, `--navbar-*` tokens and
 `mezzanine-navbar-*` classes replace the previous Header equivalents. Navbar supplies
 the labelled `nav` element, so pass links directly rather than wrapping them in another `nav`.
 
+## Table sorting
+
+`Column allowsSorting` includes Mezzanine's direction indicator. React Aria still
+supplies keyboard and pointer handling and the accessible sort announcement.
+Use `sortTableRows(rows, sortDescriptor)` to return a sorted copy of text or finite
+numeric row properties. Column IDs must match the property names. Keep the current
+`sortDescriptor` in application state and pass its setter as `Table`'s `onSortChange`.
+
+For dates, missing values or custom column IDs, provide the optional third argument,
+`compareRows(firstRow, secondRow, columnId)`. Return an ascending comparison value;
+the helper applies the selected direction. Apps using server-side sorting can
+continue supplying their ordered rows directly.
+
+Migration: sortable `Column` now adds its own visual indicator. Remove manually
+rendered sorting arrows from its children to avoid duplicate indicators. The
+React Aria props, render props and ref remain supported.
+
 ## Component documentation pages
 
 `site/AppShell.tsx` owns the site layout, navigation and theme. It loads each Docs
@@ -126,12 +143,12 @@ Written guidance and reference entries live in `site/content/`, in a named
 links. Supporting Button and RadioGroup reference datasets also live there.
 `site/pages/` owns example rendering, local state and composition with the template.
 `site/templates/` contains page templates only. `site/components/` contains reusable
-site UI, separate from the public library in `src/components/`. Its `ComponentExample`
+site UI, separate from the public library in `src/components/`. Its `ExampleZone`
 provides the standard example frame, accepting optional classes for special layouts.
 The disclosure group and its anchor-handling hook also live in `site/components/`.
 The site-specific `MezzanineNavbar` and `Sidebar` live there too. Foundation reference content and the icon
 catalogue live in `site/content/`.
-`site/components/ComponentReferenceTable.tsx` renders Anatomy, Props and CSS token
+`site/components/DocsTable.tsx` renders Anatomy, Props and CSS token
 entries consistently using Mezzanine's Table parts.
 
 To add a Related pages or References link, edit the corresponding content list.

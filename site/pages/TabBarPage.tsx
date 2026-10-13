@@ -1,10 +1,10 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { AccountIcon, CloseIcon, HomeIcon, SettingsIcon, TabBar } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
 import { tabBarContent } from '../content/tabBarContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function TabBarPage() {
   const [destination, setDestination] = useState('Home')
@@ -20,7 +20,7 @@ export default function TabBarPage() {
           title: 'Example',
           content: (<>
             {tabBarContent.exampleParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <RouterProvider navigate={(href) => setDestination(href.slice(1))}>
                 <TabBar aria-label="Tab bar example" position="inline" items={[
                   { id: 'home', href: '#Home', label: 'Home', icon: <HomeIcon />, 'aria-current': destination === 'Home' ? 'page' : undefined },
@@ -29,7 +29,7 @@ export default function TabBarPage() {
                   { id: 'disabled', href: '#tab-bar-example', label: 'Disabled', icon: <CloseIcon />, isDisabled: true },
                 ]} />
               </RouterProvider>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -41,7 +41,7 @@ export default function TabBarPage() {
               title: 'Anatomy',
               content: (<>
                 {tabBarContent.anatomyParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="Tab bar anatomy" nameColumn="Component" rows={tabBarContent.anatomyRows} />
+                <DocsTable aria-label="Tab bar anatomy" nameColumn="Component" rows={tabBarContent.anatomyRows} />
               </>),
             },
             {
@@ -62,7 +62,7 @@ export default function TabBarPage() {
               id: 'tab-bar-props-heading',
               title: 'Props',
               content: (<>
-                <ComponentReferenceTable aria-label="TabBar props" nameColumn="Prop" rows={tabBarContent.propsRows} className="documentation-props-table" />
+                <DocsTable aria-label="TabBar props" nameColumn="Prop" rows={tabBarContent.propsRows} className="documentation-props-table" />
                 {tabBarContent.propsParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
@@ -71,7 +71,7 @@ export default function TabBarPage() {
               title: 'CSS tokens',
               content: (<>
                 {tabBarContent.tokensParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="TabBar tokens" nameColumn="CSS token" rows={tabBarContent.tokensRows} />
+                <DocsTable aria-label="TabBar tokens" nameColumn="CSS token" rows={tabBarContent.tokensRows} />
               </>),
             },
           ],

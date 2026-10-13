@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import {
   Disclosure,
   DisclosureGroup,
@@ -9,7 +9,7 @@ import {
 } from '@decocode/mezzanine'
 import { disclosureContent } from '../content/disclosureContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function DisclosurePage() {
   return (
@@ -24,14 +24,14 @@ export default function DisclosurePage() {
           title: 'Example',
           content: (<>
             {disclosureContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <Disclosure defaultExpanded>
                 <DisclosureHeader>Disclosure A</DisclosureHeader>
                 <DisclosurePanel>
                   DisclosurePanel A content.
                 </DisclosurePanel>
               </Disclosure>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -49,7 +49,7 @@ export default function DisclosurePage() {
               <span>View DisclosureGroup on React Aria</span>
               <ExternalLinkIcon />
             </Link>
-            <ComponentExample>
+            <ExampleZone>
               <DisclosureGroup defaultExpandedKeys={['disclosure-a']}>
                 <Disclosure id="disclosure-a">
                   <DisclosureHeader>Disclosure A</DisclosureHeader>
@@ -64,7 +64,7 @@ export default function DisclosurePage() {
                   <DisclosurePanel>DisclosurePanel C content.</DisclosurePanel>
                 </Disclosure>
               </DisclosureGroup>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -75,7 +75,7 @@ export default function DisclosurePage() {
               id: 'disclosure-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="Disclosure anatomy" nameColumn="Component" rows={disclosureContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="Disclosure anatomy" nameColumn="Component" rows={disclosureContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {

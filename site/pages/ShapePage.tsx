@@ -1,5 +1,5 @@
 import { PageHeading, TableOfContents } from '@decocode/mezzanine'
-import { radiusLevels } from '../content/foundationData'
+import { radiusLevels } from '../content/shapeContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 
 function RadiusSample({ label, token, refreshKey }: { label: string; token: string; refreshKey: string }) {

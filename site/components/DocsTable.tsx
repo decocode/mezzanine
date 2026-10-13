@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Table, TableHeader, Column, TableBody, Row, Cell } from '@decocode/mezzanine'
 
-interface ComponentReferenceTableProps {
+interface DocsTableProps {
   'aria-label': string
   nameColumn: string
   rows: readonly { name: string; description: ReactNode }[]
@@ -9,7 +9,7 @@ interface ComponentReferenceTableProps {
 }
 
 // Shared presentation for Anatomy, Props and CSS token reference data.
-export function ComponentReferenceTable({ 'aria-label': label, nameColumn, rows, className }: ComponentReferenceTableProps) {
+export function DocsTable({ 'aria-label': label, nameColumn, rows, className }: DocsTableProps) {
   return (
     <div className={['documentation-table', className].filter(Boolean).join(' ')}>
       <Table aria-label={label}>

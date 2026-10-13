@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import {
   Button,
   ChevronDownIcon,
@@ -11,7 +11,7 @@ import {
 } from '@decocode/mezzanine'
 import { navigationTreeContent } from '../content/navigationTreeContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 import { useAnimatedNavigationTree } from '@decocode/mezzanine'
 
 export default function NavigationTreePage() {
@@ -34,7 +34,7 @@ export default function NavigationTreePage() {
           title: 'Example',
           content: (<>
             {navigationTreeContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample className="navigation-tree-example">
+            <ExampleZone className="navigation-tree-example">
               <nav aria-label="NavigationTree example">
                 <NavigationTree
                   aria-label="NavigationTree items"
@@ -135,7 +135,7 @@ export default function NavigationTreePage() {
                   </NavigationTreeSection>
                 </NavigationTree>
               </nav>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -146,7 +146,7 @@ export default function NavigationTreePage() {
               id: 'navigation-tree-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="NavigationTree anatomy" nameColumn="Component" rows={navigationTreeContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="NavigationTree anatomy" nameColumn="Component" rows={navigationTreeContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {

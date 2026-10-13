@@ -1,7 +1,7 @@
 import { useEffect, useState, type RefObject } from 'react'
 
 // URL navigation opens the containing disclosure; React Aria owns its controls.
-export function useMezzanineDisclosureGroupLogic(groupRef: RefObject<HTMLDivElement | null>) {
+export function useDocsDisclosureGroupLogic(groupRef: RefObject<HTMLDivElement | null>) {
   const [expandedKeys, setExpandedKeys] = useState<Set<string | number>>(new Set())
   const [scrollTarget, setScrollTarget] = useState<HTMLElement | null>(null)
 

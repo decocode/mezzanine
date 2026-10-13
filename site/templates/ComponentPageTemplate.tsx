@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { PageHeading, Heading, Link, ExternalLinkIcon, TableOfContents, type TableOfContentsSection } from '@decocode/mezzanine'
-import { MezzanineDisclosureGroup } from '../components/MezzanineDisclosureGroup'
+import { DocsDisclosureGroup } from '../components/DocsDisclosureGroup'
 
 export interface DocumentationSection {
   id: string
@@ -62,7 +62,7 @@ export function ComponentPageTemplate({ title, description, sections, relatedPag
         <section key={section.id} aria-labelledby={section.id} className="component-section">
           <Heading id={section.id} level={2} className="mz-text-heading-md">{section.title}</Heading>
           {'sections' in section
-            ? <MezzanineDisclosureGroup labelledBy={section.id} sections={section.sections} />
+            ? <DocsDisclosureGroup labelledBy={section.id} sections={section.sections} />
             : section.content}
         </section>
       ))}

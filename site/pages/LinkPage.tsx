@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import {
   Cell,
   Column,
@@ -11,7 +11,7 @@ import {
 } from '@decocode/mezzanine'
 import { linkContent } from '../content/linkContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 type LinkPreviewState = 'default' | 'hovered' | 'pressed' | 'focused' | 'current' | 'disabled'
 
@@ -41,9 +41,9 @@ export default function LinkPage() {
           title: 'Example',
           content: (<>
             {linkContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <Link href="#link-content-heading">Link content examples</Link>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -123,7 +123,7 @@ export default function LinkPage() {
               id: 'link-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="Link anatomy" nameColumn="Component" rows={linkContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="Link anatomy" nameColumn="Component" rows={linkContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {

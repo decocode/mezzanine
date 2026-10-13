@@ -19,45 +19,10 @@ import {
   foundationColorPalettes,
   semanticColorPalettes,
   type ColorPaletteDefinition,
-} from '../content/foundationData'
-import { chooseSwatchTextTone } from '../colorContrast'
+} from '../content/colorContent'
+import { ColorSwatch } from '../components/ColorSwatch'
 import { useTokenValue } from '../components/tokenValueLogic'
 import { TokenValue } from '../components/TokenValue'
-
-function ColorPaletteStep({
-  darkTextValue,
-  lightTextValue,
-  paletteId,
-  refreshKey,
-  step,
-}: {
-  darkTextValue: string
-  lightTextValue: string
-  paletteId: ColorPaletteDefinition['id']
-  refreshKey: string
-  step: number
-}) {
-  const token = `--color-${paletteId}-${step}`
-  const value = useTokenValue(token, refreshKey)
-  const textTone = chooseSwatchTextTone(value, darkTextValue, lightTextValue)
-
-  return (
-    <li className="color-palette-step">
-      <span
-        className="color-palette-swatch"
-        style={{
-          backgroundColor: `var(${token})`,
-          color: textTone === 'dark'
-            ? 'var(--color-neutral-950)'
-            : 'var(--color-neutral-50)',
-        }}
-      >
-        <strong className="color-palette-step-number">{step}</strong>
-      </span>
-      <code>{value}</code>
-    </li>
-  )
-}
 
 function ColorPaletteScale({
   paletteId,
@@ -73,7 +38,7 @@ function ColorPaletteScale({
     <div className="color-palette-viewport" tabIndex={0}>
       <ol className="color-palette-scale">
         {colorShadeSteps.map((step) => (
-          <ColorPaletteStep
+          <ColorSwatch
             darkTextValue={darkTextValue}
             key={step}
             lightTextValue={lightTextValue}

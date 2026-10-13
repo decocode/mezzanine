@@ -132,6 +132,9 @@ export {
   TableHeader,
 } from './components/Table'
 
+export { sortTableRows } from './components/tableSorting'
+export type { TableRowComparator } from './components/tableSorting'
+
 export {
   HomeIcon,
   AccountIcon,

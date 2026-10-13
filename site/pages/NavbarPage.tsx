@@ -1,10 +1,10 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { Button,Link,Navbar } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
 import { navbarContent } from '../content/navbarContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function NavbarPage() {
   const [destination, setDestination] = useState('Home link')
@@ -21,7 +21,7 @@ export default function NavbarPage() {
           title: 'Example',
           content: (<>
             <p>{navbarContent.exampleIntroduction}</p>
-            <ComponentExample className="navbar-example">
+            <ExampleZone className="navbar-example">
               <RouterProvider navigate={(href) => setDestination(decodeURIComponent(href.slice(1)))}>
                 <Navbar aria-label="Example navigation"
                   brand={<Link href="#Home%20link" aria-label="Example home"><span aria-hidden="true" className="site-logo" /></Link>}
@@ -33,7 +33,7 @@ export default function NavbarPage() {
                 </Navbar>
               </RouterProvider>
               <p role="status">{isSaved ? 'Changes saved.' : ''}</p>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -43,7 +43,7 @@ export default function NavbarPage() {
             {
               id: 'navbar-anatomy',
               title: 'Anatomy',
-              content: <ComponentReferenceTable aria-label="Navbar anatomy" nameColumn="Component" rows={navbarContent.anatomy} />,
+              content: <DocsTable aria-label="Navbar anatomy" nameColumn="Component" rows={navbarContent.anatomy} />,
             },
             {
               id: 'navbar-behaviour',
@@ -58,14 +58,14 @@ export default function NavbarPage() {
             {
               id: 'navbar-props-heading',
               title: 'Props',
-              content: <ComponentReferenceTable aria-label="Navbar props" nameColumn="Prop" rows={navbarContent.props} className="documentation-props-table" />,
+              content: <DocsTable aria-label="Navbar props" nameColumn="Prop" rows={navbarContent.props} className="documentation-props-table" />,
             },
             {
               id: 'navbar-tokens-heading',
               title: 'CSS tokens',
               content: (<>
                 <p>{navbarContent.tokensIntroduction}</p>
-                <ComponentReferenceTable aria-label="Navbar tokens" nameColumn="CSS token" rows={navbarContent.tokens} />
+                <DocsTable aria-label="Navbar tokens" nameColumn="CSS token" rows={navbarContent.tokens} />
               </>),
             }
           ],

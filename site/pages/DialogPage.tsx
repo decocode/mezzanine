@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import {
   Button,
   Dialog, DialogTrigger, Heading, Modal, ModalOverlay
@@ -6,7 +6,7 @@ import {
 import { useState } from 'react'
 import { dialogContent } from '../content/dialogContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function DialogPage() {
   const [confirmationCount, setConfirmationCount] = useState(0)
@@ -23,7 +23,7 @@ export default function DialogPage() {
           title: 'Example',
           content: (<>
             {dialogContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <DialogTrigger>
                 <Button>Open dialog</Button>
                 <ModalOverlay isDismissable>
@@ -38,7 +38,7 @@ export default function DialogPage() {
                   </Modal>
                 </ModalOverlay>
               </DialogTrigger>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -46,7 +46,7 @@ export default function DialogPage() {
           title: 'Confirmation dialog',
           content: (<>
             {dialogContent.confirmationDialogParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <DialogTrigger>
                 <Button variant="secondary">Open confirmation</Button>
                 <ModalOverlay>
@@ -76,7 +76,7 @@ export default function DialogPage() {
                   ? 'No action confirmed.'
                   : `Example action confirmed ${confirmationCount} ${confirmationCount === 1 ? 'time' : 'times'}.`}
               </p>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -87,7 +87,7 @@ export default function DialogPage() {
               id: 'dialog-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="Dialog anatomy" nameColumn="Component" rows={dialogContent.anatomyRows} />
+                <DocsTable aria-label="Dialog anatomy" nameColumn="Component" rows={dialogContent.anatomyRows} />
               </>),
             },
             {
@@ -102,7 +102,7 @@ export default function DialogPage() {
               title: 'CSS tokens',
               content: (<>
                 {dialogContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="Dialog and Modal CSS tokens" nameColumn="CSS token" rows={dialogContent.tokensRows} />
+                <DocsTable aria-label="Dialog and Modal CSS tokens" nameColumn="CSS token" rows={dialogContent.tokensRows} />
               </>),
             },
           ],

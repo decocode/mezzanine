@@ -1,51 +1,16 @@
 import { useEffect, useState } from 'react'
-import { PageHeading, Link } from '@decocode/mezzanine'
+import { Link } from '@decocode/mezzanine'
 import { MezzanineNavbar } from './components/MezzanineNavbar'
 import { Sidebar } from './components/Sidebar'
 import { PageLoader } from './PageLoader'
-import { findSitePage, type SitePageDefinition } from './siteStructure'
+import NotFoundPage from './pages/NotFoundPage'
+import NotImplementedPage from './pages/NotImplementedPage'
+import { siteContent } from './content/siteContent'
+import { findSitePage } from './siteStructure'
 import { applyTheme, storeTheme, type Theme } from './themeSwitcherLogic'
 
 interface AppShellProps {
   initialTheme: Theme
-}
-
-function LandingPage() {
-  return (
-    <main className="landing-page" id="main-content">
-      <section className="landing-hero" aria-labelledby="landing-heading">
-        <p className="mz-text-label-lg section-label">Design system by DecoCode Ltd</p>
-        <h1 id="landing-heading" className="landing-wordmark mz-text-display-md mz-text-emphasis">
-          <span aria-hidden="true" className="site-logo landing-hero-logo" />
-          <span className="landing-wordmark-name">Mezzanine</span>
-        </h1>
-        <p className="mz-text-body-lg landing-hero-description">
-          An accessible React Aria design system with neutral defaults that products can theme.
-        </p>
-        <Link className="landing-primary-cta" href="/introduction">Read docs</Link>
-      </section>
-    </main>
-  )
-}
-
-function EmptyPage({ page }: { page: SitePageDefinition }) {
-  return (
-    <>
-      <PageHeading
-        title={page.label}
-      />
-      <p className="mz-text-body-md empty-page-status">Not implemented</p>
-    </>
-  )
-}
-
-function NotFoundPage() {
-  return (
-    <main className="not-found-page" id="main-content">
-      <PageHeading title="Page not found" />
-      <Link href="/">Return to Mezzanine</Link>
-    </main>
-  )
 }
 
 export function AppShell({ initialTheme }: AppShellProps) {
@@ -78,13 +43,15 @@ export function AppShell({ initialTheme }: AppShellProps) {
   if (!currentPage) {
     return (
       <>
-        <title>Page not found | Mezzanine</title>
+        <title>{`${siteContent.notFound.title} | ${siteContent.name}`}</title>
         <MezzanineNavbar
           currentPath={currentPath}
           onThemeChange={setSelectedTheme}
           selectedTheme={selectedTheme}
         />
-        <NotFoundPage />
+        <main className="not-found-page" id="main-content">
+          <NotFoundPage />
+        </main>
       </>
     )
   }
@@ -92,22 +59,24 @@ export function AppShell({ initialTheme }: AppShellProps) {
   if (currentPage.id === 'home') {
     return (
       <>
-        <title>Mezzanine</title>
-        <Link className="skip-link" href="#main-content">Skip to main content</Link>
+        <title>{siteContent.name}</title>
+        <Link className="skip-link" href="#main-content">{siteContent.skipLink}</Link>
         <MezzanineNavbar
           currentPath={currentPath}
           onThemeChange={setSelectedTheme}
           selectedTheme={selectedTheme}
         />
-        <LandingPage />
+        <main className="landing-page" id="main-content">
+          <PageLoader page={currentPage} refreshKey={refreshKey} />
+        </main>
       </>
     )
   }
 
   return (
     <>
-      <title>{`${currentPage.label} | Mezzanine`}</title>
-      <Link className="skip-link" href="#main-content">Skip to main content</Link>
+      <title>{`${currentPage.label} | ${siteContent.name}`}</title>
+      <Link className="skip-link" href="#main-content">{siteContent.skipLink}</Link>
       <MezzanineNavbar
         currentPath={currentPath}
         onThemeChange={setSelectedTheme}
@@ -118,7 +87,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
         <main className="site-content" id="main-content">
           {currentPage.status === 'implemented'
             ? <PageLoader page={currentPage} refreshKey={refreshKey} />
-            : <EmptyPage page={currentPage} />}
+            : <NotImplementedPage title={currentPage.label} />}
         </main>
       </div>
     </>

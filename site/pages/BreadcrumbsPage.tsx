@@ -1,8 +1,8 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { Breadcrumb, Breadcrumbs, Link } from '@decocode/mezzanine'
 import { breadcrumbsContent } from '../content/breadcrumbsContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function BreadcrumbsPage() {
   return (
@@ -16,7 +16,7 @@ export default function BreadcrumbsPage() {
           id: 'breadcrumbs-example-heading',
           title: 'Example',
           content: (<>
-            <ComponentExample className="breadcrumbs-examples">
+            <ExampleZone className="breadcrumbs-examples">
               <div>
                 <h3 className="mz-text-heading-sm">Hierarchy</h3>
                 <p className="component-section-description">
@@ -56,7 +56,7 @@ export default function BreadcrumbsPage() {
                   </Breadcrumbs>
                 </nav>
               </div>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -67,7 +67,7 @@ export default function BreadcrumbsPage() {
               id: 'breadcrumbs-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="Breadcrumbs anatomy" nameColumn="Component" rows={breadcrumbsContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="Breadcrumbs anatomy" nameColumn="Component" rows={breadcrumbsContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {

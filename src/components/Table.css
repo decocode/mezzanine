@@ -41,6 +41,10 @@
   cursor: pointer;
 }
 
+.mezzanine-table-sort-indicator {
+  margin-inline-start: var(--space-1);
+}
+
 .react-aria-TableHeader[data-hovered] .react-aria-Column,
 .react-aria-Column[data-hovered],
 .react-aria-Cell[data-hovered],

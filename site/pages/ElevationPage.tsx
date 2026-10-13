@@ -1,5 +1,5 @@
 import { PageHeading, TableOfContents } from '@decocode/mezzanine'
-import { elevationDefinitions } from '../content/foundationData'
+import { elevationDefinitions } from '../content/elevationContent'
 
 export default function ElevationPage() {
   return (

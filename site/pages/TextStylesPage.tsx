@@ -11,7 +11,7 @@ import {
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
-import { typographyStyles, typographyStyleTokens } from '../content/foundationData'
+import { typographyStyles, typographyStyleTokens } from '../content/textStylesContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 import { TokenValue } from '../components/TokenValue'
 

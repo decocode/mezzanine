@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import {
   Cell,
   Checkbox,
@@ -7,20 +7,20 @@ import {
   Table,
   TableBody,
   TableHeader,
+  sortTableRows,
   type SortDescriptor,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
-import { tableContent } from '../content/tableContent'
-import { sortTableExampleRows, tableExampleRows } from '../tableExampleData'
+import { tableContent, tableExampleColumns, tableExampleRows } from '../content/tableContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function TablePage() {
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: 'columnA',
     direction: 'ascending',
   })
-  const sortedRows = sortTableExampleRows(tableExampleRows, sortDescriptor)
+  const sortedRows = sortTableRows(tableExampleRows, sortDescriptor)
 
   return (
     <ComponentPageTemplate
@@ -42,7 +42,7 @@ export default function TablePage() {
               <div>
                 <h3 id="table-single-selection-heading" className="mz-text-heading-sm">Single selection</h3>
                 <p className="component-section-description">{tableContent.exampleParagraphs[1]}</p>
-                <ComponentExample className="documentation-table">
+                <ExampleZone className="documentation-table">
                   <Table
                     aria-label="Table with single row selection"
                     className="react-aria-Table table-selection-example"
@@ -51,9 +51,9 @@ export default function TablePage() {
                   >
                     <TableHeader>
                       <Column aria-label="Select row" id="selection" />
-                      <Column id="columnA" isRowHeader>Column A</Column>
-                      <Column id="columnB">Column B</Column>
-                      <Column id="columnC">Column C</Column>
+                      {tableExampleColumns.map(({ id, label, isRowHeader }) => (
+                        <Column key={id} id={id} isRowHeader={isRowHeader}>{label}</Column>
+                      ))}
                     </TableHeader>
                     <TableBody items={tableExampleRows}>
                       {(item) => (
@@ -66,11 +66,11 @@ export default function TablePage() {
                       )}
                     </TableBody>
                   </Table>
-                </ComponentExample>
+                </ExampleZone>
               </div>
               <div>
                 <h3 id="table-multiple-selection-heading" className="mz-text-heading-sm">Multiple selection</h3>
-                <ComponentExample className="documentation-table">
+                <ExampleZone className="documentation-table">
                   <Table
                     aria-label="Table with multiple row selection"
                     className="react-aria-Table table-selection-example"
@@ -78,9 +78,9 @@ export default function TablePage() {
                   >
                     <TableHeader>
                       <Column id="selection"><Checkbox slot="selection" /></Column>
-                      <Column id="columnA" isRowHeader>Column A</Column>
-                      <Column id="columnB">Column B</Column>
-                      <Column id="columnC">Column C</Column>
+                      {tableExampleColumns.map(({ id, label, isRowHeader }) => (
+                        <Column key={id} id={id} isRowHeader={isRowHeader}>{label}</Column>
+                      ))}
                     </TableHeader>
                     <TableBody items={tableExampleRows}>
                       {(item) => (
@@ -93,7 +93,7 @@ export default function TablePage() {
                       )}
                     </TableBody>
                   </Table>
-                </ComponentExample>
+                </ExampleZone>
               </div>
             </div>
           </>),
@@ -103,28 +103,16 @@ export default function TablePage() {
           title: 'Sorting',
           content: (<>
             {tableContent.sortingParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample className="documentation-table">
+            <ExampleZone className="documentation-table">
               <Table
                 aria-label="Sortable table"
                 onSortChange={setSortDescriptor}
                 sortDescriptor={sortDescriptor}
               >
                 <TableHeader>
-                  <Column id="columnA" isRowHeader allowsSorting>
-                    {({ sortDirection }) => (
-                      <>Column A {sortDirection && <span aria-hidden="true">{sortDirection === 'ascending' ? '▲' : '▼'}</span>}</>
-                    )}
-                  </Column>
-                  <Column id="columnB" allowsSorting>
-                    {({ sortDirection }) => (
-                      <>Column B {sortDirection && <span aria-hidden="true">{sortDirection === 'ascending' ? '▲' : '▼'}</span>}</>
-                    )}
-                  </Column>
-                  <Column id="columnC" allowsSorting>
-                    {({ sortDirection }) => (
-                      <>Column C {sortDirection && <span aria-hidden="true">{sortDirection === 'ascending' ? '▲' : '▼'}</span>}</>
-                    )}
-                  </Column>
+                  {tableExampleColumns.map(({ id, label, isRowHeader }) => (
+                    <Column key={id} id={id} isRowHeader={isRowHeader} allowsSorting>{label}</Column>
+                  ))}
                 </TableHeader>
                 <TableBody items={sortedRows}>
                   {(item) => (
@@ -136,7 +124,7 @@ export default function TablePage() {
                   )}
                 </TableBody>
               </Table>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -144,16 +132,16 @@ export default function TablePage() {
           title: 'Empty state',
           content: (<>
             {tableContent.emptyStateParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample className="documentation-table">
+            <ExampleZone className="documentation-table">
               <Table aria-label="Empty table">
                 <TableHeader>
-                  <Column id="columnA" isRowHeader>Column A</Column>
-                  <Column id="columnB">Column B</Column>
-                  <Column id="columnC">Column C</Column>
+                  {tableExampleColumns.map(({ id, label, isRowHeader }) => (
+                    <Column key={id} id={id} isRowHeader={isRowHeader}>{label}</Column>
+                  ))}
                 </TableHeader>
                 <TableBody renderEmptyState={() => 'No rows to display.'}>{[]}</TableBody>
               </Table>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -165,7 +153,7 @@ export default function TablePage() {
               title: 'Anatomy',
               content: (<>
                 {tableContent.anatomyParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="Table anatomy" nameColumn="Component" rows={tableContent.anatomyRows} />
+                <DocsTable aria-label="Table anatomy" nameColumn="Component" rows={tableContent.anatomyRows} />
               </>),
             },
             {

@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { PageHeading, TableOfContents } from '@decocode/mezzanine'
 import { useTokenValue } from '../components/tokenValueLogic'
 
@@ -23,7 +23,7 @@ export default function ProsePage({ refreshKey }: { refreshKey: string }) {
           <h3 id="unordered-list-heading" className="mz-text-heading-sm">Unordered lists</h3>
           <p className="component-section-description mz-text-body-md">An unordered list uses <code>&lt;ul&gt;</code> to group related items whose order is not significant. Filled bullet points mark the first level; nested items use hollow bullet points and an additional indent.</p>
           <h4 className="mz-text-title-lg">Example</h4>
-          <ComponentExample>
+          <ExampleZone>
             <ul className="mz-text-body-md">
               <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
               <li>Sed do eiusmod tempor incididunt.
@@ -33,13 +33,13 @@ export default function ProsePage({ refreshKey }: { refreshKey: string }) {
                 </ul>
               </li>
             </ul>
-          </ComponentExample>
+          </ExampleZone>
         </section>
         <section aria-labelledby="ordered-list-heading">
           <h3 id="ordered-list-heading" className="mz-text-heading-sm">Ordered lists</h3>
           <p className="component-section-description mz-text-body-md">An ordered list uses <code>&lt;ol&gt;</code> to group items in a meaningful sequence, such as steps or rankings. Numbered markers use the same body style as the list text. Nested lists are indented and restart numbering at 1.</p>
           <h4 className="mz-text-title-lg">Example</h4>
-          <ComponentExample>
+          <ExampleZone>
             <ol className="mz-text-body-md">
               <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
               <li>Sed do eiusmod tempor incididunt.
@@ -49,7 +49,7 @@ export default function ProsePage({ refreshKey }: { refreshKey: string }) {
                 </ol>
               </li>
             </ol>
-          </ComponentExample>
+          </ExampleZone>
         </section>
       </section>
       <section aria-labelledby="inline-code-heading" className="component-section">
@@ -63,11 +63,11 @@ export default function ProsePage({ refreshKey }: { refreshKey: string }) {
         </p>
         <p className="component-section-description">Code inside <code>&lt;pre&gt;</code> retains the monospace font without the inline background or padding. Code-block layout is supplied by the consuming app.</p>
         <h4 className="mz-text-title-lg">Example</h4>
-        <ComponentExample>
+        <ExampleZone>
           <p className="mz-text-body-md">
             The <code>--space-4</code> token stores <code>1rem</code> by default.
           </p>
-        </ComponentExample>
+        </ExampleZone>
       </section>
     </>
   )

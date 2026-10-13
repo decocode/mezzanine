@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import {
   Cell,
   Column,
@@ -13,7 +13,7 @@ import {
 } from '@decocode/mezzanine'
 import { toggleButtonContent } from '../content/toggleButtonContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function ToggleButtonPage() {
   return (
@@ -28,9 +28,9 @@ export default function ToggleButtonPage() {
           title: 'Example',
           content: (<>
             <p className="component-section-description">{toggleButtonContent.exampleParagraphs[0]}</p>
-            <ComponentExample>
+            <ExampleZone>
               <ToggleButton>Toggle</ToggleButton>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -85,7 +85,7 @@ export default function ToggleButtonPage() {
                 <h3 id="single-selection-heading" className="mz-text-heading-sm">
                   Single selection
                 </h3>
-                <ComponentExample>
+                <ExampleZone>
                   <ToggleButtonGroup
                     aria-label="Single selection example"
                     defaultSelectedKeys={['toggle-a']}
@@ -96,13 +96,13 @@ export default function ToggleButtonPage() {
                     <ToggleButton id="toggle-b">Toggle B</ToggleButton>
                     <ToggleButton id="toggle-c">Toggle C</ToggleButton>
                   </ToggleButtonGroup>
-                </ComponentExample>
+                </ExampleZone>
               </section>
               <section aria-labelledby="multiple-selection-heading">
                 <h3 id="multiple-selection-heading" className="mz-text-heading-sm">
                   Multiple selection
                 </h3>
-                <ComponentExample>
+                <ExampleZone>
                   <ToggleButtonGroup
                     aria-label="Multiple selection example"
                     defaultSelectedKeys={['toggle-a']}
@@ -112,7 +112,7 @@ export default function ToggleButtonPage() {
                     <ToggleButton id="toggle-b">Toggle B</ToggleButton>
                     <ToggleButton id="toggle-c">Toggle C</ToggleButton>
                   </ToggleButtonGroup>
-                </ComponentExample>
+                </ExampleZone>
               </section>
             </div>
           </>),
@@ -125,7 +125,7 @@ export default function ToggleButtonPage() {
               id: 'toggle-button-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label='ToggleButton anatomy' nameColumn='Component' rows={toggleButtonContent.anatomyRows} className='documentation-anatomy-table' />
+                <DocsTable aria-label='ToggleButton anatomy' nameColumn='Component' rows={toggleButtonContent.anatomyRows} className='documentation-anatomy-table' />
               </>),
             },
             {

@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import {
   Cell,
   Column,
@@ -15,10 +15,9 @@ import {
   Text
 } from '@decocode/mezzanine'
 import { useState } from 'react'
-import { radioGroupContent } from '../content/radioGroupContent'
-import { radioGroupStates } from '../content/radioGroupReferenceData'
+import { radioGroupContent, radioGroupStates } from '../content/radioGroupContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function RadioGroupPage() {
   const [validationValue, setValidationValue] = useState<string | null>(null)
@@ -35,7 +34,7 @@ export default function RadioGroupPage() {
           title: 'Example',
           content: (<>
             {radioGroupContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <RadioGroup defaultValue="option-a">
                 <Label>RadioGroup label</Label>
                 <Text slot="description">RadioGroup description</Text>
@@ -62,7 +61,7 @@ export default function RadioGroupPage() {
                 </RadioField>
                 <FieldError />
               </RadioGroup>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -98,18 +97,18 @@ export default function RadioGroupPage() {
             <section aria-labelledby="radio-group-read-only-heading">
               <h3 id="radio-group-read-only-heading" className="mz-text-heading-sm">Read only</h3>
               <p className="component-section-description">{radioGroupContent.statesParagraphs[1]}</p>
-              <ComponentExample>
+              <ExampleZone>
                 <RadioGroup defaultValue="option-a" isReadOnly>
                   <Label>Read-only options</Label>
                   <RadioField value="option-a"><RadioButton><SelectionIndicator />Option A</RadioButton></RadioField>
                   <RadioField value="option-b"><RadioButton><SelectionIndicator />Option B</RadioButton></RadioField>
                 </RadioGroup>
-              </ComponentExample>
+              </ExampleZone>
             </section>
             <section aria-labelledby="radio-group-validation-heading">
               <h3 id="radio-group-validation-heading" className="mz-text-heading-sm">Validation</h3>
               <p className="component-section-description">{radioGroupContent.statesParagraphs[2]}</p>
-              <ComponentExample>
+              <ExampleZone>
                 <RadioGroup value={validationValue} onChange={setValidationValue} isRequired isInvalid={validationValue === null} validationBehavior="aria">
                   <Label>Required options</Label>
                   <Text slot="description">Choose one option.</Text>
@@ -117,7 +116,7 @@ export default function RadioGroupPage() {
                   <RadioField value="option-b"><RadioButton><SelectionIndicator />Option B</RadioButton></RadioField>
                   <FieldError>Select an option to continue.</FieldError>
                 </RadioGroup>
-              </ComponentExample>
+              </ExampleZone>
             </section>
           </>),
         },
@@ -130,7 +129,7 @@ export default function RadioGroupPage() {
               title: 'Anatomy',
               content: (<>
                 {radioGroupContent.anatomyParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="RadioGroup anatomy" nameColumn="Component" rows={radioGroupContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="RadioGroup anatomy" nameColumn="Component" rows={radioGroupContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {
@@ -145,7 +144,7 @@ export default function RadioGroupPage() {
               title: 'CSS tokens',
               content: (<>
                 {radioGroupContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="RadioGroup CSS tokens" nameColumn="CSS token" rows={radioGroupContent.tokensRows} />
+                <DocsTable aria-label="RadioGroup CSS tokens" nameColumn="CSS token" rows={radioGroupContent.tokensRows} />
               </>),
             },
           ],

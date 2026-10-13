@@ -1,8 +1,8 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { Cell, Checkbox, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { checkboxContent } from '../content/checkboxContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function CheckboxPage() {
   return (
@@ -17,9 +17,9 @@ export default function CheckboxPage() {
           title: 'Example',
           content: (<>
             {checkboxContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <Checkbox>Checkbox label</Checkbox>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -62,7 +62,7 @@ export default function CheckboxPage() {
               id: 'checkbox-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="Checkbox anatomy" nameColumn="Component" rows={checkboxContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="Checkbox anatomy" nameColumn="Component" rows={checkboxContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {

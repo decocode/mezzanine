@@ -1,10 +1,10 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { Button, FieldError, Input, Label, Text, TextField } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { Form } from 'react-aria-components/Form'
 import { textFieldContent } from '../content/textFieldContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function TextFieldPage() {
   const [value, setValue] = useState('')
@@ -21,14 +21,14 @@ export default function TextFieldPage() {
           id: 'text-field-example',
           title: 'Example',
           content: (<>
-            <ComponentExample>
+            <ExampleZone>
               <TextField value={value} onChange={setValue}>
                 <Label>Field label</Label>
                 <Input placeholder="Enter text" />
                 <Text slot="description">Supporting information about this field.</Text>
               </TextField>
               <p>Current value: {value || 'Empty'}</p>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -36,22 +36,22 @@ export default function TextFieldPage() {
           title: 'States',
           content: (<>
             {textFieldContent.statesParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <TextField isReadOnly defaultValue="Read-only value">
                 <Label>Read-only field</Label><Input />
               </TextField>
-            </ComponentExample>
-            <ComponentExample>
+            </ExampleZone>
+            <ExampleZone>
               <TextField isDisabled defaultValue="Disabled value">
                 <Label>Disabled field</Label><Input />
               </TextField>
-            </ComponentExample>
-            <ComponentExample>
+            </ExampleZone>
+            <ExampleZone>
               <TextField isInvalid validationBehavior="aria" defaultValue="Invalid value">
                 <Label>Invalid field</Label><Input />
                 <FieldError>This example shows an externally supplied error.</FieldError>
               </TextField>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -60,7 +60,7 @@ export default function TextFieldPage() {
           content: (<>
             {textFieldContent.validationParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
             <Form onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>
-              <ComponentExample>
+              <ExampleZone>
                 <TextField name="email" type="email" isRequired onChange={() => setSubmitted(false)}>
                   <Label>Email address (required)</Label>
                   <Input autoComplete="email" />
@@ -69,7 +69,7 @@ export default function TextFieldPage() {
                 </TextField>
                 <p><Button type="submit">Validate field</Button></p>
                 <p role="status">{submitted ? 'The email address passed validation.' : ''}</p>
-              </ComponentExample>
+              </ExampleZone>
             </Form>
           </>),
         },
@@ -81,7 +81,7 @@ export default function TextFieldPage() {
               id: 'text-field-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="TextField anatomy" nameColumn="Component" rows={textFieldContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="TextField anatomy" nameColumn="Component" rows={textFieldContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {

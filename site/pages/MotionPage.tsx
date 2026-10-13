@@ -3,7 +3,7 @@ import {
   motionPatternDefinitions,
   motionTimingDefinitions,
   motionTokenDefinitions,
-} from '../content/foundationData'
+} from '../content/motionContent'
 import { TokenValue } from '../components/TokenValue'
 
 export default function MotionPage({ refreshKey }: { refreshKey: string }) {

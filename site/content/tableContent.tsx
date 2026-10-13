@@ -1,3 +1,22 @@
+interface TableExampleRow {
+  id: string
+  columnA: string
+  columnB: string
+  columnC: string
+}
+
+export const tableExampleColumns = [
+  { id: 'columnA', label: 'Column A', isRowHeader: true },
+  { id: 'columnB', label: 'Column B', isRowHeader: false },
+  { id: 'columnC', label: 'Column C', isRowHeader: false },
+] as const
+
+export const tableExampleRows: TableExampleRow[] = [
+  { id: 'row-a', columnA: 'Row A', columnB: 'Cell A2', columnC: 'Cell A3' },
+  { id: 'row-b', columnA: 'Row B', columnB: 'Cell B2', columnC: 'Cell B3' },
+  { id: 'row-c', columnA: 'Row C', columnB: 'Cell C2', columnC: 'Cell C3' },
+]
+
 // Written guidance and reference entries; live examples stay in the page.
 export const tableContent = {
   title: 'Table',
@@ -45,6 +64,7 @@ export const tableContent = {
     <>Give the table an <code>aria-label</code> or <code>aria-labelledby</code>. Use <code>Column isRowHeader</code> for the cell that identifies each row, and stable row and column IDs so selection and sorting refer to consistent records.</>,
     <>React Aria manages keyboard navigation through the table’s rows, cells and focusable controls. Use arrow keys to move within the table and Tab to move between focusable regions or controls. Keep labels on any buttons and links placed inside cells.</>,
     <>Use <code>selectionMode</code> to opt into selection. Set <code>defaultSelectedKeys</code> for initial selection or <code>selectedKeys</code> with <code>onSelectionChange</code> for application-controlled selection. Disabled rows are identified through <code>disabledKeys</code>.</>,
-    <>Sorting is application work: <code>allowsSorting</code> enables the column control, while <code>sortDescriptor</code> and <code>onSortChange</code> describe the requested ordering. Reorder the rows you supply, as this page’s example does.</>,
+    <>Set <code>allowsSorting</code> on a <code>Column</code> to enable sorting controls and the shared direction indicator. Pass <code>sortDescriptor</code> and <code>onSortChange</code> to <code>Table</code>, and use Mezzanine’s <code>sortTableRows</code> to supply the ordered rows. The helper sorts text alphabetically and finite numbers numerically without changing the original array. Column IDs must match row properties unless you supply a custom comparator.</>,
+    <>Pass an optional <code>compareRows</code> function for dates, missing values or other custom rules. It receives two rows and the column ID, and returns a negative number, zero or a positive number for ascending order; the helper applies the requested direction. For server-sorted data, supply the returned rows directly without using the helper.</>,
   ],
 }

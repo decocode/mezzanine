@@ -1,8 +1,8 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { FieldError, Label, Text, TextArea, TextField } from '@decocode/mezzanine'
 import { textAreaContent } from '../content/textAreaContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function TextAreaPage() {
   return (
@@ -17,13 +17,13 @@ export default function TextAreaPage() {
           title: 'Example',
           content: (<>
             {textAreaContent.exampleParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <TextField>
                 <Label>Text area label</Label>
                 <TextArea rows={4} placeholder="Enter multiple lines of text" />
                 <Text slot="description">Supporting information about this field.</Text>
               </TextField>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -31,25 +31,25 @@ export default function TextAreaPage() {
           title: 'States',
           content: (<>
             {textAreaContent.statesParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <TextField isReadOnly defaultValue={'First read-only line\nSecond read-only line'}>
                 <Label>Read-only text area</Label>
                 <TextArea rows={3} />
               </TextField>
-            </ComponentExample>
-            <ComponentExample>
+            </ExampleZone>
+            <ExampleZone>
               <TextField isDisabled defaultValue="Disabled value">
                 <Label>Disabled text area</Label>
                 <TextArea rows={3} />
               </TextField>
-            </ComponentExample>
-            <ComponentExample>
+            </ExampleZone>
+            <ExampleZone>
               <TextField isInvalid validationBehavior="aria" defaultValue="Invalid value">
                 <Label>Invalid text area</Label>
                 <TextArea rows={3} />
                 <FieldError>This example shows an externally supplied error.</FieldError>
               </TextField>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -60,7 +60,7 @@ export default function TextAreaPage() {
               id: 'text-area-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="TextArea anatomy" nameColumn="Component" rows={textAreaContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="TextArea anatomy" nameColumn="Component" rows={textAreaContent.anatomyRows} className="documentation-anatomy-table" />
               </>),
             },
             {

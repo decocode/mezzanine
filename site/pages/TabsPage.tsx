@@ -1,8 +1,8 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import { Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
 import { tabsContent } from '../content/tabsContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 export default function TabsPage() {
   return (
@@ -17,7 +17,7 @@ export default function TabsPage() {
           title: 'Example',
           content: (<>
             {tabsContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <Tabs defaultSelectedKey="a">
                 <TabList aria-label="Example sections">
                   <Tab id="a">Tab A</Tab>
@@ -30,7 +30,7 @@ export default function TabsPage() {
                 <TabPanel id="c">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</TabPanel>
                 <TabPanel id="d">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</TabPanel>
               </Tabs>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -38,7 +38,7 @@ export default function TabsPage() {
           title: 'Vertical tabs',
           content: (<>
             {tabsContent.verticalTabsParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <Tabs orientation="vertical" keyboardActivation="manual" defaultSelectedKey="a">
                 <TabList aria-label="Vertical example sections">
                   <Tab id="a">Tab A</Tab>
@@ -51,7 +51,7 @@ export default function TabsPage() {
                 <TabPanel id="c">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</TabPanel>
                 <TabPanel id="d">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</TabPanel>
               </Tabs>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -62,7 +62,7 @@ export default function TabsPage() {
               id: 'tabs-anatomy-heading',
               title: 'Anatomy',
               content: (<>
-                <ComponentReferenceTable aria-label="Tabs anatomy" nameColumn="Component" rows={tabsContent.anatomyRows} />
+                <DocsTable aria-label="Tabs anatomy" nameColumn="Component" rows={tabsContent.anatomyRows} />
               </>),
             },
             {
@@ -70,7 +70,7 @@ export default function TabsPage() {
               title: 'Props',
               content: (<>
                 {tabsContent.propsParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="Tabs props" nameColumn="Prop" rows={tabsContent.propsRows} className="documentation-props-table" />
+                <DocsTable aria-label="Tabs props" nameColumn="Prop" rows={tabsContent.propsRows} className="documentation-props-table" />
               </>),
             },
             {
@@ -85,7 +85,7 @@ export default function TabsPage() {
               title: 'CSS tokens',
               content: (<>
                 {tabsContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="Tabs CSS tokens" nameColumn="CSS token" rows={tabsContent.tokensRows} />
+                <DocsTable aria-label="Tabs CSS tokens" nameColumn="CSS token" rows={tabsContent.tokensRows} />
               </>),
             },
           ],

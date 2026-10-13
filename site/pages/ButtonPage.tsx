@@ -1,4 +1,4 @@
-import { ComponentExample } from '../components/ComponentExample'
+import { ExampleZone } from '../components/ExampleZone'
 import {
   ArrowRightIcon,
   Button,
@@ -14,15 +14,15 @@ import {
   type ButtonVariant
 } from '@decocode/mezzanine'
 import { useState } from 'react'
-import { buttonContent } from '../content/buttonContent'
 import {
+  buttonContent,
   buttonSizes,
   buttonStates,
   buttonVariants,
   type ButtonPreviewState,
-} from '../content/buttonReferenceData'
+} from '../content/buttonContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
+import { DocsTable } from '../components/DocsTable'
 
 function ButtonStateExample({
   label,
@@ -63,10 +63,10 @@ export default function ButtonPage() {
           title: 'Example',
           content: (<>
             {buttonContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ComponentExample>
+            <ExampleZone>
               <Button onPress={() => setPressCount((count) => count + 1)}>Press Button</Button>
               <p className="component-example-feedback" role="status">Press count: {pressCount}</p>
-            </ComponentExample>
+            </ExampleZone>
           </>),
         },
         {
@@ -223,7 +223,7 @@ export default function ButtonPage() {
               title: 'Anatomy',
               content: (<>
                 {buttonContent.anatomyParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="Button anatomy" nameColumn="Component" rows={buttonContent.anatomyRows} className="documentation-anatomy-table" />
+                <DocsTable aria-label="Button anatomy" nameColumn="Component" rows={buttonContent.anatomyRows} className="documentation-anatomy-table" />
 
               </>),
             },
@@ -258,7 +258,7 @@ export default function ButtonPage() {
               title: 'CSS tokens',
               content: (<>
                 {buttonContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <ComponentReferenceTable aria-label="Button CSS tokens" nameColumn="CSS token" rows={buttonContent.tokensRows} />
+                <DocsTable aria-label="Button CSS tokens" nameColumn="CSS token" rows={buttonContent.tokensRows} />
               </>),
             },
           ],

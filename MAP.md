@@ -37,23 +37,23 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/NavbarPage.tsx` | Composes Navbar content with the shared template and owns the live example state |
 | `site/content/badgeContent.tsx` | Badge written guidance, reference entries, related pages and external references |
 | `site/content/breadcrumbsContent.tsx` | Breadcrumbs written guidance, reference entries, related pages and external references |
-| `site/content/buttonContent.tsx` | Button written guidance, reference entries, related pages and external references |
+| `site/content/buttonContent.tsx` | Button guidance, variants, sizes, states, token descriptions, related pages and references |
 | `site/content/checkboxContent.tsx` | Checkbox written guidance, reference entries, related pages and external references |
 | `site/content/dialogContent.tsx` | Dialog written guidance, reference entries, related pages and external references |
 | `site/content/disclosureContent.tsx` | Disclosure written guidance, reference entries, related pages and external references |
 | `site/content/linkContent.tsx` | Link written guidance, reference entries, related pages and external references |
 | `site/content/navigationTreeContent.tsx` | NavigationTree written guidance, reference entries, related pages and external references |
-| `site/content/radioGroupContent.tsx` | RadioGroup written guidance, reference entries, related pages and external references |
+| `site/content/radioGroupContent.tsx` | RadioGroup guidance, anatomy, states, token descriptions, related pages and references |
 | `site/content/tabBarContent.tsx` | TabBar written guidance, reference entries, related pages and external references |
-| `site/content/tableContent.tsx` | Table written guidance, reference entries, related pages and external references |
+| `site/content/tableContent.tsx` | Table sample rows and column definitions, written guidance, reference entries, related pages and external references |
 | `site/content/tableOfContentsContent.tsx` | TableOfContents written guidance, reference entries, related pages and external references |
 | `site/content/tabsContent.tsx` | Tabs written guidance, reference entries, related pages and external references |
 | `site/content/textAreaContent.tsx` | TextArea written guidance, reference entries, related pages and external references |
 | `site/content/textFieldContent.tsx` | TextField written guidance, reference entries, related pages and external references |
 | `site/content/toggleButtonContent.tsx` | ToggleButton written guidance, reference entries, related pages and external references |
 | `site/content/navbarContent.tsx` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
-| `site/components/ComponentExample.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
-| `site/components/ComponentReferenceTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes |
+| `site/components/ExampleZone.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
+| `site/components/DocsTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes |
 | `tests/navigation-tree-motion.spec.ts` | Checks public tree animation, keyboard expansion and reduced motion including preference changes mid-animation |
 | `tests/wireframe-links.spec.ts` | Checks Wireframe underlines across link patterns and narrow layouts while preserving Light and Dark treatments |
 | `tests/navbar.spec.ts` | Navbar keyboard, responsive, theme, contrast and forced-colour checks |
@@ -74,7 +74,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Disclosure.css` | Token-led styling for Disclosure, DisclosureGroup and DisclosureHeader states |
 | `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
 | `src/icons/StudioIcons.tsx` | Public action, navigation, transport and sequencer icons imported from Rhythm Directives' active icon modules |
-| `src/components/Table.ts` | Public React Aria Table, TableHeader, Column, Row, TableBody and Cell exports and their prop types |
+| `src/components/Table.tsx` | React Aria Table parts and a Column wrapper that adds a shared sort-direction indicator |
+| `src/components/tableSorting.ts` | Public non-mutating text and numeric row sorting, with optional custom comparison rules |
+| `tests/table.spec.ts` | Shared sorting, keyboard and pointer activation, sort indicators and responsive contrast checks |
 | `src/components/Tabs.tsx`, `src/components/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
 | `src/components/ToggleButton.ts` | Public current React Aria ToggleButton and ToggleButtonGroup exports and prop types |
@@ -88,18 +90,22 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/index.html` | HTML shell for the showcase site, including its favicon reference |
 | `site/favicon.svg` | Staircase Z favicon with neutral-200 background and neutral-950 mark, embedded for use outside the site CSS |
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
-| `site/AppShell.tsx` | Showcase shell, theme state, landing hero, and empty/not-found views; renders documentation through the route loading boundary |
+| `site/AppShell.tsx` | Site layout, theme state and route selection; delegates page rendering to page components and the loading boundary |
+| `site/pages/HomePage.tsx` | Home hero and wordmark composition using the separate Home content |
+| `site/content/homeContent.ts` | Home attribution, title, description and documentation link |
+| `site/content/siteContent.ts` | Shared site name, skip-link label and not-found/not-implemented messages |
+| `site/pages/NotFoundPage.tsx` | Unknown-route heading and return-home link |
+| `site/pages/NotImplementedPage.tsx` | WIP page heading and not-implemented message |
 | `site/pageRegistry.ts` | Maps implemented documentation page IDs to lazy imports so only the requested page loads |
 | `site/PageLoader.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
 | `src/components/PageHeading.tsx` | Public page introduction using Heading, optional description paragraphs and additional content |
 | `src/components/PageHeading.css` | Token-based page introduction widths, spacing and fluid title typography |
 | `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template: composes the page heading, generated On this page links, technical disclosures and reference sections from page-supplied content |
-| `site/components/MezzanineDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
-| `site/components/MezzanineDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
+| `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
+| `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
 | `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow |
 | `site/components/tokenValueLogic.ts` | Reads current CSS token values when the selected theme changes |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
-| `site/content/buttonReferenceData.ts` | Button variant, size and state reference data used by the Button page |
 | `site/pages/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
 | `site/pages/ColorPage.tsx` | Palette swatches and semantic color-role reference; loaded only when its route is requested |
 | `site/pages/TypographyPage.tsx` | Typography overview; loaded only when its route is requested |
@@ -134,11 +140,15 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |
 | `src/components/useAnimatedNavigationTree.ts` | Public optional NavigationTree expansion-animation hook with reduced-motion handling |
 | `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
-| `site/content/foundationData.tsx` | Names and descriptions, with inline code markup for component references, for the implemented color, typography, spacing, corner-radius and motion foundations shown by the showcase |
-| `site/content/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
-| `site/tableExampleData.ts` | Table example rows and sorting logic used by the Table documentation page |
-| `site/content/radioGroupReferenceData.tsx` | Verified anatomy, state descriptions with inline code markup, and component token names for the RadioGroup documentation page |
-| `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
+| `site/content/colorContent.ts` | Colour palette descriptions, shade steps and semantic colour-role reference entries |
+| `site/content/textStylesContent.ts` | Typography style names, purposes and associated token names |
+| `site/content/spacingContent.ts` | Spacing scale steps displayed on the Spacing page |
+| `site/content/shapeContent.ts` | Corner-radius labels and token names displayed on the Shape page |
+| `site/content/elevationContent.ts` | Elevation names, descriptions and token names |
+| `site/content/motionContent.tsx` | Motion timing, token and reduced-motion reference descriptions |
+| `site/content/iconsContent.tsx` | Names and rendered examples for every icon exported by Mezzanine |
+| `site/components/ColorSwatch.tsx` | Displays a palette shade, its number and resolved colour value with readable text |
+| `site/components/colorSwatchLogic.ts` | Contrast calculation used to choose light or dark text inside ColorSwatch |
 | `site/themeSwitcherLogic.ts` | Theme option validation, system-theme resolution, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |

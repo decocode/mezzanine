@@ -10,6 +10,7 @@ export interface DocumentationPageProps {
 
 // Declare lazy components once so theme updates retain each page's local state.
 export const pageRegistry: Record<string, ComponentType<DocumentationPageProps>> = {
+  home: lazy(() => import('./pages/HomePage')),
   introduction: lazy(() => import('./pages/IntroductionPage')),
   color: lazy(() => import('./pages/ColorPage')),
   typography: lazy(() => import('./pages/TypographyPage')),
