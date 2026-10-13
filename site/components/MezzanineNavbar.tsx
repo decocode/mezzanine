@@ -1,4 +1,5 @@
 import { Navbar, Link } from '@decocode/mezzanine'
+import { findSitePage } from '../siteStructure'
 import type { Theme } from '../themeSwitcherLogic'
 import { ThemeSwitcher } from './ThemeSwitcher'
 
@@ -13,6 +14,8 @@ export function MezzanineNavbar({
   onThemeChange,
   selectedTheme,
 }: MezzanineNavbarProps) {
+  const isDocsPage = currentPath !== '/' && findSitePage(currentPath) != null
+
   return (
     <Navbar aria-label="Showcase navigation" actions={<ThemeSwitcher onThemeChange={onThemeChange} selectedTheme={selectedTheme} />} brand={(
       <Link
@@ -26,7 +29,10 @@ export function MezzanineNavbar({
       </Link>
     )}>
       {({ closeMenu }) => (
-        <Link className="showcase-navigation-link" aria-current={currentPath === '/introduction' ? 'page' : undefined} href="/introduction" onPress={closeMenu}>Docs</Link>
+        <>
+          <Link className="showcase-navigation-link" aria-current={currentPath === '/' ? 'page' : undefined} href="/" onPress={closeMenu}>Home</Link>
+          <Link className="showcase-navigation-link" aria-current={currentPath === '/introduction' ? 'page' : isDocsPage ? true : undefined} href="/introduction" onPress={closeMenu}>Docs</Link>
+        </>
       )}
     </Navbar>
   )

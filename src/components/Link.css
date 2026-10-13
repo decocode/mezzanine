@@ -26,7 +26,7 @@
 }
 
 .react-aria-Link[aria-current='page'] {
-  color: var(--color-text);
+  color: var(--color-link);
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
 }

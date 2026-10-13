@@ -227,6 +227,12 @@
   --radius-xl: 1rem;
   --radius-full: 9999rem;
 
+  /* Tooltip: short descriptions shown on hover or keyboard focus. */
+  --tooltip-max-width: 20rem;
+  --tooltip-border-width: 0.0625rem;
+  --tooltip-z-index: 110;
+  --tooltip-motion-duration: 120ms;
+
   /* Modal and Dialog: neutral overlays and their content. */
   --modal-z-index: 100;
   --modal-viewport-padding: var(--space-4);

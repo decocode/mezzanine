@@ -9,7 +9,8 @@
         "http://localhost/button",
         "http://localhost/table",
         "http://localhost/tab-bar",
-        "http://localhost/navbar"
+        "http://localhost/navbar",
+        "http://localhost/tooltip"
       ],
       "settings": {
         "preset": "desktop",

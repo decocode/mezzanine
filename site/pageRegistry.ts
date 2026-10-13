@@ -28,6 +28,7 @@ export const pageRegistry: Record<string, ComponentType<DocumentationPageProps>>
   breadcrumbs: lazy(() => import('./pages/BreadcrumbsPage')),
   tabs: lazy(() => import('./pages/TabsPage')),
   link: lazy(() => import('./pages/LinkPage')),
+  tooltip: lazy(() => import('./pages/TooltipPage')),
   dialog: lazy(() => import('./pages/DialogPage')),
   disclosure: lazy(() => import('./pages/DisclosurePage')),
   checkbox: lazy(() => import('./pages/CheckboxPage')),

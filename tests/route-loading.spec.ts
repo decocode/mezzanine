@@ -23,6 +23,12 @@ for (const sitePage of sitePages) {
       ? [expectedPage]
       : [])
     expect(errors).toEqual([])
+    const docsLink = page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Docs', exact: true })
+    if (sitePage.id === 'home') {
+      await expect(docsLink).not.toHaveAttribute('aria-current')
+    } else {
+      await expect(docsLink).toHaveAttribute('aria-current', sitePage.id === 'introduction' ? 'page' : 'true')
+    }
   })
 }
 

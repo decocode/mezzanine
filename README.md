@@ -46,7 +46,7 @@ Open a local report with `npx playwright show-report`.
 ## Lighthouse reports
 
 Run `npm run lighthouse` after installing Chromium to build the showcase and audit
-home, Button, Table, TabBar, and the Navbar page on mobile and desktop, with three runs per page and device.
+home, Button, Table, TabBar, Navbar and Tooltip pages on mobile and desktop, with three runs per page and device.
 Use `npm run lighthouse:mobile` or `npm run lighthouse:desktop` for one profile.
 Reports are saved under `reports/lighthouse/` (ignored by Git).
 
@@ -155,3 +155,22 @@ parents whose descendant rows need `animated-navigation-tree-item` plus
 The library stylesheet supplies those animation classes. The hook reads
 `--navigation-tree-motion-duration` from the document root. Reduced motion
 removes row and chevron animation and completes any pending collapse immediately.
+
+## Tooltips
+
+Compose `TooltipTrigger`, a focusable control, and `Tooltip` from
+`@decocode/mezzanine`. The trigger defaults to a 300ms hover delay, configurable
+with `delay`; keyboard focus shows the tooltip immediately. Keep an accessible
+name on icon-only controls because tooltips do not appear on touch interactions.
+The fade animation is disabled for reduced motion.
+
+```tsx
+<TooltipTrigger>
+  <ToggleButton aria-label="Dark theme"><MoonIcon /></ToggleButton>
+  <Tooltip placement="bottom">Dark theme</Tooltip>
+</TooltipTrigger>
+```
+
+These components follow the [React Aria Tooltip API](https://react-aria.adobe.com/Tooltip).
+
+The Tooltip documentation page is registered at `/tooltip` under Components → Overlays.

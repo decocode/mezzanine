@@ -33,6 +33,18 @@ The current color values are the first browser-review version. They remain
 easy to revise because components depend on the token names rather than those
 literal values.
 
+### Wireframe link identification
+
+Wireframe underlines all links, including navigation, current and disabled links,
+and links styled as buttons. Its theme rule deliberately overrides component
+rules that remove underlines; current-item indicators and focus outlines remain.
+Hovering or visibly focusing an enabled link doubles its `--link-underline-thickness`;
+disabled links keep the normal thickness. Standard Link keyboard focus uses the
+hover text colour and retains its focus ring.
+Pressed links keep the heavier underline and use `--color-surface-pressed` for
+a grey background. The Link page's state previews use these same treatments.
+Light and Dark retain their existing link treatments.
+
 ## Product themes
 
 Mezzanine's defaults deliberately contain no DecoCode branding. DecoCode's
@@ -140,6 +152,12 @@ Link and Focus are separate roles. Light and Dark draw Link from the Signature
 palette, while Focus remains tied to the Info palette. Primary actions are
 defined by their components rather than a generic color role. There is no
 generic Accent token.
+
+In Light and Dark, text and navigation links—including current destinations,
+linked tabs, Table of Contents, Related pages and References—use the Signature
+link colours. NavigationTree keeps its neutral default and current-item text.
+The site wordmark, disabled links and links styled as buttons keep their own
+treatments. Wireframe keeps its neutral link colours.
 
 ### Semantic color palettes
 
@@ -602,3 +620,17 @@ The More sheet uses the existing modal backdrop, elevation and motion duration.
 Overflow uses More rather than horizontal scrolling. The minimum slot width scales
 with root text size; labels can wrap within a slot. Sheet motion is disabled when
 the visitor prefers reduced motion.
+
+## Tooltip tokens
+
+Tooltips use the shared surface, text, border, spacing, small body type, small
+radius and overlay elevation tokens. These tokens control their remaining values:
+
+| Token | Purpose |
+| --- | --- |
+| `--tooltip-max-width` | Maximum tooltip width, additionally limited to the viewport |
+| `--tooltip-border-width` | Tooltip border thickness |
+| `--tooltip-z-index` | Tooltip stacking level |
+| `--tooltip-motion-duration` | Fade duration; disabled for reduced motion |
+
+The hover delay is controlled by the `TooltipTrigger` `delay` prop, not CSS.

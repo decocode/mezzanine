@@ -250,3 +250,6 @@ export type { TextAreaProps } from './components/TextArea'
 
 export { TabBar } from './components/TabBar'
 export type { TabBarProps, TabBarItem } from './components/TabBar'
+
+export { Tooltip, TooltipTrigger } from './components/Tooltip'
+export type { TooltipProps, TooltipRenderProps, TooltipTriggerComponentProps } from './components/Tooltip'

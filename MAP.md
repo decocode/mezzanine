@@ -20,6 +20,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/useTabBarCapacity.ts` | Observes container and token-sized slot widths to determine how many navigation items fit |
 | `site/pages/TabBarPage.tsx` | Live TabBar example and verified composition, overflow and placement guidance |
 | `tests/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |
+| `src/components/Tooltip.tsx` | React Aria Tooltip exports and TooltipTrigger with a configurable 300ms default hover delay |
+| `src/components/Tooltip.css` | Token-based tooltip layout, fade animation, reduced-motion and forced-colour rules |
+| `tests/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
 | `src/components/Badge.tsx` | Public non-interactive Badge with core and semantic color variants, rendered as a semantic span |
 | `src/components/Badge.css` | Token-led styling for Neutral, Violet, Info, Success, Warning and Danger Badges |
 | `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants, sizes, icon content and pending-state progress |
@@ -52,6 +55,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/components/ComponentExample.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
 | `site/components/ComponentReferenceTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes |
 | `tests/navigation-tree-motion.spec.ts` | Checks public tree animation, keyboard expansion and reduced motion including preference changes mid-animation |
+| `tests/wireframe-links.spec.ts` | Checks Wireframe underlines across link patterns and narrow layouts while preserving Light and Dark treatments |
 | `tests/navbar.spec.ts` | Navbar keyboard, responsive, theme, contrast and forced-colour checks |
 | `site/pages/TextAreaPage.tsx` | Multiline field examples, states, composition and vertical resizing guidance |
 | `site/pages/TextFieldPage.tsx` | TextField composition, editing, states and local validation examples |
@@ -114,6 +118,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/BreadcrumbsPage.tsx` | Breadcrumb hierarchy and disabled examples; loaded only when its route is requested |
 | `site/pages/TabsPage.tsx` | Tabs documentation content and examples, composed with the shared template; loaded only when requested |
 | `site/pages/LinkPage.tsx` | Link states and content examples; loaded only when its route is requested |
+| `site/pages/TooltipPage.tsx` | Live Tooltip example and shared-template documentation under Overlays |
+| `site/content/tooltipContent.tsx` | Tooltip introduction, anatomy, behaviour, usage, props, tokens and reference links |
 | `site/pages/DialogPage.tsx` | Dialog documentation content and modal examples, composed with the shared template; loaded only when requested |
 | `site/pages/DisclosurePage.tsx` | Disclosure and DisclosureGroup examples; loaded only when its route is requested |
 | `site/pages/CheckboxPage.tsx` | Checkbox example and selection states; loaded only when its route is requested |
@@ -152,7 +158,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `.github/workflows/gitleaks.yml` | Gitleaks scan of the full history for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
-| `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar and the Navbar page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
+| `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
 | `docs/TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |

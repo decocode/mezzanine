@@ -63,13 +63,23 @@ a:focus-visible {
   text-decoration: none;
 }
 
+.site-name:is(:hover, :active, [data-hovered], [data-pressed]) {
+  color: var(--color-text);
+}
+
+/* The brand text stands in for an SVG wordmark, including in Wireframe. */
+:root[data-theme='wireframe'] .site-name {
+  text-decoration-line: none !important;
+}
+
 .showcase-navigation-link {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
   padding: 0.5rem 0.75rem;
+  border-bottom: var(--navigation-tree-current-indicator-width) solid transparent;
   background: transparent;
-  color: var(--color-text);
+  color: var(--color-link);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
@@ -89,6 +99,18 @@ a:focus-visible {
 
 .showcase-navigation-link[data-pressed] {
   background: var(--color-surface-pressed);
+  color: var(--color-link-pressed);
+}
+
+.showcase-navigation-link[aria-current] {
+  border-bottom-color: var(--navigation-tree-current-indicator);
+  background: var(--navigation-tree-item-background-current);
+  color: var(--navigation-tree-item-content-current);
+  font-weight: var(--font-weight-semibold);
+}
+
+:root:not([data-theme='wireframe']) .showcase-navigation-link[aria-current] {
+  color: var(--color-link-hover);
 }
 
 .theme-toggle-group {
@@ -211,6 +233,22 @@ a:focus-visible {
 
 .landing-hero {
   max-width: 52rem;
+}
+
+.landing-wordmark {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.landing-wordmark-name {
+  min-width: 0;
+}
+
+.landing-hero-logo {
+  display: block;
+  width: 1em;
+  height: 1em;
 }
 
 .landing-hero h1 {
@@ -812,6 +850,12 @@ a:focus-visible {
 
 .component-reference-links .react-aria-Link {
   max-inline-size: 100%;
+  color: var(--color-link);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body-sm);
+  text-decoration: none;
   overflow-wrap: anywhere;
 }
 

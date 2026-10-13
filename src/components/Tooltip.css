@@ -1,0 +1,41 @@
+.react-aria-Tooltip {
+  box-sizing: border-box;
+  max-width: min(var(--tooltip-max-width), calc(100vw - var(--space-4) * 2));
+  padding: var(--space-2) var(--space-3);
+  border: var(--tooltip-border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--elevation-overlay);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  overflow-wrap: anywhere;
+  z-index: var(--tooltip-z-index);
+}
+
+.react-aria-Tooltip[data-entering] {
+  animation: mezzanine-tooltip-fade var(--tooltip-motion-duration) ease-out;
+}
+
+.react-aria-Tooltip[data-exiting] {
+  animation: mezzanine-tooltip-fade var(--tooltip-motion-duration) reverse ease-in;
+}
+
+@keyframes mezzanine-tooltip-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .react-aria-Tooltip[data-entering],
+  .react-aria-Tooltip[data-exiting] {
+    animation: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .react-aria-Tooltip {
+    forced-color-adjust: auto;
+  }
+}

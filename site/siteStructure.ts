@@ -102,6 +102,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'overlays',
         label: 'Overlays',
         pages: [
+          { id: 'tooltip', label: 'Tooltip', path: '/tooltip', status: 'implemented' },
           { id: 'dialog', label: 'Dialog', path: '/dialog', status: 'implemented' },
         ],
       },

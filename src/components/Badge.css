@@ -1,6 +1,5 @@
 .mezzanine-badge {
-  display: inline-flex;
-  align-items: center;
+  display: inline-block;
   padding: var(--badge-padding-block) var(--badge-padding-inline);
   border: var(--badge-border-width) solid var(--badge-border);
   border-radius: var(--badge-border-radius);
@@ -13,6 +12,12 @@
   line-height: var(--line-height-label-sm);
   text-transform: var(--text-transform-label);
   white-space: nowrap;
+}
+
+/* An atomic inline label prevents a surrounding link's underline from crossing the badge. */
+.mezzanine-badge-label {
+  display: inline-block;
+  text-decoration: none;
 }
 
 .mezzanine-badge[data-variant='neutral'] {

@@ -42,7 +42,7 @@
   min-height: var(--tab-bar-item-min-height);
   padding: var(--tab-bar-item-padding);
   border-block-end: var(--tab-bar-indicator-width) solid transparent;
-  color: var(--color-text);
+  color: var(--color-link);
   font-size: var(--font-size-label-lg);
   line-height: var(--line-height-label-lg);
   font-weight: var(--font-weight-medium);
@@ -63,6 +63,7 @@
 
 :is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[data-pressed]:not([data-disabled]) {
   background: var(--color-surface-pressed);
+  color: var(--color-link-pressed);
 }
 
 

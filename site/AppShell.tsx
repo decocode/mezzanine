@@ -14,12 +14,15 @@ function LandingPage() {
   return (
     <main className="landing-page" id="main-content">
       <section className="landing-hero" aria-labelledby="landing-heading">
-        <p className="mz-text-label-lg section-label">Design system by DecoCode</p>
-        <h1 id="landing-heading" className="mz-text-display-md mz-text-emphasis">Mezzanine</h1>
+        <p className="mz-text-label-lg section-label">Design system by DecoCode Ltd</p>
+        <h1 id="landing-heading" className="landing-wordmark mz-text-display-md mz-text-emphasis">
+          <span aria-hidden="true" className="site-logo landing-hero-logo" />
+          <span className="landing-wordmark-name">Mezzanine</span>
+        </h1>
         <p className="mz-text-body-lg landing-hero-description">
           An accessible React Aria design system with neutral defaults that products can theme.
         </p>
-        <Link className="landing-primary-cta" href="/introduction">Documentation</Link>
+        <Link className="landing-primary-cta" href="/introduction">Read docs</Link>
       </section>
     </main>
   )

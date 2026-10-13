@@ -101,6 +101,14 @@
   cursor: pointer;
 }
 
+.react-aria-Tab[href]:not([data-disabled]) {
+  color: var(--color-link);
+}
+
+.react-aria-Tab[href][data-pressed]:not([data-disabled]) {
+  color: var(--color-link-pressed);
+}
+
 .react-aria-TabPanel {
   flex: 1;
   min-width: 0;
