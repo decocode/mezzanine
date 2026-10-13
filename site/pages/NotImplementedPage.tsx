@@ -1,4 +1,4 @@
-import { PageHeading } from '@decocode/mezzanine'
+import { PageHeading } from '../templates/ComponentPageTemplate'
 import { siteContent } from '../content/siteContent'
 
 export default function NotImplementedPage({ title }: { title: string }) {

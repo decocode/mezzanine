@@ -1,5 +1,4 @@
-import { PageHeading } from '@decocode/mezzanine'
-
+import { PageHeading } from '../templates/ComponentPageTemplate'
 export default function IntroductionPage() {
   return (
     <PageHeading

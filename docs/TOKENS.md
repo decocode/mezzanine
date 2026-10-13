@@ -283,12 +283,12 @@ Its own container switches to desktop navigation at 48rem, relative to the root 
 | `--navbar-panel-max-height` | Maximum panel height before it scrolls |
 | `--navbar-motion-duration`, `--navbar-motion-offset` | Panel entry timing and initial vertical displacement; disabled with reduced motion |
 
-## Page heading tokens
+## Site-only page heading tokens
 
-PageHeading retains the existing page introduction appearance. Its heading uses
-Mezzanine’s React Aria Heading at level 1, with the public display and body text styles.
-Shared spacing tokens control the gaps; these component tokens control the widths
-and responsive title size:
+The heading in `site/templates/ComponentPageTemplate.tsx` uses Mezzanine’s
+React Aria Heading at level 1, with the public display and body text styles.
+These site-only values are defined in `site/styles.css`; they are not part of
+the shared package’s token contract:
 
 | Token | Meaning |
 | --- | --- |

@@ -18,7 +18,7 @@ export const tooltipContent = {
   exampleTooltip: 'Settings',
   anatomyRows: [
     { name: 'TooltipTrigger', description: <>Connects the control and tooltip, managing when the tooltip opens and closes.</> },
-    { name: 'IconButton', description: <>Composes Mezzanine’s <code>Button</code> with a cog icon and the accessible name Settings in this example. Other focusable React Aria controls, such as <code>ToggleButton</code> and <code>Link</code>, can also act as triggers.</> },
+    { name: 'Button', description: <>Mezzanine’s icon-only <code>Button</code> with a cog icon and the accessible name Settings in this example. Other focusable React Aria controls, such as <code>ToggleButton</code> and <code>Link</code>, can also act as triggers.</> },
     { name: 'Tooltip', description: <>The text bubble, positioned relative to its trigger and associated with it through <code>aria-describedby</code>.</> },
   ],
   behaviourParagraphs: [

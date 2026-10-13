@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/AppShell.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `IconButton`, `DisclosureHeader`, `TableOfContents`, `PageHeading` and `Navbar` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `DisclosureHeader`, `TableOfContents` and `Navbar` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
@@ -15,9 +15,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | --- | --- |
 | `site/assets/mezzanine-logo.svg` | Mezzanine brand icon: a Z with a staircase diagonal; standalone SVG using currentColor |
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
-| `src/components/TabBar.tsx` | Primary route navigation with a More bottom sheet composed from library links, buttons and modal parts |
+| `src/components/TabBar.tsx` | Primary route navigation with built-in capacity measurement and a More bottom sheet composed from library links, buttons and modal parts |
 | `src/components/TabBar.css` | TabBar states, safe-area spacing and responsive bottom-sheet presentation |
-| `src/components/useTabBarCapacity.ts` | Observes container and token-sized slot widths to determine how many navigation items fit |
 | `site/pages/TabBarPage.tsx` | Live TabBar example and verified composition, overflow and placement guidance |
 | `tests/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |
 | `src/components/Tooltip.tsx` | React Aria Tooltip exports and TooltipTrigger with a configurable 300ms default hover delay |
@@ -25,12 +24,10 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `tests/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
 | `src/components/Badge.tsx` | Public non-interactive Badge with core and semantic color variants, rendered as a semantic span |
 | `src/components/Badge.css` | Token-led styling for Neutral, Violet, Info, Success, Warning and Danger Badges |
-| `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants, sizes, icon content and pending-state progress |
+| `src/components/Button.tsx` | Public Button: React Aria Button for actions or Link when href is supplied, sharing variants, sizes and icon layout; pending state is action-only |
 | `src/components/Button.css` | Token-led styling for Button variants and React Aria interaction states |
 | `src/components/Breadcrumbs.ts` | Public React Aria Breadcrumbs and Breadcrumb exports and prop types |
 | `src/components/Breadcrumbs.css` | Token-led layout and separator styling for Breadcrumbs |
-| `src/components/IconButton.tsx` | Public composed icon-only Button requiring a label that can be hidden, above or below |
-| `src/components/IconButton.css` | Token-led layout and visible-label styling for IconButton |
 | `src/components/TextArea.ts` | Public React Aria TextArea export and type; composes with TextField for multiline input |
 | `src/components/TextField.ts` | Public React Aria TextField and Input exports and types |
 | `src/components/TextField.css` | Shared TextField, Input and TextArea layout, interaction states and forced-colour styling |
@@ -64,7 +61,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Checkbox.css` | Token-led styling for Checkbox states and interaction feedback |
 | `src/components/Link.ts` | Public React Aria Link export and prop types |
 | `src/components/Link.css` | Token-led styling for Link interaction states |
-| `src/components/NavigationTree.ts` | Public React Aria NavigationTree family, prop types and optional animation-hook export |
+| `src/components/NavigationTree.ts` | Public React Aria NavigationTree family, prop types and optional expansion-animation hook with reduced-motion handling |
 | `src/components/NavigationTree.css` | Token-led hierarchy, route and interaction styling, plus optional row animations and reduced-motion rules |
 | `src/components/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/RadioGroup.css` | Token-led styling for RadioGroup, RadioField, RadioButton and SelectionIndicator |
@@ -75,8 +72,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
 | `src/icons/StudioIcons.tsx` | Public action, navigation, transport and sequencer icons imported from Rhythm Directives' active icon modules |
 | `src/components/Table.tsx` | React Aria Table parts and a Column wrapper that adds a shared sort-direction indicator |
-| `src/components/tableSorting.ts` | Public non-mutating text and numeric row sorting, with optional custom comparison rules |
-| `tests/table.spec.ts` | Shared sorting, keyboard and pointer activation, sort indicators and responsive contrast checks |
+| `tests/table.spec.ts` | Table sorting interactions, keyboard and pointer activation, sort indicators and responsive contrast checks |
 | `src/components/Tabs.tsx`, `src/components/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
 | `src/components/ToggleButton.ts` | Public current React Aria ToggleButton and ToggleButtonGroup exports and prop types |
@@ -99,9 +95,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/NotImplementedPage.tsx` | WIP page heading and not-implemented message |
 | `site/pageRegistry.ts` | Maps implemented documentation page IDs to lazy imports so only the requested page loads |
 | `site/PageLoader.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
-| `src/components/PageHeading.tsx` | Public page introduction using Heading, optional description paragraphs and additional content |
-| `src/components/PageHeading.css` | Token-based page introduction widths, spacing and fluid title typography |
-| `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template: composes the page heading, generated On this page links, technical disclosures and reference sections from page-supplied content |
+| `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template: owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures and reference sections from page-supplied content |
 | `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
 | `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
 | `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow |
@@ -141,7 +135,6 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/components/useSidebarNavigationVisibility.ts` | Observes when CSS makes the desktop sidebar visible, including text-size changes, before requesting navigation |
 | `src/components/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |
 | `src/components/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |
-| `src/components/useAnimatedNavigationTree.ts` | Public optional NavigationTree expansion-animation hook with reduced-motion handling |
 | `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
 | `site/content/colorContent.ts` | Colour palette descriptions, shade steps and semantic colour-role reference entries |
 | `site/content/textStylesContent.ts` | Typography style names, purposes and associated token names |

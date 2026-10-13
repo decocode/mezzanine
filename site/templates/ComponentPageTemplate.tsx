@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { PageHeading, Heading, Link, ExternalLinkIcon, TableOfContents, type TableOfContentsSection } from '@decocode/mezzanine'
+import { Heading, Link, ExternalLinkIcon, TableOfContents, type TableOfContentsSection } from '@decocode/mezzanine'
 import { DocsDisclosureGroup } from '../components/DocsDisclosureGroup'
 
 export interface DocumentationSection {
@@ -67,5 +67,33 @@ export function ComponentPageTemplate({ title, description, sections, relatedPag
         </section>
       ))}
     </>
+  )
+}
+
+export interface PageHeadingProps {
+  title: string
+  description?: ReactNode
+  children?: ReactNode
+  className?: string
+}
+
+// Composes React Aria Heading with introductory paragraphs and optional content.
+export function PageHeading({ title, description, children, className }: PageHeadingProps) {
+  const paragraphs = Array.isArray(description) ? description : [description]
+
+  return (
+    <div className={['page-heading-group', className].filter(Boolean).join(' ')}>
+      <Heading className="mz-text-display-md mz-text-emphasis" level={1}>
+        {title}
+      </Heading>
+      {description != null && (
+        <div className="page-description">
+          {paragraphs.map((paragraph, index) => (
+            <p className="mz-text-body-lg" key={index}>{paragraph}</p>
+          ))}
+        </div>
+      )}
+      {children}
+    </div>
   )
 }

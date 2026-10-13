@@ -185,10 +185,7 @@
   --navbar-motion-duration: 180ms;
   --navbar-motion-offset: -0.375rem;
 
-  /* PageHeading: existing page introduction widths and fluid title size. */
-  --page-heading-max-width: 58rem;
-  --page-heading-description-max-width: 65ch;
-  --page-heading-title-font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-md));
+
 
   /* Primary navigation; safe-area spacing may be overridden by the app shell. */
   --tab-bar-background: var(--color-page);

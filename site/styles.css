@@ -1,3 +1,10 @@
+:root {
+  /* PageHeading: existing page introduction widths and fluid title size. */
+  --page-heading-max-width: 58rem;
+  --page-heading-description-max-width: 65ch;
+  --page-heading-title-font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-md));
+}
+
 * {
   box-sizing: border-box;
 }
@@ -104,7 +111,6 @@ a:focus-visible {
 
 .showcase-navigation-link[aria-current] {
   border-bottom-color: var(--navigation-tree-current-indicator);
-  background: var(--navigation-tree-item-background-current);
   color: var(--navigation-tree-item-content-current);
   font-weight: var(--font-weight-semibold);
 }
@@ -260,38 +266,6 @@ a:focus-visible {
   max-width: 42rem;
   margin: 0 0 2rem;
   color: var(--color-text-muted);
-}
-
-.landing-primary-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.75rem;
-  padding: 0.75rem 1rem;
-  border: var(--button-border-width) solid var(--button-primary-border);
-  background: var(--button-primary-background);
-  color: var(--button-primary-content);
-  font-size: var(--font-size-label-lg);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-lg);
-  text-decoration: none;
-  text-transform: var(--text-transform-label);
-}
-
-.landing-primary-cta[data-hovered] {
-  background: var(--button-primary-background-hovered);
-  color: var(--button-primary-content);
-}
-
-.landing-primary-cta[data-pressed] {
-  background: var(--button-primary-background-pressed);
-  color: var(--button-primary-content);
-}
-
-.landing-primary-cta[data-focus-visible] {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
 }
 
 .site-content,
@@ -1040,4 +1014,29 @@ a:focus-visible {
     forced-color-adjust: none;
     background: CanvasText;
   }
+}
+
+.page-heading-group {
+  max-width: var(--page-heading-max-width);
+  margin-bottom: var(--space-16);
+}
+
+.page-heading-group h1 {
+  overflow-wrap: anywhere;
+  margin: var(--space-0) var(--space-0) var(--space-4);
+  font-size: var(--page-heading-title-font-size);
+}
+
+.page-heading-group .page-description {
+  max-width: var(--page-heading-description-max-width);
+  margin: var(--space-0);
+  color: var(--color-text-muted);
+}
+
+.page-heading-group .page-description p {
+  margin: var(--space-0);
+}
+
+.page-heading-group .page-description p + p {
+  margin-top: var(--space-4);
 }

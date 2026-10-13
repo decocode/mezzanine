@@ -1,4 +1,5 @@
-import { PageHeading, TableOfContents } from '@decocode/mezzanine'
+import { PageHeading } from '../templates/ComponentPageTemplate'
+import { TableOfContents } from '@decocode/mezzanine'
 import { elevationDefinitions } from '../content/elevationContent'
 
 export default function ElevationPage() {

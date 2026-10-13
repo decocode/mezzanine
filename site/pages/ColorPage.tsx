@@ -1,5 +1,5 @@
+import { PageHeading } from '../templates/ComponentPageTemplate'
 import {
-  PageHeading,
   TableOfContents,
   Disclosure,
   DisclosureHeader,

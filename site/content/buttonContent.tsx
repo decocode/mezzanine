@@ -127,6 +127,7 @@ export const buttonContent = {
   ],
   references: [
     { label: 'React Aria Button', href: 'https://react-aria.adobe.com/Button' },
+    { label: 'React Aria Link (navigation behaviour)', href: 'https://react-aria.adobe.com/Link' },
   ],
   referencesId: 'button-references-heading',
   exampleParagraphs: [
@@ -135,14 +136,21 @@ export const buttonContent = {
       see its <code>onPress</code> handler update the count.
     </>,
   ],
+  navigationExample: {
+    description: <>Supply <code>href</code> for a navigational button. This example jumps to Usage and accessibility on this page.</>,
+    label: 'Read usage guidance',
+    href: '#button-usage-heading',
+    disabledLabel: 'Disabled',
+  },
   anatomyRows: [
     { name: 'Button', description: <>The action control, containing a text label and optional leading or trailing icons.</> },
-    { name: 'IconButton', description: <>Composes <code>Button</code> with an icon and a required accessible label. The label can be hidden, above or below the control.</> },
   ],
   anatomyParagraphs: [
     <>
-      <code>Button</code> combines a label with optional leading and trailing icons. <code>IconButton</code> composes
-      {' '}<code>Button</code> with a required <code>label</code> and an <code>icon</code>.
+      <code>Button</code> supports four content options: text-only, text with a leading icon,
+      text with a trailing icon, and icon only. Use <code>iconLeading</code> or <code>iconTrailing</code>
+      for icons. For icon only, omit children and supply <code>aria-label</code> or <code>aria-labelledby</code>.
+      Compose with <code>TooltipTrigger</code> and <code>Tooltip</code> to show its label on hover or keyboard focus.
     </>,
   ],
   hierarchyItems: <>
@@ -158,9 +166,17 @@ export const buttonContent = {
   ],
   usageParagraphs: [
     <>
-      Use <code>Button</code> for an action and <code>Link</code> for navigation. Handle activation with
-      {' '}<code>onPress</code>; React Aria supports pointer, touch, Enter and Space activation.
-      Keep the visible label clear. <code>IconButton</code> requires a label even when it is hidden.
+      Use <code>Button</code> for actions and navigational calls to action. Supply <code>href</code> to
+      navigate; Button uses React Aria <code>Link</code> internally with the same styling, sizes and icons.
+      Without <code>href</code>, handle actions with <code>onPress</code>; React Aria Button supports pointer,
+      touch, Enter and Space activation. Use <code>Link</code> for ordinary text links.
+      Keep visible labels clear. Icon-only buttons require an accessible name even when a tooltip is provided.
+    </>,
+    <>
+      With <code>href</code>, Button accepts React Aria Link props such as <code>target</code>, <code>rel</code>,
+      {' '}<code>download</code> and <code>isDisabled</code>. It keeps native link behaviour: Enter activates it,
+      and the destination can be copied or opened in a new tab. Space does not activate it.
+      Form props and <code>isPending</code> apply only to action buttons without <code>href</code>.
     </>,
     <>
       Use <code>isPending</code> while an action is in progress: <code>Button</code> displays its progress

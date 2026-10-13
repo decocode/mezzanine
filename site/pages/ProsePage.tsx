@@ -1,5 +1,6 @@
+import { PageHeading } from '../templates/ComponentPageTemplate'
 import { ExampleZone } from '../components/ExampleZone'
-import { PageHeading, TableOfContents } from '@decocode/mezzanine'
+import { TableOfContents } from '@decocode/mezzanine'
 import { useTokenValue } from '../components/tokenValueLogic'
 
 export default function ProsePage({ refreshKey }: { refreshKey: string }) {

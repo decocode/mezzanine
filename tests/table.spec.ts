@@ -1,29 +1,5 @@
 import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
-import { sortTableRows } from '../src/components/tableSorting'
-
-test('shared sorting handles text and numbers without changing the input', () => {
-  const rows = Object.freeze([
-    { id: 'a', name: 'Pear', count: 10 },
-    { id: 'b', name: 'Apple', count: 2 },
-    { id: 'c', name: 'Pear', count: 2 },
-  ])
-  expect(sortTableRows(rows, { column: 'name', direction: 'ascending' }).map(row => row.id)).toEqual(['b', 'a', 'c'])
-  expect(sortTableRows(rows, { column: 'count', direction: 'ascending' }).map(row => row.id)).toEqual(['b', 'c', 'a'])
-  expect(sortTableRows(rows, { column: 'count', direction: 'descending' }).map(row => row.id)).toEqual(['a', 'b', 'c'])
-  expect(rows.map(row => row.id)).toEqual(['a', 'b', 'c'])
-  expect(sortTableRows([], { column: 'count', direction: 'ascending' })).toEqual([])
-})
-
-test('custom sorting supports dates and column IDs independent of row properties', () => {
-  const rows = [{ created: new Date('2026-01-01') }, { created: new Date('2026-02-01') }]
-  const result = sortTableRows(rows, { column: 'created-date', direction: 'descending' }, (first, second, column) => {
-    expect(column).toBe('created-date')
-    return first.created.getTime() - second.created.getTime()
-  })
-  expect(result).toEqual([rows[1], rows[0]])
-  expect(() => sortTableRows(rows, { column: 'created', direction: 'ascending' })).toThrow(/Supply compareRows/)
-})
 
 test('Table sorting works with pointer and keyboard and supplies one accessible indicator', async ({ page }) => {
   await page.goto('/table')

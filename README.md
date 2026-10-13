@@ -70,6 +70,34 @@ Light/Dark preference, with Light as the fallback.
 
 The package is `private` and is not published to npm.
 
+## Buttons
+
+Use the same `Button` component for actions and navigational calls to action:
+
+```tsx
+<Button onPress={saveChanges}>Save changes</Button>
+<Button href="/introduction">Read docs</Button>
+```
+
+With `href`, it uses React Aria Link and accepts its navigation props, including
+`target`, `rel`, `download` and `isDisabled`. Without `href`, it uses React Aria
+Button, including form behaviour and `isPending`. Both share variants, sizes
+and icons. Button supports text-only, text with a leading icon, text with a
+trailing icon, and icon-only content. For icon-only content, omit children and
+supply an accessible name; compose with TooltipTrigger and Tooltip for a tooltip.
+
+Breaking change: `IconButton`, `IconButtonProps`, `IconButtonLabelPosition` and
+its `.mezzanine-icon-button` CSS classes have been removed. Replace
+`<IconButton icon={icon} label="Settings" />` with
+`<Button iconLeading={icon} aria-label="Settings" />`. The old above/below label
+options are no longer part of Button; use a text-and-icon option when the label
+should remain visible.
+
+Type compatibility: `ButtonProps` is now a discriminated union. Existing JSX
+action usage is unchanged, but interfaces extending `ButtonProps` must use a
+type intersection, or select the action branch with
+`Extract<ButtonProps, { href?: never }>` before using `Omit` or interface extension.
+
 ## Reusable Navbar
 
 `Navbar` supplies the sticky layout and mobile disclosure menu. Pass your branding
@@ -99,20 +127,27 @@ the labelled `nav` element, so pass links directly rather than wrapping them in 
 
 `Column allowsSorting` includes Mezzanine's direction indicator. React Aria still
 supplies keyboard and pointer handling and the accessible sort announcement.
-Use `sortTableRows(rows, sortDescriptor)` to return a sorted copy of text or finite
-numeric row properties. Column IDs must match the property names. Keep the current
-`sortDescriptor` in application state and pass its setter as `Table`'s `onSortChange`.
+Keep `sortDescriptor` in application state and pass its setter as `Table`'s
+`onSortChange`. The application supplies the ordered rows, using its own sorting
+rules or a server request. The documentation example sorts its sample text rows locally.
 
-For dates, missing values or custom column IDs, provide the optional third argument,
-`compareRows(firstRow, secondRow, columnId)`. Return an ascending comparison value;
-the helper applies the selected direction. Apps using server-side sorting can
-continue supplying their ordered rows directly.
+Breaking change: the optional `sortTableRows` helper and `TableRowComparator` type
+have been removed from the public package.
 
 Migration: sortable `Column` now adds its own visual indicator. Remove manually
 rendered sorting arrows from its children to avoid duplicate indicators. The
 React Aria props, render props and ref remain supported.
 
 ## Component documentation pages
+
+The page title and introduction are owned by `site/templates/ComponentPageTemplate.tsx`.
+Foundation pages and loading/error views reuse its site-only `PageHeading` export.
+Its styles and `--page-heading-*` values live in `site/styles.css`.
+
+Breaking change: `PageHeading`, `PageHeadingProps`, its CSS classes and
+`--page-heading-*` tokens are no longer exported or supplied by the library.
+Consuming apps should compose their own page introductions using `Heading` and
+the shared typography and spacing tokens.
 
 `site/AppShell.tsx` owns the site layout, navigation and theme. It loads each Docs
 page independently through `PageLoader.tsx`.

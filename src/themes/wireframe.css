@@ -103,14 +103,14 @@
   --color-focus: var(--color-info-700);
 }
 
-/* Wireframe identifies every link, including components that normally remove underlines. */
-:root[data-theme='wireframe'] :is(a, [role='link']) {
+/* Wireframe underlines text links; button-styled links use the shared Button treatment. */
+:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button)) {
   text-decoration-line: underline !important;
   text-decoration-thickness: var(--link-underline-thickness);
   text-underline-offset: var(--link-underline-offset);
 }
 
-:root[data-theme='wireframe'] :is(a, [role='link']):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
+:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button)):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
   text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
 }
 
@@ -119,12 +119,12 @@
 }
 
 @media (hover: hover) {
-  :root[data-theme='wireframe'] :is(a, [role='link']):hover:not([data-disabled], [aria-disabled='true']) {
+  :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button)):hover:not([data-disabled], [aria-disabled='true']) {
     text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
   }
 }
 
-:root[data-theme='wireframe'] :is(a, [role='link']):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
+:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button)):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
   background-color: var(--color-surface-pressed);
   text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
 }

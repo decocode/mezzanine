@@ -1,4 +1,5 @@
-import { PageHeading, TableOfContents, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { PageHeading } from '../templates/ComponentPageTemplate'
+import { TableOfContents, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import {
   motionPatternDefinitions,
   motionTimingDefinitions,

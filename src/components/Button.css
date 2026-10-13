@@ -18,6 +18,7 @@
   letter-spacing: var(--letter-spacing-label);
   line-height: var(--button-line-height);
   text-align: center;
+  text-decoration: none;
   text-transform: var(--text-transform-label);
   white-space: normal;
   overflow-wrap: anywhere;

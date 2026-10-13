@@ -1,4 +1,5 @@
-import { PageHeading, TableOfContents } from '@decocode/mezzanine'
+import { PageHeading } from '../templates/ComponentPageTemplate'
+import { TableOfContents } from '@decocode/mezzanine'
 import { radiusLevels } from '../content/shapeContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 

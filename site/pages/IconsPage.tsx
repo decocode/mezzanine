@@ -1,4 +1,4 @@
-import { PageHeading } from '@decocode/mezzanine'
+import { PageHeading } from '../templates/ComponentPageTemplate'
 import { iconDefinitions } from '../content/iconsContent'
 
 export default function IconsPage() {

@@ -1,4 +1,5 @@
-import { PageHeading, Link } from '@decocode/mezzanine'
+import { PageHeading } from '../templates/ComponentPageTemplate'
+import { Link } from '@decocode/mezzanine'
 
 export default function TypographyPage() {
   return (

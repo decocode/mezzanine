@@ -7,7 +7,6 @@ import {
   Table,
   TableBody,
   TableHeader,
-  sortTableRows,
   type SortDescriptor,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
@@ -20,7 +19,11 @@ export default function TablePage() {
     column: 'columnA',
     direction: 'ascending',
   })
-  const sortedRows = sortTableRows(tableExampleRows, sortDescriptor)
+  const sortColumn = tableExampleColumns.find(column => column.id === sortDescriptor.column) ?? tableExampleColumns[0]
+  const sortedRows = [...tableExampleRows].sort((first, second) => {
+    const order = first[sortColumn.id].localeCompare(second[sortColumn.id])
+    return sortDescriptor.direction === 'descending' ? -order : order
+  })
 
   return (
     <ComponentPageTemplate

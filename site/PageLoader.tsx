@@ -4,7 +4,8 @@
 // requested section when the URL includes a section link, such as #navbar-anatomy.
 
 import { Component, Suspense, useEffect, type ReactNode } from 'react'
-import { PageHeading, Button } from '@decocode/mezzanine'
+import { Button } from '@decocode/mezzanine'
+import { PageHeading } from './templates/ComponentPageTemplate'
 import { pageRegistry } from './pageRegistry'
 import type { SitePageDefinition } from './siteStructure'
 

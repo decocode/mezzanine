@@ -1,4 +1,4 @@
-import { Link } from '@decocode/mezzanine'
+import { Button } from '@decocode/mezzanine'
 import { homeContent } from '../content/homeContent'
 
 export default function HomePage() {
@@ -10,7 +10,7 @@ export default function HomePage() {
         <span className="landing-wordmark-name">{homeContent.title}</span>
       </h1>
       <p className="mz-text-body-lg landing-hero-description">{homeContent.description}</p>
-      <Link className="landing-primary-cta" href={homeContent.docsLink.href}>{homeContent.docsLink.label}</Link>
+      <Button href={homeContent.docsLink.href}>{homeContent.docsLink.label}</Button>
     </section>
   )
 }

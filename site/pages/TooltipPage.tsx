@@ -1,4 +1,4 @@
-import { IconButton, SettingsIcon, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
+import { Button, SettingsIcon, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
 import { ExampleZone } from '../components/ExampleZone'
 import { DocsTable } from '../components/DocsTable'
 import { tooltipContent } from '../content/tooltipContent'
@@ -19,7 +19,7 @@ export default function TooltipPage() {
             {tooltipContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
             <ExampleZone>
               <TooltipTrigger>
-                <IconButton icon={<SettingsIcon />} label={tooltipContent.exampleLabel} />
+                <Button iconLeading={<SettingsIcon />} aria-label={tooltipContent.exampleLabel} />
                 <Tooltip placement="bottom">{tooltipContent.exampleTooltip}</Tooltip>
               </TooltipTrigger>
             </ExampleZone>

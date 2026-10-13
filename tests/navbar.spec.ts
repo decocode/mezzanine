@@ -89,7 +89,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
     await expect(docsLink).toHaveAttribute('aria-current', 'true')
     expect(await docsLink.evaluate(element => {
       const style = getComputedStyle(element)
-      return style.borderBottomColor !== 'rgba(0, 0, 0, 0)' && Number.parseFloat(style.borderBottomWidth) > 0 && style.backgroundColor !== 'rgba(0, 0, 0, 0)'
+      return style.borderBottomColor !== 'rgba(0, 0, 0, 0)' && Number.parseFloat(style.borderBottomWidth) > 0 && style.backgroundColor === 'rgba(0, 0, 0, 0)'
     })).toBe(true)
     if (theme === 'wireframe') {
       expect(await docsLink.evaluate(element => getComputedStyle(element).textDecorationLine)).toBe('underline')

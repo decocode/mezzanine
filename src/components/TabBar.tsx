@@ -1,11 +1,10 @@
-import { useState, type AriaAttributes, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, useState, type AriaAttributes, type ReactNode } from 'react'
 import { composeRenderProps } from 'react-aria-components'
 import { Button } from './Button'
 import { Dialog, DialogTrigger, Heading } from './Dialog'
 import { Modal, ModalOverlay } from './Modal'
 import { Link, type LinkProps } from './Link'
 import { MoreIcon } from '../icons/StudioIcons'
-import { useTabBarCapacity } from './useTabBarCapacity'
 
 export interface TabBarItem extends Omit<LinkProps, 'children'> {
   id: string
@@ -87,4 +86,32 @@ export function TabBar({ items, 'aria-label': label, position = 'bottom', moreLa
       </ul>
     </nav>
   )
+}
+
+// Measure both available space and the token-sized slot, including text enlargement.
+function useTabBarCapacity() {
+  const listRef = useRef<HTMLUListElement>(null)
+  const slotRef = useRef<HTMLSpanElement>(null)
+  const [capacity, setCapacity] = useState(1)
+
+  useLayoutEffect(() => {
+    const list = listRef.current
+    const slot = slotRef.current
+    if (!list || !slot) return
+
+    const measure = () => {
+      const style = getComputedStyle(list)
+      const gap = parseFloat(style.columnGap) || 0
+      const width = list.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight)
+      const slotWidth = slot.getBoundingClientRect().width
+      setCapacity(Math.max(1, Math.floor((width + gap) / (slotWidth + gap))))
+    }
+    const observer = new ResizeObserver(measure)
+    observer.observe(list)
+    observer.observe(slot)
+    measure()
+    return () => observer.disconnect()
+  }, [])
+
+  return { listRef, slotRef, capacity }
 }

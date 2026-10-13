@@ -5,7 +5,8 @@ import {
   Cell,
   Column,
   DownloadIcon,
-  IconButton,
+  Tooltip,
+  TooltipTrigger,
   PlusIcon,
   Row,
   Table,
@@ -70,6 +71,17 @@ export default function ButtonPage() {
           </>),
         },
         {
+          id: 'button-navigation-heading',
+          title: 'Navigational buttons',
+          content: (<>
+            <p className="component-section-description">{buttonContent.navigationExample.description}</p>
+            <ExampleZone>
+              <Button href={buttonContent.navigationExample.href} iconTrailing={<ArrowRightIcon />}>{buttonContent.navigationExample.label}</Button>
+              <Button href={buttonContent.navigationExample.href} isDisabled>{buttonContent.navigationExample.disabledLabel}</Button>
+            </ExampleZone>
+          </>),
+        },
+        {
           id: 'button-content-examples-heading',
           title: 'Content and sizes',
           subsections: [{ id: 'button-sizes-heading', label: 'Sizes' }],
@@ -84,7 +96,7 @@ export default function ButtonPage() {
                   <Row id="text-only">
                     <Cell>
                       <span className="table-item-heading">
-                        <strong>Text only</strong>
+                        <strong>Text-only</strong>
                         <span>Buttons use a text label without an icon by default.</span>
                       </span>
                     </Cell>
@@ -93,7 +105,7 @@ export default function ButtonPage() {
                   <Row id="leading-icon">
                     <Cell>
                       <span className="table-item-heading">
-                        <strong>Leading icon</strong>
+                        <strong>Text + icon leading</strong>
                         <code>iconLeading</code>
                         <span>Places an icon before the label.</span>
                       </span>
@@ -103,44 +115,27 @@ export default function ButtonPage() {
                   <Row id="trailing-icon">
                     <Cell>
                       <span className="table-item-heading">
-                        <strong>Trailing icon</strong>
+                        <strong>Text + icon trailing</strong>
                         <code>iconTrailing</code>
                         <span>Places an icon after the label.</span>
                       </span>
                     </Cell>
                     <Cell><Button iconTrailing={<ArrowRightIcon />}>Button</Button></Cell>
                   </Row>
-                  <Row id="icon-button-hidden-label">
+                  <Row id="icon-only">
                     <Cell>
                       <span className="table-item-heading">
-                        <strong>Icon button: hidden label</strong>
-                        <code>hidden</code>
-                        <span>
-                          The default. Its label provides the accessible name without being visible.
-                        </span>
+                        <strong>Icon only</strong>
+                        <code>aria-label</code>
+                        <span>No visible text. Supply an accessible name and a tooltip for hover and keyboard focus.</span>
                       </span>
                     </Cell>
-                    <Cell><IconButton icon={<DownloadIcon />} label="Download" /></Cell>
-                  </Row>
-                  <Row id="icon-button-label-above">
                     <Cell>
-                      <span className="table-item-heading">
-                        <strong>Icon button: label above</strong>
-                        <code>above</code>
-                        <span>Displays the label above the icon button.</span>
-                      </span>
+                      <TooltipTrigger>
+                        <Button iconLeading={<DownloadIcon />} aria-label="Download" />
+                        <Tooltip>Download</Tooltip>
+                      </TooltipTrigger>
                     </Cell>
-                    <Cell><IconButton icon={<PlusIcon />} label="Button" labelPosition="above" /></Cell>
-                  </Row>
-                  <Row id="icon-button-label-below">
-                    <Cell>
-                      <span className="table-item-heading">
-                        <strong>Icon button: label below</strong>
-                        <code>below</code>
-                        <span>Displays the label below the icon button.</span>
-                      </span>
-                    </Cell>
-                    <Cell><IconButton icon={<PlusIcon />} label="Button" labelPosition="below" /></Cell>
                   </Row>
                 </TableBody>
               </Table>

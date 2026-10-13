@@ -1,4 +1,4 @@
-import { PageHeading } from '@decocode/mezzanine'
+import { PageHeading } from '../templates/ComponentPageTemplate'
 import { spacingScaleSteps } from '../content/spacingContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 

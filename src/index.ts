@@ -65,13 +65,6 @@ export type {
   DisclosureRenderProps,
 } from './components/Disclosure'
 
-export { IconButton } from './components/IconButton'
-
-export type {
-  IconButtonLabelPosition,
-  IconButtonProps,
-} from './components/IconButton'
-
 export { Link } from './components/Link'
 
 export type {
@@ -132,8 +125,6 @@ export {
   TableHeader,
 } from './components/Table'
 
-export { sortTableRows } from './components/tableSorting'
-export type { TableRowComparator } from './components/tableSorting'
 
 export {
   HomeIcon,
@@ -239,8 +230,6 @@ export { TableOfContents } from './components/TableOfContents'
 
 export type { TableOfContentsProps, TableOfContentsSection } from './components/TableOfContents'
 
-export { PageHeading } from './components/PageHeading'
-export type { PageHeadingProps } from './components/PageHeading'
 
 export { Navbar } from './components/Navbar'
 export type { NavbarProps, NavbarRenderProps } from './components/Navbar'
