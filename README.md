@@ -28,7 +28,14 @@ Showcase: [mezzanine.fly.dev](https://mezzanine.fly.dev)
 - `npm run build:site` — type-check and build the showcase into `site-dist/`
 - `npm run build` — both
 - `npm run lint` — oxlint
-- `npm run test:e2e` — Playwright tests
+- `npm run test:e2e` — build the showcase and run Chromium route-loading regression tests
+
+## Browser tests
+
+Install Chromium once with `npx playwright install chromium`, then run
+`npm run test:e2e`. The tests start a production preview automatically and check
+route-specific downloads, loading and error states, direct section links and
+state preservation when changing themes.
 
 ## How DecoCode products use it
 

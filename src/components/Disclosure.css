@@ -1,18 +1,22 @@
 .react-aria-DisclosureGroup {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--disclosure-group-gap);
 }
 
 .react-aria-Disclosure {
+  min-width: 0;
+  overflow-wrap: anywhere;
   border-block-end: var(--disclosure-border-width) solid var(--color-border);
   color: var(--color-text);
 }
 
-.react-aria-Disclosure > .react-aria-Heading {
+.react-aria-Heading:has(> .mezzanine-disclosure-trigger) {
   margin: 0;
 }
 
 .mezzanine-disclosure-trigger {
+  box-sizing: border-box;
   display: flex;
   gap: var(--disclosure-trigger-gap);
   align-items: center;
@@ -23,12 +27,12 @@
   border: 0;
   background: var(--disclosure-trigger-background);
   color: var(--color-text);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-title-sm);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-title-sm);
   text-align: start;
   cursor: pointer;
+}
+
+.mezzanine-disclosure-trigger > span {
+  min-width: 0;
 }
 
 .mezzanine-disclosure-trigger[data-hovered] {
@@ -58,6 +62,11 @@
 .react-aria-DisclosurePanel {
   padding: 0 var(--disclosure-panel-padding-inline) var(--disclosure-panel-padding-block);
   color: var(--color-text-muted);
+}
+
+.react-aria-DisclosurePanel[hidden] {
+  /* hidden="until-found" hides content, but still lays out the panel's padding. */
+  padding: 0;
 }
 
 .react-aria-Disclosure[data-disabled] {

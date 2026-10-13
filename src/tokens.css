@@ -26,18 +26,18 @@
   --color-neutral-900: #292929;
   --color-neutral-950: #121212;
 
-  /* Mezzanine's default violet scale. */
-  --color-violet-50: #FAF9FF;
-  --color-violet-100: #F2EFFF;
-  --color-violet-200: #E0D8FF;
-  --color-violet-300: #C8B7FF;
-  --color-violet-400: #B091FF;
-  --color-violet-500: #9670EC;
-  --color-violet-600: #7951CA;
-  --color-violet-700: #623CA8;
-  --color-violet-800: #482880;
-  --color-violet-900: #2F1759;
-  --color-violet-950: #160530;
+  /* Mezzanine's Signature palette. */
+  --color-signature-50: #F9FAFE;
+  --color-signature-100: #EFF1FD;
+  --color-signature-200: #D8DCF9;
+  --color-signature-300: #BABFF5;
+  --color-signature-400: #999FF0;
+  --color-signature-500: #7D81DC;
+  --color-signature-600: #6163BB;
+  --color-signature-700: #4C4D9B;
+  --color-signature-800: #363675;
+  --color-signature-900: #222251;
+  --color-signature-950: #0D0C2B;
 
   /* Product-neutral semantic scales with a deliberately softened character. */
   --color-info-50: #F7FAFF;
@@ -100,6 +100,8 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-default: var(--font-weight-regular);
+  --font-weight-emphasis: var(--font-weight-semibold);
 
   /* Display: short, expressive hero and marketing text. */
   --font-size-display-lg: 4.5rem;
@@ -204,9 +206,9 @@
   --badge-neutral-background: var(--color-neutral-100);
   --badge-neutral-content: var(--color-neutral-800);
   --badge-neutral-border: var(--color-neutral-300);
-  --badge-violet-background: var(--color-violet-100);
-  --badge-violet-content: var(--color-violet-800);
-  --badge-violet-border: var(--color-violet-300);
+  --badge-violet-background: var(--color-signature-100);
+  --badge-violet-content: var(--color-signature-800);
+  --badge-violet-border: var(--color-signature-300);
   --badge-info-background: var(--color-info-100);
   --badge-info-content: var(--color-info-800);
   --badge-info-border: var(--color-info-300);
@@ -290,10 +292,10 @@
   --disclosure-border-width: 0.0625rem;
   --disclosure-trigger-min-height: 3rem;
   --disclosure-trigger-padding-block: 0.75rem;
-  --disclosure-trigger-padding-inline: 0.75rem;
+  --disclosure-trigger-padding-inline: 0;
   --disclosure-trigger-gap: 1rem;
   --disclosure-panel-padding-block: 1rem;
-  --disclosure-panel-padding-inline: 0.75rem;
+  --disclosure-panel-padding-inline: 0;
   --disclosure-icon-size: 1.25rem;
   --disclosure-focus-ring-width: 0.1875rem;
   --disclosure-focus-ring-offset: -0.1875rem;

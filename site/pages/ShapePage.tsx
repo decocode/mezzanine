@@ -1,0 +1,66 @@
+import { radiusLevels } from '../foundationData'
+import { TableOfContents } from '../TableOfContents'
+import { ShapeCornerExample } from '../ShapeCornerExample'
+import { PageHeading } from '../PageHeading'
+import { useTokenValue } from '../useTokenValue'
+
+function RadiusSample({ label, token, refreshKey }: { label: string; token: string; refreshKey: string }) {
+  const value = useTokenValue(token, refreshKey)
+
+  return (
+    <li className="radius-scale-item">
+      <span aria-hidden="true" className="radius-scale-sample" style={{ borderRadius: `var(${token})` }} />
+      <strong>{label}</strong>
+      <code>{token}</code>
+      <code>{value}</code>
+    </li>
+  )
+}
+
+export default function ShapePage({ refreshKey }: { refreshKey: string }) {
+  return (
+    <>
+      <PageHeading title="Shape" description="Corner radius controls how square or rounded a surface appears. Mezzanine provides a shared scale that products can reference from their component tokens." />
+      <TableOfContents sections={[
+        { id: 'radius-levels-heading', label: 'Corner radius' },
+        { id: 'radius-corners-heading', label: 'Individual corners' },
+        { id: 'radius-usage-heading', label: 'Using the scale' },
+      ]} />
+      <section className="component-section" aria-labelledby="radius-levels-heading">
+        <h2 id="radius-levels-heading" className="mz-text-heading-md">Corner radius</h2>
+        <p className="component-section-description">
+          Small through Extra large use <code>rem</code>, so they respond to the root font size.
+          None keeps square corners. Full uses a deliberately large radius to produce pill ends.
+          Values below come from the active CSS tokens.
+        </p>
+        <ol className="radius-scale-list">
+          {radiusLevels.map((level) => <RadiusSample key={level.token} {...level} refreshKey={refreshKey} />)}
+        </ol>
+      </section>
+      <section className="component-section" aria-labelledby="radius-corners-heading">
+        <h2 id="radius-corners-heading" className="mz-text-heading-md">Individual corners</h2>
+        <p className="component-section-description">
+          Choose a radius for each corner independently. Leave the other corners at None to round
+          just one corner, or combine levels to round an edge or create an asymmetric shape.
+          These are physical corners: left and right do not change with text direction.
+        </p>
+        <ShapeCornerExample />
+        <p className="component-section-description">
+          CSS reduces overlapping radii proportionally to fit the shape. Full can therefore affect
+          the visible size of other rounded corners when combined with them.
+        </p>
+      </section>
+      <section className="component-section" aria-labelledby="radius-usage-heading">
+        <h2 id="radius-usage-heading" className="mz-text-heading-md">Using the scale</h2>
+        <p className="component-section-description">
+          Reference a level from a component token, for example <code>--button-border-radius: var(--radius-sm)</code>.
+          Adding this scale does not change existing component corners; their current defaults remain intact.
+        </p>
+        <p className="component-section-description">
+          Full is a pill treatment, not another incremental step. For a circle, use <code>50%</code> on
+          a square element; on a rectangle, that percentage produces an ellipse.
+        </p>
+      </section>
+    </>
+  )
+}

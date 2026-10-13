@@ -3,6 +3,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
   min-height: var(--button-min-height);
   padding: var(--button-padding-block) var(--button-padding-inline);
   border: var(--button-border-width) solid var(--button-border);
@@ -16,7 +19,8 @@
   line-height: var(--button-line-height);
   text-align: center;
   text-transform: var(--text-transform-label);
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
   cursor: pointer;
 }
 
@@ -58,6 +62,8 @@
 
 .mezzanine-button-content {
   display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
   align-items: center;
   justify-content: center;
   gap: var(--button-content-gap);

@@ -50,7 +50,36 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/typography.css` | Fifteen public text-style classes and the Inline code element pattern, assembled from typography tokens |
 | `site/index.html` | HTML shell for the showcase site |
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
-| `site/App.tsx` | Route-aware showcase shell, landing hero, implemented documentation content, and explicit empty-page state |
+| `site/App.tsx` | Showcase shell, theme state, landing hero, and empty/not-found views; renders documentation through the route loading boundary |
+| `site/documentationPages.ts` | Maps implemented documentation page IDs to lazy imports so only the requested page loads |
+| `site/DocumentationPage.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
+| `site/PageHeading.tsx` | Shared page title, description and official React Aria documentation link |
+| `site/useTokenValue.ts` | Reads current CSS token values when the selected theme changes |
+| `site/TokenValue.tsx` | Displays a live CSS token value as code |
+| `site/buttonDocumentation.ts` | Button variant, size and state reference data used by the Button page |
+| `site/pages/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
+| `site/pages/ColorPage.tsx` | Palette swatches and semantic color-role reference; loaded only when its route is requested |
+| `site/pages/TypographyPage.tsx` | Typography overview; loaded only when its route is requested |
+| `site/pages/TextStylesPage.tsx` | Typography specimens, weight modifiers and token reference; loaded only when its route is requested |
+| `site/pages/ProsePage.tsx` | List and inline-code examples; loaded only when its route is requested |
+| `site/pages/SpacingPage.tsx` | Spacing-scale reference; loaded only when its route is requested |
+| `site/pages/ShapePage.tsx` | Corner-radius reference and interactive corner example; loaded only when its route is requested |
+| `site/pages/ElevationPage.tsx` | Elevation roles and theming guidance; loaded only when its route is requested |
+| `site/pages/MotionPage.tsx` | Motion timing, tokens and reduced-motion guidance; loaded only when its route is requested |
+| `site/pages/IconsPage.tsx` | Exported icon catalogue; loaded only when its route is requested |
+| `site/pages/BadgePage.tsx` | Badge examples and variants; loaded only when its route is requested |
+| `site/pages/ButtonPage.tsx` | Button examples, states, sizes and token reference; loaded only when its route is requested |
+| `site/pages/ToggleButtonPage.tsx` | Standalone and grouped toggle examples; loaded only when its route is requested |
+| `site/pages/NavigationTreePage.tsx` | Hierarchical navigation example; loaded only when its route is requested |
+| `site/pages/TableOfContentsPage.tsx` | Showcase table-of-contents examples and props; loaded only when its route is requested |
+| `site/pages/BreadcrumbsPage.tsx` | Breadcrumb hierarchy and disabled examples; loaded only when its route is requested |
+| `site/pages/TabsPage.tsx` | Tabs page heading and existing Tabs examples; loaded only when its route is requested |
+| `site/pages/LinkPage.tsx` | Link states and content examples; loaded only when its route is requested |
+| `site/pages/DialogPage.tsx` | Dialog page heading and existing Dialog examples; loaded only when its route is requested |
+| `site/pages/DisclosurePage.tsx` | Disclosure and DisclosureGroup examples; loaded only when its route is requested |
+| `site/pages/CheckboxPage.tsx` | Checkbox example and selection states; loaded only when its route is requested |
+| `site/pages/RadioGroupPage.tsx` | RadioGroup anatomy, states, validation and token reference; loaded only when its route is requested |
+| `site/pages/TablePage.tsx` | Table selection, sorting, empty-state and anatomy examples; loaded only when its route is requested |
 | `site/Header.tsx` | Responsive showcase header with React Aria links, an icon-only Mezzanine ToggleButtonGroup theme switcher and Disclosure hamburger menu |
 | `site/Sidebar.tsx` | Responsive nested NavigationTree sidebar, expanding the current page's ancestor groups, including the mobile Browse sections disclosure |
 | `site/TableOfContents.tsx` | Reusable site-level Contents navigation with nested child links and a configurable heading, composing Mezzanine Link with section anchors; documented at `/table-of-contents` under Navigation |
@@ -67,6 +96,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |
+| `playwright.config.ts` | Builds and serves the production showcase for Chromium route-loading regression tests |
+| `tests/route-loading.spec.ts` | Verifies route-specific downloads, delayed and failed loads, section links and theme-state preservation |
 | `vite.config.ts` | Showcase build: React plugin, `site/` root, package-name alias, `site-dist/` output |
 | `vite.lib.config.ts` | Package build: library mode, external peer dependencies, `dist/` output |
 | `tsconfig.json` | References the app and node TypeScript projects |
@@ -90,9 +121,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 ## Commands
 
 Typography retains its overview at `/typography`. Its child pages are
-`/typography/text-styles` (full-width text-style specimens and line heights) and
-`/typography/prose` (lists and inline code). These pages are rendered by
-`site/App.tsx`; `site/siteNavigation.ts` defines the linked parent and children.
+`/typography/text-styles` (responsive Default/Emphasis example table, token reference and line heights) and
+`/typography/prose` (lists and inline code). These pages are loaded from `site/pages/` through `site/documentationPages.ts`;
+`site/siteNavigation.ts` defines the linked parent and children.
 
 | Command | Purpose |
 | --- | --- |
@@ -104,6 +135,7 @@ Typography retains its overview at `/typography`. Its child pages are
 | `npm run build:site` | Type-check and build the showcase into `site-dist/` |
 | `npm run build` | Build both the package and the showcase |
 | `npm run preview` | Preview the showcase build locally |
+| `npm run test:e2e` | Build the showcase and run the route-loading browser tests |
 | `npm run lighthouse` | Build the showcase and run the mobile and desktop Lighthouse performance audits |
 | `npm run lighthouse:mobile` | Build the showcase and run the mobile Lighthouse audit |
 | `npm run lighthouse:desktop` | Build the showcase and run the desktop Lighthouse audit |

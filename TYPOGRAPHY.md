@@ -184,21 +184,53 @@ Common patterns should reuse the foundation instead of creating new sizes:
 A pattern should become its own shared style only after more than one product
 demonstrates that it needs a distinct, stable treatment.
 
-## Weights are separate
+## Default and Emphasis
 
-Mezzanine provides four weight tokens:
+All fifteen text styles support two weight modifiers. Apply one alongside the
+style class:
+
+```tsx
+<p className="mz-text-body-md mz-text-default">Default body text</p>
+<p className="mz-text-body-md mz-text-emphasis">Emphasised body text</p>
+```
+
+- `mz-text-default` uses `--font-weight-default`, currently an alias of
+  `--font-weight-regular` (400).
+- `mz-text-emphasis` uses `--font-weight-emphasis`, currently an alias of
+  `--font-weight-semibold` (600).
+- Both preserve the base style's family, size, line height, letter spacing and
+  text transform. Use only one weight modifier on an element.
+- Styles without a modifier keep the defaults listed above. Existing consumers
+  do not need to migrate.
+- Disclosure headers use Title small with the Default modifier.
+
+Default and Emphasis describe intent, not fixed font weights. A brand can set
+`--font-weight-default: 300` and `--font-weight-emphasis: 800` to use Light and
+Extra Bold, provided its font supports those weights. The numeric Regular token
+remains separate from the themeable Default role.
+
+The newly introduced `mz-text-regular` modifier has been renamed to
+`mz-text-default`; update consumers using that modifier. No alias is retained.
+
+These classes only change appearance. Use semantic `strong` or `em` when the
+content conveys importance or stress; a visual modifier does not add that meaning.
+
+## Weight tokens
+
+Mezzanine provides four numeric weight tokens and two themeable role aliases:
 
 ```text
 --font-weight-regular
 --font-weight-medium
 --font-weight-semibold
 --font-weight-bold
+--font-weight-default
+--font-weight-emphasis
 ```
 
-The named styles choose a sensible default weight. Mezzanine does not multiply
-all 15 styles by all four weights. Semantic emphasis such as `strong` and `em`
-should remain semantic HTML, while components can select another supported
-weight when their design requires it.
+The named styles choose a default weight; the two shared modifiers provide
+Default and Emphasis without duplicating the fifteen size recipes. Themes can
+override the weight tokens without changing the public classes.
 
 Every weight used by a product must have a corresponding font file. Declaring
 weight 500 does not load that weight.

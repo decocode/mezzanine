@@ -81,7 +81,7 @@ Examples:
 - `--font-family-body` is the normal reading and interface font.
 
 Names describe purpose rather than appearance. Component CSS therefore asks
-for `--button-primary-background`, not `--color-violet-700`.
+for `--button-primary-background`, not `--color-signature-700`.
 
 ## Current color inventory
 
@@ -89,7 +89,11 @@ Every official theme defines the same color roles.
 
 ### Palette scales
 
-Mezzanine includes an 11-step Violet core palette, from `50` to `950`.
+Mezzanine includes an 11-step Signature core palette, from `50` to `950`.
+Breaking change: `--color-violet-*` has been renamed to `--color-signature-*`.
+Consumers must update palette references and theme overrides; no aliases are provided.
+The existing `violet` Badge variant and its component tokens remain unchanged,
+but reference the Signature palette.
 Roles select a step from a core or semantic palette so a product can change
 the palette without changing what each role means.
 
@@ -100,10 +104,10 @@ step number alone.
 
 | Token | Meaning |
 | --- | --- |
-| `--color-violet-{50–950}` | Mezzanine's default violet palette |
+| `--color-signature-{50–950}` | Mezzanine's Signature palette |
 
-Light and Dark use the Violet core palette and the Neutral semantic palette.
-Wireframe uses Neutral for its monochrome presentation and does not use Violet
+Light and Dark use the Signature core palette and the Neutral semantic palette.
+Wireframe uses Neutral for its monochrome presentation and does not use Signature
 for actions.
 
 ### Page and surfaces
@@ -132,7 +136,7 @@ for actions.
 | `--color-link-pressed` | A pressed link |
 | `--color-focus` | The keyboard-focus indicator color |
 
-Link and Focus are separate roles. Light and Dark draw Link from the Violet
+Link and Focus are separate roles. Light and Dark draw Link from the Signature
 palette, while Focus remains tied to the Info palette. Primary actions are
 defined by their components rather than a generic color role. There is no
 generic Accent token.
@@ -169,6 +173,8 @@ stack. The default requires no font download.
 | `--font-weight-medium` | Medium weight, currently 500 |
 | `--font-weight-semibold` | Semibold weight, currently 600 |
 | `--font-weight-bold` | Bold weight, currently 700 |
+| `--font-weight-emphasis` | Text-style Emphasis modifier, defaults to `--font-weight-semibold` (600) |
+| `--font-weight-default` | Text-style Default modifier, defaults to `--font-weight-regular` (400); themes may choose any supported weight |
 | `--font-size-{role}-{size}` | The size used by one named typography style |
 | `--line-height-{role}-{size}` | The line height paired with that style |
 | `--letter-spacing-{role}` | Tracking shared by a role's three sizes |
@@ -357,7 +363,9 @@ tokens for its interactive colors.
 | `--radio-border-invalid` | Invalid Radio indicator border color |
 
 Disclosure uses structural tokens for its trigger, panel, grouping and
-interaction feedback.
+interaction feedback. Trigger and panel horizontal padding default to zero,
+aligning labels and expanded content with the container edges. Themes can
+override the inline-padding tokens when an inset is needed.
 
 | Token | Meaning |
 | --- | --- |
@@ -421,11 +429,11 @@ states.
 | Token | Meaning |
 | --- | --- |
 | `--navigation-tree-gap` | Space between NavigationTree rows and sections |
-| `--navigation-tree-item-min-height` | Minimum height of a navigation item |
+| `--navigation-tree-item-min-height` | Minimum height of a navigation item and width of its chevron column |
 | `--navigation-tree-item-padding-block` | Vertical space inside a navigation item |
-| `--navigation-tree-item-padding-inline` | Base horizontal space inside a navigation item |
+| `--navigation-tree-item-padding-inline` | Base label inset; rows with children have no end inset so chevron buttons sit flush with the row edge |
 | `--navigation-tree-item-gap` | Space between item content and controls |
-| `--navigation-tree-indent` | Additional indentation for each nested level |
+| `--navigation-tree-indent` | Additional label indentation for each nested level; chevrons remain aligned at the inline end |
 | `--navigation-tree-current-indicator-width` | Width of the current-route indicator |
 | `--navigation-tree-focus-ring-width` | Keyboard-focus indicator width |
 | `--navigation-tree-focus-ring-offset` | Keyboard-focus indicator position |

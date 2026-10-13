@@ -99,8 +99,17 @@
 }
 
 @media (forced-colors: active) {
-  .react-aria-RadioButton,
-  .react-aria-SelectionIndicator {
+  .react-aria-RadioButton {
     forced-color-adjust: auto;
+  }
+
+  /* Preserve the selection dot against the system canvas in high contrast. */
+  .react-aria-RadioButton > .react-aria-SelectionIndicator {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+
+  .react-aria-RadioButton[data-disabled] > .react-aria-SelectionIndicator {
+    background: GrayText;
   }
 }

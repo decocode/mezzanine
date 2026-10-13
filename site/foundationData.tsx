@@ -51,7 +51,7 @@ export interface ColorPaletteDefinition {
     content: string[]
     label: string
   }
-  id: 'neutral' | 'violet' | 'info' | 'success' | 'warning' | 'danger'
+  id: 'neutral' | 'signature' | 'info' | 'success' | 'warning' | 'danger'
   label: string
 }
 
@@ -70,8 +70,15 @@ export const radiusLevels = [
 
 export const foundationColorPalettes: ColorPaletteDefinition[] = [
   {
-    id: 'violet',
-    label: 'Violet',
+    id: 'signature',
+    label: 'Signature',
+    details: {
+      label: 'When to use Signature colors',
+      content: [
+        'The Signature palette is usually based around the main color associated with a brand. In Mezzanine, signature colors are used for primary buttons, links, and selected controls.',
+        'If your main brand color is similar to those used for warnings or errors, consider how people will tell those meanings apart. Some brands use high-contrast neutral colors for buttons and links, reserving their brand color for images and other visual content.',
+      ],
+    },
   },
 ]
 
@@ -79,19 +86,62 @@ export const semanticColorPalettes: ColorPaletteDefinition[] = [
   {
     id: 'neutral',
     label: 'Neutral',
-    description: 'Used to indicate statuses without a positive or negative inference. Very light and dark Neutral tones can be used when high contrast is required. Gray tones are often used to indicate that something is disabled or archived.',
     details: {
-      label: 'Customising Neutral',
+      label: 'When to use Neutral colors',
       content: [
+        'Used to indicate statuses without a positive or negative inference. Very light and dark Neutral tones can be used when high contrast is required. Gray tones are often used to indicate that something is disabled or archived.',
+        'Pair the color with a clear label, such as “Draft” or “Archived”, so people can understand the status without relying on color alone.',
         'Mezzanine Neutral tones sit between pure white (#FFFFFF) and pure black (#000000). It is used in the Wireframe theme to help product teams focus on the functionality of their designs.',
         'For custom themes, the Neutral palette can be easily adjusted to suit different brands - be that cool slates, warm taupes or icy silver tones.',
       ],
     },
   },
-  { id: 'info', label: 'Info', description: 'Information and keyboard focus' },
-  { id: 'success', label: 'Success', description: 'Successful outcomes' },
-  { id: 'warning', label: 'Warning', description: 'Cautions and warnings' },
-  { id: 'danger', label: 'Danger', description: 'Errors and destructive actions' },
+  {
+    id: 'info',
+    label: 'Info',
+    details: {
+      label: 'When to use Info colors',
+      content: [
+        'Use Info colors to draw attention to helpful information without suggesting that something has gone right or wrong. They suit informational statuses and supporting guidance, such as a note explaining what happens after a form is submitted.',
+        'Pair the color with a clear label or message, such as “In progress” or “Your request is being reviewed”, so people can understand the information without relying on color alone.',
+        'Mezzanine also uses the Info palette for keyboard-focus indicators. These identify the control a person is currently interacting with, rather than communicating a status.',
+      ],
+    },
+  },
+  {
+    id: 'success',
+    label: 'Success',
+    details: {
+      label: 'When to use Success colors',
+      content: [
+        'Use Success colors to confirm that an action has completed or a positive outcome has been reached. Examples include changes being saved, an upload completing, or a request being approved.',
+        'Reserve Success for a confirmed outcome, rather than an action that is still in progress. Pair the color with a clear label, such as “Saved” or “Complete”, so people can understand the result without relying on color alone.',
+      ],
+    },
+  },
+  {
+    id: 'warning',
+    label: 'Warning',
+    details: {
+      label: 'When to use Warning colors',
+      content: [
+        'Use Warning colors for situations that need attention but are not yet errors. Examples include an approaching expiry date, unsaved changes, or nearing a usage limit.',
+        'A warning should help people understand a risk before it becomes a problem. Explain what needs their attention and what they can do next. If an action has already failed, use Danger instead.',
+        'Pair the color with a clear label, such as “Expires soon” or “Unsaved changes”, so people can understand the warning without relying on color alone.',
+      ],
+    },
+  },
+  {
+    id: 'danger',
+    label: 'Danger',
+    details: {
+      label: 'When to use Danger colors',
+      content: [
+        'Use Danger colors to highlight errors, failed actions, and actions that remove or destroy something important. For example, Mezzanine uses the Danger palette for invalid form-control borders and destructive buttons.',
+        'Always pair Danger colors with a clear label or message, such as “Save failed”, “Enter a valid email address” or “Delete” so people can avoid potential issues without relying on color alone.',
+      ],
+    },
+  },
 ]
 
 export const elevationDefinitions: ElevationDefinition[] = [
@@ -227,6 +277,15 @@ export const typographyStyles: TypographyStyleDefinition[] = [
   { className: 'mz-text-label-md', label: 'Label medium', purpose: 'Compact controls, badges, and metadata.' },
   { className: 'mz-text-label-sm', label: 'Label small', purpose: 'Supplementary labels where space is constrained.' },
 ]
+
+export const typographyStyleTokens = typographyStyles.map((style) => {
+  const roleAndSize = style.className.replace('mz-text-', '')
+  return {
+    ...style,
+    fontSizeToken: `--font-size-${roleAndSize}`,
+    lineHeightToken: `--line-height-${roleAndSize}`,
+  }
+})
 
 export const motionTimingDefinitions: MotionTimingDefinition[] = [
   {

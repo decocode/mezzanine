@@ -172,3 +172,12 @@ code:not(pre code) {
   font-size: var(--font-size-label-sm);
   line-height: var(--line-height-label-sm);
 }
+
+/* Apply with a named text style; only the weight changes. */
+.mz-text-default {
+  font-weight: var(--font-weight-default);
+}
+
+.mz-text-emphasis {
+  font-weight: var(--font-weight-emphasis);
+}

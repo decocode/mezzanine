@@ -49,6 +49,7 @@
 }
 
 .react-aria-NavigationTreeItem[data-has-child-items] {
+  padding-inline-end: 0;
   color: var(--navigation-tree-header-content);
   font-weight: var(--font-weight-semibold);
 }
@@ -86,6 +87,18 @@
 .react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle .mezzanine-button-content {
   width: 100%;
   justify-content: space-between;
+}
+
+/* Keep chevrons in a shared end column, independent of label indentation. */
+.react-aria-NavigationTreeItem .react-aria-Button[slot='chevron']:not(.mezzanine-navigation-tree-group-toggle) {
+  flex: 0 0 var(--navigation-tree-item-min-height);
+  width: var(--navigation-tree-item-min-height);
+  padding-inline: 0;
+}
+
+.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle .mezzanine-button-icon {
+  width: var(--navigation-tree-item-min-height);
+  justify-content: center;
 }
 
 .react-aria-NavigationTreeItem:has(.mezzanine-navigation-tree-group-toggle[data-hovered]) {
