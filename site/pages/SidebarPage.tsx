@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import {
   Button, Checkbox, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel,
-  HomeIcon, Link, MenuIcon, Sidebar, SidebarPanel, SidebarTrigger,
+  HomeIcon, Link, PanelLeftOpenIcon, PanelRightOpenIcon, Sidebar, SidebarPanel, SidebarTrigger,
   ToggleButton, ToggleButtonGroup, Tooltip, TooltipTrigger,
 } from '@decocode/mezzanine'
 import { ExampleZone } from '../components/ExampleZone'
+import { Sidebar as DocumentationSidebar } from '../components/Sidebar'
+import { findSitePage } from '../siteStructure'
 import { DocsTable } from '../components/DocsTable'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import { sidebarContent } from '../content/sidebarContent'
@@ -14,11 +16,12 @@ function SidebarExample() {
   const [side, setSide] = useState<'left' | 'right'>('left')
   const [collapseMode, setCollapseMode] = useState<'hide' | 'rail'>('rail')
   const [isExpanded, setExpanded] = useState(true)
+  const [isCollapsible, setCollapsible] = useState(true)
   const [optionA, setOptionA] = useState(false)
   const [optionB, setOptionB] = useState(false)
   const [expandedKeys, setExpandedKeys] = useState(new Set(['options']))
   const rail = <TooltipTrigger>
-    <Button aria-label={sidebarContent.labels.expand} iconLeading={<MenuIcon />} variant="tertiary" onPress={() => setExpanded(true)} />
+    <Button aria-label={sidebarContent.labels.expand} iconLeading={side === 'left' ? <PanelLeftOpenIcon /> : <PanelRightOpenIcon />} variant="tertiary" onPress={() => setExpanded(true)} />
     <Tooltip placement={side === 'left' ? 'right' : 'left'}>{sidebarContent.labels.expand}</Tooltip>
   </TooltipTrigger>
 
@@ -30,8 +33,9 @@ function SidebarExample() {
       <ToggleButtonGroup aria-label="Collapse behaviour" selectionMode="single" disallowEmptySelection selectedKeys={[collapseMode]} onSelectionChange={(keys) => setCollapseMode(keys.has('rail') ? 'rail' : 'hide')}>
         <ToggleButton id="rail">Icon rail</ToggleButton><ToggleButton id="hide">Hide</ToggleButton>
       </ToggleButtonGroup>
+      <Checkbox isSelected={isCollapsible} onChange={setCollapsible}>{sidebarContent.labels.collapsible}</Checkbox>
     </div>
-    <Sidebar isExpanded={isExpanded} onExpandedChange={setExpanded}>
+    <Sidebar isCollapsible={isCollapsible} isExpanded={isExpanded} onExpandedChange={setExpanded}>
       <SidebarTrigger variant="secondary">{sidebarContent.labels.trigger}</SidebarTrigger>
       <div className="sidebar-example-layout">
         <SidebarPanel title="Panel" headingLevel={3} side={side} closeLabel={sidebarContent.labels.close}
@@ -116,7 +120,13 @@ export default function SidebarPage() {
     sections={[
       { id: 'sidebar-example', title: 'Example', content: <><p>{sidebarContent.exampleIntroduction}</p><SidebarExample /></> },
       { id: 'sidebar-multiple', title: 'Multiple sidebars', content: <><p>Navigation, filters and details use separate Sidebar boundaries. They become drawers below 90rem of viewport width in this example.</p><MultipleSidebarsExample /></> },
-      { id: 'sidebar-technical-details', title: 'Technical details', sections: [
+      { id: 'sidebar-documentation', title: 'Documentation sidebar', content: <>
+        <p>{sidebarContent.documentationIntroduction}</p>
+        <ExampleZone className="sidebar-documentation-example">
+          <DocumentationSidebar currentPage={findSitePage('/sidebar')!} aria-label="Documentation example sections" navigationLabel="Documentation example navigation" />
+        </ExampleZone>
+      </> },
+      { id: 'sidebar-technical-details' , title: 'Technical details', sections: [
         { id: 'sidebar-anatomy', title: 'Anatomy', content: <DocsTable aria-label="Sidebar anatomy" nameColumn="Component" rows={sidebarContent.anatomy} /> },
         { id: 'sidebar-behaviour', title: 'Behaviour', content: sidebarContent.behaviour.map((text, index) => <p key={index}>{text}</p>) },
         { id: 'sidebar-usage', title: 'Usage', content: sidebarContent.usage.map((text, index) => <p key={index}>{text}</p>) },

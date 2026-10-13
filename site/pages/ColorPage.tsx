@@ -1,6 +1,6 @@
+import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
 import {
-  TableOfContents,
   Disclosure,
   DisclosureHeader,
   DisclosurePanel,
@@ -142,7 +142,7 @@ export default function ColorPage({ refreshKey }: { refreshKey: string }) {
         ]}
         title="Color"
       />
-      <TableOfContents sections={[
+      <DocsTableOfContents sections={[
         {
           id: 'color-palettes-heading',
           label: 'Color palettes',

@@ -1,5 +1,5 @@
+import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
-import { TableOfContents } from '@decocode/mezzanine'
 import { radiusLevels } from '../content/shapeContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 
@@ -20,7 +20,7 @@ export default function ShapePage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
       <PageHeading title="Shape" description="Corner radius controls how square or rounded a surface appears. Mezzanine provides a shared scale that products can reference from their component tokens." />
-      <TableOfContents sections={[
+      <DocsTableOfContents sections={[
         { id: 'radius-levels-heading', label: 'Corner radius' },
         { id: 'radius-corners-heading', label: 'Individual corners' },
         { id: 'radius-usage-heading', label: 'Using the scale' },

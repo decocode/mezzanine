@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link } from '@decocode/mezzanine'
 import { MezzanineNavbar } from './components/MezzanineNavbar'
 import { Sidebar } from './components/Sidebar'
+import { DocsContentsContext } from './components/docsContentsContext'
 import { PageLoader } from './PageLoader'
 import NotFoundPage from './pages/NotFoundPage'
 import NotImplementedPage from './pages/NotImplementedPage'
@@ -9,11 +10,14 @@ import { siteContent } from './content/siteContent'
 import { findSitePage } from './siteStructure'
 import { applyTheme, storeTheme, type Theme } from './themeSwitcherLogic'
 
+const LabShell = lazy(() => import('./lab/LabShell'))
+
 interface AppShellProps {
   initialTheme: Theme
 }
 
 export function AppShell({ initialTheme }: AppShellProps) {
+  const [contentsHost, setContentsHost] = useState<HTMLDivElement | null>(null)
   const [selectedTheme, setSelectedTheme] = useState(initialTheme)
   const [systemPreferenceVersion, setSystemPreferenceVersion] = useState(0)
   const currentPath = window.location.pathname === '/'
@@ -39,6 +43,8 @@ export function AppShell({ initialTheme }: AppShellProps) {
   }, [selectedTheme])
 
   const refreshKey = `${selectedTheme}-${systemPreferenceVersion}`
+
+  if (currentPath === '/site/lab') return <Suspense fallback={<p role="status">Loading lab…</p>}><LabShell /></Suspense>
 
   if (!currentPage) {
     return (
@@ -82,14 +88,17 @@ export function AppShell({ initialTheme }: AppShellProps) {
         onThemeChange={setSelectedTheme}
         selectedTheme={selectedTheme}
       />
-      <div className="site-layout">
-        <Sidebar currentPage={currentPage} />
-        <main className="site-content" id="main-content">
-          {currentPage.status === 'implemented'
-            ? <PageLoader page={currentPage} refreshKey={refreshKey} />
-            : <NotImplementedPage title={currentPage.label} />}
-        </main>
-      </div>
+      <DocsContentsContext.Provider value={contentsHost}>
+        <div className="site-layout">
+          <Sidebar currentPage={currentPage} />
+          <main className="site-content" id="main-content">
+            {currentPage.status === 'implemented'
+              ? <PageLoader page={currentPage} refreshKey={refreshKey} />
+              : <NotImplementedPage title={currentPage.label} />}
+          </main>
+          <div className="site-contents-sidebar" ref={setContentsHost} />
+        </div>
+      </DocsContentsContext.Provider>
     </>
   )
 }

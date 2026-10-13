@@ -18,9 +18,10 @@ import { useAnimatedNavigationTree } from '@decocode/mezzanine'
 
 interface SidebarNavigationProps {
   currentPage: SitePageDefinition
+  'aria-label'?: string
 }
 
-export default function SidebarNavigation({ currentPage }: SidebarNavigationProps) {
+export default function SidebarNavigation({ currentPage, 'aria-label': label = 'Mezzanine documentation' }: SidebarNavigationProps) {
   const currentGroups = findSiteNavigationGroups(currentPage.id)
   const {
     closingKeys,
@@ -93,7 +94,7 @@ export default function SidebarNavigation({ currentPage }: SidebarNavigationProp
 
   return (
     <NavigationTree
-      aria-label="Mezzanine documentation"
+      aria-label={label}
       className="react-aria-NavigationTree animated-navigation-tree"
       expandedKeys={expandedKeys}
       onExpandedChange={onExpandedChange}

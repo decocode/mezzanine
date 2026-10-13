@@ -1,5 +1,5 @@
+import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
-import { TableOfContents } from '@decocode/mezzanine'
 import { elevationDefinitions } from '../content/elevationContent'
 
 export default function ElevationPage() {
@@ -9,7 +9,7 @@ export default function ElevationPage() {
         description="Elevation communicates whether a surface is inset, flat, raised, floating, or overlaying other content. Mezzanine uses neutral shadows that product themes can replace without changing these role names."
         title="Elevation"
       />
-      <TableOfContents sections={[
+      <DocsTableOfContents sections={[
         { id: 'elevation-roles-heading', label: 'Elevation roles' },
         { id: 'elevation-theming-heading', label: 'Theming elevation' },
         { id: 'elevation-focus-heading', label: 'Focus is not elevation' },

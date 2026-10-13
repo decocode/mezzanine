@@ -260,3 +260,14 @@ expanded disclosure keys in application state. Panel `className` and `style`
 apply in both presentations; root-level theme tokens also reach portalled drawers.
 The `/sidebar` page demonstrates both sides, both collapse modes and independent
 navigation, filter and detail panels with neutral content.
+
+For a permanently expanded inline sidebar, set `isCollapsible={false}` on Sidebar.
+It overrides inline expansion props and removes the inline trigger and close
+button; mobile modal controls continue to work. `hideInlineHeader` on SidebarPanel
+omits its inline heading row and supplementary header content without removing
+the aside’s accessible name. Modal headings and close controls remain visible.
+
+The AppShell now composes this public Sidebar and SidebarPanel with its existing
+NavigationTree. It keeps its desktop layout and mobile Browse sections Disclosure,
+using `presentation="inline"`, `isCollapsible={false}` and `hideInlineHeader`.
+The documentation sidebar example reuses that same site component and real links.

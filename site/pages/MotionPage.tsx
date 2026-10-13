@@ -1,5 +1,6 @@
+import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
-import { TableOfContents, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import {
   motionPatternDefinitions,
   motionTimingDefinitions,
@@ -14,7 +15,7 @@ export default function MotionPage({ refreshKey }: { refreshKey: string }) {
         description="Motion helps people understand when interface content opens, closes, or remains busy. This page records the motion that Mezzanine currently uses."
         title="Motion"
       />
-      <TableOfContents sections={[
+      <DocsTableOfContents sections={[
         { id: 'motion-timing-heading', label: 'Timing and easing' },
         { id: 'motion-tokens-heading', label: 'CSS tokens' },
         { id: 'motion-patterns-heading', label: 'Current motion patterns' },

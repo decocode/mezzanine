@@ -186,6 +186,8 @@ export {
   MoreIcon,
   MusicNoteIcon,
   MusicNotesIcon,
+  PanelLeftCloseIcon,
+  PanelLeftOpenIcon,
   PanelRightCloseIcon,
   PanelRightOpenIcon,
   PauseIcon,

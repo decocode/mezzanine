@@ -1,6 +1,6 @@
+import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
 import {
-  TableOfContents,
   Disclosure,
   DisclosureHeader,
   DisclosurePanel,
@@ -20,7 +20,7 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
       <PageHeading title="Text styles" description="Fifteen text styles pair font size, weight and line height across five roles: Display, Heading, Title, Body and Label." />
-      <TableOfContents sections={[
+      <DocsTableOfContents sections={[
         { id: 'text-styles-heading', label: 'Text styles' },
         { id: 'line-height-heading', label: 'Line height' },
       ]} />

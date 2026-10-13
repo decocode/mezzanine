@@ -3,12 +3,13 @@ import { Button, type ButtonProps } from './Button'
 import { Dialog } from './Dialog'
 import { Heading } from './Heading'
 import { Modal, ModalOverlay } from './Modal'
-import { CloseIcon } from '../icons/StudioIcons'
+import { PanelLeftCloseIcon, PanelRightCloseIcon } from '../icons/StudioIcons'
 import { SidebarContext, useSidebarMediaQuery, useSidebarState, useSidebarFocus } from './sidebarState'
 
 export interface SidebarProps {
   children: ReactNode
   presentation?: 'auto' | 'inline' | 'modal'
+  isCollapsible?: boolean
   inlineMediaQuery?: string
   isExpanded?: boolean
   defaultExpanded?: boolean
@@ -20,13 +21,13 @@ export interface SidebarProps {
 
 /** State boundary for one independently controlled trigger and panel. Adds no DOM. */
 export function Sidebar({
-  children, presentation = 'auto', inlineMediaQuery = '(min-width: 64rem)',
+  children, presentation = 'auto', isCollapsible = true, inlineMediaQuery = '(min-width: 64rem)',
   isExpanded: controlledExpanded, defaultExpanded = true, onExpandedChange,
   isOpen: controlledOpen, defaultOpen = false, onOpenChange,
 }: SidebarProps) {
   const [expanded, setExpanded] = useState(defaultExpanded)
   const [open, setOpen] = useState(defaultOpen)
-  const isExpanded = controlledExpanded ?? expanded
+  const isExpanded = !isCollapsible || (controlledExpanded ?? expanded)
   const isOpen = controlledOpen ?? open
   const isWide = useSidebarMediaQuery(inlineMediaQuery)
   const isModal = presentation === 'modal' || (presentation === 'auto' && !isWide)
@@ -47,9 +48,10 @@ export function Sidebar({
 
   return (
     <SidebarContext.Provider value={{
-      isModal, isExpanded, isOpen, panelId, triggerRef,
+      isModal, isCollapsible, isExpanded, isOpen, panelId, triggerRef,
       setOpen: changeOpen,
       setExpanded: (next) => {
+        if (!isCollapsible) return
         if (controlledExpanded === undefined) setExpanded(next)
         onExpandedChange?.(next)
       },
@@ -64,6 +66,7 @@ export type SidebarTriggerProps = Omit<Extract<ButtonProps, { href?: never }>, '
 /** Mezzanine Button, using React Aria press and focus behaviour. Keep it outside the panel. */
 export function SidebarTrigger({ onPress, ...props }: SidebarTriggerProps) {
   const state = useSidebarState()
+  if (!state.isModal && !state.isCollapsible) return null
   return (
     <Button
       {...props}
@@ -88,6 +91,7 @@ interface SidebarPanelBaseProps {
   footer?: ReactNode
   closeLabel?: string
   headingLevel?: 2 | 3 | 4 | 5 | 6
+  hideInlineHeader?: boolean
   className?: string
   style?: CSSProperties
 }
@@ -100,18 +104,18 @@ export type SidebarPanelProps = SidebarPanelBaseProps & (
 /** Generic complementary content; compose a labelled nav inside for navigation. */
 export function SidebarPanel({
   title, children, side = 'left', collapseMode = 'hide', rail,
-  header, footer, closeLabel = `Close ${title}`, headingLevel = 2, className, style,
+  hideInlineHeader = false, header, footer, closeLabel = `Close ${title}`, headingLevel = 2, className, style,
 }: SidebarPanelProps) {
   const state = useSidebarState()
   const titleId = useId()
   const focusedElement = useSidebarFocus(state.isExpanded, state.triggerRef)
   const classes = ['mezzanine-sidebar-panel', className].filter(Boolean).join(' ')
   const contents = <>
-    <div className="mezzanine-sidebar-header">
+    {(!hideInlineHeader || state.isModal) && <div className="mezzanine-sidebar-header">
       <Heading id={titleId} level={headingLevel} slot={state.isModal ? 'title' : undefined}>{title}</Heading>
-      <Button
+      {(state.isModal || state.isCollapsible) && <Button
         aria-label={closeLabel}
-        iconLeading={<CloseIcon />}
+        iconLeading={side === 'left' ? <PanelLeftCloseIcon /> : <PanelRightCloseIcon />}
         variant="tertiary"
         onPress={() => {
           if (state.isModal) state.setOpen(false)
@@ -120,9 +124,9 @@ export function SidebarPanel({
             state.setExpanded(false)
           }
         }}
-      />
+      />}
       {header != null && <div className="mezzanine-sidebar-header-content">{header}</div>}
-    </div>
+    </div>}
     <div className="mezzanine-sidebar-content">{children}</div>
     {footer != null && <div className="mezzanine-sidebar-footer">{footer}</div>}
   </>

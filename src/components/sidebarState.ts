@@ -2,6 +2,7 @@ import { createContext, useContext, useLayoutEffect, useRef, useSyncExternalStor
 
 export interface SidebarState {
   isModal: boolean
+  isCollapsible: boolean
   isExpanded: boolean
   isOpen: boolean
   panelId: string

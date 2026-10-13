@@ -13,11 +13,17 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 
 | Path | Purpose |
 | --- | --- |
+| `site/components/DocsTableOfContents.tsx` | Page contents rendered in the right sidebar, with a drawer on narrow screens |
+| `site/components/docsContentsContext.ts` | Shares the AppShell contents destination with documentation pages |
+| `site/lab/LabShell.tsx` | Experimental /site/lab shell using Navbar, Sidebar and responsive navigation |
+| `site/lab/lab.css` | Fixed viewport layout, independent scrolling and responsive rail placement |
+| `site/lab/labContent.ts` | Lab control labels and navigation destinations |
+| `tests/lab.spec.ts` | Desktop layout and narrow-screen drawer regression checks |
 | `site/assets/mezzanine-logo.svg` | Mezzanine brand icon: a Z with a staircase diagonal; standalone SVG using currentColor |
-| `src/components/Sidebar.tsx` | Public Sidebar state boundary, Button-based SidebarTrigger and generic inline or modal SidebarPanel with optional compact rail |
+| `src/components/Sidebar.tsx` | Public Sidebar state boundary, Button-based SidebarTrigger and generic inline or modal SidebarPanel with optional compact rail, permanent inline expansion and optional inline header |
 | `src/components/sidebarState.ts` | Internal sidebar context and responsive media-query subscription |
 | `src/components/Sidebar.css` | Token-based sidebar regions, left/right placement, rail and modal drawer styling |
-| `site/pages/SidebarPage.tsx` | Real Sidebar examples for mixed content, collapse options and multiple independent panels |
+| `site/pages/SidebarPage.tsx` | Real Sidebar examples for mixed content, collapse options, multiple independent panels and the actual documentation sidebar |
 | `site/content/sidebarContent.tsx` | Sidebar guidance, prop and token references, and neutral example labels |
 | `site/assets/sidebar-example.svg` | Neutral geometric image demonstrating sidebar content composition |
 | `tests/sidebar.spec.ts` | Sidebar collapse, independent state, modal focus, responsiveness and accessibility checks |
@@ -142,7 +148,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Navbar.css` | Token-based Navbar layout, text-size-aware container breakpoint and reduced-motion-aware menu panel |
 | `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
 | `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs link and separate theme actions to the library Navbar |
-| `site/components/Sidebar.tsx` | Responsive sidebar shell; loads navigation when needed with loading and error states |
+| `site/components/Sidebar.tsx` | Docs composition of the public non-collapsible SidebarPanel, mobile Disclosure and on-demand navigation with loading and error states |
 | `site/components/SidebarNavigation.tsx` | On-demand nested NavigationTree, expanding the current page's ancestor groups |
 | `site/components/useSidebarNavigationVisibility.ts` | Observes when CSS makes the desktop sidebar visible, including text-size changes, before requesting navigation |
 | `src/components/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |

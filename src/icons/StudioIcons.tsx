@@ -85,6 +85,14 @@ export function ChevronUpIcon(iconProps: IconProps) {
 
 const panelFrame = 'M3.75 4.75h16.5v14.5H3.75z'
 
+export function PanelLeftOpenIcon(iconProps: IconProps) {
+  return <GeometricIcon {...iconProps}><Outline d={panelFrame} /><Outline d="M9 4.75v14.5" /><Outline d="M12.5 9l3 3-3 3" /></GeometricIcon>
+}
+
+export function PanelLeftCloseIcon(iconProps: IconProps) {
+  return <GeometricIcon {...iconProps}><Outline d={panelFrame} /><Outline d="M9 4.75v14.5" /><Outline d="M15.5 9l-3 3 3 3" /></GeometricIcon>
+}
+
 export function PanelRightOpenIcon(iconProps: IconProps) {
   return <GeometricIcon {...iconProps}><Outline d={panelFrame} /><Outline d="M15 4.75v14.5" /><Outline d="M11.5 9l-3 3 3 3" /></GeometricIcon>
 }

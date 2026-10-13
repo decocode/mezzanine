@@ -1,5 +1,5 @@
 import { Component, lazy, Suspense, useRef, useState, type ReactNode } from 'react'
-import { Button, Disclosure, DisclosurePanel, Heading, MenuIcon } from '@decocode/mezzanine'
+import { Button, Disclosure, DisclosurePanel, Heading, PanelLeftCloseIcon, PanelLeftOpenIcon, Sidebar as MezzanineSidebar, SidebarPanel } from '@decocode/mezzanine'
 import type { SitePageDefinition } from '../siteStructure'
 import { useSidebarNavigationVisibility } from './useSidebarNavigationVisibility'
 
@@ -7,6 +7,8 @@ const SidebarNavigation = lazy(() => import('./SidebarNavigation'))
 
 interface SidebarProps {
   currentPage: SitePageDefinition
+  'aria-label'?: string
+  navigationLabel?: string
 }
 
 class NavigationLoadBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
@@ -27,30 +29,37 @@ class NavigationLoadBoundary extends Component<{ children: ReactNode }, { hasErr
   }
 }
 
-function LoadedNavigation({ currentPage }: SidebarProps) {
+function LoadedNavigation({ currentPage, 'aria-label': label = 'Mezzanine sections', navigationLabel }: SidebarProps) {
   return (
-    <NavigationLoadBoundary>
-      <Suspense fallback={<p role="status">Loading navigation…</p>}>
-        <SidebarNavigation currentPage={currentPage} />
-      </Suspense>
-    </NavigationLoadBoundary>
+    <MezzanineSidebar presentation="inline" isCollapsible={false}>
+      <SidebarPanel title={label} hideInlineHeader className="site-sidebar-panel">
+        <nav aria-label={label}>
+          <NavigationLoadBoundary>
+            <Suspense fallback={<p role="status">Loading navigation…</p>}>
+              <SidebarNavigation currentPage={currentPage} aria-label={navigationLabel} />
+            </Suspense>
+          </NavigationLoadBoundary>
+        </nav>
+      </SidebarPanel>
+    </MezzanineSidebar>
   )
 }
 
-export function Sidebar({ currentPage }: SidebarProps) {
+export function Sidebar(props: SidebarProps) {
   const desktopRef = useRef<HTMLDivElement>(null)
   const desktopRequested = useSidebarNavigationVisibility(desktopRef)
   const [mobileRequested, setMobileRequested] = useState(false)
 
   return (
-    <nav aria-label="Mezzanine sections" className="site-sidebar">
+    <div className="site-sidebar">
       <Disclosure className="mobile-sidebar" onExpandedChange={(isExpanded) => {
         if (isExpanded) setMobileRequested(true)
       }}>
+        {({ isExpanded }) => <>
         <Heading className="mobile-sidebar-heading" level={2}>
           <Button
             className="sidebar-browse-trigger"
-            iconLeading={<MenuIcon />}
+            iconLeading={isExpanded ? <PanelLeftCloseIcon /> : <PanelLeftOpenIcon />}
             slot="trigger"
             variant="tertiary"
           >
@@ -58,13 +67,14 @@ export function Sidebar({ currentPage }: SidebarProps) {
           </Button>
         </Heading>
         <DisclosurePanel className="mobile-sidebar-panel">
-          {mobileRequested && <LoadedNavigation currentPage={currentPage} />}
+          {mobileRequested && <LoadedNavigation {...props} />}
         </DisclosurePanel>
+        </>}
       </Disclosure>
 
       <div className="desktop-sidebar" ref={desktopRef}>
-        {desktopRequested && <LoadedNavigation currentPage={currentPage} />}
+        {desktopRequested && <LoadedNavigation {...props} />}
       </div>
-    </nav>
+    </div>
   )
 }

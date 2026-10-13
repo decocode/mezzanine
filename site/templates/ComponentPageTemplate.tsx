@@ -1,5 +1,6 @@
+import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import type { ReactNode } from 'react'
-import { Heading, Link, ExternalLinkIcon, TableOfContents, type TableOfContentsSection } from '@decocode/mezzanine'
+import { Heading, Link, ExternalLinkIcon, type TableOfContentsSection } from '@decocode/mezzanine'
 import { DocsDisclosureGroup } from '../components/DocsDisclosureGroup'
 
 export interface DocumentationSection {
@@ -51,7 +52,7 @@ export function ComponentPageTemplate({ title, description, sections, relatedPag
   return (
     <>
       <PageHeading title={title} description={description} />
-      <TableOfContents heading="On this page" sections={pageSections.map(section => ({
+      <DocsTableOfContents heading="On this page" sections={pageSections.map(section => ({
         id: section.id,
         label: section.title,
         children: 'sections' in section

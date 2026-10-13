@@ -428,6 +428,14 @@
     "kind": "type"
   },
   {
+    "name": "PanelLeftCloseIcon",
+    "kind": "value"
+  },
+  {
+    "name": "PanelLeftOpenIcon",
+    "kind": "value"
+  },
+  {
     "name": "PanelRightCloseIcon",
     "kind": "value"
   },

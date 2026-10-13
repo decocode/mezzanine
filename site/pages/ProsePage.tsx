@@ -1,6 +1,6 @@
+import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
 import { ExampleZone } from '../components/ExampleZone'
-import { TableOfContents } from '@decocode/mezzanine'
 import { useTokenValue } from '../components/tokenValueLogic'
 
 export default function ProsePage({ refreshKey }: { refreshKey: string }) {
@@ -9,7 +9,7 @@ export default function ProsePage({ refreshKey }: { refreshKey: string }) {
     <>
       <PageHeading title="Prose" description="Mezzanine’s styling for longer-form content. Lists share the body text styles and spacing tokens; inline code has a distinct treatment within the surrounding text." />
       <p className="component-section-description mz-text-body-md">The library includes body-styled lists and inline code, but does not yet provide a complete prose container. The section spacing and reading widths on this documentation site are site layout styles, not part of the library.</p>
-      <TableOfContents sections={[
+      <DocsTableOfContents sections={[
         { id: 'lists-heading', label: 'Lists', children: [
           { id: 'unordered-list-heading', label: 'Unordered lists' },
           { id: 'ordered-list-heading', label: 'Ordered lists' },

@@ -1056,3 +1056,43 @@ a:focus-visible {
 
 .sidebar-example, .sidebar-multiple-example { max-width: none; }
 .sidebar-example-options { display: grid; gap: var(--space-3); }
+
+
+/* The docs shell supplies its existing sizing, scroll area and responsive disclosure. */
+.site-sidebar-panel {
+  --sidebar-width: 100%;
+  --sidebar-max-height: none;
+  --sidebar-padding: 0;
+  --sidebar-border-width: 0;
+  background: var(--color-page);
+}
+
+.sidebar-documentation-example { max-width: 17.5rem; }
+.sidebar-documentation-example .desktop-sidebar {
+  position: static;
+  height: auto;
+  max-height: 32rem;
+  border-inline-end: 0;
+}
+
+/* Page-owned contents are placed beside the article by AppShell. */
+.site-contents-sidebar:empty { display: none; }
+.site-contents-sidebar { display: flex; justify-content: flex-end; padding: var(--space-3) var(--space-4); }
+.site-layout { display: flex; flex-direction: column; }
+.site-contents-sidebar { order: -1; }
+.site-layout > .site-sidebar { order: -2; }
+.docs-contents-panel .mezzanine-table-of-contents { margin-bottom: 0; }
+/* The drawer header supplies the visible title; the nav retains its labelled heading. */
+.mezzanine-sidebar-overlay .docs-contents-panel .mezzanine-table-of-contents > h2 { display: none; }
+@container showcase (min-width: 48rem) {
+  .site-layout { display: grid; }
+  .site-layout > .site-sidebar { grid-column: 1; grid-row: 1 / 3; }
+  .site-contents-sidebar { grid-column: 2; grid-row: 1; }
+  .site-content { grid-column: 2; grid-row: 2; }
+}
+@media (min-width: 80rem) {
+  .site-layout:has(.site-contents-sidebar:not(:empty)) { grid-template-columns: 17.5rem minmax(0, 1fr) 17rem; }
+  .site-contents-sidebar:not(:empty) { display: block; grid-column: 3; grid-row: 1 / 3; position: sticky; top: 4rem; align-self: start; height: calc(100dvh - 4rem); padding: var(--space-8) var(--space-2); border-inline-start: 1px solid var(--color-border); }
+  .docs-contents-panel { --sidebar-width: 100%; --sidebar-max-height: calc(100dvh - 9rem); border: 0; background: transparent; }
+  .site-layout:has(.site-contents-sidebar:not(:empty)) > .site-content { padding-inline: var(--space-8); }
+}

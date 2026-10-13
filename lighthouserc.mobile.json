@@ -10,7 +10,8 @@
         "http://localhost/table",
         "http://localhost/tab-bar",
         "http://localhost/navbar",
-        "http://localhost/tooltip"
+        "http://localhost/tooltip",
+        "http://localhost/site/lab"
       ],
       "settings": {
         "onlyCategories": ["performance"],

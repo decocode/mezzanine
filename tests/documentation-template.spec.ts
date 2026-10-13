@@ -7,10 +7,10 @@ const componentPages = sitePages.filter(page => page.status === 'implemented'
 
 for (const definition of componentPages) {
   test(`${definition.path} uses consistent sections and matching On this page links`, async ({ page }) => {
-    await page.setViewportSize({ width: 320, height: 900 })
+    await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto(definition.path)
     const main = page.getByRole('main')
-    const contents = main.getByRole('navigation', { name: 'On this page', exact: true })
+    const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
     await expect(contents).toBeVisible()
     await expect(main.getByRole('heading', { level: 1 })).toHaveCount(1)
     const sections = main.locator(':scope > section.component-section')
@@ -51,19 +51,20 @@ for (const definition of componentPages) {
         }
       }
     }
+    await page.setViewportSize({ width: 320, height: 900 })
     for (const fontSize of [16, 32]) {
       await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
     }
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
-    expect((await new AxeBuilder({ page }).include('.mezzanine-table-of-contents').include('section[aria-labelledby$="-technical-details"]').include('section[aria-labelledby="related-pages"]').include('section[aria-labelledby*="references"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
+    expect((await new AxeBuilder({ page }).include('section[aria-labelledby$="-technical-details"]').include('section[aria-labelledby="related-pages"]').include('section[aria-labelledby*="references"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
   })
 }
 
 test('Navbar exposes related pages and external references through On this page', async ({ page }) => {
   await page.goto('/navbar')
   const main = page.getByRole('main')
-  const contents = main.getByRole('navigation', { name: 'On this page', exact: true })
+  const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
   const related = main.getByRole('region', { name: 'Related pages', exact: true })
   const references = main.getByRole('region', { name: 'References', exact: true })
   await contents.getByRole('link', { name: 'Related pages', exact: true }).click()
@@ -105,7 +106,7 @@ test('Navbar groups technical sections and preserves their anchors', async ({ pa
   await expect(group.getByRole('heading', { level: 3 })).toHaveText([
     'Anatomy', 'Behaviour', 'Usage', 'Props', 'CSS tokens',
   ])
-  const contents = main.getByRole('navigation', { name: 'On this page', exact: true })
+  const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
   const groupItem = contents.locator(':scope > ul > li').filter({
     has: page.getByRole('link', { name: 'Technical details', exact: true }),
   })
@@ -143,7 +144,7 @@ test('technical disclosures support keyboard toggling and repeated section links
   await page.keyboard.press('Tab')
   await expect(group.getByRole('button', { name: 'Usage', exact: true })).toBeFocused()
 
-  const contents = main.getByRole('navigation', { name: 'On this page', exact: true })
+  const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
   const propsLink = contents.getByRole('link', { name: 'Props', exact: true })
   const props = group.getByRole('button', { name: 'Props', exact: true })
   await propsLink.click()
@@ -158,3 +159,44 @@ test('technical disclosures support keyboard toggling and repeated section links
   await expect(props).toHaveAttribute('aria-expanded', 'true')
   await expect(props).toBeInViewport()
 })
+
+for (const path of ['/navbar', '/color', '/motion', '/typography/text-styles', '/typography/prose', '/shape', '/elevation']) {
+  test(`${path} places page contents in the desktop right sidebar`, async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    await page.goto(path)
+    const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
+    await expect(contents).toBeVisible()
+    await expect(page.getByRole('main').getByRole('navigation', { name: 'On this page', exact: true })).toHaveCount(0)
+    const sidebar = page.locator('.site-contents-sidebar')
+    const main = await page.getByRole('main').boundingBox()
+    expect((await sidebar.boundingBox())!.x).toBeGreaterThanOrEqual(main!.x + main!.width)
+    await expect(contents.getByRole('link').first()).toBeVisible()
+    if (path === '/navbar') await page.screenshot({ path: 'test-results/docs-contents-desktop.png' })
+  })
+}
+
+for (const fontSize of [16, 32]) {
+  test(`page contents drawer navigates and restores focus at ${fontSize}px`, async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 900 })
+    await page.goto('/navbar')
+    await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
+    const trigger = page.getByRole('button', { name: 'On this page', exact: true })
+    await trigger.click()
+    const dialog = page.getByRole('dialog', { name: 'On this page', exact: true })
+    await expect(dialog).toBeVisible()
+    await expect(page.locator('.mezzanine-sidebar-overlay')).not.toHaveAttribute('data-entering')
+    await expect(page.locator('.docs-contents-panel')).not.toHaveAttribute('data-entering')
+    await page.screenshot({ path: `test-results/docs-contents-${fontSize}.png` })
+    expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
+    await dialog.getByRole('link', { name: 'Props', exact: true }).click()
+    await expect(dialog).toBeHidden()
+    await expect(page).toHaveURL(/#navbar-props-heading$/)
+    await expect(page.getByRole('button', { name: 'Props', exact: true })).toHaveAttribute('aria-expanded', 'true')
+    await expect(page.getByRole('heading', { name: 'Props', exact: true })).toBeInViewport()
+    await trigger.click()
+    await page.keyboard.press('Escape')
+    await expect(dialog).toBeHidden()
+    await expect(trigger).toBeFocused()
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
+  })
+}
