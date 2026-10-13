@@ -1,14 +1,17 @@
+import { ComponentExample } from '../components/ComponentExample'
 import {
-  Link,
   Cell,
   Column,
   ExternalLinkIcon,
+  Link,
   Row,
   Table,
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
+import { linkContent } from '../content/linkContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
 
 type LinkPreviewState = 'default' | 'hovered' | 'pressed' | 'focused' | 'current' | 'disabled'
 
@@ -17,45 +20,31 @@ const linkStates: {
   state: LinkPreviewState
   reactAriaState: string
 }[] = [
-  { name: 'Default', state: 'default', reactAriaState: 'default' },
-  { name: 'Hover', state: 'hovered', reactAriaState: 'data-hovered' },
-  { name: 'Pressed', state: 'pressed', reactAriaState: 'data-pressed' },
-  { name: 'Focused', state: 'focused', reactAriaState: 'data-focus-visible' },
-  { name: 'Current page', state: 'current', reactAriaState: 'aria-current="page"' },
-  { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled' },
-]
+    { name: 'Default', state: 'default', reactAriaState: 'default' },
+    { name: 'Hover', state: 'hovered', reactAriaState: 'data-hovered' },
+    { name: 'Pressed', state: 'pressed', reactAriaState: 'data-pressed' },
+    { name: 'Focused', state: 'focused', reactAriaState: 'data-focus-visible' },
+    { name: 'Current page', state: 'current', reactAriaState: 'aria-current="page"' },
+    { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled' },
+  ]
 
 export default function LinkPage() {
   return (
     <ComponentPageTemplate
-      description="Links take people to another page or resource. Their text should describe where the link goes."
+      description={linkContent.description}
       reactAriaPage="Link"
-      title="Link"
+      title={linkContent.title}
+      relatedPages={linkContent.relatedPages}
+      references={linkContent.references}
       sections={[
         {
           id: 'link-example-heading',
           title: 'Example',
           content: (<>
-            <p className="component-section-description">
-              This <code>Link</code> uses an <code>href</code> to navigate to another section on this page.
-            </p>
-            <div className="component-example">
+            {linkContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ComponentExample>
               <Link href="#link-content-heading">Link content examples</Link>
-            </div>
-          </>),
-        },
-        {
-          id: 'link-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <div className="documentation-table documentation-anatomy-table">
-              <Table aria-label="Link anatomy">
-                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
-                <TableBody>
-                  <Row id="part-0"><Cell><code>Link</code></Cell><Cell>Provides a focusable destination through href, with optional text and decorative icons as children.</Cell></Row>
-                </TableBody>
-              </Table>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
@@ -99,11 +88,7 @@ export default function LinkPage() {
           id: 'link-content-heading',
           title: 'Content',
           content: (<>
-            <p className="component-section-description">
-              When a <code>Link</code> opens a page in a new browser tab, add the External Link trailing icon to
-              warn people before their browser context changes. Its accessible name must also include
-              “opens in a new tab”.
-            </p>
+            {linkContent.contentParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
             <div className="documentation-table documentation-comparison-table">
               <Table aria-label="Link content">
                 <TableHeader>
@@ -132,14 +117,25 @@ export default function LinkPage() {
           </>),
         },
         {
-          id: 'link-usage-heading',
-          title: 'Usage and accessibility',
-          content: (<>
-            <p>Use <code>href</code> for a destination and <code>Button</code> for an action. Give the link text enough context to make its destination clear. Use <code>aria-current="page"</code> for the current destination.</p>
-            <p>Tab focuses enabled links and Enter follows them. Use <code>isDisabled</code> to prevent activation. Supply <code>target</code> and <code>rel</code> when needed for external destinations, and keep new-window warnings consistent with the Content example above.</p>
-            <p>Client-side routing is supplied by the consuming application. Mezzanine exports the React Aria Link API directly; it does not choose a router or infer the current page.</p>
-          </>),
-        }
+          id: 'link-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'link-anatomy-heading',
+              title: 'Anatomy',
+              content: (<>
+                <ComponentReferenceTable aria-label="Link anatomy" nameColumn="Component" rows={linkContent.anatomyRows} className="documentation-anatomy-table" />
+              </>),
+            },
+            {
+              id: 'link-usage-heading',
+              title: 'Usage and accessibility',
+              content: (<>
+                {linkContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+          ],
+        },
       ]}
     />
   )

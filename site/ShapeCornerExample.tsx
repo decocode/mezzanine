@@ -1,3 +1,4 @@
+import { ComponentExample } from './components/ComponentExample'
 import { useId, useState } from 'react'
 import { ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
 import { radiusLevels } from './foundationData'
@@ -19,7 +20,7 @@ export function ShapeCornerExample() {
   })
 
   return (
-    <div className="component-example shape-corner-example">
+    <ComponentExample className="shape-corner-example">
       <div className="shape-corner-preview" aria-hidden="true" style={{
         borderTopLeftRadius: `var(${selectedTokens.topLeft})`,
         borderTopRightRadius: `var(${selectedTokens.topRight})`,
@@ -53,6 +54,6 @@ export function ShapeCornerExample() {
       <pre className="shape-corner-code"><code>{corners.map(({ id, property }) =>
         `${property}: var(${selectedTokens[id]});`
       ).join('\n')}</code></pre>
-    </div>
+    </ComponentExample>
   )
 }

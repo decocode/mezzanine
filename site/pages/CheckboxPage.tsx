@@ -1,37 +1,26 @@
-import { Checkbox, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { ComponentExample } from '../components/ComponentExample'
+import { Cell, Checkbox, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { checkboxContent } from '../content/checkboxContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
 
 export default function CheckboxPage() {
   return (
     <ComponentPageTemplate
-      description="Checkboxes let people select one or more independent options. Their label explains what will be selected."
+      description={checkboxContent.description}
       reactAriaPage="Checkbox"
-      title="Checkbox"
+      title={checkboxContent.title}
+      relatedPages={checkboxContent.relatedPages}
+      references={checkboxContent.references}
       sections={[
         {
           id: 'checkbox-example-heading',
           title: 'Example',
           content: (<>
-            <p className="component-section-description">
-              Select or clear the <code>Checkbox</code> using its label or the Space key when focused.
-            </p>
-            <div className="component-example">
+            {checkboxContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ComponentExample>
               <Checkbox>Checkbox label</Checkbox>
-            </div>
-          </>),
-        },
-        {
-          id: 'checkbox-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <div className="documentation-table documentation-anatomy-table">
-              <Table aria-label="Checkbox anatomy">
-                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
-                <TableBody>
-                  <Row id="part-0"><Cell><code>Checkbox</code></Cell><Cell>Provides the interactive checkbox, native input and visible label. Mezzanine adds a decorative check or indeterminate indicator internally.</Cell></Row>
-                </TableBody>
-              </Table>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
@@ -67,14 +56,25 @@ export default function CheckboxPage() {
           </>),
         },
         {
-          id: 'checkbox-usage-heading',
-          title: 'Usage and accessibility',
-          content: (<>
-            <p>Place the visible label inside <code>Checkbox</code>. Use <code>defaultSelected</code> for initial state, or <code>isSelected</code> with <code>onChange</code> for controlled state. The callback receives a boolean.</p>
-            <p>Tab focuses the checkbox and Space changes its selection. <code>isDisabled</code> prevents interaction; <code>isReadOnly</code> prevents value changes. <code>isIndeterminate</code> controls the mixed-state appearance independently of selection; the application must clear it when appropriate.</p>
-            <p>For form submission, provide <code>name</code> and <code>value</code>. Use <code>isRequired</code> with native validation to require selection, or <code>isInvalid</code> to communicate an application validation result. Provide visible error guidance and associate it using <code>aria-describedby</code>; this wrapper does not insert error text automatically.</p>
-          </>),
-        }
+          id: 'checkbox-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'checkbox-anatomy-heading',
+              title: 'Anatomy',
+              content: (<>
+                <ComponentReferenceTable aria-label="Checkbox anatomy" nameColumn="Component" rows={checkboxContent.anatomyRows} className="documentation-anatomy-table" />
+              </>),
+            },
+            {
+              id: 'checkbox-usage-heading',
+              title: 'Usage and accessibility',
+              content: (<>
+                {checkboxContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+          ],
+        },
       ]}
     />
   )

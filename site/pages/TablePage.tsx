@@ -1,16 +1,19 @@
-import { useState } from 'react'
+import { ComponentExample } from '../components/ComponentExample'
 import {
-  Checkbox,
-  type SortDescriptor,
   Cell,
+  Checkbox,
   Column,
   Row,
   Table,
   TableBody,
   TableHeader,
+  type SortDescriptor,
 } from '@decocode/mezzanine'
-import { sortTableExampleRows, tableAnatomy, tableExampleRows } from '../tableExampleData'
+import { useState } from 'react'
+import { tableContent } from '../content/tableContent'
+import { sortTableExampleRows, tableExampleRows } from '../tableExampleData'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
 
 export default function TablePage() {
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
@@ -21,9 +24,11 @@ export default function TablePage() {
 
   return (
     <ComponentPageTemplate
-      description="Tables organise related information into rows and columns so it can be compared and understood. Mezzanine uses React Aria's table structure and interaction behaviour."
+      description={tableContent.description}
       reactAriaPage="Table"
-      title="Table"
+      title={tableContent.title}
+      relatedPages={tableContent.relatedPages}
+      references={tableContent.references}
       sections={[
         {
           id: 'table-selection-heading',
@@ -33,15 +38,12 @@ export default function TablePage() {
             { id: 'table-multiple-selection-heading', label: 'Multiple selection' },
           ],
           content: (<>
-            <p className="component-section-description">
-              Tables have no selectable rows by default. Use single selection when one row can be
-              chosen, or multiple selection when several rows can be chosen.
-            </p>
+            {tableContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
             <div className="table-example-group">
               <div>
                 <h3 id="table-single-selection-heading" className="mz-text-heading-sm">Single selection</h3>
-                <p className="component-section-description">Row C is disabled in this example.</p>
-                <div className="component-example documentation-table">
+                <p className="component-section-description">{tableContent.exampleParagraphs[1]}</p>
+                <ComponentExample className="documentation-table">
                   <Table
                     aria-label="Table with single row selection"
                     className="react-aria-Table table-selection-example"
@@ -65,11 +67,11 @@ export default function TablePage() {
                       )}
                     </TableBody>
                   </Table>
-                </div>
+                </ComponentExample>
               </div>
               <div>
                 <h3 id="table-multiple-selection-heading" className="mz-text-heading-sm">Multiple selection</h3>
-                <div className="component-example documentation-table">
+                <ComponentExample className="documentation-table">
                   <Table
                     aria-label="Table with multiple row selection"
                     className="react-aria-Table table-selection-example"
@@ -92,33 +94,8 @@ export default function TablePage() {
                       )}
                     </TableBody>
                   </Table>
-                </div>
+                </ComponentExample>
               </div>
-            </div>
-          </>),
-        },
-        {
-          id: 'table-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <p className="component-section-description">
-              A table is assembled from six React Aria components. Selection and sorting are optional.
-            </p>
-            <div className="documentation-table">
-              <Table aria-label="Table anatomy">
-                <TableHeader>
-                  <Column id="component" isRowHeader>Component</Column>
-                  <Column id="purpose">Purpose</Column>
-                </TableHeader>
-                <TableBody>
-                  {tableAnatomy.map((part) => (
-                    <Row id={part.name} key={part.name}>
-                      <Cell><code>{part.name}</code></Cell>
-                      <Cell>{part.purpose}</Cell>
-                    </Row>
-                  ))}
-                </TableBody>
-              </Table>
             </div>
           </>),
         },
@@ -126,8 +103,8 @@ export default function TablePage() {
           id: 'table-sorting-heading',
           title: 'Sorting',
           content: (<>
-            <p className="component-section-description">Select a column heading to change the order of its rows.</p>
-            <div className="component-example documentation-table">
+            {tableContent.sortingParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ComponentExample className="documentation-table">
               <Table
                 aria-label="Sortable table"
                 onSortChange={setSortDescriptor}
@@ -160,15 +137,15 @@ export default function TablePage() {
                   )}
                 </TableBody>
               </Table>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
           id: 'table-empty-heading',
           title: 'Empty state',
           content: (<>
-            <p className="component-section-description">Use an empty state to explain clearly when the table has no rows to display.</p>
-            <div className="component-example documentation-table">
+            {tableContent.emptyStateParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ComponentExample className="documentation-table">
               <Table aria-label="Empty table">
                 <TableHeader>
                   <Column id="columnA" isRowHeader>Column A</Column>
@@ -177,29 +154,37 @@ export default function TablePage() {
                 </TableHeader>
                 <TableBody renderEmptyState={() => 'No rows to display.'}>{[]}</TableBody>
               </Table>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
-          id: 'table-responsive-heading',
-          title: 'Responsive behaviour',
-          content: (<>
-            <p className="component-section-description">
-              When a table is wider than the available space, it scrolls horizontally without causing
-              the whole page to overflow.
-            </p>
-          </>),
+          id: 'table-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'table-anatomy-heading',
+              title: 'Anatomy',
+              content: (<>
+                {tableContent.anatomyParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <ComponentReferenceTable aria-label="Table anatomy" nameColumn="Component" rows={tableContent.anatomyRows} />
+              </>),
+            },
+            {
+              id: 'table-responsive-heading',
+              title: 'Responsive behaviour',
+              content: (<>
+                {tableContent.responsiveBehaviourParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'table-usage-heading',
+              title: 'Usage and accessibility',
+              content: (<>
+                {tableContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+          ],
         },
-        {
-          id: 'table-usage-heading',
-          title: 'Usage and accessibility',
-          content: (<>
-            <p>Give the table an <code>aria-label</code> or <code>aria-labelledby</code>. Use <code>Column isRowHeader</code> for the cell that identifies each row, and stable row and column IDs so selection and sorting refer to consistent records.</p>
-            <p>React Aria manages keyboard navigation through the table’s rows, cells and focusable controls. Use arrow keys to move within the table and Tab to move between focusable regions or controls. Keep labels on any buttons and links placed inside cells.</p>
-            <p>Use <code>selectionMode</code> to opt into selection. Set <code>defaultSelectedKeys</code> for initial selection or <code>selectedKeys</code> with <code>onSelectionChange</code> for application-controlled selection. Disabled rows are identified through <code>disabledKeys</code>.</p>
-            <p>Sorting is application work: <code>allowsSorting</code> enables the column control, while <code>sortDescriptor</code> and <code>onSortChange</code> describe the requested ordering. Reorder the rows you supply, as this page’s example does.</p>
-          </>),
-        }
       ]}
     />
   )

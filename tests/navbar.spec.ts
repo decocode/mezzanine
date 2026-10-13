@@ -38,10 +38,19 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await expect(example.getByRole('button', { name: 'Button' })).toBeFocused()
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
       expect(await example.locator('.mezzanine-navbar-panel').evaluate(e => getComputedStyle(e).animationName)).toBe('none')
+      const technicalDetails = page.getByRole('region', { name: 'Technical details', exact: true })
+      for (const trigger of await technicalDetails.getByRole('button').all()) {
+        await trigger.click()
+        await expect(trigger).toHaveAttribute('aria-expanded', 'true')
+        expect((await trigger.boundingBox())!.height).toBeGreaterThanOrEqual(24)
+        expect(await trigger.locator('svg').evaluate(element => getComputedStyle(element).transitionDuration)).toBe('0s')
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
       // Scan from the page start: keyboard scrolling can leave unrelated Contents links behind the sticky site header.
       await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
       expect((await new AxeBuilder({ page }).include('main').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
       await example.screenshot({ path: `test-results/navbar-${theme}-${fontSize}.png` })
+      await example.getByRole('button', { name: 'Button', exact: true }).focus()
       await page.keyboard.press('Enter')
       await expect(page.getByRole('status')).toHaveText('Changes saved.')
       await trigger.click()

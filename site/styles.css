@@ -886,6 +886,15 @@ a:focus-visible {
   padding-inline-start: 1.25rem;
 }
 
+.component-reference-links .react-aria-Link {
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+}
+
+.component-reference-links .react-aria-Link > span {
+  min-inline-size: 0;
+}
+
 .breadcrumbs-examples {
   display: grid;
   gap: var(--space-8);

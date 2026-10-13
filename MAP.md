@@ -31,7 +31,26 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/TextArea.ts` | Public React Aria TextArea export and type; composes with TextField for multiline input |
 | `src/components/TextField.ts` | Public React Aria TextField and Input exports and types |
 | `src/components/TextField.css` | Shared TextField, Input and TextArea layout, interaction states and forced-colour styling |
-| `site/pages/NavbarPage.tsx` | Live Navbar example, anatomy, behaviour and migration guidance |
+| `site/pages/NavbarPage.tsx` | Composes Navbar content with the shared template and owns the live example state |
+| `site/content/badgeContent.tsx` | Badge written guidance, reference entries, related pages and external references |
+| `site/content/breadcrumbsContent.tsx` | Breadcrumbs written guidance, reference entries, related pages and external references |
+| `site/content/buttonContent.tsx` | Button written guidance, reference entries, related pages and external references |
+| `site/content/checkboxContent.tsx` | Checkbox written guidance, reference entries, related pages and external references |
+| `site/content/dialogContent.tsx` | Dialog written guidance, reference entries, related pages and external references |
+| `site/content/disclosureContent.tsx` | Disclosure written guidance, reference entries, related pages and external references |
+| `site/content/linkContent.tsx` | Link written guidance, reference entries, related pages and external references |
+| `site/content/navigationTreeContent.tsx` | NavigationTree written guidance, reference entries, related pages and external references |
+| `site/content/radioGroupContent.tsx` | RadioGroup written guidance, reference entries, related pages and external references |
+| `site/content/tabBarContent.tsx` | TabBar written guidance, reference entries, related pages and external references |
+| `site/content/tableContent.tsx` | Table written guidance, reference entries, related pages and external references |
+| `site/content/tableOfContentsContent.tsx` | TableOfContents written guidance, reference entries, related pages and external references |
+| `site/content/tabsContent.tsx` | Tabs written guidance, reference entries, related pages and external references |
+| `site/content/textAreaContent.tsx` | TextArea written guidance, reference entries, related pages and external references |
+| `site/content/textFieldContent.tsx` | TextField written guidance, reference entries, related pages and external references |
+| `site/content/toggleButtonContent.tsx` | ToggleButton written guidance, reference entries, related pages and external references |
+| `site/content/navbarContent.tsx` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
+| `site/components/ComponentExample.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
+| `site/components/ComponentReferenceTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes |
 | `tests/navbar.spec.ts` | Navbar keyboard, responsive, theme, contrast and forced-colour checks |
 | `site/pages/TextAreaPage.tsx` | Multiline field examples, states, composition and vertical resizing guidance |
 | `site/pages/TextFieldPage.tsx` | TextField composition, editing, states and local validation examples |
@@ -69,12 +88,14 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/DocumentationPage.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
 | `src/components/PageHeading.tsx` | Public page introduction using Heading, optional description paragraphs and additional content |
 | `src/components/PageHeading.css` | Token-based page introduction widths, spacing and fluid title typography |
-| `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template: composes the page heading, generated Contents links and labelled sections from page-supplied content |
+| `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template: composes the page heading, generated On this page links, technical disclosures and reference sections from page-supplied content |
+| `site/components/DocumentationDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
+| `site/components/useDocumentationDisclosureAnchors.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
 | `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow |
 | `site/DocumentationHeading.tsx` | Uses the library PageHeading with documentation title translations and the official React Aria link |
 | `site/useTokenValue.ts` | Reads current CSS token values when the selected theme changes |
 | `site/TokenValue.tsx` | Displays a live CSS token value as code |
-| `site/buttonDocumentation.ts` | Button variant, size and state reference data used by the Button page |
+| `site/content/buttonReferenceData.ts` | Button variant, size and state reference data used by the Button page |
 | `site/pages/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
 | `site/pages/ColorPage.tsx` | Palette swatches and semantic color-role reference; loaded only when its route is requested |
 | `site/pages/TypographyPage.tsx` | Typography overview; loaded only when its route is requested |
@@ -109,9 +130,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/siteNavigation.ts` | Single source of truth for nested IA groups, routes, labels, implementation status and verified React Aria documentation matches; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
 | `site/foundationData.tsx` | Names and descriptions, with inline code markup for component references, for the implemented color, typography, spacing, corner-radius and motion foundations shown by the showcase |
 | `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
-| `site/tableExampleData.ts` | Table anatomy content, example rows and sorting logic used by the Table documentation page |
-| `site/radioGroupDocumentation.tsx` | Verified anatomy, state descriptions with inline code markup, and component token names for the RadioGroup documentation page |
-| `site/componentTokenDocumentation.ts` | Verified Tabs, Dialog/Modal, Navbar and TabBar token names and descriptions for their documentation tables |
+| `site/tableExampleData.ts` | Table example rows and sorting logic used by the Table documentation page |
+| `site/content/radioGroupReferenceData.tsx` | Verified anatomy, state descriptions with inline code markup, and component token names for the RadioGroup documentation page |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
@@ -135,8 +155,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar and the Navbar page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
-| `TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |
-| `TYPOGRAPHY.md` | Typography roles, named styles, defaults, pattern mappings, theming guidance, and accessibility checks |
+| `docs/TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |
+| `docs/TYPOGRAPHY.md` | Typography roles, named styles, defaults, pattern mappings, theming guidance, and accessibility checks |
 | `README.md` | Overview, licence note, local setup, and how DecoCode products use the package |
 | `AGENTS.md` | Instructions for coding agents |
 

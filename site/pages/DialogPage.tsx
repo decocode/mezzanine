@@ -1,29 +1,30 @@
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { useState } from 'react'
+import { ComponentExample } from '../components/ComponentExample'
 import {
-  Button, Cell, Column, Dialog, DialogTrigger, Heading, Modal, ModalOverlay,
-  Row, Table, TableBody, TableHeader,
+  Button,
+  Dialog, DialogTrigger, Heading, Modal, ModalOverlay
 } from '@decocode/mezzanine'
-import { dialogTokens } from '../componentTokenDocumentation'
+import { useState } from 'react'
+import { dialogContent } from '../content/dialogContent'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
 
 export default function DialogPage() {
   const [confirmationCount, setConfirmationCount] = useState(0)
 
   return (
     <ComponentPageTemplate
-      description={<>A <code>Dialog</code> presents a focused task or message. Place it inside a <code>Modal</code> to block interaction with the page behind it.</>}
+      description={dialogContent.description}
       reactAriaPage="Modal"
-      title="Dialog"
+      title={dialogContent.title}
+      relatedPages={dialogContent.relatedPages}
+      references={dialogContent.references}
       sections={[
         {
           id: 'dialog-example-heading',
           title: 'Example',
           content: (<>
-            <p className="component-section-description">
-              A modal dialog blocks interaction with the page behind it. This example can be
-              closed with the Close button, Escape, or a click outside the dialog.
-            </p>
-            <div className="component-example">
+            {dialogContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ComponentExample>
               <DialogTrigger>
                 <Button>Open dialog</Button>
                 <ModalOverlay isDismissable>
@@ -38,41 +39,15 @@ export default function DialogPage() {
                   </Modal>
                 </ModalOverlay>
               </DialogTrigger>
-            </div>
-          </>),
-        },
-        {
-          id: 'dialog-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <div className="documentation-table">
-              <Table aria-label="Dialog anatomy">
-                <TableHeader>
-                  <Column isRowHeader>Component</Column>
-                  <Column>Purpose</Column>
-                </TableHeader>
-                <TableBody>
-                  <Row id="trigger"><Cell><code>DialogTrigger</code></Cell><Cell>Connects the opening control to the dialog and manages open state.</Cell></Row>
-                  <Row id="overlay"><Cell><code>ModalOverlay</code></Cell><Cell>The backdrop; accepts dismissal and controlled open-state props.</Cell></Row>
-                  <Row id="modal"><Cell><code>Modal</code></Cell><Cell>The modal container. Blocks interaction outside it. Can also create its own overlay when used without an explicit <code>ModalOverlay</code>.</Cell></Row>
-                  <Row id="dialog"><Cell><code>Dialog</code></Cell><Cell>The accessible content container. Use its close render prop for a custom action.</Cell></Row>
-                  <Row id="title"><Cell><code>Heading slot="title"</code></Cell><Cell>Provides the visible title and accessible name.</Cell></Row>
-                  <Row id="close"><Cell><code>Button slot="close"</code></Cell><Cell>Closes the dialog without an additional event handler.</Cell></Row>
-                </TableBody>
-              </Table>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
           id: 'dialog-confirmation-heading',
           title: 'Confirmation dialog',
           content: (<>
-            <p className="component-section-description">
-              Use <code>Dialog</code> with <code>role="alertdialog"</code> for a confirmation
-              that needs an immediate response. Cancel receives initial focus. Clicking outside
-              does not dismiss this example; Escape still cancels. Confirm only updates the message below.
-            </p>
-            <div className="component-example">
+            {dialogContent.confirmationDialogParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ComponentExample>
               <DialogTrigger>
                 <Button variant="secondary">Open confirmation</Button>
                 <ModalOverlay>
@@ -102,40 +77,37 @@ export default function DialogPage() {
                   ? 'No action confirmed.'
                   : `Example action confirmed ${confirmationCount} ${confirmationCount === 1 ? 'time' : 'times'}.`}
               </p>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
-          id: 'dialog-usage-heading',
-          title: 'Usage and accessibility',
-          content: (<>
-            <ul className="mz-text-body-md">
-              <li><code>Dialog</code> describes the content; <code>Modal</code> adds blocking behaviour. A non-modal dialog leaves the rest of the page usable. Non-modal presentation is not included in this first release.</li>
-              <li>Give every dialog a title. For a short confirmation, connect the explanatory text with <code>aria-describedby</code>.</li>
-              <li>React Aria manages focus containment, background interaction blocking, and focus return to the trigger.</li>
-              <li><code>isDismissable</code> enables outside-click dismissal. Escape closes by default; <code>isKeyboardDismissDisabled</code> can disable it. Always provide a visible way to close.</li>
-              <li>For controlled use, pass <code>isOpen</code> and <code>onOpenChange</code> to <code>DialogTrigger</code>, or to <code>ModalOverlay</code> when there is no trigger.</li>
-              <li>Use <code>mezzanine-dialog-actions</code> on a footer to arrange buttons. <code>Dialog</code> content scrolls when it exceeds the available height, and entry/exit animations respect reduced motion.</li>
-            </ul>
-          </>),
+          id: 'dialog-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'dialog-anatomy-heading',
+              title: 'Anatomy',
+              content: (<>
+                <ComponentReferenceTable aria-label="Dialog anatomy" nameColumn="Component" rows={dialogContent.anatomyRows} />
+              </>),
+            },
+            {
+              id: 'dialog-usage-heading',
+              title: 'Usage and accessibility',
+              content: (<>
+                <ul className="mz-text-body-md">{dialogContent.usageItems}</ul>
+              </>),
+            },
+            {
+              id: 'dialog-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {dialogContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <ComponentReferenceTable aria-label="Dialog and Modal CSS tokens" nameColumn="CSS token" rows={dialogContent.tokensRows} />
+              </>),
+            },
+          ],
         },
-        {
-          id: 'dialog-tokens-heading',
-          title: 'CSS tokens',
-          content: (<>
-            <p className="component-section-description"><code>Dialog</code> and <code>Modal</code> also use shared typography, focus colour and overlay elevation tokens. React Aria supplies the page and visual-viewport dimensions.</p>
-            <div className="documentation-table">
-              <Table aria-label="Dialog and Modal CSS tokens">
-                <TableHeader><Column isRowHeader>CSS token</Column><Column>Purpose</Column></TableHeader>
-                <TableBody>
-                  {dialogTokens.map(({ token, description }) => (
-                    <Row id={token} key={token}><Cell><code>{token}</code></Cell><Cell>{description}</Cell></Row>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </>),
-        }
       ]}
     />
   )

@@ -1,7 +1,10 @@
+import { ComponentExample } from '../components/ComponentExample'
+import { Button, FieldError, Input, Label, Text, TextField } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { Form } from 'react-aria-components/Form'
-import { Table, TableHeader, Column, TableBody, Row, Cell, Button, FieldError, Input, Label, Text, TextField } from '@decocode/mezzanine'
+import { textFieldContent } from '../content/textFieldContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
 
 export default function TextFieldPage() {
   const [value, setValue] = useState('')
@@ -9,72 +12,56 @@ export default function TextFieldPage() {
 
   return (
     <ComponentPageTemplate
-      title="Text field"
+      title={textFieldContent.title}
       reactAriaPage="TextField"
-      description="A single-line field for entering text. Compose TextField with Input, Label, optional description Text and FieldError."
+      description={textFieldContent.description}
+      relatedPages={textFieldContent.relatedPages}
+      references={textFieldContent.references}
       sections={[
         {
           id: 'text-field-example',
           title: 'Example',
           content: (<>
-            <div className="component-example">
+            <ComponentExample>
               <TextField value={value} onChange={setValue}>
                 <Label>Field label</Label>
                 <Input placeholder="Enter text" />
                 <Text slot="description">Supporting information about this field.</Text>
               </TextField>
               <p>Current value: {value || 'Empty'}</p>
-            </div>
-          </>),
-        },
-        {
-          id: 'text-field-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <div className="documentation-table documentation-anatomy-table">
-              <Table aria-label="TextField anatomy">
-                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
-                <TableBody>
-                  <Row id="part-0"><Cell><code>TextField</code></Cell><Cell>Manages value, validation and associations between field parts.</Cell></Row>
-                  <Row id="part-1"><Cell><code>Label</code></Cell><Cell>Provides the visible field label.</Cell></Row>
-                  <Row id="part-2"><Cell><code>Input</code></Cell><Cell>Renders the single-line input.</Cell></Row>
-                  <Row id="part-3"><Cell><code>Text slot="description"</code></Cell><Cell>Provides optional supporting text.</Cell></Row>
-                  <Row id="part-4"><Cell><code>FieldError</code></Cell><Cell>Displays validation feedback.</Cell></Row>
-                </TableBody>
-              </Table>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
           id: 'text-field-states',
           title: 'States',
           content: (<>
-            <p>Focus or hover the editable fields to inspect their interaction states. Read-only text remains selectable; disabled fields are skipped when using Tab.</p>
-            <div className="component-example">
+            {textFieldContent.statesParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+            <ComponentExample>
               <TextField isReadOnly defaultValue="Read-only value">
                 <Label>Read-only field</Label><Input />
               </TextField>
-            </div>
-            <div className="component-example">
+            </ComponentExample>
+            <ComponentExample>
               <TextField isDisabled defaultValue="Disabled value">
                 <Label>Disabled field</Label><Input />
               </TextField>
-            </div>
-            <div className="component-example">
+            </ComponentExample>
+            <ComponentExample>
               <TextField isInvalid validationBehavior="aria" defaultValue="Invalid value">
                 <Label>Invalid field</Label><Input />
                 <FieldError>This example shows an externally supplied error.</FieldError>
               </TextField>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
           id: 'text-field-validation',
           title: 'Validation',
           content: (<>
-            <p>Submit an empty or incomplete email address to see validation. This local example does not send data.</p>
+            {textFieldContent.validationParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
             <Form onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>
-              <div className="component-example">
+              <ComponentExample>
                 <TextField name="email" type="email" isRequired onChange={() => setSubmitted(false)}>
                   <Label>Email address (required)</Label>
                   <Input autoComplete="email" />
@@ -83,19 +70,30 @@ export default function TextFieldPage() {
                 </TextField>
                 <p><Button type="submit">Validate field</Button></p>
                 <p role="status">{submitted ? 'The email address passed validation.' : ''}</p>
-              </div>
+              </ComponentExample>
             </Form>
           </>),
         },
         {
-          id: 'text-field-composition',
-          title: 'Usage and accessibility',
-          content: (<>
-            <p><code>TextField</code> and <code>Input</code> expose the React Aria APIs directly. Use Mezzanine’s <code>Label</code>, <code>Text slot="description"</code> and <code>FieldError</code> inside the field for automatically associated text.</p>
-            <p>Use <code>defaultValue</code> for an initial value, or <code>value</code> with <code>onChange</code> for a value managed by your application. Set <code>isRequired</code>, <code>isReadOnly</code>, <code>isDisabled</code> or <code>isInvalid</code> on <code>TextField</code>. Put <code>placeholder</code> on <code>Input</code>; it does not replace a label.</p>
-            <p>The validation example uses React Aria’s <code>Form</code> directly; Mezzanine does not yet export Form. The field has no animation, and its colours and dimensions can be overridden through tokens.</p>
-          </>),
-        }
+          id: 'text-field-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'text-field-anatomy-heading',
+              title: 'Anatomy',
+              content: (<>
+                <ComponentReferenceTable aria-label="TextField anatomy" nameColumn="Component" rows={textFieldContent.anatomyRows} className="documentation-anatomy-table" />
+              </>),
+            },
+            {
+              id: 'text-field-composition',
+              title: 'Usage and accessibility',
+              content: (<>
+                {textFieldContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+          ],
+        },
       ]}
     />
   )

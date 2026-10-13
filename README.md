@@ -18,6 +18,7 @@ Showcase: [mezzanine.fly.dev](https://mezzanine.fly.dev)
 | ---------- | ----------------------------------------------------------------- |
 | `src/`     | The library: components, structural CSS, public `index.ts`         |
 | `site/`    | The showcase site deployed to mezzanine.fly.dev                    |
+| `docs/`    | [Token](docs/TOKENS.md) and [typography](docs/TYPOGRAPHY.md) guides |
 | `dist/`    | Built package output (generated)                                  |
 | `site-dist/` | Built showcase site output (generated)                          |
 
@@ -103,11 +104,40 @@ Implemented component pages in `site/pages/` use `site/templates/ComponentPageTe
 Each page supplies its title, description, optional React Aria reference and an
 ordered `sections` list. Each section defines `id`, `title` and `content` once;
 the template creates its heading, wrapper and matching table-of-contents link.
-Optional `subsections` add Contents links to headings inside that section's content.
+Optional `subsections` add On this page links to headings inside a section.
+A section group supplies `id`, `title` and a `sections` list instead of `content`.
+The template renders its heading at level 2 and its children as a Mezzanine
+DisclosureGroup with level-3 trigger headings. Disclosures start closed and allow
+multiple panels to stay open. Section links open the relevant panel before
+scrolling, including direct URLs and repeated links.
 
-Keep component-specific copy, tables and live examples in the page module; retain
-local React state there when an example needs it. Shared data can stay in its
-existing descriptive documentation module. Use only applicable sections—such as
-Example, Anatomy, States, Behaviour or Usage—and do not add empty sections or
-invent missing documentation. Keep component names in Anatomy tables in `<code>`.
-Foundation pages retain their own structures.
+All implemented component pages use this structure:
+
+- The example and any additional interactive demonstrations remain visible.
+- Technical details groups the applicable Anatomy, Behaviour, Usage, Props and
+  CSS tokens guidance in disclosures.
+- Related pages links to relevant Mezzanine pages.
+- References links to the underlying React Aria documentation or other relevant
+  sources. Badge is a static HTML element, so its reference is MDN rather than
+  an unrelated React Aria component.
+
+Written guidance and reference entries live in `site/content/`, in a named
+`*Content.tsx` file for each component. These files use JSX for inline code and
+links. Supporting Button and RadioGroup reference datasets also live there.
+`site/pages/` owns example rendering, local state and composition with the template.
+`site/templates/` contains page templates only. `site/components/` contains reusable
+site UI, separate from the public library in `src/components/`. Its `ComponentExample`
+provides the standard example frame, accepting optional classes for special layouts.
+The disclosure group and its anchor-handling hook also live in `site/components/`.
+`site/components/ComponentReferenceTable.tsx` renders Anatomy, Props and CSS token
+entries consistently using Mezzanine's Table parts.
+
+To add a Related pages or References link, edit the corresponding content list.
+Each entry has a `label` and `href`. Use local paths for Related pages and external
+URLs for References. External links show a trailing icon and announce that they
+open in a new tab. Empty lists produce no section or On this page entry. The
+optional `referencesId` preserves an existing reference-section anchor.
+
+Use only applicable sections; do not add empty sections or invent missing
+features. Foundation pages retain their own structures. WIP pages remain marked
+Not implemented.

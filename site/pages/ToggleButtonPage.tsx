@@ -1,8 +1,9 @@
+import { ComponentExample } from '../components/ComponentExample'
 import {
-  Link,
   Cell,
   Column,
   ExternalLinkIcon,
+  Link,
   Row,
   Table,
   TableBody,
@@ -10,40 +11,27 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from '@decocode/mezzanine'
+import { toggleButtonContent } from '../content/toggleButtonContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
 
 export default function ToggleButtonPage() {
   return (
     <ComponentPageTemplate
-      description={<>A <code>ToggleButton</code> switches one option on or off and keeps its selected state until it is pressed again.</>}
+      description={toggleButtonContent.description}
       reactAriaPage="ToggleButton"
-      title="ToggleButton"
+      title={toggleButtonContent.title}
+      relatedPages={toggleButtonContent.relatedPages}
+      references={toggleButtonContent.references}
       sections={[
         {
           id: 'toggle-button-example-heading',
           title: 'Example',
           content: (<>
-            <p className="component-section-description">
-              Press the <code>ToggleButton</code> to select it, then press it again to clear the selection.
-            </p>
-            <div className="component-example">
+            <p className="component-section-description">{toggleButtonContent.exampleParagraphs[0]}</p>
+            <ComponentExample>
               <ToggleButton>Toggle</ToggleButton>
-            </div>
-          </>),
-        },
-        {
-          id: 'toggle-button-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <div className="documentation-table documentation-anatomy-table">
-              <Table aria-label="ToggleButton anatomy">
-                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
-                <TableBody>
-                  <Row id="part-0"><Cell><code>ToggleButton</code></Cell><Cell>A button with a selected state and an accessible pressed state.</Cell></Row>
-                  <Row id="part-1"><Cell><code>ToggleButtonGroup</code></Cell><Cell>Optionally coordinates single or multiple selection among buttons identified by id.</Cell></Row>
-                </TableBody>
-              </Table>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
@@ -82,10 +70,7 @@ export default function ToggleButtonPage() {
             { id: 'multiple-selection-heading', label: 'Multiple selection' },
           ],
           content: (<>
-            <p className="component-section-description">
-              A <code>ToggleButtonGroup</code> brings related <code>ToggleButton</code> components together and supports either single or
-              multiple selection.
-            </p>
+            <p className="component-section-description">{toggleButtonContent.toggleButtonGroupParagraphs[0]}</p>
             <Link
               aria-label="View ToggleButtonGroup on React Aria (opens in a new tab)"
               className="react-aria-Link react-aria-documentation-link"
@@ -101,7 +86,7 @@ export default function ToggleButtonPage() {
                 <h3 id="single-selection-heading" className="mz-text-heading-sm">
                   Single selection
                 </h3>
-                <div className="component-example">
+                <ComponentExample>
                   <ToggleButtonGroup
                     aria-label="Single selection example"
                     defaultSelectedKeys={['toggle-a']}
@@ -112,13 +97,13 @@ export default function ToggleButtonPage() {
                     <ToggleButton id="toggle-b">Toggle B</ToggleButton>
                     <ToggleButton id="toggle-c">Toggle C</ToggleButton>
                   </ToggleButtonGroup>
-                </div>
+                </ComponentExample>
               </section>
               <section aria-labelledby="multiple-selection-heading">
                 <h3 id="multiple-selection-heading" className="mz-text-heading-sm">
                   Multiple selection
                 </h3>
-                <div className="component-example">
+                <ComponentExample>
                   <ToggleButtonGroup
                     aria-label="Multiple selection example"
                     defaultSelectedKeys={['toggle-a']}
@@ -128,20 +113,33 @@ export default function ToggleButtonPage() {
                     <ToggleButton id="toggle-b">Toggle B</ToggleButton>
                     <ToggleButton id="toggle-c">Toggle C</ToggleButton>
                   </ToggleButtonGroup>
-                </div>
+                </ComponentExample>
               </section>
             </div>
           </>),
         },
         {
-          id: 'toggle-button-usage-heading',
-          title: 'Usage and accessibility',
-          content: (<>
-            <p>For an independent toggle, use <code>defaultSelected</code> for initial state or <code>isSelected</code> with <code>onChange</code> for controlled state. Use a stable visible label, or <code>aria-label</code> for an icon-only control. The selected state is communicated separately from the name.</p>
-            <p>For a group, supply an accessible label and stable button <code>id</code> values. Choose <code>selectionMode="single"</code> or <code>selectionMode="multiple"</code>; use <code>defaultSelectedKeys</code> or controlled <code>selectedKeys</code> with <code>onSelectionChange</code>. Set <code>disallowEmptySelection</code> when a selection must remain.</p>
-            <p>Enter or Space activates a focused toggle. Within a group, arrow keys move between buttons according to its orientation. Disabled buttons cannot be activated.</p>
-          </>),
-        }
+          id: 'toggle-button-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'toggle-button-anatomy-heading',
+              title: 'Anatomy',
+              content: (<>
+                <ComponentReferenceTable aria-label='ToggleButton anatomy' nameColumn='Component' rows={toggleButtonContent.anatomyRows} className='documentation-anatomy-table' />
+              </>),
+            },
+            {
+              id: 'toggle-button-usage-heading',
+              title: 'Usage and accessibility',
+              content: (<>
+                <p>{toggleButtonContent.usageParagraphs[0]}</p>
+                <p>{toggleButtonContent.usageParagraphs[1]}</p>
+                <p>{toggleButtonContent.usageParagraphs[2]}</p>
+              </>),
+            },
+          ],
+        },
       ]}
     />
   )

@@ -1,28 +1,28 @@
-import { useState } from 'react'
+import { ComponentExample } from '../components/ComponentExample'
 import {
-  Button,
-  type ButtonVariant,
-  Link,
   ArrowRightIcon,
+  Button,
   Cell,
   Column,
   DownloadIcon,
-  ExternalLinkIcon,
   IconButton,
   PlusIcon,
   Row,
   Table,
   TableBody,
   TableHeader,
+  type ButtonVariant
 } from '@decocode/mezzanine'
-import { buttonTokens } from '../foundationData'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { useState } from 'react'
+import { buttonContent } from '../content/buttonContent'
 import {
-  buttonVariants,
-  buttonStates,
   buttonSizes,
+  buttonStates,
+  buttonVariants,
   type ButtonPreviewState,
-} from '../buttonDocumentation'
+} from '../content/buttonReferenceData'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
 
 function ButtonStateExample({
   label,
@@ -52,45 +52,28 @@ export default function ButtonPage() {
 
   return (
     <ComponentPageTemplate
-      description="Buttons trigger actions and guide people through tasks. Their variant and state show which action matters most."
-      title="Button"
+      description={buttonContent.description}
+      title={buttonContent.title}
+      relatedPages={buttonContent.relatedPages}
+      references={buttonContent.references}
+      referencesId={buttonContent.referencesId}
       sections={[
         {
           id: 'button-example-heading',
           title: 'Example',
           content: (<>
-            <p className="component-section-description">
-              <code>Button</code> defaults to the primary variant and medium size. Activate this example to
-              see its <code>onPress</code> handler update the count.
-            </p>
-            <div className="component-example">
+            {buttonContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ComponentExample>
               <Button onPress={() => setPressCount((count) => count + 1)}>Press Button</Button>
               <p className="component-example-feedback" role="status">Press count: {pressCount}</p>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
-          id: 'button-content-heading',
-          title: 'Anatomy',
-          subsections: [
-            { id: 'button-content-examples-heading', label: 'Content' },
-            { id: 'button-sizes-heading', label: 'Sizes' },
-          ],
+          id: 'button-content-examples-heading',
+          title: 'Content and sizes',
+          subsections: [{ id: 'button-sizes-heading', label: 'Sizes' }],
           content: (<>
-            <p className="component-section-description">
-              <code>Button</code> combines a label with optional leading and trailing icons. <code>IconButton</code> composes
-              {' '}<code>Button</code> with a required <code>label</code> and an <code>icon</code>.
-            </p>
-            <div className="documentation-table documentation-anatomy-table">
-              <Table aria-label="Button anatomy">
-                <TableHeader><Column id="component" isRowHeader>Component</Column><Column id="purpose">Purpose</Column></TableHeader>
-                <TableBody>
-                  <Row id="button"><Cell><code>Button</code></Cell><Cell>The action control, containing a text label and optional leading or trailing icons.</Cell></Row>
-                  <Row id="icon-button"><Cell><code>IconButton</code></Cell><Cell>Composes <code>Button</code> with an icon and a required accessible label. The label can be hidden, above or below the control.</Cell></Row>
-                </TableBody>
-              </Table>
-            </div>
-            <h3 id="button-content-examples-heading" className="mz-text-heading-sm">Content</h3>
             <div className="documentation-table documentation-comparison-table">
               <Table aria-label="Button content">
                 <TableHeader>
@@ -162,67 +145,41 @@ export default function ButtonPage() {
                 </TableBody>
               </Table>
             </div>
-                  <section aria-labelledby="button-sizes-heading">
-            <h3 id="button-sizes-heading" className="mz-text-heading-sm">
-              Sizes
-            </h3>
-            <div className="documentation-table documentation-comparison-table">
-              <Table aria-label="Button sizes">
-                <TableHeader>
-                  <Column id="size" isRowHeader>Size</Column>
-                  <Column id="example">Example</Column>
-                </TableHeader>
-                <TableBody>
-                  {buttonSizes.map(({ label, size, usage }) => (
-                    <Row id={size} key={size}>
-                      <Cell>
-                        <span className="table-item-heading">
-                          <strong>{label}</strong>
-                          <code>{size}</code>
-                          <span>{usage}</span>
-                        </span>
-                      </Cell>
-                      <Cell><Button size={size}>Button</Button></Cell>
-                    </Row>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-                  </section>
-          </>),
-        },
-        {
-          id: 'button-variants-heading',
-          title: 'States',
-          content: (<>
-            <div className="documentation-table">
-              <Table aria-label="Button states">
-                <TableHeader><Column id="state" isRowHeader>State</Column><Column id="behaviour">Behaviour</Column></TableHeader>
-                <TableBody>
-                  {buttonStates.map(({ name, state, reactAriaState, description }) => (
-                    <Row id={state} key={state}>
-                      <Cell><span className="table-item-heading"><strong>{name}</strong><code>{reactAriaState}</code></span></Cell>
-                      <Cell>{description}</Cell>
-                    </Row>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
+            <section aria-labelledby="button-sizes-heading">
+              <h3 id="button-sizes-heading" className="mz-text-heading-sm">
+                Sizes
+              </h3>
+              <div className="documentation-table documentation-comparison-table">
+                <Table aria-label="Button sizes">
+                  <TableHeader>
+                    <Column id="size" isRowHeader>Size</Column>
+                    <Column id="example">Example</Column>
+                  </TableHeader>
+                  <TableBody>
+                    {buttonSizes.map(({ label, size, usage }) => (
+                      <Row id={size} key={size}>
+                        <Cell>
+                          <span className="table-item-heading">
+                            <strong>{label}</strong>
+                            <code>{size}</code>
+                            <span>{usage}</span>
+                          </span>
+                        </Cell>
+                        <Cell><Button size={size}>Button</Button></Cell>
+                      </Row>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </section>
           </>),
         },
         {
           id: 'button-variant-examples-heading',
           title: 'Hierarchy',
           content: (<>
-            <p className="component-section-description">
-              Button hierarchy communicates the relative importance of actions.
-            </p>
-            <ul className="component-section-description mz-text-body-md">
-              <li><strong>Primary:</strong> emphasises the main action.</li>
-              <li><strong>Secondary:</strong> supports the main action.</li>
-              <li><strong>Tertiary:</strong> gives lower-priority actions less visual emphasis.</li>
-              <li><strong>Destructive:</strong> identifies actions that delete or remove something; it communicates purpose rather than another level of importance.</li>
-            </ul>
+            {buttonContent.hierarchyParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ul className="component-section-description mz-text-body-md">{buttonContent.hierarchyItems}</ul>
             <div className="documentation-table documentation-state-matrix">
               <Table aria-label="Button hierarchy and states">
                 <TableHeader>
@@ -258,66 +215,54 @@ export default function ButtonPage() {
           </>),
         },
         {
-          id: 'button-usage-heading',
-          title: 'Usage and accessibility',
-          content: (<>
-            <p className="component-section-description">
-              Use <code>Button</code> for an action and <code>Link</code> for navigation. Handle activation with
-              {' '}<code>onPress</code>; React Aria supports pointer, touch, Enter and Space activation.
-              Keep the visible label clear. <code>IconButton</code> requires a label even when it is hidden.
-            </p>
-            <p className="component-section-description">
-              Use <code>isPending</code> while an action is in progress: <code>Button</code> displays its progress
-              indicator and prevents further presses while remaining focusable. Use
-              {' '}<code>isDisabled</code> when the action is unavailable. Keyboard focus has its own
-              visible outline, separate from hover and pressed feedback.
-            </p>
-            <p className="component-section-description">Button labels wrap when space is limited, allowing the control to grow taller without shrinking the text. Icons retain their size.</p>
-          </>),
+          id: 'button-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'button-content-heading',
+              title: 'Anatomy',
+              content: (<>
+                {buttonContent.anatomyParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <ComponentReferenceTable aria-label="Button anatomy" nameColumn="Component" rows={buttonContent.anatomyRows} className="documentation-anatomy-table" />
+
+              </>),
+            },
+            {
+              id: 'button-variants-heading',
+              title: 'States',
+              content: (<>
+                <div className="documentation-table">
+                  <Table aria-label="Button states">
+                    <TableHeader><Column id="state" isRowHeader>State</Column><Column id="behaviour">Behaviour</Column></TableHeader>
+                    <TableBody>
+                      {buttonStates.map(({ name, state, reactAriaState, description }) => (
+                        <Row id={state} key={state}>
+                          <Cell><span className="table-item-heading"><strong>{name}</strong><code>{reactAriaState}</code></span></Cell>
+                          <Cell>{description}</Cell>
+                        </Row>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </>),
+            },
+            {
+              id: 'button-usage-heading',
+              title: 'Usage and accessibility',
+              content: (<>
+                {buttonContent.usageParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'button-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {buttonContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <ComponentReferenceTable aria-label="Button CSS tokens" nameColumn="CSS token" rows={buttonContent.tokensRows} />
+              </>),
+            },
+          ],
         },
-        {
-          id: 'button-tokens-heading',
-          title: 'CSS tokens',
-          content: (<>
-            <p className="component-section-description">
-              These component tokens control variant colours, sizes, content spacing, borders, focus
-              and progress indicators. <code>Button</code> also uses shared typography, focus colour
-              and disabled-opacity tokens.
-            </p>
-            <div className="documentation-table">
-              <Table aria-label="Button CSS tokens">
-                <TableHeader>
-                  <Column id="token" isRowHeader>CSS token</Column>
-                  <Column id="purpose">Purpose</Column>
-                </TableHeader>
-                <TableBody>
-                  {buttonTokens.map((buttonToken) => (
-                    <Row id={buttonToken.token} key={buttonToken.token}>
-                      <Cell><code>{buttonToken.token}</code></Cell>
-                      <Cell>{buttonToken.description}</Cell>
-                    </Row>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </>),
-        },
-        {
-          id: 'button-references-heading',
-          title: 'Related references',
-          content: (<>
-            <ul className="component-reference-links">
-              <li>
-                <Link href="https://react-aria.adobe.com/Button" target="_blank" rel="noreferrer"
-                  aria-label="Button API on React Aria (opens in a new tab)">
-                  Button API on React Aria <ExternalLinkIcon />
-                </Link>
-              </li>
-              <li><Link href="/link">Link — navigation</Link></li>
-              <li><Link href="/toggle-button">ToggleButton — a persistent selected state</Link></li>
-            </ul>
-          </>),
-        }
       ]}
     />
   )

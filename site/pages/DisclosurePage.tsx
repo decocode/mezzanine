@@ -1,64 +1,45 @@
+import { ComponentExample } from '../components/ComponentExample'
 import {
-  Table, TableHeader, Column, TableBody, Row, Cell,
   Disclosure,
   DisclosureGroup,
   DisclosureHeader,
   DisclosurePanel,
-  Link,
   ExternalLinkIcon,
+  Link
 } from '@decocode/mezzanine'
+import { disclosureContent } from '../content/disclosureContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
 
 export default function DisclosurePage() {
   return (
     <ComponentPageTemplate
-      description={<>A <code>Disclosure</code> shows and hides a section of related content.</>}
+      description={disclosureContent.description}
       reactAriaPage="Disclosure"
-      title="Disclosure"
+      title={disclosureContent.title}
+      relatedPages={disclosureContent.relatedPages}
+      references={disclosureContent.references}
       sections={[
         {
           id: 'disclosure-basic-heading',
           title: 'Example',
           content: (<>
-            <p className="component-section-description">
-              Activate <code>DisclosureHeader</code> to show or hide the <code>DisclosurePanel</code>. This example starts expanded.
-            </p>
-            <div className="component-example">
+            {disclosureContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <ComponentExample>
               <Disclosure defaultExpanded>
                 <DisclosureHeader>Disclosure A</DisclosureHeader>
                 <DisclosurePanel>
                   DisclosurePanel A content.
                 </DisclosurePanel>
               </Disclosure>
-            </div>
-          </>),
-        },
-        {
-          id: 'disclosure-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <div className="documentation-table documentation-anatomy-table">
-              <Table aria-label="Disclosure anatomy">
-                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
-                <TableBody>
-                  <Row id="part-0"><Cell><code>Disclosure</code></Cell><Cell>Owns one expanded or collapsed panel.</Cell></Row>
-                  <Row id="part-1"><Cell><code>DisclosureHeader</code></Cell><Cell>Composes Heading and the trigger Button; defaults to heading level 3.</Cell></Row>
-                  <Row id="part-2"><Cell><code>DisclosurePanel</code></Cell><Cell>Contains the content that is shown or hidden.</Cell></Row>
-                  <Row id="part-3"><Cell><code>DisclosureGroup</code></Cell><Cell>Optionally coordinates expansion across multiple disclosures.</Cell></Row>
-                </TableBody>
-              </Table>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
           id: 'disclosure-group-heading',
           title: 'DisclosureGroup',
           content: (<>
-            <p className="component-section-description">
-              A <code>DisclosureGroup</code> (also known as a concertina) brings related disclosures together.
-              Opening an item will close a previously open item by default, but you can opt to have
-              multiple disclosures open simultaneously instead.
-            </p>
+            {disclosureContent.disclosureGroupParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
             <Link
               aria-label="View DisclosureGroup on React Aria (opens in a new tab)"
               className="react-aria-Link react-aria-documentation-link"
@@ -69,7 +50,7 @@ export default function DisclosurePage() {
               <span>View DisclosureGroup on React Aria</span>
               <ExternalLinkIcon />
             </Link>
-            <div className="component-example">
+            <ComponentExample>
               <DisclosureGroup defaultExpandedKeys={['disclosure-a']}>
                 <Disclosure id="disclosure-a">
                   <DisclosureHeader>Disclosure A</DisclosureHeader>
@@ -84,18 +65,29 @@ export default function DisclosurePage() {
                   <DisclosurePanel>DisclosurePanel C content.</DisclosurePanel>
                 </Disclosure>
               </DisclosureGroup>
-            </div>
+            </ComponentExample>
           </>),
         },
         {
-          id: 'disclosure-usage-heading',
-          title: 'Usage and accessibility',
-          content: (<>
-            <p>Use <code>defaultExpanded</code> for initial state, or <code>isExpanded</code> with <code>onExpandedChange</code> for controlled state. Give grouped disclosures stable <code>id</code> values; the group uses <code>defaultExpandedKeys</code> or <code>expandedKeys</code> with <code>onExpandedChange</code>. Enable <code>allowsMultipleExpanded</code> when several panels may stay open.</p>
-            <p>Tab focuses the trigger; Enter or Space toggles its panel. Tab then reaches available controls inside an expanded panel. The trigger exposes its expanded state. Set <code>isDisabled</code> on a Disclosure to prevent toggling.</p>
-            <p>Choose <code>DisclosureHeader level</code> to fit the page’s heading hierarchy. Its children supply the trigger label; do not place another button or link inside that label.</p>
-          </>),
-        }
+          id: 'disclosure-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'disclosure-anatomy-heading',
+              title: 'Anatomy',
+              content: (<>
+                <ComponentReferenceTable aria-label="Disclosure anatomy" nameColumn="Component" rows={disclosureContent.anatomyRows} className="documentation-anatomy-table" />
+              </>),
+            },
+            {
+              id: 'disclosure-usage-heading',
+              title: 'Usage and accessibility',
+              content: (<>
+                {disclosureContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+          ],
+        },
       ]}
     />
   )

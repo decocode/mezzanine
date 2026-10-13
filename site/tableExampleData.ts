@@ -7,15 +7,6 @@ export interface TableExampleRow {
   columnC: string
 }
 
-export const tableAnatomy = [
-  { name: 'Table', purpose: 'Contains the complete table and its interaction settings.' },
-  { name: 'TableHeader', purpose: 'Groups the column headings.' },
-  { name: 'Column', purpose: 'Names a column and can enable sorting for it.' },
-  { name: 'TableBody', purpose: 'Groups the rows and provides the empty state.' },
-  { name: 'Row', purpose: 'Contains one record and its cells.' },
-  { name: 'Cell', purpose: 'Contains one piece of data within a row.' },
-] as const
-
 export const tableExampleRows: TableExampleRow[] = [
   { id: 'row-a', columnA: 'Row A', columnB: 'Cell A2', columnC: 'Cell A3' },
   { id: 'row-b', columnA: 'Row B', columnB: 'Cell B2', columnC: 'Cell B3' },
