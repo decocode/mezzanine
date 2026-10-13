@@ -22,7 +22,7 @@ export const tooltipContent = {
     { name: 'Tooltip', description: <>The text bubble, positioned relative to its trigger and associated with it through <code>aria-describedby</code>.</> },
   ],
   behaviourParagraphs: [
-    <>The first tooltip opens after a 300ms hover delay. Keyboard focus opens it immediately. React Aria allows subsequent tooltips to open immediately while its warmup state is active.</>,
+    <>The first tooltip opens after a 500ms hover delay. Keyboard focus opens it immediately. React Aria allows subsequent tooltips to open immediately while its warmup state is active.</>,
     <>The tooltip stays open while the pointer is over the trigger or tooltip. Moving away starts the close delay, which defaults to 500ms. Escape dismisses it; moving focus away or pressing the trigger also closes it by default.</>,
     <>React Aria positions the tooltip and can flip it when there is not enough room. Mezzanine limits its width to fit the viewport and disables the fade animation when reduced motion is requested.</>,
   ],
@@ -33,7 +33,7 @@ export const tooltipContent = {
     <>Set <code>isDisabled</code> on <code>TooltipTrigger</code> to suppress its tooltip without disabling the control. A disabled control cannot receive keyboard focus, so do not rely on its tooltip to explain why it is disabled.</>,
   ],
   propsRows: [
-    { name: 'TooltipTrigger: delay', description: 'Hover delay in milliseconds. Mezzanine defaults to 300; React Aria defaults to 1500. Focus opens immediately.' },
+    { name: 'TooltipTrigger: delay', description: 'Hover delay in milliseconds. Mezzanine defaults to 500; React Aria defaults to 1500. Focus opens immediately.' },
     { name: 'TooltipTrigger: closeDelay', description: 'Delay before closing after hover ends. Defaults to 500ms.' },
     { name: 'TooltipTrigger: trigger', description: <>Defaults to <code>hover</code>, supporting both hover and focus. Set <code>focus</code> to open only on keyboard focus.</> },
     { name: 'TooltipTrigger: isDisabled', description: 'Disables the tooltip independently of its control.' },

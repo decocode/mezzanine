@@ -35,14 +35,33 @@ export { Checkbox } from './components/Checkbox'
 
 export type { CheckboxProps } from './components/Checkbox'
 
-export { Dialog, DialogTrigger, Heading } from './components/Dialog'
+export { Dialog, DialogTrigger } from './components/Dialog'
 
 export type {
   DialogProps,
   DialogRenderProps,
   DialogTriggerProps,
-  HeadingProps,
 } from './components/Dialog'
+
+export { Label } from './components/Label'
+
+export type { LabelProps } from './components/Label'
+
+export { Text } from './components/Text'
+
+export type { TextProps } from './components/Text'
+
+export { FieldError } from './components/FieldError'
+
+export type { FieldErrorProps, FieldErrorRenderProps } from './components/FieldError'
+
+export { SelectionIndicator } from './components/SelectionIndicator'
+
+export type { SelectionIndicatorProps } from './components/SelectionIndicator'
+
+export { Heading } from './components/Heading'
+
+export type { HeadingProps } from './components/Heading'
 
 export { Modal, ModalOverlay } from './components/Modal'
 
@@ -93,27 +112,18 @@ export type {
 } from './components/NavigationTree'
 
 export {
-  FieldError,
-  Label,
   RadioButton,
   RadioField,
   RadioGroup,
-  SelectionIndicator,
-  Text,
 } from './components/RadioGroup'
 
 export type {
-  FieldErrorProps,
-  FieldErrorRenderProps,
-  LabelProps,
   RadioButtonProps,
   RadioButtonRenderProps,
   RadioFieldProps,
   RadioFieldRenderProps,
   RadioGroupProps,
   RadioGroupRenderProps,
-  SelectionIndicatorProps,
-  TextProps,
 } from './components/RadioGroup'
 
 export {

@@ -55,7 +55,7 @@ export default function NavigationTreePage() {
                       </NavigationTreeItemContent>
                     </NavigationTreeItem>
                     <NavigationTreeItem
-                      className={`react-aria-NavigationTreeItem${closingKeys.has('item-b') ? ' is-closing' : ''}`}
+                      className={`react-aria-NavigationTreeItem${closingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
                       id="item-b"
                       textValue="Item B"
                     >
@@ -72,7 +72,7 @@ export default function NavigationTreePage() {
                         </Button>
                       </NavigationTreeItemContent>
                       <NavigationTreeItem
-                        className={`react-aria-NavigationTreeItem animated-navigation-tree-item${openingKeys.has('item-b') ? ' is-opening' : ''}${closingKeys.has('item-b') ? ' is-closing' : ''}`}
+                        className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${openingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-opening' : ''}${closingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
                         href="/navigation-tree#child-item-b1"
                         id="child-item-b1"
                         textValue="Child item B1"
@@ -82,7 +82,7 @@ export default function NavigationTreePage() {
                         </NavigationTreeItemContent>
                       </NavigationTreeItem>
                       <NavigationTreeItem
-                        className={`react-aria-NavigationTreeItem animated-navigation-tree-item${openingKeys.has('item-b') ? ' is-opening' : ''}${closingKeys.has('item-b') ? ' is-closing' : ''}`}
+                        className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${openingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-opening' : ''}${closingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
                         href="/navigation-tree#child-item-b2"
                         id="child-item-b2"
                         textValue="Child item B2"
@@ -96,7 +96,7 @@ export default function NavigationTreePage() {
                   <NavigationTreeSection>
                     <NavigationTreeHeader>Header B</NavigationTreeHeader>
                     <NavigationTreeItem
-                      className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-has-link${closingKeys.has('item-c') ? ' is-closing' : ''}`}
+                      className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-has-link${closingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
                       href="/navigation-tree#item-c"
                       id="item-c"
                       textValue="Item C"
@@ -112,7 +112,7 @@ export default function NavigationTreePage() {
                         />
                       </NavigationTreeItemContent>
                       <NavigationTreeItem
-                        className={`react-aria-NavigationTreeItem animated-navigation-tree-item${openingKeys.has('item-c') ? ' is-opening' : ''}${closingKeys.has('item-c') ? ' is-closing' : ''}`}
+                        className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${openingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-opening' : ''}${closingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
                         href="/navigation-tree#child-item-c1"
                         id="child-item-c1"
                         textValue="Child item C1"
@@ -122,7 +122,7 @@ export default function NavigationTreePage() {
                         </NavigationTreeItemContent>
                       </NavigationTreeItem>
                       <NavigationTreeItem
-                        className={`react-aria-NavigationTreeItem animated-navigation-tree-item${openingKeys.has('item-c') ? ' is-opening' : ''}${closingKeys.has('item-c') ? ' is-closing' : ''}`}
+                        className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${openingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-opening' : ''}${closingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
                         href="/navigation-tree#child-item-c2"
                         id="child-item-c2"
                         textValue="Child item C2"

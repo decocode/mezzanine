@@ -202,8 +202,8 @@ Import `useAnimatedNavigationTree` from `@decocode/mezzanine` to opt into the
 row animation used by the documentation sidebar. The standard React Aria tree
 exports and props are unchanged. Pass the hook's `expandedKeys` and
 `onExpandedChange` to the tree. Its `openingKeys` and `closingKeys` identify
-parents whose descendant rows need `animated-navigation-tree-item` plus
-`is-opening` or `is-closing`; mark closing parents with `is-closing` as well.
+parents whose descendant rows need `mezzanine-navigation-tree-item-animated` plus
+`mezzanine-navigation-tree-item-opening` or `mezzanine-navigation-tree-item-closing`; mark closing parents with `mezzanine-navigation-tree-item-closing` as well.
 The library stylesheet supplies those animation classes. The hook reads
 `--navigation-tree-motion-duration` from the document root. Reduced motion
 removes row and chevron animation and completes any pending collapse immediately.
@@ -211,7 +211,7 @@ removes row and chevron animation and completes any pending collapse immediately
 ## Tooltips
 
 Compose `TooltipTrigger`, a focusable control, and `Tooltip` from
-`@decocode/mezzanine`. The trigger defaults to a 300ms hover delay, configurable
+`@decocode/mezzanine`. The trigger defaults to a 500ms hover delay, configurable
 with `delay`; keyboard focus shows the tooltip immediately. Keep an accessible
 name on icon-only controls because tooltips do not appear on touch interactions.
 The fade animation is disabled for reduced motion.

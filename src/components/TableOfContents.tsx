@@ -1,5 +1,5 @@
 import { useId } from 'react'
-import { Heading } from './Dialog'
+import { Heading } from './Heading'
 import { Link } from './Link'
 
 export interface TableOfContentsSection {

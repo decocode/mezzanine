@@ -1,45 +1,45 @@
 # Agent instructions
 
-This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It contains two things: the component library (`@decocode/mezzanine`) in `src/`, and the showcase site for mezzanine.fly.dev in `site/`. Read `MAP.md` for the file layout and `README.md` for setup commands.
+This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It contains two things: the component library (`@decocode/mezzanine`) in `src/`, and the documentation site for mezzanine.fly.dev in `site/`. Read `MAP.md` for the file layout and `README.md` for setup commands.
 
 ## Stack and conventions
 
 - Use React with TypeScript.
-- Use `react-aria-components` for supported interface patterns in both the library and the showcase so keyboard, focus, pointer, touch, and accessibility behavior come from the same foundation.
+- Use `react-aria-components` for supported interface patterns in both the library and the documentation site so keyboard, focus, pointer, touch, and accessibility behavior come from the same foundation.
 - Use npm and keep `package-lock.json` in sync with `package.json`.
 - Keep configuration minimal and follow the existing Vite and Oxlint setup.
 
-## Library and showcase boundaries
+## Library and documentation site boundaries
 
 - `src/` is the package. Everything a consuming app can use is exported from `src/index.ts`. Do not import from `site/` inside `src/`.
-- `site/` is the showcase. It imports the library as `@decocode/mezzanine` (resolved to `src/index.ts` by an alias), never by relative paths into `src/`, so it consumes the library the way apps do.
+- `site/` is the documentation site. It imports the library as `@decocode/mezzanine` (resolved to `src/index.ts` by an alias), never by relative paths into `src/`, so it consumes the library the way apps do.
 - `react`, `react-dom`, and `react-aria-components` are peer dependencies. Do not bundle them. If library code imports another package directly (for example `react-aria`, `react-stately`, or `@internationalized/date`), it must be listed in `package.json`.
 - Library components contain no product-specific content, branding, copy, or imagery. Anything belonging to a single product stays in that product's repository.
 - Library CSS references design tokens (CSS custom properties) only, never raw color, font, or size values. Each consuming app supplies token values in its own theme file. Name tokens by purpose, not appearance (for example `--color-accent`, not `--color-yellow`).
 - Treat changes to exported component names, props, token names, or CSS class names as breaking changes for consuming apps. Call them out explicitly.
 
-## Showcase accuracy and source of truth
+## Documentation accuracy and source of truth
 
-- `src/` is the source of truth for what Mezzanine currently contains. The showcase documents the library; it must not design, extend, or simulate it.
+- `src/` is the source of truth for what Mezzanine currently contains. The documentation site documents the library; it must not design, extend, or simulate it.
 - Only document components, variants, states, tokens, behaviours, and rules that are implemented in the library and available through its public API.
-- Do not invent or embellish content to make the showcase appear more complete. The approved information architecture may include an empty route before its subject is implemented, but that page must say `Not implemented`, contain no speculative examples or rules, and be visibly marked `WIP` in navigation.
-- Before adding showcase content, verify the corresponding implementation and its agreed behaviour in the repository. If something is missing or ambiguous, stop and ask the user before defining or documenting it.
-- Showcase examples must render the real exported library components. Do not create showcase-only replicas, variants, styles, or behaviours.
-- Build the showcase itself from React Aria Components wherever React Aria provides the interface pattern. If Mezzanine already exports that component, the showcase must import the Mezzanine export rather than importing the same component directly from `react-aria-components`.
-- A direct `react-aria-components` import is allowed in the showcase only while Mezzanine has no corresponding public export, and must not be wrapped or styled as though it were an implemented Mezzanine component.
-- Component comparison matrices and other tabular showcase content must use Mezzanine's exported `Table` parts. Do not use a native `<table>` as a shortcut once `Table` is available.
+- Do not invent or embellish content to make the documentation site appear more complete. The approved information architecture may include an empty route before its subject is implemented, but that page must say `Not implemented`, contain no speculative examples or rules, and be visibly marked `WIP` in navigation.
+- Before adding documentation content, verify the corresponding implementation and its agreed behaviour in the repository. If something is missing or ambiguous, stop and ask the user before defining or documenting it.
+- Documentation examples must render the real exported library components. Do not create documentation-only replicas, variants, styles, or behaviours.
+- Build the documentation site itself from React Aria Components wherever React Aria provides the interface pattern. If Mezzanine already exports that component, the documentation site must import the Mezzanine export rather than importing the same component directly from `react-aria-components`.
+- A direct `react-aria-components` import is allowed in the documentation site only while Mezzanine has no corresponding public export, and must not be wrapped or styled as though it were an implemented Mezzanine component.
+- Component comparison matrices and other tabular documentation content must use Mezzanine's exported `Table` parts. Do not use a native `<table>` as a shortcut once `Table` is available.
 - Native semantic HTML remains appropriate for static page structure and content when React Aria does not provide a corresponding component.
-- Display token values from the implemented token source wherever possible. Do not manually duplicate values in showcase code.
+- Display token values from the implemented token source wherever possible. Do not manually duplicate values in documentation site code.
 - Neutral sample text or data may be used to demonstrate an existing component, but it must not imply that an unimplemented feature, rule, or variant exists.
-- Prefer descriptive teaching labels in showcase examples, such as `Toggle A`, `Column A`, `Row A`, and `Current page`, so the component anatomy and state are easy to identify. Use realistic product copy only when that content is itself necessary to demonstrate the agreed behaviour.
+- Prefer descriptive teaching labels in documentation examples, such as `Toggle A`, `Column A`, `Row A`, and `Current page`, so the component anatomy and state are easy to identify. Use realistic product copy only when that content is itself necessary to demonstrate the agreed behaviour.
 - When React Aria names a component part or concept, retain that exact term in code references and API explanations. Human-readable display labels, such as “Navigation tree” and “Toggle button”, are allowed when the page gives the exact React Aria name in code and links to the corresponding official React Aria page.
-- If the showcase or written documentation disagrees with the implemented public library, treat the library as authoritative and correct the documentation.
+- If the documentation site or other written documentation disagrees with the implemented public library, treat the library as authoritative and correct the documentation.
 - An implemented foundation or component may be presented as documentation only after it has been agreed, implemented, exported where applicable, and checked. An approved empty IA destination is not evidence that its named subject exists in Mezzanine.
 
 ## React Aria alignment and naming
 
 - React Aria Components is the behavioural and naming foundation for Mezzanine's atomic components. Before implementing or revising one, consult the current official React Aria documentation for that component.
-- When a Mezzanine atomic component directly corresponds to a React Aria component, use the exact React Aria component name for the Mezzanine export and file. Documentation titles and showcase navigation entries may use readable display labels, provided the page gives the exact React Aria name in code and links to its official React Aria page. For exports and files, use `ToggleButton`, `ToggleButtonGroup`, `Toast`, `Table`, `Switch`, and `Slider`, not product-specific or invented replacements.
+- When a Mezzanine atomic component directly corresponds to a React Aria component, use the exact React Aria component name for the Mezzanine export and file. Documentation titles and documentation site navigation entries may use readable display labels, provided the page gives the exact React Aria name in code and links to its official React Aria page. For exports and files, use `ToggleButton`, `ToggleButtonGroup`, `Toast`, `Table`, `Switch`, and `Slider`, not product-specific or invented replacements.
 - Compose the same documented React Aria parts and follow its prop names, event names, controlled and uncontrolled conventions, slots, render props, state model, keyboard behaviour, focus behaviour, and accessibility semantics as closely as possible. Do not replace React Aria conventions with a pre-existing DecoCode API merely to avoid revising that component.
 - Use the official Vanilla CSS example for the corresponding React Aria component as the implementation baseline. Preserve its component anatomy, selectors, documented state data attributes, orientation and placement attributes, interaction-state coverage, forced-colour handling, and reduced-motion handling where applicable. Express Mezzanine's visual values through its implemented design tokens rather than copying an example theme's literal colours, type, spacing, radii, or shadows.
 - Keep React Aria prop conventions such as `onPress`, `isDisabled`, `isPending`, `isSelected`, and `onSelectionChange` where the underlying component supports them. Do not introduce aliases for the same concepts.
@@ -47,6 +47,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Apart from the readable display labels permitted above, any deviation from the corresponding React Aria component's name, anatomy, API, state selectors, or behaviour requires the user's explicit agreement and must be documented with the reason.
 - More advanced Mezzanine patterns that compose multiple primitives may use bespoke, purpose-based names. Their underlying atomic parts should still use the matching React Aria components and conventions.
 - Treat migrated DecoCode components as inputs to review, not as the naming authority. Rename or revise them during migration when they conflict with React Aria conventions.
+- Agreed deviation: `TooltipTrigger` defaults to a 500ms hover `delay`, shorter than React Aria's 1500ms default. Do not change it without the user's agreement. Keyboard focus behaviour is unchanged.
 
 ## Button and Link
 
@@ -67,11 +68,11 @@ Browsers and assistive technology treat the two behaviours differently. Navigati
 
 Rules:
 
-- Anything that looks like a button must use the shared `Button`, including calls to action in the showcase. Never restyle a link or button by hand to look like a `Button`.
+- Anything that looks like a button must use the shared `Button`, including calls to action in the documentation site. Never restyle a link or button by hand to look like a `Button`.
 - Anything that looks like an ordinary text link must use `Link`.
 - `Button` supports text-only, leading icon, trailing icon, and icon-only content. Icon-only buttons need an accessible name, and a tooltip can be composed with them.
 - There is no separate `IconButton`. Do not add one, and do not add another component for navigation buttons.
-- Showcase labels and destinations for a Button live in the page's content file, not in the page component.
+- Documentation site labels and destinations for a Button live in the page's content file, not in the page component.
 - Button styling must stay identical whether the underlying element is a button or a link, including no text underline in every theme (Wireframe included).
 - Do not change the choice of underlying element without checking it renders the right element and behaves correctly for keyboard and assistive technology.
 
@@ -93,7 +94,7 @@ Rules:
 
 ## Components, accessibility, and responsive design
 
-- Target WCAG 2.2 Level AA across the library and showcase. Do not claim compliance without checking the finished components and interactions.
+- Target WCAG 2.2 Level AA across the library and documentation site. Do not claim compliance without checking the finished components and interactions.
 - Build mobile first: make the narrow layout work before adding wider-screen styles. Check content and controls at 320 CSS pixels, with text enlarged to 200%, and without unintended horizontal page scrolling.
 - Use `react-aria-components` for interactive patterns it supports. Consult the official React Aria documentation for each component, use its compositional parts and built-in behavior, and do not recreate its keyboard, pointer, touch, or focus handling.
 - Give advanced component wrappers a clear, purpose-based name for the composed UI pattern they present, and document the React Aria primitives they use. Atomic components follow the exact naming and API rules in “React Aria alignment and naming”. Keep wrapper props close to the underlying component APIs, and pass `className` through so consuming apps have an escape hatch.
@@ -102,10 +103,11 @@ Rules:
 
 ## Before finishing a code change
 
-- Run `npm run lint` and `npm run build` when library, showcase, or configuration code changes. `npm run build` builds both the package and the showcase.
+- Run `npm run check:rules` before finishing a code change and report the result.
+- Run `npm run lint` and `npm run build` when library, documentation site, or configuration code changes. `npm run build` builds both the package and the documentation site.
 - Scan staged changes with `gitleaks git --staged --redact .` before a commit. The configured hook runs this automatically.
 - Update `MAP.md` if the project structure or main entry points change.
-- When a showcase route is added or removed, update the allowed routes in `nginx.conf` and the URLs in the Lighthouse configs.
+- When a documentation site route is added or removed, update the allowed routes in `nginx.conf` and the URLs in the Lighthouse configs.
 - Do not run Lighthouse (`npm run lighthouse` and its variants) unless the user asks for it. Never run it repeatedly to chase scores. If asked, run it once, report the results, and do not leave generated report files for the user to clean up.
 - Report any check that could not run.
 
@@ -115,6 +117,6 @@ The repository is public but all rights are reserved (see `LICENSE`). Do not add
 
 The package is marked `"private": true` and is not published to npm. Do not publish it, change its version, or remove `private` unless the user asks.
 
-The showcase is deployed to mezzanine.fly.dev from the Fly.io app `mezzanine` in the DecoCode Ltd organization, using `Dockerfile`, `nginx.conf`, and `fly.toml`. It is pre-launch and sends a `noindex` header. Do not deploy, change the Fly app, or remove the `noindex` header unless the user asks.
+The documentation site is deployed to mezzanine.fly.dev from the Fly.io app `mezzanine` in the DecoCode Ltd organization, using `Dockerfile`, `nginx.conf`, and `fly.toml`. It is pre-launch and sends a `noindex` header. Do not deploy, change the Fly app, or remove the `noindex` header unless the user asks.
 
 Preserve unrelated user changes and do not create a commit unless requested.

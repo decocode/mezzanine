@@ -1,0 +1,317 @@
+import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import ts from 'typescript'
+
+const root = fileURLToPath(new URL('../', import.meta.url))
+const snapshotFile = 'scripts/public-api.snapshot.json'
+const problems = []
+const allowedPrefixes = ['react-aria-', 'mezzanine-', 'mz-text-']
+const read = file => readFileSync(path.join(root, file), 'utf8')
+
+function report(file, text, position, check, message) {
+  const line = text.slice(0, position).split('\n').length
+  problems.push({ file, line, check, message })
+}
+
+function filesIn(directory, extensions) {
+  return readdirSync(path.join(root, directory), { withFileTypes: true })
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .flatMap(entry => {
+      const file = `${directory}/${entry.name}`
+      return entry.isDirectory() ? filesIn(file, extensions)
+        : entry.isFile() && extensions.includes(path.extname(file)) ? [file] : []
+    })
+}
+
+function walk(node, visit) {
+  visit(node)
+  ts.forEachChild(node, child => walk(child, visit))
+}
+
+function publicApi(program, checker) {
+  const source = program.getSourceFile(path.join(root, 'src/index.ts'))
+  const exports = checker.getExportsOfModule(checker.getSymbolAtLocation(source))
+  function isTypeOnly(symbol, seen = new Set()) {
+    if (seen.has(symbol)) return false
+    seen.add(symbol)
+    for (const declaration of symbol.declarations ?? []) {
+      if (ts.isExportSpecifier(declaration)) {
+        const statement = declaration.parent.parent
+        if (declaration.isTypeOnly || statement.isTypeOnly) return true
+        if (statement.moduleSpecifier) {
+          const module = checker.getSymbolAtLocation(statement.moduleSpecifier)
+          const name = (declaration.propertyName ?? declaration.name).text
+          const target = module && checker.getExportsOfModule(module).find(item => item.name === name)
+          if (target && isTypeOnly(target, seen)) return true
+        } else {
+          const target = checker.getExportSpecifierLocalTargetSymbol(declaration)
+          if (target && isTypeOnly(target, seen)) return true
+        }
+      }
+      if (ts.isImportSpecifier(declaration)
+        && (declaration.isTypeOnly || declaration.parent.parent.isTypeOnly)) return true
+      if (ts.isImportClause(declaration) && declaration.isTypeOnly) return true
+    }
+    return false
+  }
+  function exportKind(module, name, seen = new Set()) {
+    const symbol = checker.getExportsOfModule(module).find(item => item.name === name)
+    if (!symbol) return 'type'
+    const target = symbol.flags & ts.SymbolFlags.Alias ? checker.getAliasedSymbol(symbol) : symbol
+    const fallback = !isTypeOnly(symbol) && target.flags & ts.SymbolFlags.Value ? 'value' : 'type'
+    if (seen.has(module)) return fallback
+    const nextSeen = new Set(seen).add(module)
+    const moduleSource = module.declarations?.find(ts.isSourceFile)
+    if (!moduleSource) return fallback
+    const wildcardKinds = []
+    for (const statement of moduleSource.statements) {
+      if (!ts.isExportDeclaration(statement)) continue
+      const clause = statement.exportClause
+      const importedModule = statement.moduleSpecifier && checker.getSymbolAtLocation(statement.moduleSpecifier)
+      if (clause && ts.isNamedExports(clause)) {
+        const item = clause.elements.find(element => element.name.text === name)
+        if (!item) continue
+        if (statement.isTypeOnly || item.isTypeOnly) return 'type'
+        return importedModule ? exportKind(importedModule, (item.propertyName ?? item.name).text, nextSeen) : fallback
+      }
+      if (clause && ts.isNamespaceExport(clause) && clause.name.text === name) {
+        return statement.isTypeOnly ? 'type' : 'value'
+      }
+      if (!clause && importedModule && name !== 'default'
+        && checker.getExportsOfModule(importedModule).some(item => item.name === name)) {
+        wildcardKinds.push(statement.isTypeOnly ? 'type' : exportKind(importedModule, name, nextSeen))
+      }
+    }
+    // Explicit local declarations take precedence over wildcard re-exports.
+    if (symbol.declarations?.some(declaration => declaration.getSourceFile() === moduleSource)) return fallback
+    return wildcardKinds.length ? (wildcardKinds.includes('value') ? 'value' : 'type') : fallback
+  }
+  const module = checker.getSymbolAtLocation(source)
+  return exports.map(symbol => ({ name: symbol.name, kind: exportKind(module, symbol.name) }))
+    .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
+}
+
+function checkSite(source, checker, exportedNames) {
+  const file = path.relative(root, source.fileName)
+  const namespaces = new Set()
+  const checkImport = (name, node) => {
+    if (exportedNames.has(name)) {
+      report(file, source.text, node.getStart(source), 'site-controls',
+        `Import ${name} from @decocode/mezzanine; it is already publicly exported there.`)
+    }
+  }
+  walk(source, node => {
+    if (ts.isImportDeclaration(node) && /^react-aria-components(?:\/|$)/.test(node.moduleSpecifier.text)) {
+      const clause = node.importClause
+      if (!clause) return
+      const bindings = clause.namedBindings
+      if (bindings && ts.isNamedImports(bindings)) {
+        for (const item of bindings.elements) {
+          checkImport((item.propertyName ?? item.name).text, item)
+        }
+      } else if (bindings && ts.isNamespaceImport(bindings)) {
+        namespaces.add(checker.getSymbolAtLocation(bindings.name))
+      }
+    }
+    if ((ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node))
+      && ts.isIdentifier(node.tagName) && ['a', 'button'].includes(node.tagName.text)) {
+      report(file, source.text, node.getStart(source), 'site-controls',
+        `Native <${node.tagName.text}> bypasses Mezzanine; use its Link or Button component.`)
+    }
+  })
+  // Namespace imports must not provide a way around the named-import check.
+  walk(source, node => {
+    if (!ts.isIdentifier(node) || !namespaces.has(checker.getSymbolAtLocation(node))) return
+    const parent = node.parent
+    if (ts.isNamespaceImport(parent)) return
+    if (ts.isPropertyAccessExpression(parent) && parent.expression === node) {
+      checkImport(parent.name.text, parent)
+    } else if (ts.isElementAccessExpression(parent) && parent.expression === node
+      && ts.isStringLiteralLike(parent.argumentExpression)) {
+      checkImport(parent.argumentExpression.text, parent)
+    } else if (ts.isVariableDeclaration(parent) && ts.isObjectBindingPattern(parent.name)) {
+      for (const element of parent.name.elements) {
+        if (!element.dotDotDotToken) checkImport((element.propertyName ?? element.name).getText(source), element)
+        else report(file, source.text, element.getStart(source), 'site-controls',
+          'Import named React Aria components so their public Mezzanine equivalents can be checked.')
+      }
+    } else {
+      report(file, source.text, node.getStart(source), 'site-controls',
+        'Import named React Aria components instead of passing or dynamically indexing the namespace.')
+    }
+  })
+}
+
+function checkClasses(file, text, value, position) {
+  for (const match of value.matchAll(/\S+/g)) {
+    if (!allowedPrefixes.some(prefix => match[0].startsWith(prefix))) {
+      report(file, text, position + match.index, 'class-prefix',
+        `Class "${match[0]}" must start with react-aria-, mezzanine-, or mz-text-.`)
+    }
+  }
+}
+
+function checkJsxClasses(source, checker) {
+  const file = path.relative(root, source.fileName)
+  const visited = new Set()
+  function inspect(node) {
+    if (!node || visited.has(node)) return
+    visited.add(node)
+    if (ts.isStringLiteralLike(node)) {
+      checkClasses(file, source.text, node.text, node.getStart(source) + 1)
+    } else if (ts.isConditionalExpression(node)) {
+      inspect(node.whenTrue)
+      inspect(node.whenFalse)
+    } else if (ts.isBinaryExpression(node)) {
+      if (node.operatorToken.kind !== ts.SyntaxKind.AmpersandAmpersandToken) inspect(node.left)
+      inspect(node.right)
+    } else if (ts.isIdentifier(node)) {
+      for (const declaration of checker.getSymbolAtLocation(node)?.declarations ?? []) {
+        if (declaration.getSourceFile() === source && ts.isVariableDeclaration(declaration)) inspect(declaration.initializer)
+      }
+    } else if (ts.isPropertyAccessExpression(node) || ts.isElementAccessExpression(node)) {
+      const property = ts.isPropertyAccessExpression(node) ? node.name : node.argumentExpression
+      for (const declaration of checker.getSymbolAtLocation(property)?.declarations ?? []) {
+        if (declaration.getSourceFile() === source && ts.isPropertyAssignment(declaration)) inspect(declaration.initializer)
+      }
+    } else if (ts.isCallExpression(node)) {
+      if (ts.isPropertyAccessExpression(node.expression)) {
+        inspect(node.expression.expression)
+        // join separators and filter predicates are not class names.
+        if (['join', 'filter'].includes(node.expression.name.text)) return
+      }
+      node.arguments.forEach(inspect)
+    } else if (ts.isArrowFunction(node) || ts.isFunctionExpression(node)) {
+      if (ts.isBlock(node.body)) walk(node.body, child => {
+        if (ts.isReturnStatement(child)) inspect(child.expression)
+      })
+      else inspect(node.body)
+    } else if (ts.isTemplateExpression(node)) {
+      checkClasses(file, source.text, node.head.text, node.head.getStart(source) + 1)
+      for (const span of node.templateSpans) {
+        // Static fragments beginning with whitespace start a new class token.
+        const match = /\s[\s\S]*/.exec(span.literal.text)
+        if (match) checkClasses(file, source.text, match[0], span.literal.getStart(source) + 1 + match.index)
+        if (!node.head.text || /\s$/.test(node.head.text)) inspect(span.expression)
+      }
+    } else if (ts.isObjectLiteralExpression(node)) {
+      for (const property of node.properties) {
+        if (ts.isPropertyAssignment(property)) {
+          checkClasses(file, source.text, property.name.text ?? property.name.getText(source), property.name.getStart(source))
+        }
+      }
+    } else {
+      ts.forEachChild(node, inspect)
+    }
+  }
+  walk(source, node => {
+    if (ts.isJsxAttribute(node) && node.name.text === 'className') inspect(node.initializer)
+    if (ts.isPropertyAssignment(node) && node.name.getText(source).replace(/['"]/g, '') === 'className') inspect(node.initializer)
+  })
+}
+
+// Mask comments and strings without moving source positions. CSS URLs are data,
+// not selectors or colour declarations (e.g. an SVG fragment can contain #fff).
+function maskCss(text) {
+  return text.replace(/\/\*[\s\S]*?\*\/|"(?:\\[\s\S]|[^"\\])*"|'(?:\\[\s\S]|[^'\\])*'|url\((?:\\[\s\S]|[^)\\])*\)/gi,
+    match => match.replace(/[^\n\r]/g, ' '))
+}
+
+function checkCss(file) {
+  const text = read(file)
+  const masked = maskCss(text)
+  const checkPrefixes = file.startsWith('src/components/')
+  // These files define token values, so literal colours belong here.
+  const checkColours = file !== 'src/tokens.css' && !/^src\/themes\/[^/]+\.css$/.test(file)
+  let start = 0
+  let parentheses = 0
+  let brackets = 0
+  for (let index = 0; index < masked.length; index++) {
+    const character = masked[index]
+    if (character === '(') parentheses++
+    if (character === ')') parentheses--
+    if (character === '[') brackets++
+    if (character === ']') brackets--
+    if (parentheses || brackets || !'{};'.includes(character)) continue
+    const segment = masked.slice(start, index)
+    if (character === '{' && checkPrefixes && !segment.trimStart().startsWith('@')) {
+      for (const match of segment.matchAll(/\.((?:\\[0-9a-fA-F]{1,6}\s?|\\[^\n\r]|[a-zA-Z_-]|\P{ASCII})(?:\\[0-9a-fA-F]{1,6}\s?|\\[^\n\r]|[\w-]|\P{ASCII})*)/gu)) {
+        const name = match[1].replace(/\\([0-9a-fA-F]{1,6})\s?|\\(.)/g,
+          (_, hex, escaped) => hex ? String.fromCodePoint(parseInt(hex, 16) || 0xfffd) : escaped)
+        checkClasses(file, text, name, start + match.index)
+      }
+    } else if (character !== '{' && checkColours) {
+      const colon = segment.indexOf(':')
+      if (colon !== -1 && !segment.trimStart().startsWith('@')) {
+        const value = segment.slice(colon + 1)
+        // System colour keywords in forced-colors rules are intentionally valid;
+        // this check targets the explicit hex and function syntaxes requested.
+        for (const match of value.matchAll(/#[\da-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab)\s*\(/gi)) {
+          if (match[0].startsWith('#') && ![4, 5, 7, 9].includes(match[0].length)) continue
+          report(file, text, start + colon + 1 + match.index, 'raw-colour',
+            `Raw colour "${match[0]}" must use a design token instead.`)
+        }
+      }
+    }
+    start = index + 1
+  }
+}
+
+function checkSnapshot(api, update) {
+  if (update) {
+    writeFileSync(path.join(root, snapshotFile), `${JSON.stringify(api, null, 2)}\n`)
+    console.log(`Updated ${snapshotFile} (${api.length} exports).`)
+    return
+  }
+  const snapshotText = read(snapshotFile)
+  const snapshot = JSON.parse(snapshotText)
+  if (!Array.isArray(snapshot) || snapshot.some(item => !item || typeof item.name !== 'string'
+    || !['value', 'type'].includes(item.kind)) || new Set(snapshot.map(item => item.name)).size !== snapshot.length) {
+    throw new Error(`${snapshotFile} must contain unique names marked value or type.`)
+  }
+  const before = new Map(snapshot.map(item => [item.name, item.kind]))
+  const after = new Map(api.map(item => [item.name, item.kind]))
+  const source = read('src/index.ts')
+  const exportPosition = name => Math.max(0, source.indexOf(name))
+  for (const { name, kind } of api) {
+    if (!before.has(name)) report('src/index.ts', source, exportPosition(name), 'public-api', `Added ${kind} export "${name}".`)
+    else if (before.get(name) !== kind) report('src/index.ts', source, exportPosition(name), 'public-api',
+      `Export "${name}" changed from ${before.get(name)} to ${kind}.`)
+  }
+  for (const { name, kind } of snapshot) {
+    if (!after.has(name)) report(snapshotFile, snapshotText, snapshotText.indexOf(`"name": ${JSON.stringify(name)}`),
+      'public-api', `Removed ${kind} export "${name}".`)
+  }
+}
+
+try {
+  const argumentsList = process.argv.slice(2)
+  if (argumentsList.some(argument => argument !== '--update-api')) throw new Error('Only --update-api is supported.')
+  const configFile = ts.readConfigFile(path.join(root, 'tsconfig.app.json'), ts.sys.readFile)
+  if (configFile.error) throw new Error(ts.flattenDiagnosticMessageText(configFile.error.messageText, '\n'))
+  const config = ts.parseJsonConfigFileContent(configFile.config, ts.sys, root)
+  if (config.errors.length) throw new Error(config.errors.map(error => ts.flattenDiagnosticMessageText(error.messageText, '\n')).join('\n'))
+  const siteFiles = filesIn('site', ['.tsx'])
+  const componentFiles = filesIn('src/components', ['.tsx'])
+  const program = ts.createProgram([...new Set([...config.fileNames, ...siteFiles.map(file => path.join(root, file)),
+    ...componentFiles.map(file => path.join(root, file))])], config.options)
+  const checker = program.getTypeChecker()
+  const api = publicApi(program, checker)
+  const exportedNames = new Set(api.map(item => item.name))
+  for (const file of siteFiles) checkSite(program.getSourceFile(path.join(root, file)), checker, exportedNames)
+  for (const file of componentFiles) checkJsxClasses(program.getSourceFile(path.join(root, file)), checker)
+  for (const file of filesIn('src', ['.css'])) checkCss(file)
+  checkSnapshot(api, argumentsList.includes('--update-api'))
+} catch (error) {
+  report('scripts/check-rules.mjs', '', 0, 'rule-checker', error.message)
+}
+
+problems.sort((a, b) => a.file.localeCompare(b.file) || a.line - b.line || a.message.localeCompare(b.message))
+for (const problem of problems) console.error(`${problem.file}:${problem.line}, ${problem.check}, ${problem.message}`)
+if (problems.length) {
+  console.error(`Rule checks failed: ${problems.length} problem(s).`)
+  process.exitCode = 1
+} else {
+  console.log('All checks passed (4 rule checks).')
+}

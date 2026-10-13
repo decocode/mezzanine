@@ -1,6 +1,6 @@
 import { useRef, useState, type ReactNode } from 'react'
 import { Button } from './Button'
-import { Heading } from './Dialog'
+import { Heading } from './Heading'
 import { Disclosure, DisclosurePanel } from './Disclosure'
 import { MenuIcon } from '../icons/Icons'
 import { CloseIcon } from '../icons/StudioIcons'

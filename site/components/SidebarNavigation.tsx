@@ -37,7 +37,7 @@ export default function SidebarNavigation({ currentPage }: SidebarNavigationProp
 
     return (
         <NavigationTreeItem
-          className={`react-aria-NavigationTreeItem sidebar-navigation-tree-group${group.path ? ' mezzanine-navigation-tree-item-has-link' : ''}${parentIsOpening || parentIsClosing ? ' animated-navigation-tree-item' : ''}${parentIsOpening ? ' is-opening' : ''}${childrenAreClosing ? ' is-closing' : ''}`}
+          className={`react-aria-NavigationTreeItem sidebar-navigation-tree-group${group.path ? ' mezzanine-navigation-tree-item-has-link' : ''}${parentIsOpening || parentIsClosing ? ' mezzanine-navigation-tree-item-animated' : ''}${parentIsOpening ? ' mezzanine-navigation-tree-item-opening' : ''}${childrenAreClosing ? ' mezzanine-navigation-tree-item-closing' : ''}`}
           href={group.path}
           id={group.id}
           key={group.id}
@@ -71,7 +71,7 @@ export default function SidebarNavigation({ currentPage }: SidebarNavigationProp
           {group.groups?.map((childGroup) => renderGroup(childGroup, [...ancestorIds, group.id]))}
           {group.pages.map((page) => (
             <NavigationTreeItem
-              className={`react-aria-NavigationTreeItem animated-navigation-tree-item${childrenAreOpening ? ' is-opening' : ''}${childrenAreClosing ? ' is-closing' : ''}`}
+              className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${childrenAreOpening ? ' mezzanine-navigation-tree-item-opening' : ''}${childrenAreClosing ? ' mezzanine-navigation-tree-item-closing' : ''}`}
               href={page.path}
               id={page.id}
               key={page.id}

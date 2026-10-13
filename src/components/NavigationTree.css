@@ -160,20 +160,20 @@
   text-transform: var(--text-transform-label);
 }
 
-.animated-navigation-tree-item {
+.mezzanine-navigation-tree-item-animated {
   overflow: hidden;
 }
 
-.animated-navigation-tree-item.is-opening {
+.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-opening {
   animation: navigation-tree-item-open var(--navigation-tree-motion-duration) ease-out both;
 }
 
-.animated-navigation-tree-item.is-closing {
+.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing {
   pointer-events: none;
   animation: navigation-tree-item-close var(--navigation-tree-motion-duration) ease-out both;
 }
 
-.react-aria-NavigationTreeItem.is-closing .react-aria-Button[slot='chevron'] svg {
+.react-aria-NavigationTreeItem.mezzanine-navigation-tree-item-closing .react-aria-Button[slot='chevron'] svg {
   rotate: 0deg;
 }
 
@@ -210,8 +210,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animated-navigation-tree-item.is-opening,
-  .animated-navigation-tree-item.is-closing {
+  .mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-opening,
+  .mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing {
     animation: none;
   }
 

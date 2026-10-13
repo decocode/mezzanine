@@ -19,7 +19,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/TabBar.css` | TabBar states, safe-area spacing and responsive bottom-sheet presentation |
 | `site/pages/TabBarPage.tsx` | Live TabBar example and verified composition, overflow and placement guidance |
 | `tests/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |
-| `src/components/Tooltip.tsx` | React Aria Tooltip exports and TooltipTrigger with a configurable 300ms default hover delay |
+| `src/components/Tooltip.tsx` | React Aria Tooltip exports and TooltipTrigger with a configurable 500ms default hover delay |
 | `src/components/Tooltip.css` | Token-based tooltip layout, fade animation, reduced-motion and forced-colour rules |
 | `tests/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
 | `src/components/Badge.tsx` | Public non-interactive Badge with core and semantic color variants, rendered as a semantic span |
@@ -66,7 +66,12 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/RadioGroup.css` | Token-led styling for RadioGroup, RadioField, RadioButton and SelectionIndicator |
 | `src/components/Disclosure.tsx` | Public React Aria Disclosure family plus the composed DisclosureHeader trigger pattern |
-| `src/components/Dialog.ts`, `src/components/Dialog.css` | Public React Aria Dialog, DialogTrigger and Heading exports; token-led content, title, focus and action-footer styling |
+| `src/components/Dialog.ts`, `src/components/Dialog.css` | Public React Aria Dialog and DialogTrigger exports; token-led content, title, focus and action-footer styling |
+| `src/components/Label.ts` | Public React Aria Label export and prop type |
+| `src/components/Text.ts` | Public React Aria Text export and prop type |
+| `src/components/FieldError.ts` | Public React Aria FieldError export and prop and render-prop types |
+| `src/components/SelectionIndicator.ts` | Public React Aria SelectionIndicator export and prop type |
+| `src/components/Heading.ts` | Public React Aria Heading export and prop type |
 | `src/components/Modal.ts`, `src/components/Modal.css` | Public React Aria Modal and ModalOverlay exports; token-led backdrop, responsive container and reduced-motion-aware entry/exit styling |
 | `src/components/Disclosure.css` | Token-led styling for Disclosure, DisclosureGroup and DisclosureHeader states |
 | `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
@@ -165,6 +170,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
 | `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
+| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours and the public API snapshot; supports explicit `--update-api` |
+| `scripts/public-api.snapshot.json` | Reviewed public export names and value/type categories used to detect API changes |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
 | `docs/TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |
@@ -183,6 +190,7 @@ Typography retains its overview at `/typography`. Its child pages are
 | --- | --- |
 | `npm ci` | Install locked dependencies |
 | `npm run dev` | Start the showcase on the local Vite server |
+| `npm run check:rules` | Check the four repository rules without changing the API snapshot |
 | `npm run lint` | Run Oxlint |
 | `npm run typecheck` | Type-check the library, showcase, and configuration |
 | `npm run build:lib` | Build the package into `dist/` |
