@@ -1,5 +1,5 @@
 import { Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function BadgePage() {
   return (
@@ -16,6 +16,20 @@ export default function BadgePage() {
             </p>
             <div className="component-example">
               <Badge>Badge label</Badge>
+            </div>
+          </>),
+        },
+        {
+          id: 'badge-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table documentation-anatomy-table">
+              <Table aria-label="Badge anatomy">
+                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="part-0"><Cell><code>Badge</code></Cell><Cell>Renders a non-interactive span containing the status label. The variant controls its colour treatment.</Cell></Row>
+                </TableBody>
+              </Table>
             </div>
           </>),
         },
@@ -42,6 +56,14 @@ export default function BadgePage() {
                 </TableBody>
               </Table>
             </div>
+          </>),
+        },
+        {
+          id: 'badge-usage-heading',
+          title: 'Usage and accessibility',
+          content: (<>
+            <p>Use a short text label that communicates the status without relying on colour. Supply it as the children of <code>Badge</code>; <code>variant</code> defaults to <code>neutral</code>. The available variants are shown above.</p>
+            <p>Badge renders a <code>span</code>, not an action control. Use <code>Button</code> or <code>Link</code> for an action or destination. It does not add keyboard interaction or automatically announce changes.</p>
           </>),
         }
       ]}

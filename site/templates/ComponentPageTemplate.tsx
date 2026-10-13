@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Heading, TableOfContents, type TableOfContentsSection } from '@decocode/mezzanine'
-import { DocumentationHeading } from './DocumentationHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export interface DocumentationSection {
   id: string

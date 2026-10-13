@@ -8,7 +8,7 @@ import {
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 type LinkPreviewState = 'default' | 'hovered' | 'pressed' | 'focused' | 'current' | 'disabled'
 
@@ -41,6 +41,20 @@ export default function LinkPage() {
             </p>
             <div className="component-example">
               <Link href="#link-content-heading">Link content examples</Link>
+            </div>
+          </>),
+        },
+        {
+          id: 'link-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table documentation-anatomy-table">
+              <Table aria-label="Link anatomy">
+                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="part-0"><Cell><code>Link</code></Cell><Cell>Provides a focusable destination through href, with optional text and decorative icons as children.</Cell></Row>
+                </TableBody>
+              </Table>
             </div>
           </>),
         },
@@ -115,6 +129,15 @@ export default function LinkPage() {
                 </TableBody>
               </Table>
             </div>
+          </>),
+        },
+        {
+          id: 'link-usage-heading',
+          title: 'Usage and accessibility',
+          content: (<>
+            <p>Use <code>href</code> for a destination and <code>Button</code> for an action. Give the link text enough context to make its destination clear. Use <code>aria-current="page"</code> for the current destination.</p>
+            <p>Tab focuses enabled links and Enter follows them. Use <code>isDisabled</code> to prevent activation. Supply <code>target</code> and <code>rel</code> when needed for external destinations, and keep new-window warnings consistent with the Content example above.</p>
+            <p>Client-side routing is supplied by the consuming application. Mezzanine exports the React Aria Link API directly; it does not choose a router or infer the current page.</p>
           </>),
         }
       ]}

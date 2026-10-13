@@ -1,5 +1,5 @@
-import { Breadcrumb, Breadcrumbs, Link } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { Table, TableHeader, Column, TableBody, Row, Cell, Breadcrumb, Breadcrumbs, Link } from '@decocode/mezzanine'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function BreadcrumbsPage() {
   return (
@@ -53,6 +53,30 @@ export default function BreadcrumbsPage() {
                 </nav>
               </div>
             </div>
+          </>),
+        },
+        {
+          id: 'breadcrumbs-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table documentation-anatomy-table">
+              <Table aria-label="Breadcrumbs anatomy">
+                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="part-0"><Cell><code>Breadcrumbs</code></Cell><Cell>Groups the breadcrumb items in their supplied order.</Cell></Row>
+                  <Row id="part-1"><Cell><code>Breadcrumb</code></Cell><Cell>Contains one level of the hierarchy.</Cell></Row>
+                  <Row id="part-2"><Cell><code>Link</code></Cell><Cell>Makes an earlier level navigable. The current-page example uses plain text.</Cell></Row>
+                </TableBody>
+              </Table>
+            </div>
+          </>),
+        },
+        {
+          id: 'breadcrumbs-usage-heading',
+          title: 'Usage and accessibility',
+          content: (<>
+            <p>Wrap the list in a <code>nav</code> with an <code>aria-label</code> describing the breadcrumb trail. Order items from the broadest ancestor to the current page; give each earlier destination a meaningful link label and <code>href</code>.</p>
+            <p>Tab moves between enabled links and Enter follows the focused link. The plain-text current item in these examples is not a tab stop. Set <code>isDisabled</code> on Breadcrumbs to disable its links.</p>
           </>),
         }
       ]}

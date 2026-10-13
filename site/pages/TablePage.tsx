@@ -10,7 +10,7 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { sortTableExampleRows, tableAnatomy, tableExampleRows } from '../tableExampleData'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function TablePage() {
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
@@ -188,6 +188,16 @@ export default function TablePage() {
               When a table is wider than the available space, it scrolls horizontally without causing
               the whole page to overflow.
             </p>
+          </>),
+        },
+        {
+          id: 'table-usage-heading',
+          title: 'Usage and accessibility',
+          content: (<>
+            <p>Give the table an <code>aria-label</code> or <code>aria-labelledby</code>. Use <code>Column isRowHeader</code> for the cell that identifies each row, and stable row and column IDs so selection and sorting refer to consistent records.</p>
+            <p>React Aria manages keyboard navigation through the table’s rows, cells and focusable controls. Use arrow keys to move within the table and Tab to move between focusable regions or controls. Keep labels on any buttons and links placed inside cells.</p>
+            <p>Use <code>selectionMode</code> to opt into selection. Set <code>defaultSelectedKeys</code> for initial selection or <code>selectedKeys</code> with <code>onSelectionChange</code> for application-controlled selection. Disabled rows are identified through <code>disabledKeys</code>.</p>
+            <p>Sorting is application work: <code>allowsSorting</code> enables the column control, while <code>sortDescriptor</code> and <code>onSortChange</code> describe the requested ordering. Reorder the rows you supply, as this page’s example does.</p>
           </>),
         }
       ]}

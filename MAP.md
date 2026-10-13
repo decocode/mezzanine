@@ -69,7 +69,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/DocumentationPage.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
 | `src/components/PageHeading.tsx` | Public page introduction using Heading, optional description paragraphs and additional content |
 | `src/components/PageHeading.css` | Token-based page introduction widths, spacing and fluid title typography |
-| `site/ComponentPageTemplate.tsx` | Shared component Docs template: composes the page heading, generated Contents links and labelled sections from page-supplied content |
+| `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template: composes the page heading, generated Contents links and labelled sections from page-supplied content |
 | `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow |
 | `site/DocumentationHeading.tsx` | Uses the library PageHeading with documentation title translations and the official React Aria link |
 | `site/useTokenValue.ts` | Reads current CSS token values when the selected theme changes |
@@ -111,7 +111,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/tableExampleData.ts` | Table anatomy content, example rows and sorting logic used by the Table documentation page |
 | `site/radioGroupDocumentation.tsx` | Verified anatomy, state descriptions with inline code markup, and component token names for the RadioGroup documentation page |
-| `site/componentTokenDocumentation.ts` | Verified Tabs and Dialog/Modal token names and descriptions for their documentation tables |
+| `site/componentTokenDocumentation.ts` | Verified Tabs, Dialog/Modal, Navbar and TabBar token names and descriptions for their documentation tables |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |

@@ -1,4 +1,5 @@
 import {
+  Table, TableHeader, Column, TableBody, Row, Cell,
   Disclosure,
   DisclosureGroup,
   DisclosureHeader,
@@ -6,7 +7,7 @@ import {
   Link,
   ExternalLinkIcon,
 } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function DisclosurePage() {
   return (
@@ -29,6 +30,23 @@ export default function DisclosurePage() {
                   DisclosurePanel A content.
                 </DisclosurePanel>
               </Disclosure>
+            </div>
+          </>),
+        },
+        {
+          id: 'disclosure-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table documentation-anatomy-table">
+              <Table aria-label="Disclosure anatomy">
+                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="part-0"><Cell><code>Disclosure</code></Cell><Cell>Owns one expanded or collapsed panel.</Cell></Row>
+                  <Row id="part-1"><Cell><code>DisclosureHeader</code></Cell><Cell>Composes Heading and the trigger Button; defaults to heading level 3.</Cell></Row>
+                  <Row id="part-2"><Cell><code>DisclosurePanel</code></Cell><Cell>Contains the content that is shown or hidden.</Cell></Row>
+                  <Row id="part-3"><Cell><code>DisclosureGroup</code></Cell><Cell>Optionally coordinates expansion across multiple disclosures.</Cell></Row>
+                </TableBody>
+              </Table>
             </div>
           </>),
         },
@@ -67,6 +85,15 @@ export default function DisclosurePage() {
                 </Disclosure>
               </DisclosureGroup>
             </div>
+          </>),
+        },
+        {
+          id: 'disclosure-usage-heading',
+          title: 'Usage and accessibility',
+          content: (<>
+            <p>Use <code>defaultExpanded</code> for initial state, or <code>isExpanded</code> with <code>onExpandedChange</code> for controlled state. Give grouped disclosures stable <code>id</code> values; the group uses <code>defaultExpandedKeys</code> or <code>expandedKeys</code> with <code>onExpandedChange</code>. Enable <code>allowsMultipleExpanded</code> when several panels may stay open.</p>
+            <p>Tab focuses the trigger; Enter or Space toggles its panel. Tab then reaches available controls inside an expanded panel. The trigger exposes its expanded state. Set <code>isDisabled</code> on a Disclosure to prevent toggling.</p>
+            <p>Choose <code>DisclosureHeader level</code> to fit the page’s heading hierarchy. Its children supply the trigger label; do not place another button or link inside that label.</p>
           </>),
         }
       ]}

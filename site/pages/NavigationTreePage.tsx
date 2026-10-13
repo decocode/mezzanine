@@ -1,4 +1,5 @@
 import {
+  Table, TableHeader, Column, TableBody, Row, Cell,
   Button,
   ChevronDownIcon,
   Link,
@@ -9,7 +10,7 @@ import {
   NavigationTreeSection,
 } from '@decocode/mezzanine'
 import { useAnimatedNavigationTree } from '../useAnimatedNavigationTree'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function NavigationTreePage() {
   const {
@@ -138,6 +139,36 @@ export default function NavigationTreePage() {
                 </NavigationTree>
               </nav>
             </div>
+          </>),
+        },
+        {
+          id: 'navigation-tree-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table documentation-anatomy-table">
+              <Table aria-label="NavigationTree anatomy">
+                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="part-0"><Cell><code>NavigationTree</code></Cell><Cell>Manages the hierarchy, expanded items and current route.</Cell></Row>
+                  <Row id="part-1"><Cell><code>NavigationTreeSection</code></Cell><Cell>Groups related items.</Cell></Row>
+                  <Row id="part-2"><Cell><code>NavigationTreeHeader</code></Cell><Cell>Provides a section label.</Cell></Row>
+                  <Row id="part-3"><Cell><code>NavigationTreeItem</code></Cell><Cell>Defines an item with a stable id, textValue and optional href or child items.</Cell></Row>
+                  <Row id="part-4"><Cell><code>NavigationTreeItemContent</code></Cell><Cell>Contains the visible row content.</Cell></Row>
+                  <Row id="part-5"><Cell><code>Link</code></Cell><Cell>Provides the destination link within a row.</Cell></Row>
+                  <Row id="part-6"><Cell><code>Button slot="chevron"</code></Cell><Cell>Expands or collapses a parent item.</Cell></Row>
+                </TableBody>
+              </Table>
+            </div>
+          </>),
+        },
+        {
+          id: 'navigation-tree-usage-heading',
+          title: 'Usage and accessibility',
+          content: (<>
+            <p>Give the tree an <code>aria-label</code>, and wrap it in a labelled <code>nav</code> when it provides page navigation. Give each item a stable <code>id</code> and a <code>textValue</code> describing its label. A section needs a visible header or an accessible label.</p>
+            <p>Pass the current destination as <code>selectedRoute</code>. Set <code>defaultExpandedKeys</code> for initial expansion, or use <code>expandedKeys</code> with <code>onExpandedChange</code> when the application owns that state. Routing and the current path remain the application’s responsibility.</p>
+            <p>Use arrow keys to move through the tree hierarchy. The chevron Button expands or collapses its parent; Enter activates a focused destination. Keep the React Aria row composition so focus and keyboard handling remain connected to the tree.</p>
+            <p>The reveal animation shown here is supplied by the showcase’s <code>useAnimatedNavigationTree</code> hook. That hook is not a public Mezzanine export.</p>
           </>),
         }
       ]}

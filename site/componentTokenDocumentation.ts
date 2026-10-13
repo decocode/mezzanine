@@ -37,3 +37,35 @@ export const dialogTokens = [
   { token: '--dialog-actions-gap', description: 'Space between action buttons.' },
   { token: '--dialog-focus-ring-width', description: 'Dialog keyboard-focus outline thickness.' },
 ]
+
+export const navbarTokens = [
+  { token: '--navbar-z-index', description: 'Header stacking order.' },
+  { token: '--navbar-border-width', description: 'Header and trigger border thickness.' },
+  { token: '--navbar-min-height', description: 'Minimum content-row height.' },
+  { token: '--navbar-wide-padding-inline', description: 'Horizontal padding in the wide layout.' },
+  { token: '--navbar-menu-min-height', description: 'Minimum trigger and navigation-link height.' },
+  { token: '--navbar-focus-ring-width', description: 'Trigger focus outline thickness.' },
+  { token: '--navbar-focus-ring-offset', description: 'Trigger focus outline offset.' },
+  { token: '--navbar-panel-max-height', description: 'Maximum panel height before scrolling.' },
+  { token: '--navbar-motion-duration', description: 'Panel entry animation duration; disabled for reduced motion.' },
+  { token: '--navbar-motion-offset', description: 'Initial vertical offset of the panel entry animation.' },
+]
+
+export const tabBarTokens = [
+  { token: '--tab-bar-background', description: 'Navigation surface colour.' },
+  { token: '--tab-bar-item-background-current', description: 'Current destination background.' },
+  { token: '--tab-bar-border-width', description: 'Navigation border thickness.' },
+  { token: '--tab-bar-z-index', description: 'Sticky bar stacking order.' },
+  { token: '--tab-bar-sheet-max-height', description: 'Maximum overflow sheet height.' },
+  { token: '--tab-bar-safe-area-bottom', description: 'Space reserved beneath the sticky bar for the device safe area.' },
+  { token: '--tab-bar-gap', description: 'Space between destination slots.' },
+  { token: '--tab-bar-padding', description: 'Padding around the destination list.' },
+  { token: '--tab-bar-item-min-width', description: 'Minimum slot width used to calculate overflow.' },
+  { token: '--tab-bar-item-min-height', description: 'Minimum link and More-button height.' },
+  { token: '--tab-bar-item-gap', description: 'Space between an icon and its label.' },
+  { token: '--tab-bar-item-padding', description: 'Padding inside destination controls.' },
+  { token: '--tab-bar-icon-size', description: 'Destination icon dimensions.' },
+  { token: '--tab-bar-indicator-width', description: 'Current destination indicator thickness.' },
+  { token: '--tab-bar-focus-ring-width', description: 'Keyboard-focus outline thickness.' },
+  { token: '--tab-bar-focus-ring-offset', description: 'Keyboard-focus outline offset.' },
+]

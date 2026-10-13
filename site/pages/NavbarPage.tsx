@@ -1,7 +1,8 @@
+import { navbarTokens } from '../componentTokenDocumentation'
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
 import { Navbar, Link, Button, Table, TableHeader, Column, TableBody, Row, Cell } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function NavbarPage() {
   const [destination, setDestination] = useState('Home link')
@@ -67,6 +68,41 @@ export default function NavbarPage() {
             <p>Both <code>children</code> and <code>actions</code> accept a function receiving <code>closeMenu</code>. Call it from a link’s <code>onPress</code> to close the compact panel and return focus to its trigger. Set <code>aria-current="page"</code> on the current link. Override <code>menuLabel</code> and <code>closeLabel</code> for translated trigger text.</p>
             <p>The desktop and mobile content are rendered separately; avoid fixed IDs in supplied content. Use React-generated IDs for associated controls. Very long desktop content wraps rather than overflowing. Search is not included.</p>
             <p><code>Navbar</code>, <code>NavbarProps</code>, <code>NavbarRenderProps</code> and <code>--navbar-*</code> tokens replace the previous Header API and tokens.</p>
+          </>),
+        },
+        {
+          id: 'navbar-props-heading',
+          title: 'Props',
+          content: (<>
+            <div className="documentation-table documentation-props-table">
+              <Table aria-label="Navbar props">
+                <TableHeader><Column isRowHeader>Prop</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="part-0"><Cell><code>brand</code></Cell><Cell>Required branding content. Supply a Link for a home destination.</Cell></Row>
+                  <Row id="part-1"><Cell><code>children</code></Cell><Cell>Required navigation content, or a function receiving closeMenu. Navbar supplies the nav element.</Cell></Row>
+                  <Row id="part-2"><Cell><code>actions</code></Cell><Cell>Optional action controls, or a function receiving closeMenu.</Cell></Row>
+                  <Row id="part-3"><Cell><code>aria-label</code></Cell><Cell>Required accessible name for the navigation.</Cell></Row>
+                  <Row id="part-4"><Cell><code>menuLabel</code></Cell><Cell>Closed trigger label. Defaults to Menu.</Cell></Row>
+                  <Row id="part-5"><Cell><code>closeLabel</code></Cell><Cell>Expanded trigger label. Defaults to Close menu.</Cell></Row>
+                  <Row id="part-6"><Cell><code>className</code></Cell><Cell>Optional class added to the outer header.</Cell></Row>
+                </TableBody>
+              </Table>
+            </div>
+          </>),
+        },
+        {
+          id: 'navbar-tokens-heading',
+          title: 'CSS tokens',
+          content: (<>
+            <p>Override these CSS custom properties on the component or a containing theme. Defaults come from Mezzanine’s token stylesheet; shared colour, spacing tokens also apply.</p>
+            <div className="documentation-table">
+              <Table aria-label="Navbar tokens">
+                <TableHeader><Column isRowHeader>CSS token</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  {navbarTokens.map((item) => <Row id={item.token} key={item.token}><Cell><code>{item.token}</code></Cell><Cell>{item.description}</Cell></Row>)}
+                </TableBody>
+              </Table>
+            </div>
           </>),
         }
       ]}

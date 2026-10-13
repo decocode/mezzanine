@@ -17,7 +17,7 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { radioGroupAnatomy, radioGroupStates, radioGroupTokens } from '../radioGroupDocumentation'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function RadioGroupPage() {
   const [validationValue, setValidationValue] = useState<string | null>(null)

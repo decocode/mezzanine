@@ -1,5 +1,5 @@
 import { TableOfContents, Link, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function TableOfContentsPage() {
   const exampleSections = [
@@ -56,6 +56,22 @@ export default function TableOfContentsPage() {
               It composes Mezzanine’s React Aria <code>Heading</code> and <code>Link</code>
               with a navigation landmark and nested lists.
             </p>
+          </>),
+        },
+        {
+          id: 'table-of-contents-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table documentation-anatomy-table">
+              <Table aria-label="TableOfContents anatomy">
+                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="part-0"><Cell><code>TableOfContents</code></Cell><Cell>Renders a named navigation landmark and nested lists of section links.</Cell></Row>
+                  <Row id="part-1"><Cell><code>Heading</code></Cell><Cell>Provides the visible Contents label and accessible navigation name.</Cell></Row>
+                  <Row id="part-2"><Cell><code>Link</code></Cell><Cell>Points to the id supplied for each section.</Cell></Row>
+                </TableBody>
+              </Table>
+            </div>
           </>),
         },
         {

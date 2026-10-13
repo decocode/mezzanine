@@ -99,7 +99,7 @@ the labelled `nav` element, so pass links directly rather than wrapping them in 
 `site/AppShell.tsx` owns the site layout, navigation and theme. It loads each Docs
 page independently through `DocumentationPage.tsx`.
 
-Implemented component pages in `site/pages/` use `ComponentPageTemplate.tsx`.
+Implemented component pages in `site/pages/` use `site/templates/ComponentPageTemplate.tsx`.
 Each page supplies its title, description, optional React Aria reference and an
 ordered `sections` list. Each section defines `id`, `title` and `content` once;
 the template creates its heading, wrapper and matching table-of-contents link.

@@ -16,7 +16,7 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { buttonTokens } from '../foundationData'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import {
   buttonVariants,
   buttonStates,

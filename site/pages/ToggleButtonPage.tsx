@@ -10,7 +10,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 
 export default function ToggleButtonPage() {
   return (
@@ -28,6 +28,21 @@ export default function ToggleButtonPage() {
             </p>
             <div className="component-example">
               <ToggleButton>Toggle</ToggleButton>
+            </div>
+          </>),
+        },
+        {
+          id: 'toggle-button-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table documentation-anatomy-table">
+              <Table aria-label="ToggleButton anatomy">
+                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="part-0"><Cell><code>ToggleButton</code></Cell><Cell>A button with a selected state and an accessible pressed state.</Cell></Row>
+                  <Row id="part-1"><Cell><code>ToggleButtonGroup</code></Cell><Cell>Optionally coordinates single or multiple selection among buttons identified by id.</Cell></Row>
+                </TableBody>
+              </Table>
             </div>
           </>),
         },
@@ -116,6 +131,15 @@ export default function ToggleButtonPage() {
                 </div>
               </section>
             </div>
+          </>),
+        },
+        {
+          id: 'toggle-button-usage-heading',
+          title: 'Usage and accessibility',
+          content: (<>
+            <p>For an independent toggle, use <code>defaultSelected</code> for initial state or <code>isSelected</code> with <code>onChange</code> for controlled state. Use a stable visible label, or <code>aria-label</code> for an icon-only control. The selected state is communicated separately from the name.</p>
+            <p>For a group, supply an accessible label and stable button <code>id</code> values. Choose <code>selectionMode="single"</code> or <code>selectionMode="multiple"</code>; use <code>defaultSelectedKeys</code> or controlled <code>selectedKeys</code> with <code>onSelectionChange</code>. Set <code>disallowEmptySelection</code> when a selection must remain.</p>
+            <p>Enter or Space activates a focused toggle. Within a group, arrow keys move between buttons according to its orientation. Disabled buttons cannot be activated.</p>
           </>),
         }
       ]}

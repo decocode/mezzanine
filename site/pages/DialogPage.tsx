@@ -1,4 +1,4 @@
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import { useState } from 'react'
 import {
   Button, Cell, Column, Dialog, DialogTrigger, Heading, Modal, ModalOverlay,
@@ -42,6 +42,28 @@ export default function DialogPage() {
           </>),
         },
         {
+          id: 'dialog-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table">
+              <Table aria-label="Dialog anatomy">
+                <TableHeader>
+                  <Column isRowHeader>Component</Column>
+                  <Column>Purpose</Column>
+                </TableHeader>
+                <TableBody>
+                  <Row id="trigger"><Cell><code>DialogTrigger</code></Cell><Cell>Connects the opening control to the dialog and manages open state.</Cell></Row>
+                  <Row id="overlay"><Cell><code>ModalOverlay</code></Cell><Cell>The backdrop; accepts dismissal and controlled open-state props.</Cell></Row>
+                  <Row id="modal"><Cell><code>Modal</code></Cell><Cell>The modal container. Blocks interaction outside it. Can also create its own overlay when used without an explicit <code>ModalOverlay</code>.</Cell></Row>
+                  <Row id="dialog"><Cell><code>Dialog</code></Cell><Cell>The accessible content container. Use its close render prop for a custom action.</Cell></Row>
+                  <Row id="title"><Cell><code>Heading slot="title"</code></Cell><Cell>Provides the visible title and accessible name.</Cell></Row>
+                  <Row id="close"><Cell><code>Button slot="close"</code></Cell><Cell>Closes the dialog without an additional event handler.</Cell></Row>
+                </TableBody>
+              </Table>
+            </div>
+          </>),
+        },
+        {
           id: 'dialog-confirmation-heading',
           title: 'Confirmation dialog',
           content: (<>
@@ -80,28 +102,6 @@ export default function DialogPage() {
                   ? 'No action confirmed.'
                   : `Example action confirmed ${confirmationCount} ${confirmationCount === 1 ? 'time' : 'times'}.`}
               </p>
-            </div>
-          </>),
-        },
-        {
-          id: 'dialog-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <div className="documentation-table">
-              <Table aria-label="Dialog anatomy">
-                <TableHeader>
-                  <Column isRowHeader>Component</Column>
-                  <Column>Purpose</Column>
-                </TableHeader>
-                <TableBody>
-                  <Row id="trigger"><Cell><code>DialogTrigger</code></Cell><Cell>Connects the opening control to the dialog and manages open state.</Cell></Row>
-                  <Row id="overlay"><Cell><code>ModalOverlay</code></Cell><Cell>The backdrop; accepts dismissal and controlled open-state props.</Cell></Row>
-                  <Row id="modal"><Cell><code>Modal</code></Cell><Cell>The modal container. Blocks interaction outside it. Can also create its own overlay when used without an explicit <code>ModalOverlay</code>.</Cell></Row>
-                  <Row id="dialog"><Cell><code>Dialog</code></Cell><Cell>The accessible content container. Use its close render prop for a custom action.</Cell></Row>
-                  <Row id="title"><Cell><code>Heading slot="title"</code></Cell><Cell>Provides the visible title and accessible name.</Cell></Row>
-                  <Row id="close"><Cell><code>Button slot="close"</code></Cell><Cell>Closes the dialog without an additional event handler.</Cell></Row>
-                </TableBody>
-              </Table>
             </div>
           </>),
         },

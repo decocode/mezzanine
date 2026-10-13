@@ -1,4 +1,4 @@
-import { ComponentPageTemplate } from '../ComponentPageTemplate'
+import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import { Cell, Column, Row, Table, TableBody, TableHeader, Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
 import { tabsTokens } from '../componentTokenDocumentation'
 
@@ -34,6 +34,23 @@ export default function TabsPage() {
           </>),
         },
         {
+          id: 'tabs-anatomy-heading',
+          title: 'Anatomy',
+          content: (<>
+            <div className="documentation-table">
+              <Table aria-label="Tabs anatomy">
+                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
+                <TableBody>
+                  <Row id="tabs"><Cell><code>Tabs</code></Cell><Cell>Manages selection, orientation and keyboard activation.</Cell></Row>
+                  <Row id="list"><Cell><code>TabList</code></Cell><Cell>Groups the tabs and gives the collection an accessible name.</Cell></Row>
+                  <Row id="tab"><Cell><code>Tab</code></Cell><Cell>Selects a panel. Includes React Aria’s <code>SelectionIndicator</code> for the selected underline.</Cell></Row>
+                  <Row id="panel"><Cell><code>TabPanel</code></Cell><Cell>Contains the content for the <code>Tab</code> with the matching <code>id</code>.</Cell></Row>
+                </TableBody>
+              </Table>
+            </div>
+          </>),
+        },
+        {
           id: 'tabs-vertical-heading',
           title: 'Vertical tabs',
           content: (<>
@@ -54,23 +71,6 @@ export default function TabsPage() {
                 <TabPanel id="c">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</TabPanel>
                 <TabPanel id="d">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</TabPanel>
               </Tabs>
-            </div>
-          </>),
-        },
-        {
-          id: 'tabs-anatomy-heading',
-          title: 'Anatomy',
-          content: (<>
-            <div className="documentation-table">
-              <Table aria-label="Tabs anatomy">
-                <TableHeader><Column isRowHeader>Component</Column><Column>Purpose</Column></TableHeader>
-                <TableBody>
-                  <Row id="tabs"><Cell><code>Tabs</code></Cell><Cell>Manages selection, orientation and keyboard activation.</Cell></Row>
-                  <Row id="list"><Cell><code>TabList</code></Cell><Cell>Groups the tabs and gives the collection an accessible name.</Cell></Row>
-                  <Row id="tab"><Cell><code>Tab</code></Cell><Cell>Selects a panel. Includes React Aria’s <code>SelectionIndicator</code> for the selected underline.</Cell></Row>
-                  <Row id="panel"><Cell><code>TabPanel</code></Cell><Cell>Contains the content for the <code>Tab</code> with the matching <code>id</code>.</Cell></Row>
-                </TableBody>
-              </Table>
             </div>
           </>),
         },
