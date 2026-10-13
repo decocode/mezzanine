@@ -48,6 +48,33 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - More advanced Mezzanine patterns that compose multiple primitives may use bespoke, purpose-based names. Their underlying atomic parts should still use the matching React Aria components and conventions.
 - Treat migrated DecoCode components as inputs to review, not as the naming authority. Rename or revise them during migration when they conflict with React Aria conventions.
 
+## Button and Link
+
+This is an agreed deviation from the exact React Aria naming and anatomy rules above. Do not undo it, split it, or work around it without the user's explicit agreement.
+
+In Mezzanine, "button" describes an appearance. Appearance and behaviour are separate decisions:
+
+- Appearance: should this look like a button or like an ordinary text link?
+- Behaviour: does it perform an action, or navigate to a destination?
+
+Browsers and assistive technology treat the two behaviours differently. Navigation supports opening in a new tab and copying the destination. Actions support form submission and activation with both Enter and Space. One Mezzanine component keeps both behaviours by choosing the underlying React Aria component from the props.
+
+| Intended use | Mezzanine component | Underlying React Aria component |
+| --- | --- | --- |
+| Action button | `<Button onPress={...}>` | `Button` |
+| Navigation styled as a button | `<Button href="...">` | `Link` |
+| Ordinary text link | `<Link href="...">` | `Link` |
+
+Rules:
+
+- Anything that looks like a button must use the shared `Button`, including calls to action in the showcase. Never restyle a link or button by hand to look like a `Button`.
+- Anything that looks like an ordinary text link must use `Link`.
+- `Button` supports text-only, leading icon, trailing icon, and icon-only content. Icon-only buttons need an accessible name, and a tooltip can be composed with them.
+- There is no separate `IconButton`. Do not add one, and do not add another component for navigation buttons.
+- Showcase labels and destinations for a Button live in the page's content file, not in the page component.
+- Button styling must stay identical whether the underlying element is a button or a link, including no text underline in every theme (Wireframe included).
+- Do not change the choice of underlying element without checking it renders the right element and behaves correctly for keyboard and assistive technology.
+
 ## Scope and understandability
 
 - Make only the requested change and the smallest changes needed to make it work. Do not add speculative features, sample content, dependencies, or abstractions.
@@ -79,6 +106,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Scan staged changes with `gitleaks git --staged --redact .` before a commit. The configured hook runs this automatically.
 - Update `MAP.md` if the project structure or main entry points change.
 - When a showcase route is added or removed, update the allowed routes in `nginx.conf` and the URLs in the Lighthouse configs.
+- Do not run Lighthouse (`npm run lighthouse` and its variants) unless the user asks for it. Never run it repeatedly to chase scores. If asked, run it once, report the results, and do not leave generated report files for the user to clean up.
 - Report any check that could not run.
 
 ## Licence, publishing, and deployment status

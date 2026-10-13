@@ -56,7 +56,7 @@ for (const definition of componentPages) {
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
     }
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
-    expect((await new AxeBuilder({ page }).include('.table-of-contents').include('section[aria-labelledby$="-technical-details"]').include('section[aria-labelledby="related-pages"]').include('section[aria-labelledby*="references"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
+    expect((await new AxeBuilder({ page }).include('.mezzanine-table-of-contents').include('section[aria-labelledby$="-technical-details"]').include('section[aria-labelledby="related-pages"]').include('section[aria-labelledby*="references"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
   })
 }
 

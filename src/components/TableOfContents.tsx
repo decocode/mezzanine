@@ -42,7 +42,7 @@ export function TableOfContents({
   return (
     <nav
       aria-labelledby={headingId}
-      className={['table-of-contents', className].filter(Boolean).join(' ')}
+      className={['mezzanine-table-of-contents', className].filter(Boolean).join(' ')}
     >
       <Heading className="mz-text-heading-sm" id={headingId} level={headingLevel}>{heading}</Heading>
       <TableOfContentsList sections={sections} />
