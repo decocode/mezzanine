@@ -45,7 +45,7 @@ Open a local report with `npx playwright show-report`.
 ## Lighthouse reports
 
 Run `npm run lighthouse` after installing Chromium to build the showcase and audit
-home, Button, and Table on mobile and desktop, with three runs per page and device.
+home, Button, Table, TabBar, and the WIP Navbar page on mobile and desktop, with three runs per page and device.
 Use `npm run lighthouse:mobile` or `npm run lighthouse:desktop` for one profile.
 Reports are saved under `reports/lighthouse/` (ignored by Git).
 

@@ -553,3 +553,51 @@ Before adding a public token, answer:
 6. What would a product owner expect to change by overriding it?
 
 If those answers are unclear, the token is not ready to become public API.
+
+## Text field tokens
+
+TextField composes the public Label, Input or TextArea, description Text and FieldError.
+Its initial appearance uses square corners, a 3rem minimum input height and the
+existing theme colours. Light and Dark visual refinements are deferred.
+
+| Token | Meaning |
+| --- | --- |
+| `--text-field-gap` | Space between field parts |
+| `--text-field-error-content` | Validation message colour |
+| `--input-min-height` | Minimum single-line input height |
+| `--text-area-min-height` | Minimum multiline height, initially 4rem |
+| `--input-padding-block`, `--input-padding-inline` | Input text padding |
+| `--input-border-width`, `--input-border-radius` | Input border and corner shape |
+| `--input-background` | Input surface colour |
+| `--input-border`, `--input-border-hovered`, `--input-border-invalid` | Default, hovered and invalid borders |
+| `--input-focus-ring-width`, `--input-focus-ring-offset` | Focus outline thickness and spacing |
+
+Input text, placeholder, descriptions and focus use existing semantic colour
+roles. Disabled fields use the shared disabled opacity; read-only fields retain
+the normal appearance and can receive focus. No motion is applied.
+
+TextArea shares Input’s appearance and state tokens. It permits vertical resizing,
+remains within its container width, and accepts the native `rows` prop for the
+initial visible line count. Its minimum height still applies when resized.
+
+## Tab bar tokens
+
+TabBar uses the existing semantic text, border, hover, pressed and focus colours.
+The More sheet uses the existing modal backdrop, elevation and motion duration.
+
+| Token | Purpose |
+| --- | --- |
+| `--tab-bar-background`, `--tab-bar-item-background-current` | Bar/sheet surface and current destination background |
+| `--tab-bar-border-width`, `--tab-bar-indicator-width` | Surface border and current destination marker |
+| `--tab-bar-z-index` | Sticky bar stacking level |
+| `--tab-bar-safe-area-bottom` | Device bottom inset; defaults to `env(safe-area-inset-bottom, 0px)` |
+| `--tab-bar-gap`, `--tab-bar-padding` | Space between items and inside the bar |
+| `--tab-bar-item-min-width` | Minimum slot width used to decide which links move into More |
+| `--tab-bar-item-min-height`, `--tab-bar-item-padding`, `--tab-bar-item-gap` | Touch target height, inner padding and icon/label spacing |
+| `--tab-bar-icon-size` | Decorative icon dimensions |
+| `--tab-bar-focus-ring-width`, `--tab-bar-focus-ring-offset` | Visible keyboard focus outline |
+| `--tab-bar-sheet-max-height` | Maximum sheet height before its content scrolls |
+
+Overflow uses More rather than horizontal scrolling. The minimum slot width scales
+with root text size; labels can wrap within a slot. Sheet motion is disabled when
+the visitor prefers reduced motion.

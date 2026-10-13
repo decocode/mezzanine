@@ -14,6 +14,11 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | Path | Purpose |
 | --- | --- |
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
+| `src/components/TabBar.tsx` | Primary route navigation with a More bottom sheet composed from library links, buttons and modal parts |
+| `src/components/TabBar.css` | TabBar states, safe-area spacing and responsive bottom-sheet presentation |
+| `src/components/useTabBarCapacity.ts` | Observes container and token-sized slot widths to determine how many navigation items fit |
+| `site/pages/TabBarPage.tsx` | Live TabBar example and verified composition, overflow and placement guidance |
+| `tests/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |
 | `src/components/Badge.tsx` | Public non-interactive Badge with core and semantic color variants, rendered as a semantic span |
 | `src/components/Badge.css` | Token-led styling for Neutral, Violet, Info, Success, Warning and Danger Badges |
 | `src/components/Button.tsx` | Public React Aria Button wrapper with Mezzanine variants, sizes, icon content and pending-state progress |
@@ -22,6 +27,12 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Breadcrumbs.css` | Token-led layout and separator styling for Breadcrumbs |
 | `src/components/IconButton.tsx` | Public composed icon-only Button requiring a label that can be hidden, above or below |
 | `src/components/IconButton.css` | Token-led layout and visible-label styling for IconButton |
+| `src/components/TextArea.ts` | Public React Aria TextArea export and type; composes with TextField for multiline input |
+| `src/components/TextField.ts` | Public React Aria TextField and Input exports and types |
+| `src/components/TextField.css` | Shared TextField, Input and TextArea layout, interaction states and forced-colour styling |
+| `site/pages/TextAreaPage.tsx` | Multiline field examples, states, composition and vertical resizing guidance |
+| `site/pages/TextFieldPage.tsx` | TextField composition, editing, states and local validation examples |
+| `tests/text-field.spec.ts` | TextField keyboard, validation, responsive and automated accessibility checks |
 | `src/components/Checkbox.tsx` | Public React Aria Checkbox wrapper with selected and indeterminate indicators |
 | `src/components/Checkbox.css` | Token-led styling for Checkbox states and interaction feedback |
 | `src/components/Link.ts` | Public React Aria Link export and prop types |
@@ -91,7 +102,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/DialogExamples.tsx` | Modal and confirmation-dialog examples, anatomy and accessibility guidance for `/dialog` under Components → Overlays |
 | `site/ShapeCornerExample.tsx` | Independent single-select corner-radius ToggleButtonGroups, defaulting to none, with a live shape preview and resulting CSS |
 | `site/useAnimatedNavigationTree.ts` | Shared expansion state and reduced-motion handling for NavigationTree reveal and collapse motion |
-| `site/siteNavigation.ts` | Single source of truth for nested IA groups, routes, labels, implementation status and verified React Aria documentation matches; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with remaining pages awaiting categorisation |
+| `site/siteNavigation.ts` | Single source of truth for nested IA groups, routes, labels, implementation status and verified React Aria documentation matches; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the WIP top-navigation page at `/navbar` and remaining pages awaiting categorisation |
 | `site/foundationData.tsx` | Names and descriptions, with inline code markup for component references, for the implemented color, typography, spacing, corner-radius and motion foundations shown by the showcase |
 | `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/tableExampleData.ts` | Table anatomy content, example rows and sorting logic used by the Table documentation page |
@@ -117,7 +128,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `.github/workflows/gitleaks.yml` | Gitleaks scan of the full history for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
-| `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button and Table audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
+| `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar and the WIP Navbar page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
 | `TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |

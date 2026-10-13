@@ -91,6 +91,12 @@
   --table-header-background: var(--color-neutral-900);
   --table-drop-target-color: var(--color-signature-700);
 
+  --input-background: var(--color-page);
+  --input-border: var(--color-neutral-400);
+  --input-border-hovered: var(--color-text);
+  --input-border-invalid: var(--color-danger-400);
+  --text-field-error-content: var(--color-danger-400);
+
   --color-focus: var(--color-info-500);
 }
 
@@ -187,6 +193,12 @@
     --table-row-content-selected: var(--color-neutral-50);
     --table-header-background: var(--color-neutral-900);
     --table-drop-target-color: var(--color-signature-700);
+
+    --input-background: var(--color-page);
+    --input-border: var(--color-neutral-400);
+    --input-border-hovered: var(--color-text);
+    --input-border-invalid: var(--color-danger-400);
+    --text-field-error-content: var(--color-danger-400);
 
     --color-focus: var(--color-info-500);
   }

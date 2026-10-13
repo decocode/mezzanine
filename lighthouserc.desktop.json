@@ -7,7 +7,9 @@
       "url": [
         "http://localhost/",
         "http://localhost/button",
-        "http://localhost/table"
+        "http://localhost/table",
+        "http://localhost/tab-bar",
+        "http://localhost/navbar"
       ],
       "settings": {
         "preset": "desktop",

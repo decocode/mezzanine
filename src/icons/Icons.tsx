@@ -106,3 +106,25 @@ export function SunIcon(iconProps: IconProps) {
     </StrokeIcon>
   )
 }
+
+export function HomeIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8" /></StrokeIcon>
+}
+
+export function AccountIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><circle cx="12" cy="8" r="4" /><path d="M4 21v-2a8 8 0 0 1 16 0v2" /></StrokeIcon>
+}
+
+export function SlidersVerticalIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><path d="M4 3v18M12 3v18M20 3v18" /><path d="M1 8h6M9 16h6M17 8h6" /></StrokeIcon>
+}
+
+
+export function SettingsIcon(iconProps: IconProps) {
+  return (
+    <StrokeIcon {...iconProps}>
+      <path d="M9.5 3h5l.5 3 2 1 2.8-1 2.5 4.3L20 12l2.3 1.7-2.5 4.3-2.8-1-2 1-.5 3h-5L9 18l-2-1-2.8 1-2.5-4.3L4 12l-2.3-1.7L4.2 6 7 7l2-1Z" />
+      <circle cx="12" cy="12" r="3" />
+    </StrokeIcon>
+  )
+}

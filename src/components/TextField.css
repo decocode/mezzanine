@@ -1,0 +1,119 @@
+.react-aria-TextField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--text-field-gap);
+  min-width: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+  overflow-wrap: anywhere;
+}
+
+.react-aria-TextField > .react-aria-Label {
+  font-weight: var(--font-weight-semibold);
+}
+
+:is(.react-aria-Input, .react-aria-TextArea) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--input-min-height);
+  margin: 0;
+  padding: var(--input-padding-block) var(--input-padding-inline);
+  border: var(--input-border-width) solid var(--input-border);
+  border-radius: var(--input-border-radius);
+  background: var(--input-background);
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+  -webkit-tap-highlight-color: transparent;
+}
+
+:is(.react-aria-Input, .react-aria-TextArea)::placeholder {
+  color: var(--color-text-muted);
+  opacity: 1;
+}
+
+:is(.react-aria-Input, .react-aria-TextArea)[data-hovered]:not([data-disabled]):not([data-readonly]):not([data-invalid]) {
+  border-color: var(--input-border-hovered);
+}
+
+:is(.react-aria-Input, .react-aria-TextArea)[data-invalid] {
+  border-color: var(--input-border-invalid);
+}
+
+:is(.react-aria-Input, .react-aria-TextArea)[data-focused] {
+  outline: var(--input-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--input-focus-ring-offset);
+}
+
+.react-aria-TextField > [slot='description'],
+.react-aria-TextField > .react-aria-FieldError {
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+}
+
+.react-aria-TextField > [slot='description'] {
+  color: var(--color-text-muted);
+}
+
+.react-aria-TextField > .react-aria-FieldError {
+  color: var(--text-field-error-content);
+}
+
+.react-aria-TextField[data-disabled] {
+  opacity: var(--opacity-disabled);
+}
+
+:is(.react-aria-Input, .react-aria-TextArea)[data-disabled],
+:is(.react-aria-Input, .react-aria-TextArea)[data-readonly] {
+  cursor: default;
+}
+
+@media (forced-colors: active) {
+  :is(.react-aria-Input, .react-aria-TextArea) {
+    forced-color-adjust: auto;
+    background: Field;
+    color: FieldText;
+    border-color: ButtonBorder;
+  }
+
+  :is(.react-aria-Input, .react-aria-TextArea)[data-hovered]:not([data-disabled]):not([data-readonly]):not([data-invalid]) {
+    border-color: Highlight;
+  }
+
+  :is(.react-aria-Input, .react-aria-TextArea)[data-invalid] {
+    border-color: Mark;
+  }
+
+  :is(.react-aria-Input, .react-aria-TextArea)[data-focused] {
+    outline-color: Highlight;
+  }
+
+  .react-aria-TextField[data-disabled] {
+    opacity: 1;
+    color: GrayText;
+  }
+
+  :is(.react-aria-Input, .react-aria-TextArea)[data-disabled] {
+    color: GrayText;
+    border-color: GrayText;
+  }
+
+  :is(.react-aria-Input, .react-aria-TextArea)[data-disabled]::placeholder {
+    color: GrayText;
+  }
+
+  .react-aria-TextField > .react-aria-FieldError {
+    color: Mark;
+  }
+}
+
+/* Share field appearance and states; only multiline sizing differs. */
+.react-aria-TextArea {
+  min-height: var(--text-area-min-height);
+  max-width: 100%;
+  resize: vertical;
+}

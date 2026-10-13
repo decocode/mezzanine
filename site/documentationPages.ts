@@ -28,5 +28,8 @@ export const documentationPages: Record<string, ComponentType<DocumentationPageP
   disclosure: lazy(() => import('./pages/DisclosurePage')),
   checkbox: lazy(() => import('./pages/CheckboxPage')),
   'radio-group': lazy(() => import('./pages/RadioGroupPage')),
+  'text-area': lazy(() => import('./pages/TextAreaPage')),
+  'text-field': lazy(() => import('./pages/TextFieldPage')),
+  'tab-bar': lazy(() => import('./pages/TabBarPage')),
   table: lazy(() => import('./pages/TablePage')),
 }

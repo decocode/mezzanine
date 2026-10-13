@@ -132,6 +132,10 @@ export {
 } from './components/Table'
 
 export {
+  HomeIcon,
+  AccountIcon,
+  SettingsIcon,
+  SlidersVerticalIcon,
   BriefcaseIcon,
   CheckIcon,
   CopyIcon,
@@ -236,3 +240,12 @@ export type { PageHeadingProps } from './components/PageHeading'
 
 export { Header } from './components/Header'
 export type { HeaderProps, HeaderRenderProps } from './components/Header'
+
+export { TextField, Input } from './components/TextField'
+export type { TextFieldProps, TextFieldRenderProps, InputProps } from './components/TextField'
+
+export { TextArea } from './components/TextArea'
+export type { TextAreaProps } from './components/TextArea'
+
+export { TabBar } from './components/TabBar'
+export type { TabBarProps, TabBarItem } from './components/TabBar'

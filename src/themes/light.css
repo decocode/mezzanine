@@ -96,5 +96,11 @@
   --table-header-background: var(--color-neutral-100);
   --table-drop-target-color: var(--color-signature-700);
 
+  --input-background: var(--color-page);
+  --input-border: var(--color-neutral-700);
+  --input-border-hovered: var(--color-text);
+  --input-border-invalid: var(--color-danger-700);
+  --text-field-error-content: var(--color-danger-700);
+
   --color-focus: var(--color-info-700);
 }

@@ -70,7 +70,8 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'tabs', label: 'Tabs', path: '/tabs', reactAriaPage: 'Tabs', status: 'implemented' },
           { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
           { id: 'menu', label: 'Menu', path: '/menu', reactAriaPage: 'Menu', status: 'empty' },
-          { id: 'header', label: 'Header', path: '/header', status: 'empty' },
+          { id: 'tab-bar', label: 'Tab bar', path: '/tab-bar', status: 'implemented' },
+          { id: 'navbar', label: 'Navbar', path: '/navbar', status: 'empty' },
           { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'empty' },
           { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },
         ],
@@ -89,8 +90,8 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         pages: [
           { id: 'checkbox', label: 'Checkbox', path: '/checkbox', reactAriaPage: 'Checkbox', status: 'implemented' },
           { id: 'radio-group', label: 'RadioGroup', path: '/radio-group', reactAriaPage: 'RadioGroup', status: 'implemented' },
-          { id: 'text-field', label: 'TextField', path: '/text-field', reactAriaPage: 'TextField', status: 'empty' },
-          { id: 'text-area', label: 'TextArea', path: '/text-area', reactAriaPage: 'TextField', status: 'empty' },
+          { id: 'text-field', label: 'Text field', path: '/text-field', reactAriaPage: 'TextField', status: 'implemented' },
+          { id: 'text-area', label: 'Text area', path: '/text-area', reactAriaPage: 'TextField', status: 'implemented' },
         ],
       },
       {
