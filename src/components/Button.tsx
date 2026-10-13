@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, Ref } from 'react'
 import { composeRenderProps } from 'react-aria-components'
 import {
   Button as ReactAriaButton,
@@ -10,6 +10,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'destructive'
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
 
 export interface ButtonProps extends ReactAriaButtonProps {
+  ref?: Ref<HTMLButtonElement>
   iconLeading?: ReactNode
   iconTrailing?: ReactNode
   size?: ButtonSize

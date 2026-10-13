@@ -238,8 +238,8 @@ export type { TableOfContentsProps, TableOfContentsSection } from './components/
 export { PageHeading } from './components/PageHeading'
 export type { PageHeadingProps } from './components/PageHeading'
 
-export { Header } from './components/Header'
-export type { HeaderProps, HeaderRenderProps } from './components/Header'
+export { Navbar } from './components/Navbar'
+export type { NavbarProps, NavbarRenderProps } from './components/Navbar'
 
 export { TextField, Input } from './components/TextField'
 export type { TextFieldProps, TextFieldRenderProps, InputProps } from './components/TextField'

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" role="img" aria-label="Mezzanine">
+  <title>Mezzanine</title>
+  <rect width="128" height="128" fill="#DEDEDE"/>
+  <path d="M24 24H104V40H84V56H64V72H44V88H24V104H104" stroke="#121212" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>

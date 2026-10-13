@@ -361,9 +361,9 @@ export const motionPatternDefinitions: MotionPatternDefinition[] = [
     reducedMotion: 'The indicator remains visible without rotating.',
   },
   {
-    id: 'header-navigation',
-    name: 'Mobile Header navigation',
-    scope: 'Showcase layout',
+    id: 'navbar-navigation',
+    name: 'Mobile Navbar navigation',
+    scope: 'Library component',
     movement: 'Fades in while moving down by 0.375rem when opened.',
     reducedMotion: 'The navigation appears immediately.',
   },

@@ -45,7 +45,7 @@ Open a local report with `npx playwright show-report`.
 ## Lighthouse reports
 
 Run `npm run lighthouse` after installing Chromium to build the showcase and audit
-home, Button, Table, TabBar, and the WIP Navbar page on mobile and desktop, with three runs per page and device.
+home, Button, Table, TabBar, and the Navbar page on mobile and desktop, with three runs per page and device.
 Use `npm run lighthouse:mobile` or `npm run lighthouse:desktop` for one profile.
 Reports are saved under `reports/lighthouse/` (ignored by Git).
 
@@ -69,25 +69,45 @@ Light/Dark preference, with Light as the fallback.
 
 The package is `private` and is not published to npm.
 
-## Reusable Header
+## Reusable Navbar
 
-`Header` supplies the sticky layout and mobile disclosure menu. Pass your branding
-as `brand` and your navigation as children. Use `menuLabel` to replace the default
+`Navbar` supplies the sticky layout and mobile disclosure menu. Pass your branding
+as `brand`, your links as children and optional controls as `actions`. Use `menuLabel` to replace the default
 “Menu” text, and `className` to add application-specific styling.
 
 ```tsx
-import { Header, Link } from '@decocode/mezzanine'
+import { Navbar, Link } from '@decocode/mezzanine'
 
-<Header brand={<Link href="/">My application</Link>}>
+<Navbar aria-label="Main navigation" brand={<Link href="/">My application</Link>}>
   {({ closeMenu }) => (
-    <nav aria-label="Main navigation">
-      <Link href="/about" onPress={closeMenu}>About</Link>
-    </nav>
+    <Link href="/about" onPress={closeMenu}>About</Link>
   )}
-</Header>
+</Navbar>
 ```
 
 The children appear in separate mobile and desktop containers; CSS exposes only
 one at a time. Avoid hard-coded HTML IDs inside this repeated content; use React’s
 `useId` in child components when IDs are needed. Branding, navigation content,
 link presentation and theme controls belong to the consuming application.
+
+Migration: `Navbar`, `NavbarProps`, `NavbarRenderProps`, `--navbar-*` tokens and
+`mezzanine-navbar-*` classes replace the previous Header equivalents. Navbar supplies
+the labelled `nav` element, so pass links directly rather than wrapping them in another `nav`.
+
+## Component documentation pages
+
+`site/AppShell.tsx` owns the site layout, navigation and theme. It loads each Docs
+page independently through `DocumentationPage.tsx`.
+
+Implemented component pages in `site/pages/` use `ComponentPageTemplate.tsx`.
+Each page supplies its title, description, optional React Aria reference and an
+ordered `sections` list. Each section defines `id`, `title` and `content` once;
+the template creates its heading, wrapper and matching table-of-contents link.
+Optional `subsections` add Contents links to headings inside that section's content.
+
+Keep component-specific copy, tables and live examples in the page module; retain
+local React state there when an example needs it. Shared data can stay in its
+existing descriptive documentation module. Use only applicable sections—such as
+Example, Anatomy, States, Behaviour or Usage—and do not add empty sections or
+invent missing documentation. Keep component names in Anatomy tables in `<code>`.
+Foundation pages retain their own structures.

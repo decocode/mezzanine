@@ -1,0 +1,167 @@
+.mezzanine-navbar {
+  container: mezzanine-navbar / inline-size;
+  position: sticky;
+  z-index: var(--navbar-z-index);
+  top: 0;
+  border-bottom: var(--navbar-border-width) solid var(--color-border);
+  background: var(--color-page);
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+}
+
+.mezzanine-navbar-content {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--navbar-min-height);
+  padding: var(--space-3) min(var(--space-4), 4cqi);
+}
+
+.mezzanine-navbar-content > * {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.mezzanine-navbar-mobile {
+  display: contents;
+}
+
+.mezzanine-navbar-heading {
+  margin: 0;
+  margin-inline-start: auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mezzanine-navbar-trigger.react-aria-Button[data-variant] {
+  --button-icon-size: var(--space-5);
+  --button-content-gap: var(--space-2);
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  min-height: var(--navbar-menu-min-height);
+  padding: var(--space-2) var(--space-3);
+  border: var(--navbar-border-width) solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
+  cursor: pointer;
+}
+
+.mezzanine-navbar-trigger.react-aria-Button[data-variant][data-hovered] {
+  background: var(--color-surface-hover);
+}
+
+.mezzanine-navbar-trigger.react-aria-Button[data-variant][data-pressed] {
+  background: var(--color-surface-pressed);
+}
+
+.mezzanine-navbar-trigger.react-aria-Button[data-variant][data-focus-visible] {
+  outline: var(--navbar-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--navbar-focus-ring-offset);
+}
+
+.mezzanine-navbar-panel {
+  box-sizing: border-box;
+  flex-basis: 100%;
+  width: 100%;
+  max-height: var(--navbar-panel-max-height);
+  padding: var(--space-2) 0 var(--space-4);
+  overflow-y: auto;
+  background: var(--color-page);
+}
+
+.mezzanine-navbar-panel[hidden] {
+  display: none;
+}
+
+.mezzanine-navbar-panel:not([hidden]) {
+  animation: navbar-navigation-reveal var(--navbar-motion-duration) ease-out both;
+}
+
+.mezzanine-navbar-desktop {
+  display: none;
+}
+
+@keyframes navbar-navigation-reveal {
+  from {
+    opacity: 0;
+    translate: 0 var(--navbar-motion-offset);
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Container-relative layout also follows changes to the root text size. */
+@container mezzanine-navbar (min-width: 48rem) {
+  .mezzanine-navbar-content {
+    gap: var(--space-4);
+    padding-inline: var(--navbar-wide-padding-inline);
+  }
+
+  .mezzanine-navbar-mobile {
+    display: none;
+  }
+
+  .mezzanine-navbar-desktop {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mezzanine-navbar-panel:not([hidden]) {
+    animation: none;
+  }
+}
+
+.mezzanine-navbar-links,
+.mezzanine-navbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.mezzanine-navbar-panel .mezzanine-navbar-links,
+.mezzanine-navbar-panel .mezzanine-navbar-actions {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.mezzanine-navbar-panel .mezzanine-navbar-actions {
+  margin-block-start: var(--space-3);
+}
+
+.mezzanine-navbar-links > .react-aria-Link,
+.mezzanine-navbar-brand > .react-aria-Link {
+  min-height: var(--navbar-menu-min-height);
+  overflow-wrap: anywhere;
+}
+
+.mezzanine-navbar-links > .react-aria-Link[aria-current='page'] {
+  text-decoration: underline;
+}
+
+@media (forced-colors: active) {
+  .mezzanine-navbar {
+    forced-color-adjust: auto;
+  }
+}

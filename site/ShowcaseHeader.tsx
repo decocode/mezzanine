@@ -1,5 +1,5 @@
 import {
-  Header,
+  Navbar,
   Link,
   MoonIcon,
   PlaceholderIcon,
@@ -19,10 +19,6 @@ interface ThemeControlProps {
 
 interface ShowcaseHeaderProps extends ThemeControlProps {
   currentPath: string
-}
-
-interface HeaderNavigationProps extends ShowcaseHeaderProps {
-  onNavigate?: () => void
 }
 
 function getDisplayedThemeSelection(themeSelection: ThemeSelection) {
@@ -60,52 +56,26 @@ function ThemeToggleButtonGroup({ onThemeSelectionChange, themeSelection }: Them
   )
 }
 
-function HeaderNavigation({
-  currentPath,
-  onNavigate,
-  onThemeSelectionChange,
-  themeSelection,
-}: HeaderNavigationProps) {
-  return (
-    <nav aria-label="Showcase navigation" className="showcase-navigation">
-      <Link
-        aria-current={currentPath === '/introduction' ? 'page' : undefined}
-        href="/introduction"
-        onPress={onNavigate}
-      >
-        Docs
-      </Link>
-      <ThemeToggleButtonGroup
-        onThemeSelectionChange={onThemeSelectionChange}
-        themeSelection={themeSelection}
-      />
-    </nav>
-  )
-}
-
 export function ShowcaseHeader({
   currentPath,
   onThemeSelectionChange,
   themeSelection,
 }: ShowcaseHeaderProps) {
   return (
-    <Header brand={(
+    <Navbar aria-label="Showcase navigation" actions={<ThemeToggleButtonGroup onThemeSelectionChange={onThemeSelectionChange} themeSelection={themeSelection} />} brand={(
       <Link
         aria-current={currentPath === '/' ? 'page' : undefined}
+        aria-label="Mezzanine home"
         className="site-name"
         href="/"
       >
+        <span aria-hidden="true" className="site-logo" />
         Mezzanine
       </Link>
     )}>
       {({ closeMenu }) => (
-        <HeaderNavigation
-          currentPath={currentPath}
-          onNavigate={closeMenu}
-          onThemeSelectionChange={onThemeSelectionChange}
-          themeSelection={themeSelection}
-        />
+        <Link className="showcase-navigation-link" aria-current={currentPath === '/introduction' ? 'page' : undefined} href="/introduction" onPress={closeMenu}>Docs</Link>
       )}
-    </Header>
+    </Navbar>
   )
 }

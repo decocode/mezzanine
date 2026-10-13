@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { App } from './App'
+import { AppShell } from './AppShell'
 import { applyThemeSelection, readStoredThemeSelection } from './themeSelection'
 import './styles.css'
 
@@ -12,6 +12,6 @@ applyThemeSelection(initialThemeSelection)
 
 createRoot(root).render(
   <StrictMode>
-    <App initialThemeSelection={initialThemeSelection} />
+    <AppShell initialThemeSelection={initialThemeSelection} />
   </StrictMode>,
 )

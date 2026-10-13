@@ -7,7 +7,7 @@ import { DocumentationPage } from './DocumentationPage'
 import { findSitePage, type SitePageDefinition } from './siteNavigation'
 import { applyThemeSelection, storeThemeSelection, type ThemeSelection } from './themeSelection'
 
-interface AppProps {
+interface AppShellProps {
   initialThemeSelection: ThemeSelection
 }
 
@@ -47,7 +47,7 @@ function NotFoundPage() {
   )
 }
 
-export function App({ initialThemeSelection }: AppProps) {
+export function AppShell({ initialThemeSelection }: AppShellProps) {
   const [themeSelection, setThemeSelection] = useState(initialThemeSelection)
   const [systemPreferenceVersion, setSystemPreferenceVersion] = useState(0)
   const currentPath = window.location.pathname === '/'

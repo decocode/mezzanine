@@ -41,7 +41,7 @@ test('delayed loading keeps the shell usable and restores a direct section link'
   await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
   await page.getByRole('button', { name: 'Menu', exact: true }).click()
   await expect(page.getByRole('radio', { name: 'Dark theme', exact: true })).toBeVisible()
-  await page.getByRole('button', { name: 'Menu', exact: true }).click()
+  await page.getByRole('button', { name: 'Close menu', exact: true }).click()
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
 
   releaseChunk()
