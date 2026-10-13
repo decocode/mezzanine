@@ -1,0 +1,112 @@
+.mezzanine-sidebar-panel {
+  box-sizing: border-box;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-height: var(--sidebar-max-height);
+  border: var(--sidebar-border-width) solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+  overflow-wrap: anywhere;
+}
+
+.mezzanine-sidebar-panel[data-side='left'] { order: -1; }
+.mezzanine-sidebar-panel[data-side='right'] { order: 1; }
+.mezzanine-sidebar-panel[data-collapse-mode='rail']:not([data-expanded]) { width: var(--sidebar-rail-width); }
+
+.mezzanine-sidebar-expanded,
+.mezzanine-sidebar-dialog {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: inherit;
+  flex: 1;
+}
+
+.mezzanine-sidebar-header,
+.mezzanine-sidebar-footer {
+  flex: none;
+  padding: var(--sidebar-padding);
+}
+
+.mezzanine-sidebar-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sidebar-gap);
+  border-block-end: var(--sidebar-border-width) solid var(--color-border);
+}
+
+.mezzanine-sidebar-header .react-aria-Heading {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-size-heading-sm);
+  line-height: var(--line-height-heading-sm);
+}
+
+.mezzanine-sidebar-header-content { flex-basis: 100%; }
+.mezzanine-sidebar-content { min-height: 0; overflow: auto; padding: var(--sidebar-padding); }
+.mezzanine-sidebar-footer { margin-block-start: auto; border-block-start: var(--sidebar-border-width) solid var(--color-border); }
+.mezzanine-sidebar-rail { display: flex; flex-direction: column; align-items: center; gap: var(--sidebar-gap); padding: var(--sidebar-rail-padding); overflow: auto; }
+
+.mezzanine-sidebar-panel[hidden],
+.mezzanine-sidebar-expanded[hidden],
+.mezzanine-sidebar-rail[hidden] { display: none; }
+
+/* React Aria owns modality, focus containment, scroll locking and dismissal. */
+.mezzanine-sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  height: var(--visual-viewport-height);
+  z-index: var(--modal-z-index);
+  display: flex;
+  background: var(--modal-backdrop);
+}
+
+.mezzanine-sidebar-overlay[data-side='left'] > .mezzanine-sidebar-panel { left: 0; }
+.mezzanine-sidebar-overlay[data-side='right'] > .mezzanine-sidebar-panel { right: 0; }
+.mezzanine-sidebar-overlay > .mezzanine-sidebar-panel {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  max-height: 100%;
+  width: min(var(--sidebar-width), calc(100% - var(--sidebar-drawer-gap)));
+  box-shadow: var(--elevation-overlay);
+}
+
+.mezzanine-sidebar-dialog { outline: none; }
+.mezzanine-sidebar-dialog:focus-visible {
+  outline: var(--dialog-focus-ring-width) solid var(--color-focus);
+  outline-offset: calc(-1 * var(--dialog-focus-ring-width));
+}
+
+.mezzanine-sidebar-overlay[data-entering] { animation: mezzanine-modal-fade var(--sidebar-motion-duration) ease-out; }
+.mezzanine-sidebar-overlay[data-exiting] { animation: mezzanine-modal-fade var(--sidebar-motion-duration) reverse ease-in; }
+.mezzanine-sidebar-overlay .mezzanine-sidebar-panel[data-side='left'] { --sidebar-enter-offset: -100%; }
+.mezzanine-sidebar-overlay .mezzanine-sidebar-panel[data-side='right'] { --sidebar-enter-offset: 100%; }
+.mezzanine-sidebar-overlay .mezzanine-sidebar-panel[data-entering] { animation: mezzanine-sidebar-enter var(--sidebar-motion-duration) ease-out; }
+.mezzanine-sidebar-overlay .mezzanine-sidebar-panel[data-exiting] { animation: mezzanine-sidebar-enter var(--sidebar-motion-duration) reverse ease-in; }
+@keyframes mezzanine-sidebar-enter {
+  from { transform: translateX(var(--sidebar-enter-offset)); }
+  to { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mezzanine-sidebar-overlay,
+  .mezzanine-sidebar-overlay > .mezzanine-sidebar-panel { animation: none !important; }
+}
+
+@media (forced-colors: active) {
+  .mezzanine-sidebar-panel { background: Canvas; color: CanvasText; border-color: CanvasText; }
+  .mezzanine-sidebar-header, .mezzanine-sidebar-footer { border-color: CanvasText; }
+  .mezzanine-sidebar-dialog:focus-visible { outline-color: Highlight; }
+}

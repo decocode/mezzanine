@@ -255,3 +255,6 @@ export type { TabBarProps, TabBarItem } from './components/TabBar'
 
 export { Tooltip, TooltipTrigger } from './components/Tooltip'
 export type { TooltipProps, TooltipRenderProps, TooltipTriggerComponentProps } from './components/Tooltip'
+
+export { Sidebar, SidebarTrigger, SidebarPanel } from './components/Sidebar'
+export type { SidebarProps, SidebarTriggerProps, SidebarPanelProps } from './components/Sidebar'

@@ -76,7 +76,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
           { id: 'tab-bar', label: 'Tab bar', path: '/tab-bar', status: 'implemented' },
           { id: 'navbar', label: 'Navbar', path: '/navbar', status: 'implemented' },
-          { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'empty' },
+          { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'implemented' },
           { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },
         ],
       },

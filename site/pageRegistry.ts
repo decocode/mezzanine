@@ -37,6 +37,7 @@ export const pageRegistry: Record<string, ComponentType<DocumentationPageProps>>
   'text-area': lazy(() => import('./pages/TextAreaPage')),
   'text-field': lazy(() => import('./pages/TextFieldPage')),
   'tab-bar': lazy(() => import('./pages/TabBarPage')),
+  sidebar: lazy(() => import('./pages/SidebarPage')),
   navbar: lazy(() => import('./pages/NavbarPage')),
   table: lazy(() => import('./pages/TablePage')),
 }

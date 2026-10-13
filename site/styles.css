@@ -1040,3 +1040,19 @@ a:focus-visible {
 .page-heading-group .page-description p + p {
   margin-top: var(--space-4);
 }
+
+/* Application layout around real Sidebar components; panel styling is public. */
+.sidebar-example-controls,
+.sidebar-example-layout,
+.sidebar-example-columns { display: flex; flex-wrap: wrap; gap: var(--space-4); min-width: 0; }
+.sidebar-example-controls { margin-block-end: var(--space-4); }
+.sidebar-example-layout { margin-block-start: var(--space-4); align-items: stretch; }
+.sidebar-example-workspace { flex: 1; min-width: min(100%, 10rem); padding: var(--space-3); overflow-wrap: anywhere; }
+.sidebar-example-column { display: flex; flex-direction: column; align-items: start; gap: var(--space-3); min-width: 0; max-width: 100%; }
+.sidebar-example-column .mezzanine-sidebar-panel { order: 0; }
+.sidebar-example-image { display: block; width: 100%; height: auto; margin-block-end: var(--space-4); }
+.sidebar-example-caption { margin: 0; }
+.sidebar-example-links { display: grid; gap: var(--space-3); }
+
+.sidebar-example, .sidebar-multiple-example { max-width: none; }
+.sidebar-example-options { display: grid; gap: var(--space-3); }

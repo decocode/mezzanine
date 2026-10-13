@@ -532,6 +532,30 @@
     "kind": "value"
   },
   {
+    "name": "Sidebar",
+    "kind": "value"
+  },
+  {
+    "name": "SidebarPanel",
+    "kind": "value"
+  },
+  {
+    "name": "SidebarPanelProps",
+    "kind": "type"
+  },
+  {
+    "name": "SidebarProps",
+    "kind": "type"
+  },
+  {
+    "name": "SidebarTrigger",
+    "kind": "value"
+  },
+  {
+    "name": "SidebarTriggerProps",
+    "kind": "type"
+  },
+  {
     "name": "SlidersVerticalIcon",
     "kind": "value"
   },

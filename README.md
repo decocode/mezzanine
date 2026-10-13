@@ -226,3 +226,37 @@ The fade animation is disabled for reduced motion.
 These components follow the [React Aria Tooltip API](https://react-aria.adobe.com/Tooltip).
 
 The Tooltip documentation page is registered at `/tooltip` under Components → Overlays.
+
+## Sidebar
+
+`Sidebar` supplies independent inline expansion and modal open state. Compose one
+`SidebarTrigger` and one `SidebarPanel` inside it; the trigger remains outside the
+panel so it can reopen a fully hidden sidebar. Both interactive parts use existing
+Mezzanine components backed by React Aria.
+
+```tsx
+<Sidebar>
+  <SidebarTrigger>Filters</SidebarTrigger>
+  <div className="application-layout">
+    <SidebarPanel title="Filters" side="left" collapseMode="hide">
+      <Checkbox>Option A</Checkbox>
+    </SidebarPanel>
+    <section aria-label="Workspace">…</section>
+  </div>
+</Sidebar>
+```
+
+The app owns the surrounding layout. `SidebarPanel` supports `header`, `children`
+and `footer`; these accept arbitrary content, including images, disclosures,
+forms and navigation. Use `collapseMode="rail"` with explicit `rail` content for
+compact controls. Use a separate Sidebar boundary for each additional panel.
+
+By default, viewports below 64rem use a modal drawer. `inlineMediaQuery` customizes
+that threshold; `presentation="inline"` or `"modal"` lets the app choose directly.
+Inline `isExpanded` and modal `isOpen` each support controlled state and change
+callbacks; their uncontrolled defaults are expanded and closed, respectively.
+Content remounts when changing presentation, so keep persistent form values and
+expanded disclosure keys in application state. Panel `className` and `style`
+apply in both presentations; root-level theme tokens also reach portalled drawers.
+The `/sidebar` page demonstrates both sides, both collapse modes and independent
+navigation, filter and detail panels with neutral content.
