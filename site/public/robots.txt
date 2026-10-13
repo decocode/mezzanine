@@ -1,0 +1,4 @@
+# Allow crawlers to read the pre-launch X-Robots-Tag header set in nginx.conf.
+# That header controls whether pages may appear in search results.
+User-agent: *
+Allow: /

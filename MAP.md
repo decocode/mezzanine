@@ -88,6 +88,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/styles.css` | Library stylesheet entry point; imports typography and, as components arrive, their structural styles |
 | `src/typography.css` | Fifteen public text-style classes and the Inline code element pattern, assembled from typography tokens |
 | `site/index.html` | HTML shell for the showcase site, including its favicon reference |
+| `site/public/robots.txt` | Served unchanged at `/robots.txt`; allows crawling so search engines can read the pre-launch `noindex` response header |
 | `site/favicon.svg` | Staircase Z favicon with neutral-200 background and neutral-950 mark, embedded for use outside the site CSS |
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
 | `site/AppShell.tsx` | Site layout, theme state and route selection; delegates page rendering to page components and the loading boundary |
@@ -135,7 +136,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Navbar.css` | Token-based Navbar layout, text-size-aware container breakpoint and reduced-motion-aware menu panel |
 | `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
 | `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs link and separate theme actions to the library Navbar |
-| `site/components/Sidebar.tsx` | Responsive nested NavigationTree sidebar, expanding the current page's ancestor groups, including the mobile Browse sections disclosure |
+| `site/components/Sidebar.tsx` | Responsive sidebar shell; loads navigation when needed with loading and error states |
+| `site/components/SidebarNavigation.tsx` | On-demand nested NavigationTree, expanding the current page's ancestor groups |
+| `site/components/useSidebarNavigationVisibility.ts` | Observes when CSS makes the desktop sidebar visible, including text-size changes, before requesting navigation |
 | `src/components/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |
 | `src/components/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |
 | `src/components/useAnimatedNavigationTree.ts` | Public optional NavigationTree expansion-animation hook with reduced-motion handling |

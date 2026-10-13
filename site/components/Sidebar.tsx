@@ -1,116 +1,52 @@
-import {
-  Badge,
-  Button,
-  ChevronDownIcon,
-  Disclosure,
-  DisclosurePanel,
-  Heading,
-  Link,
-  MenuIcon,
-  NavigationTree,
-  NavigationTreeItem,
-  NavigationTreeItemContent,
-} from '@decocode/mezzanine'
-import {
-  findSiteNavigationGroups,
-  siteNavigationGroups,
-  type SiteNavigationGroup,
-  type SitePageDefinition,
-} from '../siteStructure'
-import { useAnimatedNavigationTree } from '@decocode/mezzanine'
+import { Component, lazy, Suspense, useRef, useState, type ReactNode } from 'react'
+import { Button, Disclosure, DisclosurePanel, Heading, MenuIcon } from '@decocode/mezzanine'
+import type { SitePageDefinition } from '../siteStructure'
+import { useSidebarNavigationVisibility } from './useSidebarNavigationVisibility'
+
+const SidebarNavigation = lazy(() => import('./SidebarNavigation'))
 
 interface SidebarProps {
   currentPage: SitePageDefinition
 }
 
-function SidebarNavigation({ currentPage }: SidebarProps) {
-  const currentGroups = findSiteNavigationGroups(currentPage.id)
-  const {
-    closingKeys,
-    expandedKeys,
-    onExpandedChange,
-    openingKeys,
-  } = useAnimatedNavigationTree(currentGroups.map((group) => group.id))
+class NavigationLoadBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false }
 
-  function renderGroup(group: SiteNavigationGroup, ancestorIds: string[] = []) {
-    const parentIsOpening = ancestorIds.some((id) => openingKeys.has(id))
-    const parentIsClosing = ancestorIds.some((id) => closingKeys.has(id))
-    const childrenAreOpening = parentIsOpening || openingKeys.has(group.id)
-    const childrenAreClosing = parentIsClosing || closingKeys.has(group.id)
-
-    return (
-        <NavigationTreeItem
-          className={`react-aria-NavigationTreeItem sidebar-navigation-tree-group${group.path ? ' mezzanine-navigation-tree-item-has-link' : ''}${parentIsOpening || parentIsClosing ? ' animated-navigation-tree-item' : ''}${parentIsOpening ? ' is-opening' : ''}${childrenAreClosing ? ' is-closing' : ''}`}
-          href={group.path}
-          id={group.id}
-          key={group.id}
-          textValue={group.label}
-        >
-          <NavigationTreeItemContent>
-            {group.path ? (
-              <>
-                <Link>{group.label}</Link>
-                <Button
-                  aria-label={`Expand or collapse ${group.label}`}
-                  iconLeading={<ChevronDownIcon />}
-                  size="sm"
-                  slot="chevron"
-                  variant="tertiary"
-                />
-              </>
-            ) : (
-              <Button
-                aria-label={`Expand or collapse ${group.label}`}
-                className="mezzanine-navigation-tree-group-toggle"
-                iconTrailing={<ChevronDownIcon />}
-                size="sm"
-                slot="chevron"
-                variant="tertiary"
-              >
-                {group.label}
-              </Button>
-            )}
-          </NavigationTreeItemContent>
-          {group.groups?.map((childGroup) => renderGroup(childGroup, [...ancestorIds, group.id]))}
-          {group.pages.map((page) => (
-            <NavigationTreeItem
-              className={`react-aria-NavigationTreeItem animated-navigation-tree-item${childrenAreOpening ? ' is-opening' : ''}${childrenAreClosing ? ' is-closing' : ''}`}
-              href={page.path}
-              id={page.id}
-              key={page.id}
-              textValue={page.label}
-            >
-              <NavigationTreeItemContent>
-                <Link>
-                  <span>{page.label}</span>
-                  {page.status === 'empty' && (
-                    <Badge variant="info">WIP</Badge>
-                  )}
-                </Link>
-              </NavigationTreeItemContent>
-            </NavigationTreeItem>
-          ))}
-        </NavigationTreeItem>
-    )
+  static getDerivedStateFromError() {
+    return { hasError: true }
   }
 
+  render() {
+    if (this.state.hasError) {
+      return <>
+        <p role="alert">Unable to load navigation.</p>
+        <Button onPress={() => window.location.reload()}>Reload page</Button>
+      </>
+    }
+    return this.props.children
+  }
+}
+
+function LoadedNavigation({ currentPage }: SidebarProps) {
   return (
-    <NavigationTree
-      aria-label="Mezzanine documentation"
-      className="react-aria-NavigationTree animated-navigation-tree"
-      expandedKeys={expandedKeys}
-      onExpandedChange={onExpandedChange}
-      selectedRoute={currentPage.path}
-    >
-      {siteNavigationGroups.map((group) => renderGroup(group))}
-    </NavigationTree>
+    <NavigationLoadBoundary>
+      <Suspense fallback={<p role="status">Loading navigation…</p>}>
+        <SidebarNavigation currentPage={currentPage} />
+      </Suspense>
+    </NavigationLoadBoundary>
   )
 }
 
 export function Sidebar({ currentPage }: SidebarProps) {
+  const desktopRef = useRef<HTMLDivElement>(null)
+  const desktopRequested = useSidebarNavigationVisibility(desktopRef)
+  const [mobileRequested, setMobileRequested] = useState(false)
+
   return (
     <nav aria-label="Mezzanine sections" className="site-sidebar">
-      <Disclosure className="mobile-sidebar">
+      <Disclosure className="mobile-sidebar" onExpandedChange={(isExpanded) => {
+        if (isExpanded) setMobileRequested(true)
+      }}>
         <Heading className="mobile-sidebar-heading" level={2}>
           <Button
             className="sidebar-browse-trigger"
@@ -122,12 +58,12 @@ export function Sidebar({ currentPage }: SidebarProps) {
           </Button>
         </Heading>
         <DisclosurePanel className="mobile-sidebar-panel">
-          <SidebarNavigation currentPage={currentPage} />
+          {mobileRequested && <LoadedNavigation currentPage={currentPage} />}
         </DisclosurePanel>
       </Disclosure>
 
-      <div className="desktop-sidebar">
-        <SidebarNavigation currentPage={currentPage} />
+      <div className="desktop-sidebar" ref={desktopRef}>
+        {desktopRequested && <LoadedNavigation currentPage={currentPage} />}
       </div>
     </nav>
   )
