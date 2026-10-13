@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+  TableOfContents,
   Button,
   type ButtonVariant,
   Link,
@@ -16,7 +17,6 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { buttonTokens } from '../foundationData'
-import { TableOfContents } from '../TableOfContents'
 import { PageHeading } from '../PageHeading'
 import {
   buttonVariants,

@@ -1,5 +1,6 @@
 import { useId } from 'react'
-import { Link } from '@decocode/mezzanine'
+import { Heading } from './Dialog'
+import { Link } from './Link'
 
 export interface TableOfContentsSection {
   id: string
@@ -7,7 +8,7 @@ export interface TableOfContentsSection {
   children?: readonly TableOfContentsSection[]
 }
 
-interface TableOfContentsProps {
+export interface TableOfContentsProps {
   sections: readonly TableOfContentsSection[]
   className?: string
   heading?: string
@@ -27,7 +28,7 @@ function TableOfContentsList({ sections }: { sections: readonly TableOfContentsS
   )
 }
 
-// Composes Mezzanine's React Aria Link with a semantic navigation landmark.
+// Composes Mezzanine's React Aria Heading and Link in a navigation landmark.
 export function TableOfContents({
   sections,
   className,
@@ -35,7 +36,6 @@ export function TableOfContents({
   headingLevel = 2,
 }: TableOfContentsProps) {
   const headingId = useId()
-  const Heading = headingLevel === 3 ? 'h3' : 'h2'
 
   if (sections.length === 0) return null
 
@@ -44,7 +44,7 @@ export function TableOfContents({
       aria-labelledby={headingId}
       className={['table-of-contents', className].filter(Boolean).join(' ')}
     >
-      <Heading className="mz-text-heading-sm" id={headingId}>{heading}</Heading>
+      <Heading className="mz-text-heading-sm" id={headingId} level={headingLevel}>{heading}</Heading>
       <TableOfContentsList sections={sections} />
     </nav>
   )

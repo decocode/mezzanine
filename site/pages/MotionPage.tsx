@@ -1,10 +1,9 @@
-import { Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { TableOfContents, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import {
   motionPatternDefinitions,
   motionTimingDefinitions,
   motionTokenDefinitions,
 } from '../foundationData'
-import { TableOfContents } from '../TableOfContents'
 import { PageHeading } from '../PageHeading'
 import { TokenValue } from '../TokenValue'
 

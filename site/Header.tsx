@@ -2,8 +2,7 @@ import { useState } from 'react'
 import {
   Button,
   Heading,
-} from 'react-aria-components'
-import {
+  MenuIcon,
   Disclosure,
   DisclosurePanel,
   Link,
@@ -29,22 +28,6 @@ interface HeaderProps extends ThemeControlProps {
 
 interface HeaderNavigationProps extends HeaderProps {
   onNavigate?: () => void
-}
-
-function MenuIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="menu-trigger-icon"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path d="M3 6h18M3 12h18M3 18h18" />
-    </svg>
-  )
 }
 
 function getDisplayedThemeSelection(themeSelection: ThemeSelection) {
@@ -130,8 +113,12 @@ export function Header({
         onExpandedChange={setIsMenuExpanded}
       >
         <Heading className="mobile-navigation-heading" level={2}>
-          <Button className="menu-trigger" slot="trigger">
-            <MenuIcon />
+          <Button
+            className="menu-trigger"
+            iconLeading={<MenuIcon />}
+            slot="trigger"
+            variant="secondary"
+          >
             Menu
           </Button>
         </Heading>

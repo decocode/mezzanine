@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+  TableOfContents,
   FieldError,
   Label,
   Link,
@@ -16,7 +17,6 @@ import {
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
-import { TableOfContents } from '../TableOfContents'
 import { radioGroupAnatomy, radioGroupStates, radioGroupTokens } from '../radioGroupDocumentation'
 import { PageHeading } from '../PageHeading'
 

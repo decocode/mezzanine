@@ -18,5 +18,6 @@
 @import './components/NavigationTree.css';
 @import './components/RadioGroup.css';
 @import './components/Table.css';
+@import './components/TableOfContents.css';
 @import './components/Tabs.css';
 @import './components/ToggleButton.css';

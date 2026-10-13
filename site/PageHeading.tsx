@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link, ExternalLinkIcon } from '@decocode/mezzanine'
+import { Heading, Link, ExternalLinkIcon } from '@decocode/mezzanine'
 
 interface PageHeadingProps {
   description?: ReactNode | ReactNode[]
@@ -24,7 +24,9 @@ export function PageHeading({ description, reactAriaPage, title }: PageHeadingPr
 
   return (
     <div className="page-heading-group">
-      <h1 className="mz-text-display-md mz-text-emphasis">{headingLabels[title] ?? title}</h1>
+      <Heading className="mz-text-display-md mz-text-emphasis" level={1}>
+        {headingLabels[title] ?? title}
+      </Heading>
       {description && (
         <div className="page-description">
           {descriptionParagraphs.map((paragraph, index) => (

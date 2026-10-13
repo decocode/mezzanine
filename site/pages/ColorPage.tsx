@@ -1,4 +1,5 @@
 import {
+  TableOfContents,
   Disclosure,
   DisclosureHeader,
   DisclosurePanel,
@@ -19,7 +20,6 @@ import {
   type ColorPaletteDefinition,
 } from '../foundationData'
 import { chooseSwatchTextTone } from '../colorContrast'
-import { TableOfContents } from '../TableOfContents'
 import { PageHeading } from '../PageHeading'
 import { useTokenValue } from '../useTokenValue'
 import { TokenValue } from '../TokenValue'

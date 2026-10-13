@@ -1,4 +1,5 @@
 import {
+  TableOfContents,
   Disclosure,
   DisclosureGroup,
   DisclosureHeader,
@@ -6,7 +7,6 @@ import {
   Link,
   ExternalLinkIcon,
 } from '@decocode/mezzanine'
-import { TableOfContents } from '../TableOfContents'
 import { PageHeading } from '../PageHeading'
 
 export default function DisclosurePage() {

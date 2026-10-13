@@ -1,5 +1,4 @@
-import { Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { TableOfContents } from '../TableOfContents'
+import { TableOfContents, Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { PageHeading } from '../PageHeading'
 
 export default function BadgePage() {

@@ -1,5 +1,4 @@
-import { Link, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { TableOfContents } from '../TableOfContents'
+import { TableOfContents, Link, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { PageHeading } from '../PageHeading'
 
 export default function TableOfContentsPage() {
@@ -58,9 +57,9 @@ export default function TableOfContentsPage() {
           ))}
         </div>
         <p className="component-section-description">
-          This is a reusable showcase component in <code>site/TableOfContents.tsx</code>,
-          composed from Mezzanine’s React Aria <code>Link</code> and semantic HTML. It is not currently
-          exported from <code>@decocode/mezzanine</code>.
+          Import <code>TableOfContents</code> from <code>@decocode/mezzanine</code>.
+          It composes Mezzanine’s React Aria <code>Heading</code> and <code>Link</code>
+          with a navigation landmark and nested lists.
         </p>
       </section>
       <section aria-labelledby="table-of-contents-props-heading" className="component-section">

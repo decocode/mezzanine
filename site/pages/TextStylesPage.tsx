@@ -1,4 +1,5 @@
 import {
+  TableOfContents,
   Disclosure,
   DisclosureHeader,
   DisclosurePanel,
@@ -10,7 +11,6 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { typographyStyles, typographyStyleTokens } from '../foundationData'
-import { TableOfContents } from '../TableOfContents'
 import { PageHeading } from '../PageHeading'
 import { useTokenValue } from '../useTokenValue'
 import { TokenValue } from '../TokenValue'

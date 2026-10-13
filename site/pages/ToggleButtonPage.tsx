@@ -1,4 +1,5 @@
 import {
+  TableOfContents,
   Link,
   Cell,
   Column,
@@ -10,7 +11,6 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from '@decocode/mezzanine'
-import { TableOfContents } from '../TableOfContents'
 import { PageHeading } from '../PageHeading'
 
 export default function ToggleButtonPage() {

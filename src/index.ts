@@ -226,3 +226,7 @@ export type {
   ToggleButtonProps,
   ToggleButtonRenderProps,
 } from './components/ToggleButton'
+
+export { TableOfContents } from './components/TableOfContents'
+
+export type { TableOfContentsProps, TableOfContentsSection } from './components/TableOfContents'

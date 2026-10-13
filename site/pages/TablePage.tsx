@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import {
+  TableOfContents,
   Checkbox,
   type SortDescriptor,
   Cell,
@@ -9,7 +10,6 @@ import {
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
-import { TableOfContents } from '../TableOfContents'
 import { sortTableExampleRows, tableAnatomy, tableExampleRows } from '../tableExampleData'
 import { PageHeading } from '../PageHeading'
 

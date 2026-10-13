@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import {
+  TableOfContents,
   Button, Cell, Column, Dialog, DialogTrigger, Heading, Modal, ModalOverlay,
   Row, Table, TableBody, TableHeader,
 } from '@decocode/mezzanine'
-import { TableOfContents } from './TableOfContents'
 import { dialogTokens } from './componentTokenDocumentation'
 
 export function DialogExamples() {

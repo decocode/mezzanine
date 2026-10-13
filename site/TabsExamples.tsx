@@ -1,5 +1,4 @@
-import { Cell, Column, Row, Table, TableBody, TableHeader, Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
-import { TableOfContents } from './TableOfContents'
+import { TableOfContents, Cell, Column, Row, Table, TableBody, TableHeader, Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
 import { tabsTokens } from './componentTokenDocumentation'
 
 export function TabsExamples() {

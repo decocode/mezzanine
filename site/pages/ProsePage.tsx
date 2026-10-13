@@ -1,4 +1,4 @@
-import { TableOfContents } from '../TableOfContents'
+import { TableOfContents } from '@decocode/mezzanine'
 import { PageHeading } from '../PageHeading'
 import { useTokenValue } from '../useTokenValue'
 

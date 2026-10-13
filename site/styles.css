@@ -40,8 +40,9 @@ a:focus-visible {
   position: sticky;
   z-index: 10;
   top: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 0.75rem;
   align-items: center;
   min-height: 4rem;
@@ -58,7 +59,7 @@ a:focus-visible {
 }
 
 .mobile-navigation {
-  justify-self: end;
+  margin-inline-start: auto;
   border-block-end: 0;
 }
 
@@ -66,7 +67,9 @@ a:focus-visible {
   margin: 0;
 }
 
-.menu-trigger {
+.menu-trigger.react-aria-Button[data-variant] {
+  --button-icon-size: 1.25rem;
+  --button-content-gap: 0.5rem;
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
@@ -85,23 +88,18 @@ a:focus-visible {
   cursor: pointer;
 }
 
-.menu-trigger[data-hovered] {
+.menu-trigger.react-aria-Button[data-variant][data-hovered] {
   background: var(--color-surface-hover);
 }
 
-.menu-trigger[data-pressed] {
+.menu-trigger.react-aria-Button[data-variant][data-pressed] {
   background: var(--color-surface-pressed);
 }
 
-.menu-trigger[data-focus-visible],
+.menu-trigger.react-aria-Button[data-variant][data-focus-visible],
 .showcase-navigation > .react-aria-Link[data-focus-visible] {
   outline: 3px solid var(--color-focus);
   outline-offset: 2px;
-}
-
-.menu-trigger-icon {
-  width: 1.25rem;
-  height: 1.25rem;
 }
 
 .mobile-navigation-panel {
@@ -223,7 +221,10 @@ a:focus-visible {
   border-block-end: 0;
 }
 
-.sidebar-browse-trigger {
+.sidebar-browse-trigger.react-aria-Button[data-variant] {
+  --button-icon-size: 1.25rem;
+  --button-content-gap: 0.5rem;
+  justify-content: flex-start;
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -244,20 +245,14 @@ a:focus-visible {
   cursor: pointer;
 }
 
-.sidebar-browse-trigger[data-hovered],
-.sidebar-browse-trigger[data-pressed] {
+.sidebar-browse-trigger.react-aria-Button[data-variant][data-hovered],
+.sidebar-browse-trigger.react-aria-Button[data-variant][data-pressed] {
   background: var(--color-surface-hover);
 }
 
-.sidebar-browse-trigger[data-focus-visible] {
+.sidebar-browse-trigger.react-aria-Button[data-variant][data-focus-visible] {
   outline: 3px solid var(--color-focus);
   outline-offset: -3px;
-}
-
-.sidebar-browse-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  flex: none;
 }
 
 .mobile-sidebar-panel {
@@ -876,38 +871,6 @@ a:focus-visible {
   padding-inline: 0.75rem;
   text-align: center;
   vertical-align: middle;
-}
-
-.table-of-contents {
-  margin-bottom: var(--space-16);
-}
-
-.table-of-contents > :is(h2, h3) {
-  margin: 0 0 var(--space-4);
-}
-
-.table-of-contents ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.table-of-contents ul ul {
-  margin-top: 0.25rem;
-  padding-inline-start: 1.25rem;
-}
-
-.table-of-contents li {
-  min-width: 0;
-}
-
-.table-of-contents .react-aria-Link {
-  min-height: 2rem;
-  max-width: 100%;
-  overflow-wrap: anywhere;
 }
 
 .component-section :is(h2, h3, h4)[id],

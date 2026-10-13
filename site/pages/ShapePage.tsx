@@ -1,5 +1,5 @@
+import { TableOfContents } from '@decocode/mezzanine'
 import { radiusLevels } from '../foundationData'
-import { TableOfContents } from '../TableOfContents'
 import { ShapeCornerExample } from '../ShapeCornerExample'
 import { PageHeading } from '../PageHeading'
 import { useTokenValue } from '../useTokenValue'

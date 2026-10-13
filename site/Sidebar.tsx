@@ -1,11 +1,12 @@
-import { Button as ReactAriaButton, Heading } from 'react-aria-components'
 import {
   Badge,
   Button,
   ChevronDownIcon,
   Disclosure,
   DisclosurePanel,
+  Heading,
   Link,
+  MenuIcon,
   NavigationTree,
   NavigationTreeItem,
   NavigationTreeItemContent,
@@ -20,22 +21,6 @@ import { useAnimatedNavigationTree } from './useAnimatedNavigationTree'
 
 interface SidebarProps {
   currentPage: SitePageDefinition
-}
-
-function BrowseIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="sidebar-browse-icon"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path d="M3 6h18M3 12h18M3 18h18" />
-    </svg>
-  )
 }
 
 function SidebarNavigation({ currentPage }: SidebarProps) {
@@ -127,10 +112,14 @@ export function Sidebar({ currentPage }: SidebarProps) {
     <nav aria-label="Mezzanine sections" className="site-sidebar">
       <Disclosure className="mobile-sidebar">
         <Heading className="mobile-sidebar-heading" level={2}>
-          <ReactAriaButton className="sidebar-browse-trigger" slot="trigger">
-            <BrowseIcon />
+          <Button
+            className="sidebar-browse-trigger"
+            iconLeading={<MenuIcon />}
+            slot="trigger"
+            variant="tertiary"
+          >
             Browse sections
-          </ReactAriaButton>
+          </Button>
         </Heading>
         <DisclosurePanel className="mobile-sidebar-panel">
           <SidebarNavigation currentPage={currentPage} />

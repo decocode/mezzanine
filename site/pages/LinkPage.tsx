@@ -1,4 +1,5 @@
 import {
+  TableOfContents,
   Link,
   Cell,
   Column,
@@ -8,7 +9,6 @@ import {
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
-import { TableOfContents } from '../TableOfContents'
 import { PageHeading } from '../PageHeading'
 
 type LinkPreviewState = 'default' | 'hovered' | 'pressed' | 'focused' | 'current' | 'disabled'

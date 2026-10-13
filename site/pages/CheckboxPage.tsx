@@ -1,5 +1,4 @@
-import { Checkbox, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { TableOfContents } from '../TableOfContents'
+import { TableOfContents, Checkbox, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { PageHeading } from '../PageHeading'
 
 export default function CheckboxPage() {
