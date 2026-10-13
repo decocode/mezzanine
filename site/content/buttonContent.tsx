@@ -1,4 +1,4 @@
-import { buttonTokens } from '../foundationData'
+import { buttonTokens } from './foundationData'
 
 // Written guidance and reference entries; live examples stay in the page.
 export const buttonContent = {

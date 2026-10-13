@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
-import { Link } from '@decocode/mezzanine'
-import { ShowcaseHeader } from './ShowcaseHeader'
-import { Sidebar } from './Sidebar'
-import { DocumentationHeading } from './DocumentationHeading'
-import { DocumentationPage } from './DocumentationPage'
-import { findSitePage, type SitePageDefinition } from './siteNavigation'
-import { applyThemeSelection, storeThemeSelection, type ThemeSelection } from './themeSelection'
+import { PageHeading, Link } from '@decocode/mezzanine'
+import { MezzanineNavbar } from './components/MezzanineNavbar'
+import { Sidebar } from './components/Sidebar'
+import { PageLoader } from './PageLoader'
+import { findSitePage, type SitePageDefinition } from './siteStructure'
+import { applyTheme, storeTheme, type Theme } from './themeSwitcherLogic'
 
 interface AppShellProps {
-  initialThemeSelection: ThemeSelection
+  initialTheme: Theme
 }
 
 function LandingPage() {
@@ -29,8 +28,7 @@ function LandingPage() {
 function EmptyPage({ page }: { page: SitePageDefinition }) {
   return (
     <>
-      <DocumentationHeading
-        reactAriaPage={page.reactAriaPage}
+      <PageHeading
         title={page.label}
       />
       <p className="mz-text-body-md empty-page-status">Not implemented</p>
@@ -41,14 +39,14 @@ function EmptyPage({ page }: { page: SitePageDefinition }) {
 function NotFoundPage() {
   return (
     <main className="not-found-page" id="main-content">
-      <DocumentationHeading title="Page not found" />
+      <PageHeading title="Page not found" />
       <Link href="/">Return to Mezzanine</Link>
     </main>
   )
 }
 
-export function AppShell({ initialThemeSelection }: AppShellProps) {
-  const [themeSelection, setThemeSelection] = useState(initialThemeSelection)
+export function AppShell({ initialTheme }: AppShellProps) {
+  const [selectedTheme, setSelectedTheme] = useState(initialTheme)
   const [systemPreferenceVersion, setSystemPreferenceVersion] = useState(0)
   const currentPath = window.location.pathname === '/'
     ? '/'
@@ -56,12 +54,12 @@ export function AppShell({ initialThemeSelection }: AppShellProps) {
   const currentPage = findSitePage(currentPath)
 
   useEffect(() => {
-    applyThemeSelection(themeSelection)
-    storeThemeSelection(themeSelection)
-  }, [themeSelection])
+    applyTheme(selectedTheme)
+    storeTheme(selectedTheme)
+  }, [selectedTheme])
 
   useEffect(() => {
-    if (themeSelection !== 'system') return
+    if (selectedTheme !== 'system') return
 
     const devicePreference = window.matchMedia('(prefers-color-scheme: dark)')
     const updateSystemPreference = () => {
@@ -70,18 +68,18 @@ export function AppShell({ initialThemeSelection }: AppShellProps) {
 
     devicePreference.addEventListener('change', updateSystemPreference)
     return () => devicePreference.removeEventListener('change', updateSystemPreference)
-  }, [themeSelection])
+  }, [selectedTheme])
 
-  const refreshKey = `${themeSelection}-${systemPreferenceVersion}`
+  const refreshKey = `${selectedTheme}-${systemPreferenceVersion}`
 
   if (!currentPage) {
     return (
       <>
         <title>Page not found | Mezzanine</title>
-        <ShowcaseHeader
+        <MezzanineNavbar
           currentPath={currentPath}
-          onThemeSelectionChange={setThemeSelection}
-          themeSelection={themeSelection}
+          onThemeChange={setSelectedTheme}
+          selectedTheme={selectedTheme}
         />
         <NotFoundPage />
       </>
@@ -93,10 +91,10 @@ export function AppShell({ initialThemeSelection }: AppShellProps) {
       <>
         <title>Mezzanine</title>
         <Link className="skip-link" href="#main-content">Skip to main content</Link>
-        <ShowcaseHeader
+        <MezzanineNavbar
           currentPath={currentPath}
-          onThemeSelectionChange={setThemeSelection}
-          themeSelection={themeSelection}
+          onThemeChange={setSelectedTheme}
+          selectedTheme={selectedTheme}
         />
         <LandingPage />
       </>
@@ -107,16 +105,16 @@ export function AppShell({ initialThemeSelection }: AppShellProps) {
     <>
       <title>{`${currentPage.label} | Mezzanine`}</title>
       <Link className="skip-link" href="#main-content">Skip to main content</Link>
-      <ShowcaseHeader
+      <MezzanineNavbar
         currentPath={currentPath}
-        onThemeSelectionChange={setThemeSelection}
-        themeSelection={themeSelection}
+        onThemeChange={setSelectedTheme}
+        selectedTheme={selectedTheme}
       />
       <div className="site-layout">
         <Sidebar currentPage={currentPage} />
         <main className="site-content" id="main-content">
           {currentPage.status === 'implemented'
-            ? <DocumentationPage page={currentPage} refreshKey={refreshKey} />
+            ? <PageLoader page={currentPage} refreshKey={refreshKey} />
             : <EmptyPage page={currentPage} />}
         </main>
       </div>

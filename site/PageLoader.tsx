@@ -1,8 +1,12 @@
+// This component finds the requested page in pageRegistry.ts and displays it.
+// It shows a loading message while the page downloads, or an error with a reload
+// button if something goes wrong. Once the page loads, it also scrolls to the
+// requested section when the URL includes a section link, such as #navbar-anatomy.
+
 import { Component, Suspense, useEffect, type ReactNode } from 'react'
-import { Button } from '@decocode/mezzanine'
-import { documentationPages } from './documentationPages'
-import { DocumentationHeading } from './DocumentationHeading'
-import type { SitePageDefinition } from './siteNavigation'
+import { PageHeading, Button } from '@decocode/mezzanine'
+import { pageRegistry } from './pageRegistry'
+import type { SitePageDefinition } from './siteStructure'
 
 class PageLoadBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
   state = { hasError: false }
@@ -15,7 +19,7 @@ class PageLoadBoundary extends Component<{ children: ReactNode }, { hasError: bo
     if (this.state.hasError) {
       return (
         <>
-          <DocumentationHeading title="Unable to load this page" />
+          <PageHeading title="Unable to load this page" />
           <p role="alert">Reload the page to try again.</p>
           <Button onPress={() => window.location.reload()}>Reload page</Button>
         </>
@@ -26,7 +30,7 @@ class PageLoadBoundary extends Component<{ children: ReactNode }, { hasError: bo
 }
 
 function LoadedPage({ pageId, refreshKey }: { pageId: string; refreshKey: string }) {
-  const Page = documentationPages[pageId]
+  const Page = pageRegistry[pageId]
 
   useEffect(() => {
     // A direct section link may arrive before the page's chunk and heading exist.
@@ -45,7 +49,7 @@ function LoadedPage({ pageId, refreshKey }: { pageId: string; refreshKey: string
   return <Page refreshKey={refreshKey} />
 }
 
-export function DocumentationPage({ page, refreshKey }: {
+export function PageLoader({ page, refreshKey }: {
   page: SitePageDefinition
   refreshKey: string
 }) {
@@ -53,7 +57,7 @@ export function DocumentationPage({ page, refreshKey }: {
     <PageLoadBoundary key={page.id}>
       <Suspense fallback={
         <>
-          <DocumentationHeading title={page.label} />
+          <PageHeading title={page.label} />
           <p role="status">Loading documentation…</p>
         </>
       }>

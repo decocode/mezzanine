@@ -98,10 +98,10 @@ the labelled `nav` element, so pass links directly rather than wrapping them in 
 ## Component documentation pages
 
 `site/AppShell.tsx` owns the site layout, navigation and theme. It loads each Docs
-page independently through `DocumentationPage.tsx`.
+page independently through `PageLoader.tsx`.
 
 Implemented component pages in `site/pages/` use `site/templates/ComponentPageTemplate.tsx`.
-Each page supplies its title, description, optional React Aria reference and an
+Each page supplies its title, description and an
 ordered `sections` list. Each section defines `id`, `title` and `content` once;
 the template creates its heading, wrapper and matching table-of-contents link.
 Optional `subsections` add On this page links to headings inside a section.
@@ -129,6 +129,8 @@ links. Supporting Button and RadioGroup reference datasets also live there.
 site UI, separate from the public library in `src/components/`. Its `ComponentExample`
 provides the standard example frame, accepting optional classes for special layouts.
 The disclosure group and its anchor-handling hook also live in `site/components/`.
+The site-specific `MezzanineNavbar` and `Sidebar` live there too. Foundation reference content and the icon
+catalogue live in `site/content/`.
 `site/components/ComponentReferenceTable.tsx` renders Anatomy, Props and CSS token
 entries consistently using Mezzanine's Table parts.
 
@@ -141,3 +143,15 @@ optional `referencesId` preserves an existing reference-section anchor.
 Use only applicable sections; do not add empty sections or invent missing
 features. Foundation pages retain their own structures. WIP pages remain marked
 Not implemented.
+
+## Optional NavigationTree animation
+
+Import `useAnimatedNavigationTree` from `@decocode/mezzanine` to opt into the
+row animation used by the documentation sidebar. The standard React Aria tree
+exports and props are unchanged. Pass the hook's `expandedKeys` and
+`onExpandedChange` to the tree. Its `openingKeys` and `closingKeys` identify
+parents whose descendant rows need `animated-navigation-tree-item` plus
+`is-opening` or `is-closing`; mark closing parents with `is-closing` as well.
+The library stylesheet supplies those animation classes. The hook reads
+`--navigation-tree-motion-duration` from the document root. Reduced motion
+removes row and chevron animation and completes any pending collapse immediately.

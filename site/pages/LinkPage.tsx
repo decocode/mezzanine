@@ -32,7 +32,6 @@ export default function LinkPage() {
   return (
     <ComponentPageTemplate
       description={linkContent.description}
-      reactAriaPage="Link"
       title={linkContent.title}
       relatedPages={linkContent.relatedPages}
       references={linkContent.references}

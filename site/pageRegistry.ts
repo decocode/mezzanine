@@ -1,3 +1,7 @@
+// This is the site's directory of implemented pages. It connects each page ID
+// (such as 'navbar') to its React component and loads that component only when
+// someone visits the page. The page content lives in site/pages/ and site/content/.
+
 import { lazy, type ComponentType } from 'react'
 
 export interface DocumentationPageProps {
@@ -5,7 +9,7 @@ export interface DocumentationPageProps {
 }
 
 // Declare lazy components once so theme updates retain each page's local state.
-export const documentationPages: Record<string, ComponentType<DocumentationPageProps>> = {
+export const pageRegistry: Record<string, ComponentType<DocumentationPageProps>> = {
   introduction: lazy(() => import('./pages/IntroductionPage')),
   color: lazy(() => import('./pages/ColorPage')),
   typography: lazy(() => import('./pages/TypographyPage')),

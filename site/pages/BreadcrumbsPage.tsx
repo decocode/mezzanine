@@ -8,7 +8,6 @@ export default function BreadcrumbsPage() {
   return (
     <ComponentPageTemplate
       description={breadcrumbsContent.description}
-      reactAriaPage="Breadcrumbs"
       title={breadcrumbsContent.title}
       relatedPages={breadcrumbsContent.relatedPages}
       references={breadcrumbsContent.references}

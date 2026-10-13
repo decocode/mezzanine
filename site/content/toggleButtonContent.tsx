@@ -1,6 +1,6 @@
 // Written guidance and reference entries; live examples stay in the page.
 export const toggleButtonContent = {
-  title: 'ToggleButton',
+  title: 'Toggle button',
   description: 'A toggle button turns a choice on or off and changes its appearance to show whether it is selected. For example, a Bold button stays selected while bold formatting is switched on.',
   relatedPages: [
     { label: 'Button', href: '/button' },

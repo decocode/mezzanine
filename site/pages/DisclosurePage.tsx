@@ -15,7 +15,6 @@ export default function DisclosurePage() {
   return (
     <ComponentPageTemplate
       description={disclosureContent.description}
-      reactAriaPage="Disclosure"
       title={disclosureContent.title}
       relatedPages={disclosureContent.relatedPages}
       references={disclosureContent.references}

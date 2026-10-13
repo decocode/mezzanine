@@ -13,7 +13,6 @@ export default function TextFieldPage() {
   return (
     <ComponentPageTemplate
       title={textFieldContent.title}
-      reactAriaPage="TextField"
       description={textFieldContent.description}
       relatedPages={textFieldContent.relatedPages}
       references={textFieldContent.references}

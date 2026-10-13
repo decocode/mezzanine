@@ -1,8 +1,6 @@
-import { TableOfContents } from '@decocode/mezzanine'
-import { radiusLevels } from '../foundationData'
-import { ShapeCornerExample } from '../ShapeCornerExample'
-import { DocumentationHeading } from '../DocumentationHeading'
-import { useTokenValue } from '../useTokenValue'
+import { PageHeading, TableOfContents } from '@decocode/mezzanine'
+import { radiusLevels } from '../content/foundationData'
+import { useTokenValue } from '../components/tokenValueLogic'
 
 function RadiusSample({ label, token, refreshKey }: { label: string; token: string; refreshKey: string }) {
   const value = useTokenValue(token, refreshKey)
@@ -20,7 +18,7 @@ function RadiusSample({ label, token, refreshKey }: { label: string; token: stri
 export default function ShapePage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
-      <DocumentationHeading title="Shape" description="Corner radius controls how square or rounded a surface appears. Mezzanine provides a shared scale that products can reference from their component tokens." />
+      <PageHeading title="Shape" description="Corner radius controls how square or rounded a surface appears. Mezzanine provides a shared scale that products can reference from their component tokens." />
       <TableOfContents sections={[
         { id: 'radius-levels-heading', label: 'Corner radius' },
         { id: 'radius-corners-heading', label: 'Individual corners' },
@@ -40,14 +38,9 @@ export default function ShapePage({ refreshKey }: { refreshKey: string }) {
       <section className="component-section" aria-labelledby="radius-corners-heading">
         <h2 id="radius-corners-heading" className="mz-text-heading-md">Individual corners</h2>
         <p className="component-section-description">
-          Choose a radius for each corner independently. Leave the other corners at None to round
-          just one corner, or combine levels to round an edge or create an asymmetric shape.
-          These are physical corners: left and right do not change with text direction.
-        </p>
-        <ShapeCornerExample />
-        <p className="component-section-description">
-          CSS reduces overlapping radii proportionally to fit the shape. Full can therefore affect
-          the visible size of other rounded corners when combined with them.
+          Use <code>border-radius</code> to make all four corners match, or target a specific
+          corner with a property such as <code>border-top-left-radius</code>. Both can use the
+          same radius tokens, for example <code>var(--radius-sm)</code>.
         </p>
       </section>
       <section className="component-section" aria-labelledby="radius-usage-heading">

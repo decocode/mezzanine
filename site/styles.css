@@ -50,7 +50,7 @@ a:focus-visible {
   width: 100%;
   height: 100%;
   background: var(--color-neutral-950);
-  mask: url('./mezzanine-logo.svg') center / contain no-repeat;
+  mask: url('./assets/mezzanine-logo.svg') center / contain no-repeat;
 }
 
 .site-name {
@@ -198,56 +198,6 @@ a:focus-visible {
 
 .site-sidebar .react-aria-NavigationTreeItem[data-level='1'][data-has-child-items]:not(:first-child) {
   margin-block-start: var(--space-2);
-}
-
-.animated-navigation-tree-item {
-  overflow: hidden;
-}
-
-.animated-navigation-tree-item.is-opening {
-  animation: navigation-tree-item-open var(--navigation-tree-motion-duration) ease-out both;
-}
-
-.animated-navigation-tree-item.is-closing {
-  pointer-events: none;
-  animation: navigation-tree-item-close var(--navigation-tree-motion-duration) ease-out both;
-}
-
-.sidebar-navigation-tree-group.is-closing .react-aria-Button[slot='chevron'] svg,
-.navigation-tree-example .react-aria-NavigationTreeItem.is-closing .react-aria-Button[slot='chevron'] svg {
-  rotate: 0deg;
-}
-
-@keyframes navigation-tree-item-open {
-  from {
-    min-height: 0;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(calc(-1 * var(--space-1)));
-  }
-
-  to {
-    min-height: var(--navigation-tree-item-min-height);
-    max-height: var(--navigation-tree-item-min-height);
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes navigation-tree-item-close {
-  from {
-    min-height: var(--navigation-tree-item-min-height);
-    max-height: var(--navigation-tree-item-min-height);
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  to {
-    min-height: 0;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(calc(-1 * var(--space-1)));
-  }
 }
 
 .landing-page {
@@ -654,32 +604,6 @@ a:focus-visible {
   margin-block-start: var(--space-8);
 }
 
-.shape-corner-preview {
-  width: 100%;
-  height: 10rem;
-  margin-bottom: var(--space-6);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-}
-
-.shape-corner-controls {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-6);
-}
-
-.shape-corner-control {
-  display: grid;
-  gap: var(--space-2);
-  min-width: 0;
-}
-
-.shape-corner-code {
-  margin: var(--space-2) 0 0;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
 .radius-scale-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
@@ -1059,10 +983,6 @@ a:focus-visible {
     scroll-behavior: auto;
   }
 
-  .animated-navigation-tree-item.is-opening,
-  .animated-navigation-tree-item.is-closing {
-    animation: none;
-  }
 
 }
 

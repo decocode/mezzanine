@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { sitePages } from '../site/siteNavigation'
+import { sitePages } from '../site/siteStructure'
 
 for (const sitePage of sitePages) {
   test(`${sitePage.path} loads only its own documentation page`, async ({ page }) => {

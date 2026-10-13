@@ -19,7 +19,6 @@ export default function ToggleButtonPage() {
   return (
     <ComponentPageTemplate
       description={toggleButtonContent.description}
-      reactAriaPage="ToggleButton"
       title={toggleButtonContent.title}
       relatedPages={toggleButtonContent.relatedPages}
       references={toggleButtonContent.references}

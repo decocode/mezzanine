@@ -1,6 +1,6 @@
 // Written guidance and reference entries; live examples stay in the page.
 export const tableOfContentsContent = {
-  title: 'Table of Contents',
+  title: 'Table of contents',
   description: 'A table of contents lists the sections of a page as links. It helps people see what the page covers and jump straight to the part they need.',
   relatedPages: [
     { label: 'Link', href: '/link' },

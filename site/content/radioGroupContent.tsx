@@ -2,7 +2,7 @@ import { radioGroupAnatomy, radioGroupTokens } from './radioGroupReferenceData'
 
 // Written guidance and reference entries; live examples stay in the page.
 export const radioGroupContent = {
-  title: 'RadioGroup',
+  title: 'Radio group',
   description: 'A radio group is a set of choices where only one option can be selected at a time, such as a delivery method. Choosing a different option replaces the previous selection.',
   relatedPages: [
     { label: 'Checkbox', href: '/checkbox' },

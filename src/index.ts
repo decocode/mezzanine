@@ -80,6 +80,7 @@ export type {
 } from './components/Link'
 
 export {
+  useAnimatedNavigationTree,
   NavigationTree,
   NavigationTreeHeader,
   NavigationTreeItem,

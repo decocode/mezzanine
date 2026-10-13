@@ -1,10 +1,14 @@
+// This file describes how the site's pages are organised: their navigation
+// groups, display names, URLs and implementation status.
+// It also helps the site find a page from its URL and the sidebar groups that
+// contain it. Page components are listed separately in pageRegistry.ts.
+
 export type SitePageStatus = 'implemented' | 'empty'
 
 export interface SitePageDefinition {
   id: string
   label: string
   path: string
-  reactAriaPage?: string
   status: SitePageStatus
 }
 
@@ -63,13 +67,13 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'navigation',
         label: 'Navigation',
         pages: [
-          { id: 'link', label: 'Link', path: '/link', reactAriaPage: 'Link', status: 'implemented' },
-          { id: 'breadcrumbs', label: 'Breadcrumbs', path: '/breadcrumbs', reactAriaPage: 'Breadcrumbs', status: 'implemented' },
-          { id: 'navigation-tree', label: 'Navigation tree', path: '/navigation-tree', reactAriaPage: 'NavigationTree', status: 'implemented' },
+          { id: 'link', label: 'Link', path: '/link', status: 'implemented' },
+          { id: 'breadcrumbs', label: 'Breadcrumbs', path: '/breadcrumbs', status: 'implemented' },
+          { id: 'navigation-tree', label: 'Navigation tree', path: '/navigation-tree', status: 'implemented' },
           { id: 'table-of-contents', label: 'Table of contents', path: '/table-of-contents', status: 'implemented' },
-          { id: 'tabs', label: 'Tabs', path: '/tabs', reactAriaPage: 'Tabs', status: 'implemented' },
+          { id: 'tabs', label: 'Tabs', path: '/tabs', status: 'implemented' },
           { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
-          { id: 'menu', label: 'Menu', path: '/menu', reactAriaPage: 'Menu', status: 'empty' },
+          { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
           { id: 'tab-bar', label: 'Tab bar', path: '/tab-bar', status: 'implemented' },
           { id: 'navbar', label: 'Navbar', path: '/navbar', status: 'implemented' },
           { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'empty' },
@@ -80,25 +84,25 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'actions-and-controls',
         label: 'Actions and controls',
         pages: [
-          { id: 'button', label: 'Button', path: '/button', reactAriaPage: 'Button', status: 'implemented' },
-          { id: 'toggle-button', label: 'Toggle button', path: '/toggle-button', reactAriaPage: 'ToggleButton', status: 'implemented' },
+          { id: 'button', label: 'Button', path: '/button', status: 'implemented' },
+          { id: 'toggle-button', label: 'Toggle button', path: '/toggle-button', status: 'implemented' },
         ],
       },
       {
         id: 'forms-and-input',
         label: 'Forms and input',
         pages: [
-          { id: 'checkbox', label: 'Checkbox', path: '/checkbox', reactAriaPage: 'Checkbox', status: 'implemented' },
-          { id: 'radio-group', label: 'RadioGroup', path: '/radio-group', reactAriaPage: 'RadioGroup', status: 'implemented' },
-          { id: 'text-field', label: 'Text field', path: '/text-field', reactAriaPage: 'TextField', status: 'implemented' },
-          { id: 'text-area', label: 'Text area', path: '/text-area', reactAriaPage: 'TextField', status: 'implemented' },
+          { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'implemented' },
+          { id: 'radio-group', label: 'Radio group', path: '/radio-group', status: 'implemented' },
+          { id: 'text-field', label: 'Text field', path: '/text-field', status: 'implemented' },
+          { id: 'text-area', label: 'Text area', path: '/text-area', status: 'implemented' },
         ],
       },
       {
         id: 'overlays',
         label: 'Overlays',
         pages: [
-          { id: 'dialog', label: 'Dialog', path: '/dialog', reactAriaPage: 'Modal', status: 'implemented' },
+          { id: 'dialog', label: 'Dialog', path: '/dialog', status: 'implemented' },
         ],
       },
       {
@@ -111,11 +115,11 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     ],
     pages: [
       { id: 'badge', label: 'Badge', path: '/badge', status: 'implemented' },
-      { id: 'table', label: 'Table', path: '/table', reactAriaPage: 'Table', status: 'implemented' },
-      { id: 'disclosure', label: 'Disclosure', path: '/disclosure', reactAriaPage: 'Disclosure', status: 'implemented' },
+      { id: 'table', label: 'Table', path: '/table', status: 'implemented' },
+      { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
       { id: 'carousel', label: 'Carousel', path: '/carousel', status: 'empty' },
-      { id: 'image-viewer', label: 'Image Viewer', path: '/image-viewer', status: 'empty' },
-      { id: 'tag-group', label: 'TagGroup', path: '/tag-group', reactAriaPage: 'TagGroup', status: 'empty' },
+      { id: 'image-viewer', label: 'Image viewer', path: '/image-viewer', status: 'empty' },
+      { id: 'tag-group', label: 'Tag group', path: '/tag-group', status: 'empty' },
     ],
   },
 ]

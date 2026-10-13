@@ -1,10 +1,9 @@
-import { Link } from '@decocode/mezzanine'
-import { DocumentationHeading } from '../DocumentationHeading'
+import { PageHeading, Link } from '@decocode/mezzanine'
 
 export default function TypographyPage() {
   return (
     <>
-      <DocumentationHeading
+      <PageHeading
         description={[
           'Typography helps people understand what matters, scan a page and read its content. Mezzanine provides consistent text styles for everything from prominent headings to body copy and compact interface labels.',
           'Each style combines a font family, size, weight and line height. Use these styles together to create a clear hierarchy; product themes can customise their appearance without changing how they are applied.',

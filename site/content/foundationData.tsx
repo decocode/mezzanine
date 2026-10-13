@@ -349,7 +349,7 @@ export const motionPatternDefinitions: MotionPatternDefinition[] = [
   {
     id: 'navigation-tree',
     name: <><code>NavigationTree</code></>,
-    scope: 'Library chevron; Sidebar and documentation example rows',
+    scope: 'Library chevron and optional animated NavigationTree rows',
     movement: 'Rotates its chevron and reveals or collapses child rows by changing height, spacing, opacity, and position.',
     reducedMotion: 'The hierarchy changes immediately.',
   },

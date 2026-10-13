@@ -25,7 +25,6 @@ export default function TablePage() {
   return (
     <ComponentPageTemplate
       description={tableContent.description}
-      reactAriaPage="Table"
       title={tableContent.title}
       relatedPages={tableContent.relatedPages}
       references={tableContent.references}

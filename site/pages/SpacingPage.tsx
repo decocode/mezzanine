@@ -1,6 +1,6 @@
-import { spacingScaleSteps } from '../foundationData'
-import { DocumentationHeading } from '../DocumentationHeading'
-import { useTokenValue } from '../useTokenValue'
+import { PageHeading } from '@decocode/mezzanine'
+import { spacingScaleSteps } from '../content/foundationData'
+import { useTokenValue } from '../components/tokenValueLogic'
 
 function SpacingScaleItem({
   refreshKey,
@@ -37,7 +37,7 @@ function SpacingScaleItem({
 export default function SpacingPage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
-      <DocumentationHeading
+      <PageHeading
         description="Spacing creates consistent distance inside components and between elements."
         title="Spacing"
       />

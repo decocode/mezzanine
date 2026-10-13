@@ -1,16 +1,15 @@
-import { TableOfContents, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { PageHeading, TableOfContents, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import {
   motionPatternDefinitions,
   motionTimingDefinitions,
   motionTokenDefinitions,
-} from '../foundationData'
-import { DocumentationHeading } from '../DocumentationHeading'
-import { TokenValue } from '../TokenValue'
+} from '../content/foundationData'
+import { TokenValue } from '../components/TokenValue'
 
 export default function MotionPage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
-      <DocumentationHeading
+      <PageHeading
         description="Motion helps people understand when interface content opens, closes, or remains busy. This page records the motion that Mezzanine currently uses."
         title="Motion"
       />

@@ -8,7 +8,6 @@ export default function TabsPage() {
   return (
     <ComponentPageTemplate
       title={tabsContent.title}
-      reactAriaPage="Tabs"
       description={tabsContent.description}
       relatedPages={tabsContent.relatedPages}
       references={tabsContent.references}

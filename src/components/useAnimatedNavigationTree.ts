@@ -21,10 +21,25 @@ export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
   const [expandedKeys, setExpandedKeys] = useState(() => new Set(initialExpandedKeys))
   const [openingKeys, setOpeningKeys] = useState<Set<Key>>(() => new Set())
   const [closingKeys, setClosingKeys] = useState<Set<Key>>(() => new Set())
+  const requestedExpandedKeys = useRef(expandedKeys)
   const motionTimers = useRef(new Map<Key, ReturnType<typeof setTimeout>>())
 
   useEffect(() => () => {
     motionTimers.current.forEach(clearTimeout)
+  }, [])
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const finishMotion = () => {
+      if (!preference.matches) return
+      motionTimers.current.forEach(clearTimeout)
+      motionTimers.current.clear()
+      setOpeningKeys(new Set())
+      setClosingKeys(new Set())
+      setExpandedKeys(new Set(requestedExpandedKeys.current))
+    }
+    preference.addEventListener('change', finishMotion)
+    return () => preference.removeEventListener('change', finishMotion)
   }, [])
 
   const scheduleMotionEnd = useCallback((key: Key, onMotionEnd: () => void) => {
@@ -41,6 +56,7 @@ export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
 
   const onExpandedChange = useCallback((requestedKeys: Set<Key>) => {
     const nextKeys = new Set(requestedKeys)
+    requestedExpandedKeys.current = nextKeys
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (prefersReducedMotion) {

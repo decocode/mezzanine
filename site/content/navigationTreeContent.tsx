@@ -1,6 +1,6 @@
 // Written guidance and reference entries; live examples stay in the page.
 export const navigationTreeContent = {
-  title: 'NavigationTree',
+  title: 'Navigation tree',
   description: 'A navigation tree is a list of links arranged in groups that can open to reveal more links inside them, like folders containing other folders. It helps people explore a website with several levels of pages.',
   relatedPages: [
     { label: 'Navbar', href: '/navbar' },
@@ -32,6 +32,6 @@ export const navigationTreeContent = {
     <>Give the tree an <code>aria-label</code>, and wrap it in a labelled <code>nav</code> when it provides page navigation. Give each item a stable <code>id</code> and a <code>textValue</code> describing its label. A section needs a visible header or an accessible label.</>,
     <>Pass the current destination as <code>selectedRoute</code>. Set <code>defaultExpandedKeys</code> for initial expansion, or use <code>expandedKeys</code> with <code>onExpandedChange</code> when the application owns that state. Routing and the current path remain the application’s responsibility.</>,
     <>Use arrow keys to move through the tree hierarchy. The chevron Button expands or collapses its parent; Enter activates a focused destination. Keep the React Aria row composition so focus and keyboard handling remain connected to the tree.</>,
-    <>The reveal animation shown here is supplied by the showcase’s <code>useAnimatedNavigationTree</code> hook. That hook is not a public Mezzanine export.</>,
+    <>The optional <code>useAnimatedNavigationTree</code> hook is exported by Mezzanine. Pass its <code>expandedKeys</code> and <code>onExpandedChange</code> to the tree. Use its <code>openingKeys</code> and <code>closingKeys</code> to apply <code>is-opening</code> and <code>is-closing</code> to descendant rows with the <code>animated-navigation-tree-item</code> class. Mark a closing parent with <code>is-closing</code> so its chevron rotates back. Reduced motion skips the row animation and chevron transition; changing the preference during an animation finishes it immediately.</>,
   ],
 }

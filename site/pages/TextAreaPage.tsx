@@ -8,7 +8,6 @@ export default function TextAreaPage() {
   return (
     <ComponentPageTemplate
       title={textAreaContent.title}
-      reactAriaPage="TextField"
       description={textAreaContent.description}
       relatedPages={textAreaContent.relatedPages}
       references={textAreaContent.references}

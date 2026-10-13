@@ -14,7 +14,6 @@ export default function DialogPage() {
   return (
     <ComponentPageTemplate
       description={dialogContent.description}
-      reactAriaPage="Modal"
       title={dialogContent.title}
       relatedPages={dialogContent.relatedPages}
       references={dialogContent.references}

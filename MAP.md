@@ -13,7 +13,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 
 | Path | Purpose |
 | --- | --- |
-| `site/mezzanine-logo.svg` | Mezzanine brand icon: a Z with a staircase diagonal; standalone SVG using currentColor |
+| `site/assets/mezzanine-logo.svg` | Mezzanine brand icon: a Z with a staircase diagonal; standalone SVG using currentColor |
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
 | `src/components/TabBar.tsx` | Primary route navigation with a More bottom sheet composed from library links, buttons and modal parts |
 | `src/components/TabBar.css` | TabBar states, safe-area spacing and responsive bottom-sheet presentation |
@@ -51,6 +51,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/content/navbarContent.tsx` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
 | `site/components/ComponentExample.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
 | `site/components/ComponentReferenceTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes |
+| `tests/navigation-tree-motion.spec.ts` | Checks public tree animation, keyboard expansion and reduced motion including preference changes mid-animation |
 | `tests/navbar.spec.ts` | Navbar keyboard, responsive, theme, contrast and forced-colour checks |
 | `site/pages/TextAreaPage.tsx` | Multiline field examples, states, composition and vertical resizing guidance |
 | `site/pages/TextFieldPage.tsx` | TextField composition, editing, states and local validation examples |
@@ -59,8 +60,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Checkbox.css` | Token-led styling for Checkbox states and interaction feedback |
 | `src/components/Link.ts` | Public React Aria Link export and prop types |
 | `src/components/Link.css` | Token-led styling for Link interaction states |
-| `src/components/NavigationTree.ts` | Public React Aria NavigationTree family exports and prop types |
-| `src/components/NavigationTree.css` | Token-led styling for NavigationTree hierarchy, routes and interaction states |
+| `src/components/NavigationTree.ts` | Public React Aria NavigationTree family, prop types and optional animation-hook export |
+| `src/components/NavigationTree.css` | Token-led hierarchy, route and interaction styling, plus optional row animations and reduced-motion rules |
 | `src/components/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/RadioGroup.css` | Token-led styling for RadioGroup, RadioField, RadioButton and SelectionIndicator |
 | `src/components/Disclosure.tsx` | Public React Aria Disclosure family plus the composed DisclosureHeader trigger pattern |
@@ -84,17 +85,16 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/favicon.svg` | Staircase Z favicon with neutral-200 background and neutral-950 mark, embedded for use outside the site CSS |
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
 | `site/AppShell.tsx` | Showcase shell, theme state, landing hero, and empty/not-found views; renders documentation through the route loading boundary |
-| `site/documentationPages.ts` | Maps implemented documentation page IDs to lazy imports so only the requested page loads |
-| `site/DocumentationPage.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
+| `site/pageRegistry.ts` | Maps implemented documentation page IDs to lazy imports so only the requested page loads |
+| `site/PageLoader.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
 | `src/components/PageHeading.tsx` | Public page introduction using Heading, optional description paragraphs and additional content |
 | `src/components/PageHeading.css` | Token-based page introduction widths, spacing and fluid title typography |
 | `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template: composes the page heading, generated On this page links, technical disclosures and reference sections from page-supplied content |
-| `site/components/DocumentationDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
-| `site/components/useDocumentationDisclosureAnchors.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
+| `site/components/MezzanineDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
+| `site/components/MezzanineDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
 | `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow |
-| `site/DocumentationHeading.tsx` | Uses the library PageHeading with documentation title translations and the official React Aria link |
-| `site/useTokenValue.ts` | Reads current CSS token values when the selected theme changes |
-| `site/TokenValue.tsx` | Displays a live CSS token value as code |
+| `site/components/tokenValueLogic.ts` | Reads current CSS token values when the selected theme changes |
+| `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/content/buttonReferenceData.ts` | Button variant, size and state reference data used by the Button page |
 | `site/pages/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
 | `site/pages/ColorPage.tsx` | Palette swatches and semantic color-role reference; loaded only when its route is requested |
@@ -102,7 +102,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/TextStylesPage.tsx` | Typography specimens, weight modifiers and token reference; loaded only when its route is requested |
 | `site/pages/ProsePage.tsx` | List and inline-code examples; loaded only when its route is requested |
 | `site/pages/SpacingPage.tsx` | Spacing-scale reference; loaded only when its route is requested |
-| `site/pages/ShapePage.tsx` | Corner-radius reference and interactive corner example; loaded only when its route is requested |
+| `site/pages/ShapePage.tsx` | Corner-radius scale and guidance for styling all corners or individual corners; loaded only when its route is requested |
 | `site/pages/ElevationPage.tsx` | Elevation roles and theming guidance; loaded only when its route is requested |
 | `site/pages/MotionPage.tsx` | Motion timing, tokens and reduced-motion guidance; loaded only when its route is requested |
 | `site/pages/IconsPage.tsx` | Exported icon catalogue; loaded only when its route is requested |
@@ -121,19 +121,19 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/TablePage.tsx` | Table selection, sorting, empty-state and anatomy examples; loaded only when its route is requested |
 | `src/components/Navbar.tsx` | Public sticky Navbar with brand, navigation and action areas and a React Aria Disclosure mobile menu |
 | `src/components/Navbar.css` | Token-based Navbar layout, text-size-aware container breakpoint and reduced-motion-aware menu panel |
-| `site/ShowcaseHeader.tsx` | Supplies Mezzanine branding, Docs link and separate theme actions to the library Navbar |
-| `site/Sidebar.tsx` | Responsive nested NavigationTree sidebar, expanding the current page's ancestor groups, including the mobile Browse sections disclosure |
+| `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
+| `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs link and separate theme actions to the library Navbar |
+| `site/components/Sidebar.tsx` | Responsive nested NavigationTree sidebar, expanding the current page's ancestor groups, including the mobile Browse sections disclosure |
 | `src/components/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |
 | `src/components/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |
-| `site/ShapeCornerExample.tsx` | Independent single-select corner-radius ToggleButtonGroups, defaulting to none, with a live shape preview and resulting CSS |
-| `site/useAnimatedNavigationTree.ts` | Shared expansion state and reduced-motion handling for NavigationTree reveal and collapse motion |
-| `site/siteNavigation.ts` | Single source of truth for nested IA groups, routes, labels, implementation status and verified React Aria documentation matches; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
-| `site/foundationData.tsx` | Names and descriptions, with inline code markup for component references, for the implemented color, typography, spacing, corner-radius and motion foundations shown by the showcase |
-| `site/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
+| `src/components/useAnimatedNavigationTree.ts` | Public optional NavigationTree expansion-animation hook with reduced-motion handling |
+| `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
+| `site/content/foundationData.tsx` | Names and descriptions, with inline code markup for component references, for the implemented color, typography, spacing, corner-radius and motion foundations shown by the showcase |
+| `site/content/iconDefinitions.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/tableExampleData.ts` | Table example rows and sorting logic used by the Table documentation page |
 | `site/content/radioGroupReferenceData.tsx` | Verified anatomy, state descriptions with inline code markup, and component token names for the RadioGroup documentation page |
 | `site/colorContrast.ts` | Contrast calculation used to choose readable text inside palette swatches |
-| `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
+| `site/themeSwitcherLogic.ts` | Theme option validation, system-theme resolution, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |
 | `playwright.config.ts` | Builds and serves the production showcase for Chromium tests, with CI safeguards, HTML reports and failure traces |
@@ -164,8 +164,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 
 Typography retains its overview at `/typography`. Its child pages are
 `/typography/text-styles` (responsive Default/Emphasis example table, token reference and line heights) and
-`/typography/prose` (lists and inline code). These pages are loaded from `site/pages/` through `site/documentationPages.ts`;
-`site/siteNavigation.ts` defines the linked parent and children.
+`/typography/prose` (lists and inline code). These pages are loaded from `site/pages/` through `site/pageRegistry.ts`;
+`site/siteStructure.ts` defines the linked parent and children.
 
 | Command | Purpose |
 | --- | --- |

@@ -1,16 +1,16 @@
 import { useRef } from 'react'
 import { Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel } from '@decocode/mezzanine'
 import type { DocumentationSection } from '../templates/ComponentPageTemplate'
-import { useDocumentationDisclosureAnchors } from './useDocumentationDisclosureAnchors'
+import { useMezzanineDisclosureGroupLogic } from './MezzanineDisclosureGroupLogic'
 
-interface DocumentationDisclosureGroupProps {
+interface MezzanineDisclosureGroupProps {
   labelledBy: string
   sections: readonly DocumentationSection[]
 }
 
-export function DocumentationDisclosureGroup({ labelledBy, sections }: DocumentationDisclosureGroupProps) {
+export function MezzanineDisclosureGroup({ labelledBy, sections }: MezzanineDisclosureGroupProps) {
   const groupRef = useRef<HTMLDivElement>(null)
-  const { expandedKeys, setExpandedKeys } = useDocumentationDisclosureAnchors(groupRef)
+  const { expandedKeys, setExpandedKeys } = useMezzanineDisclosureGroupLogic(groupRef)
 
   return (
     <DisclosureGroup ref={groupRef} aria-labelledby={labelledBy} allowsMultipleExpanded expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>

@@ -8,7 +8,6 @@ export default function CheckboxPage() {
   return (
     <ComponentPageTemplate
       description={checkboxContent.description}
-      reactAriaPage="Checkbox"
       title={checkboxContent.title}
       relatedPages={checkboxContent.relatedPages}
       references={checkboxContent.references}

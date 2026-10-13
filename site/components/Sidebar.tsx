@@ -16,8 +16,8 @@ import {
   siteNavigationGroups,
   type SiteNavigationGroup,
   type SitePageDefinition,
-} from './siteNavigation'
-import { useAnimatedNavigationTree } from './useAnimatedNavigationTree'
+} from '../siteStructure'
+import { useAnimatedNavigationTree } from '@decocode/mezzanine'
 
 interface SidebarProps {
   currentPage: SitePageDefinition

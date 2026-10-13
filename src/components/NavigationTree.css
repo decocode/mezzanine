@@ -160,7 +160,61 @@
   text-transform: var(--text-transform-label);
 }
 
+.animated-navigation-tree-item {
+  overflow: hidden;
+}
+
+.animated-navigation-tree-item.is-opening {
+  animation: navigation-tree-item-open var(--navigation-tree-motion-duration) ease-out both;
+}
+
+.animated-navigation-tree-item.is-closing {
+  pointer-events: none;
+  animation: navigation-tree-item-close var(--navigation-tree-motion-duration) ease-out both;
+}
+
+.react-aria-NavigationTreeItem.is-closing .react-aria-Button[slot='chevron'] svg {
+  rotate: 0deg;
+}
+
+@keyframes navigation-tree-item-open {
+  from {
+    min-height: 0;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--space-1)));
+  }
+
+  to {
+    min-height: var(--navigation-tree-item-min-height);
+    max-height: var(--navigation-tree-item-min-height);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes navigation-tree-item-close {
+  from {
+    min-height: var(--navigation-tree-item-min-height);
+    max-height: var(--navigation-tree-item-min-height);
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    min-height: 0;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(calc(-1 * var(--space-1)));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .animated-navigation-tree-item.is-opening,
+  .animated-navigation-tree-item.is-closing {
+    animation: none;
+  }
+
   .react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] svg {
     transition: none;
   }

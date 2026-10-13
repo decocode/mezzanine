@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
-import { findSiteNavigationGroups, sitePages } from '../site/siteNavigation'
+import { findSiteNavigationGroups, sitePages } from '../site/siteStructure'
 
 const componentPages = sitePages.filter(page => page.status === 'implemented'
   && findSiteNavigationGroups(page.id).some(group => group.id === 'components'))

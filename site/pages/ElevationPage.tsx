@@ -1,11 +1,10 @@
-import { TableOfContents } from '@decocode/mezzanine'
-import { elevationDefinitions } from '../foundationData'
-import { DocumentationHeading } from '../DocumentationHeading'
+import { PageHeading, TableOfContents } from '@decocode/mezzanine'
+import { elevationDefinitions } from '../content/foundationData'
 
 export default function ElevationPage() {
   return (
     <>
-      <DocumentationHeading
+      <PageHeading
         description="Elevation communicates whether a surface is inset, flat, raised, floating, or overlaying other content. Mezzanine uses neutral shadows that product themes can replace without changing these role names."
         title="Elevation"
       />

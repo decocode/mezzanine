@@ -1,4 +1,5 @@
 import {
+  PageHeading,
   TableOfContents,
   Disclosure,
   DisclosureHeader,
@@ -18,11 +19,10 @@ import {
   foundationColorPalettes,
   semanticColorPalettes,
   type ColorPaletteDefinition,
-} from '../foundationData'
+} from '../content/foundationData'
 import { chooseSwatchTextTone } from '../colorContrast'
-import { DocumentationHeading } from '../DocumentationHeading'
-import { useTokenValue } from '../useTokenValue'
-import { TokenValue } from '../TokenValue'
+import { useTokenValue } from '../components/tokenValueLogic'
+import { TokenValue } from '../components/TokenValue'
 
 function ColorPaletteStep({
   darkTextValue,
@@ -158,7 +158,7 @@ function ColorPalette({
 export default function ColorPage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
-      <DocumentationHeading
+      <PageHeading
         description={[
           "In user interfaces, colors are not merely decorative. They help to establish visual hierarchy, convey meaning, and distinguish states. Mezzanine keeps colors that express a brand's unique visual identity separate from semantic colors that communicate specific meaning—that way, different brands can be expressive without impacting usability.",
           <>

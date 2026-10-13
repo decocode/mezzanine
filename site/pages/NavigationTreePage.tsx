@@ -12,7 +12,7 @@ import {
 import { navigationTreeContent } from '../content/navigationTreeContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import { ComponentReferenceTable } from '../components/ComponentReferenceTable'
-import { useAnimatedNavigationTree } from '../useAnimatedNavigationTree'
+import { useAnimatedNavigationTree } from '@decocode/mezzanine'
 
 export default function NavigationTreePage() {
   const {
@@ -25,7 +25,6 @@ export default function NavigationTreePage() {
   return (
     <ComponentPageTemplate
       description={navigationTreeContent.description}
-      reactAriaPage="NavigationTree"
       title={navigationTreeContent.title}
       relatedPages={navigationTreeContent.relatedPages}
       references={navigationTreeContent.references}

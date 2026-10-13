@@ -1,3 +1,5 @@
+export { useAnimatedNavigationTree } from './useAnimatedNavigationTree'
+
 export {
   NavigationTree,
   NavigationTreeHeader,

@@ -470,7 +470,7 @@ states.
 | `--navigation-tree-focus-ring-offset` | Keyboard-focus indicator position |
 | `--navigation-tree-chevron-size` | Expand-and-collapse chevron size |
 | `--navigation-tree-header-padding-block` | Vertical space around a section header |
-| `--navigation-tree-motion-duration` | Chevron rotation duration |
+| `--navigation-tree-motion-duration` | Chevron rotation and optional row-animation duration |
 | `--navigation-tree-item-background` | Default item background |
 | `--navigation-tree-item-background-hovered` | Item background while hovered |
 | `--navigation-tree-item-background-pressed` | Item background while pressed |
@@ -531,7 +531,7 @@ Button focus uses the shared `--color-focus` role. Pending retains the enabled
 colors while displaying progress. Disabled Buttons retain their variant colors
 at `--opacity-disabled` and do not add elevation.
 
-The documentation site's navigation animation reads `--navigation-tree-motion-duration`
+The library’s optional `useAnimatedNavigationTree` hook reads `--navigation-tree-motion-duration`
 from the root element for both CSS motion and JavaScript completion timing.
 Root theme overrides can use `ms` or `s`; reduced motion bypasses the animation.
 

@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
-import { Heading, Link, ExternalLinkIcon, TableOfContents, type TableOfContentsSection } from '@decocode/mezzanine'
-import { DocumentationHeading } from '../DocumentationHeading'
-import { DocumentationDisclosureGroup } from '../components/DocumentationDisclosureGroup'
+import { PageHeading, Heading, Link, ExternalLinkIcon, TableOfContents, type TableOfContentsSection } from '@decocode/mezzanine'
+import { MezzanineDisclosureGroup } from '../components/MezzanineDisclosureGroup'
 
 export interface DocumentationSection {
   id: string
@@ -19,7 +18,6 @@ interface DocumentationSectionGroup {
 interface ComponentPageTemplateProps {
   title: string
   description?: ReactNode
-  reactAriaPage?: string
   sections: readonly (DocumentationSection | DocumentationSectionGroup)[]
   relatedPages?: readonly { label: string; href: string }[]
   referencesId?: string
@@ -28,7 +26,7 @@ interface ComponentPageTemplateProps {
 
 // Each section definition supplies both its visible heading and its On this page link.
 // Pages compose their content and live examples before passing sections here.
-export function ComponentPageTemplate({ title, description, reactAriaPage, sections, relatedPages = [], references = [], referencesId = 'references' }: ComponentPageTemplateProps) {
+export function ComponentPageTemplate({ title, description, sections, relatedPages = [], references = [], referencesId = 'references' }: ComponentPageTemplateProps) {
   const pageSections: readonly (DocumentationSection | DocumentationSectionGroup)[] = [
     ...sections,
     ...[
@@ -52,7 +50,7 @@ export function ComponentPageTemplate({ title, description, reactAriaPage, secti
   ]
   return (
     <>
-      <DocumentationHeading title={title} description={description} reactAriaPage={reactAriaPage} />
+      <PageHeading title={title} description={description} />
       <TableOfContents heading="On this page" sections={pageSections.map(section => ({
         id: section.id,
         label: section.title,
@@ -64,7 +62,7 @@ export function ComponentPageTemplate({ title, description, reactAriaPage, secti
         <section key={section.id} aria-labelledby={section.id} className="component-section">
           <Heading id={section.id} level={2} className="mz-text-heading-md">{section.title}</Heading>
           {'sections' in section
-            ? <DocumentationDisclosureGroup labelledBy={section.id} sections={section.sections} />
+            ? <MezzanineDisclosureGroup labelledBy={section.id} sections={section.sections} />
             : section.content}
         </section>
       ))}
