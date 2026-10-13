@@ -1,10 +1,10 @@
 import { Breadcrumb, Breadcrumbs, Link } from '@decocode/mezzanine'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function BreadcrumbsPage() {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description={<><code>Breadcrumbs</code> show where the current page sits within a hierarchy and help people move back to a previous level.</>}
         reactAriaPage="Breadcrumbs"
         title="Breadcrumbs"

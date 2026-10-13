@@ -247,6 +247,19 @@ and may vary the shared shadow opacity.
 Keyboard focus is not an elevation role. Components continue to use the
 separate `--color-focus` token for visible focus indicators.
 
+## Page heading tokens
+
+PageHeading retains the existing page introduction appearance. Its heading uses
+Mezzanine’s React Aria Heading at level 1, with the public display and body text styles.
+Shared spacing tokens control the gaps; these component tokens control the widths
+and responsive title size:
+
+| Token | Meaning |
+| --- | --- |
+| `--page-heading-max-width` | Maximum width of the whole introduction |
+| `--page-heading-description-max-width` | Maximum line length of description paragraphs |
+| `--page-heading-title-font-size` | Fluid title size bounded by the existing heading and display sizes |
+
 ## Current component tokens
 
 Tabs uses semantic text, link, border and surface colours across the official themes.

@@ -1,7 +1,7 @@
 import { Component, Suspense, useEffect, type ReactNode } from 'react'
 import { Button } from '@decocode/mezzanine'
 import { documentationPages } from './documentationPages'
-import { PageHeading } from './PageHeading'
+import { DocumentationHeading } from './DocumentationHeading'
 import type { SitePageDefinition } from './siteNavigation'
 
 class PageLoadBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
@@ -15,7 +15,7 @@ class PageLoadBoundary extends Component<{ children: ReactNode }, { hasError: bo
     if (this.state.hasError) {
       return (
         <>
-          <PageHeading title="Unable to load this page" />
+          <DocumentationHeading title="Unable to load this page" />
           <p role="alert">Reload the page to try again.</p>
           <Button onPress={() => window.location.reload()}>Reload page</Button>
         </>
@@ -53,7 +53,7 @@ export function DocumentationPage({ page, refreshKey }: {
     <PageLoadBoundary key={page.id}>
       <Suspense fallback={
         <>
-          <PageHeading title={page.label} />
+          <DocumentationHeading title={page.label} />
           <p role="status">Loading documentation…</p>
         </>
       }>

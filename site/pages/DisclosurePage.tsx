@@ -7,12 +7,12 @@ import {
   Link,
   ExternalLinkIcon,
 } from '@decocode/mezzanine'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function DisclosurePage() {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description={<>A <code>Disclosure</code> shows and hides a section of related content.</>}
         reactAriaPage="Disclosure"
         title="Disclosure"

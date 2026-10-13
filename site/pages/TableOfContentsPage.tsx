@@ -1,5 +1,5 @@
 import { TableOfContents, Link, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function TableOfContentsPage() {
   const exampleSections = [
@@ -21,7 +21,7 @@ export default function TableOfContentsPage() {
 
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description="Table of Contents provides a stacked list of links to sections within a page."
         title="Table of Contents"
       />

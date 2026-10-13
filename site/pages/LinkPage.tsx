@@ -9,7 +9,7 @@ import {
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 type LinkPreviewState = 'default' | 'hovered' | 'pressed' | 'focused' | 'current' | 'disabled'
 
@@ -29,7 +29,7 @@ const linkStates: {
 export default function LinkPage() {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description="Links take people to another page or resource. Their text should describe where the link goes."
         reactAriaPage="Link"
         title="Link"

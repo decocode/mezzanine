@@ -394,33 +394,9 @@ a:focus-visible {
   margin-inline: auto;
 }
 
-.page-heading-group {
-  max-width: 58rem;
-  margin-bottom: var(--space-16);
-}
-
-.page-heading-group h1 {
-  overflow-wrap: anywhere;
-  margin: 0 0 1rem;
-}
-
-/* Fluid site titles: preserve the token values and fixed typography specimens. */
-:is(.page-heading-group, .landing-hero) h1 {
-  font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-md));
-}
-
-.page-description {
-  max-width: 65ch;
-  margin: 0;
-  color: var(--color-text-muted);
-}
-
-.page-description p {
-  margin: 0;
-}
-
-.page-description p + p {
-  margin-top: 1rem;
+/* The landing title shares the page heading's fluid typography. */
+.landing-hero h1 {
+  font-size: var(--page-heading-title-font-size);
 }
 
 .react-aria-documentation-link {

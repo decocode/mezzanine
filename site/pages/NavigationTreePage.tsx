@@ -9,7 +9,7 @@ import {
   NavigationTreeSection,
 } from '@decocode/mezzanine'
 import { useAnimatedNavigationTree } from '../useAnimatedNavigationTree'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function NavigationTreePage() {
   const {
@@ -21,7 +21,7 @@ export default function NavigationTreePage() {
 
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description={<>A <code>NavigationTree</code> helps people move through a nested, hierarchical set of links.</>}
         reactAriaPage="NavigationTree"
         title="NavigationTree"

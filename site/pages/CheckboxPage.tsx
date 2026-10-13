@@ -1,10 +1,10 @@
 import { TableOfContents, Checkbox, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function CheckboxPage() {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description="Checkboxes let people select one or more independent options. Their label explains what will be selected."
         reactAriaPage="Checkbox"
         title="Checkbox"

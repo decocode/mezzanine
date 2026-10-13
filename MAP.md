@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/App.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `IconButton`, `DisclosureHeader` and `TableOfContents` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `IconButton`, `DisclosureHeader`, `TableOfContents` and `PageHeading` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
@@ -53,7 +53,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/App.tsx` | Showcase shell, theme state, landing hero, and empty/not-found views; renders documentation through the route loading boundary |
 | `site/documentationPages.ts` | Maps implemented documentation page IDs to lazy imports so only the requested page loads |
 | `site/DocumentationPage.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
-| `site/PageHeading.tsx` | Shared page title, description and official React Aria documentation link |
+| `src/components/PageHeading.tsx` | Public page introduction using Heading, optional description paragraphs and additional content |
+| `src/components/PageHeading.css` | Token-based page introduction widths, spacing and fluid title typography |
+| `site/DocumentationHeading.tsx` | Uses the library PageHeading with documentation title translations and the official React Aria link |
 | `site/useTokenValue.ts` | Reads current CSS token values when the selected theme changes |
 | `site/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/buttonDocumentation.ts` | Button variant, size and state reference data used by the Button page |

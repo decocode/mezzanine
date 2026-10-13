@@ -11,7 +11,7 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { typographyStyles, typographyStyleTokens } from '../foundationData'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 import { useTokenValue } from '../useTokenValue'
 import { TokenValue } from '../TokenValue'
 
@@ -19,7 +19,7 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
   const bodyLineHeight = useTokenValue('--line-height-body-md', refreshKey)
   return (
     <>
-      <PageHeading title="Text styles" description="Fifteen text styles pair font size, weight and line height across five roles: Display, Heading, Title, Body and Label." />
+      <DocumentationHeading title="Text styles" description="Fifteen text styles pair font size, weight and line height across five roles: Display, Heading, Title, Body and Label." />
       <TableOfContents sections={[
         { id: 'text-styles-heading', label: 'Text styles' },
         { id: 'line-height-heading', label: 'Line height' },

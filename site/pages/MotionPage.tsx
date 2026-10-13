@@ -4,13 +4,13 @@ import {
   motionTimingDefinitions,
   motionTokenDefinitions,
 } from '../foundationData'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 import { TokenValue } from '../TokenValue'
 
 export default function MotionPage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description="Motion helps people understand when interface content opens, closes, or remains busy. This page records the motion that Mezzanine currently uses."
         title="Motion"
       />

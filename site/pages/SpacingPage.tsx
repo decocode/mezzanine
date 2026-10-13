@@ -1,5 +1,5 @@
 import { spacingScaleSteps } from '../foundationData'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 import { useTokenValue } from '../useTokenValue'
 
 function SpacingScaleItem({
@@ -37,7 +37,7 @@ function SpacingScaleItem({
 export default function SpacingPage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description="Spacing creates consistent distance inside components and between elements."
         title="Spacing"
       />

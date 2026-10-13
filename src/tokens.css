@@ -173,6 +173,11 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
+  /* PageHeading: existing page introduction widths and fluid title size. */
+  --page-heading-max-width: 58rem;
+  --page-heading-description-max-width: 65ch;
+  --page-heading-title-font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-md));
+
   /* Corner-radius scale; component defaults remain independently controlled. */
   --radius-none: 0;
   --radius-sm: 0.25rem;

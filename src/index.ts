@@ -230,3 +230,6 @@ export type {
 export { TableOfContents } from './components/TableOfContents'
 
 export type { TableOfContentsProps, TableOfContentsSection } from './components/TableOfContents'
+
+export { PageHeading } from './components/PageHeading'
+export type { PageHeadingProps } from './components/PageHeading'

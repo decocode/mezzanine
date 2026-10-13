@@ -18,13 +18,13 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { radioGroupAnatomy, radioGroupStates, radioGroupTokens } from '../radioGroupDocumentation'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function RadioGroupPage() {
   const [validationValue, setValidationValue] = useState<string | null>(null)
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description={<>A <code>RadioGroup</code> lets people choose one option from a list of choices that cannot be selected together.</>}
         title="RadioGroup"
       />

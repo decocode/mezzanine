@@ -11,12 +11,12 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from '@decocode/mezzanine'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function ToggleButtonPage() {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description={<>A <code>ToggleButton</code> switches one option on or off and keeps its selected state until it is pressed again.</>}
         reactAriaPage="ToggleButton"
         title="ToggleButton"

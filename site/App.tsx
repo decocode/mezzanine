@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from '@decocode/mezzanine'
 import { Header } from './Header'
 import { Sidebar } from './Sidebar'
-import { PageHeading } from './PageHeading'
+import { DocumentationHeading } from './DocumentationHeading'
 import { DocumentationPage } from './DocumentationPage'
 import { findSitePage, type SitePageDefinition } from './siteNavigation'
 import { applyThemeSelection, storeThemeSelection, type ThemeSelection } from './themeSelection'
@@ -29,7 +29,7 @@ function LandingPage() {
 function EmptyPage({ page }: { page: SitePageDefinition }) {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         reactAriaPage={page.reactAriaPage}
         title={page.label}
       />
@@ -41,7 +41,7 @@ function EmptyPage({ page }: { page: SitePageDefinition }) {
 function NotFoundPage() {
   return (
     <main className="not-found-page" id="main-content">
-      <PageHeading title="Page not found" />
+      <DocumentationHeading title="Page not found" />
       <Link href="/">Return to Mezzanine</Link>
     </main>
   )

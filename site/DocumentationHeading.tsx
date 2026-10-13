@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react'
-import { Heading, Link, ExternalLinkIcon } from '@decocode/mezzanine'
+import { PageHeading, Link, ExternalLinkIcon } from '@decocode/mezzanine'
 
-interface PageHeadingProps {
+interface DocumentationHeadingProps {
   description?: ReactNode | ReactNode[]
   reactAriaPage?: string
   title: string
 }
 
-export function PageHeading({ description, reactAriaPage, title }: PageHeadingProps) {
+export function DocumentationHeading({ description, reactAriaPage, title }: DocumentationHeadingProps) {
   const headingLabels: Record<string, string> = {
     NavigationTree: 'Navigation tree',
     RadioGroup: 'Radio group',
@@ -18,22 +18,9 @@ export function PageHeading({ description, reactAriaPage, title }: PageHeadingPr
     'Table of Contents': 'Table of contents',
     'Image Viewer': 'Image viewer',
   }
-  const descriptionParagraphs = Array.isArray(description)
-    ? description
-    : [description]
 
   return (
-    <div className="page-heading-group">
-      <Heading className="mz-text-display-md mz-text-emphasis" level={1}>
-        {headingLabels[title] ?? title}
-      </Heading>
-      {description && (
-        <div className="page-description">
-          {descriptionParagraphs.map((paragraph, index) => (
-            <p className="mz-text-body-lg" key={index}>{paragraph}</p>
-          ))}
-        </div>
-      )}
+    <PageHeading description={description} title={headingLabels[title] ?? title}>
       {reactAriaPage && (
         <Link
           aria-label={`View ${title} on React Aria (opens in a new tab)`}
@@ -46,6 +33,6 @@ export function PageHeading({ description, reactAriaPage, title }: PageHeadingPr
           <ExternalLinkIcon />
         </Link>
       )}
-    </div>
+    </PageHeading>
   )
 }

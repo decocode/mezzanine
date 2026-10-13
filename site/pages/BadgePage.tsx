@@ -1,10 +1,10 @@
 import { TableOfContents, Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function BadgePage() {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description={<>A <code>Badge</code> is a short, non-interactive label that describes the status or state of something.</>}
         title="Badge"
       />

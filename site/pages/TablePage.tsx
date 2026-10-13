@@ -11,7 +11,7 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { sortTableExampleRows, tableAnatomy, tableExampleRows } from '../tableExampleData'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function TablePage() {
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
@@ -22,7 +22,7 @@ export default function TablePage() {
 
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description="Tables organise related information into rows and columns so it can be compared and understood. Mezzanine uses React Aria's table structure and interaction behaviour."
         reactAriaPage="Table"
         title="Table"

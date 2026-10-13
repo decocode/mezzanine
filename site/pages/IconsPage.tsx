@@ -1,10 +1,10 @@
 import { iconDefinitions } from '../iconDefinitions'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 
 export default function IconsPage() {
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description="Mezzanine's icon library provides a consistent, brand-agnostic set of interface symbols. New icons will be added as real product needs arise."
         title="Icons"
       />

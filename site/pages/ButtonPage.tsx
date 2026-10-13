@@ -17,7 +17,7 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { buttonTokens } from '../foundationData'
-import { PageHeading } from '../PageHeading'
+import { DocumentationHeading } from '../DocumentationHeading'
 import {
   buttonVariants,
   buttonStates,
@@ -53,7 +53,7 @@ export default function ButtonPage() {
 
   return (
     <>
-      <PageHeading
+      <DocumentationHeading
         description="Buttons trigger actions and guide people through tasks. Their variant and state show which action matters most."
         title="Button"
       />
