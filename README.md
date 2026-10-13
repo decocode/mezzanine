@@ -37,6 +37,24 @@ Install Chromium once with `npx playwright install chromium`, then run
 route-specific downloads, loading and error states, direct section links and
 state preservation when changing themes.
 
+The Playwright workflow runs lint, the library and showcase builds, and browser
+tests on pull requests and pushes to `main`. It rejects focused tests (`test.only`)
+in CI and saves an HTML report plus traces for failed tests as a 14-day artifact.
+Open a local report with `npx playwright show-report`.
+
+## Lighthouse reports
+
+Run `npm run lighthouse` after installing Chromium to build the showcase and audit
+home, Button, and Table on mobile and desktop, with three runs per page and device.
+Use `npm run lighthouse:mobile` or `npm run lighthouse:desktop` for one profile.
+Reports are saved under `reports/lighthouse/` (ignored by Git).
+
+The Lighthouse workflow runs the same audits on pull requests and pushes to `main`
+and saves reports as a 14-day artifact. Performance thresholds produce warnings
+while we establish a CI baseline; audit execution failures still fail the job.
+These performance audits and browser tests do not establish WCAG compliance;
+manual accessibility checks remain necessary.
+
 ## How DecoCode products use it
 
 ```ts

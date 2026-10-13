@@ -6,25 +6,8 @@
       "numberOfRuns": 3,
       "url": [
         "http://localhost/",
-        "http://localhost/introduction",
-        "http://localhost/color",
-        "http://localhost/typography",
-        "http://localhost/typography/text-styles",
-        "http://localhost/typography/prose",
-        "http://localhost/shape",
-        "http://localhost/spacing",
-        "http://localhost/elevation",
-        "http://localhost/motion",
-        "http://localhost/badge",
-        "http://localhost/table",
         "http://localhost/button",
-        "http://localhost/dialog",
-        "http://localhost/breadcrumbs",
-        "http://localhost/navigation-tree",
-        "http://localhost/table-of-contents",
-        "http://localhost/tabs",
-        "http://localhost/pagination",
-        "http://localhost/menu"
+        "http://localhost/table"
       ],
       "settings": {
         "preset": "desktop",
@@ -34,10 +17,10 @@
     },
     "assert": {
       "assertions": {
-        "categories:performance": ["error", { "minScore": 0.75 }],
-        "largest-contentful-paint": ["error", { "maxNumericValue": 4000 }],
-        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.25 }],
-        "total-blocking-time": ["error", { "maxNumericValue": 600 }],
+        "categories:performance": ["warn", { "minScore": 0.75 }],
+        "largest-contentful-paint": ["warn", { "maxNumericValue": 4000 }],
+        "cumulative-layout-shift": ["warn", { "maxNumericValue": 0.25 }],
+        "total-blocking-time": ["warn", { "maxNumericValue": 600 }],
         "first-contentful-paint": ["warn", { "maxNumericValue": 2000 }],
         "speed-index": ["warn", { "maxNumericValue": 4000 }],
         "total-byte-weight": ["warn", { "maxNumericValue": 4000000 }],

@@ -96,7 +96,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/themeSelection.ts` | Theme option validation, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |
-| `playwright.config.ts` | Builds and serves the production showcase for Chromium route-loading regression tests |
+| `playwright.config.ts` | Builds and serves the production showcase for Chromium tests, with CI safeguards, HTML reports and failure traces |
 | `tests/route-loading.spec.ts` | Verifies route-specific downloads, delayed and failed loads, section links and theme-state preservation |
 | `vite.config.ts` | Showcase build: React plugin, `site/` root, package-name alias, `site-dist/` output |
 | `vite.lib.config.ts` | Package build: library mode, external peer dependencies, `dist/` output |
@@ -110,7 +110,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `.githooks/pre-commit` | Gitleaks scan of staged changes |
 | `.github/workflows/gitleaks.yml` | Gitleaks scan of the full history for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
-| `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Lighthouse page coverage of the showcase, device profiles, performance assertions, and local report destinations |
+| `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
+| `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button and Table audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
 | `TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |
