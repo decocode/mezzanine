@@ -7,6 +7,11 @@
   background: var(--tab-bar-background);
   color: var(--color-text);
   font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
 }
 
 .mezzanine-tab-bar[data-position='bottom'] {
@@ -43,9 +48,12 @@
   padding: var(--tab-bar-item-padding);
   border-block-end: var(--tab-bar-indicator-width) solid transparent;
   color: var(--color-link);
+  font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-label);
   line-height: var(--line-height-label-lg);
-  font-weight: var(--font-weight-medium);
+  text-transform: var(--text-transform-label);
   text-align: center;
   text-decoration: none;
   overflow-wrap: anywhere;
@@ -54,7 +62,7 @@
 :is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[aria-current='page'] {
   border-block-end-color: currentColor;
   background: var(--tab-bar-item-background-current);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-emphasis);
 }
 
 :is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[data-hovered]:not([data-disabled]) {

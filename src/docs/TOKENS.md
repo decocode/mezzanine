@@ -514,8 +514,8 @@ its appearance without tying the component to particular palette values.
 | `--button-{size}-min-height` | Minimum target height for Small, Medium, Large or Extra Large |
 | `--button-{size}-padding-block` | Vertical space for Small, Medium, Large or Extra Large |
 | `--button-{size}-padding-inline` | Horizontal space for Small, Medium, Large or Extra Large |
-| `--button-{size}-font-size` | Label size for Small, Medium, Large or Extra Large |
-| `--button-{size}-line-height` | Label line height for Small, Medium, Large or Extra Large |
+| `--button-{size}-font-size` | Label size for Small, Medium, Large or Extra Large; points to `label-md`, `label-lg`, `title-sm` and `title-md` |
+| `--button-{size}-line-height` | Label line height for Small, Medium, Large or Extra Large; points to the same type-scale step |
 | `--button-{size}-icon-size` | Icon size for Small, Medium, Large or Extra Large |
 | `--button-content-gap` | Space between an icon and the Button label |
 | `--button-border-width` | Border width |

@@ -6,10 +6,10 @@
   background: var(--badge-background);
   color: var(--badge-content);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-label-sm);
-  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-default);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-sm);
+  line-height: var(--line-height-label-md);
   text-transform: var(--text-transform-label);
   white-space: nowrap;
 }

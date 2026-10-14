@@ -5,7 +5,10 @@
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
   cursor: pointer;
 }
 

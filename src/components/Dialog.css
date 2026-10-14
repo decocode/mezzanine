@@ -7,7 +7,10 @@
   outline: none;
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
 }
 
 .react-aria-Dialog:focus-visible {
@@ -17,10 +20,12 @@
 
 .react-aria-Dialog .react-aria-Heading[slot='title'] {
   margin: 0 0 var(--dialog-content-gap);
-  font-family: var(--font-family-heading);
-  font-size: var(--font-size-heading-sm);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-title-lg);
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-heading-sm);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-lg);
+  text-transform: var(--text-transform-title);
 }
 
 .react-aria-Dialog > p {

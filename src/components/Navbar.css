@@ -7,6 +7,11 @@
   background: var(--color-page);
   color: var(--color-text);
   font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
 }
 
 .mezzanine-navbar-content {
@@ -131,12 +136,13 @@
   border-bottom: var(--navigation-tree-current-indicator-width) solid transparent;
   background: transparent;
   color: var(--color-link);
+  font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
   line-height: var(--line-height-label-lg);
-  text-decoration: none;
   text-transform: var(--text-transform-label);
+  text-decoration: none;
 }
 
 .navbar-link[data-focus-visible] {
@@ -156,7 +162,7 @@
 .navbar-link[aria-current] {
   border-bottom-color: var(--navigation-tree-current-indicator);
   color: var(--navigation-tree-item-content-current);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-emphasis);
 }
 
 :root:not([data-theme='wireframe']) .navbar-link[aria-current] {

@@ -27,7 +27,7 @@
 
 .react-aria-Link[aria-current='page'] {
   color: var(--color-link);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-emphasis);
   text-decoration: none;
 }
 

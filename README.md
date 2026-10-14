@@ -315,6 +315,28 @@ icon-size overrides in library compositions and site CSS, and inline button
 styles. Size recipes live in Button.css; global theme customisation uses the
 shared button tokens. Parent containers own positioning and available space.
 
+## Shared typography
+
+Every component sets its text with one complete role from the type scale:
+family, size, weight, letter spacing, line height and text transform, following
+the pattern mappings in [TYPOGRAPHY.md](src/docs/TYPOGRAPHY.md#pattern-mappings).
+A component may change only the weight, to `--font-weight-default` or
+`--font-weight-emphasis`, for example to emphasise the current page.
+`npm run check:rules` rejects partial roles, mixed roles, raw sizes and other
+numeric weights in component CSS, and Button text tokens that copy the scale.
+
+The library stylesheet now styles plain `body` text and `h1`–`h6` with zero
+specificity, so any class overrides it. Display and Heading sizes grow with the
+viewport between a smaller minimum and their previous size.
+
+Visual changes: Dialog titles use Title large and Sidebar headings use Title
+medium instead of Heading small. TextField and RadioGroup labels use Label large.
+Badges use Label medium at the Default weight. NavTree and NavigationTree section
+headers use Label medium; parent rows are always emphasised, rather than only
+the current page's ancestors, and linked parents' chevrons align with the row end.
+TabBar items use the Default weight, with Emphasis for the current page. Navigation
+and table-of-contents text sizes are unchanged. No public names changed.
+
 ## Shared motion
 
 Components read the ten shared motion tokens directly. Configure system speed with

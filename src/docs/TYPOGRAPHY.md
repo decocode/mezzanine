@@ -47,12 +47,12 @@ values without changing the style names.
 
 | Style | Class | Default size | Default family and weight |
 | --- | --- | ---: | --- |
-| Display large | `mz-text-display-lg` | 72px | System, regular |
-| Display medium | `mz-text-display-md` | 60px | System, regular |
-| Display small | `mz-text-display-sm` | 48px | System, regular |
-| Heading large | `mz-text-heading-lg` | 36px | System, regular |
-| Heading medium | `mz-text-heading-md` | 30px | System, regular |
-| Heading small | `mz-text-heading-sm` | 24px | System, regular |
+| Display large | `mz-text-display-lg` | 44–72px | System, regular |
+| Display medium | `mz-text-display-md` | 40–60px | System, regular |
+| Display small | `mz-text-display-sm` | 36–48px | System, regular |
+| Heading large | `mz-text-heading-lg` | 30–36px | System, regular |
+| Heading medium | `mz-text-heading-md` | 26–30px | System, regular |
+| Heading small | `mz-text-heading-sm` | 22–24px | System, regular |
 | Title large | `mz-text-title-lg` | 20px | System, semibold |
 | Title medium | `mz-text-title-md` | 18px | System, semibold |
 | Title small | `mz-text-title-sm` | 16px | System, semibold |
@@ -85,6 +85,36 @@ described below. Other elements retain their existing margins.
 The style class must not determine the semantic element. Choose `h1`, `h2`,
 `p`, `span`, `label` or another element for its meaning and structure, then
 apply the visual style.
+
+## Base text
+
+The library stylesheet also styles elements that have no named style, so a
+product does not inherit the browser's defaults:
+
+| Element | Style |
+| --- | --- |
+| `body` | Body medium |
+| `h1` | Heading large |
+| `h2` | Heading medium |
+| `h3` | Heading small |
+| `h4` | Title large |
+| `h5` | Title medium |
+| `h6` | Title small |
+
+These rules use `:where()`, which gives them zero specificity, so any class,
+including a named style or a component's own recipe, overrides them. They set
+typography only, not colour or margins.
+
+## Responsive sizes
+
+Display and Heading sizes grow with the viewport. Each token uses CSS `clamp()`
+with a `rem` minimum, a preferred size that adds a share of the viewport width
+(`vw`), and a `rem` maximum equal to the size listed above. On a 320px screen
+Display large is 44px; it reaches 72px on wider screens. Because both limits are
+in `rem`, the text still follows the reader's text size.
+
+Title, Body and Label sizes stay fixed. They sit inside components, where a
+consistent size matters more than proportion to the screen.
 
 ## Line height
 
@@ -161,23 +191,44 @@ must now supply their own code-block styles.
 
 Common patterns should reuse the foundation instead of creating new sizes:
 
-| Pattern | Start with |
+<!-- The site's Text styles page shows this table from site/content/textStylesContent.ts.
+     npm run check:rules fails if the two differ, so change both together. -->
+
+| Text | Style |
 | --- | --- |
+| Hero headline | `display-lg` or `display-md` |
+| Large number or metric | `display-sm` |
 | Page title | `heading-lg` |
 | Section heading | `heading-md` |
-| Component heading | `title-md` |
-| Introductory copy | `body-lg` |
-| Supporting text or validation message | `body-sm` |
-| Image caption | `body-sm` |
-| Button, tab or form label | `label-lg` |
-| Badge or compact metadata | `label-md` or, when necessary, `label-sm` |
-| Section label | `label-md` |
-| Quote | `body-lg` or `heading-sm` |
-| Metric | `display-sm` |
-| Inline code | Semantic `<code>` element |
+| Subsection heading | `heading-sm` |
+| Dialog title | `title-lg` |
+| Heading inside a card or panel | `title-md` |
+| Introductory paragraph | `body-lg` |
+| Paragraphs and normal reading | `body-md` |
+| Supporting text, captions and validation messages | `body-sm` |
+| Button, tab, form label or navigation item | `label-lg` |
+| Badge, section label or compact metadata | `label-md` |
+
+Further notes:
+
+- Navigation items use `label-lg` with Default; Emphasis marks the current page or a parent.
+- Use `label-sm` for badges or metadata only when `label-md` does not fit.
+- A quote starts with `body-lg`, or `heading-sm` when it is a pull quote.
+- Inline code uses the semantic `<code>` element rather than a text style.
 
 A pattern should become its own shared style only after more than one product
 demonstrates that it needs a distinct, stable treatment.
+
+## Component typography
+
+Library components follow the same roles as the named styles. Each rule that
+sets text sets one complete role: family, size, weight, letter spacing, line
+height and text transform. A state rule may change only the weight, using
+`--font-weight-default` or `--font-weight-emphasis`. Button and ToggleButton take
+their size from the `--button-{size}-font-size` and `-line-height` tokens, which
+point to Label sizes for Small and Medium and to Title sizes for Large and Extra
+Large. `npm run check:rules` enforces this, so a product theme that changes a
+role's tokens reaches every component that uses it.
 
 ## Default and Emphasis
 

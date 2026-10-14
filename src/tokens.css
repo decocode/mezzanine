@@ -115,22 +115,25 @@
   --font-weight-default: var(--font-weight-regular);
   --font-weight-emphasis: var(--font-weight-semibold);
 
-  /* Display: short, expressive hero and marketing text. */
-  --font-size-display-lg: 4.5rem;
+  /* Display: short, expressive hero and marketing text.
+     Display and Heading sizes grow with the viewport between a rem minimum
+     and maximum, so they stay proportionate on small screens and still follow
+     the reader's text size. */
+  --font-size-display-lg: clamp(2.75rem, 1.75rem + 5vw, 4.5rem);
   --line-height-display-lg: 1.25;
-  --font-size-display-md: 3.75rem;
+  --font-size-display-md: clamp(2.5rem, 1.75rem + 3.75vw, 3.75rem);
   --line-height-display-md: 1.2;
-  --font-size-display-sm: 3rem;
+  --font-size-display-sm: clamp(2.25rem, 1.75rem + 2.5vw, 3rem);
   --line-height-display-sm: 1.25;
   --letter-spacing-display: normal;
   --text-transform-display: none;
 
   /* Heading: page and section hierarchy. */
-  --font-size-heading-lg: 2.25rem;
+  --font-size-heading-lg: clamp(1.875rem, 1.5rem + 1.875vw, 2.25rem);
   --line-height-heading-lg: 1.22;
-  --font-size-heading-md: 1.875rem;
+  --font-size-heading-md: clamp(1.625rem, 1.375rem + 1.25vw, 1.875rem);
   --line-height-heading-md: 1.27;
-  --font-size-heading-sm: 1.5rem;
+  --font-size-heading-sm: clamp(1.375rem, 1.25rem + 0.625vw, 1.5rem);
   --line-height-heading-sm: 1.33;
   --letter-spacing-heading: normal;
   --text-transform-heading: none;
@@ -278,30 +281,32 @@
   --badge-danger-content: var(--color-danger-800);
   --badge-danger-border: var(--color-danger-300);
 
-  /* Button: component-specific structure, shared by every theme. */
+  /* Button: component-specific structure, shared by every theme.
+     Text sizes point to the type scale: label sizes for Small and Medium, and
+     the matching title sizes for Large and Extra Large, where Label has no step. */
   --button-sm-min-height: 2.75rem;
   --button-sm-padding-block: 0.5rem;
   --button-sm-padding-inline: 0.875rem;
-  --button-sm-font-size: 0.75rem;
-  --button-sm-line-height: 1.33;
+  --button-sm-font-size: var(--font-size-label-md);
+  --button-sm-line-height: var(--line-height-label-md);
   --button-sm-icon-size: 1rem;
   --button-md-min-height: 3rem;
   --button-md-padding-block: 0.625rem;
   --button-md-padding-inline: 1rem;
-  --button-md-font-size: 0.875rem;
-  --button-md-line-height: 1.43;
+  --button-md-font-size: var(--font-size-label-lg);
+  --button-md-line-height: var(--line-height-label-lg);
   --button-md-icon-size: 1.125rem;
   --button-lg-min-height: 3.25rem;
   --button-lg-padding-block: 0.75rem;
   --button-lg-padding-inline: 1.25rem;
-  --button-lg-font-size: 1rem;
-  --button-lg-line-height: 1.5;
+  --button-lg-font-size: var(--font-size-title-sm);
+  --button-lg-line-height: var(--line-height-title-sm);
   --button-lg-icon-size: 1.25rem;
   --button-xl-min-height: 3.5rem;
   --button-xl-padding-block: 0.875rem;
   --button-xl-padding-inline: 1.5rem;
-  --button-xl-font-size: 1.125rem;
-  --button-xl-line-height: 1.56;
+  --button-xl-font-size: var(--font-size-title-md);
+  --button-xl-line-height: var(--line-height-title-md);
   --button-xl-icon-size: 1.5rem;
   --button-content-gap: 0.5rem;
   --button-border-width: 0.0625rem;

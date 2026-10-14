@@ -1,4 +1,5 @@
 import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
+import { checkTypographyChoices, checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -355,6 +356,7 @@ try {
   for (const file of [...filesIn('src', ['.css']), ...filesIn('site', ['.css'])]) {
     const text = read(file)
     for (const problem of checkNavTreeCss(file, text)) report(file, text, problem.position, 'nav-tree-ownership', problem.message)
+    for (const problem of checkTypographyCss(file, text)) report(file, text, problem.position, 'typography', problem.message)
     for (const problem of checkMotionCss(file, text)) report(file, text, problem.position, 'motion', problem.message)
   }
   for (const file of [...filesIn('src', ['.ts', '.tsx']), ...filesIn('site', ['.ts', '.tsx'])]) {
@@ -363,6 +365,9 @@ try {
     for (const problem of checkMotionSource(file, text)) report(file, text, problem.position, 'motion', problem.message)
   }
   const tokens = read('src/tokens.css')
+  for (const problem of checkTypographyTokens(tokens)) report('src/tokens.css', tokens, problem.position, 'typography', problem.message)
+  const typographyGuide = read('src/docs/TYPOGRAPHY.md')
+  for (const problem of checkTypographyChoices(typographyGuide, read('site/content/textStylesContent.ts'))) report('src/docs/TYPOGRAPHY.md', typographyGuide, problem.position, 'typography', problem.message)
   for (const token of motionTokens) {
     if (!tokens.includes(`${token}:`)) report('src/tokens.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
   }

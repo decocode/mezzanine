@@ -13,7 +13,10 @@
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
   overflow-wrap: anywhere;
 }
 
@@ -49,8 +52,12 @@
   flex: 1 1 auto;
   min-width: 0;
   margin: 0;
-  font-size: var(--font-size-heading-sm);
-  line-height: var(--line-height-heading-sm);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-title-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-md);
+  text-transform: var(--text-transform-title);
 }
 
 .mezzanine-sidebar-header-content { flex-basis: 100%; }

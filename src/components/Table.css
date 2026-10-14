@@ -4,7 +4,10 @@
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
 }
 
 .react-aria-Column,
@@ -20,6 +23,7 @@
 .react-aria-Column {
   border-top: var(--table-border-width) solid var(--color-border);
   background: var(--table-header-background);
+  font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);

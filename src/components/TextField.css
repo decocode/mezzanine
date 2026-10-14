@@ -6,12 +6,20 @@
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
   overflow-wrap: anywhere;
 }
 
 .react-aria-TextField > .react-aria-Label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
 }
 
 :is(.react-aria-Input, .react-aria-TextArea) {
@@ -27,7 +35,10 @@
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -51,8 +62,12 @@
 
 .react-aria-TextField > [slot='description'],
 .react-aria-TextField > .react-aria-FieldError {
+  font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
 }
 
 .react-aria-TextField > [slot='description'] {

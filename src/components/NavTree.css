@@ -4,8 +4,11 @@
   gap: var(--navigation-tree-gap);
   color: var(--navigation-tree-item-content);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-body-sm);
-  line-height: var(--line-height-body-sm);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
 }
 .mezzanine-nav-tree-item {
   display: flex;
@@ -50,7 +53,8 @@
   overflow-wrap: anywhere;
   cursor: pointer;
 }
-.mezzanine-nav-tree-toggle:not(.mezzanine-nav-tree-label) { justify-content: center; flex: none; }
+/* A linked parent's chevron sits at the row end, aligned with unlinked parents. */
+.mezzanine-nav-tree-toggle:not(.mezzanine-nav-tree-label) { justify-content: flex-end; flex: none; }
 .mezzanine-nav-tree-content { display: inline-flex; flex: none; margin-inline-start: auto; }
 .mezzanine-nav-tree-chevron {
   flex: none;
@@ -68,12 +72,12 @@
 .mezzanine-nav-tree-item:has(.mezzanine-nav-tree-label[data-pressed], .mezzanine-nav-tree-toggle[data-pressed]) {
   background: var(--navigation-tree-item-background-pressed);
 }
-.mezzanine-nav-tree-item[data-current-ancestor] { font-weight: var(--font-weight-semibold); }
+.mezzanine-nav-tree-item[data-has-child-items] { font-weight: var(--font-weight-emphasis); }
 .mezzanine-nav-tree-item[data-current] {
   border-inline-start-color: var(--navigation-tree-current-indicator);
   background: var(--navigation-tree-item-background-current);
   color: var(--navigation-tree-item-content-current);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-emphasis);
 }
 .mezzanine-nav-tree-item[data-focus-visible],
 .mezzanine-nav-tree-label[data-focus-visible],
@@ -87,10 +91,11 @@
 .mezzanine-nav-tree-header {
   padding: var(--navigation-tree-header-padding-block) var(--navigation-tree-item-padding-inline);
   color: var(--navigation-tree-header-content);
-  font-size: var(--font-size-label-lg);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-md);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-lg);
+  line-height: var(--line-height-label-md);
   text-transform: var(--text-transform-label);
 }
 @media (forced-colors: active) {
