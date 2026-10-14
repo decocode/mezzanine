@@ -18,6 +18,14 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Library CSS references design tokens (CSS custom properties) only, never raw color, font, or size values. Each consuming app supplies token values in its own theme file. Name tokens by purpose, not appearance (for example `--color-accent`, not `--color-yellow`).
 - Treat changes to exported component names, props, token names, or CSS class names as breaking changes for consuming apps. Call them out explicitly.
 
+## Lab sandbox boundary
+
+- `site/lab/` is an experimental sandbox hosted within the site, not authoritative documentation or part of the public library. Keep experiments visibly labelled as illustrative and unapproved.
+- Lab may consume public library exports through `@decocode/mezzanine`. Neither `src/` nor documentation pages, examples, content or shared site components may import or re-export Lab code, styles, data or candidate tokens. Site routing may load Lab's entry component solely to render Lab routes, and navigation may link to them; these are hosting exceptions, not permission to reuse sandbox implementation elsewhere.
+- Keep experimental styles and candidate values scoped to Lab. Do not place them in shared site styles, library tokens or public exports, or allow Lab styles to affect documentation pages.
+- Do not copy or promote Lab code, designs, values or behaviour into `src/` or authoritative documentation without the user's explicit approval for that promotion. The instruction to move component recipes into `src/` does not automatically approve Lab experiments. After approval, implement and check the feature in the library, export it where applicable, then document the actual public implementation and have Lab consume it.
+- Lab examples, tests and successful builds are not evidence that a feature is approved or supported by Mezzanine. Written proposals may discuss Lab experiments only as proposals, never as implemented library guidance.
+
 ## Documentation accuracy and source of truth
 
 - `src/` is the source of truth for what Mezzanine currently contains. The documentation site documents the library; it must not design, extend, or simulate it.

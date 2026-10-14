@@ -18,9 +18,19 @@ Showcase: [mezzanine.fly.dev](https://mezzanine.fly.dev)
 | ---------- | ----------------------------------------------------------------- |
 | `src/`     | The library: components, structural CSS, public `index.ts`         |
 | `site/`    | The showcase site deployed to mezzanine.fly.dev                    |
-| `docs/`    | [Token](docs/TOKENS.md) and [typography](docs/TYPOGRAPHY.md) guides |
+| `site/lab/` | Experimental sandbox within the showcase site |
+| `src/docs/` | [Token](src/docs/TOKENS.md) and [typography](src/docs/TYPOGRAPHY.md) guides |
+| `docs/` | Research and proposals for future library work |
 | `dist/`    | Built package output (generated)                                  |
 | `site-dist/` | Built showcase site output (generated)                          |
+
+## Layout lab
+
+Run `npm run dev` and select **Lab** in the site navbar, or open `/site/lab`
+for the experiment index. Choose **Shell comparison** (`/site/lab/shell`) or
+**Page widths** (`/site/lab/page-widths`). Every Lab page shares a navbar with **Exit Lab**, links to the index and both
+experiments, and the ThemeSwitcher. All three routes are included in the production site build. The width
+candidates are illustrative, unapproved, and not library exports.
 
 ## Scripts
 

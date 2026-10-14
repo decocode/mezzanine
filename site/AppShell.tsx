@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link } from '@decocode/mezzanine'
 import { MezzanineNavbar } from './components/MezzanineNavbar'
+import { ThemeSwitcher } from './components/ThemeSwitcher'
 import { Sidebar } from './components/Sidebar'
 import { DocsContentsContext } from './components/docsContentsContext'
 import { PageLoader } from './PageLoader'
@@ -10,7 +11,7 @@ import { siteContent } from './content/siteContent'
 import { findSitePage } from './siteStructure'
 import { applyTheme, storeTheme, type Theme } from './themeSwitcherLogic'
 
-const LabShell = lazy(() => import('./lab/LabShell'))
+const LabPage = lazy(() => import('./lab/LabPage'))
 
 interface AppShellProps {
   initialTheme: Theme
@@ -44,7 +45,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
 
   const refreshKey = `${selectedTheme}-${systemPreferenceVersion}`
 
-  if (currentPath === '/site/lab') return <Suspense fallback={<p role="status">Loading lab…</p>}><LabShell /></Suspense>
+  if (currentPath === '/site/lab' || currentPath === '/site/lab/shell' || currentPath === '/site/lab/page-widths') return <Suspense fallback={<p role="status">Loading lab…</p>}><LabPage currentPath={currentPath} themeSwitcher={<ThemeSwitcher onThemeChange={setSelectedTheme} selectedTheme={selectedTheme} />} /></Suspense>
 
   if (!currentPage) {
     return (

@@ -101,21 +101,16 @@ Each named text style applies its font size and paired
 `--line-height-{role}-{size}` token automatically. Use `mz-text-body-md`
 for normal reading; its `--line-height-body-md` default is `1.5`.
 Other styles, including headings and labels, use their own paired values.
-There is no need to set line height separately. The Typography showcase
-reads the current body-md value from CSS.
+There is no need to set line height separately.
 
 ## Lists
 
 The library supplies body-styled lists and inline code, not a complete prose
-container. The documentation site's section spacing and reading widths are
-site-only layout rules; importing Mezzanine does not apply them to an app.
-The site uses `--space-12` between major sections, `--space-8` before
-subsections, and `--space-4` between headings, copy and examples and inside
-example frames.
+container. Section spacing and reading widths belong to the consuming app;
+importing Mezzanine does not supply a page-layout recipe.
 
 Unordered lists use bullet points; ordered lists use numbers. Both share the
 same body typography and spacing.
-The showcase constrains body-styled prose lists to a reading width of `65ch`.
 List markers sit outside the text so wrapped lines align with the item text,
 not with the marker.
 

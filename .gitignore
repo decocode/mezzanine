@@ -8,3 +8,4 @@ reports
 *.tsbuildinfo
 .DS_Store
 *.local
+/docs/

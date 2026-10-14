@@ -7,6 +7,8 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/AppShell.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
+The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with separate experiments at `/site/lab/shell` and `/site/lab/page-widths`. Its illustrative candidates are not approved library features.
+
 The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `NavigationTree`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `DisclosureHeader`, `TableOfContents`, `Navbar` and `Sidebar` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
@@ -15,10 +17,14 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | --- | --- |
 | `site/components/DocsTableOfContents.tsx` | Page contents rendered in the right sidebar, with a drawer on narrow screens |
 | `site/components/docsContentsContext.ts` | Shares the AppShell contents destination with documentation pages |
-| `site/lab/LabShell.tsx` | Experimental /site/lab shell using Navbar, Sidebar and responsive navigation |
+| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry, experiment index and shared navbar with Exit Lab, experiment links and theme controls |
+| `site/lab/LabShell.tsx` | Shell comparison at /site/lab/shell using Navbar, Sidebar and responsive navigation |
 | `site/lab/lab.css` | Fixed viewport layout, independent scrolling and responsive rail placement |
 | `site/lab/labContent.ts` | Lab control labels and navigation destinations |
-| `tests/lab.spec.ts` | Desktop layout and narrow-screen drawer regression checks |
+| `site/lab/PageWidthsPage.tsx`, `site/lab/page-widths.css` | Illustrative resizable reading, card-grid and full-width bands using exported Mezzanine text and controls |
+| `site/lab/useDemoWidth.ts` | Observes the live demo width and supports keyboard-accessible resize actions |
+| `tests/lab.spec.ts` | Production lab index navigation, shell layout, narrow-screen drawers and motion regression checks |
+| `tests/lab-page-widths.spec.ts` | Production page-width route, resizing, width caps, grid reflow and accessibility checks |
 | `site/assets/mezzanine-logo.svg` | Mezzanine brand icon: a Z with a staircase diagonal; standalone SVG using currentColor |
 | `src/components/Sidebar.tsx` | Public Sidebar state boundary, Button-based SidebarTrigger and generic inline or modal SidebarPanel with optional compact rail, permanent inline expansion and optional inline header |
 | `src/components/sidebarState.ts` | Internal sidebar context and responsive media-query subscription |
@@ -188,8 +194,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `scripts/public-api.snapshot.json` | Reviewed public export names and value/type categories used to detect API changes |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
-| `docs/TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |
-| `docs/TYPOGRAPHY.md` | Typography roles, named styles, defaults, pattern mappings, theming guidance, and accessibility checks |
+| `src/docs/TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |
+| `src/docs/TYPOGRAPHY.md` | Typography roles, named styles, defaults, pattern mappings, theming guidance, and accessibility checks |
 | `README.md` | Overview, licence note, local setup, and how DecoCode products use the package |
 | `AGENTS.md` | Instructions for coding agents |
 

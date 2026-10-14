@@ -11,7 +11,9 @@
         "http://localhost/tab-bar",
         "http://localhost/navbar",
         "http://localhost/tooltip",
-        "http://localhost/site/lab"
+        "http://localhost/site/lab",
+        "http://localhost/site/lab/shell",
+        "http://localhost/site/lab/page-widths"
       ],
       "settings": {
         "preset": "desktop",

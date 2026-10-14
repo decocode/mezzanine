@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   Button, Checkbox, Disclosure, DisclosureHeader, DisclosurePanel, HomeIcon,
-  Link, Navbar, PanelLeftCloseIcon, PanelLeftOpenIcon, PanelRightOpenIcon,
+  PanelLeftCloseIcon, PanelLeftOpenIcon, PanelRightOpenIcon,
   Sidebar, SidebarPanel, SidebarTrigger, SlidersVerticalIcon, TabBar,
 } from '@decocode/mezzanine'
 import { labContent } from './labContent'
@@ -15,11 +15,6 @@ export default function LabShell() {
     { id: 'layout', ...labContent.layout, icon: <SlidersVerticalIcon /> },
   ]
   return <div className="lab-shell">
-    <title>Layout lab | Mezzanine</title>
-    <Link className="skip-link" href="#main-content">Skip to workspace</Link>
-    <Navbar aria-label="Lab navigation" brand={<Link className="site-name" href="/site/lab">Mezzanine · Lab</Link>}>
-      <Link href="/introduction">Documentation</Link>
-    </Navbar>
     <div className="lab-body" data-left-expanded={isExpanded}>
       <nav className="lab-rail" aria-label="Workspace sections">
         <Button href={labContent.overview.href} iconLeading={<HomeIcon />} variant="tertiary">{labContent.overview.label}</Button>
@@ -47,7 +42,7 @@ export default function LabShell() {
       </Sidebar>
       <main className="lab-workspace" id="main-content" tabIndex={0}>
         <section id="overview" className="lab-section">
-          <p className="lab-eyebrow">Mezzanine / Experimental layout</p>
+          <p className="lab-eyebrow">Illustrative candidates only. These widths and layouts are not approved and not part of Mezzanine.</p>
           <h1>A workspace with room around it.</h1>
           <p>A fixed header and navigation rail, a collapsible options panel, and a permanent details panel frame this independently scrolling workspace.</p>
           <p role="status">{option ? 'Option A selected.' : 'No options selected.'}</p>

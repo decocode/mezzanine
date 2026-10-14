@@ -1,0 +1,53 @@
+.lab-page-widths {
+  display: grid;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.lab-page-widths :where(h1, h2, p) { margin: var(--space-0); }
+.lab-width-controls { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+.lab-width-demo {
+  /* Illustrative candidates, deliberately local to this sandbox. */
+  --lab-reading-width: 65ch;
+  --lab-grid-width: 76rem;
+  --lab-placeholder-min-width: 12rem;
+  width: 100%;
+  min-width: min(100%, var(--lab-placeholder-min-width));
+  max-width: 100%;
+  resize: horizontal;
+  overflow: auto;
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-1) var(--space-8);
+  background: var(--color-page);
+  color: var(--color-text);
+}
+
+.lab-width-band {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  gap: var(--space-4);
+  border: 1px solid var(--color-border);
+  padding: var(--space-4);
+  background: var(--color-surface);
+}
+
+.lab-reading-band { max-width: var(--lab-reading-width); }
+.lab-grid-band { max-width: var(--lab-grid-width); }
+.lab-full-band { width: 100%; }
+.lab-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--lab-placeholder-min-width)), 1fr));
+  gap: var(--space-4);
+}
+.lab-width-placeholder {
+  min-width: 0;
+  padding: var(--space-5);
+  border: 1px dashed var(--color-border);
+  background: var(--color-surface-hover);
+}
+.lab-width-workspace { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+.lab-width-workspace > :first-child { flex: 1 1 var(--lab-placeholder-min-width); }
+.lab-width-workspace > :last-child { flex: 3 1 var(--lab-placeholder-min-width); }

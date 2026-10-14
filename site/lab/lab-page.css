@@ -1,0 +1,20 @@
+.lab-page { min-width: 0; overflow-wrap: anywhere; }
+.lab-page-shell { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+.lab-page-shell > .mezzanine-navbar { flex: none; max-height: 50dvh; overflow: auto; }
+.lab-page-main { min-width: 0; padding: var(--space-4); }
+.lab-page-main:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -2px; }
+.lab-index { display: grid; gap: var(--space-6); }
+.lab-index :where(h1, h2, p) { margin: var(--space-0); }
+.lab-experiment-list {
+  display: grid;
+  gap: var(--space-6);
+  margin: var(--space-0);
+  padding: var(--space-0);
+  list-style: none;
+}
+.lab-experiment-list li {
+  display: grid;
+  gap: var(--space-3);
+  padding-block: var(--space-5);
+  border-block-start: 1px solid var(--color-border);
+}

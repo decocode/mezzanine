@@ -4,8 +4,8 @@ A design token is a named design decision. Mezzanine components ask for the
 role they need, such as `--button-primary-background`, rather than a
 product-specific value such as a particular blue or purple.
 
-The source of truth is the CSS in [`src/tokens.css`](../src/tokens.css) and
-[`src/themes/`](../src/themes/). This document explains that implementation; it
+The source of truth is the CSS in [`src/tokens.css`](../tokens.css) and
+[`src/themes/`](../themes/). This document explains that implementation; it
 does not define additional tokens.
 
 ## Official themes
@@ -42,8 +42,7 @@ Hovering or visibly focusing an enabled link doubles its `--link-underline-thick
 disabled links keep the normal thickness. Standard Link keyboard focus uses the
 hover text colour and retains its focus ring.
 Pressed links keep the heavier underline and use `--color-surface-pressed` for
-a grey background. The Link page's state previews use these same treatments.
-Light and Dark retain their existing link treatments.
+a grey background. Light and Dark retain their existing link treatments.
 
 ## Product themes
 
@@ -109,10 +108,9 @@ but reference the Signature palette.
 Roles select a step from a core or semantic palette so a product can change
 the palette without changing what each role means.
 
-Every palette follows the same perceptual lightness curve. In the showcase,
-shade numbers use dark text from `50` to `500` and inverse text from `600` to
-`950`; the switch is still verified from the actual contrast rather than the
-step number alone.
+Every palette follows the same perceptual lightness curve. Verify text contrast
+against the actual foreground and background colours rather than relying on
+the shade number alone.
 
 | Token | Meaning |
 | --- | --- |
@@ -154,10 +152,9 @@ defined by their components rather than a generic color role. There is no
 generic Accent token.
 
 In Light and Dark, text and navigation links—including current destinations,
-linked tabs, Table of Contents, Related pages and References—use the Signature
-link colours. NavigationTree keeps its neutral default and current-item text.
-The site wordmark, disabled links and links styled as buttons keep their own
-treatments. Wireframe keeps its neutral link colours.
+linked tabs and TableOfContents—use the Signature link colours. NavigationTree
+keeps its neutral default and current-item text. Disabled links and links styled
+as buttons keep their own treatments. Wireframe keeps its neutral link colours.
 
 ### Semantic color palettes
 
@@ -282,19 +279,6 @@ Its own container switches to desktop navigation at 48rem, relative to the root 
 | `--navbar-focus-ring-width`, `--navbar-focus-ring-offset` | Menu trigger focus outline |
 | `--navbar-panel-max-height` | Maximum panel height before it scrolls |
 | `--navbar-motion-duration`, `--navbar-motion-offset` | Panel entry timing and initial vertical displacement; disabled with reduced motion |
-
-## Site-only page heading tokens
-
-The heading in `site/templates/ComponentPageTemplate.tsx` uses Mezzanine’s
-React Aria Heading at level 1, with the public display and body text styles.
-These site-only values are defined in `site/styles.css`; they are not part of
-the shared package’s token contract:
-
-| Token | Meaning |
-| --- | --- |
-| `--page-heading-max-width` | Maximum width of the whole introduction |
-| `--page-heading-description-max-width` | Maximum line length of description paragraphs |
-| `--page-heading-title-font-size` | Fluid title size bounded by the existing heading and display sizes |
 
 ## Current component tokens
 
