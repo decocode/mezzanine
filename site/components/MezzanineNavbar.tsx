@@ -22,6 +22,7 @@ export function MezzanineNavbar({
         aria-current={currentPath === '/' ? 'page' : undefined}
         aria-label="Mezzanine home"
         className="site-name"
+        data-no-wireframe-underline
         href="/"
       >
         <span aria-hidden="true" className="site-logo" />

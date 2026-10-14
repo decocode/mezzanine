@@ -103,14 +103,15 @@
   --color-focus: var(--color-info-700);
 }
 
-/* Wireframe underlines text links; button-styled links use the shared Button treatment. */
-:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button)) {
+/* Wireframe underlines text links; button-styled links use the shared Button treatment.
+   data-no-wireframe-underline opts an element out (e.g. a brand wordmark). */
+:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])) {
   text-decoration-line: underline !important;
   text-decoration-thickness: var(--link-underline-thickness);
   text-underline-offset: var(--link-underline-offset);
 }
 
-:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button)):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
+:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
   text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
 }
 
@@ -119,12 +120,12 @@
 }
 
 @media (hover: hover) {
-  :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button)):hover:not([data-disabled], [aria-disabled='true']) {
+  :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):hover:not([data-disabled], [aria-disabled='true']) {
     text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
   }
 }
 
-:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button)):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
+:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
   background-color: var(--color-surface-pressed);
   text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
 }
