@@ -26,8 +26,8 @@ for (const theme of ['light', 'dark', 'wireframe']) {
 test('nested themes restore finite motion and system reduction wins over speed overrides', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/navigation-tree')
-  const tree = page.getByRole('treegrid', { name: 'NavigationTree items', exact: true })
-  const icon = tree.getByRole('button', { name: /^Expand or collapse Item B/ }).locator('svg')
+  const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+  const icon = tree.getByRole('button', { name: 'Item B', exact: true }).locator('svg')
   await page.evaluate(() => {
     document.documentElement.dataset.theme = 'wireframe'
     document.documentElement.style.setProperty('--motion-duration-interface', '800ms')
@@ -46,40 +46,27 @@ test('nested themes restore finite motion and system reduction wins over speed o
   await expect(page.locator('.mezzanine-disclosure-chevron').first()).toHaveCSS('transition-duration', '0.8s')
 })
 
-test('theme change settles an in-flight local tree collapse; invalid timing is immediate', async ({ page }) => {
+test('theme changes settle a tree chevron; rapid toggles leave truthful immediate rows', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/navigation-tree')
-  const tree = page.getByRole('treegrid', { name: 'NavigationTree items', exact: true })
-  const trigger = tree.getByRole('button', { name: /^Expand or collapse Item B/ })
-  const child = tree.getByRole('row', { name: /Child item B1/ })
+  const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+  const trigger = tree.getByRole('button', { name: 'Item B', exact: true })
+  const child = tree.getByRole('row', { name: 'Child item B1', exact: true })
   await tree.evaluate(element => { element.style.setProperty('--motion-duration-interface', '10s') })
   await trigger.click()
-  await expect(tree.locator('.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing')).toHaveCount(2)
-  await tree.evaluate(element => { element.dataset.theme = 'wireframe' })
   await expect(child).toHaveCount(0)
-  await expect(tree.locator('.mezzanine-navigation-tree-item-closing')).toHaveCount(0)
-  await tree.evaluate(element => {
-    element.dataset.theme = 'light'
-    element.style.setProperty('--motion-duration-interface', 'invalid')
-  })
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
+  await tree.evaluate(element => { element.dataset.theme = 'wireframe' })
+  await expect(trigger.locator('svg')).toHaveCSS('rotate', '0deg')
   await trigger.click()
   await expect(child).toBeVisible()
-  await expect(tree.locator('.mezzanine-navigation-tree-item-opening')).toHaveCount(0)
-})
-
-test('rapid tree toggles retain the last requested expansion', async ({ page }) => {
-  await page.goto('/navigation-tree')
-  const tree = page.getByRole('treegrid', { name: 'NavigationTree items', exact: true })
-  const trigger = tree.getByRole('button', { name: /^Expand or collapse Item B/ })
-  await tree.evaluate(element => { element.style.setProperty('--motion-duration-interface', '800ms') })
-  await trigger.click()
-  // The current hook delays expanded state while closing; keyboard requests use
-  // the row's expansion state. Reopening is verified by a subsequent expansion.
-  await expect(tree.getByRole('row', { name: /Child item B1/ })).toHaveCount(0)
   await trigger.click()
   await trigger.click()
-  await expect(tree.getByRole('row', { name: /Child item B1/ })).toHaveCount(0)
-  await expect(tree.locator('.mezzanine-navigation-tree-item-opening')).toHaveCount(0)
+  await expect(child).toBeVisible()
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true')
+  await tree.evaluate(element => { element.dataset.theme = 'light'; element.style.setProperty('--motion-duration-interface', 'invalid') })
+  await trigger.click()
+  await expect(child).toHaveCount(0)
 })
 
 test('loading remains visible and Wireframe leaves its behaviour unchanged', async ({ page }) => {
@@ -289,3 +276,17 @@ for (const fontSize of [16, 32]) {
     await expect(panel).toHaveCSS('overflow', 'visible')
   })
 }
+
+test('rapid Nav Tree toggles retain the last requested expansion', async ({ page }) => {
+  await page.goto('/navigation-tree')
+  const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+  const trigger = tree.getByRole('button', { name: 'Item B', exact: true })
+  await tree.evaluate(element => { element.style.setProperty('--motion-duration-interface', '800ms') })
+  await trigger.click()
+  await expect(tree.getByRole('row', { name: 'Child item B1', exact: true })).toHaveCount(0)
+  await trigger.click()
+  await expect(tree.getByRole('row', { name: 'Child item B1', exact: true })).toBeVisible()
+  await trigger.click()
+  await expect(tree.getByRole('row', { name: 'Child item B1', exact: true })).toHaveCount(0)
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
+})

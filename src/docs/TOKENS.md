@@ -454,23 +454,23 @@ tokens for its unselected and selected interaction states.
 | `--toggle-button-content-selected` | Selected label and icon color |
 | `--toggle-button-border-selected` | Selected border color |
 
-NavigationTree uses structural tokens for hierarchy, route indication and its
-expandable-item chevron, plus theme tokens for interaction and current-route
-states.
+NavTree uses the existing NavigationTree structural tokens for hierarchy and
+route indication, shared button tokens for chevron sizing, and theme tokens for
+interaction and current-route states.
 
 | Token | Meaning |
 | --- | --- |
 | `--navigation-tree-gap` | Space between NavigationTree rows and sections |
-| `--navigation-tree-item-min-height` | Minimum height of a navigation item and width of its chevron column |
+| `--navigation-tree-item-min-height` | Minimum height of a navigation item; chevron controls use shared small-button sizing |
 | `--navigation-tree-item-padding-block` | Vertical space inside a navigation item |
-| `--navigation-tree-item-padding-inline` | Base label inset; rows with children have no end inset so chevron buttons sit flush with the row edge |
+| `--navigation-tree-item-padding-inline` | Base row inset, increased by nesting level on the start edge |
 | `--navigation-tree-item-gap` | Space between item content and controls |
 | `--navigation-tree-indent` | Additional label indentation for each nested level; chevrons remain aligned at the inline end |
 | `--navigation-tree-current-indicator-width` | Width of the current-route indicator |
 | `--navigation-tree-focus-ring-width` | Keyboard-focus indicator width |
 | `--navigation-tree-focus-ring-offset` | Keyboard-focus indicator position |
 | `--navigation-tree-header-padding-block` | Vertical space around a section header |
-| `--motion-duration-interface` | Chevron rotation and optional row-animation duration |
+| `--motion-duration-interface` | Nav Tree chevron rotation duration; rows change immediately |
 | `--navigation-tree-item-background` | Default item background |
 | `--navigation-tree-item-background-hovered` | Item background while hovered |
 | `--navigation-tree-item-background-pressed` | Item background while pressed |
@@ -531,9 +531,13 @@ Button focus uses the shared `--color-focus` role. Pending retains the enabled
 colors while displaying progress. Disabled Buttons retain their variant colors
 at `--opacity-disabled` and do not add elevation.
 
-The library’s optional `useAnimatedNavigationTree` hook reads `--motion-duration-interface`
-from the attached tree element, falling back to the page root, for JavaScript completion timing.
-Theme duration overrides can use `ms` or `s`; the resolved motion policy bypasses animation when suppressed. Attach the optional `treeRef` returned by the hook; it is a temporary bridge until the separate tree build removes the hook.
+NavTree owns its row appearance and chevron using the existing tree tokens and
+shared small-button sizing tokens. Top-level expandable groups retain `--space-2`
+spacing. Only the chevron animates, using `--motion-duration-interface`,
+`--motion-easing-enter` and `--motion-rotation-expanded`. Rows change immediately;
+the central policy suppresses rotation in Wireframe scopes and under system
+reduced motion. No tree tokens were added, renamed or removed in this build.
+The former optional animation hook and consumer recipe classes have been removed.
 
 ## What is not currently a Mezzanine foundation
 

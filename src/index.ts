@@ -92,7 +92,6 @@ export type {
 } from './components/Link'
 
 export {
-  useAnimatedNavigationTree,
   NavigationTree,
   NavigationTreeHeader,
   NavigationTreeItem,
@@ -260,3 +259,6 @@ export type { TooltipProps, TooltipRenderProps, TooltipTriggerComponentProps } f
 
 export { Sidebar, SidebarTrigger, SidebarPanel } from './components/Sidebar'
 export type { SidebarProps, SidebarTriggerProps, SidebarPanelProps } from './components/Sidebar'
+
+export { NavTree } from './components/NavTree'
+export type { NavTreeProps, NavTreeItemData, NavTreeSectionData } from './components/NavTree'

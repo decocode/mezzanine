@@ -70,7 +70,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/content/navbarContent.tsx` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
 | `site/components/ExampleZone.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
 | `site/components/DocsTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes |
-| `tests/navigation-tree-motion.spec.ts` | Checks public tree animation, keyboard expansion and reduced motion including preference changes mid-animation |
+| `tests/navigation-tree-motion.spec.ts` | Checks immediate Nav Tree rows, keyboard expansion and reduced-motion changes during chevron rotation |
 | `tests/wireframe-links.spec.ts` | Checks Wireframe underlines across link patterns and narrow layouts while preserving Light and Dark treatments |
 | `tests/navbar.spec.ts` | Navbar keyboard, responsive, theme, contrast and forced-colour checks |
 | `site/pages/TextAreaPage.tsx` | Multiline field examples, states, composition and vertical resizing guidance |
@@ -80,8 +80,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Checkbox.css` | Token-led styling for Checkbox states and interaction feedback |
 | `src/components/Link.ts` | Public React Aria Link export and prop types |
 | `src/components/Link.css` | Token-led styling for Link interaction states |
-| `src/components/NavigationTree.ts` | Public React Aria NavigationTree family, prop types and optional expansion-animation hook with reduced-motion handling |
-| `src/components/NavigationTree.css` | Token-led hierarchy, route and interaction styling, plus optional row animations and reduced-motion rules |
+| `src/components/NavigationTree.ts` | Unchanged low-level React Aria NavigationTree family and prop types |
+| `src/components/NavigationTree.css` | Baseline styling for low-level React Aria tree parts; no generic control overrides |
 | `src/components/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/RadioGroup.css` | Token-led styling for RadioGroup, RadioField, RadioButton and SelectionIndicator |
 | `src/components/Disclosure.tsx` | Public React Aria Disclosure family plus the composed DisclosureHeader trigger pattern |
@@ -231,3 +231,14 @@ Typography retains its overview at `/typography`. Its child pages are
 | `gitleaks git --staged --redact .` | Scan staged changes |
 
 `dist/`, `site-dist/`, `reports/`, and `node_modules/` are generated and ignored by Git.
+
+### Nav Tree ownership
+
+| File | Purpose |
+| --- | --- |
+| `src/components/NavTree.tsx` | Composed data-driven tree with owned controls, accessible labels, badges and sections |
+| `src/components/NavTree.css` | Tree-row appearance, control focus and policy-aware quarter-turn chevron |
+| `src/components/navTreeLogic.ts` | Private route/expansion reconciliation and recovery of focus lost through row removal |
+| `site/components/sidebarNavigationItems.tsx` | Converts site structure to navigation data and WIP badge content |
+| `scripts/nav-tree-rules.mjs`, `scripts/nav-tree-rules.test.mjs` | Ownership checks and regression fixtures for removed recipes, consumer internals and aliased composition |
+| `tests/nav-tree.spec.ts`, `tests/fixtures/NavTreeHarness.tsx` | Isolated public-library checks for data, controlled state, focus, themes and reflow without site CSS |

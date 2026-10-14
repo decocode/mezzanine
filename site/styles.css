@@ -141,10 +141,6 @@ a:focus-visible {
   display: none;
 }
 
-.site-sidebar .react-aria-NavigationTreeItem[data-level='1'][data-has-child-items]:not(:first-child) {
-  margin-block-start: var(--space-2);
-}
-
 .landing-page {
   display: grid;
   align-items: center;

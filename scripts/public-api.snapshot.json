@@ -364,6 +364,22 @@
     "kind": "value"
   },
   {
+    "name": "NavTree",
+    "kind": "value"
+  },
+  {
+    "name": "NavTreeItemData",
+    "kind": "type"
+  },
+  {
+    "name": "NavTreeProps",
+    "kind": "type"
+  },
+  {
+    "name": "NavTreeSectionData",
+    "kind": "type"
+  },
+  {
     "name": "Navbar",
     "kind": "value"
   },
@@ -801,10 +817,6 @@
   },
   {
     "name": "ZoomOutIcon",
-    "kind": "value"
-  },
-  {
-    "name": "useAnimatedNavigationTree",
     "kind": "value"
   }
 ]

@@ -25,17 +25,6 @@
   line-height: var(--line-height-body-sm);
 }
 
-.react-aria-NavigationTreeItem .react-aria-Link {
-  display: flex;
-  min-width: 0;
-  min-height: var(--navigation-tree-item-min-height);
-  flex: 1;
-  align-items: center;
-  justify-content: space-between;
-  color: inherit;
-  text-decoration: none;
-}
-
 .react-aria-NavigationTreeItem[data-hovered] {
   background: var(--navigation-tree-item-background-hovered);
 }
@@ -54,30 +43,6 @@
   font-weight: var(--font-weight-semibold);
 }
 
-.react-aria-NavigationTreeItem[data-has-child-items].mezzanine-navigation-tree-item-has-link {
-  color: var(--navigation-tree-item-content);
-}
-
-.react-aria-NavigationTreeItem[data-has-child-items].mezzanine-navigation-tree-item-has-link .react-aria-Link[data-hovered] {
-  color: var(--color-link-hover);
-  text-decoration-line: underline;
-  text-decoration-thickness: var(--link-underline-thickness);
-  text-underline-offset: var(--link-underline-offset);
-}
-
-.react-aria-NavigationTreeItem:has(.mezzanine-navigation-tree-group-toggle[data-hovered]) {
-  background: var(--navigation-tree-item-background-hovered);
-}
-
-.react-aria-NavigationTreeItem:has(.mezzanine-navigation-tree-group-toggle[data-pressed]) {
-  background: var(--navigation-tree-item-background-pressed);
-}
-
-.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle[data-hovered],
-.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle[data-pressed] {
-  background: transparent;
-}
-
 .react-aria-NavigationTreeItem[data-current] {
   border-inline-start-color: var(--navigation-tree-current-indicator);
   background: var(--navigation-tree-item-background-current);
@@ -90,22 +55,8 @@
   outline-offset: var(--navigation-tree-focus-ring-offset);
 }
 
-.react-aria-NavigationTreeItem .react-aria-Link[data-focus-visible] {
-  outline: none;
-}
-
 .react-aria-NavigationTreeItem[data-disabled] {
   opacity: var(--opacity-disabled);
-}
-
-.react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] svg {
-  rotate: 0deg;
-  transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
-}
-
-.react-aria-NavigationTreeItem[data-expanded] .react-aria-Button[slot='chevron'] svg {
-  /* Preserve the existing down-to-up direction until the separate tree build. */
-  rotate: calc(var(--motion-rotation-expanded) * 2);
 }
 
 .react-aria-NavigationTreeSection {
@@ -123,60 +74,7 @@
   text-transform: var(--text-transform-label);
 }
 
-.mezzanine-navigation-tree-item-animated {
-  overflow: hidden;
-}
-
-.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-opening {
-  animation: navigation-tree-item-open var(--motion-duration-interface) var(--motion-easing-enter) both; animation-name: var(--_motion-animation, navigation-tree-item-open);
-}
-
-.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing {
-  pointer-events: none;
-  animation: navigation-tree-item-close var(--motion-duration-interface) var(--motion-easing-enter) both; animation-name: var(--_motion-animation, navigation-tree-item-close);
-}
-
-.react-aria-NavigationTreeItem.mezzanine-navigation-tree-item-closing .react-aria-Button[slot='chevron'] svg {
-  rotate: 0deg;
-}
-
-@keyframes navigation-tree-item-open {
-  from {
-    min-height: 0;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(calc(-1 * var(--motion-distance-reveal)));
-  }
-
-  to {
-    min-height: var(--navigation-tree-item-min-height);
-    max-height: var(--navigation-tree-item-min-height);
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes navigation-tree-item-close {
-  from {
-    min-height: var(--navigation-tree-item-min-height);
-    max-height: var(--navigation-tree-item-min-height);
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  to {
-    min-height: 0;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(calc(-1 * var(--motion-distance-reveal)));
-  }
-}
 
 @media (forced-colors: active) {
-  .react-aria-NavigationTree,
-  .react-aria-NavigationTreeItem,
-  .react-aria-NavigationTreeItem .react-aria-Link,
-  .react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] {
-    forced-color-adjust: auto;
-  }
+  .react-aria-NavigationTree, .react-aria-NavigationTreeItem { forced-color-adjust: auto; }
 }

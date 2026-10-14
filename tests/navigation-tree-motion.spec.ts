@@ -1,44 +1,37 @@
 import { expect, test } from '@playwright/test'
 
 for (const reducedMotion of ['no-preference', 'reduce'] as const) {
-  test(`NavigationTree expansion respects ${reducedMotion}`, async ({ page }) => {
+  test(`Nav Tree immediate rows and chevron respect ${reducedMotion}`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion })
     await page.goto('/navigation-tree')
     await page.evaluate(() => document.documentElement.style.setProperty('--motion-duration-interface', '800ms'))
-    const tree = page.getByRole('treegrid', { name: 'NavigationTree items', exact: true })
-    const trigger = tree.getByRole('button', { name: /^Expand or collapse Item B/ })
-    const child = tree.getByRole('row', { name: /Child item B1/ })
+    const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+    const trigger = tree.getByRole('button', { name: 'Item B', exact: true })
+    const child = tree.getByRole('row', { name: 'Child item B1', exact: true })
     const parent = tree.getByRole('row', { name: 'Item B', exact: true })
     await parent.focus()
     await page.keyboard.press('ArrowLeft')
-    if (reducedMotion === 'no-preference') {
-      await expect(tree.locator('.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing')).toHaveCount(2)
-      expect(await tree.locator('.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing').first().evaluate(e => getComputedStyle(e).animationName)).toBe('navigation-tree-item-close')
-    } else {
-      await expect(tree.locator('.mezzanine-navigation-tree-item-closing')).toHaveCount(0)
-      expect(await trigger.locator('svg').evaluate(e => getComputedStyle(e).transitionDuration)).toBe('0s')
-    }
     await expect(child).toHaveCount(0)
+    await expect(parent).toHaveAttribute('aria-expanded', 'false')
     await expect(parent).toBeFocused()
+    await expect(trigger.locator('svg')).toHaveCSS('transition-duration', reducedMotion === 'reduce' ? '0s' : '0.8s')
     await page.keyboard.press('ArrowRight')
     await expect(child).toBeVisible()
-    if (reducedMotion === 'no-preference') {
-      await expect(tree.locator('.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-opening')).toHaveCount(2)
-      await expect(tree.locator('.mezzanine-navigation-tree-item-opening')).toHaveCount(0)
-    } else {
-      await expect(tree.locator('.mezzanine-navigation-tree-item-opening')).toHaveCount(0)
-    }
+    await expect(parent).toHaveAttribute('aria-expanded', 'true')
+    expect(await child.evaluate(element => element.getAnimations().length)).toBe(0)
+    await expect(trigger.locator('svg')).toHaveCSS('rotate', '90deg')
   })
 }
 
-test('enabling reduced motion completes a pending NavigationTree collapse', async ({ page }) => {
+test('enabling reduced motion completes a pending Nav Tree chevron rotation', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/navigation-tree')
-  await page.evaluate(() => document.documentElement.style.setProperty('--motion-duration-interface', '10s'))
-  const tree = page.getByRole('treegrid', { name: 'NavigationTree items', exact: true })
-  await tree.getByRole('button', { name: /^Expand or collapse Item B/ }).click()
-  await expect(tree.locator('.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing')).toHaveCount(2)
+  const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+  await tree.evaluate(element => { element.style.setProperty('--motion-duration-interface', '10s') })
+  const trigger = tree.getByRole('button', { name: 'Item B', exact: true })
+  await trigger.click()
+  await expect(tree.getByRole('row', { name: 'Child item B1', exact: true })).toHaveCount(0)
   await page.emulateMedia({ reducedMotion: 'reduce' })
-  await expect(tree.locator('.mezzanine-navigation-tree-item-closing')).toHaveCount(0)
-  await expect(tree.getByRole('row', { name: /Child item B1/ })).toHaveCount(0)
+  await expect(trigger.locator('svg')).toHaveCSS('rotate', '0deg')
+  await expect(trigger.locator('svg')).toHaveCSS('transition-duration', '0s')
 })

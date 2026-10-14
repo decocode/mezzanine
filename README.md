@@ -206,17 +206,39 @@ Use only applicable sections; do not add empty sections or invent missing
 features. Foundation pages retain their own structures. WIP pages remain marked
 Not implemented.
 
-## Optional NavigationTree animation
+## Nav Tree
 
-Import `useAnimatedNavigationTree` from `@decocode/mezzanine` to opt into the
-row animation used by the documentation sidebar. The standard React Aria tree
-exports and props are unchanged. Pass the hook's `expandedKeys` and
-`onExpandedChange` to the tree. Attach the optional returned `treeRef` to `<NavigationTree ref={treeRef}>` for local theme-aware timing; unattached callers use the page theme. This additive bridge is temporary: the separate tree build will remove the hook. Its `openingKeys` and `closingKeys` identify
-parents whose descendant rows need `mezzanine-navigation-tree-item-animated` plus
-`mezzanine-navigation-tree-item-opening` or `mezzanine-navigation-tree-item-closing`; mark closing parents with `mezzanine-navigation-tree-item-closing` as well.
-The library stylesheet supplies those animation classes. The hook reads
-`--motion-duration-interface` from the attached tree element (the page root if unattached). Reduced motion
-removes row and chevron animation and completes any pending collapse immediately.
+`NavTree` is Mezzanine's composed React Aria NavigationTree. Supply an accessible
+name, `items` and `selectedRoute`; the library owns links, controls, row states,
+spacing and the right-to-down chevron. Each item has a unique `id`, a string `label`,
+an optional `href`, non-interactive badge `content` and optional item `children`.
+Sections use `type: 'section'`, a label (or `aria-label`) and item children.
+
+A linked parent has a destination link and separate expansion control. An unlinked
+parent uses its visible label as the expansion control's name and announces state
+through `aria-expanded`. `getToggleLabel` can customise/localise control names.
+An empty destination-less item is disabled. IDs must be unique across the tree;
+replace changed data and its ancestors immutably. Sections cannot sit inside items.
+
+Use `defaultExpandedKeys` for uncontrolled state, or `expandedKeys` with
+`onExpandedChange` for controlled state. A route change adds only its ancestors;
+other branches remain as the user left them. Manual collapse is respected until
+the route or its ancestor chain changes. Controlled callers must accept expansion
+requests; NavTree never overrides their supplied keys. Missing routes are revealed
+when their item arrives. Removing items prunes obsolete expansion keys.
+
+Rows change immediately. Only the chevron animates, using shared motion tokens
+and the central motion policy. A public-API exit proof did not safely retain closing
+rows with truthful state and focus, so this build uses the approved chevron-only
+fallback. Lost focus after a controlled collapse or item removal returns to the
+nearest surviving ancestor, or the tree when none remains.
+
+Breaking migration: `useAnimatedNavigationTree`, its temporary `treeRef`, and the
+`mezzanine-navigation-tree-item-animated`, `-opening`, `-closing`, `-has-link` and
+`mezzanine-navigation-tree-group-toggle` recipes are removed. Replace hook/class/
+slot assembly with `NavTree items={items}`. The low-level `NavigationTree` family
+and its existing props remain available for custom React Aria composition; generic
+Button and Link appearance is no longer rewritten by tree descendant selectors.
 
 ## Tooltips
 
@@ -310,4 +332,4 @@ Wireframe alone; system reduction stops them while retaining visible feedback.
 Tooltip now fades over the standard interface duration; its 500ms hover delay stays.
 Disclosure now points right when closed and down when expanded. Tabs explicitly
 slows towards its destination. Modal, Tooltip, Sidebar and TabBar exits accelerate.
-Navbar reveal travel is now 0.25rem. NavigationTree keeps its current chevron direction.
+Navbar reveal travel is now 0.25rem. Nav Tree uses the same right-to-down quarter turn as Disclosure; its rows change immediately.

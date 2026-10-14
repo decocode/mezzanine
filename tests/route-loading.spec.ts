@@ -23,7 +23,7 @@ test('mobile navigation downloads only when opened and retains expanded groups',
   const tree = page.getByRole('treegrid', { name: 'Mezzanine documentation' })
   await expect(tree).toBeVisible()
   expect(navigationRequests).toHaveLength(1)
-  const forms = tree.getByRole('button', { name: 'Expand or collapse Forms and input' })
+  const forms = tree.getByRole('button', { name: 'Forms and input', exact: true })
   await forms.click()
   await expect(tree.getByRole('link', { name: 'Checkbox', exact: true })).toBeVisible()
   await browse.click()

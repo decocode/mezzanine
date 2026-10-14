@@ -1,3 +1,4 @@
+import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -353,10 +354,12 @@ try {
   for (const file of [...filesIn('src', ['.css']), ...filesIn('site', ['.css'])]) checkButtonSizing(file)
   for (const file of [...filesIn('src', ['.css']), ...filesIn('site', ['.css'])]) {
     const text = read(file)
+    for (const problem of checkNavTreeCss(file, text)) report(file, text, problem.position, 'nav-tree-ownership', problem.message)
     for (const problem of checkMotionCss(file, text)) report(file, text, problem.position, 'motion', problem.message)
   }
   for (const file of [...filesIn('src', ['.ts', '.tsx']), ...filesIn('site', ['.ts', '.tsx'])]) {
     const text = read(file)
+    for (const problem of checkNavTreeSource(file, text)) report(file, text, problem.position, 'nav-tree-ownership', problem.message)
     for (const problem of checkMotionSource(file, text)) report(file, text, problem.position, 'motion', problem.message)
   }
   const tokens = read('src/tokens.css')

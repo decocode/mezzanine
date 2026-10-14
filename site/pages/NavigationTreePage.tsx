@@ -1,28 +1,10 @@
 import { ExampleZone } from '../components/ExampleZone'
-import {
-  Button,
-  ChevronDownIcon,
-  Link,
-  NavigationTree,
-  NavigationTreeHeader,
-  NavigationTreeItem,
-  NavigationTreeItemContent,
-  NavigationTreeSection
-} from '@decocode/mezzanine'
-import { navigationTreeContent } from '../content/navigationTreeContent'
+import { NavTree } from '@decocode/mezzanine'
+import { navigationTreeContent, navigationTreeExampleItems } from '../content/navigationTreeContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import { DocsTable } from '../components/DocsTable'
-import { useAnimatedNavigationTree } from '@decocode/mezzanine'
 
 export default function NavigationTreePage() {
-  const {
-    treeRef,
-    closingKeys,
-    expandedKeys,
-    onExpandedChange,
-    openingKeys,
-  } = useAnimatedNavigationTree(['item-b', 'item-c'])
-
   return (
     <ComponentPageTemplate
       description={navigationTreeContent.description}
@@ -36,106 +18,9 @@ export default function NavigationTreePage() {
           content: (<>
             {navigationTreeContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
             <ExampleZone className="navigation-tree-example">
-              <nav aria-label="NavigationTree example">
-                <NavigationTree
-                  ref={treeRef}
-                  aria-label="NavigationTree items"
-                  className="react-aria-NavigationTree animated-navigation-tree"
-                  expandedKeys={expandedKeys}
-                  onExpandedChange={onExpandedChange}
-                  selectedRoute="/navigation-tree"
-                >
-                  <NavigationTreeSection>
-                    <NavigationTreeHeader>Header A</NavigationTreeHeader>
-                    <NavigationTreeItem
-                      href="/navigation-tree"
-                      id="item-a"
-                      textValue="Item A"
-                    >
-                      <NavigationTreeItemContent>
-                        <Link>Item A</Link>
-                      </NavigationTreeItemContent>
-                    </NavigationTreeItem>
-                    <NavigationTreeItem
-                      className={`react-aria-NavigationTreeItem${closingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
-                      id="item-b"
-                      textValue="Item B"
-                    >
-                      <NavigationTreeItemContent>
-                        <Button
-                          aria-label="Expand or collapse Item B"
-                          className="mezzanine-navigation-tree-group-toggle"
-                          iconTrailing={<ChevronDownIcon />}
-                          size="sm"
-                          slot="chevron"
-                          variant="tertiary"
-                        >
-                          Item B
-                        </Button>
-                      </NavigationTreeItemContent>
-                      <NavigationTreeItem
-                        className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${openingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-opening' : ''}${closingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
-                        href="/navigation-tree#child-item-b1"
-                        id="child-item-b1"
-                        textValue="Child item B1"
-                      >
-                        <NavigationTreeItemContent>
-                          <Link>Child item B1</Link>
-                        </NavigationTreeItemContent>
-                      </NavigationTreeItem>
-                      <NavigationTreeItem
-                        className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${openingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-opening' : ''}${closingKeys.has('item-b') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
-                        href="/navigation-tree#child-item-b2"
-                        id="child-item-b2"
-                        textValue="Child item B2"
-                      >
-                        <NavigationTreeItemContent>
-                          <Link>Child item B2</Link>
-                        </NavigationTreeItemContent>
-                      </NavigationTreeItem>
-                    </NavigationTreeItem>
-                  </NavigationTreeSection>
-                  <NavigationTreeSection>
-                    <NavigationTreeHeader>Header B</NavigationTreeHeader>
-                    <NavigationTreeItem
-                      className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-has-link${closingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
-                      href="/navigation-tree#item-c"
-                      id="item-c"
-                      textValue="Item C"
-                    >
-                      <NavigationTreeItemContent>
-                        <Link>Item C</Link>
-                        <Button
-                          aria-label="Expand or collapse Item C"
-                          iconLeading={<ChevronDownIcon />}
-                          size="sm"
-                          slot="chevron"
-                          variant="tertiary"
-                        />
-                      </NavigationTreeItemContent>
-                      <NavigationTreeItem
-                        className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${openingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-opening' : ''}${closingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
-                        href="/navigation-tree#child-item-c1"
-                        id="child-item-c1"
-                        textValue="Child item C1"
-                      >
-                        <NavigationTreeItemContent>
-                          <Link>Child item C1</Link>
-                        </NavigationTreeItemContent>
-                      </NavigationTreeItem>
-                      <NavigationTreeItem
-                        className={`react-aria-NavigationTreeItem mezzanine-navigation-tree-item-animated${openingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-opening' : ''}${closingKeys.has('item-c') ? ' mezzanine-navigation-tree-item-closing' : ''}`}
-                        href="/navigation-tree#child-item-c2"
-                        id="child-item-c2"
-                        textValue="Child item C2"
-                      >
-                        <NavigationTreeItemContent>
-                          <Link>Child item C2</Link>
-                        </NavigationTreeItemContent>
-                      </NavigationTreeItem>
-                    </NavigationTreeItem>
-                  </NavigationTreeSection>
-                </NavigationTree>
+              <nav aria-label="Nav Tree example">
+                <NavTree aria-label="Nav Tree items" items={navigationTreeExampleItems}
+                  defaultExpandedKeys={['item-b', 'item-c']} selectedRoute="/navigation-tree" />
               </nav>
             </ExampleZone>
           </>),

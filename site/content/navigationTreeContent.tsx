@@ -1,37 +1,42 @@
-// Written guidance and reference entries; live examples stay in the page.
+import type { NavTreeProps } from '@decocode/mezzanine'
+
+export const navigationTreeExampleItems: NavTreeProps['items'] = [
+  { type: 'section', id: 'section-a', label: 'Header A', children: [
+    { id: 'item-a', label: 'Item A', href: '/navigation-tree' },
+    { id: 'item-b', label: 'Item B', children: [
+      { id: 'child-item-b1', label: 'Child item B1', href: '/navigation-tree#child-item-b1' },
+      { id: 'child-item-b2', label: 'Child item B2', href: '/navigation-tree#child-item-b2' },
+    ] },
+  ] },
+  { type: 'section', id: 'section-b', label: 'Header B', children: [
+    { id: 'item-c', label: 'Item C', href: '/navigation-tree#item-c', children: [
+      { id: 'child-item-c1', label: 'Child item C1', href: '/navigation-tree#child-item-c1' },
+      { id: 'child-item-c2', label: 'Child item C2', href: '/navigation-tree#child-item-c2' },
+    ] },
+  ] },
+]
+
 export const navigationTreeContent = {
-  title: 'Navigation tree',
-  description: 'A navigation tree is a list of links arranged in groups that can open to reveal more links inside them, like folders containing other folders. It helps people explore a website with several levels of pages.',
+  title: 'Nav Tree',
+  description: "Nav Tree is Mezzanine’s composed version of React Aria’s NavigationTree. Supply labels, destinations and optional badges; the library supplies the rows, links, expansion controls and states.",
   relatedPages: [
     { label: 'Navbar', href: '/navbar' },
     { label: 'Breadcrumbs', href: '/breadcrumbs' },
     { label: 'Table of contents', href: '/table-of-contents' },
   ],
-  references: [
-    { label: 'React Aria NavigationTree', href: 'https://react-aria.adobe.com/NavigationTree' },
-  ],
-  exampleParagraphs: [
-    <>
-      A <code>NavigationTreeSection</code> groups related items, and a{' '}
-      <code>NavigationTreeHeader</code> labels that section. Each{' '}
-      <code>NavigationTreeItem</code> contains <code>NavigationTreeItemContent</code>. An item may
-      contain a <code>Link</code>, child items, and a <code>Button</code> in the{' '}
-      <code>chevron</code> slot.
-    </>,
-  ],
+  references: [{ label: 'React Aria NavigationTree', href: 'https://react-aria.adobe.com/NavigationTree' }],
+  exampleParagraphs: [<>Item B opens from its whole label. Item C has a destination link and a separate expansion control. Sections group items without becoming expandable rows.</>],
   anatomyRows: [
-    { name: 'NavigationTree', description: <>Manages the hierarchy, expanded items and current route.</> },
-    { name: 'NavigationTreeSection', description: <>Groups related items.</> },
-    { name: 'NavigationTreeHeader', description: <>Provides a section label.</> },
-    { name: 'NavigationTreeItem', description: <>Defines an item with a stable id, textValue and optional href or child items.</> },
-    { name: 'NavigationTreeItemContent', description: <>Contains the visible row content.</> },
-    { name: 'Link', description: <>Provides the destination link within a row.</> },
-    { name: 'Button slot="chevron"', description: <>Expands or collapses a parent item.</> },
+    { name: 'NavTree', description: <>Owns the complete navigation recipe. Pass <code>items</code> and the current <code>selectedRoute</code>.</> },
+    { name: 'NavTreeItemData', description: <>A stable <code>id</code>, string <code>label</code>, optional <code>href</code>, badge <code>content</code> and nested <code>children</code>.</> },
+    { name: 'NavTreeSectionData', description: <>An entry with <code>type="section"</code>, a visible label or <code>aria-label</code>, and item children.</> },
   ],
   usageParagraphs: [
-    <>Give the tree an <code>aria-label</code>, and wrap it in a labelled <code>nav</code> when it provides page navigation. Give each item a stable <code>id</code> and a <code>textValue</code> describing its label. A section needs a visible header or an accessible label.</>,
-    <>Pass the current destination as <code>selectedRoute</code>. Set <code>defaultExpandedKeys</code> for initial expansion, or use <code>expandedKeys</code> with <code>onExpandedChange</code> when the application owns that state. Routing and the current path remain the application’s responsibility.</>,
-    <>Use arrow keys to move through the tree hierarchy. The chevron Button expands or collapses its parent; Enter activates a focused destination. Keep the React Aria row composition so focus and keyboard handling remain connected to the tree.</>,
-    <>The optional <code>useAnimatedNavigationTree</code> hook is exported by Mezzanine. Attach its optional <code>treeRef</code> to <code>NavigationTree</code> so motion follows the tree’s nearest themed area. Without it, motion follows the page theme. This temporary hook will be replaced by the tree build. Pass its <code>expandedKeys</code> and <code>onExpandedChange</code> to the tree. Use its <code>openingKeys</code> and <code>closingKeys</code> to apply <code>mezzanine-navigation-tree-item-opening</code> and <code>mezzanine-navigation-tree-item-closing</code> to descendant rows with the <code>mezzanine-navigation-tree-item-animated</code> class. Mark a closing parent with <code>mezzanine-navigation-tree-item-closing</code> so its chevron rotates back. Reduced motion skips the row animation and chevron transition; changing the preference during an animation finishes it immediately.</>,
+    <>Give the tree an accessible name and place it inside a labelled navigation landmark when it provides page navigation. IDs must be unique throughout the tree. Sections may contain nested items; an item cannot contain a section.</>,
+    <>An unlinked parent uses its visible label as the control’s name and exposes its expanded state separately. Linked parents keep navigation and expansion separate. <code>getToggleLabel</code> can localise expansion labels.</>,
+    <>Use <code>defaultExpandedKeys</code> for initial state, or <code>expandedKeys</code> and <code>onExpandedChange</code> for controlled state. Route changes request expansion of the current page’s ancestors without closing other groups. A manual collapse stays collapsed until the route or its ancestor chain changes. Controlled applications must accept the callback to reveal those ancestors.</>,
+    <>Rows open and close immediately; only the chevron animates, from right to down. Retaining closing rows did not pass the collection/focus proof, so Nav Tree uses the chevron-only fallback. The system reduced-motion setting and local Wireframe policy make the rotation immediate.</>,
+    <>Supply non-interactive badge or text content only. A destination-less item without children is disabled. Replace changed data and its ancestors immutably so collection updates are detected. Links retain native navigation and React Aria keyboard behaviour.</>,
+    <>Use the unchanged low-level <code>NavigationTree</code> parts when you need arbitrary React Aria composition. The old optional animation hook and its recipe classes have been removed; Nav Tree needs no consumer slots, classes or motion wiring.</>,
   ],
 }
