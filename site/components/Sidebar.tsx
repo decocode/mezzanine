@@ -58,7 +58,7 @@ export function Sidebar(props: SidebarProps) {
         {({ isExpanded }) => <>
         <Heading className="mobile-sidebar-heading" level={2}>
           <Button
-            className="sidebar-browse-trigger"
+            size="sm"
             iconLeading={isExpanded ? <PanelLeftCloseIcon /> : <PanelLeftOpenIcon />}
             slot="trigger"
             variant="tertiary"

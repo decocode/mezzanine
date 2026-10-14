@@ -1,3 +1,12 @@
+/* Button and ToggleButton share one size scale. Consumers select size via props. */
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-size] {
+  box-sizing: border-box;
+  min-height: var(--button-min-height);
+  padding: var(--button-padding-block) var(--button-padding-inline);
+  font-size: var(--button-font-size);
+  line-height: var(--button-line-height);
+}
+
 .react-aria-Button[data-variant] {
   position: relative;
   display: inline-flex;
@@ -6,17 +15,13 @@
   box-sizing: border-box;
   min-width: 0;
   max-width: 100%;
-  min-height: var(--button-min-height);
-  padding: var(--button-padding-block) var(--button-padding-inline);
   border: var(--button-border-width) solid var(--button-border);
   border-radius: var(--button-border-radius);
   background: var(--button-background);
   color: var(--button-content);
   font-family: var(--font-family-body);
-  font-size: var(--button-font-size);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--button-line-height);
   text-align: center;
   text-decoration: none;
   text-transform: var(--text-transform-label);
@@ -25,7 +30,7 @@
   cursor: pointer;
 }
 
-.react-aria-Button[data-size='sm'] {
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='sm'] {
   --button-min-height: var(--button-sm-min-height);
   --button-padding-block: var(--button-sm-padding-block);
   --button-padding-inline: var(--button-sm-padding-inline);
@@ -34,7 +39,7 @@
   --button-icon-size: var(--button-sm-icon-size);
 }
 
-.react-aria-Button[data-size='md'] {
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='md'] {
   --button-min-height: var(--button-md-min-height);
   --button-padding-block: var(--button-md-padding-block);
   --button-padding-inline: var(--button-md-padding-inline);
@@ -43,7 +48,7 @@
   --button-icon-size: var(--button-md-icon-size);
 }
 
-.react-aria-Button[data-size='lg'] {
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='lg'] {
   --button-min-height: var(--button-lg-min-height);
   --button-padding-block: var(--button-lg-padding-block);
   --button-padding-inline: var(--button-lg-padding-inline);
@@ -52,7 +57,7 @@
   --button-icon-size: var(--button-lg-icon-size);
 }
 
-.react-aria-Button[data-size='xl'] {
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xl'] {
   --button-min-height: var(--button-xl-min-height);
   --button-padding-block: var(--button-xl-padding-block);
   --button-padding-inline: var(--button-xl-padding-inline);
@@ -80,7 +85,7 @@
   height: var(--button-icon-size);
 }
 
-.react-aria-Button[data-icon-only] {
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-icon-only] {
   width: var(--button-min-height);
   padding-inline: 0;
 }

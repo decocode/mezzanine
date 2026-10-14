@@ -4,6 +4,8 @@ export const sidebarContent = {
   exampleIntroduction: 'Choose a side and collapse behaviour, then use the Open button or the sidebar’s close button. On narrow screens, Open opens a modal drawer. Option selections are shared across presentations.',
   documentationIntroduction: 'This is the same component used in the Mezzanine AppShell, with the same navigation data and current-page indication. It stays open without a header or close button on desktop. On narrow layouts, Browse sections opens the existing non-modal Disclosure. The example links navigate to the real documentation pages.',
   labels: {
+    alignment: 'Alignment', collapseBehaviour: 'Collapse behaviour',
+    controls: 'Control panel', closeControls: 'Close control panel',
     collapsible: 'Allow collapsing', trigger: 'Open', close: 'Close sidebar', expand: 'Expand sidebar', reset: 'Reset options',
     navigation: 'Navigation', filters: 'Filters', details: 'Details',
   },

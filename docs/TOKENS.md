@@ -278,7 +278,7 @@ Its own container switches to desktop navigation at 48rem, relative to the root 
 | `--navbar-border-width` | Navbar and trigger border thickness |
 | `--navbar-min-height` | Minimum height of the content row |
 | `--navbar-wide-padding-inline` | Horizontal padding in the desktop layout |
-| `--navbar-menu-min-height` | Minimum mobile trigger height |
+| `--navbar-menu-min-height` | Minimum navbar navigation-link height |
 | `--navbar-focus-ring-width`, `--navbar-focus-ring-offset` | Menu trigger focus outline |
 | `--navbar-panel-max-height` | Maximum panel height before it scrolls |
 | `--navbar-motion-duration`, `--navbar-motion-offset` | Panel entry timing and initial vertical displacement; disabled with reduced motion |
@@ -452,9 +452,6 @@ tokens for its unselected and selected interaction states.
 
 | Token | Meaning |
 | --- | --- |
-| `--toggle-button-min-height` | Minimum ToggleButton target height |
-| `--toggle-button-padding-block` | Vertical space inside a ToggleButton |
-| `--toggle-button-padding-inline` | Horizontal space inside a ToggleButton |
 | `--toggle-button-border-width` | ToggleButton border width |
 | `--toggle-button-border-radius` | ToggleButton corner radius |
 | `--toggle-button-focus-ring-width` | Keyboard-focus indicator width |
@@ -486,7 +483,6 @@ states.
 | `--navigation-tree-current-indicator-width` | Width of the current-route indicator |
 | `--navigation-tree-focus-ring-width` | Keyboard-focus indicator width |
 | `--navigation-tree-focus-ring-offset` | Keyboard-focus indicator position |
-| `--navigation-tree-chevron-size` | Expand-and-collapse chevron size |
 | `--navigation-tree-header-padding-block` | Vertical space around a section header |
 | `--navigation-tree-motion-duration` | Chevron rotation and optional row-animation duration |
 | `--navigation-tree-item-background` | Default item background |
@@ -634,3 +630,17 @@ radius and overlay elevation tokens. These tokens control their remaining values
 | `--tooltip-motion-duration` | Fade duration; disabled for reduced motion |
 
 The hover delay is controlled by the `TooltipTrigger` `delay` prop, not CSS.
+
+### Shared button sizing
+
+Button and ToggleButton use the same `--button-sm-*`, `--button-md-*`,
+`--button-lg-*` and `--button-xl-*` size tokens. Both default to `md`.
+Select sizes through `size`; ToggleButtonGroup supplies a size to its children,
+which an individual ToggleButton can override with its own `size`.
+Use `iconLeading` or `iconTrailing` without children for icon-only buttons.
+
+Migration: `--toggle-button-min-height`, `--toggle-button-padding-block`,
+`--toggle-button-padding-inline` and `--navigation-tree-chevron-size` were removed.
+Replace local size overrides with size props; theme-wide changes belong in the
+shared button size tokens. Navbar, navigation-tree and TabBar action buttons now
+use those sizes instead of their own dimensions.

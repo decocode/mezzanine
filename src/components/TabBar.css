@@ -119,31 +119,11 @@
   pointer-events: none;
 }
 
-.mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant] {
-  width: 100%;
-  min-height: var(--tab-bar-item-min-height);
-  padding: var(--tab-bar-item-padding);
-  border: 0;
-  border-block-end: var(--tab-bar-indicator-width) solid transparent;
-  border-radius: 0;
-  background: transparent;
-  color: var(--color-text);
-  font-size: var(--font-size-label-lg);
-  line-height: var(--line-height-label-lg);
-  font-weight: var(--font-weight-medium);
-  letter-spacing: normal;
-  text-transform: none;
-}
-
-.mezzanine-tab-bar-more .mezzanine-button-content {
-  flex-direction: column;
-  gap: var(--tab-bar-item-gap);
-}
+.mezzanine-tab-bar-more .mezzanine-button-content { flex-direction: column; }
 
 .mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-current-route] {
   border-block-end-color: currentColor;
   background: var(--tab-bar-item-background-current);
-  font-weight: var(--font-weight-semibold);
 }
 
 .mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-hovered] {

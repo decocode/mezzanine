@@ -1,6 +1,7 @@
 import { ExampleZone } from '../components/ExampleZone'
 import {
   Cell,
+  DownloadIcon, Tooltip, TooltipTrigger,
   Column,
   ExternalLinkIcon,
   Link,
@@ -8,9 +9,11 @@ import {
   Table,
   TableBody,
   TableHeader,
+  Tabs, TabList, Tab, TabPanel,
   ToggleButton,
   ToggleButtonGroup,
 } from '@decocode/mezzanine'
+import { buttonSizes, buttonContent } from '../content/buttonContent'
 import { toggleButtonContent } from '../content/toggleButtonContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import { DocsTable } from '../components/DocsTable'
@@ -32,6 +35,29 @@ export default function ToggleButtonPage() {
               <ToggleButton>Toggle</ToggleButton>
             </ExampleZone>
           </>),
+        },
+        {
+          id: 'toggle-button-sizes',
+          title: 'Sizes',
+          content: <div className="documentation-table button-sizes-table">
+            <Table aria-label="ToggleButton sizes">
+              <TableHeader>
+                <Column id="size" isRowHeader>Size</Column>
+                <Column id="text">Text</Column>
+                <Column id="icon">Icon only buttons</Column>
+              </TableHeader>
+              <TableBody>
+                {buttonSizes.map(({ label, size }) => <Row id={size} key={size}>
+                  <Cell>{label}</Cell>
+                  <Cell><ToggleButton size={size}>Toggle</ToggleButton></Cell>
+                  <Cell><TooltipTrigger>
+                    <ToggleButton size={size} iconLeading={<DownloadIcon />} aria-label={buttonContent.iconOnlyLabel} />
+                    <Tooltip>{buttonContent.iconOnlyLabel}</Tooltip>
+                  </TooltipTrigger></Cell>
+                </Row>)}
+              </TableBody>
+            </Table>
+          </div>,
         },
         {
           id: 'toggle-button-states-heading',
@@ -68,10 +94,6 @@ export default function ToggleButtonPage() {
         {
           id: 'toggle-button-group-heading',
           title: 'Toggle button group',
-          subsections: [
-            { id: 'single-selection-heading', label: 'Single selection' },
-            { id: 'multiple-selection-heading', label: 'Multiple selection' },
-          ],
           content: (<>
             <p className="component-section-description">{toggleButtonContent.toggleButtonGroupParagraphs[0]}</p>
             <Link
@@ -84,41 +106,30 @@ export default function ToggleButtonPage() {
               <span>View ToggleButtonGroup on React Aria</span>
               <ExternalLinkIcon />
             </Link>
-            <div className="toggle-button-group-examples">
-              <section aria-labelledby="single-selection-heading">
-                <h3 id="single-selection-heading" className="mz-text-heading-sm">
-                  Single selection
-                </h3>
-                <ExampleZone>
-                  <ToggleButtonGroup
-                    aria-label="Single selection example"
-                    defaultSelectedKeys={['toggle-a']}
-                    disallowEmptySelection
-                    selectionMode="single"
-                  >
+            <ExampleZone>
+              <Tabs defaultSelectedKey="single">
+                <TabList aria-label="Selection mode">
+                  <Tab id="single">Single</Tab>
+                  <Tab id="multiple">Multi</Tab>
+                </TabList>
+                <TabPanel id="single" shouldForceMount>
+                  <p>{toggleButtonContent.singleSelectionInstruction}</p>
+                  <ToggleButtonGroup aria-label="Single selection example" defaultSelectedKeys={['toggle-a']} disallowEmptySelection selectionMode="single">
                     <ToggleButton id="toggle-a">Toggle A</ToggleButton>
                     <ToggleButton id="toggle-b">Toggle B</ToggleButton>
                     <ToggleButton id="toggle-c">Toggle C</ToggleButton>
                   </ToggleButtonGroup>
-                </ExampleZone>
-              </section>
-              <section aria-labelledby="multiple-selection-heading">
-                <h3 id="multiple-selection-heading" className="mz-text-heading-sm">
-                  Multiple selection
-                </h3>
-                <ExampleZone>
-                  <ToggleButtonGroup
-                    aria-label="Multiple selection example"
-                    defaultSelectedKeys={['toggle-a']}
-                    selectionMode="multiple"
-                  >
+                </TabPanel>
+                <TabPanel id="multiple" shouldForceMount>
+                  <p>{toggleButtonContent.multipleSelectionInstruction}</p>
+                  <ToggleButtonGroup aria-label="Multiple selection example" defaultSelectedKeys={['toggle-a']} selectionMode="multiple">
                     <ToggleButton id="toggle-a">Toggle A</ToggleButton>
                     <ToggleButton id="toggle-b">Toggle B</ToggleButton>
                     <ToggleButton id="toggle-c">Toggle C</ToggleButton>
                   </ToggleButtonGroup>
-                </ExampleZone>
-              </section>
-            </div>
+                </TabPanel>
+              </Tabs>
+            </ExampleZone>
           </>),
         },
         {

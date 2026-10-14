@@ -18,25 +18,19 @@ test('Button documents four content options and gives icon-only buttons a toolti
   await expect.poll(() => examples.evaluate(element => element.contains(document.activeElement))).toBe(true)
 })
 
-test('Button href preserves navigation, disabled state and action behaviour', async ({ page }) => {
+test('Button href preserves navigation and action behaviour', async ({ page }) => {
   await page.goto('/button')
   const navigation = page.getByRole('link', { name: 'Read usage guidance', exact: true })
   await expect(navigation).toHaveAttribute('href', '#button-usage-heading')
-  await expect(navigation.locator('.mezzanine-button-icon')).toHaveAttribute('aria-hidden', 'true')
-  const disabled = page.getByRole('link', { name: 'Disabled', exact: true })
-  await expect(disabled).toHaveAttribute('aria-disabled', 'true')
-  await disabled.dispatchEvent('click')
-  await expect(page).toHaveURL(/\/button$/)
-  await navigation.focus()
-  await page.keyboard.press('Tab')
-  await expect(disabled).not.toBeFocused()
+  await expect(page.getByText('Want to find out more about button accessibility?', { exact: true })).toBeVisible()
+  await expect(navigation.locator('.mezzanine-button-icon')).toHaveCount(0)
   await navigation.focus()
   await page.keyboard.press('Space')
   await expect(page).toHaveURL(/\/button$/)
   await page.keyboard.press('Enter')
   await expect(page).toHaveURL(/#button-usage-heading$/)
   await expect(page.locator('#button-usage-heading')).toBeVisible()
-  const action = page.getByRole('button', { name: 'Press Button', exact: true })
+  const action = page.getByRole('button', { name: 'Press', exact: true })
   await action.focus()
   await page.keyboard.press('Space')
   await expect(page.getByRole('status')).toHaveText('Press count: 1')
@@ -54,7 +48,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await page.goto(path)
       const control = path === '/'
         ? page.getByRole('link', { name: 'Read docs', exact: true })
-        : page.getByRole('button', { name: 'Press Button', exact: true })
+        : page.getByRole('button', { name: 'Press', exact: true })
       await expect(control).toBeVisible()
       for (const [index, state] of ['default', 'hovered', 'focused', 'pressed'].entries()) {
         await control.evaluate((element, state) => {

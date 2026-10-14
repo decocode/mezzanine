@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Button, Checkbox, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel,
   HomeIcon, Link, PanelLeftOpenIcon, PanelRightOpenIcon, Sidebar, SidebarPanel, SidebarTrigger,
@@ -13,6 +13,11 @@ import { sidebarContent } from '../content/sidebarContent'
 import exampleImage from '../assets/sidebar-example.svg'
 
 function SidebarExample() {
+  const [controlsExpanded, setControlsExpanded] = useState(true)
+  const controlsReopenRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (!controlsExpanded) controlsReopenRef.current?.querySelector('button')?.focus()
+  }, [controlsExpanded])
   const [side, setSide] = useState<'left' | 'right'>('left')
   const [collapseMode, setCollapseMode] = useState<'hide' | 'rail'>('rail')
   const [isExpanded, setExpanded] = useState(true)
@@ -25,46 +30,69 @@ function SidebarExample() {
     <Tooltip placement={side === 'left' ? 'right' : 'left'}>{sidebarContent.labels.expand}</Tooltip>
   </TooltipTrigger>
 
-  return <ExampleZone className="sidebar-example" controls={<>
-      <ToggleButtonGroup variant="secondary" aria-label="Panel side" selectionMode="single" disallowEmptySelection selectedKeys={[side]} onSelectionChange={(keys) => setSide(keys.has('right') ? 'right' : 'left')}>
-        <ToggleButton id="left">Left</ToggleButton><ToggleButton id="right">Right</ToggleButton>
-      </ToggleButtonGroup>
-      <ToggleButtonGroup variant="secondary" aria-label="Collapse behaviour" selectionMode="single" disallowEmptySelection selectedKeys={[collapseMode]} onSelectionChange={(keys) => setCollapseMode(keys.has('rail') ? 'rail' : 'hide')}>
-        <ToggleButton id="rail">Icon rail</ToggleButton><ToggleButton id="hide">Hide</ToggleButton>
-      </ToggleButtonGroup>
-      <Checkbox isSelected={isCollapsible} onChange={setCollapsible}>{sidebarContent.labels.collapsible}</Checkbox>
-    </>}>
-    <Sidebar isCollapsible={isCollapsible} isExpanded={isExpanded} onExpandedChange={setExpanded}>
-      <SidebarTrigger variant="primary">{sidebarContent.labels.trigger}</SidebarTrigger>
-      <div className="sidebar-example-layout">
-        <SidebarPanel title="Sidebar" headingLevel={3} side={side} closeLabel={sidebarContent.labels.close}
-          {...(collapseMode === 'rail' ? { collapseMode: 'rail', rail } : { collapseMode: 'hide' })}
-          header={<p className="sidebar-example-caption">Supporting content</p>}
-          footer={<Button variant="secondary" onPress={() => { setOptionA(false); setOptionB(false) }}>{sidebarContent.labels.reset}</Button>}>
-          <img className="sidebar-example-image" src={exampleImage} alt="A square and a circle, demonstrating an image inside a sidebar" />
-          <DisclosureGroup allowsMultipleExpanded expandedKeys={expandedKeys} onExpandedChange={(keys) => setExpandedKeys(new Set([...keys].map(String)))}>
-            <Disclosure id="options">
-              <DisclosureHeader level={4}>Options</DisclosureHeader>
-              <DisclosurePanel>
-                <div className="sidebar-example-options">
-                  <Checkbox isSelected={optionA} onChange={setOptionA}>Option A</Checkbox>
-                  <Checkbox isSelected={optionB} onChange={setOptionB}>Option B</Checkbox>
-                </div>
-              </DisclosurePanel>
-            </Disclosure>
-            <Disclosure id="information">
-              <DisclosureHeader level={4}>Information</DisclosureHeader>
-              <DisclosurePanel><p>Supporting text can sit beside interactive controls.</p></DisclosurePanel>
-            </Disclosure>
-          </DisclosureGroup>
-        </SidebarPanel>
-        <div className="sidebar-example-workspace">
-          <h3>Workspace</h3>
-          <p>The sidebar supports this content.</p>
-          <p role="status">{Number(optionA) + Number(optionB)} options selected.</p>
+  return <ExampleZone className="sidebar-example">
+    <div className="sidebar-example-frame">
+      <Sidebar isCollapsible={isCollapsible} isExpanded={isExpanded} onExpandedChange={setExpanded}>
+        <div className="sidebar-example-toolbar">
+          <span>Preview</span>
         </div>
-      </div>
-    </Sidebar>
+        <div className="sidebar-example-layout">
+          <div className="sidebar-example-launcher">
+            <SidebarTrigger variant="primary">{sidebarContent.labels.trigger}</SidebarTrigger>
+          </div>
+          <SidebarPanel title="Sidebar" headingLevel={3} side={side} closeLabel={sidebarContent.labels.close}
+            {...(collapseMode === 'rail' ? { collapseMode: 'rail', rail } : { collapseMode: 'hide' })}
+            header={<p className="sidebar-example-caption">Supporting content</p>}
+            footer={<Button variant="secondary" onPress={() => { setOptionA(false); setOptionB(false) }}>{sidebarContent.labels.reset}</Button>}>
+            <img className="sidebar-example-image" src={exampleImage} alt="A square and a circle, demonstrating an image inside a sidebar" />
+            <DisclosureGroup allowsMultipleExpanded expandedKeys={expandedKeys} onExpandedChange={(keys) => setExpandedKeys(new Set([...keys].map(String)))}>
+              <Disclosure id="options">
+                <DisclosureHeader level={4}>Options</DisclosureHeader>
+                <DisclosurePanel>
+                  <div className="sidebar-example-options">
+                    <Checkbox isSelected={optionA} onChange={setOptionA}>Option A</Checkbox>
+                    <Checkbox isSelected={optionB} onChange={setOptionB}>Option B</Checkbox>
+                  </div>
+                </DisclosurePanel>
+              </Disclosure>
+              <Disclosure id="information">
+                <DisclosureHeader level={4}>Information</DisclosureHeader>
+                <DisclosurePanel><p>Supporting text can sit beside interactive controls.</p></DisclosurePanel>
+              </Disclosure>
+            </DisclosureGroup>
+          </SidebarPanel>
+          <div className="sidebar-example-workspace">
+            <h3>Workspace</h3>
+            <p>The sidebar supports this content.</p>
+            <p role="status">{Number(optionA) + Number(optionB)} options selected.</p>
+          </div>
+        </div>
+      </Sidebar>
+      <Sidebar presentation="inline" isExpanded={controlsExpanded} onExpandedChange={setControlsExpanded}>
+        {!controlsExpanded && <div className="sidebar-example-controls-reopen" ref={controlsReopenRef}>
+          <SidebarTrigger variant="tertiary" aria-label={sidebarContent.labels.controls}
+            iconLeading={<PanelRightOpenIcon />} />
+        </div>}
+        <SidebarPanel className="sidebar-example-controls" title={sidebarContent.labels.controls} headingLevel={4}
+          side="right" closeLabel={sidebarContent.labels.closeControls}>
+          <div className="example-zone-controls-content">
+            <Checkbox isSelected={isCollapsible} onChange={setCollapsible}>{sidebarContent.labels.collapsible}</Checkbox>
+            <div className="sidebar-example-control">
+              <span id="sidebar-example-collapse">{sidebarContent.labels.collapseBehaviour}</span>
+              <ToggleButtonGroup variant="secondary" aria-labelledby="sidebar-example-collapse" selectionMode="single" disallowEmptySelection selectedKeys={[collapseMode]} onSelectionChange={(keys) => setCollapseMode(keys.has('rail') ? 'rail' : 'hide')}>
+                <ToggleButton id="rail">Icon rail</ToggleButton><ToggleButton id="hide">Hide</ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+            <div className="sidebar-example-control sidebar-example-alignment">
+              <span id="sidebar-example-alignment">{sidebarContent.labels.alignment}</span>
+              <ToggleButtonGroup variant="secondary" aria-labelledby="sidebar-example-alignment" selectionMode="single" disallowEmptySelection selectedKeys={[side]} onSelectionChange={(keys) => setSide(keys.has('right') ? 'right' : 'left')}>
+                <ToggleButton id="left">Left</ToggleButton><ToggleButton id="right">Right</ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+          </div>
+        </SidebarPanel>
+      </Sidebar>
+    </div>
   </ExampleZone>
 }
 
@@ -118,13 +146,13 @@ export default function SidebarPage() {
     relatedPages={sidebarContent.relatedPages} references={sidebarContent.references}
     sections={[
       { id: 'sidebar-example', title: 'Example', content: <><p>{sidebarContent.exampleIntroduction}</p><SidebarExample /></> },
-      { id: 'sidebar-multiple', title: 'Multiple sidebars', content: <><p>Navigation, filters and details use separate Sidebar boundaries. They become drawers below 90rem of viewport width in this example.</p><MultipleSidebarsExample /></> },
       { id: 'sidebar-documentation', title: 'Documentation sidebar', content: <>
         <p>{sidebarContent.documentationIntroduction}</p>
         <ExampleZone className="sidebar-documentation-example">
           <DocumentationSidebar currentPage={findSitePage('/sidebar')!} aria-label="Documentation example sections" navigationLabel="Documentation example navigation" />
         </ExampleZone>
       </> },
+      { id: 'sidebar-multiple', title: 'Multiple sidebars', content: <><p>Navigation, filters and details use separate Sidebar boundaries. They become drawers below 90rem of viewport width in this example.</p><MultipleSidebarsExample /></> },
       { id: 'sidebar-technical-details' , title: 'Technical details', sections: [
         { id: 'sidebar-anatomy', title: 'Anatomy', content: <DocsTable aria-label="Sidebar anatomy" nameColumn="Component" rows={sidebarContent.anatomy} /> },
         { id: 'sidebar-behaviour', title: 'Behaviour', content: sidebarContent.behaviour.map((text, index) => <p key={index}>{text}</p>) },

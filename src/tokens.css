@@ -379,9 +379,6 @@
   --tab-panel-preferred-width: 12rem;
 
   /* ToggleButton: component-specific structure, shared by every theme. */
-  --toggle-button-min-height: 2.75rem;
-  --toggle-button-padding-block: 0.5rem;
-  --toggle-button-padding-inline: 0.875rem;
   --toggle-button-border-width: 0.0625rem;
   --toggle-button-border-radius: 0;
   --toggle-button-focus-ring-width: 0.1875rem;
@@ -399,7 +396,6 @@
   --navigation-tree-current-indicator-width: 0.1875rem;
   --navigation-tree-focus-ring-width: 0.1875rem;
   --navigation-tree-focus-ring-offset: -0.1875rem;
-  --navigation-tree-chevron-size: 1.25rem;
   --navigation-tree-header-padding-block: 0.5rem;
   --navigation-tree-motion-duration: 180ms;
   /* Sidebar: generic inline panels, compact rails and modal drawers. */

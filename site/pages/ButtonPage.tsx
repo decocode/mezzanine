@@ -65,7 +65,7 @@ export default function ButtonPage() {
           content: (<>
             {buttonContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
             <ExampleZone>
-              <Button onPress={() => setPressCount((count) => count + 1)}>Press Button</Button>
+              <Button onPress={() => setPressCount((count) => count + 1)}>Press</Button>
               <p className="component-example-feedback" role="status">Press count: {pressCount}</p>
             </ExampleZone>
           </>),
@@ -74,10 +74,11 @@ export default function ButtonPage() {
           id: 'button-navigation-heading',
           title: 'Navigational buttons',
           content: (<>
-            <p className="component-section-description">{buttonContent.navigationExample.description}</p>
+            {buttonContent.navigationExample.descriptions.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
             <ExampleZone>
-              <Button href={buttonContent.navigationExample.href} iconTrailing={<ArrowRightIcon />}>{buttonContent.navigationExample.label}</Button>
-              <Button href={buttonContent.navigationExample.href} isDisabled>{buttonContent.navigationExample.disabledLabel}</Button>
+              <p>{buttonContent.navigationExample.lead}</p>
+              <Button href={buttonContent.navigationExample.href}>{buttonContent.navigationExample.label}</Button>
+              <p className="mz-text-body-sm">{buttonContent.navigationExample.hint}</p>
             </ExampleZone>
           </>),
         },
@@ -144,11 +145,12 @@ export default function ButtonPage() {
               <h3 id="button-sizes-heading" className="mz-text-heading-sm">
                 Sizes
               </h3>
-              <div className="documentation-table documentation-comparison-table">
+              <div className="documentation-table button-sizes-table">
                 <Table aria-label="Button sizes">
                   <TableHeader>
                     <Column id="size" isRowHeader>Size</Column>
                     <Column id="example">Example</Column>
+                    <Column id="icon-only">Icon only buttons</Column>
                   </TableHeader>
                   <TableBody>
                     {buttonSizes.map(({ label, size, usage }) => (
@@ -161,6 +163,12 @@ export default function ButtonPage() {
                           </span>
                         </Cell>
                         <Cell><Button size={size}>Button</Button></Cell>
+                        <Cell>
+                          <TooltipTrigger>
+                            <Button size={size} iconLeading={<DownloadIcon />} aria-label={buttonContent.iconOnlyLabel} />
+                            <Tooltip>{buttonContent.iconOnlyLabel}</Tooltip>
+                          </TooltipTrigger>
+                        </Cell>
                       </Row>
                     ))}
                   </TableBody>

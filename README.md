@@ -271,3 +271,14 @@ The AppShell now composes this public Sidebar and SidebarPanel with its existing
 NavigationTree. It keeps its desktop layout and mobile Browse sections Disclosure,
 using `presentation="inline"`, `isCollapsible={false}` and `hideInlineHeader`.
 The documentation sidebar example reuses that same site component and real links.
+
+## Button sizing
+
+Use `size="sm"`, `"md"`, `"lg"` or `"xl"` on Button and ToggleButton.
+ToggleButtonGroup can set the shared size for its children. Icon-only controls
+use `iconLeading` or `iconTrailing` with an accessible name. The default is `md`.
+
+`npm run check:rules` rejects local button dimension, padding, typography and
+icon-size overrides in library compositions and site CSS, and inline button
+styles. Size recipes live in Button.css; global theme customisation uses the
+shared button tokens. Parent containers own positioning and available space.

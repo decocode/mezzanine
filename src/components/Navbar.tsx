@@ -44,7 +44,7 @@ export function Navbar({ brand, children, actions, 'aria-label': label, menuLabe
         <div className="mezzanine-navbar-brand">{brand}</div>
         <Disclosure className="mezzanine-navbar-mobile" isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
           <Heading className="mezzanine-navbar-heading" level={2}>
-            <Button ref={triggerRef} className="mezzanine-navbar-trigger" iconLeading={isExpanded ? <CloseIcon /> : <MenuIcon />} slot="trigger" variant="secondary">
+            <Button ref={triggerRef} className="mezzanine-navbar-trigger" size="sm" iconLeading={isExpanded ? <CloseIcon /> : <MenuIcon />} slot="trigger" variant="secondary">
               {isExpanded ? closeLabel : menuLabel}
             </Button>
           </Heading>

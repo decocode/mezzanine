@@ -48,7 +48,7 @@ export const navbarContent = {
     { name: '--navbar-border-width', description: 'Header and trigger border thickness.' },
     { name: '--navbar-min-height', description: 'Minimum content-row height.' },
     { name: '--navbar-wide-padding-inline', description: 'Horizontal padding in the wide layout.' },
-    { name: '--navbar-menu-min-height', description: 'Minimum trigger and navigation-link height.' },
+    { name: '--navbar-menu-min-height', description: 'Minimum navigation-link height; the menu trigger uses Button size="sm".' },
     { name: '--navbar-focus-ring-width', description: 'Trigger focus outline thickness.' },
     { name: '--navbar-focus-ring-offset', description: 'Trigger focus outline offset.' },
     { name: '--navbar-panel-max-height', description: 'Maximum panel height before scrolling.' },

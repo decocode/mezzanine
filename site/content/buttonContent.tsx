@@ -119,6 +119,7 @@ export const buttonTokens: ButtonTokenDefinition[] = [
 
 // Written guidance and reference entries; live examples stay in the page.
 export const buttonContent = {
+  iconOnlyLabel: 'Download',
   title: 'Button',
   description: 'A button lets someone do something, such as submit a form, save their work or open a menu. Its label tells them what will happen when they press it.',
   relatedPages: [
@@ -137,10 +138,25 @@ export const buttonContent = {
     </>,
   ],
   navigationExample: {
-    description: <>Supply <code>href</code> for a navigational button. This example jumps to Usage and accessibility on this page.</>,
+    descriptions: [
+      <>
+        In React Aria, actions and navigation use separate components. <code>Button</code> renders a native
+        {' '}<code>&lt;button&gt;</code> element and uses <code>onPress</code>. <code>Link</code> renders an
+        {' '}<code>&lt;a&gt;</code> element and uses <code>href</code>. React Aria keeps them apart because they
+        behave differently: a link can be opened in a new tab, copied or bookmarked, activates with Enter
+        only, and is announced by screen readers as a link rather than a button.
+      </>,
+      <>
+        Many other design systems let one <code>Button</code> component switch to a link when you give it
+        {' '}<code>href</code>. Mezzanine does the same, so a call to action that goes to another page looks
+        identical to an action button. Supply <code>href</code> and <code>Button</code> renders React Aria
+        {' '}<code>Link</code> underneath, keeping native link behaviour.
+      </>,
+    ],
+    lead: 'Want to find out more about button accessibility?',
     label: 'Read usage guidance',
+    hint: 'Pressing this button scrolls to the Usage and accessibility section on this page.',
     href: '#button-usage-heading',
-    disabledLabel: 'Disabled',
   },
   anatomyRows: [
     { name: 'Button', description: <>The action control, containing a text label and optional leading or trailing icons.</> },

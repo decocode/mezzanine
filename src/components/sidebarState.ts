@@ -40,8 +40,15 @@ export function useSidebarFocus(isExpanded: boolean, triggerRef: RefObject<HTMLB
     const previous = focusedElement.current
     if (previous?.closest('[hidden]')
       && (document.activeElement === previous || document.activeElement === document.body)) {
-      triggerRef.current?.focus()
+      const trigger = triggerRef.current
+      // A rail can replace the external launcher. Restore focus to a visible
+      // control in the panel when that launcher is intentionally hidden.
+      const panel = previous.closest('.mezzanine-sidebar-panel')
+      const fallback = [...(panel?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)') ?? [])]
+        .find(button => button.getClientRects().length > 0)
+      const target = trigger?.getClientRects().length ? trigger : fallback
       focusedElement.current = null
+      target?.focus()
     }
   }, [isExpanded, triggerRef])
   return focusedElement

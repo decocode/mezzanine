@@ -258,6 +258,49 @@ function checkCss(file) {
   }
 }
 
+// Button dimensions belong to the shared size scale, not consuming selectors.
+// Collect consumer class names too, so statically named consumer classes are checked as well.
+const buttonClasses = new Set(['react-aria-Button', 'react-aria-ToggleButton', 'mezzanine-button-icon', 'mezzanine-button-content'])
+const sizingProperty = /^(?:(?:min-|max-)?(?:width|height|inline-size|block-size)|padding(?:-.+)?|font(?:-.+)?|line-height|letter-spacing|text-transform|zoom|scale|transform)$/
+
+function collectButtonClasses(source) {
+  const file = path.relative(root, source.fileName)
+  walk(source, node => {
+    if (!(ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node))) return
+    if (!['Button', 'ToggleButton', 'SidebarTrigger'].includes(node.tagName.getText(source))) return
+    for (const attribute of node.attributes.properties) {
+      if (!ts.isJsxAttribute(attribute)) continue
+      if (attribute.name.text === 'className' && attribute.initializer && ts.isStringLiteral(attribute.initializer)) {
+        attribute.initializer.text.split(/\s+/).forEach(name => buttonClasses.add(name))
+      }
+      if (attribute.name.text === 'style') {
+        report(file, source.text, attribute.getStart(source), 'button-sizing',
+          'Use Button/ToggleButton size props and shared theme tokens, not inline button styles.')
+      }
+    }
+  })
+}
+
+function checkButtonSizing(file) {
+  if (['src/components/Button.css', 'src/components/ToggleButton.css', 'src/tokens.css'].includes(file)
+    || file.startsWith('src/themes/')) return
+  const text = read(file)
+  const masked = maskCss(text)
+  for (const block of masked.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    // :has selects a parent layout, not the button contained within it.
+    const selector = block[1].replace(/:has\([^)]*\)/g, '')
+    const targetsButton = [...selector.matchAll(/\.([\w-]+)/g)].some(match => buttonClasses.has(match[1]))
+    for (const declaration of block[2].matchAll(/([\w-]+)\s*:\s*([^;{}]+)/g)) {
+      const property = declaration[1]
+      const setsSizeToken = /^--(?:toggle-)?button-.*(?:size|height|width|padding|gap|line-height)(?:-|$)/.test(property)
+      if (setsSizeToken || (targetsButton && sizingProperty.test(property))) {
+        report(file, text, block.index + block[1].length + 1 + declaration.index, 'button-sizing',
+          `${property} overrides shared button sizing. Select size with props; position buttons using their parent layout.`)
+      }
+    }
+  }
+}
+
 function checkSnapshot(api, update) {
   if (update) {
     writeFileSync(path.join(root, snapshotFile), `${JSON.stringify(api, null, 2)}\n`)
@@ -302,6 +345,10 @@ try {
   for (const file of siteFiles) checkSite(program.getSourceFile(path.join(root, file)), checker, exportedNames)
   for (const file of componentFiles) checkJsxClasses(program.getSourceFile(path.join(root, file)), checker)
   for (const file of filesIn('src', ['.css'])) checkCss(file)
+  for (const source of program.getSourceFiles()) {
+    if (source.fileName.startsWith(root) && !source.fileName.includes('/node_modules/')) collectButtonClasses(source)
+  }
+  for (const file of [...filesIn('src', ['.css']), ...filesIn('site', ['.css'])]) checkButtonSizing(file)
   checkSnapshot(api, argumentsList.includes('--update-api'))
 } catch (error) {
   report('scripts/check-rules.mjs', '', 0, 'rule-checker', error.message)
@@ -313,5 +360,5 @@ if (problems.length) {
   console.error(`Rule checks failed: ${problems.length} problem(s).`)
   process.exitCode = 1
 } else {
-  console.log('All checks passed (4 rule checks).')
+  console.log('All checks passed (5 rule checks).')
 }

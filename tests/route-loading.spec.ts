@@ -39,7 +39,7 @@ test('failed navigation download leaves the page usable and offers reload', asyn
   await page.goto('/button')
   await page.getByRole('button', { name: 'Browse sections', exact: true }).click()
   await expect(page.getByRole('alert')).toHaveText('Unable to load navigation.')
-  await expect(page.getByRole('button', { name: 'Press Button', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Press', exact: true })).toBeVisible()
   await page.unroute('**/assets/SidebarNavigation-*.js')
   await page.getByRole('button', { name: 'Reload page', exact: true }).click()
   await page.getByRole('button', { name: 'Browse sections', exact: true }).click()
@@ -113,12 +113,12 @@ test('a failed page download offers a working reload action', async ({ page }) =
   await page.unroute('**/assets/ButtonPage-*.js')
   await page.getByRole('button', { name: 'Reload page', exact: true }).focus()
   await page.keyboard.press('Enter')
-  await expect(page.getByRole('button', { name: 'Press Button', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Press', exact: true })).toBeVisible()
 })
 
 test('theme changes preserve the loaded page and example state', async ({ page }) => {
   await page.goto('/button')
-  await page.getByRole('button', { name: 'Press Button', exact: true }).focus()
+  await page.getByRole('button', { name: 'Press', exact: true }).focus()
   await page.keyboard.press('Enter')
   await page.getByRole('radio', { name: 'Dark theme', exact: true }).click()
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')

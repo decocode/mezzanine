@@ -123,17 +123,6 @@ a:focus-visible {
   margin-top: 0.5rem;
 }
 
-.theme-toggle-group .react-aria-ToggleButton {
-  width: 2.75rem;
-  min-height: 2.75rem;
-  padding: 0;
-}
-
-.theme-toggle-group .react-aria-ToggleButton svg {
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
 .skip-link {
   position: absolute;
   width: 1px;
@@ -172,39 +161,7 @@ a:focus-visible {
   border-block-end: 0;
 }
 
-.sidebar-browse-trigger.react-aria-Button[data-variant] {
-  --button-icon-size: 1.25rem;
-  --button-content-gap: 0.5rem;
-  justify-content: flex-start;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  width: 100%;
-  min-height: 2.75rem;
-  padding: 0.75rem 1rem;
-  border: 0;
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-surface);
-  color: var(--color-text);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-label-lg);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-lg);
-  text-align: start;
-  text-transform: var(--text-transform-label);
-  cursor: pointer;
-}
 
-.sidebar-browse-trigger.react-aria-Button[data-variant][data-hovered],
-.sidebar-browse-trigger.react-aria-Button[data-variant][data-pressed] {
-  background: var(--color-surface-hover);
-}
-
-.sidebar-browse-trigger.react-aria-Button[data-variant][data-focus-visible] {
-  outline: 3px solid var(--color-focus);
-  outline-offset: -3px;
-}
 
 .mobile-sidebar-panel {
   position: absolute;
@@ -852,16 +809,6 @@ a:focus-visible {
   color: var(--color-text-muted);
 }
 
-.toggle-button-group-examples {
-  display: grid;
-  gap: var(--space-8);
-  margin-top: var(--space-8);
-}
-
-.toggle-button-group-examples h3 {
-  margin: 0 0 var(--space-4);
-}
-
 .navigation-tree-example {
   max-width: 24rem;
 }
@@ -1077,6 +1024,86 @@ a:focus-visible {
 .sidebar-example, .sidebar-multiple-example { max-width: none; }
 .sidebar-example-options { display: grid; gap: var(--space-3); }
 
+/* Sidebar-only trial: preview actions above, configuration alongside. */
+.sidebar-example { container-type: inline-size; padding: 0; }
+.sidebar-example-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-block-end: 1px solid var(--color-border);
+  font-weight: var(--font-weight-semibold);
+}
+.sidebar-example-frame {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+.sidebar-example-toolbar { grid-column: 1 / -1; grid-row: 1; }
+.sidebar-example-controls-reopen {
+  grid-column: 2;
+  grid-row: 2 / 4;
+  padding: var(--space-2);
+  border-inline-start: 1px solid var(--color-border);
+}
+.sidebar-example-frame:has(.sidebar-example-controls-reopen) > .sidebar-example-layout {
+  grid-column: 1;
+}
+.sidebar-example-controls {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  order: 0;
+  width: 100%;
+  max-height: none;
+  background: transparent;
+  border: 0;
+  border-block-end: 1px solid var(--color-border);
+}
+.sidebar-example-controls .mezzanine-sidebar-header { border-block-end: 0; }
+.sidebar-example-controls .mezzanine-sidebar-header > .react-aria-Heading {
+  font-size: var(--font-size-label-lg);
+  line-height: var(--line-height-body-md);
+}
+/* Only offer a launcher when the example has no visible panel or icon rail. */
+.sidebar-example-launcher { flex-basis: 100%; }
+.sidebar-example-layout:has(> .mezzanine-sidebar-panel[data-expanded], > .mezzanine-sidebar-panel[data-collapse-mode='rail']) > .sidebar-example-launcher {
+  display: none;
+}
+.sidebar-example-control { display: grid; gap: var(--space-2); }
+.sidebar-example-alignment {
+  align-self: stretch;
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--color-border);
+}
+.sidebar-example-alignment > .react-aria-ToggleButtonGroup { justify-self: start; }
+.sidebar-example-controls .example-zone-controls-content {
+  flex-direction: column;
+  align-items: start;
+}
+.sidebar-example-frame > .sidebar-example-layout {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin: 0;
+  padding: var(--space-4);
+  background: var(--color-surface-hover);
+}
+@container (min-width: 40rem) {
+  .sidebar-example-frame:has(.sidebar-example-controls[data-expanded]) {
+    grid-template-columns: minmax(0, 1fr) 15rem;
+  }
+  .sidebar-example-controls {
+    grid-column: 2;
+    grid-row: 2;
+    border-block-end: 0;
+    border-inline-start: 1px solid var(--color-border);
+  }
+  .sidebar-example-frame > .sidebar-example-layout { grid-row: 2; }
+  .sidebar-example-frame:has(.sidebar-example-controls[data-expanded]) > .sidebar-example-layout {
+    grid-column: 1;
+  }
+}
+
 
 /* The docs shell supplies its existing sizing, scroll area and responsive disclosure. */
 .site-sidebar-panel {
@@ -1121,3 +1148,7 @@ a:focus-visible {
 .toggle-button-states-table .react-aria-Table { min-width: 30rem; table-layout: fixed; }
 .toggle-button-states-table .react-aria-Column,
 .toggle-button-states-table .react-aria-Cell { width: calc(100% / 3); }
+
+.button-sizes-table .react-aria-Table { min-width: 30rem; table-layout: fixed; }
+.button-sizes-table .react-aria-Column,
+.button-sizes-table .react-aria-Cell { width: calc(100% / 3); }

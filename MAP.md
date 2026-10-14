@@ -38,7 +38,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Badge.tsx` | Public non-interactive Badge with core and semantic color variants, rendered as a semantic span |
 | `src/components/Badge.css` | Token-led styling for Neutral, Violet, Info, Success, Warning and Danger Badges |
 | `src/components/Button.tsx` | Public Button: React Aria Button for actions or Link when href is supplied, sharing variants, sizes and icon layout; pending state is action-only |
-| `src/components/Button.css` | Token-led styling for Button variants and React Aria interaction states |
+| `src/components/Button.css` | Shared Button/ToggleButton size recipes, Button variants and React Aria interaction states |
 | `src/components/Breadcrumbs.ts` | Public React Aria Breadcrumbs and Breadcrumb exports and prop types |
 | `src/components/Breadcrumbs.css` | Token-led layout and separator styling for Breadcrumbs |
 | `src/components/TextArea.ts` | Public React Aria TextArea export and type; composes with TextField for multiline input |
@@ -94,7 +94,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Tabs.tsx`, `src/components/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
 | `tests/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
-| `src/components/ToggleButton.ts` | React Aria ToggleButton and ToggleButtonGroup with optional secondary appearance and preserved selection APIs |
+| `src/components/ToggleButton.ts` | React Aria ToggleButton and ToggleButtonGroup with shared button sizes, icon content, optional secondary appearance and preserved selection APIs |
 | `src/components/ToggleButton.css` | Token-led styling for ToggleButton states and ToggleButtonGroup layout |
 | `src/tokens.css` | Shared typography, spacing and corner-radius token contract and entry point for the three official color themes |
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
@@ -184,7 +184,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
 | `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
-| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours and the public API snapshot; supports explicit `--update-api` |
+| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing and the public API snapshot; supports explicit `--update-api` |
 | `scripts/public-api.snapshot.json` | Reviewed public export names and value/type categories used to detect API changes |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
@@ -204,7 +204,7 @@ Typography retains its overview at `/typography`. Its child pages are
 | --- | --- |
 | `npm ci` | Install locked dependencies |
 | `npm run dev` | Start the showcase on the local Vite server |
-| `npm run check:rules` | Check the four repository rules without changing the API snapshot |
+| `npm run check:rules` | Check the five repository rules without changing the API snapshot |
 | `npm run lint` | Run Oxlint |
 | `npm run typecheck` | Type-check the library, showcase, and configuration |
 | `npm run build:lib` | Build the package into `dist/` |

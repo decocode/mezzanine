@@ -56,10 +56,9 @@ export function TabBar({ items, 'aria-label': label, position = 'bottom', moreLa
         {(overflow.length > 0 || isOpen) && (
           <li className="mezzanine-tab-bar-item">
             <DialogTrigger isOpen={isOpen} onOpenChange={(open) => { if (open) setOpenVisibleCount(visibleCount); setIsOpen(open) }}>
-              <Button className="mezzanine-tab-bar-more" variant="tertiary"
+              <Button className="mezzanine-tab-bar-more" variant="tertiary" size="sm" iconLeading={<MoreIcon />}
                 aria-label={currentOverflow ? `${moreLabel}: ${currentOverflow.label}` : moreLabel}
                 data-current-route={currentOverflow ? 'true' : undefined}>
-                <span className="mezzanine-tab-bar-icon" aria-hidden="true"><MoreIcon /></span>
                 <span>{moreLabel}</span>
               </Button>
               <ModalOverlay className="mezzanine-tab-bar-overlay" isDismissable>

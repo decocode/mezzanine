@@ -13,6 +13,7 @@ export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherPro
     <ToggleButtonGroup
       aria-label="Theme"
       className="theme-toggle-group"
+      size="sm"
       disallowEmptySelection
       onSelectionChange={(keys) => {
         const selectedKey = keys.values().next().value
@@ -24,21 +25,15 @@ export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherPro
       selectionMode="single"
     >
       <TooltipTrigger>
-        <ToggleButton aria-label="Light theme" id="light">
-          <SunIcon />
-        </ToggleButton>
+        <ToggleButton aria-label="Light theme" id="light" iconLeading={<SunIcon />} />
         <Tooltip placement="bottom">Light theme</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
-        <ToggleButton aria-label="Dark theme" id="dark">
-          <MoonIcon />
-        </ToggleButton>
+        <ToggleButton aria-label="Dark theme" id="dark" iconLeading={<MoonIcon />} />
         <Tooltip placement="bottom">Dark theme</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
-        <ToggleButton aria-label="Wireframe theme" id="wireframe">
-          <PlaceholderIcon />
-        </ToggleButton>
+        <ToggleButton aria-label="Wireframe theme" id="wireframe" iconLeading={<PlaceholderIcon />} />
         <Tooltip placement="bottom">Wireframe theme</Tooltip>
       </TooltipTrigger>
     </ToggleButtonGroup>

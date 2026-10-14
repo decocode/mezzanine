@@ -65,42 +65,6 @@
   text-underline-offset: var(--link-underline-offset);
 }
 
-.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle {
-  width: 100%;
-  min-width: 0;
-  min-height: var(--navigation-tree-item-min-height);
-  justify-content: stretch;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-  line-height: inherit;
-  text-transform: inherit;
-  text-align: start;
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
-
-.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle .mezzanine-button-content {
-  width: 100%;
-  justify-content: space-between;
-}
-
-/* Keep chevrons in a shared end column, independent of label indentation. */
-.react-aria-NavigationTreeItem .react-aria-Button[slot='chevron']:not(.mezzanine-navigation-tree-group-toggle) {
-  flex: 0 0 var(--navigation-tree-item-min-height);
-  width: var(--navigation-tree-item-min-height);
-  padding-inline: 0;
-}
-
-.react-aria-NavigationTreeItem .mezzanine-navigation-tree-group-toggle .mezzanine-button-icon {
-  width: var(--navigation-tree-item-min-height);
-  justify-content: center;
-}
-
 .react-aria-NavigationTreeItem:has(.mezzanine-navigation-tree-group-toggle[data-hovered]) {
   background: var(--navigation-tree-item-background-hovered);
 }
@@ -135,8 +99,6 @@
 }
 
 .react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] svg {
-  width: var(--navigation-tree-chevron-size);
-  height: var(--navigation-tree-chevron-size);
   rotate: 0deg;
   transition: rotate var(--navigation-tree-motion-duration) ease-out;
 }
