@@ -49,7 +49,7 @@
   translate: 0 -50%;
 }
 
-.react-aria-SelectionIndicator {
+.react-aria-RadioButton > .react-aria-SelectionIndicator {
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: calc((var(--radio-indicator-size) - var(--radio-selection-size)) / 2);

@@ -69,10 +69,8 @@
 
 .react-aria-Tab > .react-aria-SelectionIndicator {
   position: absolute;
-  inset: auto;
   border-radius: var(--radius-none);
   background: var(--tab-indicator);
-  translate: none;
   transition-duration: var(--tab-motion-duration);
 }
 
