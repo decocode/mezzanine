@@ -65,7 +65,7 @@ a:focus-visible {
   align-items: center;
   gap: var(--space-2);
   color: var(--color-text);
-  font-size: 1.125rem;
+  font-size: var(--font-size-title-md);
   font-weight: var(--font-weight-bold);
   text-decoration: none;
 }
@@ -80,7 +80,7 @@ a:focus-visible {
 }
 
 .theme-toggle-group {
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
 }
 
 .skip-link {
@@ -95,11 +95,11 @@ a:focus-visible {
 .skip-link:focus-visible {
   position: fixed;
   z-index: 20;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: var(--space-2);
+  left: var(--space-2);
   width: auto;
   height: auto;
-  padding: 0.75rem;
+  padding: var(--space-3);
   clip-path: none;
   background: var(--color-surface);
   color: var(--color-text);
@@ -130,7 +130,7 @@ a:focus-visible {
   right: 0;
   left: 0;
   max-height: 75dvh;
-  padding: 0.75rem 1rem;
+  padding: var(--space-3) var(--space-4);
   overflow-y: auto;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-page);
@@ -283,7 +283,7 @@ a:focus-visible {
 }
 
 .color-palette-disclosure {
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
 }
 
 .color-palette-disclosure p {
@@ -291,7 +291,7 @@ a:focus-visible {
 }
 
 .color-palette-disclosure p + p {
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
 }
 
 .color-palette-viewport {
@@ -355,7 +355,7 @@ a:focus-visible {
   margin: 1.5rem 0 0;
   padding: 0;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
   list-style: none;
   overflow: hidden;
 }
@@ -363,9 +363,9 @@ a:focus-visible {
 .spacing-scale-item {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 1rem;
+  gap: var(--space-4);
   align-items: end;
-  padding: 0.75rem 1rem;
+  padding: var(--space-3) var(--space-4);
 }
 
 .spacing-scale-item + .spacing-scale-item {
@@ -413,7 +413,7 @@ a:focus-visible {
 }
 
 .color-roles > h2 {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
 }
 
 .token-group + .token-group {
@@ -421,7 +421,7 @@ a:focus-visible {
 }
 
 .token-group h3 {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
 }
 
 /* Documentation controls layout; Mezzanine supplies table appearance and states. */
@@ -561,23 +561,23 @@ a:focus-visible {
 .elevation-role-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
-  gap: 1.5rem;
+  gap: var(--space-6);
   margin: 0;
-  padding: 1rem;
+  padding: var(--space-4);
   background: var(--color-page);
   list-style: none;
 }
 
 .elevation-role-card {
   display: grid;
-  gap: 0.5rem;
+  gap: var(--space-2);
   min-width: 0;
 }
 
 .elevation-role-sample {
   display: block;
   min-height: 7rem;
-  margin: 0.75rem;
+  margin: var(--space-3);
   border: 0;
   background: var(--color-surface);
 }
@@ -595,7 +595,7 @@ a:focus-visible {
 
 .table-supporting-text {
   display: block;
-  margin-top: 0.25rem;
+  margin-top: var(--space-1);
   color: var(--color-text-muted);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -628,15 +628,15 @@ a:focus-visible {
 .component-section :is(h2, h3, h4)[id],
 .table-of-contents-example :is(h3, h4)[id] {
   /* Keep anchor destinations clear of the sticky site header. */
-  scroll-margin-top: 6rem;
+  scroll-margin-top: var(--space-24);
 }
 
 .table-of-contents-example {
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-4);
 }
 
 .table-of-contents-example section + section {
-  margin-top: 2rem;
+  margin-top: var(--space-8);
 }
 
 .table-of-contents-example section > :is(h3, h4) {
@@ -728,15 +728,15 @@ a:focus-visible {
 }
 
 .component-example-feedback {
-  margin: 1rem 0 0;
+  margin: var(--space-4) 0 0;
 }
 
 .component-reference-links {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--space-3);
   max-width: 44rem;
   margin: 0;
-  padding-inline-start: 1.25rem;
+  padding-inline-start: var(--space-5);
 }
 
 .component-reference-links .react-aria-Link {
@@ -798,7 +798,7 @@ a:focus-visible {
   place-items: center;
   width: 2.75rem;
   height: 2.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
   color: var(--color-link);
 }
 
@@ -808,7 +808,8 @@ a:focus-visible {
 }
 
 .icon-loading {
-  animation: icon-loading-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite; animation-name: var(--_motion-loading-animation, icon-loading-spin);
+  animation: icon-loading-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite;
+  animation-name: var(--_motion-loading-animation, icon-loading-spin);
 }
 
 @keyframes icon-loading-spin {
@@ -840,7 +841,7 @@ a:focus-visible {
 .component-state-heading,
 .table-item-heading {
   display: grid;
-  gap: 0.25rem;
+  gap: var(--space-1);
 }
 
 .component-state-heading code,
@@ -852,7 +853,7 @@ a:focus-visible {
 
 .table-item-heading > span {
   color: var(--color-text-muted);
-  margin-top: 0.5rem;
+  margin-top: var(--space-2);
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
 }
@@ -866,7 +867,7 @@ a:focus-visible {
 @container showcase (min-width: 48rem) {
   .theme-toggle-group {
     margin-top: 0;
-    margin-inline-start: 0.5rem;
+    margin-inline-start: var(--space-2);
   }
 
   .site-layout {
@@ -884,7 +885,7 @@ a:focus-visible {
     display: block;
     align-self: start;
     height: calc(100dvh - 4rem);
-    padding: 2rem var(--space-2);
+    padding: var(--space-8) var(--space-2);
     overflow-y: auto;
     border-inline-end: 1px solid var(--color-border);
     scrollbar-gutter: stable;
@@ -1006,11 +1007,6 @@ a:focus-visible {
   border: 0;
   border-block-end: 1px solid var(--color-border);
 }
-.sidebar-example-controls .mezzanine-sidebar-header { border-block-end: 0; }
-.sidebar-example-controls .mezzanine-sidebar-header > .react-aria-Heading {
-  font-size: var(--font-size-label-lg);
-  line-height: var(--line-height-body-md);
-}
 /* Only offer a launcher when the example has no visible panel or icon rail. */
 .sidebar-example-launcher { flex-basis: 100%; }
 .sidebar-example-layout:has(> .mezzanine-sidebar-panel[data-expanded], > .mezzanine-sidebar-panel[data-collapse-mode='rail']) > .sidebar-example-launcher {
@@ -1074,16 +1070,13 @@ a:focus-visible {
 .site-layout { display: flex; flex-direction: column; }
 .site-contents-sidebar { order: -1; }
 .site-layout > .site-sidebar { order: -2; }
-.docs-contents-panel .mezzanine-table-of-contents { margin-bottom: 0; }
-/* The drawer header supplies the visible title; the nav retains its labelled heading. */
-.mezzanine-sidebar-overlay .docs-contents-panel .mezzanine-table-of-contents > h2 { display: none; }
 @container showcase (min-width: 48rem) {
   .site-layout { display: grid; }
   .site-layout > .site-sidebar { grid-column: 1; grid-row: 1 / 3; }
   .site-contents-sidebar { grid-column: 2; grid-row: 1; }
   .site-content { grid-column: 2; grid-row: 2; }
 }
-@media (min-width: 80rem) {
+@container showcase (min-width: 80rem) {
   .site-layout:has(.site-contents-sidebar:not(:empty)) { grid-template-columns: 17.5rem minmax(0, 1fr) 17rem; }
   .site-contents-sidebar:not(:empty) { display: block; grid-column: 3; grid-row: 1 / 3; position: sticky; top: 4rem; align-self: start; height: calc(100dvh - 4rem); padding: var(--space-8) var(--space-2); border-inline-start: 1px solid var(--color-border); }
   .docs-contents-panel { --sidebar-width: 100%; --sidebar-max-height: calc(100dvh - 9rem); border: 0; background: transparent; }
