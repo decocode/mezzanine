@@ -107,13 +107,15 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/motionPolicy.ts` | Internal resolved-duration reader, preference/theme observation and token-display notification |
 | `scripts/motion-rules.mjs` | Parses motion declarations and TypeScript usage to enforce the shared contract |
 | `scripts/motion-rules.test.mjs` | Passing and failing fixtures for motion rules |
+| `scripts/typography-rules.mjs` | Checks that component CSS sets complete type-scale roles, Button text tokens point to the scale, and the documented and displayed style choices match |
+| `scripts/typography-rules.test.mjs` | Passing and failing fixtures for typography rules |
 | `tests/motion.spec.ts` | Nested themes, system precedence, Disclosure orientation, loading and live Motion reference checks |
 | `src/tokens.css` | Shared typography, spacing and corner-radius token contract and entry point for the three official color themes |
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
 | `src/themes/dark.css` | Neutral Dark theme, including automatic device-preference handling |
 | `src/themes/wireframe.css` | Monochrome Wireframe theme with semantic status colors and blue focus |
 | `src/styles.css` | Library stylesheet entry point; imports typography and, as components arrive, their structural styles |
-| `src/typography.css` | Fifteen public text-style classes and the Inline code element pattern, assembled from typography tokens |
+| `src/typography.css` | Base text for `body` and `h1`–`h6`, fifteen public text-style classes and the Inline code element pattern, assembled from typography tokens |
 | `site/index.html` | HTML shell for the showcase site, including its favicon reference |
 | `site/public/robots.txt` | Served unchanged at `/robots.txt`; allows crawling so search engines can read the pre-launch `noindex` response header |
 | `site/favicon.svg` | Staircase Z favicon with neutral-200 background and neutral-950 mark, embedded for use outside the site CSS |
@@ -130,12 +132,12 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
 | `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
 | `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow |
-| `site/components/tokenValueLogic.ts` | Reads current CSS token values when the selected theme changes |
+| `site/components/tokenValueLogic.ts` | Reads current CSS token values when the selected theme changes, and describes font-size tokens in pixels |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/pages/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
 | `site/pages/ColorPage.tsx` | Palette swatches and semantic color-role reference; loaded only when its route is requested |
-| `site/pages/TypographyPage.tsx` | Typography overview; loaded only when its route is requested |
-| `site/pages/TextStylesPage.tsx` | Typography specimens, weight modifiers and token reference; loaded only when its route is requested |
+| `site/pages/TypographyPage.tsx` | Typography overview, How typography works layers and live Label token example; loaded only when its route is requested |
+| `site/pages/TextStylesPage.tsx` | Beginner guide to the text styles: quick start, roles, grouped styles, choosing, weights, base elements, small screens, line height and token reference; loaded only when its route is requested |
 | `site/pages/ProsePage.tsx` | List and inline-code examples; loaded only when its route is requested |
 | `site/pages/SpacingPage.tsx` | Spacing-scale reference; loaded only when its route is requested |
 | `site/pages/ShapePage.tsx` | Corner-radius scale and guidance for styling all corners or individual corners; loaded only when its route is requested |
@@ -168,7 +170,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |
 | `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
 | `site/content/colorContent.ts` | Colour palette descriptions, shade steps and semantic colour-role reference entries |
-| `site/content/textStylesContent.ts` | Typography style names, purposes and associated token names |
+| `site/content/textStylesContent.ts` | Text style intro, code example, roles, style names and purposes, recommended choices (kept identical to TYPOGRAPHY.md by check:rules), weight examples, base elements and token names |
+| `site/content/typographyContent.tsx` | Typography overview intro, How typography works layers and theme example code |
 | `site/content/spacingContent.ts` | Spacing scale steps displayed on the Spacing page |
 | `site/content/shapeContent.ts` | Corner-radius labels and token names displayed on the Shape page |
 | `site/content/elevationContent.ts` | Elevation names, descriptions and token names |

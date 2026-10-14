@@ -11,83 +11,261 @@ import {
   TableBody,
   TableHeader,
 } from '@decocode/mezzanine'
-import { typographyStyles, typographyStyleTokens } from '../content/textStylesContent'
-import { useTokenValue } from '../components/tokenValueLogic'
+import {
+  baseTextElements,
+  quickStartCode,
+  textRoles,
+  textStyleChoices,
+  textStylesIntro,
+  textWeightExamples,
+  typographyStyles,
+  typographyStyleTokens,
+} from '../content/textStylesContent'
+import { describeFontSize, useTokenValue } from '../components/tokenValueLogic'
 import { TokenValue } from '../components/TokenValue'
+
+function FontSize({ className, refreshKey }: { className: string; refreshKey: string }) {
+  return <>{describeFontSize(useTokenValue(`--font-size-${className.replace('mz-text-', '')}`, refreshKey))}</>
+}
 
 export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
   const bodyLineHeight = useTokenValue('--line-height-body-md', refreshKey)
   return (
     <>
-      <PageHeading title="Text styles" description="Fifteen text styles pair font size, weight and line height across five roles: Display, Heading, Title, Body and Label." />
+      <PageHeading title="Text styles" description={textStylesIntro} />
       <DocsTableOfContents sections={[
-        { id: 'text-styles-heading', label: 'Text styles' },
-        { id: 'line-height-heading', label: 'Line height' },
+        { id: 'text-styles-quick-start-heading', label: 'Quick start' },
+        { id: 'text-styles-roles-heading', label: 'The five roles' },
+        { id: 'text-styles-all-heading', label: 'All styles' },
+        { id: 'text-styles-choosing-heading', label: 'Choosing a style' },
+        { id: 'text-styles-weight-heading', label: 'Lighter and bolder text' },
+        { id: 'text-styles-elements-heading', label: 'Plain HTML elements' },
+        { id: 'text-styles-small-screens-heading', label: 'Sizes on small screens' },
+        { id: 'text-styles-line-height-heading', label: 'Line height' },
+        { id: 'text-styles-tokens-heading', label: 'Token reference' },
       ]} />
-      <section aria-labelledby="text-styles-heading" className="component-section">
-        <h2 id="text-styles-heading" className="mz-text-heading-md">
-          Text styles
-        </h2>
+
+      <section aria-labelledby="text-styles-quick-start-heading" className="component-section">
+        <h2 id="text-styles-quick-start-heading" className="mz-text-heading-md">Quick start</h2>
         <p className="component-section-description">
-          A text style controls appearance. The HTML element controls meaning and document
-          structure. The purposes below are recommendations rather than fixed element mappings.
+          Add a style&apos;s class to any element. The class sets the font, size, weight, line
+          height, letter spacing and capitalisation together, so you do not set any of them yourself.
+        </p>
+        <pre className="docs-code-block"><code>{quickStartCode}</code></pre>
+        <p className="component-section-description">
+          A text style only changes how text looks. Choose the HTML element for its meaning:
+          a section heading is still an <code>h2</code>, even if you want it to look small.
         </p>
         <p className="component-section-description">
-          The <code>mz-</code> prefix identifies CSS classes supplied by Mezzanine and helps
-          prevent clashes with a product&apos;s own class names. For example, <code>mz-text-body-md</code>
-          {' '}applies the Body medium style.
+          Every class starts with <code>mz-</code>, short for Mezzanine, so it cannot clash
+          with your product&apos;s own class names.
         </p>
+      </section>
+
+      <section aria-labelledby="text-styles-roles-heading" className="component-section">
+        <h2 id="text-styles-roles-heading" className="mz-text-heading-md">The five roles</h2>
         <p className="component-section-description">
-          Every style has Default and Emphasis options. Add <code>mz-text-default</code> or{' '}
-          <code>mz-text-emphasis</code> alongside the style class to change its weight without
-          changing its size or line height. Without a modifier, existing style defaults are retained.
-          These names describe intent, not a fixed weight: a brand can use light text for Default
-          and extra-bold text for Emphasis by changing the corresponding weight tokens.
+          Each role does one job and comes in three sizes: large (<code>lg</code>),
+          medium (<code>md</code>) and small (<code>sm</code>).
         </p>
-        <h3 className="mz-text-heading-sm">Examples</h3>
-        <div className="typography-specimens">
-          <Table aria-label="Text style examples" className="react-aria-Table typography-examples-table">
+        <div className="documentation-table">
+          <Table aria-label="Text style roles">
             <TableHeader>
-              <Column id="style" isRowHeader>Text style</Column>
-              <Column id="default">Default</Column>
-              <Column id="emphasis">Emphasis</Column>
+              <Column id="role" isRowHeader>Role</Column>
+              <Column id="purpose">Use it for</Column>
             </TableHeader>
             <TableBody>
-              {typographyStyles.map((style) => (
-                <Row id={style.className} key={style.className}>
-                  <Cell>
-                    <div className="typography-specimen-details">
-                      <h4 className="mz-text-title-lg">{style.label}</h4>
-                      <p className="mz-text-body-md">{style.purpose}</p>
-                    </div>
-                  </Cell>
-                  {['default', 'emphasis'].map((variant) => (
-                    <Cell key={variant}>
-                      <p className="typography-specimen-variant-label mz-text-body-sm" aria-hidden="true">
-                        {variant === 'default' ? 'Default' : 'Emphasis'}
-                      </p>
-                      <p className={`typography-specimen-sample ${style.className} mz-text-${variant}`}>Aa Bb Cc</p>
-                    </Cell>
-                  ))}
+              {textRoles.map((role) => (
+                <Row id={role.id} key={role.id}>
+                  <Cell>{role.label}</Cell>
+                  <Cell>{role.purpose}</Cell>
                 </Row>
               ))}
             </TableBody>
           </Table>
         </div>
+        <p className="component-section-description">
+          Heading and Title both label content, but in different places. Use Heading for the
+          outline of a page and Title inside a component. A Title can be smaller than the
+          smallest Heading.
+        </p>
+      </section>
+
+      <section aria-labelledby="text-styles-all-heading" className="component-section">
+        <h2 id="text-styles-all-heading" className="mz-text-heading-md">All styles</h2>
+        <p className="component-section-description">
+          Each example below is written in its own style. Sizes are shown at the browser&apos;s
+          default text size.
+        </p>
+        {textRoles.map((role) => (
+          <section key={role.id} aria-labelledby={`text-styles-${role.id}-heading`}>
+            <h3 id={`text-styles-${role.id}-heading`} className="mz-text-heading-sm">{role.label}</h3>
+            <div className="documentation-table text-style-table">
+              <Table aria-label={`${role.label} styles`}>
+                <TableHeader>
+                  <Column id="example" isRowHeader>Example</Column>
+                  <Column id="class">Class</Column>
+                  <Column id="size">Size</Column>
+                </TableHeader>
+                <TableBody>
+                  {typographyStyles.filter((style) => style.role === role.id).map((style) => (
+                    <Row id={style.className} key={style.className}>
+                      <Cell>
+                        <span className={`text-style-sample ${style.className}`}>{style.label}</span>
+                        <span className="text-style-purpose mz-text-body-sm">{style.purpose}</span>
+                      </Cell>
+                      <Cell><code>{style.className}</code></Cell>
+                      <Cell><FontSize className={style.className} refreshKey={refreshKey} /></Cell>
+                    </Row>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </section>
+        ))}
+      </section>
+
+      <section aria-labelledby="text-styles-choosing-heading" className="component-section">
+        <h2 id="text-styles-choosing-heading" className="mz-text-heading-md">Choosing a style</h2>
+        <p className="component-section-description">
+          Start with these common choices. Use Body medium for anything people need to read
+          properly, and keep Label small for brief extra text in tight spaces. Instructions,
+          errors and anything needed to finish a task need a larger style.
+        </p>
+        <div className="documentation-table">
+          <Table aria-label="Recommended text styles">
+            <TableHeader>
+              <Column id="use" isRowHeader>Text</Column>
+              <Column id="class">Class</Column>
+            </TableHeader>
+            <TableBody>
+              {textStyleChoices.map((choice) => (
+                <Row id={choice.use} key={choice.use}>
+                  <Cell>{choice.use}</Cell>
+                  <Cell>
+                    {choice.classNames.map((className, index) => (
+                      <span key={className}>{index > 0 && ' or '}<code>{className}</code></span>
+                    ))}
+                  </Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+
+      <section aria-labelledby="text-styles-weight-heading" className="component-section">
+        <h2 id="text-styles-weight-heading" className="mz-text-heading-md">Lighter and bolder text</h2>
+        <p className="component-section-description">
+          On their own, Title and Label styles are semibold, and Display, Heading and Body
+          styles are regular. To change the weight, add one more class:
+        </p>
+        <ul className="mz-text-body-md component-section-description">
+          <li><code>mz-text-default</code> uses the normal weight, currently regular.</li>
+          <li><code>mz-text-emphasis</code> uses the strong weight, currently semibold.</li>
+        </ul>
+        <p className="component-section-description">
+          &ldquo;Default&rdquo; here means the theme&apos;s normal weight, not the style&apos;s
+          own weight. Adding <code>mz-text-default</code> to a Label style makes it lighter.
+          A brand theme can change both weights, for example to light and extra bold.
+        </p>
+        <div className="documentation-table">
+          <Table aria-label="Weight class examples">
+            <TableHeader>
+              <Column id="classes" isRowHeader>Classes</Column>
+              <Column id="result">Result</Column>
+            </TableHeader>
+            <TableBody>
+              {textWeightExamples.map((example) => (
+                <Row id={example.classNames} key={example.classNames}>
+                  <Cell><code>{example.classNames}</code></Cell>
+                  <Cell><span className={example.classNames}>{example.result}</span></Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+        <p className="component-section-description">
+          These classes only change appearance. When words are genuinely important, use
+          the <code>strong</code> or <code>em</code> element so assistive technology knows too.
+        </p>
+      </section>
+
+      <section aria-labelledby="text-styles-elements-heading" className="component-section">
+        <h2 id="text-styles-elements-heading" className="mz-text-heading-md">Plain HTML elements</h2>
+        <p className="component-section-description">
+          Text without a style class still gets a style, so it never falls back to the
+          browser&apos;s defaults. Any class you add replaces it.
+        </p>
+        <div className="documentation-table">
+          <Table aria-label="Styles for plain HTML elements">
+            <TableHeader>
+              <Column id="element" isRowHeader>Element</Column>
+              <Column id="style">Style</Column>
+            </TableHeader>
+            <TableBody>
+              {baseTextElements.map((item) => (
+                <Row id={item.element} key={item.element}>
+                  <Cell><code>{item.element}</code></Cell>
+                  <Cell>{item.label} (<code>{item.className}</code>)</Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+
+      <section aria-labelledby="text-styles-small-screens-heading" className="component-section">
+        <h2 id="text-styles-small-screens-heading" className="mz-text-heading-md">Sizes on small screens</h2>
+        <div className="typography-guidance">
+          <p className="mz-text-body-md">
+            Display and Heading styles grow with the width of the screen. They use the
+            smaller size in the All styles tables on a phone and the larger size on a wide
+            screen. Title, Body and Label styles stay the same size at every width.
+          </p>
+          <p className="mz-text-body-md">
+            Every size also follows the reader&apos;s browser text setting, so text gets
+            bigger for people who enlarge it.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="text-styles-line-height-heading" className="component-section">
+        <h2 id="text-styles-line-height-heading" className="mz-text-heading-md">Line height</h2>
+        <div className="typography-guidance">
+          <p className="mz-text-body-md">
+            Line height is the height of each line of text. Every text style includes its own,
+            so you never need to set it.
+          </p>
+          <p className="mz-text-body-md">
+            The values are plain numbers that multiply the font size. Body medium uses{' '}
+            <code>{bodyLineHeight}</code>, so 16px text gets 24px lines. Because the value has
+            no unit, lines stay in proportion when text is enlarged.
+          </p>
+          <p className="mz-text-body-md">
+            Line height is not the space between paragraphs or list items. That space comes
+            from margins.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="text-styles-tokens-heading" className="component-section">
+        <h2 id="text-styles-tokens-heading" className="mz-text-heading-md">Token reference</h2>
+        <p className="component-section-description">
+          Tokens are named CSS values, written as custom properties such as{' '}
+          <code>--font-size-body-md</code>. Each style reads its size and line height from
+          tokens, so a product theme can change the values without changing the class names.
+        </p>
         <Disclosure className="react-aria-Disclosure typography-token-disclosure">
-          <DisclosureHeader level={3}>Text style tokens</DisclosureHeader>
+          <DisclosureHeader level={3}>Show all text style tokens</DisclosureHeader>
           <DisclosurePanel>
-            <p className="component-section-description">
-              Apply a style class with <code>mz-text-default</code> or <code>mz-text-emphasis</code>.
-              The tables below show the corresponding tokens and their current theme values.
-            </p>
             <div className="documentation-table">
               <Table aria-label="Text style classes and tokens">
                 <TableHeader>
                   <Column id="style" isRowHeader>Style</Column>
-                  <Column id="class">CSS class</Column>
-                  <Column id="size">Font size</Column>
-                  <Column id="line-height">Line height</Column>
+                  <Column id="class">Class</Column>
+                  <Column id="size">Font size token and value</Column>
+                  <Column id="line-height">Line height token and value</Column>
                 </TableHeader>
                 <TableBody>
                   {typographyStyleTokens.map((style) => (
@@ -102,9 +280,9 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
               </Table>
             </div>
             <div className="documentation-table">
-              <Table aria-label="Text weight modifiers and tokens">
+              <Table aria-label="Weight classes and tokens">
                 <TableHeader>
-                  <Column id="class" isRowHeader>Modifier class</Column>
+                  <Column id="class" isRowHeader>Weight class</Column>
                   <Column id="token">Weight token</Column>
                   <Column id="value">Value</Column>
                 </TableHeader>
@@ -124,19 +302,6 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
             </div>
           </DisclosurePanel>
         </Disclosure>
-      </section>
-      <section aria-labelledby="line-height-heading" className="component-section">
-        <h2 id="line-height-heading" className="mz-text-heading-md">Line height</h2>
-        <p className="component-section-description mz-text-body-md">
-          Line height controls the distance between lines within a paragraph or list item.
-          Space between paragraphs or list items is a separate layout decision.
-        </p>
-        <div className="typography-guidance">
-          <h3 className="mz-text-title-lg">How it works</h3>
-          <p className="mz-text-body-md">A unitless line height multiplies the text’s font size. For example, a value of 1.5 with 16px text gives each line a 24px-high line box—not 24px of empty space between lines. Mezzanine uses unitless values so line height scales when the text size changes.</p>
-          <h3 className="mz-text-title-lg">Using Mezzanine’s text styles</h3>
-          <p className="mz-text-body-md">Each text style applies its font size and matching line height automatically. Use <code>mz-text-body-md</code> for normal reading; its current line-height value is <code>{bodyLineHeight}</code>. Headings and labels have their own values. You do not need to set line height separately.</p>
-        </div>
       </section>
     </>
   )

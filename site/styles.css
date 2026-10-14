@@ -21,7 +21,6 @@ body {
   margin: 0;
   background: var(--color-page);
   color: var(--color-text);
-  font-family: var(--font-family-body);
 }
 
 a {
@@ -76,7 +75,7 @@ a:focus-visible {
 
 /* The brand text stands in for an SVG wordmark, including in Wireframe. */
 :root[data-theme='wireframe'] .site-name {
-  text-decoration-line: none !important;
+  text-decoration-line: none;
 }
 
 .theme-toggle-group {
@@ -458,49 +457,101 @@ a:focus-visible {
   width: 50%;
 }
 
-.typography-specimens {
-  container-type: inline-size;
-  margin-block-start: var(--space-4);
-}
-
-.typography-examples-table {
-  table-layout: fixed;
-}
-
-.typography-specimen-details {
-  display: grid;
-  gap: var(--space-2);
-  max-inline-size: 65ch;
-}
-
-.typography-specimen-details > :is(h4, p) {
-  margin: 0;
-}
-
-.typography-specimen-details > p {
-  color: var(--color-text-muted);
-}
-
-.typography-specimen-sample {
-  /* Preserve the public text style's size and line height at every width. */
+.docs-code-block {
+  max-width: 100%;
+  margin: 0 0 var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body-sm);
+  /* Wrap long lines so narrow screens need no sideways scrolling. */
+  white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+.typography-layers {
+  display: grid;
+  gap: var(--space-3);
+  max-inline-size: 65ch;
+  margin: 0 0 var(--space-8);
+  padding: 0;
+  list-style: none;
+  counter-reset: typography-layer;
+}
+
+.typography-layers > li {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  counter-increment: typography-layer;
+}
+
+.typography-layers h3::before {
+  content: counter(typography-layer) ". ";
+}
+
+.typography-layers :is(h3, p) {
   margin: 0;
 }
 
-.typography-specimen-variant-label {
-  display: none;
-  margin: 0 0 var(--space-2);
+.typography-layers p {
+  margin-block-start: var(--space-1);
   color: var(--color-text-muted);
 }
 
-@container (max-width: 48rem) {
-  .typography-examples-table,
-  .typography-examples-table > tbody {
+.typography-theme-example {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-4);
+}
+
+.typography-theme-panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+}
+
+.typography-theme-caption {
+  flex-basis: 100%;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+/* Illustrates a product theme override; a real theme sets these on :root. */
+.typography-theme-panel-changed {
+  --text-transform-label: uppercase;
+  --letter-spacing-label: 0.08em;
+}
+
+.text-style-table {
+  container-type: inline-size;
+}
+
+.text-style-sample,
+.text-style-purpose {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.text-style-purpose {
+  margin-block-start: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+/* On narrow screens each style becomes a stacked card so large samples keep their size. */
+@container (max-width: 36rem) {
+  .text-style-table .react-aria-Table,
+  .text-style-table .react-aria-Table > tbody {
     display: block;
   }
 
   /* Keep column headers available to assistive technology in the stacked layout. */
-  .typography-examples-table > thead {
+  .text-style-table .react-aria-Table > thead {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -508,20 +559,16 @@ a:focus-visible {
     clip-path: inset(50%);
   }
 
-  .typography-examples-table > tbody > tr {
+  .text-style-table .react-aria-Table > tbody > tr {
     display: grid;
-    margin-block-end: var(--space-6);
+    margin-block-end: var(--space-4);
     border: var(--table-border-width) solid var(--color-border);
   }
 
-  .typography-examples-table .react-aria-Cell {
+  .text-style-table .react-aria-Cell {
     display: block;
     min-width: 0;
     border: 0;
-  }
-
-  .typography-specimen-variant-label {
-    display: block;
   }
 }
 
