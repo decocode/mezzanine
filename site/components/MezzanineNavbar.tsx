@@ -30,9 +30,9 @@ export function MezzanineNavbar({
     )}>
       {({ closeMenu }) => (
         <>
-          <Link className="showcase-navigation-link" aria-current={currentPath === '/' ? 'page' : undefined} href="/" onPress={closeMenu}>Home</Link>
-          <Link className="showcase-navigation-link" aria-current={currentPath === '/introduction' ? 'page' : isDocsPage ? true : undefined} href="/introduction" onPress={closeMenu}>Docs</Link>
-          <Link className="showcase-navigation-link" href="/site/lab" onPress={closeMenu}>Lab</Link>
+          <Link className="navbar-link" aria-current={currentPath === '/' ? 'page' : undefined} href="/" onPress={closeMenu}>Home</Link>
+          <Link className="navbar-link" aria-current={currentPath === '/introduction' ? 'page' : isDocsPage ? true : undefined} href="/introduction" onPress={closeMenu}>Docs</Link>
+          <Link className="navbar-link" href="/site/lab" onPress={closeMenu}>Lab</Link>
         </>
       )}
     </Navbar>

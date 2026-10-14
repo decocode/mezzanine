@@ -18,7 +18,7 @@ export default function LabPage({ currentPath, themeSwitcher }: { currentPath: s
       {({ closeMenu }) => <>
         {[labContent.index, labContent.shell, labContent.pageWidths].map(destination => <Link
           key={destination.href}
-          className="showcase-navigation-link"
+          className="navbar-link"
           href={destination.href}
           aria-current={currentPath === destination.href ? 'page' : undefined}
           onPress={closeMenu}

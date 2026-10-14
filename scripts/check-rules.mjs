@@ -146,7 +146,8 @@ function checkSite(source, checker, exportedNames) {
 
 function checkClasses(file, text, value, position) {
   for (const match of value.matchAll(/\S+/g)) {
-    if (!allowedPrefixes.some(prefix => match[0].startsWith(prefix))) {
+    // navbar-link is an explicitly approved public class name.
+    if (match[0] !== 'navbar-link' && !allowedPrefixes.some(prefix => match[0].startsWith(prefix))) {
       report(file, text, position + match.index, 'class-prefix',
         `Class "${match[0]}" must start with react-aria-, mezzanine-, or mz-text-.`)
     }

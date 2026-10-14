@@ -122,6 +122,47 @@
   text-decoration: underline;
 }
 
+/* Navigation link appearance shared by Navbar consumers. */
+.navbar-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--navbar-menu-min-height);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--navigation-tree-current-indicator-width) solid transparent;
+  background: transparent;
+  color: var(--color-link);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-decoration: none;
+  text-transform: var(--text-transform-label);
+}
+
+.navbar-link[data-focus-visible] {
+  outline: var(--navbar-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--navbar-focus-ring-offset);
+}
+
+.navbar-link[data-hovered] {
+  background: var(--color-surface-hover);
+}
+
+.navbar-link[data-pressed] {
+  background: var(--color-surface-pressed);
+  color: var(--color-link-pressed);
+}
+
+.navbar-link[aria-current] {
+  border-bottom-color: var(--navigation-tree-current-indicator);
+  color: var(--navigation-tree-item-content-current);
+  font-weight: var(--font-weight-semibold);
+}
+
+:root:not([data-theme='wireframe']) .navbar-link[aria-current] {
+  color: var(--color-link-hover);
+}
+
 @media (forced-colors: active) {
   .mezzanine-navbar {
     forced-color-adjust: auto;
