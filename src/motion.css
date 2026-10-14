@@ -1,0 +1,35 @@
+/* Consume the animation switch in animation-name, never in the shorthand:
+   none can otherwise be parsed as a fill mode and misidentify the name.
+   Internal policy controls, not product design tokens. Keep the configured
+   duration intact so nested themes and product speed overrides retain it. */
+:where(:root, [data-theme='light'], [data-theme='dark'], [data-theme='system']) {
+  --_motion-enabled: 1;
+  --_motion-animation: initial;
+  --_motion-scroll-behavior: smooth;
+}
+
+/* Wireframe suppresses finite motion only within its own inherited scope.
+   Explicit Light/Dark areas above reset these controls, including when nested. */
+[data-theme='wireframe'] {
+  --_motion-enabled: 0;
+  --_motion-animation: none;
+  --_motion-scroll-behavior: auto;
+}
+
+/* Loading behaviour is deliberately unchanged: only the system preference
+   stops rotation. Never zero the duration of an infinite animation. */
+:root {
+  --_motion-loading-animation: initial;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Target every theme boundary: an inherited value alone cannot beat a
+     nested area's declaration. Shared product speed overrides remain harmless.
+     This protects the supported contract, not arbitrary consumer CSS. */
+  :root, [data-theme] {
+    --_motion-enabled: 0 !important;
+    --_motion-animation: none !important;
+    --_motion-scroll-behavior: auto !important;
+    --_motion-loading-animation: none !important;
+  }
+}

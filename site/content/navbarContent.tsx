@@ -52,8 +52,8 @@ export const navbarContent = {
     { name: '--navbar-focus-ring-width', description: 'Trigger focus outline thickness.' },
     { name: '--navbar-focus-ring-offset', description: 'Trigger focus outline offset.' },
     { name: '--navbar-panel-max-height', description: 'Maximum panel height before scrolling.' },
-    { name: '--navbar-motion-duration', description: 'Panel entry animation duration; disabled for reduced motion.' },
-    { name: '--navbar-motion-offset', description: 'Initial vertical offset of the panel entry animation.' },
+    { name: '--motion-duration-interface', description: 'Panel entry animation duration; disabled for reduced motion.' },
+    { name: '--motion-distance-reveal', description: 'Shared reveal distance; the recipe applies the upward starting direction.' },
   ],
   tokensIntroduction: 'Override these CSS custom properties on the component or a containing theme. Defaults come from Mezzanine’s token stylesheet; shared colour, spacing tokens also apply.',
 }

@@ -4,12 +4,16 @@ export function useTokenValue(token: string, refreshKey: string) {
   const [value, setValue] = useState('')
 
   useEffect(() => {
-    const frame = requestAnimationFrame(() => {
+    const refresh = () => {
       const styles = getComputedStyle(document.documentElement)
       setValue(styles.getPropertyValue(token).trim())
-    })
-
-    return () => cancelAnimationFrame(frame)
+    }
+    const frame = requestAnimationFrame(refresh)
+    window.addEventListener('mezzanine-internal-motion-change', refresh)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('mezzanine-internal-motion-change', refresh)
+    }
   }, [refreshKey, token])
 
   return value

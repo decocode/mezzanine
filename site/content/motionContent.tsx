@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-export interface MotionTimingDefinition {
+interface MotionTimingDefinition {
   description: string
   duration: string
   easing: string
@@ -8,12 +8,12 @@ export interface MotionTimingDefinition {
   label: string
 }
 
-export interface MotionTokenDefinition {
+interface MotionTokenDefinition {
   description: ReactNode
   token: string
 }
 
-export interface MotionPatternDefinition {
+interface MotionPatternDefinition {
   id: string
   movement: ReactNode
   name: ReactNode
@@ -22,97 +22,35 @@ export interface MotionPatternDefinition {
 }
 
 export const motionTimingDefinitions: MotionTimingDefinition[] = [
-  {
-    id: 'interface-transition',
-    label: 'Interface transition',
-    description: 'Short changes that help people follow an interface opening, closing, or changing state.',
-    duration: '180ms',
-    easing: 'ease-out; ease-in for modal exit',
-  },
-  {
-    id: 'continuous-loading',
-    label: 'Continuous loading',
-    description: 'Repeated rotation that communicates an action is still in progress.',
-    duration: '1s',
-    easing: 'linear',
-  },
+  { id: 'interface-transition', label: 'Interface entry and state change', description: 'Shared timing for finite interface changes.', duration: '--motion-duration-interface', easing: '--motion-easing-enter' },
+  { id: 'interface-exit', label: 'Interface exit', description: 'Exits accelerate as they leave.', duration: '--motion-duration-interface', easing: '--motion-easing-exit' },
+  { id: 'continuous-loading', label: 'Continuous loading', description: 'Repeated rotation while work remains in progress.', duration: '--motion-duration-loading', easing: '--motion-easing-loading' },
 ]
 
 export const motionTokenDefinitions: MotionTokenDefinition[] = [
-  {
-    token: '--button-progress-motion-duration',
-    description: <>Controls one rotation of the <code>Button</code> loading indicator.</>,
-  },
-  {
-    token: '--tab-motion-duration',
-    description: <>Controls movement of the <code>Tab</code> selection indicator.</>,
-  },
-  {
-    token: '--modal-motion-duration',
-    description: <>Controls <code>Modal</code> and <code>ModalOverlay</code> entry and exit.</>,
-  },
-  {
-    token: '--modal-enter-scale',
-    description: <><code>Modal</code> scale at the start of entry and end of exit.</>,
-  },
-  {
-    token: '--disclosure-motion-duration',
-    description: <>Controls <code>Disclosure</code> chevron rotation.</>,
-  },
-  {
-    token: '--navigation-tree-motion-duration',
-    description: <>Controls <code>NavigationTree</code> chevron rotation and child-row motion.</>,
-  },
+  { token: '--motion-duration-interface', description: 'Configured duration for finite interface changes.' },
+  { token: '--motion-duration-loading', description: 'Duration of one loading rotation; never zeroed by the motion policy.' },
+  { token: '--motion-easing-enter', description: 'Easing (how speed changes): entry and state changes slow towards their endpoint.' },
+  { token: '--motion-easing-exit', description: 'Exits accelerate towards their endpoint.' },
+  { token: '--motion-easing-loading', description: 'Loading rotates at constant speed.' },
+  { token: '--motion-scale-enter', description: 'Modal size at the start of entry and end of exit.' },
+  { token: '--motion-rotation-expanded', description: 'Quarter-turn for the Disclosure expanded indicator. The current NavigationTree temporarily uses twice this angle to preserve its existing direction.' },
+  { token: '--motion-rotation-cycle', description: 'One complete loading rotation.' },
+  { token: '--motion-distance-reveal', description: 'Shared short reveal distance; each recipe supplies direction.' },
+  { token: '--motion-distance-offscreen', description: 'Full proportional travel of a drawer or sheet.' },
 ]
 
 export const motionPatternDefinitions: MotionPatternDefinition[] = [
-  {
-    id: 'modal',
-    name: <><code>Modal</code> and <code>ModalOverlay</code></>,
-    scope: 'Library components',
-    movement: 'Fades the backdrop and scales the modal on entry and exit.',
-    reducedMotion: 'The modal opens and closes without animation.',
-  },
-  {
-    id: 'disclosure-chevron',
-    name: <><code>Disclosure</code> chevron</>,
-    scope: 'Library component',
-    movement: <>Rotates 180 degrees when its <code>Disclosure</code> opens.</>,
-    reducedMotion: 'Rotation happens immediately.',
-  },
-  {
-    id: 'navigation-tree',
-    name: <><code>NavigationTree</code></>,
-    scope: 'Library chevron and optional animated NavigationTree rows',
-    movement: 'Rotates its chevron and reveals or collapses child rows by changing height, spacing, opacity, and position.',
-    reducedMotion: 'The hierarchy changes immediately.',
-  },
-  {
-    id: 'button-progress',
-    name: <>Pending <code>Button</code> indicator</>,
-    scope: 'Library component',
-    movement: 'Rotates one complete turn every second while an action is pending.',
-    reducedMotion: 'The indicator remains visible without rotating.',
-  },
-  {
-    id: 'navbar-navigation',
-    name: 'Mobile Navbar navigation',
-    scope: 'Library component',
-    movement: 'Fades in while moving down by 0.375rem when opened.',
-    reducedMotion: 'The navigation appears immediately.',
-  },
-  {
-    id: 'page-scrolling',
-    name: 'Page scrolling',
-    scope: 'Showcase layout',
-    movement: 'Scrolls smoothly when following a link to a place on the same page.',
-    reducedMotion: 'The page moves immediately.',
-  },
-  {
-    id: 'loading-icon-preview',
-    name: 'Loading icon preview',
-    scope: 'Showcase documentation only',
-    movement: <>Rotates the <code>LoadingIcon</code> one complete turn every second.</>,
-    reducedMotion: 'The icon remains visible without rotating.',
-  },
+  { id: 'modal', name: 'Modal and ModalOverlay', scope: 'Library', movement: 'Backdrop fades; modal scales on entry and exit.', reducedMotion: 'Opens and closes immediately.' },
+  { id: 'disclosure-panel', name: 'Disclosure panel', scope: 'Library', movement: 'Expand-and-collapse reveal: height follows measured content, with a fade and the shared reveal distance. Opening slows towards its endpoint; closing accelerates away.', reducedMotion: 'Opens and closes immediately.' },
+  { id: 'disclosure-chevron', name: 'Disclosure chevron', scope: 'Library', movement: 'Points right when closed and turns down when expanded.', reducedMotion: 'Orientation changes immediately; expanded state remains visible.' },
+  { id: 'tabs', name: 'Tabs selection indicator', scope: 'Library', movement: 'Moves and resizes with shared entry easing.', reducedMotion: 'Changes immediately.' },
+  { id: 'tooltip', name: 'Tooltip', scope: 'Library', movement: 'Fades using interface timing; the hover delay remains separate.', reducedMotion: 'Appears and disappears without a fade.' },
+  { id: 'navigation-tree', name: 'NavigationTree', scope: 'Library chevron and optional animated rows', movement: 'Chevron retains its down-to-up flip. Rows change height, opacity and vertical position.', reducedMotion: 'Hierarchy changes immediately, including pending collapses.' },
+  { id: 'navbar-navigation', name: 'Mobile Navbar navigation', scope: 'Library', movement: 'Fades in and moves by the shared reveal distance.', reducedMotion: 'Appears immediately.' },
+  { id: 'sidebar', name: 'Sidebar drawer', scope: 'Library', movement: 'Slides from its side while the backdrop fades.', reducedMotion: 'Opens and closes immediately.' },
+  { id: 'tab-bar', name: 'TabBar More sheet', scope: 'Library', movement: 'Slides from below while the backdrop fades.', reducedMotion: 'Opens and closes immediately.' },
+  { id: 'button-progress', name: 'Pending Button indicator', scope: 'Library', movement: 'Rotates continuously while pending.', reducedMotion: 'System reduction stops rotation and keeps the ring visible. Wireframe alone leaves loading unchanged.' },
+  { id: 'page-scrolling', name: 'Page scrolling', scope: 'Documentation layout', movement: 'Same-page links scroll smoothly; direct-load anchors scroll immediately.', reducedMotion: 'Scrolling is immediate.' },
+  { id: 'loading-icon-preview', name: 'Loading icon preview', scope: 'Documentation only', movement: 'Rotates continuously.', reducedMotion: 'System reduction stops rotation and keeps the icon visible. Wireframe alone leaves it unchanged.' },
 ]

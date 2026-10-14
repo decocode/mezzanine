@@ -54,7 +54,7 @@
 }
 
 .mezzanine-navbar-panel:not([hidden]) {
-  animation: navbar-navigation-reveal var(--navbar-motion-duration) ease-out both;
+  animation: navbar-navigation-reveal var(--motion-duration-interface) var(--motion-easing-enter) both; animation-name: var(--_motion-animation, navbar-navigation-reveal);
 }
 
 .mezzanine-navbar-desktop {
@@ -64,7 +64,7 @@
 @keyframes navbar-navigation-reveal {
   from {
     opacity: 0;
-    translate: 0 var(--navbar-motion-offset);
+    translate: 0 calc(-1 * var(--motion-distance-reveal));
   }
 
   to {
@@ -90,12 +90,6 @@
     justify-content: flex-end;
     gap: var(--space-4);
     flex-wrap: wrap;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mezzanine-navbar-panel:not([hidden]) {
-    animation: none;
   }
 }
 

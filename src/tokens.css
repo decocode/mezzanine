@@ -11,6 +11,18 @@
 @import './themes/wireframe.css';
 
 :where(:root) {
+  /* Shared motion decisions. Reduced behaviour is owned by motion.css. */
+  --motion-duration-interface: 180ms;
+  --motion-duration-loading: 1s;
+  --motion-easing-enter: ease-out;
+  --motion-easing-exit: ease-in;
+  --motion-easing-loading: linear;
+  --motion-scale-enter: 0.98;
+  --motion-rotation-expanded: 90deg;
+  --motion-rotation-cycle: 1turn;
+  --motion-distance-reveal: 0.25rem;
+  --motion-distance-offscreen: 100%;
+
   /* Every palette follows the same perceptual lightness curve. */
 
   /* Neutral semantic scale for statuses without positive or negative meaning. */
@@ -182,8 +194,6 @@
   --navbar-focus-ring-width: 0.1875rem;
   --navbar-focus-ring-offset: 0.125rem;
   --navbar-panel-max-height: 75dvh;
-  --navbar-motion-duration: 180ms;
-  --navbar-motion-offset: -0.375rem;
 
 
 
@@ -228,7 +238,6 @@
   --tooltip-max-width: 20rem;
   --tooltip-border-width: 0.0625rem;
   --tooltip-z-index: 110;
-  --tooltip-motion-duration: 120ms;
 
   /* Modal and Dialog: neutral overlays and their content. */
   --modal-z-index: 100;
@@ -240,8 +249,6 @@
   --modal-background: var(--color-surface);
   --modal-content: var(--color-text);
   --modal-border: var(--color-border);
-  --modal-motion-duration: 180ms;
-  --modal-enter-scale: 0.98;
   --dialog-padding: var(--space-6);
   --dialog-content-gap: var(--space-4);
   --dialog-actions-gap: var(--space-2);
@@ -304,7 +311,6 @@
   --button-progress-size: 1.25rem;
   --button-progress-stroke-width: 0.125rem;
   --button-progress-border-radius: 50%;
-  --button-progress-motion-duration: 1s;
 
   /* Checkbox: component-specific structure, shared by every theme. */
   --checkbox-size: 1.25rem;
@@ -348,7 +354,6 @@
   --disclosure-icon-size: 1.25rem;
   --disclosure-focus-ring-width: 0.1875rem;
   --disclosure-focus-ring-offset: -0.1875rem;
-  --disclosure-motion-duration: 180ms;
 
   /* Table: component-specific structure, shared by every theme. */
   --table-border-width: 0.0625rem;
@@ -374,7 +379,6 @@
   --tab-background-pressed: var(--color-surface-pressed);
   --tab-indicator: var(--color-link);
   --tab-indicator-width: 0.1875rem;
-  --tab-motion-duration: 180ms;
   --tab-panel-padding: 0.75rem;
   --tab-panel-preferred-width: 12rem;
 
@@ -397,7 +401,6 @@
   --navigation-tree-focus-ring-width: 0.1875rem;
   --navigation-tree-focus-ring-offset: -0.1875rem;
   --navigation-tree-header-padding-block: 0.5rem;
-  --navigation-tree-motion-duration: 180ms;
   /* Sidebar: generic inline panels, compact rails and modal drawers. */
   --sidebar-width: 18rem;
   --sidebar-rail-width: 4.5rem;
@@ -407,5 +410,4 @@
   --sidebar-gap: 0.5rem;
   --sidebar-border-width: 0.0625rem;
   --sidebar-drawer-gap: 1rem;
-  --sidebar-motion-duration: 180ms;
 }

@@ -4,7 +4,7 @@ for (const reducedMotion of ['no-preference', 'reduce'] as const) {
   test(`NavigationTree expansion respects ${reducedMotion}`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion })
     await page.goto('/navigation-tree')
-    await page.evaluate(() => document.documentElement.style.setProperty('--navigation-tree-motion-duration', '800ms'))
+    await page.evaluate(() => document.documentElement.style.setProperty('--motion-duration-interface', '800ms'))
     const tree = page.getByRole('treegrid', { name: 'NavigationTree items', exact: true })
     const trigger = tree.getByRole('button', { name: /^Expand or collapse Item B/ })
     const child = tree.getByRole('row', { name: /Child item B1/ })
@@ -34,7 +34,7 @@ for (const reducedMotion of ['no-preference', 'reduce'] as const) {
 test('enabling reduced motion completes a pending NavigationTree collapse', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/navigation-tree')
-  await page.evaluate(() => document.documentElement.style.setProperty('--navigation-tree-motion-duration', '10s'))
+  await page.evaluate(() => document.documentElement.style.setProperty('--motion-duration-interface', '10s'))
   const tree = page.getByRole('treegrid', { name: 'NavigationTree items', exact: true })
   await tree.getByRole('button', { name: /^Expand or collapse Item B/ }).click()
   await expect(tree.locator('.mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing')).toHaveCount(2)

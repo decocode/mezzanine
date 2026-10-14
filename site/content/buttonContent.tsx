@@ -114,7 +114,7 @@ export const buttonTokens: ButtonTokenDefinition[] = [
   { token: '--button-progress-size', label: 'Button progress size', description: 'Width and height of the pending-state progress indicator.' },
   { token: '--button-progress-stroke-width', label: 'Button progress stroke width', description: 'Thickness of the pending-state progress indicator.' },
   { token: '--button-progress-border-radius', label: 'Button progress corner radius', description: 'Rounding of the pending-state progress indicator.' },
-  { token: '--button-progress-motion-duration', label: 'Button progress duration', description: 'Duration of one loading-indicator rotation; animation stops with reduced motion.' },
+  { token: '--motion-duration-loading', label: 'Button progress duration', description: 'Duration of one loading-indicator rotation; animation stops with reduced motion.' },
 ]
 
 // Written guidance and reference entries; live examples stay in the page.

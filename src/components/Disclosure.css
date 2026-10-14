@@ -52,16 +52,49 @@
   width: var(--disclosure-icon-size);
   height: var(--disclosure-icon-size);
   flex: none;
-  transition: rotate var(--disclosure-motion-duration) ease-out;
+  transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
 .react-aria-Disclosure[data-expanded] .mezzanine-disclosure-chevron {
-  rotate: 180deg;
+  rotate: var(--motion-rotation-expanded);
 }
 
 .react-aria-DisclosurePanel {
-  padding: 0 var(--disclosure-panel-padding-inline) var(--disclosure-panel-padding-block);
+  box-sizing: border-box;
+  height: var(--disclosure-panel-height);
+  padding: 0 var(--disclosure-panel-padding-inline);
+  transition: height calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
   color: var(--color-text-muted);
+}
+
+/* Keep bottom space inside the measured content, so a zero-height panel has
+   no padding floor and its measured endpoint includes all of that space. */
+.react-aria-DisclosurePanel::after {
+  content: '';
+  display: block;
+  height: var(--disclosure-panel-padding-block);
+}
+
+.react-aria-DisclosurePanel[aria-hidden='false'] {
+  animation: mezzanine-disclosure-reveal var(--motion-duration-interface) var(--motion-easing-enter);
+  animation-name: var(--_motion-animation, mezzanine-disclosure-reveal);
+}
+
+.react-aria-DisclosurePanel[aria-hidden='true'] {
+  transition-timing-function: var(--motion-easing-exit);
+  animation: mezzanine-disclosure-conceal var(--motion-duration-interface) var(--motion-easing-exit);
+  animation-name: var(--_motion-animation, mezzanine-disclosure-conceal);
+}
+
+/* Clip only during motion, leaving expanded content and focus outlines free. */
+@keyframes mezzanine-disclosure-reveal {
+  from { opacity: 0; translate: 0 calc(-1 * var(--motion-distance-reveal)); overflow: clip; }
+  to { opacity: 1; translate: 0; overflow: clip; }
+}
+
+@keyframes mezzanine-disclosure-conceal {
+  from { opacity: 1; translate: 0; overflow: clip; }
+  to { opacity: 0; translate: 0 calc(-1 * var(--motion-distance-reveal)); overflow: clip; }
 }
 
 .react-aria-DisclosurePanel[hidden] {
@@ -75,12 +108,6 @@
 
 .react-aria-Disclosure[data-disabled] .mezzanine-disclosure-trigger {
   cursor: default;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mezzanine-disclosure-chevron {
-    transition: none;
-  }
 }
 
 @media (forced-colors: active) {

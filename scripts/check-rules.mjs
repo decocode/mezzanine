@@ -1,3 +1,4 @@
+import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -349,6 +350,18 @@ try {
     if (source.fileName.startsWith(root) && !source.fileName.includes('/node_modules/')) collectButtonClasses(source)
   }
   for (const file of [...filesIn('src', ['.css']), ...filesIn('site', ['.css'])]) checkButtonSizing(file)
+  for (const file of [...filesIn('src', ['.css']), ...filesIn('site', ['.css'])]) {
+    const text = read(file)
+    for (const problem of checkMotionCss(file, text)) report(file, text, problem.position, 'motion', problem.message)
+  }
+  for (const file of [...filesIn('src', ['.ts', '.tsx']), ...filesIn('site', ['.ts', '.tsx'])]) {
+    const text = read(file)
+    for (const problem of checkMotionSource(file, text)) report(file, text, problem.position, 'motion', problem.message)
+  }
+  const tokens = read('src/tokens.css')
+  for (const token of motionTokens) {
+    if (!tokens.includes(`${token}:`)) report('src/tokens.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
+  }
   checkSnapshot(api, argumentsList.includes('--update-api'))
 } catch (error) {
   report('scripts/check-rules.mjs', '', 0, 'rule-checker', error.message)
@@ -360,5 +373,5 @@ if (problems.length) {
   console.error(`Rule checks failed: ${problems.length} problem(s).`)
   process.exitCode = 1
 } else {
-  console.log('All checks passed (5 rule checks).')
+  console.log('All checks passed (including shared motion rules).')
 }

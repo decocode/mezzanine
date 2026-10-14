@@ -24,6 +24,7 @@ interface SidebarNavigationProps {
 export default function SidebarNavigation({ currentPage, 'aria-label': label = 'Mezzanine documentation' }: SidebarNavigationProps) {
   const currentGroups = findSiteNavigationGroups(currentPage.id)
   const {
+    treeRef,
     closingKeys,
     expandedKeys,
     onExpandedChange,
@@ -94,6 +95,7 @@ export default function SidebarNavigation({ currentPage, 'aria-label': label = '
 
   return (
     <NavigationTree
+      ref={treeRef}
       aria-label={label}
       className="react-aria-NavigationTree animated-navigation-tree"
       expandedKeys={expandedKeys}

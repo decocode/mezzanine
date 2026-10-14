@@ -13,15 +13,5 @@ export function useDemoWidth() {
     return () => observer.disconnect()
   }, [])
 
-  function resizeBy(change: number) {
-    const element = demoRef.current
-    if (!element) return
-    element.style.width = `${Math.max(0, element.getBoundingClientRect().width + change)}px`
-  }
-
-  function resetWidth() {
-    demoRef.current?.style.removeProperty('width')
-  }
-
-  return { demoRef, width, resizeBy, resetWidth }
+  return { demoRef, width }
 }

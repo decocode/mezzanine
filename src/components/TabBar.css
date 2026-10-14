@@ -186,33 +186,33 @@
 }
 
 .mezzanine-tab-bar-overlay[data-entering] {
-  animation: mezzanine-modal-fade var(--modal-motion-duration) ease-out;
+  animation: mezzanine-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-fade);
 }
 
 .mezzanine-tab-bar-overlay[data-exiting] {
-  animation: mezzanine-modal-fade var(--modal-motion-duration) reverse ease-in;
+  animation: mezzanine-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-fade-exit);
 }
 
 .mezzanine-tab-bar-sheet[data-entering] {
-  animation: mezzanine-tab-bar-sheet-enter var(--modal-motion-duration) ease-out;
+  animation: mezzanine-tab-bar-sheet-enter var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-tab-bar-sheet-enter);
 }
 
 .mezzanine-tab-bar-sheet[data-exiting] {
-  animation: mezzanine-tab-bar-sheet-enter var(--modal-motion-duration) reverse ease-in;
+  animation: mezzanine-tab-bar-sheet-enter-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-tab-bar-sheet-enter-exit);
 }
 
 @keyframes mezzanine-tab-bar-sheet-enter {
-  from { transform: translateY(100%); }
+  from { transform: translateY(var(--motion-distance-offscreen)); }
   to { transform: translateY(0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mezzanine-tab-bar-overlay,
-  .mezzanine-tab-bar-sheet { animation: none !important; }
 }
 
 @media (forced-colors: active) {
   .mezzanine-tab-bar-sheet { background: Canvas; border-color: CanvasText; }
   .mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-current-route] { border-block-end-color: Highlight; }
   .mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-focus-visible] { outline-color: Highlight; }
+}
+
+@keyframes mezzanine-tab-bar-sheet-enter-exit {
+  from { transform: translateY(0); }
+  to { transform: translateY(var(--motion-distance-offscreen)); }
 }

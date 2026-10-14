@@ -63,7 +63,7 @@ export const tabsContent = {
     { name: '--tab-background-pressed', description: 'Tab background while pressed.' },
     { name: '--tab-indicator', description: 'Selection indicator colour.' },
     { name: '--tab-indicator-width', description: 'Selection indicator thickness.' },
-    { name: '--tab-motion-duration', description: 'Selection indicator movement duration; motion stops with reduced motion.' },
+    { name: '--motion-duration-interface', description: 'Selection indicator movement duration; motion stops with reduced motion.' },
     { name: '--tab-panel-padding', description: 'Padding inside the content panel.' },
     { name: '--tab-panel-preferred-width', description: 'Preferred panel width before a vertical layout wraps the panel below the list.' },
   ],

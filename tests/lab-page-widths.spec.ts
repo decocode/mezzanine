@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
 // playwright.config.ts serves site-dist, so these also check production inclusion.
-test('production lab links to width candidates and supports drag and keyboard resizing', async ({ page }) => {
+test('production lab links to width candidates and supports drag resizing', async ({ page }) => {
   await page.setViewportSize({ width: 2400, height: 1400 })
   await page.goto('/introduction')
   await page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Lab', exact: true }).click()
@@ -25,15 +25,14 @@ test('production lab links to width candidates and supports drag and keyboard re
   const boxes = page.locator('.lab-width-placeholder').filter({ hasText: 'Placeholder' })
   expect((await boxes.nth(0).boundingBox())!.y).toBe((await boxes.nth(3).boundingBox())!.y)
 
-  const narrower = page.getByRole('button', { name: 'Narrower', exact: true })
-  await narrower.focus()
-  await page.keyboard.press('Enter')
-  await expect(narrower).toBeFocused()
-  await expect(readout).toHaveText(`Demo area width: ${Math.round(initialWidth - 64)} CSS px`)
-  await page.keyboard.press('Tab')
-  await expect(page.getByRole('button', { name: 'Wider', exact: true })).toBeFocused()
-  await page.keyboard.press('Space')
-  await expect(readout).toHaveText(`Demo area width: ${Math.round(initialWidth)} CSS px`)
+  // Reading and flexible bands are centred when the demo is wider than their caps.
+  const demoBounds = (await demo.boundingBox())!
+  for (const selector of ['.lab-reading-band', '.lab-grid-band']) {
+    const band = (await page.locator(selector).boundingBox())!
+    expect(Math.abs((band.x - demoBounds.x) - (demoBounds.x + demoBounds.width - band.x - band.width))).toBeLessThanOrEqual(1)
+  }
+  // The side column keeps its own width instead of scaling with the page.
+  expect((await page.locator('.lab-width-workspace > :first-child').boundingBox())!.width).toBeLessThanOrEqual(256)
 
   await demo.scrollIntoViewIfNeeded()
   const bounds = (await demo.boundingBox())!
@@ -45,8 +44,6 @@ test('production lab links to width candidates and supports drag and keyboard re
   await expect(readout).toHaveText(`Demo area width: ${Math.round((await demo.boundingBox())!.width)} CSS px`)
   expect((await boxes.nth(3).boundingBox())!.y).toBeGreaterThan((await boxes.nth(0).boundingBox())!.y)
   expect((await page.locator('.lab-reading-band').boundingBox())!.height).toBeGreaterThan(wideHeight)
-  await page.getByRole('button', { name: 'Use available width' }).click()
-  await expect(readout).toHaveText(`Demo area width: ${Math.round(initialWidth)} CSS px`)
   await page.getByRole('link', { name: 'Lab index', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Lab', exact: true })).toBeVisible()
   await page.getByRole('navigation', { name: 'Lab navigation', exact: true }).getByRole('link', { name: 'Shell comparison' }).click()
@@ -67,9 +64,6 @@ for (const theme of ['light', 'dark', 'wireframe']) {
         document.documentElement.dataset.theme = theme
         document.documentElement.style.fontSize = `${fontSize}px`
       }, { theme, fontSize })
-      await page.getByRole('button', { name: 'Narrower', exact: true }).click()
-      await page.getByRole('button', { name: 'Wider', exact: true }).click()
-      await page.getByRole('button', { name: 'Use available width' }).click()
       for (const selector of ['html', '.lab-page-main', '.lab-width-demo']) {
         expect(await page.locator(selector).evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true)
       }

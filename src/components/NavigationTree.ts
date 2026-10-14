@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { observeMotionPolicy, readMotionDuration } from '../motionPolicy'
 import type { Key } from 'react-aria-components'
 
 export {
@@ -20,16 +21,6 @@ export type {
   NavigationTreeSectionProps,
 } from 'react-aria-components/NavigationTree'
 
-function getNavigationTreeMotionDuration() {
-  const value = getComputedStyle(document.documentElement)
-    .getPropertyValue('--navigation-tree-motion-duration').trim()
-  const duration = Number.parseFloat(value)
-  if (!Number.isFinite(duration) || duration < 0) return 0
-  if (value.endsWith('ms')) return duration
-  if (value.endsWith('s')) return duration * 1000
-  return 0
-}
-
 function removeKey(keys: Set<Key>, key: Key) {
   const nextKeys = new Set(keys)
   nextKeys.delete(key)
@@ -37,6 +28,9 @@ function removeKey(keys: Set<Key>, key: Key) {
 }
 
 export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
+  // Optional, additive bridge until the tree build removes this hook.
+  // Unattached refs intentionally use the page-level motion policy.
+  const treeRef = useRef<HTMLDivElement>(null)
   const [expandedKeys, setExpandedKeys] = useState(() => new Set(initialExpandedKeys))
   const [openingKeys, setOpeningKeys] = useState<Set<Key>>(() => new Set())
   const [closingKeys, setClosingKeys] = useState<Set<Key>>(() => new Set())
@@ -48,17 +42,15 @@ export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
   }, [])
 
   useEffect(() => {
-    const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
     const finishMotion = () => {
-      if (!preference.matches) return
+      if (readMotionDuration(treeRef.current) > 0) return
       motionTimers.current.forEach(clearTimeout)
       motionTimers.current.clear()
       setOpeningKeys(new Set())
       setClosingKeys(new Set())
       setExpandedKeys(new Set(requestedExpandedKeys.current))
     }
-    preference.addEventListener('change', finishMotion)
-    return () => preference.removeEventListener('change', finishMotion)
+    return observeMotionPolicy(finishMotion)
   }, [])
 
   const scheduleMotionEnd = useCallback((key: Key, onMotionEnd: () => void) => {
@@ -68,7 +60,7 @@ export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
     const timer = setTimeout(() => {
       motionTimers.current.delete(key)
       onMotionEnd()
-    }, getNavigationTreeMotionDuration())
+    }, readMotionDuration(treeRef.current))
 
     motionTimers.current.set(key, timer)
   }, [])
@@ -76,7 +68,7 @@ export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
   const onExpandedChange = useCallback((requestedKeys: Set<Key>) => {
     const nextKeys = new Set(requestedKeys)
     requestedExpandedKeys.current = nextKeys
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const prefersReducedMotion = readMotionDuration(treeRef.current) === 0
 
     if (prefersReducedMotion) {
       motionTimers.current.forEach(clearTimeout)
@@ -88,6 +80,12 @@ export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
     }
 
     nextKeys.forEach((key) => {
+      // A second toggle can reopen a row before its delayed collapse finishes.
+      if (closingKeys.has(key)) {
+        clearTimeout(motionTimers.current.get(key))
+        motionTimers.current.delete(key)
+        setClosingKeys((currentKeys) => removeKey(currentKeys, key))
+      }
       if (expandedKeys.has(key)) return
 
       setExpandedKeys((currentKeys) => new Set(currentKeys).add(key))
@@ -111,6 +109,7 @@ export function useAnimatedNavigationTree(initialExpandedKeys: Iterable<Key>) {
   }, [closingKeys, expandedKeys, scheduleMotionEnd])
 
   return {
+    treeRef,
     closingKeys,
     expandedKeys,
     onExpandedChange,

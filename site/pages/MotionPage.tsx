@@ -6,9 +6,11 @@ import {
   motionTimingDefinitions,
   motionTokenDefinitions,
 } from '../content/motionContent'
+import { useTokenValue } from '../components/tokenValueLogic'
 import { TokenValue } from '../components/TokenValue'
 
 export default function MotionPage({ refreshKey }: { refreshKey: string }) {
+  const motionEnabled = useTokenValue('--_motion-enabled', refreshKey)
   return (
     <>
       <PageHeading
@@ -43,8 +45,8 @@ export default function MotionPage({ refreshKey }: { refreshKey: string }) {
                     <strong>{timing.label}</strong>
                     <span className="table-supporting-text">{timing.description}</span>
                   </Cell>
-                  <Cell><code>{timing.duration}</code></Cell>
-                  <Cell><code>{timing.easing}</code></Cell>
+                  <Cell><TokenValue token={timing.duration} refreshKey={refreshKey} /></Cell>
+                  <Cell><TokenValue token={timing.easing} refreshKey={refreshKey} /></Cell>
                 </Row>
               ))}
             </TableBody>
@@ -56,7 +58,7 @@ export default function MotionPage({ refreshKey }: { refreshKey: string }) {
           CSS tokens
         </h2>
         <p className="component-section-description">
-          These are the motion tokens that exist in Mezzanine today.
+          These are the configured shared values. Reduction suppresses playback without changing a product’s configured speed.
         </p>
         <div className="documentation-table">
           <Table aria-label="Motion CSS tokens">
@@ -112,6 +114,9 @@ export default function MotionPage({ refreshKey }: { refreshKey: string }) {
           Reduced motion
         </h2>
         <p className="component-section-description">
+          Finite motion on this page is currently {motionEnabled === '0' ? 'suppressed' : 'enabled'}.
+          Wireframe suppresses finite motion in its own area; a nested Light or Dark area
+          restores it. Loading indicators keep their existing behaviour in Wireframe.
           Mezzanine follows the device&apos;s <code>prefers-reduced-motion</code> setting. When a
           person asks for less motion, animations and smooth scrolling are removed while the
           interface continues to change state and communicate progress.

@@ -64,6 +64,6 @@ export const sidebarContent = {
     { name: '--sidebar-padding / --sidebar-rail-padding', description: 'Panel section and rail padding.' },
     { name: '--sidebar-gap / --sidebar-border-width', description: 'Header and rail spacing, and panel border thickness.' },
     { name: '--sidebar-drawer-gap', description: 'Minimum space left for the backdrop beside a narrow drawer.' },
-    { name: '--sidebar-motion-duration', description: 'Drawer and backdrop animation duration; reduced motion disables animation.' },
+    { name: '--motion-duration-interface', description: 'Drawer and backdrop animation duration; reduced motion disables animation.' },
   ],
 }

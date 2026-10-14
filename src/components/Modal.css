@@ -30,19 +30,19 @@
 }
 
 .react-aria-ModalOverlay[data-entering] {
-  animation: mezzanine-modal-fade var(--modal-motion-duration) ease-out;
+  animation: mezzanine-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-fade);
 }
 
 .react-aria-ModalOverlay[data-exiting] {
-  animation: mezzanine-modal-fade var(--modal-motion-duration) reverse ease-in;
+  animation: mezzanine-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-fade-exit);
 }
 
 .react-aria-Modal[data-entering] {
-  animation: mezzanine-modal-zoom var(--modal-motion-duration) ease-out;
+  animation: mezzanine-modal-zoom var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-zoom);
 }
 
 .react-aria-Modal[data-exiting] {
-  animation: mezzanine-modal-zoom var(--modal-motion-duration) reverse ease-in;
+  animation: mezzanine-modal-zoom-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-zoom-exit);
 }
 
 @keyframes mezzanine-modal-fade {
@@ -51,17 +51,8 @@
 }
 
 @keyframes mezzanine-modal-zoom {
-  from { transform: scale(var(--modal-enter-scale)); }
+  from { transform: scale(var(--motion-scale-enter)); }
   to { transform: scale(1); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .react-aria-ModalOverlay[data-entering],
-  .react-aria-ModalOverlay[data-exiting],
-  .react-aria-Modal[data-entering],
-  .react-aria-Modal[data-exiting] {
-    animation: none;
-  }
 }
 
 @media (forced-colors: active) {
@@ -69,4 +60,14 @@
   .react-aria-Modal {
     forced-color-adjust: auto;
   }
+}
+
+@keyframes mezzanine-modal-fade-exit {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes mezzanine-modal-zoom-exit {
+  from { transform: scale(1); }
+  to { transform: scale(var(--motion-scale-enter)); }
 }

@@ -100,11 +100,12 @@
 
 .react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] svg {
   rotate: 0deg;
-  transition: rotate var(--navigation-tree-motion-duration) ease-out;
+  transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
 .react-aria-NavigationTreeItem[data-expanded] .react-aria-Button[slot='chevron'] svg {
-  rotate: 180deg;
+  /* Preserve the existing down-to-up direction until the separate tree build. */
+  rotate: calc(var(--motion-rotation-expanded) * 2);
 }
 
 .react-aria-NavigationTreeSection {
@@ -127,12 +128,12 @@
 }
 
 .mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-opening {
-  animation: navigation-tree-item-open var(--navigation-tree-motion-duration) ease-out both;
+  animation: navigation-tree-item-open var(--motion-duration-interface) var(--motion-easing-enter) both; animation-name: var(--_motion-animation, navigation-tree-item-open);
 }
 
 .mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing {
   pointer-events: none;
-  animation: navigation-tree-item-close var(--navigation-tree-motion-duration) ease-out both;
+  animation: navigation-tree-item-close var(--motion-duration-interface) var(--motion-easing-enter) both; animation-name: var(--_motion-animation, navigation-tree-item-close);
 }
 
 .react-aria-NavigationTreeItem.mezzanine-navigation-tree-item-closing .react-aria-Button[slot='chevron'] svg {
@@ -144,7 +145,7 @@
     min-height: 0;
     max-height: 0;
     opacity: 0;
-    transform: translateY(calc(-1 * var(--space-1)));
+    transform: translateY(calc(-1 * var(--motion-distance-reveal)));
   }
 
   to {
@@ -167,18 +168,7 @@
     min-height: 0;
     max-height: 0;
     opacity: 0;
-    transform: translateY(calc(-1 * var(--space-1)));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-opening,
-  .mezzanine-navigation-tree-item-animated.mezzanine-navigation-tree-item-closing {
-    animation: none;
-  }
-
-  .react-aria-NavigationTreeItem .react-aria-Button[slot='chevron'] svg {
-    transition: none;
+    transform: translateY(calc(-1 * var(--motion-distance-reveal)));
   }
 }
 

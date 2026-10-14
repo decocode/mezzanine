@@ -5,13 +5,13 @@
 }
 
 .lab-page-widths :where(h1, h2, p) { margin: var(--space-0); }
-.lab-width-controls { display: flex; flex-wrap: wrap; gap: var(--space-3); }
 
 .lab-width-demo {
   /* Illustrative candidates, deliberately local to this sandbox. */
   --lab-reading-width: 65ch;
   --lab-grid-width: 76rem;
   --lab-placeholder-min-width: 12rem;
+  --lab-sidebar-width: 16rem;
   width: 100%;
   min-width: min(100%, var(--lab-placeholder-min-width));
   max-width: 100%;
@@ -34,8 +34,8 @@
   background: var(--color-surface);
 }
 
-.lab-reading-band { max-width: var(--lab-reading-width); }
-.lab-grid-band { max-width: var(--lab-grid-width); }
+.lab-reading-band { max-width: var(--lab-reading-width); margin-inline: auto; }
+.lab-grid-band { max-width: var(--lab-grid-width); margin-inline: auto; }
 .lab-full-band { width: 100%; }
 .lab-placeholder-grid {
   display: grid;
@@ -49,5 +49,6 @@
   background: var(--color-surface-hover);
 }
 .lab-width-workspace { display: flex; flex-wrap: wrap; gap: var(--space-4); }
-.lab-width-workspace > :first-child { flex: 1 1 var(--lab-placeholder-min-width); }
-.lab-width-workspace > :last-child { flex: 3 1 var(--lab-placeholder-min-width); }
+/* The side column keeps a content-sized width and does not grow with the page. */
+.lab-width-workspace > :first-child { flex: 0 1 var(--lab-sidebar-width); }
+.lab-width-workspace > :last-child { flex: 1 1 var(--lab-placeholder-min-width); }

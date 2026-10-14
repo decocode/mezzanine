@@ -164,18 +164,12 @@
   border: var(--button-progress-stroke-width) solid currentColor;
   border-inline-end-color: transparent;
   border-radius: var(--button-progress-border-radius);
-  animation: mezzanine-button-progress-spin var(--button-progress-motion-duration) linear infinite;
+  animation: mezzanine-button-progress-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite; animation-name: var(--_motion-loading-animation, mezzanine-button-progress-spin);
 }
 
 @keyframes mezzanine-button-progress-spin {
   to {
-    rotate: 1turn;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .mezzanine-button-progress-indicator {
-    animation: none;
+    rotate: var(--motion-rotation-cycle);
   }
 }
 

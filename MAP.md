@@ -92,6 +92,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/SelectionIndicator.ts` | Public React Aria SelectionIndicator export and prop type |
 | `src/components/Heading.ts` | Public React Aria Heading export and prop type |
 | `src/components/Modal.ts`, `src/components/Modal.css` | Public React Aria Modal and ModalOverlay exports; token-led backdrop, responsive container and reduced-motion-aware entry/exit styling |
+| `src/components/useDisclosurePanelMotion.ts` | Internal focus exclusion during panel exit and immediate settlement when motion is suppressed |
 | `src/components/Disclosure.css` | Token-led styling for Disclosure, DisclosureGroup and DisclosureHeader states |
 | `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
 | `src/icons/StudioIcons.tsx` | Public action, navigation, transport and sequencer icons imported from Rhythm Directives' active icon modules |
@@ -102,6 +103,11 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `tests/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
 | `src/components/ToggleButton.ts` | React Aria ToggleButton and ToggleButtonGroup with shared button sizes, icon content, optional secondary appearance and preserved selection APIs |
 | `src/components/ToggleButton.css` | Token-led styling for ToggleButton states and ToggleButtonGroup layout |
+| `src/motion.css` | Internal finite/loading/scroll motion policy for theme scopes and the system preference |
+| `src/motionPolicy.ts` | Internal resolved-duration reader, preference/theme observation and token-display notification |
+| `scripts/motion-rules.mjs` | Parses motion declarations and TypeScript usage to enforce the shared contract |
+| `scripts/motion-rules.test.mjs` | Passing and failing fixtures for motion rules |
+| `tests/motion.spec.ts` | Nested themes, system precedence, Disclosure orientation, loading and live Motion reference checks |
 | `src/tokens.css` | Shared typography, spacing and corner-radius token contract and entry point for the three official color themes |
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
 | `src/themes/dark.css` | Neutral Dark theme, including automatic device-preference handling |
@@ -190,7 +196,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
 | `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
-| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing and the public API snapshot; supports explicit `--update-api` |
+| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing, shared motion and the public API snapshot; supports explicit `--update-api` |
 | `scripts/public-api.snapshot.json` | Reviewed public export names and value/type categories used to detect API changes |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
@@ -210,7 +216,7 @@ Typography retains its overview at `/typography`. Its child pages are
 | --- | --- |
 | `npm ci` | Install locked dependencies |
 | `npm run dev` | Start the showcase on the local Vite server |
-| `npm run check:rules` | Check the five repository rules without changing the API snapshot |
+| `npm run check:rules` | Check repository rules including shared motion without changing the API snapshot |
 | `npm run lint` | Run Oxlint |
 | `npm run typecheck` | Type-check the library, showcase, and configuration |
 | `npm run build:lib` | Build the package into `dist/` |

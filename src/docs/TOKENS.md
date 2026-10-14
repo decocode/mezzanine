@@ -278,7 +278,7 @@ Its own container switches to desktop navigation at 48rem, relative to the root 
 | `--navbar-menu-min-height` | Minimum navbar navigation-link height |
 | `--navbar-focus-ring-width`, `--navbar-focus-ring-offset` | Menu trigger focus outline |
 | `--navbar-panel-max-height` | Maximum panel height before it scrolls |
-| `--navbar-motion-duration`, `--navbar-motion-offset` | Panel entry timing and initial vertical displacement; disabled with reduced motion |
+| `--motion-duration-interface`, `--motion-distance-reveal` | Panel entry timing and initial vertical displacement; disabled with reduced motion |
 
 ## Current component tokens
 
@@ -295,7 +295,7 @@ Tabs uses semantic text, link, border and surface colours across the official th
 | `--tab-content`, `--tab-content-selected` | Default and selected tab text colours |
 | `--tab-background-hovered`, `--tab-background-pressed` | Pointer interaction backgrounds |
 | `--tab-indicator`, `--tab-indicator-width` | Selection indicator colour and thickness |
-| `--tab-motion-duration` | Selection indicator movement duration; disabled with reduced motion |
+| `--motion-duration-interface` | Selection indicator movement duration; disabled with reduced motion |
 | `--tab-panel-padding` | Space inside the content panel |
 | `--tab-panel-preferred-width` | Preferred panel width before a vertical layout wraps the panel below the list |
 
@@ -314,8 +314,8 @@ be overridden independently by a consuming product.
 | `--modal-background` | Modal surface color |
 | `--modal-content` | Modal text color |
 | `--modal-border` | Modal border color |
-| `--modal-motion-duration` | Entry and exit duration |
-| `--modal-enter-scale` | Modal scale at the start of entry and end of exit |
+| `--motion-duration-interface` | Entry and exit duration |
+| `--motion-scale-enter` | Modal scale at the start of entry and end of exit |
 | `--dialog-padding` | Space inside the dialog |
 | `--dialog-content-gap` | Separation between the title, content and actions |
 | `--dialog-actions-gap` | Separation between action buttons |
@@ -413,7 +413,9 @@ override the inline-padding tokens when an inset is needed.
 | `--disclosure-icon-size` | DisclosureHeader chevron size |
 | `--disclosure-focus-ring-width` | Keyboard-focus indicator width |
 | `--disclosure-focus-ring-offset` | Keyboard-focus indicator position |
-| `--disclosure-motion-duration` | DisclosureHeader chevron rotation duration |
+| `--motion-duration-interface` | Chevron rotation and panel reveal duration |
+| `--motion-easing-enter`, `--motion-easing-exit` | Panel opening and closing speed curves |
+| `--motion-distance-reveal` | Panel vertical reveal travel |
 | `--disclosure-trigger-background` | Default DisclosureHeader trigger background |
 
 | Token | Meaning |
@@ -468,7 +470,7 @@ states.
 | `--navigation-tree-focus-ring-width` | Keyboard-focus indicator width |
 | `--navigation-tree-focus-ring-offset` | Keyboard-focus indicator position |
 | `--navigation-tree-header-padding-block` | Vertical space around a section header |
-| `--navigation-tree-motion-duration` | Chevron rotation and optional row-animation duration |
+| `--motion-duration-interface` | Chevron rotation and optional row-animation duration |
 | `--navigation-tree-item-background` | Default item background |
 | `--navigation-tree-item-background-hovered` | Item background while hovered |
 | `--navigation-tree-item-background-pressed` | Item background while pressed |
@@ -523,15 +525,15 @@ its appearance without tying the component to particular palette values.
 | `--button-progress-size` | Pending indicator size |
 | `--button-progress-stroke-width` | Pending indicator stroke width |
 | `--button-progress-border-radius` | Pending indicator shape |
-| `--button-progress-motion-duration` | Duration of one pending-indicator rotation; defaults to `1s`, disabled with reduced motion |
+| `--motion-duration-loading` | Duration of one pending-indicator rotation; defaults to `1s`; system reduction stops rotation, Wireframe alone does not |
 
 Button focus uses the shared `--color-focus` role. Pending retains the enabled
 colors while displaying progress. Disabled Buttons retain their variant colors
 at `--opacity-disabled` and do not add elevation.
 
-The library’s optional `useAnimatedNavigationTree` hook reads `--navigation-tree-motion-duration`
-from the root element for both CSS motion and JavaScript completion timing.
-Root theme overrides can use `ms` or `s`; reduced motion bypasses the animation.
+The library’s optional `useAnimatedNavigationTree` hook reads `--motion-duration-interface`
+from the attached tree element, falling back to the page root, for JavaScript completion timing.
+Theme duration overrides can use `ms` or `s`; the resolved motion policy bypasses animation when suppressed. Attach the optional `treeRef` returned by the hook; it is a temporary bridge until the separate tree build removes the hook.
 
 ## What is not currently a Mezzanine foundation
 
@@ -611,7 +613,7 @@ radius and overlay elevation tokens. These tokens control their remaining values
 | `--tooltip-max-width` | Maximum tooltip width, additionally limited to the viewport |
 | `--tooltip-border-width` | Tooltip border thickness |
 | `--tooltip-z-index` | Tooltip stacking level |
-| `--tooltip-motion-duration` | Fade duration; disabled for reduced motion |
+| `--motion-duration-interface` | Fade duration; disabled for reduced motion |
 
 The hover delay is controlled by the `TooltipTrigger` `delay` prop, not CSS.
 
@@ -628,3 +630,55 @@ Migration: `--toggle-button-min-height`, `--toggle-button-padding-block`,
 Replace local size overrides with size props; theme-wide changes belong in the
 shared button size tokens. Navbar, navigation-tree and TabBar action buttons now
 use those sizes instead of their own dimensions.
+
+## Shared motion
+
+All components consume these shared roles directly; there are no component motion
+aliases. Values remain configured even when playback is suppressed. The internal
+policy makes finite transition time zero and removes finite animations in Wireframe
+areas or under system reduction. Explicit nested Light, Dark and System areas restore
+finite motion unless the system asks for reduction. Product duration overrides do
+not override reduction. Internal controls are not product customisation points.
+
+| Token | Default | Purpose |
+| --- | --- | --- |
+| `--motion-duration-interface` | 180ms | Finite interface changes |
+| `--motion-duration-loading` | 1s | Loading cycle |
+| `--motion-easing-enter` | ease-out | Entry and state changes |
+| `--motion-easing-exit` | ease-in | Accelerating exit |
+| `--motion-easing-loading` | linear | Constant-speed loading |
+| `--motion-scale-enter` | 0.98 | Initial/final modal scale |
+| `--motion-rotation-expanded` | 90deg | Disclosure expanded quarter-turn |
+| `--motion-rotation-cycle` | 1turn | Complete loading rotation |
+| `--motion-distance-reveal` | 0.25rem | Small reveal travel |
+| `--motion-distance-offscreen` | 100% | Full drawer/sheet travel |
+
+NavigationTree temporarily uses twice the expanded angle to preserve its existing
+chevron direction until its separate build. Plain zero/full endpoints and static
+centring remain literals. Spinner duration stays positive: system reduction removes
+its animation and keeps the ring visible. Wireframe alone leaves loading unchanged.
+The same rule applies to the documentation's loading icon preview.
+
+### Breaking token migration
+
+Remove old overrides and choose a shared role. No compatibility aliases remain.
+The old names below are historical migration instructions, not supported tokens.
+
+| Removed | Replacement |
+| --- | --- |
+| `--modal-motion-duration` | `--motion-duration-interface` |
+| `--disclosure-motion-duration` | `--motion-duration-interface` |
+| `--tab-motion-duration` | `--motion-duration-interface` |
+| `--navbar-motion-duration` | `--motion-duration-interface` |
+| `--sidebar-motion-duration` | `--motion-duration-interface` |
+| `--navigation-tree-motion-duration` | `--motion-duration-interface` |
+| `--tooltip-motion-duration` | `--motion-duration-interface` |
+| `--button-progress-motion-duration` | `--motion-duration-loading` |
+| `--modal-enter-scale` | `--motion-scale-enter` |
+| `--navbar-motion-offset` | `--motion-distance-reveal`; recipe supplies direction |
+| `--sidebar-enter-offset` (previously local) | `--motion-distance-offscreen`; recipe supplies direction |
+
+Products may override shared durations on their theme boundary. All components in
+that scope use the same speed. Do not override the internal policy controls or
+reintroduce per-component timing. Local motion scope does not yet imply nested
+colour-theme support or overlay theme propagation.

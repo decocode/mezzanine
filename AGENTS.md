@@ -15,7 +15,13 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - `site/` is the documentation site. It imports the library as `@decocode/mezzanine` (resolved to `src/index.ts` by an alias), never by relative paths into `src/`, so it consumes the library the way apps do.
 - `react`, `react-dom`, and `react-aria-components` are peer dependencies. Do not bundle them. If library code imports another package directly (for example `react-aria`, `react-stately`, or `@internationalized/date`), it must be listed in `package.json`.
 - Library components contain no product-specific content, branding, copy, or imagery. Anything belonging to a single product stays in that product's repository.
+- The library owns each component's anatomy, appearance, states, motion, and behaviour. A consuming app, including the documentation site, supplies content and a theme, and positions components in its own layout. A consuming app must not need to re-add library class names, attach special slots or class names to make a component work, restyle a component's internals, or reimplement its behaviour. If a consumer has to do any of these, the component's recipe belongs in `src/`: move it there and tell the user.
+- A thin re-export of a React Aria component is acceptable until Mezzanine has designed that component. Once it is designed, build the recipe in `src/` instead of leaving consumers to assemble it.
 - Library CSS references design tokens (CSS custom properties) only, never raw color, font, or size values. Each consuming app supplies token values in its own theme file. Name tokens by purpose, not appearance (for example `--color-accent`, not `--color-yellow`).
+- Components take all motion (durations, easing, and distances) from shared motion tokens, never raw values or per-component copies of the same number. This lets reduced motion and the Wireframe theme switch motion off in one place.
+- In animations, plain endpoints that mean "none" or "full" (opacity 0 or 1, scale 1, translate or rotate 0) and static centring offsets may be written directly. Durations, easing, travel distances, entry scale, and non-zero rotation angles must be shared motion tokens.
+- Reduced motion has two separate sources. The user's system reduced-motion setting always applies, in every theme and area, and nothing may override it. The Wireframe theme also suppresses motion by default, to show that the interface does not depend on motion; this is not an accessibility need, so it applies only to the area that is displaying Wireframe, never to a sibling or nested area showing another theme. Every component with motion must honour both, and new motion is not finished until it does.
+- Loading and progress indicators must keep their state visible when motion is reduced. Whether such an indicator may keep moving is decided with the user, indicator by indicator.
 - Treat changes to exported component names, props, token names, or CSS class names as breaking changes for consuming apps. Call them out explicitly.
 
 ## Lab sandbox boundary
@@ -53,7 +59,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Keep React Aria prop conventions such as `onPress`, `isDisabled`, `isPending`, `isSelected`, and `onSelectionChange` where the underlying component supports them. Do not introduce aliases for the same concepts.
 - Do not omit a documented React Aria state or behaviour because the current DecoCode version lacks it. If supporting it requires an unresolved design decision, stop and ask the user before implementation.
 - Apart from the readable display labels permitted above, any deviation from the corresponding React Aria component's name, anatomy, API, state selectors, or behaviour requires the user's explicit agreement and must be documented with the reason.
-- More advanced Mezzanine patterns that compose multiple primitives may use bespoke, purpose-based names. Their underlying atomic parts should still use the matching React Aria components and conventions.
+- More advanced Mezzanine patterns that compose multiple primitives may use bespoke, purpose-based names, decided by the user and not by the agent. The user may approve a short name for such a pattern, such as `NavTree` for Mezzanine's composed version of React Aria's `NavigationTree`. The documentation then states the React Aria name it is built on and when to use which. Their underlying atomic parts should still use the matching React Aria components and conventions.
 - Treat migrated DecoCode components as inputs to review, not as the naming authority. Rename or revise them during migration when they conflict with React Aria conventions.
 - Agreed deviation: `TooltipTrigger` defaults to a 500ms hover `delay`, shorter than React Aria's 1500ms default. Do not change it without the user's agreement. Keyboard focus behaviour is unchanged.
 
@@ -90,6 +96,7 @@ Rules:
 - Before editing, identify the files involved and what each change is for. Ask about a material design decision that has not been specified.
 - Give each file one clear responsibility. Create a new folder or shared module only when the current work needs it.
 - Use literal, descriptive names for files, variables, and functions. Avoid abbreviations and vague names whose purpose cannot be understood in context.
+- The user wants to be consulted on names. Before building, propose each new public name with a one-line reason and wait for approval. Public names are tokens, exported components, hooks and functions, props, types, data attributes, and class names a consuming app can see. Private helpers and internal variables need no approval, but list the notable ones in the report. Throwaway names such as loop counters need no mention. If a name already approved seems wrong, say so and keep it.
 - Update `MAP.md` when a source file is added, moved, or removed, and state that file's purpose.
 - After a change, explain what each changed file does, why it changed, and how the result was checked.
 

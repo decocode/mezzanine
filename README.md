@@ -211,11 +211,11 @@ Not implemented.
 Import `useAnimatedNavigationTree` from `@decocode/mezzanine` to opt into the
 row animation used by the documentation sidebar. The standard React Aria tree
 exports and props are unchanged. Pass the hook's `expandedKeys` and
-`onExpandedChange` to the tree. Its `openingKeys` and `closingKeys` identify
+`onExpandedChange` to the tree. Attach the optional returned `treeRef` to `<NavigationTree ref={treeRef}>` for local theme-aware timing; unattached callers use the page theme. This additive bridge is temporary: the separate tree build will remove the hook. Its `openingKeys` and `closingKeys` identify
 parents whose descendant rows need `mezzanine-navigation-tree-item-animated` plus
 `mezzanine-navigation-tree-item-opening` or `mezzanine-navigation-tree-item-closing`; mark closing parents with `mezzanine-navigation-tree-item-closing` as well.
 The library stylesheet supplies those animation classes. The hook reads
-`--navigation-tree-motion-duration` from the document root. Reduced motion
+`--motion-duration-interface` from the attached tree element (the page root if unattached). Reduced motion
 removes row and chevron animation and completes any pending collapse immediately.
 
 ## Tooltips
@@ -292,3 +292,22 @@ use `iconLeading` or `iconTrailing` with an accessible name. The default is `md`
 icon-size overrides in library compositions and site CSS, and inline button
 styles. Size recipes live in Button.css; global theme customisation uses the
 shared button tokens. Parent containers own positioning and available space.
+
+## Shared motion
+
+Components read the ten shared motion tokens directly. Configure system speed with
+`--motion-duration-interface` and `--motion-duration-loading`; component duration
+aliases have been removed. See [the token migration table](src/docs/TOKENS.md#shared-motion).
+Finite motion and smooth scrolling stop in Wireframe areas. A nested explicit Light,
+Dark or System area restores normal motion unless the operating system requests
+reduction. System reduction applies at every theme boundary, including with product
+speed overrides. Internal policy controls are not supported product overrides.
+Nested motion scope does not yet provide nested colour themes or propagate themes
+to overlays rendered outside their area; those belong to the theme-switching work.
+
+Loading behaviour is unchanged: the Button ring and icon preview keep rotating in
+Wireframe alone; system reduction stops them while retaining visible feedback.
+Tooltip now fades over the standard interface duration; its 500ms hover delay stays.
+Disclosure now points right when closed and down when expanded. Tabs explicitly
+slows towards its destination. Modal, Tooltip, Sidebar and TabBar exits accelerate.
+Navbar reveal travel is now 0.25rem. NavigationTree keeps its current chevron direction.

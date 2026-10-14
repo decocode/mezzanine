@@ -71,7 +71,8 @@
   position: absolute;
   border-radius: var(--radius-none);
   background: var(--tab-indicator);
-  transition-duration: var(--tab-motion-duration);
+  transition-timing-function: var(--motion-easing-enter);
+  transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
 }
 
 .react-aria-TabList[data-orientation='horizontal'] .react-aria-SelectionIndicator {
@@ -122,12 +123,6 @@
 .react-aria-TabPanel[data-focus-visible] {
   outline: var(--tabs-focus-ring-width) solid var(--color-focus);
   outline-offset: var(--tabs-focus-ring-offset);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .react-aria-Tab > .react-aria-SelectionIndicator {
-    transition: none;
-  }
 }
 
 @media (forced-colors: active) {

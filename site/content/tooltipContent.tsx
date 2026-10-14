@@ -48,6 +48,6 @@ export const tooltipContent = {
     { name: '--tooltip-max-width', description: 'Maximum tooltip width, additionally constrained by the viewport.' },
     { name: '--tooltip-border-width', description: 'Tooltip border thickness.' },
     { name: '--tooltip-z-index', description: 'Tooltip stacking level.' },
-    { name: '--tooltip-motion-duration', description: 'Entry and exit fade duration; disabled for reduced motion.' },
+    { name: '--motion-duration-interface', description: 'Entry and exit fade duration; disabled for reduced motion.' },
   ],
 }

@@ -16,6 +16,7 @@ import { useAnimatedNavigationTree } from '@decocode/mezzanine'
 
 export default function NavigationTreePage() {
   const {
+    treeRef,
     closingKeys,
     expandedKeys,
     onExpandedChange,
@@ -37,6 +38,7 @@ export default function NavigationTreePage() {
             <ExampleZone className="navigation-tree-example">
               <nav aria-label="NavigationTree example">
                 <NavigationTree
+                  ref={treeRef}
                   aria-label="NavigationTree items"
                   className="react-aria-NavigationTree animated-navigation-tree"
                   expandedKeys={expandedKeys}
