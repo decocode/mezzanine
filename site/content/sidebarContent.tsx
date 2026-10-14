@@ -1,10 +1,10 @@
 export const sidebarContent = {
   title: 'Sidebar',
   description: 'A sidebar holds supporting content beside a workspace. Compose navigation, filters, images, disclosures and actions; choose either side and collapse to a rail or hide the panel.',
-  exampleIntroduction: 'Choose a side and collapse behaviour, then use Panel or its close button. On narrow screens, Panel opens a modal drawer. Option selections are shared across presentations.',
+  exampleIntroduction: 'Choose a side and collapse behaviour, then use the Open button or the sidebar’s close button. On narrow screens, Open opens a modal drawer. Option selections are shared across presentations.',
   documentationIntroduction: 'This is the same component used in the Mezzanine AppShell, with the same navigation data and current-page indication. It stays open without a header or close button on desktop. On narrow layouts, Browse sections opens the existing non-modal Disclosure. The example links navigate to the real documentation pages.',
   labels: {
-    collapsible: 'Allow collapsing', trigger: 'Panel', close: 'Close panel', expand: 'Expand panel', reset: 'Reset options',
+    collapsible: 'Allow collapsing', trigger: 'Open', close: 'Close sidebar', expand: 'Expand sidebar', reset: 'Reset options',
     navigation: 'Navigation', filters: 'Filters', details: 'Details',
   },
   links: [{ label: 'Button', href: '/button' }, { label: 'Disclosure', href: '/disclosure' }],

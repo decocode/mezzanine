@@ -37,24 +37,28 @@ export default function ToggleButtonPage() {
           id: 'toggle-button-states-heading',
           title: 'States',
           content: (<>
-            <div className="documentation-table documentation-comparison-table">
+            <div className="documentation-table toggle-button-states-table">
               <Table aria-label="ToggleButton states">
                 <TableHeader>
                   <Column id="state" isRowHeader>State</Column>
-                  <Column id="example">Example</Column>
+                  <Column id="primary">Primary</Column>
+                  <Column id="secondary">Secondary</Column>
                 </TableHeader>
                 <TableBody>
                   <Row id="unselected">
                     <Cell><strong>Unselected</strong></Cell>
                     <Cell><ToggleButton>Toggle</ToggleButton></Cell>
+                    <Cell><ToggleButton variant="secondary">Toggle</ToggleButton></Cell>
                   </Row>
                   <Row id="selected">
                     <Cell><strong>Selected</strong></Cell>
                     <Cell><ToggleButton defaultSelected>Toggle</ToggleButton></Cell>
+                    <Cell><ToggleButton variant="secondary" defaultSelected>Toggle</ToggleButton></Cell>
                   </Row>
                   <Row id="disabled">
                     <Cell><strong>Disabled</strong></Cell>
                     <Cell><ToggleButton isDisabled>Toggle</ToggleButton></Cell>
+                    <Cell><ToggleButton variant="secondary" isDisabled>Toggle</ToggleButton></Cell>
                   </Row>
                 </TableBody>
               </Table>
@@ -135,6 +139,7 @@ export default function ToggleButtonPage() {
                 <p>{toggleButtonContent.usageParagraphs[0]}</p>
                 <p>{toggleButtonContent.usageParagraphs[1]}</p>
                 <p>{toggleButtonContent.usageParagraphs[2]}</p>
+                <p>{toggleButtonContent.secondaryDescription}</p>
               </>),
             },
           ],

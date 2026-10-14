@@ -1,6 +1,7 @@
 // Written guidance and reference entries; live examples stay in the page.
 export const toggleButtonContent = {
   title: 'Toggle button',
+  secondaryDescription: <>Set <code>variant="secondary"</code> on a ToggleButtonGroup or an individual ToggleButton. This Mezzanine appearance extension preserves React Aria behaviour. The group applies the appearance to its children. Unselected buttons use standard secondary Button colours; selected buttons keep an inset line and a soft fill. Hover deepens the fill, and pressing a selected button strengthens the bottom line. Omitting the variant preserves the existing appearance. Disabled selection stays visible, and forced-colour mode underlines selected labels.</>,
   description: 'A toggle button turns a choice on or off and changes its appearance to show whether it is selected. For example, a Bold button stays selected while bold formatting is switched on.',
   relatedPages: [
     { label: 'Button', href: '/button' },

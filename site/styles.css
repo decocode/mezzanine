@@ -1042,10 +1042,30 @@ a:focus-visible {
 }
 
 /* Application layout around real Sidebar components; panel styling is public. */
-.sidebar-example-controls,
 .sidebar-example-layout,
 .sidebar-example-columns { display: flex; flex-wrap: wrap; gap: var(--space-4); min-width: 0; }
-.sidebar-example-controls { margin-block-end: var(--space-4); }
+/* Settings for an example are grouped separately from the demonstrated component. */
+.example-zone-controls {
+  min-width: 0;
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.example-zone-controls legend {
+  padding-inline: var(--space-2);
+  color: var(--color-text);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+}
+.example-zone-controls-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.example-zone-controls-content > * { min-width: 0; max-width: 100%; }
 .sidebar-example-layout { margin-block-start: var(--space-4); align-items: stretch; }
 .sidebar-example-workspace { flex: 1; min-width: min(100%, 10rem); padding: var(--space-3); overflow-wrap: anywhere; }
 .sidebar-example-column { display: flex; flex-direction: column; align-items: start; gap: var(--space-3); min-width: 0; max-width: 100%; }
@@ -1096,3 +1116,8 @@ a:focus-visible {
   .docs-contents-panel { --sidebar-width: 100%; --sidebar-max-height: calc(100dvh - 9rem); border: 0; background: transparent; }
   .site-layout:has(.site-contents-sidebar:not(:empty)) > .site-content { padding-inline: var(--space-8); }
 }
+
+/* Three equal columns, with local scrolling instead of compressed state examples. */
+.toggle-button-states-table .react-aria-Table { min-width: 30rem; table-layout: fixed; }
+.toggle-button-states-table .react-aria-Column,
+.toggle-button-states-table .react-aria-Cell { width: calc(100% / 3); }

@@ -25,20 +25,19 @@ function SidebarExample() {
     <Tooltip placement={side === 'left' ? 'right' : 'left'}>{sidebarContent.labels.expand}</Tooltip>
   </TooltipTrigger>
 
-  return <ExampleZone className="sidebar-example">
-    <div className="sidebar-example-controls">
-      <ToggleButtonGroup aria-label="Panel side" selectionMode="single" disallowEmptySelection selectedKeys={[side]} onSelectionChange={(keys) => setSide(keys.has('right') ? 'right' : 'left')}>
+  return <ExampleZone className="sidebar-example" controls={<>
+      <ToggleButtonGroup variant="secondary" aria-label="Panel side" selectionMode="single" disallowEmptySelection selectedKeys={[side]} onSelectionChange={(keys) => setSide(keys.has('right') ? 'right' : 'left')}>
         <ToggleButton id="left">Left</ToggleButton><ToggleButton id="right">Right</ToggleButton>
       </ToggleButtonGroup>
-      <ToggleButtonGroup aria-label="Collapse behaviour" selectionMode="single" disallowEmptySelection selectedKeys={[collapseMode]} onSelectionChange={(keys) => setCollapseMode(keys.has('rail') ? 'rail' : 'hide')}>
+      <ToggleButtonGroup variant="secondary" aria-label="Collapse behaviour" selectionMode="single" disallowEmptySelection selectedKeys={[collapseMode]} onSelectionChange={(keys) => setCollapseMode(keys.has('rail') ? 'rail' : 'hide')}>
         <ToggleButton id="rail">Icon rail</ToggleButton><ToggleButton id="hide">Hide</ToggleButton>
       </ToggleButtonGroup>
       <Checkbox isSelected={isCollapsible} onChange={setCollapsible}>{sidebarContent.labels.collapsible}</Checkbox>
-    </div>
+    </>}>
     <Sidebar isCollapsible={isCollapsible} isExpanded={isExpanded} onExpandedChange={setExpanded}>
-      <SidebarTrigger variant="secondary">{sidebarContent.labels.trigger}</SidebarTrigger>
+      <SidebarTrigger variant="primary">{sidebarContent.labels.trigger}</SidebarTrigger>
       <div className="sidebar-example-layout">
-        <SidebarPanel title="Panel" headingLevel={3} side={side} closeLabel={sidebarContent.labels.close}
+        <SidebarPanel title="Sidebar" headingLevel={3} side={side} closeLabel={sidebarContent.labels.close}
           {...(collapseMode === 'rail' ? { collapseMode: 'rail', rail } : { collapseMode: 'hide' })}
           header={<p className="sidebar-example-caption">Supporting content</p>}
           footer={<Button variant="secondary" onPress={() => { setOptionA(false); setOptionB(false) }}>{sidebarContent.labels.reset}</Button>}>

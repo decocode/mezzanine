@@ -93,7 +93,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `tests/table.spec.ts` | Table sorting interactions, keyboard and pointer activation, sort indicators and responsive contrast checks |
 | `src/components/Tabs.tsx`, `src/components/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
-| `src/components/ToggleButton.ts` | Public current React Aria ToggleButton and ToggleButtonGroup exports and prop types |
+| `tests/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
+| `src/components/ToggleButton.ts` | React Aria ToggleButton and ToggleButtonGroup with optional secondary appearance and preserved selection APIs |
 | `src/components/ToggleButton.css` | Token-led styling for ToggleButton states and ToggleButtonGroup layout |
 | `src/tokens.css` | Shared typography, spacing and corner-radius token contract and entry point for the three official color themes |
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
