@@ -190,7 +190,7 @@
 
   /* Navbar: responsive navigation container and disclosure panel. */
   --navbar-z-index: 10;
-  --navbar-border-width: 1px;
+  --navbar-border-width: 0.0625rem;
   --navbar-min-height: 4rem;
   --navbar-wide-padding-inline: clamp(1.5rem, 4vw, 3rem);
   --navbar-menu-min-height: 2.75rem;
