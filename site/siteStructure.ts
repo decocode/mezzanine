@@ -48,13 +48,19 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'prose', label: 'Prose', path: '/typography/prose', status: 'implemented' },
         ],
       },
+      {
+        id: 'layout',
+        label: 'Layout',
+        pages: [
+          { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'implemented' },
+        ],
+      },
     ],
     pages: [
       { id: 'color', label: 'Color', path: '/color', status: 'implemented' },
       { id: 'elevation', label: 'Elevation', path: '/elevation', status: 'implemented' },
       { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
       { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
-      { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'implemented' },
       { id: 'shape', label: 'Shape', path: '/shape', status: 'implemented' },
     ],
   },
