@@ -145,12 +145,13 @@
   border-bottom: var(--navigation-tree-current-indicator-width) solid transparent;
   background: transparent;
   color: var(--color-link);
+  /* Navigation items use title-sm at Default weight, matching NavTree items. */
   font-family: var(--font-family-body);
-  font-size: var(--font-size-label-lg);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-lg);
-  text-transform: var(--text-transform-label);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-sm);
+  text-transform: var(--text-transform-title);
   text-decoration: none;
 }
 
