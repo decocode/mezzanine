@@ -198,3 +198,24 @@ for (const fontSize of [16, 32]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
   })
 }
+
+// Links into Technical details follow the motion policy: smooth by default,
+// immediate with reduced motion or in Wireframe.
+for (const mode of ['default', 'reduced motion', 'wireframe'] as const) {
+  test(`On this page links into Technical details scroll with the ${mode} policy`, async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 })
+    if (mode === 'reduced motion') await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto('/button')
+    if (mode === 'wireframe') await page.evaluate(() => { document.documentElement.dataset.theme = 'wireframe' })
+    const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
+    await contents.getByRole('link', { name: 'Anatomy', exact: true }).click()
+    // Two frames: one for the panel to open, one for the scroll to begin.
+    const early = await page.evaluate(() => new Promise<number>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve(scrollY)))))
+    await expect(page.getByRole('heading', { name: 'Anatomy', exact: true })).toBeInViewport()
+    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(0)
+    await page.waitForTimeout(1500)
+    const settled = await page.evaluate(() => scrollY)
+    if (mode === 'default') expect(early).toBeLessThan(settled)
+    else expect(early).toBe(settled)
+  })
+}

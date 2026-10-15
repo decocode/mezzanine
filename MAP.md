@@ -128,8 +128,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/templates/foundationTechnicalDetails.ts` | Builds the shared Technical details group for Foundations and Styles pages in its fixed section order |
 | `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template, also used by converted Foundations pages: owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures and reference sections from page-supplied content |
 | `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
-| `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
-| `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow |
+| `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors, then scrolls using the motion policy's scroll behaviour |
+| `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
 | `site/components/tokenValueLogic.ts` | Reads current CSS token values when the selected theme changes, and describes font-size tokens in pixels |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/pages/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |

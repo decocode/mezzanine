@@ -35,6 +35,7 @@ function LoadedPage({ pageId, refreshKey }: { pageId: string; refreshKey: string
 
   useEffect(() => {
     // A direct section link may arrive before the page's chunk and heading exist.
+    // Arriving on a page jumps straight to the section rather than animating from the top.
     const frame = requestAnimationFrame(() => {
       let id: string
       try {

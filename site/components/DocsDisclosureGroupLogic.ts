@@ -38,8 +38,10 @@ export function useDocsDisclosureGroupLogic(groupRef: RefObject<HTMLDivElement |
   useEffect(() => {
     if (!scrollTarget) return
     // Wait until React has rendered the open panel before positioning the page.
+    // No behaviour option, so the motion policy's scroll-behavior applies:
+    // smooth normally, immediate in Wireframe or with reduced motion.
     const frame = requestAnimationFrame(() => {
-      scrollTarget.scrollIntoView({ behavior: 'instant' })
+      scrollTarget.scrollIntoView()
       setScrollTarget(null)
     })
     return () => cancelAnimationFrame(frame)
