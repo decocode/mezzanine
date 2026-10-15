@@ -6,7 +6,7 @@ import {
 } from './layout/FoundationDemos'
 import { ChildPageContent, IntrinsicOverview } from './layout/ChildPages'
 import type { ChildPage } from './layout/layoutLabContent'
-import { WildCardDemos } from './layout/WildCardDemos'
+import { EmergingFeatureDemos } from './layout/EmergingFeatureDemos'
 import './layout/layout-lab.css'
 
 // Each section of the tour is its own child page, keyed by its slug.
@@ -23,7 +23,7 @@ const sectionPages: Record<string, () => React.JSX.Element> = {
   [layoutLabSections.viewport.slug]: ViewportDemo,
   [layoutLabSections.scrollPadding.slug]: ScrollPaddingDemo,
   [layoutLabSections.layers.slug]: LayersDemo,
-  [layoutLabSections.wild.slug]: WildCardDemos,
+  [layoutLabSections.emerging.slug]: EmergingFeatureDemos,
 }
 
 export function hasLayoutSectionPage(slug: string) {

@@ -194,16 +194,16 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 
 | Path | Purpose |
 | --- | --- |
-| `site/lab/labContent.ts` | Lab labels, the experiment list and the Lab's NavTree items: Layout at the top level, with its child pages in reading order and the primitives under Intrinsic primitives |
+| `site/lab/labContent.tsx` | Lab labels, the experiment list and the Lab's NavTree items: Layout at the top level, with its child pages in reading order and the primitives under Intrinsic primitives |
 | `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry: the site's Navbar and sidebar layout with the Lab's NavTree; chooses the index, the Layout overview, a Layout child page or the not-found page from the address |
-| `site/lab/LayoutPage.tsx` | Lab layout tour: the overview listing its child pages, each section (a foundation from the layout research, or the wild cards) as its own page keyed by slug, and each primitive page; illustrative and unapproved |
+| `site/lab/LayoutPage.tsx` | Lab layout tour: the overview listing its child pages, each section (a foundation from the layout research, or the emerging features) as its own page keyed by slug, and each primitive page; illustrative and unapproved |
 | `site/lab/layout/layoutLabContent.ts` | Plain-English explanations, page slugs, the child pages (primitives) with their Card label, CSS notes, frame presets and environment queries for the Lab layout tour |
 | `site/lab/layout/layoutLabLogic.ts` | Live media-query matching without effects, CSS support checks and on-request viewport and safe-area measurement |
 | `site/lab/layout/LabParts.tsx` | Lab-only marker (Warning outline and Lab badge), width-slider demo frame, section introductions, demo headings and text, CSS notes under their own heading, browser support and support badges |
 | `site/lab/layout/LabPrimitives.tsx` | Lab-only intrinsic layout primitives: Stack, Cluster, Switcher, AutoGrid, SidebarLayout and Center, with limits as custom properties |
 | `site/lab/layout/ChildPages.tsx` | Pages under a section: the Intrinsic primitives page with a Card per primitive, and each primitive's page with its summary, example and the CSS behind it under its own heading |
 | `site/lab/layout/FoundationDemos.tsx` | Demos for the other foundations: container queries, environment queries, reading width, target size, named layers, logical properties, subgrid, :has(), viewport units, scroll padding and cascade layers |
-| `site/lab/layout/WildCardDemos.tsx` | Wild-card demos with support detection: grid-lanes masonry, scroll-state queries, anchor positioning and field-sizing |
+| `site/lab/layout/EmergingFeatureDemos.tsx` | Emerging features page, each demo with support detection: grid-lanes masonry, scroll-state queries, anchor positioning and field-sizing |
 | `site/lab/layout/layout-lab.css` | Lab-scoped styles and illustrative --lab-* candidate tokens for the layout tour |
 
 ### Browser tests (`tests/`)

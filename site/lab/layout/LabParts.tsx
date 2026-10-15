@@ -1,7 +1,7 @@
 import { useState, type CSSProperties, type ReactNode } from 'react'
 import { Badge, CodeBlock, Heading, Label, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
 import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'react-aria-components/Slider'
-import { framePresets, type CssNote, type LabSection } from './layoutLabContent'
+import { framePresets, holdBadgeLabel, type CssNote, type LabSection } from './layoutLabContent'
 import { splitInlineCode } from './layoutLabLogic'
 
 // Marks a Lab-only component: a Warning-coloured dashed outline with a Lab badge and its name.
@@ -98,9 +98,12 @@ export function CssNotes({ name, note, level = 4 }: { name: string; note: CssNot
   </div>
 }
 
-// Says whether this browser supports a wild-card feature.
-export function SupportBadge({ supported }: { supported: boolean }) {
-  return supported
-    ? <Badge variant="success">Active in this browser</Badge>
-    : <Badge variant="neutral">Not in this browser</Badge>
+// An emerging feature's status: Hold, then whether this browser supports it.
+export function FeatureStatus({ supported }: { supported: boolean }) {
+  return <p className="lab-feature-status">
+    <Badge variant="danger">{holdBadgeLabel}</Badge>
+    {supported
+      ? <Badge variant="success">Active in this browser</Badge>
+      : <Badge variant="neutral">Not in this browser</Badge>}
+  </p>
 }

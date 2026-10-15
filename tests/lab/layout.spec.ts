@@ -42,7 +42,9 @@ test('Lab Layout child pages are reachable from the overview and the navigation'
   // On a child page, the Layout group is expanded and lists every child page.
   const tree = page.locator('.site-layout > .site-sidebar').getByRole('treegrid', { name: 'Lab experiments' })
   for (const layoutPage of sectionPages) {
-    await expect(tree.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
+    // Emerging features carries a Hold badge, which is part of its link's name.
+    const name = layoutPage.title === layoutLabSections.emerging.title ? `${layoutPage.title} Hold` : layoutPage.title
+    await expect(tree.getByRole('link', { name, exact: true })).toHaveAttribute('href', layoutPage.path)
   }
 
   // Intrinsic primitives shows a Card per primitive, each with a Read docs Button to its page; on

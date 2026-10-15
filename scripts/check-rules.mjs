@@ -446,7 +446,7 @@ function checkDocsTokens(update) {
 function checkDocsRoutes() {
   const lighthouseUrls = ['config/lighthouserc.mobile.json', 'config/lighthouserc.desktop.json']
     .flatMap(file => JSON.parse(read(file)).ci.collect.url.map(url => ({ file, url })))
-  const extraPaths = labPaths({ labContent: read('site/lab/labContent.ts'), layoutContent: read('site/lab/layout/layoutLabContent.ts') })
+  const extraPaths = labPaths({ labContent: read('site/lab/labContent.tsx'), layoutContent: read('site/lab/layout/layoutLabContent.ts') })
   for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), extraPaths, nginx: read('config/nginx.conf'), lighthouseUrls })) {
     report(problem.file, read(problem.file), problem.position, 'docs-routes', problem.message)
   }

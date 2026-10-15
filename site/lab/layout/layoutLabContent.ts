@@ -38,7 +38,7 @@ export const layoutLabSections: Record<string, LabSection> = {
   environment: {
     id: 'lab-environment',
     slug: 'environment-queries',
-    title: 'Media queries for the environment',
+    title: 'Environment queries',
     what: 'Media queries still have a job, but a different one: describing the person’s setup. That means their preferences, what they point with, whether the site is installed as an app, and the size of the outer page frame.',
     why: 'Components ask about their space, and the page asks about the environment. Keeping those two questions apart stops screen breakpoints creeping into every component.',
     support: 'Works in every major browser. The answers in the table are live for your browser, and change as you change your settings.',
@@ -115,12 +115,12 @@ export const layoutLabSections: Record<string, LabSection> = {
     why: 'Apps could then adjust Mezzanine without fighting over selector strength or reaching for !important. Mezzanine’s CSS isn’t in a layer today.',
     support: 'Works in every major browser since 2022.',
   },
-  wild: {
-    id: 'lab-wild-cards',
-    slug: 'wild-cards',
-    title: 'Wild cards',
+  emerging: {
+    id: 'lab-emerging-features',
+    slug: 'emerging-features',
+    title: 'Emerging features',
     what: 'Newer features that work in some browsers today. Each one is used as an extra, so where it isn’t supported, the demo falls back to something that still works.',
-    why: 'They’re worth knowing about, and trying out in the Lab, before they arrive everywhere.',
+    why: 'They’re worth knowing about, and trying out in the Lab, before they arrive everywhere. Each one is marked Hold, meaning it shouldn’t be introduced into Mezzanine yet.',
     support: 'Each demo checks your browser and says whether the feature is active. Where it isn’t, you’re seeing the fallback.',
   },
 }
@@ -134,6 +134,9 @@ export interface ChildPage {
   // Shown on the page's Card and on the page itself.
   summary: string
 }
+
+// The badge on emerging features: they shouldn't be introduced into Mezzanine yet.
+export const holdBadgeLabel = 'Hold'
 
 // The label of the Button on each child page's Card, which opens that page.
 export const childPageCardAction = 'Read docs'
