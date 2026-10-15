@@ -1,3 +1,4 @@
+import { Card } from '@decocode/mezzanine'
 import { PageHeading } from '../templates/ComponentPageTemplate'
 import { iconDefinitions } from '../content/iconsContent'
 
@@ -13,9 +14,11 @@ export default function IconsPage() {
         <ul className="icon-grid">
           {iconDefinitions.map(({ componentName, icon, name }) => (
             <li key={componentName}>
-              <span aria-hidden="true" className="icon-sample">{icon}</span>
-              <strong>{name}</strong>
-              <code>{componentName}</code>
+              <Card>
+                <span aria-hidden="true" className="icon-sample">{icon}</span>
+                <p><strong>{name}</strong></p>
+                <p><code>{componentName}</code></p>
+              </Card>
             </li>
           ))}
         </ul>

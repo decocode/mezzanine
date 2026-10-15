@@ -1,3 +1,4 @@
+import { Card } from '@decocode/mezzanine'
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
 import { radiusLevels } from '../content/shapeContent'
@@ -7,11 +8,13 @@ function RadiusSample({ label, token }: { label: string; token: string }) {
   const value = useTokenValue(token)
 
   return (
-    <li className="radius-scale-item">
-      <span aria-hidden="true" className="radius-scale-sample" style={{ borderRadius: `var(${token})` }} />
-      <strong>{label}</strong>
-      <code>{token}</code>
-      <code>{value}</code>
+    <li>
+      <Card>
+        <span aria-hidden="true" className="radius-scale-sample" style={{ borderRadius: `var(${token})` }} />
+        <p><strong>{label}</strong></p>
+        <p><code>{token}</code></p>
+        <p><code>{value}</code></p>
+      </Card>
     </li>
   )
 }

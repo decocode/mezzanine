@@ -572,27 +572,25 @@ a:focus-visible {
   margin-block-start: var(--space-8);
 }
 
+/* Each radius step is shown in a library Card; the list only lays the cards out. */
 .radius-scale-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
-  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-4);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.radius-scale-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-2);
+.radius-scale-list li {
+  display: grid;
   min-width: 0;
 }
 
 .radius-scale-sample {
+  display: block;
   width: 100%;
   height: 6rem;
-  margin-bottom: var(--space-2);
   border: 1px solid var(--color-border);
   background: var(--color-surface);
 }
@@ -822,24 +820,19 @@ a:focus-visible {
   max-width: 24rem;
 }
 
+/* Each icon is shown in a library Card; the list only lays the cards out. */
 .icon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  gap: 1px;
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+  gap: var(--space-4);
   margin: 0;
-  padding: 1px;
-  background: var(--color-border);
+  padding: 0;
   list-style: none;
 }
 
 .icon-grid li {
   display: grid;
-  justify-items: start;
-  gap: 0.25rem;
   min-width: 0;
-  padding: 1rem;
-  background: var(--color-page);
 }
 
 .icon-sample {
@@ -847,7 +840,6 @@ a:focus-visible {
   place-items: center;
   width: 2.75rem;
   height: 2.75rem;
-  margin-bottom: var(--space-2);
   color: var(--color-link);
 }
 
@@ -865,10 +857,6 @@ a:focus-visible {
   to {
     rotate: var(--motion-rotation-cycle);
   }
-}
-
-.icon-grid code {
-  max-width: 100%;
 }
 
 .documentation-state-matrix .react-aria-Table {
