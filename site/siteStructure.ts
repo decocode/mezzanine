@@ -48,9 +48,10 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     // Foundations do not change with the theme.
     id: 'foundations',
     label: 'Foundations',
+    path: '/foundations',
     pages: [
       { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'implemented' },
-      { id: 'interaction', label: 'Interaction', path: '/interaction', status: 'empty' },
+      { id: 'interaction', label: 'Interaction', path: '/interaction', status: 'implemented' },
     ],
   },
   {

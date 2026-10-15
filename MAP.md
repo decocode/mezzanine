@@ -69,7 +69,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/content/toggleButtonContent.tsx` | ToggleButton written guidance, reference entries, related pages and external references |
 | `site/content/navbarContent.tsx` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
 | `site/components/ExampleZone.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
-| `site/components/DocsTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes |
+| `site/components/DocsTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes, with an optional description column label |
 | `tests/navigation-tree-motion.spec.ts` | Checks immediate Nav Tree rows, keyboard expansion and reduced-motion changes during chevron rotation |
 | `tests/wireframe-links.spec.ts` | Checks Wireframe underlines across link patterns and narrow layouts while preserving Light and Dark treatments |
 | `tests/navbar.spec.ts` | Navbar keyboard, responsive, theme, contrast and forced-colour checks |
@@ -125,7 +125,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/NotImplementedPage.tsx` | WIP page heading and not-implemented message |
 | `site/pageRegistry.ts` | Maps implemented documentation page IDs to lazy imports so only the requested page loads |
 | `site/PageLoader.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
-| `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template: owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures and reference sections from page-supplied content |
+| `site/templates/foundationTechnicalDetails.ts` | Builds the shared Technical details group for Foundations and Styles pages in its fixed section order |
+| `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template, also used by converted Foundations pages: owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures and reference sections from page-supplied content |
 | `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
 | `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors before scrolling |
 | `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow |
@@ -136,7 +137,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/TypographyPage.tsx` | Typography overview, How typography works layers and live Label token example; loaded only when its route is requested |
 | `site/pages/TextStylesPage.tsx` | Beginner guide to the text styles: quick start, roles, grouped styles, choosing, weights, base elements, small screens, line height and token reference; loaded only when its route is requested |
 | `site/pages/ProsePage.tsx` | List and inline-code examples; loaded only when its route is requested |
-| `site/pages/SpacingPage.tsx` | Spacing-scale reference; loaded only when its route is requested |
+| `site/pages/SpacingPage.tsx` | Spacing-scale reference with shared Technical details; loaded only when its route is requested |
+| `site/pages/FoundationsPage.tsx` | Foundations overview: what applies to every Foundation and links to each page; loaded only when its route is requested |
+| `site/pages/InteractionPage.tsx` | Interaction states, focus, pointer and touch, keyboard and disabled behaviour, with shared Technical details; loaded only when its route is requested |
 | `site/pages/ShapePage.tsx` | Corner-radius scale and guidance for styling all corners or individual corners; loaded only when its route is requested |
 | `site/pages/ElevationPage.tsx` | Elevation levels and theming guidance; loaded only when its route is requested |
 | `site/pages/MotionPage.tsx` | Motion timing, tokens and reduced-motion guidance; loaded only when its route is requested |
@@ -168,6 +171,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/content/textStylesContent.ts` | Text style intro, code example, roles, style names and purposes, recommended choices (kept identical to TYPOGRAPHY.md by check:rules), weight examples, base elements and token names |
 | `site/content/typographyContent.tsx` | Typography overview intro, How typography works layers and theme example code |
 | `site/content/spacingContent.ts` | Spacing scale steps displayed on the Spacing page |
+| `site/content/foundationsContent.tsx` | Definition, page list and shared notes for the Foundations overview page |
+| `site/content/interactionContent.tsx` | Interaction states, behaviour descriptions, token notes and lists, WCAG rows and links for the Interaction page |
 | `site/content/shapeContent.ts` | Corner-radius labels and token names displayed on the Shape page |
 | `site/content/elevationContent.ts` | Elevation levels, uses and token names |
 | `site/content/motionContent.tsx` | Motion timing, token and reduced-motion reference descriptions |

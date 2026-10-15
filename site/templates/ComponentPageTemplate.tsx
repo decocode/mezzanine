@@ -10,7 +10,7 @@ export interface DocumentationSection {
   subsections?: readonly TableOfContentsSection[]
 }
 
-interface DocumentationSectionGroup {
+export interface DocumentationSectionGroup {
   id: string
   title: string
   sections: readonly DocumentationSection[]

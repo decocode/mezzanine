@@ -57,8 +57,29 @@ trailing icon and announce that they open in a new tab. An empty list produces
 no section and no On this page link. The optional `referencesId` keeps an
 existing anchor for the References section.
 
+## Foundations and Styles pages
+
+The Foundations group has an overview page at `/foundations`. It explains what
+applies to every Foundation, including that Foundations do not change with the
+theme, so individual Foundations pages do not repeat it.
+
+Foundations and Styles pages open with their own sections, such as a scale or a
+table of states. Pages that have been converted (Interaction and Spacing) use
+`ComponentPageTemplate` and end with a shared Technical details group, built by
+`foundationTechnicalDetailsGroup` in `site/templates/foundationTechnicalDetails.ts`.
+Its sections always appear in this order:
+
+1. CSS properties: the CSS properties the page governs.
+2. Tokens: token names, purposes and values read from the token source.
+3. Theming: Styles pages only. The Wireframe baseline and what a theme changes.
+4. Accessibility: the relevant WCAG criteria and how Mezzanine meets them.
+5. Localisation: direction and text expansion, only once verified.
+6. Used by: the components that use it.
+
+Leave out sections that do not apply. Pages not yet converted, such as
+Typography and Color, have their own structures but reuse `PageHeading`.
+
 ## Other pages
 
-Foundations and Styles pages, such as Spacing, Typography and Color, have their own structures but
-reuse `PageHeading`. Pages for subjects that are not implemented yet say
-Not implemented and are marked WIP in the navigation.
+Pages for subjects that are not implemented yet say Not implemented and are
+marked WIP in the navigation.
