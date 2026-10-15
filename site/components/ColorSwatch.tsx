@@ -6,17 +6,15 @@ export function ColorSwatch({
   darkTextValue,
   lightTextValue,
   paletteId,
-  refreshKey,
   step,
 }: {
   darkTextValue: string
   lightTextValue: string
   paletteId: ColorPaletteDefinition['id']
-  refreshKey: string
   step: number
 }) {
   const token = `--color-${paletteId}-${step}`
-  const value = useTokenValue(token, refreshKey)
+  const value = useTokenValue(token)
   const textTone = chooseSwatchTextTone(value, darkTextValue, lightTextValue)
 
   return (

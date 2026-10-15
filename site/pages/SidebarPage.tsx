@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import {
   Button, Checkbox, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel,
   HomeIcon, Link, PanelLeftOpenIcon, PanelRightOpenIcon, Sidebar, SidebarPanel, SidebarTrigger,
@@ -14,10 +14,6 @@ import exampleImage from '../assets/sidebar-example.svg'
 
 function SidebarExample() {
   const [controlsExpanded, setControlsExpanded] = useState(true)
-  const controlsReopenRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    if (!controlsExpanded) controlsReopenRef.current?.querySelector('button')?.focus()
-  }, [controlsExpanded])
   const [side, setSide] = useState<'left' | 'right'>('left')
   const [collapseMode, setCollapseMode] = useState<'hide' | 'rail'>('rail')
   const [isExpanded, setExpanded] = useState(true)
@@ -69,7 +65,7 @@ function SidebarExample() {
         </div>
       </Sidebar>
       <Sidebar presentation="inline" isExpanded={controlsExpanded} onExpandedChange={setControlsExpanded}>
-        {!controlsExpanded && <div className="sidebar-example-controls-reopen" ref={controlsReopenRef}>
+        {!controlsExpanded && <div className="sidebar-example-controls-reopen">
           <SidebarTrigger variant="tertiary" aria-label={sidebarContent.labels.controls}
             iconLeading={<PanelRightOpenIcon />} />
         </div>}

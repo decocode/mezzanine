@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type Ref, type RefCallback } from 'react'
+import { useCallback, useEffect, useEffectEvent, useMemo, useRef, useState, type Ref, type RefCallback } from 'react'
 import type { Key } from 'react-aria-components'
 import type { NavTreeItemData, NavTreeProps } from './NavTree'
 import { observeMotionPolicy, readMotionDuration } from '../motionPolicy'
@@ -32,25 +32,33 @@ export function useNavTreeExpansion({ items, selectedRoute, expandedKeys, defaul
   const [internalKeys, setInternalKeys] = useState(() => new Set([
     ...[...(defaultExpandedKeys ?? [])].filter(key => index.keys.has(key)), ...index.ancestors,
   ]))
+  const [revealedRoute, setRevealedRoute] = useState<string | undefined>(undefined)
+  const [request, setRequest] = useState<{ keys: Set<Key>; identity: string } | undefined>(undefined)
   const currentKeys = useMemo(() => expandedKeys === undefined ? internalKeys : new Set(expandedKeys), [expandedKeys, internalKeys])
-  const revealedRoute = useRef<string | undefined>(undefined)
-  const lastRequest = useRef<string | undefined>(undefined)
 
+  // Reconcile while rendering: drop keys for removed items and add the route's ancestors once.
+  const next = new Set([...currentKeys].filter(key => index.keys.has(key)))
+  if (revealedRoute !== index.routeIdentity) {
+    setRevealedRoute(index.routeIdentity)
+    index.ancestors.forEach(key => next.add(key))
+  }
+  if (!equalKeys(currentKeys, next)) {
+    const identity = JSON.stringify([index.routeIdentity, [...currentKeys], [...next]])
+    if (identity !== request?.identity) {
+      if (expandedKeys === undefined) setInternalKeys(next)
+      setRequest({ keys: next, identity })
+    }
+  }
+
+  // React does not allow calling the application's callback while rendering,
+  // so telling it about a reconciled change is the one step left to an effect.
+  const notifyExpandedChange = useEffectEvent((keys: Set<Key>) => onExpandedChange?.(keys))
   useEffect(() => {
-    const next = new Set([...currentKeys].filter(key => index.keys.has(key)))
-    const routeChanged = revealedRoute.current !== index.routeIdentity
-    revealedRoute.current = index.routeIdentity
-    if (routeChanged) index.ancestors.forEach(key => next.add(key))
-    if (equalKeys(currentKeys, next)) return
-    const request = JSON.stringify([index.routeIdentity, [...currentKeys], [...next]])
-    if (request === lastRequest.current) return
-    lastRequest.current = request
-    if (expandedKeys === undefined) setInternalKeys(next)
-    onExpandedChange?.(next)
-  }, [currentKeys, expandedKeys, index, onExpandedChange])
+    if (request) notifyExpandedChange(request.keys)
+  }, [request])
 
   const changeExpansion = useCallback((keys: Set<Key>) => {
-    lastRequest.current = undefined
+    setRequest(undefined)
     if (expandedKeys === undefined) setInternalKeys(new Set(keys))
     onExpandedChange?.(new Set(keys))
   }, [expandedKeys, onExpandedChange])
@@ -60,17 +68,13 @@ export function useNavTreeExpansion({ items, selectedRoute, expandedKeys, defaul
 // React Aria handles normal keyboard collapse. Controlled changes or data removal
 // can remove a focused link without moving DOM focus; recover only that lost focus.
 export function useNavTreeElement(items: NavTreeProps['items'], forwardedRef: Ref<HTMLDivElement> | undefined): RefCallback<HTMLDivElement> {
-  const root = useRef<HTMLDivElement | null>(null)
   const focused = useRef<{ element: HTMLElement; path: string[] } | null>(null)
   const paths = useMemo(() => indexNavTree(items, null).paths, [items])
-  const ref = useCallback((element: HTMLDivElement | null) => {
-    root.current = element
-    if (typeof forwardedRef === 'function') return forwardedRef(element)
-    if (forwardedRef) forwardedRef.current = element
-  }, [forwardedRef])
-  useLayoutEffect(() => {
-    const tree = root.current
-    if (!tree) return
+  // React calls this when the tree element appears and runs the returned
+  // clean-up when it goes, or before attaching again after the items change.
+  return useCallback((tree: HTMLDivElement | null) => {
+    const releaseForwardedRef = attachForwardedRef(forwardedRef, tree)
+    if (!tree) return releaseForwardedRef
     const recover = () => {
       const previous = focused.current
       if (!previous || previous.element.isConnected) return
@@ -108,7 +112,16 @@ export function useNavTreeElement(items: NavTreeProps['items'], forwardedRef: Re
       stopObservingMotion()
       tree.removeEventListener('focusin', rememberFocus)
       tree.removeEventListener('focusout', forgetOutsideFocus)
+      releaseForwardedRef()
     }
-  })
-  return ref
+  }, [forwardedRef, paths])
+}
+
+function attachForwardedRef(ref: Ref<HTMLDivElement> | undefined, element: HTMLDivElement | null) {
+  if (typeof ref === 'function') {
+    const cleanup = ref(element)
+    return () => { if (typeof cleanup === 'function') cleanup(); else ref(null) }
+  }
+  if (ref) ref.current = element
+  return () => { if (ref) ref.current = null }
 }

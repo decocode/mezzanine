@@ -30,7 +30,7 @@ class PageLoadBoundary extends Component<{ children: ReactNode }, { hasError: bo
   }
 }
 
-function LoadedPage({ pageId, refreshKey }: { pageId: string; refreshKey: string }) {
+function LoadedPage({ pageId }: { pageId: string }) {
   const Page = pageRegistry[pageId]
 
   useEffect(() => {
@@ -48,13 +48,10 @@ function LoadedPage({ pageId, refreshKey }: { pageId: string; refreshKey: string
     return () => cancelAnimationFrame(frame)
   }, [pageId])
 
-  return <Page refreshKey={refreshKey} />
+  return <Page />
 }
 
-export function PageLoader({ page, refreshKey }: {
-  page: SitePageDefinition
-  refreshKey: string
-}) {
+export function PageLoader({ page }: { page: SitePageDefinition }) {
   return (
     <PageLoadBoundary key={page.id}>
       <Suspense fallback={
@@ -63,7 +60,7 @@ export function PageLoader({ page, refreshKey }: {
           <p role="status">Loading documentation…</p>
         </>
       }>
-        <LoadedPage pageId={page.id} refreshKey={refreshKey} />
+        <LoadedPage pageId={page.id} />
       </Suspense>
     </PageLoadBoundary>
   )

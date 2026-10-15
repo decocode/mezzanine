@@ -26,12 +26,12 @@ import {
 import { describeFontSize, useTokenValue } from '../components/tokenValueLogic'
 import { TokenValue } from '../components/TokenValue'
 
-function FontSize({ className, refreshKey }: { className: string; refreshKey: string }) {
-  return <>{describeFontSize(useTokenValue(`--font-size-${className.replace('mz-text-', '')}`, refreshKey))}</>
+function FontSize({ className }: { className: string }) {
+  return <>{describeFontSize(useTokenValue(`--font-size-${className.replace('mz-text-', '')}`))}</>
 }
 
-export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
-  const bodyLineHeight = useTokenValue('--line-height-body-md', refreshKey)
+export default function TextStylesPage() {
+  const bodyLineHeight = useTokenValue('--line-height-body-md')
   return (
     <>
       <PageHeading title="Text styles" description={textStylesIntro} />
@@ -117,7 +117,7 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
                         <span className="text-style-purpose mz-text-body-sm">{style.purpose}</span>
                       </Cell>
                       <Cell><code>{style.className}</code></Cell>
-                      <Cell><span className="text-style-size"><FontSize className={style.className} refreshKey={refreshKey} /></span></Cell>
+                      <Cell><span className="text-style-size"><FontSize className={style.className} /></span></Cell>
                     </Row>
                   ))}
                 </TableBody>
@@ -275,8 +275,8 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
                     <Row id={style.className} key={style.className}>
                       <Cell>{style.label}</Cell>
                       <Cell><code>{style.className}</code></Cell>
-                      <Cell><code>{style.fontSizeToken}</code><br /><TokenValue token={style.fontSizeToken} refreshKey={refreshKey} /></Cell>
-                      <Cell><code>{style.lineHeightToken}</code><br /><TokenValue token={style.lineHeightToken} refreshKey={refreshKey} /></Cell>
+                      <Cell><code>{style.fontSizeToken}</code><br /><TokenValue token={style.fontSizeToken} /></Cell>
+                      <Cell><code>{style.lineHeightToken}</code><br /><TokenValue token={style.lineHeightToken} /></Cell>
                     </Row>
                   ))}
                 </TableBody>
@@ -297,8 +297,8 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
                       <Cell>{role.label}</Cell>
                       <Cell><code>{role.fontFamilyToken}</code></Cell>
                       <Cell><code>{role.fontWeightToken}</code></Cell>
-                      <Cell><code>{role.letterSpacingToken}</code><br /><TokenValue token={role.letterSpacingToken} refreshKey={refreshKey} /></Cell>
-                      <Cell><code>{role.textTransformToken}</code><br /><TokenValue token={role.textTransformToken} refreshKey={refreshKey} /></Cell>
+                      <Cell><code>{role.letterSpacingToken}</code><br /><TokenValue token={role.letterSpacingToken} /></Cell>
+                      <Cell><code>{role.textTransformToken}</code><br /><TokenValue token={role.textTransformToken} /></Cell>
                     </Row>
                   ))}
                 </TableBody>
@@ -316,7 +316,7 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
                     <Row id={font.token} key={font.token}>
                       <Cell><code>{font.token}</code></Cell>
                       <Cell>{font.purpose}</Cell>
-                      <Cell><TokenValue token={font.token} refreshKey={refreshKey} /></Cell>
+                      <Cell><TokenValue token={font.token} /></Cell>
                     </Row>
                   ))}
                 </TableBody>
@@ -333,12 +333,12 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
                   <Row id="default">
                     <Cell><code>mz-text-default</code></Cell>
                     <Cell><code>--font-weight-default</code></Cell>
-                    <Cell><TokenValue token="--font-weight-default" refreshKey={refreshKey} /></Cell>
+                    <Cell><TokenValue token="--font-weight-default" /></Cell>
                   </Row>
                   <Row id="emphasis">
                     <Cell><code>mz-text-emphasis</code></Cell>
                     <Cell><code>--font-weight-emphasis</code></Cell>
-                    <Cell><TokenValue token="--font-weight-emphasis" refreshKey={refreshKey} /></Cell>
+                    <Cell><TokenValue token="--font-weight-emphasis" /></Cell>
                   </Row>
                 </TableBody>
               </Table>

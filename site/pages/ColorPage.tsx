@@ -26,13 +26,11 @@ import { TokenValue } from '../components/TokenValue'
 
 function ColorPaletteScale({
   paletteId,
-  refreshKey,
 }: {
   paletteId: ColorPaletteDefinition['id']
-  refreshKey: string
 }) {
-  const darkTextValue = useTokenValue('--color-neutral-950', refreshKey)
-  const lightTextValue = useTokenValue('--color-neutral-50', refreshKey)
+  const darkTextValue = useTokenValue('--color-neutral-950')
+  const lightTextValue = useTokenValue('--color-neutral-50')
 
   return (
     <div className="color-palette-viewport" tabIndex={0}>
@@ -43,7 +41,7 @@ function ColorPaletteScale({
             key={step}
             lightTextValue={lightTextValue}
             paletteId={paletteId}
-            refreshKey={refreshKey}
+           
             step={step}
           />
         ))}
@@ -54,10 +52,8 @@ function ColorPaletteScale({
 
 function ColorPaletteTokens({
   paletteId,
-  refreshKey,
 }: {
   paletteId: ColorPaletteDefinition['id']
-  refreshKey: string
 }) {
   return (
     <Disclosure className="react-aria-Disclosure color-palette-disclosure">
@@ -75,7 +71,7 @@ function ColorPaletteTokens({
                 return (
                   <Row id={token} key={token}>
                     <Cell><code>{token}</code></Cell>
-                    <Cell><TokenValue token={token} refreshKey={refreshKey} /></Cell>
+                    <Cell><TokenValue token={token} /></Cell>
                   </Row>
                 )
               })}
@@ -89,10 +85,8 @@ function ColorPaletteTokens({
 
 function ColorPalette({
   palette,
-  refreshKey,
 }: {
   palette: ColorPaletteDefinition
-  refreshKey: string
 }) {
   return (
     <section className="color-palette" aria-labelledby={`${palette.id}-palette-heading`}>
@@ -104,7 +98,7 @@ function ColorPalette({
           <p className="mz-text-body-sm">{palette.description}</p>
         )}
       </div>
-      <ColorPaletteScale paletteId={palette.id} refreshKey={refreshKey} />
+      <ColorPaletteScale paletteId={palette.id} />
       {palette.details && (
         <Disclosure className="react-aria-Disclosure color-palette-disclosure">
           <DisclosureHeader level={5}>{palette.details.label}</DisclosureHeader>
@@ -115,12 +109,12 @@ function ColorPalette({
           </DisclosurePanel>
         </Disclosure>
       )}
-      <ColorPaletteTokens paletteId={palette.id} refreshKey={refreshKey} />
+      <ColorPaletteTokens paletteId={palette.id} />
     </section>
   )
 }
 
-export default function ColorPage({ refreshKey }: { refreshKey: string }) {
+export default function ColorPage() {
   return (
     <>
       <PageHeading
@@ -183,7 +177,7 @@ export default function ColorPage({ refreshKey }: { refreshKey: string }) {
               >
                 {palette.label}
               </h4>
-              <ColorPaletteScale paletteId={palette.id} refreshKey={refreshKey} />
+              <ColorPaletteScale paletteId={palette.id} />
               {palette.details && (
                 <Disclosure className="react-aria-Disclosure color-palette-disclosure">
                   <DisclosureHeader level={5}>{palette.details.label}</DisclosureHeader>
@@ -194,7 +188,7 @@ export default function ColorPage({ refreshKey }: { refreshKey: string }) {
                   </DisclosurePanel>
                 </Disclosure>
               )}
-              <ColorPaletteTokens paletteId={palette.id} refreshKey={refreshKey} />
+              <ColorPaletteTokens paletteId={palette.id} />
             </section>
           ))}
         </section>
@@ -210,7 +204,7 @@ export default function ColorPage({ refreshKey }: { refreshKey: string }) {
           </p>
           <div className="color-palette-list">
             {semanticColorPalettes.map((palette) => (
-              <ColorPalette key={palette.id} palette={palette} refreshKey={refreshKey} />
+              <ColorPalette key={palette.id} palette={palette} />
             ))}
           </div>
         </section>

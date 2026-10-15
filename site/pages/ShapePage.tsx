@@ -3,8 +3,8 @@ import { PageHeading } from '../templates/ComponentPageTemplate'
 import { radiusLevels } from '../content/shapeContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 
-function RadiusSample({ label, token, refreshKey }: { label: string; token: string; refreshKey: string }) {
-  const value = useTokenValue(token, refreshKey)
+function RadiusSample({ label, token }: { label: string; token: string }) {
+  const value = useTokenValue(token)
 
   return (
     <li className="radius-scale-item">
@@ -16,7 +16,7 @@ function RadiusSample({ label, token, refreshKey }: { label: string; token: stri
   )
 }
 
-export default function ShapePage({ refreshKey }: { refreshKey: string }) {
+export default function ShapePage() {
   return (
     <>
       <PageHeading title="Shape" description="Corner radius controls how square or rounded a surface appears. Mezzanine provides a shared scale that products can reference from their component tokens." />
@@ -33,7 +33,7 @@ export default function ShapePage({ refreshKey }: { refreshKey: string }) {
           Values below come from the active CSS tokens.
         </p>
         <ol className="radius-scale-list">
-          {radiusLevels.map((level) => <RadiusSample key={level.token} {...level} refreshKey={refreshKey} />)}
+          {radiusLevels.map((level) => <RadiusSample key={level.token} {...level} />)}
         </ol>
       </section>
       <section className="component-section" aria-labelledby="radius-corners-heading">

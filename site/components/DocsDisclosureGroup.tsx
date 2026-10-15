@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel } from '@decocode/mezzanine'
 import type { DocumentationSection } from '../templates/ComponentPageTemplate'
 import { useDocsDisclosureGroupLogic } from './DocsDisclosureGroupLogic'
@@ -9,8 +8,7 @@ interface DocsDisclosureGroupProps {
 }
 
 export function DocsDisclosureGroup({ labelledBy, sections }: DocsDisclosureGroupProps) {
-  const groupRef = useRef<HTMLDivElement>(null)
-  const { expandedKeys, setExpandedKeys } = useDocsDisclosureGroupLogic(groupRef)
+  const { groupRef, expandedKeys, setExpandedKeys } = useDocsDisclosureGroupLogic()
 
   return (
     <DisclosureGroup ref={groupRef} aria-labelledby={labelledBy} allowsMultipleExpanded expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>

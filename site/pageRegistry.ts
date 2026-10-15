@@ -4,12 +4,8 @@
 
 import { lazy, type ComponentType } from 'react'
 
-export interface DocumentationPageProps {
-  refreshKey: string
-}
-
 // Declare lazy components once so theme updates retain each page's local state.
-export const pageRegistry: Record<string, ComponentType<DocumentationPageProps>> = {
+export const pageRegistry: Record<string, ComponentType> = {
   home: lazy(() => import('./pages/HomePage')),
   introduction: lazy(() => import('./pages/IntroductionPage')),
   color: lazy(() => import('./pages/ColorPage')),

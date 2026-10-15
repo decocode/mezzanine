@@ -1,4 +1,4 @@
-import { createContext, useContext, useLayoutEffect, useRef, useSyncExternalStore, type RefObject } from 'react'
+import { createContext, useCallback, useContext, useLayoutEffect, useRef, useSyncExternalStore, type RefObject } from 'react'
 
 export interface SidebarState {
   isModal: boolean
@@ -20,16 +20,14 @@ export function useSidebarState() {
 }
 
 // Keep the responsive decision in one place for the trigger and its panel.
+// The subscription changes only with the query, so React does not resubscribe on every render.
 export function useSidebarMediaQuery(query: string) {
-  return useSyncExternalStore(
-    (notify) => {
-      const media = window.matchMedia(query)
-      media.addEventListener('change', notify)
-      return () => media.removeEventListener('change', notify)
-    },
-    () => window.matchMedia(query).matches,
-    () => false,
-  )
+  const subscribe = useCallback((notify: () => void) => {
+    const media = window.matchMedia(query)
+    media.addEventListener('change', notify)
+    return () => media.removeEventListener('change', notify)
+  }, [query])
+  return useSyncExternalStore(subscribe, () => window.matchMedia(query).matches, () => false)
 }
 
 // Collapsing a focused body or expanding a focused rail must not strand focus

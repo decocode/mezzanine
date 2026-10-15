@@ -16,7 +16,7 @@ function Paragraphs({ paragraphs }: { paragraphs: readonly ReactNode[] }) {
   return <>{paragraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}</>
 }
 
-export default function InteractionPage({ refreshKey }: { refreshKey: string }) {
+export default function InteractionPage() {
   return (
     <ComponentPageTemplate
       title="Interaction"
@@ -71,7 +71,7 @@ export default function InteractionPage({ refreshKey }: { refreshKey: string }) 
                     <Row id={token} key={token}>
                       <Cell><code>{token}</code></Cell>
                       <Cell>{description}</Cell>
-                      <Cell><TokenValue token={token} refreshKey={refreshKey} /></Cell>
+                      <Cell><TokenValue token={token} /></Cell>
                     </Row>
                   ))}
                 </TableBody>
@@ -89,8 +89,8 @@ export default function InteractionPage({ refreshKey }: { refreshKey: string }) 
                   {interactionFocusRingComponents.map(({ component, prefix }) => (
                     <Row id={prefix} key={prefix}>
                       <Cell>{component}</Cell>
-                      <Cell><span className="table-item-heading"><code>{`${prefix}-focus-ring-width`}</code><TokenValue token={`${prefix}-focus-ring-width`} refreshKey={refreshKey} /></span></Cell>
-                      <Cell><span className="table-item-heading"><code>{`${prefix}-focus-ring-offset`}</code><TokenValue token={`${prefix}-focus-ring-offset`} refreshKey={refreshKey} /></span></Cell>
+                      <Cell><span className="table-item-heading"><code>{`${prefix}-focus-ring-width`}</code><TokenValue token={`${prefix}-focus-ring-width`} /></span></Cell>
+                      <Cell><span className="table-item-heading"><code>{`${prefix}-focus-ring-offset`}</code><TokenValue token={`${prefix}-focus-ring-offset`} /></span></Cell>
                     </Row>
                   ))}
                 </TableBody>

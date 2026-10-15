@@ -1,5 +1,6 @@
 import { LayoutIcon, MoonIcon, SunIcon, ToggleButton, ToggleButtonGroup, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
-import { getDisplayedTheme, isTheme, type Theme } from '../themeSwitcherLogic'
+import { useSyncExternalStore } from 'react'
+import { getDisplayedTheme, isTheme, prefersDarkColorScheme, subscribeToColorScheme, type Theme } from '../themeSwitcherLogic'
 
 interface ThemeSwitcherProps {
   onThemeChange: (selection: Theme) => void
@@ -7,7 +8,8 @@ interface ThemeSwitcherProps {
 }
 
 export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherProps) {
-  const displayedTheme = getDisplayedTheme(selectedTheme)
+  const prefersDark = useSyncExternalStore(subscribeToColorScheme, prefersDarkColorScheme)
+  const displayedTheme = getDisplayedTheme(selectedTheme, prefersDark)
 
   return (
     <ToggleButtonGroup

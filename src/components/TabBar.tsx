@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState, type AriaAttributes, type ReactNode } from 'react'
+import { useCallback, useRef, useState, type AriaAttributes, type ReactNode } from 'react'
 import { composeRenderProps } from 'react-aria-components'
 import { Button } from './Button'
 import { Dialog, DialogTrigger } from './Dialog'
@@ -89,13 +89,12 @@ export function TabBar({ items, 'aria-label': label, position = 'bottom', moreLa
 }
 
 // Measure both available space and the token-sized slot, including text enlargement.
+// The slot renders before the list, so its ref is set when React attaches the list.
 function useTabBarCapacity() {
-  const listRef = useRef<HTMLUListElement>(null)
   const slotRef = useRef<HTMLSpanElement>(null)
   const [capacity, setCapacity] = useState(1)
 
-  useLayoutEffect(() => {
-    const list = listRef.current
+  const listRef = useCallback((list: HTMLUListElement | null) => {
     const slot = slotRef.current
     if (!list || !slot) return
 

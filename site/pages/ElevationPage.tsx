@@ -5,8 +5,8 @@ import { elevationDefinitions, elevationHelperTokens, type ElevationDefinition }
 import { useTokenValue } from '../components/tokenValueLogic'
 import { TokenValue } from '../components/TokenValue'
 
-function ElevationLevel({ elevation, refreshKey }: { elevation: ElevationDefinition; refreshKey: string }) {
-  const value = useTokenValue(elevation.token, refreshKey)
+function ElevationLevel({ elevation }: { elevation: ElevationDefinition }) {
+  const value = useTokenValue(elevation.token)
 
   return (
     <li className="elevation-role-card">
@@ -24,7 +24,7 @@ function ElevationLevel({ elevation, refreshKey }: { elevation: ElevationDefinit
   )
 }
 
-export default function ElevationPage({ refreshKey }: { refreshKey: string }) {
+export default function ElevationPage() {
   return (
     <>
       <PageHeading
@@ -49,7 +49,7 @@ export default function ElevationPage({ refreshKey }: { refreshKey: string }) {
         </p>
         <ol className="elevation-role-list">
           {elevationDefinitions.map((elevation) => (
-            <ElevationLevel elevation={elevation} key={elevation.token} refreshKey={refreshKey} />
+            <ElevationLevel elevation={elevation} key={elevation.token} />
           ))}
         </ol>
       </section>
@@ -78,7 +78,7 @@ export default function ElevationPage({ refreshKey }: { refreshKey: string }) {
                 <Row id={helper.token} key={helper.token}>
                   <Cell><code>{helper.token}</code></Cell>
                   <Cell>{helper.purpose}</Cell>
-                  <Cell><TokenValue token={helper.token} refreshKey={refreshKey} /></Cell>
+                  <Cell><TokenValue token={helper.token} /></Cell>
                 </Row>
               ))}
             </TableBody>

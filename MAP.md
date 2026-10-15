@@ -117,7 +117,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/public/robots.txt` | Served unchanged at `/robots.txt`; allows crawling so search engines can read the pre-launch `noindex` response header |
 | `site/favicon.svg` | Staircase Z favicon with neutral-200 background and neutral-950 mark, embedded for use outside the site CSS |
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
-| `site/AppShell.tsx` | Site layout, theme state and route selection; delegates page rendering to page components and the loading boundary |
+| `site/AppShell.tsx` | Site layout, theme state and route selection; applies and saves a theme change before rendering; delegates page rendering to page components and the loading boundary |
 | `site/pages/HomePage.tsx` | Home hero and wordmark composition using the separate Home content |
 | `site/content/homeContent.ts` | Home attribution, title, description and documentation link |
 | `site/content/siteContent.ts` | Shared site name, skip-link label and not-found/not-implemented messages |
@@ -128,9 +128,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/templates/foundationTechnicalDetails.ts` | Builds the shared Technical details group for Foundations and Styles pages in its fixed section order |
 | `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template, also used by converted Foundations pages: owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures and reference sections from page-supplied content |
 | `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
-| `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors, then scrolls using the motion policy's scroll behaviour |
+| `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors; scrolls to changed and repeated anchors using the motion policy's scroll behaviour |
 | `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
-| `site/components/tokenValueLogic.ts` | Reads current CSS token values when the selected theme changes, and describes font-size tokens in pixels |
+| `site/components/tokenValueLogic.ts` | Reads current CSS token values and re-reads them when the theme, device colour scheme or motion setting changes, and describes font-size tokens in pixels |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/pages/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
 | `site/pages/ColorPage.tsx` | Palette swatches and semantic color-role reference; loaded only when its route is requested |
@@ -181,7 +181,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/content/iconsContent.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/components/ColorSwatch.tsx` | Displays a palette shade, its number and resolved colour value with readable text |
 | `site/components/colorSwatchLogic.ts` | Contrast calculation used to choose light or dark text inside ColorSwatch |
-| `site/themeSwitcherLogic.ts` | Theme option validation, system-theme resolution, root-attribute application and saved visitor preference |
+| `site/themeSwitcherLogic.ts` | Theme option validation, device colour-scheme subscription, system-theme resolution, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |
 | `playwright.config.ts` | Builds and serves the production showcase for Chromium tests, with CI safeguards, HTML reports and failure traces |

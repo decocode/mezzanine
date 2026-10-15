@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useEffectEvent, useId, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { Button, type ButtonProps } from './Button'
 import { Dialog } from './Dialog'
 import { Heading } from './Heading'
@@ -40,11 +40,15 @@ export function Sidebar({
     onOpenChange?.(next)
   }
 
-  useEffect(() => {
-    // A drawer must not leave a hidden modal or scroll lock after widening.
-    if (wasModal.current && !isModal && isOpen) changeOpen(false)
-    wasModal.current = isModal
+  // A drawer must not stay open, unseen, after widening. Telling the application
+  // cannot happen while rendering, so this runs only when the layout switches.
+  const closeAfterWidening = useEffectEvent(() => {
+    if (isOpen) changeOpen(false)
   })
+  useEffect(() => {
+    if (wasModal.current && !isModal) closeAfterWidening()
+    wasModal.current = isModal
+  }, [isModal])
 
   return (
     <SidebarContext.Provider value={{

@@ -5,14 +5,12 @@ import { spacingScaleSteps } from '../content/spacingContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 
 function SpacingScaleItem({
-  refreshKey,
   step,
 }: {
-  refreshKey: string
   step: number
 }) {
   const token = `--space-${step}`
-  const value = useTokenValue(token, refreshKey)
+  const value = useTokenValue(token)
 
   return (
     <li className="spacing-scale-item">
@@ -36,7 +34,7 @@ function SpacingScaleItem({
   )
 }
 
-export default function SpacingPage({ refreshKey }: { refreshKey: string }) {
+export default function SpacingPage() {
   return (
     <ComponentPageTemplate
       title="Spacing"
@@ -57,7 +55,7 @@ export default function SpacingPage({ refreshKey }: { refreshKey: string }) {
             </p>
             <ol className="spacing-scale-list">
               {spacingScaleSteps.map((step) => (
-                <SpacingScaleItem key={step} refreshKey={refreshKey} step={step} />
+                <SpacingScaleItem key={step} step={step} />
               ))}
             </ol>
           </>),

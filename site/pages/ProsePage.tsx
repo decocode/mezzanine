@@ -3,11 +3,11 @@ import { PageHeading } from '../templates/ComponentPageTemplate'
 import { ExampleZone } from '../components/ExampleZone'
 import { useTokenValue } from '../components/tokenValueLogic'
 
-export default function ProsePage({ refreshKey }: { refreshKey: string }) {
-  const listItemSpacing = useTokenValue('--space-2', refreshKey)
-  const inlineCodePaddingBlock = useTokenValue('--inline-code-padding-block', refreshKey)
-  const inlineCodePaddingInline = useTokenValue('--inline-code-padding-inline', refreshKey)
-  const inlineCodeBorderRadius = useTokenValue('--inline-code-border-radius', refreshKey)
+export default function ProsePage() {
+  const listItemSpacing = useTokenValue('--space-2')
+  const inlineCodePaddingBlock = useTokenValue('--inline-code-padding-block')
+  const inlineCodePaddingInline = useTokenValue('--inline-code-padding-inline')
+  const inlineCodeBorderRadius = useTokenValue('--inline-code-border-radius')
   return (
     <>
       <PageHeading title="Prose" description="Mezzanine’s styling for longer-form content. Lists share the body text styles and spacing tokens; inline code has a distinct treatment within the surrounding text." />

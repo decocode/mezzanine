@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { Link } from '@decocode/mezzanine'
 import { MezzanineNavbar } from './components/MezzanineNavbar'
 import { ThemeSwitcher } from './components/ThemeSwitcher'
@@ -20,32 +20,19 @@ interface AppShellProps {
 export function AppShell({ initialTheme }: AppShellProps) {
   const [contentsHost, setContentsHost] = useState<HTMLDivElement | null>(null)
   const [selectedTheme, setSelectedTheme] = useState(initialTheme)
-  const [systemPreferenceVersion, setSystemPreferenceVersion] = useState(0)
   const currentPath = window.location.pathname === '/'
     ? '/'
     : window.location.pathname.replace(/\/$/, '')
   const currentPage = findSitePage(currentPath)
 
-  useEffect(() => {
-    applyTheme(selectedTheme)
-    storeTheme(selectedTheme)
-  }, [selectedTheme])
+  // Apply the theme before React renders, so components reading CSS see it.
+  function changeTheme(theme: Theme) {
+    applyTheme(theme)
+    storeTheme(theme)
+    setSelectedTheme(theme)
+  }
 
-  useEffect(() => {
-    if (selectedTheme !== 'system') return
-
-    const devicePreference = window.matchMedia('(prefers-color-scheme: dark)')
-    const updateSystemPreference = () => {
-      setSystemPreferenceVersion((currentVersion) => currentVersion + 1)
-    }
-
-    devicePreference.addEventListener('change', updateSystemPreference)
-    return () => devicePreference.removeEventListener('change', updateSystemPreference)
-  }, [selectedTheme])
-
-  const refreshKey = `${selectedTheme}-${systemPreferenceVersion}`
-
-  if (currentPath === '/site/lab' || currentPath === '/site/lab/shell' || currentPath === '/site/lab/page-widths') return <Suspense fallback={<p role="status">Loading lab…</p>}><LabPage currentPath={currentPath} themeSwitcher={<ThemeSwitcher onThemeChange={setSelectedTheme} selectedTheme={selectedTheme} />} /></Suspense>
+  if (currentPath === '/site/lab' || currentPath === '/site/lab/shell' || currentPath === '/site/lab/page-widths') return <Suspense fallback={<p role="status">Loading lab…</p>}><LabPage currentPath={currentPath} themeSwitcher={<ThemeSwitcher onThemeChange={changeTheme} selectedTheme={selectedTheme} />} /></Suspense>
 
   if (!currentPage) {
     return (
@@ -53,7 +40,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
         <title>{`${siteContent.notFound.title} | ${siteContent.name}`}</title>
         <MezzanineNavbar
           currentPath={currentPath}
-          onThemeChange={setSelectedTheme}
+          onThemeChange={changeTheme}
           selectedTheme={selectedTheme}
         />
         <main className="not-found-page" id="main-content">
@@ -70,11 +57,11 @@ export function AppShell({ initialTheme }: AppShellProps) {
         <Link className="skip-link" href="#main-content">{siteContent.skipLink}</Link>
         <MezzanineNavbar
           currentPath={currentPath}
-          onThemeChange={setSelectedTheme}
+          onThemeChange={changeTheme}
           selectedTheme={selectedTheme}
         />
         <main className="landing-page" id="main-content">
-          <PageLoader page={currentPage} refreshKey={refreshKey} />
+          <PageLoader page={currentPage} />
         </main>
       </>
     )
@@ -86,7 +73,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
       <Link className="skip-link" href="#main-content">{siteContent.skipLink}</Link>
       <MezzanineNavbar
         currentPath={currentPath}
-        onThemeChange={setSelectedTheme}
+        onThemeChange={changeTheme}
         selectedTheme={selectedTheme}
       />
       <DocsContentsContext.Provider value={contentsHost}>
@@ -94,7 +81,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
           <Sidebar currentPage={currentPage} />
           <main className="site-content" id="main-content">
             {currentPage.status === 'implemented'
-              ? <PageLoader page={currentPage} refreshKey={refreshKey} />
+              ? <PageLoader page={currentPage} />
               : <NotImplementedPage title={currentPage.label} />}
           </main>
           <div className="site-contents-sidebar" ref={setContentsHost} />

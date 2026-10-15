@@ -34,7 +34,19 @@ export function applyTheme(theme: Theme) {
   document.documentElement.dataset.theme = theme
 }
 
-export function getDisplayedTheme(selectedTheme: Theme) {
+const darkColorScheme = '(prefers-color-scheme: dark)'
+
+export function prefersDarkColorScheme() {
+  return window.matchMedia(darkColorScheme).matches
+}
+
+export function subscribeToColorScheme(notify: () => void) {
+  const preference = window.matchMedia(darkColorScheme)
+  preference.addEventListener('change', notify)
+  return () => preference.removeEventListener('change', notify)
+}
+
+export function getDisplayedTheme(selectedTheme: Theme, prefersDark: boolean) {
   if (selectedTheme !== 'system') return selectedTheme
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return prefersDark ? 'dark' : 'light'
 }

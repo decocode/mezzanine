@@ -9,8 +9,8 @@ import {
 import { useTokenValue } from '../components/tokenValueLogic'
 import { TokenValue } from '../components/TokenValue'
 
-export default function MotionPage({ refreshKey }: { refreshKey: string }) {
-  const motionEnabled = useTokenValue('--_motion-enabled', refreshKey)
+export default function MotionPage() {
+  const motionEnabled = useTokenValue('--_motion-enabled')
   return (
     <>
       <PageHeading
@@ -45,8 +45,8 @@ export default function MotionPage({ refreshKey }: { refreshKey: string }) {
                     <strong>{timing.label}</strong>
                     <span className="table-supporting-text">{timing.description}</span>
                   </Cell>
-                  <Cell><TokenValue token={timing.duration} refreshKey={refreshKey} /></Cell>
-                  <Cell><TokenValue token={timing.easing} refreshKey={refreshKey} /></Cell>
+                  <Cell><TokenValue token={timing.duration} /></Cell>
+                  <Cell><TokenValue token={timing.easing} /></Cell>
                 </Row>
               ))}
             </TableBody>
@@ -71,7 +71,7 @@ export default function MotionPage({ refreshKey }: { refreshKey: string }) {
               {motionTokenDefinitions.map((motionToken) => (
                 <Row id={motionToken.token} key={motionToken.token}>
                   <Cell><code>{motionToken.token}</code></Cell>
-                  <Cell><TokenValue token={motionToken.token} refreshKey={refreshKey} /></Cell>
+                  <Cell><TokenValue token={motionToken.token} /></Cell>
                   <Cell>{motionToken.description}</Cell>
                 </Row>
               ))}

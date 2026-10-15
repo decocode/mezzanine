@@ -1,22 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useSyncExternalStore } from 'react'
+import { subscribeToColorScheme } from '../themeSwitcherLogic'
 
-export function useTokenValue(token: string, refreshKey: string) {
-  const [value, setValue] = useState('')
+// The library announces theme and motion changes on this internal event.
+const motionChangeEvent = 'mezzanine-internal-motion-change'
 
-  useEffect(() => {
-    const refresh = () => {
-      const styles = getComputedStyle(document.documentElement)
-      setValue(styles.getPropertyValue(token).trim())
-    }
-    const frame = requestAnimationFrame(refresh)
-    window.addEventListener('mezzanine-internal-motion-change', refresh)
-    return () => {
-      cancelAnimationFrame(frame)
-      window.removeEventListener('mezzanine-internal-motion-change', refresh)
-    }
-  }, [refreshKey, token])
+function subscribeToTokenChanges(notify: () => void) {
+  window.addEventListener(motionChangeEvent, notify)
+  const stopColorScheme = subscribeToColorScheme(notify)
+  return () => {
+    window.removeEventListener(motionChangeEvent, notify)
+    stopColorScheme()
+  }
+}
 
-  return value
+// The theme is applied before React renders, so the value read here is current.
+export function useTokenValue(token: string) {
+  const readValue = useCallback(
+    () => getComputedStyle(document.documentElement).getPropertyValue(token).trim(),
+    [token],
+  )
+  return useSyncExternalStore(subscribeToTokenChanges, readValue)
 }
 
 const pixelsPerRem = 16
