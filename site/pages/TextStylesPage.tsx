@@ -1,16 +1,6 @@
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
-import {
-  Disclosure,
-  DisclosureHeader,
-  DisclosurePanel,
-  Cell,
-  Column,
-  Row,
-  Table,
-  TableBody,
-  TableHeader,
-} from '@decocode/mezzanine'
+import { Cell, CodeBlock, Column, Disclosure, DisclosureHeader, DisclosurePanel, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import {
   baseTextElements,
   fontTokens,
@@ -53,7 +43,7 @@ export default function TextStylesPage() {
           Add a style&apos;s class to any element. The class sets the font, size, weight, line
           height, letter spacing and capitalisation together, so you do not set any of them yourself.
         </p>
-        <pre className="docs-code-block"><code>{quickStartCode}</code></pre>
+        <CodeBlock className="docs-code-block">{quickStartCode}</CodeBlock>
         <p className="component-section-description">
           A text style only changes how text looks. Choose the HTML element for its meaning:
           a section heading is still an <code>h2</code>, even if you want it to look small.

@@ -22,6 +22,7 @@ export const pageRegistry: Record<string, ComponentType> = {
   icons: lazy(() => import('./pages/IconsPage')),
   badge: lazy(() => import('./pages/BadgePage')),
   card: lazy(() => import('./pages/CardPage')),
+  'code-block': lazy(() => import('./pages/CodeBlockPage')),
   button: lazy(() => import('./pages/ButtonPage')),
   'toggle-button': lazy(() => import('./pages/ToggleButtonPage')),
   'navigation-tree': lazy(() => import('./pages/NavigationTreePage')),

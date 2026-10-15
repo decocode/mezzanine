@@ -10,9 +10,11 @@ import './styles.css'
 
 export { Badge } from './components/Badge/Badge'
 export { Card } from './components/Card/Card'
+export { CodeBlock } from './components/CodeBlock/CodeBlock'
 
 export type { BadgeProps, BadgeVariant } from './components/Badge/Badge'
 export type { CardProps } from './components/Card/Card'
+export type { CodeBlockProps } from './components/CodeBlock/CodeBlock'
 
 export { Button } from './components/Button/Button'
 

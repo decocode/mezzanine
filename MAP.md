@@ -32,6 +32,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Button/Button.tsx` | Public Button: React Aria Button for actions or Link when href is supplied, sharing variants, sizes and icon layout; pending state is action-only |
 | `src/components/Card/Card.css` | Card surface, border, elevation, padding and spacing between direct children, with body text and Title medium headings |
 | `src/components/Card/Card.tsx` | Public static Card: a div container with the card surface; the app composes its content |
+| `src/components/CodeBlock/CodeBlock.css` | Code block surface, border and padding, with Body small text in the shared monospace family; long lines wrap and indentation is kept |
+| `src/components/CodeBlock/CodeBlock.tsx` | Public static CodeBlock: a pre element with a code element inside; the app supplies the code as text |
 | `src/components/Checkbox/Checkbox.css` | Token-led styling for Checkbox states and interaction feedback |
 | `src/components/Checkbox/Checkbox.tsx` | Public React Aria Checkbox wrapper with selected and indeterminate indicators |
 | `src/components/Dialog/Dialog.ts`, `src/components/Dialog/Dialog.css` | Public React Aria Dialog and DialogTrigger exports; token-led content, title, focus and action-footer styling |
@@ -118,6 +120,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/content/breadcrumbsContent.tsx` | Breadcrumbs written guidance, reference entries, related pages and external references |
 | `site/content/buttonContent.tsx` | Button guidance, variants, sizes, states, token descriptions, related pages and references |
 | `site/content/cardContent.tsx` | Card guidance, example labels, anatomy, token descriptions, related pages and references |
+| `site/content/codeBlockContent.tsx` | Code block guidance, example code, anatomy, token descriptions, related pages and references |
 | `site/content/checkboxContent.tsx` | Checkbox written guidance, reference entries, related pages and external references |
 | `site/content/colorContent.ts` | Colour palette descriptions, shade steps and semantic colour-role reference entries |
 | `site/content/dialogContent.tsx` | Dialog written guidance, reference entries, related pages and external references |
@@ -151,6 +154,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/BreadcrumbsPage.tsx` | Breadcrumb hierarchy and disabled examples; loaded only when its route is requested |
 | `site/pages/ButtonPage.tsx` | Button examples, states, sizes and token reference; loaded only when its route is requested |
 | `site/pages/CardPage.tsx` | Card example and technical details; loaded only when its route is requested |
+| `site/pages/CodeBlockPage.tsx` | Code block example and technical details; loaded only when its route is requested |
 | `site/pages/CheckboxPage.tsx` | Checkbox example and selection states; loaded only when its route is requested |
 | `site/pages/ColorPage.tsx` | Palette swatches and semantic color-role reference; loaded only when its route is requested |
 | `site/pages/DialogPage.tsx` | Dialog documentation content and modal examples, composed with the shared template; loaded only when requested |
@@ -205,6 +209,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/display.ts` | Shared browser-test helpers for the three themes, normal and 200% text sizes, and a retrying no-horizontal-overflow check |
 | `tests/components/button.spec.ts` | Button content options, href navigation and actions, the landing Read docs link matching the shared Button, and the pending ring under reduced motion |
 | `tests/components/card.spec.ts` | Card example structure, reflow at 320px with normal and doubled text, and accessibility in each theme |
+| `tests/components/code-block.spec.ts` | Code block structure, kept line breaks, reflow at 320px with normal and doubled text, and accessibility in each theme |
 | `tests/components/disclosure.spec.ts` | Disclosure reflow, immediate panels in every theme and motion setting, find-in-page and group switching |
 | `tests/components/navbar.spec.ts` | Navbar example keyboard, responsive, theme, contrast and forced-colour checks |
 | `tests/components/sidebar.spec.ts` | Sidebar collapse, independent state, modal focus, responsiveness and accessibility checks |

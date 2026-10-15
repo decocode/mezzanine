@@ -1,0 +1,22 @@
+/* Long lines wrap rather than scroll, so narrow screens need no sideways scrolling and
+   the block never needs to take keyboard focus. Indentation and line breaks are kept.
+   The block sets the Body small role; the code element inside takes the shared monospace
+   family from Mezzanine's rule for every code element. */
+.mezzanine-code-block {
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  margin: 0;
+  padding: var(--code-block-padding);
+  border: var(--code-block-border-width) solid var(--code-block-border);
+  border-radius: var(--code-block-border-radius);
+  background: var(--code-block-background);
+  color: var(--code-block-content);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}

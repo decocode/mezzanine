@@ -136,6 +136,14 @@
     "kind": "value"
   },
   {
+    "name": "CodeBlock",
+    "kind": "value"
+  },
+  {
+    "name": "CodeBlockProps",
+    "kind": "type"
+  },
+  {
     "name": "Column",
     "kind": "value"
   },

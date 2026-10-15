@@ -144,6 +144,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     ],
     pages: [
       { id: 'badge', label: 'Badge', path: '/badge', status: 'implemented' },
+      { id: 'code-block', label: 'Code block', path: '/code-block', status: 'implemented' },
       { id: 'table', label: 'Table', path: '/table', status: 'implemented' },
       { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
       { id: 'tag-group', label: 'Tag group', path: '/tag-group', status: 'empty' },

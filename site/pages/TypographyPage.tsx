@@ -1,5 +1,5 @@
 import { PageHeading } from '../templates/ComponentPageTemplate'
-import { Badge, Button, Link } from '@decocode/mezzanine'
+import { Badge, Button, CodeBlock, Link } from '@decocode/mezzanine'
 import { ExampleZone } from '../components/ExampleZone'
 import { themeExampleCode, typographyIntro, typographyLayers } from '../content/typographyContent'
 
@@ -34,7 +34,7 @@ export default function TypographyPage() {
           This theme change makes every Label style uppercase with wider letter spacing. A product
           theme puts these lines on <code>:root</code>, so they apply everywhere:
         </p>
-        <pre className="docs-code-block"><code>{themeExampleCode}</code></pre>
+        <CodeBlock className="docs-code-block">{themeExampleCode}</CodeBlock>
         <p className="component-section-description">
           Here the same two tokens are set on the second box only, so you can compare. The Button,
           the Badge and the <code>mz-text-label-lg</code> class all change together, because they
