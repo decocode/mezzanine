@@ -140,23 +140,19 @@ export const buttonContent = {
   navigationExample: {
     descriptions: [
       <>
-        In React Aria, actions and navigation use separate components. <code>Button</code> renders a native
-        {' '}<code>&lt;button&gt;</code> element and uses <code>onPress</code>. <code>Link</code> renders an
-        {' '}<code>&lt;a&gt;</code> element and uses <code>href</code>. React Aria keeps them apart because they
-        behave differently: a link can be opened in a new tab, copied or bookmarked, activates with Enter
-        only, and is announced by screen readers as a link rather than a button.
+        Most buttons do something, such as saving a form. Sometimes a button needs to take people
+        to another page instead, like a Get started call to action. Give <code>Button</code> an
+        {' '}<code>href</code> and it becomes a link that looks exactly like a button.
       </>,
       <>
-        Many other design systems let one <code>Button</code> component switch to a link when you give it
-        {' '}<code>href</code>. Mezzanine does the same, so a call to action that goes to another page looks
-        identical to an action button. Supply <code>href</code> and <code>Button</code> renders React Aria
-        {' '}<code>Link</code> underneath, keeping native link behaviour.
+        Use this when the button’s main job is to go somewhere. For links within a sentence, use
+        {' '}<code>Link</code>.
       </>,
     ],
-    lead: 'Want to find out more about button accessibility?',
-    label: 'Read usage guidance',
-    hint: 'Pressing this button scrolls to the Usage section on this page.',
-    href: '#button-usage-heading',
+    lead: 'Want to know how a navigational button works with a keyboard or screen reader?',
+    label: 'Read accessibility details',
+    hint: 'This button is a link to an anchor on this page: its href is #button-accessibility-heading, so it jumps to the Accessibility section in Technical details and opens it.',
+    href: '#button-accessibility-heading',
   },
   anatomyRows: [
     { name: 'Button', description: <>The action control, containing a text label and optional leading or trailing icons.</> },
@@ -182,16 +178,13 @@ export const buttonContent = {
   ],
   usageParagraphs: [
     <>
-      Use <code>Button</code> for actions and navigational calls to action. Supply <code>href</code> to
-      navigate; Button uses React Aria <code>Link</code> internally with the same styling, sizes and icons.
-      Without <code>href</code>, handle actions with <code>onPress</code>; React Aria Button supports pointer,
-      touch, Enter and Space activation. Use <code>Link</code> for ordinary text links.
+      Handle actions with <code>onPress</code>. To navigate instead, supply <code>href</code>; the styling,
+      sizes and icons stay the same. Use <code>Link</code> for ordinary text links.
     </>,
     <>
-      With <code>href</code>, Button accepts React Aria Link props such as <code>target</code>, <code>rel</code>,
-      {' '}<code>download</code> and <code>isDisabled</code>. It keeps native link behaviour: Enter activates it,
-      and the destination can be copied or opened in a new tab. Space does not activate it.
-      Form props and <code>isPending</code> apply only to action buttons without <code>href</code>.
+      With <code>href</code>, Button also accepts React Aria Link props such as <code>target</code>,
+      {' '}<code>rel</code>, <code>download</code> and <code>isDisabled</code>. Form props and
+      {' '}<code>isPending</code> work only without <code>href</code>.
     </>,
     <>
       Use <code>isPending</code> while an action is in progress: <code>Button</code> displays its progress
@@ -201,7 +194,17 @@ export const buttonContent = {
     <>Button labels wrap when space is limited, allowing the control to grow taller without shrinking the text. Icons retain their size.</>,
   ],
   accessibilityParagraphs: [
-    <>Keep visible labels clear. Icon-only buttons require an accessible name even when a tooltip is provided.</>,
+    <>
+      Without <code>href</code>, Button is a native <code>&lt;button&gt;</code>. Screen readers announce
+      it as a button, and both Enter and Space activate it.
+    </>,
+    <>
+      With <code>href</code>, Button is a React Aria <code>Link</code>. Screen readers announce it as a
+      link, Enter activates it but Space does not, and people can open it in a new tab or copy its
+      address. React Aria keeps Button and Link separate for these reasons; Mezzanine’s Button
+      chooses the right one for you.
+    </>,
+    <>Keep visible labels clear. Icon-only buttons need an accessible name even when they have a tooltip.</>,
   ],
   tokensRows: buttonTokens.map(({ token, description }) => ({ name: token, description })),
   tokensParagraphs: [
