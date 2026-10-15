@@ -97,7 +97,9 @@ Its sections always appear in this order:
 4. Accessibility: only what is specific to this page. Leave it out when there
    is nothing specific; what applies everywhere is on the Accessibility page.
 5. Localisation: direction and text expansion, only once verified.
-6. Used by: the components that use it.
+
+Do not list the components that use a token or state by hand: such lists go
+out of date. Add them only if they can be generated from the code.
 
 Leave out sections that do not apply. Pages not yet converted, such as
 Typography and Color, have their own structures but reuse `PageHeading`.

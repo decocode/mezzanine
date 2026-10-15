@@ -18,5 +18,5 @@ export const foundationsThemeColourParagraphs: ReactNode[] = [
 ]
 
 export const foundationsTechnicalDetailsParagraphs: ReactNode[] = [
-  'Each Foundations page ends with Technical details, in this order: CSS properties, Tokens, Accessibility, Localisation and Used by. Sections that do not apply to a page are left out. Accessibility appears only when a page has something specific to add; what applies everywhere is on the Accessibility page.',
+  'Each Foundations page ends with Technical details, in this order: CSS properties, Tokens, Accessibility and Localisation. Sections that do not apply to a page are left out. Accessibility appears only when a page has something specific to add; what applies everywhere is on the Accessibility page.',
 ]

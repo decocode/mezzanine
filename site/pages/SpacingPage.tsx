@@ -74,13 +74,6 @@ export default function SpacingPage({ refreshKey }: { refreshKey: string }) {
               ]}
             />
           ),
-          usedBy: (
-            <p className="component-section-description">
-              Breadcrumbs, Dialog, Modal, NavTree, Navbar, TabBar, Table, TableOfContents, TextField,
-              TextArea and Tooltip take spacing from this scale. Other components currently set their
-              spacing in their own tokens.
-            </p>
-          ),
         }),
       ]}
     />

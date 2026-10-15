@@ -18,7 +18,6 @@ function ElevationLevel({ elevation, refreshKey }: { elevation: ElevationDefinit
       <code>{value}</code>
       <p>Level {elevation.level}</p>
       <p>Use for: {elevation.useFor}</p>
-      <p>Used by: {elevation.usedBy}</p>
     </li>
   )
 }

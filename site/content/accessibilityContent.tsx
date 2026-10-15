@@ -20,7 +20,7 @@ export const accessibilityMezzanineRows: { area: string; description: ReactNode;
   { area: 'Visible focus', description: <>Keyboard focus shows a ring in <code>--color-focus</code>.</>, label: 'Interaction', href: '/interaction' },
   { area: 'Colour contrast', description: 'Colour roles pair text and surfaces from the shared palettes. Automated scans check contrast.', label: 'Color', href: '/color' },
   { area: 'Reduced motion', description: 'Every component with motion follows the system reduced-motion setting, which nothing overrides. The Wireframe theme also removes motion. State changes, such as a chevron turning, then happen immediately, so the state stays visible.', label: 'Motion', href: '/motion' },
-  { area: 'Forced colours', description: 'In Windows high contrast mode, borders, focus rings and selection stay visible. Browser tests check this for Navbar, NavTree, Sidebar, TabBar, Table, TextField, ToggleButton and Tooltip.' },
+  { area: 'Forced colours', description: 'In Windows high contrast mode, borders, focus rings and selection stay visible. Browser tests check this for several components.' },
   { area: 'Text size', description: <>Library lengths are stored in <code>rem</code>, so spacing and sizes grow when someone increases their default text size.</>, label: 'Spacing', href: '/spacing' },
   { area: 'Touch targets', description: 'Buttons, tabs, text inputs and Navbar links are at least 44px tall at the default text size.', label: 'Interaction', href: '/interaction' },
 ]

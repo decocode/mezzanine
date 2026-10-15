@@ -6,22 +6,20 @@ export interface InteractionState {
   name: string
   attribute: string
   description: ReactNode
-  usedBy: string
 }
 
-// Component lists come from the state selectors in src/components/*.css.
 export const interactionStates: InteractionState[] = [
-  { name: 'Hovered', attribute: 'data-hovered', description: 'A mouse pointer is over the control. Touch does not trigger hover.', usedBy: 'Button, Checkbox, Disclosure, Link, NavTree, Navbar, RadioGroup, Table, Tabs, TabBar, TextField, ToggleButton' },
-  { name: 'Pressed', attribute: 'data-pressed', description: 'The control is being pressed with a pointer, touch or the keyboard.', usedBy: 'Button, Disclosure, Link, NavTree, Navbar, Table, Tabs, TabBar, ToggleButton' },
-  { name: 'Focus visible', attribute: 'data-focus-visible', description: 'The control has keyboard focus and shows a focus ring.', usedBy: 'Button, Checkbox, Disclosure, Link, NavTree, Navbar, RadioGroup, Table, Tabs, TabBar, ToggleButton' },
-  { name: 'Focused', attribute: 'data-focused', description: 'The control has focus from any input, including a click. Text inputs use this state.', usedBy: 'TextField, TextArea' },
-  { name: 'Selected', attribute: 'data-selected', description: 'The control or item is chosen.', usedBy: 'Checkbox, RadioGroup, Table, Tabs, ToggleButton' },
-  { name: 'Disabled', attribute: 'data-disabled', description: 'The control cannot be used.', usedBy: 'Button, Checkbox, Disclosure, Link, NavTree, RadioGroup, Table, Tabs, TabBar, TextField, ToggleButton' },
-  { name: 'Invalid', attribute: 'data-invalid', description: 'The value has failed validation.', usedBy: 'Checkbox, RadioGroup, TextField' },
-  { name: 'Read-only', attribute: 'data-readonly', description: 'The value can be read and focused but not changed.', usedBy: 'Checkbox, RadioGroup, TextField' },
-  { name: 'Expanded', attribute: 'data-expanded', description: 'A collapsible part is open.', usedBy: 'Disclosure, NavTree, Sidebar' },
-  { name: 'Pending', attribute: 'data-pending', description: 'An action is in progress.', usedBy: 'Button' },
-  { name: 'Indeterminate', attribute: 'data-indeterminate', description: 'A checkbox is neither fully checked nor unchecked.', usedBy: 'Checkbox' },
+  { name: 'Hovered', attribute: 'data-hovered', description: 'A mouse pointer is over the control. Touch does not trigger hover.' },
+  { name: 'Pressed', attribute: 'data-pressed', description: 'The control is being pressed with a pointer, touch or the keyboard.' },
+  { name: 'Focus visible', attribute: 'data-focus-visible', description: 'The control has keyboard focus and shows a focus ring.' },
+  { name: 'Focused', attribute: 'data-focused', description: 'The control has focus from any input, including a click. Text inputs use this state.' },
+  { name: 'Selected', attribute: 'data-selected', description: 'The control or item is chosen.' },
+  { name: 'Disabled', attribute: 'data-disabled', description: 'The control cannot be used.' },
+  { name: 'Invalid', attribute: 'data-invalid', description: 'The value has failed validation.' },
+  { name: 'Read-only', attribute: 'data-readonly', description: 'The value can be read and focused but not changed.' },
+  { name: 'Expanded', attribute: 'data-expanded', description: 'A collapsible part is open.' },
+  { name: 'Pending', attribute: 'data-pending', description: 'An action is in progress.' },
+  { name: 'Indeterminate', attribute: 'data-indeterminate', description: 'A checkbox is neither fully checked nor unchecked.' },
 ]
 
 export const interactionFocusParagraphs: ReactNode[] = [
@@ -81,15 +79,6 @@ export const interactionFocusRingComponents: { component: string; prefix: string
 
 export const interactionTokensIntro = <>The colour tokens below come from the active theme and are documented on the Color page. Their values here are for the theme you are viewing.</>
 
-// Component lists come from token usage in src/components/*.css.
-export const interactionUsedByRows: { token: string; components: string }[] = [
-  { token: '--color-focus', components: 'Button, Checkbox, Dialog, Disclosure, Link, NavTree, Navbar, RadioGroup, Sidebar, Table, Tabs, TabBar, TextField, ToggleButton' },
-  { token: '--color-surface-hover', components: 'Disclosure, Navbar, Table, TabBar' },
-  { token: '--color-surface-pressed', components: 'Disclosure, Navbar, Table, TabBar' },
-  { token: '--color-link-hover', components: 'Link, Navbar' },
-  { token: '--color-link-pressed', components: 'Link, Navbar, Tabs, TabBar' },
-  { token: '--opacity-disabled', components: 'Button, Checkbox, Disclosure, Link, NavTree, RadioGroup, Tabs, TabBar, TextField, ToggleButton' },
-]
 
 export const interactionRelatedPages = [
   { label: 'Accessibility', href: '/accessibility' },

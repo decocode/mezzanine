@@ -10,7 +10,6 @@ const foundationTechnicalDetailTitles = {
   theming: 'Theming',
   accessibility: 'Accessibility',
   localisation: 'Localisation',
-  usedBy: 'Used by',
 } as const
 
 export type FoundationTechnicalDetails = Partial<Record<keyof typeof foundationTechnicalDetailTitles, ReactNode>>

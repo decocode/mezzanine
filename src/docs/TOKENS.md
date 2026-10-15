@@ -259,8 +259,8 @@ the same levels and may vary the shared shadow opacity.
 | `--elevation-sunken-1` | −1 | Content pressed into or recessed within a surface |
 | `--elevation-flat` | 0 | Content with no shadow separation |
 | `--elevation-raised-1` | 1 | Subtle separation from the surface beneath |
-| `--elevation-raised-2` | 2 | Temporary content above nearby interface content; used by Tooltip |
-| `--elevation-raised-3` | 3 | The strongest separation above the main interface; used by Modal, the Sidebar overlay panel and the TabBar More sheet |
+| `--elevation-raised-2` | 2 | Temporary content above nearby interface content |
+| `--elevation-raised-3` | 3 | The strongest separation above the main interface |
 
 Keyboard focus is not an elevation role. Components continue to use the
 separate `--color-focus` token for visible focus indicators.

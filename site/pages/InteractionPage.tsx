@@ -9,7 +9,7 @@ interactionCssProperties, interactionDescription,
   interactionDisabledParagraphs, interactionFocusParagraphs, interactionFocusRingComponents,
   interactionKeyboardRows, interactionPointerParagraphs, interactionReferences,
   interactionRelatedPages, interactionSharedTokens, interactionStates, interactionTokensIntro,
-  interactionUsedByRows,
+ 
 } from '../content/interactionContent'
 
 function Paragraphs({ paragraphs }: { paragraphs: readonly ReactNode[] }) {
@@ -34,14 +34,12 @@ export default function InteractionPage({ refreshKey }: { refreshKey: string }) 
                 <TableHeader>
                   <Column id="state" isRowHeader>State</Column>
                   <Column id="meaning">Meaning</Column>
-                  <Column id="used-by">Used by</Column>
                 </TableHeader>
                 <TableBody>
-                  {interactionStates.map(({ name, attribute, description, usedBy }) => (
+                  {interactionStates.map(({ name, attribute, description }) => (
                     <Row id={attribute} key={attribute}>
                       <Cell><span className="table-item-heading"><strong>{name}</strong><code>{attribute}</code></span></Cell>
                       <Cell>{description}</Cell>
-                      <Cell>{usedBy}</Cell>
                     </Row>
                   ))}
                 </TableBody>
@@ -99,7 +97,6 @@ export default function InteractionPage({ refreshKey }: { refreshKey: string }) 
               </Table>
             </div>
           </>),
-          usedBy: <DocsTable aria-label="Components using interaction tokens" nameColumn="Token" descriptionColumn="Components" rows={interactionUsedByRows.map(({ token, components }) => ({ name: token, description: components }))} />,
         }),
       ]}
       relatedPages={interactionRelatedPages}
