@@ -1,6 +1,4 @@
-import { forwardRef, useContext, type ReactNode } from 'react'
-import { DisclosurePanel as ReactAriaDisclosurePanel, DisclosureStateContext, type DisclosurePanelProps } from 'react-aria-components/Disclosure'
-import { useDisclosurePanelMotion } from './useDisclosurePanelMotion'
+import type { ReactNode } from 'react'
 import { Button as ReactAriaButton } from 'react-aria-components/Button'
 import { Heading, type HeadingProps } from './Heading'
 import { ChevronRightIcon } from '../icons/StudioIcons'
@@ -8,6 +6,7 @@ import { ChevronRightIcon } from '../icons/StudioIcons'
 export {
   Disclosure,
   DisclosureGroup,
+  DisclosurePanel,
 } from 'react-aria-components/DisclosureGroup'
 
 export type {
@@ -18,13 +17,6 @@ export type {
   DisclosureProps,
   DisclosureRenderProps,
 } from 'react-aria-components/DisclosureGroup'
-
-// Keep React Aria's panel, measured size, semantics and find-in-page handling.
-export const DisclosurePanel = forwardRef<HTMLDivElement, DisclosurePanelProps>(function DisclosurePanel(props, ref) {
-  const state = useContext(DisclosureStateContext)
-  const panelRef = useDisclosurePanelMotion(state?.isExpanded ?? false, ref)
-  return <ReactAriaDisclosurePanel {...props} ref={panelRef} />
-})
 
 export interface DisclosureHeaderProps extends Omit<HeadingProps, 'children'> {
   children: ReactNode

@@ -42,7 +42,7 @@ export const motionTokenDefinitions: MotionTokenDefinition[] = [
 
 export const motionPatternDefinitions: MotionPatternDefinition[] = [
   { id: 'modal', name: 'Modal and ModalOverlay', scope: 'Library', movement: 'Backdrop fades; modal scales on entry and exit.', reducedMotion: 'Opens and closes immediately.' },
-  { id: 'disclosure-panel', name: 'Disclosure panel', scope: 'Library', movement: 'Expand-and-collapse reveal: height follows measured content, with a fade and the shared reveal distance. Opening slows towards its endpoint; closing accelerates away.', reducedMotion: 'Opens and closes immediately.' },
+  { id: 'disclosure-panel', name: 'Disclosure panel', scope: 'Library', movement: 'Opens and closes immediately, like Nav Tree rows. Only the chevron turns.', reducedMotion: 'Opens and closes immediately.' },
   { id: 'disclosure-chevron', name: 'Disclosure chevron', scope: 'Library', movement: 'Points right when closed and turns down when expanded.', reducedMotion: 'Orientation changes immediately; expanded state remains visible.' },
   { id: 'tabs', name: 'Tabs selection indicator', scope: 'Library', movement: 'Moves and resizes with shared entry easing.', reducedMotion: 'Changes immediately.' },
   { id: 'tooltip', name: 'Tooltip', scope: 'Library', movement: 'Fades using interface timing; the hover delay remains separate.', reducedMotion: 'Appears and disappears without a fade.' },
