@@ -119,7 +119,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/content/colorContent.ts` | Colour palette descriptions, shade steps and semantic colour-role reference entries |
 | `site/content/dialogContent.tsx` | Dialog written guidance, reference entries, related pages and external references |
 | `site/content/disclosureContent.tsx` | Disclosure written guidance, reference entries, related pages and external references |
-| `site/content/elevationContent.ts` | Elevation levels, uses and token names |
+| `site/content/elevationContent.ts` | Elevation levels and uses, colour tokens, source paths, what each theme sets and links |
 | `site/content/foundationsContent.tsx` | Definition, page list and shared notes for the Foundations overview page |
 | `site/content/homeContent.ts` | Home attribution, title, description and documentation link |
 | `site/content/iconsContent.tsx` | Names and rendered examples for every icon exported by Mezzanine |
@@ -151,7 +151,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/ColorPage.tsx` | Palette swatches and semantic color-role reference; loaded only when its route is requested |
 | `site/pages/DialogPage.tsx` | Dialog documentation content and modal examples, composed with the shared template; loaded only when requested |
 | `site/pages/DisclosurePage.tsx` | Disclosure and DisclosureGroup examples; loaded only when its route is requested |
-| `site/pages/ElevationPage.tsx` | Elevation levels and theming guidance; loaded only when its route is requested |
+| `site/pages/ElevationPage.tsx` | Elevation level cards and shared Technical details (CSS properties, tokens with live values, what each theme sets, focus note) with source links; loaded only when its route is requested |
 | `site/pages/FoundationsPage.tsx` | Foundations overview: what applies to every Foundation and links to each page; loaded only when its route is requested |
 | `site/pages/HomePage.tsx` | Home hero and wordmark composition using the separate Home content |
 | `site/pages/IconsPage.tsx` | Exported icon catalogue; loaded only when its route is requested |

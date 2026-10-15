@@ -622,10 +622,6 @@ a:focus-visible {
   background: var(--color-surface);
 }
 
-.elevation-role-card code {
-  overflow-wrap: anywhere;
-}
-
 .elevation-role-card p {
   margin: 0;
   color: var(--color-text-muted);
