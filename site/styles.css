@@ -421,6 +421,8 @@ a:focus-visible {
 
 /* Documentation controls layout; Mezzanine supplies table appearance and states. */
 .documentation-table {
+  /* Contain absolutely positioned hidden inputs, such as Checkbox's, inside the scroll area. */
+  position: relative;
   width: 100%;
   min-width: 0;
   max-width: 100%;
@@ -431,13 +433,17 @@ a:focus-visible {
 
 .documentation-table .react-aria-Column,
 .documentation-table .react-aria-Cell {
-  overflow-wrap: anywhere;
+  /* break-word keeps words whole when they fit; anywhere would let a column
+     shrink to one letter and split ordinary words such as "Display". */
+  overflow-wrap: break-word;
 }
 
 .documentation-table code {
   /* Grid and flex metadata must not stretch the inline-code background. */
   width: fit-content;
   max-width: 100%;
+  /* Long token and prop names may break at any point on narrow screens. */
+  overflow-wrap: anywhere;
 }
 
 :is(.documentation-props-table, .documentation-anatomy-table) .react-aria-Table {
@@ -535,7 +541,12 @@ a:focus-visible {
 .text-style-sample,
 .text-style-purpose {
   display: block;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+}
+
+/* Keep a size range such as 44–72px on one line. */
+.text-style-size {
+  white-space: nowrap;
 }
 
 .text-style-purpose {

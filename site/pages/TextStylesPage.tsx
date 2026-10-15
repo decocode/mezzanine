@@ -115,7 +115,7 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
                         <span className="text-style-purpose mz-text-body-sm">{style.purpose}</span>
                       </Cell>
                       <Cell><code>{style.className}</code></Cell>
-                      <Cell><FontSize className={style.className} refreshKey={refreshKey} /></Cell>
+                      <Cell><span className="text-style-size"><FontSize className={style.className} refreshKey={refreshKey} /></span></Cell>
                     </Row>
                   ))}
                 </TableBody>
