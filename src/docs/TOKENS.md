@@ -246,19 +246,21 @@ For a circle, use `50%` on a square element; on a rectangle it produces an ellip
 
 ## Current elevation inventory
 
-Elevation tokens describe the spatial relationship between surfaces rather
-than a numbered shadow strength. Every official theme defines the same roles
-and may vary the shared shadow opacity.
+Elevation tokens form a ladder around `--elevation-flat`, which is level 0.
+Numbers count away from flat in each direction: `sunken-1` sits one step into
+the surface, and `raised-1` to `raised-3` sit one, two and three steps above it.
+A higher number means more separation from flat. Every official theme defines
+the same levels and may vary the shared shadow opacity.
 
-| Token | Meaning |
-| --- | --- |
-| `--elevation-shadow-color` | Theme-specific neutral color shared by elevation shadows |
-| `--elevation-highlight-color` | Subtle edge highlight that keeps elevated surfaces visible in Dark theme |
-| `--elevation-inset` | Content pressed into or recessed within a surface |
-| `--elevation-flat` | Content with no shadow separation |
-| `--elevation-raised` | Subtle separation from the surface beneath |
-| `--elevation-floating` | Temporary content above nearby interface content |
-| `--elevation-overlay` | The strongest separation above the main interface |
+| Token | Level | Meaning |
+| --- | --- | --- |
+| `--elevation-shadow-color` | — | Theme-specific neutral color shared by elevation shadows |
+| `--elevation-highlight-color` | — | Subtle edge highlight that keeps elevated surfaces visible in Dark theme |
+| `--elevation-sunken-1` | −1 | Content pressed into or recessed within a surface |
+| `--elevation-flat` | 0 | Content with no shadow separation |
+| `--elevation-raised-1` | 1 | Subtle separation from the surface beneath |
+| `--elevation-raised-2` | 2 | Temporary content above nearby interface content; used by Tooltip |
+| `--elevation-raised-3` | 3 | The strongest separation above the main interface; used by Modal, the Sidebar overlay panel and the TabBar More sheet |
 
 Keyboard focus is not an elevation role. Components continue to use the
 separate `--color-focus` token for visible focus indicators.
@@ -300,8 +302,8 @@ Tabs uses semantic text, link, border and surface colours across the official th
 | `--tab-panel-padding` | Space inside the content panel |
 | `--tab-panel-preferred-width` | Preferred panel width before a vertical layout wraps the panel below the list |
 
-Modal and Dialog use the existing neutral surface, text, border, focus and overlay
-elevation roles. Their component tokens are shared across all three themes and can
+Modal and Dialog use the existing neutral surface, text, border and focus roles and
+the `--elevation-raised-3` elevation level. Their component tokens are shared across all three themes and can
 be overridden independently by a consuming product.
 
 | Token | Meaning |
@@ -610,8 +612,8 @@ the visitor prefers reduced motion.
 
 ## Tooltip tokens
 
-Tooltips use the shared surface, text, border, spacing, small body type, small
-radius and overlay elevation tokens. These tokens control their remaining values:
+Tooltips use the shared surface, text, border, spacing, small body type and small
+radius tokens, and `--elevation-raised-2`. These tokens control their remaining values:
 
 | Token | Purpose |
 | --- | --- |

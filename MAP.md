@@ -138,7 +138,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/ProsePage.tsx` | List and inline-code examples; loaded only when its route is requested |
 | `site/pages/SpacingPage.tsx` | Spacing-scale reference; loaded only when its route is requested |
 | `site/pages/ShapePage.tsx` | Corner-radius scale and guidance for styling all corners or individual corners; loaded only when its route is requested |
-| `site/pages/ElevationPage.tsx` | Elevation roles and theming guidance; loaded only when its route is requested |
+| `site/pages/ElevationPage.tsx` | Elevation levels and theming guidance; loaded only when its route is requested |
 | `site/pages/MotionPage.tsx` | Motion timing, tokens and reduced-motion guidance; loaded only when its route is requested |
 | `site/pages/IconsPage.tsx` | Exported icon catalogue; loaded only when its route is requested |
 | `site/pages/BadgePage.tsx` | Badge examples and variants; loaded only when its route is requested |
@@ -169,7 +169,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/content/typographyContent.tsx` | Typography overview intro, How typography works layers and theme example code |
 | `site/content/spacingContent.ts` | Spacing scale steps displayed on the Spacing page |
 | `site/content/shapeContent.ts` | Corner-radius labels and token names displayed on the Shape page |
-| `site/content/elevationContent.ts` | Elevation names, descriptions and token names |
+| `site/content/elevationContent.ts` | Elevation levels, uses and token names |
 | `site/content/motionContent.tsx` | Motion timing, token and reduced-motion reference descriptions |
 | `site/content/iconsContent.tsx` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/components/ColorSwatch.tsx` | Displays a palette shade, its number and resolved colour value with readable text |

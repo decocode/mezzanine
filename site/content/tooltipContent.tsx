@@ -43,7 +43,7 @@ export const tooltipContent = {
     { name: 'Tooltip: offset / crossOffset / shouldFlip', description: 'Adjust positioning and whether the tooltip may flip to fit the available space.' },
     { name: 'Tooltip: className', description: <>Accepts a class name or render function. Include <code>react-aria-Tooltip</code> to retain Mezzanine styling when supplying your own classes.</> },
   ],
-  tokensParagraph: 'Tooltips also use the shared surface, text, border, spacing, small body typography, small radius and overlay elevation tokens. The hover delay is a component prop, not a CSS token.',
+  tokensParagraph: <>Tooltips also use the shared surface, text, border, spacing, small body typography and small radius tokens, and the <code>--elevation-raised-2</code> elevation token. The hover delay is a component prop, not a CSS token.</>,
   tokensRows: [
     { name: '--tooltip-max-width', description: 'Maximum tooltip width, additionally constrained by the viewport.' },
     { name: '--tooltip-border-width', description: 'Tooltip border thickness.' },

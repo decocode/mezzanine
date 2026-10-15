@@ -167,7 +167,7 @@
   border: var(--tab-bar-border-width) solid var(--color-border);
   background: var(--tab-bar-background);
   color: var(--color-text);
-  box-shadow: var(--elevation-overlay);
+  box-shadow: var(--elevation-raised-3);
 }
 
 .mezzanine-tab-bar-sheet-heading {

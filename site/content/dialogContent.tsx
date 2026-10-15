@@ -56,6 +56,6 @@ export const dialogContent = {
     { name: '--dialog-focus-ring-width', description: 'Dialog keyboard-focus outline thickness.' },
   ],
   tokensParagraphs: [
-    <><code>Dialog</code> and <code>Modal</code> also use shared typography, focus colour and overlay elevation tokens. React Aria supplies the page and visual-viewport dimensions.</>,
+    <><code>Dialog</code> and <code>Modal</code> also use shared typography and focus colour tokens, and the <code>--elevation-raised-3</code> elevation token. React Aria supplies the page and visual-viewport dimensions.</>,
   ],
 }
