@@ -201,7 +201,10 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
 | `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
-| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing, typography, NavTree ownership, shared motion and the public API snapshot; supports explicit `--update-api` |
+| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing, typography, NavTree ownership, shared motion, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
+| `scripts/docs-rules.mjs` | Checks that site routes match nginx and Lighthouse, that documented tokens exist and public tokens are documented, and parses Props table rows |
+| `scripts/docs-rules.test.mjs` | Passing and failing fixtures for the docs rules |
+| `scripts/undocumented-tokens.baseline.json` | Public tokens not yet documented on the site; the token check fails only on new gaps, and entries must be removed once documented |
 | `scripts/public-api.snapshot.json` | Reviewed public export names and value/type categories used to detect API changes |
 | `scripts/run-lighthouse.mjs` | Runs Lighthouse CI with the configured system Chrome or Playwright Chromium fallback |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |

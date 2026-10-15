@@ -104,6 +104,24 @@ out of date. Add them only if they can be generated from the code.
 Leave out sections that do not apply. Pages not yet converted, such as
 Typography and Color, have their own structures but reuse `PageHeading`.
 
+## Facts checked by check:rules
+
+`npm run check:rules` keeps documentation facts in step with the code:
+
+- Every page in `site/siteStructure.ts` must be an allowed route in
+  `nginx.conf`, every route nginx allows must be a page, and every Lighthouse
+  URL must be a route.
+- Every token the site mentions must exist, and every public token in
+  `src/tokens.css` and the theme files must be documented on some page.
+  Known gaps are listed in `scripts/undocumented-tokens.baseline.json`. After
+  documenting a token, or when a gap is accepted, run
+  `npm run check:rules -- --update-token-baseline`.
+- Each Props table must match the component's exported TypeScript props: no
+  documented prop may be missing from the type, and every prop the component
+  declares itself must be documented. Inherited React Aria props may be listed
+  selectively. The tables and their types are listed in
+  `scripts/check-rules.mjs`; add a new Props table there.
+
 ## Other pages
 
 Pages for subjects that are not implemented yet say Not implemented and are

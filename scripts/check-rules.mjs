@@ -1,6 +1,7 @@
 import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
 import { checkTypographyChoices, checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
+import { checkRoutes, checkTokens, declaredTokens, parsePropRows } from './docs-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -8,6 +9,7 @@ import ts from 'typescript'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const snapshotFile = 'scripts/public-api.snapshot.json'
+const tokenBaselineFile = 'scripts/undocumented-tokens.baseline.json'
 const problems = []
 const allowedPrefixes = ['react-aria-', 'mezzanine-', 'mz-text-']
 const read = file => readFileSync(path.join(root, file), 'utf8')
@@ -332,9 +334,122 @@ function checkSnapshot(api, update) {
   }
 }
 
+// Each Props table and the exported types it documents. Rows prefixed with a
+// component name, or following a row that is only that name, use its type.
+const propTables = [
+  { file: 'site/content/navbarContent.tsx', key: 'props', types: ['NavbarProps'] },
+  { file: 'site/content/navigationTreeContent.tsx', key: 'props', types: ['NavTreeProps'] },
+  { file: 'site/content/navigationTreeContent.tsx', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
+  { file: 'site/content/tabBarContent.tsx', key: 'propsRows', types: ['TabBarProps'] },
+  { file: 'site/content/sidebarContent.tsx', key: 'props', types: ['SidebarProps'],
+    components: { Sidebar: ['SidebarProps'], SidebarTrigger: ['SidebarTriggerProps'], SidebarPanel: ['SidebarPanelProps'] } },
+  { file: 'site/content/tabsContent.tsx', key: 'propsRows', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
+  { file: 'site/content/tableOfContentsContent.tsx', key: 'propsRows', types: ['TableOfContentsProps'] },
+  { file: 'site/content/tooltipContent.tsx', key: 'propsRows', types: [],
+    components: { TooltipTrigger: ['TooltipTriggerComponentProps'], Tooltip: ['TooltipProps'] } },
+]
+
+function documentedPropNames(program, file, key) {
+  const source = program.getSourceFile(path.join(root, file))
+  const names = []
+  walk(source, node => {
+    if (!ts.isPropertyAssignment(node) || node.name.getText(source) !== key) return
+    let list = node.initializer
+    while (ts.isSatisfiesExpression(list) || ts.isAsExpression(list)) list = list.expression
+    if (!ts.isArrayLiteralExpression(list)) return
+    for (const element of list.elements) {
+      if (!ts.isObjectLiteralExpression(element)) continue
+      const name = element.properties.find(property => ts.isPropertyAssignment(property) && property.name.getText(source) === 'name')
+      if (name && ts.isStringLiteral(name.initializer)) names.push({ text: name.initializer.text, position: name.getStart(source) })
+    }
+  })
+  return names
+}
+
+function exportedType(checker, exports, name) {
+  let symbol = exports.find(item => item.name === name)
+  if (!symbol) return undefined
+  if (symbol.flags & ts.SymbolFlags.Alias) symbol = checker.getAliasedSymbol(symbol)
+  return checker.getDeclaredTypeOfSymbol(symbol)
+}
+
+// Every property of the type, across all members of a union.
+function propertiesOf(type) {
+  return type.isUnion() ? type.types.flatMap(propertiesOf) : type.getProperties()
+}
+
+function checkPropTables(program, checker) {
+  const index = program.getSourceFile(path.join(root, 'src/index.ts'))
+  const exports = checker.getExportsOfModule(checker.getSymbolAtLocation(index))
+  for (const table of propTables) {
+    const text = read(table.file)
+    const rows = documentedPropNames(program, table.file, table.key)
+    if (!rows.length) { report(table.file, text, 0, 'docs-props', `No ${table.key} rows found.`); continue }
+    const components = table.components ?? {}
+    const typeNamesFor = component => component ? components[component] : table.types
+    const resolve = names => names.map(name => {
+      const type = exportedType(checker, exports, name)
+      if (!type) report(table.file, text, 0, 'docs-props', `${name} is not exported from src/index.ts.`)
+      return type
+    }).filter(Boolean)
+    const documented = new Map()
+    for (const { component, prop } of parsePropRows(rows.map(row => row.text), Object.keys(components))) {
+      const typeNames = typeNamesFor(component)
+      const names = new Set(resolve(typeNames).flatMap(type => propertiesOf(type).map(symbol => symbol.name)))
+      const row = rows.find(item => item.text.includes(prop))
+      if (!names.has(prop)) report(table.file, text, row?.position ?? 0, 'docs-props', `Props table documents "${prop}", which ${typeNames.join(' / ')} does not have.`)
+      for (const typeName of typeNames) documented.set(typeName, new Set([...(documented.get(typeName) ?? []), prop]))
+    }
+    // Props a component declares itself must be documented. Props it inherits,
+    // from React Aria or another Mezzanine component, are documented selectively.
+    for (const typeName of new Set([...table.types, ...Object.values(components).flat()])) {
+      const [type] = resolve([typeName])
+      if (!type) continue
+      const typeFiles = new Set((type.aliasSymbol ?? type.symbol)?.declarations?.map(declaration => declaration.getSourceFile().fileName) ?? [])
+      const own = propertiesOf(type).filter(symbol => (symbol.declarations ?? []).some(declaration => {
+        const fileName = declaration.getSourceFile().fileName
+        return typeFiles.has(fileName) && fileName.startsWith(path.join(root, 'src'))
+      }))
+      // ref is the standard React prop every component accepts.
+      for (const symbol of own.filter(item => item.name !== 'ref')) {
+        const covered = [...documented].some(([name, props]) => props.has(symbol.name) && (name === typeName || resolve([name]).some(other => propertiesOf(other).includes(symbol))))
+        if (!covered) report(table.file, text, 0, 'docs-props', `${typeName} declares "${symbol.name}", but the Props table does not document it.`)
+      }
+    }
+  }
+}
+
+function checkDocsTokens(update) {
+  const tokenFiles = ['src/tokens.css', ...filesIn('src/themes', ['.css'])]
+  const publicTokens = declaredTokens(tokenFiles.map(read))
+  const knownTokens = declaredTokens([...filesIn('src', ['.css']), ...filesIn('site', ['.css'])].map(read))
+  const siteSources = filesIn('site', ['.ts', '.tsx']).filter(file => !file.startsWith('site/lab/'))
+    .map(file => ({ file, text: read(file) }))
+  const baselineText = read(tokenBaselineFile)
+  const baseline = update ? [] : JSON.parse(baselineText)
+  const { problems: tokenProblems, undocumented } = checkTokens({ publicTokens, knownTokens, siteSources, baseline })
+  if (update) {
+    writeFileSync(path.join(root, tokenBaselineFile), `${JSON.stringify(undocumented, null, 2)}\n`)
+    console.log(`Updated ${tokenBaselineFile} (${undocumented.length} undocumented tokens).`)
+    return
+  }
+  for (const problem of tokenProblems) {
+    const text = problem.file === tokenBaselineFile ? baselineText : read(problem.file)
+    report(problem.file, text, problem.position, 'docs-tokens', problem.message)
+  }
+}
+
+function checkDocsRoutes() {
+  const lighthouseUrls = ['lighthouserc.mobile.json', 'lighthouserc.desktop.json']
+    .flatMap(file => JSON.parse(read(file)).ci.collect.url.map(url => ({ file, url })))
+  for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), nginx: read('nginx.conf'), lighthouseUrls })) {
+    report(problem.file, read(problem.file), problem.position, 'docs-routes', problem.message)
+  }
+}
+
 try {
   const argumentsList = process.argv.slice(2)
-  if (argumentsList.some(argument => argument !== '--update-api')) throw new Error('Only --update-api is supported.')
+  if (argumentsList.some(argument => !['--update-api', '--update-token-baseline'].includes(argument))) throw new Error('Only --update-api and --update-token-baseline are supported.')
   const configFile = ts.readConfigFile(path.join(root, 'tsconfig.app.json'), ts.sys.readFile)
   if (configFile.error) throw new Error(ts.flattenDiagnosticMessageText(configFile.error.messageText, '\n'))
   const config = ts.parseJsonConfigFileContent(configFile.config, ts.sys, root)
@@ -372,6 +487,9 @@ try {
     if (!tokens.includes(`${token}:`)) report('src/tokens.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
   }
   checkSnapshot(api, argumentsList.includes('--update-api'))
+  checkDocsRoutes()
+  checkDocsTokens(argumentsList.includes('--update-token-baseline'))
+  checkPropTables(program, checker)
 } catch (error) {
   report('scripts/check-rules.mjs', '', 0, 'rule-checker', error.message)
 }
