@@ -36,8 +36,26 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     ],
   },
   {
+    id: 'principles',
+    label: 'Principles',
+    pages: [
+      { id: 'usability', label: 'Usability', path: '/usability', status: 'empty' },
+      { id: 'inclusivity', label: 'Inclusivity', path: '/inclusivity', status: 'empty' },
+      { id: 'creativity', label: 'Creativity', path: '/creativity', status: 'empty' },
+    ],
+  },
+  {
+    // Foundations do not change with the theme.
     id: 'foundations',
     label: 'Foundations',
+    pages: [
+      { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'implemented' },
+    ],
+  },
+  {
+    // Styles change with the theme.
+    id: 'styles',
+    label: 'Styles',
     groups: [
       {
         id: 'typography',
@@ -48,13 +66,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'prose', label: 'Prose', path: '/typography/prose', status: 'implemented' },
         ],
       },
-      {
-        id: 'layout',
-        label: 'Layout',
-        pages: [
-          { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'implemented' },
-        ],
-      },
     ],
     pages: [
       { id: 'color', label: 'Color', path: '/color', status: 'implemented' },
@@ -62,6 +73,15 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
       { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
       { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
       { id: 'shape', label: 'Shape', path: '/shape', status: 'implemented' },
+    ],
+  },
+  {
+    id: 'themes',
+    label: 'Themes',
+    pages: [
+      { id: 'wireframe', label: 'Wireframe', path: '/wireframe', status: 'empty' },
+      { id: 'light-and-dark-mode', label: 'Light & Dark mode', path: '/light-and-dark-mode', status: 'empty' },
+      { id: 'custom-themes', label: 'Custom themes', path: '/custom-themes', status: 'empty' },
     ],
   },
   {

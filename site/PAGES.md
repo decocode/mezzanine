@@ -57,6 +57,6 @@ existing anchor for the References section.
 
 ## Other pages
 
-Foundation pages, such as Typography and Color, have their own structures but
+Foundations and Styles pages, such as Spacing, Typography and Color, have their own structures but
 reuse `PageHeading`. Pages for subjects that are not implemented yet say
 Not implemented and are marked WIP in the navigation.

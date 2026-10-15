@@ -25,5 +25,6 @@ function groupItem(group: SiteNavigationGroup): NavTreeItemData {
   }
 }
 
-// Top-level groups keep their reading order: Get started, Foundations, Components.
+// Top-level groups keep their reading order: Get started, Principles,
+// Foundations, Styles, Themes, Components.
 export const sidebarNavigationItems = siteNavigationGroups.map(groupItem)

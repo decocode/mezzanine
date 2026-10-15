@@ -163,7 +163,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/components/Sidebar.tsx` | Docs composition of the public non-collapsible SidebarPanel, mobile Disclosure and NavTree navigation, expanding the current page's ancestor groups |
 | `src/components/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |
 | `src/components/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |
-| `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
+| `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; top-level groups are Get started, Principles, Foundations (does not change with the theme), Styles (changes with the theme), Themes and Components; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
 | `site/content/colorContent.ts` | Colour palette descriptions, shade steps and semantic colour-role reference entries |
 | `site/content/textStylesContent.ts` | Text style intro, code example, roles, style names and purposes, recommended choices (kept identical to TYPOGRAPHY.md by check:rules), weight examples, base elements and token names |
 | `site/content/typographyContent.tsx` | Typography overview intro, How typography works layers and theme example code |
