@@ -33,3 +33,15 @@
     --_motion-loading-animation: none !important;
   }
 }
+
+/* Backdrop fades shared by Modal, Sidebar and the TabBar sheet. Each use
+   consumes the policy switch in its own animation-name. */
+@keyframes mezzanine-modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mezzanine-modal-fade-exit {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
