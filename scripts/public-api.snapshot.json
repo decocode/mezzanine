@@ -84,6 +84,14 @@
     "kind": "value"
   },
   {
+    "name": "Card",
+    "kind": "value"
+  },
+  {
+    "name": "CardProps",
+    "kind": "type"
+  },
+  {
     "name": "Cell",
     "kind": "value"
   },

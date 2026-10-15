@@ -15,6 +15,7 @@
 
 @import './components/Badge/Badge.tokens.css';
 @import './components/Button/Button.tokens.css';
+@import './components/Card/Card.tokens.css';
 @import './components/Checkbox/Checkbox.tokens.css';
 @import './components/Dialog/Dialog.tokens.css';
 @import './components/Disclosure/Disclosure.tokens.css';

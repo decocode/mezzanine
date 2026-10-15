@@ -1,0 +1,13 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Card: a static surface for grouped content. */
+  --card-padding: var(--space-6);
+  --card-content-gap: var(--space-4);
+  --card-border-width: 0.0625rem;
+  --card-border-radius: 0;
+  --card-background: var(--color-page);
+  --card-content: var(--color-text);
+  --card-border: var(--color-border);
+  --card-elevation: var(--elevation-raised-1);
+}

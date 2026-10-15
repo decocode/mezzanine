@@ -138,7 +138,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'cards',
         label: 'Cards',
         pages: [
-          { id: 'card', label: 'Card', path: '/card', status: 'empty' },
+          { id: 'card', label: 'Card', path: '/card', status: 'implemented' },
         ],
       },
     ],
