@@ -193,27 +193,17 @@ test('AppShell and documentation example share permanent library panels and navi
 })
 
 for (const fontSize of [16, 32]) {
-  test(`docs sidebar keeps non-modal disclosure behaviour at 320px with ${fontSize}px text`, async ({ page }) => {
+  test(`docs sidebar example stays inline at 320px with ${fontSize}px text`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 800 })
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/sidebar')
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
-    const shell = page.locator('.site-layout > .site-sidebar')
+    await expect(page.getByRole('button', { name: 'Browse sections', exact: true })).toHaveCount(0)
+    await expect(page.locator('.site-layout > .site-sidebar').getByRole('treegrid')).toHaveCount(0)
     const example = page.locator('.sidebar-documentation-example')
-    for (const container of [shell, example]) {
-      const trigger = container.getByRole('button', { name: 'Browse sections', exact: true })
-      await trigger.focus()
-      await page.keyboard.press('Enter')
-      await expect(trigger).toHaveAttribute('aria-expanded', 'true')
-      await expect(container.getByRole('treegrid')).toBeVisible()
-      await expect(page.getByRole('dialog')).toHaveCount(0)
-      await expect(container.locator('.mezzanine-sidebar-header')).toHaveCount(0)
-      await page.keyboard.press('Escape')
-      await expect(trigger).toHaveAttribute('aria-expanded', 'true')
-      await trigger.focus()
-      await page.keyboard.press('Space')
-      await expect(container.getByRole('treegrid')).toHaveCount(0)
-    }
+    await expect(example.getByRole('treegrid')).toBeVisible()
+    await expect(page.getByRole('dialog')).toHaveCount(0)
+    await expect(example.locator('.mezzanine-sidebar-header')).toHaveCount(0)
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
   })
 }

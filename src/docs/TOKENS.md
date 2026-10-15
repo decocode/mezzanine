@@ -278,7 +278,7 @@ Its own container switches to desktop navigation at 48rem, relative to the root 
 | `--navbar-border-width` | Navbar and trigger border thickness |
 | `--navbar-min-height` | Minimum height of the content row |
 | `--navbar-wide-padding-inline` | Horizontal padding in the desktop layout |
-| `--navbar-menu-min-height` | Minimum navbar navigation-link height |
+| `--navbar-menu-min-height` | Minimum navbar navigation-link height, and the brand link's minimum height and width |
 | `--navbar-focus-ring-width`, `--navbar-focus-ring-offset` | Menu trigger focus outline |
 | `--navbar-panel-max-height` | Maximum panel height before it scrolls |
 | `--motion-duration-interface`, `--motion-distance-reveal` | Panel entry timing and initial vertical displacement; disabled with reduced motion |

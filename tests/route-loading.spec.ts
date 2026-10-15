@@ -1,13 +1,13 @@
 import { expect, test } from '@playwright/test'
 import { sitePages } from '../site/siteStructure'
 
-test('mobile navigation opens from Browse sections and retains expanded groups', async ({ page }) => {
+test('mobile navigation opens from the Navbar menu and retains expanded groups', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/button')
   await expect(page.getByText('Loading documentation…', { exact: true })).toHaveCount(0)
   await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
-  const browse = page.getByRole('button', { name: 'Browse sections', exact: true })
+  const browse = page.getByRole('banner').getByRole('button', { name: /^(Menu|Close menu)$/ })
   await browse.focus()
   await page.keyboard.press('Enter')
   const tree = page.getByRole('treegrid', { name: 'Mezzanine documentation' })

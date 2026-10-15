@@ -62,11 +62,23 @@ a:focus-visible {
 .site-name {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
   color: var(--color-text);
   font-size: var(--font-size-title-md);
   font-weight: var(--font-weight-bold);
   text-decoration: none;
+}
+
+/* Narrow screens show the logo only; the link keeps its "Mezzanine home" name. */
+.site-name-text {
+  display: none;
+}
+
+@container showcase (min-width: 48rem) {
+  .site-name-text {
+    display: inline;
+  }
 }
 
 .site-name:is(:hover, :active, [data-hovered], [data-pressed]) {
@@ -76,10 +88,6 @@ a:focus-visible {
 /* The brand text stands in for an SVG wordmark, including in Wireframe. */
 :root[data-theme='wireframe'] .site-name {
   text-decoration-line: none;
-}
-
-.theme-toggle-group {
-  margin-top: var(--space-2);
 }
 
 .skip-link {
@@ -112,30 +120,7 @@ a:focus-visible {
   position: relative;
 }
 
-.mobile-sidebar-heading {
-  margin: 0;
-}
-
-.mobile-sidebar {
-  border-block-end: 0;
-}
-
-
-
-.mobile-sidebar-panel {
-  position: absolute;
-  z-index: 5;
-  top: 100%;
-  right: 0;
-  left: 0;
-  max-height: 75dvh;
-  padding: var(--space-3) var(--space-4);
-  overflow-y: auto;
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-page);
-}
-
-.mobile-sidebar-panel[hidden],
+/* Narrow screens reach the docs navigation from the Navbar menu instead. */
 .desktop-sidebar {
   display: none;
 }
@@ -921,17 +906,12 @@ a:focus-visible {
 /* Keep the compact navigation until the layout fits at the current text size. */
 @container showcase (min-width: 48rem) {
   .theme-toggle-group {
-    margin-top: 0;
     margin-inline-start: var(--space-2);
   }
 
   .site-layout {
     display: grid;
     grid-template-columns: 17.5rem minmax(0, 1fr);
-  }
-
-  .mobile-sidebar {
-    display: none;
   }
 
   .desktop-sidebar {
@@ -1102,7 +1082,7 @@ a:focus-visible {
 }
 
 
-/* The docs shell supplies its existing sizing, scroll area and responsive disclosure. */
+/* The docs shell supplies its existing sizing and scroll area. */
 .site-sidebar-panel {
   --sidebar-width: 100%;
   --sidebar-max-height: none;
@@ -1113,6 +1093,7 @@ a:focus-visible {
 
 .sidebar-documentation-example { max-width: 17.5rem; }
 .sidebar-documentation-example .desktop-sidebar {
+  display: block;
   position: static;
   height: auto;
   max-height: 32rem;

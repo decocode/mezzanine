@@ -1,4 +1,4 @@
-import { MoonIcon, PlaceholderIcon, SunIcon, ToggleButton, ToggleButtonGroup, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
+import { LayoutIcon, MoonIcon, SunIcon, ToggleButton, ToggleButtonGroup, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
 import { getDisplayedTheme, isTheme, type Theme } from '../themeSwitcherLogic'
 
 interface ThemeSwitcherProps {
@@ -33,7 +33,7 @@ export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherPro
         <Tooltip placement="bottom">Dark theme</Tooltip>
       </TooltipTrigger>
       <TooltipTrigger>
-        <ToggleButton aria-label="Wireframe theme" id="wireframe" iconLeading={<PlaceholderIcon />} />
+        <ToggleButton aria-label="Wireframe theme" id="wireframe" iconLeading={<LayoutIcon />} />
         <Tooltip placement="bottom">Wireframe theme</Tooltip>
       </TooltipTrigger>
     </ToggleButtonGroup>

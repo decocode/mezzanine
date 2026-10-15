@@ -94,6 +94,11 @@ export function MoonIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z" /></StrokeIcon>
 }
 
+// A page layout: header bar, column and image placeholder. Used for the Wireframe theme.
+export function LayoutIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><rect height="5" width="18" x="3" y="3" /><rect height="10" width="6" x="3" y="11" /><rect height="10" width="9" x="12" y="11" /><path d="M12 11l9 10M21 11l-9 10" /></StrokeIcon>
+}
+
 export function PlaceholderIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><rect height="18" width="18" x="3" y="3" /><path d="M3 3l18 18M21 3 3 21" /></StrokeIcon>
 }

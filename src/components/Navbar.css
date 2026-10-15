@@ -18,11 +18,18 @@
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* The brand's auto margin keeps actions and the menu button at the end, even when they wrap. */
+  justify-content: flex-end;
   align-items: center;
   gap: var(--space-3);
   min-height: var(--navbar-min-height);
   padding: var(--space-3) min(var(--space-4), 4cqi);
+}
+
+.mezzanine-navbar-brand {
+  display: flex;
+  align-items: center;
+  margin-inline-end: auto;
 }
 
 .mezzanine-navbar-content > * {
@@ -37,7 +44,6 @@
 
 .mezzanine-navbar-heading {
   margin: 0;
-  margin-inline-start: auto;
   min-width: 0;
   max-width: 100%;
 }
@@ -85,7 +91,8 @@
     padding-inline: var(--navbar-wide-padding-inline);
   }
 
-  .mezzanine-navbar-mobile {
+  .mezzanine-navbar-mobile,
+  .mezzanine-navbar-bar-actions {
     display: none;
   }
 
@@ -107,18 +114,20 @@
   min-width: 0;
 }
 
-.mezzanine-navbar-panel .mezzanine-navbar-links,
-.mezzanine-navbar-panel .mezzanine-navbar-actions {
+.mezzanine-navbar-panel .mezzanine-navbar-links {
   flex-direction: column;
   align-items: stretch;
 }
 
-.mezzanine-navbar-panel .mezzanine-navbar-actions {
-  margin-block-start: var(--space-3);
+.mezzanine-navbar-links > .react-aria-Link {
+  min-height: var(--navbar-menu-min-height);
+  overflow-wrap: anywhere;
 }
 
-.mezzanine-navbar-links > .react-aria-Link,
-.mezzanine-navbar-brand > .react-aria-Link {
+/* The brand link keeps a full touch target even when it shows only a logo,
+   and whatever class the app gives it. */
+.mezzanine-navbar-brand > a {
+  min-width: var(--navbar-menu-min-height);
   min-height: var(--navbar-menu-min-height);
   overflow-wrap: anywhere;
 }

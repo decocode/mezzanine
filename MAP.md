@@ -156,11 +156,11 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/CheckboxPage.tsx` | Checkbox example and selection states; loaded only when its route is requested |
 | `site/pages/RadioGroupPage.tsx` | RadioGroup anatomy, states, validation and token reference; loaded only when its route is requested |
 | `site/pages/TablePage.tsx` | Table selection, sorting, empty-state and anatomy examples; loaded only when its route is requested |
-| `src/components/Navbar.tsx` | Public sticky Navbar with brand, navigation and action areas and a React Aria Disclosure mobile menu |
+| `src/components/Navbar.tsx` | Public sticky Navbar with brand, navigation and action areas, a React Aria Disclosure mobile menu with an icon-only trigger and tooltip, actions kept in the bar on narrow screens, and an isMenu render value for menu-only content |
 | `src/components/Navbar.css` | Token-based Navbar layout, text-size-aware container breakpoint and reduced-motion-aware menu panel |
 | `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
-| `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs link and separate theme actions to the library Navbar |
-| `site/components/Sidebar.tsx` | Docs composition of the public non-collapsible SidebarPanel, mobile Disclosure and NavTree navigation, expanding the current page's ancestor groups |
+| `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs and Lab links, theme actions and, on docs pages, the docs NavTree under Docs in the narrow-screen menu to the library Navbar |
+| `site/components/Sidebar.tsx` | Docs composition of the public non-collapsible SidebarPanel and NavTree navigation for wider screens, expanding the current page's ancestor groups; exports DocsNavigation for the Navbar menu |
 | `src/components/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |
 | `src/components/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |
 | `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; top-level groups are Get started, Principles, Foundations (does not change with the theme), Styles (changes with the theme), Themes and Components; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |

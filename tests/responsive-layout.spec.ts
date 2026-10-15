@@ -16,13 +16,13 @@ for (const fontSize of [16, 32]) {
         cards.every((card) => card.scrollWidth <= card.clientWidth)
       ))).toBe(true)
 
-      const browse = page.getByRole('button', { name: 'Browse sections', exact: true })
+      const browse = page.getByRole('banner').getByRole('button', { name: /^(Menu|Close menu)$/ })
       if (width < 48 * fontSize) {
         await expect(browse).toBeVisible()
         await browse.focus()
         await page.keyboard.press('Enter')
         await expect(browse).toHaveAttribute('aria-expanded', 'true')
-        await expect(page.getByRole('treegrid', { name: 'Mezzanine documentation' })).toBeVisible()
+        await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Mezzanine documentation' })).toBeVisible()
         await page.keyboard.press('Enter')
         await expect(browse).toHaveAttribute('aria-expanded', 'false')
         await expect(browse).toBeFocused()

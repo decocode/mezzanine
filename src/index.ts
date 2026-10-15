@@ -129,6 +129,7 @@ export {
   ExternalLinkIcon,
   EyeIcon,
   EyeOffIcon,
+  LayoutIcon,
   LinkedInIcon,
   LoadingIcon,
   LocationIcon,

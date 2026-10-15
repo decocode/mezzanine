@@ -35,8 +35,12 @@ containers decide position and available space.
 ## Navbar
 
 `Navbar` supplies the sticky layout and the mobile menu. Pass your branding as
-`brand`, your links as children and optional controls as `actions`. `menuLabel`
-replaces the default "Menu" text, and `className` adds your own styling.
+`brand`, your links as children and optional controls as `actions`. Actions
+stay in the bar at every width. The children function receives `isMenu`, which
+is true inside the narrow-screen menu, so menu-only content such as section
+navigation can sit between links.
+The menu button is icon-only, with a tooltip. `menuLabel` replaces its default
+"Menu" name and tooltip, and `className` adds your own styling.
 
 ```tsx
 import { Navbar, Link } from '@decocode/mezzanine'
@@ -48,8 +52,8 @@ import { Navbar, Link } from '@decocode/mezzanine'
 </Navbar>
 ```
 
-The children render twice, in separate mobile and desktop containers, and CSS
-shows one at a time. Avoid fixed HTML IDs in this content; use React's `useId`
+The children and actions render twice, in separate mobile and desktop
+containers, and CSS shows one at a time. Avoid fixed HTML IDs in this content; use React's `useId`
 when a child needs an ID. Branding, links and theme controls belong to the app.
 
 ## Table sorting

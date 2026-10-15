@@ -292,6 +292,10 @@
     "kind": "type"
   },
   {
+    "name": "LayoutIcon",
+    "kind": "value"
+  },
+  {
     "name": "Link",
     "kind": "value"
   },
