@@ -4,7 +4,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 
 ## Commands and when you are done
 
-- `npm run dev` starts the site. Setup details are in `README.md`.
+- `npm run dev` starts the site.
 - `npm run check:rules` checks the project rules. Run it before finishing any code change.
 - `npm run lint` and `npm run build` run when library, site or configuration code changes. `npm run build` builds both the package and the site.
 - `npm run test:e2e` runs the browser tests. Run the tests that cover what you changed, such as keyboard, motion, themes or responsive layout. Run the wider suite when shared foundations change, such as tokens, motion or shared styles. A text-only edit does not need it.
@@ -16,7 +16,9 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 ## Read what the task needs
 
 - `MAP.md` has the file layout. Read it when you add, move or remove files, and update it when you do.
-- `README.md` has setup and commands.
+- `README.md` is a short introduction for people visiting the repository on GitHub. Keep it that way: no component guidance, migrations or change notes.
+- `src/docs/COMPONENTS.md` explains how apps use the components. Update it when a component's usage changes.
+- `site/PAGES.md` explains how documentation site pages are built.
 - `docs/MISSIONSTATEMENT.md` explains the purpose of Mezzanine, who it is for and the principles behind it. Read it for product, design, naming and documentation-structure decisions, and when you propose ideas. A small fix does not need it.
 
 `docs/` is private and gitignored. `docs/MISSIONSTATEMENT.md` exists only on the user's own computer. Do not commit it, copy it into tracked files or quote it in public content. If you cannot find it, tell the user and continue.
@@ -74,7 +76,7 @@ Do not put an idea into code, in the Lab or anywhere else, before the user has a
 - Library components contain no product-specific content, branding, copy or imagery.
 - The library owns each component's anatomy, appearance, states, motion and behaviour. A consuming app, including the site, supplies content and a theme and positions components in its own layout. If a consumer has to re-add library class names, attach special slots, restyle internals or reimplement behaviour, the component's recipe belongs in `src/`. Move it there and tell the user.
 - A thin re-export of a React Aria component is acceptable until Mezzanine has designed that component. Once it is designed, build the recipe in `src/`.
-- Assess compatibility when changing supported public contracts, including exported components, hooks, functions, props, types, tokens, and documented data attributes or CSS classes. Call out removals, renames and incompatible changes as breaking changes. Additions and internal implementation changes are not automatically breaking.
+- Assess compatibility when changing supported public contracts, including exported components, hooks, functions, props, types, tokens, and documented data attributes or CSS classes. Call out removals, renames and incompatible changes as breaking changes, and describe them in the commit message with a `BREAKING CHANGE:` footer. Additions and internal implementation changes are not automatically breaking.
 
 ### Tokens and motion
 

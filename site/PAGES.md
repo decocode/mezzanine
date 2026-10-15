@@ -1,0 +1,62 @@
+# How documentation pages are built
+
+This covers the documentation site in `site/`. The library itself is documented
+in `src/docs/`.
+
+## Where things live
+
+| Folder or file | What it holds |
+| --- | --- |
+| `site/AppShell.tsx` | The site layout, navigation and theme. Loads each page separately through `PageLoader.tsx`. |
+| `site/templates/ComponentPageTemplate.tsx` | The component page template, and the site-only `PageHeading` used for every page title and introduction |
+| `site/pages/` | One file per page: examples, local state, and putting the content into the template |
+| `site/content/` | Each page's wording, reference entries and data, in a `*Content.tsx` (or `.ts`) file. JSX is used for inline code and links. |
+| `site/components/` | Reusable site UI, separate from the library's components in `src/components/` |
+
+Useful site components:
+
+- `ExampleZone` is the standard frame around an example. It accepts extra
+  classes for special layouts.
+- `DocsTable` shows Anatomy, Props and CSS token entries with Mezzanine's Table.
+- The disclosure group and its anchor-link handling.
+- `MezzanineNavbar` and `Sidebar`, the site's own navbar and sidebar.
+
+## Component pages
+
+Every implemented component page uses `ComponentPageTemplate`. A page supplies
+its title, description and an ordered `sections` list.
+
+- Each section defines `id`, `title` and `content` once. The template creates
+  its heading, its wrapper and its link in On this page.
+- Optional `subsections` add On this page links to headings inside a section.
+- A section group has `id`, `title` and its own `sections` list instead of
+  `content`. Its heading is level 2 and its children become a Disclosure group
+  with level-3 headings. The disclosures start closed, several can be open, and
+  an On this page link opens the right panel before scrolling to it, including
+  from a direct URL.
+
+Each component page has, where they apply:
+
+1. The example, and any other interactive demonstrations, always visible.
+2. Technical details: Anatomy, Behaviour, Usage, Props and CSS tokens, in
+   disclosures.
+3. Related pages: links to other Mezzanine pages.
+4. References: links to the React Aria documentation or other sources. Badge is
+   a plain HTML element, so its reference is MDN.
+
+Leave out sections that do not apply. Never add an empty section or describe a
+feature that does not exist.
+
+## Related pages and References
+
+Edit the page's content list. Each entry has a `label` and an `href`: a local
+path for Related pages, an external URL for References. External links show a
+trailing icon and announce that they open in a new tab. An empty list produces
+no section and no On this page link. The optional `referencesId` keeps an
+existing anchor for the References section.
+
+## Other pages
+
+Foundation pages, such as Typography and Color, have their own structures but
+reuse `PageHeading`. Pages for subjects that are not implemented yet say
+Not implemented and are marked WIP in the navigation.
