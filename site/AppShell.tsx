@@ -32,7 +32,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
     setSelectedTheme(theme)
   }
 
-  if (currentPath === '/site/lab' || currentPath === '/site/lab/shell' || currentPath === '/site/lab/page-widths') return <Suspense fallback={<p role="status">Loading lab…</p>}><LabPage currentPath={currentPath} themeSwitcher={<ThemeSwitcher onThemeChange={changeTheme} selectedTheme={selectedTheme} />} /></Suspense>
+  if (currentPath === '/site/lab' || currentPath === '/site/lab/shell' || currentPath === '/site/lab/page-widths' || currentPath === '/site/lab/layout') return <Suspense fallback={<p role="status">Loading lab…</p>}><LabPage currentPath={currentPath} themeSwitcher={<ThemeSwitcher onThemeChange={changeTheme} selectedTheme={selectedTheme} />} /></Suspense>
 
   if (!currentPage) {
     return (

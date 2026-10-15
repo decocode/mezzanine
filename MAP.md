@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/AppShell.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with separate experiments at `/site/lab/shell` and `/site/lab/page-widths`. Its illustrative candidates are not approved library features.
+The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with separate experiments at `/site/lab/shell`, `/site/lab/page-widths` and `/site/lab/layout`. Its illustrative candidates are not approved library features.
 
 The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `DisclosureHeader`, `TableOfContents`, `Navbar`, `NavTree` and `Sidebar` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
@@ -197,6 +197,14 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/lab/lab.css` | Fixed viewport layout, independent scrolling and responsive rail placement |
 | `site/lab/labContent.ts` | Lab control labels and navigation destinations |
 | `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry, experiment index and shared navbar with Exit Lab, experiment links and theme controls |
+| `site/lab/LayoutPage.tsx` | Lab layout tour at /site/lab/layout: an introduction and a live demo of each foundation from the layout research, plus wild cards; illustrative and unapproved |
+| `site/lab/layout/layoutLabContent.ts` | Plain-English explanations, frame presets and environment queries for the Lab layout tour |
+| `site/lab/layout/layoutLabLogic.ts` | Live media-query matching without effects, CSS support checks and on-request viewport and safe-area measurement |
+| `site/lab/layout/LabParts.tsx` | Lab-only marker (Warning outline and Lab badge), width-slider demo frame, section introductions, captions and support badges |
+| `site/lab/layout/LabPrimitives.tsx` | Lab-only intrinsic layout primitives: Stack, Cluster, Switcher, AutoGrid, SidebarLayout and Center, with limits as custom properties |
+| `site/lab/layout/FoundationDemos.tsx` | Demos for the ten foundations: primitives, container queries, environment queries, measure/target/layer tokens, logical properties, subgrid, :has(), viewport units, scroll padding and cascade layers |
+| `site/lab/layout/WildCardDemos.tsx` | Wild-card demos with support detection: grid-lanes masonry, scroll-state queries, anchor positioning and field-sizing |
+| `site/lab/layout/layout-lab.css` | Lab-scoped styles and illustrative --lab-* candidate tokens for the layout tour |
 | `site/lab/LabShell.tsx` | Shell comparison at /site/lab/shell using Navbar, Sidebar and responsive navigation |
 | `site/lab/PageWidthsPage.tsx`, `site/lab/page-widths.css` | Illustrative resizable reading, card-grid and full-width bands using exported Mezzanine text and controls |
 | `site/lab/useDemoWidth.ts` | Observes the live demo width and supports keyboard-accessible resize actions |
@@ -219,6 +227,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/components/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
 | `tests/components/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
 | `tests/lab/lab.spec.ts` | Production lab index navigation, shell layout, narrow-screen drawers and motion regression checks |
+| `tests/lab/layout.spec.ts` | Lab layout tour: 320px reflow at normal and doubled text and accessibility in each theme, plus container-query, Switcher and :has() behaviour |
 | `tests/lab/page-widths.spec.ts` | Production page-width route, resizing, width caps, grid reflow and accessibility checks |
 | `tests/site/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
 | `tests/site/elevation.spec.ts` | Checks the Elevation page fits each breakpoint width with normal and doubled text |
