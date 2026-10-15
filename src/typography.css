@@ -2,7 +2,7 @@
   Mezzanine named text styles.
 
   These classes contain no product-specific values. Each recipe is assembled
-  from the public tokens in tokens.css so a consuming product can replace the
+  from the public tokens in src/tokens/typography.css so a consuming product can replace the
   appearance without changing the style name or the component that uses it.
 
   Each selector has the specificity of one class. An explicitly applied text

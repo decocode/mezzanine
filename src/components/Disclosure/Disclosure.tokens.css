@@ -1,0 +1,19 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Expand and collapse chevrons, shared by Disclosure and NavTree; defined here with Disclosure. */
+  --chevron-size: 1.25rem;
+
+  /* Disclosure: component-specific structure, shared by every theme. */
+  --disclosure-group-gap: 0;
+  --disclosure-border-width: 0.0625rem;
+  --disclosure-trigger-min-height: 3rem;
+  --disclosure-trigger-padding-block: 0.75rem;
+  --disclosure-trigger-padding-inline: 0;
+  --disclosure-trigger-gap: 1rem;
+  --disclosure-panel-padding-block: 1rem;
+  --disclosure-panel-padding-inline: 0;
+  --disclosure-icon-size: var(--chevron-size);
+  --disclosure-focus-ring-width: 0.1875rem;
+  --disclosure-focus-ring-offset: -0.1875rem;
+}

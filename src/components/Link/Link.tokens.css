@@ -1,0 +1,11 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Link: component-specific structure, shared by every theme. */
+  --link-content-gap: 0.375rem;
+  --link-icon-size: 1em;
+  --link-underline-thickness: 0.0625rem;
+  --link-underline-offset: 0.1875rem;
+  --link-focus-ring-width: 0.1875rem;
+  --link-focus-ring-offset: 0.1875rem;
+}

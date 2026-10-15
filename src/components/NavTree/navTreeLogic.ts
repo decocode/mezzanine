@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useEffectEvent, useMemo, useRef, useState, type Ref, type RefCallback } from 'react'
 import type { Key } from 'react-aria-components'
 import type { NavTreeItemData, NavTreeProps } from './NavTree'
-import { observeMotionPolicy, readMotionDuration } from '../motionPolicy'
+import { observeMotionPolicy, readMotionDuration } from '../../motionPolicy'
 
 function indexNavTree(items: NavTreeProps['items'], route: NavTreeProps['selectedRoute']) {
   const keys = new Set<Key>()

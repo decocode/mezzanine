@@ -1,11 +1,11 @@
 import { useCallback, useRef, useState, type AriaAttributes, type ReactNode } from 'react'
 import { composeRenderProps } from 'react-aria-components'
-import { Button } from './Button'
-import { Dialog, DialogTrigger } from './Dialog'
-import { Heading } from './Heading'
-import { Modal, ModalOverlay } from './Modal'
-import { Link, type LinkProps } from './Link'
-import { MoreIcon } from '../icons/StudioIcons'
+import { Button } from '../Button/Button'
+import { Dialog, DialogTrigger } from '../Dialog/Dialog'
+import { Heading } from '../Heading/Heading'
+import { Modal, ModalOverlay } from '../Modal/Modal'
+import { Link, type LinkProps } from '../Link/Link'
+import { MoreIcon } from '../../icons/StudioIcons'
 
 export interface TabBarItem extends Omit<LinkProps, 'children'> {
   id: string

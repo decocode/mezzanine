@@ -1,0 +1,15 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* NavigationTree: component-specific structure, shared by every theme. */
+  --navigation-tree-gap: 0;
+  --navigation-tree-item-min-height: 2.75rem;
+  --navigation-tree-item-padding-block: 0;
+  --navigation-tree-item-padding-inline: 0.75rem;
+  --navigation-tree-item-gap: 0.5rem;
+  --navigation-tree-indent: 1rem;
+  --navigation-tree-current-indicator-width: 0.1875rem;
+  --navigation-tree-focus-ring-width: 0.1875rem;
+  --navigation-tree-focus-ring-offset: -0.1875rem;
+  --navigation-tree-header-padding-block: 0.5rem;
+}

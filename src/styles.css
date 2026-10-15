@@ -6,25 +6,25 @@
 */
 
 @import './typography.css';
-@import './components/Badge.css';
-@import './components/Breadcrumbs.css';
-@import './components/Button.css';
-@import './components/Checkbox.css';
-@import './components/Dialog.css';
-@import './components/Disclosure.css';
-@import './components/Navbar.css';
-@import './components/Link.css';
-@import './components/Modal.css';
-@import './components/NavTree.css';
-@import './components/RadioGroup.css';
-@import './components/Table.css';
-@import './components/TableOfContents.css';
-@import './components/Tabs.css';
-@import './components/ToggleButton.css';
-@import './components/TextField.css';
-@import './components/TabBar.css';
-@import './components/Tooltip.css';
+@import './components/Badge/Badge.css';
+@import './components/Breadcrumbs/Breadcrumbs.css';
+@import './components/Button/Button.css';
+@import './components/Checkbox/Checkbox.css';
+@import './components/Dialog/Dialog.css';
+@import './components/Disclosure/Disclosure.css';
+@import './components/Navbar/Navbar.css';
+@import './components/Link/Link.css';
+@import './components/Modal/Modal.css';
+@import './components/NavTree/NavTree.css';
+@import './components/RadioGroup/RadioGroup.css';
+@import './components/Table/Table.css';
+@import './components/TableOfContents/TableOfContents.css';
+@import './components/Tabs/Tabs.css';
+@import './components/ToggleButton/ToggleButton.css';
+@import './components/TextField/TextField.css';
+@import './components/TabBar/TabBar.css';
+@import './components/Tooltip/Tooltip.css';
 
-@import './components/Sidebar.css';
+@import './components/Sidebar/Sidebar.css';
 
 @import './motion.css';

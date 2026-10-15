@@ -1,0 +1,11 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Table: component-specific structure, shared by every theme. */
+  --table-border-width: 0.0625rem;
+  --table-cell-padding-block: 0.75rem;
+  --table-cell-padding-inline: 1rem;
+  --table-focus-ring-width: 0.1875rem;
+  --table-focus-ring-offset: -0.1875rem;
+  --table-disabled-opacity: 0.5;
+}

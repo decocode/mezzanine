@@ -1,0 +1,9 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Dialog: content inside a Modal. */
+  --dialog-padding: var(--space-6);
+  --dialog-content-gap: var(--space-4);
+  --dialog-actions-gap: var(--space-2);
+  --dialog-focus-ring-width: 0.1875rem;
+}

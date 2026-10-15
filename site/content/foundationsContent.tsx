@@ -4,7 +4,7 @@ export const foundationsDescription = 'Foundations are the parts of Mezzanine th
 
 export const foundationsDefinitionParagraphs: ReactNode[] = [
   'A Foundation stays the same whichever theme is active. If a theme should be able to change something, such as a colour, a typeface or a corner radius, it is a Style instead.',
-  <>Foundation tokens are defined once, in <code>src/tokens.css</code>, and every theme uses the same values. Lengths are stored in <code>rem</code>, so they follow the root text size.</>,
+  <>Foundation tokens are defined once, in <code>src/tokens/</code>, and every theme uses the same values. Lengths are stored in <code>rem</code>, so they follow the root text size.</>,
 ]
 
 export const foundationsPages: { label: string; href: string; description: string }[] = [

@@ -24,7 +24,7 @@ test('tree internals cannot be styled by the site', () => {
 })
 test('owned tree recipes cannot reach into shared controls or arbitrary icons', () => {
   for (const selector of ['.react-aria-Link', '.mezzanine-button-content', '.tree svg']) {
-    assert.ok(checkNavTreeCss('src/components/NavTree.css', `${selector} { color: inherit; }`).length)
+    assert.ok(checkNavTreeCss('src/components/NavTree/NavTree.css', `${selector} { color: inherit; }`).length)
   }
-  assert.deepEqual(checkNavTreeCss('src/components/NavTree.css', '.mezzanine-nav-tree-chevron { rotate: var(--motion-rotation-expanded); }'), [])
+  assert.deepEqual(checkNavTreeCss('src/components/NavTree/NavTree.css', '.mezzanine-nav-tree-chevron { rotate: var(--motion-rotation-expanded); }'), [])
 })

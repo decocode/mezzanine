@@ -1,10 +1,10 @@
 import { useRef, useState, type ReactNode } from 'react'
-import { Button } from './Button'
-import { Heading } from './Heading'
-import { Tooltip, TooltipTrigger } from './Tooltip'
-import { Disclosure, DisclosurePanel } from './Disclosure'
-import { MenuIcon } from '../icons/Icons'
-import { CloseIcon } from '../icons/StudioIcons'
+import { Button } from '../Button/Button'
+import { Heading } from '../Heading/Heading'
+import { Tooltip, TooltipTrigger } from '../Tooltip/Tooltip'
+import { Disclosure, DisclosurePanel } from '../Disclosure/Disclosure'
+import { MenuIcon } from '../../icons/Icons'
+import { CloseIcon } from '../../icons/StudioIcons'
 
 export interface NavbarRenderProps {
   closeMenu: () => void

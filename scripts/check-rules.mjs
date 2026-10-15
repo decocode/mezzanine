@@ -14,6 +14,10 @@ const tokenBaselineFile = 'scripts/undocumented-tokens.baseline.json'
 const problems = []
 const allowedPrefixes = ['react-aria-', 'mezzanine-', 'mz-text-']
 const read = file => readFileSync(path.join(root, file), 'utf8')
+// Files that define token values: the entry point, src/tokens/, each component's
+// *.tokens.css and the themes. Literal design values belong only here.
+const isTokenFile = file => file === 'src/tokens.css' || file.startsWith('src/tokens/')
+  || file.endsWith('.tokens.css') || /^src\/themes\/[^/]+\.css$/.test(file)
 
 function report(file, text, position, check, message) {
   const line = text.slice(0, position).split('\n').length
@@ -230,7 +234,7 @@ function checkCss(file) {
   const masked = maskCss(text)
   const checkPrefixes = file.startsWith('src/components/')
   // These files define token values, so literal colours belong here.
-  const checkColours = file !== 'src/tokens.css' && !/^src\/themes\/[^/]+\.css$/.test(file)
+  const checkColours = !isTokenFile(file)
   let start = 0
   let parentheses = 0
   let brackets = 0
@@ -289,8 +293,7 @@ function collectButtonClasses(source) {
 }
 
 function checkButtonSizing(file) {
-  if (['src/components/Button.css', 'src/components/ToggleButton.css', 'src/tokens.css'].includes(file)
-    || file.startsWith('src/themes/')) return
+  if (['src/components/Button/Button.css', 'src/components/ToggleButton/ToggleButton.css'].includes(file) || isTokenFile(file)) return
   const text = read(file)
   const masked = maskCss(text)
   for (const block of masked.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
@@ -421,7 +424,7 @@ function checkPropTables(program, checker) {
 }
 
 function checkDocsTokens(update) {
-  const tokenFiles = ['src/tokens.css', ...filesIn('src/themes', ['.css'])]
+  const tokenFiles = filesIn('src', ['.css']).filter(file => isTokenFile(file) && file !== 'src/tokens.css')
   const publicTokens = declaredTokens(tokenFiles.map(read))
   const knownTokens = declaredTokens([...filesIn('src', ['.css']), ...filesIn('site', ['.css'])].map(read))
   const siteSources = filesIn('site', ['.ts', '.tsx']).filter(file => !file.startsWith('site/lab/'))
@@ -483,12 +486,14 @@ try {
     for (const problem of checkEffectSource(file, text)) report(file, text, problem.position, 'effects', problem.message)
   }
   for (const message of checkAllowedEffectFiles(sourceFiles)) report('scripts/effect-rules.mjs', '', 0, 'effects', message)
-  const tokens = read('src/tokens.css')
-  for (const problem of checkTypographyTokens(tokens)) report('src/tokens.css', tokens, problem.position, 'typography', problem.message)
+  const buttonTokensFile = 'src/components/Button/Button.tokens.css'
+  const buttonTokens = read(buttonTokensFile)
+  for (const problem of checkTypographyTokens(buttonTokens)) report(buttonTokensFile, buttonTokens, problem.position, 'typography', problem.message)
+  const tokens = read('src/tokens/motion.css')
   const typographyGuide = read('src/docs/TYPOGRAPHY.md')
   for (const problem of checkTypographyChoices(typographyGuide, read('site/content/textStylesContent.ts'))) report('src/docs/TYPOGRAPHY.md', typographyGuide, problem.position, 'typography', problem.message)
   for (const token of motionTokens) {
-    if (!tokens.includes(`${token}:`)) report('src/tokens.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
+    if (!tokens.includes(`${token}:`)) report('src/tokens/motion.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
   }
   checkSnapshot(api, argumentsList.includes('--update-api'))
   checkDocsRoutes()

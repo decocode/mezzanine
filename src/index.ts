@@ -1,78 +1,78 @@
 // Mezzanine public entry point.
 // Every component the package exposes is exported from here.
-export { Tabs, TabList, Tab, TabPanel } from './components/Tabs'
+export { Tabs, TabList, Tab, TabPanel } from './components/Tabs/Tabs'
 export type {
   TabsProps, TabsRenderProps, TabListProps, TabListRenderProps,
   TabProps, TabRenderProps, TabPanelProps, TabPanelRenderProps,
-} from './components/Tabs'
+} from './components/Tabs/Tabs'
 import './tokens.css'
 import './styles.css'
 
-export { Badge } from './components/Badge'
+export { Badge } from './components/Badge/Badge'
 
-export type { BadgeProps, BadgeVariant } from './components/Badge'
+export type { BadgeProps, BadgeVariant } from './components/Badge/Badge'
 
-export { Button } from './components/Button'
+export { Button } from './components/Button/Button'
 
 export type {
   ButtonProps,
   ButtonSize,
   ButtonVariant,
-} from './components/Button'
+} from './components/Button/Button'
 
 export {
   Breadcrumb,
   Breadcrumbs,
-} from './components/Breadcrumbs'
+} from './components/Breadcrumbs/Breadcrumbs'
 
 export type {
   BreadcrumbProps,
   BreadcrumbRenderProps,
   BreadcrumbsProps,
-} from './components/Breadcrumbs'
+} from './components/Breadcrumbs/Breadcrumbs'
 
-export { Checkbox } from './components/Checkbox'
+export { Checkbox } from './components/Checkbox/Checkbox'
 
-export type { CheckboxProps } from './components/Checkbox'
+export type { CheckboxProps } from './components/Checkbox/Checkbox'
 
-export { Dialog, DialogTrigger } from './components/Dialog'
+export { Dialog, DialogTrigger } from './components/Dialog/Dialog'
 
 export type {
   DialogProps,
   DialogRenderProps,
   DialogTriggerProps,
-} from './components/Dialog'
+} from './components/Dialog/Dialog'
 
-export { Label } from './components/Label'
+export { Label } from './components/Label/Label'
 
-export type { LabelProps } from './components/Label'
+export type { LabelProps } from './components/Label/Label'
 
-export { Text } from './components/Text'
+export { Text } from './components/Text/Text'
 
-export type { TextProps } from './components/Text'
+export type { TextProps } from './components/Text/Text'
 
-export { FieldError } from './components/FieldError'
+export { FieldError } from './components/FieldError/FieldError'
 
-export type { FieldErrorProps, FieldErrorRenderProps } from './components/FieldError'
+export type { FieldErrorProps, FieldErrorRenderProps } from './components/FieldError/FieldError'
 
-export { SelectionIndicator } from './components/SelectionIndicator'
+export { SelectionIndicator } from './components/SelectionIndicator/SelectionIndicator'
 
-export type { SelectionIndicatorProps } from './components/SelectionIndicator'
+export type { SelectionIndicatorProps } from './components/SelectionIndicator/SelectionIndicator'
 
-export { Heading } from './components/Heading'
+export { Heading } from './components/Heading/Heading'
 
-export type { HeadingProps } from './components/Heading'
+export type { HeadingProps } from './components/Heading/Heading'
 
-export { Modal, ModalOverlay } from './components/Modal'
+export { Modal, ModalOverlay } from './components/Modal/Modal'
 
-export type { ModalOverlayProps, ModalRenderProps } from './components/Modal'
+export type { ModalOverlayProps, ModalRenderProps } from './components/Modal/Modal'
 
 export {
   Disclosure,
   DisclosureGroup,
   DisclosureHeader,
   DisclosurePanel,
-} from './components/Disclosure'
+} from './components/Disclosure/Disclosure'
 
 export type {
   DisclosureGroupProps,
@@ -82,20 +82,20 @@ export type {
   DisclosurePanelRenderProps,
   DisclosureProps,
   DisclosureRenderProps,
-} from './components/Disclosure'
+} from './components/Disclosure/Disclosure'
 
-export { Link } from './components/Link'
+export { Link } from './components/Link/Link'
 
 export type {
   LinkProps,
   LinkRenderProps,
-} from './components/Link'
+} from './components/Link/Link'
 
 export {
   RadioButton,
   RadioField,
   RadioGroup,
-} from './components/RadioGroup'
+} from './components/RadioGroup/RadioGroup'
 
 export type {
   RadioButtonProps,
@@ -104,7 +104,7 @@ export type {
   RadioFieldRenderProps,
   RadioGroupProps,
   RadioGroupRenderProps,
-} from './components/RadioGroup'
+} from './components/RadioGroup/RadioGroup'
 
 export {
   Cell,
@@ -113,7 +113,7 @@ export {
   Table,
   TableBody,
   TableHeader,
-} from './components/Table'
+} from './components/Table/Table'
 
 
 export {
@@ -205,42 +205,42 @@ export type {
   TableHeaderProps,
   TableProps,
   TableRenderProps,
-} from './components/Table'
+} from './components/Table/Table'
 
 export {
   ToggleButton,
   ToggleButtonGroup,
-} from './components/ToggleButton'
+} from './components/ToggleButton/ToggleButton'
 
 export type {
   ToggleButtonGroupProps,
   ToggleButtonGroupRenderProps,
   ToggleButtonProps,
   ToggleButtonRenderProps,
-} from './components/ToggleButton'
+} from './components/ToggleButton/ToggleButton'
 
-export { TableOfContents } from './components/TableOfContents'
+export { TableOfContents } from './components/TableOfContents/TableOfContents'
 
-export type { TableOfContentsProps, TableOfContentsSection } from './components/TableOfContents'
+export type { TableOfContentsProps, TableOfContentsSection } from './components/TableOfContents/TableOfContents'
 
 
-export { Navbar } from './components/Navbar'
-export type { NavbarProps, NavbarRenderProps } from './components/Navbar'
+export { Navbar } from './components/Navbar/Navbar'
+export type { NavbarProps, NavbarRenderProps } from './components/Navbar/Navbar'
 
-export { TextField, Input } from './components/TextField'
-export type { TextFieldProps, TextFieldRenderProps, InputProps } from './components/TextField'
+export { TextField, Input } from './components/TextField/TextField'
+export type { TextFieldProps, TextFieldRenderProps, InputProps } from './components/TextField/TextField'
 
-export { TextArea } from './components/TextArea'
-export type { TextAreaProps } from './components/TextArea'
+export { TextArea } from './components/TextArea/TextArea'
+export type { TextAreaProps } from './components/TextArea/TextArea'
 
-export { TabBar } from './components/TabBar'
-export type { TabBarProps, TabBarItem } from './components/TabBar'
+export { TabBar } from './components/TabBar/TabBar'
+export type { TabBarProps, TabBarItem } from './components/TabBar/TabBar'
 
-export { Tooltip, TooltipTrigger } from './components/Tooltip'
-export type { TooltipProps, TooltipRenderProps, TooltipTriggerComponentProps } from './components/Tooltip'
+export { Tooltip, TooltipTrigger } from './components/Tooltip/Tooltip'
+export type { TooltipProps, TooltipRenderProps, TooltipTriggerComponentProps } from './components/Tooltip/Tooltip'
 
-export { Sidebar, SidebarTrigger, SidebarPanel } from './components/Sidebar'
-export type { SidebarProps, SidebarTriggerProps, SidebarPanelProps } from './components/Sidebar'
+export { Sidebar, SidebarTrigger, SidebarPanel } from './components/Sidebar/Sidebar'
+export type { SidebarProps, SidebarTriggerProps, SidebarPanelProps } from './components/Sidebar/Sidebar'
 
-export { NavTree } from './components/NavTree'
-export type { NavTreeProps, NavTreeItemData, NavTreeSectionData } from './components/NavTree'
+export { NavTree } from './components/NavTree/NavTree'
+export type { NavTreeProps, NavTreeItemData, NavTreeSectionData } from './components/NavTree/NavTree'

@@ -1,6 +1,6 @@
 import { createContext, createElement, useContext, type ReactNode, type Ref } from 'react'
 import { composeRenderProps } from 'react-aria-components'
-import type { ButtonSize } from './Button'
+import type { ButtonSize } from '../Button/Button'
 import {
   ToggleButton as ReactAriaToggleButton,
   ToggleButtonGroup as ReactAriaToggleButtonGroup,

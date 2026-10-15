@@ -1,0 +1,15 @@
+/* Motion tokens: durations, easing, distances, scale and rotation. Reduced motion is applied by src/motion.css. */
+
+:where(:root) {
+  /* Shared motion decisions. Reduced behaviour is owned by motion.css. */
+  --motion-duration-interface: 180ms;
+  --motion-duration-loading: 1s;
+  --motion-easing-enter: ease-out;
+  --motion-easing-exit: ease-in;
+  --motion-easing-loading: linear;
+  --motion-scale-enter: 0.98;
+  --motion-rotation-expanded: 90deg;
+  --motion-rotation-cycle: 1turn;
+  --motion-distance-reveal: 0.25rem;
+  --motion-distance-offscreen: 100%;
+}

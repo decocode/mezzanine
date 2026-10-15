@@ -1,7 +1,7 @@
 import { Tab as AriaTab, type TabProps } from 'react-aria-components/Tabs'
 import { composeRenderProps } from 'react-aria-components/composeRenderProps'
 import type { RefAttributes } from 'react'
-import { SelectionIndicator } from './SelectionIndicator'
+import { SelectionIndicator } from '../SelectionIndicator/SelectionIndicator'
 
 export { Tabs, TabList, TabPanel } from 'react-aria-components/Tabs'
 export type {

@@ -4,7 +4,7 @@ A design token is a named design decision. Mezzanine components ask for the
 role they need, such as `--button-primary-background`, rather than a
 product-specific value such as a particular blue or purple.
 
-The source of truth is the CSS in [`src/tokens.css`](../tokens.css) and
+The source of truth is the CSS in [`src/tokens/`](../tokens/) (one file per documentation page), each component's `*.tokens.css` file in `src/components/<Name>/`, and
 [`src/themes/`](../themes/). This document explains that implementation; it
 does not define additional tokens.
 

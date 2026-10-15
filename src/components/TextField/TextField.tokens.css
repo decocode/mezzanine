@@ -1,0 +1,14 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Single-line text fields; products can override each visual decision. */
+  --text-field-gap: var(--space-2);
+  --input-min-height: 3rem;
+  --text-area-min-height: 4rem;
+  --input-padding-block: var(--space-2);
+  --input-padding-inline: var(--space-3);
+  --input-border-width: 0.0625rem;
+  --input-border-radius: 0;
+  --input-focus-ring-width: 0.125rem;
+  --input-focus-ring-offset: 0.125rem;
+}

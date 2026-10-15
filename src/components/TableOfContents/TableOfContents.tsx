@@ -1,6 +1,6 @@
 import { useId } from 'react'
-import { Heading } from './Heading'
-import { Link } from './Link'
+import { Heading } from '../Heading/Heading'
+import { Link } from '../Link/Link'
 
 export interface TableOfContentsSection {
   id: string

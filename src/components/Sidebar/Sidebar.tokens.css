@@ -1,0 +1,13 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Sidebar: generic inline panels, compact rails and modal drawers. */
+  --sidebar-width: 18rem;
+  --sidebar-rail-width: 4.5rem;
+  --sidebar-max-height: 80dvh;
+  --sidebar-padding: 1rem;
+  --sidebar-rail-padding: 0.5rem;
+  --sidebar-gap: 0.5rem;
+  --sidebar-border-width: 0.0625rem;
+  --sidebar-drawer-gap: 1rem;
+}

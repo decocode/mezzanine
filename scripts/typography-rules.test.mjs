@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 
-const file = 'src/components/Example.css'
+const file = 'src/components/Example/Example.css'
 const labelLarge = `font-family: var(--font-family-body); font-size: var(--font-size-label-lg); font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label); line-height: var(--line-height-label-lg); text-transform: var(--text-transform-label);`
 

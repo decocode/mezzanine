@@ -3,8 +3,8 @@ import {
   Checkbox as ReactAriaCheckbox,
   type CheckboxProps as ReactAriaCheckboxProps,
 } from 'react-aria-components/Checkbox'
-import { CheckIcon } from '../icons/Icons'
-import { MinusIcon } from '../icons/StudioIcons'
+import { CheckIcon } from '../../icons/Icons'
+import { MinusIcon } from '../../icons/StudioIcons'
 
 export interface CheckboxProps extends ReactAriaCheckboxProps {}
 

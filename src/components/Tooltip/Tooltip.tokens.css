@@ -1,0 +1,8 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Tooltip: short descriptions shown on hover or keyboard focus. */
+  --tooltip-max-width: 20rem;
+  --tooltip-border-width: 0.0625rem;
+  --tooltip-z-index: 110;
+}

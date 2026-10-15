@@ -4,9 +4,9 @@ const effectHooks = new Set(['useEffect', 'useLayoutEffect', 'useInsertionEffect
 
 // Each entry allows one effect call. Adding an entry needs the owner's agreement.
 export const allowedEffects = [
-  { file: 'src/components/sidebarState.ts', hook: 'useLayoutEffect', reason: 'Moves focus out of panel content that an application-controlled collapse has just hidden, which is only visible after React updates the page.' },
-  { file: 'src/components/navTreeLogic.ts', hook: 'useEffect', reason: 'Tells the application about a route reveal; React does not allow calling its callback while rendering.' },
-  { file: 'src/components/Sidebar.tsx', hook: 'useEffect', reason: 'Tells the application that the drawer closed after the layout widened; React does not allow calling its callback while rendering.' },
+  { file: 'src/components/Sidebar/sidebarState.ts', hook: 'useLayoutEffect', reason: 'Moves focus out of panel content that an application-controlled collapse has just hidden, which is only visible after React updates the page.' },
+  { file: 'src/components/NavTree/navTreeLogic.ts', hook: 'useEffect', reason: 'Tells the application about a route reveal; React does not allow calling its callback while rendering.' },
+  { file: 'src/components/Sidebar/Sidebar.tsx', hook: 'useEffect', reason: 'Tells the application that the drawer closed after the layout widened; React does not allow calling its callback while rendering.' },
   { file: 'site/PageLoader.tsx', hook: 'useEffect', reason: 'Scrolls to the section in the URL once the lazily loaded page has rendered.' },
 ]
 

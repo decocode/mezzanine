@@ -1,9 +1,9 @@
 import { useEffect, useEffectEvent, useId, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { Button, type ButtonProps } from './Button'
-import { Dialog } from './Dialog'
-import { Heading } from './Heading'
-import { Modal, ModalOverlay } from './Modal'
-import { PanelLeftCloseIcon, PanelRightCloseIcon } from '../icons/StudioIcons'
+import { Button, type ButtonProps } from '../Button/Button'
+import { Dialog } from '../Dialog/Dialog'
+import { Heading } from '../Heading/Heading'
+import { Modal, ModalOverlay } from '../Modal/Modal'
+import { PanelLeftCloseIcon, PanelRightCloseIcon } from '../../icons/StudioIcons'
 import { SidebarContext, useSidebarMediaQuery, useSidebarState, useSidebarFocus } from './sidebarState'
 
 export interface SidebarProps {

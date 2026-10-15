@@ -1,0 +1,6 @@
+/* Interaction tokens shared by interactive components. State colours are set per theme in src/themes/. */
+
+:where(:root) {
+  /* Shared disabled-state treatment for interactive components. */
+  --opacity-disabled: 0.5;
+}

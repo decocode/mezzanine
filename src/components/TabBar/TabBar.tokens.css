@@ -1,0 +1,21 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Primary navigation; safe-area spacing may be overridden by the app shell. */
+  --tab-bar-background: var(--color-page);
+  --tab-bar-item-background-current: var(--color-surface);
+  --tab-bar-border-width: 0.0625rem;
+  --tab-bar-z-index: 10;
+  --tab-bar-sheet-max-height: 85dvh;
+  --tab-bar-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --tab-bar-gap: var(--space-1);
+  --tab-bar-padding: var(--space-1);
+  --tab-bar-item-min-width: 5rem;
+  --tab-bar-item-min-height: 3rem;
+  --tab-bar-item-gap: var(--space-1);
+  --tab-bar-item-padding: var(--space-2);
+  --tab-bar-icon-size: 1.25rem;
+  --tab-bar-indicator-width: 0.125rem;
+  --tab-bar-focus-ring-width: 0.125rem;
+  --tab-bar-focus-ring-offset: -0.125rem;
+}

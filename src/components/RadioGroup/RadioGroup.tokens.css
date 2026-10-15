@@ -1,0 +1,16 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* RadioGroup: component-specific structure, shared by every theme. */
+  --radio-group-gap: 0.75rem;
+  --radio-group-horizontal-gap: 1.5rem;
+  --radio-field-gap-block: 0.25rem;
+  --radio-content-gap: 0.5rem;
+  --radio-indicator-size: 1.25rem;
+  --radio-selection-size: 0.625rem;
+  --radio-border-width: 0.0625rem;
+  --radio-indicator-border-radius: 50%;
+  --radio-selection-border-radius: 50%;
+  --radio-focus-ring-width: 0.1875rem;
+  --radio-focus-ring-offset: 0.1875rem;
+}

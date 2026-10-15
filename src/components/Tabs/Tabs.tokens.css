@@ -1,0 +1,22 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Tabs: shared structure and theme-aware semantic colours. */
+  --tabs-content-gap: 0.5rem;
+  --tabs-border-width: 0.0625rem;
+  --tabs-border: var(--color-border);
+  --tabs-content: var(--color-text);
+  --tabs-focus-ring-width: 0.1875rem;
+  --tabs-focus-ring-offset: -0.1875rem;
+  --tab-min-height: 2.75rem;
+  --tab-padding-block: 0.75rem;
+  --tab-padding-inline: 1rem;
+  --tab-content: var(--color-text);
+  --tab-content-selected: var(--color-text);
+  --tab-background-hovered: var(--color-surface-hover);
+  --tab-background-pressed: var(--color-surface-pressed);
+  --tab-indicator: var(--color-link);
+  --tab-indicator-width: 0.1875rem;
+  --tab-panel-padding: 0.75rem;
+  --tab-panel-preferred-width: 12rem;
+}

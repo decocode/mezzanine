@@ -1,0 +1,14 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Modal: the overlay, backdrop and container shared by Dialog and other modal content. */
+  --modal-z-index: 100;
+  --modal-viewport-padding: var(--space-4);
+  --modal-max-width: 32rem;
+  --modal-border-width: 0.0625rem;
+  --modal-border-radius: 0;
+  --modal-backdrop: color-mix(in srgb, var(--color-neutral-950) 50%, transparent);
+  --modal-background: var(--color-surface);
+  --modal-content: var(--color-text);
+  --modal-border: var(--color-border);
+}

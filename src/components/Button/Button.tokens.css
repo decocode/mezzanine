@@ -1,0 +1,39 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Button: component-specific structure, shared by every theme.
+     Text sizes point to the type scale: label sizes for Small and Medium, and
+     the matching title sizes for Large and Extra Large, where Label has no step. */
+  --button-sm-min-height: 2.75rem;
+  --button-sm-padding-block: 0.5rem;
+  --button-sm-padding-inline: 0.875rem;
+  --button-sm-font-size: var(--font-size-label-md);
+  --button-sm-line-height: var(--line-height-label-md);
+  --button-sm-icon-size: 1rem;
+  --button-md-min-height: 3rem;
+  --button-md-padding-block: 0.625rem;
+  --button-md-padding-inline: 1rem;
+  --button-md-font-size: var(--font-size-label-lg);
+  --button-md-line-height: var(--line-height-label-lg);
+  --button-md-icon-size: 1.125rem;
+  --button-lg-min-height: 3.25rem;
+  --button-lg-padding-block: 0.75rem;
+  --button-lg-padding-inline: 1.25rem;
+  --button-lg-font-size: var(--font-size-title-sm);
+  --button-lg-line-height: var(--line-height-title-sm);
+  --button-lg-icon-size: 1.25rem;
+  --button-xl-min-height: 3.5rem;
+  --button-xl-padding-block: 0.875rem;
+  --button-xl-padding-inline: 1.5rem;
+  --button-xl-font-size: var(--font-size-title-md);
+  --button-xl-line-height: var(--line-height-title-md);
+  --button-xl-icon-size: 1.5rem;
+  --button-content-gap: 0.5rem;
+  --button-border-width: 0.0625rem;
+  --button-border-radius: 0;
+  --button-focus-ring-width: 0.1875rem;
+  --button-focus-ring-offset: 0.1875rem;
+  --button-progress-size: 1.25rem;
+  --button-progress-stroke-width: 0.125rem;
+  --button-progress-border-radius: 50%;
+}
