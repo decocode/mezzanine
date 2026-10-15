@@ -159,12 +159,12 @@
   color: var(--color-link-pressed);
 }
 
-.navbar-link[aria-current] {
+.navbar-link[aria-current]:where(:not([aria-current='false'])) {
   border-bottom-color: var(--navigation-tree-current-indicator);
   color: var(--navigation-tree-item-content-current);
   font-weight: var(--font-weight-emphasis);
 }
 
-:root:not([data-theme='wireframe']) .navbar-link[aria-current] {
+:root:not([data-theme='wireframe']) .navbar-link[aria-current]:where(:not([aria-current='false'])) {
   color: var(--color-link-hover);
 }
