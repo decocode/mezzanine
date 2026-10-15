@@ -1,9 +1,6 @@
-import { Component, lazy, Suspense, useRef, useState, type ReactNode } from 'react'
-import { Button, Disclosure, DisclosurePanel, Heading, PanelLeftCloseIcon, PanelLeftOpenIcon, Sidebar as MezzanineSidebar, SidebarPanel } from '@decocode/mezzanine'
+import { Button, Disclosure, DisclosurePanel, Heading, NavTree, PanelLeftCloseIcon, PanelLeftOpenIcon, Sidebar as MezzanineSidebar, SidebarPanel } from '@decocode/mezzanine'
 import type { SitePageDefinition } from '../siteStructure'
-import { useSidebarNavigationVisibility } from './useSidebarNavigationVisibility'
-
-const SidebarNavigation = lazy(() => import('./SidebarNavigation'))
+import { sidebarNavigationItems } from './sidebarNavigationItems'
 
 interface SidebarProps {
   currentPage: SitePageDefinition
@@ -11,50 +8,23 @@ interface SidebarProps {
   navigationLabel?: string
 }
 
-class NavigationLoadBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
-  state = { hasError: false }
-
-  static getDerivedStateFromError() {
-    return { hasError: true }
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <>
-        <p role="alert">Unable to load navigation.</p>
-        <Button onPress={() => window.location.reload()}>Reload page</Button>
-      </>
-    }
-    return this.props.children
-  }
-}
-
-function LoadedNavigation({ currentPage, 'aria-label': label = 'Mezzanine sections', navigationLabel }: SidebarProps) {
+function Navigation({ currentPage, 'aria-label': label = 'Mezzanine sections', navigationLabel = 'Mezzanine documentation' }: SidebarProps) {
   return (
     <MezzanineSidebar presentation="inline" isCollapsible={false}>
       <SidebarPanel title={label} hideInlineHeader className="site-sidebar-panel">
         <nav aria-label={label}>
-          <NavigationLoadBoundary>
-            <Suspense fallback={<p role="status">Loading navigation…</p>}>
-              <SidebarNavigation currentPage={currentPage} aria-label={navigationLabel} />
-            </Suspense>
-          </NavigationLoadBoundary>
+          <NavTree aria-label={navigationLabel} selectedRoute={currentPage.path} items={sidebarNavigationItems} />
         </nav>
       </SidebarPanel>
     </MezzanineSidebar>
   )
 }
 
+// CSS shows the mobile Disclosure or the desktop column, never both.
 export function Sidebar(props: SidebarProps) {
-  const desktopRef = useRef<HTMLDivElement>(null)
-  const desktopRequested = useSidebarNavigationVisibility(desktopRef)
-  const [mobileRequested, setMobileRequested] = useState(false)
-
   return (
     <div className="site-sidebar">
-      <Disclosure className="mobile-sidebar" onExpandedChange={(isExpanded) => {
-        if (isExpanded) setMobileRequested(true)
-      }}>
+      <Disclosure className="mobile-sidebar">
         {({ isExpanded }) => <>
         <Heading className="mobile-sidebar-heading" level={2}>
           <Button
@@ -67,13 +37,13 @@ export function Sidebar(props: SidebarProps) {
           </Button>
         </Heading>
         <DisclosurePanel className="mobile-sidebar-panel">
-          {mobileRequested && <LoadedNavigation {...props} />}
+          <Navigation {...props} />
         </DisclosurePanel>
         </>}
       </Disclosure>
 
-      <div className="desktop-sidebar" ref={desktopRef}>
-        {desktopRequested && <LoadedNavigation {...props} />}
+      <div className="desktop-sidebar">
+        <Navigation {...props} />
       </div>
     </div>
   )

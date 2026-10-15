@@ -1,49 +1,24 @@
 import { expect, test } from '@playwright/test'
 import { sitePages } from '../site/siteStructure'
 
-test('mobile navigation downloads only when opened and retains expanded groups', async ({ page }) => {
+test('mobile navigation opens from Browse sections and retains expanded groups', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
-  const navigationRequests: string[] = []
-  page.on('request', request => {
-    if (/\/SidebarNavigation-[^/]+\.js$/.test(new URL(request.url()).pathname)) {
-      navigationRequests.push(request.url())
-    }
-  })
-  await page.goto('/')
-  await expect(page.getByRole('link', { name: 'Read docs' })).toBeVisible()
-  expect(navigationRequests).toHaveLength(0)
   await page.goto('/button')
   await expect(page.getByText('Loading documentation…', { exact: true })).toHaveCount(0)
-  expect(navigationRequests).toHaveLength(0)
   await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
   const browse = page.getByRole('button', { name: 'Browse sections', exact: true })
   await browse.focus()
   await page.keyboard.press('Enter')
   const tree = page.getByRole('treegrid', { name: 'Mezzanine documentation' })
   await expect(tree).toBeVisible()
-  expect(navigationRequests).toHaveLength(1)
   const forms = tree.getByRole('button', { name: 'Forms and input', exact: true })
   await forms.click()
   await expect(tree.getByRole('link', { name: 'Checkbox', exact: true })).toBeVisible()
   await browse.click()
   await browse.click()
   await expect(tree.getByRole('link', { name: 'Checkbox', exact: true })).toBeVisible()
-  expect(navigationRequests).toHaveLength(1)
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
-})
-
-test('failed navigation download leaves the page usable and offers reload', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 800 })
-  await page.route('**/assets/SidebarNavigation-*.js', route => route.abort())
-  await page.goto('/button')
-  await page.getByRole('button', { name: 'Browse sections', exact: true }).click()
-  await expect(page.getByRole('alert')).toHaveText('Unable to load navigation.')
-  await expect(page.getByRole('button', { name: 'Press', exact: true })).toBeVisible()
-  await page.unroute('**/assets/SidebarNavigation-*.js')
-  await page.getByRole('button', { name: 'Reload page', exact: true }).click()
-  await page.getByRole('button', { name: 'Browse sections', exact: true }).click()
-  await expect(page.getByRole('treegrid', { name: 'Mezzanine documentation' })).toBeVisible()
 })
 
 for (const sitePage of sitePages) {
