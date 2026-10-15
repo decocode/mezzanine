@@ -128,6 +128,7 @@ export const colorTokenGroups: ColorTokenGroup[] = [
       { token: '--color-link-hover', label: 'Link hover', description: 'A hovered link.' },
       { token: '--color-link-pressed', label: 'Link pressed', description: 'A pressed link.' },
       { token: '--color-focus', label: 'Focus', description: 'The keyboard-focus indicator color.' },
+      { token: '--color-chevron', label: 'Chevron', description: 'Expand and collapse chevrons in Disclosure and Nav Tree.' },
     ],
   },
 ]

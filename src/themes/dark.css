@@ -13,6 +13,7 @@
   --color-link: var(--color-signature-300);
   --color-link-hover: var(--color-signature-200);
   --color-link-pressed: var(--color-signature-100);
+  --color-chevron: var(--color-signature-300);
 
   --color-border: var(--color-neutral-500);
 
@@ -76,7 +77,7 @@
   --navigation-tree-item-background: transparent;
   --navigation-tree-item-background-hovered: var(--color-surface-hover);
   --navigation-tree-item-background-pressed: var(--color-surface-pressed);
-  --navigation-tree-item-background-current: var(--color-surface-pressed);
+  --navigation-tree-item-background-current: transparent;
   --navigation-tree-item-content: var(--color-text);
   --navigation-tree-item-content-current: var(--color-text);
   --navigation-tree-current-indicator: var(--color-link);
@@ -116,6 +117,7 @@
     --color-link: var(--color-signature-300);
     --color-link-hover: var(--color-signature-200);
     --color-link-pressed: var(--color-signature-100);
+    --color-chevron: var(--color-signature-300);
 
     --color-border: var(--color-neutral-500);
 
@@ -179,7 +181,7 @@
     --navigation-tree-item-background: transparent;
     --navigation-tree-item-background-hovered: var(--color-surface-hover);
     --navigation-tree-item-background-pressed: var(--color-surface-pressed);
-    --navigation-tree-item-background-current: var(--color-surface-pressed);
+    --navigation-tree-item-background-current: transparent;
     --navigation-tree-item-content: var(--color-text);
     --navigation-tree-item-content-current: var(--color-text);
     --navigation-tree-current-indicator: var(--color-link);

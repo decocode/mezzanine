@@ -206,12 +206,13 @@ Common patterns should reuse the foundation instead of creating new sizes:
 | Introductory paragraph | `body-lg` |
 | Paragraphs and normal reading | `body-md` |
 | Supporting text, captions and validation messages | `body-sm` |
-| Button, tab, form label or navigation item | `label-lg` |
+| Button, tab or form label | `label-lg` |
+| Navigation item or disclosure header | `title-sm` |
 | Badge, section label or compact metadata | `label-md` |
 
 Further notes:
 
-- Navigation items use `label-lg` with Default; Emphasis marks the current page or a parent.
+- Navigation items and disclosure headers both use `title-sm` with Default, so expandable rows match. In navigation, indentation shows depth and Emphasis marks only the current page.
 - Use `label-sm` for badges or metadata only when `label-md` does not fit.
 - A quote starts with `body-lg`, or `heading-sm` when it is a pull quote.
 - Inline code uses the semantic `<code>` element rather than a text style.

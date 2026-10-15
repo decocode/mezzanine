@@ -145,6 +145,7 @@ for actions.
 | `--color-link-hover` | A hovered link |
 | `--color-link-pressed` | A pressed link |
 | `--color-focus` | The keyboard-focus indicator color |
+| `--color-chevron` | Expand and collapse chevrons in Disclosure and NavTree: Signature in Light and Dark, the text color in Wireframe |
 
 Link and Focus are separate roles. Light and Dark draw Link from the Signature
 palette, while Focus remains tied to the Info palette. Primary actions are
@@ -152,7 +153,7 @@ defined by their components rather than a generic color role. There is no
 generic Accent token.
 
 In Light and Dark, text and navigation links—including current destinations,
-linked tabs and TableOfContents—use the Signature link colours. NavigationTree
+linked tabs and TableOfContents—use the Signature link colours. NavTree
 keeps its neutral default and current-item text. Disabled links and links styled
 as buttons keep their own treatments. Wireframe keeps its neutral link colours.
 
@@ -321,7 +322,7 @@ be overridden independently by a consuming product.
 | `--dialog-actions-gap` | Separation between action buttons |
 | `--dialog-focus-ring-width` | Width of the dialog's keyboard focus indicator |
 
-Badge, Button, Checkbox, Link, RadioGroup, Disclosure, Dialog, Modal, NavigationTree, Table,
+Badge, Button, Checkbox, Link, RadioGroup, Disclosure, Dialog, Modal, NavTree, Table,
 ToggleButton and ToggleButtonGroup are implemented components. Their component-specific tokens
 keep shared structure easy to identify and override without pretending that
 component-specific spacing decisions are part of the shared spacing scale.
@@ -410,12 +411,11 @@ override the inline-padding tokens when an inset is needed.
 | `--disclosure-trigger-gap` | Space between a Disclosure label and chevron |
 | `--disclosure-panel-padding-block` | Bottom space inside a DisclosurePanel |
 | `--disclosure-panel-padding-inline` | Horizontal space inside a DisclosurePanel |
-| `--disclosure-icon-size` | DisclosureHeader chevron size |
+| `--chevron-size` | Size of the expand and collapse chevron shared by Disclosure and NavTree |
+| `--disclosure-icon-size` | DisclosureHeader chevron size; defaults to `--chevron-size` |
 | `--disclosure-focus-ring-width` | Keyboard-focus indicator width |
 | `--disclosure-focus-ring-offset` | Keyboard-focus indicator position |
-| `--motion-duration-interface` | Chevron rotation and panel reveal duration |
-| `--motion-easing-enter`, `--motion-easing-exit` | Panel opening and closing speed curves |
-| `--motion-distance-reveal` | Panel vertical reveal travel |
+| `--motion-duration-interface`, `--motion-easing-enter` | Chevron rotation timing; the panel itself opens and closes immediately |
 | `--disclosure-trigger-background` | Default DisclosureHeader trigger background |
 
 | Token | Meaning |
@@ -454,13 +454,14 @@ tokens for its unselected and selected interaction states.
 | `--toggle-button-content-selected` | Selected label and icon color |
 | `--toggle-button-border-selected` | Selected border color |
 
-NavTree uses the existing NavigationTree structural tokens for hierarchy and
-route indication, shared button tokens for chevron sizing, and theme tokens for
+NavTree uses the `--navigation-tree-*` structural tokens for hierarchy and
+route indication, `--chevron-size` and `--color-chevron` for its chevron, shared
+small-button tokens for the expand control's target size, and theme tokens for
 interaction and current-route states.
 
 | Token | Meaning |
 | --- | --- |
-| `--navigation-tree-gap` | Space between NavigationTree rows and sections |
+| `--navigation-tree-gap` | Space between NavTree rows and sections |
 | `--navigation-tree-item-min-height` | Minimum height of a navigation item; chevron controls use shared small-button sizing |
 | `--navigation-tree-item-padding-block` | Vertical space inside a navigation item |
 | `--navigation-tree-item-padding-inline` | Base row inset, increased by nesting level on the start edge |
@@ -474,7 +475,7 @@ interaction and current-route states.
 | `--navigation-tree-item-background` | Default item background |
 | `--navigation-tree-item-background-hovered` | Item background while hovered |
 | `--navigation-tree-item-background-pressed` | Item background while pressed |
-| `--navigation-tree-item-background-current` | Current-route item background |
+| `--navigation-tree-item-background-current` | Current-route item background; transparent in the official themes, which mark the current page with the bar and Emphasis weight |
 | `--navigation-tree-item-content` | Default item content color |
 | `--navigation-tree-item-content-current` | Current-route item content color |
 | `--navigation-tree-current-indicator` | Current-route indicator color |
@@ -657,8 +658,7 @@ not override reduction. Internal controls are not product customisation points.
 | `--motion-distance-reveal` | 0.25rem | Small reveal travel |
 | `--motion-distance-offscreen` | 100% | Full drawer/sheet travel |
 
-NavigationTree temporarily uses twice the expanded angle to preserve its existing
-chevron direction until its separate build. Plain zero/full endpoints and static
+NavTree uses the same quarter turn as Disclosure. Plain zero/full endpoints and static
 centring remain literals. Spinner duration stays positive: system reduction removes
 its animation and keeps the ring visible. Wireframe alone leaves loading unchanged.
 The same rule applies to the documentation's loading icon preview.

@@ -16,6 +16,7 @@
   --color-link: var(--color-neutral-950);
   --color-link-hover: var(--color-neutral-800);
   --color-link-pressed: var(--color-neutral-950);
+  --color-chevron: var(--color-text);
 
   --color-border: var(--color-neutral-950);
 
@@ -79,7 +80,7 @@
   --navigation-tree-item-background: transparent;
   --navigation-tree-item-background-hovered: var(--color-surface-hover);
   --navigation-tree-item-background-pressed: var(--color-surface-pressed);
-  --navigation-tree-item-background-current: var(--color-surface-pressed);
+  --navigation-tree-item-background-current: transparent;
   --navigation-tree-item-content: var(--color-text);
   --navigation-tree-item-content-current: var(--color-text);
   --navigation-tree-current-indicator: var(--color-link);

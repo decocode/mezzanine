@@ -6,10 +6,12 @@ interface DocsTableProps {
   nameColumn: string
   rows: readonly { name: string; description: ReactNode }[]
   className?: string
+  // Part names such as "Section header" are plain text; API names default to code.
+  namesAreCode?: boolean
 }
 
 // Shared presentation for Anatomy, Props and CSS token reference data.
-export function DocsTable({ 'aria-label': label, nameColumn, rows, className }: DocsTableProps) {
+export function DocsTable({ 'aria-label': label, nameColumn, rows, className, namesAreCode = true }: DocsTableProps) {
   return (
     <div className={['documentation-table', className].filter(Boolean).join(' ')}>
       <Table aria-label={label}>
@@ -20,7 +22,7 @@ export function DocsTable({ 'aria-label': label, nameColumn, rows, className }: 
         <TableBody>
           {rows.map(({ name, description }) => (
             <Row id={name} key={name}>
-              <Cell><code>{name}</code></Cell>
+              <Cell>{namesAreCode ? <code>{name}</code> : name}</Cell>
               <Cell>{description}</Cell>
             </Row>
           ))}

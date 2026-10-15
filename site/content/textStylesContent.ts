@@ -65,7 +65,8 @@ export const textStyleChoices: { use: string; classNames: string[] }[] = [
   { use: 'Introductory paragraph', classNames: ['mz-text-body-lg'] },
   { use: 'Paragraphs and normal reading', classNames: ['mz-text-body-md'] },
   { use: 'Supporting text, captions and validation messages', classNames: ['mz-text-body-sm'] },
-  { use: 'Button, tab, form label or navigation item', classNames: ['mz-text-label-lg'] },
+  { use: 'Button, tab or form label', classNames: ['mz-text-label-lg'] },
+  { use: 'Navigation item or disclosure header', classNames: ['mz-text-title-sm'] },
   { use: 'Badge, section label or compact metadata', classNames: ['mz-text-label-md'] },
 ]
 

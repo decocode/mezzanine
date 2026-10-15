@@ -109,7 +109,7 @@ for (const path of ['/', '/navigation-tree', '/link', '/navbar', '/tabs', '/tab-
 test('NavigationTree links retain underlines through hover and keyboard focus in Wireframe only', async ({ page }) => {
   await page.goto('/navigation-tree')
   const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
-  const link = tree.getByRole('link', { name: 'Item A', exact: true })
+  const link = tree.getByRole('link', { name: 'Apples', exact: true })
   for (const theme of ['light', 'dark', 'wireframe']) {
     await page.evaluate(theme => document.documentElement.dataset.theme = theme, theme)
     await link.hover()

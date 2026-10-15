@@ -281,6 +281,9 @@
   --badge-danger-content: var(--color-danger-800);
   --badge-danger-border: var(--color-danger-300);
 
+  /* Expand and collapse chevrons, shared by Disclosure and NavTree. */
+  --chevron-size: 1.25rem;
+
   /* Button: component-specific structure, shared by every theme.
      Text sizes point to the type scale: label sizes for Small and Medium, and
      the matching title sizes for Large and Extra Large, where Label has no step. */
@@ -356,7 +359,7 @@
   --disclosure-trigger-gap: 1rem;
   --disclosure-panel-padding-block: 1rem;
   --disclosure-panel-padding-inline: 0;
-  --disclosure-icon-size: 1.25rem;
+  --disclosure-icon-size: var(--chevron-size);
   --disclosure-focus-ring-width: 0.1875rem;
   --disclosure-focus-ring-offset: -0.1875rem;
 

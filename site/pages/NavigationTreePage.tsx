@@ -1,10 +1,13 @@
+import { Fragment, useState } from 'react'
+import { RouterProvider } from 'react-aria-components'
 import { ExampleZone } from '../components/ExampleZone'
 import { NavTree } from '@decocode/mezzanine'
-import { navigationTreeContent, navigationTreeExampleItems } from '../content/navigationTreeContent'
+import { navigationTreeContent, navigationTreeExampleExpandedKeys, navigationTreeExampleInitialRoute, navigationTreeExampleItems } from '../content/navigationTreeContent'
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function NavigationTreePage() {
+  const [route, setRoute] = useState(navigationTreeExampleInitialRoute)
   return (
     <ComponentPageTemplate
       description={navigationTreeContent.description}
@@ -18,10 +21,12 @@ export default function NavigationTreePage() {
           content: (<>
             {navigationTreeContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
             <ExampleZone className="navigation-tree-example">
-              <nav aria-label="Nav Tree example">
-                <NavTree aria-label="Nav Tree items" items={navigationTreeExampleItems}
-                  defaultExpandedKeys={['item-b', 'item-c']} selectedRoute="/navigation-tree" />
-              </nav>
+              <RouterProvider navigate={setRoute}>
+                <nav aria-label="Nav Tree example">
+                  <NavTree aria-label="Nav Tree items" items={navigationTreeExampleItems}
+                    defaultExpandedKeys={navigationTreeExampleExpandedKeys} selectedRoute={route} />
+                </nav>
+              </RouterProvider>
             </ExampleZone>
           </>),
         },
@@ -32,15 +37,43 @@ export default function NavigationTreePage() {
             {
               id: 'navigation-tree-anatomy-heading',
               title: 'Anatomy',
+              content: <DocsTable aria-label="Nav Tree anatomy" nameColumn="Part" rows={navigationTreeContent.anatomy} namesAreCode={false} className="documentation-anatomy-table" />,
+            },
+            {
+              id: 'navigation-tree-behaviour-heading',
+              title: 'Behaviour',
               content: (<>
-                <DocsTable aria-label="NavigationTree anatomy" nameColumn="Component" rows={navigationTreeContent.anatomyRows} className="documentation-anatomy-table" />
+                <ul>
+                  {navigationTreeContent.keyboard.map(({ keys, action }) => <li key={keys}><strong>{keys}:</strong> {action}</li>)}
+                </ul>
+                {navigationTreeContent.behaviour.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
             {
               id: 'navigation-tree-usage-heading',
               title: 'Usage and accessibility',
+              content: navigationTreeContent.usage.map((topic) => (
+                <Fragment key={topic.title}>
+                  <h4 className="mz-text-title-md">{topic.title}</h4>
+                  {topic.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+                </Fragment>
+              )),
+            },
+            {
+              id: 'navigation-tree-props-heading',
+              title: 'Props',
               content: (<>
-                {navigationTreeContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="Nav Tree props" nameColumn="Prop" rows={navigationTreeContent.props} className="documentation-props-table" />
+                <h4 className="mz-text-title-md">Item and section data</h4>
+                <DocsTable aria-label="Nav Tree item and section data" nameColumn="Field" rows={navigationTreeContent.itemProps} className="documentation-props-table" />
+              </>),
+            },
+            {
+              id: 'navigation-tree-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                <p>{navigationTreeContent.tokensIntroduction}</p>
+                <DocsTable aria-label="Nav Tree tokens" nameColumn="CSS token" rows={navigationTreeContent.tokens} />
               </>),
             },
           ],

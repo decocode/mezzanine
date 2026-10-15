@@ -4,11 +4,11 @@
   gap: var(--navigation-tree-gap);
   color: var(--navigation-tree-item-content);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-label-lg);
+  font-size: var(--font-size-title-sm);
   font-weight: var(--font-weight-default);
-  letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-lg);
-  text-transform: var(--text-transform-label);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-sm);
+  text-transform: var(--text-transform-title);
 }
 .mezzanine-nav-tree-item {
   display: flex;
@@ -25,6 +25,10 @@
 }
 .mezzanine-nav-tree-item[data-level='1'][data-has-child-items]:not(:first-child) {
   margin-block-start: var(--space-2);
+}
+/* Sections are larger groups than parent rows, so they get more space above. */
+.mezzanine-nav-tree-section:not(:first-child) {
+  margin-block-start: var(--space-4);
 }
 .mezzanine-nav-tree-label {
   display: flex;
@@ -58,8 +62,9 @@
 .mezzanine-nav-tree-content { display: inline-flex; flex: none; margin-inline-start: auto; }
 .mezzanine-nav-tree-chevron {
   flex: none;
-  width: var(--button-sm-icon-size);
-  height: var(--button-sm-icon-size);
+  width: var(--chevron-size);
+  height: var(--chevron-size);
+  color: var(--color-chevron);
   rotate: 0deg;
   transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
@@ -72,7 +77,7 @@
 .mezzanine-nav-tree-item:has(.mezzanine-nav-tree-label[data-pressed], .mezzanine-nav-tree-toggle[data-pressed]) {
   background: var(--navigation-tree-item-background-pressed);
 }
-.mezzanine-nav-tree-item[data-has-child-items] { font-weight: var(--font-weight-emphasis); }
+/* Every row shares one size and weight; indentation shows depth, so Emphasis marks only the current page. */
 .mezzanine-nav-tree-item[data-current] {
   border-inline-start-color: var(--navigation-tree-current-indicator);
   background: var(--navigation-tree-item-background-current);
@@ -90,6 +95,8 @@
 .mezzanine-nav-tree-item[data-disabled] .mezzanine-nav-tree-toggle { cursor: default; }
 .mezzanine-nav-tree-header {
   padding: var(--navigation-tree-header-padding-block) var(--navigation-tree-item-padding-inline);
+  /* Matches the rows' current-page bar space so header and row text line up. */
+  border-inline-start: var(--navigation-tree-current-indicator-width) solid transparent;
   color: var(--navigation-tree-header-content);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);
