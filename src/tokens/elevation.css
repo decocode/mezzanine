@@ -1,0 +1,15 @@
+/* Elevation tokens (Styles › Elevation). Every level is built from two colour
+   tokens, so a theme changes elevation by setting those colours, and can also
+   override a level's shape. Each theme sets --elevation-shadow-color itself:
+   Light is the fallback on every page, so a shared default here would never
+   apply. The shapes are the Wireframe baseline. */
+
+:where(:root) {
+  --elevation-highlight-color: transparent;
+
+  --elevation-sunken-1: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
+  --elevation-flat: none;
+  --elevation-raised-1: 0 1px 2px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
+  --elevation-raised-2: 0 4px 8px -2px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
+  --elevation-raised-3: 0 12px 24px -6px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
+}

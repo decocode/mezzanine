@@ -19,8 +19,6 @@
 
   --elevation-shadow-color: rgb(0 0 0 / 72%);
   --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
-  --elevation-sunken-1: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
-  --elevation-flat: none;
   --elevation-raised-1: 0 2px 4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
   --elevation-raised-2: 0 8px 16px -4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
   --elevation-raised-3: 0 16px 32px -8px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
@@ -123,8 +121,6 @@
 
     --elevation-shadow-color: rgb(0 0 0 / 72%);
     --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
-    --elevation-sunken-1: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
-    --elevation-flat: none;
     --elevation-raised-1: 0 2px 4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
     --elevation-raised-2: 0 8px 16px -4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
     --elevation-raised-3: 0 16px 32px -8px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);

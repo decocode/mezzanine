@@ -23,12 +23,6 @@
   --color-border: var(--color-neutral-500);
 
   --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) 18%, transparent);
-  --elevation-highlight-color: transparent;
-  --elevation-sunken-1: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
-  --elevation-flat: none;
-  --elevation-raised-1: 0 1px 2px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
-  --elevation-raised-2: 0 4px 8px -2px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
-  --elevation-raised-3: 0 12px 24px -6px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
 
   --button-primary-background: var(--color-signature-700);
   --button-primary-background-hovered: var(--color-signature-800);

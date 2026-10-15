@@ -1,13 +1,9 @@
 /*
-  Mezzanine token entry point. It imports the official themes first, then the
-  shared tokens (one file per documentation page in src/tokens/), then each
-  component's own tokens. Components and public text styles consume these
+  Mezzanine token entry point. It imports the shared tokens (one file per
+  documentation page in src/tokens/), then each component's own tokens, then
+  the official themes, which override defaults where they differ. Components and public text styles consume these
   names rather than product-specific values.
 */
-
-@import './themes/light.css';
-@import './themes/dark.css';
-@import './themes/wireframe.css';
 
 @import './tokens/motion.css';
 @import './tokens/color.css';
@@ -15,6 +11,7 @@
 @import './tokens/typography.css';
 @import './tokens/space.css';
 @import './tokens/shape.css';
+@import './tokens/elevation.css';
 
 @import './components/Badge/Badge.tokens.css';
 @import './components/Button/Button.tokens.css';
@@ -33,3 +30,8 @@
 @import './components/TextField/TextField.tokens.css';
 @import './components/ToggleButton/ToggleButton.tokens.css';
 @import './components/Tooltip/Tooltip.tokens.css';
+
+/* Themes load last so they can override any shared or component default. */
+@import './themes/light.css';
+@import './themes/dark.css';
+@import './themes/wireframe.css';

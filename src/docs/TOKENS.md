@@ -249,8 +249,10 @@ For a circle, use `50%` on a square element; on a rectangle it produces an ellip
 Elevation tokens form a ladder around `--elevation-flat`, which is level 0.
 Numbers count away from flat in each direction: `sunken-1` sits one step into
 the surface, and `raised-1` to `raised-3` sit one, two and three steps above it.
-A higher number means more separation from flat. Every official theme defines
-the same levels and may vary the shared shadow opacity.
+A higher number means more separation from flat. The levels are shared, in
+`src/tokens/elevation.css`, and are built from `--elevation-shadow-color` and
+`--elevation-highlight-color`. Each theme sets its own shadow colour; Dark also
+sets an edge highlight and larger shapes for the raised levels.
 
 | Token | Level | Meaning |
 | --- | --- | --- |

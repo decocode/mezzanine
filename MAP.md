@@ -21,7 +21,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/motion.css` | Internal finite/loading/scroll motion policy for theme scopes and the system preference; shared backdrop fade keyframes used by Modal, Sidebar and TabBar |
 | `src/motionPolicy.ts` | Internal resolved-duration reader, preference/theme observation and token-display notification |
 | `src/styles.css` | Library stylesheet entry point; imports typography and, as components arrive, their structural styles |
-| `src/tokens.css` | Token entry point: imports the three themes, then the shared token files in `src/tokens/`, then each component's tokens |
+| `src/tokens.css` | Token entry point: imports the three themes, then the shared token files in `src/tokens/`, then each component's tokens, then the themes last so they can override defaults |
 | `src/typography.css` | Base text for `body` and `h1`–`h6`, fifteen public text-style classes and the Inline code element pattern, assembled from typography tokens |
 | `src/components/<Name>/<Name>.tokens.css` | Each component's structural tokens, shared by every theme; its theme-specific colours stay in `src/themes/` |
 | `src/components/Badge/Badge.css` | Token-led styling for Neutral, Violet, Info, Success, Warning and Danger Badges |
@@ -74,6 +74,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/themes/wireframe.css` | Monochrome Wireframe theme with semantic status colors and blue focus |
 | `src/tokens/color.css` | Colour palettes; semantic colour roles are set per theme (Styles › Color) |
 | `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) |
+| `src/tokens/elevation.css` | Elevation levels built from the shadow and highlight colours; each theme sets its shadow colour (Styles › Elevation) |
 | `src/tokens/motion.css` | Durations, easing, distances, scale and rotation (Styles › Motion) |
 | `src/tokens/shape.css` | Corner-radius scale (Styles › Shape) |
 | `src/tokens/space.css` | Spacing scale (Foundations › Spacing) |
