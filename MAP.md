@@ -23,8 +23,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/lab/labContent.ts` | Lab control labels and navigation destinations |
 | `site/lab/PageWidthsPage.tsx`, `site/lab/page-widths.css` | Illustrative resizable reading, card-grid and full-width bands using exported Mezzanine text and controls |
 | `site/lab/useDemoWidth.ts` | Observes the live demo width and supports keyboard-accessible resize actions |
-| `tests/lab.spec.ts` | Production lab index navigation, shell layout, narrow-screen drawers and motion regression checks |
-| `tests/lab-page-widths.spec.ts` | Production page-width route, resizing, width caps, grid reflow and accessibility checks |
+| `tests/lab/lab.spec.ts` | Production lab index navigation, shell layout, narrow-screen drawers and motion regression checks |
+| `tests/lab/page-widths.spec.ts` | Production page-width route, resizing, width caps, grid reflow and accessibility checks |
 | `site/assets/mezzanine-logo.svg` | Mezzanine brand icon: a Z with a staircase diagonal; standalone SVG using currentColor |
 | `src/components/Sidebar.tsx` | Public Sidebar state boundary, Button-based SidebarTrigger and generic inline or modal SidebarPanel with optional compact rail, permanent inline expansion and optional inline header |
 | `src/components/sidebarState.ts` | Internal sidebar context and responsive media-query subscription |
@@ -32,15 +32,15 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/SidebarPage.tsx` | Real Sidebar examples for mixed content, collapse options, multiple independent panels and the actual documentation sidebar |
 | `site/content/sidebarContent.tsx` | Sidebar guidance, prop and token references, and neutral example labels |
 | `site/assets/sidebar-example.svg` | Neutral geometric image demonstrating sidebar content composition |
-| `tests/sidebar.spec.ts` | Sidebar collapse, independent state, modal focus, responsiveness and accessibility checks |
+| `tests/components/sidebar.spec.ts` | Sidebar collapse, independent state, modal focus, responsiveness and accessibility checks |
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
 | `src/components/TabBar.tsx` | Primary route navigation with built-in capacity measurement and a More bottom sheet composed from library links, buttons and modal parts |
 | `src/components/TabBar.css` | TabBar states, safe-area spacing and responsive bottom-sheet presentation |
 | `site/pages/TabBarPage.tsx` | Live TabBar example and verified composition, overflow and placement guidance |
-| `tests/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |
+| `tests/components/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |
 | `src/components/Tooltip.tsx` | React Aria Tooltip exports and TooltipTrigger with a configurable 500ms default hover delay |
 | `src/components/Tooltip.css` | Token-based tooltip layout, fade animation, reduced-motion and forced-colour rules |
-| `tests/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
+| `tests/components/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
 | `src/components/Badge.tsx` | Public non-interactive Badge with core and semantic color variants, rendered as a semantic span |
 | `src/components/Badge.css` | Token-led styling for Neutral, Violet, Info, Success, Warning and Danger Badges |
 | `src/components/Button.tsx` | Public Button: React Aria Button for actions or Link when href is supplied, sharing variants, sizes and icon layout; pending state is action-only |
@@ -70,12 +70,14 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/content/navbarContent.tsx` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
 | `site/components/ExampleZone.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
 | `site/components/DocsTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes, with an optional description column label |
-| `tests/navigation-tree-motion.spec.ts` | Checks immediate Nav Tree rows, keyboard expansion and reduced-motion changes during chevron rotation |
-| `tests/wireframe-links.spec.ts` | Checks Wireframe underlines across link patterns and narrow layouts while preserving Light and Dark treatments |
-| `tests/navbar.spec.ts` | Navbar keyboard, responsive, theme, contrast and forced-colour checks |
+| `tests/site/wireframe-links.spec.ts` | Checks Wireframe underlines across link patterns and narrow layouts while preserving Light and Dark treatments |
+| `tests/components/navbar.spec.ts` | Navbar example keyboard, responsive, theme, contrast and forced-colour checks |
+| `tests/site/site-navigation.spec.ts` | Documentation site Navbar: mobile menu, current section, landing and unknown routes |
+| `tests/components/button.spec.ts` | Button content options, href navigation and actions, the landing Read docs link matching the shared Button, and the pending ring under reduced motion |
+| `tests/components/disclosure.spec.ts` | Disclosure reflow, immediate panels in every theme and motion setting, find-in-page and group switching |
 | `site/pages/TextAreaPage.tsx` | Multiline field examples, states, composition and vertical resizing guidance |
 | `site/pages/TextFieldPage.tsx` | TextField composition, editing, states and local validation examples |
-| `tests/text-field.spec.ts` | TextField keyboard, validation, responsive and automated accessibility checks |
+| `tests/components/text-field.spec.ts` | TextField keyboard, validation, responsive and automated accessibility checks |
 | `src/components/Checkbox.tsx` | Public React Aria Checkbox wrapper with selected and indeterminate indicators |
 | `src/components/Checkbox.css` | Token-led styling for Checkbox states and interaction feedback |
 | `src/components/Link.ts` | Public React Aria Link export and prop types |
@@ -94,10 +96,10 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
 | `src/icons/StudioIcons.tsx` | Public action, navigation, transport and sequencer icons imported from Rhythm Directives' active icon modules |
 | `src/components/Table.tsx` | React Aria Table parts and a Column wrapper that adds a shared sort-direction indicator |
-| `tests/table.spec.ts` | Table sorting interactions, keyboard and pointer activation, sort indicators and responsive contrast checks |
+| `tests/components/table.spec.ts` | Table sorting interactions, keyboard and pointer activation, sort indicators and responsive contrast checks |
 | `src/components/Tabs.tsx`, `src/components/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
 | `src/components/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
-| `tests/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
+| `tests/components/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
 | `src/components/ToggleButton.ts` | React Aria ToggleButton and ToggleButtonGroup with shared button sizes, icon content, optional secondary appearance and preserved selection APIs |
 | `src/components/ToggleButton.css` | Token-led styling for ToggleButton states and ToggleButtonGroup layout |
 | `src/motion.css` | Internal finite/loading/scroll motion policy for theme scopes and the system preference; shared backdrop fade keyframes used by Modal, Sidebar and TabBar |
@@ -108,7 +110,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `scripts/effect-rules.test.mjs` | Passing and failing fixtures for effect rules |
 | `scripts/typography-rules.mjs` | Checks that component CSS sets complete type-scale roles, Button text tokens point to the scale, and the documented and displayed style choices match |
 | `scripts/typography-rules.test.mjs` | Passing and failing fixtures for typography rules |
-| `tests/motion.spec.ts` | Nested themes, system precedence, Disclosure orientation, loading and live Motion reference checks |
+| `tests/site/motion.spec.ts` | Shared motion policy in each theme, nested themes, system precedence, loading indicators and the live Motion reference |
 | `src/tokens.css` | Shared typography, spacing and corner-radius token contract and entry point for the three official color themes |
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
 | `src/themes/dark.css` | Neutral Dark theme, including automatic device-preference handling |
@@ -131,7 +133,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template, also used by converted Foundations pages: owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures and reference sections from page-supplied content |
 | `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections |
 | `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors; scrolls to changed and repeated anchors using the motion policy's scroll behaviour |
-| `tests/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
+| `tests/site/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
 | `site/components/tokenValueLogic.ts` | Reads current CSS token values and re-reads them when the theme, device colour scheme or motion setting changes, and describes font-size tokens in pixels |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/pages/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
@@ -187,8 +189,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |
 | `playwright.config.ts` | Builds and serves the production showcase for Chromium tests, with CI safeguards, HTML reports in `reports/playwright/` and failure traces and screenshots in `reports/test-results/` |
-| `tests/route-loading.spec.ts` | Verifies route-specific downloads, delayed and failed loads, section links and theme-state preservation |
-| `tests/responsive-layout.spec.ts` | Checks Elevation reflow with normal and doubled text, sidebar breakpoints and keyboard disclosure operation |
+| `tests/site/route-loading.spec.ts` | Verifies route-specific downloads, delayed and failed loads, section links and theme-state preservation |
+| `tests/site/elevation.spec.ts` | Checks the Elevation page fits each breakpoint width with normal and doubled text |
 | `vite.config.ts` | Showcase build: React plugin, `site/` root, package-name alias, `site-dist/` output |
 | `config/vite.lib.config.ts` | Package build: library mode, external peer dependencies, `dist/` output |
 | `tsconfig.json` | References the app and node TypeScript projects in `config/`; stays at the root so editors find it |
@@ -244,6 +246,8 @@ Typography retains its overview at `/typography`. Its child pages are
 
 `dist/`, `site-dist/`, `reports/`, and `node_modules/` are generated and ignored by Git. `reports/` holds browser test output (`reports/playwright/`, `reports/test-results/`) and Lighthouse output (`reports/lighthouse/`).
 
+Browser tests are grouped by subject: `tests/components/` has one file per component, `tests/site/` covers the documentation site and shared rules such as motion and Wireframe links, and `tests/lab/` covers the Lab.
+
 `config/` holds configuration that tools are pointed at by a flag or path. Configuration that tools discover by itself stays at the root: `package.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts`, `fly.toml`, `Dockerfile` and the ignore files.
 
 ### Nav Tree ownership
@@ -255,4 +259,4 @@ Typography retains its overview at `/typography`. Its child pages are
 | `src/components/navTreeLogic.ts` | Private route/expansion reconciliation and recovery of focus lost through row removal |
 | `site/components/sidebarNavigationItems.tsx` | Converts site structure to navigation data and WIP badge content |
 | `scripts/nav-tree-rules.mjs`, `scripts/nav-tree-rules.test.mjs` | Ownership checks and regression fixtures for removed recipes, consumer internals and aliased composition |
-| `tests/nav-tree.spec.ts`, `tests/fixtures/NavTreeHarness.tsx` | Isolated public-library checks for data, controlled state, focus, themes and reflow without site CSS |
+| `tests/components/nav-tree.spec.ts`, `tests/components/fixtures/NavTreeHarness.tsx` | Isolated public-library checks for data, controlled state, focus, themes and reflow without site CSS, plus the documentation example's immediate rows, chevron motion and rapid toggles |

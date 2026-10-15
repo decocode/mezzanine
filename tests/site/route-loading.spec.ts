@@ -1,25 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { sitePages } from '../site/siteStructure'
-
-test('mobile navigation opens from the Navbar menu and retains expanded groups', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 800 })
-  await page.emulateMedia({ reducedMotion: 'reduce' })
-  await page.goto('/button')
-  await expect(page.getByText('Loading documentation…', { exact: true })).toHaveCount(0)
-  await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
-  const browse = page.getByRole('banner').getByRole('button', { name: /^(Menu|Close menu)$/ })
-  await browse.focus()
-  await page.keyboard.press('Enter')
-  const tree = page.getByRole('treegrid', { name: 'Mezzanine documentation' })
-  await expect(tree).toBeVisible()
-  const forms = tree.getByRole('button', { name: 'Forms and input', exact: true })
-  await forms.click()
-  await expect(tree.getByRole('link', { name: 'Checkbox', exact: true })).toBeVisible()
-  await browse.click()
-  await browse.click()
-  await expect(tree.getByRole('link', { name: 'Checkbox', exact: true })).toBeVisible()
-  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
-})
+import { sitePages } from '../../site/siteStructure'
 
 for (const sitePage of sitePages) {
   test(`${sitePage.path} loads only its own documentation page`, async ({ page }) => {

@@ -1,9 +1,9 @@
 import React, { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Badge, NavTree, type NavTreeProps } from '../../src/index'
-import '../../src/themes/light.css'
-import '../../src/themes/dark.css'
-import '../../src/themes/wireframe.css'
+import { Badge, NavTree, type NavTreeProps } from '../../../src/index'
+import '../../../src/themes/light.css'
+import '../../../src/themes/dark.css'
+import '../../../src/themes/wireframe.css'
 
 const initialItems: NavTreeProps['items'] = [
   { type: 'section', id: 'section', label: 'Section', children: [
