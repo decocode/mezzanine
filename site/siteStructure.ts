@@ -50,6 +50,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     label: 'Foundations',
     pages: [
       { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'implemented' },
+      { id: 'interaction', label: 'Interaction', path: '/interaction', status: 'empty' },
     ],
   },
   {
