@@ -392,58 +392,6 @@
     "kind": "type"
   },
   {
-    "name": "NavigationTree",
-    "kind": "value"
-  },
-  {
-    "name": "NavigationTreeHeader",
-    "kind": "value"
-  },
-  {
-    "name": "NavigationTreeHeaderProps",
-    "kind": "type"
-  },
-  {
-    "name": "NavigationTreeItem",
-    "kind": "value"
-  },
-  {
-    "name": "NavigationTreeItemContent",
-    "kind": "value"
-  },
-  {
-    "name": "NavigationTreeItemContentProps",
-    "kind": "type"
-  },
-  {
-    "name": "NavigationTreeItemContentRenderProps",
-    "kind": "type"
-  },
-  {
-    "name": "NavigationTreeItemProps",
-    "kind": "type"
-  },
-  {
-    "name": "NavigationTreeItemRenderProps",
-    "kind": "type"
-  },
-  {
-    "name": "NavigationTreeProps",
-    "kind": "type"
-  },
-  {
-    "name": "NavigationTreeRenderProps",
-    "kind": "type"
-  },
-  {
-    "name": "NavigationTreeSection",
-    "kind": "value"
-  },
-  {
-    "name": "NavigationTreeSectionProps",
-    "kind": "type"
-  },
-  {
     "name": "PanelLeftCloseIcon",
     "kind": "value"
   },
