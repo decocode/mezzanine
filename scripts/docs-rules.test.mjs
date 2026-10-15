@@ -28,11 +28,11 @@ test('routes: nested Lab rules expand to every page they allow', () => {
 test('routes: Lab pages missing from nginx, and nginx entries for removed Lab pages, are reported', () => {
   const extraPaths = labPaths({
     labContent: "index: { href: '/site/lab' }, layoutPage: { href: '/site/lab/layout' }",
-    layoutContent: "{ slug: 'grid' } { slug: 'new-lab-page' }",
+    layoutContent: "{ slug: 'grid' } { slug: 'new-lab-page' } { key: 'stack', href: '/site/lab/layout/grid/stack' }",
   })
-  assert.deepEqual(extraPaths, ['/site/lab', '/site/lab/layout', '/site/lab/layout/grid', '/site/lab/layout/new-lab-page'])
+  assert.deepEqual(extraPaths, ['/site/lab', '/site/lab/layout', '/site/lab/layout/grid/stack', '/site/lab/layout/grid', '/site/lab/layout/new-lab-page'])
   const labNginx = `map $uri $is_app_route {
-    ~^/site/lab(/layout(/(grid|old-lab-page))?)?/?$ 1;
+    ~^/site/lab(/layout(/(grid(/(stack))?|old-lab-page))?)?/?$ 1;
 }`
   const messages = checkRoutes({ siteStructure: '', extraPaths, nginx: labNginx, lighthouseUrls: [] }).map(p => p.message)
   assert.ok(messages.some(m => m.includes('/site/lab/layout/new-lab-page') && m.includes('404')))

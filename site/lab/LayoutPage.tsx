@@ -1,18 +1,22 @@
 import { Heading, Link, Text } from '@decocode/mezzanine'
 import { layoutLabIntro, layoutLabSections } from './layout/layoutLabContent'
 import {
-  ContainerQueryDemo, EnvironmentDemo, HasDemo, IntrinsicDemo, LayersDemo, LogicalDemo,
-  ScrollPaddingDemo, SubgridDemo, TokensDemo, ViewportDemo,
+  ContainerQueryDemo, EnvironmentDemo, HasDemo, LayersDemo, LogicalDemo, NamedLayersDemo,
+  ReadingWidthDemo, ScrollPaddingDemo, SubgridDemo, TargetSizeDemo, ViewportDemo,
 } from './layout/FoundationDemos'
+import { ChildPageContent, IntrinsicOverview } from './layout/ChildPages'
+import type { ChildPage } from './layout/layoutLabContent'
 import { WildCardDemos } from './layout/WildCardDemos'
 import './layout/layout-lab.css'
 
 // Each section of the tour is its own child page, keyed by its slug.
 const sectionPages: Record<string, () => React.JSX.Element> = {
-  [layoutLabSections.intrinsic.slug]: IntrinsicDemo,
+  [layoutLabSections.intrinsic.slug]: IntrinsicOverview,
   [layoutLabSections.container.slug]: ContainerQueryDemo,
   [layoutLabSections.environment.slug]: EnvironmentDemo,
-  [layoutLabSections.tokens.slug]: TokensDemo,
+  [layoutLabSections.readingWidth.slug]: ReadingWidthDemo,
+  [layoutLabSections.targetSize.slug]: TargetSizeDemo,
+  [layoutLabSections.namedLayers.slug]: NamedLayersDemo,
   [layoutLabSections.logical.slug]: LogicalDemo,
   [layoutLabSections.subgrid.slug]: SubgridDemo,
   [layoutLabSections.has.slug]: HasDemo,
@@ -42,6 +46,11 @@ export function LayoutOverviewPage() {
       </li>)}
     </ul>
   </div>
+}
+
+// A page under one of the sections, such as a primitive or a token family.
+export function LayoutChildPage({ page }: { page: ChildPage }) {
+  return <div className="lab-layout"><ChildPageContent page={page} /></div>
 }
 
 // One section of the tour as its own page.

@@ -1,5 +1,5 @@
 import { useState, type CSSProperties, type ReactNode } from 'react'
-import { Badge, CodeBlock, Disclosure, DisclosureHeader, DisclosurePanel, Heading, Label, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
+import { Badge, CodeBlock, Heading, Label, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
 import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'react-aria-components/Slider'
 import { framePresets, type CssNote, type LabSection } from './layoutLabContent'
 import { splitInlineCode } from './layoutLabLogic'
@@ -46,18 +46,24 @@ export function DemoFrame({ label, initialWidth = 720, children }: { label: stri
   </div>
 }
 
-// The page heading and an introduction (what it is, then why it matters), then browser
-// support under its own heading, then the "Examples" heading that the demos sit under.
-export function LabSectionIntro({ section }: { section: LabSection }) {
+// The page heading and an introduction (what it is, then why it matters), then the "Examples"
+// heading that the demos sit under ("Example" when there is only one), unless the page leaves it out.
+export function LabSectionIntro({ section, hasExamples = true, isSingleExample = false }: { section: LabSection; hasExamples?: boolean; isSingleExample?: boolean }) {
   return <>
     <Heading id={section.id} level={1} className="mz-text-heading-lg">{section.title}</Heading>
     <div className="lab-explainer">
       <Text elementType="p" className="mz-text-body-md">{section.what}</Text>
       <Text elementType="p" className="mz-text-body-md">{section.why}</Text>
-      <Heading level={2} className="mz-text-heading-md">Browser support</Heading>
-      <Text elementType="p" className="mz-text-body-md">{section.support}</Text>
     </div>
-    <Heading level={2} className="mz-text-heading-md">Examples</Heading>
+    {hasExamples && <Heading level={2} className="mz-text-heading-md">{isSingleExample ? 'Example' : 'Examples'}</Heading>}
+  </>
+}
+
+// Browser support, at the end of a page.
+export function BrowserSupport({ section }: { section: LabSection }) {
+  return <>
+    <Heading level={2} className="lab-section-heading mz-text-heading-md">Browser support</Heading>
+    <Text elementType="p" className="lab-demo-text mz-text-body-md">{section.support}</Text>
   </>
 }
 
@@ -71,22 +77,25 @@ export function DemoText({ children }: { children: ReactNode }) {
   return <Text elementType="p" className="lab-demo-text mz-text-body-md">{children}</Text>
 }
 
-// A closed-by-default explanation of the CSS behind one example, with the rules themselves
+// The explanation of the CSS behind one example, with the rules themselves
 // (or, when marked, example rules for an app).
-// level is 4 under an example heading, or 3 on a page whose demo has no heading of its own.
-export function CssNotes({ name, note, level = 4 }: { name: string; note: CssNote; level?: 3 | 4 }) {
-  return <Disclosure className="lab-css-notes">
-    <DisclosureHeader level={level}>The CSS behind {name}</DisclosureHeader>
-    <DisclosurePanel>
-      <div className="lab-css-notes-body">
-        {note.isExample && <Text elementType="p" className="mz-text-body-md">This is example CSS for an app. The demo above doesn’t use it.</Text>}
-        {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
-          {splitInlineCode(paragraph).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part)}
-        </Text>)}
-        <CodeBlock>{note.code}</CodeBlock>
-      </div>
-    </DisclosurePanel>
-  </Disclosure>
+export function CssNotesBody({ note }: { note: CssNote }) {
+  return <div className="lab-css-notes-body">
+    {note.isExample && <Text elementType="p" className="mz-text-body-md">This is example CSS for an app. The demo above doesn’t use it.</Text>}
+    {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
+      {splitInlineCode(paragraph).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part)}
+    </Text>)}
+    <CodeBlock>{note.code}</CodeBlock>
+  </div>
+}
+
+// The same explanation under its own heading: level 4 under an example's heading, or level 2
+// on a page with a single example, like the primitive pages.
+export function CssNotes({ name, note, level = 4 }: { name: string; note: CssNote; level?: 2 | 4 }) {
+  return <div className="lab-css-notes">
+    <Heading level={level} className={level === 2 ? 'lab-section-heading mz-text-heading-md' : 'mz-text-title-md'}>The CSS behind {name}</Heading>
+    <CssNotesBody note={note} />
+  </div>
 }
 
 // Says whether this browser supports a wild-card feature.

@@ -3,9 +3,9 @@ import { MezzanineNavbar } from '../components/MezzanineNavbar'
 import { NavigationPanel, SidebarColumn } from '../components/Sidebar'
 import type { Theme } from '../themeSwitcherLogic'
 import NotFoundPage from '../pages/NotFoundPage'
-import { hasLayoutSectionPage, LayoutOverviewPage, LayoutSectionPage } from './LayoutPage'
+import { hasLayoutSectionPage, LayoutChildPage, LayoutOverviewPage, LayoutSectionPage } from './LayoutPage'
 import { labContent, labNavigationItems } from './labContent'
-import { layoutLabSections } from './layout/layoutLabContent'
+import { childPagesBySection, layoutLabSections } from './layout/layoutLabContent'
 import './lab-page.css'
 
 interface LabPageProps {
@@ -20,7 +20,8 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const isLayout = currentPath === labContent.layoutPage.href
   const sectionSlug = currentPath.startsWith(`${labContent.layoutPage.href}/`) ? currentPath.slice(labContent.layoutPage.href.length + 1) : ''
   const section = hasLayoutSectionPage(sectionSlug) ? Object.values(layoutLabSections).find((item) => item.slug === sectionSlug) : undefined
-  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : section ? `${section.title} | Lab` : 'Page not found | Lab'
+  const childPage = Object.values(childPagesBySection).flat().find((item) => item.href === currentPath)
+  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : section ? `${section.title} | Lab` : childPage ? `${childPage.title} | Lab` : 'Page not found | Lab'
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} />
 
   return <>
@@ -39,7 +40,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : section ? <LayoutSectionPage slug={section.slug} /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : section ? <LayoutSectionPage slug={section.slug} /> : childPage ? <LayoutChildPage page={childPage} /> : <NotFoundPage />}
       </main>
     </div>
   </>

@@ -13,9 +13,10 @@ export function nginxRoutePatterns(nginx) {
   return [...block.matchAll(/^\s*~(\^[^\s]+\$)\s+1;/gm)].map(match => ({ source: match[1], position: match.index }))
 }
 
-// Lab pages: the hrefs in labContent.ts, plus a child page under the Layout overview for each slug.
+// Lab pages: the Lab hrefs written in labContent.ts and the Layout content file (such as the
+// primitive pages), plus a child page under the Layout overview for each slug.
 export function labPaths({ labContent, layoutContent }) {
-  const hrefs = [...labContent.matchAll(/\bhref: '(\/site\/lab[^']*)'/g)].map(match => match[1])
+  const hrefs = [...`${labContent}\n${layoutContent}`.matchAll(/\bhref: '(\/site\/lab[^']*)'/g)].map(match => match[1])
   const slugs = [...layoutContent.matchAll(/\bslug: '([^']+)'/g)].map(match => `/site/lab/layout/${match[1]}`)
   return [...hrefs, ...slugs]
 }

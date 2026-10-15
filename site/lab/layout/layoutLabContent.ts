@@ -43,12 +43,28 @@ export const layoutLabSections: Record<string, LabSection> = {
     why: 'Components ask about their space, and the page asks about the environment. Keeping those two questions apart stops screen breakpoints creeping into every component.',
     support: 'Works in every major browser. The answers in the table are live for your browser, and change as you change your settings.',
   },
-  tokens: {
-    id: 'lab-tokens',
-    slug: 'tokens',
-    title: 'Reading width, target size and layer tokens',
-    what: 'Three families of tokens that Mezzanine doesn’t have yet. A reading width, which typesetters call the measure, is a comfortable maximum line length for text. A target size is the smallest area something you tap or click should cover. And layers are a named order for things that sit on top of each other.',
-    why: 'Today these numbers are repeated by hand in several components: 65ch, 2.75rem, and z-index values of 10, 100 and 110. Named once as tokens, they stay consistent, and a theme or a product can tune them.',
+  readingWidth: {
+    id: 'lab-reading-width',
+    slug: 'reading-width',
+    title: 'Reading width',
+    what: 'A reading width, which typesetters call the measure, is a comfortable maximum line length for text. Lines of roughly 45 to 75 characters are the easiest to read.',
+    why: 'Today 65ch is written by hand in several places. As a token, every reading column can share it, and a theme or a product can tune it. Because it is measured in characters, it also adjusts itself when a theme changes the font.',
+    support: 'It’s an ordinary token, so it works everywhere. The name on this page is an illustrative Lab candidate.',
+  },
+  targetSize: {
+    id: 'lab-target-size',
+    slug: 'target-size',
+    title: 'Target size',
+    what: 'A target size is the smallest area that something you tap or click should cover, so it’s easy to hit with a finger or an unsteady hand.',
+    why: 'WCAG 2.2 sets a minimum of 24 by 24 pixels. Mezzanine’s buttons use 44 pixels today, but the value, 2.75rem, is written by hand. As a token, every control can share it.',
+    support: 'It’s an ordinary token, so it works everywhere. The names on this page are illustrative Lab candidates.',
+  },
+  namedLayers: {
+    id: 'lab-named-layers',
+    slug: 'named-layers',
+    title: 'Named layers',
+    what: 'Named layers are an agreed order for things that sit on top of each other, such as a sticky header, a dialog and a notification.',
+    why: 'Today the Navbar, Modal and Tooltip use z-index values of 10, 100 and 110, each chosen separately. Named once as tokens, a decision like “a modal sits above the sticky header” is made in one place, and stays consistent.',
     support: 'These are ordinary tokens, so they work everywhere. The names on this page are illustrative Lab candidates.',
   },
   logical: {
@@ -107,6 +123,34 @@ export const layoutLabSections: Record<string, LabSection> = {
     why: 'They’re worth knowing about, and trying out in the Lab, before they arrive everywhere.',
     support: 'Each demo checks your browser and says whether the feature is active. Where it isn’t, you’re seeing the fallback.',
   },
+}
+
+// A page under one of the tour's sections, such as a single primitive or token family.
+export interface ChildPage {
+  // Matches the page's entry in cssNotes and its example.
+  key: 'stack' | 'cluster' | 'switcher' | 'grid' | 'sidebar' | 'center'
+  title: string
+  href: string
+  // Shown on the page's Card and on the page itself.
+  summary: string
+}
+
+// The label of the Button on each child page's Card, which opens that page.
+export const childPageCardAction = 'Read docs'
+
+// The intrinsic primitives, each a child page of Intrinsic primitives.
+export const primitivePages: ChildPage[] = [
+  { key: 'stack', title: 'Stack', href: '/site/lab/layout/intrinsic-primitives/stack', summary: 'Stack puts items one above another. The space between them is set by the parent, not by each item, so no component needs its own outer margin.' },
+  { key: 'cluster', title: 'Cluster', href: '/site/lab/layout/intrinsic-primitives/cluster', summary: 'Cluster is a row that wraps onto new lines the way words do. The example uses real Mezzanine Badges.' },
+  { key: 'switcher', title: 'Switcher', href: '/site/lab/layout/intrinsic-primitives/switcher', summary: 'The three blocks sit in a row while there’s at least 30rem of room. Below that, they all drop into a column together, so you never get an awkward two-and-one split. Drag the slider across 30rem to see it switch.' },
+  { key: 'grid', title: 'Grid', href: '/site/lab/layout/intrinsic-primitives/grid', summary: 'The grid works out its own column count, from three to two to one, just from how many 10rem tiles fit. You never choose the number of columns.' },
+  { key: 'sidebar', title: 'Sidebar', href: '/site/lab/layout/intrinsic-primitives/sidebar', summary: 'This is the layout foundation you decided on. The 12rem side column stays next to the main content until the main area would fall below 55% of the width. Then the side column moves above it. Neither number is a screen width.' },
+  { key: 'center', title: 'Center', href: '/site/lab/layout/intrinsic-primitives/center', summary: 'Center keeps content in the middle and stops it growing wider than a set measure, here 24rem.' },
+]
+
+// Sections that are split into child pages, keyed by the section's slug.
+export const childPagesBySection: Record<string, ChildPage[]> = {
+  [layoutLabSections.intrinsic.slug]: primitivePages,
 }
 
 export interface CssNote {

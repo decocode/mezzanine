@@ -1,5 +1,5 @@
 import { Label, Text, TextArea, TextField } from '@decocode/mezzanine'
-import { CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, LabSectionIntro, SupportBadge } from './LabParts'
+import { BrowserSupport, CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, LabSectionIntro, SupportBadge } from './LabParts'
 import { cssNotes, layoutLabSections as sections } from './layoutLabContent'
 import { supportsCondition, supportsCss } from './layoutLabLogic'
 
@@ -58,5 +58,6 @@ export function WildCardDemos() {
       </TextField>
     </LabOnly>
     <CssNotes name="the growing field" note={cssNotes.fieldSizing} />
+    <BrowserSupport section={sections.wild} />
   </section>
 }

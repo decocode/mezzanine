@@ -1,15 +1,14 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
-import { cssNotes, layoutLabSections } from '../../site/lab/layout/layoutLabContent'
+import { cssNotes, layoutLabSections, primitivePages } from '../../site/lab/layout/layoutLabContent'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-const layoutPages = [
-  { path: '/site/lab/layout', title: 'Layout' },
-  ...Object.values(layoutLabSections).map(section => ({ path: `/site/lab/layout/${section.slug}`, title: section.title })),
-]
+const sectionPages = Object.values(layoutLabSections).map(section => ({ path: `/site/lab/layout/${section.slug}`, title: section.title }))
+const primitivePagePaths = primitivePages.map(primitive => ({ path: primitive.href, title: primitive.title }))
+const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...sectionPages, ...primitivePagePaths]
 
-// Checks the Layout overview and each of its child pages fit a 320px screen at normal and
+// Checks the Layout overview, each of its child pages and each primitive page fit a 320px screen at normal and
 // doubled text in every theme, and pass an automated accessibility scan.
 for (const theme of themes) {
   test(`Lab Layout pages fit 320px and pass accessibility checks in ${theme}`, async ({ page }) => {
@@ -33,7 +32,7 @@ for (const theme of themes) {
 test('Lab Layout child pages are reachable from the overview and the navigation', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/layout')
-  for (const layoutPage of layoutPages.slice(1)) {
+  for (const layoutPage of sectionPages) {
     await expect(page.locator('main').getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
   }
   await page.locator('main').getByRole('link', { name: 'Subgrid', exact: true }).click()
@@ -42,9 +41,34 @@ test('Lab Layout child pages are reachable from the overview and the navigation'
   await expect(page.locator('.lab-only').first()).toBeVisible()
   // On a child page, the Layout group is expanded and lists every child page.
   const tree = page.locator('.site-layout > .site-sidebar').getByRole('treegrid', { name: 'Lab experiments' })
-  for (const layoutPage of layoutPages.slice(1)) {
+  for (const layoutPage of sectionPages) {
     await expect(tree.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
   }
+
+  // Intrinsic primitives shows a Card per primitive, each with a Read docs Button to its page; on
+  // a primitive page, the tree shows them all and the CSS behind it is a heading, not a closed panel.
+  await page.goto('/site/lab/layout/intrinsic-primitives')
+  const card = (title: string) => page.locator('main .mezzanine-card').filter({ has: page.getByRole('heading', { name: title, exact: true, level: 2 }) })
+  for (const primitive of primitivePagePaths) {
+    const readDocs = card(primitive.title).getByRole('link', { name: 'Read docs', exact: true })
+    await expect(readDocs).toHaveAttribute('href', primitive.path)
+    await expect(readDocs).toHaveAccessibleDescription(primitive.title)
+  }
+  await card('Stack').getByRole('link', { name: 'Read docs', exact: true }).click()
+  await expect(page).toHaveTitle('Stack | Lab')
+  for (const primitive of primitivePagePaths) {
+    await expect(tree.getByRole('link', { name: primitive.title, exact: true })).toHaveAttribute('href', primitive.path)
+  }
+  await expect(page.getByRole('heading', { name: 'The CSS behind Stack', level: 2 })).toBeVisible()
+  await expect(page.locator('main .lab-css-notes')).toHaveCount(0)
+  await expect(page.locator('main pre.mezzanine-code-block')).toBeVisible()
+
+  // Reading width, Target size and Named layers are top-level pages under Layout, each with one example.
+  await page.goto('/site/lab/layout/named-layers')
+  await expect(page).toHaveTitle('Named layers | Lab')
+  await expect(page.getByRole('heading', { name: 'Example', exact: true, level: 2 })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'The CSS behind named layers', level: 2 })).toBeVisible()
+  await expect(tree.getByRole('link', { name: 'Reading width', exact: true })).toHaveAttribute('href', '/site/lab/layout/reading-width')
   await page.goto('/site/lab/layout/not-a-page')
   await expect(page).toHaveTitle('Page not found | Lab')
 })
@@ -59,7 +83,7 @@ test('Lab Layout demos respond to their space and content', async ({ page }) => 
   expect(await columns(0)).toBe(1)
   expect(await columns(1)).toBe(2)
 
-  await page.goto('/site/lab/layout/intrinsic-primitives')
+  await page.goto('/site/lab/layout/intrinsic-primitives/switcher')
   const switcherFrame = page.locator('.lab-frame').filter({ has: page.locator('.lab-switcher') })
   const rows = () => switcherFrame.locator('.lab-switcher > *').evaluateAll(items => new Set(items.map(item => Math.round(item.getBoundingClientRect().top))).size)
   await switcherFrame.getByRole('radio', { name: 'Wide', exact: true }).click()

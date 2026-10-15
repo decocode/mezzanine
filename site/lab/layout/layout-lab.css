@@ -21,7 +21,8 @@
   min-width: 0;
 }
 
-.lab-layout :is(h1, h2, h3, h4, p, ul) {
+/* No extra strength, so components such as Card keep their own spacing between children. */
+:where(.lab-layout) :where(h1, h2, h3, h4, p, ul) {
   margin: 0;
 }
 
@@ -40,11 +41,6 @@
   max-inline-size: 70ch;
 }
 
-/* More space above each heading than below it, so it reads as the start of what follows. */
-.lab-explainer > h2:not(:first-child) {
-  margin-block-start: var(--space-4);
-}
-
 /* Extra space above each example, so one example's frame doesn't run into the next one's heading. */
 .lab-layout .lab-demo-heading {
   margin-block-start: var(--space-8);
@@ -53,6 +49,30 @@
 /* Except straight after "Examples", where the heading above already separates it. */
 .lab-layout h2 + .lab-demo-heading {
   margin-block-start: 0;
+}
+
+/* Child pages as Cards: as many columns as fit, none narrower than 16rem, equal heights per row. */
+.lab-child-page-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+
+.lab-child-page-cards > li,
+.lab-child-page-cards .mezzanine-card {
+  block-size: 100%;
+}
+
+/* A page's second-level headings start a new part, so they get more space above. */
+.lab-layout .lab-section-heading {
+  margin-block-start: var(--space-4);
+}
+
+.lab-css-notes {
+  display: grid;
+  gap: var(--space-3);
 }
 
 .lab-css-notes-body {

@@ -1,66 +1,9 @@
 import { useRef, useState } from 'react'
 import { Badge, Button, Card, Cell, Checkbox, Column, Heading, Row, Table, TableBody, TableHeader, Text } from '@decocode/mezzanine'
-import { CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, LabSectionIntro } from './LabParts'
-import { AutoGrid, Block, Center, Cluster, SidebarLayout, Stack, Switcher } from './LabPrimitives'
+import { BrowserSupport, CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, LabSectionIntro } from './LabParts'
 import { environmentQueries, layoutLabSections as sections, cssNotes, sampleParagraph } from './layoutLabContent'
+import { Stack } from './LabPrimitives'
 import { measureProbes, measureSafeAreas, useMediaQuery } from './layoutLabLogic'
-
-export function IntrinsicDemo() {
-  return <section aria-labelledby={sections.intrinsic.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.intrinsic} />
-    <DemoText>Each example has its own width slider. Drag it and watch that pattern rearrange itself.</DemoText>
-    <DemoHeading>Stack</DemoHeading>
-    <DemoText>Stack puts items one above another. The space between them is set by the parent, not by each item, so no component needs its own outer margin.</DemoText>
-    <DemoFrame label="Stack">
-      <LabOnly name="Stack">
-        <Stack><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Stack>
-      </LabOnly>
-    </DemoFrame>
-    <CssNotes name="Stack" note={cssNotes.stack} />
-    <DemoHeading>Cluster</DemoHeading>
-    <DemoText>Cluster is a row that wraps onto new lines the way words do. These are real Mezzanine Badges.</DemoText>
-    <DemoFrame label="Cluster">
-      <LabOnly name="Cluster">
-        <Cluster>{['Design', 'Accessibility', 'Layout', 'Tokens', 'React Aria', 'Themes', 'Motion'].map((tag) => <Badge key={tag}>{tag}</Badge>)}</Cluster>
-      </LabOnly>
-    </DemoFrame>
-    <CssNotes name="Cluster" note={cssNotes.cluster} />
-    <DemoHeading>Switcher</DemoHeading>
-    <DemoText>The three blocks sit in a row while there’s at least 30rem of room. Below that, they all drop into a column together, so you never get an awkward two-and-one split. Drag the slider across 30rem to see it switch.</DemoText>
-    <DemoFrame label="Switcher">
-      <LabOnly name="Switcher">
-        <Switcher threshold="30rem"><Block>One</Block><Block>Two</Block><Block>Three</Block></Switcher>
-      </LabOnly>
-    </DemoFrame>
-    <CssNotes name="Switcher" note={cssNotes.switcher} />
-    <DemoHeading>Grid</DemoHeading>
-    <DemoText>The grid works out its own column count, from three to two to one, just from how many 10rem tiles fit. You never choose the number of columns.</DemoText>
-    <DemoFrame label="Grid">
-      <LabOnly name="AutoGrid">
-        <AutoGrid min="10rem">{['A', 'B', 'C', 'D', 'E', 'F'].map((letter) => <Block key={letter}>Tile {letter}</Block>)}</AutoGrid>
-      </LabOnly>
-    </DemoFrame>
-    <CssNotes name="Grid" note={cssNotes.grid} />
-    <DemoHeading>Sidebar</DemoHeading>
-    <DemoText>This is the layout foundation you decided on. The 12rem side column stays next to the main content until the main area would fall below 55% of the width. Then the side column moves above it. Neither number is a screen width.</DemoText>
-    <DemoFrame label="Sidebar">
-      <LabOnly name="SidebarLayout">
-        <SidebarLayout sideWidth="12rem" contentMin="55%" side={<Block tall>Side column</Block>}>
-          <Block tall>Main content</Block>
-        </SidebarLayout>
-      </LabOnly>
-    </DemoFrame>
-    <CssNotes name="Sidebar" note={cssNotes.sidebar} />
-    <DemoHeading>Center</DemoHeading>
-    <DemoText>Center keeps content in the middle and stops it growing wider than a set measure, here 24rem.</DemoText>
-    <DemoFrame label="Center">
-      <LabOnly name="Center">
-        <Center max="24rem"><Block>Centred, never wider than 24rem</Block></Center>
-      </LabOnly>
-    </DemoFrame>
-    <CssNotes name="Center" note={cssNotes.center} />
-  </section>
-}
 
 // The same tile adapts to whichever slot it is placed in.
 function ContainerTile() {
@@ -97,6 +40,7 @@ export function ContainerQueryDemo() {
       <ContainerTile />
     </DemoFrame>
     <CssNotes name="the tile" note={cssNotes.containerTile} />
+    <BrowserSupport section={sections.container} />
   </section>
 }
 
@@ -111,7 +55,7 @@ function EnvironmentRow({ label, query }: { label: string; query: string }) {
 
 export function EnvironmentDemo() {
   return <section aria-labelledby={sections.environment.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.environment} />
+    <LabSectionIntro section={sections.environment} isSingleExample />
     <DemoText>Try switching your system to dark mode, turning on increased contrast, or using DevTools device mode. The answers update as you go.</DemoText>
     <div className="lab-table">
       <Table aria-label="Environment media queries in this browser">
@@ -123,15 +67,15 @@ export function EnvironmentDemo() {
         <TableBody>{environmentQueries.map((item) => <EnvironmentRow key={item.query} {...item} />)}</TableBody>
       </Table>
     </div>
-    <CssNotes name="environment queries" note={cssNotes.environment} level={3} />
+    <CssNotes name="environment queries" note={cssNotes.environment} level={2} />
     <DemoText>Notice that only the last row is about width, and it’s about the whole window, which is the page frame’s concern. Reduced motion is missing on purpose: in Mezzanine, only the shared motion policy reads that preference.</DemoText>
+    <BrowserSupport section={sections.environment} />
   </section>
 }
 
-export function TokensDemo() {
-  return <section aria-labelledby={sections.tokens.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.tokens} />
-    <DemoHeading>Reading width</DemoHeading>
+export function ReadingWidthDemo() {
+  return <section aria-labelledby={sections.readingWidth.id} className="lab-layout-section">
+    <LabSectionIntro section={sections.readingWidth} isSingleExample />
     <DemoText>The same paragraph twice. Widen the frame and the first one stretches into long, tiring lines. The second stops at a comfortable 65 characters or so, and stays centred with equal space on both sides. Narrow the frame and both wrap onto more lines.</DemoText>
     <DemoFrame label="Reading width" initialWidth={1100}>
       <Stack>
@@ -139,8 +83,14 @@ export function TokensDemo() {
         <LabOnly name="With --lab-measure (65ch)"><div className="lab-measure"><Text elementType="p" className="mz-text-body-md">{sampleParagraph}</Text></div></LabOnly>
       </Stack>
     </DemoFrame>
-    <CssNotes name="Reading width" note={cssNotes.measure} />
-    <DemoHeading>Target size</DemoHeading>
+    <CssNotes name="reading width" note={cssNotes.measure} level={2} />
+    <BrowserSupport section={sections.readingWidth} />
+  </section>
+}
+
+export function TargetSizeDemo() {
+  return <section aria-labelledby={sections.targetSize.id} className="lab-layout-section">
+    <LabSectionIntro section={sections.targetSize} isSingleExample />
     <DemoText>Two squares showing the smallest a tap or click target should be. The first is the minimum WCAG 2.2 allows. The second is what Mezzanine’s buttons use today.</DemoText>
     <LabOnly name="Target sizes">
       <div className="lab-targets">
@@ -148,22 +98,29 @@ export function TokensDemo() {
         <div><span className="lab-target lab-target-comfortable" aria-hidden="true" /><Text elementType="p" className="mz-text-body-sm">44px: what Mezzanine&apos;s buttons use today, as --lab-target-min</Text></div>
       </div>
     </LabOnly>
-    <CssNotes name="Target size" note={cssNotes.targetSize} />
-    <DemoHeading>Layers</DemoHeading>
-    <DemoText>Each box takes its place in the stack from a named token, so a decision like “a modal sits above the sticky header” is made once. Today the Navbar uses 10, Modal 100 and Tooltip 110, each chosen separately.</DemoText>
+    <CssNotes name="target size" note={cssNotes.targetSize} level={2} />
+    <BrowserSupport section={sections.targetSize} />
+  </section>
+}
+
+export function NamedLayersDemo() {
+  return <section aria-labelledby={sections.namedLayers.id} className="lab-layout-section">
+    <LabSectionIntro section={sections.namedLayers} isSingleExample />
+    <DemoText>Each box takes its place in the stack from a named token, so the order is decided once, not in each component.</DemoText>
     <LabOnly name="Named layers">
       <div className="lab-layer-stack">
         {['base', 'raised', 'sticky', 'overlay', 'modal', 'toast'].map((name) => <div key={name} className={`lab-layer lab-layer-${name} mz-text-body-sm`}><code>--lab-layer-{name}</code></div>)}
       </div>
     </LabOnly>
-    <CssNotes name="Layers" note={cssNotes.layers} />
+    <CssNotes name="named layers" note={cssNotes.layers} level={2} />
+    <BrowserSupport section={sections.namedLayers} />
   </section>
 }
 
 export function LogicalDemo() {
   const [rtl, setRtl] = useState(false)
   return <section aria-labelledby={sections.logical.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.logical} />
+    <LabSectionIntro section={sections.logical} isSingleExample />
     <DemoText>Turn on right to left. The logical box moves its border and indent to the right, where Arabic and Hebrew lines start. The physical one stays on the left and looks wrong. Mezzanine’s Sidebar drawer and Modal still use some physical properties.</DemoText>
     <Checkbox isSelected={rtl} onChange={setRtl}>Show right to left</Checkbox>
     <div className="lab-two-slots" dir={rtl ? 'rtl' : 'ltr'}>
@@ -174,7 +131,8 @@ export function LogicalDemo() {
         <div className="lab-direction lab-direction-logical mz-text-body-md">Accent border and indent at the <strong>start</strong> of the line.</div>
       </LabOnly>
     </div>
-    <CssNotes name="logical properties" note={cssNotes.logical} level={3} />
+    <CssNotes name="logical properties" note={cssNotes.logical} level={2} />
+    <BrowserSupport section={sections.logical} />
   </section>
 }
 
@@ -186,7 +144,7 @@ export function SubgridDemo() {
     { title: 'Medium title', text: 'A little more text.' },
   ]
   return <section aria-labelledby={sections.subgrid.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.subgrid} />
+    <LabSectionIntro section={sections.subgrid} isSingleExample />
     <DemoText>With subgrid on, the text in each card starts at the same height and the actions line up along the bottom, however long each title is. Turn it off and they drift apart. These cards are Lab-only because Mezzanine’s Card doesn’t use subgrid.</DemoText>
     <Checkbox isSelected={aligned} onChange={setAligned}>Use subgrid</Checkbox>
     <DemoFrame label="Subgrid cards" initialWidth={900}>
@@ -200,7 +158,8 @@ export function SubgridDemo() {
         </div>
       </LabOnly>
     </DemoFrame>
-    <CssNotes name="subgrid" note={cssNotes.subgrid} level={3} />
+    <CssNotes name="subgrid" note={cssNotes.subgrid} level={2} />
+    <BrowserSupport section={sections.subgrid} />
   </section>
 }
 
@@ -231,6 +190,7 @@ export function HasDemo() {
       </div>
     </LabOnly>
     <CssNotes name="the image layout" note={cssNotes.mediaObject} />
+    <BrowserSupport section={sections.has} />
   </section>
 }
 
@@ -241,7 +201,7 @@ export function ViewportDemo() {
   const [insets, setInsets] = useState<{ label: string; pixels: string }[]>([])
   const standalone = useMediaQuery('(display-mode: standalone)')
   return <section aria-labelledby={sections.viewport.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.viewport} />
+    <LabSectionIntro section={sections.viewport} isSingleExample />
     <DemoText>Press the button to measure your screen. On a laptop the four heights match and the safe areas are zero. On a phone, scroll until the toolbar hides and measure again: svh and lvh differ, and dvh changes. Installed as an app here: {standalone ? 'yes' : 'no'}.</DemoText>
     <div ref={probes} className="lab-probes" aria-hidden="true">
       <div data-probe="100vh" className="lab-probe-vh" />
@@ -261,7 +221,8 @@ export function ViewportDemo() {
       </Table>
     </div>}
     <DemoText>To clear a notch without losing its normal space, content can take whichever is larger: its usual padding, or the safe area. In CSS that’s <code>max(your spacing, env(safe-area-inset-left))</code>.</DemoText>
-    <CssNotes name="the measurements" note={cssNotes.viewport} level={3} />
+    <CssNotes name="the measurements" note={cssNotes.viewport} level={2} />
+    <BrowserSupport section={sections.viewport} />
   </section>
 }
 
@@ -270,7 +231,7 @@ export function ScrollPaddingDemo() {
   const box = useRef<HTMLDivElement>(null)
   const jump = (index: number) => box.current?.querySelector<HTMLElement>(`[data-section="${index}"]`)?.scrollIntoView({ block: 'start', inline: 'nearest' })
   return <section aria-labelledby={sections.scrollPadding.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.scrollPadding} />
+    <LabSectionIntro section={sections.scrollPadding} isSingleExample />
     <DemoText>Jump to a section with scroll padding off, and the heading lands hidden under the sticky header. Turn it on and jump again: the heading lands just below. Mezzanine’s docs site hard-codes a 4rem offset today, which can be wrong when text is enlarged.</DemoText>
     <Checkbox isSelected={padded} onChange={setPadded}>Use scroll padding</Checkbox>
     <div className="lab-controls">
@@ -285,13 +246,14 @@ export function ScrollPaddingDemo() {
         </div>)}
       </div>
     </LabOnly>
-    <CssNotes name="scroll padding" note={cssNotes.scrollPadding} level={3} />
+    <CssNotes name="scroll padding" note={cssNotes.scrollPadding} level={2} />
+    <BrowserSupport section={sections.scrollPadding} />
   </section>
 }
 
 export function LayersDemo() {
   return <section aria-labelledby={sections.layers.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.layers} />
+    <LabSectionIntro section={sections.layers} isSingleExample />
     <DemoText>Both chips have the same simple “app” rule. On the left, the library’s rule uses a stronger selector and wins, so the app would need an even stronger one, or !important. On the right, the same library rule sits in a cascade layer, so the app’s simple rule wins.</DemoText>
     <div className="lab-two-slots">
       <LabOnly name="Library CSS not in a layer">
@@ -301,6 +263,7 @@ export function LayersDemo() {
         <div className="lab-cascade lab-cascade-layered"><span className="lab-chip lab-consumer-override mz-text-label-md" /></div>
       </LabOnly>
     </div>
-    <CssNotes name="cascade layers" note={cssNotes.cascadeLayers} level={3} />
+    <CssNotes name="cascade layers" note={cssNotes.cascadeLayers} level={2} />
+    <BrowserSupport section={sections.layers} />
   </section>
 }
