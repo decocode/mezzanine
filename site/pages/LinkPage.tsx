@@ -128,9 +128,16 @@ export default function LinkPage() {
             },
             {
               id: 'link-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {linkContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'link-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {linkContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],

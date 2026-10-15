@@ -16,7 +16,10 @@ export const breadcrumbsContent = {
     { name: 'Link', description: <>Makes an earlier level navigable. The current-page example uses plain text.</> },
   ],
   usageParagraphs: [
-    <>Wrap the list in a <code>nav</code> with an <code>aria-label</code> describing the breadcrumb trail. Order items from the broadest ancestor to the current page; give each earlier destination a meaningful link label and <code>href</code>.</>,
-    <>Tab moves between enabled links and Enter follows the focused link. The plain-text current item in these examples is not a tab stop. Set <code>isDisabled</code> on Breadcrumbs to disable its links.</>,
+    <>Order items from the broadest ancestor to the current page; give each earlier destination a meaningful link label and <code>href</code>. Set <code>isDisabled</code> on Breadcrumbs to disable its links.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Wrap the list in a <code>nav</code> with an <code>aria-label</code> describing the breadcrumb trail.</>,
+    <>Tab moves between enabled links and Enter follows the focused link. The plain-text current item in these examples is not a tab stop.</>,
   ],
 }

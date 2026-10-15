@@ -26,8 +26,12 @@ export const linkContent = {
     </>,
   ],
   usageParagraphs: [
-    <>Use <code>href</code> for a destination and <code>Button</code> for an action. Give the link text enough context to make its destination clear. Use <code>aria-current="page"</code> for the current destination.</>,
-    <>Tab focuses enabled links and Enter follows them. Use <code>isDisabled</code> to prevent activation. Supply <code>target</code> and <code>rel</code> when needed for external destinations, and keep new-window warnings consistent with the Content example above.</>,
+    <>Use <code>href</code> for a destination and <code>Button</code> for an action.</>,
+    <>Use <code>isDisabled</code> to prevent activation. Supply <code>target</code> and <code>rel</code> when needed for external destinations, and keep new-window warnings consistent with the Content example above.</>,
     <>Client-side routing is supplied by the consuming application. Mezzanine exports the React Aria Link API directly; it does not choose a router or infer the current page.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Give the link text enough context to make its destination clear. Use <code>aria-current="page"</code> for the current destination.</>,
+    <>Tab focuses enabled links and Enter follows them.</>,
   ],
 }

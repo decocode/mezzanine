@@ -80,9 +80,16 @@ export default function DisclosurePage() {
             },
             {
               id: 'disclosure-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {disclosureContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'disclosure-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {disclosureContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],

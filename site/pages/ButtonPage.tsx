@@ -251,9 +251,16 @@ export default function ButtonPage() {
             },
             {
               id: 'button-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {buttonContent.usageParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'button-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {buttonContent.accessibilityParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
               </>),
             },
             {

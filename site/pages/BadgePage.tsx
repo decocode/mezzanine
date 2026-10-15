@@ -58,9 +58,16 @@ export default function BadgePage() {
             },
             {
               id: 'badge-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {badgeContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'badge-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {badgeContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],

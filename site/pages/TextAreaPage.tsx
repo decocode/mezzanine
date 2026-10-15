@@ -65,9 +65,16 @@ export default function TextAreaPage() {
             },
             {
               id: 'text-area-composition',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {textAreaContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'text-area-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {textAreaContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],

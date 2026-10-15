@@ -51,13 +51,18 @@ export default function NavigationTreePage() {
             },
             {
               id: 'navigation-tree-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: navigationTreeContent.usage.map((topic) => (
                 <Fragment key={topic.title}>
                   <h4 className="mz-text-title-md">{topic.title}</h4>
                   {topic.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
                 </Fragment>
               )),
+            },
+            {
+              id: 'navigation-tree-accessibility-heading',
+              title: 'Accessibility',
+              content: navigationTreeContent.accessibility.map((paragraph, index) => <p key={index}>{paragraph}</p>),
             },
             {
               id: 'navigation-tree-props-heading',

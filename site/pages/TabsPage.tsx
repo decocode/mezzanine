@@ -66,18 +66,25 @@ export default function TabsPage() {
               </>),
             },
             {
+              id: 'tabs-usage-heading',
+              title: 'Usage',
+              content: (<>
+                <ul className="mz-text-body-md">{tabsContent.usageItems}</ul>
+              </>),
+            },
+            {
+              id: 'tabs-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                <ul className="mz-text-body-md">{tabsContent.accessibilityItems}</ul>
+              </>),
+            },
+            {
               id: 'tabs-props-heading',
               title: 'Props',
               content: (<>
                 {tabsContent.propsParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
                 <DocsTable aria-label="Tabs props" nameColumn="Prop" rows={tabsContent.propsRows} className="documentation-props-table" />
-              </>),
-            },
-            {
-              id: 'tabs-usage-heading',
-              title: 'Usage and accessibility',
-              content: (<>
-                <ul className="mz-text-body-md">{tabsContent.usageItems}</ul>
               </>),
             },
             {

@@ -155,7 +155,7 @@ export const buttonContent = {
     ],
     lead: 'Want to find out more about button accessibility?',
     label: 'Read usage guidance',
-    hint: 'Pressing this button scrolls to the Usage and accessibility section on this page.',
+    hint: 'Pressing this button scrolls to the Usage section on this page.',
     href: '#button-usage-heading',
   },
   anatomyRows: [
@@ -186,7 +186,6 @@ export const buttonContent = {
       navigate; Button uses React Aria <code>Link</code> internally with the same styling, sizes and icons.
       Without <code>href</code>, handle actions with <code>onPress</code>; React Aria Button supports pointer,
       touch, Enter and Space activation. Use <code>Link</code> for ordinary text links.
-      Keep visible labels clear. Icon-only buttons require an accessible name even when a tooltip is provided.
     </>,
     <>
       With <code>href</code>, Button accepts React Aria Link props such as <code>target</code>, <code>rel</code>,
@@ -197,10 +196,13 @@ export const buttonContent = {
     <>
       Use <code>isPending</code> while an action is in progress: <code>Button</code> displays its progress
       indicator and prevents further presses while remaining focusable. Use
-      {' '}<code>isDisabled</code> when the action is unavailable. Keyboard focus has its own
-      visible outline, separate from hover and pressed feedback.
+      {' '}<code>isDisabled</code> when the action is unavailable.
     </>,
     <>Button labels wrap when space is limited, allowing the control to grow taller without shrinking the text. Icons retain their size.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Keep visible labels clear. Icon-only buttons require an accessible name even when a tooltip is provided.</>,
+    <>Keyboard focus has its own visible outline, separate from hover and pressed feedback.</>,
   ],
   tokensRows: buttonTokens.map(({ token, description }) => ({ name: token, description })),
   tokensParagraphs: [

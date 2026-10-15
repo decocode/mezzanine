@@ -24,7 +24,11 @@ export const badgeContent = {
     </>,
   ],
   usageParagraphs: [
-    <>Use a short text label that communicates the status without relying on colour. Supply it as the children of <code>Badge</code>; <code>variant</code> defaults to <code>neutral</code>. The available variants are shown above.</>,
-    <>Badge renders a <code>span</code>, not an action control. Use <code>Button</code> or <code>Link</code> for an action or destination. It does not add keyboard interaction or automatically announce changes.</>,
+    <>Supply the label as the children of <code>Badge</code>; <code>variant</code> defaults to <code>neutral</code>. The available variants are shown above.</>,
+    <>Badge renders a <code>span</code>, not an action control. Use <code>Button</code> or <code>Link</code> for an action or destination.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Use a short text label that communicates the status without relying on colour.</>,
+    <>Badge does not add keyboard interaction or automatically announce changes.</>,
   ],
 }

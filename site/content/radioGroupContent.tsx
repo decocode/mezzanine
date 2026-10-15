@@ -75,10 +75,12 @@ export const radioGroupContent = {
   ],
   usageParagraphs: [
     <>
-      Use a visible <code>Label</code> for the group and a clear label inside each <code>RadioButton</code>. Give each
-      <code>RadioField</code> a unique <code>value</code>. Use <code>defaultValue</code> for an initial
+      Give each <code>RadioField</code> a unique <code>value</code>. Use <code>defaultValue</code> for an initial
       selection, or <code>value</code> with <code>onChange</code> to control it from your app.
     </>,
+  ],
+  accessibilityParagraphs: [
+    <>Use a visible <code>Label</code> for the group and a clear label inside each <code>RadioButton</code>.</>,
     <>
       Tab moves into the group and arrow keys move between available options. React Aria
       handles selection and focus; disabled options cannot be selected. Use a description

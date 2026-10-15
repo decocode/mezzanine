@@ -21,10 +21,13 @@ export const navbarContent = {
     <>Enter or Space toggles the trigger. Tab moves through the visible links and actions. This Disclosure is not a modal: focus is not trapped, and Escape and outside clicks do not close it. Motion is removed when reduced motion is requested.</>,
   ],
   usage: [
-    <>Supply a home Link through <code>brand</code>, links through <code>children</code>, and optional controls through <code>actions</code>. Give the navigation an <code>aria-label</code>. Labels and destinations belong to the consuming app.</>,
-    <><code>children</code> and <code>actions</code> accept a function receiving <code>closeMenu</code> and <code>isMenu</code>. The children render once in the compact menu and once in the bar; <code>isMenu</code> is true inside the menu, so content such as a site’s section navigation can appear only there, between links. Call it from a link’s <code>onPress</code> to close the compact panel and return focus to its trigger. Set <code>aria-current="page"</code> on the current link. Override <code>menuLabel</code> and <code>closeLabel</code> for translated trigger text.</>,
+    <>Supply a home Link through <code>brand</code>, links through <code>children</code>, and optional controls through <code>actions</code>. Labels and destinations belong to the consuming app.</>,
+    <><code>children</code> and <code>actions</code> accept a function receiving <code>closeMenu</code> and <code>isMenu</code>. The children render once in the compact menu and once in the bar; <code>isMenu</code> is true inside the menu, so content such as a site’s section navigation can appear only there, between links. Call it from a link’s <code>onPress</code> to close the compact panel and return focus to its trigger. Override <code>menuLabel</code> and <code>closeLabel</code> for translated trigger text.</>,
     <>The desktop and mobile content are rendered separately; avoid fixed IDs in supplied content. Use React-generated IDs for associated controls. Very long desktop content wraps rather than overflowing. Search is not included.</>,
     <><code>Navbar</code>, <code>NavbarProps</code>, <code>NavbarRenderProps</code> and <code>--navbar-*</code> tokens replace the previous Header API and tokens.</>,
+  ],
+  accessibility: [
+    <>Give the navigation an <code>aria-label</code>. Set <code>aria-current="page"</code> on the current link.</>,
   ],
   anatomy: [
     { name: 'Navbar', description: 'Sticky header with separate brand, navigation and action areas.' },

@@ -72,9 +72,16 @@ export default function BreadcrumbsPage() {
             },
             {
               id: 'breadcrumbs-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {breadcrumbsContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'breadcrumbs-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {breadcrumbsContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],

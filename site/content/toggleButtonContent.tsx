@@ -31,8 +31,11 @@ export const toggleButtonContent = {
   ],
   usageParagraphs: [
     <>Mezzanine's <code>size</code> appearance prop supports <code>sm</code>, <code>md</code>, <code>lg</code> and <code>xl</code>, using the same size tokens as Button. Both default to <code>md</code>. Set a group size on ToggleButtonGroup or an individual size on ToggleButton. Use <code>iconLeading</code> or <code>iconTrailing</code> without children for a square icon-only button, with an accessible name and Tooltip. These appearance props extend React Aria without changing selection or keyboard behaviour.</>,
-    <>For an independent toggle, use <code>defaultSelected</code> for initial state or <code>isSelected</code> with <code>onChange</code> for controlled state. Use a stable visible label, or <code>aria-label</code> for an icon-only control. The selected state is communicated separately from the name.</>,
+    <>For an independent toggle, use <code>defaultSelected</code> for initial state or <code>isSelected</code> with <code>onChange</code> for controlled state.</>,
     <>For a group, supply an accessible label and stable button <code>id</code> values. Choose <code>selectionMode="single"</code> or <code>selectionMode="multiple"</code>; use <code>defaultSelectedKeys</code> or controlled <code>selectedKeys</code> with <code>onSelectionChange</code>. Set <code>disallowEmptySelection</code> when a selection must remain.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Use a stable visible label, or <code>aria-label</code> for an icon-only control. The selected state is communicated separately from the name.</>,
     <>Enter or Space activates a focused toggle. Within a group, arrow keys move between buttons according to its orientation. Disabled buttons cannot be activated.</>,
   ],
 }

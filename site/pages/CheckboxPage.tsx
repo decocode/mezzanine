@@ -67,9 +67,16 @@ export default function CheckboxPage() {
             },
             {
               id: 'checkbox-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {checkboxContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'checkbox-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {checkboxContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],

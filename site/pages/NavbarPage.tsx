@@ -56,6 +56,11 @@ export default function NavbarPage() {
               content: navbarContent.usage.map((paragraph, index) => <p key={index}>{paragraph}</p>),
             },
             {
+              id: 'navbar-accessibility',
+              title: 'Accessibility',
+              content: navbarContent.accessibility.map((paragraph, index) => <p key={index}>{paragraph}</p>),
+            },
+            {
               id: 'navbar-props-heading',
               title: 'Props',
               content: <DocsTable aria-label="Navbar props" nameColumn="Prop" rows={navbarContent.props} className="documentation-props-table" />,

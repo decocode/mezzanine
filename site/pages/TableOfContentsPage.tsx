@@ -69,17 +69,24 @@ export default function TableOfContentsPage() {
               </>),
             },
             {
+              id: 'table-of-contents-usage-heading',
+              title: 'Usage',
+              content: (<>
+                {tableOfContentsContent.usageParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'table-of-contents-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {tableOfContentsContent.accessibilityParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
               id: 'table-of-contents-props-heading',
               title: 'Props',
               content: (<>
                 <DocsTable aria-label="Table of Contents props" nameColumn="Prop" rows={tableOfContentsContent.propsRows} className="documentation-props-table" />
-              </>),
-            },
-            {
-              id: 'table-of-contents-usage-heading',
-              title: 'Usage and accessibility',
-              content: (<>
-                {tableOfContentsContent.usageParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
               </>),
             },
           ],

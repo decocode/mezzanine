@@ -64,13 +64,11 @@ export const navigationTreeContent = {
   ],
   usage: [
     { title: 'Setting it up', paragraphs: [
-      <>Give the tree an accessible name with <code>aria-label</code>. When it is the page&apos;s navigation, put it inside a <code>nav</code> element with its own label.</>,
       <>Set <code>selectedRoute</code> to the current page&apos;s address. The item whose <code>href</code> matches it is marked as the current page, and its parents open.</>,
     ] },
     { title: 'Parents and sections', paragraphs: [
       <>Any item with <code>children</code> is a parent. Give it an <code>href</code> only when it has a page of its own; otherwise its label simply opens and closes it.</>,
       <>Use a section (<code>type: &apos;section&apos;</code>) to group items under a header. Sections can only sit at the top level, not inside an item.</>,
-      <><code>getToggleLabel</code> sets the expand control&apos;s accessible name, for example to translate it. By default, a parent with a link is named &ldquo;Expand&rdquo; or &ldquo;Collapse&rdquo; plus its label, and a parent without one uses its label.</>,
     ] },
     { title: 'Open and closed parents', paragraphs: [
       <>Use <code>defaultExpandedKeys</code> to choose which parents start open. To control this yourself, pass <code>expandedKeys</code> and update it in <code>onExpandedChange</code>.</>,
@@ -82,6 +80,10 @@ export const navigationTreeContent = {
       <>When your items change, pass new arrays and objects rather than editing the old ones, so Nav Tree notices the change.</>,
       <>Nav Tree is Mezzanine&apos;s only tree. For a different kind of tree, use React Aria&apos;s NavigationTree parts directly from <code>react-aria-components</code>.</>,
     ] },
+  ],
+  accessibility: [
+    <>Give the tree an accessible name with <code>aria-label</code>. When it is the page&apos;s navigation, put it inside a <code>nav</code> element with its own label.</>,
+    <><code>getToggleLabel</code> sets the expand control&apos;s accessible name, for example to translate it. By default, a parent with a link is named &ldquo;Expand&rdquo; or &ldquo;Collapse&rdquo; plus its label, and a parent without one uses its label.</>,
   ],
   props: [
     { name: 'items', description: 'Required. The items and sections to show, in order.' },

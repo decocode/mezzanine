@@ -20,7 +20,11 @@ export const checkboxContent = {
   ],
   usageParagraphs: [
     <>Place the visible label inside <code>Checkbox</code>. Use <code>defaultSelected</code> for initial state, or <code>isSelected</code> with <code>onChange</code> for controlled state. The callback receives a boolean.</>,
-    <>Tab focuses the checkbox and Space changes its selection. <code>isDisabled</code> prevents interaction; <code>isReadOnly</code> prevents value changes. <code>isIndeterminate</code> controls the mixed-state appearance independently of selection; the application must clear it when appropriate.</>,
-    <>For form submission, provide <code>name</code> and <code>value</code>. Use <code>isRequired</code> with native validation to require selection, or <code>isInvalid</code> to communicate an application validation result. Provide visible error guidance and associate it using <code>aria-describedby</code>; this wrapper does not insert error text automatically.</>,
+    <><code>isDisabled</code> prevents interaction; <code>isReadOnly</code> prevents value changes. <code>isIndeterminate</code> controls the mixed-state appearance independently of selection; the application must clear it when appropriate.</>,
+    <>For form submission, provide <code>name</code> and <code>value</code>. Use <code>isRequired</code> with native validation to require selection, or <code>isInvalid</code> to communicate an application validation result.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Tab focuses the checkbox and Space changes its selection.</>,
+    <>Provide visible error guidance and associate it using <code>aria-describedby</code>; this wrapper does not insert error text automatically.</>,
   ],
 }

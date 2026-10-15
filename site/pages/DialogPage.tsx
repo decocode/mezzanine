@@ -92,9 +92,16 @@ export default function DialogPage() {
             },
             {
               id: 'dialog-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 <ul className="mz-text-body-md">{dialogContent.usageItems}</ul>
+              </>),
+            },
+            {
+              id: 'dialog-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                <ul className="mz-text-body-md">{dialogContent.accessibilityItems}</ul>
               </>),
             },
             {

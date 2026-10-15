@@ -168,9 +168,16 @@ export default function TablePage() {
             },
             {
               id: 'table-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {tableContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'table-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {tableContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],

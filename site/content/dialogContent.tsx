@@ -32,11 +32,14 @@ export const dialogContent = {
   ],
   usageItems: <>
     <li><code>Dialog</code> describes the content; <code>Modal</code> adds blocking behaviour. A non-modal dialog leaves the rest of the page usable. Non-modal presentation is not included in this first release.</li>
-    <li>Give every dialog a title. For a short confirmation, connect the explanatory text with <code>aria-describedby</code>.</li>
-    <li>React Aria manages focus containment, background interaction blocking, and focus return to the trigger.</li>
     <li><code>isDismissable</code> enables outside-click dismissal. Escape closes by default; <code>isKeyboardDismissDisabled</code> can disable it. Always provide a visible way to close.</li>
     <li>For controlled use, pass <code>isOpen</code> and <code>onOpenChange</code> to <code>DialogTrigger</code>, or to <code>ModalOverlay</code> when there is no trigger.</li>
-    <li>Use <code>mezzanine-dialog-actions</code> on a footer to arrange buttons. <code>Dialog</code> content scrolls when it exceeds the available height, and entry/exit animations respect reduced motion.</li>
+    <li>Use <code>mezzanine-dialog-actions</code> on a footer to arrange buttons. <code>Dialog</code> content scrolls when it exceeds the available height.</li>
+  </>,
+  accessibilityItems: <>
+    <li>Give every dialog a title. For a short confirmation, connect the explanatory text with <code>aria-describedby</code>.</li>
+    <li>React Aria manages focus containment, background interaction blocking, and focus return to the trigger.</li>
+    <li>Entry and exit animations respect reduced motion.</li>
   </>,
   tokensRows: [
     { name: '--modal-z-index', description: 'Overlay stacking level.' },

@@ -145,12 +145,19 @@ export default function ToggleButtonPage() {
             },
             {
               id: 'toggle-button-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 <p>{toggleButtonContent.usageParagraphs[0]}</p>
                 <p>{toggleButtonContent.usageParagraphs[1]}</p>
                 <p>{toggleButtonContent.usageParagraphs[2]}</p>
                 <p>{toggleButtonContent.secondaryDescription}</p>
+              </>),
+            },
+            {
+              id: 'toggle-button-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {toggleButtonContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],

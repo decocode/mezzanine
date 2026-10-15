@@ -42,9 +42,11 @@ export const tabsContent = {
   ],
   usageItems: <>
     <li>Use tabs for related sections shown one at a time, not for independent on/off choices.</li>
+    <li>Horizontal tab lists scroll when space is limited. Vertical panels move below the list when there is not enough room beside it. Keep labels short and meaningful.</li>
+  </>,
+  accessibilityItems: <>
     <li>React Aria supplies tab/panel relationships, roving focus and keyboard selection. Do not add custom arrow-key handlers.</li>
     <li>Tab moves into the selected tab, then into its panel. Arrow keys follow the orientation; Home and End move to the first and last available tabs.</li>
-    <li>Horizontal tab lists scroll when space is limited. Vertical panels move below the list when there is not enough room beside it. Keep labels short and meaningful.</li>
     <li>Keyboard focus has an outline, selection has an underline, and indicator motion respects reduced-motion preferences.</li>
   </>,
   tokensRows: [

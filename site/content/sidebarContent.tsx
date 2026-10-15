@@ -38,9 +38,14 @@ export const sidebarContent = {
     <>For a permanently visible panel, combine <code>presentation="inline"</code> with <code>isCollapsible={false}</code>. Use <code>hideInlineHeader</code> on SidebarPanel to omit its title row and supplementary header content; the required title still names the aside. Modal presentation always retains its heading and close button. Mezzanine’s docs shell composes this inline panel with a separate Disclosure on small screens, preserving its existing non-modal behaviour.</>,
     <>Place one <code>SidebarPanel</code> inside each <code>Sidebar</code>. Include a <code>SidebarTrigger</code> when the panel can collapse or use modal presentation. Keep the trigger visible when the panel is hidden. The root adds no DOM and has no class; use <code>className</code> and <code>style</code> on the panel and the normal Button props on the trigger.</>,
     <>Use independent Sidebar boundaries for navigation, filters and details. Inline panels participate in the app’s layout; they do not cover the workspace. In a horizontal flex layout, <code>side</code> sets the panel order. The app owns the arrangement of multiple columns, remaining workspace width, and reading order.</>,
-    <>For <code>collapseMode="rail"</code>, supply explicit compact content. Use labelled Button or Link controls, with tooltips for icon-only controls. A tooltip supplements an accessible name; it does not replace it. A filter panel can simply hide instead of having a rail.</>,
-    <>Use Mezzanine DisclosureGroup and Disclosure parts for expandable content, Checkbox or RadioGroup parts for choices, and Button for actions. Meaningful images need alternative text. None of these content types is built into Sidebar.</>,
-    <>Set tokens at the theme root for both inline and modal presentation. Modal content is portalled outside the surrounding layout; use the panel’s className or style for per-panel token overrides. Give the panel a unique title and an appropriate headingLevel.</>,
+    <>For <code>collapseMode="rail"</code>, supply explicit compact content. Use labelled Button or Link controls, with tooltips for icon-only controls. A filter panel can simply hide instead of having a rail.</>,
+    <>Use Mezzanine DisclosureGroup and Disclosure parts for expandable content, Checkbox or RadioGroup parts for choices, and Button for actions. None of these content types is built into Sidebar.</>,
+    <>Set tokens at the theme root for both inline and modal presentation. Modal content is portalled outside the surrounding layout; use the panel’s className or style for per-panel token overrides.</>,
+  ],
+  accessibility: [
+    <>A tooltip supplements an accessible name; it does not replace it.</>,
+    <>Meaningful images need alternative text.</>,
+    <>Give the panel a unique title and an appropriate headingLevel.</>,
   ],
   props: [
     { name: 'Sidebar: children', description: 'Required panel and application layout, with a trigger where needed.' },

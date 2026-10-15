@@ -28,9 +28,12 @@ export const tooltipContent = {
   ],
   usageParagraphs: [
     <>Keep the content short and supplementary. Important instructions should be visible on the page because tooltips do not appear on touch interactions.</>,
-    <>Give icon-only controls an accessible name, such as <code>aria-label="Dark theme"</code>, even when they have a tooltip. A tooltip must not be the only way to understand a control.</>,
     <>Place a focusable control and <code>Tooltip</code> inside <code>TooltipTrigger</code>. Keep links, buttons and other interactive content out of the tooltip; use a <code>Dialog</code> when people need to interact with the content.</>,
-    <>Set <code>isDisabled</code> on <code>TooltipTrigger</code> to suppress its tooltip without disabling the control. A disabled control cannot receive keyboard focus, so do not rely on its tooltip to explain why it is disabled.</>,
+    <>Set <code>isDisabled</code> on <code>TooltipTrigger</code> to suppress its tooltip without disabling the control.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Give icon-only controls an accessible name, such as <code>aria-label="Dark theme"</code>, even when they have a tooltip. A tooltip must not be the only way to understand a control.</>,
+    <>A disabled control cannot receive keyboard focus, so do not rely on its tooltip to explain why it is disabled.</>,
   ],
   propsRows: [
     { name: 'TooltipTrigger: delay', description: 'Hover delay in milliseconds. Mezzanine defaults to 500; React Aria defaults to 1500. Focus opens immediately.' },

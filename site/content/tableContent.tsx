@@ -61,9 +61,12 @@ export const tableContent = {
     </>,
   ],
   usageParagraphs: [
-    <>Give the table an <code>aria-label</code> or <code>aria-labelledby</code>. Use <code>Column isRowHeader</code> for the cell that identifies each row, and stable row and column IDs so selection and sorting refer to consistent records.</>,
-    <>React Aria manages keyboard navigation through the table’s rows, cells and focusable controls. Use arrow keys to move within the table and Tab to move between focusable regions or controls. Keep labels on any buttons and links placed inside cells.</>,
+    <>Use <code>Column isRowHeader</code> for the cell that identifies each row, and stable row and column IDs so selection and sorting refer to consistent records.</>,
     <>Use <code>selectionMode</code> to opt into selection. Set <code>defaultSelectedKeys</code> for initial selection or <code>selectedKeys</code> with <code>onSelectionChange</code> for application-controlled selection. Disabled rows are identified through <code>disabledKeys</code>.</>,
     <>Set <code>allowsSorting</code> on a <code>Column</code> to enable sorting controls and the shared direction indicator. Pass <code>sortDescriptor</code> and <code>onSortChange</code> to <code>Table</code>. React Aria reports the requested column and direction; your application supplies the rows in that order, either by sorting locally or requesting sorted data from a server.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Give the table an <code>aria-label</code> or <code>aria-labelledby</code>.</>,
+    <>React Aria manages keyboard navigation through the table’s rows, cells and focusable controls. Use arrow keys to move within the table and Tab to move between focusable regions or controls. Keep labels on any buttons and links placed inside cells.</>,
   ],
 }

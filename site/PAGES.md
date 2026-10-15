@@ -40,14 +40,32 @@ its title, description and an ordered `sections` list.
 Each component page has, where they apply:
 
 1. The example, and any other interactive demonstrations, always visible.
-2. Technical details: Anatomy, Behaviour, Usage, Props and CSS tokens, in
-   disclosures.
+2. Technical details, in disclosures (see below).
 3. Related pages: links to other Mezzanine pages.
 4. References: links to the React Aria documentation or other sources. Badge is
    a plain HTML element, so its reference is MDN.
 
 Leave out sections that do not apply. Never add an empty section or describe a
 feature that does not exist.
+
+### Component Technical details
+
+The Technical details group always uses this order:
+
+1. Anatomy: the parts the component is built from.
+2. Behaviour: how it responds and changes. Page-specific extras, such as
+   Table's Responsive behaviour, sit next to it.
+3. States: when a page lists them inside Technical details.
+4. Usage: how to set it up and which props to choose.
+5. Accessibility: only what is specific to this component, such as its
+   keyboard keys, the accessible names it needs or what it announces. Guidance
+   that applies to every component, such as visible focus or reduced motion,
+   belongs on a shared Foundations page, not here. Leave the section out when a
+   component has nothing specific to say.
+6. Props.
+7. CSS tokens.
+
+Do not combine Usage and Accessibility into one section.
 
 ## Related pages and References
 

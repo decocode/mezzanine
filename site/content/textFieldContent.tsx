@@ -24,8 +24,12 @@ export const textFieldContent = {
     <>Submit an empty or incomplete email address to see validation. This local example does not send data.</>,
   ],
   usageParagraphs: [
-    <><code>TextField</code> and <code>Input</code> expose the React Aria APIs directly. Use Mezzanine’s <code>Label</code>, <code>Text slot="description"</code> and <code>FieldError</code> inside the field for automatically associated text.</>,
-    <>Use <code>defaultValue</code> for an initial value, or <code>value</code> with <code>onChange</code> for a value managed by your application. Set <code>isRequired</code>, <code>isReadOnly</code>, <code>isDisabled</code> or <code>isInvalid</code> on <code>TextField</code>. Put <code>placeholder</code> on <code>Input</code>; it does not replace a label.</>,
+    <><code>TextField</code> and <code>Input</code> expose the React Aria APIs directly.</>,
+    <>Use <code>defaultValue</code> for an initial value, or <code>value</code> with <code>onChange</code> for a value managed by your application. Set <code>isRequired</code>, <code>isReadOnly</code>, <code>isDisabled</code> or <code>isInvalid</code> on <code>TextField</code>.</>,
     <>The validation example uses React Aria’s <code>Form</code> directly; Mezzanine does not yet export Form. The field has no animation, and its colours and dimensions can be overridden through tokens.</>,
+  ],
+  accessibilityParagraphs: [
+    <>Use Mezzanine’s <code>Label</code>, <code>Text slot="description"</code> and <code>FieldError</code> inside the field for automatically associated text.</>,
+    <>Put <code>placeholder</code> on <code>Input</code>; it does not replace a label.</>,
   ],
 }

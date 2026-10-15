@@ -157,6 +157,7 @@ export default function SidebarPage() {
         { id: 'sidebar-anatomy', title: 'Anatomy', content: <DocsTable aria-label="Sidebar anatomy" nameColumn="Component" rows={sidebarContent.anatomy} /> },
         { id: 'sidebar-behaviour', title: 'Behaviour', content: sidebarContent.behaviour.map((text, index) => <p key={index}>{text}</p>) },
         { id: 'sidebar-usage', title: 'Usage', content: sidebarContent.usage.map((text, index) => <p key={index}>{text}</p>) },
+        { id: 'sidebar-accessibility', title: 'Accessibility', content: sidebarContent.accessibility.map((text, index) => <p key={index}>{text}</p>) },
         { id: 'sidebar-props', title: 'Props', content: <DocsTable aria-label="Sidebar props" nameColumn="Prop" rows={sidebarContent.props} /> },
         { id: 'sidebar-tokens', title: 'CSS tokens', content: <DocsTable aria-label="Sidebar tokens" nameColumn="CSS token" rows={sidebarContent.tokens} /> },
       ] },

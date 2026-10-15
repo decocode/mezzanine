@@ -44,7 +44,12 @@ export const tableOfContentsContent = {
     <>
       Place the component after the page introduction. Match link labels to the section
       headings and give each destination a unique ID. Nest children to match the heading
-      hierarchy. The visible heading names the navigation landmark; use a distinct heading
+      hierarchy.
+    </>,
+  ],
+  accessibilityParagraphs: [
+    <>
+      The visible heading names the navigation landmark; use a distinct heading
       when more than one Table of Contents appears on a page.
     </>,
     <>

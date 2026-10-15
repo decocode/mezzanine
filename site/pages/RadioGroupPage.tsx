@@ -134,9 +134,16 @@ export default function RadioGroupPage() {
             },
             {
               id: 'radio-group-usage-heading',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {radioGroupContent.usageParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'radio-group-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {radioGroupContent.accessibilityParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
               </>),
             },
             {

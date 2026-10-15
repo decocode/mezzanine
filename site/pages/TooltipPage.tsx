@@ -45,6 +45,11 @@ export default function TooltipPage() {
               content: tooltipContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>),
             },
             {
+              id: 'tooltip-accessibility-heading',
+              title: 'Accessibility',
+              content: tooltipContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>),
+            },
+            {
               id: 'tooltip-props-heading',
               title: 'Props',
               content: <DocsTable aria-label="Tooltip props" nameColumn="Prop" rows={tooltipContent.propsRows} />,

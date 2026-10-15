@@ -86,9 +86,16 @@ export default function TextFieldPage() {
             },
             {
               id: 'text-field-composition',
-              title: 'Usage and accessibility',
+              title: 'Usage',
               content: (<>
                 {textFieldContent.usageParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              </>),
+            },
+            {
+              id: 'text-field-accessibility-heading',
+              title: 'Accessibility',
+              content: (<>
+                {textFieldContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
           ],
