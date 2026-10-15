@@ -1,3 +1,5 @@
+import { fieldTokensRows } from './textFieldContent'
+
 // Written guidance and reference entries; live examples stay in the page.
 export const textAreaContent = {
   title: 'Text area',
@@ -30,5 +32,12 @@ export const textAreaContent = {
   accessibilityParagraphs: [
     <>Use Mezzanine’s <code>Label</code>, <code>Text slot="description"</code> and <code>FieldError</code> for automatically associated labels, supporting text and errors.</>,
     <>Keep a visible label: a placeholder disappears when someone enters text.</>,
+  ],
+  tokensRows: [
+    { name: '--text-area-min-height', description: <>Minimum <code>TextArea</code> height.</> },
+    ...fieldTokensRows,
+  ],
+  tokensParagraphs: [
+    <><code>TextArea</code> shares these tokens with <code>Input</code>; only its minimum height token differs. The field also uses shared typography, text colour, focus colour and disabled-opacity tokens.</>,
   ],
 }

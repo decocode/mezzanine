@@ -140,6 +140,14 @@ export default function LinkPage() {
                 {linkContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
+            {
+              id: 'link-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {linkContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="Link CSS tokens" nameColumn="CSS token" rows={linkContent.tokensRows} />
+              </>),
+            },
           ],
         },
       ]}

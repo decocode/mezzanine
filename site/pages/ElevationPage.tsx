@@ -1,7 +1,9 @@
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
-import { elevationDefinitions, type ElevationDefinition } from '../content/elevationContent'
+import { Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { elevationDefinitions, elevationHelperTokens, type ElevationDefinition } from '../content/elevationContent'
 import { useTokenValue } from '../components/tokenValueLogic'
+import { TokenValue } from '../components/TokenValue'
 
 function ElevationLevel({ elevation, refreshKey }: { elevation: ElevationDefinition; refreshKey: string }) {
   const value = useTokenValue(elevation.token, refreshKey)
@@ -61,6 +63,27 @@ export default function ElevationPage({ refreshKey }: { refreshKey: string }) {
           A product theme can replace the shadow values while components continue to request the
           same spatial relationship.
         </p>
+        <p className="component-section-description">
+          Each theme builds its sunken and raised levels from two colour tokens.
+        </p>
+        <div className="documentation-table">
+          <Table aria-label="Elevation colour tokens">
+            <TableHeader>
+              <Column id="token" isRowHeader>Token</Column>
+              <Column id="purpose">Purpose</Column>
+              <Column id="value">Value</Column>
+            </TableHeader>
+            <TableBody>
+              {elevationHelperTokens.map((helper) => (
+                <Row id={helper.token} key={helper.token}>
+                  <Cell><code>{helper.token}</code></Cell>
+                  <Cell>{helper.purpose}</Cell>
+                  <Cell><TokenValue token={helper.token} refreshKey={refreshKey} /></Cell>
+                </Row>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </section>
       <section aria-labelledby="elevation-focus-heading" className="component-section">
         <h2 id="elevation-focus-heading" className="mz-text-heading-md">

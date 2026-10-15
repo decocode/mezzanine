@@ -27,4 +27,23 @@ export const checkboxContent = {
     <>Tab focuses the checkbox and Space changes its selection.</>,
     <>Provide visible error guidance and associate it using <code>aria-describedby</code>; this wrapper does not insert error text automatically.</>,
   ],
+  tokensRows: [
+    { name: '--checkbox-size', description: 'Width and height of the checkbox box.' },
+    { name: '--checkbox-icon-size', description: 'Size of the check and indeterminate icons.' },
+    { name: '--checkbox-content-gap', description: 'Space between the box and its label.' },
+    { name: '--checkbox-border-width', description: 'Box border thickness.' },
+    { name: '--checkbox-border-radius', description: 'Rounding of the box corners.' },
+    { name: '--checkbox-border', description: 'Box border colour when not selected.' },
+    { name: '--checkbox-border-invalid', description: 'Box border colour when invalid.' },
+    { name: '--checkbox-background', description: 'Box background when not selected.' },
+    { name: '--checkbox-background-hovered', description: 'Box background when not selected and hovered.' },
+    { name: '--checkbox-background-selected', description: 'Box background and border colour when selected or indeterminate.' },
+    { name: '--checkbox-background-selected-hovered', description: 'Box background and border colour when selected or indeterminate and hovered.' },
+    { name: '--checkbox-content-selected', description: 'Icon colour when selected or indeterminate.' },
+    { name: '--checkbox-focus-ring-width', description: 'Keyboard-focus outline thickness.' },
+    { name: '--checkbox-focus-ring-offset', description: 'Distance between the box and its keyboard-focus outline.' },
+  ],
+  tokensParagraphs: [
+    <><code>Checkbox</code> also uses shared typography, text colour, focus colour and disabled-opacity tokens.</>,
+  ],
 }

@@ -44,6 +44,32 @@ export const typographyStyles: TypographyStyleDefinition[] = [
   { className: 'mz-text-label-sm', role: 'label', label: 'Label small', purpose: 'Supplementary labels where space is constrained.' },
 ]
 
+// Each role's family and weight, as set in src/typography.css.
+const textRoleFonts: { id: TextRole; fontFamilyToken: string; fontWeightToken: string }[] = [
+  { id: 'display', fontFamilyToken: '--font-family-heading', fontWeightToken: '--font-weight-regular' },
+  { id: 'heading', fontFamilyToken: '--font-family-heading', fontWeightToken: '--font-weight-regular' },
+  { id: 'title', fontFamilyToken: '--font-family-body', fontWeightToken: '--font-weight-semibold' },
+  { id: 'body', fontFamilyToken: '--font-family-body', fontWeightToken: '--font-weight-regular' },
+  { id: 'label', fontFamilyToken: '--font-family-body', fontWeightToken: '--font-weight-semibold' },
+]
+
+export const textRoleTokens = textRoleFonts.map((role) => ({
+  ...role,
+  label: textRoles.find((textRole) => textRole.id === role.id)?.label ?? role.id,
+  letterSpacingToken: `--letter-spacing-${role.id}`,
+  textTransformToken: `--text-transform-${role.id}`,
+}))
+
+export const fontTokens: { token: string; purpose: string }[] = [
+  { token: '--font-family-body', purpose: 'Font for Title, Body and Label styles and for plain body text.' },
+  { token: '--font-family-heading', purpose: 'Font for Display and Heading styles. It uses the body font unless a theme changes it.' },
+  { token: '--font-family-monospace', purpose: 'Font for code.' },
+  { token: '--font-weight-regular', purpose: 'Regular weight, used by Display, Heading and Body styles.' },
+  { token: '--font-weight-medium', purpose: 'Medium weight. No text style uses it.' },
+  { token: '--font-weight-semibold', purpose: 'Semibold weight, used by Title and Label styles.' },
+  { token: '--font-weight-bold', purpose: 'Bold weight. No text style uses it.' },
+]
+
 export const typographyStyleTokens = typographyStyles.map((style) => {
   const roleAndSize = style.className.replace('mz-text-', '')
   return {

@@ -38,4 +38,22 @@ export const disclosureContent = {
     <>Collapsing content stops accepting focus straight away.</>,
     <>The chevron points right when closed and turns down when expanded.</>,
   ],
+  tokensRows: [
+    { name: '--disclosure-group-gap', description: <>Space between disclosures in a <code>DisclosureGroup</code>.</> },
+    { name: '--disclosure-border-width', description: 'Thickness of the divider below each disclosure.' },
+    { name: '--disclosure-trigger-min-height', description: 'Minimum trigger height.' },
+    { name: '--disclosure-trigger-padding-block', description: 'Vertical trigger padding.' },
+    { name: '--disclosure-trigger-padding-inline', description: 'Horizontal trigger padding.' },
+    { name: '--disclosure-trigger-gap', description: 'Space between the trigger label and the chevron.' },
+    { name: '--disclosure-trigger-background', description: 'Trigger background when not hovered or pressed.' },
+    { name: '--disclosure-icon-size', description: 'Chevron size.' },
+    { name: '--disclosure-panel-padding-block', description: 'Space below the panel content.' },
+    { name: '--disclosure-panel-padding-inline', description: 'Horizontal panel padding.' },
+    { name: '--disclosure-focus-ring-width', description: 'Keyboard-focus outline thickness on the trigger.' },
+    { name: '--disclosure-focus-ring-offset', description: 'Keyboard-focus outline position on the trigger.' },
+    { name: '--motion-duration-interface', description: 'Chevron rotation duration; the chevron turns immediately with reduced motion.' },
+  ],
+  tokensParagraphs: [
+    <><code>Disclosure</code> also uses shared typography, border, surface, text, chevron, focus colour, rotation and disabled-opacity tokens.</>,
+  ],
 }

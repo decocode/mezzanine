@@ -180,6 +180,14 @@ export default function TablePage() {
                 {tableContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
+            {
+              id: 'table-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {tableContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="Table CSS tokens" nameColumn="CSS token" rows={tableContent.tokensRows} />
+              </>),
+            },
           ],
         },
       ]}

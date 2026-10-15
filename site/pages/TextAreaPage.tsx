@@ -77,6 +77,14 @@ export default function TextAreaPage() {
                 {textAreaContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
+            {
+              id: 'text-area-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {textAreaContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="TextArea CSS tokens" nameColumn="CSS token" rows={textAreaContent.tokensRows} />
+              </>),
+            },
           ],
         },
       ]}

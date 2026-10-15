@@ -79,6 +79,14 @@ export default function CheckboxPage() {
                 {checkboxContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
+            {
+              id: 'checkbox-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {checkboxContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="Checkbox CSS tokens" nameColumn="CSS token" rows={checkboxContent.tokensRows} />
+              </>),
+            },
           ],
         },
       ]}

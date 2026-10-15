@@ -34,4 +34,15 @@ export const linkContent = {
     <>Give the link text enough context to make its destination clear. Use <code>aria-current="page"</code> for the current destination.</>,
     <>Tab focuses enabled links and Enter follows them.</>,
   ],
+  tokensRows: [
+    { name: '--link-content-gap', description: 'Space between a link icon and its text.' },
+    { name: '--link-icon-size', description: 'Icon size, relative to the link text.' },
+    { name: '--link-underline-thickness', description: 'Underline thickness.' },
+    { name: '--link-underline-offset', description: 'Distance between the text and its underline.' },
+    { name: '--link-focus-ring-width', description: 'Keyboard-focus outline thickness.' },
+    { name: '--link-focus-ring-offset', description: 'Distance between the link and its keyboard-focus outline.' },
+  ],
+  tokensParagraphs: [
+    <><code>Link</code> takes its colours from the shared link colour tokens. It also uses shared focus colour, weight and disabled-opacity tokens.</>,
+  ],
 }

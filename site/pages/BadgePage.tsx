@@ -70,6 +70,14 @@ export default function BadgePage() {
                 {badgeContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
+            {
+              id: 'badge-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {badgeContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="Badge CSS tokens" nameColumn="CSS token" rows={badgeContent.tokensRows} />
+              </>),
+            },
           ],
         },
       ]}

@@ -13,9 +13,11 @@ import {
 } from '@decocode/mezzanine'
 import {
   baseTextElements,
+  fontTokens,
   quickStartCode,
   textRoles,
   textStyleChoices,
+  textRoleTokens,
   textStylesIntro,
   textWeightExamples,
   typographyStyles,
@@ -254,6 +256,7 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
         <p className="component-section-description">
           Tokens are named CSS values, written as custom properties such as{' '}
           <code>--font-size-body-md</code>. Each style reads its size and line height from
+          tokens, and shares its role&apos;s font, weight, letter spacing and capitalisation
           tokens, so a product theme can change the values without changing the class names.
         </p>
         <Disclosure className="react-aria-Disclosure typography-token-disclosure">
@@ -274,6 +277,46 @@ export default function TextStylesPage({ refreshKey }: { refreshKey: string }) {
                       <Cell><code>{style.className}</code></Cell>
                       <Cell><code>{style.fontSizeToken}</code><br /><TokenValue token={style.fontSizeToken} refreshKey={refreshKey} /></Cell>
                       <Cell><code>{style.lineHeightToken}</code><br /><TokenValue token={style.lineHeightToken} refreshKey={refreshKey} /></Cell>
+                    </Row>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+            <div className="documentation-table">
+              <Table aria-label="Text role tokens">
+                <TableHeader>
+                  <Column id="role" isRowHeader>Role</Column>
+                  <Column id="family">Font family token</Column>
+                  <Column id="weight">Weight token</Column>
+                  <Column id="letter-spacing">Letter spacing token and value</Column>
+                  <Column id="text-transform">Capitalisation token and value</Column>
+                </TableHeader>
+                <TableBody>
+                  {textRoleTokens.map((role) => (
+                    <Row id={role.id} key={role.id}>
+                      <Cell>{role.label}</Cell>
+                      <Cell><code>{role.fontFamilyToken}</code></Cell>
+                      <Cell><code>{role.fontWeightToken}</code></Cell>
+                      <Cell><code>{role.letterSpacingToken}</code><br /><TokenValue token={role.letterSpacingToken} refreshKey={refreshKey} /></Cell>
+                      <Cell><code>{role.textTransformToken}</code><br /><TokenValue token={role.textTransformToken} refreshKey={refreshKey} /></Cell>
+                    </Row>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+            <div className="documentation-table">
+              <Table aria-label="Font family and weight tokens">
+                <TableHeader>
+                  <Column id="token" isRowHeader>Token</Column>
+                  <Column id="purpose">Purpose</Column>
+                  <Column id="value">Value</Column>
+                </TableHeader>
+                <TableBody>
+                  {fontTokens.map((font) => (
+                    <Row id={font.token} key={font.token}>
+                      <Cell><code>{font.token}</code></Cell>
+                      <Cell>{font.purpose}</Cell>
+                      <Cell><TokenValue token={font.token} refreshKey={refreshKey} /></Cell>
                     </Row>
                   ))}
                 </TableBody>

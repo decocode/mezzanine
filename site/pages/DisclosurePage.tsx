@@ -92,6 +92,14 @@ export default function DisclosurePage() {
                 {disclosureContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
+            {
+              id: 'disclosure-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {disclosureContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="Disclosure CSS tokens" nameColumn="CSS token" rows={disclosureContent.tokensRows} />
+              </>),
+            },
           ],
         },
       ]}

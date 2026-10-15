@@ -38,3 +38,9 @@ export const elevationDefinitions: ElevationDefinition[] = [
     useFor: 'Content that sits above the main interface and needs the strongest separation.',
   },
 ]
+
+// Theme colours that every sunken and raised level is built from.
+export const elevationHelperTokens: { token: string; purpose: string }[] = [
+  { token: '--elevation-shadow-color', purpose: 'Shadow colour for every sunken and raised level.' },
+  { token: '--elevation-highlight-color', purpose: 'Colour of the thin edge line drawn around every sunken and raised level. A transparent value hides it.' },
+]

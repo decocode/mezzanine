@@ -160,6 +160,14 @@ export default function ToggleButtonPage() {
                 {toggleButtonContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
+            {
+              id: 'toggle-button-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {toggleButtonContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="ToggleButton CSS tokens" nameColumn="CSS token" rows={toggleButtonContent.tokensRows} />
+              </>),
+            },
           ],
         },
       ]}

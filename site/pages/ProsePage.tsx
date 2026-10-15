@@ -5,6 +5,9 @@ import { useTokenValue } from '../components/tokenValueLogic'
 
 export default function ProsePage({ refreshKey }: { refreshKey: string }) {
   const listItemSpacing = useTokenValue('--space-2', refreshKey)
+  const inlineCodePaddingBlock = useTokenValue('--inline-code-padding-block', refreshKey)
+  const inlineCodePaddingInline = useTokenValue('--inline-code-padding-inline', refreshKey)
+  const inlineCodeBorderRadius = useTokenValue('--inline-code-border-radius', refreshKey)
   return (
     <>
       <PageHeading title="Prose" description="Mezzanine’s styling for longer-form content. Lists share the body text styles and spacing tokens; inline code has a distinct treatment within the surrounding text." />
@@ -62,6 +65,7 @@ export default function ProsePage({ refreshKey }: { refreshKey: string }) {
           other technical text within a sentence. A monospace font and contrasting background
           distinguish it from the surrounding text.
         </p>
+        <p className="component-section-description">The padding comes from <code>--inline-code-padding-block</code> (currently <code>{inlineCodePaddingBlock}</code>) and <code>--inline-code-padding-inline</code> (currently <code>{inlineCodePaddingInline}</code>), and the corner rounding from <code>--inline-code-border-radius</code> (currently <code>{inlineCodeBorderRadius}</code>). Inline code uses <code>--font-family-monospace</code> at the Body small size.</p>
         <p className="component-section-description">Code inside <code>&lt;pre&gt;</code> retains the monospace font without the inline background or padding. Code-block layout is supplied by the consuming app.</p>
         <h4 className="mz-text-title-lg">Example</h4>
         <ExampleZone>

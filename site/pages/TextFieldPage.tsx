@@ -98,6 +98,14 @@ export default function TextFieldPage() {
                 {textFieldContent.accessibilityParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
               </>),
             },
+            {
+              id: 'text-field-tokens-heading',
+              title: 'CSS tokens',
+              content: (<>
+                {textFieldContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+                <DocsTable aria-label="TextField CSS tokens" nameColumn="CSS token" rows={textFieldContent.tokensRows} />
+              </>),
+            },
           ],
         },
       ]}
