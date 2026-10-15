@@ -1,38 +1,65 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
-import { primitiveCss } from '../../site/lab/layout/layoutLabContent'
+import { cssNotes, layoutLabSections } from '../../site/lab/layout/layoutLabContent'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// Checks the Lab Layout page fits a 320px screen at normal and doubled text in every theme,
-// marks its Lab-only components, and passes an automated accessibility scan.
+const layoutPages = [
+  { path: '/site/lab/layout', title: 'Layout' },
+  ...Object.values(layoutLabSections).map(section => ({ path: `/site/lab/layout/${section.slug}`, title: section.title })),
+]
+
+// Checks the Layout overview and each of its child pages fit a 320px screen at normal and
+// doubled text in every theme, and pass an automated accessibility scan.
 for (const theme of themes) {
-  test(`Lab Layout page fits 320px and passes accessibility checks in ${theme}`, async ({ page }) => {
+  test(`Lab Layout pages fit 320px and pass accessibility checks in ${theme}`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 })
-    await page.goto('/site/lab/layout')
-    await setTheme(page, theme)
-    await expect(page.getByRole('heading', { name: 'Layout', level: 1 })).toBeVisible()
-    await expect(page.locator('.lab-only').first()).toBeVisible()
-    for (const size of textSizes) {
-      await setTextSize(page, size)
-      await expectNoPageOverflow(page)
+    for (const layoutPage of layoutPages) {
+      await page.goto(layoutPage.path)
+      await setTheme(page, theme)
+      await expect(page.getByRole('heading', { name: layoutPage.title, exact: true, level: 1 })).toBeVisible()
+      for (const size of textSizes) {
+        await setTextSize(page, size)
+        await expectNoPageOverflow(page)
+      }
+      await setTextSize(page, 16)
+      await expectNoAccessibilityViolations(page, '.lab-layout')
     }
-    await setTextSize(page, 16)
-    await expectNoAccessibilityViolations(page, '.lab-layout')
   })
 }
+
+// Each child page is listed on the overview, sits under Layout in the Lab navigation, and marks
+// its Lab-only components; an unknown address shows the not-found page.
+test('Lab Layout child pages are reachable from the overview and the navigation', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.goto('/site/lab/layout')
+  for (const layoutPage of layoutPages.slice(1)) {
+    await expect(page.locator('main').getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
+  }
+  await page.locator('main').getByRole('link', { name: 'Subgrid', exact: true }).click()
+  await expect(page).toHaveURL(/\/site\/lab\/layout\/subgrid$/)
+  await expect(page).toHaveTitle('Subgrid | Lab')
+  await expect(page.locator('.lab-only').first()).toBeVisible()
+  // On a child page, the Layout group is expanded and lists every child page.
+  const tree = page.locator('.site-layout > .site-sidebar').getByRole('treegrid', { name: 'Lab experiments' })
+  for (const layoutPage of layoutPages.slice(1)) {
+    await expect(tree.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
+  }
+  await page.goto('/site/lab/layout/not-a-page')
+  await expect(page).toHaveTitle('Page not found | Lab')
+})
 
 // Checks the demos do what their captions say: the same tile responds to its own slot, the
 // Switcher changes at its threshold, and the list becomes a grid when it has a fifth item.
 test('Lab Layout demos respond to their space and content', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
-  await page.goto('/site/lab/layout')
-
+  await page.goto('/site/lab/layout/container-queries')
   const tiles = page.locator('.lab-two-slots .lab-cq-tile')
   const columns = (index: number) => tiles.nth(index).evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length)
   expect(await columns(0)).toBe(1)
   expect(await columns(1)).toBe(2)
 
+  await page.goto('/site/lab/layout/intrinsic-primitives')
   const switcherFrame = page.locator('.lab-frame').filter({ has: page.locator('.lab-switcher') })
   const rows = () => switcherFrame.locator('.lab-switcher > *').evaluateAll(items => new Set(items.map(item => Math.round(item.getBoundingClientRect().top))).size)
   await switcherFrame.getByRole('radio', { name: 'Wide', exact: true }).click()
@@ -40,6 +67,7 @@ test('Lab Layout demos respond to their space and content', async ({ page }) => 
   await switcherFrame.getByRole('radio', { name: '320px', exact: true }).click()
   await expect.poll(rows).toBe(3)
 
+  await page.goto('/site/lab/layout/has')
   const list = page.locator('.lab-has-list')
   await expect(list).toHaveCSS('display', 'flex')
   await page.getByRole('button', { name: 'Add an item', exact: true }).click()
@@ -47,12 +75,12 @@ test('Lab Layout demos respond to their space and content', async ({ page }) => 
   await expect(list).toHaveCSS('display', 'grid')
 })
 
-// Checks the CSS shown in each primitive's "The CSS behind it" panel matches the Lab stylesheet,
+// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet, apart from example CSS,
 // so the explanation cannot drift from the rules it describes.
 test('Lab Layout CSS notes match the Lab stylesheet', () => {
   const normalise = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim()
   const stylesheet = normalise(readFileSync('site/lab/layout/layout-lab.css', 'utf8'))
-  for (const note of Object.values(primitiveCss)) {
+  for (const note of Object.values(cssNotes).filter((note) => !note.isExample)) {
     for (const rule of note.code.split(/\n\s*\n/)) expect(stylesheet).toContain(normalise(rule))
   }
 })

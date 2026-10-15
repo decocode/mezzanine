@@ -1,44 +1,46 @@
-import type { ReactNode } from 'react'
-import { Button, Heading, Link, Navbar, Text } from '@decocode/mezzanine'
-import LabShell from './LabShell'
-import PageWidthsPage from './PageWidthsPage'
-import LayoutPage from './LayoutPage'
-import { labContent } from './labContent'
+import { Heading, Link, Text } from '@decocode/mezzanine'
+import { MezzanineNavbar } from '../components/MezzanineNavbar'
+import { NavigationPanel, SidebarColumn } from '../components/Sidebar'
+import type { Theme } from '../themeSwitcherLogic'
+import NotFoundPage from '../pages/NotFoundPage'
+import { hasLayoutSectionPage, LayoutOverviewPage, LayoutSectionPage } from './LayoutPage'
+import { labContent, labNavigationItems } from './labContent'
+import { layoutLabSections } from './layout/layoutLabContent'
 import './lab-page.css'
 
-export default function LabPage({ currentPath, themeSwitcher }: { currentPath: string; themeSwitcher: ReactNode }) {
-  const isShell = currentPath === labContent.shell.href
+interface LabPageProps {
+  currentPath: string
+  onThemeChange: (theme: Theme) => void
+  selectedTheme: Theme
+}
+
+// The Lab's entry: the site's own Navbar and sidebar layout, with the Lab's navigation tree.
+export default function LabPage({ currentPath, onThemeChange, selectedTheme }: LabPageProps) {
   const isIndex = currentPath === labContent.index.href
   const isLayout = currentPath === labContent.layoutPage.href
+  const sectionSlug = currentPath.startsWith(`${labContent.layoutPage.href}/`) ? currentPath.slice(labContent.layoutPage.href.length + 1) : ''
+  const section = hasLayoutSectionPage(sectionSlug) ? Object.values(layoutLabSections).find((item) => item.slug === sectionSlug) : undefined
+  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : section ? `${section.title} | Lab` : 'Page not found | Lab'
+  const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} />
 
-  return <div className={`lab-page${isShell ? ' lab-page-shell' : ''}`}>
-    <title>{isIndex ? 'Lab | Mezzanine' : isShell ? 'Shell comparison | Lab' : isLayout ? 'Layout | Lab' : 'Page widths | Lab'}</title>
+  return <>
+    <title>{title}</title>
     <Link className="skip-link" href="#main-content">Skip to main content</Link>
-    <Navbar aria-label="Lab navigation" actions={themeSwitcher} brand={
-      <Button href={labContent.backToDocs.href} variant="secondary">{labContent.backToDocs.label}</Button>
-    }>
-      {({ closeMenu }) => <>
-        {[labContent.index, labContent.shell, labContent.pageWidths, labContent.layoutPage].map(destination => <Link
-          key={destination.href}
-          className="navbar-link"
-          href={destination.href}
-          aria-current={currentPath === destination.href ? 'page' : undefined}
-          onPress={closeMenu}
-        >{destination.label}</Link>)}
-      </>}
-    </Navbar>
-    {isShell ? <LabShell /> :
-    <main className="lab-page-main" id="main-content" tabIndex={-1}>
-      {isIndex ? <div className="lab-index">
-        <Heading level={1} className="mz-text-heading-lg">Lab</Heading>
-        <Text elementType="p" className="mz-text-body-md">Experimental sandbox. These candidates are illustrative, unapproved and not part of Mezzanine.</Text>
-        <ul className="lab-experiment-list">
-          {[labContent.shell, labContent.pageWidths, labContent.layoutPage].map(experiment => <li key={experiment.href}>
-            <Heading level={2} className="mz-text-heading-sm"><Link href={experiment.href}>{experiment.label}</Link></Heading>
-            <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
-          </li>)}
-        </ul>
-      </div> : isLayout ? <LayoutPage /> : <PageWidthsPage />}
-    </main>}
-  </div>
+    <MezzanineNavbar currentPath={currentPath} onThemeChange={onThemeChange} selectedTheme={selectedTheme} labNavigation={navigation} />
+    <div className="site-layout">
+      <SidebarColumn>{navigation}</SidebarColumn>
+      <main className="site-content lab-page-main" id="main-content" tabIndex={-1}>
+        {isIndex ? <div className="lab-index">
+          <Heading level={1} className="mz-text-heading-lg">Lab</Heading>
+          <Text elementType="p" className="mz-text-body-md">Experimental sandbox. These candidates are illustrative, unapproved and not part of Mezzanine.</Text>
+          <ul className="lab-experiment-list">
+            {[labContent.layoutPage].map(experiment => <li key={experiment.href}>
+              <Heading level={2} className="mz-text-heading-sm"><Link href={experiment.href}>{experiment.label}</Link></Heading>
+              <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
+            </li>)}
+          </ul>
+        </div> : isLayout ? <LayoutOverviewPage /> : section ? <LayoutSectionPage slug={section.slug} /> : <NotFoundPage />}
+      </main>
+    </div>
+  </>
 }

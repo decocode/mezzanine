@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/AppShell.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with separate experiments at `/site/lab/shell`, `/site/lab/page-widths` and `/site/lab/layout`. Its illustrative candidates are not approved library features.
+The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with one experiment, the layout tour: an overview at `/site/lab/layout` and a child page for each section at `/site/lab/layout/<slug>`. Its illustrative candidates are not approved library features.
 
 The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `DisclosureHeader`, `TableOfContents`, `Navbar`, `NavTree` and `Sidebar` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
@@ -110,8 +110,8 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/components/DocsTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes, with an optional description column label |
 | `site/components/DocsTableOfContents.tsx` | Page contents shown inline after the page heading on narrower screens and in the right column on wide screens |
 | `site/components/ExampleZone.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
-| `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs and Lab links, theme actions and, on docs pages, the docs NavTree under Docs in the narrow-screen menu to the library Navbar |
-| `site/components/Sidebar.tsx` | Docs composition of the public non-collapsible SidebarPanel and NavTree navigation for wider screens, expanding the current page's ancestor groups; exports DocsNavigation for the Navbar menu |
+| `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs and Lab links, theme actions and, in the narrow-screen menu, the docs NavTree under Docs on docs pages or the Lab's NavTree (passed in as `labNavigation`) under Lab on Lab pages, to the library Navbar |
+| `site/components/Sidebar.tsx` | Docs composition of the public non-collapsible SidebarPanel and NavTree navigation for wider screens, expanding the current page's ancestor groups; exports DocsNavigation for the Navbar menu, plus NavigationPanel and SidebarColumn so the Lab can pass in its own NavTree without the site importing Lab code |
 | `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/components/tokenValueLogic.ts` | Reads current CSS token values and re-reads them when the theme, device colour scheme or motion setting changes, and describes font-size tokens in pixels |
@@ -194,20 +194,16 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 
 | Path | Purpose |
 | --- | --- |
-| `site/lab/lab.css` | Fixed viewport layout, independent scrolling and responsive rail placement |
-| `site/lab/labContent.ts` | Lab control labels and navigation destinations |
-| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry, experiment index and shared navbar with Exit Lab, experiment links and theme controls |
-| `site/lab/LayoutPage.tsx` | Lab layout tour at /site/lab/layout: an introduction and a live demo of each foundation from the layout research, plus wild cards; illustrative and unapproved |
-| `site/lab/layout/layoutLabContent.ts` | Plain-English explanations, frame presets and environment queries for the Lab layout tour |
+| `site/lab/labContent.ts` | Lab labels, the experiment list and the Lab's NavTree items: Layout at the top level, with its child pages in reading order |
+| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry: the site's Navbar and sidebar layout with the Lab's NavTree; chooses the index, the Layout overview, a Layout child page or the not-found page from the address |
+| `site/lab/LayoutPage.tsx` | Lab layout tour: the overview listing its child pages, and each section (a foundation from the layout research, or the wild cards) as its own page keyed by slug; illustrative and unapproved |
+| `site/lab/layout/layoutLabContent.ts` | Plain-English explanations, page slugs, CSS notes, frame presets and environment queries for the Lab layout tour |
 | `site/lab/layout/layoutLabLogic.ts` | Live media-query matching without effects, CSS support checks and on-request viewport and safe-area measurement |
 | `site/lab/layout/LabParts.tsx` | Lab-only marker (Warning outline and Lab badge), width-slider demo frame, section introductions, captions and support badges |
 | `site/lab/layout/LabPrimitives.tsx` | Lab-only intrinsic layout primitives: Stack, Cluster, Switcher, AutoGrid, SidebarLayout and Center, with limits as custom properties |
 | `site/lab/layout/FoundationDemos.tsx` | Demos for the ten foundations: primitives, container queries, environment queries, measure/target/layer tokens, logical properties, subgrid, :has(), viewport units, scroll padding and cascade layers |
 | `site/lab/layout/WildCardDemos.tsx` | Wild-card demos with support detection: grid-lanes masonry, scroll-state queries, anchor positioning and field-sizing |
 | `site/lab/layout/layout-lab.css` | Lab-scoped styles and illustrative --lab-* candidate tokens for the layout tour |
-| `site/lab/LabShell.tsx` | Shell comparison at /site/lab/shell using Navbar, Sidebar and responsive navigation |
-| `site/lab/PageWidthsPage.tsx`, `site/lab/page-widths.css` | Illustrative resizable reading, card-grid and full-width bands using exported Mezzanine text and controls |
-| `site/lab/useDemoWidth.ts` | Observes the live demo width and supports keyboard-accessible resize actions |
 
 ### Browser tests (`tests/`)
 
@@ -226,9 +222,8 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/components/text-field.spec.ts` | TextField keyboard, validation, responsive and automated accessibility checks |
 | `tests/components/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
 | `tests/components/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
-| `tests/lab/lab.spec.ts` | Production lab index navigation, shell layout, narrow-screen drawers and motion regression checks |
-| `tests/lab/layout.spec.ts` | Lab layout tour: 320px reflow at normal and doubled text and accessibility in each theme, plus container-query, Switcher and :has() behaviour |
-| `tests/lab/page-widths.spec.ts` | Production page-width route, resizing, width caps, grid reflow and accessibility checks |
+| `tests/lab/lab.spec.ts` | Lab navigation through the site menu at 320px with normal and doubled text, the shared sidebar layout, and the saved theme shared between Docs and Lab |
+| `tests/lab/layout.spec.ts` | Lab layout tour: 320px reflow at normal and doubled text and accessibility in each theme for the overview and every child page, links from the overview and navigation, container-query, Switcher and :has() behaviour, and CSS notes matching the stylesheet |
 | `tests/site/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
 | `tests/site/elevation.spec.ts` | Checks the Elevation page fits each breakpoint width with normal and doubled text |
 | `tests/site/motion.spec.ts` | Shared motion policy in each theme, nested themes, system precedence, loading indicators and the live Motion reference |
@@ -241,7 +236,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | Path | Purpose |
 | --- | --- |
 | `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing, typography, NavTree ownership, shared motion, allowed effects, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
-| `scripts/docs-rules.mjs` | Checks that site routes match nginx and Lighthouse, that documented tokens exist and public tokens are documented, and parses Props table rows |
+| `scripts/docs-rules.mjs` | Checks that site routes, including the Lab index, Layout overview and Layout child pages, match nginx in both directions and that Lighthouse URLs are allowed routes, that documented tokens exist and public tokens are documented, and parses Props table rows |
 | `scripts/docs-rules.test.mjs` | Passing and failing fixtures for the docs rules |
 | `scripts/effect-rules.mjs` | Finds React effect calls in the library and site and allows only the listed effects, each with an agreed reason |
 | `scripts/effect-rules.test.mjs` | Passing and failing fixtures for effect rules |
@@ -283,7 +278,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | --- | --- |
 | `npm ci` | Install locked dependencies |
 | `npm run dev` | Start the showcase on the local Vite server |
-| `npm run check:rules` | Check repository rules including shared motion without changing the API snapshot |
+| `npm run check:rules` | Run the rule checks' own tests (`scripts/*.test.mjs`), then check repository rules including shared motion without changing the API snapshot |
 | `npm run lint` | Run Oxlint |
 | `npm run typecheck` | Type-check the library, showcase, and configuration |
 | `npm run build:lib` | Build the package into `dist/` |

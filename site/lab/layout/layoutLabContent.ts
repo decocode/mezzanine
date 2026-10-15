@@ -3,7 +3,6 @@
 
 export const layoutLabIntro = {
   title: 'Layout',
-  status: 'Illustrative and unapproved. Nothing on this page is part of Mezzanine.',
   summary: 'This page is a working tour of modern layout. Instead of a 12-column grid and fixed screen breakpoints, you give each pattern a limit and let the browser arrange the content for the space it actually has.',
   key: 'Anything with a dashed Warning outline and a Lab badge is a Lab-only component, built just for this page. Everything else is a real Mezzanine component.',
   frames: 'Most demos sit inside a frame with a width slider, so you can see how a pattern behaves in more or less space without resizing your window. Chrome DevTools works too, but it resizes the whole page at once.',
@@ -11,6 +10,8 @@ export const layoutLabIntro = {
 
 export interface LabSection {
   id: string
+  // The page's address under /site/lab/layout/.
+  slug: string
   title: string
   what: string
   why: string
@@ -20,76 +21,87 @@ export interface LabSection {
 export const layoutLabSections: Record<string, LabSection> = {
   intrinsic: {
     id: 'lab-intrinsic',
-    title: '1. Intrinsic primitives',
+    slug: 'intrinsic-primitives',
+    title: 'Intrinsic primitives',
     what: 'Small layout patterns, each only a few lines of CSS. Instead of telling the page what to do at each screen size, you give each pattern a limit, such as "a tile should never be narrower than 10rem", and the browser works out the arrangement.',
     why: 'There isn’t a single breakpoint involved, so the same pattern behaves correctly on a phone, inside a narrow sidebar, in a dialog or across a wide dashboard. It responds to the space it’s given, not to the size of the screen. And because each limit is an ordinary CSS value, it can be a token that a theme or an app can tune. A breakpoint can’t, because CSS doesn’t allow variables inside media query conditions.',
     support: 'Works in every major browser. The last piece, gap in flexbox, arrived everywhere in 2021.',
   },
   container: {
     id: 'lab-container',
-    title: '2. Container queries',
+    slug: 'container-queries',
+    title: 'Container queries',
     what: 'A container query lets a component change its layout depending on how much space its container gives it, rather than how wide the whole screen is.',
     why: 'The same component can sit in a narrow sidebar and a wide main column on the same screen, and suit both. A screen breakpoint would give both copies the same layout, because the screen is the same width for each.',
     support: 'Works in every major browser since February 2023.',
   },
   environment: {
     id: 'lab-environment',
-    title: '3. Media queries for the environment',
+    slug: 'environment-queries',
+    title: 'Media queries for the environment',
     what: 'Media queries still have a job, but a different one: describing the person’s setup. That means their preferences, what they point with, whether the site is installed as an app, and the size of the outer page frame.',
     why: 'Components ask about their space, and the page asks about the environment. Keeping those two questions apart stops screen breakpoints creeping into every component.',
     support: 'Works in every major browser. The answers in the table are live for your browser, and change as you change your settings.',
   },
   tokens: {
     id: 'lab-tokens',
-    title: '4. Measure, target size and layer tokens',
-    what: 'Three families of tokens that Mezzanine doesn’t have yet. A measure is a comfortable reading width for text. A target size is the smallest area something you tap or click should cover. And layers are a named order for things that sit on top of each other.',
+    slug: 'tokens',
+    title: 'Reading width, target size and layer tokens',
+    what: 'Three families of tokens that Mezzanine doesn’t have yet. A reading width, which typesetters call the measure, is a comfortable maximum line length for text. A target size is the smallest area something you tap or click should cover. And layers are a named order for things that sit on top of each other.',
     why: 'Today these numbers are repeated by hand in several components: 65ch, 2.75rem, and z-index values of 10, 100 and 110. Named once as tokens, they stay consistent, and a theme or a product can tune them.',
     support: 'These are ordinary tokens, so they work everywhere. The names on this page are illustrative Lab candidates.',
   },
   logical: {
     id: 'lab-logical',
-    title: '5. Logical properties',
+    slug: 'logical-properties',
+    title: 'Logical properties',
     what: 'Logical properties name edges by reading direction, the start and end of a line, instead of by physical side, left and right.',
     why: 'Layouts then mirror themselves for right-to-left languages such as Arabic and Hebrew, with no extra work. Anything set with left and right stays put, and looks wrong.',
     support: 'Works in every major browser.',
   },
   subgrid: {
     id: 'lab-subgrid',
-    title: '6. Subgrid',
+    slug: 'subgrid',
+    title: 'Subgrid',
     what: 'Subgrid lets the parts inside cards that sit side by side share the same rows. Titles, text and actions then line up across the row, even when each card has a different amount of content.',
     why: 'Lined-up rows look intentional and are easier to scan, and you get them without fixing heights or cutting text short.',
     support: 'Works in every major browser, and counts as widely available since March 2026.',
   },
   has: {
     id: 'lab-has',
-    title: '7. :has() for content-aware layout',
+    slug: 'has',
+    title: ':has() for content-aware layout',
     what: 'The :has() selector lets a container change its layout depending on what’s inside it, such as how many items it holds, or whether it has an image.',
     why: 'The layout reacts to the real content, so you don’t need a separate variant or prop for each case.',
     support: 'Works in every major browser since December 2023.',
   },
   viewport: {
     id: 'lab-viewport',
-    title: '8. Viewport units and safe areas',
+    slug: 'viewport-units',
+    title: 'Viewport units and safe areas',
     what: 'Newer viewport units measure the screen height in three ways: with the browser’s toolbars showing, called svh; with them hidden, called lvh; or as they are right now, called dvh. Safe areas tell you how much room notches and home indicators take up.',
     why: 'On phones, the old 100vh is often taller than the part of the screen you can see. Installed apps also run edge to edge, so content has to stay clear of the notch. Since iOS 26, any site added to the Home Screen opens this way.',
     support: 'The new viewport units work in every major browser since 2023. Safe areas work in every browser on devices that have them, and are mostly zero on a laptop.',
   },
   scrollPadding: {
     id: 'lab-scroll-padding',
-    title: '9. Scroll padding under sticky headers',
+    slug: 'scroll-padding',
+    title: 'Scroll padding under sticky headers',
     what: 'Scroll padding tells the browser how much room a sticky header takes up, so when you jump to a section, it stops just below the header instead of underneath it.',
     why: 'Without it, the heading you jumped to, or the control you tabbed to, can end up hidden under the header. WCAG 2.2 has a rule about exactly this, called Focus Not Obscured.',
     support: 'Works in every major browser.',
   },
   layers: {
     id: 'lab-layers',
-    title: '10. Cascade layers',
+    slug: 'cascade-layers',
+    title: 'Cascade layers',
     what: 'Cascade layers put a library’s CSS into a named group that an app’s own CSS always beats, however specific the library’s selectors are.',
     why: 'Apps could then adjust Mezzanine without fighting over selector strength or reaching for !important. Mezzanine’s CSS isn’t in a layer today.',
     support: 'Works in every major browser since 2022.',
   },
   wild: {
     id: 'lab-wild-cards',
+    slug: 'wild-cards',
     title: 'Wild cards',
     what: 'Newer features that work in some browsers today. Each one is used as an extra, so where it isn’t supported, the demo falls back to something that still works.',
     why: 'They’re worth knowing about, and trying out in the Lab, before they arrive everywhere.',
@@ -101,10 +113,13 @@ export interface CssNote {
   // Text between backticks is shown as inline code.
   paragraphs: string[]
   code: string
+  // True when the code is an example for apps rather than the rules this page uses.
+  isExample?: boolean
 }
 
-// What each intrinsic primitive's CSS does, line by line, in plain English.
-export const primitiveCss: Record<'stack' | 'cluster' | 'switcher' | 'grid' | 'sidebar' | 'center', CssNote> = {
+// What each example's CSS does, in plain English. Unless marked as an example, the code is
+// copied from layout-lab.css, and a browser test checks that it still matches.
+export const cssNotes: Record<string, CssNote> = {
   stack: {
     paragraphs: [
       'The rule `display: flex` with `flex-direction: column` puts the items in a single column.',
@@ -189,6 +204,295 @@ export const primitiveCss: Record<'stack' | 'cluster' | 'switcher' | 'grid' | 's
   margin-inline: auto;
 }`,
   },
+  twoSlots: {
+    paragraphs: [
+      'The two slots are themselves the Sidebar pattern: the narrow slot asks for 16rem, and the wide slot has a `flex-grow` of 999 and never goes below 55%.',
+      'Each slot is also a container. The `container` property gives it a name, `lab-slot`, and says the tile inside may ask about its `inline-size`, which means its width.',
+    ],
+    code: `.lab-two-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.lab-two-slots > :first-child {
+  flex: 1 1 16rem;
+}
+
+.lab-two-slots > :last-child {
+  flex: 999 1 0;
+  min-inline-size: 55%;
+}
+
+.lab-cq-slot {
+  container: lab-slot / inline-size;
+  min-width: 0;
+  overflow-x: auto;
+}`,
+  },
+  containerTile: {
+    paragraphs: [
+      'The tile starts as a single column, with the image above the text. The `@container` rule then asks the nearest container called `lab-slot` how wide it is.',
+      'When the slot is at least 26rem wide, the tile switches to two columns: 8rem for the image and the rest for the text. The window size plays no part.',
+    ],
+    code: `.lab-cq-tile {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@container lab-slot (width >= 26rem) {
+  .lab-cq-tile {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    align-items: start;
+  }
+}`,
+  },
+  environment: {
+    isExample: true,
+    paragraphs: [
+      'In CSS, each question in the table becomes an `@media` rule that adjusts things for the person’s setup, such as stronger borders when they ask for more contrast, or bigger targets when they use touch.',
+      'Notice that neither example mentions a screen width. The demo itself reads these queries with JavaScript, through `matchMedia`, so it can show live answers.',
+    ],
+    code: `@media (prefers-contrast: more) {
+  .example {
+    border-color: var(--color-text);
+  }
+}
+
+@media (pointer: coarse) {
+  .example {
+    min-block-size: var(--lab-target-min);
+  }
+}`,
+  },
+  measure: {
+    paragraphs: [
+      'The `max-inline-size` property caps how long a line can get, and `margin-inline: auto` shares any space left over equally on both sides, which keeps the text centred.',
+      'The `ch` unit is the width of the zero character in the current font, so `65ch` means roughly 65 characters per line, whatever the font or its size. It’s an approximation, not an exact count. The value is a token, `--lab-measure`, so every reading column can share it.',
+    ],
+    code: `.lab-measure {
+  max-inline-size: var(--lab-measure);
+  margin-inline: auto;
+}`,
+  },
+  targetSize: {
+    paragraphs: [
+      'Each square takes its size from a token: `--lab-target-min-wcag` is 1.5rem, the WCAG minimum of 24px, and `--lab-target-min` is 2.75rem, or 44px.',
+      'A component would use the same token for the minimum width and height of anything you tap or click.',
+    ],
+    code: `.lab-target-wcag {
+  inline-size: var(--lab-target-min-wcag);
+  block-size: var(--lab-target-min-wcag);
+}
+
+.lab-target-comfortable {
+  inline-size: var(--lab-target-min);
+  block-size: var(--lab-target-min);
+}`,
+  },
+  layers: {
+    paragraphs: [
+      'The `z-index` property decides what sits on top when things overlap. Here each box takes its value from a named token instead of a number typed into the component.',
+      'The `--lab-layer-step` value only offsets each box so you can see them all. The order comes entirely from the layer tokens.',
+    ],
+    code: `.lab-layer-base { --lab-layer-step: 0; z-index: var(--lab-layer-base); }
+.lab-layer-raised { --lab-layer-step: 1; z-index: var(--lab-layer-raised); }
+.lab-layer-sticky { --lab-layer-step: 2; z-index: var(--lab-layer-sticky); }
+.lab-layer-overlay { --lab-layer-step: 3; z-index: var(--lab-layer-overlay); }
+.lab-layer-modal { --lab-layer-step: 4; z-index: var(--lab-layer-modal); }
+.lab-layer-toast { --lab-layer-step: 5; z-index: var(--lab-layer-toast); }`,
+  },
+  logical: {
+    paragraphs: [
+      'The two boxes set the same three things. The physical one uses `border-left`, `padding-left` and `text-align: left`, which always mean the left side.',
+      'The logical one uses `border-inline-start`, `padding-inline-start` and `text-align: start`. Start means wherever a line of text begins, so in a right-to-left language it becomes the right side.',
+    ],
+    code: `.lab-direction-physical {
+  border-left: var(--space-2) solid var(--color-warning-600);
+  padding-left: var(--space-4);
+  text-align: left;
+}
+
+.lab-direction-logical {
+  border-inline-start: var(--space-2) solid var(--color-warning-600);
+  padding-inline-start: var(--space-4);
+  text-align: start;
+}`,
+  },
+  subgrid: {
+    paragraphs: [
+      'The list is an ordinary auto-fill grid. When subgrid is on, each card spans three of the list’s rows, written `grid-row: span 3`, one each for the title, the text and the action.',
+      'Then `grid-template-rows: subgrid` tells the card to use those shared rows instead of its own. Every card in a row now has the same three rows, sized to fit the tallest title and the longest text.',
+    ],
+    code: `.lab-subgrid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-4);
+}
+
+.lab-subgrid-on .lab-subgrid-card {
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+}`,
+  },
+  quantityList: {
+    paragraphs: [
+      'The list starts as a single column. The selector `:has(> :nth-child(5))` asks whether the list has a fifth child.',
+      'If it does, the second rule switches the list to an auto-fill grid. Remove an item and the condition stops matching, so the list goes back to a column.',
+    ],
+    code: `.lab-has-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 0;
+  list-style: none;
+}
+
+.lab-has-list:has(> :nth-child(5)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8rem), 1fr));
+}`,
+  },
+  mediaObject: {
+    paragraphs: [
+      'The layout is a single column by default. The selector `:has(> .lab-media-image)` matches only when an image is inside.',
+      'When it matches, the layout gets two columns: the image takes up to 6rem, but never more than 35% of the width, and the text takes the rest.',
+    ],
+    code: `.lab-media {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.lab-media:has(> .lab-media-image) {
+  grid-template-columns: minmax(0, min(6rem, 35%)) minmax(0, 1fr);
+}`,
+  },
+  viewport: {
+    paragraphs: [
+      'The measurements come from invisible boxes, one for each unit: `100vh`, `100svh`, `100lvh` and `100dvh`. Pressing the button reads how tall each box really is.',
+      'Another invisible box uses `env()` to read the four safe areas, with `0px` as the fallback where a device has none.',
+    ],
+    code: `.lab-probe-vh { block-size: 100vh; }
+.lab-probe-svh { block-size: 100svh; }
+.lab-probe-lvh { block-size: 100lvh; }
+.lab-probe-dvh { block-size: 100dvh; }
+
+.lab-safe-probe {
+  padding:
+    env(safe-area-inset-top, 0px)
+    env(safe-area-inset-right, 0px)
+    env(safe-area-inset-bottom, 0px)
+    env(safe-area-inset-left, 0px);
+}`,
+  },
+  scrollPadding: {
+    paragraphs: [
+      'The header uses `position: sticky` with `inset-block-start: 0`, so it stays at the top of the box as you scroll. Its height comes from a token, `--lab-sticky-height`.',
+      'The fix is one line on the scrolling box: `scroll-padding-block-start` set to the same token. The browser then leaves that much room at the top whenever it scrolls something into view.',
+    ],
+    code: `.lab-scroll-padded {
+  scroll-padding-block-start: var(--lab-sticky-height);
+}
+
+.lab-sticky-header {
+  position: sticky;
+  z-index: var(--lab-layer-sticky);
+  inset-block-start: 0;
+  box-sizing: border-box;
+  min-block-size: var(--lab-sticky-height);
+  padding: var(--space-3);
+  border-block-end: 1px solid var(--color-border);
+  background: var(--color-surface);
+}`,
+  },
+  cascadeLayers: {
+    paragraphs: [
+      'The library rule repeats the chip class, written `.lab-chip.lab-chip`, to make its selector stronger than the app’s single class. Outside a layer, the stronger selector wins.',
+      'Inside `@layer`, the same rule loses to any CSS that isn’t in a layer, however strong its selector. So the app’s simple `.lab-consumer-override` rule wins on the right.',
+    ],
+    code: `.lab-layout .lab-cascade-unlayered .lab-chip.lab-chip {
+  background: var(--color-neutral-200);
+}
+
+@layer lab-demo-library {
+  .lab-layout .lab-cascade-layered .lab-chip.lab-chip {
+    background: var(--color-neutral-200);
+  }
+
+  .lab-layout .lab-cascade-layered .lab-chip.lab-chip::after {
+    content: 'Library style won';
+  }
+}
+
+.lab-consumer-override {
+  background: var(--color-success-100);
+}`,
+  },
+  masonry: {
+    paragraphs: [
+      'Every browser gets an ordinary auto-fill grid first. Then `@supports` checks whether the browser understands `display: grid-lanes`.',
+      'Where it does, the grid becomes masonry, and each item moves up into the shortest column. Where it doesn’t, the first rule still works, just with gaps.',
+    ],
+    code: `.lab-masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8rem), 1fr));
+  gap: var(--space-3);
+  align-items: start;
+}
+
+@supports (display: grid-lanes) {
+  .lab-masonry {
+    display: grid-lanes;
+  }
+}`,
+  },
+  scrollState: {
+    paragraphs: [
+      'The header becomes a scroll-state container with `container-type: scroll-state`, so the elements inside it can ask about its scrolling.',
+      'The `@container scroll-state(stuck: top)` rule matches only while the header is stuck to the top, and adds the Warning outline. Browsers without it simply never match the rule.',
+    ],
+    code: `.lab-stuck-aware {
+  container-type: scroll-state;
+}
+
+@container scroll-state(stuck: top) {
+  .lab-stuck-aware > span {
+    display: inline-block;
+    outline: 2px solid var(--color-warning-600);
+    outline-offset: var(--space-1);
+  }
+}`,
+  },
+  anchor: {
+    paragraphs: [
+      'The anchor gets a name with `anchor-name: --lab-anchor`. The label then refers to that name with `position-anchor`, and `position-area: inline-end` places it after the anchor along the line.',
+      'If there isn’t room, `position-try-fallbacks` tries flipping it to the other side, then below. Inside `@supports`, so other browsers keep the label in normal flow.',
+    ],
+    code: `.lab-anchor-target {
+  inline-size: 8rem;
+  anchor-name: --lab-anchor;
+}
+
+@supports (anchor-name: --lab-anchor) {
+  .lab-anchor-label {
+    position: absolute;
+    position-anchor: --lab-anchor;
+    position-area: inline-end;
+    position-try-fallbacks: flip-inline, block-end;
+    max-inline-size: min(12rem, 90%);
+    margin-inline-start: var(--space-2);
+  }
+}`,
+  },
+  fieldSizing: {
+    paragraphs: [
+      'The whole feature is one line: `field-sizing: content` lets the text area size itself to what you type, rather than to a fixed number of rows.',
+      'Browsers that don’t support it ignore the line, and the field keeps its normal size and scrolls.',
+    ],
+    code: `.lab-field-sizing .react-aria-TextArea {
+  field-sizing: content;
+}`,
+  },
 }
 
 export const framePresets = [
@@ -208,4 +512,4 @@ export const environmentQueries = [
   { label: 'Window is at least 48rem wide', query: '(width >= 48rem)' },
 ]
 
-export const sampleParagraph = 'Long lines of text are tiring to read because the eye has to travel a long way back to find the start of the next line. A comfortable line holds roughly 45 to 75 characters. This paragraph shows the same text with and without a measure.'
+export const sampleParagraph = 'Long lines of text are tiring to read because the eye has to travel a long way back to find the start of the next line. A comfortable line holds roughly 45 to 75 characters. This paragraph shows the same text with and without a reading width.'

@@ -21,7 +21,7 @@
   min-width: 0;
 }
 
-.lab-layout :is(h2, h3, h4, h5, p, ul) {
+.lab-layout :is(h1, h2, h3, h4, p, ul) {
   margin: 0;
 }
 
@@ -41,7 +41,7 @@
 }
 
 /* More space above each heading than below it, so it reads as the start of what follows. */
-.lab-explainer > h3:not(:first-child) {
+.lab-explainer > h2:not(:first-child) {
   margin-block-start: var(--space-4);
 }
 
@@ -50,8 +50,8 @@
   margin-block-start: var(--space-8);
 }
 
-/* Except straight after "Try it", where the heading above already separates it. */
-.lab-layout h3 + .lab-demo-heading {
+/* Except straight after "Examples", where the heading above already separates it. */
+.lab-layout h2 + .lab-demo-heading {
   margin-block-start: 0;
 }
 
@@ -307,9 +307,10 @@
   }
 }
 
-/* Measure, target-size and layer tokens. */
+/* Reading width (the measure), target-size and layer tokens. */
 .lab-measure {
   max-inline-size: var(--lab-measure);
+  margin-inline: auto;
 }
 
 .lab-targets {

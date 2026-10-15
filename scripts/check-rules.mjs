@@ -1,7 +1,7 @@
 import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
 import { checkTypographyChoices, checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
-import { checkRoutes, checkTokens, declaredTokens, parsePropRows } from './docs-rules.mjs'
+import { checkRoutes, checkTokens, declaredTokens, labPaths, parsePropRows } from './docs-rules.mjs'
 import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -446,7 +446,8 @@ function checkDocsTokens(update) {
 function checkDocsRoutes() {
   const lighthouseUrls = ['config/lighthouserc.mobile.json', 'config/lighthouserc.desktop.json']
     .flatMap(file => JSON.parse(read(file)).ci.collect.url.map(url => ({ file, url })))
-  for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), nginx: read('config/nginx.conf'), lighthouseUrls })) {
+  const extraPaths = labPaths({ labContent: read('site/lab/labContent.ts'), layoutContent: read('site/lab/layout/layoutLabContent.ts') })
+  for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), extraPaths, nginx: read('config/nginx.conf'), lighthouseUrls })) {
     report(problem.file, read(problem.file), problem.position, 'docs-routes', problem.message)
   }
 }

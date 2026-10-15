@@ -46,26 +46,24 @@ export function DemoFrame({ label, initialWidth = 720, children }: { label: stri
   </div>
 }
 
-// The section heading, then the three plain-English parts every section opens with, each
-// under its own heading, then the "Try it" heading that the demos sit under.
+// The page heading and an introduction (what it is, then why it matters), then browser
+// support under its own heading, then the "Examples" heading that the demos sit under.
 export function LabSectionIntro({ section }: { section: LabSection }) {
   return <>
-    <Heading id={section.id} level={2} className="mz-text-heading-md">{section.title}</Heading>
+    <Heading id={section.id} level={1} className="mz-text-heading-lg">{section.title}</Heading>
     <div className="lab-explainer">
-      <Heading level={3} className="mz-text-heading-sm">What it is</Heading>
       <Text elementType="p" className="mz-text-body-md">{section.what}</Text>
-      <Heading level={3} className="mz-text-heading-sm">Why it matters</Heading>
       <Text elementType="p" className="mz-text-body-md">{section.why}</Text>
-      <Heading level={3} className="mz-text-heading-sm">Browser support</Heading>
+      <Heading level={2} className="mz-text-heading-md">Browser support</Heading>
       <Text elementType="p" className="mz-text-body-md">{section.support}</Text>
     </div>
-    <Heading level={3} className="mz-text-heading-sm">Try it</Heading>
+    <Heading level={2} className="mz-text-heading-md">Examples</Heading>
   </>
 }
 
-// A heading for one demo inside a section's "Try it" part.
+// A heading for one demo inside a section's "Examples" part.
 export function DemoHeading({ children }: { children: ReactNode }) {
-  return <Heading level={4} className="lab-demo-heading mz-text-title-md">{children}</Heading>
+  return <Heading level={3} className="lab-demo-heading mz-text-heading-sm">{children}</Heading>
 }
 
 // The explanation that goes with a demo.
@@ -73,12 +71,15 @@ export function DemoText({ children }: { children: ReactNode }) {
   return <Text elementType="p" className="lab-demo-text mz-text-body-md">{children}</Text>
 }
 
-// A closed-by-default explanation of the CSS behind one example, with the rules themselves.
-export function CssNotes({ name, note }: { name: string; note: CssNote }) {
+// A closed-by-default explanation of the CSS behind one example, with the rules themselves
+// (or, when marked, example rules for an app).
+// level is 4 under an example heading, or 3 on a page whose demo has no heading of its own.
+export function CssNotes({ name, note, level = 4 }: { name: string; note: CssNote; level?: 3 | 4 }) {
   return <Disclosure className="lab-css-notes">
-    <DisclosureHeader level={5}>The CSS behind {name}</DisclosureHeader>
+    <DisclosureHeader level={level}>The CSS behind {name}</DisclosureHeader>
     <DisclosurePanel>
       <div className="lab-css-notes-body">
+        {note.isExample && <Text elementType="p" className="mz-text-body-md">This is example CSS for an app. The demo above doesn’t use it.</Text>}
         {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
           {splitInlineCode(paragraph).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part)}
         </Text>)}

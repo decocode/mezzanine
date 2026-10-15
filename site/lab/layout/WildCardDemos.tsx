@@ -1,6 +1,6 @@
 import { Label, Text, TextArea, TextField } from '@decocode/mezzanine'
-import { DemoFrame, DemoHeading, DemoText, LabOnly, LabSectionIntro, SupportBadge } from './LabParts'
-import { layoutLabSections as sections } from './layoutLabContent'
+import { CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, LabSectionIntro, SupportBadge } from './LabParts'
+import { cssNotes, layoutLabSections as sections } from './layoutLabContent'
 import { supportsCondition, supportsCss } from './layoutLabLogic'
 
 const heights = [6, 10, 4, 8, 12, 5, 9, 7]
@@ -24,6 +24,7 @@ export function WildCardDemos() {
         </div>
       </LabOnly>
     </DemoFrame>
+    <CssNotes name="Masonry" note={cssNotes.masonry} />
 
     <DemoHeading>Scroll-state queries</DemoHeading>
     <DemoText>CSS can ask “is this sticky header stuck right now?” and style it differently, here with a Warning border, with no JavaScript. Scroll down inside the box to see it. It only works in Chrome and Edge 133 and later, so it’s an extra, never something a layout depends on.</DemoText>
@@ -34,6 +35,7 @@ export function WildCardDemos() {
         {[1, 2, 3].map((index) => <Text key={index} elementType="p" className="lab-scroll-section mz-text-body-sm">Paragraph {index} of filler content to make the box scroll.</Text>)}
       </div>
     </LabOnly>
+    <CssNotes name="the stuck header" note={cssNotes.scrollState} />
 
     <DemoHeading>Anchor positioning</DemoHeading>
     <DemoText>CSS places one element next to another anywhere on the page, and falls back to another position when there’s no room. It now works in every major browser. Mezzanine’s tooltips and menus use React Aria’s positioning, though, so adopting this would be a deliberate change for you to approve.</DemoText>
@@ -44,6 +46,7 @@ export function WildCardDemos() {
         <div className="lab-anchor-label mz-text-label-sm">Positioned beside the anchor by CSS alone</div>
       </div>
     </LabOnly>
+    <CssNotes name="the anchored label" note={cssNotes.anchor} />
 
     <DemoHeading>Fields that grow with their content</DemoHeading>
     <DemoText>One line of CSS, field-sizing: content, makes the field grow as you type, instead of scrolling inside itself. It’s been available in every major browser since June 2026. This is the real Mezzanine TextArea with that one Lab rule added.</DemoText>
@@ -54,5 +57,6 @@ export function WildCardDemos() {
         <TextArea />
       </TextField>
     </LabOnly>
+    <CssNotes name="the growing field" note={cssNotes.fieldSizing} />
   </section>
 }

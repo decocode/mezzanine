@@ -1,33 +1,50 @@
-import { NavTree, Sidebar as MezzanineSidebar, SidebarPanel } from '@decocode/mezzanine'
+import type { ReactNode } from 'react'
+import { NavTree, Sidebar as MezzanineSidebar, SidebarPanel, type NavTreeItemData } from '@decocode/mezzanine'
 import type { SitePageDefinition } from '../siteStructure'
 import { sidebarNavigationItems } from './sidebarNavigationItems'
 
-interface SidebarProps {
-  currentPage: SitePageDefinition
-  'aria-label'?: string
-  navigationLabel?: string
+interface NavigationPanelProps {
+  'aria-label': string
+  navigationLabel: string
+  items: NavTreeItemData[]
+  selectedRoute: string
 }
 
-export function DocsNavigation({ currentPage, 'aria-label': label = 'Mezzanine sections', navigationLabel = 'Mezzanine documentation' }: SidebarProps) {
+// A section's navigation tree in the site's sidebar panel. Docs and the Lab each pass their own items.
+export function NavigationPanel({ 'aria-label': label, navigationLabel, items, selectedRoute }: NavigationPanelProps) {
   return (
     <MezzanineSidebar presentation="inline" isCollapsible={false}>
       <SidebarPanel title={label} hideInlineHeader className="site-sidebar-panel">
         <nav aria-label={label}>
-          <NavTree aria-label={navigationLabel} selectedRoute={currentPage.path} items={sidebarNavigationItems} />
+          <NavTree aria-label={navigationLabel} selectedRoute={selectedRoute} items={items} />
         </nav>
       </SidebarPanel>
     </MezzanineSidebar>
   )
 }
 
-// The docs column on wider screens. On narrow screens the same navigation sits
+interface DocsNavigationProps {
+  currentPage: SitePageDefinition
+  'aria-label'?: string
+  navigationLabel?: string
+}
+
+export function DocsNavigation({ currentPage, 'aria-label': label = 'Mezzanine sections', navigationLabel = 'Mezzanine documentation' }: DocsNavigationProps) {
+  return <NavigationPanel aria-label={label} navigationLabel={navigationLabel} items={sidebarNavigationItems} selectedRoute={currentPage.path} />
+}
+
+// The navigation column on wider screens. On narrow screens the same navigation sits
 // in the Navbar menu instead (see MezzanineNavbar).
-export function Sidebar(props: SidebarProps) {
+export function SidebarColumn({ children }: { children: ReactNode }) {
   return (
     <div className="site-sidebar">
       <div className="desktop-sidebar">
-        <DocsNavigation {...props} />
+        {children}
       </div>
     </div>
   )
+}
+
+export function Sidebar(props: DocsNavigationProps) {
+  return <SidebarColumn><DocsNavigation {...props} /></SidebarColumn>
 }

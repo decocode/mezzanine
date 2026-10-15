@@ -1,7 +1,6 @@
 import { lazy, Suspense, useState } from 'react'
 import { Link } from '@decocode/mezzanine'
 import { MezzanineNavbar } from './components/MezzanineNavbar'
-import { ThemeSwitcher } from './components/ThemeSwitcher'
 import { Sidebar } from './components/Sidebar'
 import { DocsContentsContext } from './components/docsContentsContext'
 import { PageLoader } from './PageLoader'
@@ -32,7 +31,8 @@ export function AppShell({ initialTheme }: AppShellProps) {
     setSelectedTheme(theme)
   }
 
-  if (currentPath === '/site/lab' || currentPath === '/site/lab/shell' || currentPath === '/site/lab/page-widths' || currentPath === '/site/lab/layout') return <Suspense fallback={<p role="status">Loading lab…</p>}><LabPage currentPath={currentPath} themeSwitcher={<ThemeSwitcher onThemeChange={changeTheme} selectedTheme={selectedTheme} />} /></Suspense>
+  // The Lab entry decides which Lab page to show, including its own not-found page.
+  if (currentPath === '/site/lab' || currentPath.startsWith('/site/lab/')) return <Suspense fallback={<p role="status">Loading lab…</p>}><LabPage currentPath={currentPath} onThemeChange={changeTheme} selectedTheme={selectedTheme} /></Suspense>
 
   if (!currentPage) {
     return (

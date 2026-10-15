@@ -1094,7 +1094,8 @@ a:focus-visible {
 .site-layout { display: flex; flex-direction: column; }
 .site-layout > .site-sidebar { order: -2; }
 @container showcase (min-width: 48rem) {
-  .site-layout { display: grid; }
+  /* The empty first row stays empty, so short pages start at the top instead of sharing the sidebar's height. */
+  .site-layout { display: grid; grid-template-rows: auto 1fr; }
   .site-layout > .site-sidebar { grid-column: 1; grid-row: 1 / 3; }
   .site-content { grid-column: 2; grid-row: 2; }
 }

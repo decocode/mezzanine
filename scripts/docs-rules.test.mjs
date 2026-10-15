@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { checkRoutes, checkTokens, declaredTokens, parsePropRows, templateTokenPatterns } from './docs-rules.mjs'
+import { checkRoutes, checkTokens, declaredTokens, expandRoutePattern, labPaths, parsePropRows, templateTokenPatterns } from './docs-rules.mjs'
 
 const nginx = `map $uri $is_app_route {
     default 0;
@@ -17,6 +17,27 @@ test('routes: missing nginx entries, stale entries and bad Lighthouse URLs are r
   assert.ok(messages.some(m => m.includes('/typography/text-styles')))
   assert.ok(messages.some(m => m.includes('Lighthouse URL /gone')))
   assert.ok(!messages.some(m => m.includes('/button') || m.includes('/typography/prose')))
+})
+
+test('routes: nested Lab rules expand to every page they allow', () => {
+  assert.deepEqual(expandRoutePattern('^/site/lab(/layout(/(grid|subgrid))?)?/?$'), ['/site/lab', '/site/lab/layout', '/site/lab/layout/grid', '/site/lab/layout/subgrid'])
+  assert.deepEqual(expandRoutePattern('^/?$'), ['/'])
+  assert.equal(expandRoutePattern('^/docs/[a-z]+$'), null)
+})
+
+test('routes: Lab pages missing from nginx, and nginx entries for removed Lab pages, are reported', () => {
+  const extraPaths = labPaths({
+    labContent: "index: { href: '/site/lab' }, layoutPage: { href: '/site/lab/layout' }",
+    layoutContent: "{ slug: 'grid' } { slug: 'new-lab-page' }",
+  })
+  assert.deepEqual(extraPaths, ['/site/lab', '/site/lab/layout', '/site/lab/layout/grid', '/site/lab/layout/new-lab-page'])
+  const labNginx = `map $uri $is_app_route {
+    ~^/site/lab(/layout(/(grid|old-lab-page))?)?/?$ 1;
+}`
+  const messages = checkRoutes({ siteStructure: '', extraPaths, nginx: labNginx, lighthouseUrls: [] }).map(p => p.message)
+  assert.ok(messages.some(m => m.includes('/site/lab/layout/new-lab-page') && m.includes('404')))
+  assert.ok(messages.some(m => m.includes('/site/lab/layout/old-lab-page') && m.includes('no such page')))
+  assert.ok(!messages.some(m => m.includes('/site/lab/layout/grid')))
 })
 
 test('tokens: unknown mentions fail, prefixes and templates count, the baseline must stay current', () => {

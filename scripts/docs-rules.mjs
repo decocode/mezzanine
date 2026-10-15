@@ -13,20 +13,63 @@ export function nginxRoutePatterns(nginx) {
   return [...block.matchAll(/^\s*~(\^[^\s]+\$)\s+1;/gm)].map(match => ({ source: match[1], position: match.index }))
 }
 
-export function checkRoutes({ siteStructure, nginx, lighthouseUrls }) {
+// Lab pages: the hrefs in labContent.ts, plus a child page under the Layout overview for each slug.
+export function labPaths({ labContent, layoutContent }) {
+  const hrefs = [...labContent.matchAll(/\bhref: '(\/site\/lab[^']*)'/g)].map(match => match[1])
+  const slugs = [...layoutContent.matchAll(/\bslug: '([^']+)'/g)].map(match => `/site/lab/layout/${match[1]}`)
+  return [...hrefs, ...slugs]
+}
+
+// Every path an nginx route pattern allows, when the pattern is only literal text, groups,
+// `|` alternatives and optional `?` groups. Returns null for anything more complex.
+export function expandRoutePattern(source) {
+  const body = source.replace(/^\^/, '').replace(/\$$/, '').replace(/\/\?$/, '')
+  let index = 0
+  function sequence() {
+    let results = ['']
+    while (index < body.length && body[index] !== ')' && body[index] !== '|') {
+      let options
+      if (body[index] === '(') {
+        index++
+        options = alternatives()
+        if (body[index++] !== ')') return null
+      } else if (/[a-z0-9/-]/.test(body[index])) {
+        options = [body[index++]]
+      } else return null
+      if (options == null) return null
+      if (body[index] === '?') { index++; options = ['', ...options] }
+      results = results.flatMap(result => options.map(option => result + option))
+    }
+    return results
+  }
+  function alternatives() {
+    const first = sequence()
+    if (first == null) return null
+    const all = [...first]
+    while (body[index] === '|') {
+      index++
+      const next = sequence()
+      if (next == null) return null
+      all.push(...next)
+    }
+    return all
+  }
+  const paths = alternatives()
+  if (paths == null || index !== body.length) return null
+  return paths.map(path => path === '' ? '/' : path)
+}
+
+export function checkRoutes({ siteStructure, extraPaths = [], nginx, lighthouseUrls }) {
   const problems = []
-  const paths = sitePaths(siteStructure)
+  const paths = [...sitePaths(siteStructure), ...extraPaths]
   const patterns = nginxRoutePatterns(nginx)
   const allowed = path => patterns.some(pattern => new RegExp(pattern.source).test(path))
   for (const path of paths) {
     if (!allowed(path)) problems.push({ file: 'config/nginx.conf', position: 0, message: `Site page ${path} is not in nginx's allowed routes, so it would return 404.` })
   }
-  // Each listed alternative in a simple `^/prefix(a|b)/?$` rule must still be a page.
+  // Every path a simple rule allows must still be a page.
   for (const pattern of patterns) {
-    const simple = pattern.source.match(/^\^(\/[a-z/-]*)\(([a-z|-]+)\)\/\?\$$/)
-    if (!simple) continue
-    for (const name of simple[2].split('|')) {
-      const path = `${simple[1]}${name}`
+    for (const path of expandRoutePattern(pattern.source) ?? []) {
       if (!paths.includes(path)) problems.push({ file: 'config/nginx.conf', position: pattern.position, message: `nginx allows ${path}, but the site has no such page.` })
     }
   }
