@@ -2,6 +2,7 @@ import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
 import { checkTypographyChoices, checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
 import { checkRoutes, checkTokens, declaredTokens, parsePropRows } from './docs-rules.mjs'
+import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -474,11 +475,14 @@ try {
     for (const problem of checkTypographyCss(file, text)) report(file, text, problem.position, 'typography', problem.message)
     for (const problem of checkMotionCss(file, text)) report(file, text, problem.position, 'motion', problem.message)
   }
-  for (const file of [...filesIn('src', ['.ts', '.tsx']), ...filesIn('site', ['.ts', '.tsx'])]) {
+  const sourceFiles = [...filesIn('src', ['.ts', '.tsx']), ...filesIn('site', ['.ts', '.tsx'])]
+  for (const file of sourceFiles) {
     const text = read(file)
     for (const problem of checkNavTreeSource(file, text)) report(file, text, problem.position, 'nav-tree-ownership', problem.message)
     for (const problem of checkMotionSource(file, text)) report(file, text, problem.position, 'motion', problem.message)
+    for (const problem of checkEffectSource(file, text)) report(file, text, problem.position, 'effects', problem.message)
   }
+  for (const message of checkAllowedEffectFiles(sourceFiles)) report('scripts/effect-rules.mjs', '', 0, 'effects', message)
   const tokens = read('src/tokens.css')
   for (const problem of checkTypographyTokens(tokens)) report('src/tokens.css', tokens, problem.position, 'typography', problem.message)
   const typographyGuide = read('src/docs/TYPOGRAPHY.md')

@@ -62,6 +62,7 @@ Do not put an idea into code, in the Lab or anywhere else, before the user has a
 ## Stack
 
 - Use React with TypeScript and `react-aria-components`. Keyboard, focus, pointer, touch and accessibility behaviour come from React Aria in both the library and the site.
+- Avoid `useEffect`, `useLayoutEffect` and `useInsertionEffect`. Use an event handler, a calculation during rendering, `useSyncExternalStore` or a ref callback. `npm run check:rules` allows only the effects listed, with reasons, in `scripts/effect-rules.mjs`. Adding to that list needs the user's agreement.
 - Use npm, and keep `package-lock.json` in sync with `package.json`.
 - Keep configuration minimal and follow the existing Vite and Oxlint setup.
 - Make only the requested change and the smallest changes needed to make it work. Do not add speculative features, sample content, dependencies or abstractions.
