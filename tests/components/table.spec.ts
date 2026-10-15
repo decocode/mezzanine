@@ -1,6 +1,10 @@
 import { expect, test } from '@playwright/test'
-import AxeBuilder from '@axe-core/playwright'
+import { expectNoAccessibilityViolations } from '../accessibility'
+import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
+// Checks that clicking or pressing Enter on a column heading sorts the rows, that only the sorted
+// column shows an arrow (hidden from screen readers, which announce the sort order instead), and
+// that tables without sorting show no arrow.
 test('Table sorting works with pointer and keyboard and supplies one accessible indicator', async ({ page }) => {
   await page.goto('/table')
   const table = page.getByRole('grid', { name: 'Sortable table', exact: true })
@@ -25,18 +29,21 @@ test('Table sorting works with pointer and keyboard and supplies one accessible 
   await expect(page.getByRole('grid', { name: 'Table with single row selection', exact: true }).locator('.mezzanine-table-sort-indicator')).toHaveCount(0)
 })
 
-for (const theme of ['light', 'dark', 'wireframe']) {
+// Checks, in each theme at normal and double text size, that the sortable table scrolls inside its
+// own box on a phone instead of widening the page, passes an accessibility scan and keeps its sort
+// arrow visible in high-contrast mode.
+for (const theme of themes) {
   test(`${theme} sortable Table preserves contrast and contained scrolling at 320px`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/table')
-    await page.evaluate(theme => document.documentElement.dataset.theme = theme, theme)
+    await setTheme(page, theme)
     const table = page.getByRole('grid', { name: 'Sortable table', exact: true })
-    for (const fontSize of [16, 32]) {
-      await page.evaluate(size => document.documentElement.style.fontSize = `${size}px`, fontSize)
+    for (const fontSize of textSizes) {
+      await setTextSize(page, fontSize)
       await table.getByRole('columnheader', { name: 'Column A', exact: true }).click()
-      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
-      expect((await new AxeBuilder({ page }).include('[aria-label="Sortable table"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
+      await expectNoPageOverflow(page)
+      await expectNoAccessibilityViolations(page, '[aria-label="Sortable table"]')
     }
     await page.emulateMedia({ forcedColors: 'active' })
     await expect(table.locator('.mezzanine-table-sort-indicator')).toBeVisible()

@@ -1,6 +1,10 @@
 import { expect, test } from '@playwright/test'
-import AxeBuilder from '@axe-core/playwright'
+import { expectNoAccessibilityViolations } from '../accessibility'
+import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
+// Checks that on a phone the More button opens a sheet from the bottom of the screen, keeps
+// keyboard focus inside it, and closes with Escape, the close button or a tap outside, returning
+// focus to More.
 test('More opens a bottom sheet, traps focus and restores it on dismissal', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.goto('/tab-bar')
@@ -35,6 +39,8 @@ test('More opens a bottom sheet, traps focus and restores it on dismissal', asyn
   await expect(more).toBeFocused()
 })
 
+// Checks that choosing a destination in the More sheet updates the example's selection and closes
+// the sheet without leaving the page.
 test('sheet links select an example destination without leaving the page', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.goto('/tab-bar')
@@ -46,16 +52,17 @@ test('sheet links select an example destination without leaving the page', async
   await expect(page.getByRole('dialog')).toHaveCount(0)
 })
 
-for (const theme of ['light', 'dark', 'wireframe']) {
-  for (const fontSize of [16, 32]) {
+// Checks, in each theme at normal and double text size, that the tab bar and its More sheet fit a
+// phone screen without overflowing or animating, have large enough buttons and pass accessibility
+// scans.
+for (const theme of themes) {
+  for (const fontSize of textSizes) {
     test(`${theme} TabBar and sheet fit 320px at ${fontSize}px text`, async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 800 })
       await page.emulateMedia({ reducedMotion: 'reduce' })
       await page.goto('/tab-bar')
-      await page.evaluate(({ theme, fontSize }) => {
-        document.documentElement.dataset.theme = theme
-        document.documentElement.style.fontSize = `${fontSize}px`
-      }, { theme, fontSize })
+      await setTheme(page, theme)
+      await setTextSize(page, fontSize)
       const nav = page.getByRole('navigation', { name: 'Tab bar example', exact: true })
       const more = nav.getByRole('button', { name: /^More/ })
       await expect(more).toBeVisible()
@@ -63,22 +70,22 @@ for (const theme of ['light', 'dark', 'wireframe']) {
         await expect(more).toHaveAccessibleName('More: Home')
         await expect(nav.getByRole('link')).toHaveCount(0)
       }
-      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
+      await expectNoPageOverflow(page)
       expect(await page.locator('.mezzanine-tab-bar-items').evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true)
       expect((await more.boundingBox())!.height).toBeGreaterThanOrEqual(48)
-      expect((await new AxeBuilder({ page }).include('main').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
+      await expectNoAccessibilityViolations(page, 'main')
       await more.click()
       const dialog = page.getByRole('dialog')
       await expect(dialog).toBeVisible()
-      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
-      expect((await new AxeBuilder({ page }).include('[role="dialog"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
-      expect(await page.locator('.mezzanine-tab-bar-sheet').evaluate((element) => getComputedStyle(element).animationName)).toBe('none')
-      await page.screenshot({ path: `reports/test-results/tab-bar-sheet-${theme}-${fontSize}.png` })
+      await expectNoPageOverflow(page)
+      await expectNoAccessibilityViolations(page, '[role="dialog"]')
+      await expect(page.locator('.mezzanine-tab-bar-sheet')).toHaveCSS('animation-name', 'none')
     })
   }
 }
 
-
+// Checks that on a wide screen every destination fits in the bar, so there is no More button, and
+// the current page is marked.
 test('wide layouts expose all destinations without More', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
   await page.goto('/tab-bar')
@@ -88,6 +95,8 @@ test('wide layouts expose all destinations without More', async ({ page }) => {
   await expect(nav.getByRole('link', { name: 'Home', exact: true })).toHaveAttribute('aria-current', 'page')
 })
 
+// Checks that in high-contrast mode the More button keeps a visible focus outline and the sheet
+// still opens and closes with the keyboard.
 test('forced colours retain current-page and focus indicators', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' })
@@ -97,7 +106,7 @@ test('forced colours retain current-page and focus indicators', async ({ page })
   await page.keyboard.press('Tab')
   const more = nav.getByRole('button', { name: 'More', exact: true })
   await expect(more).toBeFocused()
-  expect(await more.evaluate((element) => getComputedStyle(element).outlineStyle)).toBe('solid')
+  await expect(more).toHaveCSS('outline-style', 'solid')
   await page.keyboard.press('Enter')
   await expect(page.getByRole('dialog')).toBeVisible()
   await page.keyboard.press('Escape')

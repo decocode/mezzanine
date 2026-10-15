@@ -1,6 +1,9 @@
 import { expect, test } from '@playwright/test'
-import AxeBuilder from '@axe-core/playwright'
+import { expectNoAccessibilityViolations } from '../accessibility'
+import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
+// Checks the main Sidebar example on a wide screen: it can collapse to a narrow rail and expand
+// again, move to the right, or hide completely, while remembering the options chosen inside it.
 test('inline panel switches side, collapses to rail or hides, and preserves content state', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
   await page.goto('/sidebar')
@@ -33,9 +36,11 @@ test('inline panel switches side, collapses to rail or hides, and preserves cont
   await expect(panel.getByRole('checkbox', { name: 'Option A' })).toBeChecked()
   await panel.getByRole('button', { name: 'Reset options' }).click()
   await expect(panel.getByRole('checkbox', { name: 'Option A' })).not.toBeChecked()
-  await example.screenshot({ path: 'reports/test-results/sidebar-desktop.png' })
 })
 
+// Checks that on a phone the Sidebar opens as a drawer that keeps keyboard focus inside it, closes
+// with Escape, the close button or a tap outside, returns focus to the Open button and remembers
+// chosen options.
 test('mobile drawer traps focus, dismisses and restores focus, and keeps controlled options', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.goto('/sidebar')
@@ -67,6 +72,8 @@ test('mobile drawer traps focus, dismisses and restores focus, and keeps control
   await expect(trigger).toBeFocused()
 })
 
+// Checks that resizing between phone and desktop widths closes the drawer cleanly and keeps the
+// desktop sidebar's own open or collapsed state.
 test('responsive change releases modal and preserves independent desktop expansion', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
   await page.goto('/sidebar')
@@ -85,6 +92,7 @@ test('responsive change releases modal and preserves independent desktop expansi
   await expect(page.getByRole('dialog')).toHaveCount(0)
 })
 
+// Checks that two sidebars on the same page open and close separately and don't share element IDs.
 test('multiple inline sidebars operate independently and have unique panel relationships', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1100 })
   await page.goto('/sidebar')
@@ -100,27 +108,27 @@ test('multiple inline sidebars operate independently and have unique panel relat
   await expect(details).toBeVisible()
   const controls = await example.locator('[aria-controls]').evaluateAll(elements => elements.map(element => element.getAttribute('aria-controls')))
   expect(new Set(controls).size).toBe(controls.length)
-  await example.screenshot({ path: 'reports/test-results/sidebar-multiple.png' })
 })
 
-for (const theme of ['light', 'dark', 'wireframe']) {
-  for (const fontSize of [16, 32]) {
+// Checks, in each theme at normal and double text size, that the phone drawer fits the screen
+// without animating, has a large enough close button with a visible focus outline and passes an
+// accessibility scan.
+for (const theme of themes) {
+  for (const fontSize of textSizes) {
     test(`${theme} sidebar fits 320px at ${fontSize}px text with reduced motion`, async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 800 })
       await page.emulateMedia({ reducedMotion: 'reduce' })
       await page.goto('/sidebar')
-      await page.evaluate(({ theme, fontSize }) => {
-        document.documentElement.dataset.theme = theme
-        document.documentElement.style.fontSize = `${fontSize}px`
-      }, { theme, fontSize })
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+      await setTheme(page, theme)
+      await setTextSize(page, fontSize)
+      await expectNoPageOverflow(page)
       await page.getByRole('button', { name: 'Open', exact: true }).click()
       const panel = page.locator('.mezzanine-sidebar-overlay .mezzanine-sidebar-panel')
       const box = (await panel.boundingBox())!
       expect(box.x).toBeGreaterThanOrEqual(0)
       expect(box.x + box.width).toBeLessThanOrEqual(320)
       expect(await panel.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true)
-      expect(await panel.evaluate(element => getComputedStyle(element).animationName)).toBe('none')
+      await expect(panel).toHaveCSS('animation-name', 'none')
       const close = page.getByRole('button', { name: 'Close sidebar' })
       const closeBox = (await close.boundingBox())!
       expect(closeBox.width).toBeGreaterThanOrEqual(24)
@@ -129,13 +137,13 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await page.keyboard.press('Tab')
       await page.keyboard.press('Shift+Tab')
       await expect(close).toHaveAttribute('data-focus-visible')
-      const results = await new AxeBuilder({ page }).include('.mezzanine-sidebar-overlay').analyze()
-      expect(results.violations).toEqual([])
-      await page.screenshot({ path: `reports/test-results/sidebar-${theme}-${fontSize}.png` })
+      await expectNoAccessibilityViolations(page, '.mezzanine-sidebar-overlay')
     })
   }
 }
 
+// Checks that a right-hand drawer sits against the right edge of the screen and keeps a visible
+// border in high-contrast mode.
 test('right drawer uses the right edge and forced colours retain a visible border', async ({ page }) => {
   await page.setViewportSize({ width: 500, height: 800 })
   await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' })
@@ -145,9 +153,11 @@ test('right drawer uses the right edge and forced colours retain a visible borde
   const panel = page.locator('.mezzanine-sidebar-overlay .mezzanine-sidebar-panel')
   const box = (await panel.boundingBox())!
   expect(Math.round(box.x + box.width)).toBe(500)
-  expect(await panel.evaluate(element => getComputedStyle(element).borderLeftStyle)).toBe('solid')
+  await expect(panel).toHaveCSS('border-left-style', 'solid')
 })
 
+// Checks that a sidebar set not to collapse stays open on desktop with no close buttons, but can
+// still be closed as a drawer on a phone.
 test('non-collapsible inline panels stay expanded while mobile drawers remain dismissible', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
   await page.goto('/sidebar')
@@ -171,6 +181,8 @@ test('non-collapsible inline panels stay expanded while mobile drawers remain di
   await expect(trigger).toBeFocused()
 })
 
+// Checks that the documentation site's own sidebar and the Sidebar page example use the same
+// library component, show the same links and mark the current page.
 test('AppShell and documentation example share permanent library panels and navigation', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
   await page.goto('/sidebar')
@@ -192,22 +204,26 @@ test('AppShell and documentation example share permanent library panels and navi
   await expect(page.getByRole('heading', { name: 'Navbar', level: 1, exact: true })).toBeVisible()
 })
 
-for (const fontSize of [16, 32]) {
+// Checks that at phone width the Sidebar page's documentation example stays in the page instead of
+// becoming a drawer, at normal and double text size.
+for (const fontSize of textSizes) {
   test(`docs sidebar example stays inline at 320px with ${fontSize}px text`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 800 })
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/sidebar')
-    await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
+    await setTextSize(page, fontSize)
     await expect(page.getByRole('button', { name: 'Browse sections', exact: true })).toHaveCount(0)
     await expect(page.locator('.site-layout > .site-sidebar').getByRole('treegrid')).toHaveCount(0)
     const example = page.locator('.sidebar-documentation-example')
     await expect(example.getByRole('treegrid')).toBeVisible()
     await expect(page.getByRole('dialog')).toHaveCount(0)
     await expect(example.locator('.mezzanine-sidebar-header')).toHaveCount(0)
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
+    await expectNoPageOverflow(page)
   })
 }
 
+// Checks that the example's control panel can be closed and reopened separately from the sidebar,
+// keeping its settings, at desktop and phone widths.
 test('control panel collapse independently and retain settings', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
   await page.goto('/sidebar')
@@ -231,5 +247,5 @@ test('control panel collapse independently and retain settings', async ({ page }
   await expect(controls).toBeHidden()
   await trigger.click()
   await expect(controls).toBeVisible()
-  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
+  await expectNoPageOverflow(page)
 })

@@ -73,6 +73,8 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `tests/site/wireframe-links.spec.ts` | Checks Wireframe underlines across link patterns and narrow layouts while preserving Light and Dark treatments |
 | `tests/components/navbar.spec.ts` | Navbar example keyboard, responsive, theme, contrast and forced-colour checks |
 | `tests/site/site-navigation.spec.ts` | Documentation site Navbar: mobile menu, current section, landing and unknown routes |
+| `tests/accessibility.ts` | Shared browser-test helper that runs an automated WCAG 2.2 AA accessibility scan on chosen parts of a page |
+| `tests/display.ts` | Shared browser-test helpers for the three themes, normal and 200% text sizes, and a retrying no-horizontal-overflow check |
 | `tests/components/button.spec.ts` | Button content options, href navigation and actions, the landing Read docs link matching the shared Button, and the pending ring under reduced motion |
 | `tests/components/disclosure.spec.ts` | Disclosure reflow, immediate panels in every theme and motion setting, find-in-page and group switching |
 | `site/pages/TextAreaPage.tsx` | Multiline field examples, states, composition and vertical resizing guidance |

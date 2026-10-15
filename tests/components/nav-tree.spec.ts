@@ -1,8 +1,11 @@
 import { test, expect } from '@playwright/test'
 import { build } from 'vite'
 import { resolve } from 'node:path'
-import AxeBuilder from '@axe-core/playwright'
+import { expectNoAccessibilityViolations } from '../accessibility'
+import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
+// These tests put the Nav Tree on its own test page, without any documentation site styles, to
+// check the library component by itself.
 test.describe('isolated recipe', () => {
   let fixtureHtml: string
 
@@ -22,6 +25,9 @@ test.describe('isolated recipe', () => {
     await expect(page.getByRole('treegrid', { name: 'Isolated navigation' })).toBeVisible()
   })
 
+  // Checks that branches and links get the right names and states, that empty and disabled rows are
+  // marked unavailable, and that collapsing a branch moves focus to the branch instead of losing
+  // it.
   test('isolated recipe names controls, preserves links and makes collapse immediate and safe', async ({ page }) => {
     const tree = page.getByRole('treegrid')
     const branch = tree.getByRole('button', { name: 'Branch A', exact: true })
@@ -37,10 +43,11 @@ test.describe('isolated recipe', () => {
     await expect(tree.getByRole('row', { name: 'Branch A', exact: true })).toBeFocused()
     await expect(branch).toHaveAttribute('aria-expanded', 'false')
     await expect(tree).toHaveClass(/consumer-tree/)
-    const results = await new AxeBuilder({ page }).include('main').analyze()
-    expect(results.violations).toEqual([])
+    await expectNoAccessibilityViolations(page, '[role="treegrid"]')
   })
 
+  // Checks that the tree opens the branches leading to the current page without reopening branches
+  // the person closed, and copes with pages that are added or moved later.
   test('route reveal preserves manual expansion, waits for missing items and follows moved items', async ({ page }) => {
     const a = page.getByRole('button', { name: 'Branch A', exact: true })
     await a.click()
@@ -65,6 +72,8 @@ test.describe('isolated recipe', () => {
     await expect(page.getByRole('button', { name: 'Late parent', exact: true })).toHaveCount(0)
   })
 
+  // Checks that when the app decides which branches are open, the tree asks only once to open the
+  // current page's branch and never overrides the app's answer.
   test('controlled route requests are deduplicated and never override the caller', async ({ page }) => {
     await page.evaluate(() => { const h = (window as any).navTreeHarness; h.setAccept(false); h.setControlled(true); h.setRoute('#b') })
     await expect.poll(() => page.evaluate(() => (window as any).navTreeHarness.requests.filter((keys: string[]) => keys.includes('b')).length)).toBe(1)
@@ -75,10 +84,14 @@ test.describe('isolated recipe', () => {
     await expect(page.getByRole('link', { name: 'Leaf B', exact: true })).toBeVisible()
   })
 
-  for (const theme of ['light', 'dark', 'wireframe']) for (const fontSize of [16, 32]) {
+  // Checks, in each theme at normal and double text size, that the tree fits a phone screen, shows
+  // a focus outline (also in high-contrast mode), has tall enough rows and passes an accessibility
+  // scan.
+  for (const theme of themes) for (const fontSize of textSizes) {
     test(`${theme} fits 320px with ${fontSize}px text, focus and forced colours`, async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 900 })
-      await page.evaluate(({ theme, fontSize }) => { document.documentElement.dataset.theme = theme; document.documentElement.style.fontSize = `${fontSize}px` }, { theme, fontSize })
+      await setTheme(page, theme)
+      await setTextSize(page, fontSize)
       const branch = page.getByRole('button', { name: 'Branch A', exact: true })
       await page.keyboard.press('Tab')
       const focusedRow = page.getByRole('row', { name: 'Branch A', exact: true })
@@ -86,23 +99,30 @@ test.describe('isolated recipe', () => {
       await expect(focusedRow).toBeFocused()
       await expect(focusedRow).toHaveCSS('outline-style', 'solid')
       expect((await branch.boundingBox())!.height).toBeGreaterThanOrEqual(44)
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
-      const accessibility = await new AxeBuilder({ page }).include('main').analyze()
-      expect(accessibility.violations).toEqual([])
+      await expectNoPageOverflow(page)
+      await expectNoAccessibilityViolations(page, '[role="treegrid"]')
       await page.emulateMedia({ forcedColors: 'active' })
       await expect(focusedRow).toHaveCSS('outline-style', 'solid')
-      await page.keyboard.press('Enter')
-      await expect(branch).toHaveAttribute('aria-expanded', 'false')
-      // React Aria's navigation row uses Enter/arrows; Space is not a toggle.
-      await page.keyboard.press('Space')
-      await expect(branch).toHaveAttribute('aria-expanded', 'false')
-      await page.keyboard.press('ArrowRight')
-      await expect(branch).toHaveAttribute('aria-expanded', 'true')
-      await expect(page.getByRole('link', { name: 'Leaf A WIP', exact: true })).toBeVisible()
     })
   }
 
+  // Checks that a branch opens and closes with Enter and the arrow keys, and that Space does
+  // nothing, matching how React Aria's navigation rows work.
+  test('Enter and the arrow keys toggle a branch, and Space does not', async ({ page }) => {
+    const branch = page.getByRole('button', { name: 'Branch A', exact: true })
+    await page.getByRole('row', { name: 'Branch A', exact: true }).focus()
+    await page.keyboard.press('Enter')
+    await expect(branch).toHaveAttribute('aria-expanded', 'false')
+    // React Aria's navigation row uses Enter/arrows; Space is not a toggle.
+    await page.keyboard.press('Space')
+    await expect(branch).toHaveAttribute('aria-expanded', 'false')
+    await page.keyboard.press('ArrowRight')
+    await expect(branch).toHaveAttribute('aria-expanded', 'true')
+    await expect(page.getByRole('link', { name: 'Leaf A WIP', exact: true })).toBeVisible()
+  })
 
+  // Checks that if the focused row is removed, focus moves to the nearest remaining parent, and
+  // that removing rows never pulls focus away from something outside the tree.
   test('removing focused data recovers to an enabled ancestor without stealing outside focus', async ({ page }) => {
     await page.getByRole('link', { name: 'Leaf A WIP', exact: true }).focus()
     await page.evaluate(() => {
@@ -115,6 +135,8 @@ test.describe('isolated recipe', () => {
     await expect(page.getByRole('button', { name: 'After tree', exact: true })).toBeFocused()
   })
 
+  // Checks that very long labels wrap onto several lines without being cut off at phone width and
+  // double text size.
   test('long labels reflow without clipping at 320px and 200% text', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.evaluate(() => {
@@ -127,12 +149,15 @@ test.describe('isolated recipe', () => {
     const row = page.getByRole('row', { name: 'A long parent label that must wrap across several lines', exact: true })
     expect((await row.boundingBox())!.height).toBeGreaterThan(88)
     expect(await row.evaluate(element => element.scrollHeight <= element.clientHeight)).toBe(true)
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await expectNoPageOverflow(page)
     await expect(page.getByRole('link', { name: 'A long nested destination that also wraps across lines', exact: true })).toBeVisible()
   })
 })
 
+// These tests use the Nav Tree example on the documentation site.
 test.describe('documentation example', () => {
+  // Checks, with and without reduced motion, that rows appear and disappear instantly with the
+  // keyboard, and that only the arrow icon rotates, and not at all with reduced motion.
   for (const reducedMotion of ['no-preference', 'reduce'] as const) {
     test(`Nav Tree immediate rows and chevron respect ${reducedMotion}`, async ({ page }) => {
       await page.emulateMedia({ reducedMotion })
@@ -156,6 +181,8 @@ test.describe('documentation example', () => {
     })
   }
 
+  // Checks that switching on reduced motion part-way through an arrow rotation finishes it straight
+  // away.
   test('enabling reduced motion completes a pending Nav Tree chevron rotation', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' })
     await page.goto('/navigation-tree')
@@ -170,6 +197,8 @@ test.describe('documentation example', () => {
   })
 
 
+  // Checks that switching theme mid-rotation settles the arrow straight away, and that clicking a
+  // branch quickly several times always shows the rows that match its final state.
   test('theme changes settle a tree chevron; rapid toggles leave truthful immediate rows', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' })
     await page.goto('/navigation-tree')
@@ -193,6 +222,7 @@ test.describe('documentation example', () => {
     await expect(child).toHaveCount(0)
   })
 
+  // Checks that clicking a branch several times quickly leaves it in the state of the last click.
   test('rapid Nav Tree toggles retain the last requested expansion', async ({ page }) => {
     await page.goto('/navigation-tree')
     const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })

@@ -1,35 +1,41 @@
 import { expect, test } from '@playwright/test'
-import AxeBuilder from '@axe-core/playwright'
+import { expectNoAccessibilityViolations } from '../accessibility'
+import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-for (const theme of ['light', 'dark', 'wireframe']) {
+// Checks, in each theme, that secondary toggle buttons look different when hovered, pressed and
+// selected, switch with the mouse and Space, pass an accessibility scan and fit a phone screen at
+// double text size.
+for (const theme of themes) {
   test(`secondary toggles distinguish interaction and selection in ${theme}`, async ({ page }) => {
     await page.goto('/toggle-button')
-    await page.evaluate(theme => { document.documentElement.dataset.theme = theme }, theme)
+    await setTheme(page, theme)
     const example = page.getByRole('grid', { name: 'ToggleButton states', exact: true })
     const toggles = example.locator('[data-variant="secondary"]')
     const selected = toggles.nth(1)
     const unselected = toggles.nth(0)
     await expect(selected).toHaveAttribute('aria-pressed', 'true')
     await expect(toggles.nth(2)).toBeDisabled()
-    expect(await selected.evaluate(el => getComputedStyle(el).boxShadow)).not.toBe('none')
+    await expect(selected).not.toHaveCSS('box-shadow', 'none')
     await unselected.hover()
     const hover = await unselected.evaluate(el => getComputedStyle(el).backgroundColor)
     await page.mouse.down()
     await expect(unselected).toHaveAttribute('data-pressed')
-    expect(await unselected.evaluate(el => getComputedStyle(el).backgroundColor)).not.toBe(hover)
+    await expect(unselected).not.toHaveCSS('background-color', hover)
     await page.mouse.up()
     await expect(unselected).toHaveAttribute('aria-pressed', 'true')
     await unselected.press('Space')
     await expect(unselected).toHaveAttribute('aria-pressed', 'false')
     await expect(unselected).toHaveCSS('outline-style', 'solid')
     await page.mouse.move(0, 0)
-    expect((await new AxeBuilder({ page }).include('.toggle-button-states-table').analyze()).violations).toEqual([])
+    await expectNoAccessibilityViolations(page, '.toggle-button-states-table')
     await page.setViewportSize({ width: 320, height: 900 })
-    await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
+    await setTextSize(page, 32)
+    await expectNoPageOverflow(page)
   })
 }
 
+// Checks that a selected secondary toggle stays recognisable in high-contrast mode, where colour
+// can't be relied on, by showing an underline.
 test('secondary selection remains visible in forced colours', async ({ page }) => {
   await page.emulateMedia({ forcedColors: 'active' })
   await page.goto('/toggle-button')
@@ -37,25 +43,27 @@ test('secondary selection remains visible in forced colours', async ({ page }) =
   await expect(selected).toHaveCSS('text-decoration-line', 'underline')
 })
 
+// Checks that the states table keeps three equal columns and, on a phone, scrolls inside its own
+// box rather than squashing the buttons or widening the page.
 test('state comparison keeps three readable columns and scrolls locally on narrow screens', async ({ page }) => {
   await page.goto('/toggle-button')
   const table = page.getByRole('grid', { name: 'ToggleButton states', exact: true })
   await expect(table.getByRole('columnheader')).toHaveText(['State', 'Primary', 'Secondary'])
   const widths = await table.getByRole('columnheader').evaluateAll(headers => headers.map(header => header.getBoundingClientRect().width))
   expect(Math.max(...widths) - Math.min(...widths)).toBeLessThan(2)
-  await table.scrollIntoViewIfNeeded()
-  await table.screenshot({ path: 'reports/test-results/toggle-states-desktop.png' })
-  for (const fontSize of [16, 32]) {
+  for (const fontSize of textSizes) {
     await page.setViewportSize({ width: 320, height: 900 })
-    await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
+    await setTextSize(page, fontSize)
     const secondary = table.locator('[data-variant="secondary"]').first()
     const box = await secondary.boundingBox()
     expect(box!.width).toBeGreaterThan(box!.height)
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
+    await expectNoPageOverflow(page)
     expect(await page.locator('.toggle-button-states-table').evaluate(el => el.scrollWidth > el.clientWidth)).toBe(true)
   }
 })
 
+// Checks that the toggle button group in the Sidebar page's controls can be moved through with the
+// arrow keys and selected with Space.
 test('secondary group preserves keyboard selection in the Sidebar controls', async ({ page }) => {
   await page.goto('/sidebar')
   const controls = page.getByRole('complementary', { name: 'Control panel', exact: true })
@@ -69,6 +77,8 @@ test('secondary group preserves keyboard selection in the Sidebar controls', asy
   await expect(left).not.toBeChecked()
 })
 
+// Checks the group example's Single and Multi tabs: Single allows one choice, Multi allows several,
+// and each tab remembers its choices when you switch back.
 test('group example tabs switch selection modes and preserve choices', async ({ page }) => {
   await page.goto('/toggle-button')
   const single = page.getByRole('tab', { name: 'Single', exact: true })
@@ -89,11 +99,13 @@ test('group example tabs switch selection modes and preserve choices', async ({ 
   await expect(panel.getByRole('button', { name: 'Toggle B' })).toHaveAttribute('aria-pressed', 'true')
 })
 
-for (const fontSize of [16, 32]) {
+// Checks, at normal and double text size, that Button and ToggleButton are exactly the same size at
+// each of the four sizes, and that the theme switcher uses the small size.
+for (const fontSize of textSizes) {
   test(`Button and ToggleButton share all size dimensions at ${fontSize}px root text`, async ({ page }) => {
     const dimensions = async (route: string, tableName: string) => {
       await page.goto(route)
-      await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
+      await setTextSize(page, fontSize)
       const table = page.getByRole('grid', { name: tableName, exact: true })
       await expect(table.locator('[data-icon-only]')).toHaveCount(4)
       return table.locator('[data-icon-only]').evaluateAll(buttons => buttons.map(button => {

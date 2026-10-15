@@ -1,6 +1,10 @@
 import { expect, test } from '@playwright/test'
-import AxeBuilder from '@axe-core/playwright'
+import { expectNoAccessibilityViolations } from '../accessibility'
+import { expectNoPageOverflow, setTextSize, themes } from '../display'
 
+// Checks the Button page shows all four kinds of button content (text only, icon before, icon
+// after, icon only), and that an icon-only button shows its name in a tooltip when focused and
+// hides it again with Escape.
 test('Button documents four content options and gives icon-only buttons a tooltip', async ({ page }) => {
   await page.goto('/button')
   const examples = page.getByRole('grid', { name: 'Button content', exact: true })
@@ -18,6 +22,9 @@ test('Button documents four content options and gives icon-only buttons a toolti
   await expect.poll(() => examples.evaluate(element => element.contains(document.activeElement))).toBe(true)
 })
 
+// Checks that a Button with a destination behaves like a link (Enter follows it, Space does not),
+// that an ordinary Button responds to both Enter and Space, and that a loading button is announced
+// as loading.
 test('Button href preserves navigation and action behaviour', async ({ page }) => {
   await page.goto('/button')
   const navigation = page.getByRole('link', { name: 'Read accessibility details', exact: true })
@@ -39,7 +46,10 @@ test('Button href preserves navigation and action behaviour', async ({ page }) =
   await expect(page.locator('button[data-pending]').first().getByRole('progressbar')).toHaveAttribute('aria-label', 'Loading')
 })
 
-for (const theme of ['light', 'dark', 'wireframe']) {
+// Checks, in each theme, that the home page's Read docs link looks exactly like the standard
+// Primary Medium Button in every state, fits a phone screen with large text, passes an automated
+// accessibility scan and opens the Introduction page.
+for (const theme of themes) {
   test(`Read docs matches the shared Primary Medium Button in ${theme}`, async ({ page }) => {
     await page.addInitScript(theme => localStorage.setItem('mezzanine-theme', theme), theme)
     await page.setViewportSize({ width: 320, height: 900 })
@@ -68,9 +78,9 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await control.evaluate(element => element.removeAttribute('data-preview-state'))
     }
     const readDocs = page.getByRole('link', { name: 'Read docs', exact: true })
-    await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
-    expect((await new AxeBuilder({ page }).include('.landing-hero').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
+    await setTextSize(page, 32)
+    await expectNoPageOverflow(page)
+    await expectNoAccessibilityViolations(page, '.landing-hero')
     await readDocs.focus()
     await expect(readDocs).toBeFocused()
     await page.keyboard.press('Enter')
@@ -78,6 +88,8 @@ for (const theme of ['light', 'dark', 'wireframe']) {
   })
 }
 
+// Checks that a loading button's ring stops spinning but stays visible when the device asks for
+// reduced motion.
 test('pending Button ring stays visible when the system stops rotation', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/button')

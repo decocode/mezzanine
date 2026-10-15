@@ -1,27 +1,32 @@
 import { expect, test } from '@playwright/test'
+import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-for (const fontSize of [16, 32]) {
+// Checks that an open Disclosure fits a phone screen at normal and double text size, with its arrow
+// pointing down, a visible focus outline and a trigger at least 24px tall.
+for (const fontSize of textSizes) {
   test(`Disclosure reflows at 320px with ${fontSize}px text and retains expanded orientation`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/disclosure')
-    await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
+    await setTextSize(page, fontSize)
     const trigger = page.locator('main .mezzanine-disclosure-trigger').first()
     await trigger.focus()
     if (await trigger.getAttribute('aria-expanded') !== 'true') await page.keyboard.press('Enter')
     await expect(trigger.locator('svg')).toHaveCSS('rotate', '90deg')
-    expect(await trigger.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
+    await expect(trigger).toHaveCSS('outline-style', 'solid')
     expect((await trigger.boundingBox())!.height).toBeGreaterThanOrEqual(24)
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await expectNoPageOverflow(page)
   })
 }
 
-for (const theme of ['light', 'dark', 'wireframe']) {
+// Checks, in every theme and motion setting, that a Disclosure panel opens and closes instantly
+// without animation, and that keyboard focus can't land inside a closed panel.
+for (const theme of themes) {
   for (const reducedMotion of ['no-preference', 'reduce'] as const) {
     test(`Disclosure panel opens and closes immediately: ${theme}, ${reducedMotion}`, async ({ page }) => {
       await page.emulateMedia({ reducedMotion })
       await page.goto('/disclosure')
-      await page.evaluate(theme => { document.documentElement.dataset.theme = theme }, theme)
+      await setTheme(page, theme)
       const trigger = page.locator('main .mezzanine-disclosure-trigger').first()
       const panel = page.locator('main .react-aria-DisclosurePanel').first()
       const fullHeight = (await panel.boundingBox())!.height
@@ -46,6 +51,8 @@ for (const theme of ['light', 'dark', 'wireframe']) {
   }
 }
 
+// Checks that the browser's find-in-page feature can open a closed Disclosure when the text being
+// searched for is inside it.
 test('Disclosure find-in-page opens a closed panel', async ({ page }) => {
   await page.goto('/disclosure')
   const trigger = page.locator('main .mezzanine-disclosure-trigger').first()
@@ -60,6 +67,7 @@ test('Disclosure find-in-page opens a closed panel', async ({ page }) => {
   await expect(panel).toBeVisible()
 })
 
+// Checks that opening one Disclosure in a group closes the other, including in high-contrast mode.
 test('Disclosure group swaps panels immediately, including in forced colours', async ({ page }) => {
   await page.emulateMedia({ forcedColors: 'active' })
   await page.goto('/disclosure')
@@ -72,11 +80,13 @@ test('Disclosure group swaps panels immediately, including in forced colours', a
   await expect(panels.nth(1)).toBeVisible()
 })
 
-for (const fontSize of [16, 32]) {
+// Checks that long text inside a Disclosure wraps onto new lines on a phone screen instead of being
+// cut off or widening the page.
+for (const fontSize of textSizes) {
   test(`Disclosure wrapped content reflows at 320px and ${fontSize}px text`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.goto('/disclosure')
-    await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
+    await setTextSize(page, fontSize)
     const panel = page.locator('main .react-aria-DisclosurePanel').first()
     await panel.evaluate(element => {
       const paragraph = document.createElement('p')
@@ -85,6 +95,6 @@ for (const fontSize of [16, 32]) {
     })
     await expect(panel.locator('p').last()).toBeVisible()
     await expect(panel).toHaveCSS('overflow', 'visible')
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    await expectNoPageOverflow(page)
   })
 }
