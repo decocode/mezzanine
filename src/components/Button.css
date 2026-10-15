@@ -172,10 +172,3 @@
     rotate: var(--motion-rotation-cycle);
   }
 }
-
-@media (forced-colors: active) {
-  .react-aria-Button[data-variant],
-  .mezzanine-button-progress-indicator {
-    forced-color-adjust: auto;
-  }
-}

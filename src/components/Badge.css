@@ -55,9 +55,3 @@
   --badge-content: var(--badge-danger-content);
   --badge-border: var(--badge-danger-border);
 }
-
-@media (forced-colors: active) {
-  .mezzanine-badge {
-    forced-color-adjust: auto;
-  }
-}

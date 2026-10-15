@@ -79,10 +79,3 @@
 .react-aria-Disclosure[data-disabled] .mezzanine-disclosure-trigger {
   cursor: default;
 }
-
-@media (forced-colors: active) {
-  .react-aria-Disclosure,
-  .mezzanine-disclosure-trigger {
-    forced-color-adjust: auto;
-  }
-}

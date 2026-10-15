@@ -58,13 +58,6 @@
   to { transform: scale(1); }
 }
 
-@media (forced-colors: active) {
-  .react-aria-ModalOverlay,
-  .react-aria-Modal {
-    forced-color-adjust: auto;
-  }
-}
-
 @keyframes mezzanine-modal-fade-exit {
   from { opacity: 1; }
   to { opacity: 0; }

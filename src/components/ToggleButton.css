@@ -59,13 +59,6 @@
   align-items: flex-start;
 }
 
-@media (forced-colors: active) {
-  .react-aria-ToggleButton,
-  .react-aria-ToggleButtonGroup {
-    forced-color-adjust: auto;
-  }
-}
-
 /* Group appearance is inherited; a button may also opt into secondary on its own. */
 .react-aria-ToggleButtonGroup[data-variant='secondary'],
 .react-aria-ToggleButton[data-variant='secondary'] {

@@ -168,9 +168,3 @@
 :root:not([data-theme='wireframe']) .navbar-link[aria-current] {
   color: var(--color-link-hover);
 }
-
-@media (forced-colors: active) {
-  .mezzanine-navbar {
-    forced-color-adjust: auto;
-  }
-}

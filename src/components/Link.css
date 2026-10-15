@@ -43,9 +43,3 @@
   opacity: var(--opacity-disabled);
   cursor: default;
 }
-
-@media (forced-colors: active) {
-  .react-aria-Link {
-    forced-color-adjust: auto;
-  }
-}

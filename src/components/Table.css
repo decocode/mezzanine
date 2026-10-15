@@ -107,11 +107,3 @@
   outline: var(--table-focus-ring-width) solid var(--table-drop-target-color);
   outline-offset: var(--table-focus-ring-offset);
 }
-
-@media (forced-colors: active) {
-  .react-aria-Table,
-  .react-aria-Column,
-  .react-aria-Cell {
-    forced-color-adjust: auto;
-  }
-}

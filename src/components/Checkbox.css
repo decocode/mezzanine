@@ -63,10 +63,3 @@
 .react-aria-Checkbox[data-readonly] {
   cursor: default;
 }
-
-@media (forced-colors: active) {
-  .react-aria-Checkbox,
-  .mezzanine-checkbox-indicator {
-    forced-color-adjust: auto;
-  }
-}

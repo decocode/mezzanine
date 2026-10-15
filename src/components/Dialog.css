@@ -39,9 +39,3 @@
   gap: var(--dialog-actions-gap);
   margin-block-start: var(--dialog-content-gap);
 }
-
-@media (forced-colors: active) {
-  .react-aria-Dialog {
-    forced-color-adjust: auto;
-  }
-}

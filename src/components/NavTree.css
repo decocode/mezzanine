@@ -105,6 +105,3 @@
   line-height: var(--line-height-label-md);
   text-transform: var(--text-transform-label);
 }
-@media (forced-colors: active) {
-  .mezzanine-nav-tree { forced-color-adjust: auto; }
-}
