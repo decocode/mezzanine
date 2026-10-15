@@ -56,7 +56,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
       { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
       { id: 'spacing', label: 'Spacing', path: '/spacing', status: 'implemented' },
       { id: 'shape', label: 'Shape', path: '/shape', status: 'implemented' },
-      { id: 'textures', label: 'Textures', path: '/textures', status: 'empty' },
     ],
   },
   {
@@ -118,8 +117,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
       { id: 'badge', label: 'Badge', path: '/badge', status: 'implemented' },
       { id: 'table', label: 'Table', path: '/table', status: 'implemented' },
       { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
-      { id: 'carousel', label: 'Carousel', path: '/carousel', status: 'empty' },
-      { id: 'image-viewer', label: 'Image viewer', path: '/image-viewer', status: 'empty' },
       { id: 'tag-group', label: 'Tag group', path: '/tag-group', status: 'empty' },
     ],
   },
