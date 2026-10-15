@@ -109,14 +109,70 @@
   gap: var(--space-3);
 }
 
-.lab-frame-controls input {
+/* React Aria's Slider, drawn after React Aria's own example: a rounded track with a fill and a
+   round thumb. Neutral colours rather than an accent, so it isn't mistaken for a Mezzanine component. */
+.lab-slider {
+  display: grid;
+  grid-template-areas: "label output" "track track";
+  grid-template-columns: 1fr auto;
+  gap: var(--space-1);
   inline-size: min(100%, 20rem);
 }
 
-.lab-frame-presets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+.lab-slider > label {
+  grid-area: label;
+}
+
+.lab-slider > output {
+  grid-area: output;
+}
+
+.lab-slider-track {
+  grid-area: track;
+  box-sizing: border-box;
+  block-size: var(--space-2);
+  /* Half a thumb each side, so the thumb stays inside the slider at both ends. */
+  margin-inline: calc(var(--lab-target-min-wcag) / 2);
+  margin-block: calc((var(--lab-target-min-wcag) - var(--space-2)) / 2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-page);
+}
+
+/* A taller invisible area, so the track is as easy to press as the thumb. */
+.lab-slider-track::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block: calc((var(--space-2) - var(--lab-target-min-wcag)) / 2);
+}
+
+.lab-slider-fill {
+  border-radius: var(--radius-full);
+  background: var(--color-text-muted);
+}
+
+.lab-slider-thumb {
+  inset-block-start: 50%;
+  box-sizing: border-box;
+  inline-size: var(--lab-target-min-wcag);
+  block-size: var(--lab-target-min-wcag);
+  border: 1px solid var(--color-text-muted);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+}
+
+.lab-slider-thumb[data-focus-visible] {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* High contrast mode drops background colours, so the fill uses a system colour instead. */
+@media (forced-colors: active) {
+  .lab-slider-fill {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
 }
 
 .lab-frame-stage {

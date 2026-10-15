@@ -35,9 +35,9 @@ test('Lab Layout demos respond to their space and content', async ({ page }) => 
 
   const switcherFrame = page.locator('.lab-frame').filter({ has: page.locator('.lab-switcher') })
   const rows = () => switcherFrame.locator('.lab-switcher > *').evaluateAll(items => new Set(items.map(item => Math.round(item.getBoundingClientRect().top))).size)
-  await switcherFrame.getByRole('button', { name: 'Wide', exact: true }).click()
+  await switcherFrame.getByRole('radio', { name: 'Wide', exact: true }).click()
   await expect.poll(rows).toBe(1)
-  await switcherFrame.getByRole('button', { name: '320px', exact: true }).click()
+  await switcherFrame.getByRole('radio', { name: '320px', exact: true }).click()
   await expect.poll(rows).toBe(3)
 
   const list = page.locator('.lab-has-list')

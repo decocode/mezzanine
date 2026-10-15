@@ -1,5 +1,6 @@
 import { useState, type CSSProperties, type ReactNode } from 'react'
-import { Badge, Button, CodeBlock, Disclosure, DisclosureHeader, DisclosurePanel, Heading, Text } from '@decocode/mezzanine'
+import { Badge, CodeBlock, Disclosure, DisclosureHeader, DisclosurePanel, Heading, Label, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
+import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'react-aria-components/Slider'
 import { framePresets, type CssNote, type LabSection } from './layoutLabContent'
 import { splitInlineCode } from './layoutLabLogic'
 
@@ -14,15 +15,30 @@ export function LabOnly({ name, children }: { name: string; children: ReactNode 
 // A frame whose width you set with a slider or presets. Its contents are a size container.
 export function DemoFrame({ label, initialWidth = 720, children }: { label: string; initialWidth?: number; children: ReactNode }) {
   const [width, setWidth] = useState(initialWidth)
-  const sliderId = `${label.replace(/\W+/g, '-').toLowerCase()}-width`
   return <div className="lab-frame">
     {/* The group's name tells screen reader users which example this "Width" slider belongs to. */}
     <div className="lab-frame-controls" role="group" aria-label={`Size of “${label}”`}>
-      <label className="mz-text-label-md" htmlFor={sliderId}>Width: <output htmlFor={sliderId}>{width}px</output></label>
-      <input id={sliderId} type="range" min={320} max={1200} step={10} value={width} onChange={(event) => setWidth(Number(event.target.value))} />
-      <div className="lab-frame-presets">
-        {framePresets.map((preset) => <Button key={preset.label} size="sm" variant="tertiary" onPress={() => setWidth(preset.width)}>{preset.label}</Button>)}
-      </div>
+      {/* React Aria's Slider, used directly because Mezzanine has no Slider yet, and styled after React Aria's own example rather than as a Mezzanine component. */}
+      <Slider className="lab-slider" minValue={320} maxValue={1200} step={10} value={width} onChange={setWidth}>
+        <Label className="mz-text-label-md">Width</Label>
+        <SliderOutput className="mz-text-label-md">{({ state }) => `${state.getThumbValue(0)}px`}</SliderOutput>
+        <SliderTrack className="lab-slider-track">
+          <SliderFill className="lab-slider-fill" />
+          <SliderThumb className="lab-slider-thumb" />
+        </SliderTrack>
+      </Slider>
+      {/* The preset matching the current width shows as selected; none does after a slider drag between presets. */}
+      <ToggleButtonGroup
+        size="sm"
+        variant="secondary"
+        aria-label="Preset widths"
+        selectionMode="single"
+        disallowEmptySelection
+        selectedKeys={framePresets.filter((preset) => preset.width === width).map((preset) => preset.label)}
+        onSelectionChange={(keys) => { const preset = framePresets.find((item) => keys.has(item.label)); if (preset) setWidth(preset.width) }}
+      >
+        {framePresets.map((preset) => <ToggleButton key={preset.label} id={preset.label}>{preset.label}</ToggleButton>)}
+      </ToggleButtonGroup>
     </div>
     <div className="lab-frame-stage" style={{ '--lab-frame-width': `${width}px` } as CSSProperties}>
       {children}
