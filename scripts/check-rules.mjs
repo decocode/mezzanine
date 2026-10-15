@@ -441,9 +441,9 @@ function checkDocsTokens(update) {
 }
 
 function checkDocsRoutes() {
-  const lighthouseUrls = ['lighthouserc.mobile.json', 'lighthouserc.desktop.json']
+  const lighthouseUrls = ['config/lighthouserc.mobile.json', 'config/lighthouserc.desktop.json']
     .flatMap(file => JSON.parse(read(file)).ci.collect.url.map(url => ({ file, url })))
-  for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), nginx: read('nginx.conf'), lighthouseUrls })) {
+  for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), nginx: read('config/nginx.conf'), lighthouseUrls })) {
     report(problem.file, read(problem.file), problem.position, 'docs-routes', problem.message)
   }
 }
@@ -451,9 +451,9 @@ function checkDocsRoutes() {
 try {
   const argumentsList = process.argv.slice(2)
   if (argumentsList.some(argument => !['--update-api', '--update-token-baseline'].includes(argument))) throw new Error('Only --update-api and --update-token-baseline are supported.')
-  const configFile = ts.readConfigFile(path.join(root, 'tsconfig.app.json'), ts.sys.readFile)
+  const configFile = ts.readConfigFile(path.join(root, 'config/tsconfig.app.json'), ts.sys.readFile)
   if (configFile.error) throw new Error(ts.flattenDiagnosticMessageText(configFile.error.messageText, '\n'))
-  const config = ts.parseJsonConfigFileContent(configFile.config, ts.sys, root)
+  const config = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.join(root, 'config'))
   if (config.errors.length) throw new Error(config.errors.map(error => ts.flattenDiagnosticMessageText(error.messageText, '\n')).join('\n'))
   const siteFiles = filesIn('site', ['.tsx'])
   const componentFiles = filesIn('src/components', ['.tsx'])

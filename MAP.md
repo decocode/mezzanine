@@ -186,23 +186,23 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/themeSwitcherLogic.ts` | Theme option validation, device colour-scheme subscription, system-theme resolution, root-attribute application and saved visitor preference |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |
-| `playwright.config.ts` | Builds and serves the production showcase for Chromium tests, with CI safeguards, HTML reports and failure traces |
+| `playwright.config.ts` | Builds and serves the production showcase for Chromium tests, with CI safeguards, HTML reports in `reports/playwright/` and failure traces and screenshots in `reports/test-results/` |
 | `tests/route-loading.spec.ts` | Verifies route-specific downloads, delayed and failed loads, section links and theme-state preservation |
 | `tests/responsive-layout.spec.ts` | Checks Elevation reflow with normal and doubled text, sidebar breakpoints and keyboard disclosure operation |
 | `vite.config.ts` | Showcase build: React plugin, `site/` root, package-name alias, `site-dist/` output |
-| `vite.lib.config.ts` | Package build: library mode, external peer dependencies, `dist/` output |
-| `tsconfig.json` | References the app and node TypeScript projects |
-| `tsconfig.app.json` | Type checking for `src/` and `site/`, including the package-name path |
-| `tsconfig.node.json` | Type checking for Vite and Playwright configuration files |
-| `tsconfig.lib.json` | Emits the package's type declarations into `dist/` |
+| `config/vite.lib.config.ts` | Package build: library mode, external peer dependencies, `dist/` output |
+| `tsconfig.json` | References the app and node TypeScript projects in `config/`; stays at the root so editors find it |
+| `config/tsconfig.app.json` | Type checking for `src/` and `site/`, including the package-name path |
+| `config/tsconfig.node.json` | Type checking for Vite and Playwright configuration files |
+| `config/tsconfig.lib.json` | Emits the package's type declarations into `dist/` |
 | `Dockerfile`, `.dockerignore` | Production image: builds the showcase and serves `site-dist/` with nginx |
-| `nginx.conf` | Static server for the showcase: allowed routes, real 404s, caching, gzip, and the pre-launch `noindex` header |
+| `config/nginx.conf` | Static server for the showcase: allowed routes, real 404s, caching, gzip, and the pre-launch `noindex` header |
 | `fly.toml` | Fly.io app `mezzanine`, London region, and HTTP service settings |
 | `.githooks/pre-commit` | Gitleaks scan of staged changes |
 | `.github/workflows/gitleaks.yml` | Gitleaks scan of the full history for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
-| `lighthouserc.mobile.json`, `lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
+| `config/lighthouserc.mobile.json`, `config/lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
 | `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing, typography, NavTree ownership, shared motion, allowed effects, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
 | `scripts/docs-rules.mjs` | Checks that site routes match nginx and Lighthouse, that documented tokens exist and public tokens are documented, and parses Props table rows |
 | `scripts/docs-rules.test.mjs` | Passing and failing fixtures for the docs rules |
@@ -242,7 +242,9 @@ Typography retains its overview at `/typography`. Its child pages are
 | `fly deploy` | Build the Docker image and deploy the showcase to mezzanine.fly.dev |
 | `gitleaks git --staged --redact .` | Scan staged changes |
 
-`dist/`, `site-dist/`, `reports/`, and `node_modules/` are generated and ignored by Git.
+`dist/`, `site-dist/`, `reports/`, and `node_modules/` are generated and ignored by Git. `reports/` holds browser test output (`reports/playwright/`, `reports/test-results/`) and Lighthouse output (`reports/lighthouse/`).
+
+`config/` holds configuration that tools are pointed at by a flag or path. Configuration that tools discover by itself stays at the root: `package.json`, `tsconfig.json`, `vite.config.ts`, `playwright.config.ts`, `fly.toml`, `Dockerfile` and the ignore files.
 
 ### Nav Tree ownership
 

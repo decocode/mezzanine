@@ -22,7 +22,7 @@ test('lab desktop panels frame an independently scrolling workspace', async ({ p
   expect(await page.getByRole('banner').boundingBox()).toEqual(header)
   expect(await page.locator('.lab-rail').boundingBox()).toEqual(rail)
   await expect(page.locator('.lab-bottom-bar')).toBeHidden()
-  await page.screenshot({ path: 'test-results/lab-desktop.png' })
+  await page.screenshot({ path: 'reports/test-results/lab-desktop.png' })
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
 })
 
@@ -44,7 +44,7 @@ for (const fontSize of [16, 32]) {
       await expect(trigger).toBeFocused()
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
-    await page.screenshot({ path: `test-results/lab-mobile-${fontSize}.png` })
+    await page.screenshot({ path: `reports/test-results/lab-mobile-${fontSize}.png` })
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
   })
 }
@@ -107,7 +107,7 @@ for (const fontSize of [16, 32]) {
     await expect(widths).toBeFocused()
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
-    await page.screenshot({ path: `test-results/lab-index-${fontSize}.png` })
+    await page.screenshot({ path: `reports/test-results/lab-index-${fontSize}.png` })
     await page.keyboard.press('Enter')
     await expect(page).toHaveURL(/\/site\/lab\/page-widths$/)
     await expect(page.getByRole('complementary')).toHaveCount(0)

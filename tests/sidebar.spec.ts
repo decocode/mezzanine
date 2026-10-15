@@ -33,7 +33,7 @@ test('inline panel switches side, collapses to rail or hides, and preserves cont
   await expect(panel.getByRole('checkbox', { name: 'Option A' })).toBeChecked()
   await panel.getByRole('button', { name: 'Reset options' }).click()
   await expect(panel.getByRole('checkbox', { name: 'Option A' })).not.toBeChecked()
-  await example.screenshot({ path: 'test-results/sidebar-desktop.png' })
+  await example.screenshot({ path: 'reports/test-results/sidebar-desktop.png' })
 })
 
 test('mobile drawer traps focus, dismisses and restores focus, and keeps controlled options', async ({ page }) => {
@@ -100,7 +100,7 @@ test('multiple inline sidebars operate independently and have unique panel relat
   await expect(details).toBeVisible()
   const controls = await example.locator('[aria-controls]').evaluateAll(elements => elements.map(element => element.getAttribute('aria-controls')))
   expect(new Set(controls).size).toBe(controls.length)
-  await example.screenshot({ path: 'test-results/sidebar-multiple.png' })
+  await example.screenshot({ path: 'reports/test-results/sidebar-multiple.png' })
 })
 
 for (const theme of ['light', 'dark', 'wireframe']) {
@@ -131,7 +131,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await expect(close).toHaveAttribute('data-focus-visible')
       const results = await new AxeBuilder({ page }).include('.mezzanine-sidebar-overlay').analyze()
       expect(results.violations).toEqual([])
-      await page.screenshot({ path: `test-results/sidebar-${theme}-${fontSize}.png` })
+      await page.screenshot({ path: `reports/test-results/sidebar-${theme}-${fontSize}.png` })
     })
   }
 }

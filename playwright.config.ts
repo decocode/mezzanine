@@ -2,9 +2,10 @@ import { defineConfig } from '@playwright/test'
 
 export default defineConfig({
   testDir: './tests',
+  outputDir: './reports/test-results',
   forbidOnly: !!process.env.CI,
   workers: process.env.CI ? 1 : undefined,
-  reporter: [['list'], ['html', { open: 'never' }]],
+  reporter: [['list'], ['html', { open: 'never', outputFolder: './reports/playwright' }]],
   use: {
     browserName: 'chromium',
     trace: 'retain-on-failure',

@@ -19,7 +19,7 @@ export function checkRoutes({ siteStructure, nginx, lighthouseUrls }) {
   const patterns = nginxRoutePatterns(nginx)
   const allowed = path => patterns.some(pattern => new RegExp(pattern.source).test(path))
   for (const path of paths) {
-    if (!allowed(path)) problems.push({ file: 'nginx.conf', position: 0, message: `Site page ${path} is not in nginx's allowed routes, so it would return 404.` })
+    if (!allowed(path)) problems.push({ file: 'config/nginx.conf', position: 0, message: `Site page ${path} is not in nginx's allowed routes, so it would return 404.` })
   }
   // Each listed alternative in a simple `^/prefix(a|b)/?$` rule must still be a page.
   for (const pattern of patterns) {
@@ -27,7 +27,7 @@ export function checkRoutes({ siteStructure, nginx, lighthouseUrls }) {
     if (!simple) continue
     for (const name of simple[2].split('|')) {
       const path = `${simple[1]}${name}`
-      if (!paths.includes(path)) problems.push({ file: 'nginx.conf', position: pattern.position, message: `nginx allows ${path}, but the site has no such page.` })
+      if (!paths.includes(path)) problems.push({ file: 'config/nginx.conf', position: pattern.position, message: `nginx allows ${path}, but the site has no such page.` })
     }
   }
   for (const { file, url } of lighthouseUrls) {

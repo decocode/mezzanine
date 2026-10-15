@@ -44,7 +44,7 @@ test('state comparison keeps three readable columns and scrolls locally on narro
   const widths = await table.getByRole('columnheader').evaluateAll(headers => headers.map(header => header.getBoundingClientRect().width))
   expect(Math.max(...widths) - Math.min(...widths)).toBeLessThan(2)
   await table.scrollIntoViewIfNeeded()
-  await table.screenshot({ path: 'test-results/toggle-states-desktop.png' })
+  await table.screenshot({ path: 'reports/test-results/toggle-states-desktop.png' })
   for (const fontSize of [16, 32]) {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)

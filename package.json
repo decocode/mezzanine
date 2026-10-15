@@ -22,7 +22,7 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run build:lib && npm run build:site",
-    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "build:lib": "vite build --config config/vite.lib.config.ts && tsc -p config/tsconfig.lib.json",
     "build:site": "tsc -b && vite build",
     "typecheck": "tsc -b",
     "lint": "oxlint",
@@ -30,9 +30,9 @@
     "preview": "vite preview",
     "lighthouse": "npm run build:site && npm run lighthouse:mobile:run && npm run lighthouse:desktop:run",
     "lighthouse:mobile": "npm run build:site && npm run lighthouse:mobile:run",
-    "lighthouse:mobile:run": "node scripts/run-lighthouse.mjs autorun --config=./lighthouserc.mobile.json",
+    "lighthouse:mobile:run": "node scripts/run-lighthouse.mjs autorun --config=./config/lighthouserc.mobile.json",
     "lighthouse:desktop": "npm run build:site && npm run lighthouse:desktop:run",
-    "lighthouse:desktop:run": "node scripts/run-lighthouse.mjs autorun --config=./lighthouserc.desktop.json",
+    "lighthouse:desktop:run": "node scripts/run-lighthouse.mjs autorun --config=./config/lighthouserc.desktop.json",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed"

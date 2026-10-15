@@ -52,7 +52,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       // Scan from the page start: keyboard scrolling can leave unrelated Contents links behind the sticky site header.
       await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
       expect((await new AxeBuilder({ page }).include('main').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
-      await example.screenshot({ path: `test-results/navbar-${theme}-${fontSize}.png` })
+      await example.screenshot({ path: `reports/test-results/navbar-${theme}-${fontSize}.png` })
       await example.getByRole('button', { name: 'Button', exact: true }).focus()
       await page.keyboard.press('Enter')
       await expect(page.getByRole('status')).toHaveText('Changes saved.')
@@ -120,7 +120,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       expect(await labLink.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
       expect((await new AxeBuilder({ page }).include('header').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
-      await page.getByRole('banner').screenshot({ path: `test-results/site-navbar-current-${theme}-${fontSize}.png` })
+      await page.getByRole('banner').screenshot({ path: `reports/test-results/site-navbar-current-${theme}-${fontSize}.png` })
       await page.getByRole('banner').getByRole('button', { name: 'Close menu', exact: true }).click()
     }
     await page.emulateMedia({ forcedColors: 'active' })

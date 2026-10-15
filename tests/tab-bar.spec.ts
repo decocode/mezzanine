@@ -73,7 +73,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
       expect((await new AxeBuilder({ page }).include('[role="dialog"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
       expect(await page.locator('.mezzanine-tab-bar-sheet').evaluate((element) => getComputedStyle(element).animationName)).toBe('none')
-      await page.screenshot({ path: `test-results/tab-bar-sheet-${theme}-${fontSize}.png` })
+      await page.screenshot({ path: `reports/test-results/tab-bar-sheet-${theme}-${fontSize}.png` })
     })
   }
 }

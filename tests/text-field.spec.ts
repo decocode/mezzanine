@@ -47,7 +47,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       const violations = (await new AxeBuilder({ page }).include('main').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations
       expect(violations).toEqual([])
       await field.scrollIntoViewIfNeeded()
-      await page.screenshot({ path: `test-results/text-field-${theme}-${fontSize}.png` })
+      await page.screenshot({ path: `reports/test-results/text-field-${theme}-${fontSize}.png` })
     })
   }
 }

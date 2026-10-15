@@ -109,7 +109,7 @@ Typography and Color, have their own structures but reuse `PageHeading`.
 `npm run check:rules` keeps documentation facts in step with the code:
 
 - Every page in `site/siteStructure.ts` must be an allowed route in
-  `nginx.conf`, every route nginx allows must be a page, and every Lighthouse
+  `config/nginx.conf`, every route nginx allows must be a page, and every Lighthouse
   URL must be a route.
 - Every token the site mentions must exist, and every public token in
   `src/tokens.css` and the theme files must be documented on some page.

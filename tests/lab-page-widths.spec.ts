@@ -20,7 +20,7 @@ test('production lab links to width candidates and supports drag resizing', asyn
   const readingWidth = (await page.locator('.lab-reading-band').boundingBox())!.width
   expect(readingWidth).toBeLessThan(1216)
   expect((await page.locator('.lab-full-band').boundingBox())!.width).toBe(initialWidth)
-  await page.screenshot({ path: 'test-results/page-widths-desktop.png' })
+  await page.screenshot({ path: 'reports/test-results/page-widths-desktop.png' })
   const wideHeight = (await page.locator('.lab-reading-band').boundingBox())!.height
   const boxes = page.locator('.lab-width-placeholder').filter({ hasText: 'Placeholder' })
   expect((await boxes.nth(0).boundingBox())!.y).toBe((await boxes.nth(3).boundingBox())!.y)
@@ -69,7 +69,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       }
       await expect(page.getByRole('main')).toHaveCSS('scroll-behavior', 'auto')
       expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
-      await page.screenshot({ path: `test-results/page-widths-${theme}-${fontSize}.png` })
+      await page.screenshot({ path: `reports/test-results/page-widths-${theme}-${fontSize}.png` })
     })
   }
 }

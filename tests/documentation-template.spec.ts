@@ -171,7 +171,7 @@ for (const path of ['/navbar', '/color', '/motion', '/typography/text-styles', '
     const main = await page.getByRole('main').boundingBox()
     expect((await sidebar.boundingBox())!.x).toBeGreaterThanOrEqual(main!.x + main!.width)
     await expect(contents.getByRole('link').first()).toBeVisible()
-    if (path === '/navbar') await page.screenshot({ path: 'test-results/docs-contents-desktop.png' })
+    if (path === '/navbar') await page.screenshot({ path: 'reports/test-results/docs-contents-desktop.png' })
   })
 }
 
@@ -189,7 +189,7 @@ for (const fontSize of [16, 32]) {
     const contentsBox = await contents.boundingBox()
     expect(contentsBox!.y).toBeGreaterThan(description!.y + description!.height)
     expect(contentsBox!.y).toBeLessThan((await main.locator('section.component-section').first().boundingBox())!.y)
-    await page.screenshot({ path: `test-results/docs-contents-${fontSize}.png` })
+    await page.screenshot({ path: `reports/test-results/docs-contents-${fontSize}.png` })
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
     await contents.getByRole('link', { name: 'Props', exact: true }).click()
     await expect(page).toHaveURL(/#navbar-props-heading$/)
