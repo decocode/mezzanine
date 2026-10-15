@@ -176,27 +176,25 @@ for (const path of ['/navbar', '/color', '/motion', '/typography/text-styles', '
 }
 
 for (const fontSize of [16, 32]) {
-  test(`page contents drawer navigates and restores focus at ${fontSize}px`, async ({ page }) => {
+  test(`page contents appear inline after the heading on narrow screens at ${fontSize}px`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.goto('/navbar')
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
-    const trigger = page.getByRole('button', { name: 'On this page', exact: true })
-    await trigger.click()
-    const dialog = page.getByRole('dialog', { name: 'On this page', exact: true })
-    await expect(dialog).toBeVisible()
-    await expect(page.locator('.mezzanine-sidebar-overlay')).not.toHaveAttribute('data-entering')
-    await expect(page.locator('.docs-contents-panel')).not.toHaveAttribute('data-entering')
+    const main = page.getByRole('main')
+    const contents = main.getByRole('navigation', { name: 'On this page', exact: true })
+    await expect(contents).toBeVisible()
+    await expect(page.getByRole('navigation', { name: 'On this page', exact: true })).toHaveCount(1)
+    await expect(page.getByRole('button', { name: 'On this page', exact: true })).toHaveCount(0)
+    const description = await main.locator('.page-description').boundingBox()
+    const contentsBox = await contents.boundingBox()
+    expect(contentsBox!.y).toBeGreaterThan(description!.y + description!.height)
+    expect(contentsBox!.y).toBeLessThan((await main.locator('section.component-section').first().boundingBox())!.y)
     await page.screenshot({ path: `test-results/docs-contents-${fontSize}.png` })
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
-    await dialog.getByRole('link', { name: 'Props', exact: true }).click()
-    await expect(dialog).toBeHidden()
+    await contents.getByRole('link', { name: 'Props', exact: true }).click()
     await expect(page).toHaveURL(/#navbar-props-heading$/)
     await expect(page.getByRole('button', { name: 'Props', exact: true })).toHaveAttribute('aria-expanded', 'true')
     await expect(page.getByRole('heading', { name: 'Props', exact: true })).toBeInViewport()
-    await trigger.click()
-    await page.keyboard.press('Escape')
-    await expect(dialog).toBeHidden()
-    await expect(trigger).toBeFocused()
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
   })
 }

@@ -15,7 +15,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 
 | Path | Purpose |
 | --- | --- |
-| `site/components/DocsTableOfContents.tsx` | Page contents rendered in the right sidebar, with a drawer on narrow screens |
+| `site/components/DocsTableOfContents.tsx` | Page contents shown inline after the page heading on narrower screens and in the right column on wide screens |
 | `site/components/docsContentsContext.ts` | Shares the AppShell contents destination with documentation pages |
 | `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry, experiment index and shared navbar with Exit Lab, experiment links and theme controls |
 | `site/lab/LabShell.tsx` | Shell comparison at /site/lab/shell using Navbar, Sidebar and responsive navigation |

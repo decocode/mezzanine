@@ -1,25 +1,26 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { createPortal } from 'react-dom'
-import { PanelRightOpenIcon, Sidebar, SidebarPanel, SidebarTrigger, TableOfContents, type TableOfContentsProps } from '@decocode/mezzanine'
+import { Sidebar, SidebarPanel, TableOfContents, type TableOfContentsProps } from '@decocode/mezzanine'
 import { DocsContentsContext } from './docsContentsContext'
 
-// The same section links occupy the desktop right column or a narrow-screen drawer.
+// The same section links appear inline after the page heading on narrower
+// screens and in the right column on wide screens. CSS shows one copy at a time.
 export function DocsTableOfContents(props: TableOfContentsProps) {
   const host = useContext(DocsContentsContext)
-  const [isOpen, setOpen] = useState(false)
   if (!host || props.sections.length === 0) return null
 
-  return createPortal(
-    <Sidebar isCollapsible={false} inlineMediaQuery="(min-width: 80rem)" isOpen={isOpen} onOpenChange={setOpen}>
-      <SidebarTrigger iconLeading={<PanelRightOpenIcon />} variant="secondary">On this page</SidebarTrigger>
-      <SidebarPanel title="On this page" side="right" hideInlineHeader className="docs-contents-panel">
-        <div onClickCapture={(event) => {
-          if (!event.defaultPrevented && event.button === 0 && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey
-            && event.target instanceof Element && event.target.closest('a[href^="#"]')) setOpen(false)
-        }}>
-          <TableOfContents {...props} heading="On this page" />
-        </div>
-      </SidebarPanel>
-    </Sidebar>, host,
+  return (
+    <>
+      <div className="docs-contents-inline">
+        <TableOfContents {...props} heading="On this page" />
+      </div>
+      {createPortal(
+        <Sidebar isCollapsible={false} presentation="inline">
+          <SidebarPanel title="On this page" side="right" hideInlineHeader className="docs-contents-panel">
+            <TableOfContents {...props} heading="On this page" />
+          </SidebarPanel>
+        </Sidebar>, host,
+      )}
+    </>
   )
 }

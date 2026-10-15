@@ -29,6 +29,8 @@ its title, description and an ordered `sections` list.
 - Each section defines `id`, `title` and `content` once. The template creates
   its heading, its wrapper and its link in On this page.
 - Optional `subsections` add On this page links to headings inside a section.
+- On this page appears after the page heading and description on narrower
+  screens, and in the right column on wide screens.
 - A section group has `id`, `title` and its own `sections` list instead of
   `content`. Its heading is level 2 and its children become a Disclosure group
   with level-3 headings. The disclosures start closed, several can be open, and

@@ -81,9 +81,9 @@ test('Tooltip documentation example supports hover and keyboard focus at narrow 
     await button.scrollIntoViewIfNeeded()
     // Let scroll-triggered overlay dismissal finish before focusing the example.
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
-    // At narrow widths Contents lives in a closed drawer. Start from the
-    // visible control preceding main, then Tab into the actual example.
-    await page.getByRole('button', { name: 'Browse sections', exact: true }).evaluate(element => (element as HTMLElement).focus({ preventScroll: true }))
+    // At narrow widths On this page sits inline before the example. Start from
+    // its last link, then Tab into the actual example.
+    await page.getByRole('main').getByRole('navigation', { name: 'On this page', exact: true }).getByRole('link').last().evaluate(element => (element as HTMLElement).focus({ preventScroll: true }))
     await page.keyboard.press('Tab')
     await expect(button).toBeFocused()
     await expect(tooltip).toBeVisible()
