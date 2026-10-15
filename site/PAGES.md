@@ -77,6 +77,10 @@ existing anchor for the References section.
 
 ## Foundations and Styles pages
 
+Shared accessibility information (the WCAG target, what React Aria provides,
+what Mezzanine adds and how it is checked) lives on the Foundations
+Accessibility page at `/accessibility`, so other pages do not repeat it.
+
 The Foundations group has an overview page at `/foundations`. It explains what
 applies to every Foundation, including that Foundations do not change with the
 theme, so individual Foundations pages do not repeat it.
@@ -90,7 +94,8 @@ Its sections always appear in this order:
 1. CSS properties: the CSS properties the page governs.
 2. Tokens: token names, purposes and values read from the token source.
 3. Theming: Styles pages only. The Wireframe baseline and what a theme changes.
-4. Accessibility: the relevant WCAG criteria and how Mezzanine meets them.
+4. Accessibility: only what is specific to this page. Leave it out when there
+   is nothing specific; what applies everywhere is on the Accessibility page.
 5. Localisation: direction and text expansion, only once verified.
 6. Used by: the components that use it.
 

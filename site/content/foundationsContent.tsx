@@ -8,6 +8,7 @@ export const foundationsDefinitionParagraphs: ReactNode[] = [
 ]
 
 export const foundationsPages: { label: string; href: string; description: string }[] = [
+  { label: 'Accessibility', href: '/accessibility', description: 'What applies to every component: the WCAG target, what React Aria provides, what Mezzanine adds and how it is checked.' },
   { label: 'Interaction', href: '/interaction', description: 'How components respond to pointer, touch, keyboard and focus, and the states they show.' },
   { label: 'Spacing', href: '/spacing', description: 'The spacing scale used for distance inside components and between elements.' },
 ]
@@ -17,5 +18,5 @@ export const foundationsThemeColourParagraphs: ReactNode[] = [
 ]
 
 export const foundationsTechnicalDetailsParagraphs: ReactNode[] = [
-  'Each Foundations page ends with Technical details, in this order: CSS properties, Tokens, Accessibility, Localisation and Used by. Sections that do not apply to a page are left out.',
+  'Each Foundations page ends with Technical details, in this order: CSS properties, Tokens, Accessibility, Localisation and Used by. Sections that do not apply to a page are left out. Accessibility appears only when a page has something specific to add; what applies everywhere is on the Accessibility page.',
 ]

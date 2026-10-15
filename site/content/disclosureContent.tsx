@@ -35,7 +35,7 @@ export const disclosureContent = {
   accessibilityParagraphs: [
     <>Tab focuses the trigger; Enter or Space toggles its panel. Tab then reaches available controls inside an expanded panel. The trigger exposes its expanded state.</>,
     <>Choose <code>DisclosureHeader level</code> to fit the page’s heading hierarchy. Its children supply the trigger label; do not place another button or link inside that label.</>,
-    <>The panel uses the shared expand-and-collapse reveal described on the Motion page. System reduced motion and a Wireframe area make opening and closing immediate. Collapsing content stops accepting focus straight away.</>,
-    <>The chevron points right when closed and turns down when expanded. With reduced motion it changes orientation immediately, so the expanded state remains visible.</>,
+    <>Collapsing content stops accepting focus straight away.</>,
+    <>The chevron points right when closed and turns down when expanded.</>,
   ],
 }

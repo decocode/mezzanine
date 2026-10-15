@@ -17,6 +17,7 @@ export const pageRegistry: Record<string, ComponentType<DocumentationPageProps>>
   'text-styles': lazy(() => import('./pages/TextStylesPage')),
   prose: lazy(() => import('./pages/ProsePage')),
   foundations: lazy(() => import('./pages/FoundationsPage')),
+  accessibility: lazy(() => import('./pages/AccessibilityPage')),
   spacing: lazy(() => import('./pages/SpacingPage')),
   interaction: lazy(() => import('./pages/InteractionPage')),
   shape: lazy(() => import('./pages/ShapePage')),

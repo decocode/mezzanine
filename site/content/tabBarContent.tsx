@@ -37,7 +37,7 @@ export const tabBarContent = {
   usageParagraphs: [
     <>Supply an <code>aria-label</code> and an <code>items</code> array. Each item needs a unique <code>id</code>, <code>href</code> and visible <code>label</code>. Optional <code>icon</code> content is decorative. Other link props, including <code>isDisabled</code>, <code>target</code> and event handlers, pass through to Link. The consuming app determines the current page and handles routing.</>,
     <>The default <code>position="bottom"</code> uses sticky positioning with phone safe-area spacing. Place TabBar after the content in the app’s layout; it remains in normal flow. It does not create a full-screen app shell. Use <code>position="inline"</code> for normal document placement.</>,
-    <><code>moreLabel</code> and <code>closeLabel</code> replace the default More and Close text. The component uses Mezzanine tokens and respects reduced motion. It is page navigation, not a tab-panel control or an action toolbar.</>,
+    <><code>moreLabel</code> and <code>closeLabel</code> replace the default More and Close text. It is page navigation, not a tab-panel control or an action toolbar.</>,
   ],
   propsRows: [
     { name: 'items', description: <>Required ordered array of TabBarItem destinations. An empty array hides the bar.</> },

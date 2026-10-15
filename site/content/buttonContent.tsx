@@ -202,7 +202,6 @@ export const buttonContent = {
   ],
   accessibilityParagraphs: [
     <>Keep visible labels clear. Icon-only buttons require an accessible name even when a tooltip is provided.</>,
-    <>Keyboard focus has its own visible outline, separate from hover and pressed feedback.</>,
   ],
   tokensRows: buttonTokens.map(({ token, description }) => ({ name: token, description })),
   tokensParagraphs: [

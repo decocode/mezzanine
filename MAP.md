@@ -138,6 +138,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/pages/TextStylesPage.tsx` | Beginner guide to the text styles: quick start, roles, grouped styles, choosing, weights, base elements, small screens, line height and token reference; loaded only when its route is requested |
 | `site/pages/ProsePage.tsx` | List and inline-code examples; loaded only when its route is requested |
 | `site/pages/SpacingPage.tsx` | Spacing-scale reference with shared Technical details; loaded only when its route is requested |
+| `site/pages/AccessibilityPage.tsx` | Foundations page for accessibility that applies everywhere: WCAG target, React Aria behaviour, Mezzanine additions and checks; loaded only when its route is requested |
 | `site/pages/FoundationsPage.tsx` | Foundations overview: what applies to every Foundation and links to each page; loaded only when its route is requested |
 | `site/pages/InteractionPage.tsx` | Interaction states, focus, pointer and touch, keyboard and disabled behaviour, with shared Technical details; loaded only when its route is requested |
 | `site/pages/ShapePage.tsx` | Corner-radius scale and guidance for styling all corners or individual corners; loaded only when its route is requested |
@@ -171,8 +172,9 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `site/content/textStylesContent.ts` | Text style intro, code example, roles, style names and purposes, recommended choices (kept identical to TYPOGRAPHY.md by check:rules), weight examples, base elements and token names |
 | `site/content/typographyContent.tsx` | Typography overview intro, How typography works layers and theme example code |
 | `site/content/spacingContent.ts` | Spacing scale steps displayed on the Spacing page |
+| `site/content/accessibilityContent.tsx` | Target, React Aria and Mezzanine rows, checking notes and links for the Accessibility page |
 | `site/content/foundationsContent.tsx` | Definition, page list and shared notes for the Foundations overview page |
-| `site/content/interactionContent.tsx` | Interaction states, behaviour descriptions, token notes and lists, WCAG rows and links for the Interaction page |
+| `site/content/interactionContent.tsx` | Interaction states, behaviour descriptions, token notes and lists, and links for the Interaction page |
 | `site/content/shapeContent.ts` | Corner-radius labels and token names displayed on the Shape page |
 | `site/content/elevationContent.ts` | Elevation levels, uses and token names |
 | `site/content/motionContent.tsx` | Motion timing, token and reduced-motion reference descriptions |

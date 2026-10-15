@@ -81,13 +81,6 @@ export const interactionFocusRingComponents: { component: string; prefix: string
 
 export const interactionTokensIntro = <>The colour tokens below come from the active theme and are documented on the Color page. Their values here are for the theme you are viewing.</>
 
-export const interactionAccessibilityRows: { criterion: string; approach: ReactNode }[] = [
-  { criterion: '2.1.1 Keyboard', approach: 'Every interactive component is operable with the keyboard through React Aria.' },
-  { criterion: '2.4.3 Focus order', approach: 'Focus follows reading order. Dialogs keep focus inside until closed and then restore it.' },
-  { criterion: '2.4.7 Focus visible', approach: <>Interactive components draw a focus ring in <code>--color-focus</code> for keyboard focus.</> },
-  { criterion: '4.1.2 Name, role, value', approach: 'React Aria exposes each state, such as selected, expanded, disabled and invalid, to assistive technology.' },
-]
-
 // Component lists come from token usage in src/components/*.css.
 export const interactionUsedByRows: { token: string; components: string }[] = [
   { token: '--color-focus', components: 'Button, Checkbox, Dialog, Disclosure, Link, NavTree, Navbar, RadioGroup, Sidebar, Table, Tabs, TabBar, TextField, ToggleButton' },
@@ -99,6 +92,7 @@ export const interactionUsedByRows: { token: string; components: string }[] = [
 ]
 
 export const interactionRelatedPages = [
+  { label: 'Accessibility', href: '/accessibility' },
   { label: 'Color', href: '/color' },
   { label: 'Motion', href: '/motion' },
   { label: 'Button', href: '/button' },
@@ -106,6 +100,6 @@ export const interactionRelatedPages = [
 ]
 
 export const interactionReferences = [
-  { label: 'React Aria: Interactions', href: 'https://react-spectrum.adobe.com/react-aria/interactions.html' },
+  { label: 'React Aria: Interactions', href: 'https://react-aria.adobe.com/quality#interactions' },
   { label: 'WCAG 2.2: Focus visible', href: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html' },
 ]

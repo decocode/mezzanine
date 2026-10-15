@@ -55,7 +55,7 @@ export const tableOfContentsContent = {
     <>
       Tab moves between links and Enter follows a link. Following a link updates the
       URL fragment to identify the section. The showcase keeps target headings
-      below its sticky header and turns off smooth scrolling for reduced-motion preferences.
+      below its sticky header.
     </>,
   ],
 }

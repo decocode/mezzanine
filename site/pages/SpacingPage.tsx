@@ -74,12 +74,6 @@ export default function SpacingPage({ refreshKey }: { refreshKey: string }) {
               ]}
             />
           ),
-          accessibility: (
-            <p className="component-section-description">
-              The scale is stored in <code>rem</code>, so space grows with the text when someone
-              increases their browser&apos;s default text size.
-            </p>
-          ),
           usedBy: (
             <p className="component-section-description">
               Breadcrumbs, Dialog, Modal, NavTree, Navbar, TabBar, Table, TableOfContents, TextField,

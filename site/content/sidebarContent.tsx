@@ -43,8 +43,6 @@ export const sidebarContent = {
     <>Set tokens at the theme root for both inline and modal presentation. Modal content is portalled outside the surrounding layout; use the panel’s className or style for per-panel token overrides.</>,
   ],
   accessibility: [
-    <>A tooltip supplements an accessible name; it does not replace it.</>,
-    <>Meaningful images need alternative text.</>,
     <>Give the panel a unique title and an appropriate headingLevel.</>,
   ],
   props: [

@@ -24,7 +24,7 @@ export const textAreaContent = {
   usageParagraphs: [
     <><code>TextArea</code> replaces <code>Input</code> inside <code>TextField</code>.</>,
     <>Set <code>defaultValue</code> on <code>TextField</code> for an initial value, or use <code>value</code> and <code>onChange</code> to manage its value in your application. Set <code>isRequired</code>, <code>isReadOnly</code>, <code>isDisabled</code> and <code>isInvalid</code> on <code>TextField</code>. The invalid example above remains invalid while you edit it.</>,
-    <>Set <code>rows</code> on <code>TextArea</code> to choose its initial visible line count. The field permits vertical resizing and stays within its container width. The <code>--text-area-min-height</code> token sets its minimum height; it shares Input’s appearance and state tokens. No animation is applied.</>,
+    <>Set <code>rows</code> on <code>TextArea</code> to choose its initial visible line count. The field permits vertical resizing and stays within its container width. The <code>--text-area-min-height</code> token sets its minimum height; it shares Input’s appearance and state tokens.</>,
     <>Put <code>placeholder</code> on <code>TextArea</code>.</>,
   ],
   accessibilityParagraphs: [

@@ -39,7 +39,6 @@ export const dialogContent = {
   accessibilityItems: <>
     <li>Give every dialog a title. For a short confirmation, connect the explanatory text with <code>aria-describedby</code>.</li>
     <li>React Aria manages focus containment, background interaction blocking, and focus return to the trigger.</li>
-    <li>Entry and exit animations respect reduced motion.</li>
   </>,
   tokensRows: [
     { name: '--modal-z-index', description: 'Overlay stacking level.' },

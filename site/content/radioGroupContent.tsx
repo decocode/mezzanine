@@ -82,8 +82,8 @@ export const radioGroupContent = {
   accessibilityParagraphs: [
     <>Use a visible <code>Label</code> for the group and a clear label inside each <code>RadioButton</code>.</>,
     <>
-      Tab moves into the group and arrow keys move between available options. React Aria
-      handles selection and focus; disabled options cannot be selected. Use a description
+      Tab moves into the group and arrow keys move between available options. Disabled
+      options cannot be selected. Use a description
       or <code>FieldError</code> to explain an option or validation problem in text.
     </>,
   ],

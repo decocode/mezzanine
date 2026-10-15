@@ -67,6 +67,6 @@ export const tableContent = {
   ],
   accessibilityParagraphs: [
     <>Give the table an <code>aria-label</code> or <code>aria-labelledby</code>.</>,
-    <>React Aria manages keyboard navigation through the table’s rows, cells and focusable controls. Use arrow keys to move within the table and Tab to move between focusable regions or controls. Keep labels on any buttons and links placed inside cells.</>,
+    <>Arrow keys move through the table’s rows, cells and focusable controls, and Tab moves between focusable regions or controls. Keep labels on any buttons and links placed inside cells.</>,
   ],
 }

@@ -5,7 +5,7 @@ import { foundationTechnicalDetailsGroup } from '../templates/foundationTechnica
 import { DocsTable } from '../components/DocsTable'
 import { TokenValue } from '../components/TokenValue'
 import {
-  interactionAccessibilityRows, interactionCssProperties, interactionDescription,
+interactionCssProperties, interactionDescription,
   interactionDisabledParagraphs, interactionFocusParagraphs, interactionFocusRingComponents,
   interactionKeyboardRows, interactionPointerParagraphs, interactionReferences,
   interactionRelatedPages, interactionSharedTokens, interactionStates, interactionTokensIntro,
@@ -99,7 +99,6 @@ export default function InteractionPage({ refreshKey }: { refreshKey: string }) 
               </Table>
             </div>
           </>),
-          accessibility: <DocsTable aria-label="WCAG criteria for interaction" nameColumn="WCAG 2.2 criterion" descriptionColumn="How Mezzanine meets it" namesAreCode={false} rows={interactionAccessibilityRows.map(({ criterion, approach }) => ({ name: criterion, description: approach }))} />,
           usedBy: <DocsTable aria-label="Components using interaction tokens" nameColumn="Token" descriptionColumn="Components" rows={interactionUsedByRows.map(({ token, components }) => ({ name: token, description: components }))} />,
         }),
       ]}

@@ -47,7 +47,7 @@ export const tabsContent = {
   accessibilityItems: <>
     <li>React Aria supplies tab/panel relationships, roving focus and keyboard selection. Do not add custom arrow-key handlers.</li>
     <li>Tab moves into the selected tab, then into its panel. Arrow keys follow the orientation; Home and End move to the first and last available tabs.</li>
-    <li>Keyboard focus has an outline, selection has an underline, and indicator motion respects reduced-motion preferences.</li>
+    <li>An underline marks the selected tab.</li>
   </>,
   tokensRows: [
     { name: '--tabs-content-gap', description: 'Space between the tab list and its panel.' },
