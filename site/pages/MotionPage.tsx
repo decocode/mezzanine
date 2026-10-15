@@ -14,7 +14,7 @@ export default function MotionPage({ refreshKey }: { refreshKey: string }) {
   return (
     <>
       <PageHeading
-        description="Motion helps people understand when interface content opens, closes, or remains busy. This page records the motion that Mezzanine currently uses."
+        description="Motion shows people what is changing on screen: content opening or closing, moving into place, or still loading. It can also draw attention to something important or add creative expression, but it should never distract from what people are doing."
         title="Motion"
       />
       <DocsTableOfContents sections={[
