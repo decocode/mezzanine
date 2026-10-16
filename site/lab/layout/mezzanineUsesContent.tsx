@@ -52,10 +52,6 @@ export const mezzanineUses: Record<string, MezzanineUse[]> = {
     today('Nothing yet: the library has no Center. The docs site sets its own page width, outside the library.'),
   ],
   // Inside the box
-  text: [
-    today(<>Most components, including <Link href="/button">Button</Link>, <Link href="/card">Card</Link> and <Link href="/code-block">Code block</Link>, break very long words with <code>overflow-wrap: anywhere</code>, so nothing sticks out.</>),
-    today(<>The <code>--line-length</code> token, <code>65ch</code>, is the longest a line of reading text should get. The docs site uses it for its reading columns.</>),
-  ],
   overflow: [
     today(<>A horizontal <Link href="/tabs">Tabs</Link> list scrolls sideways when its tabs don’t fit, instead of squashing them.</>),
   ],
@@ -79,7 +75,7 @@ export const mezzanineUses: Record<string, MezzanineUse[]> = {
     today(<>A horizontal <Link href="/tabs">Tabs</Link> list already behaves like a small Reel: when its tabs don’t fit, it scrolls sideways.</>),
   ],
   // Arranging boxes
-  normalFlow: [
+  typesOfBox: [
     today(<>Content inside a <Link href="/card">Card</Link> or a <Link href="/dialog">Dialog</Link> follows normal flow: headings, paragraphs and lists stack just as they would anywhere else.</>),
   ],
   cssFlexbox: [
@@ -102,6 +98,10 @@ export const mezzanineUses: Record<string, MezzanineUse[]> = {
   readingOrder: [
     today('No Mezzanine component reorders its content with CSS, so what you see matches the HTML.'),
     today(<>The <Link href="/tab-bar">Tab bar</Link> keeps its items in the order the app supplies, even when some move into its More sheet.</>),
+  ],
+  // Layers
+  stackingContexts: [
+    today(<><Link href="/dialog">Modal</Link> and <Link href="/tooltip">Tooltip</Link> render outside other stacking contexts, at the end of the page, so they always appear on top.</>),
   ],
   // Box formations
   stack: [

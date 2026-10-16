@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Badge, Checkbox } from '@decocode/mezzanine'
+import { Badge, Checkbox, Link } from '@decocode/mezzanine'
 import { CssNotes, DemoFrame, DemoText, ValuePicker } from './LabParts'
-import { Block, Columns, ColumnsItem, Grid, Inline, InlineCluster, Split, Stack, type SplitFraction } from './LabPrimitives'
+import { Block, Columns, ColumnsItem, Cover, Grid, Inline, InlineCluster, Reel, Split, Stack, type SplitFraction } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
 
@@ -12,6 +12,32 @@ function StackDemo() {
       <Stack><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Stack>
     </DemoFrame>
     <CssNotes name="Stack" note={cssNotes.stack} level={3} />
+  </>
+}
+
+const coverHeightOptions = [
+  { label: '16rem', value: '16rem' },
+  { label: '24rem', value: '24rem' },
+  { label: '32rem', value: '32rem' },
+] as const
+
+function CoverDemo() {
+  const [height, setHeight] = useState<(typeof coverHeightOptions)[number]['value']>('24rem')
+  return <>
+    <DemoText>The dashed line is the Cover box, set out like the opening section of a homepage. Change its height: the headline stays in the middle, and the logo and “Scroll down” stay at the top and bottom edges.</DemoText>
+    <ValuePicker label="Minimum height" options={coverHeightOptions} value={height} onChange={setHeight} />
+    <DemoFrame label="Cover">
+      <div className="lab-cover-demo">
+        <Cover
+          minHeight={height}
+          top={<p className="lab-cover-small mz-text-label-md">Logo</p>}
+          bottom={<p className="lab-cover-small lab-cover-end mz-text-label-md">Scroll down</p>}
+        >
+          <p className="lab-cover-headline mz-text-heading-lg">Big headline</p>
+        </Cover>
+      </div>
+    </DemoFrame>
+    <CssNotes name="Cover" note={cssNotes.cover} level={3} />
   </>
 }
 
@@ -34,6 +60,16 @@ function InlineClusterDemo() {
       <InlineCluster>{['Badge A', 'Badge B', 'Badge C', 'Badge D', 'Badge E', 'Badge F', 'Badge G'].map((tag) => <Badge key={tag}>{tag}</Badge>)}</InlineCluster>
     </DemoFrame>
     <CssNotes name="Inline cluster" note={cssNotes.inlineCluster} level={3} />
+  </>
+}
+
+function ReelDemo() {
+  return <>
+    <DemoText>Scroll sideways, or press Tab to reach the reel and use the arrow keys. The scrolling comes from overflow: see <Link href="/site/lab/layout/inside-the-box/overflowing-the-box">Overflowing the box</Link>.</DemoText>
+      <Reel label="Example reel">
+        {Array.from({ length: 8 }, (_, index) => <Block key={index}>Item {index + 1}</Block>)}
+      </Reel>
+    <CssNotes name="Reel" note={cssNotes.reel} level={3} />
   </>
 }
 
@@ -90,8 +126,10 @@ function GridDemo() {
 
 export const boxFormationDemos: StageDemos = {
   stack: { Demo: StackDemo },
+  cover: { Demo: CoverDemo },
   inline: { Demo: InlineDemo },
   inlineCluster: { Demo: InlineClusterDemo },
+  reel: { Demo: ReelDemo },
   split: { Demo: SplitDemo },
   columns: { Demo: ColumnsDemo },
   grid: { Demo: GridDemo },

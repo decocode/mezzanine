@@ -60,11 +60,12 @@ function howMezzanineUsesItSection(id: string, uses: MezzanineUse[], detail?: Re
 export function StageOverview({ stage }: { stage: LayoutStage }) {
   const intro = stageIntros[stage.key]
   const IntroDemo = intro && demos[intro.key].Demo
-  return <DocsPageTemplate title={stage.title} description={stage.summary} sections={[
+  // A stage with only its Cards is an index page, so it has no On this page list.
+  return <DocsPageTemplate title={stage.title} description={stage.summary} showContents={intro != null} references={intro?.references ?? []} sections={[
     ...(intro && IntroDemo ? [howItWorksSection(intro, <IntroDemo />), howMezzanineUsesItSection(intro.id, mezzanineUses[intro.key] ?? [])] : []),
     {
       id: `${stage.id}-pages`,
-      title: stagePageHeadings.pages,
+      title: stage.pagesHeading ?? stagePageHeadings.pages,
       content: <ul className="lab-child-page-cards">
         {stagePagesByStage(stage.key).map((page) => <li key={page.key}>
           <Card>
@@ -100,22 +101,24 @@ export function StagePageView({ page }: { page: StagePage }) {
   ]
   return <DocsPageTemplate
     title={page.title}
-    description={page.similarTo ? [page.subtitle, <Badge key="badge">{buildingBlockLabel}</Badge>] : page.subtitle}
+    description={page.subtitle}
     sections={[
       howItWorksSection(page, <Demo />),
       howMezzanineUsesItSection(page.id, uses, MezzanineDetail && <MezzanineDetail />),
     ]}
-    references={page.similarTo ?? []}
+    references={[...(page.similarTo ?? []), ...(page.references ?? [])]}
   />
 }
 
-// A page still to be sorted into a stage: only its "How it works" half for now.
-export function SectionPageView({ section, Demo }: { section: LabSection; Demo: () => JSX.Element }) {
+// A page still to be sorted into a stage, or a Lab page outside Layout: only its "How it works" half for now.
+export function SectionPageView({ section, Demo }: { section: Pick<LabSection, 'id' | 'title' | 'subtitle' | 'what' | 'why' | 'support' | 'similarTo' | 'references'> & { usesKey?: string; relatedPages?: { label: string; href: string }[] }; Demo: () => JSX.Element }) {
+  const uses = section.usesKey ? mezzanineUses[section.usesKey] : undefined
   return <DocsPageTemplate
     title={section.title}
-    description={section.similarTo ? <Badge>{buildingBlockLabel}</Badge> : undefined}
-    sections={[howItWorksSection(section, <Demo />)]}
-    references={section.similarTo ?? []}
+    description={section.subtitle}
+    sections={[howItWorksSection(section, <Demo />), ...(uses ? [howMezzanineUsesItSection(section.id, uses)] : [])]}
+    relatedPages={section.relatedPages ?? []}
+    references={section.references ?? section.similarTo ?? []}
   />
 }
 
@@ -139,7 +142,7 @@ export function FutureOverview() {
 // One emerging feature: its demo, which says which browsers support it, in a "How it works" section.
 export function FuturePageView({ page }: { page: FuturePage }) {
   const Demo = futureDemos[page.key]
-  return <DocsPageTemplate title={page.title} sections={[{
+  return <DocsPageTemplate title={page.title} references={page.references ?? []} sections={[{
     id: `${page.id}-how-it-works`,
     title: stagePageHeadings.howItWorks,
     content: <div className="lab-section-body"><Demo /></div>,

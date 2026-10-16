@@ -5,10 +5,10 @@ import { MezzanineNavbar } from '../components/MezzanineNavbar'
 import { NavigationPanel, SidebarColumn } from '../components/Sidebar'
 import type { Theme } from '../themeSwitcherLogic'
 import NotFoundPage from '../pages/NotFoundPage'
-import { hasLayoutSectionPage, LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutSectionPage, LayoutStageChildPage, LayoutStagePage } from './LayoutPage'
+import { hasLayoutSectionPage, LabTopLevelPageView, LayersOverviewPage, LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutSectionPage, LayoutStageChildPage, LayoutStagePage } from './LayoutPage'
 import { labContent, labNavigationItems } from './labContent'
 import { InternationalisationPage } from './InternationalisationPage'
-import { boxToTheFuture, futurePages, layoutLabSections, layoutStages, stagePages } from './layout/layoutLabContent'
+import { boxToTheFuture, futurePages, labTopLevelPages, layersLab, layersPages, layoutLabSections, layoutStages, stagePages } from './layout/layoutLabContent'
 import './lab-page.css'
 
 interface LabPageProps {
@@ -28,7 +28,9 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const stagePage = stagePages.find((item) => item.href === currentPath)
   const isFuture = sectionSlug === boxToTheFuture.slug
   const futurePage = futurePages.find((item) => item.href === currentPath)
-  const pageTitle = section?.title ?? stage?.title ?? stagePage?.title ?? (isFuture ? boxToTheFuture.title : futurePage?.title)
+  const isLayers = currentPath === layersLab.href
+  const topLevelPage = [...Object.values(labTopLevelPages), ...Object.values(layersPages)].find((item) => item.href === currentPath)
+  const pageTitle = (isLayers ? layersLab.title : undefined) ?? topLevelPage?.title ?? section?.title ?? stage?.title ?? stagePage?.title ?? (isFuture ? boxToTheFuture.title : futurePage?.title)
   const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : isInternationalisation ? `${labContent.internationalisationPage.label} | Lab` : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   // Layout pages use the docs page template, whose On this page links sit in the right column on wide screens.
   const [contentsHost, setContentsHost] = useState<HTMLDivElement | null>(null)
@@ -51,7 +53,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : isInternationalisation ? <InternationalisationPage /> : section ? <LayoutSectionPage slug={section.slug} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : isInternationalisation ? <InternationalisationPage /> : isLayers ? <LayersOverviewPage /> : topLevelPage ? <LabTopLevelPageView page={topLevelPage} /> : section ? <LayoutSectionPage slug={section.slug} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
       </main>
       <div className="site-contents-sidebar" ref={setContentsHost} />
     </div>

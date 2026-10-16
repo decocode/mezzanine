@@ -70,15 +70,6 @@ export const boxCssNotes: Record<string, CssNote> = {
   background: var(--color-surface);
 }`,
   },
-  lineLength: {
-    paragraphs: [
-      'The `max-width` property lets a box shrink as much as it needs to, but stops it growing past the limit.',
-      'The limit is Mezzanine’s `--line-length` token, which is `65ch`. One `ch` is the width of a zero in the current font, so `65ch` means roughly 65 characters per line, whatever the font or its size.',
-    ],
-    code: `.lab-line-length {
-  max-width: var(--line-length);
-}`,
-  },
   // Inside the box
   overflow: {
     paragraphs: [
@@ -91,37 +82,6 @@ export const boxCssNotes: Record<string, CssNote> = {
   padding: var(--space-2);
   border: 1px solid var(--color-text);
   overflow: var(--lab-overflow);
-}`,
-  },
-  readingDirection: {
-    paragraphs: [
-      'The `dir` attribute in the HTML sets the direction of a line: `ltr` for left to right, or `rtl` for right to left. The `lang` attribute names the language, so screen readers pronounce it correctly.',
-      'For Japanese written top to bottom, `writing-mode: vertical-rl` turns the lines vertical and stacks them from right to left. In vertical text, `inline-size` is the height, so lines wrap after 10rem. The border uses `border-inline-start` and the text uses `text-align: start`, so both follow wherever lines start: the left, the right or the top.',
-    ],
-    code: `.lab-reading-direction {
-  border-inline-start: var(--space-2) solid var(--color-text);
-  padding-inline-start: var(--space-4);
-  text-align: start;
-}
-
-.lab-reading-vertical {
-  writing-mode: vertical-rl;
-  inline-size: 10rem;
-}`,
-  },
-  longWord: {
-    paragraphs: [
-      'Browsers break lines only between words, so one very long word, or a web address, can stick out of its box.',
-      'The rule `overflow-wrap: anywhere` lets the browser break the word wherever it must. The other choice cuts it off with an ellipsis, using `text-overflow: ellipsis`, which only works on a single line that hides its overflow. Cut-off text is lost to sighted readers, so use it sparingly.',
-    ],
-    code: `.lab-long-word-break {
-  overflow-wrap: anywhere;
-}
-
-.lab-long-word-cut {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }`,
   },
   imageFit: {
@@ -211,7 +171,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   normalFlow: {
     paragraphs: [
       'The `display` property decides how a box joins the flow. The buttons switch it between three values.',
-      'With `block`, each box starts on its own line. With `inline`, the boxes sit in the line of text, and their padding can overlap the lines above and below. With `inline-block`, they sit in the line but take up their full size, padding included.',
+      'With `block`, each box starts on its own line. With `inline`, the boxes sit in the line of text, and their padding can overlap the lines above and below. With `inline-block`, they sit in the line but take up their full size, padding included. With `none`, they disappear, and screen readers skip them too.',
     ],
     code: `.lab-flow-item {
   display: var(--lab-flow-display);
@@ -367,6 +327,39 @@ export const boxCssNotes: Record<string, CssNote> = {
   .lab-masonry {
     display: grid-lanes;
   }
+}`,
+  },
+  stackingContexts: {
+    paragraphs: [
+      'Each bundle has `position: relative` and a `z-index`, which makes it a stacking context: bundle A is 1 and bundle B is 2, so bundle B sits on top. Each layer has its own `z-index`, but it’s only compared with the other layers in the same bundle.',
+      'Take away both bundles’ `z-index` and they stop being bundles. All five layers then compete with each other directly. The layer with 3 is highest. Where two layers share a number, the one later in the HTML, in bundle B, sits on top.',
+    ],
+    code: `.lab-bundle-a-grouped {
+  z-index: 1;
+}
+
+.lab-bundle-b-grouped {
+  z-index: 2;
+}
+
+.lab-bundle-b {
+  height: 10rem;
+  margin-top: -7rem;
+  margin-left: 35%;
+}
+
+.lab-bundle-layer {
+  position: absolute;
+  z-index: var(--lab-layer-z);
+  top: calc(2.5rem + var(--lab-layer-step) * 1.75rem);
+  left: calc(var(--space-2) + var(--lab-layer-step) * 10%);
+  box-sizing: border-box;
+  width: 70%;
+  min-height: 4rem;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--elevation-raised-1);
 }`,
   },
   // Box formations

@@ -6,24 +6,6 @@ import { Block } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
 
-const displayOptions = [
-  { label: 'block', value: 'block' },
-  { label: 'inline', value: 'inline' },
-  { label: 'inline-block', value: 'inline-block' },
-] as const
-
-function NormalFlowDemo() {
-  const [display, setDisplay] = useState<(typeof displayOptions)[number]['value']>('inline')
-  return <>
-    <DemoText>Three boxes inside a sentence. Choose how they join the flow.</DemoText>
-    <ValuePicker label="display" options={displayOptions} value={display} onChange={setDisplay} />
-      <Text elementType="p" className="mz-text-body-md" style={{ '--lab-flow-display': display } as CSSProperties}>
-        Here is a sentence with <span className="lab-flow-item">Box 1</span> inside it, then <span className="lab-flow-item">Box 2</span>, and finally <span className="lab-flow-item">Box 3</span> near the end of the line.
-      </Text>
-    <CssNotes name="normal flow" note={cssNotes.normalFlow} level={3} />
-  </>
-}
-
 const directionOptions = [
   { label: 'row', value: 'row' },
   { label: 'column', value: 'column' },
@@ -188,7 +170,6 @@ function ReadingOrderDemo() {
 }
 
 export const arrangingBoxesDemos: StageDemos = {
-  normalFlow: { Demo: NormalFlowDemo },
   cssFlexbox: { Demo: FlexboxDemo },
   cssGrid: { Demo: GridDemo },
   subgrid: { Demo: SubgridDemo },

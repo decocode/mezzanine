@@ -23,11 +23,13 @@ interface DocsPageTemplateProps {
   relatedPages?: readonly { label: string; href: string }[]
   referencesId?: string
   references?: readonly { label: string; href: string }[]
+  // False for a short index page, where an On this page list would only repeat its one heading.
+  showContents?: boolean
 }
 
 // Each section definition supplies both its visible heading and its On this page link.
 // Pages compose their content and live examples before passing sections here.
-export function DocsPageTemplate({ title, description, sections, relatedPages = [], references = [], referencesId = 'references' }: DocsPageTemplateProps) {
+export function DocsPageTemplate({ title, description, sections, relatedPages = [], references = [], referencesId = 'references', showContents = true }: DocsPageTemplateProps) {
   const pageSections: readonly (DocumentationSection | DocumentationSectionGroup)[] = [
     ...sections,
     ...[
@@ -52,13 +54,13 @@ export function DocsPageTemplate({ title, description, sections, relatedPages = 
   return (
     <>
       <PageHeading title={title} description={description} />
-      <DocsTableOfContents heading="On this page" sections={pageSections.map(section => ({
+      {showContents && <DocsTableOfContents heading="On this page" sections={pageSections.map(section => ({
         id: section.id,
         label: section.title,
         children: 'sections' in section
           ? section.sections.map(({ id, title: label, subsections }) => ({ id, label, children: subsections }))
           : section.subsections,
-      }))} />
+      }))} />}
       {pageSections.map(section => (
         <section key={section.id} aria-labelledby={section.id} className="component-section">
           <Heading id={section.id} level={2} className="mz-text-heading-md">{section.title}</Heading>

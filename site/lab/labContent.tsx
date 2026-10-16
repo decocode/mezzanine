@@ -1,5 +1,5 @@
 import { Badge, type NavTreeItemData } from '@decocode/mezzanine'
-import { boxToTheFuture, futurePages, labBadgeLabel, layoutLabSections, layoutStages, stagePagesByStage } from './layout/layoutLabContent'
+import { boxToTheFuture, futurePages, labBadgeLabel, labTopLevelPages, layersLab, layersPages, layoutLabSections, layoutStages, stagePagesByStage } from './layout/layoutLabContent'
 
 export const labContent = {
   index: { label: 'Lab', href: '/site/lab' },
@@ -8,7 +8,7 @@ export const labContent = {
 }
 
 // The Lab's own navigation tree, shown in the site sidebar and the Navbar menu on Lab pages.
-// Each experiment is a top-level item: Layout, then Internationalisation.
+// Each experiment is a top-level item: Layout, Layers, then Internationalisation, then pages not specific to layout.
 // Layout is a top-level group. Its stages come first, each holding its pages in reading order,
 // then the pages still to be sorted, then Box to the Future, which carries the Lab badge.
 export const labNavigationItems: NavTreeItemData[] = [
@@ -29,5 +29,11 @@ export const labNavigationItems: NavTreeItemData[] = [
       },
     ],
   },
+  {
+    id: 'layers', label: layersLab.title, href: '/site/lab/layers',
+    children: Object.values(layersPages).map((page) => ({ id: `layers-${page.id}`, label: page.title, href: page.href })),
+  },
   { id: 'internationalisation', label: labContent.internationalisationPage.label, href: labContent.internationalisationPage.href },
+  // Pages that aren't specific to layout sit at the bottom until they find a home.
+  ...Object.values(labTopLevelPages).map((page) => ({ id: `lab-${page.href.split('/').pop()}`, label: page.title, href: page.href })),
 ]

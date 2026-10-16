@@ -9,6 +9,22 @@ export const textLineLengthParagraphs: ReactNode[] = [
   <>It is <code>65ch</code>, roughly 65 characters per line. One <code>ch</code> is the width of a zero in the current font, so the limit adapts to each theme’s typeface.</>,
 ]
 
+export const textLineLengthLabels = { without: 'Without a line length', with: 'With --line-length' }
+
+export const textLineLengthCode = `.article {
+  max-width: var(--line-length);
+}`
+
+export const textLongWordsCode = `<html lang="de">`
+
+export const textReadingDirectionCode = `<!-- Right to left -->
+<html dir="rtl" lang="ar">
+
+/* Top to bottom */
+.vertical-text {
+  writing-mode: vertical-rl;
+}`
+
 export const textLineLengthExample = 'Long lines of text are tiring to read, because your eyes have to travel a long way back to find the start of the next line. This paragraph stops at the line length, so it stays comfortable however wide the window gets.'
 
 export const textLongWordsParagraphs: ReactNode[] = [

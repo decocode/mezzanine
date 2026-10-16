@@ -29,17 +29,12 @@ export interface LabSection extends LabIntro {
   support?: string
   // Building blocks are reusable Lab-only layout components, credited to where they come from.
   similarTo?: SimilarTo[]
+  // External sources for further reading, shown as References.
+  references?: SimilarTo[]
 }
 
 // Pages from the first version of the tour that haven't moved into a stage yet.
 export const layoutLabSections: Record<string, LabSection> = {
-  positioning: {
-    id: 'lab-positioning',
-    slug: 'positioning',
-    title: 'Positioning',
-    what: 'Positioning takes a box out of normal flow, so it can sit on top of other boxes, or stay in place while the page scrolls.',
-    why: 'It’s how sticky headers, badges on corners and pop-ups work. A positioned box no longer pushes other boxes away, so they can end up underneath it.',
-  },
   columnDrop: {
     id: 'lab-column-drop',
     slug: 'column-drop',
@@ -54,6 +49,10 @@ export const layoutLabSections: Record<string, LabSection> = {
     title: 'Responsive design',
     what: 'Responsive design means one page that adapts to any screen, from a phone to a wide monitor, instead of a separate version for each.',
     why: 'It starts with the viewport tag, so phones show the page at its real width. Then the layout builds up from narrow to wide, which is called mobile first. Flexible widths and images that shrink to fit do most of the work, and breakpoints handle the rest.',
+    references: [
+      { label: 'MDN: Responsive design', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design' },
+      { label: 'MDN: Viewport meta tag', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Viewport_meta_element' },
+    ],
   },
   fluidSizing: {
     id: 'lab-fluid-sizing',
@@ -61,13 +60,10 @@ export const layoutLabSections: Record<string, LabSection> = {
     title: 'Fluid sizing',
     what: 'Fluid sizing lets a size grow and shrink smoothly with the space, between a smallest and a largest value, instead of jumping at a breakpoint.',
     why: 'Headings and spacing can scale gently from a phone to a wide screen. Mixing rem with a viewport or container unit keeps text zoomable: a size made only from vw doesn’t grow when someone enlarges their text.',
-  },
-  supports: {
-    id: 'lab-supports',
-    slug: 'supports',
-    title: 'Supports',
-    what: '@supports asks the browser whether it understands a feature, and uses some CSS only if it does.',
-    why: 'It lets you use a new feature as an extra, while every other browser keeps something that works. It has worked in every major browser for about ten years.',
+    references: [
+      { label: 'MDN: clamp()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/clamp' },
+      { label: 'MDN: Container size and style queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries' },
+    ],
   },
   container: {
     id: 'lab-container',
@@ -75,13 +71,9 @@ export const layoutLabSections: Record<string, LabSection> = {
     title: 'Container queries',
     what: 'A container query lets a component change its layout depending on how much space its container gives it, rather than how wide the whole screen is.',
     why: 'The same component can sit in a narrow sidebar and a wide main column on the same screen, and suit both. A screen breakpoint would give both copies the same layout, because the screen is the same width for each.',
-  },
-  namedLayers: {
-    id: 'lab-named-layers',
-    slug: 'named-layers',
-    title: 'Named layers',
-    what: 'Named layers are an agreed order for things that sit on top of each other, such as a sticky header, a dialog and a notification.',
-    why: 'Today the Navbar, Modal and Tooltip use z-index values of 10, 100 and 110, each chosen separately. Named once as tokens, a decision like “a modal sits above the sticky header” is made in one place, and stays consistent.',
+    references: [
+      { label: 'MDN: Container queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_queries' },
+    ],
   },
   viewport: {
     id: 'lab-viewport',
@@ -89,20 +81,9 @@ export const layoutLabSections: Record<string, LabSection> = {
     title: 'Viewport units',
     what: 'Newer viewport units measure the screen height in three ways: with the browser’s toolbars showing, called svh; with them hidden, called lvh; or as they are right now, called dvh.',
     why: 'On phones, the old 100vh is often taller than the part of the screen you can see.',
-  },
-  scrollPadding: {
-    id: 'lab-scroll-padding',
-    slug: 'scroll-padding',
-    title: 'Scroll padding under sticky headers',
-    what: 'Scroll padding tells the browser how much room a sticky header takes up, so when you jump to a section, it stops just below the header instead of underneath it.',
-    why: 'Without it, the heading you jumped to, or the control you tabbed to, can end up hidden under the header. WCAG 2.2 has a rule about exactly this, called Focus Not Obscured.',
-  },
-  layers: {
-    id: 'lab-layers',
-    slug: 'cascade-layers',
-    title: 'Cascade layers',
-    what: 'Cascade layers put a library’s CSS into a named group that an app’s own CSS always beats, however specific the library’s selectors are.',
-    why: 'Apps could then adjust Mezzanine without fighting over selector strength or reaching for !important. Mezzanine’s CSS isn’t in a layer today.',
+    references: [
+      { label: 'MDN: length units', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/length' },
+    ],
   },
 }
 
@@ -122,14 +103,121 @@ export interface FuturePage {
   id: string
   title: string
   href: string
+  references?: SimilarTo[]
 }
 
 export const futurePages: FuturePage[] = [
-  { key: 'masonry', id: 'lab-masonry', title: 'Masonry', href: '/site/lab/layout/box-to-the-future/masonry' },
-  { key: 'scrollStateQueries', id: 'lab-scroll-state-queries', title: 'Scroll-state queries', href: '/site/lab/layout/box-to-the-future/scroll-state-queries' },
-  { key: 'anchorPositioning', id: 'lab-anchor-positioning', title: 'Anchor positioning', href: '/site/lab/layout/box-to-the-future/anchor-positioning' },
-  { key: 'fieldSizing', id: 'lab-field-sizing', title: 'Field sizing', href: '/site/lab/layout/box-to-the-future/field-sizing' },
+  { key: 'masonry', id: 'lab-masonry', title: 'Masonry', href: '/site/lab/layout/box-to-the-future/masonry', references: [{ label: 'MDN: Grid lanes layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout' }, { label: 'WebKit: Introducing CSS Grid Lanes', href: 'https://webkit.org/blog/17660/introducing-css-grid-lanes/' }] },
+  { key: 'scrollStateQueries', id: 'lab-scroll-state-queries', title: 'Scroll-state queries', href: '/site/lab/layout/box-to-the-future/scroll-state-queries', references: [{ label: 'MDN: Container scroll-state queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Conditional_rules/Container_scroll-state_queries' }] },
+  { key: 'anchorPositioning', id: 'lab-anchor-positioning', title: 'Anchor positioning', href: '/site/lab/layout/box-to-the-future/anchor-positioning', references: [{ label: 'MDN: Using anchor positioning', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning/Using' }] },
+  { key: 'fieldSizing', id: 'lab-field-sizing', title: 'Field sizing', href: '/site/lab/layout/box-to-the-future/field-sizing', references: [{ label: 'MDN: field-sizing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/field-sizing' }] },
 ]
+
+// Lab pages that aren't specific to layout, kept at the top level of the Lab until they find a home,
+// such as a future Themes experiment for Style priority.
+export interface LabTopLevelPage extends LabIntro {
+  href: string
+  support?: string
+  references?: SimilarTo[]
+  // Other Lab or docs pages to read next, shown as Related pages.
+  relatedPages?: SimilarTo[]
+  // The key of its "How Mezzanine uses it" lines, when it has some.
+  usesKey?: string
+}
+
+export const labTopLevelPages: Record<string, LabTopLevelPage> = {
+  supports: {
+    id: 'lab-supports',
+    href: '/site/lab/supports',
+    title: 'Supports',
+    what: '@supports asks the browser whether it understands a feature, and uses some CSS only if it does.',
+    why: 'It lets you use a new feature as an extra, while every other browser keeps something that works. It has worked in every major browser for about ten years.',
+    references: [
+      { label: 'MDN: @supports', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/@supports' },
+      { label: 'MDN: Using feature queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Conditional_rules/Using_feature_queries' },
+    ],
+  },
+  stylePriority: {
+    id: 'lab-layers',
+    href: '/site/lab/style-priority',
+    title: 'Style priority',
+    subtitle: 'When the style council decides which rule wins.',
+    what: 'When several styles apply to the same box, the browser’s cascade, the C in CSS, decides which one wins. It checks importance first (!important), then layers, then specificity, where a more specific selector beats a general one, and finally order, where the rule written last wins. Elsewhere you’ll see this called the cascade, precedence or specificity.',
+    why: 'Cascade layers are the second step. They put rules into ranked groups, so a whole group, such as Mezzanine’s styles, always loses to an app’s styles, however specific its selectors. Apps could then adjust Mezzanine without fighting over selector strength or reaching for !important. Mezzanine’s CSS isn’t in a layer today.',
+    references: [
+      { label: 'MDN: Introducing the CSS cascade', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction' },
+      { label: 'MDN: Handling conflicts', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts' },
+      { label: 'MDN: Specificity', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity' },
+      { label: 'MDN: @layer', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/@layer' },
+      { label: 'W3Schools: CSS Specificity', href: 'https://www.w3schools.com/css/css_specificity.asp' },
+      { label: 'W3Schools: CSS !important', href: 'https://www.w3schools.com/css/css_important.asp' },
+    ],
+  },
+}
+
+// The Layers experiment: how boxes stack on top of each other, as depth rather than position on the page.
+export const layersLab = {
+  id: 'lab-layers-overview',
+  title: 'Layers',
+  href: '/site/lab/layers',
+  summary: 'How boxes sit on top of each other. Layout arranges boxes across the page; layers add depth.',
+}
+
+export const layersPages: Record<string, LabTopLevelPage> = {
+  positioning: {
+    id: 'lab-positioning',
+    href: '/site/lab/layers/positioning',
+    title: 'Positioning',
+    what: 'Positioning takes a box out of normal flow, so it can sit on top of other boxes, or stay in place while the page scrolls.',
+    why: 'It’s how sticky headers, badges on corners and pop-ups work. A positioned box no longer pushes other boxes away, so they can end up underneath it.',
+    references: [
+      { label: 'MDN: position', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/position' },
+      { label: 'MDN: Positioning (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Positioning' },
+    ],
+  },
+  layerOrder: {
+    id: 'lab-named-layers',
+    href: '/site/lab/layers/ordering-layers',
+    title: 'Ordering layers',
+    what: 'The page background is always right at the back. Boxes are displayed on the surface of that page. But boxes can also be placed on top of the surface of other boxes, in layers. The order of those layers is called the z-index.',
+    why: 'Ordering layers means agreeing an order for things that sit on top of each other, such as a sticky header, a dialog and a notification. Today the Navbar, Modal and Tooltip use z-index values of 10, 100 and 110, each chosen separately. Named once as tokens, a decision like “a modal sits above the sticky header” is made in one place, and stays consistent.',
+    references: [
+      { label: 'MDN: z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/z-index' },
+      { label: 'MDN: Understanding z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Understanding_z-index' },
+    ],
+  },
+  stackingContexts: {
+    id: 'lab-stacking-contexts',
+    href: '/site/lab/layers/bundles-of-layers',
+    title: 'Bundles of layers',
+    subtitle: 'When there’s more than one z-index.',
+    what: 'A bundle of layers with their own z-index can also be treated as a unified layer. Anything placed on top of that bundle is considered a separate layer, and so that creates an additional z-index. You can place bundles on top of other bundles!',
+    why: 'The technical term for a bundle of layers is a Stacking Context.',
+    usesKey: 'stackingContexts',
+    relatedPages: [
+      { label: 'Ordering layers', href: '/site/lab/layers/ordering-layers' },
+      { label: 'Positioning', href: '/site/lab/layers/positioning' },
+      { label: 'Elevation', href: '/elevation' },
+    ],
+    references: [
+      { label: 'MDN: Stacking context', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Stacking_context' },
+      { label: 'MDN: Understanding z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Understanding_z-index' },
+      { label: 'MDN: z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/z-index' },
+      { label: 'MDN: isolation', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/isolation' },
+    ],
+  },
+  scrollPadding: {
+    id: 'lab-scroll-padding',
+    href: '/site/lab/layers/scroll-padding',
+    title: 'Scroll padding',
+    what: 'Scroll padding tells the browser how much room a sticky header takes up, so when you jump to a section, it stops just below the header instead of underneath it.',
+    why: 'Without it, the heading you jumped to, or the control you tabbed to, can end up hidden under the header. WCAG 2.2 has a rule about exactly this, called Focus Not Obscured.',
+    references: [
+      { label: 'MDN: scroll-padding', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding' },
+      { label: 'WCAG 2.2: Focus not obscured (minimum)', href: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html' },
+    ],
+  },
+}
 
 export type StageKey = 'theBox' | 'insideTheBox' | 'arrangingBoxes' | 'boxFormations' | 'boxesOnDevices'
 
@@ -141,12 +229,14 @@ export interface LayoutStage {
   slug: string
   title: string
   summary: string
+  // The heading above the stage's Cards, when it isn't the usual "Pages".
+  pagesHeading?: string
 }
 
 export const layoutStages: LayoutStage[] = [
   { key: 'theBox', id: 'lab-stage-the-box', slug: 'the-box', title: 'The box', summary: 'Everything on a web page is a box. Start with just one: what it’s made of, how big it is, and how its sides are named.' },
   { key: 'insideTheBox', id: 'lab-stage-inside-the-box', slug: 'inside-the-box', title: 'Inside the box', summary: 'A box holds content: text, pictures, other boxes. These pages are about how that content behaves inside its box.' },
-  { key: 'arrangingBoxes', id: 'lab-stage-arranging-boxes', slug: 'arranging-boxes', title: 'Arranging boxes', summary: 'Many boxes together. First what they do on their own, then how to take charge, and finally a check that the result still makes sense.' },
+  { key: 'arrangingBoxes', id: 'lab-stage-arranging-boxes', slug: 'arranging-boxes', title: 'Arranging boxes', summary: 'Left to their own devices, boxes make a poor job of arranging themselves.', pagesHeading: 'How to arrange boxes' },
   { key: 'boxFormations', id: 'lab-stage-box-formations', slug: 'box-formations', title: 'Box formations', summary: 'Ready-made arrangements, built from Flexbox and Grid. Each one is a building block you could reuse, following the Bedrock layout library.' },
   { key: 'boxesOnDevices', id: 'lab-stage-boxes-on-devices', slug: 'boxes-on-devices', title: 'Boxes on devices', summary: 'How boxes adapt to the device and the person using it.' },
 ]
@@ -170,6 +260,8 @@ export interface StagePage extends LabIntro {
   support?: string
   // Building blocks are reusable Lab-only layout components; the rest teach a CSS idea.
   similarTo?: SimilarTo[]
+  // External sources for further reading, shown as References after any Similar to sources.
+  references?: SimilarTo[]
 }
 
 export const stagePages: StagePage[] = [
@@ -179,24 +271,49 @@ export const stagePages: StagePage[] = [
     subtitle: 'When boxes assert their need for personal space.',
     what: 'Margin is a way to add space outside of a box. It pushes other boxes away, including from the edge of its parent box, if the parent has a border or padding.',
     why: 'When one box sits above another and both have a margin, the browser uses only the larger of the two. This is called “margin collapsing”.',
+    references: [
+      { label: 'MDN: margin', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/margin' },
+      { label: 'MDN: Mastering margin collapsing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Margin_collapsing' },
+    ],
   },
   {
     key: 'padding', id: 'lab-padding', stage: 'theBox', title: 'Padding', href: '/site/lab/layout/the-box/padding',
     subtitle: 'When a box cushions its content.',
     what: 'Padding is a way to add space inside a box, between its edge and its content. It pushes the content in, away from the border.',
     why: 'A box’s background fills its padding, so the space looks like part of the box. Padding also makes the box bigger, unless the box uses box-sizing: border-box.',
+    references: [
+      { label: 'MDN: padding', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/padding' },
+    ],
+  },
+  {
+    key: 'typesOfBox', id: 'lab-types-of-box', stage: 'theBox', title: 'Types of box', href: '/site/lab/layout/the-box/types-of-box',
+    subtitle: 'When boxes decide whether to stack up or line up.',
+    what: 'Every box is a type, set with the display property. A block box starts a new row and fills the width of its parent. An inline box sits in a row with its neighbours and wraps like words. An inline-block box sits in a row too, but takes a width, height and padding like a block. And display: none removes a box completely, even for screen readers.',
+    why: 'Left alone, block boxes stack one above another and inline boxes line up in rows. This natural arrangement is called normal flow, and it follows the order of the HTML, which is also the order keyboards and screen readers follow. A box can also arrange the boxes inside it, with display: flex or display: grid: see Arranging boxes.',
+    references: [
+      { label: 'MDN: display', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/display' },
+      { label: 'MDN: Block and inline layout in normal flow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Display/Block_and_inline_layout' },
+    ],
   },
   {
     key: 'measuringTheBox', id: 'lab-measuring-the-box', stage: 'theBox', title: 'Measuring the box', href: '/site/lab/layout/the-box/measuring-the-box',
     subtitle: 'What do I measure a box with?',
     what: 'Every size needs a unit of measurement. Some are fixed, like px. Others depend on something else: the text size (rem, em), the box around it (%), the browser window (vw) or the width of a character (ch).',
     why: 'The right unit lets a layout look after itself. A size in rem grows when someone enlarges their text, and a width in % follows the box around it. Functions such as clamp() combine units, so a size can grow and shrink within limits.',
+    references: [
+      { label: 'MDN: Values and units', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Values_and_units' },
+      { label: 'MDN: clamp()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/clamp' },
+    ],
   },
   {
     key: 'sizingTheBox', id: 'lab-sizing-the-box', stage: 'theBox', title: 'Sizing the box', href: '/site/lab/layout/the-box/sizing-the-box',
     subtitle: 'How big is the box, and what does that size include?',
     what: 'You can give a box a size with width and height, or limits with min-width and max-width. box-sizing decides what a width includes: just the content box, or everything up to the border.',
     why: 'A box asks for a size, but its parent, its content and its arrangement also have a say. With the default content-box, padding and border are added on top, which is why a width: 100% box with padding can poke out of its parent.',
+    references: [
+      { label: 'MDN: box-sizing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing' },
+      { label: 'MDN: min-width', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/min-width' },
+    ],
   },
   {
     key: 'frame', id: 'lab-frame-block', stage: 'theBox', title: 'Frame', href: '/site/lab/layout/the-box/frame',
@@ -204,12 +321,19 @@ export const stagePages: StagePage[] = [
     what: 'Frame is a building block. It gives a box a fixed shape, such as 16:9, and crops the picture inside to fill it.',
     why: 'Pictures from different places come in different shapes. Frame lines them up as a tidy set, without squashing any of them.',
     similarTo: [everyLayout('Frame', 'frame'), bedrock('Frame', 'frame')],
+    references: [
+      { label: 'MDN: aspect-ratio', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio' },
+      { label: 'MDN: object-fit', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit' },
+    ],
   },
   {
     key: 'sides', id: 'lab-sides', stage: 'theBox', title: 'Sides', href: '/site/lab/layout/the-box/sides',
     subtitle: 'Any direction: how do I name a box’s sides so they work in every language?',
     what: 'A box has four sides. Physical names say left and right; logical names say start and end, so they follow the reading direction. In CSS, these are called logical properties. The other pages use the familiar physical names, like width and margin-left.',
     why: 'Layouts then mirror themselves for right-to-left languages such as Arabic and Hebrew, with no extra work. Anything set with left and right stays put, and looks wrong.',
+    references: [
+      { label: 'MDN: Logical properties and values', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Logical_properties_and_values' },
+    ],
   },
   {
     key: 'center', id: 'lab-center', stage: 'theBox', title: 'Center', href: '/site/lab/layout/the-box/center',
@@ -220,85 +344,92 @@ export const stagePages: StagePage[] = [
   },
   // Inside the box
   {
-    key: 'text', id: 'lab-text', stage: 'insideTheBox', title: 'Text in boxes', href: '/site/lab/layout/inside-the-box/text-in-boxes',
-    subtitle: 'How does text fit inside its box?',
-    what: 'Text fills its box one line at a time. When a line reaches the edge of the box, the next word moves onto a new line.',
-    why: 'So the box decides how long the lines are. A comfortable line holds roughly 45 to 75 characters, and words that are too long for the box need help to fit.',
-  },
-  {
     key: 'imagesAndMedia', id: 'lab-images-and-media', stage: 'insideTheBox', title: 'Filling the box', href: '/site/lab/layout/inside-the-box/filling-the-box',
     subtitle: 'How do pictures fill their box?',
     what: 'Pictures and videos are boxes too, but they arrive with a size of their own, which can be bigger than the space they’re given. A few properties keep them inside their box and in proportion.',
     why: 'An image wider than a phone screen pushes the whole page sideways, and an image squashed into the wrong shape looks broken. Every picture also needs alt text in the HTML, so people who can’t see it still get its meaning.',
+    references: [
+      { label: 'MDN: object-fit', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit' },
+      { label: 'MDN: aspect-ratio', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio' },
+    ],
   },
   {
     key: 'overflow', id: 'lab-overflow', stage: 'insideTheBox', title: 'Overflowing the box', href: '/site/lab/layout/inside-the-box/overflowing-the-box',
     subtitle: 'What if the content doesn’t fit?',
     what: 'Overflow is content that is too big for its box. By default it spills out and draws over whatever comes next. The overflow property chooses what happens instead: hide the extra, or let people scroll to it.',
     why: 'Spilled content overlaps other things, and hidden content is lost. The safest fix is usually to let the box grow. When a box has to stay a fixed size, scrolling keeps the content reachable.',
+    references: [
+      { label: 'MDN: Overflow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Overflow' },
+      { label: 'MDN: overflow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/overflow' },
+    ],
   },
   {
     key: 'multiColumn', id: 'lab-multi-column', stage: 'insideTheBox', title: 'Columns in boxes', href: '/site/lab/layout/inside-the-box/columns-in-boxes',
     subtitle: 'How do I flow content into columns, like a newspaper?',
     what: 'Columns in boxes pours any content into columns, like a newspaper: text, lists, pictures or cards. It fills the first column from top to bottom, then carries on at the top of the next. You say how wide a column should be, and the browser works out how many fit.',
     why: 'It suits short content, such as a list of links. For long text it’s awkward on a screen, because readers have to scroll back up to start each new column. Cards and pictures can be split across two columns unless each one has break-inside: avoid. Their order also runs down each column, not across, so a grid of cards is better built with CSS Grid.',
+    references: [
+      { label: 'MDN: Multi-column layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Multicol_layout' },
+      { label: 'MDN: break-inside', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside' },
+    ],
   },
   {
-    key: 'has', id: 'lab-has', stage: 'insideTheBox', title: ':has()', href: '/site/lab/layout/inside-the-box/has',
-    subtitle: 'Knows its contents: how can a box change based on what’s inside it?',
-    what: 'The :has() selector lets a container change its layout depending on what’s inside it, such as how many items it holds, or whether it has an image.',
-    why: 'The layout reacts to the real content, so you don’t need a separate variant or prop for each case.',
-  },
-  {
-    key: 'cover', id: 'lab-cover', stage: 'insideTheBox', title: 'Cover', href: '/site/lab/layout/inside-the-box/cover',
-    subtitle: 'How do I put one thing centre stage in a tall area?',
-    what: 'Cover is a building block for a tall area, like the opening section of a page. One item sits in the middle, with optional items at the top and bottom.',
-    why: 'Centring something from top to bottom used to be a famous CSS puzzle. Cover does it with a minimum height and automatic margins, and the area still grows if the content needs more room.',
-    similarTo: [everyLayout('Cover', 'cover'), bedrock('Cover', 'cover')],
-  },
-  {
-    key: 'reel', id: 'lab-reel', stage: 'insideTheBox', title: 'Reel', href: '/site/lab/layout/inside-the-box/reel',
-    subtitle: 'How do I make a row that scrolls sideways?',
-    what: 'Reel is a building block for a row of items that scrolls sideways, like a conga line going off the edge of the screen.',
-    why: 'It shows lots of items without wrapping them onto new rows. Keyboard users need to reach it too, so the scrolling area can take focus and has a name.',
-    similarTo: [everyLayout('Reel', 'reel'), bedrock('Reel', 'reel')],
+    key: 'has', id: 'lab-has', stage: 'insideTheBox', title: 'Box has content', href: '/site/lab/layout/inside-the-box/box-has-content',
+    subtitle: 'When a box changes its layout depending on what’s inside it.',
+    what: 'A selector is the part of a CSS rule that picks which boxes the rule applies to. Usually it picks a box by what it is, or where it sits, such as “a link inside the Navbar”. The :has() selector works the other way round: it picks a box by what it contains, such as “a list that has five or more items” or “a box that has a picture”.',
+    why: 'Think of a restaurant pushing two tables together when a fifth guest arrives. The table reacts to who actually turns up. In the same way, a box can react to its real content, so you don’t need a separate version, or an extra setting, for every case.',
+    references: [
+      { label: 'MDN: :has()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/:has' },
+    ],
   },
   // Arranging boxes
-  {
-    key: 'normalFlow', id: 'lab-normal-flow', stage: 'arrangingBoxes', title: 'Normal flow', href: '/site/lab/layout/arranging-boxes/normal-flow',
-    subtitle: 'How do boxes arrange themselves if I don’t arrange them?',
-    what: 'Normal flow is what the browser does before you add any layout. Block boxes, like paragraphs and headings, start on a new line and fill the width. Inline boxes, like links and bold words, sit inside a line of text, one after another.',
-    why: 'Normal flow follows the order of the HTML, which is also the order keyboards and screen readers follow. Starting from it keeps meaning first: the page makes sense before any layout is added.',
-  },
   {
     key: 'cssFlexbox', id: 'lab-css-flexbox', stage: 'arrangingBoxes', title: 'CSS Flexbox', href: '/site/lab/layout/arranging-boxes/css-flexbox',
     subtitle: 'How do I line boxes up in a row or a column?',
     what: 'Flexbox arranges boxes in one direction: a row or a column. The container chooses the direction and whether items may wrap onto a new line. Each item can grow or shrink to share the space.',
     why: 'Most everyday layouts are a row or a column: a toolbar, a list of tags, a form. Flexbox handles them in a few lines, and the space sorts itself out.',
+    references: [
+      { label: 'MDN: Basic concepts of flexbox', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts' },
+      { label: 'MDN: Flexbox (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox' },
+    ],
   },
   {
     key: 'cssGrid', id: 'lab-css-grid', stage: 'arrangingBoxes', title: 'CSS Grid', href: '/site/lab/layout/arranging-boxes/css-grid',
     subtitle: 'How do I line boxes up in rows and columns at once?',
     what: 'Grid arranges boxes in rows and columns at the same time. You describe the columns, and each item takes the next cell, or spans more than one.',
     why: 'When things need to line up in both directions, such as a gallery or a page with a header and a sidebar, Grid keeps every edge aligned.',
+    references: [
+      { label: 'MDN: Basic concepts of grid layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Basic_concepts' },
+      { label: 'MDN: Grids (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids' },
+    ],
   },
   {
     key: 'subgrid', id: 'lab-subgrid', stage: 'arrangingBoxes', title: 'Subgrid', href: '/site/lab/layout/arranging-boxes/subgrid',
     subtitle: 'How do the parts inside cards line up with each other?',
     what: 'Subgrid lets the parts inside cards that sit side by side share the same rows. Titles, text and actions then line up across the row, even when each card has a different amount of content.',
     why: 'Lined-up rows look intentional and are easier to scan, and you get them without fixing heights or cutting text short.',
+    references: [
+      { label: 'MDN: Subgrid', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Subgrid' },
+    ],
   },
   {
     key: 'alignment', id: 'lab-alignment', stage: 'arrangingBoxes', title: 'Alignment', href: '/site/lab/layout/arranging-boxes/alignment',
     subtitle: 'How do I centre things, or push them to one side?',
     what: 'Alignment moves items around inside the space they have. In Flexbox, justify-content moves them along the row, and align-items moves them across it, from top to bottom.',
     why: '“How do I centre something?” is one of the most asked questions in CSS. With Flexbox or Grid, the answer is one or two lines.',
+    references: [
+      { label: 'MDN: Box alignment', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_alignment' },
+      { label: 'MDN: Center an element', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook/Center_an_element' },
+    ],
   },
   {
     key: 'gap', id: 'lab-gap', stage: 'arrangingBoxes', title: 'Gap', href: '/site/lab/layout/arranging-boxes/gap',
     subtitle: 'When an outer box makes sure inner boxes are equally spaced out.',
     what: 'Gap is set on a parent and goes only between its children, like boxes holding hands at arm’s length.',
     why: 'Gap never adds stray space before the first item or after the last, so it’s usually the best choice between items. Mezzanine’s spacing tokens give every gap a size from the same scale.',
+    references: [
+      { label: 'MDN: gap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/gap' },
+    ],
   },
   {
     key: 'readingOrder', id: 'lab-reading-order', stage: 'arrangingBoxes', title: 'Reading order', href: '/site/lab/layout/arranging-boxes/reading-order',
@@ -306,6 +437,10 @@ export const stagePages: StagePage[] = [
     what: 'Reading order is the order people meet things when they use a keyboard or a screen reader. It always follows the HTML, even when CSS moves things around on screen.',
     why: 'Flexbox and Grid can show things in a different order from the HTML. Then what people see and what they hear or tab through no longer match, and WCAG counts that as a failure. To change the order, change the HTML.',
     support: 'A newer property, reading-flow, may one day let CSS change the reading order too, but only some browsers have it.',
+    references: [
+      { label: 'MDN: Grid layout and accessibility', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Accessibility' },
+      { label: 'WCAG 2.2: Meaningful sequence', href: 'https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html' },
+    ],
   },
   // Box formations
   {
@@ -314,6 +449,13 @@ export const stagePages: StagePage[] = [
     what: 'Stack is a building block that puts items one above another, like boxes standing on each other’s heads.',
     why: 'The space between items is set once, by the parent, so no item needs its own outer margin. Move an item and the spacing still works.',
     similarTo: [everyLayout('Stack', 'stack'), bedrock('Stack', 'stack')],
+  },
+  {
+    key: 'cover', id: 'lab-cover', stage: 'boxFormations', title: 'Cover', href: '/site/lab/layout/box-formations/cover',
+    subtitle: 'When one item takes centre stage, like the title on a book cover.',
+    what: 'Cover is a building block for a tall box, like the opening section of a homepage. One item sits in the middle, and anything before or after it is pushed to the top and bottom edges, like the title, publisher and author on a book cover.',
+    why: 'The box has a minimum height, not a fixed one, so if the content needs more room, such as on a small phone or with enlarged text, the box grows instead of cutting anything off.',
+    similarTo: [everyLayout('Cover', 'cover'), bedrock('Cover', 'cover')],
   },
   {
     key: 'inline', id: 'lab-inline', stage: 'boxFormations', title: 'Inline', href: '/site/lab/layout/box-formations/inline',
@@ -328,6 +470,13 @@ export const stagePages: StagePage[] = [
     what: 'Inline cluster is a building block for a row that wraps onto new lines the way words do. The example uses real Mezzanine Badges.',
     why: 'Tags, filters and small buttons come in any number and any length. Wrapping keeps them all visible, with the same space between every one.',
     similarTo: [everyLayout('Cluster', 'cluster'), bedrock('InlineCluster', 'inline-cluster')],
+  },
+  {
+    key: 'reel', id: 'lab-reel', stage: 'boxFormations', title: 'Reel', href: '/site/lab/layout/box-formations/reel',
+    subtitle: 'How do I make a row that scrolls sideways?',
+    what: 'Reel is a building block for a row of items that scrolls sideways, like a conga line going off the edge of the screen.',
+    why: 'It shows lots of items without wrapping them onto new rows. Keyboard users need to reach it too, so the scrolling area can take focus and has a name.',
+    similarTo: [everyLayout('Reel', 'reel'), bedrock('Reel', 'reel')],
   },
   {
     key: 'split', id: 'lab-split', stage: 'boxFormations', title: 'Split', href: '/site/lab/layout/box-formations/split',
@@ -356,6 +505,9 @@ export const stagePages: StagePage[] = [
     subtitle: 'Respect the person’s settings and device.',
     what: 'Media queries still have a job, but a different one: describing the person’s setup. That means their preferences, what they point with, whether the site is installed as an app, and the size of the outer page frame.',
     why: 'Components ask about their space, and the page asks about the environment. Keeping those two questions apart stops screen breakpoints creeping into every component.',
+    references: [
+      { label: 'MDN: Using media queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using' },
+    ],
   },
   {
     key: 'safeAreas', id: 'lab-safe-areas', stage: 'boxesOnDevices', title: 'Safe areas', href: '/site/lab/layout/boxes-on-devices/safe-areas',
@@ -363,24 +515,33 @@ export const stagePages: StagePage[] = [
     what: 'Safe areas tell you how much room notches and home indicators take up.',
     why: 'Installed apps run edge to edge, so content has to stay clear of the notch. Since iOS 26, any site added to the Home Screen opens this way.',
     support: 'Safe areas work in every browser on devices that have them, and are mostly zero on a laptop.',
+    references: [
+      { label: 'MDN: env()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/env' },
+    ],
   },
   {
     key: 'targetSize', id: 'lab-target-size', stage: 'boxesOnDevices', title: 'Touch targets', href: '/site/lab/layout/boxes-on-devices/touch-targets',
     subtitle: 'Easy tapping: how big should something be to hit with a finger, or an unsteady hand?',
     what: 'A target size is the smallest area that something you tap or click should cover, so it’s easy to hit with a finger or an unsteady hand.',
     why: 'WCAG 2.2 sets a minimum of 24 by 24 pixels. Mezzanine’s buttons use 44 pixels today, but the value, 2.75rem, is written by hand. As a token, every control can share it.',
+    references: [
+      { label: 'WCAG 2.2: Target size (minimum)', href: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html' },
+    ],
   },
 ]
 
 // A stage that opens with a "How it works" of its own, before its pages: The box explains the
 // box model, the idea every other page builds on. Keyed by the stage; its demo and Mezzanine lines
 // use the same key.
-export const stageIntros: Partial<Record<StageKey, { key: string; id: string; what: string; why: string }>> = {
+export const stageIntros: Partial<Record<StageKey, { key: string; id: string; what: string; why: string; references?: SimilarTo[] }>> = {
   theBox: {
     key: 'boxModel',
     id: 'lab-box-model',
     what: 'Everything on a web page is a box, even a single word or a picture. Each box has four layers, like rings in a tree trunk. In the middle is the content. Around it is padding, then a border, then margin on the outside.',
     why: 'Most layout puzzles come down to these four layers. Padding is space inside the box, so it pushes the content in. Margin is space outside the box, so it pushes other boxes away. Once you can picture the layers, you can tell which one to change.',
+    references: [
+      { label: 'MDN: Introduction to the CSS box model', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Introduction' },
+    ],
   },
 }
 
@@ -534,8 +695,8 @@ export const cssNotes: Record<string, CssNote> = {
   },
   quantityList: {
     paragraphs: [
-      'The list starts as a single column. The selector `:has(> :nth-child(5))` asks whether the list has a fifth child.',
-      'If it does, the second rule switches the list to an auto-fill grid. Remove an item and the condition stops matching, so the list goes back to a column.',
+      'The list starts as a single column. The selector `:has(> :nth-child(5))` asks the list a question: “do you have a fifth item?”. The `>` means only items directly inside the list count.',
+      'If the answer is yes, the second rule turns the list into a grid. Remove an item and the answer becomes no, so the list goes back to a single column.',
     ],
     code: `.lab-has-list {
   display: flex;
@@ -552,8 +713,8 @@ export const cssNotes: Record<string, CssNote> = {
   },
   mediaObject: {
     paragraphs: [
-      'The layout is a single column by default. The selector `:has(> .lab-media-image)` matches only when an image is inside.',
-      'When it matches, the layout gets two columns: the image takes up to 6rem, but never more than 35% of the width, and the text takes the rest.',
+      'The box is a single column by default. The selector `:has(> .lab-media-image)` asks “do you have a picture inside?”.',
+      'If the answer is yes, the box gets two columns: the picture takes up to 6rem, but never more than 35% of the width, and the text takes the rest.',
     ],
     code: `.lab-media {
   display: grid;
@@ -715,4 +876,3 @@ export const environmentQueries = [
 // The alt text for the example picture used by the Filling the box and Frame demos.
 export const exampleImageAlt = 'Example picture: a dark square and a grey circle on a light background'
 
-export const sampleParagraph = 'Long lines of text are tiring to read, because your eyes have to travel a long way back to find the start of the next line. A comfortable line holds roughly 45 to 75 characters. This paragraph is shown twice: once with no limit, and once with a line length.'

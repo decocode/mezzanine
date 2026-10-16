@@ -325,10 +325,6 @@
   background: var(--color-surface);
 }
 
-.lab-line-length {
-  max-width: var(--line-length);
-}
-
 /* Inside the box: overflow. */
 .lab-overflow-stage {
   min-height: 16rem;
@@ -345,22 +341,6 @@
 .lab-overflow-box:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: var(--space-1);
-}
-
-.lab-long-word {
-  width: 12rem;
-  padding: var(--space-2);
-  border: 1px solid var(--color-text);
-}
-
-.lab-long-word-break {
-  overflow-wrap: anywhere;
-}
-
-.lab-long-word-cut {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 /* Inside the box: images and media. */
@@ -576,6 +556,26 @@
   margin-block: auto;
 }
 
+/* The Cover demo's outline, so you can see the box the middle item is centred in. */
+.lab-cover-demo {
+  border: 1px dashed var(--color-text-muted);
+}
+
+/* The demo's items: small labels at the edges and a large centred headline. */
+.lab-cover-demo .lab-cover-small {
+  align-self: flex-start;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+}
+
+.lab-cover-demo .lab-cover-end {
+  align-self: center;
+}
+
+.lab-cover-headline {
+  text-align: center;
+}
+
 .lab-reel {
   display: flex;
   gap: var(--space-3);
@@ -743,18 +743,6 @@
 .lab-direction-logical {
   border-inline-start: var(--space-2) solid var(--color-warning-600);
   padding-inline-start: var(--space-4);
-}
-
-/* Inside the box: reading direction. */
-.lab-reading-direction {
-  border-inline-start: var(--space-2) solid var(--color-text);
-  padding-inline-start: var(--space-4);
-  text-align: start;
-}
-
-.lab-reading-vertical {
-  writing-mode: vertical-rl;
-  inline-size: 10rem;
 }
 
 /* Subgrid. */
@@ -969,4 +957,57 @@
 /* Emerging feature: fields that grow with their content. */
 .lab-field-sizing .react-aria-TextArea {
   field-sizing: content;
+}
+
+/* Layers: stacking contexts. Bundle B (two layers) sits on top of bundle A (three layers). */
+.lab-bundles {
+  position: relative;
+  padding-bottom: var(--space-4);
+}
+
+.lab-bundle {
+  position: relative;
+  box-sizing: border-box;
+  width: 65%;
+  height: 12rem;
+  padding: var(--space-2);
+  border: 2px dashed var(--color-text-muted);
+}
+
+/* Each bundle's label sits in its top right corner. */
+.lab-bundle > p {
+  text-align: end;
+}
+
+.lab-bundle-a-grouped {
+  z-index: 1;
+}
+
+.lab-bundle-b-grouped {
+  z-index: 2;
+}
+
+/* Unbundled: the dashed border goes, so the three layers sit loose on the page. */
+.lab-bundle-loose {
+  border-color: transparent;
+}
+
+.lab-bundle-b {
+  height: 10rem;
+  margin-top: -7rem;
+  margin-left: 35%;
+}
+
+.lab-bundle-layer {
+  position: absolute;
+  z-index: var(--lab-layer-z);
+  top: calc(2.5rem + var(--lab-layer-step) * 1.75rem);
+  left: calc(var(--space-2) + var(--lab-layer-step) * 10%);
+  box-sizing: border-box;
+  width: 70%;
+  min-height: 4rem;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--elevation-raised-1);
 }

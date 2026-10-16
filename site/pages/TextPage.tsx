@@ -1,10 +1,11 @@
-import { Card } from '@decocode/mezzanine'
+import { Card, CodeBlock } from '@decocode/mezzanine'
 import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 import { ExampleZone } from '../components/ExampleZone'
 import { TokenValue } from '../components/TokenValue'
 import {
-  textCssProperties, textDescription, textLineLengthExample, textLineLengthParagraphs, textLongWordsExample,
+  textCssProperties, textDescription, textLineLengthCode, textLineLengthExample, textLineLengthLabels, textLineLengthParagraphs,
+  textLongWordsCode, textLongWordsExample, textReadingDirectionCode,
   textLongWordsParagraphs, textReadingDirectionParagraphs, textRightToLeftExamples, textReferences, textRelatedPages, textVerticalExamples,
 } from '../content/textContent'
 
@@ -19,7 +20,11 @@ export default function TextPage() {
           title: 'Line length',
           content: (<>
             {textLineLengthParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ExampleZone>
+            <CodeBlock className="docs-code-block">{textLineLengthCode}</CodeBlock>
+            <ExampleZone className="text-comparison">
+              <p className="mz-text-label-md">{textLineLengthLabels.without}</p>
+              <p className="mz-text-body-md">{textLineLengthExample}</p>
+              <p className="mz-text-label-md">{textLineLengthLabels.with}</p>
               <p className="mz-text-body-md text-line-length-example">{textLineLengthExample}</p>
             </ExampleZone>
           </>),
@@ -29,6 +34,7 @@ export default function TextPage() {
           title: 'Long words',
           content: (<>
             {textLongWordsParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <CodeBlock className="docs-code-block">{textLongWordsCode}</CodeBlock>
             <ExampleZone className="text-narrow-example">
               <Card><p lang="de">{textLongWordsExample}</p></Card>
             </ExampleZone>
@@ -39,6 +45,7 @@ export default function TextPage() {
           title: 'Reading direction',
           content: (<>
             {textReadingDirectionParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
+            <CodeBlock className="docs-code-block">{textReadingDirectionCode}</CodeBlock>
             <ExampleZone>
               <ul className="text-language-examples">
                 {textRightToLeftExamples.map(({ language, lang, text }) => <li key={lang} dir="rtl" lang={lang}>

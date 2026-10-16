@@ -50,6 +50,25 @@ function PaddingDemo() {
   </>
 }
 
+const displayOptions = [
+  { label: 'block', value: 'block' },
+  { label: 'inline', value: 'inline' },
+  { label: 'inline-block', value: 'inline-block' },
+  { label: 'none', value: 'none' },
+] as const
+
+function TypesOfBoxDemo() {
+  const [display, setDisplay] = useState<(typeof displayOptions)[number]['value']>('inline')
+  return <>
+    <DemoText>Three boxes in a row of text. Choose their type: block boxes stack, inline and inline-block boxes line up, and none makes them disappear.</DemoText>
+    <ValuePicker label="display" options={displayOptions} value={display} onChange={setDisplay} />
+      <Text elementType="p" className="mz-text-body-md" style={{ '--lab-flow-display': display } as CSSProperties}>
+        Here is a sentence with <span className="lab-flow-item">Box 1</span> inside it, then <span className="lab-flow-item">Box 2</span>, and finally <span className="lab-flow-item">Box 3</span> near the end of the line.
+      </Text>
+    <CssNotes name="the types of box" note={cssNotes.normalFlow} level={3} />
+  </>
+}
+
 function SizingTheBoxDemo() {
   return <>
     <DemoText>Both boxes are given the same width. The first ends up wider, because its padding and border are added on top.</DemoText>
@@ -88,7 +107,7 @@ function MeasuringTheBoxDemo() {
 function LogicalDemo() {
   const [rtl, setRtl] = useState(false)
   return <>
-    <DemoText>Turn on right to left. The logical box moves its border and indent to the right, where Arabic and Hebrew lines start. The physical one stays on the left and looks wrong. Reading direction itself is explained in <Link href="/site/lab/layout/inside-the-box/text-in-boxes">Text in boxes</Link>.</DemoText>
+    <DemoText>Turn on right to left. The logical box moves its border and indent to the right, where Arabic and Hebrew lines start. The physical one stays on the left and looks wrong. Reading direction itself is explained on the <Link href="/text">Text</Link> page in the docs.</DemoText>
     <Checkbox isSelected={rtl} onChange={setRtl}>Show right to left</Checkbox>
     <div className="lab-two-slots" dir={rtl ? 'rtl' : 'ltr'}>
       <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Physical (left/right)</Text>
@@ -134,6 +153,7 @@ export const theBoxDemos: StageDemos = {
   boxModel: { Demo: BoxModelDemo },
   margin: { Demo: MarginDemo },
   padding: { Demo: PaddingDemo },
+  typesOfBox: { Demo: TypesOfBoxDemo },
   measuringTheBox: { Demo: MeasuringTheBoxDemo },
   sizingTheBox: { Demo: SizingTheBoxDemo },
   frame: { Demo: FrameDemo },

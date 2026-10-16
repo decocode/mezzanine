@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
-import { boxToTheFuture, cssNotes, futurePages, layoutLabSections, layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutLabContent'
+import { boxToTheFuture, cssNotes, futurePages, labTopLevelPages, layersLab, layersPages, layoutLabSections, layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutLabContent'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
@@ -9,7 +9,7 @@ const stageOverviewPages = layoutStages.map(stage => ({ path: `/site/lab/layout/
 const stageChildPages = stagePages.map(page => ({ path: page.href, title: page.title }))
 const futureOverviewPage = { path: `/site/lab/layout/${boxToTheFuture.slug}`, title: boxToTheFuture.title }
 const futureChildPages = futurePages.map(page => ({ path: page.href, title: page.title }))
-const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages, ...sectionPages]
+const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages, ...sectionPages, ...Object.values(labTopLevelPages).map(page => ({ path: page.href, title: page.title })), { path: layersLab.href, title: layersLab.title }, ...Object.values(layersPages).map(page => ({ path: page.href, title: page.title }))]
 
 // Checks the Layout overview, each stage, each stage page and each page still to be sorted fit a 320px
 // screen at normal and doubled text in every theme, and pass an automated accessibility scan.
@@ -111,7 +111,7 @@ test('Lab Layout demos respond to their space and content', async ({ page }) => 
   await page.locator('label').filter({ hasText: 'Switch to a column below 30rem' }).click()
   await expect.poll(rows).toBe(1)
 
-  await page.goto('/site/lab/layout/inside-the-box/has')
+  await page.goto('/site/lab/layout/inside-the-box/box-has-content')
   const list = page.locator('.lab-has-list')
   await expect(list).toHaveCSS('display', 'flex')
   await page.getByRole('button', { name: 'Add an item', exact: true }).click()

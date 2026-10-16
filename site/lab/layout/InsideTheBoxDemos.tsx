@@ -1,9 +1,8 @@
 import { useState, type CSSProperties } from 'react'
-import { Button, Checkbox, Link, Text } from '@decocode/mezzanine'
+import { Button, Checkbox, Text } from '@decocode/mezzanine'
 import exampleImage from '../../assets/sidebar-example.svg'
 import { CssNotes, DemoFrame, DemoHeading, DemoText, ValuePicker } from './LabParts'
-import { Block, Cover, Reel, Stack } from './LabPrimitives'
-import { cssNotes, exampleImageAlt, sampleParagraph } from './layoutLabContent'
+import { cssNotes, exampleImageAlt } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
 
 const overflowOptions = [
@@ -11,12 +10,6 @@ const overflowOptions = [
   { label: 'hidden', value: 'hidden' },
   { label: 'scroll', value: 'scroll' },
   { label: 'auto', value: 'auto' },
-] as const
-
-const longWordOptions = [
-  { label: 'Spill out', value: 'spill' },
-  { label: 'Break the word', value: 'break' },
-  { label: 'Cut it off', value: 'cut' },
 ] as const
 
 function OverflowDemo() {
@@ -35,49 +28,6 @@ function OverflowDemo() {
       </div>
     </div>
     <CssNotes name="the box" note={cssNotes.overflow} level={3} />
-  </>
-}
-
-const readingDirections = [
-  { label: 'Left to right', value: 'ltr', lang: 'en', text: 'Text flows from the start of a line to its end.' },
-  { label: 'Right to left', value: 'rtl', lang: 'ar', text: 'يبدأ النص من بداية السطر.' },
-  { label: 'Top to bottom', value: 'vertical', lang: 'ja', text: '文章は行の始まりから終わりへ流れます。' },
-] as const
-
-function TextDemo() {
-  const [longWord, setLongWord] = useState<(typeof longWordOptions)[number]['value']>('spill')
-  const [direction, setDirection] = useState<(typeof readingDirections)[number]['value']>('ltr')
-  const reading = readingDirections.find((item) => item.value === direction)!
-  return <>
-    <DemoHeading>Reading direction</DemoHeading>
-    <DemoText>The same box with a sentence in English, Arabic and Japanese. Its border and indent sit wherever lines start: the left, the right or the top.</DemoText>
-    <ValuePicker label="Direction" options={readingDirections} value={direction} onChange={setDirection} />
-    <p
-      lang={reading.lang}
-      dir={direction === 'rtl' ? 'rtl' : 'ltr'}
-      className={`lab-reading-direction mz-text-body-md${direction === 'vertical' ? ' lab-reading-vertical' : ''}`}
-    >
-      {reading.text}
-    </p>
-    <CssNotes name="reading direction" note={cssNotes.readingDirection} />
-    <DemoHeading>Line length</DemoHeading>
-    <DemoText>Comfy reading: the same paragraph twice. Widen the frame and the first one stretches into long, tiring lines. The second stops at about 65 characters. Line length is really a typography decision, so in Mezzanine it would sit with <Link href="/typography">Typography</Link>.</DemoText>
-    <DemoFrame label="Line length" initialWidth={1100}>
-      <Stack>
-        <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">No line length</Text><Text elementType="p" className="mz-text-body-md">{sampleParagraph}</Text></div>
-        <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">max-width: var(--line-length)</Text><div className="lab-line-length"><Text elementType="p" className="mz-text-body-md">{sampleParagraph}</Text></div></div>
-      </Stack>
-    </DemoFrame>
-    <CssNotes name="line length" note={cssNotes.lineLength} />
-    <DemoHeading>A very long word</DemoHeading>
-    <DemoText>The box is 12rem wide, and the word is longer than that. Choose how to handle it.</DemoText>
-    <ValuePicker label="Long word" options={longWordOptions} value={longWord} onChange={setLongWord} />
-    <DemoFrame label="A very long word" canOverflow>
-      <Text elementType="p" className={`lab-long-word mz-text-body-md${longWord === 'break' ? ' lab-long-word-break' : longWord === 'cut' ? ' lab-long-word-cut' : ''}`}>
-        Pneumonoultramicroscopicsilicovolcanoconiosis is a very long word.
-      </Text>
-    </DemoFrame>
-    <CssNotes name="the long word" note={cssNotes.longWord} />
   </>
 }
 
@@ -125,7 +75,7 @@ function HasDemo() {
   const [image, setImage] = useState(true)
   return <>
     <DemoHeading>A list that counts its items</DemoHeading>
-    <DemoText>Up to four items stack in a list. Add a fifth and the same list becomes a grid, because its CSS asks “do I have a fifth child?”. It has {count} items now.</DemoText>
+    <DemoText>Like the restaurant tables: up to four items, and the list is a single column. Add a fifth and the same list spreads out into a grid. Remove one and it goes back. It has {count} items now.</DemoText>
     <div className="lab-controls">
       <Button size="sm" variant="secondary" onPress={() => setCount((value) => value + 1)}>Add an item</Button>
       <Button size="sm" variant="secondary" isDisabled={count <= 1} onPress={() => setCount((value) => Math.max(1, value - 1))}>Remove an item</Button>
@@ -134,45 +84,20 @@ function HasDemo() {
         {Array.from({ length: count }, (_, index) => <li key={index}><div className="lab-block mz-text-body-sm">Item {index + 1}</div></li>)}
       </ul>
     <CssNotes name="the list" note={cssNotes.quantityList} />
-    <DemoHeading>A layout that notices an image</DemoHeading>
-    <DemoText>With an image, this becomes two columns. Without one, the text simply takes the full width. There’s no separate “with image” variant.</DemoText>
-    <Checkbox isSelected={image} onChange={setImage}>Include an image</Checkbox>
+    <DemoHeading>A box that notices a picture</DemoHeading>
+    <DemoText>With a picture, the box makes room for it, with the picture beside the text. Without one, the text simply takes the full width. It’s one box, not a separate “with picture” version.</DemoText>
+    <Checkbox isSelected={image} onChange={setImage}>Include a picture</Checkbox>
       <div className="lab-media">
-        {image && <div className="lab-block lab-media-image mz-text-body-sm">Image</div>}
-        <Text elementType="p" className="mz-text-body-md">Text beside the image when there is one, and across the full width when there isn&apos;t.</Text>
+        {image && <div className="lab-block lab-media-image mz-text-body-sm">Picture</div>}
+        <Text elementType="p" className="mz-text-body-md">Text beside the picture when there is one, and across the full width when there isn&apos;t.</Text>
       </div>
     <CssNotes name="the image layout" note={cssNotes.mediaObject} />
   </>
 }
 
-function CoverDemo() {
-  return <>
-    <DemoText>The middle block stays centred from top to bottom. The top and bottom items are optional.</DemoText>
-    <DemoFrame label="Cover">
-        <Cover top={<Block>Top item</Block>} bottom={<Block>Bottom item</Block>}>
-          <Block>Centre stage</Block>
-        </Cover>
-    </DemoFrame>
-    <CssNotes name="Cover" note={cssNotes.cover} level={3} />
-  </>
-}
-
-function ReelDemo() {
-  return <>
-    <DemoText>Scroll sideways, or press Tab to reach the reel and use the arrow keys.</DemoText>
-      <Reel label="Example reel">
-        {Array.from({ length: 8 }, (_, index) => <Block key={index}>Item {index + 1}</Block>)}
-      </Reel>
-    <CssNotes name="Reel" note={cssNotes.reel} level={3} />
-  </>
-}
-
 export const insideTheBoxDemos: StageDemos = {
-  text: { Demo: TextDemo },
   overflow: { Demo: OverflowDemo },
   imagesAndMedia: { Demo: ImagesAndMediaDemo },
   multiColumn: { Demo: MultiColumnDemo },
   has: { Demo: HasDemo },
-  cover: { Demo: CoverDemo },
-  reel: { Demo: ReelDemo },
 }
