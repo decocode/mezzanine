@@ -2,7 +2,7 @@
 
 :where(:root) {
   /* ToggleButton: component-specific structure, shared by every theme. */
-  --toggle-button-border-width: 0.0625rem;
+  --toggle-button-border-width: var(--border-width-baseline);
   --toggle-button-border-radius: 0;
   --toggle-button-focus-ring-width: 0.1875rem;
   --toggle-button-focus-ring-offset: 0.1875rem;

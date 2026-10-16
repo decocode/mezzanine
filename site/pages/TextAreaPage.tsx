@@ -1,12 +1,12 @@
 import { ExampleZone } from '../components/ExampleZone'
 import { FieldError, Label, Text, TextArea, TextField } from '@decocode/mezzanine'
 import { textAreaContent } from '../content/textAreaContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function TextAreaPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title={textAreaContent.title}
       description={textAreaContent.description}
       relatedPages={textAreaContent.relatedPages}

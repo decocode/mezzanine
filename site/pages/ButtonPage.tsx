@@ -22,7 +22,7 @@ import {
   buttonVariants,
   type ButtonPreviewState,
 } from '../content/buttonContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 function ButtonStateExample({
@@ -52,7 +52,7 @@ export default function ButtonPage() {
   const [pressCount, setPressCount] = useState(0)
 
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={buttonContent.description}
       title={buttonContent.title}
       relatedPages={buttonContent.relatedPages}

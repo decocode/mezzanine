@@ -8,12 +8,12 @@ import {
   Link
 } from '@decocode/mezzanine'
 import { disclosureContent } from '../content/disclosureContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function DisclosurePage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={disclosureContent.description}
       title={disclosureContent.title}
       relatedPages={disclosureContent.relatedPages}

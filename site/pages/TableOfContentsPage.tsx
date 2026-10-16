@@ -1,7 +1,7 @@
 import { ExampleZone } from '../components/ExampleZone'
 import { TableOfContents } from '@decocode/mezzanine'
 import { tableOfContentsContent } from '../content/tableOfContentsContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function TableOfContentsPage() {
@@ -23,7 +23,7 @@ export default function TableOfContentsPage() {
   ]
 
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={tableOfContentsContent.description}
       title={tableOfContentsContent.title}
       relatedPages={tableOfContentsContent.relatedPages}

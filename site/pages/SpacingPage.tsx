@@ -1,11 +1,10 @@
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { foundationTechnicalDetailsGroup } from '../templates/foundationTechnicalDetails'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 import { SpacingScale } from '../components/SpacingScale'
 
 export default function SpacingPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title="Spacing"
       description="Spacing creates consistent distance inside components and between elements."
       sections={[
@@ -25,19 +24,27 @@ export default function SpacingPage() {
             <SpacingScale />
           </>),
         },
-        foundationTechnicalDetailsGroup('spacing', {
-          cssProperties: (
-            <DocsTable
-              aria-label="Spacing CSS properties"
-              nameColumn="Property"
-              rows={[
-                { name: 'padding', description: 'Space inside an element, between its edge and its content.' },
-                { name: 'margin', description: 'Space outside an element, between it and its neighbours.' },
-                { name: 'gap', description: 'Space between the items inside a flex or grid container.' },
-              ]}
-            />
-          ),
-        }),
+        {
+          id: 'spacing-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'spacing-css-properties',
+              title: 'CSS properties',
+              content: (
+                <DocsTable
+                  aria-label="Spacing CSS properties"
+                  nameColumn="Property"
+                  rows={[
+                    { name: 'padding', description: 'Space inside an element, between its edge and its content.' },
+                    { name: 'margin', description: 'Space outside an element, between it and its neighbours.' },
+                    { name: 'gap', description: 'Space between the items inside a flex or grid container.' },
+                  ]}
+                />
+              ),
+            },
+          ],
+        },
       ]}
     />
   )

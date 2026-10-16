@@ -3,13 +3,13 @@ import { RouterProvider } from 'react-aria-components'
 import { ExampleZone } from '../components/ExampleZone'
 import { NavTree } from '@decocode/mezzanine'
 import { navigationTreeContent, navigationTreeExampleExpandedKeys, navigationTreeExampleInitialRoute, navigationTreeExampleItems } from '../content/navigationTreeContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function NavigationTreePage() {
   const [route, setRoute] = useState(navigationTreeExampleInitialRoute)
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={navigationTreeContent.description}
       title={navigationTreeContent.title}
       relatedPages={navigationTreeContent.relatedPages}

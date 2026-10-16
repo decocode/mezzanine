@@ -234,15 +234,34 @@ Full is a deliberately oversized radius for pill ends, not an incremental level.
 | Token | Stored value |
 | --- | --- |
 | `--radius-none` | `0` |
-| `--radius-sm` | `0.25rem` |
-| `--radius-md` | `0.5rem` |
-| `--radius-lg` | `0.75rem` |
-| `--radius-xl` | `1rem` |
+| `--radius-xs` | `0.25rem` |
+| `--radius-sm` | `0.5rem` |
+| `--radius-md` | `0.75rem` |
+| `--radius-lg` | `1rem` |
+| `--radius-xl` | `1.25rem` |
 | `--radius-full` | `9999rem` |
 
 Existing component radius defaults are unchanged. Products can opt in by referencing
 a level from a component token, such as `--button-border-radius: var(--radius-sm)`.
 For a circle, use `50%` on a square element; on a rectangle it produces an ellipse.
+
+Border-width levels use `rem` and go up in 1px steps after a hairline. Extra small is
+half a pixel: finer on high-resolution screens, rounded up to one pixel elsewhere. Use it
+for decorative lines only; control edges use Small or thicker.
+
+| Token | Stored value |
+| --- | --- |
+| `--border-width-none` | `0` |
+| `--border-width-xs` | `0.03125rem` |
+| `--border-width-sm` | `0.0625rem` |
+| `--border-width-md` | `0.125rem` |
+| `--border-width-lg` | `0.1875rem` |
+| `--border-width-xl` | `0.25rem` |
+
+`--border-width-baseline` is the role every component border-width token uses. It
+points at `--border-width-sm` (1px), so a theme can make every component border heavier or
+lighter by changing one token. A component that needs a different thickness points its own
+token at another level.
 
 ## Current elevation inventory
 

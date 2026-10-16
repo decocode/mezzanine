@@ -11,7 +11,7 @@ import {
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { tableContent, tableExampleColumns, tableExampleRows } from '../content/tableContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function TablePage() {
@@ -26,7 +26,7 @@ export default function TablePage() {
   })
 
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={tableContent.description}
       title={tableContent.title}
       relatedPages={tableContent.relatedPages}

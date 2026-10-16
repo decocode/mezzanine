@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import {
   foundationsDefinitionParagraphs, foundationsDescription, foundationsPages,
   foundationsTechnicalDetailsParagraphs, foundationsThemeColourParagraphs,
@@ -12,7 +12,7 @@ function Paragraphs({ paragraphs }: { paragraphs: readonly ReactNode[] }) {
 
 export default function FoundationsPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title="Foundations"
       description={foundationsDescription}
       sections={[

@@ -1,7 +1,6 @@
 import type { ReactNode } from 'react'
 import { Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
-import { foundationTechnicalDetailsGroup } from '../templates/foundationTechnicalDetails'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 import { TokenValue } from '../components/TokenValue'
 import {
@@ -18,7 +17,7 @@ function Paragraphs({ paragraphs }: { paragraphs: readonly ReactNode[] }) {
 
 export default function InteractionPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title="Interaction"
       description={interactionDescription}
       sections={[
@@ -55,49 +54,61 @@ export default function InteractionPage() {
           content: <DocsTable aria-label="Keyboard behaviour" nameColumn="Keys" descriptionColumn="Behaviour" namesAreCode={false} rows={interactionKeyboardRows.map(({ keys, behaviour }) => ({ name: keys, description: behaviour }))} />,
         },
         { id: 'interaction-disabled', title: 'Disabled', content: <Paragraphs paragraphs={interactionDisabledParagraphs} /> },
-        foundationTechnicalDetailsGroup('interaction', {
-          cssProperties: <DocsTable aria-label="Interaction CSS properties" nameColumn="Property" rows={interactionCssProperties} />,
-          tokens: (<>
-            <p className="component-section-description">{interactionTokensIntro}</p>
-            <div className="documentation-table">
-              <Table aria-label="Shared interaction tokens">
-                <TableHeader>
-                  <Column id="token" isRowHeader>Token</Column>
-                  <Column id="purpose">Purpose</Column>
-                  <Column id="value">Value</Column>
-                </TableHeader>
-                <TableBody>
-                  {interactionSharedTokens.map(({ token, description }) => (
-                    <Row id={token} key={token}>
-                      <Cell><code>{token}</code></Cell>
-                      <Cell>{description}</Cell>
-                      <Cell><TokenValue token={token} /></Cell>
-                    </Row>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-            <p className="component-section-description">Focus ring width and offset are set per component:</p>
-            <div className="documentation-table">
-              <Table aria-label="Focus ring tokens">
-                <TableHeader>
-                  <Column id="component" isRowHeader>Component</Column>
-                  <Column id="width">Ring width</Column>
-                  <Column id="offset">Ring offset</Column>
-                </TableHeader>
-                <TableBody>
-                  {interactionFocusRingComponents.map(({ component, prefix }) => (
-                    <Row id={prefix} key={prefix}>
-                      <Cell>{component}</Cell>
-                      <Cell><span className="table-item-heading"><code>{`${prefix}-focus-ring-width`}</code><TokenValue token={`${prefix}-focus-ring-width`} /></span></Cell>
-                      <Cell><span className="table-item-heading"><code>{`${prefix}-focus-ring-offset`}</code><TokenValue token={`${prefix}-focus-ring-offset`} /></span></Cell>
-                    </Row>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </>),
-        }),
+        {
+          id: 'interaction-technical-details',
+          title: 'Technical details',
+          sections: [
+            {
+              id: 'interaction-css-properties',
+              title: 'CSS properties',
+              content: <DocsTable aria-label="Interaction CSS properties" nameColumn="Property" rows={interactionCssProperties} />,
+            },
+            {
+              id: 'interaction-tokens',
+              title: 'Tokens',
+              content: (<>
+              <p className="component-section-description">{interactionTokensIntro}</p>
+              <div className="documentation-table">
+                <Table aria-label="Shared interaction tokens">
+                  <TableHeader>
+                    <Column id="token" isRowHeader>Token</Column>
+                    <Column id="purpose">Purpose</Column>
+                    <Column id="value">Value</Column>
+                  </TableHeader>
+                  <TableBody>
+                    {interactionSharedTokens.map(({ token, description }) => (
+                      <Row id={token} key={token}>
+                        <Cell><code>{token}</code></Cell>
+                        <Cell>{description}</Cell>
+                        <Cell><TokenValue token={token} /></Cell>
+                      </Row>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+              <p className="component-section-description">Focus ring width and offset are set per component:</p>
+              <div className="documentation-table">
+                <Table aria-label="Focus ring tokens">
+                  <TableHeader>
+                    <Column id="component" isRowHeader>Component</Column>
+                    <Column id="width">Ring width</Column>
+                    <Column id="offset">Ring offset</Column>
+                  </TableHeader>
+                  <TableBody>
+                    {interactionFocusRingComponents.map(({ component, prefix }) => (
+                      <Row id={prefix} key={prefix}>
+                        <Cell>{component}</Cell>
+                        <Cell><span className="table-item-heading"><code>{`${prefix}-focus-ring-width`}</code><TokenValue token={`${prefix}-focus-ring-width`} /></span></Cell>
+                        <Cell><span className="table-item-heading"><code>{`${prefix}-focus-ring-offset`}</code><TokenValue token={`${prefix}-focus-ring-offset`} /></span></Cell>
+                      </Row>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </>),
+            },
+          ],
+        },
       ]}
       relatedPages={interactionRelatedPages}
       references={interactionReferences}

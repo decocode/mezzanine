@@ -8,6 +8,6 @@
   --sidebar-padding: 1rem;
   --sidebar-rail-padding: 0.5rem;
   --sidebar-gap: 0.5rem;
-  --sidebar-border-width: 0.0625rem;
+  --sidebar-border-width: var(--border-width-baseline);
   --sidebar-drawer-gap: 1rem;
 }

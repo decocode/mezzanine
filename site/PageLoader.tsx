@@ -5,7 +5,7 @@
 
 import { Component, Suspense, useEffect, type ReactNode } from 'react'
 import { Button } from '@decocode/mezzanine'
-import { PageHeading } from './templates/ComponentPageTemplate'
+import { PageHeading } from './templates/DocsPageTemplate'
 import { pageRegistry } from './pageRegistry'
 import type { SitePageDefinition } from './siteStructure'
 

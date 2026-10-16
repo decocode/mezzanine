@@ -3,14 +3,14 @@ import { Button,Link,Navbar } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
 import { navbarContent } from '../content/navbarContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function NavbarPage() {
   const [destination, setDestination] = useState('Home link')
   const [isSaved, setIsSaved] = useState(false)
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title={navbarContent.title}
       description={navbarContent.description}
       relatedPages={navbarContent.relatedPages}

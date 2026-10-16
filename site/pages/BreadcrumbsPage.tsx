@@ -1,12 +1,12 @@
 import { ExampleZone } from '../components/ExampleZone'
 import { Breadcrumb, Breadcrumbs, Link } from '@decocode/mezzanine'
 import { breadcrumbsContent } from '../content/breadcrumbsContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function BreadcrumbsPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={breadcrumbsContent.description}
       title={breadcrumbsContent.title}
       relatedPages={breadcrumbsContent.relatedPages}

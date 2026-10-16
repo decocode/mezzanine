@@ -1,4 +1,4 @@
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 import { Link } from '@decocode/mezzanine'
 import { siteContent } from '../content/siteContent'
 

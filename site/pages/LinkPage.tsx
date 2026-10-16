@@ -10,7 +10,7 @@ import {
   TableHeader,
 } from '@decocode/mezzanine'
 import { linkContent } from '../content/linkContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 type LinkPreviewState = 'default' | 'hovered' | 'pressed' | 'focused' | 'current' | 'disabled'
@@ -30,7 +30,7 @@ const linkStates: {
 
 export default function LinkPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={linkContent.description}
       title={linkContent.title}
       relatedPages={linkContent.relatedPages}

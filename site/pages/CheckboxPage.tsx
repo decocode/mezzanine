@@ -1,12 +1,12 @@
 import { ExampleZone } from '../components/ExampleZone'
 import { Cell, Checkbox, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { checkboxContent } from '../content/checkboxContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function CheckboxPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={checkboxContent.description}
       title={checkboxContent.title}
       relatedPages={checkboxContent.relatedPages}

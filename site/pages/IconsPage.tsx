@@ -1,5 +1,5 @@
 import { Card } from '@decocode/mezzanine'
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 import { iconDefinitions } from '../content/iconsContent'
 
 export default function IconsPage() {

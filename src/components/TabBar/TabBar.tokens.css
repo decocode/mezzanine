@@ -4,7 +4,7 @@
   /* Primary navigation; safe-area spacing may be overridden by the app shell. */
   --tab-bar-background: var(--color-page);
   --tab-bar-item-background-current: var(--color-surface);
-  --tab-bar-border-width: 0.0625rem;
+  --tab-bar-border-width: var(--border-width-baseline);
   --tab-bar-z-index: 10;
   --tab-bar-sheet-max-height: 85dvh;
   --tab-bar-safe-area-bottom: env(safe-area-inset-bottom, 0px);

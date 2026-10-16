@@ -44,7 +44,5 @@ export const elevationRelatedPages = [
 ]
 
 export const elevationReferences = [
-  { label: 'Source: src/tokens/elevation.css', href: 'https://github.com/decocode/mezzanine/blob/main/src/tokens/elevation.css' },
-  { label: 'Source: src/themes/', href: 'https://github.com/decocode/mezzanine/tree/main/src/themes' },
   { label: 'MDN: box-shadow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow' },
 ]

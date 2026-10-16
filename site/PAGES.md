@@ -8,7 +8,7 @@ in `src/docs/`.
 | Folder or file | What it holds |
 | --- | --- |
 | `site/AppShell.tsx` | The site layout, navigation and theme. Loads each page separately through `PageLoader.tsx`. |
-| `site/templates/ComponentPageTemplate.tsx` | The component page template, and the site-only `PageHeading` used for every page title and introduction |
+| `site/templates/DocsPageTemplate.tsx` | The docs page template, used by component pages and converted Foundations and Styles pages, and the site-only `PageHeading` used for every page title and introduction |
 | `site/pages/` | One file per page: examples, local state, and putting the content into the template |
 | `site/content/` | Each page's wording, reference entries and data, in a `*Content.tsx` (or `.ts`) file. JSX is used for inline code and links. |
 | `site/components/` | Reusable site UI, separate from the library's components in `src/components/` |
@@ -23,7 +23,7 @@ Useful site components:
 
 ## Component pages
 
-Every implemented component page uses `ComponentPageTemplate`. A page supplies
+Every implemented component page uses `DocsPageTemplate`. A page supplies
 its title, description and an ordered `sections` list.
 
 - Each section defines `id`, `title` and `content` once. The template creates
@@ -86,10 +86,9 @@ applies to every Foundation, including that Foundations do not change with the
 theme, so individual Foundations pages do not repeat it.
 
 Foundations and Styles pages open with their own sections, such as a scale or a
-table of states. Pages that have been converted (Interaction and Spacing) use
-`ComponentPageTemplate` and end with a shared Technical details group, built by
-`foundationTechnicalDetailsGroup` in `site/templates/foundationTechnicalDetails.ts`.
-Its sections always appear in this order:
+table of states. Pages that have been converted (Elevation, Interaction and
+Spacing) use `DocsPageTemplate` and end with a Technical details group, written
+in the page like a component page's. Its sections always appear in this order:
 
 1. CSS properties: the CSS properties the page governs.
 2. Tokens: token names, purposes and values read from the token source.
