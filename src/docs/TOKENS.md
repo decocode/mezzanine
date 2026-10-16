@@ -234,10 +234,11 @@ Full is a deliberately oversized radius for pill ends, not an incremental level.
 | Token | Stored value |
 | --- | --- |
 | `--radius-none` | `0` |
-| `--radius-sm` | `0.25rem` |
-| `--radius-md` | `0.5rem` |
-| `--radius-lg` | `0.75rem` |
-| `--radius-xl` | `1rem` |
+| `--radius-xs` | `0.25rem` |
+| `--radius-sm` | `0.5rem` |
+| `--radius-md` | `0.75rem` |
+| `--radius-lg` | `1rem` |
+| `--radius-xl` | `1.25rem` |
 | `--radius-full` | `9999rem` |
 
 Existing component radius defaults are unchanged. Products can opt in by referencing

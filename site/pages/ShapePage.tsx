@@ -31,7 +31,7 @@ export default function ShapePage() {
       <section className="component-section" aria-labelledby="radius-levels-heading">
         <h2 id="radius-levels-heading" className="mz-text-heading-md">Corner radius</h2>
         <p className="component-section-description">
-          Small through Extra large use <code>rem</code>, so they respond to the root font size.
+          Extra small through Extra large use <code>rem</code>, so they respond to the root font size.
           None keeps square corners. Full uses a deliberately large radius to produce pill ends.
           Values below come from the active CSS tokens.
         </p>

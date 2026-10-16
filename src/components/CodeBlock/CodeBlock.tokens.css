@@ -4,7 +4,7 @@
   /* CodeBlock: a static block of code. */
   --code-block-padding: var(--space-4);
   --code-block-border-width: 0.0625rem;
-  --code-block-border-radius: var(--radius-md);
+  --code-block-border-radius: var(--radius-sm);
   --code-block-background: var(--color-surface);
   --code-block-content: var(--color-text);
   --code-block-border: var(--color-border);
