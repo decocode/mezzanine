@@ -1,12 +1,12 @@
 import { ExampleZone } from '../components/ExampleZone'
 import { Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { badgeContent } from '../content/badgeContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function BadgePage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={badgeContent.description}
       title={badgeContent.title}
       relatedPages={badgeContent.relatedPages}

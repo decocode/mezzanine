@@ -1,12 +1,12 @@
 import { ExampleZone } from '../components/ExampleZone'
 import { Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
 import { tabsContent } from '../content/tabsContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function TabsPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title={tabsContent.title}
       description={tabsContent.description}
       relatedPages={tabsContent.relatedPages}

@@ -1,6 +1,6 @@
 import { Link } from '@decocode/mezzanine'
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 
 export default function ShapePage() {
   return (

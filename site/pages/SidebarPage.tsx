@@ -8,7 +8,7 @@ import { ExampleZone } from '../components/ExampleZone'
 import { Sidebar as DocumentationSidebar } from '../components/Sidebar'
 import { findSitePage } from '../siteStructure'
 import { DocsTable } from '../components/DocsTable'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { sidebarContent } from '../content/sidebarContent'
 import exampleImage from '../assets/sidebar-example.svg'
 
@@ -137,7 +137,7 @@ function MultipleSidebarsExample() {
 }
 
 export default function SidebarPage() {
-  return <ComponentPageTemplate
+  return <DocsPageTemplate
     title={sidebarContent.title} description={sidebarContent.description}
     relatedPages={sidebarContent.relatedPages} references={sidebarContent.references}
     sections={[

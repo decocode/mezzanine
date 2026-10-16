@@ -189,8 +189,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/TooltipPage.tsx` | Live Tooltip example and shared-template documentation under Overlays |
 | `site/pages/TypographyPage.tsx` | Typography overview, How typography works layers and live Label token example; loaded only when its route is requested |
 | `site/public/robots.txt` | Served unchanged at `/robots.txt`; allows crawling so search engines can read the pre-launch `noindex` response header |
-| `site/templates/ComponentPageTemplate.tsx` | Shared component Docs template, also used by converted Foundations pages: owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures and reference sections from page-supplied content |
-| `site/templates/foundationTechnicalDetails.ts` | Builds the shared Technical details group for Foundations and Styles pages in its fixed section order |
+| `site/templates/DocsPageTemplate.tsx` | Shared docs page template, used by component pages and converted Foundations and Styles pages: owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures and reference sections from page-supplied content |
 
 ### Lab (`site/lab/`)
 

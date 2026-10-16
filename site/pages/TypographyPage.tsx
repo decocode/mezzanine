@@ -1,4 +1,4 @@
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 import { Badge, Button, CodeBlock, Link } from '@decocode/mezzanine'
 import { ExampleZone } from '../components/ExampleZone'
 import { themeExampleCode, typographyIntro, typographyLayers } from '../content/typographyContent'

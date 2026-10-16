@@ -1,4 +1,4 @@
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 export default function IntroductionPage() {
   return (
     <PageHeading

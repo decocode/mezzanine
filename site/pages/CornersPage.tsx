@@ -1,6 +1,6 @@
 import { Card } from '@decocode/mezzanine'
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 import { radiusLevels } from '../content/shapeContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 

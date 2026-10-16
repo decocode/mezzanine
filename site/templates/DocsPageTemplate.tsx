@@ -16,7 +16,7 @@ export interface DocumentationSectionGroup {
   sections: readonly DocumentationSection[]
 }
 
-interface ComponentPageTemplateProps {
+interface DocsPageTemplateProps {
   title: string
   description?: ReactNode
   sections: readonly (DocumentationSection | DocumentationSectionGroup)[]
@@ -27,7 +27,7 @@ interface ComponentPageTemplateProps {
 
 // Each section definition supplies both its visible heading and its On this page link.
 // Pages compose their content and live examples before passing sections here.
-export function ComponentPageTemplate({ title, description, sections, relatedPages = [], references = [], referencesId = 'references' }: ComponentPageTemplateProps) {
+export function DocsPageTemplate({ title, description, sections, relatedPages = [], references = [], referencesId = 'references' }: DocsPageTemplateProps) {
   const pageSections: readonly (DocumentationSection | DocumentationSectionGroup)[] = [
     ...sections,
     ...[

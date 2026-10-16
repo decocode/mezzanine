@@ -1,4 +1,4 @@
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 import { siteContent } from '../content/siteContent'
 
 export default function NotImplementedPage({ title }: { title: string }) {

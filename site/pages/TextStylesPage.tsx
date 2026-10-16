@@ -1,5 +1,5 @@
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 import { Cell, CodeBlock, Column, Disclosure, DisclosureHeader, DisclosurePanel, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import {
   baseTextElements,

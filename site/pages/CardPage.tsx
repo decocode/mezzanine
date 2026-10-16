@@ -1,12 +1,12 @@
 import { ExampleZone } from '../components/ExampleZone'
 import { Button, Card, Heading } from '@decocode/mezzanine'
 import { cardContent } from '../content/cardContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function CardPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={cardContent.description}
       title={cardContent.title}
       relatedPages={cardContent.relatedPages}

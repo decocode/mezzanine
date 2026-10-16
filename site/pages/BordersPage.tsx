@@ -1,6 +1,6 @@
 import { Card, Link } from '@decocode/mezzanine'
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 import { borderWidthLevels } from '../content/shapeContent'
 import { useTokenValue } from '../components/tokenValueLogic'
 
@@ -26,7 +26,6 @@ export default function BordersPage() {
       <PageHeading title="Borders" description="Border width controls how heavy a surface's outline is. Mezzanine provides a shared scale that products can reference from their component tokens." />
       <DocsTableOfContents sections={[
         { id: 'border-width-heading', label: 'Border width' },
-        { id: 'border-hairline-heading', label: 'Hairlines' },
         { id: 'border-baseline-heading', label: 'Baseline border width' },
         { id: 'border-usage-heading', label: 'Using the scale' },
       ]} />
@@ -39,15 +38,6 @@ export default function BordersPage() {
         <ol className="radius-scale-list">
           {borderWidthLevels.map((level) => <BorderWidthSample key={level.token} {...level} />)}
         </ol>
-      </section>
-      <section className="component-section" aria-labelledby="border-hairline-heading">
-        <h2 id="border-hairline-heading" className="mz-text-heading-md">Hairlines</h2>
-        <p className="component-section-description">
-          Extra small is a hairline, half a pixel. On high-resolution screens it draws a finer line than
-          Small. On standard screens, browsers round it up to one pixel, so it never disappears. Use it
-          only for decorative lines. The edges of controls, such as a text field&apos;s outline, must be
-          easy to see, so use Small or thicker.
-        </p>
       </section>
       <section className="component-section" aria-labelledby="border-baseline-heading">
         <h2 id="border-baseline-heading" className="mz-text-heading-md">Baseline border width</h2>

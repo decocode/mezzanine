@@ -15,12 +15,12 @@ import {
 } from '@decocode/mezzanine'
 import { buttonSizes, buttonContent } from '../content/buttonContent'
 import { toggleButtonContent } from '../content/toggleButtonContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function ToggleButtonPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={toggleButtonContent.description}
       title={toggleButtonContent.title}
       relatedPages={toggleButtonContent.relatedPages}

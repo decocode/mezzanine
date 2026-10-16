@@ -1,5 +1,5 @@
 import { Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel } from '@decocode/mezzanine'
-import type { DocumentationSection } from '../templates/ComponentPageTemplate'
+import type { DocumentationSection } from '../templates/DocsPageTemplate'
 import { useDocsDisclosureGroupLogic } from './DocsDisclosureGroupLogic'
 
 interface DocsDisclosureGroupProps {

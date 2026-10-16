@@ -3,13 +3,13 @@ import { AccountIcon, CloseIcon, HomeIcon, SettingsIcon, TabBar } from '@decocod
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
 import { tabBarContent } from '../content/tabBarContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function TabBarPage() {
   const [destination, setDestination] = useState('Home')
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title={tabBarContent.title}
       description={tabBarContent.description}
       relatedPages={tabBarContent.relatedPages}

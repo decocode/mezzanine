@@ -1,5 +1,5 @@
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
-import { PageHeading } from '../templates/ComponentPageTemplate'
+import { PageHeading } from '../templates/DocsPageTemplate'
 import { ExampleZone } from '../components/ExampleZone'
 import { useTokenValue } from '../components/tokenValueLogic'
 

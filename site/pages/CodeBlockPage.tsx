@@ -1,12 +1,12 @@
 import { ExampleZone } from '../components/ExampleZone'
 import { CodeBlock } from '@decocode/mezzanine'
 import { codeBlockContent } from '../content/codeBlockContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function CodeBlockPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={codeBlockContent.description}
       title={codeBlockContent.title}
       relatedPages={codeBlockContent.relatedPages}

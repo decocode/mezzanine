@@ -3,7 +3,7 @@ import { Button, FieldError, Input, Label, Text, TextField } from '@decocode/mez
 import { useState } from 'react'
 import { Form } from 'react-aria-components/Form'
 import { textFieldContent } from '../content/textFieldContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function TextFieldPage() {
@@ -11,7 +11,7 @@ export default function TextFieldPage() {
   const [submitted, setSubmitted] = useState(false)
 
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title={textFieldContent.title}
       description={textFieldContent.description}
       relatedPages={textFieldContent.relatedPages}

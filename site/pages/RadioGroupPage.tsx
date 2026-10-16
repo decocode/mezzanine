@@ -16,13 +16,13 @@ import {
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { radioGroupContent, radioGroupStates } from '../content/radioGroupContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function RadioGroupPage() {
   const [validationValue, setValidationValue] = useState<string | null>(null)
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={radioGroupContent.description}
       title={radioGroupContent.title}
       relatedPages={radioGroupContent.relatedPages}

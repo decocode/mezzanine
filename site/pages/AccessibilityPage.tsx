@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Button, Cell, Column, ExternalLinkIcon, Link, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 import {
   accessibilityCheckingParagraphs, accessibilityDescription, accessibilityFeedbackButton, accessibilityMezzanineRows,
@@ -14,7 +14,7 @@ function Paragraphs({ paragraphs }: { paragraphs: readonly ReactNode[] }) {
 
 export default function AccessibilityPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title="Accessibility"
       description={accessibilityDescription}
       sections={[

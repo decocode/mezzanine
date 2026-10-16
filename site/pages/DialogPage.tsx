@@ -5,14 +5,14 @@ import {
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { dialogContent } from '../content/dialogContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { DocsTable } from '../components/DocsTable'
 
 export default function DialogPage() {
   const [confirmationCount, setConfirmationCount] = useState(0)
 
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       description={dialogContent.description}
       title={dialogContent.title}
       relatedPages={dialogContent.relatedPages}

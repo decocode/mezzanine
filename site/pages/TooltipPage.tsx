@@ -2,11 +2,11 @@ import { Button, SettingsIcon, Tooltip, TooltipTrigger } from '@decocode/mezzani
 import { ExampleZone } from '../components/ExampleZone'
 import { DocsTable } from '../components/DocsTable'
 import { tooltipContent } from '../content/tooltipContent'
-import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
+import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 
 export default function TooltipPage() {
   return (
-    <ComponentPageTemplate
+    <DocsPageTemplate
       title={tooltipContent.title}
       description={tooltipContent.description}
       relatedPages={tooltipContent.relatedPages}
