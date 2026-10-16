@@ -1,4 +1,4 @@
-import { Card } from '@decocode/mezzanine'
+import { Card, Link } from '@decocode/mezzanine'
 import { DocsTableOfContents } from '../components/DocsTableOfContents'
 import { PageHeading } from '../templates/ComponentPageTemplate'
 import { borderWidthLevels } from '../content/shapeContent'
@@ -20,12 +20,14 @@ function BorderWidthSample({ label, token }: { label: string; token: string }) {
 }
 
 export default function BordersPage() {
+  const baseline = useTokenValue('--border-width-baseline')
   return (
     <>
       <PageHeading title="Borders" description="Border width controls how heavy a surface's outline is. Mezzanine provides a shared scale that products can reference from their component tokens." />
       <DocsTableOfContents sections={[
         { id: 'border-width-heading', label: 'Border width' },
         { id: 'border-hairline-heading', label: 'Hairlines' },
+        { id: 'border-baseline-heading', label: 'Baseline border width' },
         { id: 'border-usage-heading', label: 'Using the scale' },
       ]} />
       <section className="component-section" aria-labelledby="border-width-heading">
@@ -47,6 +49,19 @@ export default function BordersPage() {
           easy to see, so use Small or thicker.
         </p>
       </section>
+      <section className="component-section" aria-labelledby="border-baseline-heading">
+        <h2 id="border-baseline-heading" className="mz-text-heading-md">Baseline border width</h2>
+        <p className="component-section-description">
+          <code>--border-width-baseline</code> is the thickness of a component&apos;s border whenever it has one.
+          It points at Small, <code>var(--border-width-sm)</code>, which is <code>{baseline}</code>. Every
+          component&apos;s border-width token uses it, so a theme can make every border heavier or lighter by
+          changing this one token, for example to <code>var(--border-width-md)</code>.
+        </p>
+        <p className="component-section-description">
+          It sets thickness only. Each component still decides whether it has a border at all, and
+          <code>--color-border</code> on the <Link href="/color">Color</Link> page sets its colour.
+        </p>
+      </section>
       <section className="component-section" aria-labelledby="border-usage-heading">
         <h2 id="border-usage-heading" className="mz-text-heading-md">Using the scale</h2>
         <p className="component-section-description">
@@ -55,7 +70,7 @@ export default function BordersPage() {
           default, the width counts as zero.
         </p>
         <p className="component-section-description">
-          Adding this scale does not change existing components; their border-width tokens keep their current values.
+          To give one component a different thickness from the rest, point its own token at another level instead of the baseline.
         </p>
       </section>
     </>

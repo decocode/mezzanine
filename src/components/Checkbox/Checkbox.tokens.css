@@ -5,7 +5,7 @@
   --checkbox-size: 1.25rem;
   --checkbox-icon-size: 1rem;
   --checkbox-content-gap: 0.5rem;
-  --checkbox-border-width: 0.0625rem;
+  --checkbox-border-width: var(--border-width-baseline);
   --checkbox-border-radius: 0;
   --checkbox-focus-ring-width: 0.1875rem;
   --checkbox-focus-ring-offset: 0.1875rem;

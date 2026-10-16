@@ -3,7 +3,7 @@
 :where(:root) {
   /* Tabs: shared structure and theme-aware semantic colours. */
   --tabs-content-gap: 0.5rem;
-  --tabs-border-width: 0.0625rem;
+  --tabs-border-width: var(--border-width-baseline);
   --tabs-border: var(--color-border);
   --tabs-content: var(--color-text);
   --tabs-focus-ring-width: 0.1875rem;

@@ -8,7 +8,7 @@
   --radio-content-gap: 0.5rem;
   --radio-indicator-size: 1.25rem;
   --radio-selection-size: 0.625rem;
-  --radio-border-width: 0.0625rem;
+  --radio-border-width: var(--border-width-baseline);
   --radio-indicator-border-radius: 50%;
   --radio-selection-border-radius: 50%;
   --radio-focus-ring-width: 0.1875rem;

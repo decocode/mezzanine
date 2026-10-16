@@ -4,7 +4,7 @@
   /* Badge: non-interactive status label with optional semantic meaning. */
   --badge-padding-block: 0.125rem;
   --badge-padding-inline: 0.375rem;
-  --badge-border-width: 0.0625rem;
+  --badge-border-width: var(--border-width-baseline);
   --badge-border-radius: 0.25rem;
   --badge-neutral-background: var(--color-neutral-100);
   --badge-neutral-content: var(--color-neutral-800);

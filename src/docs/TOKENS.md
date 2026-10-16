@@ -258,7 +258,10 @@ for decorative lines only; control edges use Small or thicker.
 | `--border-width-lg` | `0.1875rem` |
 | `--border-width-xl` | `0.25rem` |
 
-Existing component border-width defaults are unchanged.
+`--border-width-baseline` is the role every component border-width token uses. It
+points at `--border-width-sm` (1px), so a theme can make every component border heavier or
+lighter by changing one token. A component that needs a different thickness points its own
+token at another level.
 
 ## Current elevation inventory
 

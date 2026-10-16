@@ -29,7 +29,7 @@
   --button-xl-line-height: var(--line-height-title-md);
   --button-xl-icon-size: 1.5rem;
   --button-content-gap: 0.5rem;
-  --button-border-width: 0.0625rem;
+  --button-border-width: var(--border-width-baseline);
   --button-border-radius: 0;
   --button-focus-ring-width: 0.1875rem;
   --button-focus-ring-offset: 0.1875rem;

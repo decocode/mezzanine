@@ -4,7 +4,7 @@
   /* Card: a static surface for grouped content. */
   --card-padding: var(--space-6);
   --card-content-gap: var(--space-4);
-  --card-border-width: 0.0625rem;
+  --card-border-width: var(--border-width-baseline);
   --card-border-radius: 0;
   --card-background: var(--color-page);
   --card-content: var(--color-text);

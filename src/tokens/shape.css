@@ -17,4 +17,7 @@
   --border-width-md: 0.125rem;
   --border-width-lg: 0.1875rem;
   --border-width-xl: 0.25rem;
+
+  /* Role: the baseline thickness of a component's border. A theme changes this one role to make every border heavier or lighter. */
+  --border-width-baseline: var(--border-width-sm);
 }
