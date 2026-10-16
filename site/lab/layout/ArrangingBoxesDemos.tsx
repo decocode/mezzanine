@@ -22,7 +22,7 @@ function NormalFlowDemo() {
         Here is a sentence with <span className="lab-flow-item">Box 1</span> inside it, then <span className="lab-flow-item">Box 2</span>, and finally <span className="lab-flow-item">Box 3</span> near the end of the line.
       </Text>
     </LabOnly>
-    <CssNotes name="normal flow" note={cssNotes.normalFlow} level={2} />
+    <CssNotes name="normal flow" note={cssNotes.normalFlow} level={3} />
   </>
 }
 
@@ -59,7 +59,7 @@ function FlexboxDemo() {
         </div>
       </LabOnly>
     </DemoFrame>
-    <CssNotes name="Flexbox" note={cssNotes.flexbox} level={2} />
+    <CssNotes name="Flexbox" note={cssNotes.flexbox} level={3} />
   </>
 }
 
@@ -82,7 +82,7 @@ function GridDemo() {
         </div>
       </LabOnly>
     </DemoFrame>
-    <CssNotes name="Grid" note={cssNotes.grid} level={2} />
+    <CssNotes name="Grid" note={cssNotes.grid} level={3} />
   </>
 }
 
@@ -107,7 +107,7 @@ function SubgridDemo() {
         </div>
       </LabOnly>
     </DemoFrame>
-    <CssNotes name="subgrid" note={cssNotes.subgrid} level={2} />
+    <CssNotes name="subgrid" note={cssNotes.subgrid} level={3} />
   </>
 }
 
@@ -161,7 +161,6 @@ const gapOptions = [
 ] as const
 
 function SpacingDemo() {
-  const [gap, setGap] = useState<(typeof gapOptions)[number]['value']>('--space-4')
   return <>
     <DemoHeading>Margin or gap</DemoHeading>
     <DemoText>The same three boxes twice. With margin, each box keeps its distance on every side, so there’s space against the dashed edge too. With gap, the space only goes between them.</DemoText>
@@ -174,6 +173,13 @@ function SpacingDemo() {
       </LabOnly>
     </div>
     <CssNotes name="margin and gap" note={cssNotes.marginAndGap} />
+  </>
+}
+
+// The spacing scale is how Mezzanine uses spacing, so it sits in that half of the page.
+function SpacingTokens() {
+  const [gap, setGap] = useState<(typeof gapOptions)[number]['value']>('--space-4')
+  return <>
     <DemoHeading>Spacing tokens</DemoHeading>
     <DemoText>Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so <code>--space-4</code> is four steps: <code>1rem</code>, normally 16px. The tokens are in <code>rem</code>, so space grows when someone enlarges their text. <Link href="/site/lab/layout/one-box/sizing-and-units">Sizing and units</Link> explains <code>rem</code>.</DemoText>
     <DemoText>These are the real tokens, with their values read live, as on the <Link href="/spacing">Spacing</Link> page in the docs.</DemoText>
@@ -200,16 +206,16 @@ function ReadingOrderDemo() {
         {[1, 2, 3].map((number) => <Button key={number} size="sm" variant="secondary">Button {number}</Button>)}
       </div>
     </LabOnly>
-    <CssNotes name="the reversed row" note={cssNotes.readingOrder} level={2} />
+    <CssNotes name="the reversed row" note={cssNotes.readingOrder} level={3} />
   </>
 }
 
 export const arrangingBoxesDemos: StageDemos = {
-  normalFlow: { Demo: NormalFlowDemo, isSingleExample: true },
-  cssFlexbox: { Demo: FlexboxDemo, isSingleExample: true },
-  cssGrid: { Demo: GridDemo, isSingleExample: true },
-  subgrid: { Demo: SubgridDemo, isSingleExample: true },
+  normalFlow: { Demo: NormalFlowDemo },
+  cssFlexbox: { Demo: FlexboxDemo },
+  cssGrid: { Demo: GridDemo },
+  subgrid: { Demo: SubgridDemo },
   alignment: { Demo: AlignmentDemo },
-  spacing: { Demo: SpacingDemo },
-  readingOrder: { Demo: ReadingOrderDemo, isSingleExample: true },
+  spacing: { Demo: SpacingDemo, MezzanineDetail: SpacingTokens },
+  readingOrder: { Demo: ReadingOrderDemo },
 }

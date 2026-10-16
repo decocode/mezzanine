@@ -1,15 +1,20 @@
 import type { JSX } from 'react'
 import { Badge, Button, Card, Heading, Text } from '@decocode/mezzanine'
-import { BrowserSupport, LabSectionIntro, SimilarToLinks } from './LabParts'
-import { buildingBlockLabel, childPageCardAction, stagePagesByStage, type LayoutStage, type StagePage } from './layoutLabContent'
+import { SimilarToLinks } from './LabParts'
+import {
+  buildingBlockLabel, candidateBadgeLabel, childPageCardAction, stagePageHeadings, stagePagesByStage, todayBadgeLabel,
+  type LayoutStage, type StagePage,
+} from './layoutLabContent'
+import { mezzanineUses, type MezzanineUse } from './mezzanineUsesContent'
 import { oneBoxDemos } from './OneBoxDemos'
 import { insideTheBoxDemos } from './InsideTheBoxDemos'
 import { arrangingBoxesDemos } from './ArrangingBoxesDemos'
 import { boxFormationDemos } from './BoxFormationDemos'
 
-// Each stage page's examples, keyed by the page's key. Pages with one example use the
-// "Example" heading and put the CSS behind it under a second-level heading.
-export type StageDemos = Record<string, { Demo: () => JSX.Element; isSingleExample?: boolean }>
+// Each stage page's examples, keyed by the page's key. Pages with several examples give each a
+// third-level heading; pages with one put the CSS behind it under a third-level heading. A page can
+// also show Mezzanine's own detail, such as the spacing scale, in its "How Mezzanine uses it" half.
+export type StageDemos = Record<string, { Demo: () => JSX.Element; MezzanineDetail?: () => JSX.Element }>
 
 const demos: StageDemos = { ...oneBoxDemos, ...insideTheBoxDemos, ...arrangingBoxesDemos, ...boxFormationDemos }
 
@@ -32,13 +37,43 @@ export function StageOverview({ stage }: { stage: LayoutStage }) {
   </section>
 }
 
-// One stage page: its introduction, examples, where a building block comes from, and browser support.
+// One line of "How Mezzanine uses it", marked as what the library does today or as a Lab candidate.
+function MezzanineUseItem({ use }: { use: MezzanineUse }) {
+  return <li className="lab-use">
+    {use.status === 'today'
+      ? <Badge variant="success">{todayBadgeLabel}</Badge>
+      : <Badge variant="warning">{candidateBadgeLabel}</Badge>}
+    <span>{use.text}</span>
+  </li>
+}
+
+// One stage page in two halves. How it works: the CSS idea, its examples and browser support.
+// How Mezzanine uses it: what the library does today, Lab candidates, and where a building block comes from.
 export function StagePageView({ page }: { page: StagePage }) {
-  const { Demo, isSingleExample = false } = demos[page.key]
+  const { Demo, MezzanineDetail } = demos[page.key]
+  const uses = [
+    ...(mezzanineUses[page.key] ?? []),
+    ...(page.similarTo ? [{ status: 'candidate' as const, text: `The ${page.title} building block on this page, following Bedrock Layouts.` }] : []),
+  ]
   return <section aria-labelledby={page.id} className="lab-layout-section">
-    <LabSectionIntro section={page} isSingleExample={isSingleExample} isBuildingBlock={page.similarTo != null} />
+    <Heading id={page.id} level={1} className="mz-text-heading-lg">{page.title}</Heading>
+    <Text elementType="p" className="lab-subtitle mz-text-body-lg">{page.subtitle}</Text>
+    {page.similarTo && <p className="lab-page-badges"><Badge>{buildingBlockLabel}</Badge></p>}
+
+    <Heading level={2} className="lab-section-heading mz-text-heading-md">{stagePageHeadings.howItWorks}</Heading>
+    <div className="lab-explainer">
+      <Text elementType="p" className="mz-text-body-md">{page.what}</Text>
+      <Text elementType="p" className="mz-text-body-md">{page.why}</Text>
+    </div>
     <Demo />
+    <Heading level={3} className="lab-section-heading mz-text-heading-sm">{stagePageHeadings.browserSupport}</Heading>
+    <Text elementType="p" className="lab-demo-text mz-text-body-md">{page.support}</Text>
+
+    <Heading level={2} className="lab-section-heading mz-text-heading-md">{stagePageHeadings.howMezzanineUsesIt}</Heading>
+    <ul className="lab-uses mz-text-body-md">
+      {uses.map((use, index) => <MezzanineUseItem key={index} use={use} />)}
+    </ul>
+    {MezzanineDetail && <MezzanineDetail />}
     {page.similarTo && <SimilarToLinks links={page.similarTo} />}
-    <BrowserSupport section={page} />
   </section>
 }

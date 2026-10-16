@@ -81,7 +81,7 @@ function LogicalDemo() {
         <div className="lab-direction lab-direction-logical mz-text-body-md">Accent border and indent at the <strong>start</strong> of the line.</div>
       </LabOnly>
     </div>
-    <CssNotes name="logical properties" note={cssNotes.logical} level={2} />
+    <CssNotes name="logical properties" note={cssNotes.logical} level={3} />
   </>
 }
 
@@ -94,7 +94,7 @@ function TargetSizeDemo() {
         <div><span className="lab-target lab-target-comfortable" aria-hidden="true" /><Text elementType="p" className="mz-text-body-sm">44px: what Mezzanine&apos;s buttons use today, as --lab-target-min</Text></div>
       </div>
     </LabOnly>
-    <CssNotes name="target size" note={cssNotes.targetSize} level={2} />
+    <CssNotes name="target size" note={cssNotes.targetSize} level={3} />
   </>
 }
 
@@ -104,14 +104,14 @@ function CenterDemo() {
     <DemoFrame label="Center"><LabOnly name="Center">
       <Center max="24rem"><Block>Centred, never wider than 24rem</Block></Center>
     </LabOnly></DemoFrame>
-    <CssNotes name="Center" note={cssNotes.center} level={2} />
+    <CssNotes name="Center" note={cssNotes.center} level={3} />
   </>
 }
 
 export const oneBoxDemos: StageDemos = {
   boxModel: { Demo: BoxModelDemo },
   sizingAndUnits: { Demo: SizingAndUnitsDemo },
-  logicalProperties: { Demo: LogicalDemo, isSingleExample: true },
-  targetSize: { Demo: TargetSizeDemo, isSingleExample: true },
-  center: { Demo: CenterDemo, isSingleExample: true },
+  logicalProperties: { Demo: LogicalDemo },
+  targetSize: { Demo: TargetSizeDemo },
+  center: { Demo: CenterDemo },
 }

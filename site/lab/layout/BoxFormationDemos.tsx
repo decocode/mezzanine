@@ -11,7 +11,7 @@ function StackDemo() {
     <DemoFrame label="Stack"><LabOnly name="Stack">
       <Stack><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Stack>
     </LabOnly></DemoFrame>
-    <CssNotes name="Stack" note={cssNotes.stack} level={2} />
+    <CssNotes name="Stack" note={cssNotes.stack} level={3} />
   </>
 }
 
@@ -23,7 +23,7 @@ function InlineDemo() {
     <DemoFrame label="Inline" canOverflow><LabOnly name="Inline">
       <Inline switchAt={isSwitching ? '30rem' : undefined}><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Inline>
     </LabOnly></DemoFrame>
-    <CssNotes name="Inline" note={cssNotes.inline} level={2} />
+    <CssNotes name="Inline" note={cssNotes.inline} level={3} />
   </>
 }
 
@@ -33,7 +33,7 @@ function InlineClusterDemo() {
     <DemoFrame label="Inline cluster"><LabOnly name="InlineCluster">
       <InlineCluster>{['Badge A', 'Badge B', 'Badge C', 'Badge D', 'Badge E', 'Badge F', 'Badge G'].map((tag) => <Badge key={tag}>{tag}</Badge>)}</InlineCluster>
     </LabOnly></DemoFrame>
-    <CssNotes name="Inline cluster" note={cssNotes.inlineCluster} level={2} />
+    <CssNotes name="Inline cluster" note={cssNotes.inlineCluster} level={3} />
   </>
 }
 
@@ -53,7 +53,7 @@ function SplitDemo() {
     <DemoFrame label="Split"><LabOnly name="Split">
       <Split fraction={fraction} switchAt={isSwitching ? '30rem' : undefined}><Block tall>First area</Block><Block tall>Second area</Block></Split>
     </LabOnly></DemoFrame>
-    <CssNotes name="Split" note={cssNotes.split} level={2} />
+    <CssNotes name="Split" note={cssNotes.split} level={3} />
   </>
 }
 
@@ -74,7 +74,7 @@ function ColumnsDemo() {
         {['two', 'three', 'four', 'five', 'six'].map((word) => <Block key={word}>Item {word}</Block>)}
       </Columns>
     </LabOnly></DemoFrame>
-    <CssNotes name="Columns" note={cssNotes.columns} level={2} />
+    <CssNotes name="Columns" note={cssNotes.columns} level={3} />
   </>
 }
 
@@ -84,15 +84,15 @@ function GridDemo() {
     <DemoFrame label="Grid"><LabOnly name="Grid">
       <Grid min="10rem">{['A', 'B', 'C', 'D', 'E', 'F'].map((letter) => <Block key={letter}>Tile {letter}</Block>)}</Grid>
     </LabOnly></DemoFrame>
-    <CssNotes name="Grid" note={cssNotes.gridBlock} level={2} />
+    <CssNotes name="Grid" note={cssNotes.gridBlock} level={3} />
   </>
 }
 
 export const boxFormationDemos: StageDemos = {
-  stack: { Demo: StackDemo, isSingleExample: true },
-  inline: { Demo: InlineDemo, isSingleExample: true },
-  inlineCluster: { Demo: InlineClusterDemo, isSingleExample: true },
-  split: { Demo: SplitDemo, isSingleExample: true },
-  columns: { Demo: ColumnsDemo, isSingleExample: true },
-  grid: { Demo: GridDemo, isSingleExample: true },
+  stack: { Demo: StackDemo },
+  inline: { Demo: InlineDemo },
+  inlineCluster: { Demo: InlineClusterDemo },
+  split: { Demo: SplitDemo },
+  columns: { Demo: ColumnsDemo },
+  grid: { Demo: GridDemo },
 }

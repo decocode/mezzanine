@@ -96,7 +96,7 @@ function MultiColumnDemo() {
         </ul>
       </LabOnly>
     </DemoFrame>
-    <CssNotes name="multi-column" note={cssNotes.multiColumn} level={2} />
+    <CssNotes name="multi-column" note={cssNotes.multiColumn} level={3} />
   </>
 }
 
@@ -145,7 +145,7 @@ function FrameDemo() {
         <Frame ratio={ratio}><img src={exampleImage} alt={exampleImageAlt} width={480} height={240} /></Frame>
       </Center>
     </LabOnly>
-    <CssNotes name="Frame" note={cssNotes.frame} level={2} />
+    <CssNotes name="Frame" note={cssNotes.frame} level={3} />
   </>
 }
 
@@ -159,7 +159,7 @@ function CoverDemo() {
         </Cover>
       </LabOnly>
     </DemoFrame>
-    <CssNotes name="Cover" note={cssNotes.cover} level={2} />
+    <CssNotes name="Cover" note={cssNotes.cover} level={3} />
   </>
 }
 
@@ -171,16 +171,16 @@ function ReelDemo() {
         {Array.from({ length: 8 }, (_, index) => <Block key={index}>Item {index + 1}</Block>)}
       </Reel>
     </LabOnly>
-    <CssNotes name="Reel" note={cssNotes.reel} level={2} />
+    <CssNotes name="Reel" note={cssNotes.reel} level={3} />
   </>
 }
 
 export const insideTheBoxDemos: StageDemos = {
   overflow: { Demo: OverflowDemo },
   imagesAndMedia: { Demo: ImagesAndMediaDemo },
-  multiColumn: { Demo: MultiColumnDemo, isSingleExample: true },
+  multiColumn: { Demo: MultiColumnDemo },
   has: { Demo: HasDemo },
-  frame: { Demo: FrameDemo, isSingleExample: true },
-  cover: { Demo: CoverDemo, isSingleExample: true },
-  reel: { Demo: ReelDemo, isSingleExample: true },
+  frame: { Demo: FrameDemo },
+  cover: { Demo: CoverDemo },
+  reel: { Demo: ReelDemo },
 }

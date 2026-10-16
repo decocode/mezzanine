@@ -259,6 +259,21 @@
   gap: var(--space-2);
 }
 
+.lab-uses {
+  display: grid;
+  gap: var(--space-3);
+  max-inline-size: 70ch;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each line's badge sits above its text, at its own width. */
+.lab-use {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-1);
+}
+
 .lab-similar-to {
   display: grid;
   gap: var(--space-2);

@@ -328,6 +328,12 @@ export const holdBadgeLabel = 'Hold'
 // The badge on building blocks, on their Cards and pages.
 export const buildingBlockLabel = 'Building block'
 
+// Each stage page has two halves: the CSS idea, then how Mezzanine uses it, where each line is
+// marked as what the library does today or as a Lab candidate.
+export const stagePageHeadings = { howItWorks: 'How it works', howMezzanineUsesIt: 'How Mezzanine uses it', browserSupport: 'Browser support', similarTo: 'Similar to' }
+export const todayBadgeLabel = 'Today'
+export const candidateBadgeLabel = 'Lab candidate'
+
 // The label of the Button on each page's Card, which opens that page.
 export const childPageCardAction = 'Read docs'
 

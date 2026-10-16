@@ -93,11 +93,12 @@ export function CssNotesBody({ note }: { note: CssNote }) {
   </div>
 }
 
-// The same explanation under its own heading: level 4 under an example's heading, or level 2
-// on a page with a single example, like the primitive pages.
-export function CssNotes({ name, note, level = 4 }: { name: string; note: CssNote; level?: 2 | 4 }) {
+// The same explanation under its own heading: level 4 under an example's heading, level 3 on a
+// stage page with a single example, or level 2 on a page with a single example and no halves.
+export function CssNotes({ name, note, level = 4 }: { name: string; note: CssNote; level?: 2 | 3 | 4 }) {
+  const className = level === 2 ? 'lab-section-heading mz-text-heading-md' : level === 3 ? 'lab-section-heading mz-text-heading-sm' : 'mz-text-title-md'
   return <div className="lab-css-notes">
-    <Heading level={level} className={level === 2 ? 'lab-section-heading mz-text-heading-md' : 'mz-text-title-md'}>The CSS behind {name}</Heading>
+    <Heading level={level} className={className}>The CSS behind {name}</Heading>
     <CssNotesBody note={note} />
   </div>
 }
@@ -115,7 +116,7 @@ export function FeatureStatus({ supported }: { supported: boolean }) {
 // Where a building block's idea comes from: the same pattern in Every Layout and Bedrock Layouts.
 export function SimilarToLinks({ links }: { links: SimilarTo[] }) {
   return <>
-    <Heading level={2} className="lab-section-heading mz-text-heading-md">Similar to</Heading>
+    <Heading level={3} className="lab-section-heading mz-text-heading-sm">Similar to</Heading>
     <ul className="lab-similar-to mz-text-body-md">
       {links.map((link) => <li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}
     </ul>

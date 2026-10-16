@@ -203,7 +203,8 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/lab/layout/layoutLabLogic.ts` | Live media-query matching without effects, CSS support checks and on-request viewport and safe-area measurement |
 | `site/lab/layout/LabParts.tsx` | Lab-only marker (Warning outline and Lab badge), width-slider demo frame, page introductions with subtitle and building block badge, demo headings and text, CSS notes, value pickers, Similar to links, browser support and support badges |
 | `site/lab/layout/LabPrimitives.tsx` | Lab-only building blocks following Bedrock Layouts and Every Layout: Stack, Inline, InlineCluster, Split, Columns, Grid, Center, Frame, Cover and Reel, with limits as custom properties |
-| `site/lab/layout/StagePages.tsx` | A stage's overview with a Card per page, and a stage page: introduction, examples, Similar to links and browser support |
+| `site/lab/layout/StagePages.tsx` | A stage's overview with a Card per page, and a stage page in two halves: How it works (introduction, examples, browser support) and How Mezzanine uses it (Today and Lab candidate lines, Mezzanine detail such as the spacing scale, and Similar to links) |
+| `site/lab/layout/mezzanineUsesContent.tsx` | The How Mezzanine uses it lines for each stage page, each marked Today (checked against the library) or Lab candidate, linking to component pages rather than documenting them |
 | `site/lab/layout/OneBoxDemos.tsx` | One box examples: the box model, sizing and units (with line length), logical properties, target size and Center |
 | `site/lab/layout/InsideTheBoxDemos.tsx` | Inside the box examples: overflow, images and media, multi-column, :has(), Frame, Cover and Reel |
 | `site/lab/layout/ArrangingBoxesDemos.tsx` | Arranging boxes examples: normal flow, CSS Flexbox, CSS Grid, subgrid, alignment, spacing (with the real spacing tokens) and reading order |

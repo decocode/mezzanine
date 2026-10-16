@@ -61,11 +61,16 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
     await expect(tree.getByRole('link', { name, exact: true })).toHaveAttribute('href', layoutPage.path)
   }
 
-  // A building block page has one example, the CSS behind it under its own heading, and its sources.
+  // A stage page has two halves: how it works, then how Mezzanine uses it, with each line marked
+  // Today or Lab candidate. A building block page also links to its sources.
   await page.goto('/site/lab/layout/box-formations/stack')
   await expect(page).toHaveTitle('Stack | Lab')
-  await expect(page.getByRole('heading', { name: 'Example', exact: true, level: 2 })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'The CSS behind Stack', level: 2 })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'The CSS behind Stack', level: 3 })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'How Mezzanine uses it', exact: true, level: 2 })).toBeVisible()
+  const uses = main.locator('.lab-uses')
+  await expect(uses.locator('.lab-use').filter({ hasText: 'Today' })).toHaveCount(1)
+  await expect(uses.locator('.lab-use').filter({ hasText: 'Lab candidate' })).toHaveCount(1)
   await expect(main.getByRole('link', { name: 'Bedrock: Stack', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/stack')
   // The Spacing page lists the real spacing tokens with their live values.
   await page.goto('/site/lab/layout/arranging-boxes/spacing')
