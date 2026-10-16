@@ -35,6 +35,14 @@
   letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-md);
   text-transform: var(--text-transform-body);
+  /* Text behaviour (Foundations › Text): long words, such as German compound nouns, break at
+     syllables with a hyphen when the page declares its language with lang. */
+  hyphens: auto;
+}
+
+/* Code must never gain hyphens: a hyphen inside code changes its meaning. */
+:where(code, kbd, pre, samp) {
+  hyphens: manual;
 }
 
 :where(h1, h2, h3) {

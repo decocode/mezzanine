@@ -1,7 +1,7 @@
 import { useId, useState, type CSSProperties, type ReactNode } from 'react'
-import { Badge, CodeBlock, Heading, Label, Link, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
+import { Badge, CodeBlock, Heading, Label, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
 import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'react-aria-components/Slider'
-import { buildingBlockLabel, framePresets, holdBadgeLabel, type CssNote, type LabIntro, type SimilarTo } from './layoutLabContent'
+import { framePresets, labBadgeLabel, type CssNote } from './layoutLabContent'
 import { splitInlineCode } from './layoutLabLogic'
 
 // A frame whose width you set with a slider or presets. Its contents are a size container. When the demo
@@ -39,30 +39,6 @@ export function DemoFrame({ label, initialWidth = 720, canOverflow = false, chil
   </div>
 }
 
-// The page heading, its subtitle and an introduction (what it is, then why it matters), then the
-// "Examples" heading that the demos sit under ("Example" when there is only one), unless the page
-// leaves it out. Building blocks show a badge under the heading.
-export function LabSectionIntro({ section, hasExamples = true, isSingleExample = false, isBuildingBlock = false }: { section: LabIntro; hasExamples?: boolean; isSingleExample?: boolean; isBuildingBlock?: boolean }) {
-  return <>
-    <Heading id={section.id} level={1} className="mz-text-heading-lg">{section.title}</Heading>
-    {section.subtitle && <Text elementType="p" className="lab-subtitle mz-text-body-lg">{section.subtitle}</Text>}
-    {isBuildingBlock && <p className="lab-page-badges"><Badge>{buildingBlockLabel}</Badge></p>}
-    <div className="lab-explainer">
-      <Text elementType="p" className="mz-text-body-md">{section.what}</Text>
-      <Text elementType="p" className="mz-text-body-md">{section.why}</Text>
-    </div>
-    {hasExamples && <Heading level={2} className="mz-text-heading-md">{isSingleExample ? 'Example' : 'Examples'}</Heading>}
-  </>
-}
-
-// Browser support, at the end of a page.
-export function BrowserSupport({ section }: { section: { support: string } }) {
-  return <>
-    <Heading level={2} className="lab-section-heading mz-text-heading-md">Browser support</Heading>
-    <Text elementType="p" className="lab-demo-text mz-text-body-md">{section.support}</Text>
-  </>
-}
-
 // A heading for one demo inside a section's "Examples" part.
 export function DemoHeading({ children }: { children: ReactNode }) {
   return <Heading level={3} className="lab-demo-heading mz-text-heading-sm">{children}</Heading>
@@ -95,24 +71,14 @@ export function CssNotes({ name, note, level = 4 }: { name: string; note: CssNot
   </div>
 }
 
-// An emerging feature's status: Hold, then whether this browser supports it.
+// An emerging feature's status: Lab, then whether this browser supports it.
 export function FeatureStatus({ supported }: { supported: boolean }) {
   return <p className="lab-feature-status">
-    <Badge variant="danger">{holdBadgeLabel}</Badge>
+    <Badge variant="warning">{labBadgeLabel}</Badge>
     {supported
       ? <Badge variant="success">Active in this browser</Badge>
       : <Badge variant="neutral">Not in this browser</Badge>}
   </p>
-}
-
-// Where a building block's idea comes from: the same pattern in Every Layout and Bedrock Layouts.
-export function SimilarToLinks({ links }: { links: SimilarTo[] }) {
-  return <>
-    <Heading level={3} className="lab-section-heading mz-text-heading-sm">Similar to</Heading>
-    <ul className="lab-similar-to mz-text-body-md">
-      {links.map((link) => <li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}
-    </ul>
-  </>
 }
 
 // Buttons that choose one CSS value for a demo, such as overflow: hidden, with a visible label.

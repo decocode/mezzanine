@@ -4,7 +4,7 @@ import type { CssNote } from './layoutLabContent'
 // layout-lab.css, and a browser test checks that it still matches. Some demos set a value
 // through a custom property, such as --lab-overflow, so the buttons can change it.
 export const boxCssNotes: Record<string, CssNote> = {
-  // One box
+  // The box
   boxAnatomy: {
     paragraphs: [
       'The `margin` sets the space outside the border, `padding` the space inside it, and `border` the line between them. Each one can also be set for a single side, such as `margin-left` or `padding-top`.',
@@ -36,6 +36,17 @@ export const boxCssNotes: Record<string, CssNote> = {
   box-sizing: border-box;
 }`,
   },
+  padding: {
+    paragraphs: [
+      'The `padding` property sets the space between the border and the content. The buttons change it to one of Mezzanine’s spacing tokens.',
+      'Like margin, padding can be set for a single side, such as `padding-top`.',
+    ],
+    code: `.lab-padding-box {
+  padding: var(--lab-padding);
+  border: var(--space-1) solid var(--color-text);
+  background: var(--color-surface);
+}`,
+  },
   units: {
     paragraphs: [
       'A `px` is a fixed size on screen. A `rem` is the root text size, normally 16px, so it grows when someone enlarges their text. A `%` is a share of the box around it, here the frame.',
@@ -62,10 +73,10 @@ export const boxCssNotes: Record<string, CssNote> = {
   lineLength: {
     paragraphs: [
       'The `max-width` property lets a box shrink as much as it needs to, but stops it growing past the limit.',
-      'The limit is `65ch`. One `ch` is the width of a zero in the current font, so `65ch` means roughly 65 characters per line, whatever the font or its size.',
+      'The limit is Mezzanine’s `--line-length` token, which is `65ch`. One `ch` is the width of a zero in the current font, so `65ch` means roughly 65 characters per line, whatever the font or its size.',
     ],
     code: `.lab-line-length {
-  max-width: 65ch;
+  max-width: var(--line-length);
 }`,
   },
   // Inside the box
@@ -80,6 +91,22 @@ export const boxCssNotes: Record<string, CssNote> = {
   padding: var(--space-2);
   border: 1px solid var(--color-text);
   overflow: var(--lab-overflow);
+}`,
+  },
+  readingDirection: {
+    paragraphs: [
+      'The `dir` attribute in the HTML sets the direction of a line: `ltr` for left to right, or `rtl` for right to left. The `lang` attribute names the language, so screen readers pronounce it correctly.',
+      'For Japanese written top to bottom, `writing-mode: vertical-rl` turns the lines vertical and stacks them from right to left. In vertical text, `inline-size` is the height, so lines wrap after 10rem. The border uses `border-inline-start` and the text uses `text-align: start`, so both follow wherever lines start: the left, the right or the top.',
+    ],
+    code: `.lab-reading-direction {
+  border-inline-start: var(--space-2) solid var(--color-text);
+  padding-inline-start: var(--space-4);
+  text-align: start;
+}
+
+.lab-reading-vertical {
+  writing-mode: vertical-rl;
+  inline-size: 10rem;
 }`,
   },
   longWord: {
@@ -251,16 +278,19 @@ export const boxCssNotes: Record<string, CssNote> = {
   border: 1px dashed var(--color-text-muted);
 }`,
   },
-  marginAndGap: {
+  margin: {
     paragraphs: [
-      'On the left, each item has a `margin`, so it keeps its distance on every side, including from the dashed edge. Where two margins meet top to bottom, the browser uses only the larger one. This is called margin collapsing.',
-      'On the right, the parent sets a `gap`, which only ever goes between items.',
+      'Each box has a `margin`, so it keeps its distance on every side, including from the dashed edge. Where two margins meet top to bottom, the browser uses only the larger one.',
     ],
     code: `.lab-spacing-margin > * {
   margin: var(--space-4);
-}
-
-.lab-spacing-gap {
+}`,
+  },
+  gap: {
+    paragraphs: [
+      'The parent sets a `gap`, which only ever goes between its children.',
+    ],
+    code: `.lab-spacing-gap {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -289,6 +319,54 @@ export const boxCssNotes: Record<string, CssNote> = {
 .lab-order-reversed {
   flex-direction: row-reverse;
   justify-content: flex-end;
+}`,
+  },
+  // Pages still to be sorted
+  positioning: {
+    paragraphs: [
+      'The `position` property chooses how the second box is placed. With `static`, the default, it stays in normal flow and `top` and `left` do nothing. With `relative`, it moves from where it would have been, but its old space stays.',
+      'With `absolute`, it leaves the flow and is placed from the corner of the nearest positioned parent, here the dashed box. With `sticky`, it scrolls with the rest until it reaches `top`, then stays put. `z-index` keeps it above the other boxes.',
+    ],
+    code: `.lab-position-item {
+  position: var(--lab-position);
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 1;
+}`,
+  },
+  columnDrop: {
+    paragraphs: [
+      'Column drop is a Flexbox row that may wrap. Each column has `flex: 1 1 12rem`: it starts at 12rem, can shrink, and grows to share the spare room.',
+      'When the columns no longer fit, the last one wraps onto a new row, and its `flex-grow` stretches it across the full width.',
+    ],
+    code: `.lab-column-drop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.lab-column-drop > * {
+  flex: 1 1 var(--lab-column-drop-min, 12rem);
+}`,
+  },
+  fluidSizing: {
+    paragraphs: [
+      'The size is `clamp(1.5rem, 1rem + 4cqi, 3rem)`: never smaller than 1.5rem, never larger than 3rem, and in between it’s 1rem plus 4% of the frame’s width.',
+      'The `cqi` unit is a hundredth of the width of the nearest container, here the frame, so the text follows the slider. The `rem` part keeps it growing when someone enlarges their text.',
+    ],
+    code: `.lab-fluid-heading {
+  font-size: clamp(1.5rem, 1rem + 4cqi, 3rem);
+  line-height: 1.2;
+}`,
+  },
+  supports: {
+    paragraphs: [
+      'Every browser first gets an ordinary rule. Then `@supports` checks whether the browser understands `display: grid-lanes`, and only then uses it. This is the masonry rule from Box to the Future.',
+    ],
+    code: `@supports (display: grid-lanes) {
+  .lab-masonry {
+    display: grid-lanes;
+  }
 }`,
   },
   // Box formations

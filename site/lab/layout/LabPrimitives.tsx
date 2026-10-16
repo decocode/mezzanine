@@ -53,6 +53,11 @@ export function Grid({ children, min }: Children & { min?: string }) {
   return <div className="lab-grid" style={vars({ '--lab-grid-min': min })}>{children}</div>
 }
 
+// Column drop: columns that drop below each other one at a time as space runs out.
+export function ColumnDrop({ children, min }: Children & { min?: string }) {
+  return <div className="lab-column-drop" style={vars({ '--lab-column-drop-min': min })}>{children}</div>
+}
+
 // Center: caps the width of content and centres it.
 export function Center({ children, max }: Children & { max?: string }) {
   return <div className="lab-center" style={vars({ '--lab-center-max': max })}>{children}</div>

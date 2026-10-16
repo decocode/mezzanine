@@ -1,13 +1,15 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
-import { cssNotes, layoutLabSections, layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutLabContent'
+import { boxToTheFuture, cssNotes, futurePages, layoutLabSections, layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutLabContent'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
 const sectionPages = Object.values(layoutLabSections).map(section => ({ path: `/site/lab/layout/${section.slug}`, title: section.title }))
 const stageOverviewPages = layoutStages.map(stage => ({ path: `/site/lab/layout/${stage.slug}`, title: stage.title }))
 const stageChildPages = stagePages.map(page => ({ path: page.href, title: page.title }))
-const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, ...sectionPages]
+const futureOverviewPage = { path: `/site/lab/layout/${boxToTheFuture.slug}`, title: boxToTheFuture.title }
+const futureChildPages = futurePages.map(page => ({ path: page.href, title: page.title }))
+const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages, ...sectionPages]
 
 // Checks the Layout overview, each stage, each stage page and each page still to be sorted fit a 320px
 // screen at normal and doubled text in every theme, and pass an automated accessibility scan.
@@ -35,30 +37,38 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/layout')
   const main = page.locator('main')
-  for (const layoutPage of [...stageOverviewPages, ...stageChildPages, ...sectionPages]) {
+  // Each stage is a section of the docs page template, with links to its pages and a Read docs Button to its overview.
+  for (const layoutPage of [...stageChildPages, ...futureChildPages, ...sectionPages]) {
     await expect(main.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
   }
-  await main.getByRole('link', { name: 'One box', exact: true }).click()
-  await expect(page).toHaveTitle('One box | Lab')
+  for (const stage of [...stageOverviewPages, futureOverviewPage]) {
+    await expect(main.locator(`a[href="${stage.path}"]`)).toHaveAccessibleDescription(stage.title)
+  }
+  await expect(page.getByRole('navigation', { name: 'On this page', exact: true }).getByRole('link', { name: 'The box', exact: true })).toBeVisible()
+  await main.locator('a[href="/site/lab/layout/the-box"]').click()
+  await expect(page).toHaveTitle('The box | Lab')
 
   // A stage shows a Card for each of its pages, each with a Read docs Button to the page.
-  const card = (title: string) => page.locator('main .mezzanine-card').filter({ has: page.getByRole('heading', { name: title, exact: true, level: 2 }) })
-  for (const stagePage of stagePagesByStage('oneBox')) {
+  const card = (title: string) => page.locator('main .mezzanine-card').filter({ has: page.getByRole('heading', { name: title, exact: true, level: 3 }) })
+  for (const stagePage of stagePagesByStage('theBox')) {
     const readDocs = card(stagePage.title).getByRole('link', { name: 'Read docs', exact: true })
     await expect(readDocs).toHaveAttribute('href', stagePage.href)
     await expect(readDocs).toHaveAccessibleDescription(stagePage.title)
   }
-  await card('The box model').getByRole('link', { name: 'Read docs', exact: true }).click()
-  await expect(page).toHaveTitle('The box model | Lab')
-  await expect(page.getByText('What is a box made of?', { exact: true })).toBeVisible()
+  // The box explains the box model itself, before its Cards.
+  await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toBeVisible()
+  await expect(page.locator('.lab-box-anatomy')).toBeVisible()
+  await card('Margin').getByRole('link', { name: 'Read docs', exact: true }).click()
+  await expect(page).toHaveTitle('Margin | Lab')
+  await expect(page.getByText('When boxes assert their need for personal space.', { exact: true })).toBeVisible()
 
   // On a stage page, the tree lists every stage and page, and the pages still to be sorted.
   const tree = page.locator('.site-layout > .site-sidebar').getByRole('treegrid', { name: 'Lab experiments' })
-  for (const layoutPage of [...stageOverviewPages, ...stagePagesByStage('oneBox').map(item => ({ path: item.href, title: item.title })), ...sectionPages]) {
-    // Emerging features carries a Hold badge, which is part of its link's name.
-    const name = layoutPage.title === layoutLabSections.emerging.title ? `${layoutPage.title} Hold` : layoutPage.title
-    await expect(tree.getByRole('link', { name, exact: true })).toHaveAttribute('href', layoutPage.path)
+  for (const layoutPage of [...stageOverviewPages, ...stagePagesByStage('theBox').map(item => ({ path: item.href, title: item.title })), ...sectionPages]) {
+    await expect(tree.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
   }
+  // Box to the Future carries a Lab badge, which is part of its link's name.
+  await expect(tree.getByRole('link', { name: `${boxToTheFuture.title} Lab`, exact: true })).toHaveAttribute('href', futureOverviewPage.path)
 
   // A stage page has two halves: how it works, then how Mezzanine uses it, with each line marked
   // Today or Lab candidate. A building block page also links to its sources.
@@ -70,9 +80,10 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   const uses = main.locator('.lab-uses')
   await expect(uses.locator('.lab-use').filter({ hasText: 'Today' })).toHaveCount(1)
   await expect(uses.locator('.lab-use').filter({ hasText: 'Lab candidate' })).toHaveCount(1)
-  await expect(main.getByRole('link', { name: 'Bedrock: Stack', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/stack')
-  // The Spacing page lists the real spacing tokens with their live values.
-  await page.goto('/site/lab/layout/arranging-boxes/spacing')
+  await expect(main.getByRole('heading', { name: 'References', exact: true, level: 2 })).toBeVisible()
+  await expect(main.getByRole('link', { name: 'Bedrock: Stack (opens in a new tab)', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/stack')
+  // The Gap page lists the real spacing tokens with their live values.
+  await page.goto('/site/lab/layout/arranging-boxes/gap')
   await expect(main.locator('.spacing-scale-item').filter({ hasText: '--space-4' }).locator('.spacing-scale-rem')).toHaveText('1rem')
   await page.goto('/site/lab/layout/not-a-page')
   await expect(page).toHaveTitle('Page not found | Lab')
@@ -82,7 +93,8 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
 // to a column below its switch width, the list becomes a grid with a fifth item, the overflow box
 // becomes scrollable, and reversing the row changes what you see but not the keyboard order.
 test('Lab Layout demos respond to their space and content', async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 900 })
+  // Wide enough that the wide slot has room for two columns beside the On this page column.
+  await page.setViewportSize({ width: 1600, height: 900 })
   await page.goto('/site/lab/layout/container-queries')
   const tiles = page.locator('.lab-two-slots .lab-cq-tile')
   const columns = (index: number) => tiles.nth(index).evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length)
@@ -106,7 +118,7 @@ test('Lab Layout demos respond to their space and content', async ({ page }) => 
   await page.getByRole('button', { name: 'Add an item', exact: true }).click()
   await expect(list).toHaveCSS('display', 'grid')
 
-  await page.goto('/site/lab/layout/inside-the-box/overflow')
+  await page.goto('/site/lab/layout/inside-the-box/overflowing-the-box')
   const box = page.locator('.lab-overflow-box')
   await expect(box).toHaveCSS('overflow-y', 'visible')
   await page.getByRole('radio', { name: 'auto', exact: true }).click()

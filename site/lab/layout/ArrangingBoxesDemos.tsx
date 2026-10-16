@@ -150,17 +150,10 @@ const gapOptions = [
 
 function SpacingDemo() {
   return <>
-    <DemoHeading>Margin or gap</DemoHeading>
-    <DemoText>The same three boxes twice. With margin, each box keeps its distance on every side, so there’s space against the dashed edge too. With gap, the space only goes between them.</DemoText>
-    <div className="lab-two-slots">
-      <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Margin on each box</Text>
-        <div className="lab-spacing-demo lab-spacing-margin">{[1, 2, 3].map((number) => <Block key={number}>Box {number}</Block>)}</div>
-      </div>
-      <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Gap on the parent</Text>
-        <div className="lab-spacing-demo lab-spacing-gap">{[1, 2, 3].map((number) => <Block key={number}>Box {number}</Block>)}</div>
-      </div>
-    </div>
-    <CssNotes name="margin and gap" note={cssNotes.marginAndGap} />
+    <DemoHeading>Gap on the parent</DemoHeading>
+    <DemoText>Three boxes with a gap. The space only goes between them, never against the dashed edge.</DemoText>
+    <div className="lab-spacing-demo lab-spacing-gap">{[1, 2, 3].map((number) => <Block key={number}>Box {number}</Block>)}</div>
+    <CssNotes name="gap" note={cssNotes.gap} />
   </>
 }
 
@@ -169,8 +162,8 @@ function SpacingTokens() {
   const [gap, setGap] = useState<(typeof gapOptions)[number]['value']>('--space-4')
   return <>
     <DemoHeading>Spacing tokens</DemoHeading>
-    <DemoText>Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so <code>--space-4</code> is four steps: <code>1rem</code>, normally 16px. The tokens are in <code>rem</code>, so space grows when someone enlarges their text. <Link href="/site/lab/layout/one-box/sizing-and-units">Sizing and units</Link> explains <code>rem</code>.</DemoText>
-    <DemoText>These are the real tokens, with their values read live, as on the <Link href="/spacing">Spacing</Link> page in the docs.</DemoText>
+    <DemoText>Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so <code>--space-4</code> is four steps: <code>1rem</code>, normally 16px. The tokens are in <code>rem</code>, so space grows when someone enlarges their text. <Link href="/site/lab/layout/the-box/measuring-the-box">Measuring the box</Link> explains <code>rem</code>.</DemoText>
+    <DemoText>These are the real tokens, with their values read live.</DemoText>
     <SpacingScale />
     <DemoHeading>Sizes from the spacing scale</DemoHeading>
     <DemoText>Choose a spacing token for the gap.</DemoText>
@@ -200,6 +193,6 @@ export const arrangingBoxesDemos: StageDemos = {
   cssGrid: { Demo: GridDemo },
   subgrid: { Demo: SubgridDemo },
   alignment: { Demo: AlignmentDemo },
-  spacing: { Demo: SpacingDemo, MezzanineDetail: SpacingTokens },
+  gap: { Demo: SpacingDemo, MezzanineDetail: SpacingTokens },
   readingOrder: { Demo: ReadingOrderDemo },
 }

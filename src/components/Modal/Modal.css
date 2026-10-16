@@ -20,8 +20,9 @@
   position: sticky;
   box-sizing: border-box;
   top: calc(var(--visual-viewport-height) / 2);
-  margin-left: 50vw;
-  translate: -50% -50%;
+  /* Auto inline margins centre the modal in either reading direction. */
+  margin-inline: auto;
+  translate: 0 -50%;
   width: calc(100vw - var(--modal-viewport-padding) * 2);
   max-width: var(--modal-max-width);
   max-height: calc(var(--visual-viewport-height) - var(--modal-viewport-padding) * 2);

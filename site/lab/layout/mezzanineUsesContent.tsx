@@ -13,19 +13,36 @@ const today = (text: ReactNode): MezzanineUse => ({ status: 'today', text })
 const candidate = (text: ReactNode): MezzanineUse => ({ status: 'candidate', text })
 
 export const mezzanineUses: Record<string, MezzanineUse[]> = {
-  // One box
+  // The box
   boxModel: [
+    today('The Cards further down this page are boxes you can see: padding inside, a border around, and space between them.'),
+  ],
+  margin: [
+    today(<><Link href="/card">Card</Link> spaces its children with a margin above each one after the first, set by <code>--space-4</code>.</>),
+  ],
+  padding: [
+    today(<><Link href="/card">Card</Link>’s padding is <code>--space-6</code>.</>),
+    today(<><Link href="/button">Button</Link> takes its padding from its size tokens, so each button size has its own padding.</>),
+  ],
+  measuringTheBox: [
+    today(<>Mezzanine’s <Link href="/site/lab/layout/arranging-boxes/gap">spacing tokens</Link> are stored in rem, so they grow when someone enlarges their text.</>),
+  ],
+  sizingTheBox: [
     today(<>Components with padding and borders, such as <Link href="/button">Button</Link> and <Link href="/card">Card</Link>, set <code>box-sizing: border-box</code> themselves, so their width includes their padding and border. They don’t rely on an app to set it.</>),
-    today(<>The Cards on the <Link href="/site/lab/layout/one-box">One box</Link> page are boxes you can see: padding inside, a border around, and space between them.</>),
-  ],
-  sizingAndUnits: [
-    today(<>Mezzanine’s <Link href="/site/lab/layout/arranging-boxes/spacing">spacing tokens</Link> are stored in rem, so they grow when someone enlarges their text.</>),
     today(<><Link href="/button">Button</Link> has <code>max-width: 100%</code>, so a long label can never push it wider than its space.</>),
-    candidate('A shared line length, parked for a future Typography experiment rather than Layout.'),
   ],
-  logicalProperties: [
+  sides: [
     today(<>Components use logical names for sideways spacing, such as <code>padding-inline-start</code>, so they mirror for right-to-left languages.</>),
     today(<>A few physical properties remain, in the <Link href="/sidebar">Sidebar</Link> drawer and the Modal.</>),
+  ],
+  mediaQueries: [
+    today('When no theme is chosen, Mezzanine follows the device’s light or dark setting with prefers-color-scheme.'),
+    today('Mezzanine’s shared motion policy reads the person’s reduced-motion setting, so motion is reduced for every component from one place.'),
+    today(<>Six components, including <Link href="/radio-group">Radio group</Link>, <Link href="/tabs">Tabs</Link> and <Link href="/text-field">Text field</Link>, adjust for forced-colors, Windows’ high-contrast mode.</>),
+    today(<>The <Link href="/sidebar">Sidebar</Link> sits beside the content on wide windows and becomes a drawer on narrow ones, using a width media query.</>),
+  ],
+  safeAreas: [
+    today(<>The <Link href="/tab-bar">Tab bar</Link> adds the bottom safe area beneath itself, so phone home indicators never cover it.</>),
   ],
   targetSize: [
     today(<>Buttons, tabs, text inputs and Navbar links are at least 44px tall at the default text size. The rule is on the <Link href="/accessibility">Accessibility</Link> page.</>),
@@ -35,8 +52,11 @@ export const mezzanineUses: Record<string, MezzanineUse[]> = {
     today('Nothing yet: the library has no Center. The docs site sets its own page width, outside the library.'),
   ],
   // Inside the box
-  overflow: [
+  text: [
     today(<>Most components, including <Link href="/button">Button</Link>, <Link href="/card">Card</Link> and <Link href="/code-block">Code block</Link>, break very long words with <code>overflow-wrap: anywhere</code>, so nothing sticks out.</>),
+    today(<>The <code>--line-length</code> token, <code>65ch</code>, is the longest a line of reading text should get. The docs site uses it for its reading columns.</>),
+  ],
+  overflow: [
     today(<>A horizontal <Link href="/tabs">Tabs</Link> list scrolls sideways when its tabs don’t fit, instead of squashing them.</>),
   ],
   imagesAndMedia: [
@@ -75,7 +95,7 @@ export const mezzanineUses: Record<string, MezzanineUse[]> = {
   alignment: [
     today(<><Link href="/button">Button</Link> uses <code>align-items: center</code> and <code>justify-content: center</code> to centre its label and icon.</>),
   ],
-  spacing: [
+  gap: [
     today(<>A scale of spacing tokens, shown below. <Link href="/card">Card</Link>, for example, uses <code>--space-6</code> for its padding and <code>--space-4</code> between its children.</>),
     today('Many components still set their own spacing values instead of using the scale. Connecting them is still to do.'),
   ],

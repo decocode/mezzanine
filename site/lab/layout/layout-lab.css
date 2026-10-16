@@ -14,19 +14,16 @@
   --lab-layer-toast: 300;
   --lab-sticky-height: 3rem;
 
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-16);
   min-width: 0;
 }
 
-/* No extra strength, so components such as Card keep their own spacing between children. */
-:where(.lab-layout) :where(h1, h2, h3, h4, p, ul) {
+/* The content of one section of the docs page template. No extra strength, so components such
+   as Card keep their own spacing between children. */
+:where(.lab-section-body) :where(h3, h4, p, ul) {
   margin: 0;
 }
 
-.lab-layout-intro,
-.lab-layout-section {
+.lab-section-body {
   display: grid;
   /* minmax(0, 1fr) lets wide content such as tables scroll inside its wrapper instead of widening the page. */
   grid-template-columns: minmax(0, 1fr);
@@ -43,11 +40,6 @@
 /* Extra space above each example, so one example's frame doesn't run into the next one's heading. */
 .lab-layout .lab-demo-heading {
   margin-block-start: var(--space-8);
-}
-
-/* Except straight after "Examples", where the heading above already separates it. */
-.lab-layout h2 + .lab-demo-heading {
-  margin-block-start: 0;
 }
 
 /* Child pages as Cards: as many columns as fit, none narrower than 16rem, equal heights per row. */
@@ -274,7 +266,7 @@
   padding-inline-start: var(--space-6);
 }
 
-/* One box: the box model. */
+/* The box: the box model. */
 .lab-box-margin-area {
   border: 1px dashed var(--color-text-muted);
 }
@@ -306,7 +298,13 @@
   box-sizing: border-box;
 }
 
-/* One box: sizing and units. */
+.lab-padding-box {
+  padding: var(--lab-padding);
+  border: var(--space-1) solid var(--color-text);
+  background: var(--color-surface);
+}
+
+/* The box: sizing and units. */
 .lab-unit-bar {
   box-sizing: border-box;
   padding: var(--space-2);
@@ -328,7 +326,7 @@
 }
 
 .lab-line-length {
-  max-width: 65ch;
+  max-width: var(--line-length);
 }
 
 /* Inside the box: overflow. */
@@ -539,6 +537,16 @@
   gap: var(--space-3);
 }
 
+.lab-column-drop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.lab-column-drop > * {
+  flex: 1 1 var(--lab-column-drop-min, 12rem);
+}
+
 .lab-center {
   box-sizing: content-box;
   max-inline-size: var(--lab-center-max, 60ch);
@@ -582,6 +590,37 @@
 .lab-reel:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: var(--space-1);
+}
+
+/* Positioning. */
+.lab-position-stage {
+  position: relative;
+  max-height: 14rem;
+  overflow: auto;
+  padding: var(--space-3);
+  border: 1px dashed var(--color-text-muted);
+}
+
+.lab-position-stage:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: var(--space-1);
+}
+
+.lab-position-stage > * + * {
+  margin-top: var(--space-3);
+}
+
+.lab-position-item {
+  position: var(--lab-position);
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 1;
+}
+
+/* Fluid sizing: the size follows the frame, between two limits. */
+.lab-fluid-heading {
+  font-size: clamp(1.5rem, 1rem + 4cqi, 3rem);
+  line-height: 1.2;
 }
 
 /* Container queries: the tile responds to its slot, not the screen. */
@@ -699,13 +738,23 @@
 .lab-direction-physical {
   border-left: var(--space-2) solid var(--color-warning-600);
   padding-left: var(--space-4);
-  text-align: left;
 }
 
 .lab-direction-logical {
   border-inline-start: var(--space-2) solid var(--color-warning-600);
   padding-inline-start: var(--space-4);
+}
+
+/* Inside the box: reading direction. */
+.lab-reading-direction {
+  border-inline-start: var(--space-2) solid var(--color-text);
+  padding-inline-start: var(--space-4);
   text-align: start;
+}
+
+.lab-reading-vertical {
+  writing-mode: vertical-rl;
+  inline-size: 10rem;
 }
 
 /* Subgrid. */

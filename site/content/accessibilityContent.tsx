@@ -41,7 +41,6 @@ export const accessibilityRelatedPages = [
   { label: 'Interaction', href: '/interaction' },
   { label: 'Color', href: '/color' },
   { label: 'Motion', href: '/motion' },
-  { label: 'Spacing', href: '/spacing' },
 ]
 
 export const accessibilityReferences = [

@@ -1,7 +1,7 @@
 :root {
   /* PageHeading: existing page introduction widths and fluid title size. */
   --page-heading-max-width: 58rem;
-  --page-heading-description-max-width: 65ch;
+  --page-heading-description-max-width: var(--line-length);
   --page-heading-title-font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-md));
 }
 
@@ -231,7 +231,7 @@ a:focus-visible {
 }
 
 .color-palette-category-description {
-  max-width: 65ch;
+  max-width: var(--line-length);
   margin: 0 0 var(--space-4);
   color: var(--color-text-muted);
 }
@@ -257,7 +257,7 @@ a:focus-visible {
 }
 
 .color-palette-heading p {
-  max-width: 65ch;
+  max-width: var(--line-length);
   margin-top: var(--space-4);
   color: var(--color-text-muted);
 }
@@ -456,7 +456,7 @@ a:focus-visible {
 .typography-layers {
   display: grid;
   gap: var(--space-3);
-  max-inline-size: 65ch;
+  max-inline-size: var(--line-length);
   margin: 0 0 var(--space-8);
   padding: 0;
   list-style: none;
@@ -720,14 +720,14 @@ a:focus-visible {
 }
 
 .component-section-description {
-  max-width: 65ch;
+  max-width: var(--line-length);
   margin: 0 0 var(--space-4);
   color: var(--color-text-muted);
 }
 
 .typography-guidance,
 .component-section :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm) {
-  max-inline-size: 65ch;
+  max-inline-size: var(--line-length);
 }
 
 .typography-guidance > p {
@@ -1125,3 +1125,12 @@ a:focus-visible {
 .button-sizes-table .react-aria-Table { min-width: 30rem; table-layout: fixed; }
 .button-sizes-table .react-aria-Column,
 .button-sizes-table .react-aria-Cell { width: calc(100% / 3); }
+
+/* Text page examples: a paragraph at the line length, a narrow Card for long words, and vertical text in a Card. */
+.text-line-length-example { max-width: var(--line-length); margin: 0; }
+.text-narrow-example .mezzanine-card { max-width: 12rem; }
+/* Language examples: as many per row as fit. */
+.text-language-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+/* In vertical writing, inline-size is the height, so lines wrap after 12rem. */
+/* The Card's gap between children follows each child's own direction, so vertical text needs its own space above. */
+.text-vertical-example { writing-mode: vertical-rl; inline-size: 12rem; margin-top: var(--space-4); }
