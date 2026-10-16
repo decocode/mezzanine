@@ -1,4 +1,4 @@
-/* Shape tokens: the corner-radius scale. */
+/* Shape tokens: the corner-radius and border-width scales. */
 
 :where(:root) {
   /* Corner-radius scale; component defaults remain independently controlled. */
@@ -9,4 +9,12 @@
   --radius-lg: 1rem;
   --radius-xl: 1.25rem;
   --radius-full: 9999rem;
+
+  /* Border-width scale, in 1px steps after a hairline; component defaults remain independently controlled. */
+  --border-width-none: 0;
+  --border-width-xs: 0.03125rem;
+  --border-width-sm: 0.0625rem;
+  --border-width-md: 0.125rem;
+  --border-width-lg: 0.1875rem;
+  --border-width-xl: 0.25rem;
 }

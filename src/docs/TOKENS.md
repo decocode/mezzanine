@@ -245,6 +245,21 @@ Existing component radius defaults are unchanged. Products can opt in by referen
 a level from a component token, such as `--button-border-radius: var(--radius-sm)`.
 For a circle, use `50%` on a square element; on a rectangle it produces an ellipse.
 
+Border-width levels use `rem` and go up in 1px steps after a hairline. Extra small is
+half a pixel: finer on high-resolution screens, rounded up to one pixel elsewhere. Use it
+for decorative lines only; control edges use Small or thicker.
+
+| Token | Stored value |
+| --- | --- |
+| `--border-width-none` | `0` |
+| `--border-width-xs` | `0.03125rem` |
+| `--border-width-sm` | `0.0625rem` |
+| `--border-width-md` | `0.125rem` |
+| `--border-width-lg` | `0.1875rem` |
+| `--border-width-xl` | `0.25rem` |
+
+Existing component border-width defaults are unchanged.
+
 ## Current elevation inventory
 
 Elevation tokens form a ladder around `--elevation-flat`, which is level 0.

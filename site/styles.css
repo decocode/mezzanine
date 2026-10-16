@@ -586,6 +586,16 @@ a:focus-visible {
   background: var(--color-surface);
 }
 
+.border-width-scale-sample {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 6rem;
+  border-style: solid;
+  border-color: var(--color-text);
+  background: var(--color-surface);
+}
+
 .elevation-role-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));

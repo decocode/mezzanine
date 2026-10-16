@@ -7,3 +7,12 @@ export const radiusLevels = [
   { label: 'Extra large', token: '--radius-xl' },
   { label: 'Full', token: '--radius-full' },
 ] as const
+
+export const borderWidthLevels = [
+  { label: 'None', token: '--border-width-none' },
+  { label: 'Extra small (hairline)', token: '--border-width-xs' },
+  { label: 'Small', token: '--border-width-sm' },
+  { label: 'Medium', token: '--border-width-md' },
+  { label: 'Large', token: '--border-width-lg' },
+  { label: 'Extra large', token: '--border-width-xl' },
+] as const
