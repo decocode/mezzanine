@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/AppShell.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with one experiment, the layout tour: an overview at `/site/lab/layout` and a child page for each section at `/site/lab/layout/<slug>`, and a page for each intrinsic primitive at `/site/lab/layout/intrinsic-primitives/<name>`. Its illustrative candidates are not approved library features.
+The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with one experiment, the layout tour: an overview at `/site/lab/layout`, four stages told through boxes (One box, Inside the box, Arranging boxes and Box formations), each with an overview at `/site/lab/layout/<stage>` and a page for each topic or building block at `/site/lab/layout/<stage>/<page>`, and the pages still to be sorted into stages at `/site/lab/layout/<slug>`. Its illustrative candidates are not approved library features.
 
 The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `DisclosureHeader`, `TableOfContents`, `Navbar`, `NavTree` and `Sidebar` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
@@ -194,15 +194,20 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 
 | Path | Purpose |
 | --- | --- |
-| `site/lab/labContent.tsx` | Lab labels, the experiment list and the Lab's NavTree items: Layout at the top level, with its child pages in reading order and the primitives under Intrinsic primitives |
-| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry: the site's Navbar and sidebar layout with the Lab's NavTree; chooses the index, the Layout overview, a Layout child page or the not-found page from the address |
-| `site/lab/LayoutPage.tsx` | Lab layout tour: the overview listing its child pages, each section (a foundation from the layout research, or the emerging features) as its own page keyed by slug, and each primitive page; illustrative and unapproved |
-| `site/lab/layout/layoutLabContent.ts` | Plain-English explanations, page slugs, the child pages (primitives) with their Card label, CSS notes, frame presets and environment queries for the Lab layout tour |
+| `site/lab/labContent.tsx` | Lab labels, the experiment list and the Lab's NavTree items: Layout at the top level, its stages each holding their pages, then the pages still to be sorted |
+| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry: the site's Navbar and sidebar layout with the Lab's NavTree; chooses the index, the Layout overview, a stage, a stage page, a page still to be sorted or the not-found page from the address |
+| `site/lab/LayoutPage.tsx` | Lab layout tour: the overview listing the stages and their pages, a stage's overview, a stage page, and each page still to be sorted, keyed by slug; illustrative and unapproved |
+| `site/lab/layout/layoutLabContent.ts` | Plain-English explanations for the layout tour: the stages, each stage page with its address, subtitle and sources, the pages still to be sorted, their CSS notes, frame presets and environment queries |
+| `site/lab/layout/boxCssNotes.ts` | The CSS behind each stage page's examples, in plain English, merged into the tour's CSS notes |
 | `site/lab/layout/layoutLabLogic.ts` | Live media-query matching without effects, CSS support checks and on-request viewport and safe-area measurement |
-| `site/lab/layout/LabParts.tsx` | Lab-only marker (Warning outline and Lab badge), width-slider demo frame, section introductions, demo headings and text, CSS notes under their own heading, browser support and support badges |
-| `site/lab/layout/LabPrimitives.tsx` | Lab-only intrinsic layout primitives: Stack, Cluster, Switcher, AutoGrid, SidebarLayout and Center, with limits as custom properties |
-| `site/lab/layout/ChildPages.tsx` | Pages under a section: the Intrinsic primitives page with a Card per primitive, and each primitive's page with its summary, example and the CSS behind it under its own heading |
-| `site/lab/layout/FoundationDemos.tsx` | Demos for the other foundations: container queries, environment queries, reading width, target size, named layers, logical properties, subgrid, :has(), viewport units, scroll padding and cascade layers |
+| `site/lab/layout/LabParts.tsx` | Lab-only marker (Warning outline and Lab badge), width-slider demo frame, page introductions with subtitle and building block badge, demo headings and text, CSS notes, value pickers, Similar to links, browser support and support badges |
+| `site/lab/layout/LabPrimitives.tsx` | Lab-only building blocks following Bedrock Layouts and Every Layout: Stack, Inline, InlineCluster, Split, Columns, Grid, Center, Frame, Cover and Reel, with limits as custom properties |
+| `site/lab/layout/StagePages.tsx` | A stage's overview with a Card per page, and a stage page: introduction, examples, Similar to links and browser support |
+| `site/lab/layout/OneBoxDemos.tsx` | One box examples: the box model, sizing and units (with line length), logical properties, target size and Center |
+| `site/lab/layout/InsideTheBoxDemos.tsx` | Inside the box examples: overflow, images and media, multi-column, :has(), Frame, Cover and Reel |
+| `site/lab/layout/ArrangingBoxesDemos.tsx` | Arranging boxes examples: normal flow, CSS Flexbox, CSS Grid, subgrid, alignment, spacing and reading order |
+| `site/lab/layout/BoxFormationDemos.tsx` | Box formations examples: Stack, Inline, Inline cluster, Split, Columns and Grid |
+| `site/lab/layout/FoundationDemos.tsx` | Demos for the pages still to be sorted: container queries, environment queries, named layers, viewport units, scroll padding and cascade layers |
 | `site/lab/layout/EmergingFeatureDemos.tsx` | Emerging features page, each demo with support detection: grid-lanes masonry, scroll-state queries, anchor positioning and field-sizing |
 | `site/lab/layout/layout-lab.css` | Lab-scoped styles and illustrative --lab-* candidate tokens for the layout tour |
 
@@ -224,7 +229,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/components/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
 | `tests/components/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
 | `tests/lab/lab.spec.ts` | Lab navigation through the site menu at 320px with normal and doubled text, the shared sidebar layout, and the saved theme shared between Docs and Lab |
-| `tests/lab/layout.spec.ts` | Lab layout tour: 320px reflow at normal and doubled text and accessibility in each theme for the overview and every child page, links from the overview and navigation, container-query, Switcher and :has() behaviour, and CSS notes matching the stylesheet |
+| `tests/lab/layout.spec.ts` | Lab layout tour: 320px reflow at normal and doubled text and accessibility in each theme for the overview, every stage and every page, links from the overview, stage Cards and navigation, container-query, Inline switch, :has(), overflow and reading-order behaviour, and CSS notes matching the stylesheet |
 | `tests/site/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
 | `tests/site/elevation.spec.ts` | Checks the Elevation page fits each breakpoint width with normal and doubled text |
 | `tests/site/motion.spec.ts` | Shared motion policy in each theme, nested themes, system precedence, loading indicators and the live Motion reference |
@@ -237,7 +242,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | Path | Purpose |
 | --- | --- |
 | `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing, typography, NavTree ownership, shared motion, allowed effects, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
-| `scripts/docs-rules.mjs` | Checks that site routes, including the Lab index, Layout overview and Layout child pages, match nginx in both directions and that Lighthouse URLs are allowed routes, that documented tokens exist and public tokens are documented, and parses Props table rows |
+| `scripts/docs-rules.mjs` | Checks that site routes, including the Lab index, Layout overview, stages and their pages, match nginx in both directions and that Lighthouse URLs are allowed routes, that documented tokens exist and public tokens are documented, and parses Props table rows |
 | `scripts/docs-rules.test.mjs` | Passing and failing fixtures for the docs rules |
 | `scripts/effect-rules.mjs` | Finds React effect calls in the library and site and allows only the listed effects, each with an agreed reason |
 | `scripts/effect-rules.test.mjs` | Passing and failing fixtures for effect rules |

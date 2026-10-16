@@ -1,32 +1,36 @@
-// Plain-English explanations for the Lab's Layout demonstration, drawn from
-// docs/layout-research-2026.md. Illustrative and unapproved.
+// Plain-English explanations for the Lab's Layout tour. The tour is told through boxes, in
+// stages: one box, what goes inside it, how boxes arrange themselves, and ready-made formations.
+// Illustrative and unapproved.
+
+import { boxCssNotes } from './boxCssNotes'
 
 export const layoutLabIntro = {
   title: 'Layout',
-  summary: 'This page is a working tour of modern layout. Instead of a 12-column grid and fixed screen breakpoints, you give each pattern a limit and let the browser arrange the content for the space it actually has.',
+  summary: 'A hands-on tour of layout, told through boxes. Everything on a web page is a box. The tour starts with one box, then looks at what goes inside it, then at how many boxes arrange themselves, and finally at ready-made formations you can reuse.',
   key: 'Anything with a dashed Warning outline and a Lab badge is a Lab-only component, built just for this page. Everything else is a real Mezzanine component.',
-  frames: 'Most demos sit inside a frame with a width slider, so you can see how a pattern behaves in more or less space without resizing your window. Chrome DevTools works too, but it resizes the whole page at once.',
+  frames: 'Many demos sit inside a frame with a width slider, so you can see how a layout behaves in more or less space without resizing your window.',
+  stagesHeading: 'Stages',
+  moreHeading: 'Still to be sorted',
+  more: 'These pages are from the first version of the tour. They will move into new stages next.',
 }
 
-export interface LabSection {
+// What a page's introduction needs: its heading, an optional subtitle, and what it is and why it matters.
+export interface LabIntro {
   id: string
-  // The page's address under /site/lab/layout/.
-  slug: string
   title: string
+  subtitle?: string
   what: string
   why: string
+}
+
+export interface LabSection extends LabIntro {
+  // The page's address under /site/lab/layout/.
+  slug: string
   support: string
 }
 
+// Pages from the first version of the tour that haven't moved into a stage yet.
 export const layoutLabSections: Record<string, LabSection> = {
-  intrinsic: {
-    id: 'lab-intrinsic',
-    slug: 'intrinsic-primitives',
-    title: 'Intrinsic primitives',
-    what: 'Small layout patterns, each only a few lines of CSS. Instead of telling the page what to do at each screen size, you give each pattern a limit, such as "a tile should never be narrower than 10rem", and the browser works out the arrangement.',
-    why: 'There isn’t a single breakpoint involved, so the same pattern behaves correctly on a phone, inside a narrow sidebar, in a dialog or across a wide dashboard. It responds to the space it’s given, not to the size of the screen. And because each limit is an ordinary CSS value, it can be a token that a theme or an app can tune. A breakpoint can’t, because CSS doesn’t allow variables inside media query conditions.',
-    support: 'Works in every major browser. The last piece, gap in flexbox, arrived everywhere in 2021.',
-  },
   container: {
     id: 'lab-container',
     slug: 'container-queries',
@@ -43,22 +47,6 @@ export const layoutLabSections: Record<string, LabSection> = {
     why: 'Components ask about their space, and the page asks about the environment. Keeping those two questions apart stops screen breakpoints creeping into every component.',
     support: 'Works in every major browser. The answers in the table are live for your browser, and change as you change your settings.',
   },
-  readingWidth: {
-    id: 'lab-reading-width',
-    slug: 'reading-width',
-    title: 'Reading width',
-    what: 'A reading width, which typesetters call the measure, is a comfortable maximum line length for text. Lines of roughly 45 to 75 characters are the easiest to read.',
-    why: 'Today 65ch is written by hand in several places. As a token, every reading column can share it, and a theme or a product can tune it. Because it is measured in characters, it also adjusts itself when a theme changes the font.',
-    support: 'It’s an ordinary token, so it works everywhere. The name on this page is an illustrative Lab candidate.',
-  },
-  targetSize: {
-    id: 'lab-target-size',
-    slug: 'target-size',
-    title: 'Target size',
-    what: 'A target size is the smallest area that something you tap or click should cover, so it’s easy to hit with a finger or an unsteady hand.',
-    why: 'WCAG 2.2 sets a minimum of 24 by 24 pixels. Mezzanine’s buttons use 44 pixels today, but the value, 2.75rem, is written by hand. As a token, every control can share it.',
-    support: 'It’s an ordinary token, so it works everywhere. The names on this page are illustrative Lab candidates.',
-  },
   namedLayers: {
     id: 'lab-named-layers',
     slug: 'named-layers',
@@ -66,30 +54,6 @@ export const layoutLabSections: Record<string, LabSection> = {
     what: 'Named layers are an agreed order for things that sit on top of each other, such as a sticky header, a dialog and a notification.',
     why: 'Today the Navbar, Modal and Tooltip use z-index values of 10, 100 and 110, each chosen separately. Named once as tokens, a decision like “a modal sits above the sticky header” is made in one place, and stays consistent.',
     support: 'These are ordinary tokens, so they work everywhere. The names on this page are illustrative Lab candidates.',
-  },
-  logical: {
-    id: 'lab-logical',
-    slug: 'logical-properties',
-    title: 'Logical properties',
-    what: 'Logical properties name edges by reading direction, the start and end of a line, instead of by physical side, left and right.',
-    why: 'Layouts then mirror themselves for right-to-left languages such as Arabic and Hebrew, with no extra work. Anything set with left and right stays put, and looks wrong.',
-    support: 'Works in every major browser.',
-  },
-  subgrid: {
-    id: 'lab-subgrid',
-    slug: 'subgrid',
-    title: 'Subgrid',
-    what: 'Subgrid lets the parts inside cards that sit side by side share the same rows. Titles, text and actions then line up across the row, even when each card has a different amount of content.',
-    why: 'Lined-up rows look intentional and are easier to scan, and you get them without fixing heights or cutting text short.',
-    support: 'Works in every major browser, and counts as widely available since March 2026.',
-  },
-  has: {
-    id: 'lab-has',
-    slug: 'has',
-    title: ':has() for content-aware layout',
-    what: 'The :has() selector lets a container change its layout depending on what’s inside it, such as how many items it holds, or whether it has an image.',
-    why: 'The layout reacts to the real content, so you don’t need a separate variant or prop for each case.',
-    support: 'Works in every major browser since December 2023.',
   },
   viewport: {
     id: 'lab-viewport',
@@ -125,36 +89,247 @@ export const layoutLabSections: Record<string, LabSection> = {
   },
 }
 
-// A page under one of the tour's sections, such as a single primitive or token family.
-export interface ChildPage {
-  // Matches the page's entry in cssNotes and its example.
-  key: 'stack' | 'cluster' | 'switcher' | 'grid' | 'sidebar' | 'center'
+export type StageKey = 'oneBox' | 'insideTheBox' | 'arrangingBoxes' | 'boxFormations'
+
+// A stage of the tour: a group of pages with an overview page of its own.
+export interface LayoutStage {
+  key: StageKey
+  id: string
+  // The stage's address under /site/lab/layout/.
+  slug: string
   title: string
-  href: string
-  // Shown on the page's Card and on the page itself.
   summary: string
 }
+
+export const layoutStages: LayoutStage[] = [
+  { key: 'oneBox', id: 'lab-stage-one-box', slug: 'one-box', title: 'One box', summary: 'Everything on a web page is a box. Start with just one: what it’s made of, how big it is, and how its sides are named.' },
+  { key: 'insideTheBox', id: 'lab-stage-inside-the-box', slug: 'inside-the-box', title: 'Inside the box', summary: 'A box holds content: text, pictures, other boxes. These pages are about how that content behaves inside its box.' },
+  { key: 'arrangingBoxes', id: 'lab-stage-arranging-boxes', slug: 'arranging-boxes', title: 'Arranging boxes', summary: 'Many boxes together. First what they do on their own, then how to take charge, and finally a check that the result still makes sense.' },
+  { key: 'boxFormations', id: 'lab-stage-box-formations', slug: 'box-formations', title: 'Box formations', summary: 'Ready-made arrangements, built from Flexbox and Grid. Each one is a building block you could reuse, following the Bedrock layout library.' },
+]
+
+// Where a building block's idea comes from, linked on its page.
+export interface SimilarTo {
+  label: string
+  href: string
+}
+
+const everyLayout = (name: string, slug: string): SimilarTo => ({ label: `Every Layout: ${name}`, href: `https://every-layout.dev/layouts/${slug}/` })
+const bedrock = (name: string, slug: string): SimilarTo => ({ label: `Bedrock: ${name}`, href: `https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/${slug}` })
+
+// A page in one of the stages.
+export interface StagePage extends LabIntro {
+  key: string
+  stage: StageKey
+  href: string
+  subtitle: string
+  support: string
+  // Building blocks are reusable Lab-only layout components; the rest teach a CSS idea.
+  similarTo?: SimilarTo[]
+}
+
+export const stagePages: StagePage[] = [
+  // One box
+  {
+    key: 'boxModel', id: 'lab-box-model', stage: 'oneBox', title: 'The box model', href: '/site/lab/layout/one-box/box-model',
+    subtitle: 'What is a box made of?',
+    what: 'Everything on a web page is a box, even a single word or a picture. Each box has four layers, like rings in a tree trunk. In the middle is the content. Around it is padding, then a border, then margin on the outside.',
+    why: 'Most layout puzzles come down to these four layers. Padding is space inside the box, so it pushes the content in. Margin is space outside the box, so it pushes other boxes away. Once you can picture the layers, you can tell which one to change.',
+    support: 'Works in every browser.',
+  },
+  {
+    key: 'sizingAndUnits', id: 'lab-sizing-and-units', stage: 'oneBox', title: 'Sizing and units', href: '/site/lab/layout/one-box/sizing-and-units',
+    subtitle: 'How big is it, and how do I measure?',
+    what: 'You can give a box a size with width and height, or a limit with min-width and max-width. Every size needs a unit. Some units are fixed, like px. Others depend on something else: the text size, the box around it, or the window.',
+    why: 'The right unit lets a layout look after itself. A size in rem grows when someone enlarges their text. A width in % follows the box around it. A limit like max-width stops a box growing too wide, which is how long lines of text are kept comfy to read.',
+    support: 'Works in every browser. The min(), max() and clamp() functions arrived everywhere in 2020.',
+  },
+  {
+    key: 'logicalProperties', id: 'lab-logical', stage: 'oneBox', title: 'Logical properties', href: '/site/lab/layout/one-box/logical-properties',
+    subtitle: 'Any direction: how do I name a box’s sides so they work in every language?',
+    what: 'Logical properties name a box’s sides by reading direction, the start and end of a line, instead of by physical side, left and right. The other pages use the familiar physical names, like width and margin-left. This page introduces the logical versions.',
+    why: 'Layouts then mirror themselves for right-to-left languages such as Arabic and Hebrew, with no extra work. Anything set with left and right stays put, and looks wrong.',
+    support: 'Works in every major browser.',
+  },
+  {
+    key: 'targetSize', id: 'lab-target-size', stage: 'oneBox', title: 'Target size', href: '/site/lab/layout/one-box/target-size',
+    subtitle: 'Easy tapping: how big should something be to tap it comfortably?',
+    what: 'A target size is the smallest area that something you tap or click should cover, so it’s easy to hit with a finger or an unsteady hand.',
+    why: 'WCAG 2.2 sets a minimum of 24 by 24 pixels. Mezzanine’s buttons use 44 pixels today, but the value, 2.75rem, is written by hand. As a token, every control can share it.',
+    support: 'It’s an ordinary token, so it works everywhere. The names on this page are illustrative Lab candidates.',
+  },
+  {
+    key: 'center', id: 'lab-center', stage: 'oneBox', title: 'Center', href: '/site/lab/layout/one-box/center',
+    subtitle: 'How do I keep a column in the middle, at a comfortable width?',
+    what: 'Center is a building block. It keeps content in the middle of the space and stops it growing wider than a set limit.',
+    why: 'On a wide screen, content stuck to one edge or stretched across the whole width is hard to read. Center fixes both with a single limit, which could be a token.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Center', 'center'), bedrock('Center', 'center')],
+  },
+  // Inside the box
+  {
+    key: 'overflow', id: 'lab-overflow', stage: 'insideTheBox', title: 'Overflow', href: '/site/lab/layout/inside-the-box/overflow',
+    subtitle: 'What if the content doesn’t fit?',
+    what: 'Overflow is content that is too big for its box. By default it spills out and draws over whatever comes next. The overflow property chooses what happens instead: hide the extra, or let people scroll to it.',
+    why: 'Spilled content overlaps other things, and hidden content is lost. The safest fix is usually to let the box grow. When a box has to stay a fixed size, scrolling keeps the content reachable.',
+    support: 'Works in every browser.',
+  },
+  {
+    key: 'imagesAndMedia', id: 'lab-images-and-media', stage: 'insideTheBox', title: 'Images and media', href: '/site/lab/layout/inside-the-box/images-and-media',
+    subtitle: 'How do pictures fill their box?',
+    what: 'Pictures and videos are boxes too, but they arrive with a size of their own, which can be bigger than the space they’re given. A few properties keep them inside their box and in proportion.',
+    why: 'An image wider than a phone screen pushes the whole page sideways, and an image squashed into the wrong shape looks broken. Every picture also needs alt text in the HTML, so people who can’t see it still get its meaning.',
+    support: 'Works in every browser. The aspect-ratio property arrived everywhere in 2021.',
+  },
+  {
+    key: 'multiColumn', id: 'lab-multi-column', stage: 'insideTheBox', title: 'Multi-column', href: '/site/lab/layout/inside-the-box/multi-column',
+    subtitle: 'How do I flow content into columns, like a newspaper?',
+    what: 'Multi-column layout pours content into columns, one after another, like a newspaper. You say how wide a column should be, and the browser works out how many fit.',
+    why: 'It suits short content, such as a list of links. For long text it’s awkward on a screen, because readers have to scroll back up to start each new column.',
+    support: 'Works in every browser.',
+  },
+  {
+    key: 'has', id: 'lab-has', stage: 'insideTheBox', title: ':has()', href: '/site/lab/layout/inside-the-box/has',
+    subtitle: 'Knows its contents: how can a box change based on what’s inside it?',
+    what: 'The :has() selector lets a container change its layout depending on what’s inside it, such as how many items it holds, or whether it has an image.',
+    why: 'The layout reacts to the real content, so you don’t need a separate variant or prop for each case.',
+    support: 'Works in every major browser since December 2023.',
+  },
+  {
+    key: 'frame', id: 'lab-frame-block', stage: 'insideTheBox', title: 'Frame', href: '/site/lab/layout/inside-the-box/frame',
+    subtitle: 'How do I crop a picture to a set shape?',
+    what: 'Frame is a building block. It gives a box a fixed shape, such as 16:9, and crops the picture inside to fill it.',
+    why: 'Pictures from different places come in different shapes. Frame lines them up as a tidy set, without squashing any of them.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Frame', 'frame'), bedrock('Frame', 'frame')],
+  },
+  {
+    key: 'cover', id: 'lab-cover', stage: 'insideTheBox', title: 'Cover', href: '/site/lab/layout/inside-the-box/cover',
+    subtitle: 'How do I put one thing centre stage in a tall area?',
+    what: 'Cover is a building block for a tall area, like the opening section of a page. One item sits in the middle, with optional items at the top and bottom.',
+    why: 'Centring something from top to bottom used to be a famous CSS puzzle. Cover does it with a minimum height and automatic margins, and the area still grows if the content needs more room.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Cover', 'cover'), bedrock('Cover', 'cover')],
+  },
+  {
+    key: 'reel', id: 'lab-reel', stage: 'insideTheBox', title: 'Reel', href: '/site/lab/layout/inside-the-box/reel',
+    subtitle: 'How do I make a row that scrolls sideways?',
+    what: 'Reel is a building block for a row of items that scrolls sideways, like a conga line going off the edge of the screen.',
+    why: 'It shows lots of items without wrapping them onto new rows. Keyboard users need to reach it too, so the scrolling area can take focus and has a name.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Reel', 'reel'), bedrock('Reel', 'reel')],
+  },
+  // Arranging boxes
+  {
+    key: 'normalFlow', id: 'lab-normal-flow', stage: 'arrangingBoxes', title: 'Normal flow', href: '/site/lab/layout/arranging-boxes/normal-flow',
+    subtitle: 'How do boxes arrange themselves if I don’t arrange them?',
+    what: 'Normal flow is what the browser does before you add any layout. Block boxes, like paragraphs and headings, start on a new line and fill the width. Inline boxes, like links and bold words, sit inside a line of text, one after another.',
+    why: 'Normal flow follows the order of the HTML, which is also the order keyboards and screen readers follow. Starting from it keeps meaning first: the page makes sense before any layout is added.',
+    support: 'Works in every browser.',
+  },
+  {
+    key: 'cssFlexbox', id: 'lab-css-flexbox', stage: 'arrangingBoxes', title: 'CSS Flexbox', href: '/site/lab/layout/arranging-boxes/css-flexbox',
+    subtitle: 'How do I line boxes up in a row or a column?',
+    what: 'Flexbox arranges boxes in one direction: a row or a column. The container chooses the direction and whether items may wrap onto a new line. Each item can grow or shrink to share the space.',
+    why: 'Most everyday layouts are a row or a column: a toolbar, a list of tags, a form. Flexbox handles them in a few lines, and the space sorts itself out.',
+    support: 'Works in every browser.',
+  },
+  {
+    key: 'cssGrid', id: 'lab-css-grid', stage: 'arrangingBoxes', title: 'CSS Grid', href: '/site/lab/layout/arranging-boxes/css-grid',
+    subtitle: 'How do I line boxes up in rows and columns at once?',
+    what: 'Grid arranges boxes in rows and columns at the same time. You describe the columns, and each item takes the next cell, or spans more than one.',
+    why: 'When things need to line up in both directions, such as a gallery or a page with a header and a sidebar, Grid keeps every edge aligned.',
+    support: 'Works in every browser.',
+  },
+  {
+    key: 'subgrid', id: 'lab-subgrid', stage: 'arrangingBoxes', title: 'Subgrid', href: '/site/lab/layout/arranging-boxes/subgrid',
+    subtitle: 'How do the parts inside cards line up with each other?',
+    what: 'Subgrid lets the parts inside cards that sit side by side share the same rows. Titles, text and actions then line up across the row, even when each card has a different amount of content.',
+    why: 'Lined-up rows look intentional and are easier to scan, and you get them without fixing heights or cutting text short.',
+    support: 'Works in every major browser, and counts as widely available since March 2026.',
+  },
+  {
+    key: 'alignment', id: 'lab-alignment', stage: 'arrangingBoxes', title: 'Alignment', href: '/site/lab/layout/arranging-boxes/alignment',
+    subtitle: 'How do I centre things, or push them to one side?',
+    what: 'Alignment moves items around inside the space they have. In Flexbox, justify-content moves them along the row, and align-items moves them across it, from top to bottom.',
+    why: '“How do I centre something?” is one of the most asked questions in CSS. With Flexbox or Grid, the answer is one or two lines.',
+    support: 'Works in every browser.',
+  },
+  {
+    key: 'spacing', id: 'lab-spacing', stage: 'arrangingBoxes', title: 'Spacing', href: '/site/lab/layout/arranging-boxes/spacing',
+    subtitle: 'How far apart should things be?',
+    what: 'There are three kinds of space. Padding is inside a box. Margin pushes other boxes away from the outside, like saying “talk to the hand”. Gap is set on the parent and goes only between its children, like boxes holding hands at arm’s length.',
+    why: 'Gap is usually the best choice between items, because it never adds stray space before the first one or after the last. Mezzanine’s spacing tokens give every gap, margin and padding a size from the same scale.',
+    support: 'Works in every browser. Gap in Flexbox arrived everywhere in 2021.',
+  },
+  {
+    key: 'readingOrder', id: 'lab-reading-order', stage: 'arrangingBoxes', title: 'Reading order', href: '/site/lab/layout/arranging-boxes/reading-order',
+    subtitle: 'Does it still make sense to keyboard and screen reader users?',
+    what: 'Reading order is the order people meet things when they use a keyboard or a screen reader. It always follows the HTML, even when CSS moves things around on screen.',
+    why: 'Flexbox and Grid can show things in a different order from the HTML. Then what people see and what they hear or tab through no longer match, and WCAG counts that as a failure. To change the order, change the HTML.',
+    support: 'Works in every browser. A newer property, reading-flow, may one day let CSS change the reading order too, but only some browsers have it.',
+  },
+  // Box formations
+  {
+    key: 'stack', id: 'lab-stack', stage: 'boxFormations', title: 'Stack', href: '/site/lab/layout/box-formations/stack',
+    subtitle: 'How do I put boxes one above another, evenly spaced?',
+    what: 'Stack is a building block that puts items one above another, like boxes standing on each other’s heads.',
+    why: 'The space between items is set once, by the parent, so no item needs its own outer margin. Move an item and the spacing still works.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Stack', 'stack'), bedrock('Stack', 'stack')],
+  },
+  {
+    key: 'inline', id: 'lab-inline', stage: 'boxFormations', title: 'Inline', href: '/site/lab/layout/box-formations/inline',
+    subtitle: 'How do I keep boxes together in one row?',
+    what: 'Inline is a building block that keeps items in a single row, like boxes holding hands. It can also switch to a column when its space is narrower than a limit you set.',
+    why: 'A row of buttons, or a logo beside a title, should stay together. The switch stops the row getting squashed in narrow space, and the limit is a size, not a screen width.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Switcher', 'switcher'), bedrock('Inline', 'inline')],
+  },
+  {
+    key: 'inlineCluster', id: 'lab-inline-cluster', stage: 'boxFormations', title: 'Inline cluster', href: '/site/lab/layout/box-formations/inline-cluster',
+    subtitle: 'How do I make a row that wraps like words?',
+    what: 'Inline cluster is a building block for a row that wraps onto new lines the way words do. The example uses real Mezzanine Badges.',
+    why: 'Tags, filters and small buttons come in any number and any length. Wrapping keeps them all visible, with the same space between every one.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Cluster', 'cluster'), bedrock('InlineCluster', 'inline-cluster')],
+  },
+  {
+    key: 'split', id: 'lab-split', stage: 'boxFormations', title: 'Split', href: '/site/lab/layout/box-formations/split',
+    subtitle: 'How do I put two areas side by side?',
+    what: 'Split is a building block for two areas side by side, like boxes with linked arms, such as a side panel and the main content. You choose how the space is shared, and it can switch to a column below a limit.',
+    why: 'Sharing by fractions, such as one third and two thirds, keeps the proportions at any width. The switch gives each area the full width when there isn’t room for both.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Sidebar', 'sidebar'), bedrock('Split', 'split')],
+  },
+  {
+    key: 'columns', id: 'lab-columns', stage: 'boxFormations', title: 'Columns', href: '/site/lab/layout/box-formations/columns',
+    subtitle: 'How do I make a set number of columns?',
+    what: 'Columns is a building block with a fixed number of equal columns. An item can span more than one.',
+    why: 'Some designs need an exact number of columns, such as a form laid out in two. Unlike Grid, the number doesn’t change by itself, so check it still fits narrow space.',
+    support: 'Works in every browser.',
+    similarTo: [bedrock('Columns', 'columns')],
+  },
+  {
+    key: 'grid', id: 'lab-grid', stage: 'boxFormations', title: 'Grid', href: '/site/lab/layout/box-formations/grid',
+    subtitle: 'How do I fit as many columns as there’s room for?',
+    what: 'Grid is a building block that works out its own number of columns from how many fit. You only choose the narrowest a column may be.',
+    why: 'You never pick a column count for each screen size. The same grid shows three columns in a wide space, and one on a phone.',
+    support: 'Works in every browser.',
+    similarTo: [everyLayout('Grid', 'grid'), bedrock('Grid', 'grid')],
+  },
+]
+
+export const stagePagesByStage = (stage: StageKey) => stagePages.filter((page) => page.stage === stage)
 
 // The badge on emerging features: they shouldn't be introduced into Mezzanine yet.
 export const holdBadgeLabel = 'Hold'
 
-// The label of the Button on each child page's Card, which opens that page.
+// The badge on building blocks, on their Cards and pages.
+export const buildingBlockLabel = 'Building block'
+
+// The label of the Button on each page's Card, which opens that page.
 export const childPageCardAction = 'Read docs'
-
-// The intrinsic primitives, each a child page of Intrinsic primitives.
-export const primitivePages: ChildPage[] = [
-  { key: 'stack', title: 'Stack', href: '/site/lab/layout/intrinsic-primitives/stack', summary: 'Stack puts items one above another. The space between them is set by the parent, not by each item, so no component needs its own outer margin.' },
-  { key: 'cluster', title: 'Cluster', href: '/site/lab/layout/intrinsic-primitives/cluster', summary: 'Cluster is a row that wraps onto new lines the way words do. The example uses real Mezzanine Badges.' },
-  { key: 'switcher', title: 'Switcher', href: '/site/lab/layout/intrinsic-primitives/switcher', summary: 'The three blocks sit in a row while there’s at least 30rem of room. Below that, they all drop into a column together, so you never get an awkward two-and-one split. Drag the slider across 30rem to see it switch.' },
-  { key: 'grid', title: 'Grid', href: '/site/lab/layout/intrinsic-primitives/grid', summary: 'The grid works out its own column count, from three to two to one, just from how many 10rem tiles fit. You never choose the number of columns.' },
-  { key: 'sidebar', title: 'Sidebar', href: '/site/lab/layout/intrinsic-primitives/sidebar', summary: 'This is the layout foundation you decided on. The 12rem side column stays next to the main content until the main area would fall below 55% of the width. Then the side column moves above it. Neither number is a screen width.' },
-  { key: 'center', title: 'Center', href: '/site/lab/layout/intrinsic-primitives/center', summary: 'Center keeps content in the middle and stops it growing wider than a set measure, here 24rem.' },
-]
-
-// Sections that are split into child pages, keyed by the section's slug.
-export const childPagesBySection: Record<string, ChildPage[]> = {
-  [layoutLabSections.intrinsic.slug]: primitivePages,
-}
 
 export interface CssNote {
   // Text between backticks is shown as inline code.
@@ -167,90 +342,7 @@ export interface CssNote {
 // What each example's CSS does, in plain English. Unless marked as an example, the code is
 // copied from layout-lab.css, and a browser test checks that it still matches.
 export const cssNotes: Record<string, CssNote> = {
-  stack: {
-    paragraphs: [
-      'The rule `display: flex` with `flex-direction: column` puts the items in a single column.',
-      'The `gap` property sets the space between items. It never adds space before the first item or after the last, and because the parent sets it, the items themselves need no margins. The space is a custom property, so it can be a token.',
-    ],
-    code: `.lab-stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lab-stack-space, var(--space-3));
-}`,
-  },
-  cluster: {
-    paragraphs: [
-      'The key line is `flex-wrap: wrap`. When a row runs out of room, the next item moves onto a new line instead of squashing or overflowing, just like words in a sentence.',
-      'Setting `align-items: center` lines up items of different heights, and `gap` spaces them both along each line and between lines.',
-    ],
-    code: `.lab-cluster {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--lab-cluster-space, var(--space-2));
-}`,
-  },
-  switcher: {
-    paragraphs: [
-      'The trick is in `flex-basis`, the size each item would like to be. Inside the calculation, `100%` means the width of the container, so the sum takes the container’s width away from the threshold and multiplies the result by 999.',
-      'When the container is narrower than the threshold, the answer is a huge positive number. Every item wants to be enormous, so each one wraps onto its own line, and you get a column. When the container is wider, the answer is negative, which the browser treats as zero, so `flex-grow` shares the row out equally. The threshold is a custom property, so it can be a token.',
-    ],
-    code: `.lab-switcher {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.lab-switcher > * {
-  flex-grow: 1;
-  flex-basis: calc((var(--lab-switcher-threshold, 30rem) - 100%) * 999);
-}`,
-  },
-  grid: {
-    paragraphs: [
-      'The `repeat` function with `auto-fill` asks the browser to make as many columns as will fit. Inside it, `minmax` sets a range for each column: at least the minimum width, here 10rem, and at most `1fr`, which means one equal share of the space that is left over.',
-      'The minimum is written as `min(100%, 10rem)`, which means “10rem, or the full width of the container if that is smaller”. So in a container narrower than 10rem, the single column shrinks to fit instead of overflowing.',
-    ],
-    code: `.lab-auto-grid {
-  display: grid;
-  grid-template-columns:
-    repeat(auto-fill, minmax(min(100%, var(--lab-grid-min, 10rem)), 1fr));
-  gap: var(--space-3);
-}`,
-  },
-  sidebar: {
-    paragraphs: [
-      'The side column asks for its width with `flex-basis`. The main content asks for nothing, a `flex-basis` of zero, but has a `flex-grow` of 999, so it takes almost all the spare room. Its `min-inline-size` stops it getting narrower than its minimum.',
-      'When the side column and the main content’s minimum no longer fit on one line, `flex-wrap` moves the side column onto its own line. Its `flex-grow` of 1 then lets it fill the full width.',
-    ],
-    code: `.lab-sidebar-layout {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.lab-sidebar-side {
-  flex-basis: var(--lab-sidebar-width, 16rem);
-  flex-grow: 1;
-}
-
-.lab-sidebar-main {
-  flex-basis: 0;
-  flex-grow: 999;
-  min-inline-size: var(--lab-sidebar-content-min, 50%);
-}`,
-  },
-  center: {
-    paragraphs: [
-      'The `max-inline-size` property caps the width. Inline means along the line of text, so the rule still makes sense in languages written top to bottom.',
-      'Setting `margin-inline: auto` shares any leftover space equally on both sides, which centres the content. With `box-sizing: content-box`, any padding added later goes outside the cap, so the content itself keeps its full width.',
-    ],
-    code: `.lab-center {
-  box-sizing: content-box;
-  max-inline-size: var(--lab-center-max, 60ch);
-  margin-inline: auto;
-}`,
-  },
+  ...boxCssNotes,
   twoSlots: {
     paragraphs: [
       'The two slots are themselves the Sidebar pattern: the narrow slot asks for 16rem, and the wide slot has a `flex-grow` of 999 and never goes below 55%.',
@@ -310,16 +402,6 @@ export const cssNotes: Record<string, CssNote> = {
   .example {
     min-block-size: var(--lab-target-min);
   }
-}`,
-  },
-  measure: {
-    paragraphs: [
-      'The `max-inline-size` property caps how long a line can get, and `margin-inline: auto` shares any space left over equally on both sides, which keeps the text centred.',
-      'The `ch` unit is the width of the zero character in the current font, so `65ch` means roughly 65 characters per line, whatever the font or its size. It’s an approximation, not an exact count. The value is a token, `--lab-measure`, so every reading column can share it.',
-    ],
-    code: `.lab-measure {
-  max-inline-size: var(--lab-measure);
-  margin-inline: auto;
 }`,
   },
   targetSize: {
@@ -559,4 +641,4 @@ export const environmentQueries = [
   { label: 'Window is at least 48rem wide', query: '(width >= 48rem)' },
 ]
 
-export const sampleParagraph = 'Long lines of text are tiring to read because the eye has to travel a long way back to find the start of the next line. A comfortable line holds roughly 45 to 75 characters. This paragraph shows the same text with and without a reading width.'
+export const sampleParagraph = 'Long lines of text are tiring to read, because your eyes have to travel a long way back to find the start of the next line. A comfortable line holds roughly 45 to 75 characters. This paragraph is shown twice: once with no limit, and once with a line length.'

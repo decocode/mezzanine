@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react'
 import { Badge, Button, Card, Cell, Checkbox, Column, Heading, Row, Table, TableBody, TableHeader, Text } from '@decocode/mezzanine'
 import { BrowserSupport, CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, LabSectionIntro } from './LabParts'
-import { environmentQueries, layoutLabSections as sections, cssNotes, sampleParagraph } from './layoutLabContent'
-import { Stack } from './LabPrimitives'
+import { environmentQueries, layoutLabSections as sections, cssNotes } from './layoutLabContent'
 import { measureProbes, measureSafeAreas, useMediaQuery } from './layoutLabLogic'
 
 // The same tile adapts to whichever slot it is placed in.
@@ -73,36 +72,6 @@ export function EnvironmentDemo() {
   </section>
 }
 
-export function ReadingWidthDemo() {
-  return <section aria-labelledby={sections.readingWidth.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.readingWidth} isSingleExample />
-    <DemoText>The same paragraph twice. Widen the frame and the first one stretches into long, tiring lines. The second stops at a comfortable 65 characters or so, and stays centred with equal space on both sides. Narrow the frame and both wrap onto more lines.</DemoText>
-    <DemoFrame label="Reading width" initialWidth={1100}>
-      <Stack>
-        <LabOnly name="Without a reading width"><Text elementType="p" className="mz-text-body-md">{sampleParagraph}</Text></LabOnly>
-        <LabOnly name="With --lab-measure (65ch)"><div className="lab-measure"><Text elementType="p" className="mz-text-body-md">{sampleParagraph}</Text></div></LabOnly>
-      </Stack>
-    </DemoFrame>
-    <CssNotes name="reading width" note={cssNotes.measure} level={2} />
-    <BrowserSupport section={sections.readingWidth} />
-  </section>
-}
-
-export function TargetSizeDemo() {
-  return <section aria-labelledby={sections.targetSize.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.targetSize} isSingleExample />
-    <DemoText>Two squares showing the smallest a tap or click target should be. The first is the minimum WCAG 2.2 allows. The second is what Mezzanine’s buttons use today.</DemoText>
-    <LabOnly name="Target sizes">
-      <div className="lab-targets">
-        <div><span className="lab-target lab-target-wcag" aria-hidden="true" /><Text elementType="p" className="mz-text-body-sm">24px: the WCAG 2.2 AA minimum</Text></div>
-        <div><span className="lab-target lab-target-comfortable" aria-hidden="true" /><Text elementType="p" className="mz-text-body-sm">44px: what Mezzanine&apos;s buttons use today, as --lab-target-min</Text></div>
-      </div>
-    </LabOnly>
-    <CssNotes name="target size" note={cssNotes.targetSize} level={2} />
-    <BrowserSupport section={sections.targetSize} />
-  </section>
-}
-
 export function NamedLayersDemo() {
   return <section aria-labelledby={sections.namedLayers.id} className="lab-layout-section">
     <LabSectionIntro section={sections.namedLayers} isSingleExample />
@@ -114,83 +83,6 @@ export function NamedLayersDemo() {
     </LabOnly>
     <CssNotes name="named layers" note={cssNotes.layers} level={2} />
     <BrowserSupport section={sections.namedLayers} />
-  </section>
-}
-
-export function LogicalDemo() {
-  const [rtl, setRtl] = useState(false)
-  return <section aria-labelledby={sections.logical.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.logical} isSingleExample />
-    <DemoText>Turn on right to left. The logical box moves its border and indent to the right, where Arabic and Hebrew lines start. The physical one stays on the left and looks wrong. Mezzanine’s Sidebar drawer and Modal still use some physical properties.</DemoText>
-    <Checkbox isSelected={rtl} onChange={setRtl}>Show right to left</Checkbox>
-    <div className="lab-two-slots" dir={rtl ? 'rtl' : 'ltr'}>
-      <LabOnly name="Physical (left/right)">
-        <div className="lab-direction lab-direction-physical mz-text-body-md">Accent border and indent on the <strong>left</strong>, always.</div>
-      </LabOnly>
-      <LabOnly name="Logical (start/end)">
-        <div className="lab-direction lab-direction-logical mz-text-body-md">Accent border and indent at the <strong>start</strong> of the line.</div>
-      </LabOnly>
-    </div>
-    <CssNotes name="logical properties" note={cssNotes.logical} level={2} />
-    <BrowserSupport section={sections.logical} />
-  </section>
-}
-
-export function SubgridDemo() {
-  const [aligned, setAligned] = useState(true)
-  const cards = [
-    { title: 'Short', text: 'One line.' },
-    { title: 'A much longer title that wraps onto two lines', text: 'Some text that is longer than the others, so it takes up more lines than the cards beside it.' },
-    { title: 'Medium title', text: 'A little more text.' },
-  ]
-  return <section aria-labelledby={sections.subgrid.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.subgrid} isSingleExample />
-    <DemoText>With subgrid on, the text in each card starts at the same height and the actions line up along the bottom, however long each title is. Turn it off and they drift apart. These cards are Lab-only because Mezzanine’s Card doesn’t use subgrid.</DemoText>
-    <Checkbox isSelected={aligned} onChange={setAligned}>Use subgrid</Checkbox>
-    <DemoFrame label="Subgrid cards" initialWidth={900}>
-      <LabOnly name="SubgridCards">
-        <div className={`lab-subgrid-list${aligned ? ' lab-subgrid-on' : ''}`}>
-          {cards.map((card) => <div key={card.title} className="lab-subgrid-card">
-            <Heading level={3}>{card.title}</Heading>
-            <Text elementType="p" className="mz-text-body-sm">{card.text}</Text>
-            <div><Button size="sm" variant="secondary">Action</Button></div>
-          </div>)}
-        </div>
-      </LabOnly>
-    </DemoFrame>
-    <CssNotes name="subgrid" note={cssNotes.subgrid} level={2} />
-    <BrowserSupport section={sections.subgrid} />
-  </section>
-}
-
-export function HasDemo() {
-  const [count, setCount] = useState(3)
-  const [image, setImage] = useState(true)
-  return <section aria-labelledby={sections.has.id} className="lab-layout-section">
-    <LabSectionIntro section={sections.has} />
-    <DemoHeading>A list that counts its items</DemoHeading>
-    <DemoText>Up to four items stack in a list. Add a fifth and the same list becomes a grid, because its CSS asks “do I have a fifth child?”. It has {count} items now.</DemoText>
-    <div className="lab-controls">
-      <Button size="sm" variant="secondary" onPress={() => setCount((value) => value + 1)}>Add an item</Button>
-      <Button size="sm" variant="secondary" isDisabled={count <= 1} onPress={() => setCount((value) => Math.max(1, value - 1))}>Remove an item</Button>
-    </div>
-    <LabOnly name="QuantityList">
-      <ul className="lab-has-list">
-        {Array.from({ length: count }, (_, index) => <li key={index}><div className="lab-block mz-text-body-sm">Item {index + 1}</div></li>)}
-      </ul>
-    </LabOnly>
-    <CssNotes name="the list" note={cssNotes.quantityList} />
-    <DemoHeading>A layout that notices an image</DemoHeading>
-    <DemoText>With an image, this becomes two columns. Without one, the text simply takes the full width. There’s no separate “with image” variant.</DemoText>
-    <Checkbox isSelected={image} onChange={setImage}>Include an image</Checkbox>
-    <LabOnly name="MediaObject">
-      <div className="lab-media">
-        {image && <div className="lab-block lab-media-image mz-text-body-sm">Image</div>}
-        <Text elementType="p" className="mz-text-body-md">Text beside the image when there is one, and across the full width when there isn&apos;t.</Text>
-      </div>
-    </LabOnly>
-    <CssNotes name="the image layout" note={cssNotes.mediaObject} />
-    <BrowserSupport section={sections.has} />
   </section>
 }
 

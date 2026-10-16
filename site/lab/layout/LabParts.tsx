@@ -1,7 +1,7 @@
-import { useState, type CSSProperties, type ReactNode } from 'react'
-import { Badge, CodeBlock, Heading, Label, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
+import { useId, useState, type CSSProperties, type ReactNode } from 'react'
+import { Badge, CodeBlock, Heading, Label, Link, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
 import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'react-aria-components/Slider'
-import { framePresets, holdBadgeLabel, type CssNote, type LabSection } from './layoutLabContent'
+import { buildingBlockLabel, framePresets, holdBadgeLabel, type CssNote, type LabIntro, type SimilarTo } from './layoutLabContent'
 import { splitInlineCode } from './layoutLabLogic'
 
 // Marks a Lab-only component: a Warning-coloured dashed outline with a Lab badge and its name.
@@ -12,8 +12,9 @@ export function LabOnly({ name, children }: { name: string; children: ReactNode 
   </div>
 }
 
-// A frame whose width you set with a slider or presets. Its contents are a size container.
-export function DemoFrame({ label, initialWidth = 720, children }: { label: string; initialWidth?: number; children: ReactNode }) {
+// A frame whose width you set with a slider or presets. Its contents are a size container. When the demo
+// is meant to stick out of the frame, the frame is a named region that takes focus, so keyboard users can scroll it.
+export function DemoFrame({ label, initialWidth = 720, canOverflow = false, children }: { label: string; initialWidth?: number; canOverflow?: boolean; children: ReactNode }) {
   const [width, setWidth] = useState(initialWidth)
   return <div className="lab-frame">
     {/* The group's name tells screen reader users which example this "Width" slider belongs to. */}
@@ -40,17 +41,20 @@ export function DemoFrame({ label, initialWidth = 720, children }: { label: stri
         {framePresets.map((preset) => <ToggleButton key={preset.label} id={preset.label}>{preset.label}</ToggleButton>)}
       </ToggleButtonGroup>
     </div>
-    <div className="lab-frame-stage" style={{ '--lab-frame-width': `${width}px` } as CSSProperties}>
+    <div className="lab-frame-stage" style={{ '--lab-frame-width': `${width}px` } as CSSProperties} {...(canOverflow ? { role: 'region', 'aria-label': `“${label}” frame`, tabIndex: 0 } : {})}>
       {children}
     </div>
   </div>
 }
 
-// The page heading and an introduction (what it is, then why it matters), then the "Examples"
-// heading that the demos sit under ("Example" when there is only one), unless the page leaves it out.
-export function LabSectionIntro({ section, hasExamples = true, isSingleExample = false }: { section: LabSection; hasExamples?: boolean; isSingleExample?: boolean }) {
+// The page heading, its subtitle and an introduction (what it is, then why it matters), then the
+// "Examples" heading that the demos sit under ("Example" when there is only one), unless the page
+// leaves it out. Building blocks show a badge under the heading.
+export function LabSectionIntro({ section, hasExamples = true, isSingleExample = false, isBuildingBlock = false }: { section: LabIntro; hasExamples?: boolean; isSingleExample?: boolean; isBuildingBlock?: boolean }) {
   return <>
     <Heading id={section.id} level={1} className="mz-text-heading-lg">{section.title}</Heading>
+    {section.subtitle && <Text elementType="p" className="lab-subtitle mz-text-body-lg">{section.subtitle}</Text>}
+    {isBuildingBlock && <p className="lab-page-badges"><Badge>{buildingBlockLabel}</Badge></p>}
     <div className="lab-explainer">
       <Text elementType="p" className="mz-text-body-md">{section.what}</Text>
       <Text elementType="p" className="mz-text-body-md">{section.why}</Text>
@@ -60,7 +64,7 @@ export function LabSectionIntro({ section, hasExamples = true, isSingleExample =
 }
 
 // Browser support, at the end of a page.
-export function BrowserSupport({ section }: { section: LabSection }) {
+export function BrowserSupport({ section }: { section: { support: string } }) {
   return <>
     <Heading level={2} className="lab-section-heading mz-text-heading-md">Browser support</Heading>
     <Text elementType="p" className="lab-demo-text mz-text-body-md">{section.support}</Text>
@@ -106,4 +110,33 @@ export function FeatureStatus({ supported }: { supported: boolean }) {
       ? <Badge variant="success">Active in this browser</Badge>
       : <Badge variant="neutral">Not in this browser</Badge>}
   </p>
+}
+
+// Where a building block's idea comes from: the same pattern in Every Layout and Bedrock Layouts.
+export function SimilarToLinks({ links }: { links: SimilarTo[] }) {
+  return <>
+    <Heading level={2} className="lab-section-heading mz-text-heading-md">Similar to</Heading>
+    <ul className="lab-similar-to mz-text-body-md">
+      {links.map((link) => <li key={link.href}><Link href={link.href}>{link.label}</Link></li>)}
+    </ul>
+  </>
+}
+
+// Buttons that choose one CSS value for a demo, such as overflow: hidden, with a visible label.
+export function ValuePicker<Value extends string>({ label, options, value, onChange }: { label: string; options: readonly { label: string; value: Value }[]; value: Value; onChange: (value: Value) => void }) {
+  const labelId = useId()
+  return <div className="lab-picker">
+    <span id={labelId} className="mz-text-label-md">{label}</span>
+    <ToggleButtonGroup
+      size="sm"
+      variant="secondary"
+      aria-labelledby={labelId}
+      selectionMode="single"
+      disallowEmptySelection
+      selectedKeys={[value]}
+      onSelectionChange={(keys) => { const option = options.find((item) => keys.has(item.value)); if (option) onChange(option.value) }}
+    >
+      {options.map((option) => <ToggleButton key={option.value} id={option.value}>{option.label}</ToggleButton>)}
+    </ToggleButtonGroup>
+  </div>
 }

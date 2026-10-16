@@ -1,25 +1,17 @@
 import { Heading, Link, Text } from '@decocode/mezzanine'
-import { layoutLabIntro, layoutLabSections } from './layout/layoutLabContent'
+import { layoutLabIntro, layoutLabSections, layoutStages, stagePagesByStage, type LayoutStage, type StagePage } from './layout/layoutLabContent'
 import {
-  ContainerQueryDemo, EnvironmentDemo, HasDemo, LayersDemo, LogicalDemo, NamedLayersDemo,
-  ReadingWidthDemo, ScrollPaddingDemo, SubgridDemo, TargetSizeDemo, ViewportDemo,
+  ContainerQueryDemo, EnvironmentDemo, LayersDemo, NamedLayersDemo, ScrollPaddingDemo, ViewportDemo,
 } from './layout/FoundationDemos'
-import { ChildPageContent, IntrinsicOverview } from './layout/ChildPages'
-import type { ChildPage } from './layout/layoutLabContent'
 import { EmergingFeatureDemos } from './layout/EmergingFeatureDemos'
+import { StageOverview, StagePageView } from './layout/StagePages'
 import './layout/layout-lab.css'
 
-// Each section of the tour is its own child page, keyed by its slug.
+// Pages from the first version of the tour, keyed by their slug, until they move into a stage.
 const sectionPages: Record<string, () => React.JSX.Element> = {
-  [layoutLabSections.intrinsic.slug]: IntrinsicOverview,
   [layoutLabSections.container.slug]: ContainerQueryDemo,
   [layoutLabSections.environment.slug]: EnvironmentDemo,
-  [layoutLabSections.readingWidth.slug]: ReadingWidthDemo,
-  [layoutLabSections.targetSize.slug]: TargetSizeDemo,
   [layoutLabSections.namedLayers.slug]: NamedLayersDemo,
-  [layoutLabSections.logical.slug]: LogicalDemo,
-  [layoutLabSections.subgrid.slug]: SubgridDemo,
-  [layoutLabSections.has.slug]: HasDemo,
   [layoutLabSections.viewport.slug]: ViewportDemo,
   [layoutLabSections.scrollPadding.slug]: ScrollPaddingDemo,
   [layoutLabSections.layers.slug]: LayersDemo,
@@ -30,7 +22,7 @@ export function hasLayoutSectionPage(slug: string) {
   return slug in sectionPages
 }
 
-// The overview, listing the child pages of the tour. Illustrative and unapproved.
+// The overview: each stage with links to its pages, then the pages still to be sorted. Illustrative and unapproved.
 export function LayoutOverviewPage() {
   return <div className="lab-layout">
     <div className="lab-layout-intro">
@@ -39,21 +31,39 @@ export function LayoutOverviewPage() {
       <Text elementType="p" className="mz-text-body-md">{layoutLabIntro.key}</Text>
       <Text elementType="p" className="mz-text-body-md">{layoutLabIntro.frames}</Text>
     </div>
-    <ul className="lab-experiment-list">
-      {Object.values(layoutLabSections).map((section) => <li key={section.slug}>
-        <Heading level={2} className="mz-text-heading-sm"><Link href={`/site/lab/layout/${section.slug}`}>{section.title}</Link></Heading>
-        <Text elementType="p" className="mz-text-body-md">{section.what}</Text>
+    <ol className="lab-stage-list">
+      {layoutStages.map((stage) => <li key={stage.slug}>
+        <Heading level={2} className="mz-text-heading-md"><Link href={`/site/lab/layout/${stage.slug}`}>{stage.title}</Link></Heading>
+        <Text elementType="p" className="mz-text-body-md">{stage.summary}</Text>
+        <ul className="lab-stage-pages mz-text-body-md">
+          {stagePagesByStage(stage.key).map((page) => <li key={page.key}><Link href={page.href}>{page.title}</Link></li>)}
+        </ul>
       </li>)}
-    </ul>
+    </ol>
+    <div className="lab-layout-intro">
+      <Heading level={2} className="mz-text-heading-md">{layoutLabIntro.moreHeading}</Heading>
+      <Text elementType="p" className="mz-text-body-md">{layoutLabIntro.more}</Text>
+      <ul className="lab-experiment-list">
+        {Object.values(layoutLabSections).map((section) => <li key={section.slug}>
+          <Heading level={3} className="mz-text-heading-sm"><Link href={`/site/lab/layout/${section.slug}`}>{section.title}</Link></Heading>
+          <Text elementType="p" className="mz-text-body-md">{section.what}</Text>
+        </li>)}
+      </ul>
+    </div>
   </div>
 }
 
-// A page under one of the sections, such as a primitive or a token family.
-export function LayoutChildPage({ page }: { page: ChildPage }) {
-  return <div className="lab-layout"><ChildPageContent page={page} /></div>
+// A stage's overview page.
+export function LayoutStagePage({ stage }: { stage: LayoutStage }) {
+  return <div className="lab-layout"><StageOverview stage={stage} /></div>
 }
 
-// One section of the tour as its own page.
+// A page inside a stage.
+export function LayoutStageChildPage({ page }: { page: StagePage }) {
+  return <div className="lab-layout"><StagePageView page={page} /></div>
+}
+
+// One of the pages still to be sorted.
 export function LayoutSectionPage({ slug }: { slug: string }) {
   const Section = sectionPages[slug]
   return <div className="lab-layout"><Section /></div>

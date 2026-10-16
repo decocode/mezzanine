@@ -3,9 +3,9 @@ import { MezzanineNavbar } from '../components/MezzanineNavbar'
 import { NavigationPanel, SidebarColumn } from '../components/Sidebar'
 import type { Theme } from '../themeSwitcherLogic'
 import NotFoundPage from '../pages/NotFoundPage'
-import { hasLayoutSectionPage, LayoutChildPage, LayoutOverviewPage, LayoutSectionPage } from './LayoutPage'
+import { hasLayoutSectionPage, LayoutOverviewPage, LayoutSectionPage, LayoutStageChildPage, LayoutStagePage } from './LayoutPage'
 import { labContent, labNavigationItems } from './labContent'
-import { childPagesBySection, layoutLabSections } from './layout/layoutLabContent'
+import { layoutLabSections, layoutStages, stagePages } from './layout/layoutLabContent'
 import './lab-page.css'
 
 interface LabPageProps {
@@ -20,8 +20,10 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const isLayout = currentPath === labContent.layoutPage.href
   const sectionSlug = currentPath.startsWith(`${labContent.layoutPage.href}/`) ? currentPath.slice(labContent.layoutPage.href.length + 1) : ''
   const section = hasLayoutSectionPage(sectionSlug) ? Object.values(layoutLabSections).find((item) => item.slug === sectionSlug) : undefined
-  const childPage = Object.values(childPagesBySection).flat().find((item) => item.href === currentPath)
-  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : section ? `${section.title} | Lab` : childPage ? `${childPage.title} | Lab` : 'Page not found | Lab'
+  const stage = layoutStages.find((item) => item.slug === sectionSlug)
+  const stagePage = stagePages.find((item) => item.href === currentPath)
+  const pageTitle = section?.title ?? stage?.title ?? stagePage?.title
+  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} />
 
   return <>
@@ -40,7 +42,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : section ? <LayoutSectionPage slug={section.slug} /> : childPage ? <LayoutChildPage page={childPage} /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : section ? <LayoutSectionPage slug={section.slug} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : <NotFoundPage />}
       </main>
     </div>
   </>
