@@ -80,13 +80,13 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) |
 | `src/tokens/elevation.css` | Elevation levels built from the shadow and highlight colours; each theme sets its shadow colour (Styles › Elevation) |
 | `src/tokens/motion.css` | Durations, easing, distances, scale and rotation (Styles › Motion) |
-| `src/tokens/shape.css` | Corner-radius and border-width scales (Styles › Shape) |
+| `src/tokens/shape.css` | Corner-radius and border-width scales (Styles › Shape › Corners and Borders) |
 | `src/tokens/space.css` | Spacing scale (Foundations › Spacing) |
 | `src/tokens/typography.css` | Font families, weights, type-scale roles and inline-code tokens (Styles › Typography) |
 
 ### Documentation site (`site/`)
 
-Typography retains its overview at `/typography`. Its child pages are `/typography/text-styles` (beginner guide: quick start, roles, styles grouped by role, choosing, weights, base elements, small screens, line height and token reference) and `/typography/prose` (lists and inline code). These pages are loaded from `site/pages/` through `site/pageRegistry.ts`; `site/siteStructure.ts` defines the linked parent and children.
+Typography retains its overview at `/typography`. Its child pages are `/typography/text-styles` (beginner guide: quick start, roles, styles grouped by role, choosing, weights, base elements, small screens, line height and token reference) and `/typography/prose` (lists and inline code). Shape retains its overview at `/shape`, with child pages `/shape/corners` (the corner-radius scale) and `/shape/borders` (the border-width scale). These pages are loaded from `site/pages/` through `site/pageRegistry.ts`; `site/siteStructure.ts` defines the linked parent and children.
 
 | Path | Purpose |
 | --- | --- |
@@ -135,7 +135,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/content/navbarContent.tsx` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
 | `site/content/navigationTreeContent.tsx` | Nav Tree written guidance, reference entries, related pages and external references |
 | `site/content/radioGroupContent.tsx` | RadioGroup guidance, anatomy, states, token descriptions, related pages and references |
-| `site/content/shapeContent.ts` | Corner-radius and border-width labels and token names displayed on the Shape page |
+| `site/content/shapeContent.ts` | Corner-radius and border-width labels and token names displayed on the Corners and Borders pages |
 | `site/content/sidebarContent.tsx` | Sidebar guidance, prop and token references, and neutral example labels |
 | `site/content/siteContent.ts` | Shared site name, skip-link label and not-found/not-implemented messages |
 | `site/content/spacingContent.ts` | Spacing scale steps displayed on the Spacing page |
@@ -173,7 +173,9 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/NotImplementedPage.tsx` | WIP page heading and not-implemented message |
 | `site/pages/ProsePage.tsx` | List and inline-code examples; loaded only when its route is requested |
 | `site/pages/RadioGroupPage.tsx` | RadioGroup anatomy, states, validation and token reference; loaded only when its route is requested |
-| `site/pages/ShapePage.tsx` | Corner-radius scale, guidance for styling all corners or individual corners, and the border-width scale with hairline guidance; loaded only when its route is requested |
+| `site/pages/ShapePage.tsx` | Shape overview linking to Corners and Borders; loaded only when its route is requested |
+| `site/pages/CornersPage.tsx` | Corner-radius scale and guidance for styling all corners or individual corners; loaded only when its route is requested |
+| `site/pages/BordersPage.tsx` | Border-width scale, hairline guidance and how to use the scale; loaded only when its route is requested |
 | `site/pages/SidebarPage.tsx` | Real Sidebar examples for mixed content, collapse options, multiple independent panels and the actual documentation sidebar |
 | `site/pages/SpacingPage.tsx` | Spacing-scale reference with shared Technical details; loaded only when its route is requested |
 | `site/pages/TabBarPage.tsx` | Live TabBar example and verified composition, overflow and placement guidance |
