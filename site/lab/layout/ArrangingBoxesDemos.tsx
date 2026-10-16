@@ -1,6 +1,6 @@
 import { useState, type CSSProperties } from 'react'
 import { Button, Checkbox, Heading, Link, Text } from '@decocode/mezzanine'
-import { CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, ValuePicker } from './LabParts'
+import { CssNotes, DemoFrame, DemoHeading, DemoText, ValuePicker } from './LabParts'
 import { SpacingScale } from '../../components/SpacingScale'
 import { Block } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
@@ -17,11 +17,9 @@ function NormalFlowDemo() {
   return <>
     <DemoText>Three boxes inside a sentence. Choose how they join the flow.</DemoText>
     <ValuePicker label="display" options={displayOptions} value={display} onChange={setDisplay} />
-    <LabOnly name="Boxes in a sentence">
       <Text elementType="p" className="mz-text-body-md" style={{ '--lab-flow-display': display } as CSSProperties}>
         Here is a sentence with <span className="lab-flow-item">Box 1</span> inside it, then <span className="lab-flow-item">Box 2</span>, and finally <span className="lab-flow-item">Box 3</span> near the end of the line.
       </Text>
-    </LabOnly>
     <CssNotes name="normal flow" note={cssNotes.normalFlow} level={3} />
   </>
 }
@@ -53,11 +51,9 @@ function FlexboxDemo() {
       <ValuePicker label="flex-grow" options={growOptions} value={grow} onChange={setGrow} />
     </div>
     <DemoFrame label="Flexbox" canOverflow>
-      <LabOnly name="Flexbox">
         <div className="lab-flex-demo" style={{ '--lab-flex-direction': direction, '--lab-flex-wrap': wrap, '--lab-flex-grow': grow } as CSSProperties}>
           {[1, 2, 3, 4, 5].map((number) => <Block key={number}>Box {number}</Block>)}
         </div>
-      </LabOnly>
     </DemoFrame>
     <CssNotes name="Flexbox" note={cssNotes.flexbox} level={3} />
   </>
@@ -75,12 +71,10 @@ function GridDemo() {
     <DemoText>Six boxes in a grid. Choose the columns, and watch the first box keep spanning two of them.</DemoText>
     <ValuePicker label="grid-template-columns" options={columnOptions} value={columns} onChange={setColumns} />
     <DemoFrame label="Grid">
-      <LabOnly name="Grid">
         <div className="lab-grid-demo" style={{ '--lab-grid-columns': columns } as CSSProperties}>
           <div className="lab-block lab-grid-wide mz-text-body-sm">Box 1 spans two columns</div>
           {[2, 3, 4, 5, 6].map((number) => <Block key={number}>Box {number}</Block>)}
         </div>
-      </LabOnly>
     </DemoFrame>
     <CssNotes name="Grid" note={cssNotes.grid} level={3} />
   </>
@@ -97,7 +91,6 @@ function SubgridDemo() {
     <DemoText>With subgrid on, the text in each card starts at the same height and the actions line up along the bottom, however long each title is. Turn it off and they drift apart. These cards are Lab-only because Mezzanine’s Card doesn’t use subgrid.</DemoText>
     <Checkbox isSelected={aligned} onChange={setAligned}>Use subgrid</Checkbox>
     <DemoFrame label="Subgrid cards" initialWidth={900}>
-      <LabOnly name="SubgridCards">
         <div className={`lab-subgrid-list${aligned ? ' lab-subgrid-on' : ''}`}>
           {cards.map((card) => <div key={card.title} className="lab-subgrid-card">
             <Heading level={3}>{card.title}</Heading>
@@ -105,7 +98,6 @@ function SubgridDemo() {
             <div><Button size="sm" variant="secondary">Action</Button></div>
           </div>)}
         </div>
-      </LabOnly>
     </DemoFrame>
     <CssNotes name="subgrid" note={cssNotes.subgrid} level={3} />
   </>
@@ -136,20 +128,16 @@ function AlignmentDemo() {
       <ValuePicker label="align-items" options={alignOptions} value={align} onChange={setAlign} />
     </div>
     <DemoFrame label="Alignment">
-      <LabOnly name="Alignment">
         <div className="lab-align-demo" style={{ '--lab-justify': justify, '--lab-align': align } as CSSProperties}>
           <Block>Box 1</Block>
           <Block>Box 2 has more to say</Block>
           <Block>Box 3</Block>
         </div>
-      </LabOnly>
     </DemoFrame>
     <CssNotes name="alignment" note={cssNotes.alignment} />
     <DemoHeading>Centre anything</DemoHeading>
     <DemoText>The famous puzzle, solved in two lines.</DemoText>
-    <LabOnly name="Centred">
       <div className="lab-centre-anything"><Block>Right in the middle</Block></div>
-    </LabOnly>
     <CssNotes name="centring" note={cssNotes.centreAnything} />
   </>
 }
@@ -165,12 +153,12 @@ function SpacingDemo() {
     <DemoHeading>Margin or gap</DemoHeading>
     <DemoText>The same three boxes twice. With margin, each box keeps its distance on every side, so there’s space against the dashed edge too. With gap, the space only goes between them.</DemoText>
     <div className="lab-two-slots">
-      <LabOnly name="Margin on each box">
+      <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Margin on each box</Text>
         <div className="lab-spacing-demo lab-spacing-margin">{[1, 2, 3].map((number) => <Block key={number}>Box {number}</Block>)}</div>
-      </LabOnly>
-      <LabOnly name="Gap on the parent">
+      </div>
+      <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Gap on the parent</Text>
         <div className="lab-spacing-demo lab-spacing-gap">{[1, 2, 3].map((number) => <Block key={number}>Box {number}</Block>)}</div>
-      </LabOnly>
+      </div>
     </div>
     <CssNotes name="margin and gap" note={cssNotes.marginAndGap} />
   </>
@@ -187,11 +175,9 @@ function SpacingTokens() {
     <DemoHeading>Sizes from the spacing scale</DemoHeading>
     <DemoText>Choose a spacing token for the gap.</DemoText>
     <ValuePicker label="gap" options={gapOptions} value={gap} onChange={setGap} />
-    <LabOnly name="Spacing scale">
       <div className="lab-spacing-scale" style={{ '--lab-gap': `var(${gap})` } as CSSProperties}>
         {[1, 2, 3, 4, 5, 6].map((number) => <Block key={number}>Box {number}</Block>)}
       </div>
-    </LabOnly>
     <CssNotes name="the spacing scale" note={cssNotes.spacingScale} />
   </>
 }
@@ -201,11 +187,9 @@ function ReadingOrderDemo() {
   return <>
     <DemoText>Press Tab to move through the buttons. Then reverse them on screen and try again: focus jumps backwards across the row, because it still follows the HTML.</DemoText>
     <Checkbox isSelected={reversed} onChange={setReversed}>Reverse on screen</Checkbox>
-    <LabOnly name="Three buttons">
       <div className={`lab-order-row${reversed ? ' lab-order-reversed' : ''}`}>
         {[1, 2, 3].map((number) => <Button key={number} size="sm" variant="secondary">Button {number}</Button>)}
       </div>
-    </LabOnly>
     <CssNotes name="the reversed row" note={cssNotes.readingOrder} level={3} />
   </>
 }

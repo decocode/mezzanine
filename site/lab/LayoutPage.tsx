@@ -28,7 +28,6 @@ export function LayoutOverviewPage() {
     <div className="lab-layout-intro">
       <Heading level={1} className="mz-text-heading-lg">{layoutLabIntro.title}</Heading>
       <Text elementType="p" className="mz-text-body-lg">{layoutLabIntro.summary}</Text>
-      <Text elementType="p" className="mz-text-body-md">{layoutLabIntro.key}</Text>
       <Text elementType="p" className="mz-text-body-md">{layoutLabIntro.frames}</Text>
     </div>
     <ol className="lab-stage-list">

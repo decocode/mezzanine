@@ -4,14 +4,6 @@ import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'reac
 import { buildingBlockLabel, framePresets, holdBadgeLabel, type CssNote, type LabIntro, type SimilarTo } from './layoutLabContent'
 import { splitInlineCode } from './layoutLabLogic'
 
-// Marks a Lab-only component: a Warning-coloured dashed outline with a Lab badge and its name.
-export function LabOnly({ name, children }: { name: string; children: ReactNode }) {
-  return <div className="lab-only">
-    <p className="lab-only-label mz-text-label-sm"><Badge variant="warning">Lab</Badge> <code>{name}</code></p>
-    <div className="lab-only-body">{children}</div>
-  </div>
-}
-
 // A frame whose width you set with a slider or presets. Its contents are a size container. When the demo
 // is meant to stick out of the frame, the frame is a named region that takes focus, so keyboard users can scroll it.
 export function DemoFrame({ label, initialWidth = 720, canOverflow = false, children }: { label: string; initialWidth?: number; canOverflow?: boolean; children: ReactNode }) {

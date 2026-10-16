@@ -94,23 +94,10 @@
   overflow-x: auto;
 }
 
-/* Lab-only marker: a dashed Warning outline with a Lab badge. */
-.lab-only {
+/* A demo with a caption naming it, for side-by-side comparisons. */
+.lab-labelled {
   display: grid;
   gap: var(--space-2);
-  min-width: 0;
-  padding: var(--space-3);
-  border: 2px dashed var(--color-warning-600);
-}
-
-.lab-only-label {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.lab-only-body {
   min-width: 0;
 }
 

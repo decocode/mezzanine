@@ -51,7 +51,6 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   await card('The box model').getByRole('link', { name: 'Read docs', exact: true }).click()
   await expect(page).toHaveTitle('The box model | Lab')
   await expect(page.getByText('What is a box made of?', { exact: true })).toBeVisible()
-  await expect(page.locator('.lab-only').first()).toBeVisible()
 
   // On a stage page, the tree lists every stage and page, and the pages still to be sorted.
   const tree = page.locator('.site-layout > .site-sidebar').getByRole('treegrid', { name: 'Lab experiments' })

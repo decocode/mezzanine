@@ -7,7 +7,6 @@ import { boxCssNotes } from './boxCssNotes'
 export const layoutLabIntro = {
   title: 'Layout',
   summary: 'A hands-on tour of layout, told through boxes. Everything on a web page is a box. The tour starts with one box, then looks at what goes inside it, then at how many boxes arrange themselves, and finally at ready-made formations you can reuse.',
-  key: 'Anything with a dashed Warning outline and a Lab badge is a Lab-only component, built just for this page. Everything else is a real Mezzanine component.',
   frames: 'Many demos sit inside a frame with a width slider, so you can see how a layout behaves in more or less space without resizing your window.',
   stagesHeading: 'Stages',
   moreHeading: 'Still to be sorted',

@@ -1,13 +1,12 @@
 import { useRef, useState } from 'react'
 import { Badge, Button, Card, Cell, Checkbox, Column, Heading, Row, Table, TableBody, TableHeader, Text } from '@decocode/mezzanine'
-import { BrowserSupport, CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, LabSectionIntro } from './LabParts'
+import { BrowserSupport, CssNotes, DemoFrame, DemoHeading, DemoText, LabSectionIntro } from './LabParts'
 import { environmentQueries, layoutLabSections as sections, cssNotes } from './layoutLabContent'
 import { measureProbes, measureSafeAreas, useMediaQuery } from './layoutLabLogic'
 
 // The same tile adapts to whichever slot it is placed in.
 function ContainerTile() {
   return <div className="lab-cq-slot">
-    <LabOnly name="ContainerTile">
       <Card>
         <div className="lab-cq-tile">
           <div className="lab-block lab-cq-image mz-text-body-sm">Image</div>
@@ -17,7 +16,6 @@ function ContainerTile() {
           </div>
         </div>
       </Card>
-    </LabOnly>
   </div>
 }
 
@@ -76,11 +74,9 @@ export function NamedLayersDemo() {
   return <section aria-labelledby={sections.namedLayers.id} className="lab-layout-section">
     <LabSectionIntro section={sections.namedLayers} isSingleExample />
     <DemoText>Each box takes its place in the stack from a named token, so the order is decided once, not in each component.</DemoText>
-    <LabOnly name="Named layers">
       <div className="lab-layer-stack">
         {['base', 'raised', 'sticky', 'overlay', 'modal', 'toast'].map((name) => <div key={name} className={`lab-layer lab-layer-${name} mz-text-body-sm`}><code>--lab-layer-{name}</code></div>)}
       </div>
-    </LabOnly>
     <CssNotes name="named layers" note={cssNotes.layers} level={2} />
     <BrowserSupport section={sections.namedLayers} />
   </section>
@@ -129,7 +125,6 @@ export function ScrollPaddingDemo() {
     <div className="lab-controls">
       {[2, 3, 4].map((index) => <Button key={index} size="sm" variant="secondary" onPress={() => jump(index)}>Jump to section {index}</Button>)}
     </div>
-    <LabOnly name="ScrollBox with sticky header">
       <div ref={box} className={`lab-scroll-box${padded ? ' lab-scroll-padded' : ''}`} role="region" aria-label="Scrolling content with a sticky header" tabIndex={0}>
         <div className="lab-sticky-header mz-text-label-md">Sticky header</div>
         {[1, 2, 3, 4].map((index) => <div key={index} data-section={index} className="lab-scroll-section">
@@ -137,7 +132,6 @@ export function ScrollPaddingDemo() {
           <Text elementType="p" className="mz-text-body-sm">Content for section {index}. Jumping here should show this heading, not hide it under the header.</Text>
         </div>)}
       </div>
-    </LabOnly>
     <CssNotes name="scroll padding" note={cssNotes.scrollPadding} level={2} />
     <BrowserSupport section={sections.scrollPadding} />
   </section>
@@ -148,12 +142,12 @@ export function LayersDemo() {
     <LabSectionIntro section={sections.layers} isSingleExample />
     <DemoText>Both chips have the same simple “app” rule. On the left, the library’s rule uses a stronger selector and wins, so the app would need an even stronger one, or !important. On the right, the same library rule sits in a cascade layer, so the app’s simple rule wins.</DemoText>
     <div className="lab-two-slots">
-      <LabOnly name="Library CSS not in a layer">
+      <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Library CSS not in a layer</Text>
         <div className="lab-cascade lab-cascade-unlayered"><span className="lab-chip lab-consumer-override mz-text-label-md" /></div>
-      </LabOnly>
-      <LabOnly name="Library CSS in a layer">
+      </div>
+      <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Library CSS in a layer</Text>
         <div className="lab-cascade lab-cascade-layered"><span className="lab-chip lab-consumer-override mz-text-label-md" /></div>
-      </LabOnly>
+      </div>
     </div>
     <CssNotes name="cascade layers" note={cssNotes.cascadeLayers} level={2} />
     <BrowserSupport section={sections.layers} />
