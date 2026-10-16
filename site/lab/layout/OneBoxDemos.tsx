@@ -38,7 +38,7 @@ function BoxModelDemo() {
 function SizingAndUnitsDemo() {
   return <>
     <DemoHeading>Four units</DemoHeading>
-    <DemoText>Drag the frame’s slider. The % bar follows the frame. The vw bar follows the window, so it ignores the frame. The px and rem bars stay put, but rem grows if you enlarge your text.</DemoText>
+    <DemoText>Drag the frame’s slider. The % bar follows the frame. The vw bar follows the window, so it ignores the frame. The px and rem bars stay put, but rem grows if you enlarge your text. That’s why Mezzanine’s <Link href="/site/lab/layout/arranging-boxes/spacing">spacing tokens</Link> are in rem.</DemoText>
     <DemoFrame label="Four units">
       <LabOnly name="Unit bars">
         <Stack>

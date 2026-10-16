@@ -112,6 +112,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/components/ExampleZone.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
 | `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs and Lab links, theme actions and, in the narrow-screen menu, the docs NavTree under Docs on docs pages or the Lab's NavTree (passed in as `labNavigation`) under Lab on Lab pages, to the library Navbar |
 | `site/components/Sidebar.tsx` | Docs composition of the public non-collapsible SidebarPanel and NavTree navigation for wider screens, expanding the current page's ancestor groups; exports DocsNavigation for the Navbar menu, plus NavigationPanel and SidebarColumn so the Lab can pass in its own NavTree without the site importing Lab code |
+| `site/components/SpacingScale.tsx` | Every spacing token with a bar of its size, its live value and its usual pixel size; shared by the Spacing page and the Lab's Spacing page |
 | `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/components/tokenValueLogic.ts` | Reads current CSS token values and re-reads them when the theme, device colour scheme or motion setting changes, and describes font-size tokens in pixels |
@@ -205,7 +206,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/lab/layout/StagePages.tsx` | A stage's overview with a Card per page, and a stage page: introduction, examples, Similar to links and browser support |
 | `site/lab/layout/OneBoxDemos.tsx` | One box examples: the box model, sizing and units (with line length), logical properties, target size and Center |
 | `site/lab/layout/InsideTheBoxDemos.tsx` | Inside the box examples: overflow, images and media, multi-column, :has(), Frame, Cover and Reel |
-| `site/lab/layout/ArrangingBoxesDemos.tsx` | Arranging boxes examples: normal flow, CSS Flexbox, CSS Grid, subgrid, alignment, spacing and reading order |
+| `site/lab/layout/ArrangingBoxesDemos.tsx` | Arranging boxes examples: normal flow, CSS Flexbox, CSS Grid, subgrid, alignment, spacing (with the real spacing tokens) and reading order |
 | `site/lab/layout/BoxFormationDemos.tsx` | Box formations examples: Stack, Inline, Inline cluster, Split, Columns and Grid |
 | `site/lab/layout/FoundationDemos.tsx` | Demos for the pages still to be sorted: container queries, environment queries, named layers, viewport units, scroll padding and cascade layers |
 | `site/lab/layout/EmergingFeatureDemos.tsx` | Emerging features page, each demo with support detection: grid-lanes masonry, scroll-state queries, anchor positioning and field-sizing |

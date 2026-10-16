@@ -1,6 +1,7 @@
 import { useState, type CSSProperties } from 'react'
 import { Button, Checkbox, Heading, Link, Text } from '@decocode/mezzanine'
 import { CssNotes, DemoFrame, DemoHeading, DemoText, LabOnly, ValuePicker } from './LabParts'
+import { SpacingScale } from '../../components/SpacingScale'
 import { Block } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
@@ -173,8 +174,12 @@ function SpacingDemo() {
       </LabOnly>
     </div>
     <CssNotes name="margin and gap" note={cssNotes.marginAndGap} />
+    <DemoHeading>Spacing tokens</DemoHeading>
+    <DemoText>Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so <code>--space-4</code> is four steps: <code>1rem</code>, normally 16px. The tokens are in <code>rem</code>, so space grows when someone enlarges their text. <Link href="/site/lab/layout/one-box/sizing-and-units">Sizing and units</Link> explains <code>rem</code>.</DemoText>
+    <DemoText>These are the real tokens, with their values read live, as on the <Link href="/spacing">Spacing</Link> page in the docs.</DemoText>
+    <SpacingScale />
     <DemoHeading>Sizes from the spacing scale</DemoHeading>
-    <DemoText>Choose a spacing token for the gap. The full scale is on the <Link href="/spacing">Spacing</Link> page.</DemoText>
+    <DemoText>Choose a spacing token for the gap.</DemoText>
     <ValuePicker label="gap" options={gapOptions} value={gap} onChange={setGap} />
     <LabOnly name="Spacing scale">
       <div className="lab-spacing-scale" style={{ '--lab-gap': `var(${gap})` } as CSSProperties}>

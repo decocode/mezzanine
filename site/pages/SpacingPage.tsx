@@ -1,38 +1,7 @@
 import { ComponentPageTemplate } from '../templates/ComponentPageTemplate'
 import { foundationTechnicalDetailsGroup } from '../templates/foundationTechnicalDetails'
 import { DocsTable } from '../components/DocsTable'
-import { spacingScaleSteps } from '../content/spacingContent'
-import { useTokenValue } from '../components/tokenValueLogic'
-
-function SpacingScaleItem({
-  step,
-}: {
-  step: number
-}) {
-  const token = `--space-${step}`
-  const value = useTokenValue(token)
-
-  return (
-    <li className="spacing-scale-item">
-      <span className="spacing-scale-example">
-        {step === 0
-          ? <span className="spacing-scale-not-applicable">N/A</span>
-          : (
-              <span
-                aria-hidden="true"
-                className="spacing-scale-bar"
-                style={{ width: `var(${token})` }}
-              />
-            )}
-        <code>{token}</code>
-      </span>
-      <span className="spacing-scale-value">
-        <code className="spacing-scale-rem">{value}</code>
-        <span className="spacing-scale-pixels">{step * 4}px</span>
-      </span>
-    </li>
-  )
-}
+import { SpacingScale } from '../components/SpacingScale'
 
 export default function SpacingPage() {
   return (
@@ -53,11 +22,7 @@ export default function SpacingPage() {
               font size. Pixel values are shown only as a familiar reference and assume the common
               browser default of <code>1rem = 16px</code>.
             </p>
-            <ol className="spacing-scale-list">
-              {spacingScaleSteps.map((step) => (
-                <SpacingScaleItem key={step} step={step} />
-              ))}
-            </ol>
+            <SpacingScale />
           </>),
         },
         foundationTechnicalDetailsGroup('spacing', {
