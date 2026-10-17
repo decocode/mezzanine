@@ -7,7 +7,7 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/AppShell.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with three experiments. Layers, at `/site/lab/layers`, holds Positioning, Ordering layers, Bundles of layers and Scroll padding. Internationalisation, at `/site/lab/internationalisation`, is only an introduction so far. The other is the layout tour: an overview at `/site/lab/layout`, five stages told through boxes (The box, Inside the box, Arranging boxes, Box formations and Boxes on devices), each with an overview at `/site/lab/layout/<stage>` and a page for each topic or building block at `/site/lab/layout/<stage>/<page>`, Box to the Future, an overview at `/site/lab/layout/box-to-the-future` with a page for each emerging feature marked Lab, and the pages still to be sorted into stages at `/site/lab/layout/<slug>`. Its illustrative candidates are not approved library features.
+The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with three experiments and a Components section. Components, at `/site/lab/components`, shows only its heading so far; its child page, Search, at `/site/lab/components/search`, holds the search dialog experiment. Layers, at `/site/lab/layers`, holds Positioning, Ordering layers, Bundles of layers and Scroll padding. Internationalisation, at `/site/lab/internationalisation`, is only an introduction so far. The other is the layout tour: an overview at `/site/lab/layout`, five stages told through boxes (The box, Inside the box, Arranging boxes, Box formations and Boxes on devices), each with an overview at `/site/lab/layout/<stage>` and a page for each topic or building block at `/site/lab/layout/<stage>/<page>`, Box to the Future, an overview at `/site/lab/layout/box-to-the-future` with a page for each emerging feature marked Lab, and the pages still to be sorted into stages at `/site/lab/layout/<slug>`. Its illustrative candidates are not approved library features.
 
 The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `DisclosureHeader`, `TableOfContents`, `Navbar`, `NavTree` and `Sidebar` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
@@ -33,6 +33,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Card/Card.css` | Card surface, border, elevation, padding and spacing between direct children, with body text and Title medium headings |
 | `src/components/Card/Card.tsx` | Public static Card: a div container with the card surface; the app composes its content |
 | `src/components/CodeBlock/CodeBlock.css` | Code block surface, border and padding, with Body small text in the shared monospace family; long lines wrap and indentation is kept |
+| `src/components/Autocomplete/Autocomplete.ts` | Public React Aria Autocomplete and useFilter exports; no styles, since it only connects a SearchField or TextField to the collection it filters |
 | `src/components/CodeBlock/CodeBlock.tsx` | Public static CodeBlock: a pre element with a code element inside; the app supplies the code as text |
 | `src/components/Checkbox/Checkbox.css` | Token-led styling for Checkbox states and interaction feedback |
 | `src/components/Checkbox/Checkbox.tsx` | Public React Aria Checkbox wrapper with selected and indeterminate indicators |
@@ -42,6 +43,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/FieldError/FieldError.ts` | Public React Aria FieldError export and prop and render-prop types |
 | `src/components/Heading/Heading.ts` | Public React Aria Heading export and prop type |
 | `src/components/Label/Label.ts` | Public React Aria Label export and prop type |
+| `src/components/ListBox/ListBox.ts`, `src/components/ListBox/ListBox.css` | Public React Aria ListBox, ListBoxItem, ListBoxSection and Header exports; token-led vertical list, section header, label and description slots, hovered, highlighted, pressed, focus, selected and disabled states, and forced-colour styling |
 | `src/components/Link/Link.css` | Token-led styling for Link interaction states |
 | `src/components/Link/Link.ts` | Public React Aria Link export and prop types |
 | `src/components/Modal/Modal.ts`, `src/components/Modal/Modal.css` | Public React Aria Modal and ModalOverlay exports; token-led backdrop, responsive container and reduced-motion-aware entry/exit styling |
@@ -62,6 +64,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Tabs/Tabs.tsx`, `src/components/Tabs/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
 | `src/components/Text/Text.ts` | Public React Aria Text export and prop type |
 | `src/components/TextArea/TextArea.ts` | Public React Aria TextArea export and type; composes with TextField for multiline input |
+| `src/components/SearchField/SearchField.tsx`, `src/components/SearchField/SearchField.css` | Public React Aria SearchField wrapper that adds the search icon and a clear button (the shared Button) around the app's Label and Input; the Input keeps the shared field appearance |
 | `src/components/TextField/TextField.css` | Shared TextField, Input and TextArea layout, interaction states and forced-colour styling |
 | `src/components/TextField/TextField.ts` | Public React Aria TextField and Input exports and types |
 | `src/components/ToggleButton/ToggleButton.css` | Token-led styling for ToggleButton states and ToggleButtonGroup layout |
@@ -198,8 +201,11 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 
 | Path | Purpose |
 | --- | --- |
-| `site/lab/labContent.tsx` | Lab labels, the experiment list and the Lab's NavTree items: Layout at the top level, its stages each holding their pages, then the pages still to be sorted |
-| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry: the site's Navbar and sidebar layout with the Lab's NavTree, Internationalisation, the Layers experiment, the top-level Supports and Style priority pages and the On this page column used by DocsPageTemplate; chooses the index, the Layout overview, a stage, a stage page, a page still to be sorted or the not-found page from the address |
+| `site/lab/labContent.tsx` | Lab labels, the experiment list and the Lab's NavTree items: Layout at the top level, its stages each holding their pages, then the pages still to be sorted; then Layers, Internationalisation and Components (holding Search) |
+| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry: the site's Navbar and sidebar layout with the Lab's NavTree, Internationalisation, Components and Search, the Layers experiment, the top-level Supports and Style priority pages and the On this page column used by DocsPageTemplate; chooses the index, the Layout overview, a stage, a stage page, a page still to be sorted or the not-found page from the address |
+| `site/lab/ComponentsPage.tsx` | Lab Components section (heading only) and its Search page, built with DocsPageTemplate |
+| `site/lab/SearchLab.tsx`, `site/lab/search-lab.css` | Lab search experiment: SearchField and ListBox joined by Autocomplete in a modal Dialog opened by a Search Button, following React Aria's command palette example; Lab-scoped layout with a candidate dialog height |
+| `site/lab/searchLabContent.ts` | Sample results for the search experiment: every linked page in the docs and Lab navigation trees, grouped as Docs and Lab, with the groups above each page |
 | `site/lab/InternationalisationPage.tsx` | Lab Internationalisation experiment: its introduction, built with DocsPageTemplate; its pages are still to be agreed |
 | `site/lab/LayoutPage.tsx` | Lab layout tour: the overview (built with DocsPageTemplate) with a section per stage and the pages still to be sorted, and the stage, stage page and unsorted page routes, keyed by slug; illustrative and unapproved |
 | `site/lab/layout/layoutLabContent.ts` | Plain-English explanations for the layout tour: the stages, each stage page with its address, subtitle and sources, the pages still to be sorted, their CSS notes, frame presets and environment queries |
@@ -235,6 +241,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/components/text-field.spec.ts` | TextField keyboard, validation, responsive and automated accessibility checks |
 | `tests/components/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
 | `tests/components/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
+| `tests/lab/search.spec.ts` | Lab search experiment: filtering while focus stays in the field, arrow keys and Enter, Docs and Lab groups, the empty state, clearing with the button and Escape, closing and focus return, every result reachable by keyboard, 320px reflow at normal and doubled text with accessibility scans in each theme, and forced colours |
 | `tests/lab/lab.spec.ts` | Lab navigation through the site menu at 320px with normal and doubled text, the shared sidebar layout, and the saved theme shared between Docs and Lab |
 | `tests/lab/layout.spec.ts` | Lab layout tour: 320px reflow at normal and doubled text and accessibility in each theme for the overview, every stage and every page, links from the overview, stage Cards and navigation, container-query, Inline switch, :has(), overflow and reading-order behaviour, and CSS notes matching the stylesheet |
 | `tests/site/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |

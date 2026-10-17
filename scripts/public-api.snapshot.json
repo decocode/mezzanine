@@ -24,6 +24,14 @@
     "kind": "value"
   },
   {
+    "name": "Autocomplete",
+    "kind": "value"
+  },
+  {
+    "name": "AutocompleteProps",
+    "kind": "type"
+  },
+  {
     "name": "Badge",
     "kind": "value"
   },
@@ -276,6 +284,14 @@
     "kind": "value"
   },
   {
+    "name": "Header",
+    "kind": "value"
+  },
+  {
+    "name": "HeaderProps",
+    "kind": "type"
+  },
+  {
     "name": "Heading",
     "kind": "value"
   },
@@ -326,6 +342,38 @@
   {
     "name": "LinkedInIcon",
     "kind": "value"
+  },
+  {
+    "name": "ListBox",
+    "kind": "value"
+  },
+  {
+    "name": "ListBoxItem",
+    "kind": "value"
+  },
+  {
+    "name": "ListBoxItemProps",
+    "kind": "type"
+  },
+  {
+    "name": "ListBoxItemRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "ListBoxProps",
+    "kind": "type"
+  },
+  {
+    "name": "ListBoxRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "ListBoxSection",
+    "kind": "value"
+  },
+  {
+    "name": "ListBoxSectionProps",
+    "kind": "type"
   },
   {
     "name": "LoadingIcon",
@@ -510,6 +558,18 @@
   {
     "name": "RowRenderProps",
     "kind": "type"
+  },
+  {
+    "name": "SearchField",
+    "kind": "value"
+  },
+  {
+    "name": "SearchFieldProps",
+    "kind": "type"
+  },
+  {
+    "name": "SearchIcon",
+    "kind": "value"
   },
   {
     "name": "SelectionIndicator",
@@ -785,6 +845,10 @@
   },
   {
     "name": "ZoomOutIcon",
+    "kind": "value"
+  },
+  {
+    "name": "useFilter",
     "kind": "value"
   }
 ]

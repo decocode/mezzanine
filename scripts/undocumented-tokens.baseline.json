@@ -1,1 +1,26 @@
-[]
+[
+  "--list-box-empty-content",
+  "--list-box-gap",
+  "--list-box-header-content",
+  "--list-box-header-padding-block",
+  "--list-box-header-padding-inline",
+  "--list-box-item-background",
+  "--list-box-item-background-hovered",
+  "--list-box-item-background-pressed",
+  "--list-box-item-background-selected",
+  "--list-box-item-background-selected-hovered",
+  "--list-box-item-background-selected-pressed",
+  "--list-box-item-content",
+  "--list-box-item-content-selected",
+  "--list-box-item-description-content",
+  "--list-box-item-gap",
+  "--list-box-item-min-height",
+  "--list-box-item-padding-block",
+  "--list-box-item-padding-inline",
+  "--list-box-padding",
+  "--list-box-section-gap",
+  "--search-field-gap",
+  "--search-field-icon-content",
+  "--search-field-icon-gap",
+  "--search-field-icon-size"
+]

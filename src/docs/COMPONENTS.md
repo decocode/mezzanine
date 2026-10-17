@@ -116,6 +116,38 @@ so icon-only controls still need their own accessible name. The fade is removed
 when motion is reduced. The API follows the
 [React Aria Tooltip](https://react-aria.adobe.com/Tooltip).
 
+## SearchField, ListBox and Autocomplete
+
+`SearchField` follows TextField: supply a `Label` (or `aria-label`) and an
+`Input`. The field adds its search icon and a clear button. React Aria names the
+clear button, keeps it out of the Tab order, and clears the field when it or
+Escape is pressed.
+
+`ListBox` shows a vertical list of `ListBoxItem` options, optionally grouped in
+`ListBoxSection` with a `Header`. Put `Text slot="label"` and
+`Text slot="description"` inside an item for a title and a second line. Give an
+item `href` when choosing it opens a page.
+
+`Autocomplete` connects a SearchField to a ListBox and filters it as you type.
+Focus stays in the field while the arrow keys move through the options:
+
+```tsx
+const { contains } = useFilter({ sensitivity: 'base' })
+
+<Autocomplete filter={contains}>
+  <SearchField aria-label="Search"><Input /></SearchField>
+  <ListBox aria-label="Results" renderEmptyState={() => 'No results'}>
+    <ListBoxItem href="/page-a">Page A</ListBoxItem>
+  </ListBox>
+</Autocomplete>
+```
+
+The APIs follow [React Aria SearchField](https://react-aria.adobe.com/SearchField),
+[ListBox](https://react-aria.adobe.com/ListBox) and
+[Autocomplete](https://react-aria.adobe.com/Autocomplete). ListBox styles the
+vertical stack layout; horizontal and grid layouts and drag and drop are not
+styled yet.
+
 ## Sidebar
 
 `Sidebar` manages two separate states: inline expansion and the modal drawer.

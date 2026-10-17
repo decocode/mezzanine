@@ -1,0 +1,160 @@
+/* Follows React Aria's vanilla ListBox for a vertical stack of options. */
+.react-aria-ListBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--list-box-gap);
+  box-sizing: border-box;
+  min-width: 0;
+  max-height: inherit;
+  overflow: auto;
+  padding: var(--list-box-padding);
+  outline: none;
+  color: var(--list-box-item-content);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-ListBox[data-focus-visible] {
+  outline: var(--list-box-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--list-box-focus-ring-offset);
+}
+
+.react-aria-ListBox[data-empty] {
+  padding: var(--list-box-item-padding-block) var(--list-box-item-padding-inline);
+  color: var(--list-box-empty-content);
+}
+
+.react-aria-ListBoxSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--list-box-gap);
+}
+
+.react-aria-ListBoxSection:not(:first-child) {
+  margin-block-start: var(--list-box-section-gap);
+}
+
+.react-aria-ListBox .react-aria-Header {
+  padding: var(--list-box-header-padding-block) var(--list-box-header-padding-inline);
+  color: var(--list-box-header-content);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
+  cursor: default;
+  user-select: none;
+}
+
+.react-aria-ListBoxItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--list-box-item-gap);
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: var(--list-box-item-min-height);
+  padding: var(--list-box-item-padding-block) var(--list-box-item-padding-inline);
+  outline: none;
+  background: var(--list-box-item-background);
+  color: var(--list-box-item-content);
+  overflow-wrap: anywhere;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-aria-ListBoxItem[href] {
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-touch-callout: none;
+}
+
+.react-aria-ListBoxItem[data-selection-mode] {
+  cursor: pointer;
+}
+
+/* Focused covers the option highlighted from an Autocomplete's input as well as keyboard focus. */
+.react-aria-ListBoxItem:is([data-hovered], [data-focused]) {
+  background: var(--list-box-item-background-hovered);
+}
+
+.react-aria-ListBoxItem[data-pressed] {
+  background: var(--list-box-item-background-pressed);
+}
+
+.react-aria-ListBoxItem[data-focus-visible] {
+  outline: var(--list-box-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--list-box-focus-ring-offset);
+}
+
+.react-aria-ListBoxItem[data-selected] {
+  background: var(--list-box-item-background-selected);
+  color: var(--list-box-item-content-selected);
+}
+
+.react-aria-ListBoxItem[data-selected]:is([data-hovered], [data-focused]) {
+  background: var(--list-box-item-background-selected-hovered);
+}
+
+.react-aria-ListBoxItem[data-selected][data-pressed] {
+  background: var(--list-box-item-background-selected-pressed);
+}
+
+.react-aria-ListBoxItem [slot='label'] {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-sm);
+  text-transform: var(--text-transform-title);
+}
+
+.react-aria-ListBoxItem [slot='description'] {
+  color: var(--list-box-item-description-content);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-ListBoxItem[data-selected] [slot='description'] {
+  color: inherit;
+}
+
+.react-aria-ListBoxItem[data-disabled] {
+  opacity: var(--opacity-disabled);
+  cursor: default;
+}
+
+@media (forced-colors: active) {
+  .react-aria-ListBoxItem:is([data-hovered], [data-focused], [data-pressed]) {
+    background: Canvas;
+  }
+
+  .react-aria-ListBoxItem[data-focus-visible],
+  .react-aria-ListBox[data-focus-visible] {
+    outline-color: Highlight;
+  }
+
+  .react-aria-ListBoxItem[data-selected] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .react-aria-ListBoxItem[data-selected] [slot='description'] {
+    color: HighlightText;
+  }
+
+  .react-aria-ListBoxItem[data-disabled] {
+    opacity: 1;
+    color: GrayText;
+  }
+}

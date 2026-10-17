@@ -8,6 +8,7 @@ import NotFoundPage from '../pages/NotFoundPage'
 import { hasLayoutSectionPage, LabTopLevelPageView, LayersOverviewPage, LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutSectionPage, LayoutStageChildPage, LayoutStagePage } from './LayoutPage'
 import { labContent, labNavigationItems } from './labContent'
 import { InternationalisationPage } from './InternationalisationPage'
+import { ComponentsPage, SearchPage } from './ComponentsPage'
 import { boxToTheFuture, futurePages, labTopLevelPages, layersLab, layersPages, layoutLabSections, layoutStages, stagePages } from './layout/layoutLabContent'
 import './lab-page.css'
 
@@ -22,6 +23,8 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const isIndex = currentPath === labContent.index.href
   const isLayout = currentPath === labContent.layoutPage.href
   const isInternationalisation = currentPath === labContent.internationalisationPage.href
+  const isComponents = currentPath === labContent.componentsPage.href
+  const isSearch = currentPath === labContent.searchPage.href
   const sectionSlug = currentPath.startsWith(`${labContent.layoutPage.href}/`) ? currentPath.slice(labContent.layoutPage.href.length + 1) : ''
   const section = hasLayoutSectionPage(sectionSlug) ? Object.values(layoutLabSections).find((item) => item.slug === sectionSlug) : undefined
   const stage = layoutStages.find((item) => item.slug === sectionSlug)
@@ -31,7 +34,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const isLayers = currentPath === layersLab.href
   const topLevelPage = [...Object.values(labTopLevelPages), ...Object.values(layersPages)].find((item) => item.href === currentPath)
   const pageTitle = (isLayers ? layersLab.title : undefined) ?? topLevelPage?.title ?? section?.title ?? stage?.title ?? stagePage?.title ?? (isFuture ? boxToTheFuture.title : futurePage?.title)
-  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : isInternationalisation ? `${labContent.internationalisationPage.label} | Lab` : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
+  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : isInternationalisation ? `${labContent.internationalisationPage.label} | Lab` : isComponents ? `${labContent.componentsPage.label} | Lab` : isSearch ? `${labContent.searchPage.label} | Lab` : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   // Layout pages use the docs page template, whose On this page links sit in the right column on wide screens.
   const [contentsHost, setContentsHost] = useState<HTMLDivElement | null>(null)
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} />
@@ -53,7 +56,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : isInternationalisation ? <InternationalisationPage /> : isLayers ? <LayersOverviewPage /> : topLevelPage ? <LabTopLevelPageView page={topLevelPage} /> : section ? <LayoutSectionPage slug={section.slug} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : isInternationalisation ? <InternationalisationPage /> : isComponents ? <ComponentsPage /> : isSearch ? <SearchPage /> : isLayers ? <LayersOverviewPage /> : topLevelPage ? <LabTopLevelPageView page={topLevelPage} /> : section ? <LayoutSectionPage slug={section.slug} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
       </main>
       <div className="site-contents-sidebar" ref={setContentsHost} />
     </div>

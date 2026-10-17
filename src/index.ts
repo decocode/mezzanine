@@ -88,6 +88,21 @@ export type {
   DisclosureRenderProps,
 } from './components/Disclosure/Disclosure'
 
+export { Autocomplete, useFilter } from './components/Autocomplete/Autocomplete'
+
+export type { AutocompleteProps } from './components/Autocomplete/Autocomplete'
+
+export { Header, ListBox, ListBoxItem, ListBoxSection } from './components/ListBox/ListBox'
+
+export type {
+  HeaderProps,
+  ListBoxItemProps,
+  ListBoxItemRenderProps,
+  ListBoxProps,
+  ListBoxRenderProps,
+  ListBoxSectionProps,
+} from './components/ListBox/ListBox'
+
 export { Link } from './components/Link/Link'
 
 export type {
@@ -141,6 +156,7 @@ export {
   MoonIcon,
   PlaceholderIcon,
   ResetIcon,
+  SearchIcon,
   SunIcon,
   TrustIcon,
 } from './icons/Icons'
@@ -233,6 +249,9 @@ export type { NavbarProps, NavbarRenderProps } from './components/Navbar/Navbar'
 
 export { TextField, Input } from './components/TextField/TextField'
 export type { TextFieldProps, TextFieldRenderProps, InputProps } from './components/TextField/TextField'
+
+export { SearchField } from './components/SearchField/SearchField'
+export type { SearchFieldProps } from './components/SearchField/SearchField'
 
 export { TextArea } from './components/TextArea/TextArea'
 export type { TextAreaProps } from './components/TextArea/TextArea'
