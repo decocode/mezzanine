@@ -2,7 +2,7 @@ import { useState, type CSSProperties } from 'react'
 import { Link, Text } from '@decocode/mezzanine'
 import { CssNotes, DemoFrame, DemoHeading, DemoText, ValuePicker } from './LabParts'
 import exampleImage from '../../assets/sidebar-example.svg'
-import { Block, Center, Frame, Stack } from './LabPrimitives'
+import { AspectRatio, Block, Center, Column } from './LabPrimitives'
 import { cssNotes, exampleImageAlt } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
 
@@ -73,10 +73,10 @@ function SizingTheBoxDemo() {
   return <>
     <DemoText>Both boxes are given the same width. The first ends up wider, because its padding and border are added on top.</DemoText>
     <DemoFrame label="Where the width is measured">
-      <Stack>
+      <Column>
         <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">box-sizing: content-box</Text><div className="lab-sizing-box lab-sizing-content-box mz-text-body-sm">12rem of content, plus padding and border</div></div>
         <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">box-sizing: border-box</Text><div className="lab-sizing-box lab-sizing-border-box mz-text-body-sm">12rem in total</div></div>
-      </Stack>
+      </Column>
     </DemoFrame>
     <CssNotes name="box-sizing" note={cssNotes.boxSizing} level={3} />
   </>
@@ -87,12 +87,12 @@ function MeasuringTheBoxDemo() {
     <DemoHeading>Four units</DemoHeading>
     <DemoText>The % bar follows the frame. The vw bar follows the window, so it ignores the frame. The px and rem bars stay put, but rem grows if you enlarge your text. That’s why Mezzanine’s <Link href="/site/lab/layout/add-space/gap">spacing tokens</Link> are in rem.</DemoText>
     <DemoFrame label="Four units">
-      <Stack>
+      <Column>
         <div className="lab-unit-bar lab-unit-px mz-text-body-sm">160px</div>
         <div className="lab-unit-bar lab-unit-rem mz-text-body-sm">10rem</div>
         <div className="lab-unit-bar lab-unit-percent mz-text-body-sm">50% of the frame</div>
         <div className="lab-unit-bar lab-unit-vw mz-text-body-sm">30vw: 30% of the window</div>
-      </Stack>
+      </Column>
     </DemoFrame>
     <CssNotes name="the units" note={cssNotes.units} />
     <DemoHeading>Grow, but within limits</DemoHeading>
@@ -116,9 +116,9 @@ function FrameDemo() {
     <DemoText>Whatever the shape, the picture is cropped to fill it, never squashed.</DemoText>
     <ValuePicker label="Shape" options={ratioOptions} value={ratio} onChange={setRatio} />
       <Center max="24rem">
-        <Frame ratio={ratio}><img src={exampleImage} alt={exampleImageAlt} width={480} height={240} /></Frame>
+        <AspectRatio ratio={ratio}><img src={exampleImage} alt={exampleImageAlt} width={480} height={240} /></AspectRatio>
       </Center>
-    <CssNotes name="Frame" note={cssNotes.frame} level={3} />
+    <CssNotes name="Aspect ratio" note={cssNotes.frame} level={3} />
   </>
 }
 

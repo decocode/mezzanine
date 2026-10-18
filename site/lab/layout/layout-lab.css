@@ -338,8 +338,8 @@
   border: 1px solid var(--color-text);
 }
 
-/* Inside the box: multi-column. */
-.lab-multicol {
+/* Inside the box: content columns, using CSS multi-column layout. */
+.lab-content-columns {
   columns: 12rem;
   column-gap: var(--space-6);
   column-rule: 1px solid var(--color-border);
@@ -353,19 +353,7 @@
   background: var(--color-surface);
 }
 
-/* Arranging boxes: Flexbox, Grid and alignment. */
-.lab-flex-demo {
-  display: flex;
-  flex-direction: var(--lab-flex-direction);
-  flex-wrap: var(--lab-flex-wrap);
-  gap: var(--space-3);
-}
-
-.lab-flex-demo > * {
-  flex-grow: var(--lab-flex-grow);
-  min-width: 6rem;
-}
-
+/* Arranging boxes: Grid and alignment. */
 .lab-grid-demo {
   display: grid;
   grid-template-columns: var(--lab-grid-columns);
@@ -426,10 +414,10 @@
 }
 
 /* Building blocks. Each limit is a custom property, so it could be a token. */
-.lab-stack {
+.lab-column {
   display: flex;
   flex-direction: column;
-  gap: var(--lab-stack-space, var(--space-3));
+  gap: var(--lab-column-space, var(--space-3));
 }
 
 .lab-row {
@@ -471,14 +459,14 @@
   gap: var(--space-3);
 }
 
-.lab-column-drop {
+.lab-row-wrap-grow {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
 }
 
-.lab-column-drop > * {
-  flex: 1 1 var(--lab-column-drop-min, 12rem);
+.lab-row-wrap-grow > * {
+  flex: 1 1 var(--lab-row-wrap-grow-min, 12rem);
 }
 
 .lab-center {
@@ -487,12 +475,12 @@
   margin-inline: auto;
 }
 
-.lab-media-frame {
-  aspect-ratio: var(--lab-frame-ratio, 16 / 9);
+.lab-aspect-ratio {
+  aspect-ratio: var(--lab-aspect-ratio, 16 / 9);
   overflow: hidden;
 }
 
-.lab-media-frame > img {
+.lab-aspect-ratio > img {
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;

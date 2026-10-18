@@ -1,7 +1,7 @@
 import { useRef, useState, type CSSProperties } from 'react'
 import { Badge, Button, Card, Cell, Checkbox, CodeBlock, Column, Heading, Link, Row, Table, TableBody, TableHeader, Text } from '@decocode/mezzanine'
 import { CssNotes, DemoFrame, DemoHeading, DemoText, ValuePicker } from './LabParts'
-import { Block, ColumnDrop } from './LabPrimitives'
+import { Block, RowWrapAndGrow } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
 import { supportsCondition, supportsCss, useProbeHeights } from './layoutLabLogic'
 
@@ -132,13 +132,12 @@ export function PositioningDemo() {
   </>
 }
 
-export function ColumnDropDemo() {
+export function RowWrapAndGrowDemo() {
   return <>
-    <DemoText>As the frame narrows, the columns drop below each other one at a time, and each new row stretches to fill the width.</DemoText>
-    <DemoFrame label="Column drop" initialWidth={1100}>
-      <ColumnDrop>{['one', 'two', 'three', 'four'].map((word) => <Block key={word} tall>Column {word}</Block>)}</ColumnDrop>
+    <DemoFrame label="Row wrap and grow" initialWidth={1100}>
+      <RowWrapAndGrow>{['A', 'B', 'C', 'D'].map((letter) => <Block key={letter} tall>Box {letter}</Block>)}</RowWrapAndGrow>
     </DemoFrame>
-    <CssNotes name="Column drop" note={cssNotes.columnDrop} level={3} />
+    <CssNotes name="Row wrap and grow" note={cssNotes.columnDrop} level={3} />
   </>
 }
 

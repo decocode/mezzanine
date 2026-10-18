@@ -60,13 +60,12 @@ function ImagesAndMediaDemo() {
 
 function MultiColumnDemo() {
   return <>
-    <DemoText>A list of twelve items. Widen the frame and more columns appear. Narrow it and they merge back into one.</DemoText>
-    <DemoFrame label="Multi-column" initialWidth={900}>
-        <ul className="lab-multicol mz-text-body-md">
+    <DemoFrame label="Content columns" initialWidth={900}>
+        <ul className="lab-content-columns mz-text-body-md">
           {Array.from({ length: 12 }, (_, index) => <li key={index}>Item {index + 1}</li>)}
         </ul>
     </DemoFrame>
-    <CssNotes name="multi-column" note={cssNotes.multiColumn} level={3} />
+    <CssNotes name="Content columns" note={cssNotes.multiColumn} level={3} />
   </>
 }
 

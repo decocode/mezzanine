@@ -8,7 +8,7 @@ import {
   stagePagesByStage, type FuturePage, type LabSection, type LayoutStage, type StagePage,
 } from './layoutLabContent'
 import { futureDemos } from './EmergingFeatureDemos'
-import { ColumnDropDemo, ContainerQueryDemo, FluidSizingDemo, ViewportDemo } from './FoundationDemos'
+import { RowWrapAndGrowDemo, ContainerQueryDemo, FluidSizingDemo, ViewportDemo } from './FoundationDemos'
 import { theBoxDemos } from './TheBoxDemos'
 import { insideTheBoxDemos } from './InsideTheBoxDemos'
 import { arrangingBoxesDemos } from './ArrangingBoxesDemos'
@@ -21,7 +21,7 @@ export type StageDemos = Record<string, { Demo: () => JSX.Element; Detail?: () =
 
 // The pages that moved into groups from the first version of Layout.
 const sortedPageDemos: StageDemos = {
-  columnDrop: { Demo: ColumnDropDemo },
+  columnDrop: { Demo: RowWrapAndGrowDemo },
   containerQueries: { Demo: ContainerQueryDemo },
   fluidSizing: { Demo: FluidSizingDemo },
   viewportUnits: { Demo: ViewportDemo },
@@ -31,13 +31,13 @@ const demos: StageDemos = { ...theBoxDemos, ...insideTheBoxDemos, ...arrangingBo
 
 // The "How it works" and "Example" sections shared by every Layout page: what it is, why it matters
 // and browser support, then the examples with the CSS behind them. Each is a section of the docs page template.
-function howItWorksSections(page: { id: string; what: string; why: string; details?: readonly string[]; support?: string }, examples: ReactNode) {
+function howItWorksSections(page: { id: string; what: string; why?: string; details?: readonly string[]; support?: string }, examples: ReactNode) {
   return [{
     id: `${page.id}-how-it-works`,
     title: stagePageHeadings.howItWorks,
     content: <div className="lab-section-body">
       <div className="lab-explainer">
-        {[page.what, page.why, ...(page.details ?? [])].map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">{paragraph}</Text>)}
+        {[page.what, page.why, ...(page.details ?? [])].filter((paragraph) => paragraph !== undefined).map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">{splitInlineCode(paragraph).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part)}</Text>)}
       </div>
       {page.support && <>
         <Heading level={3} className="lab-section-heading mz-text-heading-sm">{stagePageHeadings.browserSupport}</Heading>

@@ -6,9 +6,9 @@ import type { CSSProperties, ReactNode } from 'react'
 type Children = { children: ReactNode }
 const vars = (values: Record<string, string | undefined>) => Object.fromEntries(Object.entries(values).filter(([, value]) => value)) as CSSProperties
 
-// Stack: even vertical space between items, set by the parent.
-export function Stack({ children, space }: Children & { space?: string }) {
-  return <div className="lab-stack" style={vars({ '--lab-stack-space': space })}>{children}</div>
+// Column: boxes one below another, with even space between them set by the parent.
+export function Column({ children, space }: Children & { space?: string }) {
+  return <div className="lab-column" style={vars({ '--lab-column-space': space })}>{children}</div>
 }
 
 // Row: items in one row; with switchAt, one below another whenever the row is narrower than that width.
@@ -36,9 +36,9 @@ export function Grid({ children, min }: Children & { min?: string }) {
   return <div className="lab-grid" style={vars({ '--lab-grid-min': min })}>{children}</div>
 }
 
-// Column drop: columns that drop below each other one at a time as space runs out.
-export function ColumnDrop({ children, min }: Children & { min?: string }) {
-  return <div className="lab-column-drop" style={vars({ '--lab-column-drop-min': min })}>{children}</div>
+// Row wrap and grow: a row that wraps, where the boxes on each new row grow to fill it.
+export function RowWrapAndGrow({ children, min }: Children & { min?: string }) {
+  return <div className="lab-row-wrap-grow" style={vars({ '--lab-row-wrap-grow-min': min })}>{children}</div>
 }
 
 // Center: caps the width of content and centres it.
@@ -46,9 +46,9 @@ export function Center({ children, max }: Children & { max?: string }) {
   return <div className="lab-center" style={vars({ '--lab-center-max': max })}>{children}</div>
 }
 
-// Frame: a fixed shape, such as "16 / 9", that crops the picture inside it.
-export function Frame({ children, ratio }: Children & { ratio?: string }) {
-  return <div className="lab-media-frame" style={vars({ '--lab-frame-ratio': ratio })}>{children}</div>
+// AspectRatio: a fixed shape, such as "16 / 9", that crops the picture inside it.
+export function AspectRatio({ children, ratio }: Children & { ratio?: string }) {
+  return <div className="lab-aspect-ratio" style={vars({ '--lab-aspect-ratio': ratio })}>{children}</div>
 }
 
 // Hero: a tall area with one item in the middle and optional items at the top and bottom.

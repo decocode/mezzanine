@@ -71,11 +71,11 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
 
   // A stage page explains how it works, then shows an example with the CSS behind it. A building
   // block page also links to its sources.
-  await page.goto('/site/lab/layout/one-below-another/stack')
-  await expect(page).toHaveTitle('Stack | Lab')
+  await page.goto('/site/lab/layout/one-below-another/column')
+  await expect(page).toHaveTitle('Column | Lab')
   await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Example', exact: true, level: 2 })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'The CSS behind Stack', level: 3 })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'The CSS behind Column', level: 3 })).toBeVisible()
   await expect(main.getByRole('heading', { name: 'References', exact: true, level: 2 })).toBeVisible()
   await expect(main.getByRole('link', { name: 'Bedrock: Stack (opens in a new tab)', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/stack')
   // The Gap page lists the real spacing tokens with their live values.

@@ -7,41 +7,6 @@ import { cssNotes } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
 import { AutoGridDemo, ColumnsDemo } from './BoxFormationDemos'
 
-const directionOptions = [
-  { label: 'row', value: 'row' },
-  { label: 'column', value: 'column' },
-] as const
-
-const wrapOptions = [
-  { label: 'nowrap', value: 'nowrap' },
-  { label: 'wrap', value: 'wrap' },
-] as const
-
-const growOptions = [
-  { label: '0', value: '0' },
-  { label: '1', value: '1' },
-] as const
-
-function FlexboxDemo() {
-  const [direction, setDirection] = useState<(typeof directionOptions)[number]['value']>('row')
-  const [wrap, setWrap] = useState<(typeof wrapOptions)[number]['value']>('nowrap')
-  const [grow, setGrow] = useState<(typeof growOptions)[number]['value']>('0')
-  return <>
-    <DemoText>Five boxes in a Flexbox. In a narrow frame with nowrap, the boxes can’t fit, so they stick out. With wrap, they move onto new lines.</DemoText>
-    <div className="lab-controls">
-      <ValuePicker label="flex-direction" options={directionOptions} value={direction} onChange={setDirection} />
-      <ValuePicker label="flex-wrap" options={wrapOptions} value={wrap} onChange={setWrap} />
-      <ValuePicker label="flex-grow" options={growOptions} value={grow} onChange={setGrow} />
-    </div>
-    <DemoFrame label="Flexbox" canOverflow>
-        <div className="lab-flex-demo" style={{ '--lab-flex-direction': direction, '--lab-flex-wrap': wrap, '--lab-flex-grow': grow } as CSSProperties}>
-          {[1, 2, 3, 4, 5].map((number) => <Block key={number}>Box {number}</Block>)}
-        </div>
-    </DemoFrame>
-    <CssNotes name="Flexbox" note={cssNotes.flexbox} level={3} />
-  </>
-}
-
 const columnOptions = [
   { label: '1fr 1fr 1fr', value: '1fr 1fr 1fr' },
   { label: '1fr 2fr', value: '1fr 2fr' },
@@ -183,7 +148,6 @@ function GridPageDemo() {
 }
 
 export const arrangingBoxesDemos: StageDemos = {
-  cssFlexbox: { Demo: FlexboxDemo },
   grid: { Demo: GridPageDemo },
   subgrid: { Demo: SubgridDemo },
   alignment: { Demo: AlignmentDemo },

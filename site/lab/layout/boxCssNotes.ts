@@ -112,7 +112,7 @@ export const boxCssNotes: Record<string, CssNote> = {
       'The `columns` property says how wide a column should be, at least 12rem here. The browser fits in as many as it can, and shares out any space that’s left.',
       'The `column-gap` sets the space between columns, and `column-rule` draws a line in the middle of each gap.',
     ],
-    code: `.lab-multicol {
+    code: `.lab-content-columns {
   columns: 12rem;
   column-gap: var(--space-6);
   column-rule: 1px solid var(--color-border);
@@ -120,15 +120,15 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   frame: {
     paragraphs: [
-      'The `aspect-ratio` gives the frame its shape, and `overflow: hidden` crops anything that sticks out.',
-      'The picture fills the whole frame, and `object-fit: cover` crops its edges rather than squashing it. The sizes use logical names: inline means along a line of text, and block means across it.',
+      'The `aspect-ratio` gives the box its shape, and `overflow: hidden` crops anything that sticks out.',
+      'The picture fills the whole box, and `object-fit: cover` crops its edges rather than squashing it. The sizes use logical names: inline means along a line of text, and block means across it.',
     ],
-    code: `.lab-media-frame {
-  aspect-ratio: var(--lab-frame-ratio, 16 / 9);
+    code: `.lab-aspect-ratio {
+  aspect-ratio: var(--lab-aspect-ratio, 16 / 9);
   overflow: hidden;
 }
 
-.lab-media-frame > img {
+.lab-aspect-ratio > img {
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
@@ -136,7 +136,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   cover: {
     paragraphs: [
-      'The cover is a Flexbox column with a minimum height, `min-block-size`, so it’s at least 20rem tall but can grow.',
+      'The rule `display: flex` makes the box a Flexbox, which lines its items up in one direction, and `flex-direction: column` makes that direction top to bottom. The box has a minimum height, `min-block-size`, so it’s at least 20rem tall but can grow.',
       'The centred item gets `margin-block: auto`, an automatic margin above and below. Automatic margins soak up all the spare room, so the item ends up in the middle, and anything before or after it is pushed to the top and bottom.',
     ],
     code: `.lab-hero {
@@ -153,8 +153,8 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   reel: {
     paragraphs: [
-      'The reel is a Flexbox row that never wraps, and `overflow-x: auto` lets it scroll sideways when the items don’t fit.',
-      'Each item has `flex: 0 0 12rem`, which means: don’t grow, don’t shrink, and start at 12rem. That keeps every item the same width, however many there are.',
+      'The rule `display: flex` makes the reel a Flexbox row. A Flexbox doesn’t wrap unless `flex-wrap` says so, so the items stay on one line, and `overflow-x: auto` lets it scroll sideways when they don’t fit.',
+      'Each item has `flex: 0 0 12rem`. The `flex` property sets three things at once: `flex-grow`, `flex-shrink` and `flex-basis`. Here that means: don’t grow, don’t shrink, and start at 12rem. That keeps every item the same width, however many there are.',
     ],
     code: `.lab-reel {
   display: flex;
@@ -178,23 +178,6 @@ export const boxCssNotes: Record<string, CssNote> = {
   padding: var(--space-2);
   border: 1px solid var(--color-text);
   background: var(--color-surface);
-}`,
-  },
-  flexbox: {
-    paragraphs: [
-      'The rule `display: flex` turns the container into a Flexbox. Then `flex-direction` chooses `row` or `column`, and `flex-wrap` chooses whether items may move onto a new line with `wrap`, or must stay on one with `nowrap`.',
-      'Each item is at least 6rem wide. With `flex-grow: 1`, items also grow to share out any spare room. With `flex-grow: 0`, they stay at their own size.',
-    ],
-    code: `.lab-flex-demo {
-  display: flex;
-  flex-direction: var(--lab-flex-direction);
-  flex-wrap: var(--lab-flex-wrap);
-  gap: var(--space-3);
-}
-
-.lab-flex-demo > * {
-  flex-grow: var(--lab-flex-grow);
-  min-width: 6rem;
 }`,
   },
   grid: {
@@ -296,17 +279,17 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   columnDrop: {
     paragraphs: [
-      'Column drop is a Flexbox row that may wrap. Each column has `flex: 1 1 12rem`: it starts at 12rem, can shrink, and grows to share the spare room.',
-      'When the columns no longer fit, the last one wraps onto a new row, and its `flex-grow` stretches it across the full width.',
+      'Row wrap and grow is a Flexbox row, from `display: flex`, that may wrap, from `flex-wrap: wrap`. Each box has `flex: 1 1 12rem`, which sets `flex-grow`, `flex-shrink` and `flex-basis` at once: it starts at 12rem, can shrink, and grows to share the spare room.',
+      'When the boxes no longer fit, the last one wraps onto a new row, and its `flex-grow` makes it grow across the full width.',
     ],
-    code: `.lab-column-drop {
+    code: `.lab-row-wrap-grow {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
 }
 
-.lab-column-drop > * {
-  flex: 1 1 var(--lab-column-drop-min, 12rem);
+.lab-row-wrap-grow > * {
+  flex: 1 1 var(--lab-row-wrap-grow-min, 12rem);
 }`,
   },
   fluidSpace: {
@@ -384,19 +367,20 @@ export const boxCssNotes: Record<string, CssNote> = {
   // Box formations
   stack: {
     paragraphs: [
-      'The rule `display: flex` with `flex-direction: column` puts the items in a single column.',
+      'The rule `display: flex` makes the container a Flexbox, which lines its items up in one direction. That direction is a row unless `flex-direction` changes it, and `column` makes it top to bottom, so the items sit one above another.',
       'The `gap` property sets the space between items. It never adds space before the first item or after the last, and because the parent sets it, the items themselves need no margins. The space is a custom property, so it can be a token.',
     ],
-    code: `.lab-stack {
+    code: `.lab-column {
   display: flex;
   flex-direction: column;
-  gap: var(--lab-stack-space, var(--space-3));
+  gap: var(--lab-column-space, var(--space-3));
 }`,
   },
   inline: {
     paragraphs: [
-      'On its own, Row is a Flexbox row that doesn’t wrap. With the switch on, it may wrap, and each item’s `flex-basis`, the size it would like to be, comes from a sum.',
-      'Inside the sum, `100%` is the width of the row. When the row is narrower than the switch width, the answer is huge, so every item wraps onto its own line and you get a column. When it’s wider, the answer is negative, which counts as zero, and `flex-grow` shares the row out equally. Every Layout calls this trick the Switcher.',
+      'The rule `display: flex` makes the container a Flexbox, which lines its items up in one direction. That direction is a row unless `flex-direction` changes it, and the items stay on one line unless `flex-wrap` lets them wrap. Each item is as wide as its content.',
+      'With the switch on, it may wrap, and each item’s `flex-basis`, the size it would like to be, comes from a sum.',
+      'Inside the sum, `100%` is the width of the row. When the row is narrower than the switch width, the answer is huge, so every item wraps onto its own line and you get a column. When it’s wider, the answer is negative, which counts as zero, and `flex-grow: 1` makes every item grow by the same amount, so the row is shared out equally. Every Layout calls this trick the Switcher.',
     ],
     code: `.lab-row {
   display: flex;
@@ -415,7 +399,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   inlineCluster: {
     paragraphs: [
-      'The key line is `flex-wrap: wrap`. When a row runs out of room, the next item moves onto a new line instead of squashing or overflowing, just like words in a sentence.',
+      'The rule `display: flex` makes the container a Flexbox row. The key line is `flex-wrap: wrap`: when the row runs out of room, the next item moves onto a new line instead of squashing or overflowing, just like words in a sentence.',
       'Setting `align-items: center` lines up items of different heights, and `gap` spaces them both along each line and between lines.',
     ],
     code: `.lab-row-wrap {
@@ -427,7 +411,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   split: {
     paragraphs: [
-      'Split is a flexbox row: `display: flex` places the two areas next to each other. `flex-wrap: wrap` allows an area to move onto a new line when the row is full, and `gap` sets the space between them, whether they’re side by side or one above the other.',
+      'Split is a Flexbox row: `display: flex` places the two areas next to each other. `flex-wrap: wrap` allows an area to move onto a new line when the row is full, and `gap` sets the space between them, whether they’re side by side or one above the other.',
       'Each area has a `flex-basis` of zero, so it starts with no width of its own. `flex-grow` then shares out the space: for one third and two thirds, the first area gets a `flex-grow` of 1 and the second gets 2, so the second takes twice as much.',
       '`min-inline-size` is the minimum width. Flexbox checks it before placing an area on the row; when two minimums plus the gap are more than the row’s width, the second area goes onto the next line. Alone on its line, `flex-grow` makes it fill the full width. The `min()` function stops the minimum from ever being wider than the Split itself.',
       'With Auto Start, the first area has a `flex-basis` of `auto`, which means its width comes from its content. The second area has a `flex-grow` of 999, so it takes almost all of the space that’s left, and keeps the minimum width.',

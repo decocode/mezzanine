@@ -17,7 +17,7 @@ export interface LabIntro {
   title: string
   subtitle?: string
   what: string
-  why: string
+  why?: string
   // Further paragraphs after what and why, when a page needs more explanation.
   details?: readonly string[]
 }
@@ -334,10 +334,10 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'frame', id: 'lab-frame-block', stage: 'insideTheBox', title: 'Frame', href: '/site/lab/layout/inside-the-box/frame',
+    key: 'frame', id: 'lab-aspect-ratio', stage: 'insideTheBox', title: 'Aspect ratio', href: '/site/lab/layout/inside-the-box/aspect-ratio',
     subtitle: 'When a picture is cropped to a set shape.',
-    what: 'Frame is a building block. It gives a box a fixed shape, such as 16:9, and crops the picture inside to fill it.',
-    why: 'Pictures from different places come in different shapes. Frame lines them up as a tidy set, without squashing any of them.',
+    what: 'Aspect ratio gives a box a fixed shape, such as 16:9, and crops the picture inside to fill it.',
+    why: 'Pictures from different places come in different shapes. A shared aspect ratio lines them up as a tidy set, without squashing any of them.',
     similarTo: [everyLayout('Frame', 'frame'), bedrock('Frame', 'frame')],
     references: [
       { label: 'MDN: aspect-ratio', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio' },
@@ -347,7 +347,7 @@ export const stagePages: StagePage[] = [
   {
     key: 'center', id: 'lab-center', stage: 'boxBasics', title: 'Center', href: '/site/lab/layout/box-basics/center',
     subtitle: 'When content stays in the middle, at a comfortable width.',
-    what: 'Center is a building block. It keeps content in the middle of the space and stops it growing wider than a set limit.',
+    what: 'Center keeps content in the middle of the space and stops it growing wider than a set limit.',
     why: 'On a wide screen, content stuck to one edge or stretched across the whole width is hard to read. Center fixes both with a single limit, which could be a token.',
     similarTo: [everyLayout('Center', 'center'), bedrock('Center', 'center')],
   },
@@ -373,10 +373,10 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'multiColumn', id: 'lab-multi-column', stage: 'insideTheBox', title: 'Columns in boxes', href: '/site/lab/layout/inside-the-box/columns-in-boxes',
+    key: 'multiColumn', id: 'lab-content-columns', stage: 'insideTheBox', title: 'Content columns', href: '/site/lab/layout/inside-the-box/content-columns',
     subtitle: 'When content flows into columns, like a newspaper.',
-    what: 'Columns in boxes pours any content into columns, like a newspaper: text, lists, pictures or cards. It fills the first column from top to bottom, then carries on at the top of the next. You say how wide a column should be, and the browser works out how many fit.',
-    why: 'It suits short content, such as a list of links. For long text it’s awkward on a screen, because readers have to scroll back up to start each new column. Cards and pictures can be split across two columns unless each one has break-inside: avoid. Their order also runs down each column, not across, so a grid of cards is better built with CSS Grid.',
+    what: 'Content columns makes information flow like it does in printed media such as newspapers. Once the content fills the first column from top to bottom, it then carries on at the top of the next column. You choose a width for the columns, and the browser works out how many will fit.',
+    why: 'It suits short content, such as a list of links. For long text it’s awkward on a screen, because readers have to scroll back up to start each new column. Cards and pictures can be split across two columns unless each one has `break-inside: avoid`. Their order also runs down each column, not across, so a grid of cards is better built with CSS Grid.',
     references: [
       { label: 'MDN: Multi-column layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Multicol_layout' },
       { label: 'MDN: break-inside', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside' },
@@ -392,16 +392,6 @@ export const stagePages: StagePage[] = [
     ],
   },
   // Arranging boxes
-  {
-    key: 'cssFlexbox', id: 'lab-css-flexbox', stage: 'sideBySide', title: 'Flexbox', href: '/site/lab/layout/side-by-side/flexbox',
-    subtitle: 'When boxes line up in a single row, or one below another.',
-    what: 'Flexbox arranges boxes in one direction: a row or a column. The container chooses the direction and whether items may wrap onto a new line. Each item can grow or shrink to share the space.',
-    why: 'Most everyday layouts are a row or a column: a toolbar, a list of tags, a form. Flexbox handles them in a few lines, and the space sorts itself out.',
-    references: [
-      { label: 'MDN: Basic concepts of flexbox', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts' },
-      { label: 'MDN: Flexbox (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox' },
-    ],
-  },
   {
     key: 'grid', id: 'lab-grid', stage: 'gridFormation', title: 'Grid', href: '/site/lab/layout/grid-formation/grid',
     subtitle: 'When boxes line up in rows and columns at once.',
@@ -445,37 +435,58 @@ export const stagePages: StagePage[] = [
   },
   // Box formations
   {
-    key: 'stack', id: 'lab-stack', stage: 'oneBelowAnother', title: 'Stack', href: '/site/lab/layout/one-below-another/stack',
+    key: 'stack', id: 'lab-column', stage: 'oneBelowAnother', title: 'Column', href: '/site/lab/layout/one-below-another/column',
     subtitle: 'When boxes sit one below another, evenly spaced.',
-    what: 'Stack is a building block that puts items one above another, like boxes standing on each other’s heads.',
+    what: 'Column puts boxes one below another, in the same order as the HTML, like items on a to-do list. It’s a Flexbox column, not a Grid column or a newspaper-style column.',
     why: 'The space between items is set once, by the parent, so no item needs its own outer margin. Move an item and the spacing still works.',
     similarTo: [everyLayout('Stack', 'stack'), bedrock('Stack', 'stack')],
+    references: [
+      { label: 'MDN: Basic concepts of flexbox', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts' },
+    ],
   },
   {
     key: 'cover', id: 'lab-hero', stage: 'oneBelowAnother', title: 'Hero', href: '/site/lab/layout/one-below-another/hero',
     subtitle: 'When one item takes centre stage, like the title on a book cover.',
-    what: 'Hero is a building block for a tall box, like the opening section of a homepage. One item sits in the middle, and anything before or after it is pushed to the top and bottom edges, like the title, publisher and author on a book cover.',
+    what: 'Hero is a tall box, like the opening section of a homepage. One item sits in the middle, and anything before or after it is pushed to the top and bottom edges, like the title, publisher and author on a book cover.',
     why: 'The box has a minimum height, not a fixed one, so if the content needs more room, such as on a small phone or with enlarged text, the box grows instead of cutting anything off.',
     similarTo: [everyLayout('Cover', 'cover'), bedrock('Cover', 'cover')],
   },
   {
     key: 'inline', id: 'lab-row', stage: 'sideBySide', title: 'Row', href: '/site/lab/layout/side-by-side/row',
     subtitle: 'When boxes stay together in one row.',
-    what: 'Row is a building block that keeps items in a single row, like boxes holding hands. It can also switch to a column when its space is narrower than a limit you set.',
+    what: 'Row keeps items in a single row, like boxes holding hands. It can also switch to a column when its space is narrower than a limit you set.',
     why: 'A row of buttons, or a logo beside a title, should stay together. The switch stops the row getting squashed in narrow space, and the limit is a size, not a screen width.',
     similarTo: [everyLayout('Switcher', 'switcher'), bedrock('Inline', 'inline')],
+    references: [
+      { label: 'MDN: Basic concepts of flexbox', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts' },
+      { label: 'MDN: Flexbox (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox' },
+    ],
   },
   {
     key: 'inlineCluster', id: 'lab-row-wrap', stage: 'sideBySide', title: 'Row wrap', href: '/site/lab/layout/side-by-side/row-wrap',
-    subtitle: 'When a row wraps onto new lines, like words.',
-    what: 'Row wrap is a building block for a row that wraps onto new lines the way words do. The example uses real Mezzanine Badges.',
-    why: 'Tags, filters and small buttons come in any number and any length. Wrapping keeps them all visible, with the same space between every one.',
+    subtitle: 'When squeezed boxes enjoy a spacious new row.',
+    what: 'Row wrap moves boxes into a new row when they no longer fit. The word “wrap” is borrowed from how words in a string of text behave. Each box keeps its own width, so the rows can end at different places.',
+    why: 'Row wrap is useful for small items that come in any number and any length, such as tags, Badges and filter buttons. Every item stays visible, with the same space between each one.',
     similarTo: [everyLayout('Cluster', 'cluster'), bedrock('InlineCluster', 'inline-cluster')],
+    alsoKnownAs: [
+      { where: 'Figma', called: 'Auto layout, horizontal, with Wrap.' },
+      { where: 'CSS', called: 'Flexbox with `flex-wrap: wrap`. CSS has no single name for this pattern.' },
+      { where: 'Tailwind CSS', called: '`flex flex-wrap` on the parent, with `gap` for the space. There’s no named pattern.' },
+      { where: 'Bootstrap', called: '`d-flex flex-wrap` on the parent, with a `gap` utility. There’s no named pattern.' },
+      { where: 'Material Design', called: 'A chip set: a group of chips that wraps onto new rows.' },
+    ],
+    references: [
+      { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
+      { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap' },
+      { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },
+      { label: 'Bootstrap: Flex', href: 'https://getbootstrap.com/docs/5.3/utilities/flex/' },
+      { label: 'Material Design: Chips', href: 'https://m3.material.io/components/chips/overview' },
+    ],
   },
   {
     key: 'reel', id: 'lab-reel', stage: 'sideBySide', title: 'Reel', href: '/site/lab/layout/side-by-side/reel',
     subtitle: 'When a row scrolls sideways.',
-    what: 'Reel is a building block for a row of items that scrolls sideways, like a conga line going off the edge of the screen.',
+    what: 'Reel is a row of items that scrolls sideways, like a conga line going off the edge of the screen.',
     why: 'It shows lots of items without wrapping them onto new rows. Keyboard users need to reach it too, so the scrolling area can take focus and has a name.',
     similarTo: [everyLayout('Reel', 'reel'), bedrock('Reel', 'reel')],
   },
@@ -504,9 +515,9 @@ export const stagePages: StagePage[] = [
   },
   // Boxes on devices
   {
-    key: 'columnDrop', id: 'lab-column-drop', stage: 'sideBySide', title: 'Column drop', href: '/site/lab/layout/side-by-side/column-drop',
-    what: 'Column drop is a building block for columns that drop below each other one at a time as space runs out.',
-    why: 'Each column keeps a minimum width. When there isn’t room for all of them, the last one moves onto a new row and stretches to fill it, with no query needed.',
+    key: 'columnDrop', id: 'lab-row-wrap-and-grow', stage: 'sideBySide', title: 'Row wrap and grow', href: '/site/lab/layout/side-by-side/row-wrap-and-grow',
+    what: 'Grow is used with Row wrap so that the boxes moved onto the new row stretch to fill the available space.',
+    why: 'Row wrap and grow is useful for a few larger boxes such as form fields side by side, summary panels on a dashboard, or groups of footer links. No row is left with a gap at its end, so it looks nice and tidy.',
     similarTo: [{ label: 'Bedrock: ColumnDrop', href: 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/column-drop' }],
     references: [
       { label: 'web.dev: Macro layouts', href: 'https://web.dev/learn/design/macro-layouts' },
@@ -552,7 +563,7 @@ const stagePageOrder: Record<StageKey, readonly string[]> = {
   boxBasics: ['boxModel', 'typesOfBox', 'measuringTheBox', 'viewportUnits', 'sizingTheBox', 'center'],
   addSpace: ['margin', 'padding', 'gap'],
   insideTheBox: ['alignment', 'imagesAndMedia', 'overflow', 'frame', 'multiColumn', 'has'],
-  sideBySide: ['cssFlexbox', 'inline', 'reel', 'inlineCluster', 'columnDrop', 'split'],
+  sideBySide: ['inline', 'inlineCluster', 'columnDrop', 'reel', 'split'],
   oneBelowAnother: ['stack', 'cover'],
   gridFormation: ['grid', 'subgrid'],
   container: ['containerQueries', 'fluidSizing'],
@@ -870,6 +881,6 @@ export const environmentQueries = [
   { label: 'Window is at least 48rem wide', query: '(width >= 48rem)' },
 ]
 
-// The alt text for the example picture used by the Filling the box and Frame demos.
+// The alt text for the example picture used by the Filling the box and Aspect ratio demos.
 export const exampleImageAlt = 'Example picture: a dark square and a grey circle on a light background'
 

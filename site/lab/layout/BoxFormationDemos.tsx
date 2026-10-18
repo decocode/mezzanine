@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { Badge, Checkbox, Link, Split, type SplitProps } from '@decocode/mezzanine'
 import { CssNotes, DemoFrame, DemoText, ValuePicker } from './LabParts'
-import { Block, Columns, ColumnsItem, Grid, Hero, Reel, Row, RowWrap, Stack } from './LabPrimitives'
+import { Block, Column, Columns, ColumnsItem, Grid, Hero, Reel, Row, RowWrap } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
 
-function StackDemo() {
+function ColumnDemo() {
   return <>
     <DemoText>Three items, one above another, with the same space between each.</DemoText>
-    <DemoFrame label="Stack">
-      <Stack><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Stack>
+    <DemoFrame label="Column">
+      <Column><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Column>
     </DemoFrame>
-    <CssNotes name="Stack" note={cssNotes.stack} level={3} />
+    <CssNotes name="Column" note={cssNotes.stack} level={3} />
   </>
 }
 
@@ -55,9 +55,8 @@ function InlineDemo() {
 
 function InlineClusterDemo() {
   return <>
-    <DemoText>Badges in a row. Narrow the frame and they wrap onto new lines, like words.</DemoText>
     <DemoFrame label="Row wrap">
-      <RowWrap>{['Badge A', 'Badge B', 'Badge C', 'Badge D', 'Badge E', 'Badge F', 'Badge G'].map((tag) => <Badge key={tag}>{tag}</Badge>)}</RowWrap>
+      <RowWrap>{['Fig', 'Watermelon', 'Kiwi', 'Pomegranate', 'Plum', 'Passion fruit', 'Apple', 'Dragon fruit', 'Pear'].map((tag) => <Badge key={tag}>{tag}</Badge>)}</RowWrap>
     </DemoFrame>
     <CssNotes name="Row wrap" note={cssNotes.inlineCluster} level={3} />
   </>
@@ -126,7 +125,7 @@ export function AutoGridDemo() {
 }
 
 export const boxFormationDemos: StageDemos = {
-  stack: { Demo: StackDemo },
+  stack: { Demo: ColumnDemo },
   cover: { Demo: CoverDemo },
   inline: { Demo: InlineDemo },
   inlineCluster: { Demo: InlineClusterDemo },
