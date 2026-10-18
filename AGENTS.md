@@ -47,6 +47,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Within an approved task, using the exact name of the corresponding React Aria component (for example `Switch`) needs no separate naming approval. This does not authorise adding unrequested components.
 - Public names are the ones consuming apps rely on: exported components, hooks, functions, props and types; token names; and documented data attributes and class names. Internal class names and private helpers need no approval.
 - If an approved name seems wrong, say so and keep using it until the user decides.
+- Don't use a CSS term with a different meaning. A name that is also a CSS word (a property, value, keyword or concept, such as `columns`, `grid`, `inline`, `block`, `container` or `layer`) must mean the same thing as in CSS. This covers public names, documentation and Lab page titles, and explanatory copy. Using a CSS word with its CSS meaning, such as `gap`, is encouraged.
 
 ## Ideas and the approval process
 

@@ -1,6 +1,8 @@
 import type { JSX, ReactNode } from 'react'
 import { Badge, Button, Card, Heading, Text } from '@decocode/mezzanine'
 import { DocsPageTemplate } from '../../templates/DocsPageTemplate'
+import { DocsTable } from '../../components/DocsTable'
+import { splitInlineCode } from './layoutLabLogic'
 import {
   boxToTheFuture, buildingBlockLabel, candidateBadgeLabel, childPageCardAction, futurePages, labBadgeLabel, stagePageHeadings,
   stageIntros, stagePagesByStage, todayBadgeLabel, type FuturePage, type LabSection, type LayoutStage, type StagePage,
@@ -93,6 +95,19 @@ function MezzanineUseItem({ use }: { use: MezzanineUse }) {
 }
 
 // One stage page in two halves. How it works: the CSS idea, its examples and browser support.
+// What designers, engineers, print and other design systems call the same thing, in a closed Disclosure.
+function alsoKnownAsSection(id: string, title: string, names: NonNullable<StagePage['alsoKnownAs']>) {
+  return {
+    id: `${id}-also-known-as`,
+    title: stagePageHeadings.alsoKnownAs,
+    isCollapsible: true,
+    content: <DocsTable aria-label={`Other names for ${title}`} nameColumn="Where" descriptionColumn="Called" namesAreCode={false} rows={names.map(({ where, called }) => ({
+      name: where,
+      description: splitInlineCode(called).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part),
+    }))} />,
+  }
+}
+
 // How Mezzanine uses it: what the library does today and Lab candidates. A building block's
 // Every Layout and Bedrock sources are its References.
 export function StagePageView({ page }: { page: StagePage }) {
@@ -105,6 +120,7 @@ export function StagePageView({ page }: { page: StagePage }) {
     title={page.title}
     description={page.subtitle}
     sections={[
+      ...(page.alsoKnownAs ? [alsoKnownAsSection(page.id, page.title, page.alsoKnownAs)] : []),
       ...howItWorksSections(page, <Demo />),
       howMezzanineUsesItSection(page.id, uses, MezzanineDetail && <MezzanineDetail />),
     ]}

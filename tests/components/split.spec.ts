@@ -43,13 +43,14 @@ for (const fontSize of [16, 32]) {
     await width.focus()
     await page.keyboard.press('Home')
     await expect(width).toHaveValue('320')
-    // Wait for the frame to finish narrowing before measuring.
-    await expect.poll(async () => { const { first, second } = await areas(page); return second.y >= first.y + first.height }).toBe(true)
-    const { split, first, second } = await areas(page)
-    const splitBox = (await split.boundingBox())!
-    expect(second.y).toBeGreaterThanOrEqual(first.y + first.height)
-    expect(Math.abs(first.width - splitBox.width)).toBeLessThan(1)
-    expect(Math.abs(second.width - splitBox.width)).toBeLessThan(1)
+    // Measure inside the wait, so a layout that is still settling can't make the check flaky.
+    await expect.poll(async () => {
+      const { split, first, second } = await areas(page)
+      const splitBox = (await split.boundingBox())!
+      return second.y >= first.y + first.height - 1
+        && Math.abs(first.width - splitBox.width) < 1
+        && Math.abs(second.width - splitBox.width) < 1
+    }).toBe(true)
     await expectNoPageOverflow(page)
   })
 }

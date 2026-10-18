@@ -264,6 +264,8 @@ export interface StagePage extends LabIntro {
   similarTo?: SimilarTo[]
   // External sources for further reading, shown as References after any Similar to sources.
   references?: SimilarTo[]
+  // What designers, engineers and other systems call the same thing, shown first in a closed Disclosure.
+  alsoKnownAs?: readonly { where: string; called: string }[]
 }
 
 export const stagePages: StagePage[] = [
@@ -489,6 +491,19 @@ export const stagePages: StagePage[] = [
       'If using fractions each area has a default minimum width of 15rem. If using Auto Start, the width of the first area is based on the content inside it, and the width of the second area fills the remaining space, down to 15rem. When there isn’t enough room for both areas to be side by side, the second area moves underneath the first, and both become full width.',
     ],
     similarTo: [everyLayout('Sidebar', 'sidebar'), bedrock('Split', 'split')],
+    alsoKnownAs: [
+      { where: 'Figma', called: 'Auto layout, horizontal, with Wrap. One child is set to Fill container.' },
+      { where: 'CSS', called: 'Flexbox with `flex-wrap`, `flex-grow` and `flex-basis`. CSS has no single name for this pattern.' },
+      { where: 'Tailwind CSS', called: '`flex flex-wrap` on the parent, with `grow` and `basis-1/3` (for example) on the two areas. There’s no named pattern.' },
+      { where: 'Bootstrap', called: 'A `row` with two columns, such as `col-md-4` and `col-md-8`. These stack below a set screen width.' },
+      { where: 'Material Design', called: 'Supporting pane layout, or list-detail when one side lists items.' },
+    ],
+    references: [
+      { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
+      { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },
+      { label: 'Bootstrap: Grid system', href: 'https://getbootstrap.com/docs/5.3/layout/grid/' },
+      { label: 'Material Design: Canonical layouts', href: 'https://m3.material.io/foundations/adaptive-design/canonical-layouts' },
+    ],
   },
   {
     key: 'columns', id: 'lab-columns', stage: 'boxFormations', title: 'Columns', href: '/site/lab/layout/box-formations/columns',
@@ -560,7 +575,7 @@ export const buildingBlockLabel = 'Building block'
 
 // Each stage page has two halves: the CSS idea, then how Mezzanine uses it, where each line is
 // marked as what the library does today or as a Lab candidate.
-export const stagePageHeadings = { howItWorks: 'How it works', example: 'Example', howMezzanineUsesIt: 'How Mezzanine uses it', browserSupport: 'Browser support', pages: 'Pages' }
+export const stagePageHeadings = { alsoKnownAs: 'Also known as', howItWorks: 'How it works', example: 'Example', howMezzanineUsesIt: 'How Mezzanine uses it', browserSupport: 'Browser support', pages: 'Pages' }
 export const todayBadgeLabel = 'Today'
 export const candidateBadgeLabel = 'Lab candidate'
 

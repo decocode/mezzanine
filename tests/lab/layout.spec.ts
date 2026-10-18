@@ -147,3 +147,20 @@ test('Lab Layout CSS notes match the Lab stylesheet', () => {
     for (const rule of note.code.split(/\n\s*\n/)) expect(stylesheet).toContain(normalise(rule))
   }
 })
+
+// Checks that a page's "Also known as" names start in a closed Disclosure, open from its button,
+// and open when its On this page link is followed.
+test('Also known as starts closed and opens from its button or On this page', async ({ page }) => {
+  await page.goto('/site/lab/layout/box-formations/split')
+  const trigger = page.getByRole('button', { name: 'Also known as', exact: true })
+  const names = page.getByRole('grid', { name: 'Other names for Split' })
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
+  await expect(names).toBeHidden()
+  await trigger.click()
+  await expect(names).toBeVisible()
+  await expect(names.getByRole('rowheader', { name: 'Figma', exact: true })).toBeVisible()
+  await page.reload()
+  await page.getByRole('navigation', { name: 'On this page' }).getByRole('link', { name: 'Also known as', exact: true }).click()
+  await expect(page.getByRole('button', { name: 'Also known as', exact: true })).toHaveAttribute('aria-expanded', 'true')
+  await expect(names).toBeVisible()
+})
