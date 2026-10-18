@@ -20,6 +20,8 @@ export interface LabIntro {
   subtitle?: string
   what: string
   why: string
+  // Further paragraphs after what and why, when a page needs more explanation.
+  details?: readonly string[]
 }
 
 export interface LabSection extends LabIntro {
@@ -481,8 +483,11 @@ export const stagePages: StagePage[] = [
   {
     key: 'split', id: 'lab-split', stage: 'boxFormations', title: 'Split', href: '/site/lab/layout/box-formations/split',
     subtitle: 'How do I put two areas side by side?',
-    what: 'Split is a building block for two areas side by side, like boxes with linked arms, such as a side panel and the main content. You choose how the space is shared, and it can switch to a column below a limit.',
-    why: 'Sharing by fractions, such as one third and two thirds, keeps the proportions at any width. The switch gives each area the full width when there isn’t room for both.',
+    what: 'Split is a layout technique that Mezzanine uses for placing two areas next to each other, such as a side panel and the main content.',
+    why: 'You can choose how the two areas share that space by using either fractions, such as one third and two thirds, or Auto Start, where the width of the first area is based on the content inside it.',
+    details: [
+      'If using fractions each area has a default minimum width of 15rem. If using Auto Start, the width of the first area is based on the content inside it, and the width of the second area fills the remaining space, down to 15rem. When there isn’t enough room for both areas to be side by side, the second area moves underneath the first, and both become full width.',
+    ],
     similarTo: [everyLayout('Sidebar', 'sidebar'), bedrock('Split', 'split')],
   },
   {
@@ -555,7 +560,7 @@ export const buildingBlockLabel = 'Building block'
 
 // Each stage page has two halves: the CSS idea, then how Mezzanine uses it, where each line is
 // marked as what the library does today or as a Lab candidate.
-export const stagePageHeadings = { howItWorks: 'How it works', howMezzanineUsesIt: 'How Mezzanine uses it', browserSupport: 'Browser support', pages: 'Pages' }
+export const stagePageHeadings = { howItWorks: 'How it works', example: 'Example', howMezzanineUsesIt: 'How Mezzanine uses it', browserSupport: 'Browser support', pages: 'Pages' }
 export const todayBadgeLabel = 'Today'
 export const candidateBadgeLabel = 'Lab candidate'
 

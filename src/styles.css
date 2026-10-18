@@ -30,5 +30,6 @@
 @import './components/Tooltip/Tooltip.css';
 
 @import './components/Sidebar/Sidebar.css';
+@import './components/Split/Split.css';
 
 @import './motion.css';

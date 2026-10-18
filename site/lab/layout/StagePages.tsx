@@ -20,24 +20,26 @@ export type StageDemos = Record<string, { Demo: () => JSX.Element; MezzanineDeta
 
 const demos: StageDemos = { ...theBoxDemos, ...insideTheBoxDemos, ...arrangingBoxesDemos, ...boxFormationDemos, ...boxesOnDevicesDemos }
 
-// The "How it works" half shared by every Layout page: what it is and why it matters, the
-// examples, then browser support. It is one section of the docs page template.
-function howItWorksSection(page: { id: string; what: string; why: string; support?: string }, examples: ReactNode) {
-  return {
+// The "How it works" and "Example" sections shared by every Layout page: what it is, why it matters
+// and browser support, then the examples with the CSS behind them. Each is a section of the docs page template.
+function howItWorksSections(page: { id: string; what: string; why: string; details?: readonly string[]; support?: string }, examples: ReactNode) {
+  return [{
     id: `${page.id}-how-it-works`,
     title: stagePageHeadings.howItWorks,
     content: <div className="lab-section-body">
       <div className="lab-explainer">
-        <Text elementType="p" className="mz-text-body-md">{page.what}</Text>
-        <Text elementType="p" className="mz-text-body-md">{page.why}</Text>
+        {[page.what, page.why, ...(page.details ?? [])].map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">{paragraph}</Text>)}
       </div>
-      {examples}
       {page.support && <>
         <Heading level={3} className="lab-section-heading mz-text-heading-sm">{stagePageHeadings.browserSupport}</Heading>
         <Text elementType="p" className="lab-demo-text mz-text-body-md">{page.support}</Text>
       </>}
     </div>,
-  }
+  }, {
+    id: `${page.id}-example`,
+    title: stagePageHeadings.example,
+    content: <div className="lab-section-body">{examples}</div>,
+  }]
 }
 
 // The "How Mezzanine uses it" half: what the library does today and Lab candidates, plus any detail.
@@ -62,7 +64,7 @@ export function StageOverview({ stage }: { stage: LayoutStage }) {
   const IntroDemo = intro && demos[intro.key].Demo
   // A stage with only its Cards is an index page, so it has no On this page list.
   return <DocsPageTemplate title={stage.title} description={stage.summary} showContents={intro != null} references={intro?.references ?? []} sections={[
-    ...(intro && IntroDemo ? [howItWorksSection(intro, <IntroDemo />), howMezzanineUsesItSection(intro.id, mezzanineUses[intro.key] ?? [])] : []),
+    ...(intro && IntroDemo ? [...howItWorksSections(intro, <IntroDemo />), howMezzanineUsesItSection(intro.id, mezzanineUses[intro.key] ?? [])] : []),
     {
       id: `${stage.id}-pages`,
       title: stage.pagesHeading ?? stagePageHeadings.pages,
@@ -103,20 +105,20 @@ export function StagePageView({ page }: { page: StagePage }) {
     title={page.title}
     description={page.subtitle}
     sections={[
-      howItWorksSection(page, <Demo />),
+      ...howItWorksSections(page, <Demo />),
       howMezzanineUsesItSection(page.id, uses, MezzanineDetail && <MezzanineDetail />),
     ]}
     references={[...(page.similarTo ?? []), ...(page.references ?? [])]}
   />
 }
 
-// A page still to be sorted into a stage, or a Lab page outside Layout: only its "How it works" half for now.
-export function SectionPageView({ section, Demo }: { section: Pick<LabSection, 'id' | 'title' | 'subtitle' | 'what' | 'why' | 'support' | 'similarTo' | 'references'> & { usesKey?: string; relatedPages?: { label: string; href: string }[] }; Demo: () => JSX.Element }) {
+// A page still to be sorted into a stage, or a Lab page outside Layout: its "How it works" and "Example" sections.
+export function SectionPageView({ section, Demo }: { section: Pick<LabSection, 'id' | 'title' | 'subtitle' | 'what' | 'why' | 'details' | 'support' | 'similarTo' | 'references'> & { usesKey?: string; relatedPages?: { label: string; href: string }[] }; Demo: () => JSX.Element }) {
   const uses = section.usesKey ? mezzanineUses[section.usesKey] : undefined
   return <DocsPageTemplate
     title={section.title}
     description={section.subtitle}
-    sections={[howItWorksSection(section, <Demo />), ...(uses ? [howMezzanineUsesItSection(section.id, uses)] : [])]}
+    sections={[...howItWorksSections(section, <Demo />), ...(uses ? [howMezzanineUsesItSection(section.id, uses)] : [])]}
     relatedPages={section.relatedPages ?? []}
     references={section.references ?? section.similarTo ?? []}
   />

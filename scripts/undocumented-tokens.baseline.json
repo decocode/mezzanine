@@ -23,6 +23,8 @@
   "--search-field-icon-content",
   "--search-field-icon-gap",
   "--search-field-icon-size",
+  "--split-gap",
+  "--split-min-area-width",
   "--z-index-base",
   "--z-index-overlay",
   "--z-index-raised",

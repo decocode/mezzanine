@@ -408,30 +408,38 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   split: {
     paragraphs: [
-      'Both areas start from nothing, a `flex-basis` of zero, and then grow by their share. A fraction of one third gives the first area a `flex-grow` of 1 and the second a `flex-grow` of 2.',
-      'With the switch on, each area’s `flex-basis` uses the same sum as Inline. Below the switch width it becomes huge, so the second area wraps underneath and each takes the full width.',
+      'Split is a flexbox row: `display: flex` places the two areas next to each other. `flex-wrap: wrap` allows an area to move onto a new line when the row is full, and `gap` sets the space between them, whether they’re side by side or one above the other.',
+      'Each area has a `flex-basis` of zero, so it starts with no width of its own. `flex-grow` then shares out the space: for one third and two thirds, the first area gets a `flex-grow` of 1 and the second gets 2, so the second takes twice as much.',
+      '`min-inline-size` is the minimum width. Flexbox checks it before placing an area on the row; when two minimums plus the gap are more than the row’s width, the second area goes onto the next line. Alone on its line, `flex-grow` makes it fill the full width. The `min()` function stops the minimum from ever being wider than the Split itself.',
+      'With Auto Start, the first area has a `flex-basis` of `auto`, which means its width comes from its content. The second area has a `flex-grow` of 999, so it takes almost all of the space that’s left, and keeps the minimum width.',
     ],
-    code: `.lab-split {
+    code: `.mezzanine-split {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.lab-split > * {
-  flex-basis: 0;
+  gap: var(--_split-gap, var(--split-gap));
   min-inline-size: 0;
 }
 
-.lab-split > :first-child {
-  flex-grow: var(--lab-split-start, 1);
+.mezzanine-split[data-fraction] > * {
+  flex-basis: 0;
+  flex-grow: 1;
+  min-inline-size: min(100%, var(--_split-min-area-width, var(--split-min-area-width)));
 }
 
-.lab-split > :last-child {
-  flex-grow: var(--lab-split-end, 1);
+.mezzanine-split[data-fraction='1/4'] > :last-child { flex-grow: 3; }
+.mezzanine-split[data-fraction='1/3'] > :last-child { flex-grow: 2; }
+.mezzanine-split[data-fraction='2/3'] > :first-child { flex-grow: 2; }
+.mezzanine-split[data-fraction='3/4'] > :first-child { flex-grow: 3; }
+
+.mezzanine-split[data-fraction='auto-start'] > :first-child,
+.mezzanine-split[data-fraction='auto-end'] > :last-child {
+  flex-basis: auto;
+  min-inline-size: 0;
 }
 
-.lab-split-switch > * {
-  flex-basis: calc((var(--lab-switch-at) - 100%) * 999);
+.mezzanine-split[data-fraction='auto-start'] > :last-child,
+.mezzanine-split[data-fraction='auto-end'] > :first-child {
+  flex-grow: 999;
 }`,
   },
   columns: {

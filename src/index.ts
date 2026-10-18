@@ -256,6 +256,9 @@ export type { SearchFieldProps } from './components/SearchField/SearchField'
 export { TextArea } from './components/TextArea/TextArea'
 export type { TextAreaProps } from './components/TextArea/TextArea'
 
+export { Split } from './components/Split/Split'
+export type { SplitProps } from './components/Split/Split'
+
 export { TabBar } from './components/TabBar/TabBar'
 export type { TabBarProps, TabBarItem } from './components/TabBar/TabBar'
 

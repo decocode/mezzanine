@@ -114,7 +114,8 @@ export const mezzanineUses: Record<string, MezzanineUse[]> = {
     today(<><Link href="/breadcrumbs">Breadcrumbs</Link> is a row of links that wraps onto new lines when it runs out of room, like an Inline cluster.</>),
   ],
   split: [
-    today(<>The <Link href="/sidebar">Sidebar</Link> component can sit beside the main content, as it does in the docs. How it relates to Split is still an open question.</>),
+    today('Split is in the library. It shares the row by a fraction or by auto, and stacks its areas when they can’t both have their minimum width.'),
+    today(<>The <Link href="/sidebar">Sidebar</Link> component is due to be rebuilt on Split.</>),
   ],
   columns: [
     today('Nothing yet: the library has no Columns.'),

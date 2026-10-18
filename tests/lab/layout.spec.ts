@@ -137,11 +137,12 @@ test('Lab Layout demos respond to their space and content', async ({ page }) => 
   await expect(page.getByRole('button', { name: 'Button 2', exact: true })).toBeFocused()
 })
 
-// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet, apart from example CSS,
+// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet (or, for Split, the library's), apart from example CSS,
 // so the explanation cannot drift from the rules it describes.
 test('Lab Layout CSS notes match the Lab stylesheet', () => {
   const normalise = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim()
-  const stylesheet = normalise(readFileSync('site/lab/layout/layout-lab.css', 'utf8'))
+  // Split's note shows the library's own CSS, since the Lab uses the library component.
+  const stylesheet = normalise(['site/lab/layout/layout-lab.css', 'src/components/Split/Split.css'].map((file) => readFileSync(file, 'utf8')).join('\n'))
   for (const note of Object.values(cssNotes).filter((note) => !note.isExample)) {
     for (const rule of note.code.split(/\n\s*\n/)) expect(stylesheet).toContain(normalise(rule))
   }

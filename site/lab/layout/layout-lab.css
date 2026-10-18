@@ -472,29 +472,6 @@
   gap: var(--lab-inline-cluster-space, var(--space-2));
 }
 
-.lab-split {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.lab-split > * {
-  flex-basis: 0;
-  min-inline-size: 0;
-}
-
-.lab-split > :first-child {
-  flex-grow: var(--lab-split-start, 1);
-}
-
-.lab-split > :last-child {
-  flex-grow: var(--lab-split-end, 1);
-}
-
-.lab-split-switch > * {
-  flex-basis: calc((var(--lab-switch-at) - 100%) * 999);
-}
-
 .lab-columns {
   display: grid;
   grid-template-columns: repeat(var(--lab-columns, 3), minmax(0, 1fr));

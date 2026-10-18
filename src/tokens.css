@@ -30,6 +30,7 @@
 @import './components/RadioGroup/RadioGroup.tokens.css';
 @import './components/SearchField/SearchField.tokens.css';
 @import './components/Sidebar/Sidebar.tokens.css';
+@import './components/Split/Split.tokens.css';
 @import './components/TabBar/TabBar.tokens.css';
 @import './components/Table/Table.tokens.css';
 @import './components/Tabs/Tabs.tokens.css';

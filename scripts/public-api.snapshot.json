@@ -620,6 +620,14 @@
     "kind": "value"
   },
   {
+    "name": "Split",
+    "kind": "value"
+  },
+  {
+    "name": "SplitProps",
+    "kind": "type"
+  },
+  {
     "name": "SunIcon",
     "kind": "value"
   },

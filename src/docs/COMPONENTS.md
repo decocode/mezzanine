@@ -148,6 +148,28 @@ The APIs follow [React Aria SearchField](https://react-aria.adobe.com/SearchFiel
 vertical stack layout; horizontal and grid layouts and drag and drop are not
 styled yet.
 
+## Split
+
+`Split` puts two areas side by side. Give it exactly two children:
+
+```tsx
+<Split fraction="1/3" minAreaWidth="18rem" gap={6}>
+  <section aria-label="Area A">…</section>
+  <section aria-label="Area B">…</section>
+</Split>
+```
+
+- `fraction` shares the row: `1/4`, `1/3`, `1/2` (the default), `2/3` or `3/4`
+  gives the first area that share. `auto-start` or `auto-end` lets that area
+  keep the width its content needs, and the other fills the rest.
+- When the areas can't both have their minimum width, the second wraps
+  underneath and each takes the full width. Set the minimum with `minAreaWidth`
+  (any CSS length); the default is `--split-min-area-width`.
+- `gap` takes a step on the spacing scale, such as `4` for `--space-4`.
+
+Split follows its container, not the screen, and adds no behaviour. It is not
+yet documented on the site.
+
 ## Sidebar
 
 `Sidebar` manages two separate states: inline expansion and the modal drawer.

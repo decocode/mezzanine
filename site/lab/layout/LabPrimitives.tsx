@@ -21,23 +21,6 @@ export function InlineCluster({ children, space }: Children & { space?: string }
   return <div className="lab-inline-cluster" style={vars({ '--lab-inline-cluster-space': space })}>{children}</div>
 }
 
-// How Split shares the row between its two areas: the first area's share, then the second's.
-export const splitFractions = {
-  '1/4': ['1', '3'],
-  '1/3': ['1', '2'],
-  '1/2': ['1', '1'],
-  '2/3': ['2', '1'],
-  '3/4': ['3', '1'],
-} as const
-
-export type SplitFraction = keyof typeof splitFractions
-
-// Split: two areas side by side, sharing the row by a fraction; with switchAt, a column below that width.
-export function Split({ children, fraction = '1/2', switchAt }: Children & { fraction?: SplitFraction; switchAt?: string }) {
-  const [start, end] = splitFractions[fraction]
-  return <div className={`lab-split${switchAt ? ' lab-split-switch' : ''}`} style={vars({ '--lab-split-start': start, '--lab-split-end': end, '--lab-switch-at': switchAt })}>{children}</div>
-}
-
 // Columns: a fixed number of equal columns.
 export function Columns({ children, columns }: Children & { columns?: number }) {
   return <div className="lab-columns" style={vars({ '--lab-columns': columns?.toString() })}>{children}</div>

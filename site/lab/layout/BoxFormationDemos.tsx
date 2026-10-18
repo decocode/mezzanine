@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Badge, Checkbox, Link } from '@decocode/mezzanine'
+import { Badge, Checkbox, Link, Split, type SplitProps } from '@decocode/mezzanine'
 import { CssNotes, DemoFrame, DemoText, ValuePicker } from './LabParts'
-import { Block, Columns, ColumnsItem, Cover, Grid, Inline, InlineCluster, Reel, Split, Stack, type SplitFraction } from './LabPrimitives'
+import { Block, Columns, ColumnsItem, Cover, Grid, Inline, InlineCluster, Reel, Stack } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
 
@@ -73,21 +73,21 @@ function ReelDemo() {
   </>
 }
 
+type SplitFraction = NonNullable<SplitProps['fraction']>
+
 const fractionOptions: readonly { label: string; value: SplitFraction }[] = [
   { label: '1/4', value: '1/4' },
   { label: '1/3', value: '1/3' },
   { label: '1/2', value: '1/2' },
+  { label: 'Auto start', value: 'auto-start' },
 ]
 
 function SplitDemo() {
   const [fraction, setFraction] = useState<SplitFraction>('1/3')
-  const [isSwitching, setIsSwitching] = useState(true)
   return <>
-    <DemoText>Choose how much of the row the first area gets. Then drag the slider below about 30rem to see the switch.</DemoText>
     <ValuePicker label="Fraction" options={fractionOptions} value={fraction} onChange={setFraction} />
-    <Checkbox isSelected={isSwitching} onChange={setIsSwitching}>Switch to a column below 30rem</Checkbox>
     <DemoFrame label="Split">
-      <Split fraction={fraction} switchAt={isSwitching ? '30rem' : undefined}><Block tall>First area</Block><Block tall>Second area</Block></Split>
+      <Split fraction={fraction} gap={3}><Block tall>First area</Block><Block tall>Second area</Block></Split>
     </DemoFrame>
     <CssNotes name="Split" note={cssNotes.split} level={3} />
   </>

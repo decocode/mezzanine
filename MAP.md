@@ -54,6 +54,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/SelectionIndicator/SelectionIndicator.ts` | Public React Aria SelectionIndicator export and prop type |
 | `src/components/Sidebar/Sidebar.css` | Token-based sidebar regions, left/right placement, rail and modal drawer styling |
 | `src/components/Sidebar/Sidebar.tsx` | Public Sidebar state boundary, Button-based SidebarTrigger and generic inline or modal SidebarPanel with optional compact rail, permanent inline expansion and optional inline header |
+| `src/components/Split/Split.tsx`, `src/components/Split/Split.css` | Public Split layout building block: two areas side by side that share the row by a fraction or by auto and stack when they can't both have their minimum width; layout only, following its container through flexbox wrapping |
 | `src/components/Sidebar/sidebarState.ts` | Internal sidebar context and responsive media-query subscription |
 | `src/components/TabBar/TabBar.css` | TabBar states, safe-area spacing and responsive bottom-sheet presentation |
 | `src/components/TabBar/TabBar.tsx` | Primary route navigation with built-in capacity measurement and a More bottom sheet composed from library links, buttons and modal parts |
@@ -213,8 +214,8 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/lab/layout/boxCssNotes.ts` | The CSS behind each stage page's examples, in plain English, merged into the tour's CSS notes |
 | `site/lab/layout/layoutLabLogic.ts` | Live media-query matching without effects, CSS support checks and on-request viewport and safe-area measurement |
 | `site/lab/layout/LabParts.tsx` | Width-slider demo frame, demo headings and text, CSS notes, value pickers and emerging-feature support badges |
-| `site/lab/layout/LabPrimitives.tsx` | Lab-only building blocks following Bedrock Layouts and Every Layout: Stack, Inline, InlineCluster, Split, Columns, Grid, ColumnDrop, Center, Frame, Cover and Reel, with limits as custom properties |
-| `site/lab/layout/StagePages.tsx` | Lab Layout pages built with the site's DocsPageTemplate: a stage's overview, with its own How it works where it has one (The box explains the box model), and a Card per page; a stage page in two halves, How it works (introduction, examples, browser support) and How Mezzanine uses it (Today and Lab candidate lines and Mezzanine detail such as the spacing scale), with a building block's sources as References; and a page still to be sorted, How it works only |
+| `site/lab/layout/LabPrimitives.tsx` | Lab-only building blocks following Bedrock Layouts and Every Layout: Stack, Inline, InlineCluster, Columns, Grid, ColumnDrop, Center, Frame, Cover and Reel, with limits as custom properties |
+| `site/lab/layout/StagePages.tsx` | Lab Layout pages built with the site's DocsPageTemplate: a stage's overview, with its own How it works where it has one (The box explains the box model), and a Card per page; a stage page with How it works (introduction and browser support), Example (the demos and the CSS behind them) and How Mezzanine uses it (Today and Lab candidate lines and Mezzanine detail such as the spacing scale), with a building block's sources as References; and a page still to be sorted, or a Lab page outside Layout, with How it works and Example |
 | `site/lab/layout/mezzanineUsesContent.tsx` | The How Mezzanine uses it lines for each stage page, each marked Today (checked against the library) or Lab candidate, linking to component pages rather than documenting them |
 | `site/lab/layout/TheBoxDemos.tsx` | The box examples: the box model (shown on The box page itself), margin, padding, types of box (display: block, inline, inline-block and none), measuring the box (units and clamp()), sizing the box (box-sizing), Frame, sides (logical properties) and Center |
 | `site/lab/layout/InsideTheBoxDemos.tsx` | Inside the box examples: filling the box (images and media), overflowing the box, columns in boxes and Box has content |
@@ -236,6 +237,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/components/code-block.spec.ts` | Code block structure, kept line breaks, reflow at 320px with normal and doubled text, and accessibility in each theme |
 | `tests/components/disclosure.spec.ts` | Disclosure reflow, immediate panels in every theme and motion setting, find-in-page and group switching |
 | `tests/components/navbar.spec.ts` | Navbar example keyboard, responsive, theme, contrast and forced-colour checks |
+| `tests/components/split.spec.ts` | Split sharing by fraction and by auto, and stacking at full width in a narrow container at normal and doubled text, using the Lab's Split page |
 | `tests/components/sidebar.spec.ts` | Sidebar collapse, independent state, modal focus, responsiveness and accessibility checks |
 | `tests/components/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |
 | `tests/components/table.spec.ts` | Table sorting interactions, keyboard and pointer activation, sort indicators and responsive contrast checks |
