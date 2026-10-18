@@ -22,5 +22,10 @@
   "--search-field-gap",
   "--search-field-icon-content",
   "--search-field-icon-gap",
-  "--search-field-icon-size"
+  "--search-field-icon-size",
+  "--z-index-base",
+  "--z-index-overlay",
+  "--z-index-raised",
+  "--z-index-sticky",
+  "--z-index-toast"
 ]

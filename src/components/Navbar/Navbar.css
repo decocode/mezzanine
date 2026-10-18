@@ -1,7 +1,7 @@
 .mezzanine-navbar {
   container: mezzanine-navbar / inline-size;
   position: sticky;
-  z-index: var(--navbar-z-index);
+  z-index: var(--z-index-sticky);
   top: 0;
   border-bottom: var(--navbar-border-width) solid var(--color-border);
   background: var(--color-page);

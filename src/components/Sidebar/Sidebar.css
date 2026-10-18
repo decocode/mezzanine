@@ -74,7 +74,7 @@
   position: fixed;
   inset: 0;
   height: var(--visual-viewport-height);
-  z-index: var(--modal-z-index);
+  z-index: var(--z-index-overlay);
   display: flex;
   background: var(--modal-backdrop);
 }

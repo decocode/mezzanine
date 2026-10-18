@@ -41,7 +41,6 @@ export const dialogContent = {
     <li>React Aria manages focus containment, background interaction blocking, and focus return to the trigger.</li>
   </>,
   tokensRows: [
-    { name: '--modal-z-index', description: 'Overlay stacking level.' },
     { name: '--modal-viewport-padding', description: 'Minimum space between the modal and viewport edges.' },
     { name: '--modal-max-width', description: 'Maximum modal width.' },
     { name: '--modal-border-width', description: 'Modal border thickness.' },

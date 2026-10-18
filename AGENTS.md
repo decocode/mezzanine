@@ -87,6 +87,15 @@ Do not put an idea into code, in the Lab or anywhere else, before the user has a
 - Reduced motion has two sources. The user's system setting applies in every theme and area, and nothing overrides it. The Wireframe theme also suppresses motion by default, but only in the area showing Wireframe, not sibling areas showing another theme. An explicitly nested Light, Dark or System area restores normal motion unless system reduced motion applies. Every component with motion honours both sources. New motion is not finished until it does.
 - Loading and progress indicators keep their state visible when motion is reduced. Whether such an indicator may keep moving is decided with the user, indicator by indicator.
 
+### Layout and stacking
+
+Agreed by the owner on 18 October 2026. Components made before these rules (notably Sidebar and Modal) are due to be rebuilt to follow them. Do not copy their screen-width switching or physical sides into new work.
+
+- Components respond to their container, not the screen. Use container queries for layout changes. Where the rendered structure itself must change (for example inline panel or drawer), measure the container with a ref callback or `useSyncExternalStore`. Media queries describe the person's setup only: preferences such as reduced motion and colour scheme, pointer and hover, display mode, and the outer page layout.
+- Stacking order (`z-index`) comes from one shared, named scale in `src/tokens/z-index.css`: `--z-index-base`, `--z-index-raised`, `--z-index-sticky`, `--z-index-overlay` and `--z-index-toast`. Components choose a step by name and never set their own number; `npm run check:rules` enforces this for library CSS. Every pop-up (tooltip, popover, drawer, dialog) uses the overlay step, and React Aria's opening order puts the newest on top.
+- Split is the layout building block for two areas side by side that stack when their container is too narrow. Sidebar is built on Split and adds collapse, rail and drawer behaviour. Split is still a Lab candidate until the owner approves its promotion.
+- Describe sides as start and end with CSS logical properties (`margin-inline-start`, `inset-inline-end`, `padding-block`). Use left, right, top or bottom only where the meaning is truly physical, with a comment saying why.
+
 ### Documentation site (`site/`)
 
 - The site imports the library as `@decocode/mezzanine`, not by relative paths into `src/`. It consumes the library the way apps do.

@@ -48,7 +48,6 @@ export const navbarContent = {
     { name: 'className', description: 'Optional class added to the outer header.' },
   ],
   tokens: [
-    { name: '--navbar-z-index', description: 'Header stacking order.' },
     { name: '--navbar-border-width', description: 'Header and trigger border thickness.' },
     { name: '--navbar-min-height', description: 'Minimum content-row height.' },
     { name: '--navbar-wide-padding-inline', description: 'Horizontal padding in the wide layout.' },

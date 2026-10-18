@@ -54,7 +54,6 @@ export const tabBarContent = {
     { name: '--tab-bar-background', description: 'Navigation surface colour.' },
     { name: '--tab-bar-item-background-current', description: 'Current destination background.' },
     { name: '--tab-bar-border-width', description: 'Navigation border thickness.' },
-    { name: '--tab-bar-z-index', description: 'Sticky bar stacking order.' },
     { name: '--tab-bar-sheet-max-height', description: 'Maximum overflow sheet height.' },
     { name: '--tab-bar-safe-area-bottom', description: 'Space reserved beneath the sticky bar for the device safe area.' },
     { name: '--tab-bar-gap', description: 'Space between destination slots.' },

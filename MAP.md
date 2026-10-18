@@ -83,6 +83,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) |
 | `src/tokens/elevation.css` | Elevation levels built from the shadow and highlight colours; each theme sets its shadow colour (Styles › Elevation) |
 | `src/tokens/motion.css` | Durations, easing, distances, scale and rotation (Styles › Motion) |
+| `src/tokens/z-index.css` | The shared stacking scale: base, raised, sticky, overlay (every pop-up) and toast; not yet documented on a site page |
 | `src/tokens/shape.css` | Corner-radius and border-width scales (Styles › Shape › Corners and Borders) |
 | `src/tokens/text.css` | Text behaviour tokens: `--line-length` (Foundations › Text) |
 | `src/tokens/space.css` | Spacing scale; shown on the Lab's Gap page, with no docs page until the Lab pages are promoted |
@@ -255,7 +256,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 
 | Path | Purpose |
 | --- | --- |
-| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, shared button sizing, typography, NavTree ownership, shared motion, allowed effects, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
+| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, z-index values from the shared scale, shared button sizing, typography, NavTree ownership, shared motion, allowed effects, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
 | `scripts/docs-rules.mjs` | Checks that site routes, including the Lab index, Layout overview, stages and their pages, match nginx in both directions and that Lighthouse URLs are allowed routes, that documented tokens exist and public tokens are documented, and parses Props table rows |
 | `scripts/docs-rules.test.mjs` | Passing and failing fixtures for the docs rules |
 | `scripts/effect-rules.mjs` | Finds React effect calls in the library and site and allows only the listed effects, each with an agreed reason |

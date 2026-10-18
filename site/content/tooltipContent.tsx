@@ -50,7 +50,6 @@ export const tooltipContent = {
   tokensRows: [
     { name: '--tooltip-max-width', description: 'Maximum tooltip width, additionally constrained by the viewport.' },
     { name: '--tooltip-border-width', description: 'Tooltip border thickness.' },
-    { name: '--tooltip-z-index', description: 'Tooltip stacking level.' },
     { name: '--motion-duration-interface', description: 'Entry and exit fade duration; disabled for reduced motion.' },
   ],
 }

@@ -6,12 +6,6 @@
   /* Candidate tokens from the research report. */
   --lab-target-min-wcag: 1.5rem;
   --lab-target-min: 2.75rem;
-  --lab-layer-base: 0;
-  --lab-layer-raised: 1;
-  --lab-layer-sticky: 10;
-  --lab-layer-overlay: 100;
-  --lab-layer-modal: 200;
-  --lab-layer-toast: 300;
   --lab-sticky-height: 3rem;
 
   min-width: 0;
@@ -723,12 +717,11 @@
   inset-inline-start: calc(var(--lab-layer-step) * 6%);
 }
 
-.lab-layer-base { --lab-layer-step: 0; z-index: var(--lab-layer-base); }
-.lab-layer-raised { --lab-layer-step: 1; z-index: var(--lab-layer-raised); }
-.lab-layer-sticky { --lab-layer-step: 2; z-index: var(--lab-layer-sticky); }
-.lab-layer-overlay { --lab-layer-step: 3; z-index: var(--lab-layer-overlay); }
-.lab-layer-modal { --lab-layer-step: 4; z-index: var(--lab-layer-modal); }
-.lab-layer-toast { --lab-layer-step: 5; z-index: var(--lab-layer-toast); }
+.lab-layer-base { --lab-layer-step: 0; z-index: var(--z-index-base); }
+.lab-layer-raised { --lab-layer-step: 1; z-index: var(--z-index-raised); }
+.lab-layer-sticky { --lab-layer-step: 2; z-index: var(--z-index-sticky); }
+.lab-layer-overlay { --lab-layer-step: 3; z-index: var(--z-index-overlay); }
+.lab-layer-toast { --lab-layer-step: 4; z-index: var(--z-index-toast); }
 
 /* Logical properties. */
 .lab-direction {
@@ -838,7 +831,7 @@
 
 .lab-sticky-header {
   position: sticky;
-  z-index: var(--lab-layer-sticky);
+  z-index: var(--z-index-sticky);
   inset-block-start: 0;
   box-sizing: border-box;
   min-block-size: var(--lab-sticky-height);

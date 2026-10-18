@@ -113,5 +113,5 @@
 
 .react-aria-ToggleButtonGroup[data-variant='secondary'] > .react-aria-ToggleButton[data-focus-visible] {
   position: relative;
-  z-index: 1;
+  z-index: var(--z-index-raised);
 }

@@ -180,7 +180,7 @@ export const layersPages: Record<string, LabTopLevelPage> = {
     href: '/site/lab/layers/ordering-layers',
     title: 'Ordering layers',
     what: 'The page background is always right at the back. Boxes are displayed on the surface of that page. But boxes can also be placed on top of the surface of other boxes, in layers. The order of those layers is called the z-index.',
-    why: 'Ordering layers means agreeing an order for things that sit on top of each other, such as a sticky header, a dialog and a notification. Today the Navbar, Modal and Tooltip use z-index values of 10, 100 and 110, each chosen separately. Named once as tokens, a decision like “a modal sits above the sticky header” is made in one place, and stays consistent.',
+    why: 'Ordering layers means agreeing an order for things that sit on top of each other, such as a sticky header, a dialog and a notification. Mezzanine names five steps once, as tokens, so a decision like “a dialog sits above the sticky header” is made in one place and stays consistent. Every pop-up shares the overlay step, and the newest one sits on top.',
     references: [
       { label: 'MDN: z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/z-index' },
       { label: 'MDN: Understanding z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Understanding_z-index' },
@@ -652,15 +652,14 @@ export const cssNotes: Record<string, CssNote> = {
   },
   layers: {
     paragraphs: [
-      'The `z-index` property decides what sits on top when things overlap. Here each box takes its value from a named token instead of a number typed into the component.',
-      'The `--lab-layer-step` value only offsets each box so you can see them all. The order comes entirely from the layer tokens.',
+      'The `z-index` property decides what sits on top when things overlap. Here each box takes its value from one of Mezzanine’s five named tokens instead of a number typed into the component.',
+      'The `--lab-layer-step` value only offsets each box so you can see them all. The order comes entirely from the `--z-index-*` tokens.',
     ],
-    code: `.lab-layer-base { --lab-layer-step: 0; z-index: var(--lab-layer-base); }
-.lab-layer-raised { --lab-layer-step: 1; z-index: var(--lab-layer-raised); }
-.lab-layer-sticky { --lab-layer-step: 2; z-index: var(--lab-layer-sticky); }
-.lab-layer-overlay { --lab-layer-step: 3; z-index: var(--lab-layer-overlay); }
-.lab-layer-modal { --lab-layer-step: 4; z-index: var(--lab-layer-modal); }
-.lab-layer-toast { --lab-layer-step: 5; z-index: var(--lab-layer-toast); }`,
+    code: `.lab-layer-base { --lab-layer-step: 0; z-index: var(--z-index-base); }
+.lab-layer-raised { --lab-layer-step: 1; z-index: var(--z-index-raised); }
+.lab-layer-sticky { --lab-layer-step: 2; z-index: var(--z-index-sticky); }
+.lab-layer-overlay { --lab-layer-step: 3; z-index: var(--z-index-overlay); }
+.lab-layer-toast { --lab-layer-step: 4; z-index: var(--z-index-toast); }`,
   },
   logical: {
     paragraphs: [
@@ -757,7 +756,7 @@ export const cssNotes: Record<string, CssNote> = {
 
 .lab-sticky-header {
   position: sticky;
-  z-index: var(--lab-layer-sticky);
+  z-index: var(--z-index-sticky);
   inset-block-start: 0;
   box-sizing: border-box;
   min-block-size: var(--lab-sticky-height);

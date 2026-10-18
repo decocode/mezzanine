@@ -14,7 +14,7 @@
   line-height: var(--line-height-body-sm);
   text-transform: var(--text-transform-body);
   overflow-wrap: anywhere;
-  z-index: var(--tooltip-z-index);
+  z-index: var(--z-index-overlay);
 }
 
 .react-aria-Tooltip[data-entering] {

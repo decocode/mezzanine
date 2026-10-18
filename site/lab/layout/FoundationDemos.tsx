@@ -44,7 +44,7 @@ export function NamedLayersDemo() {
   return <>
     <DemoText>Each box takes its place in the stack from a named token, so the order is decided once, not in each component.</DemoText>
       <div className="lab-layer-stack">
-        {['base', 'raised', 'sticky', 'overlay', 'modal', 'toast'].map((name) => <div key={name} className={`lab-layer lab-layer-${name} mz-text-body-sm`}><code>--lab-layer-{name}</code></div>)}
+        {['base', 'raised', 'sticky', 'overlay', 'toast'].map((name) => <div key={name} className={`lab-layer lab-layer-${name} mz-text-body-sm`}><code>--z-index-{name}</code></div>)}
       </div>
     <CssNotes name="layer order" note={cssNotes.layers} level={3} />
   </>

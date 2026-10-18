@@ -2,7 +2,6 @@
 
 :where(:root) {
   /* Modal: the overlay, backdrop and container shared by Dialog and other modal content. */
-  --modal-z-index: 100;
   --modal-viewport-padding: var(--space-4);
   --modal-max-width: 32rem;
   --modal-border-width: var(--border-width-baseline);

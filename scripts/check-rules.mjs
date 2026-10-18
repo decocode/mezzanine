@@ -256,6 +256,11 @@ function checkCss(file) {
       const colon = segment.indexOf(':')
       if (colon !== -1 && !segment.trimStart().startsWith('@')) {
         const value = segment.slice(colon + 1)
+        // Stacking order comes from the shared --z-index-* scale, never a component's own number.
+        if (segment.slice(0, colon).trim() === 'z-index' && !/^\s*(?:var\(--z-index-[a-z]+\)|auto)\s*$/.test(value)) {
+          report(file, text, start + colon + 1, 'z-index',
+            'Use a --z-index-* step (base, raised, sticky, overlay or toast) instead of a number.')
+        }
         // System colour keywords in forced-colors rules are intentionally valid;
         // this check targets the explicit hex and function syntaxes requested.
         for (const match of value.matchAll(/#[\da-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab)\s*\(/gi)) {

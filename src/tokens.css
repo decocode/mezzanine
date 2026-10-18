@@ -13,6 +13,7 @@
 @import './tokens/text.css';
 @import './tokens/shape.css';
 @import './tokens/elevation.css';
+@import './tokens/z-index.css';
 
 @import './components/Badge/Badge.tokens.css';
 @import './components/Button/Button.tokens.css';

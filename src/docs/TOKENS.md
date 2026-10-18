@@ -286,6 +286,22 @@ sets an edge highlight and larger shapes for the raised levels.
 Keyboard focus is not an elevation role. Components continue to use the
 separate `--color-focus` token for visible focus indicators.
 
+## Current stacking inventory
+
+Stacking order (CSS `z-index`) comes from one shared scale in
+`src/tokens/z-index.css`. Components choose a step by name and never set their
+own number. Every pop-up (Tooltip, Modal, the Sidebar drawer and the TabBar
+sheet) uses the overlay step. React Aria adds each pop-up to the end of the page
+in the order it opens, so the newest one sits on top.
+
+| Token | Meaning |
+| --- | --- |
+| `--z-index-base` | The normal page flow |
+| `--z-index-raised` | Lifted just above neighbours, such as a focused button in a group |
+| `--z-index-sticky` | Bars that stay in view while the page scrolls, such as Navbar and TabBar |
+| `--z-index-overlay` | Pop-ups: tooltips, popovers, drawers and dialogs |
+| `--z-index-toast` | Notifications that must appear above everything, including dialogs |
+
 ## Navbar tokens
 
 Navbar provides a sticky container and a compact Disclosure menu. Applications supply
@@ -295,7 +311,6 @@ Its own container switches to desktop navigation at 48rem, relative to the root 
 
 | Token | Meaning |
 | --- | --- |
-| `--navbar-z-index` | Navbar stacking order |
 | `--navbar-border-width` | Navbar and trigger border thickness |
 | `--navbar-min-height` | Minimum height of the content row |
 | `--navbar-wide-padding-inline` | Horizontal padding in the desktop layout |
@@ -329,7 +344,6 @@ be overridden independently by a consuming product.
 
 | Token | Meaning |
 | --- | --- |
-| `--modal-z-index` | Overlay stacking level |
 | `--modal-viewport-padding` | Minimum space between the modal and viewport edges |
 | `--modal-max-width` | Maximum modal width |
 | `--modal-border-width` | Modal border thickness |
@@ -618,7 +632,6 @@ The More sheet uses the existing modal backdrop, elevation and motion duration.
 | --- | --- |
 | `--tab-bar-background`, `--tab-bar-item-background-current` | Bar/sheet surface and current destination background |
 | `--tab-bar-border-width`, `--tab-bar-indicator-width` | Surface border and current destination marker |
-| `--tab-bar-z-index` | Sticky bar stacking level |
 | `--tab-bar-safe-area-bottom` | Device bottom inset; defaults to `env(safe-area-inset-bottom, 0px)` |
 | `--tab-bar-gap`, `--tab-bar-padding` | Space between items and inside the bar |
 | `--tab-bar-item-min-width` | Minimum slot width used to decide which links move into More |
@@ -640,7 +653,6 @@ radius tokens, and `--elevation-raised-2`. These tokens control their remaining 
 | --- | --- |
 | `--tooltip-max-width` | Maximum tooltip width, additionally limited to the viewport |
 | `--tooltip-border-width` | Tooltip border thickness |
-| `--tooltip-z-index` | Tooltip stacking level |
 | `--motion-duration-interface` | Fade duration; disabled for reduced motion |
 
 The hover delay is controlled by the `TooltipTrigger` `delay` prop, not CSS.
