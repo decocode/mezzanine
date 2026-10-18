@@ -13,7 +13,7 @@
 .react-aria-Column,
 .react-aria-Cell {
   padding: var(--table-cell-padding-block) var(--table-cell-padding-inline);
-  border-bottom: var(--table-border-width) solid var(--color-border);
+  border-block-end: var(--table-border-width) solid var(--color-border);
   text-align: start;
   vertical-align: top;
   overflow-wrap: normal;
@@ -21,7 +21,7 @@
 }
 
 .react-aria-Column {
-  border-top: var(--table-border-width) solid var(--color-border);
+  border-block-start: var(--table-border-width) solid var(--color-border);
   background: var(--table-header-background);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);

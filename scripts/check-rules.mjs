@@ -256,6 +256,18 @@ function checkCss(file) {
       const colon = segment.indexOf(':')
       if (colon !== -1 && !segment.trimStart().startsWith('@')) {
         const value = segment.slice(colon + 1)
+        // Sides are start and end. A physical side needs a "physical:" comment on its line or the one before.
+        const property = segment.slice(0, colon).trim()
+        const physicalSide = /^(?:(?:margin|padding|border|inset|scroll-margin|scroll-padding)-(?:top|right|bottom|left)(?:-.+)?|top|right|bottom|left)$/.test(property)
+          || (/^(?:text-align|float|clear)$/.test(property) && /^\s*(?:left|right)\s*$/.test(value))
+        if (physicalSide) {
+          const lineIndex = text.slice(0, start + colon).split('\n').length - 1
+          const lines = text.split('\n')
+          if (!/physical:/.test(lines[lineIndex] ?? '') && !/physical:/.test(lines[lineIndex - 1] ?? '')) {
+            report(file, text, start + colon, 'logical-sides',
+              `Use a start/end (logical) property instead of "${property}", or add a "physical:" comment saying why.`)
+          }
+        }
         // Stacking order comes from the shared --z-index-* scale, never a component's own number.
         if (segment.slice(0, colon).trim() === 'z-index' && !/^\s*(?:var\(--z-index-[a-z]+\)|auto)\s*$/.test(value)) {
           report(file, text, start + colon + 1, 'z-index',

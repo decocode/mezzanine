@@ -250,6 +250,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/lab/search.spec.ts` | Lab search experiment: filtering while focus stays in the field, arrow keys and Enter, Docs and Lab groups, the empty state, clearing with the button and Escape, closing and focus return, every result reachable by keyboard, 320px reflow at normal and doubled text with accessibility scans in each theme, and forced colours |
 | `tests/lab/lab.spec.ts` | Lab navigation through the site menu at 320px with normal and doubled text, the shared sidebar layout, and the saved theme shared between Docs and Lab |
 | `tests/lab/layout.spec.ts` | Lab Layout pages: 320px reflow at normal and doubled text and accessibility in each theme for the overview, every stage and every page, links from the overview, group Cards and navigation, container-query, Inline switch, :has(), overflow and reading-order behaviour, CSS notes matching the stylesheet (and, for Split, the library's), and the closed Also known as Disclosure opening from its button or On this page |
+| `tests/site/right-to-left.spec.ts` | Right-to-left mirroring: Checkbox's box at the start of the line, Breadcrumbs running from the right, and nested Table of contents links indented from the right |
 | `tests/site/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
 | `tests/site/elevation.spec.ts` | Checks the Elevation page fits each breakpoint width with normal and doubled text |
 | `tests/site/motion.spec.ts` | Shared motion policy in each theme, nested themes, system precedence, loading indicators and the live Motion reference |
@@ -261,7 +262,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 
 | Path | Purpose |
 | --- | --- |
-| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, z-index values from the shared scale, shared button sizing, typography, NavTree ownership, shared motion, allowed effects, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
+| `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, z-index values from the shared scale, logical sides (start and end, unless marked `physical:`), shared button sizing, typography, NavTree ownership, shared motion, allowed effects, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
 | `scripts/docs-rules.mjs` | Checks that site routes, including the Lab index, Layout overview, stages and their pages, match nginx in both directions and that Lighthouse URLs are allowed routes, that documented tokens exist and public tokens are documented, and parses Props table rows |
 | `scripts/docs-rules.test.mjs` | Passing and failing fixtures for the docs rules |
 | `scripts/effect-rules.mjs` | Finds React effect calls in the library and site and allows only the listed effects, each with an agreed reason |

@@ -19,6 +19,7 @@
 .react-aria-Modal {
   position: sticky;
   box-sizing: border-box;
+  /* physical: centres against the visible screen height, paired with the vertical translate. */
   top: calc(var(--visual-viewport-height) / 2);
   /* Auto inline margins centre the modal in either reading direction. */
   margin-inline: auto;

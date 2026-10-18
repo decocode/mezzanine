@@ -2,8 +2,8 @@
   container: mezzanine-navbar / inline-size;
   position: sticky;
   z-index: var(--z-index-sticky);
-  top: 0;
-  border-bottom: var(--navbar-border-width) solid var(--color-border);
+  inset-block-start: 0;
+  border-block-end: var(--navbar-border-width) solid var(--color-border);
   background: var(--color-page);
   color: var(--color-text);
   font-family: var(--font-family-body);
@@ -142,7 +142,7 @@
   align-items: center;
   min-height: var(--target-size);
   padding: var(--space-2) var(--space-3);
-  border-bottom: var(--navigation-tree-current-indicator-width) solid transparent;
+  border-block-end: var(--navigation-tree-current-indicator-width) solid transparent;
   background: transparent;
   color: var(--color-link);
   /* Navigation items use title-sm at Default weight, matching NavTree items. */
@@ -170,7 +170,7 @@
 }
 
 .navbar-link[aria-current]:where(:not([aria-current='false'])) {
-  border-bottom-color: var(--navigation-tree-current-indicator);
+  border-block-end-color: var(--navigation-tree-current-indicator);
   color: var(--navigation-tree-item-content-current);
   font-weight: var(--font-weight-emphasis);
 }
