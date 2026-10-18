@@ -1,6 +1,6 @@
 import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { labContent } from './labContent'
-import { SearchLabDialog } from './SearchLab'
+import { SearchLabDialog } from './components/search/SearchLab'
 
 // The Lab's Components section and its Search page. Illustrative and unapproved.
 export function ComponentsPage() {

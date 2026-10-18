@@ -11,8 +11,8 @@ in `src/docs/`.
 | `site/templates/ContentPage.tsx` | Builds a page from its content file: the sections, the Technical details group, Related pages and References |
 | `site/templates/docsPageContent.ts` | The one shape every content file follows (`DocsPageContent`), the standard section titles and how section ids are made |
 | `site/templates/DocsPageTemplate.tsx` | The layout underneath `ContentPage`, and the site-only `PageHeading` used for every page title and introduction |
-| `site/pages/` | One file per page: live examples, local state and anything only code can build, passed to `ContentPage` as `parts` |
-| `site/content/` | Each page's wording, reference entries and data, in a plain `*Content.ts` file with no JSX |
+| `site/pages/` | One folder per page, arranged like the navigation: `foundations/interaction/target-size/`, `components/actions-and-controls/button/` and so on. Each holds the page (`ButtonPage.tsx`: live examples, local state and anything only code can build, passed to `ContentPage` as `parts`), its content file (`buttonContent.ts`: the wording, reference entries and data, as plain TypeScript with no JSX) and any helpers only that page uses. A parent page, such as Interaction, keeps its files in its own folder beside its child pages' folders. |
+| `site/siteContent.ts` | Wording shared across the site: its name, the skip link and the not-found and not-implemented messages |
 | `site/components/` | Reusable site UI, separate from the library's components in `src/components/` |
 
 ## Writing copy
@@ -26,6 +26,8 @@ formatting:
   so, like the References list.
 
 A paragraph can also be a short bulleted list: `{ list: ['First item', 'Second item'] }`.
+
+When a page moves in the navigation, move its folder to match, so the folders always read like the navigation. The Lab in `site/lab/` follows the same pattern.
 
 Useful site components:
 

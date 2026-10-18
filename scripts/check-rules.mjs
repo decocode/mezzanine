@@ -358,15 +358,15 @@ function checkSnapshot(api, update) {
 // Each Props table, by content file and section key, and the exported types it documents. Rows prefixed with a
 // component name, or following a row that is only that name, use its type.
 const propTables = [
-  { file: 'site/content/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
-  { file: 'site/content/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
-  { file: 'site/content/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
-  { file: 'site/content/tabBarContent.ts', key: 'props', types: ['TabBarProps'] },
-  { file: 'site/content/sidebarContent.ts', key: 'props', types: ['SidebarProps'],
+  { file: 'site/pages/components/navigation/navbar/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
+  { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
+  { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
+  { file: 'site/pages/components/navigation/tab-bar/tabBarContent.ts', key: 'props', types: ['TabBarProps'] },
+  { file: 'site/pages/components/navigation/sidebar/sidebarContent.ts', key: 'props', types: ['SidebarProps'],
     components: { Sidebar: ['SidebarProps'], SidebarTrigger: ['SidebarTriggerProps'], SidebarPanel: ['SidebarPanelProps'] } },
-  { file: 'site/content/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
-  { file: 'site/content/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
-  { file: 'site/content/tooltipContent.ts', key: 'props', types: [],
+  { file: 'site/pages/components/navigation/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
+  { file: 'site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
+  { file: 'site/pages/components/overlays/tooltip/tooltipContent.ts', key: 'props', types: [],
     components: { TooltipTrigger: ['TooltipTriggerComponentProps'], Tooltip: ['TooltipProps'] } },
 ]
 
@@ -472,7 +472,7 @@ function checkDocsTokens(update) {
 function checkDocsRoutes() {
   const lighthouseUrls = ['config/lighthouserc.mobile.json', 'config/lighthouserc.desktop.json']
     .flatMap(file => JSON.parse(read(file)).ci.collect.url.map(url => ({ file, url })))
-  const extraPaths = labPaths({ labContent: read('site/lab/labContent.tsx'), layoutContent: read('site/lab/layout/layoutLabContent.ts') })
+  const extraPaths = labPaths({ labContent: read('site/lab/labContent.tsx'), pageContent: filesIn('site/lab', ['.ts']).map(read).join('\n') })
   for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), extraPaths, nginx: read('config/nginx.conf'), lighthouseUrls })) {
     report(problem.file, read(problem.file), problem.position, 'docs-routes', problem.message)
   }
@@ -518,7 +518,7 @@ try {
   for (const problem of checkTypographyTokens(buttonTokens)) report(buttonTokensFile, buttonTokens, problem.position, 'typography', problem.message)
   const tokens = read('src/tokens/motion.css')
   const typographyGuide = read('src/docs/TYPOGRAPHY.md')
-  for (const problem of checkTypographyChoices(typographyGuide, read('site/content/textStylesContent.ts'))) report('src/docs/TYPOGRAPHY.md', typographyGuide, problem.position, 'typography', problem.message)
+  for (const problem of checkTypographyChoices(typographyGuide, read('site/pages/styles/typography/text-styles/textStylesContent.ts'))) report('src/docs/TYPOGRAPHY.md', typographyGuide, problem.position, 'typography', problem.message)
   for (const token of motionTokens) {
     if (!tokens.includes(`${token}:`)) report('src/tokens/motion.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
   }

@@ -1,5 +1,10 @@
 import { Badge, type NavTreeItemData } from '@decocode/mezzanine'
-import { emergingFeatures, futurePages, labBadgeLabel, browserAndDevicePages, browserAndDeviceLab, labTopLevelPages, layersLab, layersPages, layoutStages, stagePagesByStage } from './layout/layoutLabContent'
+import { labBadgeLabel } from './shared/labValues'
+import { layoutStages, stagePagesByStage } from './layout/layoutContent'
+import { layersLab, layersPages } from './layers/layersContent'
+import { browserAndDeviceLab, browserAndDevicePages } from './browser-and-device/browserAndDeviceContent'
+import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
+import { labTopLevelPages } from './labTopLevelPages'
 
 export const labContent = {
   index: { label: 'Lab', href: '/site/lab' },

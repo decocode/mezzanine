@@ -1,6 +1,11 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
-import { emergingFeatures, cssNotes, futurePages, browserAndDeviceLab, browserAndDevicePages, labTopLevelPages, layersLab, layersPages, layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutLabContent'
+import { layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutContent'
+import { layersLab, layersPages } from '../../site/lab/layers/layersContent'
+import { browserAndDeviceLab, browserAndDevicePages } from '../../site/lab/browser-and-device/browserAndDeviceContent'
+import { emergingFeatures, futurePages } from '../../site/lab/emerging-features/emergingFeaturesContent'
+import { labTopLevelPages } from '../../site/lab/labTopLevelPages'
+import { cssNotes } from '../../site/lab/labCssNotes'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
@@ -138,7 +143,7 @@ test('Lab Layout examples respond to their space and content', async ({ page }) 
 test('Lab Layout CSS notes match the Lab stylesheet', () => {
   const normalise = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim()
   // Split's note shows the library's own CSS, since the Lab uses the library component.
-  const stylesheet = normalise(['site/lab/layout/layout-lab.css', 'src/components/Split/Split.css'].map((file) => readFileSync(file, 'utf8')).join('\n'))
+  const stylesheet = normalise(['site/lab/shared/layout-lab.css', 'src/components/Split/Split.css'].map((file) => readFileSync(file, 'utf8')).join('\n'))
   for (const note of Object.values(cssNotes).filter((note) => !note.isExample)) {
     for (const rule of note.code.split(/\n\s*\n/)) expect(stylesheet).toContain(normalise(rule))
   }
