@@ -1,12 +1,10 @@
 import { Button, Card, Heading } from '@decocode/mezzanine'
 import { DocsPageTemplate } from '../templates/DocsPageTemplate'
 import { childPageCardAction, browserAndDeviceLab, browserAndDevicePages, labTopLevelPages, layersLab, layersPages, layoutLabIntro, layoutStages, type FuturePage, type LabTopLevelPage, type LayoutStage, type StagePage } from './layout/layoutLabContent'
-import {
-  LayersDemo, NamedLayersDemo, PositioningDemo,
-  ScrollPaddingDemo, StackingContextsDemo, SupportsDemo,
-} from './layout/FoundationDemos'
-import { ReadingOrderDemo } from './layout/ArrangingBoxesDemos'
-import { MediaQueriesDemo, SafeAreasDemo, TargetSizeDemo } from './layout/BoxesOnDevicesDemos'
+import { NamedLayersExample, PositioningExample, ScrollPaddingExample, StackingContextsExample } from './layout/LayersExamples'
+import { MediaQueriesExample, SafeAreasExample, SupportsExample, TargetSizeExample } from './layout/BrowserAndDeviceExamples'
+import { ReadingOrderExample } from './layout/ReadingOrderExamples'
+import { StylePriorityExample } from './layout/StylePriorityExamples'
 import { FutureOverview, FuturePageView, SectionPageView, StageOverview, StagePageView } from './layout/StagePages'
 import './layout/layout-lab.css'
 
@@ -57,21 +55,21 @@ export function LayoutFutureChildPage({ page }: { page: FuturePage }) {
 }
 
 // Lab pages outside Layout, keyed by their address.
-const topLevelDemos: Record<string, () => React.JSX.Element> = {
-  [layersPages.positioning.href]: PositioningDemo,
-  [layersPages.layerOrder.href]: NamedLayersDemo,
-  [layersPages.stackingContexts.href]: StackingContextsDemo,
-  [layersPages.scrollPadding.href]: ScrollPaddingDemo,
-  [browserAndDevicePages.mediaQueries.href]: MediaQueriesDemo,
-  [browserAndDevicePages.safeAreas.href]: SafeAreasDemo,
-  [browserAndDevicePages.targetSize.href]: TargetSizeDemo,
-  [labTopLevelPages.readingOrder.href]: ReadingOrderDemo,
-  [browserAndDevicePages.supports.href]: SupportsDemo,
-  [labTopLevelPages.stylePriority.href]: LayersDemo,
+const topLevelExamples: Record<string, () => React.JSX.Element> = {
+  [layersPages.positioning.href]: PositioningExample,
+  [layersPages.layerOrder.href]: NamedLayersExample,
+  [layersPages.stackingContexts.href]: StackingContextsExample,
+  [layersPages.scrollPadding.href]: ScrollPaddingExample,
+  [browserAndDevicePages.mediaQueries.href]: MediaQueriesExample,
+  [browserAndDevicePages.safeAreas.href]: SafeAreasExample,
+  [browserAndDevicePages.targetSize.href]: TargetSizeExample,
+  [labTopLevelPages.readingOrder.href]: ReadingOrderExample,
+  [browserAndDevicePages.supports.href]: SupportsExample,
+  [labTopLevelPages.stylePriority.href]: StylePriorityExample,
 }
 
 export function LabTopLevelPageView({ page }: { page: LabTopLevelPage }) {
-  return <div className="lab-layout"><SectionPageView section={page} Demo={topLevelDemos[page.href]} /></div>
+  return <div className="lab-layout"><SectionPageView section={page} Example={topLevelExamples[page.href]} /></div>
 }
 
 // An experiment's overview outside Layout: what it covers, then a Card for each page.

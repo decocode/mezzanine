@@ -1,10 +1,10 @@
 import type { CssNote } from './layoutLabContent'
 
 // The CSS behind the examples on the stage pages, in plain English. The code is copied from
-// layout-lab.css, and a browser test checks that it still matches. Some demos set a value
+// layout-lab.css, and a browser test checks that it still matches. Some examples set a value
 // through a custom property, such as --lab-overflow, so the buttons can change it.
 export const boxCssNotes: Record<string, CssNote> = {
-  // The box
+  // Box basics
   boxAnatomy: {
     paragraphs: [
       'The `margin` sets the space outside the border, `padding` the space inside it, and `border` the line between them. Each one can also be set for a single side, such as `margin-left` or `padding-top`.',
@@ -107,7 +107,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   border: 1px solid var(--color-text);
 }`,
   },
-  multiColumn: {
+  contentColumns: {
     paragraphs: [
       'The `columns` property says how wide a column should be, at least 12rem here. The browser fits in as many as it can, and shares out any space that’s left.',
       'The `column-gap` sets the space between columns, and `column-rule` draws a line in the middle of each gap.',
@@ -118,7 +118,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   column-rule: 1px solid var(--color-border);
 }`,
   },
-  frame: {
+  aspectRatio: {
     paragraphs: [
       'The `aspect-ratio` gives the box its shape, and `overflow: hidden` crops anything that sticks out.',
       'The picture fills the whole box, and `object-fit: cover` crops its edges rather than squashing it. The sizes use logical names: inline means along a line of text, and block means across it.',
@@ -134,7 +134,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   object-fit: cover;
 }`,
   },
-  cover: {
+  hero: {
     paragraphs: [
       'The rule `display: flex` makes the box a Flexbox, which lines its items up in one direction, and `flex-direction: column` makes that direction top to bottom. The box has a minimum height, `min-block-size`, so it’s at least 20rem tall but can grow.',
       'The centred item gets `margin-block: auto`, an automatic margin above and below. Automatic margins soak up all the spare room, so the item ends up in the middle, and anything before or after it is pushed to the top and bottom.',
@@ -167,7 +167,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   flex: 0 0 var(--lab-reel-item, 12rem);
 }`,
   },
-  // Arranging boxes
+  // Grid formation and alignment
   normalFlow: {
     paragraphs: [
       'The `display` property decides how a box joins the flow. The buttons switch it between three values.',
@@ -185,7 +185,7 @@ export const boxCssNotes: Record<string, CssNote> = {
       'The rule `display: grid` turns the container into a grid, and `grid-template-columns` lists the columns. The `fr` unit means a share of the space left over, so `1fr 2fr` gives the second column twice as much as the first.',
       'The first item has `grid-column: span 2`, so it covers two columns. The other items fill the remaining cells in order.',
     ],
-    code: `.lab-grid-demo {
+    code: `.lab-grid-example {
   display: grid;
   grid-template-columns: var(--lab-grid-columns);
   gap: var(--space-3);
@@ -200,7 +200,7 @@ export const boxCssNotes: Record<string, CssNote> = {
       'In a Flexbox row, `justify-content` moves the items along the row: to the `start`, the `center` or the `end`, or with `space-between` to spread them out.',
       'The `align-items` property moves them across the row, from top to bottom. The default, `stretch`, makes every item as tall as the row.',
     ],
-    code: `.lab-align-demo {
+    code: `.lab-align-example {
   display: flex;
   justify-content: var(--lab-justify);
   align-items: var(--lab-align);
@@ -277,7 +277,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   z-index: 1;
 }`,
   },
-  columnDrop: {
+  rowWrapAndGrow: {
     paragraphs: [
       'Row wrap and grow is a Flexbox row, from `display: flex`, that may wrap, from `flex-wrap: wrap`. Each box has `flex: 1 1 12rem`, which sets `flex-grow`, `flex-shrink` and `flex-basis` at once: it starts at 12rem, can shrink, and grows to share the spare room.',
       'When the boxes no longer fit, the last one wraps onto a new row, and its `flex-grow` makes it grow across the full width.',
@@ -364,8 +364,8 @@ export const boxCssNotes: Record<string, CssNote> = {
   box-shadow: var(--elevation-raised-1);
 }`,
   },
-  // Box formations
-  stack: {
+  // One below another and Side by side
+  column: {
     paragraphs: [
       'The rule `display: flex` makes the container a Flexbox, which lines its items up in one direction. That direction is a row unless `flex-direction` changes it, and `column` makes it top to bottom, so the items sit one above another.',
       'The `gap` property sets the space between items. It never adds space before the first item or after the last, and because the parent sets it, the items themselves need no margins. The space is a custom property, so it can be a token.',
@@ -376,7 +376,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   gap: var(--lab-column-space, var(--space-3));
 }`,
   },
-  inline: {
+  row: {
     paragraphs: [
       'The rule `display: flex` makes the container a Flexbox, which lines its items up in one direction. That direction is a row unless `flex-direction` changes it, and the items stay on one line unless `flex-wrap` lets them wrap. Each item is as wide as its content.',
       'With the switch on, it may wrap, and each item’s `flex-basis`, the size it would like to be, comes from a sum.',
@@ -397,7 +397,7 @@ export const boxCssNotes: Record<string, CssNote> = {
   flex-basis: calc((var(--lab-switch-at) - 100%) * 999);
 }`,
   },
-  inlineCluster: {
+  rowWrap: {
     paragraphs: [
       'The rule `display: flex` makes the container a Flexbox row. The key line is `flex-wrap: wrap`: when the row runs out of room, the next item moves onto a new line instead of squashing or overflowing, just like words in a sentence.',
       'Setting `align-items: center` lines up items of different heights, and `gap` spaces them both along each line and between lines.',
@@ -445,29 +445,29 @@ export const boxCssNotes: Record<string, CssNote> = {
   flex-grow: 999;
 }`,
   },
-  columns: {
+  fixedColumnGrid: {
     paragraphs: [
       'The `repeat()` function makes the chosen number of columns. Each is `minmax(0, 1fr)`, an equal share that can shrink to nothing, so long content can’t make one column wider than the rest.',
       'An item spans more than one column with `grid-column: span`, followed by how many.',
     ],
-    code: `.lab-columns {
+    code: `.lab-fixed-column-grid {
   display: grid;
-  grid-template-columns: repeat(var(--lab-columns, 3), minmax(0, 1fr));
+  grid-template-columns: repeat(var(--lab-fixed-columns, 3), minmax(0, 1fr));
   gap: var(--space-3);
 }
 
-.lab-columns-item {
+.lab-fixed-column-grid-item {
   grid-column: span var(--lab-span, 1);
 }`,
   },
-  gridBlock: {
+  autoFillGrid: {
     paragraphs: [
       'The `repeat()` function with `auto-fill` asks the browser to make as many columns as will fit. Inside it, `minmax()` sets a range for each column: at least the minimum, here 10rem, and at most `1fr`, one equal share of the space left over.',
       'The minimum is written `min(100%, 10rem)`, which means “10rem, or the full width if that’s smaller”. So in a space narrower than 10rem, the single column shrinks to fit instead of sticking out.',
     ],
-    code: `.lab-grid {
+    code: `.lab-auto-fill-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--lab-grid-min, 10rem)), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--lab-auto-fill-min, 10rem)), 1fr));
   gap: var(--space-3);
 }`,
   },

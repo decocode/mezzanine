@@ -4,9 +4,9 @@ import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'reac
 import { framePresets, labBadgeLabel, type CssNote } from './layoutLabContent'
 import { splitInlineCode } from './layoutLabLogic'
 
-// A frame whose width you set with a slider or presets. Its contents are a size container. When the demo
+// A frame whose width you set with a slider or presets. Its contents are a size container. When the example
 // is meant to stick out of the frame, the frame is a named region that takes focus, so keyboard users can scroll it.
-export function DemoFrame({ label, initialWidth = 720, canOverflow = false, children }: { label: string; initialWidth?: number; canOverflow?: boolean; children: ReactNode }) {
+export function ExampleFrame({ label, initialWidth = 720, canOverflow = false, children }: { label: string; initialWidth?: number; canOverflow?: boolean; children: ReactNode }) {
   const [width, setWidth] = useState(initialWidth)
   return <div className="lab-frame">
     {/* The group's name tells screen reader users which example this "Width" slider belongs to. */}
@@ -39,21 +39,21 @@ export function DemoFrame({ label, initialWidth = 720, canOverflow = false, chil
   </div>
 }
 
-// A heading for one demo inside a section's "Examples" part.
-export function DemoHeading({ children }: { children: ReactNode }) {
-  return <Heading level={3} className="lab-demo-heading mz-text-heading-sm">{children}</Heading>
+// A heading for one example inside a section's "Examples" part.
+export function ExampleHeading({ children }: { children: ReactNode }) {
+  return <Heading level={3} className="lab-example-heading mz-text-heading-sm">{children}</Heading>
 }
 
-// The explanation that goes with a demo.
-export function DemoText({ children }: { children: ReactNode }) {
-  return <Text elementType="p" className="lab-demo-text mz-text-body-md">{children}</Text>
+// The explanation that goes with an example.
+export function ExampleText({ children }: { children: ReactNode }) {
+  return <Text elementType="p" className="lab-example-text mz-text-body-md">{children}</Text>
 }
 
 // The explanation of the CSS behind one example, with the rules themselves
 // (or, when marked, example rules for an app).
 export function CssNotesBody({ note }: { note: CssNote }) {
   return <div className="lab-css-notes-body">
-    {note.isExample && <Text elementType="p" className="mz-text-body-md">This is example CSS for an app; the demo doesn’t use it.</Text>}
+    {note.isExample && <Text elementType="p" className="mz-text-body-md">This CSS is for an app to use; the example on this page doesn’t use it.</Text>}
     {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
       {splitInlineCode(paragraph).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part)}
     </Text>)}
@@ -81,7 +81,7 @@ export function FeatureStatus({ supported }: { supported: boolean }) {
   </p>
 }
 
-// Buttons that choose one CSS value for a demo, such as overflow: hidden, with a visible label.
+// Buttons that choose one CSS value for an example, such as overflow: hidden, with a visible label.
 export function ValuePicker<Value extends string>({ label, options, value, onChange }: { label: string; options: readonly { label: string; value: Value }[]; value: Value; onChange: (value: Value) => void }) {
   const labelId = useId()
   return <div className="lab-picker">

@@ -1,4 +1,4 @@
-/* Lab only: the Layout demonstration. Every rule is scoped to .lab-layout or to a
+/* Lab only: the Layout pages. Every rule is scoped to .lab-layout or to a
    class used only here, so nothing can reach documentation pages. --lab-* values
    are illustrative candidates, not Mezzanine tokens. */
 
@@ -30,7 +30,7 @@
 }
 
 /* Extra space above each example, so one example's frame doesn't run into the next one's heading. */
-.lab-layout .lab-demo-heading {
+.lab-layout .lab-example-heading {
   margin-block-start: var(--space-8);
 }
 
@@ -64,7 +64,7 @@
   max-inline-size: 70ch;
 }
 
-.lab-demo-text {
+.lab-example-text {
   max-inline-size: 70ch;
 }
 
@@ -78,7 +78,7 @@
   overflow-x: auto;
 }
 
-/* A demo with a caption naming it, for side-by-side comparisons. */
+/* An example with a caption naming it, for side-by-side comparisons. */
 .lab-labelled {
   display: grid;
   gap: var(--space-2);
@@ -194,7 +194,7 @@
 }
 
 /* The Layout groups. Pages that teach a CSS idea use the familiar physical names, such as
-   width and margin-left; the building blocks use logical names, as a library would. */
+   width and margin-left; the layout components use logical names, as a library would. */
 
 .lab-subtitle {
   max-inline-size: 70ch;
@@ -320,7 +320,7 @@
   outline-offset: var(--space-1);
 }
 
-/* Inside the box: images and media. */
+/* Inside the box: filling the box. */
 .lab-image-fit {
   max-width: 100%;
   height: auto;
@@ -345,7 +345,7 @@
   column-rule: 1px solid var(--color-border);
 }
 
-/* Arranging boxes: normal flow. */
+/* Box basics: types of box. */
 .lab-flow-item {
   display: var(--lab-flow-display);
   padding: var(--space-2);
@@ -353,8 +353,8 @@
   background: var(--color-surface);
 }
 
-/* Arranging boxes: Grid and alignment. */
-.lab-grid-demo {
+/* Grid formation, and alignment inside the box. */
+.lab-grid-example {
   display: grid;
   grid-template-columns: var(--lab-grid-columns);
   gap: var(--space-3);
@@ -364,7 +364,7 @@
   grid-column: span 2;
 }
 
-.lab-align-demo {
+.lab-align-example {
   display: flex;
   justify-content: var(--lab-justify);
   align-items: var(--lab-align);
@@ -381,8 +381,8 @@
   border: 1px dashed var(--color-text-muted);
 }
 
-/* Arranging boxes: spacing. */
-.lab-spacing-demo {
+/* Add space: gap and the spacing scale. */
+.lab-spacing-example {
   border: 1px dashed var(--color-text-muted);
 }
 
@@ -402,7 +402,7 @@
   gap: var(--lab-gap);
 }
 
-/* Arranging boxes: reading order. */
+/* Reading order. */
 .lab-order-row {
   display: flex;
   gap: var(--space-2);
@@ -413,7 +413,7 @@
   justify-content: flex-end;
 }
 
-/* Building blocks. Each limit is a custom property, so it could be a token. */
+/* Layout components. Each limit is a custom property, so it could be a token. */
 .lab-column {
   display: flex;
   flex-direction: column;
@@ -443,19 +443,19 @@
   gap: var(--lab-row-wrap-space, var(--space-2));
 }
 
-.lab-columns {
+.lab-fixed-column-grid {
   display: grid;
-  grid-template-columns: repeat(var(--lab-columns, 3), minmax(0, 1fr));
+  grid-template-columns: repeat(var(--lab-fixed-columns, 3), minmax(0, 1fr));
   gap: var(--space-3);
 }
 
-.lab-columns-item {
+.lab-fixed-column-grid-item {
   grid-column: span var(--lab-span, 1);
 }
 
-.lab-grid {
+.lab-auto-fill-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--lab-grid-min, 10rem)), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--lab-auto-fill-min, 10rem)), 1fr));
   gap: var(--space-3);
 }
 
@@ -498,19 +498,19 @@
   margin-block: auto;
 }
 
-/* The Hero demo's outline, so you can see the box the middle item is centred in. */
-.lab-hero-demo {
+/* The Hero example's outline, so you can see the box the middle item is centred in. */
+.lab-hero-example {
   border: 1px dashed var(--color-text-muted);
 }
 
-/* The demo's items: small labels at the edges and a large centred headline. */
-.lab-hero-demo .lab-hero-small {
+/* The example's items: small labels at the edges and a large centred headline. */
+.lab-hero-example .lab-hero-small {
   align-self: flex-start;
   padding: var(--space-1) var(--space-2);
   border: 1px solid var(--color-border);
 }
 
-.lab-hero-demo .lab-hero-end {
+.lab-hero-example .lab-hero-end {
   align-self: center;
 }
 
@@ -805,7 +805,7 @@
   content: 'Library style won';
 }
 
-@layer lab-demo-library {
+@layer lab-example-library {
   .lab-layout .lab-cascade-layered .lab-chip.lab-chip {
     background: var(--color-neutral-200);
   }

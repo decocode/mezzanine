@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 
-// Lab-only layout building blocks, following Bedrock Layouts and Every Layout. Each limit is
+// Lab-only layout components, following Bedrock Layouts and Every Layout. Each limit is
 // passed as a CSS custom property so it could be a token. Illustrative and unapproved.
 
 type Children = { children: ReactNode }
@@ -21,19 +21,19 @@ export function RowWrap({ children, space }: Children & { space?: string }) {
   return <div className="lab-row-wrap" style={vars({ '--lab-row-wrap-space': space })}>{children}</div>
 }
 
-// Columns: a fixed number of equal columns.
-export function Columns({ children, columns }: Children & { columns?: number }) {
-  return <div className="lab-columns" style={vars({ '--lab-columns': columns?.toString() })}>{children}</div>
+// FixedColumnGrid: a grid with a set number of equal columns.
+export function FixedColumnGrid({ children, columns }: Children & { columns?: number }) {
+  return <div className="lab-fixed-column-grid" style={vars({ '--lab-fixed-columns': columns?.toString() })}>{children}</div>
 }
 
-// An item in Columns that spans more than one column.
-export function ColumnsItem({ children, span }: Children & { span?: number }) {
-  return <div className="lab-columns-item" style={vars({ '--lab-span': span?.toString() })}>{children}</div>
+// An item in FixedColumnGrid that spans more than one column.
+export function FixedColumnGridItem({ children, span }: Children & { span?: number }) {
+  return <div className="lab-fixed-column-grid-item" style={vars({ '--lab-span': span?.toString() })}>{children}</div>
 }
 
-// Grid: as many columns as fit, none narrower than the minimum.
-export function Grid({ children, min }: Children & { min?: string }) {
-  return <div className="lab-grid" style={vars({ '--lab-grid-min': min })}>{children}</div>
+// AutoFillGrid: a grid with as many columns as fit, none narrower than the minimum.
+export function AutoFillGrid({ children, min }: Children & { min?: string }) {
+  return <div className="lab-auto-fill-grid" style={vars({ '--lab-auto-fill-min': min })}>{children}</div>
 }
 
 // Row wrap and grow: a row that wraps, where the boxes on each new row grow to fill it.

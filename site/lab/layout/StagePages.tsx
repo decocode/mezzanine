@@ -7,27 +7,22 @@ import {
   emergingFeatures, childPageCardAction, futurePages, labBadgeLabel, stagePageHeadings,
   stagePagesByStage, type FuturePage, type LabSection, type LayoutStage, type StagePage,
 } from './layoutLabContent'
-import { futureDemos } from './EmergingFeatureDemos'
-import { RowWrapAndGrowDemo, ContainerQueryDemo, FluidSizingDemo, ViewportDemo } from './FoundationDemos'
-import { theBoxDemos } from './TheBoxDemos'
-import { insideTheBoxDemos } from './InsideTheBoxDemos'
-import { arrangingBoxesDemos } from './ArrangingBoxesDemos'
-import { boxFormationDemos } from './BoxFormationDemos'
+import { futureExamples } from './EmergingFeatureExamples'
+import { boxBasicsExamples } from './BoxBasicsExamples'
+import { addSpaceExamples } from './AddSpaceExamples'
+import { insideTheBoxExamples } from './InsideTheBoxExamples'
+import { sideBySideExamples } from './SideBySideExamples'
+import { oneBelowAnotherExamples } from './OneBelowAnotherExamples'
+import { gridFormationExamples } from './GridFormationExamples'
+import { containerExamples } from './ContainerExamples'
 
 // Each stage page's examples, keyed by the page's key. Pages with several examples give each a
 // third-level heading; pages with one put the CSS behind it under a third-level heading. A page can
-// also show Mezzanine's own detail, such as the spacing scale, after its demo in the Example section.
-export type StageDemos = Record<string, { Demo: () => JSX.Element; Detail?: () => JSX.Element }>
+// also show Mezzanine's own detail, such as the spacing scale, after its example in the Example section.
+export type StageExamples = Record<string, { Example: () => JSX.Element; Detail?: () => JSX.Element }>
 
-// The pages that moved into groups from the first version of Layout.
-const sortedPageDemos: StageDemos = {
-  columnDrop: { Demo: RowWrapAndGrowDemo },
-  containerQueries: { Demo: ContainerQueryDemo },
-  fluidSizing: { Demo: FluidSizingDemo },
-  viewportUnits: { Demo: ViewportDemo },
-}
-
-const demos: StageDemos = { ...theBoxDemos, ...insideTheBoxDemos, ...arrangingBoxesDemos, ...boxFormationDemos, ...sortedPageDemos }
+// One example file per Layout group.
+const examples: StageExamples = { ...boxBasicsExamples, ...addSpaceExamples, ...insideTheBoxExamples, ...sideBySideExamples, ...oneBelowAnotherExamples, ...gridFormationExamples, ...containerExamples }
 
 // The "How it works" and "Example" sections shared by every Layout page: what it is, why it matters
 // and browser support, then the examples with the CSS behind them. Each is a section of the docs page template.
@@ -41,7 +36,7 @@ function howItWorksSections(page: { id: string; what: string; why?: string; deta
       </div>
       {page.support && <>
         <Heading level={3} className="lab-section-heading mz-text-heading-sm">{stagePageHeadings.browserSupport}</Heading>
-        <Text elementType="p" className="lab-demo-text mz-text-body-md">{page.support}</Text>
+        <Text elementType="p" className="lab-example-text mz-text-body-md">{page.support}</Text>
       </>}
     </div>,
   }, {
@@ -88,13 +83,13 @@ function alsoKnownAsSection(id: string, title: string, names: NonNullable<StageP
 // One stage page: Also known as when its name is agreed, How it works, then Example. A building
 // block's Every Layout and Bedrock sources are its References.
 export function StagePageView({ page }: { page: StagePage }) {
-  const { Demo, Detail } = demos[page.key]
+  const { Example, Detail } = examples[page.key]
   return <DocsPageTemplate
     title={page.title}
     description={page.subtitle}
     sections={[
       ...(page.alsoKnownAs ? [alsoKnownAsSection(page.id, page.title, page.alsoKnownAs)] : []),
-      ...howItWorksSections(page, <><Demo />{Detail && <Detail />}</>),
+      ...howItWorksSections(page, <><Example />{Detail && <Detail />}</>),
     ]}
     relatedPages={page.relatedPages ?? []}
     references={[...(page.similarTo ?? []), ...(page.references ?? [])]}
@@ -102,11 +97,11 @@ export function StagePageView({ page }: { page: StagePage }) {
 }
 
 // A page still to be sorted into a stage, or a Lab page outside Layout: its "How it works" and "Example" sections.
-export function SectionPageView({ section, Demo }: { section: Pick<LabSection, 'id' | 'title' | 'subtitle' | 'what' | 'why' | 'details' | 'support' | 'similarTo' | 'references'> & { relatedPages?: { label: string; href: string }[] }; Demo: () => JSX.Element }) {
+export function SectionPageView({ section, Example }: { section: Pick<LabSection, 'id' | 'title' | 'subtitle' | 'what' | 'why' | 'details' | 'support' | 'similarTo' | 'references'> & { relatedPages?: { label: string; href: string }[] }; Example: () => JSX.Element }) {
   return <DocsPageTemplate
     title={section.title}
     description={section.subtitle}
-    sections={howItWorksSections(section, <Demo />)}
+    sections={howItWorksSections(section, <Example />)}
     relatedPages={section.relatedPages ?? []}
     references={section.references ?? section.similarTo ?? []}
   />
@@ -129,12 +124,12 @@ export function FutureOverview() {
   }]} />
 }
 
-// One emerging feature: its demo, which says which browsers support it, in a "How it works" section.
+// One emerging feature: its example, which says which browsers support it, in a "How it works" section.
 export function FuturePageView({ page }: { page: FuturePage }) {
-  const Demo = futureDemos[page.key]
+  const Example = futureExamples[page.key]
   return <DocsPageTemplate title={page.title} references={page.references ?? []} sections={[{
     id: `${page.id}-how-it-works`,
     title: stagePageHeadings.howItWorks,
-    content: <div className="lab-section-body"><Demo /></div>,
+    content: <div className="lab-section-body"><Example /></div>,
   }]} />
 }

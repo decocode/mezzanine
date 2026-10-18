@@ -27,7 +27,7 @@ export interface LabSection extends LabIntro {
   slug: string
   // Only where support is worth knowing: not for features that work in every browser.
   support?: string
-  // Building blocks are reusable Lab-only layout components, credited to where they come from.
+  // Pages for reusable Lab-only layout components credit where each idea comes from.
   similarTo?: SimilarTo[]
   // External sources for further reading, shown as References.
   references?: SimilarTo[]
@@ -39,9 +39,9 @@ export const emergingFeatures = {
   id: 'lab-emerging-features',
   href: '/site/lab/emerging-features',
   title: 'Emerging features',
-  what: 'Newer features that work in some browsers today. Each one is used as an extra, so where it isn’t supported, the demo falls back to something that still works.',
+  what: 'Newer features that work in some browsers today. Each one is used as an extra, so where it isn’t supported, the example falls back to something that still works.',
   why: 'They’re worth knowing about, and trying out in the Lab, before they arrive everywhere. Each one is marked Lab, meaning it shouldn’t be introduced into Mezzanine yet.',
-  support: 'Each demo checks your browser and says whether the feature is active. Where it isn’t, you’re seeing the fallback.',
+  support: 'Each example checks your browser and says whether the feature is active. Where it isn’t, you’re seeing the fallback.',
 }
 
 export interface FuturePage {
@@ -246,7 +246,7 @@ export const layoutStages: LayoutStage[] = [
   { key: 'container', id: 'lab-stage-container', slug: 'container', title: 'Container', summary: 'When a box responds to the space its container gives it.' },
 ]
 
-// Where a building block's idea comes from, linked on its page.
+// Where a layout component's idea comes from, linked on its page.
 export interface SimilarTo {
   label: string
   href: string
@@ -263,7 +263,7 @@ export interface StagePage extends LabIntro {
   subtitle?: string
   // Only where support is worth knowing: not for features that work in every browser.
   support?: string
-  // Building blocks are reusable Lab-only layout components; the rest teach a CSS idea.
+  // Pages for reusable Lab-only layout components credit where each idea comes from.
   similarTo?: SimilarTo[]
   // External sources for further reading, shown as References after any Similar to sources.
   references?: SimilarTo[]
@@ -283,7 +283,7 @@ export const stagePages: StagePage[] = [
       { label: 'MDN: Introduction to the CSS box model', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Introduction' },
     ],
   },
-  // The box
+  // Box basics
   {
     key: 'margin', id: 'lab-margin', stage: 'addSpace', title: 'Margin', href: '/site/lab/layout/add-space/margin',
     subtitle: 'When boxes assert their need for personal space.',
@@ -307,7 +307,12 @@ export const stagePages: StagePage[] = [
     key: 'typesOfBox', id: 'lab-types-of-box', stage: 'boxBasics', title: 'Types of box', href: '/site/lab/layout/box-basics/types-of-box',
     subtitle: 'When boxes decide whether to stack up or line up.',
     what: 'Every box is a type, set with the display property. A block box starts a new row and fills the width of its parent. An inline box sits in a row with its neighbours and wraps like words. An inline-block box sits in a row too, but takes a width, height and padding like a block. And display: none removes a box completely, even for screen readers.',
-    why: 'Left alone, block boxes stack one above another and inline boxes line up in rows. This natural arrangement is called normal flow, and it follows the order of the HTML, which is also the order keyboards and screen readers follow. A box can also arrange the boxes inside it, with display: flex or display: grid: see Arranging boxes.',
+    why: 'Left alone, block boxes stack one above another and inline boxes line up in rows. This natural arrangement is called normal flow, and it follows the order of the HTML, which is also the order keyboards and screen readers follow. A box can also arrange the boxes inside it, with `display: flex` or `display: grid`, which Side by side, One below another and Grid formation explain.',
+    relatedPages: [
+      { label: 'Side by side', href: '/site/lab/layout/side-by-side' },
+      { label: 'One below another', href: '/site/lab/layout/one-below-another' },
+      { label: 'Grid formation', href: '/site/lab/layout/grid-formation' },
+    ],
     references: [
       { label: 'MDN: display', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/display' },
       { label: 'MDN: Block and inline layout in normal flow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Display/Block_and_inline_layout' },
@@ -334,7 +339,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'frame', id: 'lab-aspect-ratio', stage: 'insideTheBox', title: 'Aspect ratio', href: '/site/lab/layout/inside-the-box/aspect-ratio',
+    key: 'aspectRatio', id: 'lab-aspect-ratio', stage: 'insideTheBox', title: 'Aspect ratio', href: '/site/lab/layout/inside-the-box/aspect-ratio',
     subtitle: 'When a picture is cropped to a set shape.',
     what: 'Aspect ratio gives a box a fixed shape, such as 16:9, and crops the picture inside to fill it.',
     why: 'Pictures from different places come in different shapes. A shared aspect ratio lines them up as a tidy set, without squashing any of them.',
@@ -353,7 +358,7 @@ export const stagePages: StagePage[] = [
   },
   // Inside the box
   {
-    key: 'imagesAndMedia', id: 'lab-images-and-media', stage: 'insideTheBox', title: 'Filling the box', href: '/site/lab/layout/inside-the-box/filling-the-box',
+    key: 'fillingTheBox', id: 'lab-filling-the-box', stage: 'insideTheBox', title: 'Filling the box', href: '/site/lab/layout/inside-the-box/filling-the-box',
     subtitle: 'When pictures fill their box.',
     what: 'Pictures and videos are boxes too, but they arrive with a size of their own, which can be bigger than the space they’re given. A few properties keep them inside their box and in proportion.',
     why: 'An image wider than a phone screen pushes the whole page sideways, and an image squashed into the wrong shape looks broken. Every picture also needs alt text in the HTML, so people who can’t see it still get its meaning.',
@@ -363,7 +368,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'overflow', id: 'lab-overflow', stage: 'insideTheBox', title: 'Overflowing the box', href: '/site/lab/layout/inside-the-box/overflowing-the-box',
+    key: 'overflowingTheBox', id: 'lab-overflowing-the-box', stage: 'insideTheBox', title: 'Overflowing the box', href: '/site/lab/layout/inside-the-box/overflowing-the-box',
     subtitle: 'When the content doesn’t fit.',
     what: 'Overflow is content that is too big for its box. By default it spills out and draws over whatever comes next. The overflow property chooses what happens instead: hide the extra, or let people scroll to it.',
     why: 'Spilled content overlaps other things, and hidden content is lost. The safest fix is usually to let the box grow. When a box has to stay a fixed size, scrolling keeps the content reachable.',
@@ -373,7 +378,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'multiColumn', id: 'lab-content-columns', stage: 'insideTheBox', title: 'Content columns', href: '/site/lab/layout/inside-the-box/content-columns',
+    key: 'contentColumns', id: 'lab-content-columns', stage: 'insideTheBox', title: 'Content columns', href: '/site/lab/layout/inside-the-box/content-columns',
     subtitle: 'When content flows into columns, like a newspaper.',
     what: 'Content columns makes information flow like it does in printed media such as newspapers. Once the content fills the first column from top to bottom, it then carries on at the top of the next column. You choose a width for the columns, and the browser works out how many will fit.',
     why: 'It suits short content, such as a list of links. For long text it’s awkward on a screen, because readers have to scroll back up to start each new column. Cards and pictures can be split across two columns unless each one has `break-inside: avoid`. Their order also runs down each column, not across, so a grid of cards is better built with CSS Grid.',
@@ -383,7 +388,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'has', id: 'lab-has', stage: 'insideTheBox', title: 'Box has content', href: '/site/lab/layout/inside-the-box/box-has-content',
+    key: 'boxHasContent', id: 'lab-box-has-content', stage: 'insideTheBox', title: 'Box has content', href: '/site/lab/layout/inside-the-box/box-has-content',
     subtitle: 'When a box changes its layout depending on what’s inside it.',
     what: 'A selector is the part of a CSS rule that picks which boxes the rule applies to. Usually it picks a box by what it is, or where it sits, such as “a link inside the Navbar”. The :has() selector works the other way round: it picks a box by what it contains, such as “a list that has five or more items” or “a box that has a picture”.',
     why: 'Think of a restaurant pushing two tables together when a fifth guest arrives. The table reacts to who actually turns up. In the same way, a box can react to its real content, so you don’t need a separate version, or an extra setting, for every case.',
@@ -391,7 +396,7 @@ export const stagePages: StagePage[] = [
       { label: 'MDN: :has()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/:has' },
     ],
   },
-  // Arranging boxes
+  // Grid formation and alignment
   {
     key: 'grid', id: 'lab-grid', stage: 'gridFormation', title: 'Grid', href: '/site/lab/layout/grid-formation/grid',
     subtitle: 'When boxes line up in rows and columns at once.',
@@ -433,9 +438,9 @@ export const stagePages: StagePage[] = [
       { label: 'MDN: gap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/gap' },
     ],
   },
-  // Box formations
+  // One below another and Side by side
   {
-    key: 'stack', id: 'lab-column', stage: 'oneBelowAnother', title: 'Column', href: '/site/lab/layout/one-below-another/column',
+    key: 'column', id: 'lab-column', stage: 'oneBelowAnother', title: 'Column', href: '/site/lab/layout/one-below-another/column',
     subtitle: 'When boxes sit one below another, evenly spaced.',
     what: 'Column puts boxes one below another, in the same order as the HTML, like items on a to-do list. It’s a Flexbox column, not a Grid column or a newspaper-style column.',
     why: 'The space between items is set once, by the parent, so no item needs its own outer margin. Move an item and the spacing still works.',
@@ -445,14 +450,14 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'cover', id: 'lab-hero', stage: 'oneBelowAnother', title: 'Hero', href: '/site/lab/layout/one-below-another/hero',
+    key: 'hero', id: 'lab-hero', stage: 'oneBelowAnother', title: 'Hero', href: '/site/lab/layout/one-below-another/hero',
     subtitle: 'When one item takes centre stage, like the title on a book cover.',
     what: 'Hero is a tall box, like the opening section of a homepage. One item sits in the middle, and anything before or after it is pushed to the top and bottom edges, like the title, publisher and author on a book cover.',
     why: 'The box has a minimum height, not a fixed one, so if the content needs more room, such as on a small phone or with enlarged text, the box grows instead of cutting anything off.',
     similarTo: [everyLayout('Cover', 'cover'), bedrock('Cover', 'cover')],
   },
   {
-    key: 'inline', id: 'lab-row', stage: 'sideBySide', title: 'Row', href: '/site/lab/layout/side-by-side/row',
+    key: 'row', id: 'lab-row', stage: 'sideBySide', title: 'Row', href: '/site/lab/layout/side-by-side/row',
     subtitle: 'When boxes stay together in one row.',
     what: 'Row keeps items in a single row, like boxes holding hands. It can also switch to a column when its space is narrower than a limit you set.',
     why: 'A row of buttons, or a logo beside a title, should stay together. The switch stops the row getting squashed in narrow space, and the limit is a size, not a screen width.',
@@ -463,7 +468,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'inlineCluster', id: 'lab-row-wrap', stage: 'sideBySide', title: 'Row wrap', href: '/site/lab/layout/side-by-side/row-wrap',
+    key: 'rowWrap', id: 'lab-row-wrap', stage: 'sideBySide', title: 'Row wrap', href: '/site/lab/layout/side-by-side/row-wrap',
     subtitle: 'When squeezed boxes enjoy a spacious new row.',
     what: 'Row wrap moves boxes into a new row when they no longer fit. The word “wrap” is borrowed from how words in a string of text behave. Each box keeps its own width, so the rows can end at different places.',
     why: 'Row wrap is useful for small items that come in any number and any length, such as tags, Badges and filter buttons. Every item stays visible, with the same space between each one.',
@@ -513,9 +518,9 @@ export const stagePages: StagePage[] = [
       { label: 'Material Design: Canonical layouts', href: 'https://m3.material.io/foundations/adaptive-design/canonical-layouts' },
     ],
   },
-  // Boxes on devices
+  // Side by side and Container
   {
-    key: 'columnDrop', id: 'lab-row-wrap-and-grow', stage: 'sideBySide', title: 'Row wrap and grow', href: '/site/lab/layout/side-by-side/row-wrap-and-grow',
+    key: 'rowWrapAndGrow', id: 'lab-row-wrap-and-grow', stage: 'sideBySide', title: 'Row wrap and grow', href: '/site/lab/layout/side-by-side/row-wrap-and-grow',
     what: 'Grow is used with Row wrap so that the boxes moved onto the new row stretch to fill the available space.',
     why: 'Row wrap and grow is useful for a few larger boxes such as form fields side by side, summary panels on a dashboard, or groups of footer links. No row is left with a gap at its end, so it looks nice and tidy.',
     similarTo: [{ label: 'Bedrock: ColumnDrop', href: 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/column-drop' }],
@@ -525,7 +530,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'containerQueries', id: 'lab-container', stage: 'container', title: 'Container queries', href: '/site/lab/layout/container/container-queries',
+    key: 'containerQueries', id: 'lab-container-queries', stage: 'container', title: 'Container queries', href: '/site/lab/layout/container/container-queries',
     what: 'A container query lets a component change its layout depending on how much space its container gives it, rather than how wide the whole screen is.',
     why: 'The same component can sit in a narrow sidebar and a wide main column on the same screen, and suit both. A screen breakpoint would give both copies the same layout, because the screen is the same width for each.',
     references: [
@@ -548,7 +553,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'viewportUnits', id: 'lab-viewport', stage: 'boxBasics', title: 'Viewport units', href: '/site/lab/layout/box-basics/viewport-units',
+    key: 'viewportUnits', id: 'lab-viewport-units', stage: 'boxBasics', title: 'Viewport units', href: '/site/lab/layout/box-basics/viewport-units',
     what: 'Newer viewport units measure the screen height in three ways: with the browser’s toolbars showing, called svh; with them hidden, called lvh; or as they are right now, called dvh.',
     why: 'On phones, the old 100vh is often taller than the part of the screen you can see.',
     references: [
@@ -562,9 +567,9 @@ export const stagePages: StagePage[] = [
 const stagePageOrder: Record<StageKey, readonly string[]> = {
   boxBasics: ['boxModel', 'typesOfBox', 'measuringTheBox', 'viewportUnits', 'sizingTheBox', 'center'],
   addSpace: ['margin', 'padding', 'gap'],
-  insideTheBox: ['alignment', 'imagesAndMedia', 'overflow', 'frame', 'multiColumn', 'has'],
-  sideBySide: ['inline', 'inlineCluster', 'columnDrop', 'reel', 'split'],
-  oneBelowAnother: ['stack', 'cover'],
+  insideTheBox: ['alignment', 'fillingTheBox', 'overflowingTheBox', 'aspectRatio', 'contentColumns', 'boxHasContent'],
+  sideBySide: ['row', 'rowWrap', 'rowWrapAndGrow', 'reel', 'split'],
+  oneBelowAnother: ['column', 'hero'],
   gridFormation: ['grid', 'subgrid'],
   container: ['containerQueries', 'fluidSizing'],
 }
@@ -640,7 +645,7 @@ export const cssNotes: Record<string, CssNote> = {
     isExample: true,
     paragraphs: [
       'In CSS, each question in the table becomes an `@media` rule that adjusts things for the person’s setup, such as stronger borders when they ask for more contrast, or bigger targets when they use touch.',
-      'Notice that neither example mentions a screen width. The demo itself reads these queries with JavaScript, through `matchMedia`, so it can show live answers.',
+      'Notice that neither example mentions a screen width. The live answers on this page come from JavaScript, which reads these queries through `matchMedia`.',
     ],
     code: `@media (prefers-contrast: more) {
   .example {
@@ -778,7 +783,7 @@ export const cssNotes: Record<string, CssNote> = {
   background: var(--color-neutral-200);
 }
 
-@layer lab-demo-library {
+@layer lab-example-library {
   .lab-layout .lab-cascade-layered .lab-chip.lab-chip {
     background: var(--color-neutral-200);
   }
@@ -881,6 +886,6 @@ export const environmentQueries = [
   { label: 'Window is at least 48rem wide', query: '(width >= 48rem)' },
 ]
 
-// The alt text for the example picture used by the Filling the box and Aspect ratio demos.
+// The alt text for the example picture used by the Filling the box and Aspect ratio examples.
 export const exampleImageAlt = 'Example picture: a dark square and a grey circle on a light background'
 
