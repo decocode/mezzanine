@@ -139,15 +139,15 @@ export const boxCssNotes: Record<string, CssNote> = {
       'The cover is a Flexbox column with a minimum height, `min-block-size`, so it’s at least 20rem tall but can grow.',
       'The centred item gets `margin-block: auto`, an automatic margin above and below. Automatic margins soak up all the spare room, so the item ends up in the middle, and anything before or after it is pushed to the top and bottom.',
     ],
-    code: `.lab-cover {
+    code: `.lab-hero {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  min-block-size: var(--lab-cover-min, 20rem);
+  min-block-size: var(--lab-hero-min, 20rem);
   padding: var(--space-4);
 }
 
-.lab-cover-centre {
+.lab-hero-centre {
   margin-block: auto;
 }`,
   },
@@ -395,20 +395,20 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   inline: {
     paragraphs: [
-      'On its own, Inline is a Flexbox row that doesn’t wrap. With the switch on, it may wrap, and each item’s `flex-basis`, the size it would like to be, comes from a sum.',
+      'On its own, Row is a Flexbox row that doesn’t wrap. With the switch on, it may wrap, and each item’s `flex-basis`, the size it would like to be, comes from a sum.',
       'Inside the sum, `100%` is the width of the row. When the row is narrower than the switch width, the answer is huge, so every item wraps onto its own line and you get a column. When it’s wider, the answer is negative, which counts as zero, and `flex-grow` shares the row out equally. Every Layout calls this trick the Switcher.',
     ],
-    code: `.lab-inline {
+    code: `.lab-row {
   display: flex;
   align-items: center;
-  gap: var(--lab-inline-space, var(--space-3));
+  gap: var(--lab-row-space, var(--space-3));
 }
 
-.lab-inline-switch {
+.lab-row-switch {
   flex-wrap: wrap;
 }
 
-.lab-inline-switch > * {
+.lab-row-switch > * {
   flex-grow: 1;
   flex-basis: calc((var(--lab-switch-at) - 100%) * 999);
 }`,
@@ -418,11 +418,11 @@ export const boxCssNotes: Record<string, CssNote> = {
       'The key line is `flex-wrap: wrap`. When a row runs out of room, the next item moves onto a new line instead of squashing or overflowing, just like words in a sentence.',
       'Setting `align-items: center` lines up items of different heights, and `gap` spaces them both along each line and between lines.',
     ],
-    code: `.lab-inline-cluster {
+    code: `.lab-row-wrap {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--lab-inline-cluster-space, var(--space-2));
+  gap: var(--lab-row-wrap-space, var(--space-2));
 }`,
   },
   split: {

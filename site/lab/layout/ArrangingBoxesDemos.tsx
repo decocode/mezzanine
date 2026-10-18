@@ -94,10 +94,10 @@ const justifyOptions = [
 ] as const
 
 const alignOptions = [
-  { label: 'stretch', value: 'stretch' },
   { label: 'start', value: 'start' },
   { label: 'center', value: 'center' },
   { label: 'end', value: 'end' },
+  { label: 'stretch', value: 'stretch' },
 ] as const
 
 function AlignmentDemo() {

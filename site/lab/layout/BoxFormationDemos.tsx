@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Badge, Checkbox, Link, Split, type SplitProps } from '@decocode/mezzanine'
 import { CssNotes, DemoFrame, DemoText, ValuePicker } from './LabParts'
-import { Block, Columns, ColumnsItem, Cover, Grid, Inline, InlineCluster, Reel, Stack } from './LabPrimitives'
+import { Block, Columns, ColumnsItem, Grid, Hero, Reel, Row, RowWrap, Stack } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
 
@@ -24,20 +24,20 @@ const coverHeightOptions = [
 function CoverDemo() {
   const [height, setHeight] = useState<(typeof coverHeightOptions)[number]['value']>('24rem')
   return <>
-    <DemoText>The dashed line is the Cover box, set out like the opening section of a homepage. At every height, the headline stays in the middle, and the logo and “Scroll down” stay at the top and bottom edges.</DemoText>
+    <DemoText>The dashed line is the Hero box, set out like the opening section of a homepage. At every height, the headline stays in the middle, and the logo and “Scroll down” stay at the top and bottom edges.</DemoText>
     <ValuePicker label="Minimum height" options={coverHeightOptions} value={height} onChange={setHeight} />
-    <DemoFrame label="Cover">
-      <div className="lab-cover-demo">
-        <Cover
+    <DemoFrame label="Hero">
+      <div className="lab-hero-demo">
+        <Hero
           minHeight={height}
-          top={<p className="lab-cover-small mz-text-label-md">Logo</p>}
-          bottom={<p className="lab-cover-small lab-cover-end mz-text-label-md">Scroll down</p>}
+          top={<p className="lab-hero-small mz-text-label-md">Logo</p>}
+          bottom={<p className="lab-hero-small lab-hero-end mz-text-label-md">Scroll down</p>}
         >
-          <p className="lab-cover-headline mz-text-heading-lg">Big headline</p>
-        </Cover>
+          <p className="lab-hero-headline mz-text-heading-lg">Big headline</p>
+        </Hero>
       </div>
     </DemoFrame>
-    <CssNotes name="Cover" note={cssNotes.cover} level={3} />
+    <CssNotes name="Hero" note={cssNotes.cover} level={3} />
   </>
 }
 
@@ -46,20 +46,20 @@ function InlineDemo() {
   return <>
     <DemoText>Below about 30rem, with the switch, the row becomes a column. Without it, the row squashes, then sticks out of the frame.</DemoText>
     <Checkbox isSelected={isSwitching} onChange={setIsSwitching}>Switch to a column below 30rem</Checkbox>
-    <DemoFrame label="Inline" canOverflow>
-      <Inline switchAt={isSwitching ? '30rem' : undefined}><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Inline>
+    <DemoFrame label="Row" canOverflow>
+      <Row switchAt={isSwitching ? '30rem' : undefined}><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Row>
     </DemoFrame>
-    <CssNotes name="Inline" note={cssNotes.inline} level={3} />
+    <CssNotes name="Row" note={cssNotes.inline} level={3} />
   </>
 }
 
 function InlineClusterDemo() {
   return <>
     <DemoText>Badges in a row. Narrow the frame and they wrap onto new lines, like words.</DemoText>
-    <DemoFrame label="Inline cluster">
-      <InlineCluster>{['Badge A', 'Badge B', 'Badge C', 'Badge D', 'Badge E', 'Badge F', 'Badge G'].map((tag) => <Badge key={tag}>{tag}</Badge>)}</InlineCluster>
+    <DemoFrame label="Row wrap">
+      <RowWrap>{['Badge A', 'Badge B', 'Badge C', 'Badge D', 'Badge E', 'Badge F', 'Badge G'].map((tag) => <Badge key={tag}>{tag}</Badge>)}</RowWrap>
     </DemoFrame>
-    <CssNotes name="Inline cluster" note={cssNotes.inlineCluster} level={3} />
+    <CssNotes name="Row wrap" note={cssNotes.inlineCluster} level={3} />
   </>
 }
 

@@ -85,7 +85,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   await expect(page).toHaveTitle('Page not found | Lab')
 })
 
-// Checks the demos do what their captions say: the same tile responds to its own slot, Inline switches
+// Checks the demos do what their captions say: the same tile responds to its own slot, Row switches
 // to a column below its switch width, the list becomes a grid with a fifth item, the overflow box
 // becomes scrollable, and reversing the row changes what you see but not the keyboard order.
 test('Lab Layout demos respond to their space and content', async ({ page }) => {
@@ -97,9 +97,9 @@ test('Lab Layout demos respond to their space and content', async ({ page }) => 
   expect(await columns(0)).toBe(1)
   expect(await columns(1)).toBe(2)
 
-  await page.goto('/site/lab/layout/side-by-side/inline')
-  const inlineFrame = page.locator('.lab-frame').filter({ has: page.locator('.lab-inline') })
-  const rows = () => inlineFrame.locator('.lab-inline > *').evaluateAll(items => new Set(items.map(item => Math.round(item.getBoundingClientRect().top))).size)
+  await page.goto('/site/lab/layout/side-by-side/row')
+  const inlineFrame = page.locator('.lab-frame').filter({ has: page.locator('.lab-row') })
+  const rows = () => inlineFrame.locator('.lab-row > *').evaluateAll(items => new Set(items.map(item => Math.round(item.getBoundingClientRect().top))).size)
   await inlineFrame.getByRole('radio', { name: 'Wide', exact: true }).click()
   await expect.poll(rows).toBe(1)
   await inlineFrame.getByRole('radio', { name: '320px', exact: true }).click()

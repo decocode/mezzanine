@@ -11,14 +11,14 @@ export function Stack({ children, space }: Children & { space?: string }) {
   return <div className="lab-stack" style={vars({ '--lab-stack-space': space })}>{children}</div>
 }
 
-// Inline: items in one row; with switchAt, a column whenever the row is narrower than that width.
-export function Inline({ children, space, switchAt }: Children & { space?: string; switchAt?: string }) {
-  return <div className={`lab-inline${switchAt ? ' lab-inline-switch' : ''}`} style={vars({ '--lab-inline-space': space, '--lab-switch-at': switchAt })}>{children}</div>
+// Row: items in one row; with switchAt, one below another whenever the row is narrower than that width.
+export function Row({ children, space, switchAt }: Children & { space?: string; switchAt?: string }) {
+  return <div className={`lab-row${switchAt ? ' lab-row-switch' : ''}`} style={vars({ '--lab-row-space': space, '--lab-switch-at': switchAt })}>{children}</div>
 }
 
-// Inline cluster: items that wrap like words in a sentence.
-export function InlineCluster({ children, space }: Children & { space?: string }) {
-  return <div className="lab-inline-cluster" style={vars({ '--lab-inline-cluster-space': space })}>{children}</div>
+// Row wrap: items that wrap like words in a sentence.
+export function RowWrap({ children, space }: Children & { space?: string }) {
+  return <div className="lab-row-wrap" style={vars({ '--lab-row-wrap-space': space })}>{children}</div>
 }
 
 // Columns: a fixed number of equal columns.
@@ -51,11 +51,11 @@ export function Frame({ children, ratio }: Children & { ratio?: string }) {
   return <div className="lab-media-frame" style={vars({ '--lab-frame-ratio': ratio })}>{children}</div>
 }
 
-// Cover: a tall area with one item in the middle and optional items at the top and bottom.
-export function Cover({ children, top, bottom, minHeight }: Children & { top?: ReactNode; bottom?: ReactNode; minHeight?: string }) {
-  return <div className="lab-cover" style={vars({ '--lab-cover-min': minHeight })}>
+// Hero: a tall area with one item in the middle and optional items at the top and bottom.
+export function Hero({ children, top, bottom, minHeight }: Children & { top?: ReactNode; bottom?: ReactNode; minHeight?: string }) {
+  return <div className="lab-hero" style={vars({ '--lab-hero-min': minHeight })}>
     {top}
-    <div className="lab-cover-centre">{children}</div>
+    <div className="lab-hero-centre">{children}</div>
     {bottom}
   </div>
 }
