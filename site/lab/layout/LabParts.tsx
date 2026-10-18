@@ -53,7 +53,7 @@ export function DemoText({ children }: { children: ReactNode }) {
 // (or, when marked, example rules for an app).
 export function CssNotesBody({ note }: { note: CssNote }) {
   return <div className="lab-css-notes-body">
-    {note.isExample && <Text elementType="p" className="mz-text-body-md">This is example CSS for an app. The demo above doesn’t use it.</Text>}
+    {note.isExample && <Text elementType="p" className="mz-text-body-md">This is example CSS for an app; the demo doesn’t use it.</Text>}
     {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
       {splitInlineCode(paragraph).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part)}
     </Text>)}

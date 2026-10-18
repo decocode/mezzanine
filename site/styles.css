@@ -1126,7 +1126,7 @@ a:focus-visible {
 .button-sizes-table .react-aria-Column,
 .button-sizes-table .react-aria-Cell { width: calc(100% / 3); }
 
-/* Text page examples: a paragraph at the line length, a narrow Card for long words, and vertical text in a Card. */
+/* Text and Reading direction page examples: a paragraph at the line length, a narrow Card for long words, and vertical text in a Card. */
 .text-line-length-example { max-width: var(--line-length); margin: 0; }
 /* The line length comparison: a label above each paragraph. */
 .text-comparison { display: grid; gap: var(--space-2); }

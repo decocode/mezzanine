@@ -144,14 +144,6 @@ export function ColumnDropDemo() {
 
 export function FluidSizingDemo() {
   return <>
-    <DemoHeading>Fluid text</DemoHeading>
-    <DemoText>The display text and the heading grow and shrink smoothly with the frame, but never below or above their limits. The body text stays the same size at every width, so it’s always comfortable to read. Mezzanine’s own Display and Heading styles also grow with the screen: see <Link href="/typography/text-styles">Text styles</Link>.</DemoText>
-    <DemoFrame label="Fluid text">
-      <p className="lab-fluid-display">Display text</p>
-      <p className="lab-fluid-heading">Headings that scale within the space</p>
-      <p className="mz-text-body-md">Body text stays the same size, however wide or narrow the frame gets. This is so it remains easy to read.</p>
-    </DemoFrame>
-    <CssNotes name="the scaling text" note={cssNotes.fluidSizing} level={4} />
     <DemoHeading>Fluid space</DemoHeading>
     <DemoText>The space inside the box, and between the items in it, grows with the frame, between two limits.</DemoText>
     <DemoFrame label="Fluid space">

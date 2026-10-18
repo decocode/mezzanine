@@ -81,6 +81,7 @@ export const interactionTokensIntro = <>The colour tokens below come from the ac
 
 
 export const interactionRelatedPages = [
+  { label: 'Target size', href: '/interaction/target-size' },
   { label: 'Accessibility', href: '/accessibility' },
   { label: 'Color', href: '/color' },
   { label: 'Motion', href: '/motion' },

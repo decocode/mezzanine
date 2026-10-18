@@ -1,6 +1,6 @@
-import { Button, Card, Heading, Link, Text } from '@decocode/mezzanine'
+import { Button, Card, Heading } from '@decocode/mezzanine'
 import { DocsPageTemplate } from '../templates/DocsPageTemplate'
-import { childPageCardAction, browserAndDeviceLab, browserAndDevicePages, labTopLevelPages, layersLab, layersPages, layoutLabIntro, layoutStages, stagePagesByStage, type FuturePage, type LabTopLevelPage, type LayoutStage, type StagePage } from './layout/layoutLabContent'
+import { childPageCardAction, browserAndDeviceLab, browserAndDevicePages, labTopLevelPages, layersLab, layersPages, layoutLabIntro, layoutStages, type FuturePage, type LabTopLevelPage, type LayoutStage, type StagePage } from './layout/layoutLabContent'
 import {
   LayersDemo, NamedLayersDemo, PositioningDemo,
   ScrollPaddingDemo, StackingContextsDemo, SupportsDemo,
@@ -11,24 +11,27 @@ import { FutureOverview, FuturePageView, SectionPageView, StageOverview, StagePa
 import './layout/layout-lab.css'
 
 
-// The overview: a section for each group with links to its pages. Built with the docs page template.
+// The overview: what layout is, then a Card for each group. Built with the docs page template.
 // Illustrative and unapproved.
 export function LayoutOverviewPage() {
   return <div className="lab-layout">
     <DocsPageTemplate
       title={layoutLabIntro.title}
-      description={[layoutLabIntro.summary, layoutLabIntro.frames]}
-      sections={layoutStages.map((stage) => ({
-        id: stage.id,
-        title: stage.title,
-        content: <div className="lab-section-body">
-          <Text elementType="p" className="mz-text-body-md">{stage.summary}</Text>
-          <ul className="lab-stage-pages mz-text-body-md">
-            {stagePagesByStage(stage.key).map((page) => <li key={page.key}><Link href={page.href}>{page.title}</Link></li>)}
-          </ul>
-          <div><Button variant="secondary" href={`/site/lab/layout/${stage.slug}`} aria-describedby={stage.id}>{childPageCardAction}</Button></div>
-        </div>,
-      }))}
+      description={[layoutLabIntro.summary, layoutLabIntro.principles]}
+      showContents={false}
+      sections={[{
+        id: 'lab-layout-groups',
+        title: layoutLabIntro.groupsHeading,
+        content: <ul className="lab-child-page-cards">
+          {layoutStages.map((stage) => <li key={stage.key}>
+            <Card>
+              <Heading level={3} id={stage.id}>{stage.title}</Heading>
+              <p>{stage.summary}</p>
+              <Button variant="secondary" href={`/site/lab/layout/${stage.slug}`} aria-describedby={stage.id}>{childPageCardAction}</Button>
+            </Card>
+          </li>)}
+        </ul>,
+      }]}
     />
   </div>
 }

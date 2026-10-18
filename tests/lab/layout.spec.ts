@@ -30,20 +30,20 @@ for (const theme of themes) {
   })
 }
 
-// Each stage and its pages are listed on the overview and in the Lab navigation; a stage shows a
-// Card per page; building blocks link to where they come from; an unknown address shows the not-found page.
+// The overview shows a Card per group, with no On this page list; each group and its pages are in
+// the Lab navigation; a group shows a Card per page; building blocks link to where they come from;
+// an unknown address shows the not-found page.
 test('Lab Layout stages and pages are reachable from the overview and the navigation', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/layout')
   const main = page.locator('main')
-  // Each stage is a section of the docs page template, with links to its pages and a Read docs Button to its overview.
-  for (const layoutPage of stageChildPages) {
-    await expect(main.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
-  }
+  // Each group is a Card with a Read docs Button to its overview, described by the group's name.
   for (const stage of stageOverviewPages) {
-    await expect(main.locator(`a[href="${stage.path}"]`)).toHaveAccessibleDescription(stage.title)
+    const readDocs = main.locator('.mezzanine-card').filter({ has: page.getByRole('heading', { name: stage.title, exact: true, level: 3 }) }).getByRole('link', { name: 'Read docs', exact: true })
+    await expect(readDocs).toHaveAttribute('href', stage.path)
+    await expect(readDocs).toHaveAccessibleDescription(stage.title)
   }
-  await expect(page.getByRole('navigation', { name: 'On this page', exact: true }).getByRole('link', { name: 'Box basics', exact: true })).toBeVisible()
+  await expect(page.getByRole('navigation', { name: 'On this page', exact: true })).toHaveCount(0)
   await main.locator('a[href="/site/lab/layout/box-basics"]').click()
   await expect(page).toHaveTitle('Box basics | Lab')
 
@@ -54,9 +54,9 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
     await expect(readDocs).toHaveAttribute('href', stagePage.href)
     await expect(readDocs).toHaveAccessibleDescription(stagePage.title)
   }
-  // Box basics explains the box model itself, before its Cards.
-  await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toBeVisible()
-  await expect(page.locator('.lab-box-anatomy')).toBeVisible()
+  // Box basics is an index of Cards; the box model has its own page, first among them.
+  await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toHaveCount(0)
+  await expect(page.locator('main .mezzanine-card').first().getByRole('heading', { level: 3 })).toHaveText('The box model')
   await card('Types of box').getByRole('link', { name: 'Read docs', exact: true }).click()
   await expect(page).toHaveTitle('Types of box | Lab')
   await expect(page.getByText('When boxes decide whether to stack up or line up.', { exact: true })).toBeVisible()

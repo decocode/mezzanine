@@ -4,8 +4,8 @@ import { DocsPageTemplate } from '../../templates/DocsPageTemplate'
 import { DocsTable } from '../../components/DocsTable'
 import { splitInlineCode } from './layoutLabLogic'
 import {
-  emergingFeatures, buildingBlockLabel, childPageCardAction, futurePages, labBadgeLabel, stagePageHeadings,
-  stageIntros, stagePagesByStage, type FuturePage, type LabSection, type LayoutStage, type StagePage,
+  emergingFeatures, childPageCardAction, futurePages, labBadgeLabel, stagePageHeadings,
+  stagePagesByStage, type FuturePage, type LabSection, type LayoutStage, type StagePage,
 } from './layoutLabContent'
 import { futureDemos } from './EmergingFeatureDemos'
 import { ColumnDropDemo, ContainerQueryDemo, FluidSizingDemo, ViewportDemo } from './FoundationDemos'
@@ -19,7 +19,7 @@ import { boxFormationDemos } from './BoxFormationDemos'
 // also show Mezzanine's own detail, such as the spacing scale, after its demo in the Example section.
 export type StageDemos = Record<string, { Demo: () => JSX.Element; Detail?: () => JSX.Element }>
 
-// The pages that moved into stages from the first version of the tour.
+// The pages that moved into groups from the first version of Layout.
 const sortedPageDemos: StageDemos = {
   columnDrop: { Demo: ColumnDropDemo },
   containerQueries: { Demo: ContainerQueryDemo },
@@ -51,15 +51,11 @@ function howItWorksSections(page: { id: string; what: string; why: string; detai
   }]
 }
 
-// A stage's overview: what the stage is about, its own "How it works" when it has one (Box basics
-// explains the box model), then a Card for each of its pages. The Button is described by the
-// Card's heading, so each "Read docs" is distinguishable to screen reader users.
+// A group's overview: what the group is about, then a Card for each of its pages, with no On this
+// page list. The Button is described by the Card's heading, so each "Read docs" is distinguishable
+// to screen reader users.
 export function StageOverview({ stage }: { stage: LayoutStage }) {
-  const intro = stageIntros[stage.key]
-  const IntroDemo = intro && demos[intro.key].Demo
-  // A stage with only its Cards is an index page, so it has no On this page list.
-  return <DocsPageTemplate title={stage.title} description={stage.summary} showContents={intro != null} references={intro?.references ?? []} sections={[
-    ...(intro && IntroDemo ? [...howItWorksSections(intro, <IntroDemo />)] : []),
+  return <DocsPageTemplate title={stage.title} description={stage.summary} showContents={false} sections={[
     {
       id: `${stage.id}-pages`,
       title: stage.pagesHeading ?? stagePageHeadings.pages,
@@ -67,7 +63,6 @@ export function StageOverview({ stage }: { stage: LayoutStage }) {
         {stagePagesByStage(stage.key).map((page) => <li key={page.key}>
           <Card>
             <Heading level={3} id={`lab-child-page-card-${page.key}`}>{page.title}</Heading>
-            {page.similarTo && <p className="lab-page-badges"><Badge>{buildingBlockLabel}</Badge></p>}
             <p>{page.subtitle}</p>
             <Button variant="secondary" href={page.href} aria-describedby={`lab-child-page-card-${page.key}`}>{childPageCardAction}</Button>
           </Card>
@@ -101,6 +96,7 @@ export function StagePageView({ page }: { page: StagePage }) {
       ...(page.alsoKnownAs ? [alsoKnownAsSection(page.id, page.title, page.alsoKnownAs)] : []),
       ...howItWorksSections(page, <><Demo />{Detail && <Detail />}</>),
     ]}
+    relatedPages={page.relatedPages ?? []}
     references={[...(page.similarTo ?? []), ...(page.references ?? [])]}
   />
 }

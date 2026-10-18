@@ -51,8 +51,25 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     path: '/foundations',
     pages: [
       { id: 'accessibility', label: 'Accessibility', path: '/accessibility', status: 'implemented' },
-      { id: 'interaction', label: 'Interaction', path: '/interaction', status: 'implemented' },
-      { id: 'text', label: 'Text', path: '/text', status: 'implemented' },
+    ],
+    groups: [
+      {
+        id: 'interaction',
+        label: 'Interaction',
+        path: '/interaction',
+        pages: [
+          { id: 'target-size', label: 'Target size', path: '/interaction/target-size', status: 'implemented' },
+        ],
+      },
+      {
+        id: 'text',
+        label: 'Text',
+        path: '/text',
+        pages: [
+          { id: 'fluid-text', label: 'Fluid text', path: '/text/fluid-text', status: 'implemented' },
+          { id: 'reading-direction', label: 'Reading direction', path: '/text/reading-direction', status: 'implemented' },
+        ],
+      },
     ],
   },
   {

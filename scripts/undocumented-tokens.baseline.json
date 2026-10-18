@@ -24,8 +24,6 @@
   "--search-field-icon-size",
   "--split-gap",
   "--split-min-area-width",
-  "--target-size",
-  "--target-size-min",
   "--z-index-base",
   "--z-index-overlay",
   "--z-index-raised",

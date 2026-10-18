@@ -309,22 +309,6 @@ export const boxCssNotes: Record<string, CssNote> = {
   flex: 1 1 var(--lab-column-drop-min, 12rem);
 }`,
   },
-  fluidSizing: {
-    paragraphs: [
-      'The display text is `clamp(2.5rem, 1.5rem + 8cqi, 5rem)`, and the heading is `clamp(1.5rem, 1rem + 4cqi, 3rem)`. Each stays between its two limits, and in between it’s a rem value plus a percentage of the frame’s width.',
-      'The `cqi` unit is a hundredth of the width of the nearest container, here the frame, so the text follows the slider. The `rem` part keeps it growing when someone enlarges their text.',
-      'The body text uses Mezzanine’s Body medium style, `mz-text-body-md`, which has a fixed size, so it doesn’t scale.',
-    ],
-    code: `.lab-fluid-display {
-  font-size: clamp(2.5rem, 1.5rem + 8cqi, 5rem);
-  line-height: 1.1;
-}
-
-.lab-fluid-heading {
-  font-size: clamp(1.5rem, 1rem + 4cqi, 3rem);
-  line-height: 1.2;
-}`,
-  },
   fluidSpace: {
     paragraphs: [
       'The padding and the gap are both `clamp(var(--space-2), 4cqi, var(--space-8))`: 4% of the frame’s width, but never less than `--space-2` or more than `--space-8`.',

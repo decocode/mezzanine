@@ -5,8 +5,7 @@ import { ExampleZone } from '../components/ExampleZone'
 import { TokenValue } from '../components/TokenValue'
 import {
   textCssProperties, textDescription, textLineLengthCode, textLineLengthExample, textLineLengthLabels, textLineLengthParagraphs,
-  textLongWordsExample, textReadingDirectionCode,
-  textLongWordsParagraphs, textReadingDirectionParagraphs, textRightToLeftExamples, textReferences, textRelatedPages, textVerticalExamples,
+  textLongWordsExample, textLongWordsParagraphs, textRelatedPages,
 } from '../content/textContent'
 
 export default function TextPage() {
@@ -40,34 +39,6 @@ export default function TextPage() {
           </>),
         },
         {
-          id: 'text-reading-direction-heading',
-          title: 'Reading direction',
-          content: (<>
-            {textReadingDirectionParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <CodeBlock className="docs-code-block">{textReadingDirectionCode}</CodeBlock>
-            <ExampleZone>
-              <ul className="text-language-examples">
-                {textRightToLeftExamples.map(({ language, lang, text }) => <li key={lang} dir="rtl" lang={lang}>
-                  <Card>
-                    <p className="mz-text-label-md" lang="en">{language}</p>
-                    <p>{text}</p>
-                  </Card>
-                </li>)}
-              </ul>
-            </ExampleZone>
-            <ExampleZone>
-              <ul className="text-language-examples">
-                {textVerticalExamples.map(({ language, lang, text }) => <li key={lang}>
-                  <Card>
-                    <p className="mz-text-label-md">{language}</p>
-                    <p className="text-vertical-example" lang={lang}>{text}</p>
-                  </Card>
-                </li>)}
-              </ul>
-            </ExampleZone>
-          </>),
-        },
-        {
           id: 'text-technical-details',
           title: 'Technical details',
           sections: [
@@ -85,7 +56,6 @@ export default function TextPage() {
         },
       ]}
       relatedPages={textRelatedPages}
-      references={textReferences}
     />
   )
 }

@@ -193,7 +193,7 @@
   min-block-size: var(--space-24);
 }
 
-/* The tour's stages. Pages that teach a CSS idea use the familiar physical names, such as
+/* The Layout groups. Pages that teach a CSS idea use the familiar physical names, such as
    width and margin-left; the building blocks use logical names, as a library would. */
 
 .lab-subtitle {
@@ -572,16 +572,6 @@
 }
 
 /* Fluid sizing: the size follows the frame, between two limits. */
-.lab-fluid-display {
-  font-size: clamp(2.5rem, 1.5rem + 8cqi, 5rem);
-  line-height: 1.1;
-}
-
-.lab-fluid-heading {
-  font-size: clamp(1.5rem, 1rem + 4cqi, 3rem);
-  line-height: 1.2;
-}
-
 .lab-fluid-space {
   display: grid;
   gap: clamp(var(--space-2), 4cqi, var(--space-8));

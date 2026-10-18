@@ -3,7 +3,7 @@ import { emergingFeatures, futurePages, labBadgeLabel, browserAndDevicePages, br
 
 export const labContent = {
   index: { label: 'Lab', href: '/site/lab' },
-  layoutPage: { label: 'Layout', href: '/site/lab/layout', description: 'A hands-on tour of layout, told through boxes: the basics of a box, space, what goes inside it, ways to place boxes, and how they respond to their container, the browser and the device. Each page has a live demo and the CSS behind it.' },
+  layoutPage: { label: 'Layout', href: '/site/lab/layout', description: 'How boxes are sized, spaced and arranged: mobile first, and responding to their container.' },
   componentsPage: { label: 'Components', href: '/site/lab/components' },
   searchPage: { label: 'Search', href: '/site/lab/components/search' },
 }

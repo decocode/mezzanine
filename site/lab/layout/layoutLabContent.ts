@@ -1,4 +1,4 @@
-// Plain-English explanations for the Lab's Layout tour. The tour is told through boxes, in groups
+// Plain-English explanations for the Lab's Layout pages, told through boxes, in groups
 // named after what you want to do: box basics, space, what goes inside a box, ways to place boxes,
 // and how boxes respond to their container, the browser and the device. Illustrative and unapproved.
 
@@ -6,9 +6,9 @@ import { boxCssNotes } from './boxCssNotes'
 
 export const layoutLabIntro = {
   title: 'Layout',
-  summary: 'A hands-on tour of layout, told through boxes. Everything on a web page is a box. The tour starts with the basics of one box, then space, then what goes inside a box. Then it looks at ways to place boxes side by side, one below another and in a grid, and finally at how boxes respond to their container, the browser and the device.',
-  frames: 'Many demos sit inside a frame with a width slider, so you can see how a layout behaves in more or less space without resizing your window.',
-  stagesHeading: 'Stages',
+  summary: 'Layout is how boxes are sized, spaced and arranged. Everything on a web page is a box, from a single word to a whole section of a page.',
+  principles: 'Mezzanine’s layouts are mobile first: they start with the narrowest space and add to it as the space grows. Components respond to the room their container gives them, not to the size of the screen.',
+  groupsHeading: 'Groups',
 }
 
 // What a page's introduction needs: its heading, an optional subtitle, and what it is and why it matters.
@@ -152,6 +152,7 @@ export const browserAndDevicePages: Record<string, LabTopLevelPage> = {
     subtitle: 'When something is big enough to hit with a finger, or an unsteady hand.',
     what: 'A target size is the smallest area that something you tap or click should cover, so it’s easy to hit with a finger or an unsteady hand.',
     why: 'WCAG 2.2 sets a minimum of 24 by 24 pixels. Mezzanine’s buttons use 44 pixels today, but the value, 2.75rem, is written by hand. As a token, every control can share it.',
+    relatedPages: [{ label: 'Target size', href: '/interaction/target-size' }],
     references: [
       { label: 'WCAG 2.2: Target size (minimum)', href: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html' },
     ],
@@ -221,9 +222,9 @@ export const layersPages: Record<string, LabTopLevelPage> = {
   },
 }
 
-export type StageKey = 'boxBasics' | 'addSpace' | 'insideTheBox' | 'sideBySide' | 'oneBelowAnother' | 'formingAGrid' | 'container'
+export type StageKey = 'boxBasics' | 'addSpace' | 'insideTheBox' | 'sideBySide' | 'oneBelowAnother' | 'gridFormation' | 'container'
 
-// A stage of the tour: a group of pages with an overview page of its own.
+// A Layout group: a set of pages with an overview page of its own.
 export interface LayoutStage {
   key: StageKey
   id: string
@@ -241,7 +242,7 @@ export const layoutStages: LayoutStage[] = [
   { key: 'insideTheBox', id: 'lab-stage-inside-the-box', slug: 'inside-the-box', title: 'Inside the box', summary: 'A box holds content: text, pictures, other boxes. These pages are about how that content behaves inside its box.' },
   { key: 'sideBySide', id: 'lab-stage-side-by-side', slug: 'side-by-side', title: 'Side by side', summary: 'Ways to place boxes next to each other.' },
   { key: 'oneBelowAnother', id: 'lab-stage-one-below-another', slug: 'one-below-another', title: 'One below another', summary: 'Ways to place boxes one below another.' },
-  { key: 'formingAGrid', id: 'lab-stage-forming-a-grid', slug: 'forming-a-grid', title: 'Forming a grid', summary: 'Boxes in rows and columns at the same time.' },
+  { key: 'gridFormation', id: 'lab-stage-grid-formation', slug: 'grid-formation', title: 'Grid formation', summary: 'Boxes in rows and columns at the same time.' },
   { key: 'container', id: 'lab-stage-container', slug: 'container', title: 'Container', summary: 'When a box responds to the space its container gives it.' },
 ]
 
@@ -266,11 +267,22 @@ export interface StagePage extends LabIntro {
   similarTo?: SimilarTo[]
   // External sources for further reading, shown as References after any Similar to sources.
   references?: SimilarTo[]
+  // Other Mezzanine pages to read next, shown as Related pages.
+  relatedPages?: SimilarTo[]
   // What designers, engineers and other systems call the same thing, shown first in a closed Disclosure.
   alsoKnownAs?: readonly { where: string; called: string }[]
 }
 
 export const stagePages: StagePage[] = [
+  {
+    key: 'boxModel', id: 'lab-box-model', stage: 'boxBasics', title: 'The box model', href: '/site/lab/layout/box-basics/the-box-model',
+    subtitle: 'When every box is made of content, padding, a border and margin.',
+    what: 'Everything on a web page is a box, even a single word or a picture. Each box has four layers, like rings in a tree trunk. In the middle is the content. Around it is padding, then a border, then margin on the outside.',
+    why: 'Most layout puzzles come down to these four layers. Padding is space inside the box, so it pushes the content in. Margin is space outside the box, so it pushes other boxes away. Once you can picture the layers, you can tell which one to change.',
+    references: [
+      { label: 'MDN: Introduction to the CSS box model', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Introduction' },
+    ],
+  },
   // The box
   {
     key: 'margin', id: 'lab-margin', stage: 'addSpace', title: 'Margin', href: '/site/lab/layout/add-space/margin',
@@ -400,7 +412,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'grid', id: 'lab-grid', stage: 'formingAGrid', title: 'Grid', href: '/site/lab/layout/forming-a-grid/grid',
+    key: 'grid', id: 'lab-grid', stage: 'gridFormation', title: 'Grid', href: '/site/lab/layout/grid-formation/grid',
     subtitle: 'When boxes line up in rows and columns at once.',
     what: 'Grid arranges boxes in rows and columns at the same time. You describe the columns, and each item takes the next cell, or spans more than one.',
     why: 'When things need to line up in both directions, such as a gallery or a page with a header and a sidebar, Grid keeps every edge aligned.',
@@ -413,7 +425,7 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'subgrid', id: 'lab-subgrid', stage: 'formingAGrid', title: 'Subgrid', href: '/site/lab/layout/forming-a-grid/subgrid',
+    key: 'subgrid', id: 'lab-subgrid', stage: 'gridFormation', title: 'Subgrid', href: '/site/lab/layout/grid-formation/subgrid',
     subtitle: 'When the parts inside boxes line up with the boxes beside them.',
     what: 'Subgrid lets the parts inside boxes that sit side by side share the same rows. Headings, text and buttons then line up across the row, even when each box has a different amount of content.',
     why: 'Lined-up rows look intentional and are easier to scan, and you get them without fixing heights or cutting text short.',
@@ -516,12 +528,13 @@ export const stagePages: StagePage[] = [
   },
   {
     key: 'fluidSizing', id: 'lab-fluid-sizing', stage: 'container', title: 'Fluid sizing', href: '/site/lab/layout/container/fluid-sizing',
+    relatedPages: [{ label: 'Fluid text', href: '/text/fluid-text' }],
     subtitle: 'When a size grows and shrinks smoothly with the space it has.',
     what: 'Fluid sizing lets a size grow and shrink smoothly with its space, between a smallest and a largest value, instead of jumping from one size to another.',
     why: 'CSS has three functions for it. `min()` uses whichever of its values is smaller, so it sets a ceiling. `max()` uses whichever is larger, so it sets a floor. `clamp()` does both: `clamp(1.5rem, 1rem + 4cqi, 3rem)` means “1rem plus 4% of the container’s width, but never smaller than 1.5rem or larger than 3rem”.',
     details: [
       'The middle value usually mixes a fixed unit with one that follows the space. `vw` follows the browser window, and `cqi` follows the box’s container. The `rem` part keeps text growing when someone enlarges it.',
-      'It suits headings and display text, which can be bigger where there’s room, and space around page sections, which can breathe more on a wide screen. It also keeps widths within comfortable limits, such as a reading column, and sets minimums that never push past a narrow screen, such as `min(100%, 15rem)`.',
+      'It suits headings and display text, which can be bigger where there’s room; Mezzanine’s own Display and Heading styles work this way. It also suits space around page sections, which can breathe more on a wide screen. It keeps widths within comfortable limits, such as a reading column, and sets minimums that never push past a narrow screen, such as `min(100%, 15rem)`.',
     ],
     references: [
       { label: 'MDN: clamp()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/clamp' },
@@ -539,29 +552,14 @@ export const stagePages: StagePage[] = [
   },
 ]
 
-// A stage that opens with a "How it works" of its own, before its pages: The box explains the
-// box model, the idea every other page builds on. Keyed by the stage; its demo and Mezzanine lines
-// use the same key.
-export const stageIntros: Partial<Record<StageKey, { key: string; id: string; what: string; why: string; references?: SimilarTo[] }>> = {
-  boxBasics: {
-    key: 'boxModel',
-    id: 'lab-box-model',
-    what: 'Everything on a web page is a box, even a single word or a picture. Each box has four layers, like rings in a tree trunk. In the middle is the content. Around it is padding, then a border, then margin on the outside.',
-    why: 'Most layout puzzles come down to these four layers. Padding is space inside the box, so it pushes the content in. Margin is space outside the box, so it pushes other boxes away. Once you can picture the layers, you can tell which one to change.',
-    references: [
-      { label: 'MDN: Introduction to the CSS box model', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Introduction' },
-    ],
-  },
-}
-
 // The reading order of each stage's pages.
 const stagePageOrder: Record<StageKey, readonly string[]> = {
-  boxBasics: ['typesOfBox', 'sides', 'measuringTheBox', 'viewportUnits', 'sizingTheBox', 'center'],
+  boxBasics: ['boxModel', 'typesOfBox', 'sides', 'measuringTheBox', 'viewportUnits', 'sizingTheBox', 'center'],
   addSpace: ['margin', 'padding', 'gap'],
   insideTheBox: ['imagesAndMedia', 'overflow', 'frame', 'multiColumn', 'has'],
   sideBySide: ['cssFlexbox', 'alignment', 'inline', 'inlineCluster', 'split', 'reel', 'columnDrop'],
   oneBelowAnother: ['stack', 'cover'],
-  formingAGrid: ['grid', 'subgrid'],
+  gridFormation: ['grid', 'subgrid'],
   container: ['containerQueries', 'fluidSizing'],
 }
 
@@ -570,8 +568,6 @@ export const stagePagesByStage = (stage: StageKey) => stagePageOrder[stage].map(
 // The badge on emerging features: they shouldn't be introduced into Mezzanine yet.
 export const labBadgeLabel = 'Lab'
 
-// The badge on building blocks, on their Cards and pages.
-export const buildingBlockLabel = 'Building block'
 
 // The section headings on Lab Layout pages.
 export const stagePageHeadings = { alsoKnownAs: 'Also known as', howItWorks: 'How it works', example: 'Example', browserSupport: 'Browser support', pages: 'Pages' }
