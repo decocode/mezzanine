@@ -1,7 +1,7 @@
 // This file describes how the site's pages are organised: their navigation
 // groups, display names, URLs and implementation status.
 // It also helps the site find a page from its URL and the sidebar groups that
-// contain it. Page components are listed separately in pageRegistry.ts.
+// contain it, and says which folder in site/pages holds each page.
 
 export type SitePageStatus = 'implemented' | 'empty'
 
@@ -209,4 +209,19 @@ export function findSiteNavigationGroups(
     if (childGroups.length > 0) return [group, ...childGroups]
   }
   return []
+}
+
+// The folder in site/pages that holds a page: its navigation groups, then the page itself, such as
+// "foundations/interaction/target-size". A group's own page lives in the group's folder.
+export function sitePageFolder(pageId: string): string {
+  if (pageId === landingPage.id) return pageId
+  const groups = findSiteNavigationGroups(pageId)
+  if (!groups.length) throw new Error(`Page "${pageId}" is not in the navigation.`)
+  const folders = groups.map((group) => group.id)
+  return groups.at(-1)?.id === pageId ? folders.join('/') : [...folders, pageId].join('/')
+}
+
+// The page's component file within its folder, such as "TargetSizePage.tsx".
+export function sitePageFile(pageId: string): string {
+  return `${pageId.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join('')}Page.tsx`
 }

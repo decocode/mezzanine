@@ -175,4 +175,4 @@ In Mezzanine, "button" describes an appearance. Appearance (looks like a button 
 - The repository is public but all rights are reserved (see `LICENSE`). Do not add an open-source licence or change the terms unless the user asks.
 - The package is `"private": true` and is not published to npm. Do not publish it, change its version or remove `private` unless the user asks.
 - The site deploys to mezzanine.fly.dev from the Fly.io app `mezzanine` in the DecoCode Ltd organisation, using `Dockerfile`, `config/nginx.conf` and `fly.toml`. It is pre-launch and sends a `noindex` header. Do not deploy, change the Fly app or remove the header unless the user asks.
-- When a site route is added or removed, update the allowed routes in `config/nginx.conf` and the URLs in the Lighthouse configs in `config/`.
+- The server's allowed routes are generated from `site/siteStructure.ts` and the Lab's content by `scripts/generate-routes.mjs` during the Docker build, so adding or removing a page needs no nginx edit. The Lighthouse configs in `config/` list a few sample pages; update them only when one of those pages is renamed or removed (`npm run check:rules` reports it).

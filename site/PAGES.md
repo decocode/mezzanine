@@ -29,6 +29,17 @@ A paragraph can also be a short bulleted list: `{ list: ['First item', 'Second i
 
 When a page moves in the navigation, move its folder to match, so the folders always read like the navigation. The Lab in `site/lab/` follows the same pattern.
 
+## Adding a page
+
+1. Add the page to `site/siteStructure.ts`, in its navigation group.
+2. Create its folder in `site/pages/`, following the navigation, with
+   `<Name>Page.tsx` and `<name>Content.ts`. The page id `target-size` in the
+   Interaction group becomes `foundations/interaction/target-size/TargetSizePage.tsx`.
+
+The page loads from its folder automatically, and the server allows its route
+on the next deploy. `npm run check:rules` reports a page whose file is missing
+or in the wrong folder.
+
 Useful site components:
 
 - `ExampleZone` is the standard frame around an example. It accepts extra
@@ -132,9 +143,12 @@ Leave out sections that do not apply.
 
 `npm run check:rules` keeps documentation facts in step with the code:
 
-- Every page in `site/siteStructure.ts` must be an allowed route in
-  `config/nginx.conf`, every route nginx allows must be a page, and every Lighthouse
-  URL must be a route.
+- Every implemented page in `site/siteStructure.ts` must have its component in
+  the folder its place in the navigation gives it, such as
+  `site/pages/foundations/interaction/target-size/TargetSizePage.tsx`, and no
+  page file may sit anywhere else. Every Lighthouse URL must be a page.
+- The server's allowed routes are not written by hand: `scripts/generate-routes.mjs`
+  lists every docs and Lab page, and the Docker build gives that list to nginx.
 - Every token the site mentions must exist, and every public token in
   `src/tokens/`, the components' `*.tokens.css` files and the theme files must
   be documented on some page.

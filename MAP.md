@@ -101,7 +101,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/index.html` | HTML shell for the showcase site, including its favicon reference |
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
 | `site/PageLoader.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
-| `site/pageRegistry.ts` | Maps implemented documentation page IDs to lazy imports so only the requested page loads |
+| `site/pageRegistry.ts` | Finds each implemented page's component in the folder its place in the navigation gives it, loading it only when the page is visited |
 | `site/PAGES.md` | How documentation site pages are built: folders, the component page template, and Related pages and References |
 | `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; top-level groups are Get started, Principles, Foundations (does not change with the theme; Interaction is a group with Target size under it, and Text a group with Fluid text and Reading direction under it), Styles (changes with the theme), Themes and Components; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
@@ -279,7 +279,8 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | Path | Purpose |
 | --- | --- |
 | `scripts/check-rules.mjs` | Checks documentation controls, component class prefixes, library CSS colours, z-index values from the shared scale, logical sides (start and end, unless marked `physical:`), shared button sizing, typography, NavTree ownership, shared motion, allowed effects, docs facts (routes, tokens, Props tables) and the public API snapshot; supports explicit `--update-api` |
-| `scripts/docs-rules.mjs` | Checks that site routes, including the Lab index, Layout overview, stages and their pages, match nginx in both directions and that Lighthouse URLs are allowed routes, that documented tokens exist and public tokens are documented, and parses Props table rows |
+| `scripts/docs-rules.mjs` | Checks that each page's component sits in the folder its place in the navigation gives it and that Lighthouse URLs are pages, finds Lab routes, checks that documented tokens exist and public tokens are documented, and parses Props table rows |
+| `scripts/generate-routes.mjs` | Lists every docs and Lab page as nginx's allowed routes; the Docker build writes it to `/etc/nginx/conf.d/routes.inc` |
 | `scripts/docs-rules.test.mjs` | Passing and failing fixtures for the docs rules |
 | `scripts/effect-rules.mjs` | Finds React effect calls in the library and site and allows only the listed effects, each with an agreed reason |
 | `scripts/effect-rules.test.mjs` | Passing and failing fixtures for effect rules |
@@ -296,7 +297,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | Path | Purpose |
 | --- | --- |
 | `AGENTS.md` | Instructions for coding agents |
-| `Dockerfile`, `.dockerignore` | Production image: builds the showcase and serves `site-dist/` with nginx |
+| `Dockerfile`, `.dockerignore` | Production image: builds the showcase, generates the allowed routes, checks the nginx configuration and serves `site-dist/` with nginx |
 | `fly.toml` | Fly.io app `mezzanine`, London region, and HTTP service settings |
 | `LICENSE` | All rights reserved: the source is public to view, not licensed for use |
 | `package.json`, `package-lock.json` | Package name, exports, peer dependencies, dev dependencies, and npm scripts |
@@ -309,7 +310,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
 | `config/lighthouserc.mobile.json`, `config/lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
-| `config/nginx.conf` | Static server for the showcase: allowed routes, real 404s, caching, gzip, and the pre-launch `noindex` header |
+| `config/nginx.conf` | Static server for the showcase: includes the generated allowed routes, real 404s, caching, gzip, and the pre-launch `noindex` header |
 | `config/tsconfig.app.json` | Type checking for `src/` and `site/`, including the package-name path |
 | `config/tsconfig.lib.json` | Emits the package's type declarations into `dist/` |
 | `config/tsconfig.node.json` | Type checking for Vite and Playwright configuration files |

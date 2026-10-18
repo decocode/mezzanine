@@ -1,7 +1,9 @@
 import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
 import { checkTypographyChoices, checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
-import { checkRoutes, checkTokens, declaredTokens, labPaths, parsePropRows } from './docs-rules.mjs'
+import { checkRoutes, checkTokens, declaredTokens, parsePropRows } from './docs-rules.mjs'
+import { appRoutes } from './generate-routes.mjs'
+import { sitePageFile, sitePageFolder, sitePages } from '../site/siteStructure.ts'
 import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -472,8 +474,12 @@ function checkDocsTokens(update) {
 function checkDocsRoutes() {
   const lighthouseUrls = ['config/lighthouserc.mobile.json', 'config/lighthouserc.desktop.json']
     .flatMap(file => JSON.parse(read(file)).ci.collect.url.map(url => ({ file, url })))
-  const extraPaths = labPaths({ labContent: read('site/lab/labContent.tsx'), pageContent: filesIn('site/lab', ['.ts']).map(read).join('\n') })
-  for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), extraPaths, nginx: read('config/nginx.conf'), lighthouseUrls })) {
+  const pages = sitePages.filter(page => page.status === 'implemented')
+    .map(page => ({ id: page.id, file: `site/pages/${sitePageFolder(page.id)}/${sitePageFile(page.id)}` }))
+  const pageFiles = filesIn('site/pages', ['.tsx']).filter(file => file.endsWith('Page.tsx'))
+  // Shown by the app shell for unknown and unbuilt pages, so they have no place in the navigation.
+  const otherPageFiles = ['site/pages/not-found/NotFoundPage.tsx', 'site/pages/not-implemented/NotImplementedPage.tsx']
+  for (const problem of checkRoutes({ routes: appRoutes(), pages, pageFiles, otherPageFiles, lighthouseUrls })) {
     report(problem.file, read(problem.file), problem.position, 'docs-routes', problem.message)
   }
 }
