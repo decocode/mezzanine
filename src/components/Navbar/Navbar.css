@@ -120,15 +120,15 @@
 }
 
 .mezzanine-navbar-links > .react-aria-Link {
-  min-height: var(--navbar-menu-min-height);
+  min-height: var(--target-size);
   overflow-wrap: anywhere;
 }
 
 /* The brand link keeps a full touch target even when it shows only a logo,
    and whatever class the app gives it. */
 .mezzanine-navbar-brand > a {
-  min-width: var(--navbar-menu-min-height);
-  min-height: var(--navbar-menu-min-height);
+  min-width: var(--target-size);
+  min-height: var(--target-size);
   overflow-wrap: anywhere;
 }
 
@@ -140,7 +140,7 @@
 .navbar-link {
   display: inline-flex;
   align-items: center;
-  min-height: var(--navbar-menu-min-height);
+  min-height: var(--target-size);
   padding: var(--space-2) var(--space-3);
   border-bottom: var(--navigation-tree-current-indicator-width) solid transparent;
   background: transparent;

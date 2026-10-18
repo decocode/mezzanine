@@ -56,7 +56,6 @@ export const tabsContent = {
     { name: '--tabs-content', description: 'Panel text colour.' },
     { name: '--tabs-focus-ring-width', description: 'Keyboard-focus outline thickness.' },
     { name: '--tabs-focus-ring-offset', description: 'Keyboard-focus outline position.' },
-    { name: '--tab-min-height', description: 'Minimum tab target height.' },
     { name: '--tab-padding-block', description: 'Vertical tab padding.' },
     { name: '--tab-padding-inline', description: 'Horizontal tab padding.' },
     { name: '--tab-content', description: 'Default tab text colour.' },

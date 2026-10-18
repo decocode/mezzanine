@@ -4,7 +4,6 @@
   /* Button: component-specific structure, shared by every theme.
      Text sizes point to the type scale: label sizes for Small and Medium, and
      the matching title sizes for Large and Extra Large, where Label has no step. */
-  --button-sm-min-height: 2.75rem;
   --button-sm-padding-block: 0.5rem;
   --button-sm-padding-inline: 0.875rem;
   --button-sm-font-size: var(--font-size-label-md);

@@ -4,8 +4,6 @@
 
 .lab-layout {
   /* Candidate tokens from the research report. */
-  --lab-target-min-wcag: 1.5rem;
-  --lab-target-min: 2.75rem;
   --lab-sticky-height: 3rem;
 
   min-width: 0;
@@ -124,8 +122,8 @@
   box-sizing: border-box;
   block-size: var(--space-2);
   /* Half a thumb each side, so the thumb stays inside the slider at both ends. */
-  margin-inline: calc(var(--lab-target-min-wcag) / 2);
-  margin-block: calc((var(--lab-target-min-wcag) - var(--space-2)) / 2);
+  margin-inline: calc(var(--target-size-min) / 2);
+  margin-block: calc((var(--target-size-min) - var(--space-2)) / 2);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   background: var(--color-page);
@@ -136,7 +134,7 @@
   content: "";
   position: absolute;
   inset-inline: 0;
-  inset-block: calc((var(--space-2) - var(--lab-target-min-wcag)) / 2);
+  inset-block: calc((var(--space-2) - var(--target-size-min)) / 2);
 }
 
 .lab-slider-fill {
@@ -147,8 +145,8 @@
 .lab-slider-thumb {
   inset-block-start: 50%;
   box-sizing: border-box;
-  inline-size: var(--lab-target-min-wcag);
-  block-size: var(--lab-target-min-wcag);
+  inline-size: var(--target-size-min);
+  block-size: var(--target-size-min);
   border: 1px solid var(--color-text-muted);
   border-radius: var(--radius-full);
   background: var(--color-surface);
@@ -668,13 +666,13 @@
 }
 
 .lab-target-wcag {
-  inline-size: var(--lab-target-min-wcag);
-  block-size: var(--lab-target-min-wcag);
+  inline-size: var(--target-size-min);
+  block-size: var(--target-size-min);
 }
 
 .lab-target-comfortable {
-  inline-size: var(--lab-target-min);
-  block-size: var(--lab-target-min);
+  inline-size: var(--target-size);
+  block-size: var(--target-size);
 }
 
 .lab-layer-stack {

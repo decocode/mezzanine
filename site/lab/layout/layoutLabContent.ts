@@ -651,23 +651,23 @@ export const cssNotes: Record<string, CssNote> = {
 
 @media (pointer: coarse) {
   .example {
-    min-block-size: var(--lab-target-min);
+    min-block-size: var(--target-size);
   }
 }`,
   },
   targetSize: {
     paragraphs: [
-      'Each square takes its size from a token: `--lab-target-min-wcag` is 1.5rem, the WCAG minimum of 24px, and `--lab-target-min` is 2.75rem, or 44px.',
+      'Each square takes its size from a Mezzanine token: `--target-size-min` is 1.5rem, the WCAG minimum of 24px, and `--target-size` is 2.75rem, or 44px.',
       'A component would use the same token for the minimum width and height of anything you tap or click.',
     ],
     code: `.lab-target-wcag {
-  inline-size: var(--lab-target-min-wcag);
-  block-size: var(--lab-target-min-wcag);
+  inline-size: var(--target-size-min);
+  block-size: var(--target-size-min);
 }
 
 .lab-target-comfortable {
-  inline-size: var(--lab-target-min);
-  block-size: var(--lab-target-min);
+  inline-size: var(--target-size);
+  block-size: var(--target-size);
 }`,
   },
   layers: {

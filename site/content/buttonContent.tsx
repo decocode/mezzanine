@@ -82,7 +82,6 @@ export const buttonTokens: ButtonTokenDefinition[] = [
   { token: '--button-destructive-background-pressed', label: 'Button destructive background pressed', description: <>Destructive <code>Button</code> background when pressed.</> },
   { token: '--button-destructive-content', label: 'Button destructive content', description: <>Destructive <code>Button</code> label and icon.</> },
   { token: '--button-destructive-border', label: 'Button destructive border', description: <>Destructive <code>Button</code> border.</> },
-  { token: '--button-sm-min-height', label: 'Button small minimum height', description: <>Small <code>Button</code> minimum height.</> },
   { token: '--button-sm-padding-block', label: 'Button small vertical padding', description: <>Small <code>Button</code> vertical padding.</> },
   { token: '--button-sm-padding-inline', label: 'Button small horizontal padding', description: <>Small <code>Button</code> horizontal padding.</> },
   { token: '--button-sm-font-size', label: 'Button small font size', description: <>Small <code>Button</code> label size.</> },

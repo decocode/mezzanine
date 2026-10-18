@@ -3,7 +3,6 @@
 :where(:root) {
   /* NavigationTree: component-specific structure, shared by every theme. */
   --navigation-tree-gap: 0;
-  --navigation-tree-item-min-height: 2.75rem;
   --navigation-tree-item-padding-block: 0;
   --navigation-tree-item-padding-inline: 0.75rem;
   --navigation-tree-item-gap: 0.5rem;

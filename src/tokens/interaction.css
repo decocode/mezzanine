@@ -3,4 +3,9 @@
 :where(:root) {
   /* Shared disabled-state treatment for interactive components. */
   --opacity-disabled: 0.5;
+
+  /* Target size: how big something you tap or click must be. --target-size-min is the
+     WCAG 2.2 AA minimum of 24px; --target-size is the size Mezzanine's controls use. */
+  --target-size-min: 1.5rem;
+  --target-size: 2.75rem;
 }

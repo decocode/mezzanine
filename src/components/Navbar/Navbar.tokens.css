@@ -5,7 +5,6 @@
   --navbar-border-width: var(--border-width-baseline);
   --navbar-min-height: 4rem;
   --navbar-wide-padding-inline: clamp(1.5rem, 4vw, 3rem);
-  --navbar-menu-min-height: 2.75rem;
   --navbar-focus-ring-width: 0.1875rem;
   --navbar-focus-ring-offset: 0.125rem;
   --navbar-panel-max-height: 75dvh;

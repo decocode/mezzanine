@@ -31,7 +31,7 @@
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='sm'] {
-  --button-min-height: var(--button-sm-min-height);
+  --button-min-height: var(--target-size);
   --button-padding-block: var(--button-sm-padding-block);
   --button-padding-inline: var(--button-sm-padding-inline);
   --button-font-size: var(--button-sm-font-size);

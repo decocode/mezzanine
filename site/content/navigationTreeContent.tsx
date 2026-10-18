@@ -108,7 +108,6 @@ export const navigationTreeContent = {
   tokensIntroduction: 'Override these tokens in a product theme. Nav Tree also uses --chevron-size and --color-chevron, shared with Disclosure, for its chevron, the shared small-button sizing for its expand control, and the shared motion tokens for the chevron’s turn.',
   tokens: [
     { name: '--navigation-tree-gap', description: 'Space between rows and sections.' },
-    { name: '--navigation-tree-item-min-height', description: 'Minimum row height.' },
     { name: '--navigation-tree-item-padding-block', description: 'Space above and below a row’s content.' },
     { name: '--navigation-tree-item-padding-inline', description: 'Space at the start and end of a row.' },
     { name: '--navigation-tree-item-gap', description: 'Space between a row’s label, content and expand control.' },
