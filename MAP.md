@@ -22,7 +22,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/motionPolicy.ts` | Internal resolved-duration reader, preference/theme observation and token-display notification |
 | `src/styles.css` | Library stylesheet entry point; imports typography and, as components arrive, their structural styles |
 | `src/tokens.css` | Token entry point: imports the three themes, then the shared token files in `src/tokens/`, then each component's tokens, then the themes last so they can override defaults |
-| `src/typography.css` | Base text for `body` (including `hyphens: auto`, with code kept unhyphenated) and `h1`–`h6`, fifteen public text-style classes and the Inline code element pattern, assembled from typography tokens |
+| `src/typography.css` | Base text for `body` (no automatic hyphens) and `h1`–`h6`, fifteen public text-style classes and the Inline code element pattern, assembled from typography tokens |
 | `src/components/<Name>/<Name>.tokens.css` | Each component's structural tokens, shared by every theme; its theme-specific colours stay in `src/themes/` |
 | `src/components/Badge/Badge.css` | Token-led styling for Neutral, Violet, Info, Success, Warning and Danger Badges |
 | `src/components/Badge/Badge.tsx` | Public non-interactive Badge with core and semantic color variants, rendered as a semantic span |

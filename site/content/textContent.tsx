@@ -15,8 +15,6 @@ export const textLineLengthCode = `.article {
   max-width: var(--line-length);
 }`
 
-export const textLongWordsCode = `<html lang="de">`
-
 export const textReadingDirectionCode = `<!-- Right to left -->
 <html dir="rtl" lang="ar">
 
@@ -28,8 +26,7 @@ export const textReadingDirectionCode = `<!-- Right to left -->
 export const textLineLengthExample = 'Long lines of text are tiring to read, because your eyes have to travel a long way back to find the start of the next line. This paragraph stops at the line length, so it stays comfortable however wide the window gets.'
 
 export const textLongWordsParagraphs: ReactNode[] = [
-  <>Body text uses <code>hyphens: auto</code>, so a long word breaks at a syllable with a hyphen when the page declares its language with <code>lang</code>. Code never gains hyphens, because a hyphen would change its meaning.</>,
-  <>Components also break any word that still doesn’t fit, with <code>overflow-wrap: anywhere</code>, so nothing sticks out of its box.</>,
+  <>Components break any word that doesn’t fit, with <code>overflow-wrap: anywhere</code>, so nothing sticks out of its box.</>,
 ]
 
 export const textLongWordsExample = 'Donaudampfschifffahrtsgesellschaftskapitän'
@@ -57,7 +54,6 @@ export const textVerticalExamples = [
 
 export const textCssProperties = [
   { name: 'max-width', description: 'Limits a box of text to the line length.' },
-  { name: 'hyphens', description: <><code>auto</code> on body text, so long words break at syllables; <code>manual</code> on code.</> },
   { name: 'overflow-wrap', description: <><code>anywhere</code> in components, so a word that still doesn’t fit breaks.</> },
 ]
 
@@ -67,6 +63,5 @@ export const textRelatedPages = [
 ]
 
 export const textReferences = [
-  { label: 'MDN: hyphens', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens' },
   { label: 'MDN: Logical properties and values', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Logical_properties_and_values' },
 ]

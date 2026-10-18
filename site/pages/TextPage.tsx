@@ -5,7 +5,7 @@ import { ExampleZone } from '../components/ExampleZone'
 import { TokenValue } from '../components/TokenValue'
 import {
   textCssProperties, textDescription, textLineLengthCode, textLineLengthExample, textLineLengthLabels, textLineLengthParagraphs,
-  textLongWordsCode, textLongWordsExample, textReadingDirectionCode,
+  textLongWordsExample, textReadingDirectionCode,
   textLongWordsParagraphs, textReadingDirectionParagraphs, textRightToLeftExamples, textReferences, textRelatedPages, textVerticalExamples,
 } from '../content/textContent'
 
@@ -34,7 +34,6 @@ export default function TextPage() {
           title: 'Long words',
           content: (<>
             {textLongWordsParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <CodeBlock className="docs-code-block">{textLongWordsCode}</CodeBlock>
             <ExampleZone className="text-narrow-example">
               <Card><p lang="de">{textLongWordsExample}</p></Card>
             </ExampleZone>
