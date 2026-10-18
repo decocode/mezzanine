@@ -114,6 +114,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections (level 3 headers), or for a single collapsible top-level section (level 2) |
 | `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors; scrolls to changed and repeated anchors using the motion policy's scroll behaviour |
 | `site/components/DocsTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes, with an optional description column label |
+| `site/components/RichText.tsx` | Renders content-file copy, turning its `code`, **strong** and [label](href) markers into elements |
 | `site/components/DocsTableOfContents.tsx` | Page contents shown inline after the page heading on narrower screens and in the right column on wide screens |
 | `site/components/ExampleZone.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
 | `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs and Lab links, theme actions and, in the narrow-screen menu, the docs NavTree under Docs on docs pages or the Lab's NavTree (passed in as `labNavigation`) under Lab on Lab pages, to the library Navbar |
@@ -122,43 +123,47 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/components/tokenValueLogic.ts` | Reads current CSS token values and re-reads them when the theme, device colour scheme or motion setting changes, and describes font-size tokens in pixels |
-| `site/content/accessibilityContent.tsx` | Target, React Aria and Mezzanine rows, checking notes and links for the Accessibility page |
-| `site/content/badgeContent.tsx` | Badge written guidance, reference entries, related pages and external references |
-| `site/content/breadcrumbsContent.tsx` | Breadcrumbs written guidance, reference entries, related pages and external references |
-| `site/content/buttonContent.tsx` | Button guidance, variants, sizes, states, token descriptions, related pages and references |
-| `site/content/cardContent.tsx` | Card guidance, example labels, anatomy, token descriptions, related pages and references |
-| `site/content/codeBlockContent.tsx` | Code block guidance, example code, anatomy, token descriptions, related pages and references |
-| `site/content/checkboxContent.tsx` | Checkbox written guidance, reference entries, related pages and external references |
+| `site/content/accessibilityContent.ts` | Target, React Aria and Mezzanine rows, checking notes and links for the Accessibility page |
+| `site/content/badgeContent.ts` | Badge written guidance, reference entries, related pages and external references |
+| `site/content/bordersContent.ts` | Borders page wording: border width, baseline width and using the scale |
+| `site/content/breadcrumbsContent.ts` | Breadcrumbs written guidance, reference entries, related pages and external references |
+| `site/content/buttonContent.ts` | Button guidance, variants, sizes, states, token descriptions, related pages and references |
+| `site/content/cardContent.ts` | Card guidance, example labels, anatomy, token descriptions, related pages and references |
+| `site/content/codeBlockContent.ts` | Code block guidance, example code, anatomy, token descriptions, related pages and references |
+| `site/content/checkboxContent.ts` | Checkbox written guidance, reference entries, related pages and external references |
 | `site/content/colorContent.ts` | Colour palette descriptions, shade steps and semantic colour-role reference entries |
-| `site/content/dialogContent.tsx` | Dialog written guidance, reference entries, related pages and external references |
-| `site/content/disclosureContent.tsx` | Disclosure written guidance, reference entries, related pages and external references |
+| `site/content/cornersContent.ts` | Corners page wording: corner radius, individual corners and using the scale |
+| `site/content/dialogContent.ts` | Dialog written guidance, reference entries, related pages and external references |
+| `site/content/disclosureContent.ts` | Disclosure written guidance, reference entries, related pages and external references |
 | `site/content/elevationContent.ts` | Elevation levels and uses, colour tokens, source paths, what each theme sets and links |
-| `site/content/foundationsContent.tsx` | Definition, page list and shared notes for the Foundations overview page |
+| `site/content/foundationsContent.ts` | Definition, page list and shared notes for the Foundations overview page |
 | `site/content/homeContent.ts` | Home attribution, title, description and documentation link |
-| `site/content/iconsContent.tsx` | Names and rendered examples for every icon exported by Mezzanine |
-| `site/content/interactionContent.tsx` | Interaction states, behaviour descriptions, token notes and lists, and links for the Interaction page |
-| `site/content/linkContent.tsx` | Link written guidance, reference entries, related pages and external references |
-| `site/content/motionContent.tsx` | Motion timing, token and reduced-motion reference descriptions |
-| `site/content/navbarContent.tsx` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
-| `site/content/navigationTreeContent.tsx` | Nav Tree written guidance, reference entries, related pages and external references |
-| `site/content/radioGroupContent.tsx` | RadioGroup guidance, anatomy, states, token descriptions, related pages and references |
-| `site/content/shapeContent.ts` | Corner-radius and border-width labels and token names displayed on the Corners and Borders pages |
-| `site/content/sidebarContent.tsx` | Sidebar guidance, prop and token references, and neutral example labels |
+| `site/content/iconsContent.ts` | Names and rendered examples for every icon exported by Mezzanine |
+| `site/content/interactionContent.ts` | Interaction states, behaviour descriptions, token notes and lists, and links for the Interaction page |
+| `site/content/introductionContent.ts` | Introduction page title and description |
+| `site/content/linkContent.ts` | Link written guidance, reference entries, related pages and external references |
+| `site/content/motionContent.ts` | Motion timing, token and reduced-motion reference descriptions |
+| `site/content/navbarContent.ts` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
+| `site/content/navigationTreeContent.ts` | Nav Tree written guidance, reference entries, related pages and external references |
+| `site/content/radioGroupContent.ts` | RadioGroup guidance, anatomy, states, token descriptions, related pages and references |
+| `site/content/shapeContent.ts` | Shape overview page wording, and the corner-radius and border-width levels the Corners and Borders pages display |
+| `site/content/proseContent.ts` | Prose page wording: lists and inline code, with placeholders for live values |
+| `site/content/sidebarContent.ts` | Sidebar guidance, prop and token references, and neutral example labels |
 | `site/content/siteContent.ts` | Shared site name, skip-link label and not-found/not-implemented messages |
 | `site/content/spacingContent.ts` | Spacing scale steps displayed by SpacingScale on the Lab's Gap page |
-| `site/content/tabBarContent.tsx` | TabBar written guidance, reference entries, related pages and external references |
-| `site/content/tableContent.tsx` | Table sample rows and column definitions, written guidance, reference entries, related pages and external references |
-| `site/content/tableOfContentsContent.tsx` | TableOfContents written guidance, reference entries, related pages and external references |
-| `site/content/tabsContent.tsx` | Tabs written guidance, reference entries, related pages and external references |
-| `site/content/textAreaContent.tsx` | TextArea written guidance, reference entries, related pages and external references |
-| `site/content/textFieldContent.tsx` | TextField written guidance, reference entries, related pages and external references |
-| `site/content/textContent.tsx` | Text page wording for line length and long words, CSS properties and related pages |
-| `site/content/readingDirectionContent.tsx` | Reading direction page wording, code example, right-to-left and vertical example text, related pages and references |
-| `site/content/fluidTextContent.tsx` | Fluid text page wording, example text, CSS properties, the six fluid size tokens, related pages and references |
+| `site/content/tabBarContent.ts` | TabBar written guidance, reference entries, related pages and external references |
+| `site/content/tableContent.ts` | Table sample rows and column definitions, written guidance, reference entries, related pages and external references |
+| `site/content/tableOfContentsContent.ts` | TableOfContents written guidance, reference entries, related pages and external references |
+| `site/content/tabsContent.ts` | Tabs written guidance, reference entries, related pages and external references |
+| `site/content/textAreaContent.ts` | TextArea written guidance, reference entries, related pages and external references |
+| `site/content/textFieldContent.ts` | TextField written guidance, reference entries, related pages and external references |
+| `site/content/textContent.ts` | Text page wording for line length and long words, CSS properties and related pages |
+| `site/content/readingDirectionContent.ts` | Reading direction page wording, code example, right-to-left and vertical example text, related pages and references |
+| `site/content/fluidTextContent.ts` | Fluid text page wording, example text, CSS properties, the six fluid size tokens, related pages and references |
 | `site/content/textStylesContent.ts` | Text style intro, code example, roles, style names and purposes, recommended choices (kept identical to TYPOGRAPHY.md by check:rules), weight examples, base elements and token names |
-| `site/content/toggleButtonContent.tsx` | ToggleButton written guidance, reference entries, related pages and external references |
-| `site/content/tooltipContent.tsx` | Tooltip introduction, anatomy, behaviour, usage, props, tokens and reference links |
-| `site/content/typographyContent.tsx` | Typography overview intro, How typography works layers and theme example code |
+| `site/content/toggleButtonContent.ts` | ToggleButton written guidance, reference entries, related pages and external references |
+| `site/content/tooltipContent.ts` | Tooltip introduction, anatomy, behaviour, usage, props, tokens and reference links |
+| `site/content/typographyContent.ts` | Typography overview intro, How typography works layers and theme example code |
 | `site/pages/AccessibilityPage.tsx` | Foundations page for accessibility that applies everywhere: WCAG target, React Aria behaviour, Mezzanine additions and checks; loaded only when its route is requested |
 | `site/pages/BadgePage.tsx` | Badge examples and variants; loaded only when its route is requested |
 | `site/pages/BreadcrumbsPage.tsx` | Breadcrumb hierarchy and disabled examples; loaded only when its route is requested |
@@ -196,13 +201,16 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/TextPage.tsx` | Foundations › Text: line length and long words, with real Card examples and the `--line-length` token; loaded only when its route is requested |
 | `site/pages/ReadingDirectionPage.tsx` | Foundations › Text › Reading direction in three sections: Start and end (physical and logical sides, with a right-to-left example built on Split and a Checkbox), Right to left (Arabic, Persian, Urdu and Hebrew) and Top to bottom (Japanese, Simplified and Traditional Chinese), with real Card examples |
 | `site/pages/FluidTextPage.tsx` | Foundations › Text › Fluid text: how Display and Heading sizes grow with the screen through `clamp()` while other text stays fixed, an example of the real text styles, and Technical details with CSS properties and the fluid size tokens read from the token source |
-| `site/pages/TargetSizePage.tsx`, `site/content/targetSizeContent.tsx` | Foundations › Interaction › Target size: the WCAG minimum and Mezzanine's 44px target size, the two target-size tokens read from the token source, and the components that use them |
+| `site/pages/TargetSizePage.tsx`, `site/content/targetSizeContent.ts` | Foundations › Interaction › Target size: the WCAG minimum and Mezzanine's 44px target size, the two target-size tokens read from the token source, and the components that use them |
 | `site/pages/TextStylesPage.tsx` | Beginner guide to the text styles: quick start, roles, grouped styles, choosing, weights, base elements, small screens, line height and token reference; loaded only when its route is requested |
 | `site/pages/ToggleButtonPage.tsx` | Standalone and grouped toggle examples; loaded only when its route is requested |
 | `site/pages/TooltipPage.tsx` | Live Tooltip example and shared-template documentation under Overlays |
 | `site/pages/TypographyPage.tsx` | Typography overview, How typography works layers and live Label token example; loaded only when its route is requested |
 | `site/public/robots.txt` | Served unchanged at `/robots.txt`; allows crawling so search engines can read the pre-launch `noindex` response header |
-| `site/templates/DocsPageTemplate.tsx` | Shared docs page template, used by component pages, converted Foundations and Styles pages and the Lab (On this page can be turned off for short index pages): owns the site-only PageHeading presentation and composes it with generated On this page links, technical disclosures, optional collapsible sections (a closed Disclosure that its On this page link opens) and reference sections from page-supplied content |
+| `site/templates/ContentPage.tsx` | Builds every documentation page from its content file and the page's live parts |
+| `site/templates/docsPageContent.ts` | The one shape every content file follows, standard section titles, section ids and the placeholder helper for live values |
+| `site/templates/richText.ts` | Parses the `code`, **strong** and [label](href) markers in content-file copy |
+| `site/templates/DocsPageTemplate.tsx` | The page layout underneath ContentPage: heading, On this page, sections, the Technical details Disclosure group, Related pages and References; also the site-only `PageHeading` |
 
 ### Lab (`site/lab/`)
 

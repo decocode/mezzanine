@@ -7,9 +7,8 @@ import {
 import { ExampleZone } from '../components/ExampleZone'
 import { Sidebar as DocumentationSidebar } from '../components/Sidebar'
 import { findSitePage } from '../siteStructure'
-import { DocsTable } from '../components/DocsTable'
-import { DocsPageTemplate } from '../templates/DocsPageTemplate'
-import { sidebarContent } from '../content/sidebarContent'
+import { ContentPage } from '../templates/ContentPage'
+import { sidebarContent, sidebarExampleLabels, sidebarExampleLinks } from '../content/sidebarContent'
 import exampleImage from '../assets/sidebar-example.svg'
 
 function SidebarExample() {
@@ -22,8 +21,8 @@ function SidebarExample() {
   const [optionB, setOptionB] = useState(false)
   const [expandedKeys, setExpandedKeys] = useState(new Set(['options']))
   const rail = <TooltipTrigger>
-    <Button aria-label={sidebarContent.labels.expand} iconLeading={side === 'left' ? <PanelLeftOpenIcon /> : <PanelRightOpenIcon />} variant="tertiary" onPress={() => setExpanded(true)} />
-    <Tooltip placement={side === 'left' ? 'right' : 'left'}>{sidebarContent.labels.expand}</Tooltip>
+    <Button aria-label={sidebarExampleLabels.expand} iconLeading={side === 'left' ? <PanelLeftOpenIcon /> : <PanelRightOpenIcon />} variant="tertiary" onPress={() => setExpanded(true)} />
+    <Tooltip placement={side === 'left' ? 'right' : 'left'}>{sidebarExampleLabels.expand}</Tooltip>
   </TooltipTrigger>
 
   return <ExampleZone className="sidebar-example">
@@ -34,12 +33,12 @@ function SidebarExample() {
         </div>
         <div className="sidebar-example-layout">
           <div className="sidebar-example-launcher">
-            <SidebarTrigger variant="primary">{sidebarContent.labels.trigger}</SidebarTrigger>
+            <SidebarTrigger variant="primary">{sidebarExampleLabels.trigger}</SidebarTrigger>
           </div>
-          <SidebarPanel title="Sidebar" headingLevel={3} side={side} closeLabel={sidebarContent.labels.close}
+          <SidebarPanel title="Sidebar" headingLevel={3} side={side} closeLabel={sidebarExampleLabels.close}
             {...(collapseMode === 'rail' ? { collapseMode: 'rail', rail } : { collapseMode: 'hide' })}
             header={<p className="sidebar-example-caption">Supporting content</p>}
-            footer={<Button variant="secondary" onPress={() => { setOptionA(false); setOptionB(false) }}>{sidebarContent.labels.reset}</Button>}>
+            footer={<Button variant="secondary" onPress={() => { setOptionA(false); setOptionB(false) }}>{sidebarExampleLabels.reset}</Button>}>
             <img className="sidebar-example-image" src={exampleImage} alt="A square and a circle, demonstrating an image inside a sidebar" />
             <DisclosureGroup allowsMultipleExpanded expandedKeys={expandedKeys} onExpandedChange={(keys) => setExpandedKeys(new Set([...keys].map(String)))}>
               <Disclosure id="options">
@@ -66,21 +65,21 @@ function SidebarExample() {
       </Sidebar>
       <Sidebar presentation="inline" isExpanded={controlsExpanded} onExpandedChange={setControlsExpanded}>
         {!controlsExpanded && <div className="sidebar-example-controls-reopen">
-          <SidebarTrigger variant="tertiary" aria-label={sidebarContent.labels.controls}
+          <SidebarTrigger variant="tertiary" aria-label={sidebarExampleLabels.controls}
             iconLeading={<PanelRightOpenIcon />} />
         </div>}
-        <SidebarPanel className="sidebar-example-controls" title={sidebarContent.labels.controls} headingLevel={4}
-          side="right" closeLabel={sidebarContent.labels.closeControls}>
+        <SidebarPanel className="sidebar-example-controls" title={sidebarExampleLabels.controls} headingLevel={4}
+          side="right" closeLabel={sidebarExampleLabels.closeControls}>
           <div className="example-zone-controls-content">
-            <Checkbox isSelected={isCollapsible} onChange={setCollapsible}>{sidebarContent.labels.collapsible}</Checkbox>
+            <Checkbox isSelected={isCollapsible} onChange={setCollapsible}>{sidebarExampleLabels.collapsible}</Checkbox>
             <div className="sidebar-example-control">
-              <span id="sidebar-example-collapse">{sidebarContent.labels.collapseBehaviour}</span>
+              <span id="sidebar-example-collapse">{sidebarExampleLabels.collapseBehaviour}</span>
               <ToggleButtonGroup variant="secondary" aria-labelledby="sidebar-example-collapse" selectionMode="single" disallowEmptySelection selectedKeys={[collapseMode]} onSelectionChange={(keys) => setCollapseMode(keys.has('rail') ? 'rail' : 'hide')}>
                 <ToggleButton id="rail">Icon rail</ToggleButton><ToggleButton id="hide">Hide</ToggleButton>
               </ToggleButtonGroup>
             </div>
             <div className="sidebar-example-control sidebar-example-alignment">
-              <span id="sidebar-example-alignment">{sidebarContent.labels.alignment}</span>
+              <span id="sidebar-example-alignment">{sidebarExampleLabels.alignment}</span>
               <ToggleButtonGroup variant="secondary" aria-labelledby="sidebar-example-alignment" selectionMode="single" disallowEmptySelection selectedKeys={[side]} onSelectionChange={(keys) => setSide(keys.has('right') ? 'right' : 'left')}>
                 <ToggleButton id="left">Left</ToggleButton><ToggleButton id="right">Right</ToggleButton>
               </ToggleButtonGroup>
@@ -99,22 +98,22 @@ function MultipleSidebarsExample() {
     <div className="sidebar-example-columns">
       <Sidebar isExpanded={navigationExpanded} onExpandedChange={setNavigationExpanded} inlineMediaQuery="(min-width: 90rem)">
         <div className="sidebar-example-column">
-          <SidebarTrigger variant="secondary">{sidebarContent.labels.navigation}</SidebarTrigger>
+          <SidebarTrigger variant="secondary">{sidebarExampleLabels.navigation}</SidebarTrigger>
           <SidebarPanel title="Navigation" headingLevel={3} collapseMode="rail" rail={
             <TooltipTrigger>
-              <Button aria-label={sidebarContent.labels.navigation} iconLeading={<HomeIcon />} variant="tertiary" onPress={() => setNavigationExpanded(true)} />
-              <Tooltip placement="right">{sidebarContent.labels.navigation}</Tooltip>
+              <Button aria-label={sidebarExampleLabels.navigation} iconLeading={<HomeIcon />} variant="tertiary" onPress={() => setNavigationExpanded(true)} />
+              <Tooltip placement="right">{sidebarExampleLabels.navigation}</Tooltip>
             </TooltipTrigger>
           }>
             <nav aria-label="Example destinations" className="sidebar-example-links">
-              {sidebarContent.links.map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}
+              {sidebarExampleLinks.map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}
             </nav>
           </SidebarPanel>
         </div>
       </Sidebar>
       <Sidebar inlineMediaQuery="(min-width: 90rem)">
         <div className="sidebar-example-column">
-          <SidebarTrigger variant="secondary">{sidebarContent.labels.filters}</SidebarTrigger>
+          <SidebarTrigger variant="secondary">{sidebarExampleLabels.filters}</SidebarTrigger>
           <SidebarPanel title="Filters" headingLevel={3}>
             <Disclosure defaultExpanded>
               <DisclosureHeader level={4}>Options</DisclosureHeader>
@@ -126,7 +125,7 @@ function MultipleSidebarsExample() {
       <div className="sidebar-example-workspace"><h3>Workspace</h3><p role="status">{option ? 'Option C selected.' : 'No filter selected.'}</p></div>
       <Sidebar inlineMediaQuery="(min-width: 90rem)">
         <div className="sidebar-example-column">
-          <SidebarTrigger variant="secondary">{sidebarContent.labels.details}</SidebarTrigger>
+          <SidebarTrigger variant="secondary">{sidebarExampleLabels.details}</SidebarTrigger>
           <SidebarPanel title="Details" side="right" headingLevel={3}>
             <p>Additional information appears independently of navigation and filters.</p>
           </SidebarPanel>
@@ -137,26 +136,16 @@ function MultipleSidebarsExample() {
 }
 
 export default function SidebarPage() {
-  return <DocsPageTemplate
-    title={sidebarContent.title} description={sidebarContent.description}
-    relatedPages={sidebarContent.relatedPages} references={sidebarContent.references}
-    sections={[
-      { id: 'sidebar-example', title: 'Example', content: <><p>{sidebarContent.exampleIntroduction}</p><SidebarExample /></> },
-      { id: 'sidebar-documentation', title: 'Documentation sidebar', content: <>
-        <p>{sidebarContent.documentationIntroduction}</p>
+  return <ContentPage
+    content={sidebarContent}
+    parts={{
+      example: <SidebarExample />,
+      documentation: (
         <ExampleZone className="sidebar-documentation-example">
           <DocumentationSidebar currentPage={findSitePage('/sidebar')!} aria-label="Documentation example sections" navigationLabel="Documentation example navigation" />
         </ExampleZone>
-      </> },
-      { id: 'sidebar-multiple', title: 'Multiple sidebars', content: <><p>Navigation, filters and details use separate Sidebar boundaries. They become drawers below 90rem of viewport width in this example.</p><MultipleSidebarsExample /></> },
-      { id: 'sidebar-technical-details' , title: 'Technical details', sections: [
-        { id: 'sidebar-anatomy', title: 'Anatomy', content: <DocsTable aria-label="Sidebar anatomy" nameColumn="Component" rows={sidebarContent.anatomy} /> },
-        { id: 'sidebar-behaviour', title: 'Behaviour', content: sidebarContent.behaviour.map((text, index) => <p key={index}>{text}</p>) },
-        { id: 'sidebar-usage', title: 'Usage', content: sidebarContent.usage.map((text, index) => <p key={index}>{text}</p>) },
-        { id: 'sidebar-accessibility', title: 'Accessibility', content: sidebarContent.accessibility.map((text, index) => <p key={index}>{text}</p>) },
-        { id: 'sidebar-props', title: 'Props', content: <DocsTable aria-label="Sidebar props" nameColumn="Prop" rows={sidebarContent.props} /> },
-        { id: 'sidebar-tokens', title: 'CSS tokens', content: <DocsTable aria-label="Sidebar tokens" nameColumn="CSS token" rows={sidebarContent.tokens} /> },
-      ] },
-    ]}
+      ),
+      multiple: <MultipleSidebarsExample />,
+    }}
   />
 }

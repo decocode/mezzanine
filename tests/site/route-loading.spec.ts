@@ -42,7 +42,7 @@ test('delayed loading keeps the shell usable and restores a direct section link'
     await route.continue()
   })
 
-  await page.goto('/button#button-tokens-heading')
+  await page.goto('/button#button-tokens')
   await expect(page.getByRole('status')).toHaveText('Loading documentation…')
   await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
   await page.getByRole('button', { name: 'Menu', exact: true }).click()
@@ -51,7 +51,7 @@ test('delayed loading keeps the shell usable and restores a direct section link'
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
 
   releaseChunk()
-  const heading = page.locator('#button-tokens-heading')
+  const heading = page.locator('#button-tokens')
   await expect(heading).toBeVisible()
   await expect.poll(() => heading.evaluate((element) => element.getBoundingClientRect().top))
     .toBeGreaterThanOrEqual(0)

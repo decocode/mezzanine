@@ -196,19 +196,10 @@ a:focus-visible {
   color: var(--color-text-muted);
 }
 
-.color-palettes,
 .core-color-palettes,
 .color-palette-category,
 .semantic-color-palettes {
   min-width: 0;
-}
-
-.color-palettes {
-  margin-bottom: var(--space-16);
-}
-
-.color-palettes > h2 {
-  margin: 0 0 var(--space-4);
 }
 
 .color-palette-category > h4,
@@ -390,10 +381,6 @@ a:focus-visible {
 .spacing-scale-pixels {
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
-}
-
-.color-roles > h2 {
-  margin: 0 0 var(--space-4);
 }
 
 .token-group + .token-group {
@@ -692,7 +679,7 @@ a:focus-visible {
 }
 
 /* Documentation rhythm: 4rem between major sections, 3rem before topics,
-   2rem before subtopics, and 1rem within groups. Keep component demos untouched. */
+   2rem before subtopics, and 1rem within groups. Keep component examples untouched. */
 .component-section > h3,
 .typography-guidance > h3 {
   margin: var(--space-12) 0 var(--space-4);

@@ -1,28 +1,27 @@
 import { Card } from '@decocode/mezzanine'
-import { PageHeading } from '../templates/DocsPageTemplate'
-import { iconDefinitions } from '../content/iconsContent'
+import { iconDefinitions, iconsContent } from '../content/iconsContent'
+import { ContentPage } from '../templates/ContentPage'
 
 export default function IconsPage() {
   return (
-    <>
-      <PageHeading
-        description="Mezzanine's icon library provides a consistent, brand-agnostic set of interface symbols. New icons will be added as real product needs arise."
-        title="Icons"
-      />
-      <section aria-labelledby="icons-heading" className="component-section">
-        <h2 id="icons-heading" className="mz-text-heading-md">Icon set</h2>
-        <ul className="icon-grid">
-          {iconDefinitions.map(({ componentName, icon, name }) => (
-            <li key={componentName}>
-              <Card>
-                <span aria-hidden="true" className="icon-sample">{icon}</span>
-                <p><strong>{name}</strong></p>
-                <p><code>{componentName}</code></p>
-              </Card>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </>
+    <ContentPage
+      content={iconsContent}
+      showContents={false}
+      parts={{
+        iconSet: (
+          <ul className="icon-grid">
+            {iconDefinitions.map(({ componentName, icon: Icon, className, name }) => (
+              <li key={componentName}>
+                <Card>
+                  <span aria-hidden="true" className="icon-sample"><Icon className={className} /></span>
+                  <p><strong>{name}</strong></p>
+                  <p><code>{componentName}</code></p>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        ),
+      }}
+    />
   )
 }

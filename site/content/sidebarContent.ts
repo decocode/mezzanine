@@ -1,0 +1,121 @@
+import type { DocsPageContent, LinkItem } from '../templates/docsPageContent'
+
+export const sidebarContent: DocsPageContent = {
+  id: 'sidebar',
+  kind: 'component',
+  title: 'Sidebar',
+  description: 'A sidebar holds supporting content beside a workspace. Compose navigation, filters, images, disclosures and actions; choose either side and collapse to a rail or hide the panel.',
+  sections: [
+    { key: 'example', body: ['Choose a side and collapse behaviour, then use the Open button or the sidebar’s close button. On narrow screens, Open opens a modal drawer. Option selections are shared across presentations.'] },
+    {
+      key: 'documentation',
+      title: 'Documentation sidebar',
+      body: ['This is the same component used in the Mezzanine AppShell, with the same navigation data and current-page indication. It stays open without a header or close button on desktop. On narrow layouts the site moves the same navigation into the Navbar menu; this example stays open so it can be seen at every width. The example links navigate to the real documentation pages.'],
+    },
+    {
+      key: 'multiple',
+      title: 'Multiple sidebars',
+      body: ['Navigation, filters and details use separate Sidebar boundaries. They become drawers below 90rem of viewport width in this example.'],
+    },
+  ],
+  technicalDetails: [
+    {
+      key: 'anatomy',
+      table: {
+        label: 'Sidebar anatomy',
+        nameColumn: 'Component',
+        rows: [
+          { name: 'Sidebar', description: 'State boundary for one panel and an optional trigger. Adds no layout element, so the app can place the trigger in a toolbar and the panel beside its content.' },
+          { name: 'SidebarTrigger', description: 'Mezzanine Button using React Aria press and focus behaviour. Connects its expanded state and accessible relationship to the panel. Keep one trigger outside the panel.' },
+          { name: 'SidebarPanel', description: 'Labelled aside when inline, or ModalOverlay → Modal → Dialog when modal. Includes a Heading, scrolling content, and optional header content and footer. A close Button appears when collapse or modal dismissal is available.' },
+          { name: 'Composed content', description: 'Supply existing Mezzanine controls in children, header, footer and rail. Use semantic HTML for static text and images, and a labelled nav for navigation. No navigation model is imposed.' },
+        ],
+      },
+    },
+    {
+      key: 'behaviour',
+      body: [
+        'Set `isCollapsible=` to keep the inline panel expanded with no trigger or close button. This overrides inline expansion props and does not prevent modal opening or dismissal.',
+        'In `auto` presentation, the sidebar is inline at viewport widths matching `inlineMediaQuery`, defaulting to `(min-width: 64rem)`, and modal otherwise. Override the query for layouts with several panels, or set `presentation` explicitly when your application owns responsive layout.',
+        'Inline panels use `isExpanded`; modal drawers use `isOpen`. These states are independent. Moving to inline presentation dismisses an open drawer without changing the saved inline expansion state.',
+        'Inline collapse either hides the full panel or shows only the supplied rail. Hidden content stays mounted but is excluded from focus and the accessibility tree. Closing with the panel’s button returns focus to its external trigger. Collapsing one sidebar does not change another.',
+        'A modal drawer always shows the full content. React Aria contains focus, prevents background interaction, locks background scrolling, and restores focus on dismissal. Escape, the close button and clicking the backdrop dismiss it. Entry and exit animations respect reduced motion.',
+        'Switching between inline and modal presentation remounts the content. Keep filter values, drafts and any disclosure state that must persist in the consuming application and pass controlled props to those components.',
+      ],
+    },
+    {
+      key: 'usage',
+      body: [
+        'For a permanently visible panel, combine `presentation="inline"` with `isCollapsible=`. Use `hideInlineHeader` on SidebarPanel to omit its title row and supplementary header content; the required title still names the aside. Modal presentation always retains its heading and close button. Mezzanine’s docs shell composes this inline panel with a separate Disclosure on small screens, preserving its existing non-modal behaviour.',
+        'Place one `SidebarPanel` inside each `Sidebar`. Include a `SidebarTrigger` when the panel can collapse or use modal presentation. Keep the trigger visible when the panel is hidden. The root adds no DOM and has no class; use `className` and `style` on the panel and the normal Button props on the trigger.',
+        'Use independent Sidebar boundaries for navigation, filters and details. Inline panels participate in the app’s layout; they do not cover the workspace. In a horizontal flex layout, `side` sets the panel order. The app owns the arrangement of multiple columns, remaining workspace width, and reading order.',
+        'For `collapseMode="rail"`, supply explicit compact content. Use labelled Button or Link controls, with tooltips for icon-only controls. A filter panel can simply hide instead of having a rail.',
+        'Use Mezzanine DisclosureGroup and Disclosure parts for expandable content, Checkbox or RadioGroup parts for choices, and Button for actions. None of these content types is built into Sidebar.',
+        'Set tokens at the theme root for both inline and modal presentation. Modal content is portalled outside the surrounding layout; use the panel’s className or style for per-panel token overrides.',
+      ],
+    },
+    {
+      key: 'accessibility',
+      body: ['Give the panel a unique title and an appropriate headingLevel.'],
+    },
+    {
+      key: 'props',
+      table: {
+        label: 'Sidebar props',
+        nameColumn: 'Prop',
+        rows: [
+          { name: 'Sidebar: children', description: 'Required panel and application layout, with a trigger where needed.' },
+          { name: 'presentation / inlineMediaQuery', description: 'auto (default), inline or modal. The media query determines the inline viewport range in auto mode; default (min-width: 64rem).' },
+          { name: 'isCollapsible', description: 'Defaults to true. Set false to keep inline content expanded and omit its trigger and close control. Modal controls remain available.' },
+          { name: 'isExpanded / defaultExpanded / onExpandedChange', description: 'Controlled or uncontrolled inline expansion. defaultExpanded is true.' },
+          { name: 'isOpen / defaultOpen / onOpenChange', description: 'Controlled or uncontrolled modal visibility. defaultOpen is false. Honour onOpenChange when controlling state, including responsive dismissal.' },
+          { name: 'SidebarTrigger', description: 'Action Button props, including children, iconLeading, variant, isDisabled, className and onPress. Sidebar owns ref, aria-controls, aria-expanded and aria-haspopup.' },
+          { name: 'SidebarPanel: title / children', description: 'Required accessible title and arbitrary body content.' },
+          { name: 'side', description: 'left (default) or right. Sets inline flex order and the physical drawer edge.' },
+          { name: 'collapseMode / rail', description: 'hide (default) or rail. rail content is required for rail mode. Only affects inline presentation.' },
+          { name: 'hideInlineHeader', description: 'Defaults to false. Omits the entire inline header, including supplementary header content. The aside remains named by title; the modal header is always shown.' },
+          { name: 'header / footer', description: 'Optional React content below the title row and below the scrolling body.' },
+          { name: 'closeLabel / headingLevel', description: 'Close button name defaults to Close followed by title; heading level defaults to 2.' },
+          { name: 'className / style', description: 'Applied to the aside or modal panel; supports scoped styling and token overrides.' },
+        ],
+      },
+    },
+    {
+      key: 'tokens',
+      table: {
+        label: 'Sidebar tokens',
+        nameColumn: 'CSS token',
+        rows: [
+          { name: '--sidebar-width', description: 'Expanded inline and preferred drawer width, capped by available space.' },
+          { name: '--sidebar-rail-width', description: 'Collapsed rail width.' },
+          { name: '--sidebar-max-height', description: 'Inline height limit. Modal panels use the visual viewport height.' },
+          { name: '--sidebar-padding / --sidebar-rail-padding', description: 'Panel section and rail padding.' },
+          { name: '--sidebar-gap / --sidebar-border-width', description: 'Header and rail spacing, and panel border thickness.' },
+          { name: '--sidebar-drawer-gap', description: 'Minimum space left for the backdrop beside a narrow drawer.' },
+          { name: '--motion-duration-interface', description: 'Drawer and backdrop animation duration; reduced motion disables animation.' },
+        ],
+      },
+    },
+  ],
+  relatedPages: [
+    { label: 'Button', href: '/button' }, { label: 'Dialog', href: '/dialog' },
+    { label: 'Disclosure', href: '/disclosure' }, { label: 'Navigation tree', href: '/navigation-tree' },
+    { label: 'Tooltip', href: '/tooltip' },
+  ],
+  references: [
+    { label: 'React Aria Button', href: 'https://react-aria.adobe.com/Button' },
+    { label: 'React Aria Modal', href: 'https://react-aria.adobe.com/Modal' },
+    { label: 'React Aria DisclosureGroup', href: 'https://react-aria.adobe.com/DisclosureGroup' },
+  ],
+}
+
+// Control labels used inside the live examples.
+export const sidebarExampleLabels = {
+  alignment: 'Alignment', collapseBehaviour: 'Collapse behaviour',
+  controls: 'Control panel', closeControls: 'Close control panel',
+  collapsible: 'Allow collapsing', trigger: 'Open', close: 'Close sidebar', expand: 'Expand sidebar', reset: 'Reset options',
+  navigation: 'Navigation', filters: 'Filters', details: 'Details',
+}
+
+// Destinations in the Multiple sidebars example's navigation panel.
+export const sidebarExampleLinks: readonly LinkItem[] = [{ label: 'Button', href: '/button' }, { label: 'Disclosure', href: '/disclosure' }]

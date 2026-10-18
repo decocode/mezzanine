@@ -1,7 +1,44 @@
-import type { ReactNode } from 'react'
+import type { Copy, DocsPageContent } from '../templates/docsPageContent'
+
+export const colorContent: DocsPageContent = {
+  id: 'color',
+  kind: 'foundation',
+  title: 'Color',
+  description: [
+    "In user interfaces, colors are not merely decorative. They help to establish visual hierarchy, convey meaning, and distinguish states. Mezzanine keeps colors that express a brand's unique visual identity separate from semantic colors that communicate specific meaning—that way, different brands can be expressive without impacting usability.",
+    "Mezzanine's default color combinations (for both light and dark mode) aim to meet [WCAG 2.2 Level AA](https://www.w3.org/TR/WCAG22/#conformance-reqs) contrast requirements.",
+  ],
+  sections: [
+    {
+      key: 'colorPalettes',
+      title: 'Color palettes',
+      subsections: [{ id: 'color-core-colors', label: 'Core colors' }, { id: 'color-semantic-colors', label: 'Semantic colors' }],
+      intro: ['Each palette brings together eleven shades of a color, ranging from light to dark. Lower numbers indicate lighter shades; higher numbers indicate darker shades. Each swatch shows its shade number and color value. Expand Color tokens beneath a palette to see its token names and values.'],
+    },
+    {
+      key: 'colorRoles',
+      title: 'Color roles',
+      intro: ['Roles name the purpose of a color. Components use these tokens so a theme can change the palette without changing the meaning of each role.'],
+    },
+  ],
+}
+
+// The two groups inside Color palettes, and the disclosure label beneath every palette.
+export const colorPaletteGroups = {
+  core: {
+    title: 'Core colors',
+    intro: 'Core colors are the palettes your brand can use to communicate its distinct visual identity. Mezzanine uses the Signature palette for its default brand color.',
+  },
+  semantic: {
+    title: 'Semantic colors',
+    intro: 'Semantic colors are used to communicate meaning. Traffic lights are a familiar real-world example: green means go, amber warns you to take care, and red means stop. In user interface design, the same principles help people to quickly recognise helpful info, successful outcomes, warnings, and errors.',
+  },
+} satisfies Record<string, { title: string; intro: Copy }>
+
+export const colorTokensLabel = 'Color tokens'
 
 export interface ColorTokenDefinition {
-  description: ReactNode
+  description: Copy
   label: string
   token: string
 }

@@ -14,16 +14,17 @@ import {
   TableHeader,
   type ButtonVariant
 } from '@decocode/mezzanine'
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import {
   buttonContent,
+  buttonContentOptions,
+  buttonExampleCopy,
   buttonSizes,
   buttonStates,
   buttonVariants,
   type ButtonPreviewState,
 } from '../content/buttonContent'
-import { DocsPageTemplate } from '../templates/DocsPageTemplate'
-import { DocsTable } from '../components/DocsTable'
+import { ContentPage } from '../templates/ContentPage'
 
 function ButtonStateExample({
   label,
@@ -48,232 +49,147 @@ function ButtonStateExample({
   )
 }
 
+const contentOptionExamples: Record<(typeof buttonContentOptions)[number]['id'], ReactNode> = {
+  'text-only': <Button>Button</Button>,
+  'leading-icon': <Button iconLeading={<PlusIcon />}>Button</Button>,
+  'trailing-icon': <Button iconTrailing={<ArrowRightIcon />}>Button</Button>,
+  'icon-only': (
+    <TooltipTrigger>
+      <Button iconLeading={<DownloadIcon />} aria-label={buttonContent.iconOnlyLabel} />
+      <Tooltip>{buttonContent.iconOnlyLabel}</Tooltip>
+    </TooltipTrigger>
+  ),
+}
+
 export default function ButtonPage() {
   const [pressCount, setPressCount] = useState(0)
+  const navigation = buttonExampleCopy.navigation
 
   return (
-    <DocsPageTemplate
-      description={buttonContent.description}
-      title={buttonContent.title}
-      relatedPages={buttonContent.relatedPages}
-      references={buttonContent.references}
-      referencesId={buttonContent.referencesId}
-      sections={[
-        {
-          id: 'button-example-heading',
-          title: 'Example',
-          content: (<>
-            {buttonContent.exampleParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ExampleZone>
-              <Button onPress={() => setPressCount((count) => count + 1)}>Press</Button>
-              <p className="component-example-feedback" role="status">Press count: {pressCount}</p>
-            </ExampleZone>
-          </>),
-        },
-        {
-          id: 'button-navigation-heading',
-          title: 'Navigational buttons',
-          content: (<>
-            {buttonContent.navigationExample.descriptions.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ExampleZone>
-              <p>{buttonContent.navigationExample.lead}</p>
-              <Button href={buttonContent.navigationExample.href}>{buttonContent.navigationExample.label}</Button>
-              <p className="mz-text-body-sm">{buttonContent.navigationExample.hint}</p>
-            </ExampleZone>
-          </>),
-        },
-        {
-          id: 'button-content-examples-heading',
-          title: 'Content and sizes',
-          subsections: [{ id: 'button-sizes-heading', label: 'Sizes' }],
-          content: (<>
-            <div className="documentation-table documentation-comparison-table">
-              <Table aria-label="Button content">
+    <ContentPage
+      content={buttonContent}
+      parts={{
+        example: (
+          <ExampleZone>
+            <Button onPress={() => setPressCount((count) => count + 1)}>Press</Button>
+            <p className="component-example-feedback" role="status">{buttonExampleCopy.pressCount} {pressCount}</p>
+          </ExampleZone>
+        ),
+        navigationalButtons: (
+          <ExampleZone>
+            <p>{navigation.lead}</p>
+            <Button href={navigation.href}>{navigation.label}</Button>
+            <p className="mz-text-body-sm">{navigation.hint}</p>
+          </ExampleZone>
+        ),
+        contentAndSizes: (<>
+          <div className="documentation-table documentation-comparison-table">
+            <Table aria-label="Button content">
+              <TableHeader>
+                <Column id="content" isRowHeader>Content</Column>
+                <Column id="example">Example</Column>
+              </TableHeader>
+              <TableBody>
+                {buttonContentOptions.map(({ id, name, prop, description }) => (
+                  <Row id={id} key={id}>
+                    <Cell>
+                      <span className="table-item-heading">
+                        <strong>{name}</strong>
+                        {prop && <code>{prop}</code>}
+                        <span>{description}</span>
+                      </span>
+                    </Cell>
+                    <Cell>{contentOptionExamples[id]}</Cell>
+                  </Row>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+          <section aria-labelledby="button-sizes-heading">
+            <h3 id="button-sizes-heading" className="mz-text-heading-sm">
+              {buttonExampleCopy.sizesTitle}
+            </h3>
+            <div className="documentation-table button-sizes-table">
+              <Table aria-label="Button sizes">
                 <TableHeader>
-                  <Column id="content" isRowHeader>Content</Column>
+                  <Column id="size" isRowHeader>Size</Column>
                   <Column id="example">Example</Column>
+                  <Column id="icon-only">Icon only buttons</Column>
                 </TableHeader>
                 <TableBody>
-                  <Row id="text-only">
-                    <Cell>
-                      <span className="table-item-heading">
-                        <strong>Text-only</strong>
-                        <span>Buttons use a text label without an icon by default.</span>
-                      </span>
-                    </Cell>
-                    <Cell><Button>Button</Button></Cell>
-                  </Row>
-                  <Row id="leading-icon">
-                    <Cell>
-                      <span className="table-item-heading">
-                        <strong>Text + icon leading</strong>
-                        <code>iconLeading</code>
-                        <span>Places an icon before the label.</span>
-                      </span>
-                    </Cell>
-                    <Cell><Button iconLeading={<PlusIcon />}>Button</Button></Cell>
-                  </Row>
-                  <Row id="trailing-icon">
-                    <Cell>
-                      <span className="table-item-heading">
-                        <strong>Text + icon trailing</strong>
-                        <code>iconTrailing</code>
-                        <span>Places an icon after the label.</span>
-                      </span>
-                    </Cell>
-                    <Cell><Button iconTrailing={<ArrowRightIcon />}>Button</Button></Cell>
-                  </Row>
-                  <Row id="icon-only">
-                    <Cell>
-                      <span className="table-item-heading">
-                        <strong>Icon only</strong>
-                        <code>aria-label</code>
-                        <span>No visible text. Supply an accessible name and a tooltip for hover and keyboard focus.</span>
-                      </span>
-                    </Cell>
-                    <Cell>
-                      <TooltipTrigger>
-                        <Button iconLeading={<DownloadIcon />} aria-label="Download" />
-                        <Tooltip>Download</Tooltip>
-                      </TooltipTrigger>
-                    </Cell>
-                  </Row>
-                </TableBody>
-              </Table>
-            </div>
-            <section aria-labelledby="button-sizes-heading">
-              <h3 id="button-sizes-heading" className="mz-text-heading-sm">
-                Sizes
-              </h3>
-              <div className="documentation-table button-sizes-table">
-                <Table aria-label="Button sizes">
-                  <TableHeader>
-                    <Column id="size" isRowHeader>Size</Column>
-                    <Column id="example">Example</Column>
-                    <Column id="icon-only">Icon only buttons</Column>
-                  </TableHeader>
-                  <TableBody>
-                    {buttonSizes.map(({ label, size, usage }) => (
-                      <Row id={size} key={size}>
-                        <Cell>
-                          <span className="table-item-heading">
-                            <strong>{label}</strong>
-                            <code>{size}</code>
-                            <span>{usage}</span>
-                          </span>
-                        </Cell>
-                        <Cell><Button size={size}>Button</Button></Cell>
-                        <Cell>
-                          <TooltipTrigger>
-                            <Button size={size} iconLeading={<DownloadIcon />} aria-label={buttonContent.iconOnlyLabel} />
-                            <Tooltip>{buttonContent.iconOnlyLabel}</Tooltip>
-                          </TooltipTrigger>
-                        </Cell>
-                      </Row>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </section>
-          </>),
-        },
-        {
-          id: 'button-variant-examples-heading',
-          title: 'Hierarchy',
-          content: (<>
-            {buttonContent.hierarchyParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-            <ul className="component-section-description mz-text-body-md">{buttonContent.hierarchyItems}</ul>
-            <div className="documentation-table documentation-state-matrix">
-              <Table aria-label="Button hierarchy and states">
-                <TableHeader>
-                  <Column id="variant" isRowHeader>Hierarchy</Column>
-                  {buttonStates.map(({ name, reactAriaState, state }) => (
-                    <Column id={state} key={state}>
-                      <span className="component-state-heading">
-                        <span>{name}</span>
-                        <code>{reactAriaState}</code>
-                      </span>
-                    </Column>
-                  ))}
-                </TableHeader>
-                <TableBody>
-                  {buttonVariants.map(({ label, name, variant }) => (
-                    <Row id={variant} key={variant}>
+                  {buttonSizes.map(({ label, size, usage }) => (
+                    <Row id={size} key={size}>
                       <Cell>
                         <span className="table-item-heading">
-                          <strong>{name}</strong>
-                          <code>{variant}</code>
+                          <strong>{label}</strong>
+                          <code>{size}</code>
+                          <span>{usage}</span>
                         </span>
                       </Cell>
-                      {buttonStates.map(({ state }) => (
-                        <Cell key={state}>
-                          <ButtonStateExample label={label} state={state} variant={variant} />
-                        </Cell>
-                      ))}
+                      <Cell><Button size={size}>Button</Button></Cell>
+                      <Cell>
+                        <TooltipTrigger>
+                          <Button size={size} iconLeading={<DownloadIcon />} aria-label={buttonContent.iconOnlyLabel} />
+                          <Tooltip>{buttonContent.iconOnlyLabel}</Tooltip>
+                        </TooltipTrigger>
+                      </Cell>
                     </Row>
                   ))}
                 </TableBody>
               </Table>
             </div>
-          </>),
-        },
-        {
-          id: 'button-technical-details',
-          title: 'Technical details',
-          sections: [
-            {
-              id: 'button-content-heading',
-              title: 'Anatomy',
-              content: (<>
-                {buttonContent.anatomyParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <DocsTable aria-label="Button anatomy" nameColumn="Component" rows={buttonContent.anatomyRows} className="documentation-anatomy-table" />
-
-              </>),
-            },
-            {
-              id: 'button-variants-heading',
-              title: 'States',
-              content: (<>
-                <div className="documentation-table">
-                  <Table aria-label="Button states">
-                    <TableHeader><Column id="state" isRowHeader>State</Column><Column id="behaviour">Behaviour</Column></TableHeader>
-                    <TableBody>
-                      {buttonStates.map(({ name, state, reactAriaState, description }) => (
-                        <Row id={state} key={state}>
-                          <Cell><span className="table-item-heading"><strong>{name}</strong><code>{reactAriaState}</code></span></Cell>
-                          <Cell>{description}</Cell>
-                        </Row>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </div>
-              </>),
-            },
-            {
-              id: 'button-usage-heading',
-              title: 'Usage',
-              content: (<>
-                {buttonContent.usageParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-              </>),
-            },
-            {
-              id: 'button-accessibility-heading',
-              title: 'Accessibility',
-              content: (<>
-                {buttonContent.accessibilityParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-              </>),
-            },
-            {
-              id: 'button-tokens-heading',
-              title: 'CSS tokens',
-              content: (<>
-                {buttonContent.tokensParagraphs.map((paragraph, index) => <p className="component-section-description" key={index}>{paragraph}</p>)}
-                <DocsTable aria-label="Button CSS tokens" nameColumn="CSS token" rows={buttonContent.tokensRows} />
-              </>),
-            },
-          ],
-        },
-      ]}
+          </section>
+        </>),
+        hierarchy: (
+          <div className="documentation-table documentation-state-matrix">
+            <Table aria-label="Button hierarchy and states">
+              <TableHeader>
+                <Column id="variant" isRowHeader>Hierarchy</Column>
+                {buttonStates.map(({ name, reactAriaState, state }) => (
+                  <Column id={state} key={state}>
+                    <span className="component-state-heading">
+                      <span>{name}</span>
+                      <code>{reactAriaState}</code>
+                    </span>
+                  </Column>
+                ))}
+              </TableHeader>
+              <TableBody>
+                {buttonVariants.map(({ label, name, variant }) => (
+                  <Row id={variant} key={variant}>
+                    <Cell>
+                      <span className="table-item-heading">
+                        <strong>{name}</strong>
+                        <code>{variant}</code>
+                      </span>
+                    </Cell>
+                    {buttonStates.map(({ state }) => (
+                      <Cell key={state}>
+                        <ButtonStateExample label={label} state={state} variant={variant} />
+                      </Cell>
+                    ))}
+                  </Row>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        ),
+        states: (
+          <div className="documentation-table">
+            <Table aria-label="Button states">
+              <TableHeader><Column id="state" isRowHeader>State</Column><Column id="behaviour">Behaviour</Column></TableHeader>
+              <TableBody>
+                {buttonStates.map(({ name, state, reactAriaState, description }) => (
+                  <Row id={state} key={state}>
+                    <Cell><span className="table-item-heading"><strong>{name}</strong><code>{reactAriaState}</code></span></Cell>
+                    <Cell>{description}</Cell>
+                  </Row>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        ),
+      }}
     />
   )
 }

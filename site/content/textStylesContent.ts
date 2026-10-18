@@ -1,3 +1,5 @@
+import type { Copy, DocsPageContent } from '../templates/docsPageContent'
+
 export type TextRole = 'display' | 'heading' | 'title' | 'body' | 'label'
 
 interface TextRoleDefinition {
@@ -13,7 +15,80 @@ interface TypographyStyleDefinition {
   purpose: string
 }
 
-export const textStylesIntro = 'A text style is a ready-made set of font settings that you apply with one CSS class. Mezzanine has fifteen, grouped into five roles.'
+export const textStylesContent: DocsPageContent = {
+  id: 'text-styles',
+  kind: 'foundation',
+  title: 'Text styles',
+  description: 'A text style is a ready-made set of font settings that you apply with one CSS class. Mezzanine has fifteen, grouped into five roles.',
+  sections: [
+    {
+      key: 'quickStart',
+      title: 'Quick start',
+      intro: ["Add a style's class to any element. The class sets the font, size, weight, line height, letter spacing and capitalisation together, so you do not set any of them yourself."],
+    },
+    {
+      key: 'theFiveRoles',
+      title: 'The five roles',
+      intro: ['Each role does one job and comes in three sizes: large (`lg`), medium (`md`) and small (`sm`).'],
+    },
+    {
+      key: 'allStyles',
+      title: 'All styles',
+      intro: ["Each example below is written in its own style. Sizes are shown at the browser's default text size."],
+    },
+    {
+      key: 'choosingAStyle',
+      title: 'Choosing a style',
+      intro: ['Start with these common choices. Use Body medium for anything people need to read properly, and keep Label small for brief extra text in tight spaces. Instructions, errors and anything needed to finish a task need a larger style.'],
+    },
+    {
+      key: 'lighterAndBolderText',
+      title: 'Lighter and bolder text',
+      intro: [
+        'On their own, Title and Label styles are semibold, and Display, Heading and Body styles are regular. To change the weight, add one more class:',
+        { list: [
+          '`mz-text-default` uses the normal weight, currently regular.',
+          '`mz-text-emphasis` uses the strong weight, currently semibold.',
+        ] },
+        "“Default” here means the theme's normal weight, not the style's own weight. Adding `mz-text-default` to a Label style makes it lighter. A brand theme can change both weights, for example to light and extra bold.",
+      ],
+    },
+    {
+      key: 'plainHtmlElements',
+      title: 'Plain HTML elements',
+      intro: ["Text without a style class still gets a style, so it never falls back to the browser's defaults. Any class you add replaces it."],
+    },
+    { key: 'sizesOnSmallScreens', title: 'Sizes on small screens' },
+    { key: 'lineHeight', title: 'Line height' },
+    {
+      key: 'tokenReference',
+      title: 'Token reference',
+      intro: ["Tokens are named CSS values, written as custom properties such as `--font-size-body-md`. Each style reads its size and line height from tokens, and shares its role's font, weight, letter spacing and capitalisation tokens, so a product theme can change the values without changing the class names."],
+    },
+  ],
+}
+
+// Copy the page places around its live parts: after a code sample or table, or in the
+// guidance boxes that have no introduction. {bodyLineHeight} is replaced with the live value.
+export const textStylesPartCopy = {
+  afterQuickStartCode: [
+    'A text style only changes how text looks. Choose the HTML element for its meaning: a section heading is still an `h2`, even if you want it to look small.',
+    "Every class starts with `mz-`, short for Mezzanine, so it cannot clash with your product's own class names.",
+  ],
+  afterRolesTable: ['Heading and Title both label content, but in different places. Use Heading for the outline of a page and Title inside a component. A Title can be smaller than the smallest Heading.'],
+  afterWeightTable: ['These classes only change appearance. When words are genuinely important, use the `strong` or `em` element so assistive technology knows too.'],
+  sizesOnSmallScreens: [
+    'Display and Heading styles grow with the width of the screen. They use the smaller size in the All styles tables on a phone and the larger size on a wide screen. Title, Body and Label styles stay the same size at every width.',
+    "Every size also follows the reader's browser text setting, so text gets bigger for people who enlarge it.",
+  ],
+  lineHeight: [
+    'Line height is the height of each line of text. Every text style includes its own, so you never need to set it.',
+    'The values are plain numbers that multiply the font size. Body medium uses `{bodyLineHeight}`, so 16px text gets 24px lines. Because the value has no unit, lines stay in proportion when text is enlarged.',
+    'Line height is not the space between paragraphs or list items. That space comes from margins.',
+  ],
+  tokenDisclosureLabel: 'Show all text style tokens',
+  choiceSeparator: ' or ',
+} satisfies Record<string, Copy | readonly Copy[]>
 
 export const quickStartCode = `<h1 className="mz-text-heading-lg">Page title</h1>
 <p className="mz-text-body-md">A paragraph of reading text.</p>`

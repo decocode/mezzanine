@@ -1,12 +1,6 @@
-import { PageHeading } from '../templates/DocsPageTemplate'
+import { introductionContent } from '../content/introductionContent'
+import { ContentPage } from '../templates/ContentPage'
+
 export default function IntroductionPage() {
-  return (
-    <PageHeading
-      description={[
-        'Mezzanine is a design system created by DecoCode Ltd.',
-        'The components are based on React Aria, an open-source, style-free (headless) UI library developed by Adobe which provides excellent support for accessibility and localisation.',
-      ]}
-      title="Introduction"
-    />
-  )
+  return <ContentPage content={introductionContent} showContents={false} />
 }

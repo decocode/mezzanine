@@ -32,7 +32,7 @@ for (const theme of themes) {
       const fullHeight = (await panel.boundingBox())!.height
       await panel.evaluate(element => {
         const link = document.createElement('a')
-        link.href = '#disclosure-basic-heading'
+        link.href = '#disclosure-example'
         link.textContent = 'Panel focus probe'
         element.append(link)
       })

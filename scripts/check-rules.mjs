@@ -355,33 +355,42 @@ function checkSnapshot(api, update) {
   }
 }
 
-// Each Props table and the exported types it documents. Rows prefixed with a
+// Each Props table, by content file and section key, and the exported types it documents. Rows prefixed with a
 // component name, or following a row that is only that name, use its type.
 const propTables = [
-  { file: 'site/content/navbarContent.tsx', key: 'props', types: ['NavbarProps'] },
-  { file: 'site/content/navigationTreeContent.tsx', key: 'props', types: ['NavTreeProps'] },
-  { file: 'site/content/navigationTreeContent.tsx', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
-  { file: 'site/content/tabBarContent.tsx', key: 'propsRows', types: ['TabBarProps'] },
-  { file: 'site/content/sidebarContent.tsx', key: 'props', types: ['SidebarProps'],
+  { file: 'site/content/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
+  { file: 'site/content/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
+  { file: 'site/content/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
+  { file: 'site/content/tabBarContent.ts', key: 'props', types: ['TabBarProps'] },
+  { file: 'site/content/sidebarContent.ts', key: 'props', types: ['SidebarProps'],
     components: { Sidebar: ['SidebarProps'], SidebarTrigger: ['SidebarTriggerProps'], SidebarPanel: ['SidebarPanelProps'] } },
-  { file: 'site/content/tabsContent.tsx', key: 'propsRows', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
-  { file: 'site/content/tableOfContentsContent.tsx', key: 'propsRows', types: ['TableOfContentsProps'] },
-  { file: 'site/content/tooltipContent.tsx', key: 'propsRows', types: [],
+  { file: 'site/content/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
+  { file: 'site/content/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
+  { file: 'site/content/tooltipContent.ts', key: 'props', types: [],
     components: { TooltipTrigger: ['TooltipTriggerComponentProps'], Tooltip: ['TooltipProps'] } },
 ]
 
+// The Props rows of one content-file section: the object whose `key` is the section key, then its
+// `table.rows`. Content files follow site/templates/docsPageContent.ts.
 function documentedPropNames(program, file, key) {
   const source = program.getSourceFile(path.join(root, file))
+  const property = (object, name) => object.properties.find(item => ts.isPropertyAssignment(item) && item.name.getText(source) === name)?.initializer
   const names = []
   walk(source, node => {
-    if (!ts.isPropertyAssignment(node) || node.name.getText(source) !== key) return
-    let list = node.initializer
-    while (ts.isSatisfiesExpression(list) || ts.isAsExpression(list)) list = list.expression
-    if (!ts.isArrayLiteralExpression(list)) return
-    for (const element of list.elements) {
+    let table
+    // A section such as { key: 'props', table: { rows } }.
+    if (ts.isObjectLiteralExpression(node)) {
+      const sectionKey = property(node, 'key')
+      if (sectionKey && ts.isStringLiteral(sectionKey) && sectionKey.text === key) table = property(node, 'table')
+    }
+    // A table a page renders itself, exported under the key, such as props: { rows }.
+    if (ts.isPropertyAssignment(node) && node.name.getText(source) === key) table = node.initializer
+    const rows = table && ts.isObjectLiteralExpression(table) ? property(table, 'rows') : undefined
+    if (!rows || !ts.isArrayLiteralExpression(rows)) return
+    for (const element of rows.elements) {
       if (!ts.isObjectLiteralExpression(element)) continue
-      const name = element.properties.find(property => ts.isPropertyAssignment(property) && property.name.getText(source) === 'name')
-      if (name && ts.isStringLiteral(name.initializer)) names.push({ text: name.initializer.text, position: name.getStart(source) })
+      const name = property(element, 'name')
+      if (name && ts.isStringLiteral(name)) names.push({ text: name.text, position: name.getStart(source) })
     }
   })
   return names
