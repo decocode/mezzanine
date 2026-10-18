@@ -22,7 +22,7 @@ function MasonryDemo() {
 function ScrollStateDemo() {
   const scrollState = supportsCondition('container-type: scroll-state')
   return <>
-    <DemoText>CSS can ask “is this sticky header stuck right now?” and style it differently, here with a Warning border, with no JavaScript. Scroll down inside the box to see it. It only works in Chrome and Edge 133 and later, so it’s an extra, never something a layout depends on.</DemoText>
+    <DemoText>CSS can ask “is this sticky header stuck right now?” and style it differently, here with a Warning border, with no JavaScript. The border appears once the header sticks. It only works in Chrome and Edge 133 and later, so it’s an extra, never something a layout depends on.</DemoText>
     <FeatureStatus supported={scrollState} />
       <div className="lab-scroll-box lab-scroll-state-box" role="region" aria-label="Scrolling content with a header that changes when stuck" tabIndex={0}>
         <div className="lab-sticky-header lab-stuck-aware mz-text-label-md"><span>Scroll down and I change when I stick</span></div>

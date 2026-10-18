@@ -311,17 +311,52 @@ export const boxCssNotes: Record<string, CssNote> = {
   },
   fluidSizing: {
     paragraphs: [
-      'The size is `clamp(1.5rem, 1rem + 4cqi, 3rem)`: never smaller than 1.5rem, never larger than 3rem, and in between it’s 1rem plus 4% of the frame’s width.',
+      'The display text is `clamp(2.5rem, 1.5rem + 8cqi, 5rem)`, and the heading is `clamp(1.5rem, 1rem + 4cqi, 3rem)`. Each stays between its two limits, and in between it’s a rem value plus a percentage of the frame’s width.',
       'The `cqi` unit is a hundredth of the width of the nearest container, here the frame, so the text follows the slider. The `rem` part keeps it growing when someone enlarges their text.',
+      'The body text uses Mezzanine’s Body medium style, `mz-text-body-md`, which has a fixed size, so it doesn’t scale.',
     ],
-    code: `.lab-fluid-heading {
+    code: `.lab-fluid-display {
+  font-size: clamp(2.5rem, 1.5rem + 8cqi, 5rem);
+  line-height: 1.1;
+}
+
+.lab-fluid-heading {
   font-size: clamp(1.5rem, 1rem + 4cqi, 3rem);
   line-height: 1.2;
 }`,
   },
+  fluidSpace: {
+    paragraphs: [
+      'The padding and the gap are both `clamp(var(--space-2), 4cqi, var(--space-8))`: 4% of the frame’s width, but never less than `--space-2` or more than `--space-8`.',
+      'The limits come from Mezzanine’s spacing tokens, so the space still follows the spacing scale at both ends.',
+    ],
+    code: `.lab-fluid-space {
+  display: grid;
+  gap: clamp(var(--space-2), 4cqi, var(--space-8));
+  padding: clamp(var(--space-2), 4cqi, var(--space-8));
+  border: 1px dashed var(--color-border);
+}`,
+  },
+  fluidWidth: {
+    paragraphs: [
+      'The box’s `inline-size`, its width, is `clamp(12rem, 60%, 28rem)`: 60% of the frame, but never narrower than 12rem or wider than 28rem.',
+    ],
+    code: `.lab-fluid-width {
+  inline-size: clamp(12rem, 60%, 28rem);
+}`,
+  },
+  safeMinimum: {
+    paragraphs: [
+      'The box’s `inline-size` is `min(100%, 25rem)`. `min()` uses whichever value is smaller: 25rem when the frame has room, or the full width of the frame when it doesn’t.',
+      'Without `min()`, a plain `25rem` would stick out of any frame narrower than that.',
+    ],
+    code: `.lab-safe-minimum {
+  inline-size: min(100%, 25rem);
+}`,
+  },
   supports: {
     paragraphs: [
-      'Every browser first gets an ordinary rule. Then `@supports` checks whether the browser understands `display: grid-lanes`, and only then uses it. This is the masonry rule from Box to the Future.',
+      'Every browser first gets an ordinary rule. Then `@supports` checks whether the browser understands `display: grid-lanes`, and only then uses it. This is the masonry rule from Emerging features.',
     ],
     code: `@supports (display: grid-lanes) {
   .lab-masonry {

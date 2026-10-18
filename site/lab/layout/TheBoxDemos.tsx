@@ -41,7 +41,7 @@ const paddingOptions = [
 function PaddingDemo() {
   const [padding, setPadding] = useState<(typeof paddingOptions)[number]['value']>('--space-4')
   return <>
-    <DemoText>The box with its content in a different shade. Choose the padding and watch the content move in while the box grows.</DemoText>
+    <DemoText>The box with its content in a different shade. More padding moves the content in and makes the box grow.</DemoText>
     <ValuePicker label="padding" options={paddingOptions} value={padding} onChange={setPadding} />
     <div className="lab-padding-box" style={{ '--lab-padding': `var(${padding})` } as CSSProperties}>
       <div className="lab-box-content mz-text-body-md">Content</div>
@@ -60,7 +60,7 @@ const displayOptions = [
 function TypesOfBoxDemo() {
   const [display, setDisplay] = useState<(typeof displayOptions)[number]['value']>('inline')
   return <>
-    <DemoText>Three boxes in a row of text. Choose their type: block boxes stack, inline and inline-block boxes line up, and none makes them disappear.</DemoText>
+    <DemoText>Three boxes in a row of text. Block boxes stack, inline and inline-block boxes line up, and none makes them disappear.</DemoText>
     <ValuePicker label="display" options={displayOptions} value={display} onChange={setDisplay} />
       <Text elementType="p" className="mz-text-body-md" style={{ '--lab-flow-display': display } as CSSProperties}>
         Here is a sentence with <span className="lab-flow-item">Box 1</span> inside it, then <span className="lab-flow-item">Box 2</span>, and finally <span className="lab-flow-item">Box 3</span> near the end of the line.
@@ -85,7 +85,7 @@ function SizingTheBoxDemo() {
 function MeasuringTheBoxDemo() {
   return <>
     <DemoHeading>Four units</DemoHeading>
-    <DemoText>Drag the frame’s slider. The % bar follows the frame. The vw bar follows the window, so it ignores the frame. The px and rem bars stay put, but rem grows if you enlarge your text. That’s why Mezzanine’s <Link href="/site/lab/layout/arranging-boxes/gap">spacing tokens</Link> are in rem.</DemoText>
+    <DemoText>The % bar follows the frame. The vw bar follows the window, so it ignores the frame. The px and rem bars stay put, but rem grows if you enlarge your text. That’s why Mezzanine’s <Link href="/site/lab/layout/add-space/gap">spacing tokens</Link> are in rem.</DemoText>
     <DemoFrame label="Four units">
       <Stack>
         <div className="lab-unit-bar lab-unit-px mz-text-body-sm">160px</div>
@@ -96,7 +96,7 @@ function MeasuringTheBoxDemo() {
     </DemoFrame>
     <CssNotes name="the units" note={cssNotes.units} />
     <DemoHeading>Grow, but within limits</DemoHeading>
-    <DemoText>This box tries to be half the frame. Drag the slider to each end: it stops shrinking at 10rem and stops growing at 30rem.</DemoText>
+    <DemoText>This box tries to be half the frame, but it stops shrinking at 10rem and stops growing at 30rem.</DemoText>
     <DemoFrame label="Grow, but within limits">
       <div className="lab-clamp-box mz-text-body-sm">Half the frame, between 10rem and 30rem</div>
     </DemoFrame>
@@ -107,7 +107,7 @@ function MeasuringTheBoxDemo() {
 function LogicalDemo() {
   const [rtl, setRtl] = useState(false)
   return <>
-    <DemoText>Turn on right to left. The logical box moves its border and indent to the right, where Arabic and Hebrew lines start. The physical one stays on the left and looks wrong. Reading direction itself is explained on the <Link href="/text">Text</Link> page in the docs.</DemoText>
+    <DemoText>In right to left, the logical box moves its border and indent to the right, where Arabic and Hebrew lines start. The physical one stays on the left and looks wrong. Reading direction itself is explained on the <Link href="/text">Text</Link> page in the docs.</DemoText>
     <Checkbox isSelected={rtl} onChange={setRtl}>Show right to left</Checkbox>
     <div className="lab-two-slots" dir={rtl ? 'rtl' : 'ltr'}>
       <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Physical (left/right)</Text>
@@ -130,7 +130,7 @@ const ratioOptions = [
 function FrameDemo() {
   const [ratio, setRatio] = useState<(typeof ratioOptions)[number]['value']>('16 / 9')
   return <>
-    <DemoText>Choose a shape. The picture is cropped to fill it, never squashed.</DemoText>
+    <DemoText>Whatever the shape, the picture is cropped to fill it, never squashed.</DemoText>
     <ValuePicker label="Shape" options={ratioOptions} value={ratio} onChange={setRatio} />
       <Center max="24rem">
         <Frame ratio={ratio}><img src={exampleImage} alt={exampleImageAlt} width={480} height={240} /></Frame>
@@ -141,7 +141,7 @@ function FrameDemo() {
 
 function CenterDemo() {
   return <>
-    <DemoText>Widen the frame. The block stays in the middle and never grows past 24rem.</DemoText>
+    <DemoText>However wide the frame gets, the block stays in the middle and never grows past 24rem.</DemoText>
     <DemoFrame label="Center">
       <Center max="24rem"><Block>Centred, never wider than 24rem</Block></Center>
     </DemoFrame>

@@ -24,7 +24,7 @@ const coverHeightOptions = [
 function CoverDemo() {
   const [height, setHeight] = useState<(typeof coverHeightOptions)[number]['value']>('24rem')
   return <>
-    <DemoText>The dashed line is the Cover box, set out like the opening section of a homepage. Change its height: the headline stays in the middle, and the logo and “Scroll down” stay at the top and bottom edges.</DemoText>
+    <DemoText>The dashed line is the Cover box, set out like the opening section of a homepage. At every height, the headline stays in the middle, and the logo and “Scroll down” stay at the top and bottom edges.</DemoText>
     <ValuePicker label="Minimum height" options={coverHeightOptions} value={height} onChange={setHeight} />
     <DemoFrame label="Cover">
       <div className="lab-cover-demo">
@@ -44,7 +44,7 @@ function CoverDemo() {
 function InlineDemo() {
   const [isSwitching, setIsSwitching] = useState(true)
   return <>
-    <DemoText>Drag the slider below about 30rem. With the switch, the row becomes a column. Without it, the row squashes, then sticks out of the frame.</DemoText>
+    <DemoText>Below about 30rem, with the switch, the row becomes a column. Without it, the row squashes, then sticks out of the frame.</DemoText>
     <Checkbox isSelected={isSwitching} onChange={setIsSwitching}>Switch to a column below 30rem</Checkbox>
     <DemoFrame label="Inline" canOverflow>
       <Inline switchAt={isSwitching ? '30rem' : undefined}><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></Inline>
@@ -65,7 +65,7 @@ function InlineClusterDemo() {
 
 function ReelDemo() {
   return <>
-    <DemoText>Scroll sideways, or press Tab to reach the reel and use the arrow keys. The scrolling comes from overflow: see <Link href="/site/lab/layout/inside-the-box/overflowing-the-box">Overflowing the box</Link>.</DemoText>
+    <DemoText>The reel scrolls sideways. Keyboard users reach it with Tab and scroll it with the arrow keys. The scrolling comes from overflow: see <Link href="/site/lab/layout/inside-the-box/overflowing-the-box">Overflowing the box</Link>.</DemoText>
       <Reel label="Example reel">
         {Array.from({ length: 8 }, (_, index) => <Block key={index}>Item {index + 1}</Block>)}
       </Reel>
@@ -99,10 +99,11 @@ const columnCountOptions = [
   { label: '4', value: '4' },
 ] as const
 
-function ColumnsDemo() {
+// Grid's two common recipes, shown on the Grid page under their own third-level headings.
+export function ColumnsDemo() {
   const [count, setCount] = useState<(typeof columnCountOptions)[number]['value']>('3')
   return <>
-    <DemoText>Choose the number of columns. The first item always spans two of them.</DemoText>
+    <DemoText>Whatever the number of columns, the first item always spans two of them.</DemoText>
     <ValuePicker label="Columns" options={columnCountOptions} value={count} onChange={setCount} />
     <DemoFrame label="Columns">
       <Columns columns={Number(count)}>
@@ -110,17 +111,17 @@ function ColumnsDemo() {
         {['two', 'three', 'four', 'five', 'six'].map((word) => <Block key={word}>Item {word}</Block>)}
       </Columns>
     </DemoFrame>
-    <CssNotes name="Columns" note={cssNotes.columns} level={3} />
+    <CssNotes name="a set number of columns" note={cssNotes.columns} level={4} />
   </>
 }
 
-function GridDemo() {
+export function AutoGridDemo() {
   return <>
     <DemoText>The grid works out its own number of columns, from three to two to one, just from how many 10rem tiles fit. You never choose the number.</DemoText>
     <DemoFrame label="Grid">
       <Grid min="10rem">{['A', 'B', 'C', 'D', 'E', 'F'].map((letter) => <Block key={letter}>Tile {letter}</Block>)}</Grid>
     </DemoFrame>
-    <CssNotes name="Grid" note={cssNotes.gridBlock} level={3} />
+    <CssNotes name="as many columns as fit" note={cssNotes.gridBlock} level={4} />
   </>
 }
 
@@ -131,6 +132,4 @@ export const boxFormationDemos: StageDemos = {
   inlineCluster: { Demo: InlineClusterDemo },
   reel: { Demo: ReelDemo },
   split: { Demo: SplitDemo },
-  columns: { Demo: ColumnsDemo },
-  grid: { Demo: GridDemo },
 }

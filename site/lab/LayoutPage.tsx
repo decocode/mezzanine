@@ -1,70 +1,34 @@
 import { Button, Card, Heading, Link, Text } from '@decocode/mezzanine'
 import { DocsPageTemplate } from '../templates/DocsPageTemplate'
-import { boxToTheFuture, childPageCardAction, futurePages, labTopLevelPages, layersLab, layersPages, layoutLabIntro, layoutLabSections, layoutStages, stagePagesByStage, type FuturePage, type LabTopLevelPage, type LayoutStage, type StagePage } from './layout/layoutLabContent'
+import { childPageCardAction, browserAndDeviceLab, browserAndDevicePages, labTopLevelPages, layersLab, layersPages, layoutLabIntro, layoutStages, stagePagesByStage, type FuturePage, type LabTopLevelPage, type LayoutStage, type StagePage } from './layout/layoutLabContent'
 import {
-  ColumnDropDemo, ContainerQueryDemo, FluidSizingDemo, LayersDemo, NamedLayersDemo, PositioningDemo, ResponsiveDesignDemo,
-  ScrollPaddingDemo, StackingContextsDemo, SupportsDemo, ViewportDemo,
+  LayersDemo, NamedLayersDemo, PositioningDemo,
+  ScrollPaddingDemo, StackingContextsDemo, SupportsDemo,
 } from './layout/FoundationDemos'
+import { ReadingOrderDemo } from './layout/ArrangingBoxesDemos'
+import { MediaQueriesDemo, SafeAreasDemo, TargetSizeDemo } from './layout/BoxesOnDevicesDemos'
 import { FutureOverview, FuturePageView, SectionPageView, StageOverview, StagePageView } from './layout/StagePages'
 import './layout/layout-lab.css'
 
-// Pages from the first version of the tour, keyed by their slug, until they move into a stage.
-const sectionPages: Record<string, () => React.JSX.Element> = {
-  [layoutLabSections.columnDrop.slug]: ColumnDropDemo,
-  [layoutLabSections.responsiveDesign.slug]: ResponsiveDesignDemo,
-  [layoutLabSections.fluidSizing.slug]: FluidSizingDemo,
-  [layoutLabSections.container.slug]: ContainerQueryDemo,
-  [layoutLabSections.viewport.slug]: ViewportDemo,
-}
 
-export function hasLayoutSectionPage(slug: string) {
-  return slug in sectionPages
-}
-
-// The overview: a section for each stage with links to its pages, then the pages still to be
-// sorted, then Box to the Future. Built with the docs page template. Illustrative and unapproved.
+// The overview: a section for each group with links to its pages. Built with the docs page template.
+// Illustrative and unapproved.
 export function LayoutOverviewPage() {
   return <div className="lab-layout">
     <DocsPageTemplate
       title={layoutLabIntro.title}
       description={[layoutLabIntro.summary, layoutLabIntro.frames]}
-      sections={[
-        ...layoutStages.map((stage) => ({
-          id: stage.id,
-          title: stage.title,
-          content: <div className="lab-section-body">
-            <Text elementType="p" className="mz-text-body-md">{stage.summary}</Text>
-            <ul className="lab-stage-pages mz-text-body-md">
-              {stagePagesByStage(stage.key).map((page) => <li key={page.key}><Link href={page.href}>{page.title}</Link></li>)}
-            </ul>
-            <div><Button variant="secondary" href={`/site/lab/layout/${stage.slug}`} aria-describedby={stage.id}>{childPageCardAction}</Button></div>
-          </div>,
-        })),
-        {
-          id: 'lab-still-to-be-sorted',
-          title: layoutLabIntro.moreHeading,
-          content: <div className="lab-section-body">
-            <Text elementType="p" className="mz-text-body-md">{layoutLabIntro.more}</Text>
-            <ul className="lab-experiment-list">
-              {Object.values(layoutLabSections).map((section) => <li key={section.slug}>
-                <Heading level={3} className="mz-text-heading-sm"><Link href={`/site/lab/layout/${section.slug}`}>{section.title}</Link></Heading>
-                <Text elementType="p" className="mz-text-body-md">{section.what}</Text>
-              </li>)}
-            </ul>
-          </div>,
-        },
-        {
-          id: boxToTheFuture.id,
-          title: boxToTheFuture.title,
-          content: <div className="lab-section-body">
-            <Text elementType="p" className="mz-text-body-md">{boxToTheFuture.what}</Text>
-            <ul className="lab-stage-pages mz-text-body-md">
-              {futurePages.map((page) => <li key={page.key}><Link href={page.href}>{page.title}</Link></li>)}
-            </ul>
-            <div><Button variant="secondary" href={`/site/lab/layout/${boxToTheFuture.slug}`} aria-describedby={boxToTheFuture.id}>{childPageCardAction}</Button></div>
-          </div>,
-        },
-      ]}
+      sections={layoutStages.map((stage) => ({
+        id: stage.id,
+        title: stage.title,
+        content: <div className="lab-section-body">
+          <Text elementType="p" className="mz-text-body-md">{stage.summary}</Text>
+          <ul className="lab-stage-pages mz-text-body-md">
+            {stagePagesByStage(stage.key).map((page) => <li key={page.key}><Link href={page.href}>{page.title}</Link></li>)}
+          </ul>
+          <div><Button variant="secondary" href={`/site/lab/layout/${stage.slug}`} aria-describedby={stage.id}>{childPageCardAction}</Button></div>
+        </div>,
+      }))}
     />
   </div>
 }
@@ -79,13 +43,7 @@ export function LayoutStageChildPage({ page }: { page: StagePage }) {
   return <div className="lab-layout"><StagePageView page={page} /></div>
 }
 
-// One of the pages still to be sorted.
-export function LayoutSectionPage({ slug }: { slug: string }) {
-  const section = Object.values(layoutLabSections).find((item) => item.slug === slug)!
-  return <div className="lab-layout"><SectionPageView section={section} Demo={sectionPages[slug]} /></div>
-}
-
-// Box to the Future's overview page.
+// The Emerging features experiment's overview page.
 export function LayoutFuturePage() {
   return <div className="lab-layout"><FutureOverview /></div>
 }
@@ -101,7 +59,11 @@ const topLevelDemos: Record<string, () => React.JSX.Element> = {
   [layersPages.layerOrder.href]: NamedLayersDemo,
   [layersPages.stackingContexts.href]: StackingContextsDemo,
   [layersPages.scrollPadding.href]: ScrollPaddingDemo,
-  [labTopLevelPages.supports.href]: SupportsDemo,
+  [browserAndDevicePages.mediaQueries.href]: MediaQueriesDemo,
+  [browserAndDevicePages.safeAreas.href]: SafeAreasDemo,
+  [browserAndDevicePages.targetSize.href]: TargetSizeDemo,
+  [labTopLevelPages.readingOrder.href]: ReadingOrderDemo,
+  [browserAndDevicePages.supports.href]: SupportsDemo,
   [labTopLevelPages.stylePriority.href]: LayersDemo,
 }
 
@@ -109,14 +71,14 @@ export function LabTopLevelPageView({ page }: { page: LabTopLevelPage }) {
   return <div className="lab-layout"><SectionPageView section={page} Demo={topLevelDemos[page.href]} /></div>
 }
 
-// The Layers experiment's overview: what layers are, then a Card for each page.
-export function LayersOverviewPage() {
+// An experiment's overview outside Layout: what it covers, then a Card for each page.
+function ExperimentOverview({ experiment, pages }: { experiment: { id: string; title: string; summary: string }; pages: Record<string, LabTopLevelPage> }) {
   return <div className="lab-layout">
-    <DocsPageTemplate title={layersLab.title} description={layersLab.summary} showContents={false} sections={[{
-      id: `${layersLab.id}-pages`,
+    <DocsPageTemplate title={experiment.title} description={experiment.summary} showContents={false} sections={[{
+      id: `${experiment.id}-pages`,
       title: 'Pages',
       content: <ul className="lab-child-page-cards">
-        {Object.values(layersPages).map((page) => <li key={page.href}>
+        {Object.values(pages).map((page) => <li key={page.href}>
           <Card>
             <Heading level={3} id={`lab-card-${page.id}`}>{page.title}</Heading>
             <p>{page.what}</p>
@@ -126,4 +88,14 @@ export function LayersOverviewPage() {
       </ul>,
     }]} />
   </div>
+}
+
+// The Layers experiment's overview.
+export function LayersOverviewPage() {
+  return <ExperimentOverview experiment={layersLab} pages={layersPages} />
+}
+
+// The Browser and device experiment's overview.
+export function BrowserAndDeviceOverviewPage() {
+  return <ExperimentOverview experiment={browserAndDeviceLab} pages={browserAndDevicePages} />
 }

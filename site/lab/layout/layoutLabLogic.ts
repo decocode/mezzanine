@@ -1,4 +1,4 @@
-import { useSyncExternalStore } from 'react'
+import { useSyncExternalStore, type RefObject } from 'react'
 
 // Live media query matching without effects: the browser notifies React of changes.
 export function useMediaQuery(query: string) {
@@ -24,23 +24,56 @@ export function supportsCondition(condition: string) {
 }
 
 // Reads the rendered height of each probe element, for the viewport-unit comparison.
-export function measureProbes(container: HTMLElement | null) {
-  if (!container) return []
-  return [...container.querySelectorAll<HTMLElement>('[data-probe]')].map((probe) => ({
-    label: probe.dataset.probe ?? '',
-    pixels: Math.round(probe.getBoundingClientRect().height || parseFloat(getComputedStyle(probe).paddingTop)),
-  }))
+// Window and screen changes that can alter a measurement: resizing, rotating, and on phones the
+// browser's toolbar showing or hiding, which resizes the visual viewport.
+function subscribeToScreenChanges(onChange: () => void) {
+  window.addEventListener('resize', onChange)
+  window.addEventListener('orientationchange', onChange)
+  window.visualViewport?.addEventListener('resize', onChange)
+  return () => {
+    window.removeEventListener('resize', onChange)
+    window.removeEventListener('orientationchange', onChange)
+    window.visualViewport?.removeEventListener('resize', onChange)
+  }
 }
 
-// Reads env(safe-area-inset-*) through a probe whose padding uses each inset.
-export function measureSafeAreas(probe: HTMLElement | null) {
-  if (!probe) return []
-  const style = getComputedStyle(probe)
+// The height of each [data-probe] inside the container, read again once the probes are on the
+// page and whenever the screen changes. The snapshot is a string, so React only re-renders when a
+// height actually changes.
+export function useProbeHeights(container: RefObject<HTMLElement | null>) {
+  const snapshot = useSyncExternalStore(
+    subscribeToScreenChanges,
+    () => container.current
+      ? [...container.current.querySelectorAll<HTMLElement>('[data-probe]')]
+        .map((probe) => `${probe.dataset.probe ?? ''}\t${Math.round(probe.getBoundingClientRect().height)}`).join('\n')
+      : '',
+    () => '',
+  )
+  return snapshot ? snapshot.split('\n').map((line) => {
+    const [label, pixels] = line.split('\t')
+    return { label, pixels: Number(pixels) }
+  }) : []
+}
+
+// Reads env(safe-area-inset-*) through a probe whose padding uses each inset. React reads it
+// again once the probe is on the page, and whenever the window resizes or the screen rotates.
+// Safe areas are physical: they belong to the screen's own edges, not the reading direction.
+export function useSafeAreas(probe: RefObject<HTMLElement | null>) {
+  const snapshot = useSyncExternalStore(
+    subscribeToScreenChanges,
+    () => {
+      if (!probe.current) return ''
+      const style = getComputedStyle(probe.current)
+      return [style.paddingTop, style.paddingRight, style.paddingBottom, style.paddingLeft].join(' ')
+    },
+    () => '',
+  )
+  const [top = '0px', right = '0px', bottom = '0px', left = '0px'] = snapshot ? snapshot.split(' ') : []
   return [
-    { label: 'Top', pixels: style.paddingTop },
-    { label: 'Right', pixels: style.paddingRight },
-    { label: 'Bottom', pixels: style.paddingBottom },
-    { label: 'Left', pixels: style.paddingLeft },
+    { label: 'Top', pixels: top },
+    { label: 'Right', pixels: right },
+    { label: 'Bottom', pixels: bottom },
+    { label: 'Left', pixels: left },
   ]
 }
 

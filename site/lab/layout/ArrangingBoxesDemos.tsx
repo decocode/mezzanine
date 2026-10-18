@@ -5,6 +5,7 @@ import { SpacingScale } from '../../components/SpacingScale'
 import { Block } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
 import type { StageDemos } from './StagePages'
+import { AutoGridDemo, ColumnsDemo } from './BoxFormationDemos'
 
 const directionOptions = [
   { label: 'row', value: 'row' },
@@ -26,7 +27,7 @@ function FlexboxDemo() {
   const [wrap, setWrap] = useState<(typeof wrapOptions)[number]['value']>('nowrap')
   const [grow, setGrow] = useState<(typeof growOptions)[number]['value']>('0')
   return <>
-    <DemoText>Five boxes in a Flexbox. Try a narrow frame with nowrap: the boxes can’t fit, so they stick out. Then switch to wrap.</DemoText>
+    <DemoText>Five boxes in a Flexbox. In a narrow frame with nowrap, the boxes can’t fit, so they stick out. With wrap, they move onto new lines.</DemoText>
     <div className="lab-controls">
       <ValuePicker label="flex-direction" options={directionOptions} value={direction} onChange={setDirection} />
       <ValuePicker label="flex-wrap" options={wrapOptions} value={wrap} onChange={setWrap} />
@@ -50,7 +51,7 @@ const columnOptions = [
 function GridDemo() {
   const [columns, setColumns] = useState<(typeof columnOptions)[number]['value']>('1fr 1fr 1fr')
   return <>
-    <DemoText>Six boxes in a grid. Choose the columns, and watch the first box keep spanning two of them.</DemoText>
+    <DemoText>Six boxes in a grid. Whatever the columns, the first box keeps spanning two of them.</DemoText>
     <ValuePicker label="grid-template-columns" options={columnOptions} value={columns} onChange={setColumns} />
     <DemoFrame label="Grid">
         <div className="lab-grid-demo" style={{ '--lab-grid-columns': columns } as CSSProperties}>
@@ -64,19 +65,19 @@ function GridDemo() {
 
 function SubgridDemo() {
   const [aligned, setAligned] = useState(true)
-  const cards = [
+  const boxes = [
     { title: 'Short', text: 'One line.' },
-    { title: 'A much longer title that wraps onto two lines', text: 'Some text that is longer than the others, so it takes up more lines than the cards beside it.' },
+    { title: 'A much longer title that wraps onto two lines', text: 'Some text that is longer than the others, so it takes up more lines than the boxes beside it.' },
     { title: 'Medium title', text: 'A little more text.' },
   ]
   return <>
-    <DemoText>With subgrid on, the text in each card starts at the same height and the actions line up along the bottom, however long each title is. Turn it off and they drift apart. These cards are Lab-only because Mezzanine’s Card doesn’t use subgrid.</DemoText>
+    <DemoText>With subgrid on, the text in each box starts at the same height and the buttons line up along the bottom, however long each heading is. Without it, they drift apart. These boxes are Lab-only, because Mezzanine’s Card component doesn’t use subgrid.</DemoText>
     <Checkbox isSelected={aligned} onChange={setAligned}>Use subgrid</Checkbox>
-    <DemoFrame label="Subgrid cards" initialWidth={900}>
+    <DemoFrame label="Subgrid boxes" initialWidth={900}>
         <div className={`lab-subgrid-list${aligned ? ' lab-subgrid-on' : ''}`}>
-          {cards.map((card) => <div key={card.title} className="lab-subgrid-card">
-            <Heading level={3}>{card.title}</Heading>
-            <Text elementType="p" className="mz-text-body-sm">{card.text}</Text>
+          {boxes.map((box) => <div key={box.title} className="lab-subgrid-box">
+            <Heading level={3}>{box.title}</Heading>
+            <Text elementType="p" className="mz-text-body-sm">{box.text}</Text>
             <div><Button size="sm" variant="secondary">Action</Button></div>
           </div>)}
         </div>
@@ -104,7 +105,7 @@ function AlignmentDemo() {
   const [align, setAlign] = useState<(typeof alignOptions)[number]['value']>('stretch')
   return <>
     <DemoHeading>Along the row and across it</DemoHeading>
-    <DemoText>Three boxes in a Flexbox row that’s taller than they need. Move them along the row, then across it.</DemoText>
+    <DemoText>Three boxes in a Flexbox row that’s taller than they need, so they can move along the row and across it.</DemoText>
     <div className="lab-controls">
       <ValuePicker label="justify-content" options={justifyOptions} value={justify} onChange={setJustify} />
       <ValuePicker label="align-items" options={alignOptions} value={align} onChange={setAlign} />
@@ -144,11 +145,11 @@ function SpacingTokens() {
   const [gap, setGap] = useState<(typeof gapOptions)[number]['value']>('--space-4')
   return <>
     <DemoHeading>Spacing tokens</DemoHeading>
-    <DemoText>Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so <code>--space-4</code> is four steps: <code>1rem</code>, normally 16px. The tokens are in <code>rem</code>, so space grows when someone enlarges their text. <Link href="/site/lab/layout/the-box/measuring-the-box">Measuring the box</Link> explains <code>rem</code>.</DemoText>
+    <DemoText>Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so <code>--space-4</code> is four steps: <code>1rem</code>, normally 16px. The tokens are in <code>rem</code>, so space grows when someone enlarges their text. <Link href="/site/lab/layout/box-basics/measuring-the-box">Measuring the box</Link> explains <code>rem</code>.</DemoText>
     <DemoText>These are the real tokens, with their values read live.</DemoText>
     <SpacingScale />
     <DemoHeading>Sizes from the spacing scale</DemoHeading>
-    <DemoText>Choose a spacing token for the gap.</DemoText>
+    <DemoText>The gap comes from one of Mezzanine’s spacing tokens.</DemoText>
     <ValuePicker label="gap" options={gapOptions} value={gap} onChange={setGap} />
       <div className="lab-spacing-scale" style={{ '--lab-gap': `var(${gap})` } as CSSProperties}>
         {[1, 2, 3, 4, 5, 6].map((number) => <Block key={number}>Box {number}</Block>)}
@@ -157,10 +158,11 @@ function SpacingTokens() {
   </>
 }
 
-function ReadingOrderDemo() {
+// Shown on the Lab's Reading order page, outside Layout.
+export function ReadingOrderDemo() {
   const [reversed, setReversed] = useState(false)
   return <>
-    <DemoText>Press Tab to move through the buttons. Then reverse them on screen and try again: focus jumps backwards across the row, because it still follows the HTML.</DemoText>
+    <DemoText>Tab moves focus through the buttons in their HTML order. Reversed on screen, focus jumps backwards across the row, because it still follows the HTML.</DemoText>
     <Checkbox isSelected={reversed} onChange={setReversed}>Reverse on screen</Checkbox>
       <div className={`lab-order-row${reversed ? ' lab-order-reversed' : ''}`}>
         {[1, 2, 3].map((number) => <Button key={number} size="sm" variant="secondary">Button {number}</Button>)}
@@ -169,11 +171,21 @@ function ReadingOrderDemo() {
   </>
 }
 
+// The Grid page: the technique, then its two common recipes.
+function GridPageDemo() {
+  return <>
+    <GridDemo />
+    <DemoHeading>A set number of columns</DemoHeading>
+    <ColumnsDemo />
+    <DemoHeading>As many columns as fit</DemoHeading>
+    <AutoGridDemo />
+  </>
+}
+
 export const arrangingBoxesDemos: StageDemos = {
   cssFlexbox: { Demo: FlexboxDemo },
-  cssGrid: { Demo: GridDemo },
+  grid: { Demo: GridPageDemo },
   subgrid: { Demo: SubgridDemo },
   alignment: { Demo: AlignmentDemo },
-  gap: { Demo: SpacingDemo, MezzanineDetail: SpacingTokens },
-  readingOrder: { Demo: ReadingOrderDemo },
+  gap: { Demo: SpacingDemo, Detail: SpacingTokens },
 }

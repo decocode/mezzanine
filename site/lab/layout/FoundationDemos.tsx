@@ -3,7 +3,7 @@ import { Badge, Button, Card, Cell, Checkbox, CodeBlock, Column, Heading, Link, 
 import { CssNotes, DemoFrame, DemoHeading, DemoText, ValuePicker } from './LabParts'
 import { Block, ColumnDrop } from './LabPrimitives'
 import { cssNotes } from './layoutLabContent'
-import { measureProbes, supportsCondition, supportsCss } from './layoutLabLogic'
+import { supportsCondition, supportsCss, useProbeHeights } from './layoutLabLogic'
 
 // The same tile adapts to whichever slot it is placed in.
 function ContainerTile() {
@@ -32,7 +32,7 @@ export function ContainerQueryDemo() {
     </DemoFrame>
     <CssNotes name="the two slots" note={cssNotes.twoSlots} />
     <DemoHeading>In a frame you can resize</DemoHeading>
-    <DemoText>Drag the slider past about 26rem and the tile changes layout, while the window stays the same size.</DemoText>
+    <DemoText>Above about 26rem, the tile changes layout, while the window stays the same size.</DemoText>
     <DemoFrame label="In a frame you can resize" initialWidth={360}>
       <ContainerTile />
     </DemoFrame>
@@ -52,16 +52,17 @@ export function NamedLayersDemo() {
 
 export function ViewportDemo() {
   const probes = useRef<HTMLDivElement>(null)
-  const [heights, setHeights] = useState<{ label: string; pixels: number }[]>([])
+  const heights = useProbeHeights(probes)
   return <>
-    <DemoText>Press the button to measure your screen. On a laptop the four heights match. On a phone, scroll until the toolbar hides and measure again: svh and lvh differ, and dvh changes.</DemoText>
+    <DemoText>Every page needs this tag in its HTML. Without it, phones pretend to be a wide screen and shrink the whole page to fit, so viewport units would measure that pretend screen instead of the real one.</DemoText>
+    <CodeBlock>{'<meta name="viewport" content="width=device-width, initial-scale=1">'}</CodeBlock>
+    <DemoText>On a laptop the four heights match. On a phone they differ once the browser’s toolbar hides: svh and lvh stay apart, and dvh changes.</DemoText>
     <div ref={probes} className="lab-probes" aria-hidden="true">
       <div data-probe="100vh" className="lab-probe-vh" />
       <div data-probe="100svh (toolbars shown)" className="lab-probe-svh" />
       <div data-probe="100lvh (toolbars hidden)" className="lab-probe-lvh" />
       <div data-probe="100dvh (right now)" className="lab-probe-dvh" />
     </div>
-    <div><Button size="sm" variant="secondary" onPress={() => setHeights(measureProbes(probes.current))}>Measure this screen</Button></div>
     {heights.length > 0 && <div className="lab-table">
       <Table aria-label="Viewport heights">
         <TableHeader><Column isRowHeader>Measurement</Column><Column>Value</Column></TableHeader>
@@ -79,7 +80,7 @@ export function ScrollPaddingDemo() {
   const box = useRef<HTMLDivElement>(null)
   const jump = (index: number) => box.current?.querySelector<HTMLElement>(`[data-section="${index}"]`)?.scrollIntoView({ block: 'start', inline: 'nearest' })
   return <>
-    <DemoText>Jump to a section with scroll padding off, and the heading lands hidden under the sticky header. Turn it on and jump again: the heading lands just below. Mezzanine’s docs site hard-codes a 4rem offset today, which can be wrong when text is enlarged.</DemoText>
+    <DemoText>Without scroll padding, a heading you jump to lands hidden under the sticky header. With it, the heading lands just below. Mezzanine’s docs site hard-codes a 4rem offset today, which can be wrong when text is enlarged.</DemoText>
     <Checkbox isSelected={padded} onChange={setPadded}>Use scroll padding</Checkbox>
     <div className="lab-controls">
       {[2, 3, 4].map((index) => <Button key={index} size="sm" variant="secondary" onPress={() => jump(index)}>Jump to section {index}</Button>)}
@@ -120,7 +121,7 @@ const positionOptions = [
 export function PositioningDemo() {
   const [position, setPosition] = useState<(typeof positionOptions)[number]['value']>('static')
   return <>
-    <DemoText>Choose how the second box is positioned, then scroll inside the dashed box.</DemoText>
+    <DemoText>The second box behaves differently with each position setting, most clearly when the dashed box scrolls.</DemoText>
     <ValuePicker label="position" options={positionOptions} value={position} onChange={setPosition} />
     <div className="lab-position-stage" role="region" aria-label="Scrolling boxes, one of them positioned" tabIndex={0}>
       {[1, 2, 3, 4, 5, 6].map((number) => number === 2
@@ -133,7 +134,7 @@ export function PositioningDemo() {
 
 export function ColumnDropDemo() {
   return <>
-    <DemoText>Narrow the frame. The columns drop below each other one at a time, and each new row stretches to fill the width.</DemoText>
+    <DemoText>As the frame narrows, the columns drop below each other one at a time, and each new row stretches to fill the width.</DemoText>
     <DemoFrame label="Column drop" initialWidth={1100}>
       <ColumnDrop>{['one', 'two', 'three', 'four'].map((word) => <Block key={word} tall>Column {word}</Block>)}</ColumnDrop>
     </DemoFrame>
@@ -141,31 +142,34 @@ export function ColumnDropDemo() {
   </>
 }
 
-export function ResponsiveDesignDemo() {
-  return <>
-    <DemoText>Every responsive page starts with this tag in the HTML. Without it, phones pretend to be a wide screen and shrink the whole page to fit.</DemoText>
-    <CodeBlock>{'<meta name="viewport" content="width=device-width, initial-scale=1">'}</CodeBlock>
-    <DemoText>Mobile first means the plain CSS is for narrow screens, and media queries add to it as the screen gets wider. This is example CSS for an app.</DemoText>
-    <CodeBlock>{`.page {
-  display: grid;
-  gap: var(--space-4);
-}
-
-@media (width >= 48rem) {
-  .page {
-    grid-template-columns: 16rem 1fr;
-  }
-}`}</CodeBlock>
-  </>
-}
-
 export function FluidSizingDemo() {
   return <>
-    <DemoText>Drag the frame’s slider. The text grows and shrinks smoothly with the frame, but never below or above its limits. Mezzanine’s own Display and Heading styles also grow with the screen: see <Link href="/typography/text-styles">Text styles</Link>.</DemoText>
-    <DemoFrame label="Fluid sizing">
-      <p className="lab-fluid-heading">Text that scales with its space</p>
+    <DemoHeading>Fluid text</DemoHeading>
+    <DemoText>The display text and the heading grow and shrink smoothly with the frame, but never below or above their limits. The body text stays the same size at every width, so it’s always comfortable to read. Mezzanine’s own Display and Heading styles also grow with the screen: see <Link href="/typography/text-styles">Text styles</Link>.</DemoText>
+    <DemoFrame label="Fluid text">
+      <p className="lab-fluid-display">Display text</p>
+      <p className="lab-fluid-heading">Headings that scale within the space</p>
+      <p className="mz-text-body-md">Body text stays the same size, however wide or narrow the frame gets. This is so it remains easy to read.</p>
     </DemoFrame>
-    <CssNotes name="the scaling text" note={cssNotes.fluidSizing} level={3} />
+    <CssNotes name="the scaling text" note={cssNotes.fluidSizing} level={4} />
+    <DemoHeading>Fluid space</DemoHeading>
+    <DemoText>The space inside the box, and between the items in it, grows with the frame, between two limits.</DemoText>
+    <DemoFrame label="Fluid space">
+      <div className="lab-fluid-space"><Block>Item one</Block><Block>Item two</Block><Block>Item three</Block></div>
+    </DemoFrame>
+    <CssNotes name="the fluid space" note={cssNotes.fluidSpace} level={4} />
+    <DemoHeading>Fluid width</DemoHeading>
+    <DemoText>The box is 60% of the frame’s width, but never narrower than 12rem or wider than 28rem.</DemoText>
+    <DemoFrame label="Fluid width">
+      <div className="lab-fluid-width"><Block>A box between 12rem and 28rem wide</Block></div>
+    </DemoFrame>
+    <CssNotes name="the fluid width" note={cssNotes.fluidWidth} level={4} />
+    <DemoHeading>Safe minimums</DemoHeading>
+    <DemoText>The box asks for 25rem. In a frame narrower than that, it takes the full width instead of spilling out.</DemoText>
+    <DemoFrame label="Safe minimum">
+      <div className="lab-safe-minimum"><Block>A box that asks for 25rem</Block></div>
+    </DemoFrame>
+    <CssNotes name="the safe minimum" note={cssNotes.safeMinimum} level={4} />
   </>
 }
 
@@ -179,7 +183,7 @@ const supportChecks = [
 
 export function SupportsDemo() {
   return <>
-    <DemoText>The same question, asked live in your browser. The last three are in <Link href="/site/lab/layout/box-to-the-future">Box to the Future</Link>.</DemoText>
+    <DemoText>The same question, asked live in your browser. The last three are in <Link href="/site/lab/emerging-features">Emerging features</Link>.</DemoText>
     <div className="lab-table">
       <Table aria-label="Features this browser supports">
         <TableHeader>

@@ -16,7 +16,7 @@ function OverflowDemo() {
   const [overflow, setOverflow] = useState<(typeof overflowOptions)[number]['value']>('visible')
   const canScroll = overflow === 'scroll' || overflow === 'auto'
   return <>
-    <DemoText>The box is 6rem tall, which isn’t enough for its text. Choose what happens to the rest.</DemoText>
+    <DemoText>The box is 6rem tall, which isn’t enough for its text. The overflow setting decides what happens to the rest.</DemoText>
     <ValuePicker label="overflow" options={overflowOptions} value={overflow} onChange={setOverflow} />
     <div className="lab-overflow-stage">
       <div
@@ -42,14 +42,14 @@ function ImagesAndMediaDemo() {
   const [objectFit, setObjectFit] = useState<(typeof objectFitOptions)[number]['value']>('fill')
   return <>
     <DemoHeading>Shrink to fit</DemoHeading>
-    <DemoText>The picture is 480 pixels wide, and the frame starts narrower than that. Without the rule, the picture sticks out of the frame. Turn the rule on and it shrinks to fit.</DemoText>
+    <DemoText>The picture is 480 pixels wide, and the frame starts narrower than that. Without the rule, the picture sticks out of the frame. With it, the picture shrinks to fit.</DemoText>
     <Checkbox isSelected={fit} onChange={setFit}>Use max-width: 100%</Checkbox>
     <DemoFrame label="Shrink to fit" canOverflow initialWidth={320}>
         <img src={exampleImage} alt={exampleImageAlt} width={480} height={240} className={fit ? 'lab-image-fit' : undefined} />
     </DemoFrame>
     <CssNotes name="shrinking to fit" note={cssNotes.imageFit} />
     <DemoHeading>Fill a shape</DemoHeading>
-    <DemoText>The same wide picture in a square box. Choose how it fills the square.</DemoText>
+    <DemoText>The same wide picture in a square box. Each setting fills the square a different way.</DemoText>
     <ValuePicker label="object-fit" options={objectFitOptions} value={objectFit} onChange={setObjectFit} />
       <div className="lab-object-fit-holder">
         <img src={exampleImage} alt={exampleImageAlt} width={480} height={240} className="lab-object-fit" style={{ '--lab-object-fit': objectFit } as CSSProperties} />
@@ -75,7 +75,7 @@ function HasDemo() {
   const [image, setImage] = useState(true)
   return <>
     <DemoHeading>A list that counts its items</DemoHeading>
-    <DemoText>Like the restaurant tables: up to four items, and the list is a single column. Add a fifth and the same list spreads out into a grid. Remove one and it goes back. It has {count} items now.</DemoText>
+    <DemoText>Like the restaurant tables: up to four items, and the list is a single column. With a fifth, the same list spreads out into a grid, and with four again it goes back. It has {count} items now.</DemoText>
     <div className="lab-controls">
       <Button size="sm" variant="secondary" onPress={() => setCount((value) => value + 1)}>Add an item</Button>
       <Button size="sm" variant="secondary" isDisabled={count <= 1} onPress={() => setCount((value) => Math.max(1, value - 1))}>Remove an item</Button>

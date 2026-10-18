@@ -230,21 +230,6 @@
   gap: var(--space-2);
 }
 
-.lab-uses {
-  display: grid;
-  gap: var(--space-3);
-  max-inline-size: 70ch;
-  padding: 0;
-  list-style: none;
-}
-
-/* Each line's badge sits above its text, at its own width. */
-.lab-use {
-  display: grid;
-  justify-items: start;
-  gap: var(--space-1);
-}
-
 .lab-similar-to {
   display: grid;
   gap: var(--space-2);
@@ -587,9 +572,29 @@
 }
 
 /* Fluid sizing: the size follows the frame, between two limits. */
+.lab-fluid-display {
+  font-size: clamp(2.5rem, 1.5rem + 8cqi, 5rem);
+  line-height: 1.1;
+}
+
 .lab-fluid-heading {
   font-size: clamp(1.5rem, 1rem + 4cqi, 3rem);
   line-height: 1.2;
+}
+
+.lab-fluid-space {
+  display: grid;
+  gap: clamp(var(--space-2), 4cqi, var(--space-8));
+  padding: clamp(var(--space-2), 4cqi, var(--space-8));
+  border: 1px dashed var(--color-border);
+}
+
+.lab-fluid-width {
+  inline-size: clamp(12rem, 60%, 28rem);
+}
+
+.lab-safe-minimum {
+  inline-size: min(100%, 25rem);
 }
 
 /* Container queries: the tile responds to its slot, not the screen. */
@@ -720,7 +725,7 @@
   gap: var(--space-4);
 }
 
-.lab-subgrid-card {
+.lab-subgrid-box {
   display: grid;
   align-content: start;
   gap: var(--space-3);
@@ -728,11 +733,11 @@
   border: 1px solid var(--color-border);
 }
 
-.lab-subgrid-card > * {
+.lab-subgrid-box > * {
   margin: 0;
 }
 
-.lab-subgrid-on .lab-subgrid-card {
+.lab-subgrid-on .lab-subgrid-box {
   grid-row: span 3;
   grid-template-rows: subgrid;
 }

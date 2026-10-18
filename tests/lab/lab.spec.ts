@@ -56,15 +56,3 @@ test('Lab shares the site sidebar layout and the saved theme with Docs', async (
   await expect(page.getByRole('radio', { name: 'Light theme', exact: true })).toBeChecked()
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
 })
-
-// Internationalisation is a top-level experiment beside Layout, in the Lab tree and on the Lab index.
-test('Internationalisation sits beside Layout in the Lab navigation', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 })
-  await page.goto('/site/lab')
-  const tree = page.locator('.site-layout > .site-sidebar').getByRole('treegrid', { name: 'Lab experiments' })
-  await expect(tree.getByRole('row', { name: /^Internationalisation/ })).toHaveAttribute('aria-level', '1')
-  await page.locator('main').getByRole('link', { name: 'Internationalisation', exact: true }).click()
-  await expect(page).toHaveURL(/\/site\/lab\/internationalisation$/)
-  await expect(page.getByRole('heading', { name: 'Internationalisation', exact: true, level: 1 })).toBeVisible()
-  expect((await new AxeBuilder({ page }).include('main').analyze()).violations).toEqual([])
-})

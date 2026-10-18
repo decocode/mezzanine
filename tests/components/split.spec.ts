@@ -18,7 +18,7 @@ async function chooseFraction(page: Page, label: string) {
 // at the width its content needs while the second fills the rest.
 test('Split shares the row by fraction or by auto', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
-  await page.goto('/site/lab/layout/box-formations/split')
+  await page.goto('/site/lab/layout/side-by-side/split')
   await chooseFraction(page, '1/3')
   let { first, second } = await areas(page)
   expect(Math.abs(first.y - second.y)).toBeLessThan(1)
@@ -37,7 +37,7 @@ test('Split shares the row by fraction or by auto', async ({ page }) => {
 for (const fontSize of [16, 32]) {
   test(`Split stacks its areas in a narrow container at ${fontSize}px text`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
-    await page.goto('/site/lab/layout/box-formations/split')
+    await page.goto('/site/lab/layout/side-by-side/split')
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
     const width = page.getByRole('slider', { name: 'Width' })
     await width.focus()
