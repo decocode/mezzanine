@@ -92,7 +92,8 @@ export function checkMotionSource(file, text) {
   const source = ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true, file.endsWith('tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS)
   function visit(node) {
     if (ts.isStringLiteralLike(node)) {
-      if (file !== 'src/motionPolicy.ts' && node.text.includes('prefers-reduced-motion')) report(node.pos, 'Only the internal motion reader may query the system preference.')
+      // A query such as (prefers-reduced-motion: reduce); copy may still name the setting.
+      if (file !== 'src/motionPolicy.ts' && /prefers-reduced-motion\s*[:)]/.test(node.text)) report(node.pos, 'Only the internal motion reader may query the system preference.')
       for (const match of node.text.matchAll(oldToken)) report(node.pos, `Removed motion token ${match[0]}.`)
     }
     if (ts.isPropertyAssignment(node)) {

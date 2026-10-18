@@ -38,4 +38,6 @@ test('source timing and preference boundaries', () => {
   for (const code of ['const style = {transitionDuration: "180ms"}', 'element.animate([], {duration: 180, easing: "ease-out"})', 'window.matchMedia("(prefers-reduced-motion: reduce)")']) assert.ok(checkMotionSource('src/example.ts', code).length)
   assert.deepEqual(checkMotionSource('src/example.tsx', 'const delay = 500; const duration = seconds * 1000; const control = <TooltipTrigger delay={delay} />'), [])
   assert.deepEqual(checkMotionSource('src/motionPolicy.ts', 'window.matchMedia("(prefers-reduced-motion: reduce)")'), [])
+  for (const code of ['window.matchMedia("(prefers-reduced-motion)")', 'const query = "prefers-reduced-motion: reduce"']) assert.ok(checkMotionSource('src/example.ts', code).length)
+  assert.deepEqual(checkMotionSource('site/content/motionContent.ts', 'const copy = "Mezzanine follows the device’s `prefers-reduced-motion` setting."'), [])
 })
