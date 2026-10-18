@@ -297,6 +297,19 @@ than their own minimum heights, so a theme changes every target at once.
 | `--target-size-min` | The WCAG 2.2 AA minimum, 24px (1.5rem) |
 | `--target-size` | The size Mezzanine's controls use, 44px (2.75rem): Button's small size, Tabs, Navbar menu items, NavTree rows and expand buttons, ListBox options and SearchField's clear button |
 
+## Current control size inventory
+
+Every control's height comes from one shared scale in `src/tokens/interaction.css`,
+so a text field and a Button of the same size always line up, and a theme can
+change every control at once.
+
+| Token | Value | Used by |
+| --- | --- | --- |
+| `--control-size-sm` | `--target-size` (44px) | Button and ToggleButton `size="sm"` |
+| `--control-size-md` | 3rem (48px) | Button and ToggleButton `size="md"` (the default), text fields, Disclosure triggers, TabBar items |
+| `--control-size-lg` | 3.25rem (52px) | Button and ToggleButton `size="lg"` |
+| `--control-size-xl` | 3.5rem (56px) | Button and ToggleButton `size="xl"` |
+
 ## Current stacking inventory
 
 Stacking order (CSS `z-index`) comes from one shared scale in
@@ -451,7 +464,6 @@ override the inline-padding tokens when an inset is needed.
 | --- | --- |
 | `--disclosure-group-gap` | Space between items in a DisclosureGroup |
 | `--disclosure-border-width` | Divider width between Disclosure items |
-| `--disclosure-trigger-min-height` | Minimum height of a DisclosureHeader trigger |
 | `--disclosure-trigger-padding-block` | Vertical space inside a DisclosureHeader trigger |
 | `--disclosure-trigger-padding-inline` | Horizontal space inside a DisclosureHeader trigger |
 | `--disclosure-trigger-gap` | Space between a Disclosure label and chevron |
@@ -615,7 +627,6 @@ existing theme colours. Light and Dark visual refinements are deferred.
 | --- | --- |
 | `--text-field-gap` | Space between field parts |
 | `--text-field-error-content` | Validation message colour |
-| `--input-min-height` | Minimum single-line input height |
 | `--text-area-min-height` | Minimum multiline height, initially 4rem |
 | `--input-padding-block`, `--input-padding-inline` | Input text padding |
 | `--input-border-width`, `--input-border-radius` | Input border and corner shape |
@@ -654,7 +665,7 @@ The More sheet uses the existing modal backdrop, elevation and motion duration.
 | `--tab-bar-safe-area-bottom` | Device bottom inset; defaults to `env(safe-area-inset-bottom, 0px)` |
 | `--tab-bar-gap`, `--tab-bar-padding` | Space between items and inside the bar |
 | `--tab-bar-item-min-width` | Minimum slot width used to decide which links move into More |
-| `--tab-bar-item-min-height`, `--tab-bar-item-padding`, `--tab-bar-item-gap` | Touch target height, inner padding and icon/label spacing |
+| `--tab-bar-item-padding`, `--tab-bar-item-gap` | Inner padding and icon/label spacing; the item's height is the shared `--control-size-md` |
 | `--tab-bar-icon-size` | Decorative icon dimensions |
 | `--tab-bar-focus-ring-width`, `--tab-bar-focus-ring-offset` | Visible keyboard focus outline |
 | `--tab-bar-sheet-max-height` | Maximum sheet height before its content scrolls |
@@ -679,8 +690,8 @@ The hover delay is controlled by the `TooltipTrigger` `delay` prop, not CSS.
 ### Shared button sizing
 
 Button and ToggleButton use the same `--button-sm-*`, `--button-md-*`,
-`--button-lg-*` and `--button-xl-*` size tokens. The small size's minimum height
-is the shared `--target-size`. Both default to `md`.
+`--button-lg-*` and `--button-xl-*` size tokens. Their minimum heights come from the shared
+`--control-size-*` scale. Both default to `md`.
 Select sizes through `size`; ToggleButtonGroup supplies a size to its children,
 which an individual ToggleButton can override with its own `size`.
 Use `iconLeading` or `iconTrailing` without children for icon-only buttons.

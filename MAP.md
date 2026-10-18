@@ -81,7 +81,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
 | `src/themes/wireframe.css` | Monochrome Wireframe theme with semantic status colors and blue focus |
 | `src/tokens/color.css` | Colour palettes; semantic colour roles are set per theme (Styles › Color) |
-| `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) and target sizes: `--target-size-min` (the WCAG minimum) and `--target-size` (the size controls use), not yet documented on a site page |
+| `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) target sizes: `--target-size-min` (the WCAG minimum) and `--target-size` (the size controls use), documented on Interaction › Target size; and the shared control-size scale, `--control-size-sm` to `--control-size-xl`, which Button, ToggleButton, text fields, Disclosure and TabBar take their heights from |
 | `src/tokens/elevation.css` | Elevation levels built from the shadow and highlight colours; each theme sets its shadow colour (Styles › Elevation) |
 | `src/tokens/motion.css` | Durations, easing, distances, scale and rotation (Styles › Motion) |
 | `src/tokens/z-index.css` | The shared stacking scale: base, raised, sticky, overlay (every pop-up) and toast; not yet documented on a site page |

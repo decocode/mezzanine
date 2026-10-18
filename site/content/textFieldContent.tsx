@@ -49,10 +49,9 @@ export const textFieldContent = {
     <>Put <code>placeholder</code> on <code>Input</code>; it does not replace a label.</>,
   ],
   tokensRows: [
-    { name: '--input-min-height', description: <>Minimum <code>Input</code> height.</> },
     ...fieldTokensRows,
   ],
   tokensParagraphs: [
-    <>These tokens style <code>TextField</code> and its <code>Input</code>. <code>TextArea</code> shares all of them except <code>--input-min-height</code>. The field also uses shared typography, text colour, focus colour and disabled-opacity tokens.</>,
+    <>These tokens style <code>TextField</code> and its <code>Input</code>. <code>TextArea</code> shares all of them. A single-line field's height is the shared <code>--control-size-md</code>, and <code>TextArea</code> sets its own minimum. The field also uses shared typography, text colour, focus colour and disabled-opacity tokens.</>,
   ],
 }

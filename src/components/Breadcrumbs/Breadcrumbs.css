@@ -21,6 +21,13 @@
   min-width: 0;
 }
 
+/* Each link is at least the shared target size tall, so it's easy to tap. */
+.react-aria-Breadcrumb > .react-aria-Link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-size);
+}
+
 .react-aria-Breadcrumb + .react-aria-Breadcrumb::before {
   color: var(--color-text-muted);
   content: '/';

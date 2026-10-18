@@ -59,7 +59,6 @@ export const tabBarContent = {
     { name: '--tab-bar-gap', description: 'Space between destination slots.' },
     { name: '--tab-bar-padding', description: 'Padding around the destination list.' },
     { name: '--tab-bar-item-min-width', description: 'Minimum slot width used to calculate overflow.' },
-    { name: '--tab-bar-item-min-height', description: 'Minimum link and More-button height.' },
     { name: '--tab-bar-item-gap', description: 'Space between an icon and its label.' },
     { name: '--tab-bar-item-padding', description: 'Padding inside destination controls.' },
     { name: '--tab-bar-icon-size', description: 'Destination icon dimensions.' },

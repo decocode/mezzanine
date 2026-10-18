@@ -8,4 +8,11 @@
      WCAG 2.2 AA minimum of 24px; --target-size is the size Mezzanine's controls use. */
   --target-size-min: 1.5rem;
   --target-size: 2.75rem;
+
+  /* Control size: the heights every control picks from. The smallest is the target size. Button
+     and ToggleButton use all four; text fields, Disclosure and TabBar use md. */
+  --control-size-sm: var(--target-size);
+  --control-size-md: 3rem;
+  --control-size-lg: 3.25rem;
+  --control-size-xl: 3.5rem;
 }

@@ -41,7 +41,6 @@ export const disclosureContent = {
   tokensRows: [
     { name: '--disclosure-group-gap', description: <>Space between disclosures in a <code>DisclosureGroup</code>.</> },
     { name: '--disclosure-border-width', description: 'Thickness of the divider below each disclosure.' },
-    { name: '--disclosure-trigger-min-height', description: 'Minimum trigger height.' },
     { name: '--disclosure-trigger-padding-block', description: 'Vertical trigger padding.' },
     { name: '--disclosure-trigger-padding-inline', description: 'Horizontal trigger padding.' },
     { name: '--disclosure-trigger-gap', description: 'Space between the trigger label and the chevron.' },

@@ -7,7 +7,6 @@
   /* Disclosure: component-specific structure, shared by every theme. */
   --disclosure-group-gap: 0;
   --disclosure-border-width: var(--border-width-baseline);
-  --disclosure-trigger-min-height: 3rem;
   --disclosure-trigger-padding-block: 0.75rem;
   --disclosure-trigger-padding-inline: 0;
   --disclosure-trigger-gap: 1rem;
