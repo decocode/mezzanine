@@ -345,15 +345,6 @@ export const stagePages: StagePage[] = [
     ],
   },
   {
-    key: 'sides', id: 'lab-sides', stage: 'boxBasics', title: 'Sides', href: '/site/lab/layout/box-basics/sides',
-    subtitle: 'When a box’s sides are named so they work in every language.',
-    what: 'A box has four sides. Physical names say left and right; logical names say start and end, so they follow the reading direction. In CSS, these are called logical properties. The other pages use the familiar physical names, like width and margin-left.',
-    why: 'Layouts then mirror themselves for right-to-left languages such as Arabic and Hebrew, with no extra work. Anything set with left and right stays put, and looks wrong.',
-    references: [
-      { label: 'MDN: Logical properties and values', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Logical_properties_and_values' },
-    ],
-  },
-  {
     key: 'center', id: 'lab-center', stage: 'boxBasics', title: 'Center', href: '/site/lab/layout/box-basics/center',
     subtitle: 'When content stays in the middle, at a comfortable width.',
     what: 'Center is a building block. It keeps content in the middle of the space and stops it growing wider than a set limit.',
@@ -554,7 +545,7 @@ export const stagePages: StagePage[] = [
 
 // The reading order of each stage's pages.
 const stagePageOrder: Record<StageKey, readonly string[]> = {
-  boxBasics: ['boxModel', 'typesOfBox', 'sides', 'measuringTheBox', 'viewportUnits', 'sizingTheBox', 'center'],
+  boxBasics: ['boxModel', 'typesOfBox', 'measuringTheBox', 'viewportUnits', 'sizingTheBox', 'center'],
   addSpace: ['margin', 'padding', 'gap'],
   insideTheBox: ['imagesAndMedia', 'overflow', 'frame', 'multiColumn', 'has'],
   sideBySide: ['cssFlexbox', 'alignment', 'inline', 'inlineCluster', 'split', 'reel', 'columnDrop'],
@@ -673,21 +664,6 @@ export const cssNotes: Record<string, CssNote> = {
 .lab-layer-sticky { --lab-layer-step: 2; z-index: var(--z-index-sticky); }
 .lab-layer-overlay { --lab-layer-step: 3; z-index: var(--z-index-overlay); }
 .lab-layer-toast { --lab-layer-step: 4; z-index: var(--z-index-toast); }`,
-  },
-  logical: {
-    paragraphs: [
-      'The two boxes set the same two things. The physical one uses `border-left` and `padding-left`, which always mean the left side.',
-      'The logical one uses `border-inline-start` and `padding-inline-start`. Start means wherever a line of text begins, so in a right-to-left language it becomes the right side.',
-    ],
-    code: `.lab-direction-physical {
-  border-left: var(--space-2) solid var(--color-warning-600);
-  padding-left: var(--space-4);
-}
-
-.lab-direction-logical {
-  border-inline-start: var(--space-2) solid var(--color-warning-600);
-  padding-inline-start: var(--space-4);
-}`,
   },
   subgrid: {
     paragraphs: [

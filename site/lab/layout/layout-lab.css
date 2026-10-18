@@ -693,21 +693,6 @@
 .lab-layer-overlay { --lab-layer-step: 3; z-index: var(--z-index-overlay); }
 .lab-layer-toast { --lab-layer-step: 4; z-index: var(--z-index-toast); }
 
-/* Logical properties. */
-.lab-direction {
-  padding-block: var(--space-3);
-}
-
-.lab-direction-physical {
-  border-left: var(--space-2) solid var(--color-warning-600);
-  padding-left: var(--space-4);
-}
-
-.lab-direction-logical {
-  border-inline-start: var(--space-2) solid var(--color-warning-600);
-  padding-inline-start: var(--space-4);
-}
-
 /* Subgrid. */
 .lab-subgrid-list {
   display: grid;

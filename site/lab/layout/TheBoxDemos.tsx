@@ -1,5 +1,5 @@
 import { useState, type CSSProperties } from 'react'
-import { Checkbox, Link, Text } from '@decocode/mezzanine'
+import { Link, Text } from '@decocode/mezzanine'
 import { CssNotes, DemoFrame, DemoHeading, DemoText, ValuePicker } from './LabParts'
 import exampleImage from '../../assets/sidebar-example.svg'
 import { Block, Center, Frame, Stack } from './LabPrimitives'
@@ -104,23 +104,6 @@ function MeasuringTheBoxDemo() {
   </>
 }
 
-function LogicalDemo() {
-  const [rtl, setRtl] = useState(false)
-  return <>
-    <DemoText>In right to left, the logical box moves its border and indent to the right, where Arabic and Hebrew lines start. The physical one stays on the left and looks wrong. Reading direction itself is explained on the <Link href="/text">Text</Link> page in the docs.</DemoText>
-    <Checkbox isSelected={rtl} onChange={setRtl}>Show right to left</Checkbox>
-    <div className="lab-two-slots" dir={rtl ? 'rtl' : 'ltr'}>
-      <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Physical (left/right)</Text>
-        <div className="lab-direction lab-direction-physical mz-text-body-md">Accent border and indent on the <strong>left</strong>, always.</div>
-      </div>
-      <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">Logical (start/end)</Text>
-        <div className="lab-direction lab-direction-logical mz-text-body-md">Accent border and indent at the <strong>start</strong> of the line.</div>
-      </div>
-    </div>
-    <CssNotes name="logical properties" note={cssNotes.logical} level={3} />
-  </>
-}
-
 const ratioOptions = [
   { label: '16:9', value: '16 / 9' },
   { label: '4:3', value: '4 / 3' },
@@ -157,6 +140,5 @@ export const theBoxDemos: StageDemos = {
   measuringTheBox: { Demo: MeasuringTheBoxDemo },
   sizingTheBox: { Demo: SizingTheBoxDemo },
   frame: { Demo: FrameDemo },
-  sides: { Demo: LogicalDemo },
   center: { Demo: CenterDemo },
 }

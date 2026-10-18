@@ -36,3 +36,17 @@ test('Table of contents indents nested links from the start of the line in right
   await expect(nested).toHaveCSS('padding-right', /^[1-9]/)
   await expect(nested).toHaveCSS('padding-left', '0px')
 })
+
+// Checks the Reading direction example: in right to left, the logical box's border moves to the right
+// and the physical box's border stays on the left.
+test('Reading direction shows logical sides mirroring and physical sides staying put', async ({ page }) => {
+  await page.goto('/text/reading-direction')
+  const physical = page.locator('.text-direction-physical')
+  const logical = page.locator('.text-direction-logical')
+  await expect(logical).toHaveCSS('border-left-style', 'solid')
+  await page.locator('label').filter({ hasText: 'Show right to left' }).click()
+  await expect(page.getByRole('checkbox', { name: 'Show right to left', exact: true })).toBeChecked()
+  await expect(logical).toHaveCSS('border-right-style', 'solid')
+  await expect(logical).toHaveCSS('border-left-style', 'none')
+  await expect(physical).toHaveCSS('border-left-style', 'solid')
+})
