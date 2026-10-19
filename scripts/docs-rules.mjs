@@ -3,80 +3,29 @@
 
 // Routes ---------------------------------------------------------------------
 
-export function sitePaths(siteStructure) {
-  return [...siteStructure.matchAll(/\bpath: '([^']+)'/g)].map(match => match[1])
-}
-
-// The `~^...$ 1;` lines inside nginx's `map $uri $is_app_route` block.
-export function nginxRoutePatterns(nginx) {
-  const block = nginx.match(/map \$uri \$is_app_route \{([\s\S]*?)\n\}/)?.[1] ?? ''
-  return [...block.matchAll(/^\s*~(\^[^\s]+\$)\s+1;/gm)].map(match => ({ source: match[1], position: match.index }))
-}
-
-// Lab pages: the Lab hrefs written in labContent.tsx and the Layout content file (such as the
-// primitive pages), plus a child page under the Layout overview for each slug.
-export function labPaths({ labContent, layoutContent }) {
-  const hrefs = [...`${labContent}\n${layoutContent}`.matchAll(/\bhref: '(\/site\/lab[^']*)'/g)].map(match => match[1])
-  const slugs = [...layoutContent.matchAll(/\bslug: '([^']+)'/g)].map(match => `/site/lab/layout/${match[1]}`)
+// Lab pages: the Lab hrefs written in labContent.tsx and the Lab's content files (one per page
+// folder, plus each group's overview), plus a child page under the Layout overview for each slug.
+export function labPaths({ labContent, pageContent }) {
+  const hrefs = [...`${labContent}\n${pageContent}`.matchAll(/\bhref: '(\/site\/lab[^']*)'/g)].map(match => match[1])
+  const slugs = [...pageContent.matchAll(/\bslug: '([^']+)'/g)].map(match => `/site/lab/layout/${match[1]}`)
   return [...hrefs, ...slugs]
 }
 
-// Every path an nginx route pattern allows, when the pattern is only literal text, groups,
-// `|` alternatives and optional `?` groups. Returns null for anything more complex.
-export function expandRoutePattern(source) {
-  const body = source.replace(/^\^/, '').replace(/\$$/, '').replace(/\/\?$/, '')
-  let index = 0
-  function sequence() {
-    let results = ['']
-    while (index < body.length && body[index] !== ')' && body[index] !== '|') {
-      let options
-      if (body[index] === '(') {
-        index++
-        options = alternatives()
-        if (body[index++] !== ')') return null
-      } else if (/[a-z0-9/-]/.test(body[index])) {
-        options = [body[index++]]
-      } else return null
-      if (options == null) return null
-      if (body[index] === '?') { index++; options = ['', ...options] }
-      results = results.flatMap(result => options.map(option => result + option))
-    }
-    return results
-  }
-  function alternatives() {
-    const first = sequence()
-    if (first == null) return null
-    const all = [...first]
-    while (body[index] === '|') {
-      index++
-      const next = sequence()
-      if (next == null) return null
-      all.push(...next)
-    }
-    return all
-  }
-  const paths = alternatives()
-  if (paths == null || index !== body.length) return null
-  return paths.map(path => path === '' ? '/' : path)
-}
-
-export function checkRoutes({ siteStructure, extraPaths = [], nginx, lighthouseUrls }) {
+// Every page's component must sit in the folder the navigation gives it, and no page file may sit
+// anywhere else. Lighthouse URLs must be app routes. `pages` lists { id, file } for each
+// implemented page; `pageFiles` is every *Page.tsx under site/pages.
+export function checkRoutes({ routes, pages, pageFiles, otherPageFiles = [], lighthouseUrls }) {
   const problems = []
-  const paths = [...sitePaths(siteStructure), ...extraPaths]
-  const patterns = nginxRoutePatterns(nginx)
-  const allowed = path => patterns.some(pattern => new RegExp(pattern.source).test(path))
-  for (const path of paths) {
-    if (!allowed(path)) problems.push({ file: 'config/nginx.conf', position: 0, message: `Site page ${path} is not in nginx's allowed routes, so it would return 404.` })
+  const expected = new Set(pages.map(page => page.file))
+  for (const page of pages) {
+    if (!pageFiles.includes(page.file)) problems.push({ file: 'site/siteStructure.ts', position: 0, message: `Page "${page.id}" should be at ${page.file}, matching its place in the navigation.` })
   }
-  // Every path a simple rule allows must still be a page.
-  for (const pattern of patterns) {
-    for (const path of expandRoutePattern(pattern.source) ?? []) {
-      if (!paths.includes(path)) problems.push({ file: 'config/nginx.conf', position: pattern.position, message: `nginx allows ${path}, but the site has no such page.` })
-    }
+  for (const file of pageFiles) {
+    if (!expected.has(file) && !otherPageFiles.includes(file)) problems.push({ file, position: 0, message: `${file} is not where the navigation puts any page. Move it to match site/siteStructure.ts.` })
   }
   for (const { file, url } of lighthouseUrls) {
     const path = new URL(url).pathname
-    if (!allowed(path)) problems.push({ file, position: 0, message: `Lighthouse URL ${path} is not an allowed site route.` })
+    if (!routes.includes(path)) problems.push({ file, position: 0, message: `Lighthouse URL ${path} is not an app route.` })
   }
   return problems
 }

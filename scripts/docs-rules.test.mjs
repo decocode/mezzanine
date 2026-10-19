@@ -1,43 +1,23 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { checkRoutes, checkTokens, declaredTokens, expandRoutePattern, labPaths, parsePropRows, templateTokenPatterns } from './docs-rules.mjs'
+import { checkRoutes, checkTokens, declaredTokens, labPaths, parsePropRows, templateTokenPatterns } from './docs-rules.mjs'
 
-const nginx = `map $uri $is_app_route {
-    default 0;
-    ~^/?$ 1;
-    ~^/typography/(text-styles|prose)/?$ 1;
-    ~^/(button|link|old-page)/?$ 1;
-}`
-const site = `{ path: '/' } { path: '/button' } { path: '/link' } { path: '/typography/prose' } { path: '/new-page' }`
-
-test('routes: missing nginx entries, stale entries and bad Lighthouse URLs are reported', () => {
-  const messages = checkRoutes({ siteStructure: site, nginx, lighthouseUrls: [{ file: 'lh.json', url: 'http://localhost/gone' }] }).map(p => p.message)
-  assert.ok(messages.some(m => m.includes('/new-page') && m.includes('404')))
-  assert.ok(messages.some(m => m.includes('/old-page') && m.includes('no such page')))
-  assert.ok(messages.some(m => m.includes('/typography/text-styles')))
+test('routes: misplaced page files, stray page files and bad Lighthouse URLs are reported', () => {
+  const pages = [{ id: 'button', file: 'site/pages/components/button/ButtonPage.tsx' }, { id: 'link', file: 'site/pages/components/link/LinkPage.tsx' }]
+  const pageFiles = ['site/pages/components/button/ButtonPage.tsx', 'site/pages/link/LinkPage.tsx', 'site/pages/not-found/NotFoundPage.tsx']
+  const messages = checkRoutes({ routes: ['/', '/button'], pages, pageFiles, otherPageFiles: ['site/pages/not-found/NotFoundPage.tsx'], lighthouseUrls: [{ file: 'lh.json', url: 'http://localhost/gone' }] }).map(p => p.message)
+  assert.ok(messages.some(m => m.includes('"link"') && m.includes('components/link/LinkPage.tsx')))
+  assert.ok(messages.some(m => m.startsWith('site/pages/link/LinkPage.tsx')))
   assert.ok(messages.some(m => m.includes('Lighthouse URL /gone')))
-  assert.ok(!messages.some(m => m.includes('/button') || m.includes('/typography/prose')))
+  assert.equal(messages.length, 3)
 })
 
-test('routes: nested Lab rules expand to every page they allow', () => {
-  assert.deepEqual(expandRoutePattern('^/site/lab(/layout(/(grid|subgrid))?)?/?$'), ['/site/lab', '/site/lab/layout', '/site/lab/layout/grid', '/site/lab/layout/subgrid'])
-  assert.deepEqual(expandRoutePattern('^/?$'), ['/'])
-  assert.equal(expandRoutePattern('^/docs/[a-z]+$'), null)
-})
-
-test('routes: Lab pages missing from nginx, and nginx entries for removed Lab pages, are reported', () => {
+test('routes: Lab pages come from Lab hrefs and Layout slugs', () => {
   const extraPaths = labPaths({
     labContent: "index: { href: '/site/lab' }, layoutPage: { href: '/site/lab/layout' }",
-    layoutContent: "{ slug: 'grid' } { slug: 'new-lab-page' } { key: 'stack', href: '/site/lab/layout/grid/stack' }",
+    pageContent: "{ slug: 'grid' } { slug: 'new-lab-page' } { key: 'stack', href: '/site/lab/layout/grid/stack' }",
   })
   assert.deepEqual(extraPaths, ['/site/lab', '/site/lab/layout', '/site/lab/layout/grid/stack', '/site/lab/layout/grid', '/site/lab/layout/new-lab-page'])
-  const labNginx = `map $uri $is_app_route {
-    ~^/site/lab(/layout(/(grid(/(stack))?|old-lab-page))?)?/?$ 1;
-}`
-  const messages = checkRoutes({ siteStructure: '', extraPaths, nginx: labNginx, lighthouseUrls: [] }).map(p => p.message)
-  assert.ok(messages.some(m => m.includes('/site/lab/layout/new-lab-page') && m.includes('404')))
-  assert.ok(messages.some(m => m.includes('/site/lab/layout/old-lab-page') && m.includes('no such page')))
-  assert.ok(!messages.some(m => m.includes('/site/lab/layout/grid')))
 })
 
 test('tokens: unknown mentions fail, prefixes and templates count, the baseline must stay current', () => {

@@ -1,5 +1,5 @@
 .mezzanine-table-of-contents {
-  margin-bottom: var(--space-16);
+  margin-block-end: var(--space-16);
 }
 
 .mezzanine-table-of-contents > :is(h2, h3) {
@@ -16,7 +16,7 @@
 }
 
 .mezzanine-table-of-contents ul ul {
-  margin-top: var(--space-1);
+  margin-block-start: var(--space-1);
   padding-inline-start: var(--space-5);
 }
 
@@ -25,7 +25,7 @@
 }
 
 .mezzanine-table-of-contents .react-aria-Link {
-  min-height: var(--space-8);
+  min-height: var(--target-size);
   max-width: 100%;
   color: var(--color-link);
   font-family: var(--font-family-body);

@@ -1,0 +1,9 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* SearchField: a single-line Input with a search icon at the start and a clear button at the end. */
+  --search-field-gap: var(--text-field-gap);
+  --search-field-icon-size: 1.125rem;
+  --search-field-icon-gap: var(--space-2);
+  --search-field-icon-content: var(--color-text-muted);
+}

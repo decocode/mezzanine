@@ -101,7 +101,7 @@ a:focus-visible {
 
 .skip-link:focus-visible {
   position: fixed;
-  z-index: 20;
+  z-index: var(--z-index-overlay);
   top: var(--space-2);
   left: var(--space-2);
   width: auto;
@@ -196,19 +196,10 @@ a:focus-visible {
   color: var(--color-text-muted);
 }
 
-.color-palettes,
 .core-color-palettes,
 .color-palette-category,
 .semantic-color-palettes {
   min-width: 0;
-}
-
-.color-palettes {
-  margin-bottom: var(--space-16);
-}
-
-.color-palettes > h2 {
-  margin: 0 0 var(--space-4);
 }
 
 .color-palette-category > h4,
@@ -390,10 +381,6 @@ a:focus-visible {
 .spacing-scale-pixels {
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
-}
-
-.color-roles > h2 {
-  margin: 0 0 var(--space-4);
 }
 
 .token-group + .token-group {
@@ -692,7 +679,7 @@ a:focus-visible {
 }
 
 /* Documentation rhythm: 4rem between major sections, 3rem before topics,
-   2rem before subtopics, and 1rem within groups. Keep component demos untouched. */
+   2rem before subtopics, and 1rem within groups. Keep component examples untouched. */
 .component-section > h3,
 .typography-guidance > h3 {
   margin: var(--space-12) 0 var(--space-4);
@@ -1126,7 +1113,7 @@ a:focus-visible {
 .button-sizes-table .react-aria-Column,
 .button-sizes-table .react-aria-Cell { width: calc(100% / 3); }
 
-/* Text page examples: a paragraph at the line length, a narrow Card for long words, and vertical text in a Card. */
+/* Text and Reading direction page examples: a paragraph at the line length, a narrow Card for long words, and vertical text in a Card. */
 .text-line-length-example { max-width: var(--line-length); margin: 0; }
 /* The line length comparison: a label above each paragraph. */
 .text-comparison { display: grid; gap: var(--space-2); }
@@ -1138,3 +1125,7 @@ a:focus-visible {
 /* In vertical writing, inline-size is the height, so lines wrap after 12rem. */
 /* The Card's gap between children follows each child's own direction, so vertical text needs its own space above. */
 .text-vertical-example { writing-mode: vertical-rl; inline-size: 12rem; margin-top: var(--space-4); }
+/* Reading direction › Start and end: one box uses physical sides on purpose, to show it doesn't mirror. */
+.text-direction-example p { margin: 0 0 var(--space-2); }
+.text-direction-physical { padding-block: var(--space-3); border-left: var(--space-2) solid var(--color-warning-600); padding-left: var(--space-4); }
+.text-direction-logical { padding-block: var(--space-3); border-inline-start: var(--space-2) solid var(--color-warning-600); padding-inline-start: var(--space-4); }

@@ -8,6 +8,8 @@ export interface DocumentationSection {
   title: string
   content: ReactNode
   subsections?: readonly TableOfContentsSection[]
+  // Shown as a closed Disclosure whose header is the section heading; its On this page link opens it.
+  isCollapsible?: boolean
 }
 
 export interface DocumentationSectionGroup {
@@ -61,7 +63,11 @@ export function DocsPageTemplate({ title, description, sections, relatedPages = 
           ? section.sections.map(({ id, title: label, subsections }) => ({ id, label, children: subsections }))
           : section.subsections,
       }))} />}
-      {pageSections.map(section => (
+      {pageSections.map(section => !('sections' in section) && section.isCollapsible ? (
+        <section key={section.id} aria-labelledby={section.id} className="component-section">
+          <DocsDisclosureGroup labelledBy={section.id} sections={[section]} headingLevel={2} />
+        </section>
+      ) : (
         <section key={section.id} aria-labelledby={section.id} className="component-section">
           <Heading id={section.id} level={2} className="mz-text-heading-md">{section.title}</Heading>
           {'sections' in section

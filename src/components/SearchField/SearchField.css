@@ -1,0 +1,101 @@
+/* Follows React Aria's vanilla SearchField: the icon and clear button sit over the Input, which keeps the shared field appearance. */
+.react-aria-SearchField {
+  display: grid;
+  grid-template-areas: 'label' 'input' 'help';
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  row-gap: var(--search-field-gap);
+  min-width: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+  overflow-wrap: anywhere;
+}
+
+.react-aria-SearchField > .react-aria-Label {
+  grid-area: label;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-SearchField > .react-aria-Input {
+  grid-area: input;
+  padding-inline-start: calc(var(--input-padding-inline) + var(--search-field-icon-size) + var(--search-field-icon-gap));
+  padding-inline-end: calc(var(--target-size) + var(--input-border-width));
+}
+
+/* Hide the browser's own clear button and search decoration; the field supplies its own. */
+.react-aria-SearchField > .react-aria-Input::-webkit-search-cancel-button,
+.react-aria-SearchField > .react-aria-Input::-webkit-search-decoration {
+  appearance: none;
+}
+
+.mezzanine-search-field-icon {
+  grid-area: input;
+  justify-self: start;
+  width: var(--search-field-icon-size);
+  height: var(--search-field-icon-size);
+  margin-inline-start: var(--input-padding-inline);
+  color: var(--search-field-icon-content);
+  pointer-events: none;
+}
+
+.react-aria-SearchField > .mezzanine-search-field-clear {
+  grid-area: input;
+  justify-self: end;
+  margin-inline-end: var(--input-border-width);
+}
+
+.react-aria-SearchField[data-empty] > .mezzanine-search-field-clear {
+  display: none;
+}
+
+.react-aria-SearchField > [slot='description'],
+.react-aria-SearchField > .react-aria-FieldError {
+  grid-area: help;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-SearchField > [slot='description'] {
+  color: var(--color-text-muted);
+}
+
+.react-aria-SearchField > .react-aria-FieldError {
+  color: var(--text-field-error-content);
+}
+
+.react-aria-SearchField[data-disabled] {
+  opacity: var(--opacity-disabled);
+}
+
+@media (forced-colors: active) {
+  .mezzanine-search-field-icon {
+    color: FieldText;
+  }
+
+  .react-aria-SearchField[data-disabled] {
+    opacity: 1;
+    color: GrayText;
+  }
+
+  .react-aria-SearchField[data-disabled] .mezzanine-search-field-icon {
+    color: GrayText;
+  }
+
+  .react-aria-SearchField > .react-aria-FieldError {
+    color: Mark;
+  }
+}

@@ -88,6 +88,18 @@
   --table-row-background-selected-hovered: var(--color-signature-800);
   --table-row-background-selected-pressed: var(--color-signature-900);
   --table-row-content-selected: var(--color-neutral-50);
+
+  --list-box-item-background: transparent;
+  --list-box-item-background-hovered: var(--color-surface-hover);
+  --list-box-item-background-pressed: var(--color-surface-pressed);
+  --list-box-item-background-selected: var(--color-signature-700);
+  --list-box-item-background-selected-hovered: var(--color-signature-800);
+  --list-box-item-background-selected-pressed: var(--color-signature-900);
+  --list-box-item-content: var(--color-text);
+  --list-box-item-content-selected: var(--color-neutral-50);
+  --list-box-item-description-content: var(--color-neutral-700);
+  --list-box-header-content: var(--color-neutral-700);
+  --list-box-empty-content: var(--color-neutral-700);
   --table-header-background: var(--color-neutral-100);
   --table-drop-target-color: var(--color-signature-700);
 

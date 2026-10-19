@@ -99,7 +99,7 @@ test('Navbar exposes related pages and external references through On this page'
 })
 
 test('Navbar groups technical sections and preserves their anchors', async ({ page }) => {
-  await page.goto('/navbar#navbar-props-heading')
+  await page.goto('/navbar#navbar-props')
   const main = page.getByRole('main')
   const group = main.getByRole('region', { name: 'Technical details', exact: true })
   await expect(group.getByRole('heading', { level: 2 })).toHaveText('Technical details')
@@ -192,7 +192,7 @@ for (const fontSize of [16, 32]) {
     await page.screenshot({ path: `reports/test-results/docs-contents-${fontSize}.png` })
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
     await contents.getByRole('link', { name: 'Props', exact: true }).click()
-    await expect(page).toHaveURL(/#navbar-props-heading$/)
+    await expect(page).toHaveURL(/#navbar-props$/)
     await expect(page.getByRole('button', { name: 'Props', exact: true })).toHaveAttribute('aria-expanded', 'true')
     await expect(page.getByRole('heading', { name: 'Props', exact: true })).toBeInViewport()
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)

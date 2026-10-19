@@ -286,6 +286,46 @@ sets an edge highlight and larger shapes for the raised levels.
 Keyboard focus is not an elevation role. Components continue to use the
 separate `--color-focus` token for visible focus indicators.
 
+## Current target size inventory
+
+Target size is how big something you tap or click must be. It lives in
+`src/tokens/interaction.css`. Components use the shared token directly rather
+than their own minimum heights, so a theme changes every target at once.
+
+| Token | Meaning |
+| --- | --- |
+| `--target-size-min` | The WCAG 2.2 AA minimum, 24px (1.5rem) |
+| `--target-size` | The size Mezzanine's controls use, 44px (2.75rem): Button's small size, Tabs, Navbar menu items, NavTree rows and expand buttons, ListBox options and SearchField's clear button |
+
+## Current control size inventory
+
+Every control's height comes from one shared scale in `src/tokens/interaction.css`,
+so a text field and a Button of the same size always line up, and a theme can
+change every control at once.
+
+| Token | Value | Used by |
+| --- | --- | --- |
+| `--control-size-sm` | `--target-size` (44px) | Button and ToggleButton `size="sm"` |
+| `--control-size-md` | 3rem (48px) | Button and ToggleButton `size="md"` (the default), text fields, Disclosure triggers, TabBar items |
+| `--control-size-lg` | 3.25rem (52px) | Button and ToggleButton `size="lg"` |
+| `--control-size-xl` | 3.5rem (56px) | Button and ToggleButton `size="xl"` |
+
+## Current stacking inventory
+
+Stacking order (CSS `z-index`) comes from one shared scale in
+`src/tokens/z-index.css`. Components choose a step by name and never set their
+own number. Every pop-up (Tooltip, Modal, the Sidebar drawer and the TabBar
+sheet) uses the overlay step. React Aria adds each pop-up to the end of the page
+in the order it opens, so the newest one sits on top.
+
+| Token | Meaning |
+| --- | --- |
+| `--z-index-base` | The normal page flow |
+| `--z-index-raised` | Lifted just above neighbours, such as a focused button in a group |
+| `--z-index-sticky` | Bars that stay in view while the page scrolls, such as Navbar and TabBar |
+| `--z-index-overlay` | Pop-ups: tooltips, popovers, drawers and dialogs |
+| `--z-index-toast` | Notifications that must appear above everything, including dialogs |
+
 ## Navbar tokens
 
 Navbar provides a sticky container and a compact Disclosure menu. Applications supply
@@ -295,11 +335,9 @@ Its own container switches to desktop navigation at 48rem, relative to the root 
 
 | Token | Meaning |
 | --- | --- |
-| `--navbar-z-index` | Navbar stacking order |
 | `--navbar-border-width` | Navbar and trigger border thickness |
 | `--navbar-min-height` | Minimum height of the content row |
 | `--navbar-wide-padding-inline` | Horizontal padding in the desktop layout |
-| `--navbar-menu-min-height` | Minimum navbar navigation-link height, and the brand link's minimum height and width |
 | `--navbar-focus-ring-width`, `--navbar-focus-ring-offset` | Menu trigger focus outline |
 | `--navbar-panel-max-height` | Maximum panel height before it scrolls |
 | `--motion-duration-interface`, `--motion-distance-reveal` | Panel entry timing and initial vertical displacement; disabled with reduced motion |
@@ -314,7 +352,6 @@ Tabs uses semantic text, link, border and surface colours across the official th
 | `--tabs-border-width`, `--tabs-border` | Tab-list divider thickness and colour |
 | `--tabs-content` | Panel text colour |
 | `--tabs-focus-ring-width`, `--tabs-focus-ring-offset` | Keyboard-focus outline thickness and position |
-| `--tab-min-height` | Minimum tab target height |
 | `--tab-padding-block`, `--tab-padding-inline` | Tab padding |
 | `--tab-content`, `--tab-content-selected` | Default and selected tab text colours |
 | `--tab-background-hovered`, `--tab-background-pressed` | Pointer interaction backgrounds |
@@ -329,7 +366,6 @@ be overridden independently by a consuming product.
 
 | Token | Meaning |
 | --- | --- |
-| `--modal-z-index` | Overlay stacking level |
 | `--modal-viewport-padding` | Minimum space between the modal and viewport edges |
 | `--modal-max-width` | Maximum modal width |
 | `--modal-border-width` | Modal border thickness |
@@ -428,7 +464,6 @@ override the inline-padding tokens when an inset is needed.
 | --- | --- |
 | `--disclosure-group-gap` | Space between items in a DisclosureGroup |
 | `--disclosure-border-width` | Divider width between Disclosure items |
-| `--disclosure-trigger-min-height` | Minimum height of a DisclosureHeader trigger |
 | `--disclosure-trigger-padding-block` | Vertical space inside a DisclosureHeader trigger |
 | `--disclosure-trigger-padding-inline` | Horizontal space inside a DisclosureHeader trigger |
 | `--disclosure-trigger-gap` | Space between a Disclosure label and chevron |
@@ -485,7 +520,6 @@ interaction and current-route states.
 | Token | Meaning |
 | --- | --- |
 | `--navigation-tree-gap` | Space between NavTree rows and sections |
-| `--navigation-tree-item-min-height` | Minimum height of a navigation item; chevron controls use shared small-button sizing |
 | `--navigation-tree-item-padding-block` | Vertical space inside a navigation item |
 | `--navigation-tree-item-padding-inline` | Base row inset, increased by nesting level on the start edge |
 | `--navigation-tree-item-gap` | Space between item content and controls |
@@ -593,7 +627,6 @@ existing theme colours. Light and Dark visual refinements are deferred.
 | --- | --- |
 | `--text-field-gap` | Space between field parts |
 | `--text-field-error-content` | Validation message colour |
-| `--input-min-height` | Minimum single-line input height |
 | `--text-area-min-height` | Minimum multiline height, initially 4rem |
 | `--input-padding-block`, `--input-padding-inline` | Input text padding |
 | `--input-border-width`, `--input-border-radius` | Input border and corner shape |
@@ -609,6 +642,17 @@ TextArea shares Input’s appearance and state tokens. It permits vertical resiz
 remains within its container width, and accepts the native `rows` prop for the
 initial visible line count. Its minimum height still applies when resized.
 
+## Split tokens
+
+Split shares a row between two areas and stacks them when they can't both have
+their minimum width. Apps can pass `gap` (a spacing step) and `minAreaWidth` for
+one Split; these tokens set the defaults.
+
+| Token | Meaning |
+| --- | --- |
+| `--split-gap` | Default space between the two areas |
+| `--split-min-area-width` | Default narrowest width of each sharing area before the areas stack |
+
 ## Tab bar tokens
 
 TabBar uses the existing semantic text, border, hover, pressed and focus colours.
@@ -618,11 +662,10 @@ The More sheet uses the existing modal backdrop, elevation and motion duration.
 | --- | --- |
 | `--tab-bar-background`, `--tab-bar-item-background-current` | Bar/sheet surface and current destination background |
 | `--tab-bar-border-width`, `--tab-bar-indicator-width` | Surface border and current destination marker |
-| `--tab-bar-z-index` | Sticky bar stacking level |
 | `--tab-bar-safe-area-bottom` | Device bottom inset; defaults to `env(safe-area-inset-bottom, 0px)` |
 | `--tab-bar-gap`, `--tab-bar-padding` | Space between items and inside the bar |
 | `--tab-bar-item-min-width` | Minimum slot width used to decide which links move into More |
-| `--tab-bar-item-min-height`, `--tab-bar-item-padding`, `--tab-bar-item-gap` | Touch target height, inner padding and icon/label spacing |
+| `--tab-bar-item-padding`, `--tab-bar-item-gap` | Inner padding and icon/label spacing; the item's height is the shared `--control-size-md` |
 | `--tab-bar-icon-size` | Decorative icon dimensions |
 | `--tab-bar-focus-ring-width`, `--tab-bar-focus-ring-offset` | Visible keyboard focus outline |
 | `--tab-bar-sheet-max-height` | Maximum sheet height before its content scrolls |
@@ -640,7 +683,6 @@ radius tokens, and `--elevation-raised-2`. These tokens control their remaining 
 | --- | --- |
 | `--tooltip-max-width` | Maximum tooltip width, additionally limited to the viewport |
 | `--tooltip-border-width` | Tooltip border thickness |
-| `--tooltip-z-index` | Tooltip stacking level |
 | `--motion-duration-interface` | Fade duration; disabled for reduced motion |
 
 The hover delay is controlled by the `TooltipTrigger` `delay` prop, not CSS.
@@ -648,7 +690,8 @@ The hover delay is controlled by the `TooltipTrigger` `delay` prop, not CSS.
 ### Shared button sizing
 
 Button and ToggleButton use the same `--button-sm-*`, `--button-md-*`,
-`--button-lg-*` and `--button-xl-*` size tokens. Both default to `md`.
+`--button-lg-*` and `--button-xl-*` size tokens. Their minimum heights come from the shared
+`--control-size-*` scale. Both default to `md`.
 Select sizes through `size`; ToggleButtonGroup supplies a size to its children,
 which an individual ToggleButton can override with its own `size`.
 Use `iconLeading` or `iconTrailing` without children for icon-only buttons.

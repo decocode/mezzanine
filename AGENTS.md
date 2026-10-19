@@ -47,6 +47,7 @@ This repository is Mezzanine, a React Aria design system by DecoCode Ltd. It con
 - Within an approved task, using the exact name of the corresponding React Aria component (for example `Switch`) needs no separate naming approval. This does not authorise adding unrequested components.
 - Public names are the ones consuming apps rely on: exported components, hooks, functions, props and types; token names; and documented data attributes and class names. Internal class names and private helpers need no approval.
 - If an approved name seems wrong, say so and keep using it until the user decides.
+- Don't use a CSS term with a different meaning. A name that is also a CSS word (a property, value, keyword or concept, such as `columns`, `grid`, `inline`, `block`, `container` or `layer`) must mean the same thing as in CSS. This covers public names, documentation and Lab page titles, and explanatory copy. Using a CSS word with its CSS meaning, such as `gap`, is encouraged.
 
 ## Ideas and the approval process
 
@@ -86,6 +87,15 @@ Do not put an idea into code, in the Lab or anywhere else, before the user has a
 - Take durations, easing, travel distances, entry scale and non-zero rotation angles from the shared motion tokens, not per-component numbers. Plain endpoints that mean "none" or "full" (opacity 0 or 1, scale 1, translate or rotate 0) and static centring offsets can be written directly.
 - Reduced motion has two sources. The user's system setting applies in every theme and area, and nothing overrides it. The Wireframe theme also suppresses motion by default, but only in the area showing Wireframe, not sibling areas showing another theme. An explicitly nested Light, Dark or System area restores normal motion unless system reduced motion applies. Every component with motion honours both sources. New motion is not finished until it does.
 - Loading and progress indicators keep their state visible when motion is reduced. Whether such an indicator may keep moving is decided with the user, indicator by indicator.
+
+### Layout and stacking
+
+Agreed by the owner on 18 October 2026. Components made before these rules (notably Sidebar) are due to be rebuilt to follow them. Do not copy Sidebar's screen-width switching or physical sides into new work.
+
+- Components respond to their container, not the screen. Use container queries for layout changes. Where the rendered structure itself must change (for example inline panel or drawer), measure the container with a ref callback or `useSyncExternalStore`. Media queries describe the person's setup only: preferences such as reduced motion and colour scheme, pointer and hover, display mode, and the outer page layout.
+- Stacking order (`z-index`) comes from one shared, named scale in `src/tokens/z-index.css`: `--z-index-base`, `--z-index-raised`, `--z-index-sticky`, `--z-index-overlay` and `--z-index-toast`. Components choose a step by name and never set their own number; `npm run check:rules` enforces this for library CSS. Every pop-up (tooltip, popover, drawer, dialog) uses the overlay step, and React Aria's opening order puts the newest on top.
+- Split is the layout building block for two areas side by side that stack when their container is too narrow. Sidebar is built on Split and adds collapse, rail and drawer behaviour. Split is in the library (`src/components/Split/`); Sidebar is still to be rebuilt on it.
+- Describe sides as start and end with CSS logical properties (`margin-inline-start`, `inset-inline-end`, `padding-block`). Use left, right, top or bottom only where the meaning is truly physical, with a `physical:` comment on the same line or the line before saying why. `npm run check:rules` enforces this for library CSS.
 
 ### Documentation site (`site/`)
 
@@ -165,4 +175,4 @@ In Mezzanine, "button" describes an appearance. Appearance (looks like a button 
 - The repository is public but all rights are reserved (see `LICENSE`). Do not add an open-source licence or change the terms unless the user asks.
 - The package is `"private": true` and is not published to npm. Do not publish it, change its version or remove `private` unless the user asks.
 - The site deploys to mezzanine.fly.dev from the Fly.io app `mezzanine` in the DecoCode Ltd organisation, using `Dockerfile`, `config/nginx.conf` and `fly.toml`. It is pre-launch and sends a `noindex` header. Do not deploy, change the Fly app or remove the header unless the user asks.
-- When a site route is added or removed, update the allowed routes in `config/nginx.conf` and the URLs in the Lighthouse configs in `config/`.
+- The server's allowed routes are generated from `site/siteStructure.ts` and the Lab's content by `scripts/generate-routes.mjs` during the Docker build, so adding or removing a page needs no nginx edit. The Lighthouse configs in `config/` list a few sample pages; update them only when one of those pages is renamed or removed (`npm run check:rules` reports it).

@@ -1,0 +1,68 @@
+// Plain-English explanations for the Lab's Layout pages, told through boxes, in groups
+// named after what you want to do: box basics, space, what goes inside a box, ways to place boxes,
+// and how boxes respond to their container, the browser and the device. Illustrative and unapproved.
+
+import type { DocsPageContent } from '../../templates/docsPageContent'
+import type { LayoutStage, StageKey, StagePage } from '../shared/labTypes'
+import { theBoxModelPage } from './box-basics/the-box-model/theBoxModelContent'
+import { typesOfBoxPage } from './box-basics/types-of-box/typesOfBoxContent'
+import { measuringTheBoxPage } from './box-basics/measuring-the-box/measuringTheBoxContent'
+import { viewportUnitsPage } from './box-basics/viewport-units/viewportUnitsContent'
+import { sizingTheBoxPage } from './box-basics/sizing-the-box/sizingTheBoxContent'
+import { centerPage } from './box-basics/center/centerContent'
+import { marginPage } from './add-space/margin/marginContent'
+import { paddingPage } from './add-space/padding/paddingContent'
+import { gapPage } from './add-space/gap/gapContent'
+import { alignmentPage } from './inside-the-box/alignment/alignmentContent'
+import { fillingTheBoxPage } from './inside-the-box/filling-the-box/fillingTheBoxContent'
+import { overflowingTheBoxPage } from './inside-the-box/overflowing-the-box/overflowingTheBoxContent'
+import { aspectRatioPage } from './inside-the-box/aspect-ratio/aspectRatioContent'
+import { contentColumnsPage } from './inside-the-box/content-columns/contentColumnsContent'
+import { boxHasContentPage } from './inside-the-box/box-has-content/boxHasContentContent'
+import { rowPage } from './side-by-side/row/rowContent'
+import { rowWrapPage } from './side-by-side/row-wrap/rowWrapContent'
+import { rowWrapAndGrowPage } from './side-by-side/row-wrap-and-grow/rowWrapAndGrowContent'
+import { reelPage } from './side-by-side/reel/reelContent'
+import { splitPage } from './side-by-side/split/splitContent'
+import { columnPage } from './one-below-another/column/columnContent'
+import { heroPage } from './one-below-another/hero/heroContent'
+import { gridPage } from './grid-formation/grid/gridContent'
+import { subgridPage } from './grid-formation/subgrid/subgridContent'
+import { containerQueriesPage } from './container/container-queries/containerQueriesContent'
+import { fluidSizingPage } from './container/fluid-sizing/fluidSizingContent'
+
+// The Layout overview: what layout is, then a Card for each group in its Groups section.
+export const layoutOverview: DocsPageContent = {
+  id: 'lab-layout', kind: 'foundation', title: 'Layout',
+  description: [
+    'Layout is how boxes are sized, spaced and arranged. Everything on a web page is a box, from a single word to a whole section of a page.',
+    'Mezzanine’s layouts are mobile first: they start with the narrowest space and add to it as the space grows. Components respond to the room their container gives them, not to the size of the screen.',
+  ],
+  sections: [{ key: 'groups', title: 'Groups' }],
+}
+
+export const layoutStages: LayoutStage[] = [
+  { key: 'boxBasics', id: 'lab-stage-box-basics', slug: 'box-basics', title: 'Box basics', summary: 'Everything on a web page is a box. Start with just one: what it’s made of, how big it is, and how its sides are named.' },
+  { key: 'addSpace', id: 'lab-stage-add-space', slug: 'add-space', title: 'Add space', summary: 'Space outside a box, inside it, and between the boxes it holds.' },
+  { key: 'insideTheBox', id: 'lab-stage-inside-the-box', slug: 'inside-the-box', title: 'Inside the box', summary: 'A box holds content: text, pictures, other boxes. These pages are about how that content behaves inside its box.' },
+  { key: 'sideBySide', id: 'lab-stage-side-by-side', slug: 'side-by-side', title: 'Side by side', summary: 'Ways to place boxes next to each other.' },
+  { key: 'oneBelowAnother', id: 'lab-stage-one-below-another', slug: 'one-below-another', title: 'One below another', summary: 'Ways to place boxes one below another.' },
+  { key: 'gridFormation', id: 'lab-stage-grid-formation', slug: 'grid-formation', title: 'Grid formation', summary: 'Boxes in rows and columns at the same time.' },
+  { key: 'container', id: 'lab-stage-container', slug: 'container', title: 'Container', summary: 'When a box responds to the space its container gives it.' },
+]
+
+// The pages in each group, in reading order.
+const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
+  boxBasics: [theBoxModelPage, typesOfBoxPage, measuringTheBoxPage, viewportUnitsPage, sizingTheBoxPage, centerPage],
+  addSpace: [marginPage, paddingPage, gapPage],
+  insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, aspectRatioPage, contentColumnsPage, boxHasContentPage],
+  sideBySide: [rowPage, rowWrapPage, rowWrapAndGrowPage, reelPage, splitPage],
+  oneBelowAnother: [columnPage, heroPage],
+  gridFormation: [gridPage, subgridPage],
+  container: [containerQueriesPage, fluidSizingPage],
+}
+
+// Every Layout page, group by group.
+export const stagePages: StagePage[] = Object.values(stagePagesInOrder).flat()
+
+export const stagePagesByStage = (stage: StageKey) => stagePagesInOrder[stage]

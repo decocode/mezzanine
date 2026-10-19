@@ -17,7 +17,7 @@
 .mezzanine-tab-bar[data-position='bottom'] {
   position: sticky;
   inset-block-end: 0;
-  z-index: var(--tab-bar-z-index);
+  z-index: var(--z-index-sticky);
   padding-block-end: var(--tab-bar-safe-area-bottom);
 }
 
@@ -44,7 +44,7 @@
   align-items: center;
   gap: var(--tab-bar-item-gap);
   width: 100%;
-  min-height: var(--tab-bar-item-min-height);
+  min-height: var(--control-size-md);
   padding: var(--tab-bar-item-padding);
   border-block-end: var(--tab-bar-indicator-width) solid transparent;
   color: var(--color-link);
@@ -154,7 +154,7 @@
   display: flex;
   align-items: end;
   justify-content: center;
-  z-index: var(--modal-z-index);
+  z-index: var(--z-index-overlay);
   background: var(--modal-backdrop);
 }
 

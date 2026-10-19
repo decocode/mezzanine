@@ -74,16 +74,17 @@
   position: fixed;
   inset: 0;
   height: var(--visual-viewport-height);
-  z-index: var(--modal-z-index);
+  z-index: var(--z-index-overlay);
   display: flex;
   background: var(--modal-backdrop);
 }
 
-.mezzanine-sidebar-overlay[data-side='left'] > .mezzanine-sidebar-panel { left: 0; }
-.mezzanine-sidebar-overlay[data-side='right'] > .mezzanine-sidebar-panel { right: 0; }
+/* physical: the side prop names a physical side until Sidebar is rebuilt. */
+.mezzanine-sidebar-overlay[data-side='left'] > .mezzanine-sidebar-panel { left: 0; } /* physical: see above */
+.mezzanine-sidebar-overlay[data-side='right'] > .mezzanine-sidebar-panel { right: 0; } /* physical: see above */
 .mezzanine-sidebar-overlay > .mezzanine-sidebar-panel {
   position: absolute;
-  top: 0;
+  inset-block-start: 0;
   height: 100%;
   max-height: 100%;
   width: min(var(--sidebar-width), calc(100% - var(--sidebar-drawer-gap)));

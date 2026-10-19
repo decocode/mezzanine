@@ -8,10 +8,37 @@ in `src/docs/`.
 | Folder or file | What it holds |
 | --- | --- |
 | `site/AppShell.tsx` | The site layout, navigation and theme. Loads each page separately through `PageLoader.tsx`. |
-| `site/templates/DocsPageTemplate.tsx` | The docs page template, used by component pages and converted Foundations and Styles pages, and the site-only `PageHeading` used for every page title and introduction |
-| `site/pages/` | One file per page: examples, local state, and putting the content into the template |
-| `site/content/` | Each page's wording, reference entries and data, in a `*Content.tsx` (or `.ts`) file. JSX is used for inline code and links. |
+| `site/templates/ContentPage.tsx` | Builds a page from its content file: the sections, the Technical details group, Related pages and References |
+| `site/templates/docsPageContent.ts` | The one shape every content file follows (`DocsPageContent`), the standard section titles and how section ids are made |
+| `site/templates/DocsPageTemplate.tsx` | The layout underneath `ContentPage`, and the site-only `PageHeading` used for every page title and introduction |
+| `site/pages/` | One folder per page, arranged like the navigation: `foundations/interaction/target-size/`, `components/actions-and-controls/button/` and so on. Each holds the page (`ButtonPage.tsx`: live examples, local state and anything only code can build, passed to `ContentPage` as `parts`), its content file (`buttonContent.ts`: the wording, reference entries and data, as plain TypeScript with no JSX) and any helpers only that page uses. A parent page, such as Interaction, keeps its files in its own folder beside its child pages' folders. |
+| `site/siteContent.ts` | Wording shared across the site: its name, the skip link and the not-found and not-implemented messages |
 | `site/components/` | Reusable site UI, separate from the library's components in `src/components/` |
+
+## Writing copy
+
+Copy in content files is plain text. Three markers, borrowed from Markdown, add
+formatting:
+
+- `` `code` `` for code, such as a prop or token name.
+- `**strong**` for emphasis.
+- `[label](href)` for a link. A link to another site opens in a new tab and says
+  so, like the References list.
+
+A paragraph can also be a short bulleted list: `{ list: ['First item', 'Second item'] }`.
+
+When a page moves in the navigation, move its folder to match, so the folders always read like the navigation. The Lab in `site/lab/` follows the same pattern: each Lab page's content file exports the same `DocsPageContent` shape (as a `LabPage`, which adds its Lab address), and `ContentPage` builds it, with its examples as `parts`.
+
+## Adding a page
+
+1. Add the page to `site/siteStructure.ts`, in its navigation group.
+2. Create its folder in `site/pages/`, following the navigation, with
+   `<Name>Page.tsx` and `<name>Content.ts`. The page id `target-size` in the
+   Interaction group becomes `foundations/interaction/target-size/TargetSizePage.tsx`.
+
+The page loads from its folder automatically, and the server allows its route
+on the next deploy. `npm run check:rules` reports a page whose file is missing
+or in the wrong folder.
 
 Useful site components:
 
@@ -23,23 +50,46 @@ Useful site components:
 
 ## Component pages
 
-Every implemented component page uses `DocsPageTemplate`. A page supplies
-its title, description and an ordered `sections` list.
+Every page uses `ContentPage`. The page passes its content file and any live
+parts:
 
-- Each section defines `id`, `title` and `content` once. The template creates
-  its heading, its wrapper and its link in On this page.
+```tsx
+<ContentPage content={badgeContent} parts={{ example: <ExampleZone>…</ExampleZone> }} />
+```
+
+Every page, in the Docs or the Lab, follows the same order:
+
+1. Also known as, when the page's name is agreed: what Figma, CSS, Tailwind CSS,
+   Bootstrap and Material Design call the same thing, in a closed Disclosure.
+2. The page's own sections, such as Example and Variants, or How it works and
+   Example in the Lab.
+3. Technical details, where the page has them.
+4. Related pages and References.
+
+The content file sets the page's `id`, `kind` (`component` or `foundation`),
+title, description, its `alsoKnownAs` rows, its `sections` in order, its
+`technicalDetails`, Related pages and References.
+
+- Each section has a `key`. Standard keys, such as `example`, `anatomy`,
+  `usage` and `tokens`, supply their own title; any other key needs a `title`.
+- A section's id is the page id and its key, such as `badge-anatomy`. The
+  Technical details group is always `<page id>-technical-details`.
+- In a section, `intro` paragraphs come first, in the muted description style,
+  then `body` paragraphs, then the page's part for that key, then the section's
+  two-column `table`.
 - Optional `subsections` add On this page links to headings inside a section.
+- Optional `subheadings` add headed blocks inside a section, such as Browser
+  support, each with a level-3 heading and its own On this page link.
 - On this page appears after the page heading and description on narrower
   screens, and in the right column on wide screens.
-- A section group has `id`, `title` and its own `sections` list instead of
-  `content`. Its heading is level 2 and its children become a Disclosure group
-  with level-3 headings. The disclosures start closed, several can be open, and
-  an On this page link opens the right panel before scrolling to it, including
-  from a direct URL.
+- The Technical details group's heading is level 2 and its sections become a
+  Disclosure group with level-3 headings. The disclosures start closed, several
+  can be open, and an On this page link opens the right panel before scrolling
+  to it, including from a direct URL.
 
 Each component page has, where they apply:
 
-1. The example, and any other interactive demonstrations, always visible.
+1. The example, and any other interactive examples, always visible.
 2. Technical details, in disclosures (see below).
 3. Related pages: links to other Mezzanine pages.
 4. References: links to the React Aria documentation or other sources. Badge is
@@ -69,11 +119,10 @@ Do not combine Usage and Accessibility into one section.
 
 ## Related pages and References
 
-Edit the page's content list. Each entry has a `label` and an `href`: a local
+Edit the page's content file. Each entry has a `label` and an `href`: a local
 path for Related pages, an external URL for References. External links show a
 trailing icon and announce that they open in a new tab. An empty list produces
-no section and no On this page link. The optional `referencesId` keeps an
-existing anchor for the References section.
+no section and no On this page link.
 
 ## Foundations and Styles pages
 
@@ -86,9 +135,8 @@ applies to every Foundation, including that Foundations do not change with the
 theme, so individual Foundations pages do not repeat it.
 
 Foundations and Styles pages open with their own sections, such as a scale or a
-table of states. Pages that have been converted (Elevation, Interaction and
-Spacing) use `DocsPageTemplate` and end with a Technical details group, written
-in the page like a component page's. Its sections always appear in this order:
+table of states. Their content files use `kind: 'foundation'`, and where they
+have a Technical details group, its sections always appear in this order:
 
 1. CSS properties: the CSS properties the page governs.
 2. Tokens: token names, purposes and values read from the token source.
@@ -100,16 +148,18 @@ in the page like a component page's. Its sections always appear in this order:
 Do not list the components that use a token or state by hand: such lists go
 out of date. Add them only if they can be generated from the code.
 
-Leave out sections that do not apply. Pages not yet converted, such as
-Typography and Color, have their own structures but reuse `PageHeading`.
+Leave out sections that do not apply.
 
 ## Facts checked by check:rules
 
 `npm run check:rules` keeps documentation facts in step with the code:
 
-- Every page in `site/siteStructure.ts` must be an allowed route in
-  `config/nginx.conf`, every route nginx allows must be a page, and every Lighthouse
-  URL must be a route.
+- Every implemented page in `site/siteStructure.ts` must have its component in
+  the folder its place in the navigation gives it, such as
+  `site/pages/foundations/interaction/target-size/TargetSizePage.tsx`, and no
+  page file may sit anywhere else. Every Lighthouse URL must be a page.
+- The server's allowed routes are not written by hand: `scripts/generate-routes.mjs`
+  lists every docs and Lab page, and the Docker build gives that list to nginx.
 - Every token the site mentions must exist, and every public token in
   `src/tokens/`, the components' `*.tokens.css` files and the theme files must
   be documented on some page.

@@ -1,7 +1,9 @@
 import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
 import { checkTypographyChoices, checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
-import { checkRoutes, checkTokens, declaredTokens, labPaths, parsePropRows } from './docs-rules.mjs'
+import { checkRoutes, checkTokens, declaredTokens, parsePropRows } from './docs-rules.mjs'
+import { appRoutes } from './generate-routes.mjs'
+import { sitePageFile, sitePageFolder, sitePages } from '../site/siteStructure.ts'
 import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -256,6 +258,23 @@ function checkCss(file) {
       const colon = segment.indexOf(':')
       if (colon !== -1 && !segment.trimStart().startsWith('@')) {
         const value = segment.slice(colon + 1)
+        // Sides are start and end. A physical side needs a "physical:" comment on its line or the one before.
+        const property = segment.slice(0, colon).trim()
+        const physicalSide = /^(?:(?:margin|padding|border|inset|scroll-margin|scroll-padding)-(?:top|right|bottom|left)(?:-.+)?|top|right|bottom|left)$/.test(property)
+          || (/^(?:text-align|float|clear)$/.test(property) && /^\s*(?:left|right)\s*$/.test(value))
+        if (physicalSide) {
+          const lineIndex = text.slice(0, start + colon).split('\n').length - 1
+          const lines = text.split('\n')
+          if (!/physical:/.test(lines[lineIndex] ?? '') && !/physical:/.test(lines[lineIndex - 1] ?? '')) {
+            report(file, text, start + colon, 'logical-sides',
+              `Use a start/end (logical) property instead of "${property}", or add a "physical:" comment saying why.`)
+          }
+        }
+        // Stacking order comes from the shared --z-index-* scale, never a component's own number.
+        if (segment.slice(0, colon).trim() === 'z-index' && !/^\s*(?:var\(--z-index-[a-z]+\)|auto)\s*$/.test(value)) {
+          report(file, text, start + colon + 1, 'z-index',
+            'Use a --z-index-* step (base, raised, sticky, overlay or toast) instead of a number.')
+        }
         // System colour keywords in forced-colors rules are intentionally valid;
         // this check targets the explicit hex and function syntaxes requested.
         for (const match of value.matchAll(/#[\da-f]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab)\s*\(/gi)) {
@@ -338,33 +357,42 @@ function checkSnapshot(api, update) {
   }
 }
 
-// Each Props table and the exported types it documents. Rows prefixed with a
+// Each Props table, by content file and section key, and the exported types it documents. Rows prefixed with a
 // component name, or following a row that is only that name, use its type.
 const propTables = [
-  { file: 'site/content/navbarContent.tsx', key: 'props', types: ['NavbarProps'] },
-  { file: 'site/content/navigationTreeContent.tsx', key: 'props', types: ['NavTreeProps'] },
-  { file: 'site/content/navigationTreeContent.tsx', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
-  { file: 'site/content/tabBarContent.tsx', key: 'propsRows', types: ['TabBarProps'] },
-  { file: 'site/content/sidebarContent.tsx', key: 'props', types: ['SidebarProps'],
+  { file: 'site/pages/components/navigation/navbar/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
+  { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
+  { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
+  { file: 'site/pages/components/navigation/tab-bar/tabBarContent.ts', key: 'props', types: ['TabBarProps'] },
+  { file: 'site/pages/components/navigation/sidebar/sidebarContent.ts', key: 'props', types: ['SidebarProps'],
     components: { Sidebar: ['SidebarProps'], SidebarTrigger: ['SidebarTriggerProps'], SidebarPanel: ['SidebarPanelProps'] } },
-  { file: 'site/content/tabsContent.tsx', key: 'propsRows', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
-  { file: 'site/content/tableOfContentsContent.tsx', key: 'propsRows', types: ['TableOfContentsProps'] },
-  { file: 'site/content/tooltipContent.tsx', key: 'propsRows', types: [],
+  { file: 'site/pages/components/navigation/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
+  { file: 'site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
+  { file: 'site/pages/components/overlays/tooltip/tooltipContent.ts', key: 'props', types: [],
     components: { TooltipTrigger: ['TooltipTriggerComponentProps'], Tooltip: ['TooltipProps'] } },
 ]
 
+// The Props rows of one content-file section: the object whose `key` is the section key, then its
+// `table.rows`. Content files follow site/templates/docsPageContent.ts.
 function documentedPropNames(program, file, key) {
   const source = program.getSourceFile(path.join(root, file))
+  const property = (object, name) => object.properties.find(item => ts.isPropertyAssignment(item) && item.name.getText(source) === name)?.initializer
   const names = []
   walk(source, node => {
-    if (!ts.isPropertyAssignment(node) || node.name.getText(source) !== key) return
-    let list = node.initializer
-    while (ts.isSatisfiesExpression(list) || ts.isAsExpression(list)) list = list.expression
-    if (!ts.isArrayLiteralExpression(list)) return
-    for (const element of list.elements) {
+    let table
+    // A section such as { key: 'props', table: { rows } }.
+    if (ts.isObjectLiteralExpression(node)) {
+      const sectionKey = property(node, 'key')
+      if (sectionKey && ts.isStringLiteral(sectionKey) && sectionKey.text === key) table = property(node, 'table')
+    }
+    // A table a page renders itself, exported under the key, such as props: { rows }.
+    if (ts.isPropertyAssignment(node) && node.name.getText(source) === key) table = node.initializer
+    const rows = table && ts.isObjectLiteralExpression(table) ? property(table, 'rows') : undefined
+    if (!rows || !ts.isArrayLiteralExpression(rows)) return
+    for (const element of rows.elements) {
       if (!ts.isObjectLiteralExpression(element)) continue
-      const name = element.properties.find(property => ts.isPropertyAssignment(property) && property.name.getText(source) === 'name')
-      if (name && ts.isStringLiteral(name.initializer)) names.push({ text: name.initializer.text, position: name.getStart(source) })
+      const name = property(element, 'name')
+      if (name && ts.isStringLiteral(name)) names.push({ text: name.text, position: name.getStart(source) })
     }
   })
   return names
@@ -446,8 +474,12 @@ function checkDocsTokens(update) {
 function checkDocsRoutes() {
   const lighthouseUrls = ['config/lighthouserc.mobile.json', 'config/lighthouserc.desktop.json']
     .flatMap(file => JSON.parse(read(file)).ci.collect.url.map(url => ({ file, url })))
-  const extraPaths = labPaths({ labContent: read('site/lab/labContent.tsx'), layoutContent: read('site/lab/layout/layoutLabContent.ts') })
-  for (const problem of checkRoutes({ siteStructure: read('site/siteStructure.ts'), extraPaths, nginx: read('config/nginx.conf'), lighthouseUrls })) {
+  const pages = sitePages.filter(page => page.status === 'implemented')
+    .map(page => ({ id: page.id, file: `site/pages/${sitePageFolder(page.id)}/${sitePageFile(page.id)}` }))
+  const pageFiles = filesIn('site/pages', ['.tsx']).filter(file => file.endsWith('Page.tsx'))
+  // Shown by the app shell for unknown and unbuilt pages, so they have no place in the navigation.
+  const otherPageFiles = ['site/pages/not-found/NotFoundPage.tsx', 'site/pages/not-implemented/NotImplementedPage.tsx']
+  for (const problem of checkRoutes({ routes: appRoutes(), pages, pageFiles, otherPageFiles, lighthouseUrls })) {
     report(problem.file, read(problem.file), problem.position, 'docs-routes', problem.message)
   }
 }
@@ -492,7 +524,7 @@ try {
   for (const problem of checkTypographyTokens(buttonTokens)) report(buttonTokensFile, buttonTokens, problem.position, 'typography', problem.message)
   const tokens = read('src/tokens/motion.css')
   const typographyGuide = read('src/docs/TYPOGRAPHY.md')
-  for (const problem of checkTypographyChoices(typographyGuide, read('site/content/textStylesContent.ts'))) report('src/docs/TYPOGRAPHY.md', typographyGuide, problem.position, 'typography', problem.message)
+  for (const problem of checkTypographyChoices(typographyGuide, read('site/pages/styles/typography/text-styles/textStylesContent.ts'))) report('src/docs/TYPOGRAPHY.md', typographyGuide, problem.position, 'typography', problem.message)
   for (const token of motionTokens) {
     if (!tokens.includes(`${token}:`)) report('src/tokens/motion.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
   }

@@ -3,7 +3,6 @@
 :where(:root) {
   /* Single-line text fields; products can override each visual decision. */
   --text-field-gap: var(--space-2);
-  --input-min-height: 3rem;
   --text-area-min-height: 4rem;
   --input-padding-block: var(--space-2);
   --input-padding-inline: var(--space-3);

@@ -37,6 +37,10 @@ export function ExternalLinkIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><path d="M14 2h8v8m0-8L11 13m9 0v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h6" /></StrokeIcon>
 }
 
+export function SearchIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5.5 5.5" /></StrokeIcon>
+}
+
 export function MenuIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><path d="M3 6h18M3 12h18M3 18h18" /></StrokeIcon>
 }

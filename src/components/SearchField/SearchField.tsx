@@ -1,0 +1,32 @@
+import { composeRenderProps } from 'react-aria-components'
+import {
+  SearchField as ReactAriaSearchField,
+  type SearchFieldProps as ReactAriaSearchFieldProps,
+} from 'react-aria-components/SearchField'
+import { Button } from '../Button/Button'
+import { SearchIcon } from '../../icons/Icons'
+import { CloseIcon } from '../../icons/StudioIcons'
+
+export interface SearchFieldProps extends ReactAriaSearchFieldProps {}
+
+// Apps supply the Label and Input, as with TextField; the field adds its search icon and clear button.
+// React Aria names the clear button, keeps it out of the Tab order and clears the field when it or Escape is pressed.
+export function SearchField({ children, className, ...searchFieldProps }: SearchFieldProps) {
+  return (
+    <ReactAriaSearchField
+      {...searchFieldProps}
+      className={composeRenderProps(className, (resolvedClassName) => (
+        ['react-aria-SearchField', resolvedClassName].filter(Boolean).join(' ')
+      ))}
+    >
+      {composeRenderProps(children, (resolvedChildren) => (
+        <>
+          {resolvedChildren}
+          {/* After the Input in source order, so the icon paints above the field's background. */}
+          <SearchIcon className="mezzanine-search-field-icon" />
+          <Button className="mezzanine-search-field-clear" iconLeading={<CloseIcon />} size="sm" variant="tertiary" />
+        </>
+      ))}
+    </ReactAriaSearchField>
+  )
+}

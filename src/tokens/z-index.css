@@ -1,0 +1,11 @@
+/* Stacking order shared by every component and theme. Components choose a step by name and never
+   set their own number. React Aria adds each pop-up to the end of the page in the order it opens,
+   so pop-ups that share the overlay step stack with the newest on top. */
+
+:where(:root) {
+  --z-index-base: 0;
+  --z-index-raised: 1;
+  --z-index-sticky: 10;
+  --z-index-overlay: 100;
+  --z-index-toast: 200;
+}
