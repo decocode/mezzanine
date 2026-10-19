@@ -36,7 +36,7 @@ export const dialogContent: DocsPageContent = {
           '`Dialog` describes the content; `Modal` adds blocking behaviour. A non-modal dialog leaves the rest of the page usable. Non-modal presentation is not included in this first release.',
           '`isDismissable` enables outside-click dismissal. Escape closes by default; `isKeyboardDismissDisabled` can disable it. Always provide a visible way to close.',
           'For controlled use, pass `isOpen` and `onOpenChange` to `DialogTrigger`, or to `ModalOverlay` when there is no trigger.',
-          'Use `mezzanine-dialog-actions` on a footer to arrange buttons. `Dialog` content scrolls when it exceeds the available height.',
+          'Use `mz-dialog-actions` on a footer to arrange buttons. `Dialog` content scrolls when it exceeds the available height.',
         ],
       }],
     },

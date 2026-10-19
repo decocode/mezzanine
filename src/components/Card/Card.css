@@ -1,7 +1,7 @@
 /* Normal document flow, like Dialog: block content fills the width and inline
    content (code, badges, links) keeps its natural size. flow-root keeps the
    children's margins inside the card. */
-.mezzanine-card {
+.mz-card {
   box-sizing: border-box;
   display: flow-root;
   min-width: 0;
@@ -21,16 +21,16 @@
 }
 
 /* Even space between the card's direct children, and none at the edges. */
-.mezzanine-card > * {
+.mz-card > * {
   margin-block: 0;
 }
 
-.mezzanine-card > * + * {
+.mz-card > * + * {
   margin-block-start: var(--card-content-gap);
 }
 
 /* TYPOGRAPHY.md: a heading inside a card or panel uses title-md. */
-.mezzanine-card > .react-aria-Heading {
+.mz-card > .react-aria-Heading {
   font-family: var(--font-family-body);
   font-size: var(--font-size-title-md);
   font-weight: var(--font-weight-emphasis);

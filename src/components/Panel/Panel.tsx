@@ -37,7 +37,7 @@ export function Panel({
   const headingId = useId()
   const isDrawer = presentation(edge) === 'drawer'
   const isOpen = (controlledOpen ?? store.isOpen(id)) && (!isDrawer || store.isShownOpen(id, true))
-  const classes = ['mezzanine-panel', className].filter(Boolean).join(' ')
+  const classes = ['mz-panel', className].filter(Boolean).join(' ')
 
   // Register from a ref callback, so triggers can find this Panel without an effect.
   const register = useCallback((element: HTMLElement | null) => {
@@ -52,11 +52,11 @@ export function Panel({
   }
 
   const contents = <>
-    <div className="mezzanine-panel-header">
+    <div className="mz-panel-header">
       <Heading id={headingId} level={headingLevel} slot={isDrawer ? 'title' : undefined}>{title}</Heading>
       <Button iconLeading={<CloseIcon />} labelPlacement="tooltip" size="sm" variant="tertiary" onPress={close}>{closeLabel}</Button>
     </div>
-    <div className="mezzanine-panel-content">{children}</div>
+    <div className="mz-panel-content">{children}</div>
   </>
 
   const isShown = isOpen && !isDrawer
@@ -71,11 +71,11 @@ export function Panel({
       aria-label={isShown ? undefined : title}
       inert={!isShown && minimized == null}
     >
-      {isShown ? contents : minimized != null && <div className="mezzanine-panel-minimized">{minimized}</div>}
+      {isShown ? contents : minimized != null && <div className="mz-panel-minimized">{minimized}</div>}
     </aside>
-    {isDrawer && <ModalOverlay isOpen={isOpen} onOpenChange={(open) => store.setOpen(id, open, true)} isDismissable className="mezzanine-panel-overlay" data-edge={edge}>
+    {isDrawer && <ModalOverlay isOpen={isOpen} onOpenChange={(open) => store.setOpen(id, open, true)} isDismissable className="mz-panel-overlay" data-edge={edge}>
       <Modal className={classes} data-edge={edge}>
-        <Dialog id={elementId} className="mezzanine-panel-dialog">{contents}</Dialog>
+        <Dialog id={elementId} className="mz-panel-dialog">{contents}</Dialog>
       </Modal>
     </ModalOverlay>}
   </>

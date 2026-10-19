@@ -10,7 +10,7 @@ for (const theme of themes) {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.goto('/code-block')
     await setTheme(page, theme)
-    const block = page.locator('main pre.mezzanine-code-block')
+    const block = page.locator('main pre.mz-code-block')
     await expect(block).toHaveCount(1)
     await expect(block.locator('> code')).toHaveCount(1)
     expect(await block.evaluate(element => element.textContent?.split('\n').length)).toBe(4)
@@ -19,6 +19,6 @@ for (const theme of themes) {
       await expectNoPageOverflow(page)
       expect(await block.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true)
     }
-    await expectNoAccessibilityViolations(page, 'main pre.mezzanine-code-block')
+    await expectNoAccessibilityViolations(page, 'main pre.mz-code-block')
   })
 }

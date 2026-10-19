@@ -43,32 +43,32 @@ export const ratioPairCssNotes: Record<string, CssNote> = {
       '`min-inline-size` is the minimum width. Flexbox checks it before placing an area on the row; when two minimums plus the gap are more than the row’s width, the second area goes onto the next line. Alone on its line, `flex-grow` makes it fill the full width. The `min()` function stops the minimum from ever being wider than the Ratio pair itself.',
       'With Auto Start, the first area has a `flex-basis` of `auto`, which means its width comes from its content. The second area has a `flex-grow` of 999, so it takes almost all of the space that’s left, and keeps the minimum width.',
     ],
-    code: `.mezzanine-ratio-pair {
+    code: `.mz-ratio-pair {
   display: flex;
   flex-wrap: wrap;
   gap: var(--_ratio-pair-gap, var(--ratio-pair-gap));
   min-inline-size: 0;
 }
 
-.mezzanine-ratio-pair[data-fraction] > * {
+.mz-ratio-pair[data-fraction] > * {
   flex-basis: 0;
   flex-grow: 1;
   min-inline-size: min(100%, var(--_ratio-pair-min-area-width, var(--ratio-pair-min-area-width)));
 }
 
-.mezzanine-ratio-pair[data-fraction='1/4'] > :last-child { flex-grow: 3; }
-.mezzanine-ratio-pair[data-fraction='1/3'] > :last-child { flex-grow: 2; }
-.mezzanine-ratio-pair[data-fraction='2/3'] > :first-child { flex-grow: 2; }
-.mezzanine-ratio-pair[data-fraction='3/4'] > :first-child { flex-grow: 3; }
+.mz-ratio-pair[data-fraction='1/4'] > :last-child { flex-grow: 3; }
+.mz-ratio-pair[data-fraction='1/3'] > :last-child { flex-grow: 2; }
+.mz-ratio-pair[data-fraction='2/3'] > :first-child { flex-grow: 2; }
+.mz-ratio-pair[data-fraction='3/4'] > :first-child { flex-grow: 3; }
 
-.mezzanine-ratio-pair[data-fraction='auto-start'] > :first-child,
-.mezzanine-ratio-pair[data-fraction='auto-end'] > :last-child {
+.mz-ratio-pair[data-fraction='auto-start'] > :first-child,
+.mz-ratio-pair[data-fraction='auto-end'] > :last-child {
   flex-basis: auto;
   min-inline-size: 0;
 }
 
-.mezzanine-ratio-pair[data-fraction='auto-start'] > :last-child,
-.mezzanine-ratio-pair[data-fraction='auto-end'] > :first-child {
+.mz-ratio-pair[data-fraction='auto-start'] > :last-child,
+.mz-ratio-pair[data-fraction='auto-end'] > :first-child {
   flex-grow: 999;
 }`,
   },

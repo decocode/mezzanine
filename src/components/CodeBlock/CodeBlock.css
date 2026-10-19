@@ -2,7 +2,7 @@
    the block never needs to take keyboard focus. Indentation and line breaks are kept.
    The block sets the Body small role; the code element inside takes the shared monospace
    family from Mezzanine's rule for every code element. */
-.mezzanine-code-block {
+.mz-code-block {
   box-sizing: border-box;
   max-inline-size: 100%;
   margin: 0;

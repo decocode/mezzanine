@@ -66,7 +66,7 @@
   --button-icon-size: var(--button-xl-icon-size);
 }
 
-.mezzanine-button-content {
+.mz-button-content {
   display: inline-flex;
   min-width: 0;
   max-width: 100%;
@@ -75,12 +75,12 @@
   gap: var(--button-content-gap);
 }
 
-.mezzanine-button-icon {
+.mz-button-icon {
   display: inline-flex;
   flex: 0 0 auto;
 }
 
-.mezzanine-button-icon svg {
+.mz-button-icon svg {
   width: var(--button-icon-size);
   height: var(--button-icon-size);
 }
@@ -91,12 +91,12 @@
 }
 
 /* An icon with its label below or above it, as in a Rail: the label stays visible. */
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement] .mezzanine-button-content {
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement] .mz-button-content {
   flex-direction: column;
   gap: var(--button-content-gap);
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement='above'] .mezzanine-button-content {
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement='above'] .mz-button-content {
   flex-direction: column-reverse;
 }
 
@@ -157,27 +157,27 @@
   cursor: progress;
 }
 
-.react-aria-Button[data-variant][data-pending] .mezzanine-button-content {
+.react-aria-Button[data-variant][data-pending] .mz-button-content {
   opacity: 0;
 }
 
-.mezzanine-button-progress {
+.mz-button-progress {
   position: absolute;
   display: grid;
   place-items: center;
   color: inherit;
 }
 
-.mezzanine-button-progress-indicator {
+.mz-button-progress-indicator {
   width: var(--button-progress-size);
   height: var(--button-progress-size);
   border: var(--button-progress-stroke-width) solid currentColor;
   border-inline-end-color: transparent;
   border-radius: var(--button-progress-border-radius);
-  animation: mezzanine-button-progress-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite; animation-name: var(--_motion-loading-animation, mezzanine-button-progress-spin);
+  animation: mz-button-progress-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite; animation-name: var(--_motion-loading-animation, mz-button-progress-spin);
 }
 
-@keyframes mezzanine-button-progress-spin {
+@keyframes mz-button-progress-spin {
   to {
     rotate: var(--motion-rotation-cycle);
   }

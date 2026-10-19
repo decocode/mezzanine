@@ -44,7 +44,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   const main = page.locator('main')
   // Each group is a Card with a Read docs Button to its overview, described by the group's name.
   for (const stage of stageOverviewPages) {
-    const readDocs = main.locator('.mezzanine-card').filter({ has: page.getByRole('heading', { name: stage.title, exact: true, level: 3 }) }).getByRole('link', { name: 'Read docs', exact: true })
+    const readDocs = main.locator('.mz-card').filter({ has: page.getByRole('heading', { name: stage.title, exact: true, level: 3 }) }).getByRole('link', { name: 'Read docs', exact: true })
     await expect(readDocs).toHaveAttribute('href', stage.path)
     await expect(readDocs).toHaveAccessibleDescription(stage.title)
   }
@@ -53,7 +53,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   await expect(page).toHaveTitle('Box basics | Lab')
 
   // A stage shows a Card for each of its pages, each with a Read docs Button to the page.
-  const card = (title: string) => page.locator('main .mezzanine-card').filter({ has: page.getByRole('heading', { name: title, exact: true, level: 3 }) })
+  const card = (title: string) => page.locator('main .mz-card').filter({ has: page.getByRole('heading', { name: title, exact: true, level: 3 }) })
   for (const stagePage of stagePagesByStage('boxBasics')) {
     const readDocs = card(stagePage.title).getByRole('link', { name: 'Read docs', exact: true })
     await expect(readDocs).toHaveAttribute('href', stagePage.href)
@@ -61,7 +61,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   }
   // Box basics is an index of Cards; the box model has its own page, first among them.
   await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toHaveCount(0)
-  await expect(page.locator('main .mezzanine-card').first().getByRole('heading', { level: 3 })).toHaveText('The box model')
+  await expect(page.locator('main .mz-card').first().getByRole('heading', { level: 3 })).toHaveText('The box model')
   await card('Types of box').getByRole('link', { name: 'Read docs', exact: true }).click()
   await expect(page).toHaveTitle('Types of box | Lab')
   await expect(page.getByText('When boxes decide whether to stack up or line up.', { exact: true })).toBeVisible()

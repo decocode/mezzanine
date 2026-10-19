@@ -37,25 +37,25 @@ export function Navbar({ brand, children, actions, 'aria-label': label, menuLabe
   }
   const render = (content: NavbarContent, isMenu: boolean) => typeof content === 'function' ? content({ closeMenu, isMenu }) : content
   const actionContent = render(actions, false)
-  const links = (isMenu: boolean) => <nav aria-label={label} className="mezzanine-navbar-links">{render(children, isMenu)}</nav>
-  const actionGroup = actionContent != null && <div className="mezzanine-navbar-actions">{actionContent}</div>
+  const links = (isMenu: boolean) => <nav aria-label={label} className="mz-navbar-links">{render(children, isMenu)}</nav>
+  const actionGroup = actionContent != null && <div className="mz-navbar-actions">{actionContent}</div>
 
   return (
-    <header className={['mezzanine-navbar', className].filter(Boolean).join(' ')}>
-      <div className="mezzanine-navbar-content">
-        <div className="mezzanine-navbar-brand">{brand}</div>
+    <header className={['mz-navbar', className].filter(Boolean).join(' ')}>
+      <div className="mz-navbar-content">
+        <div className="mz-navbar-brand">{brand}</div>
         {/* Narrow screens keep actions in the bar, beside the menu button. */}
-        {actionGroup && <div className="mezzanine-navbar-bar-actions">{actionGroup}</div>}
-        <Disclosure className="mezzanine-navbar-mobile" isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
-          <Heading className="mezzanine-navbar-heading" level={2}>
+        {actionGroup && <div className="mz-navbar-bar-actions">{actionGroup}</div>}
+        <Disclosure className="mz-navbar-mobile" isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
+          <Heading className="mz-navbar-heading" level={2}>
             {/* Its label shows in a tooltip, to leave room for actions. */}
-            <Button ref={triggerRef} className="mezzanine-navbar-trigger" size="sm" iconLeading={isExpanded ? <CloseIcon /> : <MenuIcon />} labelPlacement="tooltip" slot="trigger" variant="secondary">
+            <Button ref={triggerRef} className="mz-navbar-trigger" size="sm" iconLeading={isExpanded ? <CloseIcon /> : <MenuIcon />} labelPlacement="tooltip" slot="trigger" variant="secondary">
               {isExpanded ? closeLabel : menuLabel}
             </Button>
           </Heading>
-          <DisclosurePanel className="mezzanine-navbar-panel">{links(true)}</DisclosurePanel>
+          <DisclosurePanel className="mz-navbar-panel">{links(true)}</DisclosurePanel>
         </Disclosure>
-        <div className="mezzanine-navbar-desktop">{links(false)}{actionGroup}</div>
+        <div className="mz-navbar-desktop">{links(false)}{actionGroup}</div>
       </div>
     </header>
   )

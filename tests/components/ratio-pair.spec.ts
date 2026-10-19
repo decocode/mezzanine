@@ -5,7 +5,7 @@ import { expectNoPageOverflow } from '../display'
 // component inside a frame whose width can be changed.
 
 async function areas(page: Page) {
-  const split = page.locator('.mezzanine-ratio-pair')
+  const split = page.locator('.mz-ratio-pair')
   const [first, second] = [split.locator('> *').first(), split.locator('> *').last()]
   return { split, first: (await first.boundingBox())!, second: (await second.boundingBox())! }
 }

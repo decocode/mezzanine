@@ -122,7 +122,7 @@ for (const fontSize of textSizes) {
     expect(buttons.map(button => parseFloat(button.iconWidth))).toEqual([1, 1.125, 1.25, 1.5].map(size => size * fontSize))
     expect(buttons.map(button => parseFloat(button.height))).toEqual([2.75, 3, 3.25, 3.5].map(size => size * fontSize))
     const themes = page.getByRole('radiogroup', { name: 'Theme', exact: true }).filter({ visible: true })
-    if (!(await themes.count())) await page.locator('header.mezzanine-navbar').first().getByRole('button', { name: 'Menu', exact: true }).click()
+    if (!(await themes.count())) await page.locator('header.mz-navbar').first().getByRole('button', { name: 'Menu', exact: true }).click()
     await expect(themes.getByRole('radio').first()).toHaveAttribute('data-size', 'sm')
     await expect(themes.getByRole('radio').first().locator('svg')).toHaveCSS('width', `${fontSize}px`)
   })

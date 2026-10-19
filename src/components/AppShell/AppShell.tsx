@@ -82,14 +82,14 @@ export function AppShell({ children, bottomPanelSpan = 'main', className }: AppS
     <AppShellContext.Provider value={{ store, presentation }}>
       <div
         ref={setElement}
-        className={['mezzanine-app-shell', className].filter(Boolean).join(' ')}
+        className={['mz-app-shell', className].filter(Boolean).join(' ')}
         data-bottom-panel-span={bottomPanelSpan}
         data-start={trackState(start, 'start')}
         data-end={trackState(end, 'end')}
         data-bottom={trackState(bottom, 'bottom')}
       >
         {childList.slice(0, Math.max(contentIndex, 0))}
-        {content.length > 0 && <div className="mezzanine-app-shell-content">{content}</div>}
+        {content.length > 0 && <div className="mz-app-shell-content">{content}</div>}
         {childList.slice(Math.max(contentIndex, 0)).filter((child) => !isContent(child))}
       </div>
     </AppShellContext.Provider>

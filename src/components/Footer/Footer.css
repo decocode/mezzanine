@@ -1,5 +1,5 @@
 /* A Row wrap of the app's small print and links, separated from the content above by a border. */
-.mezzanine-footer {
+.mz-footer {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -20,5 +20,5 @@
 }
 
 @media (forced-colors: active) {
-  .mezzanine-footer { border-color: CanvasText; }
+  .mz-footer { border-color: CanvasText; }
 }

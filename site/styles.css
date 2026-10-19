@@ -983,7 +983,7 @@ a:focus-visible {
 .sidebar-example-layout { margin-block-start: var(--space-4); align-items: stretch; }
 .sidebar-example-workspace { flex: 1; min-width: min(100%, 10rem); padding: var(--space-3); overflow-wrap: anywhere; }
 .sidebar-example-column { display: flex; flex-direction: column; align-items: start; gap: var(--space-3); min-width: 0; max-width: 100%; }
-.sidebar-example-column .mezzanine-sidebar-panel { order: 0; }
+.sidebar-example-column .mz-sidebar-panel { order: 0; }
 .sidebar-example-image { display: block; width: 100%; height: auto; margin-block-end: var(--space-4); }
 .sidebar-example-caption { margin: 0; }
 .sidebar-example-links { display: grid; gap: var(--space-3); }
@@ -1029,7 +1029,7 @@ a:focus-visible {
 }
 /* Only offer a launcher when the example has no visible panel or icon rail. */
 .sidebar-example-launcher { flex-basis: 100%; }
-.sidebar-example-layout:has(> .mezzanine-sidebar-panel[data-expanded], > .mezzanine-sidebar-panel[data-collapse-mode='rail']) > .sidebar-example-launcher {
+.sidebar-example-layout:has(> .mz-sidebar-panel[data-expanded], > .mz-sidebar-panel[data-collapse-mode='rail']) > .sidebar-example-launcher {
   display: none;
 }
 .sidebar-example-control { display: grid; gap: var(--space-2); }
@@ -1119,7 +1119,7 @@ a:focus-visible {
 .text-comparison { display: grid; gap: var(--space-2); }
 .text-comparison > p { margin: 0; }
 .text-comparison > p + .mz-text-label-md { margin-top: var(--space-4); }
-.text-narrow-example .mezzanine-card { max-width: 12rem; }
+.text-narrow-example .mz-card { max-width: 12rem; }
 /* Language examples: as many per row as fit. */
 .text-language-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
 /* In vertical writing, inline-size is the height, so lines wrap after 12rem. */

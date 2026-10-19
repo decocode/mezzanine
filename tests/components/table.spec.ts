@@ -22,11 +22,11 @@ test('Table sorting works with pointer and keyboard and supplies one accessible 
   await expect(secondColumn).toHaveCSS('outline-style', 'solid')
   await page.keyboard.press('Enter')
   await expect(secondColumn).toHaveAttribute('aria-sort', 'descending')
-  const indicator = table.locator('.mezzanine-table-sort-indicator')
+  const indicator = table.locator('.mz-table-sort-indicator')
   await expect(indicator).toHaveCount(1)
   await expect(indicator).toHaveAttribute('aria-hidden', 'true')
   await expect(indicator).toHaveText('▼')
-  await expect(page.getByRole('grid', { name: 'Table with single row selection', exact: true }).locator('.mezzanine-table-sort-indicator')).toHaveCount(0)
+  await expect(page.getByRole('grid', { name: 'Table with single row selection', exact: true }).locator('.mz-table-sort-indicator')).toHaveCount(0)
 })
 
 // Checks, in each theme at normal and double text size, that the sortable table scrolls inside its
@@ -46,6 +46,6 @@ for (const theme of themes) {
       await expectNoAccessibilityViolations(page, '[aria-label="Sortable table"]')
     }
     await page.emulateMedia({ forcedColors: 'active' })
-    await expect(table.locator('.mezzanine-table-sort-indicator')).toBeVisible()
+    await expect(table.locator('.mz-table-sort-indicator')).toBeVisible()
   })
 }

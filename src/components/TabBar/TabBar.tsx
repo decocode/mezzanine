@@ -27,12 +27,12 @@ export interface TabBarProps {
 function TabBarLink({ item, close }: { item: TabBarItem; close?: () => void }) {
   const { id: _id, label, icon, className, onClick, ...props } = item
   return (
-    <li className="mezzanine-tab-bar-item">
+    <li className="mz-tab-bar-item">
       <Link {...props}
         onClick={(event) => { onClick?.(event); if (!event.defaultPrevented) close?.() }}
-        className={composeRenderProps(className, (value) => ['react-aria-Link', 'mezzanine-tab-bar-link', value].filter(Boolean).join(' '))}
+        className={composeRenderProps(className, (value) => ['react-aria-Link', 'mz-tab-bar-link', value].filter(Boolean).join(' '))}
       >
-        {icon != null && <span className="mezzanine-tab-bar-icon" aria-hidden="true">{icon}</span>}
+        {icon != null && <span className="mz-tab-bar-icon" aria-hidden="true">{icon}</span>}
         <span>{label}</span>
       </Link>
     </li>
@@ -49,29 +49,29 @@ export function TabBar({ items, 'aria-label': label, position = 'bottom', moreLa
   const currentOverflow = overflow.find((item) => item['aria-current'] === 'page')
 
   return (
-    <nav aria-label={label} className={['mezzanine-tab-bar', className].filter(Boolean).join(' ')} data-position={position} hidden={items.length === 0}>
-      <span ref={slotRef} className="mezzanine-tab-bar-measure" aria-hidden="true" />
-      <ul ref={listRef} className="mezzanine-tab-bar-items">
+    <nav aria-label={label} className={['mz-tab-bar', className].filter(Boolean).join(' ')} data-position={position} hidden={items.length === 0}>
+      <span ref={slotRef} className="mz-tab-bar-measure" aria-hidden="true" />
+      <ul ref={listRef} className="mz-tab-bar-items">
         {items.slice(0, visibleCount).map((item) => <TabBarLink key={item.id} item={item} />)}
         {(overflow.length > 0 || isOpen) && (
-          <li className="mezzanine-tab-bar-item">
+          <li className="mz-tab-bar-item">
             <DialogTrigger isOpen={isOpen} onOpenChange={(open) => { if (open) setOpenVisibleCount(visibleCount); setIsOpen(open) }}>
-              <Button className="mezzanine-tab-bar-more" variant="tertiary" size="sm" iconLeading={<MoreIcon />}
+              <Button className="mz-tab-bar-more" variant="tertiary" size="sm" iconLeading={<MoreIcon />}
                 aria-label={currentOverflow ? `${moreLabel}: ${currentOverflow.label}` : moreLabel}
                 data-current-route={currentOverflow ? 'true' : undefined}>
                 <span>{moreLabel}</span>
               </Button>
-              <ModalOverlay className="mezzanine-tab-bar-overlay" isDismissable>
-                <Modal className="mezzanine-tab-bar-sheet">
+              <ModalOverlay className="mz-tab-bar-overlay" isDismissable>
+                <Modal className="mz-tab-bar-sheet">
                   <Dialog>
                     {({ close }) => (
                       <>
-                        <div className="mezzanine-tab-bar-sheet-heading">
+                        <div className="mz-tab-bar-sheet-heading">
                           <Heading slot="title">{moreLabel}</Heading>
                           <Button slot="close" variant="secondary">{closeLabel}</Button>
                         </div>
                         <nav aria-label={label}>
-                          <ul className="mezzanine-tab-bar-sheet-items">
+                          <ul className="mz-tab-bar-sheet-items">
                             {overflow.map((item) => <TabBarLink key={item.id} item={item} close={close} />)}
                           </ul>
                         </nav>

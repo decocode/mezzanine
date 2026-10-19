@@ -40,10 +40,10 @@ export function ToggleButton({ variant, size, iconLeading, iconTrailing, labelPl
     'data-size': size ?? groupSize,
     'data-icon-only': (labelPlacement === 'tooltip' || (children == null && (iconLeading != null || iconTrailing != null))) || undefined,
     'data-label-placement': labelPlacement === 'below' || labelPlacement === 'above' ? labelPlacement : undefined,
-    children: composeRenderProps(children, content => createElement('span', { className: 'mezzanine-button-content' },
-      iconLeading != null && createElement('span', { className: 'mezzanine-button-icon', 'aria-hidden': true }, iconLeading),
+    children: composeRenderProps(children, content => createElement('span', { className: 'mz-button-content' },
+      iconLeading != null && createElement('span', { className: 'mz-button-icon', 'aria-hidden': true }, iconLeading),
       tooltipLabel === undefined && content,
-      iconTrailing != null && createElement('span', { className: 'mezzanine-button-icon', 'aria-hidden': true }, iconTrailing),
+      iconTrailing != null && createElement('span', { className: 'mz-button-icon', 'aria-hidden': true }, iconTrailing),
     )),
   }
   const toggle = createElement(ReactAriaToggleButton, appearanceProps)

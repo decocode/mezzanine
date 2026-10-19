@@ -23,8 +23,8 @@ export function SearchField({ children, className, ...searchFieldProps }: Search
         <>
           {resolvedChildren}
           {/* After the Input in source order, so the icon paints above the field's background. */}
-          <SearchIcon className="mezzanine-search-field-icon" />
-          <Button className="mezzanine-search-field-clear" iconLeading={<CloseIcon />} size="sm" variant="tertiary" />
+          <SearchIcon className="mz-search-field-icon" />
+          <Button className="mz-search-field-clear" iconLeading={<CloseIcon />} size="sm" variant="tertiary" />
         </>
       ))}
     </ReactAriaSearchField>

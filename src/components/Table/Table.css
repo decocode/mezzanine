@@ -45,7 +45,7 @@
   cursor: pointer;
 }
 
-.mezzanine-table-sort-indicator {
+.mz-table-sort-indicator {
   margin-inline-start: var(--space-1);
 }
 

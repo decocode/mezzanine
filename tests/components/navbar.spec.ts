@@ -9,7 +9,7 @@ test('Navbar menu works with the keyboard at 320px', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/navbar')
-  const example = page.locator('main .mezzanine-navbar')
+  const example = page.locator('main .mz-navbar')
   const trigger = example.getByRole('button', { name: /^(Menu|Close menu)$/ })
   // Actions stay in the bar on narrow screens, before the menu button.
   const action = example.getByRole('button', { name: 'Button', exact: true })
@@ -52,7 +52,7 @@ for (const theme of themes) {
       await page.goto('/navbar')
       await setTheme(page, theme)
       await setTextSize(page, fontSize)
-      const example = page.locator('main .mezzanine-navbar')
+      const example = page.locator('main .mz-navbar')
       const trigger = example.getByRole('button', { name: /^(Menu|Close menu)$/ })
       const action = example.getByRole('button', { name: 'Button', exact: true })
       await expect(action).toBeVisible()
@@ -62,7 +62,7 @@ for (const theme of themes) {
       expect((await trigger.boundingBox())!.height).toBeGreaterThanOrEqual(44)
       await page.keyboard.press('Enter')
       await expect(trigger).toHaveAttribute('aria-expanded', 'true')
-      await expect(example.locator('.mezzanine-navbar-panel')).toHaveCSS('animation-name', 'none')
+      await expect(example.locator('.mz-navbar-panel')).toHaveCSS('animation-name', 'none')
       await expectNoPageOverflow(page)
       const technicalDetails = page.getByRole('region', { name: 'Technical details', exact: true })
       for (const detailsTrigger of await technicalDetails.getByRole('button').all()) {
@@ -84,7 +84,7 @@ for (const theme of themes) {
 test('desktop navigation and showcase actions remain accessible', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
   await page.goto('/navbar')
-  const example = page.locator('main .mezzanine-navbar')
+  const example = page.locator('main .mz-navbar')
   await expect(example.getByRole('button', { name: /^(Menu|Close menu)$/ })).toBeHidden()
   await expect(example.getByRole('navigation', { name: 'Example navigation' })).toBeVisible()
   await expect(page.getByRole('radiogroup', { name: 'Theme', exact: true })).toBeVisible()

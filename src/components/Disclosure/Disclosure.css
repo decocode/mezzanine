@@ -11,11 +11,11 @@
   color: var(--color-text);
 }
 
-.react-aria-Heading:has(> .mezzanine-disclosure-trigger) {
+.react-aria-Heading:has(> .mz-disclosure-trigger) {
   margin: 0;
 }
 
-.mezzanine-disclosure-trigger {
+.mz-disclosure-trigger {
   box-sizing: border-box;
   display: flex;
   gap: var(--disclosure-trigger-gap);
@@ -31,24 +31,24 @@
   cursor: pointer;
 }
 
-.mezzanine-disclosure-trigger > span {
+.mz-disclosure-trigger > span {
   min-width: 0;
 }
 
-.mezzanine-disclosure-trigger[data-hovered] {
+.mz-disclosure-trigger[data-hovered] {
   background: var(--color-surface-hover);
 }
 
-.mezzanine-disclosure-trigger[data-pressed] {
+.mz-disclosure-trigger[data-pressed] {
   background: var(--color-surface-pressed);
 }
 
-.mezzanine-disclosure-trigger[data-focus-visible] {
+.mz-disclosure-trigger[data-focus-visible] {
   outline: var(--disclosure-focus-ring-width) solid var(--color-focus);
   outline-offset: var(--disclosure-focus-ring-offset);
 }
 
-.mezzanine-disclosure-chevron {
+.mz-disclosure-chevron {
   width: var(--disclosure-icon-size);
   height: var(--disclosure-icon-size);
   color: var(--color-chevron);
@@ -56,7 +56,7 @@
   transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
-.react-aria-Disclosure[data-expanded] .mezzanine-disclosure-chevron {
+.react-aria-Disclosure[data-expanded] .mz-disclosure-chevron {
   rotate: var(--motion-rotation-expanded);
 }
 
@@ -76,6 +76,6 @@
   opacity: var(--opacity-disabled);
 }
 
-.react-aria-Disclosure[data-disabled] .mezzanine-disclosure-trigger {
+.react-aria-Disclosure[data-disabled] .mz-disclosure-trigger {
   cursor: default;
 }

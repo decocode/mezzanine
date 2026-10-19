@@ -1,4 +1,4 @@
-.mezzanine-badge {
+.mz-badge {
   display: inline-block;
   padding: var(--badge-padding-block) var(--badge-padding-inline);
   border: var(--badge-border-width) solid var(--badge-border);
@@ -15,42 +15,42 @@
 }
 
 /* An atomic inline label prevents a surrounding link's underline from crossing the badge. */
-.mezzanine-badge-label {
+.mz-badge-label {
   display: inline-block;
   text-decoration: none;
 }
 
-.mezzanine-badge[data-variant='neutral'] {
+.mz-badge[data-variant='neutral'] {
   --badge-background: var(--badge-neutral-background);
   --badge-content: var(--badge-neutral-content);
   --badge-border: var(--badge-neutral-border);
 }
 
-.mezzanine-badge[data-variant='violet'] {
+.mz-badge[data-variant='violet'] {
   --badge-background: var(--badge-violet-background);
   --badge-content: var(--badge-violet-content);
   --badge-border: var(--badge-violet-border);
 }
 
-.mezzanine-badge[data-variant='info'] {
+.mz-badge[data-variant='info'] {
   --badge-background: var(--badge-info-background);
   --badge-content: var(--badge-info-content);
   --badge-border: var(--badge-info-border);
 }
 
-.mezzanine-badge[data-variant='success'] {
+.mz-badge[data-variant='success'] {
   --badge-background: var(--badge-success-background);
   --badge-content: var(--badge-success-content);
   --badge-border: var(--badge-success-border);
 }
 
-.mezzanine-badge[data-variant='warning'] {
+.mz-badge[data-variant='warning'] {
   --badge-background: var(--badge-warning-background);
   --badge-content: var(--badge-warning-content);
   --badge-border: var(--badge-warning-border);
 }
 
-.mezzanine-badge[data-variant='danger'] {
+.mz-badge[data-variant='danger'] {
   --badge-background: var(--badge-danger-background);
   --badge-content: var(--badge-danger-content);
   --badge-border: var(--badge-danger-border);

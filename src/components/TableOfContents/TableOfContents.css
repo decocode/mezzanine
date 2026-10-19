@@ -1,12 +1,12 @@
-.mezzanine-table-of-contents {
+.mz-table-of-contents {
   margin-block-end: var(--space-16);
 }
 
-.mezzanine-table-of-contents > :is(h2, h3) {
+.mz-table-of-contents > :is(h2, h3) {
   margin: var(--space-0) 0 var(--space-4);
 }
 
-.mezzanine-table-of-contents ul {
+.mz-table-of-contents ul {
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
@@ -15,16 +15,16 @@
   list-style: none;
 }
 
-.mezzanine-table-of-contents ul ul {
+.mz-table-of-contents ul ul {
   margin-block-start: var(--space-1);
   padding-inline-start: var(--space-5);
 }
 
-.mezzanine-table-of-contents li {
+.mz-table-of-contents li {
   min-width: 0;
 }
 
-.mezzanine-table-of-contents .react-aria-Link {
+.mz-table-of-contents .react-aria-Link {
   min-height: var(--target-size);
   max-width: 100%;
   color: var(--color-link);

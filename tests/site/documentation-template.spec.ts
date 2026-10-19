@@ -29,7 +29,7 @@ for (const definition of componentPages) {
     }
     const technical = main.getByRole('region', { name: 'Technical details', exact: true })
     await expect(technical).toBeVisible()
-    const triggers = technical.locator('.mezzanine-disclosure-trigger')
+    const triggers = technical.locator('.mz-disclosure-trigger')
     expect(await triggers.count()).toBeGreaterThan(0)
     for (const trigger of await triggers.all()) {
       await expect(trigger).toHaveAttribute('aria-expanded', 'false')

@@ -113,9 +113,9 @@ export function SidebarPanel({
   const state = useSidebarState()
   const titleId = useId()
   const focusedElement = useSidebarFocus(state.isExpanded, state.triggerRef)
-  const classes = ['mezzanine-sidebar-panel', className].filter(Boolean).join(' ')
+  const classes = ['mz-sidebar-panel', className].filter(Boolean).join(' ')
   const contents = <>
-    {(!hideInlineHeader || state.isModal) && <div className="mezzanine-sidebar-header">
+    {(!hideInlineHeader || state.isModal) && <div className="mz-sidebar-header">
       <Heading id={titleId} level={headingLevel} slot={state.isModal ? 'title' : undefined}>{title}</Heading>
       {(state.isModal || state.isCollapsible) && <Button
         iconLeading={side === 'left' ? <PanelLeftCloseIcon /> : <PanelRightCloseIcon />}
@@ -129,10 +129,10 @@ export function SidebarPanel({
           }
         }}
       >{closeLabel}</Button>}
-      {header != null && <div className="mezzanine-sidebar-header-content">{header}</div>}
+      {header != null && <div className="mz-sidebar-header-content">{header}</div>}
     </div>}
-    <div className="mezzanine-sidebar-content">{children}</div>
-    {footer != null && <div className="mezzanine-sidebar-footer">{footer}</div>}
+    <div className="mz-sidebar-content">{children}</div>
+    {footer != null && <div className="mz-sidebar-footer">{footer}</div>}
   </>
 
   if (state.isModal) {
@@ -141,11 +141,11 @@ export function SidebarPanel({
         isOpen={state.isOpen}
         onOpenChange={state.setOpen}
         isDismissable
-        className="mezzanine-sidebar-overlay"
+        className="mz-sidebar-overlay"
         data-side={side}
       >
         <Modal className={classes} data-side={side} style={style}>
-          <Dialog id={state.panelId} aria-labelledby={titleId} className="mezzanine-sidebar-dialog">
+          <Dialog id={state.panelId} aria-labelledby={titleId} className="mz-sidebar-dialog">
             {contents}
           </Dialog>
         </Modal>
@@ -164,10 +164,10 @@ export function SidebarPanel({
       onFocusCapture={(event) => { focusedElement.current = event.target as HTMLElement }}
       hidden={!state.isExpanded && collapseMode === 'hide'}
     >
-      <div id={state.panelId} className="mezzanine-sidebar-expanded" hidden={!state.isExpanded}>
+      <div id={state.panelId} className="mz-sidebar-expanded" hidden={!state.isExpanded}>
         {contents}
       </div>
-      {collapseMode === 'rail' && <div className="mezzanine-sidebar-rail" hidden={state.isExpanded}>{rail}</div>}
+      {collapseMode === 'rail' && <div className="mz-sidebar-rail" hidden={state.isExpanded}>{rail}</div>}
     </aside>
   )
 }

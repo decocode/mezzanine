@@ -10,10 +10,10 @@ export function Badge({ children, className, variant = 'neutral', ...badgeProps 
   return (
     <span
       {...badgeProps}
-      className={['mezzanine-badge', className].filter(Boolean).join(' ')}
+      className={['mz-badge', className].filter(Boolean).join(' ')}
       data-variant={variant}
     >
-      <span className="mezzanine-badge-label">{children}</span>
+      <span className="mz-badge-label">{children}</span>
     </span>
   )
 }

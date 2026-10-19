@@ -86,7 +86,7 @@ test('AppShell places its Footer after the main content, outside main', async ({
   await expect(main.locator('footer')).toHaveCount(0)
   const [mainBox, footerBox] = [(await main.boundingBox())!, (await footer.boundingBox())!]
   expect(footerBox.y).toBeGreaterThanOrEqual(mainBox.y + mainBox.height - 1)
-  expect(await footer.evaluate(element => element.parentElement === element.closest('.mezzanine-app-shell')?.querySelector('main')?.parentElement)).toBe(true)
+  expect(await footer.evaluate(element => element.parentElement === element.closest('.mz-app-shell')?.querySelector('main')?.parentElement)).toBe(true)
 })
 
 // Checks the Footer page's example is a footer landmark whose links are named as their own group.

@@ -16,7 +16,7 @@ test('More opens a bottom sheet, traps focus and restores it on dismissal', asyn
   await expect(dialog).toBeVisible()
   await expect(dialog.getByRole('link', { name: 'Account', exact: true })).toBeVisible()
   await expect(dialog.getByRole('link', { name: 'Disabled', exact: true })).toHaveAttribute('aria-disabled', 'true')
-  const modal = page.locator('.mezzanine-tab-bar-sheet')
+  const modal = page.locator('.mz-tab-bar-sheet')
   await expect.poll(async () => {
     const box = (await modal.boundingBox())!
     return Math.round(box.y + box.height)
@@ -71,7 +71,7 @@ for (const theme of themes) {
         await expect(nav.getByRole('link')).toHaveCount(0)
       }
       await expectNoPageOverflow(page)
-      expect(await page.locator('.mezzanine-tab-bar-items').evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true)
+      expect(await page.locator('.mz-tab-bar-items').evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true)
       expect((await more.boundingBox())!.height).toBeGreaterThanOrEqual(48)
       await expectNoAccessibilityViolations(page, 'main')
       await more.click()
@@ -79,7 +79,7 @@ for (const theme of themes) {
       await expect(dialog).toBeVisible()
       await expectNoPageOverflow(page)
       await expectNoAccessibilityViolations(page, '[role="dialog"]')
-      await expect(page.locator('.mezzanine-tab-bar-sheet')).toHaveCSS('animation-name', 'none')
+      await expect(page.locator('.mz-tab-bar-sheet')).toHaveCSS('animation-name', 'none')
     })
   }
 }

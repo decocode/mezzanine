@@ -35,27 +35,27 @@
 }
 
 .react-aria-ModalOverlay[data-entering] {
-  animation: mezzanine-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-fade);
+  animation: mz-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-modal-fade);
 }
 
 .react-aria-ModalOverlay[data-exiting] {
-  animation: mezzanine-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-fade-exit);
+  animation: mz-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-modal-fade-exit);
 }
 
 .react-aria-Modal[data-entering] {
-  animation: mezzanine-modal-zoom var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-zoom);
+  animation: mz-modal-zoom var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-modal-zoom);
 }
 
 .react-aria-Modal[data-exiting] {
-  animation: mezzanine-modal-zoom-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-zoom-exit);
+  animation: mz-modal-zoom-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-modal-zoom-exit);
 }
 
-@keyframes mezzanine-modal-zoom {
+@keyframes mz-modal-zoom {
   from { transform: scale(var(--motion-scale-enter)); }
   to { transform: scale(1); }
 }
 
-@keyframes mezzanine-modal-zoom-exit {
+@keyframes mz-modal-zoom-exit {
   from { transform: scale(1); }
   to { transform: scale(var(--motion-scale-enter)); }
 }

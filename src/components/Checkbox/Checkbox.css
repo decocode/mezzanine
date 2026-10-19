@@ -14,7 +14,7 @@
   cursor: pointer;
 }
 
-.mezzanine-checkbox-indicator {
+.mz-checkbox-indicator {
   display: grid;
   width: var(--checkbox-size);
   height: var(--checkbox-size);
@@ -26,33 +26,33 @@
   color: transparent;
 }
 
-.mezzanine-checkbox-indicator svg {
+.mz-checkbox-indicator svg {
   width: var(--checkbox-icon-size);
   height: var(--checkbox-icon-size);
 }
 
-.react-aria-Checkbox[data-hovered] .mezzanine-checkbox-indicator {
+.react-aria-Checkbox[data-hovered] .mz-checkbox-indicator {
   background: var(--checkbox-background-hovered);
 }
 
-.react-aria-Checkbox[data-selected] .mezzanine-checkbox-indicator,
-.react-aria-Checkbox[data-indeterminate] .mezzanine-checkbox-indicator {
+.react-aria-Checkbox[data-selected] .mz-checkbox-indicator,
+.react-aria-Checkbox[data-indeterminate] .mz-checkbox-indicator {
   border-color: var(--checkbox-background-selected);
   background: var(--checkbox-background-selected);
   color: var(--checkbox-content-selected);
 }
 
-.react-aria-Checkbox[data-selected][data-hovered] .mezzanine-checkbox-indicator,
-.react-aria-Checkbox[data-indeterminate][data-hovered] .mezzanine-checkbox-indicator {
+.react-aria-Checkbox[data-selected][data-hovered] .mz-checkbox-indicator,
+.react-aria-Checkbox[data-indeterminate][data-hovered] .mz-checkbox-indicator {
   border-color: var(--checkbox-background-selected-hovered);
   background: var(--checkbox-background-selected-hovered);
 }
 
-.react-aria-Checkbox[data-invalid] .mezzanine-checkbox-indicator {
+.react-aria-Checkbox[data-invalid] .mz-checkbox-indicator {
   border-color: var(--checkbox-border-invalid);
 }
 
-.react-aria-Checkbox[data-focus-visible] .mezzanine-checkbox-indicator {
+.react-aria-Checkbox[data-focus-visible] .mz-checkbox-indicator {
   outline: var(--checkbox-focus-ring-width) solid var(--color-focus);
   outline-offset: var(--checkbox-focus-ring-offset);
 }

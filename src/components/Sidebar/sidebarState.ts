@@ -41,7 +41,7 @@ export function useSidebarFocus(isExpanded: boolean, triggerRef: RefObject<HTMLB
       const trigger = triggerRef.current
       // A rail can replace the external launcher. Restore focus to a visible
       // control in the panel when that launcher is intentionally hidden.
-      const panel = previous.closest('.mezzanine-sidebar-panel')
+      const panel = previous.closest('.mz-sidebar-panel')
       const fallback = [...(panel?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)') ?? [])]
         .find(button => button.getClientRects().length > 0)
       const target = trigger?.getClientRects().length ? trigger : fallback

@@ -6,5 +6,5 @@ export type FooterProps = HTMLAttributes<HTMLElement>
 // Inside an AppShell it sits at the end of the content and scrolls with it, outside <main>, so it
 // stays the page's footer landmark. The app supplies everything inside.
 export function Footer({ className, ...props }: FooterProps) {
-  return <footer {...props} className={['mezzanine-footer', className].filter(Boolean).join(' ')} />
+  return <footer {...props} className={['mz-footer', className].filter(Boolean).join(' ')} />
 }

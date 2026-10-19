@@ -23,7 +23,7 @@ export default function DialogPage() {
                   <Dialog>
                     <Heading slot="title">Dialog title</Heading>
                     <p>{dialogExampleCopy.modalBody}</p>
-                    <footer className="mezzanine-dialog-actions">
+                    <footer className="mz-dialog-actions">
                       <Button slot="close">Close</Button>
                     </footer>
                   </Dialog>
@@ -43,7 +43,7 @@ export default function DialogPage() {
                       <>
                         <Heading slot="title">{dialogExampleCopy.confirmationTitle}</Heading>
                         <p id="dialog-confirmation-description">{dialogExampleCopy.confirmationBody}</p>
-                        <footer className="mezzanine-dialog-actions">
+                        <footer className="mz-dialog-actions">
                           <Button autoFocus slot="close" variant="secondary">Cancel</Button>
                           <Button onPress={() => {
                             setConfirmationCount((count) => count + 1)

@@ -1,5 +1,5 @@
 /* A Panel shares the space beside or below the main content. Its AppShell sizes the space. */
-.mezzanine-panel {
+.mz-panel {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -20,23 +20,23 @@
     visibility calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
-.mezzanine-panel[data-edge='start'] { border-inline-end: var(--border-width-baseline) solid var(--color-border); }
-.mezzanine-panel[data-edge='end'] { border-inline-start: var(--border-width-baseline) solid var(--color-border); }
-.mezzanine-panel[data-edge='bottom'] { border-block-start: var(--border-width-baseline) solid var(--color-border); }
+.mz-panel[data-edge='start'] { border-inline-end: var(--border-width-baseline) solid var(--color-border); }
+.mz-panel[data-edge='end'] { border-inline-start: var(--border-width-baseline) solid var(--color-border); }
+.mz-panel[data-edge='bottom'] { border-block-start: var(--border-width-baseline) solid var(--color-border); }
 
 /* Closed: the content fades while its space closes, and leaves keyboard and screen reader reach. */
-.mezzanine-panel[data-state='closed'] {
+.mz-panel[data-state='closed'] {
   visibility: hidden;
   opacity: 0;
   border-width: 0;
 }
 
 /* Side content keeps its open width while the space animates, so it's revealed rather than squeezed. */
-:is(.mezzanine-panel[data-edge='start'], .mezzanine-panel[data-edge='end']):not([data-state='minimized']) > * {
+:is(.mz-panel[data-edge='start'], .mz-panel[data-edge='end']):not([data-state='minimized']) > * {
   min-inline-size: var(--panel-width);
 }
 
-.mezzanine-panel-header {
+.mz-panel-header {
   display: flex;
   flex: none;
   align-items: center;
@@ -46,7 +46,7 @@
   border-block-end: var(--border-width-baseline) solid var(--color-border);
 }
 
-.mezzanine-panel-header .react-aria-Heading {
+.mz-panel-header .react-aria-Heading {
   flex: 1 1 auto;
   min-inline-size: 0;
   margin: 0;
@@ -58,14 +58,14 @@
   text-transform: var(--text-transform-title);
 }
 
-.mezzanine-panel-content {
+.mz-panel-content {
   flex: 1 1 auto;
   min-block-size: 0;
   overflow: auto;
   padding: var(--space-4);
 }
 
-.mezzanine-panel-minimized {
+.mz-panel-minimized {
   display: flex;
   min-block-size: 0;
   overflow: auto;
@@ -73,24 +73,24 @@
 
 /* A side Panel without room beside the content opens as a drawer: React Aria owns modality, focus
    containment, scroll locking and dismissal. */
-.mezzanine-panel-overlay {
+.mz-panel-overlay {
   position: fixed;
   inset: 0;
   z-index: var(--z-index-overlay);
   background: var(--modal-backdrop);
 }
 
-.mezzanine-panel-overlay > .mezzanine-panel {
+.mz-panel-overlay > .mz-panel {
   position: absolute;
   inset-block: 0;
   inline-size: min(var(--panel-width), 100%);
   box-shadow: var(--elevation-raised-3);
 }
 
-.mezzanine-panel-overlay > .mezzanine-panel[data-edge='start'] { inset-inline-start: 0; }
-.mezzanine-panel-overlay > .mezzanine-panel[data-edge='end'] { inset-inline-end: 0; }
+.mz-panel-overlay > .mz-panel[data-edge='start'] { inset-inline-start: 0; }
+.mz-panel-overlay > .mz-panel[data-edge='end'] { inset-inline-end: 0; }
 
-.mezzanine-panel-dialog {
+.mz-panel-dialog {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
@@ -98,42 +98,42 @@
   outline: none;
 }
 
-.mezzanine-panel-dialog:focus-visible {
+.mz-panel-dialog:focus-visible {
   outline: var(--dialog-focus-ring-width) solid var(--color-focus);
   outline-offset: calc(-1 * var(--dialog-focus-ring-width));
 }
 
-.mezzanine-panel-overlay[data-entering] { animation: mezzanine-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-fade); }
-.mezzanine-panel-overlay[data-exiting] { animation: mezzanine-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-fade-exit); }
+.mz-panel-overlay[data-entering] { animation: mz-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-modal-fade); }
+.mz-panel-overlay[data-exiting] { animation: mz-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-modal-fade-exit); }
 /* Drawers slide in from their own edge: the start edge is on the left in left-to-right text and on the
    right in right-to-left text, so each slide is chosen by the edge it moves on screen. */
-.mezzanine-panel-overlay > .mezzanine-panel:is([data-edge='start']:dir(ltr), [data-edge='end']:dir(rtl))[data-entering] { animation: mezzanine-panel-enter-left var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-panel-enter-left); }
-.mezzanine-panel-overlay > .mezzanine-panel:is([data-edge='start']:dir(ltr), [data-edge='end']:dir(rtl))[data-exiting] { animation: mezzanine-panel-exit-left var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-panel-exit-left); }
-.mezzanine-panel-overlay > .mezzanine-panel:is([data-edge='end']:dir(ltr), [data-edge='start']:dir(rtl))[data-entering] { animation: mezzanine-panel-enter-right var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-panel-enter-right); }
-.mezzanine-panel-overlay > .mezzanine-panel:is([data-edge='end']:dir(ltr), [data-edge='start']:dir(rtl))[data-exiting] { animation: mezzanine-panel-exit-right var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-panel-exit-right); }
+.mz-panel-overlay > .mz-panel:is([data-edge='start']:dir(ltr), [data-edge='end']:dir(rtl))[data-entering] { animation: mz-panel-enter-left var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-panel-enter-left); }
+.mz-panel-overlay > .mz-panel:is([data-edge='start']:dir(ltr), [data-edge='end']:dir(rtl))[data-exiting] { animation: mz-panel-exit-left var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-panel-exit-left); }
+.mz-panel-overlay > .mz-panel:is([data-edge='end']:dir(ltr), [data-edge='start']:dir(rtl))[data-entering] { animation: mz-panel-enter-right var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-panel-enter-right); }
+.mz-panel-overlay > .mz-panel:is([data-edge='end']:dir(ltr), [data-edge='start']:dir(rtl))[data-exiting] { animation: mz-panel-exit-right var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-panel-exit-right); }
 
-@keyframes mezzanine-panel-enter-left {
+@keyframes mz-panel-enter-left {
   from { transform: translateX(calc(-1 * var(--motion-distance-offscreen))); }
   to { transform: translateX(0); }
 }
 
-@keyframes mezzanine-panel-exit-left {
+@keyframes mz-panel-exit-left {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-1 * var(--motion-distance-offscreen))); }
 }
 
-@keyframes mezzanine-panel-enter-right {
+@keyframes mz-panel-enter-right {
   from { transform: translateX(var(--motion-distance-offscreen)); }
   to { transform: translateX(0); }
 }
 
-@keyframes mezzanine-panel-exit-right {
+@keyframes mz-panel-exit-right {
   from { transform: translateX(0); }
   to { transform: translateX(var(--motion-distance-offscreen)); }
 }
 
 @media (forced-colors: active) {
-  .mezzanine-panel { background: Canvas; color: CanvasText; border-color: CanvasText; }
-  .mezzanine-panel-header { border-color: CanvasText; }
-  .mezzanine-panel-dialog:focus-visible { outline-color: Highlight; }
+  .mz-panel { background: Canvas; color: CanvasText; border-color: CanvasText; }
+  .mz-panel-header { border-color: CanvasText; }
+  .mz-panel-dialog:focus-visible { outline-color: Highlight; }
 }

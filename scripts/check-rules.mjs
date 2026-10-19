@@ -14,7 +14,7 @@ const root = fileURLToPath(new URL('../', import.meta.url))
 const snapshotFile = 'scripts/public-api.snapshot.json'
 const tokenBaselineFile = 'scripts/undocumented-tokens.baseline.json'
 const problems = []
-const allowedPrefixes = ['react-aria-', 'mezzanine-', 'mz-text-']
+const allowedPrefixes = ['react-aria-', 'mz-']
 const read = file => readFileSync(path.join(root, file), 'utf8')
 // Files that define token values: the entry point, src/tokens/, each component's
 // *.tokens.css and the themes. Literal design values belong only here.
@@ -160,7 +160,7 @@ function checkClasses(file, text, value, position) {
     // navbar-link is an explicitly approved public class name.
     if (match[0] !== 'navbar-link' && !allowedPrefixes.some(prefix => match[0].startsWith(prefix))) {
       report(file, text, position + match.index, 'class-prefix',
-        `Class "${match[0]}" must start with react-aria-, mezzanine-, or mz-text-.`)
+        `Class "${match[0]}" must start with react-aria- or mz-.`)
     }
   }
 }
@@ -290,7 +290,7 @@ function checkCss(file) {
 
 // Button dimensions belong to the shared size scale, not consuming selectors.
 // Collect consumer class names too, so statically named consumer classes are checked as well.
-const buttonClasses = new Set(['react-aria-Button', 'react-aria-ToggleButton', 'mezzanine-button-icon', 'mezzanine-button-content'])
+const buttonClasses = new Set(['react-aria-Button', 'react-aria-ToggleButton', 'mz-button-icon', 'mz-button-content'])
 const sizingProperty = /^(?:(?:min-|max-)?(?:width|height|inline-size|block-size)|padding(?:-.+)?|font(?:-.+)?|line-height|letter-spacing|text-transform|zoom|scale|transform)$/
 
 function collectButtonClasses(source) {

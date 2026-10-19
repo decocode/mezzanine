@@ -1,4 +1,4 @@
-.mezzanine-tab-bar {
+.mz-tab-bar {
   box-sizing: border-box;
   min-width: 0;
   max-width: 100%;
@@ -14,14 +14,14 @@
   text-transform: var(--text-transform-body);
 }
 
-.mezzanine-tab-bar[data-position='bottom'] {
+.mz-tab-bar[data-position='bottom'] {
   position: sticky;
   inset-block-end: 0;
   z-index: var(--z-index-sticky);
   padding-block-end: var(--tab-bar-safe-area-bottom);
 }
 
-.mezzanine-tab-bar-items {
+.mz-tab-bar-items {
   display: flex;
   gap: var(--tab-bar-gap);
 
@@ -30,13 +30,13 @@
   list-style: none;
 }
 
-.mezzanine-tab-bar-item {
+.mz-tab-bar-item {
   display: flex;
   flex: 1 1 0;
   min-width: 0;
 }
 
-:is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link {
+:is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -59,67 +59,67 @@
   overflow-wrap: anywhere;
 }
 
-:is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[aria-current='page'] {
+:is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link[aria-current='page'] {
   border-block-end-color: currentColor;
   background: var(--tab-bar-item-background-current);
   font-weight: var(--font-weight-emphasis);
 }
 
-:is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[data-hovered]:not([data-disabled]) {
+:is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link[data-hovered]:not([data-disabled]) {
   background: var(--color-surface-hover);
 }
 
-:is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[data-pressed]:not([data-disabled]) {
+:is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link[data-pressed]:not([data-disabled]) {
   background: var(--color-surface-pressed);
   color: var(--color-link-pressed);
 }
 
 
 
-:is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[data-focus-visible] {
+:is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link[data-focus-visible] {
   outline: var(--tab-bar-focus-ring-width) solid var(--color-focus);
   outline-offset: var(--tab-bar-focus-ring-offset);
 }
 
-:is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[data-disabled] {
+:is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link[data-disabled] {
   color: var(--color-text-muted);
   opacity: var(--opacity-disabled);
   cursor: default;
 }
 
-.mezzanine-tab-bar-icon {
+.mz-tab-bar-icon {
   display: flex;
   flex: none;
 }
 
-.mezzanine-tab-bar .mezzanine-tab-bar-icon svg {
+.mz-tab-bar .mz-tab-bar-icon svg {
   width: var(--tab-bar-icon-size);
   height: var(--tab-bar-icon-size);
 }
 
 @media (forced-colors: active) {
-  .mezzanine-tab-bar {
+  .mz-tab-bar {
     background: Canvas;
     border-color: CanvasText;
   }
 
-  :is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[aria-current='page'] {
+  :is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link[aria-current='page'] {
     border-block-end-color: Highlight;
   }
 
-  :is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[data-focus-visible] {
+  :is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link[data-focus-visible] {
     outline-color: Highlight;
   }
 
-  :is(.mezzanine-tab-bar, .mezzanine-tab-bar-sheet) .mezzanine-tab-bar-link[data-disabled] {
+  :is(.mz-tab-bar, .mz-tab-bar-sheet) .mz-tab-bar-link[data-disabled] {
     color: GrayText;
     opacity: 1;
   }
 }
 
-.mezzanine-tab-bar[hidden] { display: none; }
+.mz-tab-bar[hidden] { display: none; }
 
-.mezzanine-tab-bar-measure {
+.mz-tab-bar-measure {
   position: absolute;
   width: var(--tab-bar-item-min-width);
   height: 0;
@@ -127,27 +127,27 @@
   pointer-events: none;
 }
 
-.mezzanine-tab-bar-more .mezzanine-button-content { flex-direction: column; }
+.mz-tab-bar-more .mz-button-content { flex-direction: column; }
 
-.mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-current-route] {
+.mz-tab-bar .mz-tab-bar-more.react-aria-Button[data-variant][data-current-route] {
   border-block-end-color: currentColor;
   background: var(--tab-bar-item-background-current);
 }
 
-.mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-hovered] {
+.mz-tab-bar .mz-tab-bar-more.react-aria-Button[data-variant][data-hovered] {
   background: var(--color-surface-hover);
 }
 
-.mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-pressed] {
+.mz-tab-bar .mz-tab-bar-more.react-aria-Button[data-variant][data-pressed] {
   background: var(--color-surface-pressed);
 }
 
-.mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-focus-visible] {
+.mz-tab-bar .mz-tab-bar-more.react-aria-Button[data-variant][data-focus-visible] {
   outline: var(--tab-bar-focus-ring-width) solid var(--color-focus);
   outline-offset: var(--tab-bar-focus-ring-offset);
 }
 
-.mezzanine-tab-bar-overlay {
+.mz-tab-bar-overlay {
   position: fixed;
   inset: 0;
   height: var(--visual-viewport-height);
@@ -158,7 +158,7 @@
   background: var(--modal-backdrop);
 }
 
-.mezzanine-tab-bar-sheet {
+.mz-tab-bar-sheet {
   box-sizing: border-box;
   width: 100%;
   max-height: min(var(--tab-bar-sheet-max-height), var(--visual-viewport-height));
@@ -170,7 +170,7 @@
   box-shadow: var(--elevation-raised-3);
 }
 
-.mezzanine-tab-bar-sheet-heading {
+.mz-tab-bar-sheet-heading {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -179,7 +179,7 @@
   margin-block-end: var(--space-4);
 }
 
-.mezzanine-tab-bar-sheet-items {
+.mz-tab-bar-sheet-items {
   display: grid;
   gap: var(--tab-bar-gap);
   padding: 0;
@@ -187,40 +187,40 @@
   list-style: none;
 }
 
-.mezzanine-tab-bar-sheet .mezzanine-tab-bar-link {
+.mz-tab-bar-sheet .mz-tab-bar-link {
   flex-direction: row;
   justify-content: start;
   text-align: start;
 }
 
-.mezzanine-tab-bar-overlay[data-entering] {
-  animation: mezzanine-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-fade);
+.mz-tab-bar-overlay[data-entering] {
+  animation: mz-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-modal-fade);
 }
 
-.mezzanine-tab-bar-overlay[data-exiting] {
-  animation: mezzanine-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-fade-exit);
+.mz-tab-bar-overlay[data-exiting] {
+  animation: mz-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-modal-fade-exit);
 }
 
-.mezzanine-tab-bar-sheet[data-entering] {
-  animation: mezzanine-tab-bar-sheet-enter var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-tab-bar-sheet-enter);
+.mz-tab-bar-sheet[data-entering] {
+  animation: mz-tab-bar-sheet-enter var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-tab-bar-sheet-enter);
 }
 
-.mezzanine-tab-bar-sheet[data-exiting] {
-  animation: mezzanine-tab-bar-sheet-enter-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-tab-bar-sheet-enter-exit);
+.mz-tab-bar-sheet[data-exiting] {
+  animation: mz-tab-bar-sheet-enter-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-tab-bar-sheet-enter-exit);
 }
 
-@keyframes mezzanine-tab-bar-sheet-enter {
+@keyframes mz-tab-bar-sheet-enter {
   from { transform: translateY(var(--motion-distance-offscreen)); }
   to { transform: translateY(0); }
 }
 
 @media (forced-colors: active) {
-  .mezzanine-tab-bar-sheet { background: Canvas; border-color: CanvasText; }
-  .mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-current-route] { border-block-end-color: Highlight; }
-  .mezzanine-tab-bar .mezzanine-tab-bar-more.react-aria-Button[data-variant][data-focus-visible] { outline-color: Highlight; }
+  .mz-tab-bar-sheet { background: Canvas; border-color: CanvasText; }
+  .mz-tab-bar .mz-tab-bar-more.react-aria-Button[data-variant][data-current-route] { border-block-end-color: Highlight; }
+  .mz-tab-bar .mz-tab-bar-more.react-aria-Button[data-variant][data-focus-visible] { outline-color: Highlight; }
 }
 
-@keyframes mezzanine-tab-bar-sheet-enter-exit {
+@keyframes mz-tab-bar-sheet-enter-exit {
   from { transform: translateY(0); }
   to { transform: translateY(var(--motion-distance-offscreen)); }
 }

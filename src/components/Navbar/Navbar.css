@@ -1,5 +1,5 @@
-.mezzanine-navbar {
-  container: mezzanine-navbar / inline-size;
+.mz-navbar {
+  container: mz-navbar / inline-size;
   position: sticky;
   z-index: var(--z-index-sticky);
   inset-block-start: 0;
@@ -14,7 +14,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.mezzanine-navbar-content {
+.mz-navbar-content {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -26,23 +26,23 @@
   padding: var(--space-3) min(var(--space-4), 4cqi);
 }
 
-.mezzanine-navbar-brand {
+.mz-navbar-brand {
   display: flex;
   align-items: center;
   margin-inline-end: auto;
 }
 
-.mezzanine-navbar-content > * {
+.mz-navbar-content > * {
   min-width: 0;
   max-width: 100%;
   overflow-wrap: anywhere;
 }
 
-.mezzanine-navbar-mobile {
+.mz-navbar-mobile {
   display: contents;
 }
 
-.mezzanine-navbar-heading {
+.mz-navbar-heading {
   margin: 0;
   min-width: 0;
   max-width: 100%;
@@ -50,7 +50,7 @@
 
 
 
-.mezzanine-navbar-panel {
+.mz-navbar-panel {
   box-sizing: border-box;
   flex-basis: 100%;
   width: 100%;
@@ -60,15 +60,15 @@
   background: var(--color-page);
 }
 
-.mezzanine-navbar-panel[hidden] {
+.mz-navbar-panel[hidden] {
   display: none;
 }
 
-.mezzanine-navbar-panel:not([hidden]) {
+.mz-navbar-panel:not([hidden]) {
   animation: navbar-navigation-reveal var(--motion-duration-interface) var(--motion-easing-enter) both; animation-name: var(--_motion-animation, navbar-navigation-reveal);
 }
 
-.mezzanine-navbar-desktop {
+.mz-navbar-desktop {
   display: none;
 }
 
@@ -85,18 +85,18 @@
 }
 
 /* Container-relative layout also follows changes to the root text size. */
-@container mezzanine-navbar (min-width: 48rem) {
-  .mezzanine-navbar-content {
+@container mz-navbar (min-width: 48rem) {
+  .mz-navbar-content {
     gap: var(--space-4);
     padding-inline: var(--navbar-wide-padding-inline);
   }
 
-  .mezzanine-navbar-mobile,
-  .mezzanine-navbar-bar-actions {
+  .mz-navbar-mobile,
+  .mz-navbar-bar-actions {
     display: none;
   }
 
-  .mezzanine-navbar-desktop {
+  .mz-navbar-desktop {
     display: flex;
     flex: 1;
     justify-content: flex-end;
@@ -105,8 +105,8 @@
   }
 }
 
-.mezzanine-navbar-links,
-.mezzanine-navbar-actions {
+.mz-navbar-links,
+.mz-navbar-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -114,25 +114,25 @@
   min-width: 0;
 }
 
-.mezzanine-navbar-panel .mezzanine-navbar-links {
+.mz-navbar-panel .mz-navbar-links {
   flex-direction: column;
   align-items: stretch;
 }
 
-.mezzanine-navbar-links > .react-aria-Link {
+.mz-navbar-links > .react-aria-Link {
   min-height: var(--target-size);
   overflow-wrap: anywhere;
 }
 
 /* The brand link keeps a full touch target even when it shows only a logo,
    and whatever class the app gives it. */
-.mezzanine-navbar-brand > a {
+.mz-navbar-brand > a {
   min-width: var(--target-size);
   min-height: var(--target-size);
   overflow-wrap: anywhere;
 }
 
-.mezzanine-navbar-links > .react-aria-Link[aria-current='page'] {
+.mz-navbar-links > .react-aria-Link[aria-current='page'] {
   text-decoration: underline;
 }
 

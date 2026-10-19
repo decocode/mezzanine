@@ -1,6 +1,6 @@
 /* The frame: a header row, then the start area, main content and end area, with the bottom area under
    the main content (or under everything). Each edge's track opens to make room for its Panel. */
-.mezzanine-app-shell {
+.mz-app-shell {
   --_app-shell-start: 0;
   --_app-shell-end: 0;
   display: grid;
@@ -15,22 +15,22 @@
   transition: grid-template-columns calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
-.mezzanine-app-shell[data-bottom-panel-span='full'] {
+.mz-app-shell[data-bottom-panel-span='full'] {
   grid-template-areas:
     'header header header'
     'start main end'
     'bottom bottom bottom';
 }
 
-.mezzanine-app-shell[data-start='open'] { --_app-shell-start: var(--panel-width); }
-.mezzanine-app-shell[data-start='minimized'] { --_app-shell-start: auto; }
-.mezzanine-app-shell[data-end='open'] { --_app-shell-end: var(--panel-width); }
-.mezzanine-app-shell[data-end='minimized'] { --_app-shell-end: auto; }
+.mz-app-shell[data-start='open'] { --_app-shell-start: var(--panel-width); }
+.mz-app-shell[data-start='minimized'] { --_app-shell-start: auto; }
+.mz-app-shell[data-end='open'] { --_app-shell-end: var(--panel-width); }
+.mz-app-shell[data-end='minimized'] { --_app-shell-end: auto; }
 
-.mezzanine-app-shell > header { grid-area: header; }
+.mz-app-shell > header { grid-area: header; }
 
 /* The main content and any Footer scroll together, the Footer at the end. */
-.mezzanine-app-shell-content {
+.mz-app-shell-content {
   grid-area: main;
   display: flex;
   flex-direction: column;
@@ -39,8 +39,8 @@
   overflow: auto;
 }
 
-.mezzanine-app-shell-content > main { flex: 1 0 auto; }
+.mz-app-shell-content > main { flex: 1 0 auto; }
 
-.mezzanine-app-shell > .mezzanine-panel[data-edge='start'] { grid-area: start; }
-.mezzanine-app-shell > .mezzanine-panel[data-edge='end'] { grid-area: end; }
-.mezzanine-app-shell > .mezzanine-panel[data-edge='bottom'] { grid-area: bottom; }
+.mz-app-shell > .mz-panel[data-edge='start'] { grid-area: start; }
+.mz-app-shell > .mz-panel[data-edge='end'] { grid-area: end; }
+.mz-app-shell > .mz-panel[data-edge='bottom'] { grid-area: bottom; }

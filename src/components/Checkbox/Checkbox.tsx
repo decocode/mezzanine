@@ -18,7 +18,7 @@ export function Checkbox({ children, className, ...checkboxProps }: CheckboxProp
     >
       {composeRenderProps(children, (resolvedChildren, { isIndeterminate, isSelected }) => (
         <>
-          <span aria-hidden="true" className="mezzanine-checkbox-indicator">
+          <span aria-hidden="true" className="mz-checkbox-indicator">
             {isIndeterminate && <MinusIcon />}
             {!isIndeterminate && isSelected && <CheckIcon />}
           </span>

@@ -60,14 +60,14 @@ export function Button({
   function renderContent(children: ReactNode, isPending = false) {
     return (
       <>
-        <span className="mezzanine-button-content">
-          {iconLeading != null && <span aria-hidden="true" className="mezzanine-button-icon">{iconLeading}</span>}
+        <span className="mz-button-content">
+          {iconLeading != null && <span aria-hidden="true" className="mz-button-icon">{iconLeading}</span>}
           {tooltipLabel === undefined && children}
-          {iconTrailing != null && <span aria-hidden="true" className="mezzanine-button-icon">{iconTrailing}</span>}
+          {iconTrailing != null && <span aria-hidden="true" className="mz-button-icon">{iconTrailing}</span>}
         </span>
         {isPending && (
-          <ProgressBar aria-label="Loading" className="mezzanine-button-progress" isIndeterminate>
-            <span aria-hidden="true" className="mezzanine-button-progress-indicator" />
+          <ProgressBar aria-label="Loading" className="mz-button-progress" isIndeterminate>
+            <span aria-hidden="true" className="mz-button-progress-indicator" />
           </ProgressBar>
         )}
       </>

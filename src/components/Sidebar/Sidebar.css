@@ -1,4 +1,4 @@
-.mezzanine-sidebar-panel {
+.mz-sidebar-panel {
   box-sizing: border-box;
   display: flex;
   flex: none;
@@ -20,12 +20,12 @@
   overflow-wrap: anywhere;
 }
 
-.mezzanine-sidebar-panel[data-side='left'] { order: -1; }
-.mezzanine-sidebar-panel[data-side='right'] { order: 1; }
-.mezzanine-sidebar-panel[data-collapse-mode='rail']:not([data-expanded]) { width: var(--sidebar-rail-width); }
+.mz-sidebar-panel[data-side='left'] { order: -1; }
+.mz-sidebar-panel[data-side='right'] { order: 1; }
+.mz-sidebar-panel[data-collapse-mode='rail']:not([data-expanded]) { width: var(--sidebar-rail-width); }
 
-.mezzanine-sidebar-expanded,
-.mezzanine-sidebar-dialog {
+.mz-sidebar-expanded,
+.mz-sidebar-dialog {
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -33,13 +33,13 @@
   flex: 1;
 }
 
-.mezzanine-sidebar-header,
-.mezzanine-sidebar-footer {
+.mz-sidebar-header,
+.mz-sidebar-footer {
   flex: none;
   padding: var(--sidebar-padding);
 }
 
-.mezzanine-sidebar-header {
+.mz-sidebar-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -48,7 +48,7 @@
   border-block-end: var(--sidebar-border-width) solid var(--color-border);
 }
 
-.mezzanine-sidebar-header .react-aria-Heading {
+.mz-sidebar-header .react-aria-Heading {
   flex: 1 1 auto;
   min-width: 0;
   margin: 0;
@@ -60,17 +60,17 @@
   text-transform: var(--text-transform-title);
 }
 
-.mezzanine-sidebar-header-content { flex-basis: 100%; }
-.mezzanine-sidebar-content { min-height: 0; overflow: auto; padding: var(--sidebar-padding); }
-.mezzanine-sidebar-footer { margin-block-start: auto; border-block-start: var(--sidebar-border-width) solid var(--color-border); }
-.mezzanine-sidebar-rail { display: flex; flex-direction: column; align-items: center; gap: var(--sidebar-gap); padding: var(--sidebar-rail-padding); overflow: auto; }
+.mz-sidebar-header-content { flex-basis: 100%; }
+.mz-sidebar-content { min-height: 0; overflow: auto; padding: var(--sidebar-padding); }
+.mz-sidebar-footer { margin-block-start: auto; border-block-start: var(--sidebar-border-width) solid var(--color-border); }
+.mz-sidebar-rail { display: flex; flex-direction: column; align-items: center; gap: var(--sidebar-gap); padding: var(--sidebar-rail-padding); overflow: auto; }
 
-.mezzanine-sidebar-panel[hidden],
-.mezzanine-sidebar-expanded[hidden],
-.mezzanine-sidebar-rail[hidden] { display: none; }
+.mz-sidebar-panel[hidden],
+.mz-sidebar-expanded[hidden],
+.mz-sidebar-rail[hidden] { display: none; }
 
 /* React Aria owns modality, focus containment, scroll locking and dismissal. */
-.mezzanine-sidebar-overlay {
+.mz-sidebar-overlay {
   position: fixed;
   inset: 0;
   height: var(--visual-viewport-height);
@@ -80,9 +80,9 @@
 }
 
 /* physical: the side prop names a physical side until Sidebar is rebuilt. */
-.mezzanine-sidebar-overlay[data-side='left'] > .mezzanine-sidebar-panel { left: 0; } /* physical: see above */
-.mezzanine-sidebar-overlay[data-side='right'] > .mezzanine-sidebar-panel { right: 0; } /* physical: see above */
-.mezzanine-sidebar-overlay > .mezzanine-sidebar-panel {
+.mz-sidebar-overlay[data-side='left'] > .mz-sidebar-panel { left: 0; } /* physical: see above */
+.mz-sidebar-overlay[data-side='right'] > .mz-sidebar-panel { right: 0; } /* physical: see above */
+.mz-sidebar-overlay > .mz-sidebar-panel {
   position: absolute;
   inset-block-start: 0;
   height: 100%;
@@ -91,37 +91,37 @@
   box-shadow: var(--elevation-raised-3);
 }
 
-.mezzanine-sidebar-dialog { outline: none; }
-.mezzanine-sidebar-dialog:focus-visible {
+.mz-sidebar-dialog { outline: none; }
+.mz-sidebar-dialog:focus-visible {
   outline: var(--dialog-focus-ring-width) solid var(--color-focus);
   outline-offset: calc(-1 * var(--dialog-focus-ring-width));
 }
 
-.mezzanine-sidebar-overlay[data-entering] { animation: mezzanine-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-fade); }
-.mezzanine-sidebar-overlay[data-exiting] { animation: mezzanine-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-fade-exit); }
-.mezzanine-sidebar-overlay .mezzanine-sidebar-panel[data-side='left'][data-entering] { animation: mezzanine-sidebar-left-enter var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-sidebar-left-enter); }
-@keyframes mezzanine-sidebar-left-enter {
+.mz-sidebar-overlay[data-entering] { animation: mz-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-modal-fade); }
+.mz-sidebar-overlay[data-exiting] { animation: mz-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-modal-fade-exit); }
+.mz-sidebar-overlay .mz-sidebar-panel[data-side='left'][data-entering] { animation: mz-sidebar-left-enter var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-sidebar-left-enter); }
+@keyframes mz-sidebar-left-enter {
   from { transform: translateX(calc(-1 * var(--motion-distance-offscreen))); }
   to { transform: translateX(0); }
 }
-.mezzanine-sidebar-overlay .mezzanine-sidebar-panel[data-side='left'][data-exiting] { animation: mezzanine-sidebar-left-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-sidebar-left-exit); }
-@keyframes mezzanine-sidebar-left-exit {
+.mz-sidebar-overlay .mz-sidebar-panel[data-side='left'][data-exiting] { animation: mz-sidebar-left-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-sidebar-left-exit); }
+@keyframes mz-sidebar-left-exit {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-1 * var(--motion-distance-offscreen))); }
 }
-.mezzanine-sidebar-overlay .mezzanine-sidebar-panel[data-side='right'][data-entering] { animation: mezzanine-sidebar-right-enter var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-sidebar-right-enter); }
-@keyframes mezzanine-sidebar-right-enter {
+.mz-sidebar-overlay .mz-sidebar-panel[data-side='right'][data-entering] { animation: mz-sidebar-right-enter var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-sidebar-right-enter); }
+@keyframes mz-sidebar-right-enter {
   from { transform: translateX(var(--motion-distance-offscreen)); }
   to { transform: translateX(0); }
 }
-.mezzanine-sidebar-overlay .mezzanine-sidebar-panel[data-side='right'][data-exiting] { animation: mezzanine-sidebar-right-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-sidebar-right-exit); }
-@keyframes mezzanine-sidebar-right-exit {
+.mz-sidebar-overlay .mz-sidebar-panel[data-side='right'][data-exiting] { animation: mz-sidebar-right-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-sidebar-right-exit); }
+@keyframes mz-sidebar-right-exit {
   from { transform: translateX(0); }
   to { transform: translateX(var(--motion-distance-offscreen)); }
 }
 
 @media (forced-colors: active) {
-  .mezzanine-sidebar-panel { background: Canvas; color: CanvasText; border-color: CanvasText; }
-  .mezzanine-sidebar-header, .mezzanine-sidebar-footer { border-color: CanvasText; }
-  .mezzanine-sidebar-dialog:focus-visible { outline-color: Highlight; }
+  .mz-sidebar-panel { background: Canvas; color: CanvasText; border-color: CanvasText; }
+  .mz-sidebar-header, .mz-sidebar-footer { border-color: CanvasText; }
+  .mz-sidebar-dialog:focus-visible { outline-color: Highlight; }
 }

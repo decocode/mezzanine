@@ -9,7 +9,7 @@ for (const fontSize of textSizes) {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/disclosure')
     await setTextSize(page, fontSize)
-    const trigger = page.locator('main .mezzanine-disclosure-trigger').first()
+    const trigger = page.locator('main .mz-disclosure-trigger').first()
     await trigger.focus()
     if (await trigger.getAttribute('aria-expanded') !== 'true') await page.keyboard.press('Enter')
     await expect(trigger.locator('svg')).toHaveCSS('rotate', '90deg')
@@ -27,7 +27,7 @@ for (const theme of themes) {
       await page.emulateMedia({ reducedMotion })
       await page.goto('/disclosure')
       await setTheme(page, theme)
-      const trigger = page.locator('main .mezzanine-disclosure-trigger').first()
+      const trigger = page.locator('main .mz-disclosure-trigger').first()
       const panel = page.locator('main .react-aria-DisclosurePanel').first()
       const fullHeight = (await panel.boundingBox())!.height
       await panel.evaluate(element => {
@@ -55,7 +55,7 @@ for (const theme of themes) {
 // searched for is inside it.
 test('Disclosure find-in-page opens a closed panel', async ({ page }) => {
   await page.goto('/disclosure')
-  const trigger = page.locator('main .mezzanine-disclosure-trigger').first()
+  const trigger = page.locator('main .mz-disclosure-trigger').first()
   const panel = page.locator('main .react-aria-DisclosurePanel').first()
   await trigger.click()
   await expect(panel).toHaveAttribute('hidden', 'until-found')
@@ -72,7 +72,7 @@ test('Disclosure group swaps panels immediately, including in forced colours', a
   await page.emulateMedia({ forcedColors: 'active' })
   await page.goto('/disclosure')
   const group = page.locator('main .react-aria-DisclosureGroup').first()
-  const triggers = group.locator('.mezzanine-disclosure-trigger')
+  const triggers = group.locator('.mz-disclosure-trigger')
   const panels = group.locator('.react-aria-DisclosurePanel')
   await triggers.nth(1).click()
   await expect(panels.nth(0)).toHaveAttribute('hidden', 'until-found')

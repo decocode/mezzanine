@@ -20,7 +20,7 @@ export function RatioPair({ fraction = '1/2', minAreaWidth, gap, className, styl
   return (
     <div
       {...divProps}
-      className={['mezzanine-ratio-pair', className].filter(Boolean).join(' ')}
+      className={['mz-ratio-pair', className].filter(Boolean).join(' ')}
       data-fraction={fraction}
       style={{ ...layout, ...style }}
     />

@@ -127,7 +127,7 @@ for (const theme of themes) {
       await setTextSize(page, fontSize)
       await expectNoPageOverflow(page)
       await page.getByRole('button', { name: 'Open', exact: true }).click()
-      const panel = page.locator('.mezzanine-sidebar-overlay .mezzanine-sidebar-panel')
+      const panel = page.locator('.mz-sidebar-overlay .mz-sidebar-panel')
       const box = (await panel.boundingBox())!
       expect(box.x).toBeGreaterThanOrEqual(0)
       expect(box.x + box.width).toBeLessThanOrEqual(320)
@@ -141,7 +141,7 @@ for (const theme of themes) {
       await page.keyboard.press('Tab')
       await page.keyboard.press('Shift+Tab')
       await expect(close).toHaveAttribute('data-focus-visible')
-      await expectNoAccessibilityViolations(page, '.mezzanine-sidebar-overlay')
+      await expectNoAccessibilityViolations(page, '.mz-sidebar-overlay')
     })
   }
 }
@@ -154,7 +154,7 @@ test('right drawer uses the right edge and forced colours retain a visible borde
   await page.goto('/sidebar')
   await page.locator('.sidebar-example').getByRole('radio', { name: 'Right', exact: true }).click()
   await page.getByRole('button', { name: 'Open', exact: true }).click()
-  const panel = page.locator('.mezzanine-sidebar-overlay .mezzanine-sidebar-panel')
+  const panel = page.locator('.mz-sidebar-overlay .mz-sidebar-panel')
   const box = (await panel.boundingBox())!
   expect(Math.round(box.x + box.width)).toBe(500)
   await expect(panel).toHaveCSS('border-left-style', 'solid')
@@ -192,12 +192,12 @@ test('AppShell and documentation example share permanent library panels and navi
   await page.goto('/sidebar')
   const shell = page.locator('.site-layout > .site-sidebar')
   const example = page.locator('.sidebar-documentation-example')
-  const shellPanel = shell.locator('.desktop-sidebar .mezzanine-sidebar-panel')
-  const examplePanel = example.locator('.desktop-sidebar .mezzanine-sidebar-panel')
+  const shellPanel = shell.locator('.desktop-sidebar .mz-sidebar-panel')
+  const examplePanel = example.locator('.desktop-sidebar .mz-sidebar-panel')
   await expect(shellPanel).toBeVisible()
   await expect(examplePanel).toBeVisible()
   for (const panel of [shellPanel, examplePanel]) {
-    await expect(panel.locator('.mezzanine-sidebar-header')).toHaveCount(0)
+    await expect(panel.locator('.mz-sidebar-header')).toHaveCount(0)
     await expect(panel).toHaveAttribute('data-expanded')
     await expect(panel.getByRole('link', { name: 'Sidebar', exact: true })).toHaveAttribute('aria-current', 'page')
   }
@@ -221,7 +221,7 @@ for (const fontSize of textSizes) {
     const example = page.locator('.sidebar-documentation-example')
     await expect(example.getByRole('treegrid')).toBeVisible()
     await expect(page.getByRole('dialog')).toHaveCount(0)
-    await expect(example.locator('.mezzanine-sidebar-header')).toHaveCount(0)
+    await expect(example.locator('.mz-sidebar-header')).toHaveCount(0)
     await expectNoPageOverflow(page)
   })
 }
