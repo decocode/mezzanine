@@ -48,7 +48,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Link/Link.ts` | Public React Aria Link export and prop types |
 | `src/components/Modal/Modal.ts`, `src/components/Modal/Modal.css` | Public React Aria Modal and ModalOverlay exports; token-led backdrop, responsive container and reduced-motion-aware entry/exit styling |
 | `src/components/Navbar/Navbar.css` | Token-based Navbar layout, text-size-aware container breakpoint and reduced-motion-aware menu panel |
-| `src/components/Navbar/Navbar.tsx` | Public sticky Navbar with brand, navigation and action areas, a React Aria Disclosure mobile menu with an icon-only trigger and tooltip, actions kept in the bar on narrow screens, and an isMenu render value for menu-only content |
+| `src/components/Navbar/Navbar.tsx` | Public sticky Navbar with brand, navigation and action areas, a React Aria Disclosure mobile menu with a menu trigger whose label shows in a tooltip, actions kept in the bar on narrow screens, and an isMenu render value for menu-only content |
 | `src/components/RadioGroup/RadioGroup.css` | Token-led styling for RadioGroup, RadioField, RadioButton and SelectionIndicator |
 | `src/components/RadioGroup/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/SelectionIndicator/SelectionIndicator.ts` | Public React Aria SelectionIndicator export and prop type |

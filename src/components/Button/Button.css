@@ -90,6 +90,16 @@
   padding-inline: 0;
 }
 
+/* An icon with its label below or above it, as in a Rail: the label stays visible. */
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement] .mezzanine-button-content {
+  flex-direction: column;
+  gap: var(--button-content-gap);
+}
+
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement='above'] .mezzanine-button-content {
+  flex-direction: column-reverse;
+}
+
 .react-aria-Button[data-variant='primary'] {
   --button-background: var(--button-primary-background);
   --button-background-hovered: var(--button-primary-background-hovered);

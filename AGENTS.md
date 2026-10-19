@@ -150,7 +150,7 @@ In Mezzanine, "button" describes an appearance. Appearance (looks like a button 
 | Ordinary text link | `<Link href="...">` | `Link` |
 
 - Anything that looks like a button uses the shared `Button`, including calls to action in the site. Anything that looks like an ordinary text link uses `Link`. Do not restyle either by hand to imitate the other.
-- `Button` supports text only, leading icon, trailing icon and icon-only content. Icon-only buttons need an accessible name, and a tooltip can be composed with them.
+- `Button` supports text only, a leading icon or a trailing icon, and icon buttons. An icon button always has a label, its children, and `labelPlacement` shows it in a tooltip, below the icon or above it, so the label is also its accessible name. Agreed by the owner on 19 October 2026; `ToggleButton` works the same way.
 - There is no separate `IconButton`, and no extra component for navigation buttons.
 - Labels and destinations for a Button in the site live in the page's content file, not the page component.
 - Button styling is identical whether the element is a button or a link, with no text underline in any theme, Wireframe included.

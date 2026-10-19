@@ -3,7 +3,7 @@ import type { DocsPageContent } from '../../../../templates/docsPageContent'
 // Column headings for the Sizes table; its rows come from Button's sizes.
 export const toggleButtonSizesTable = {
   label: 'ToggleButton sizes',
-  columns: { size: 'Size', text: 'Text', icon: 'Icon only buttons' },
+  columns: { size: 'Size', text: 'Text', icon: 'Icon buttons, label in a tooltip' },
 }
 
 // Headings and row labels for the States table; each row shows live buttons.
@@ -63,7 +63,7 @@ export const toggleButtonContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: [
-        'Use a stable visible label, or `aria-label` for an icon-only control. The selected state is communicated separately from the name.',
+        'Use a stable label. For an icon button, `labelPlacement` shows it in a tooltip, below the icon or above it, and it stays the accessible name. The selected state is communicated separately from the name.',
         'Enter or Space activates a focused toggle. Within a group, arrow keys move between buttons according to its orientation. Disabled buttons cannot be activated.',
       ],
     },

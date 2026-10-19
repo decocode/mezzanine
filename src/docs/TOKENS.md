@@ -694,7 +694,7 @@ Button and ToggleButton use the same `--button-sm-*`, `--button-md-*`,
 `--control-size-*` scale. Both default to `md`.
 Select sizes through `size`; ToggleButtonGroup supplies a size to its children,
 which an individual ToggleButton can override with its own `size`.
-Use `iconLeading` or `iconTrailing` without children for icon-only buttons.
+For icon buttons, give the label as children and choose `labelPlacement`: `tooltip`, `below` or `above`.
 
 Migration: `--toggle-button-min-height`, `--toggle-button-padding-block`,
 `--toggle-button-padding-inline` and `--navigation-tree-chevron-size` were removed.

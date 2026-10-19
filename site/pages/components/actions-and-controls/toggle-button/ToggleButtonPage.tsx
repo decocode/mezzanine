@@ -1,7 +1,7 @@
 import { ExampleZone } from '../../../../components/ExampleZone'
 import {
   Cell,
-  DownloadIcon, Tooltip, TooltipTrigger,
+  DownloadIcon,
   Column,
   ExternalLinkIcon,
   Link,
@@ -42,10 +42,7 @@ export default function ToggleButtonPage() {
                 {buttonSizes.map(({ label, size }) => <Row id={size} key={size}>
                   <Cell>{label}</Cell>
                   <Cell><ToggleButton size={size}>Toggle</ToggleButton></Cell>
-                  <Cell><TooltipTrigger>
-                    <ToggleButton size={size} iconLeading={<DownloadIcon />} aria-label={buttonContent.iconOnlyLabel} />
-                    <Tooltip>{buttonContent.iconOnlyLabel}</Tooltip>
-                  </TooltipTrigger></Cell>
+                  <Cell><ToggleButton size={size} iconLeading={<DownloadIcon />} labelPlacement="tooltip">{buttonContent.iconButtonLabel}</ToggleButton></Cell>
                 </Row>)}
               </TableBody>
             </Table>

@@ -1,7 +1,6 @@
 import { useRef, useState, type ReactNode } from 'react'
 import { Button } from '../Button/Button'
 import { Heading } from '../Heading/Heading'
-import { Tooltip, TooltipTrigger } from '../Tooltip/Tooltip'
 import { Disclosure, DisclosurePanel } from '../Disclosure/Disclosure'
 import { MenuIcon } from '../../icons/Icons'
 import { CloseIcon } from '../../icons/StudioIcons'
@@ -49,11 +48,10 @@ export function Navbar({ brand, children, actions, 'aria-label': label, menuLabe
         {actionGroup && <div className="mezzanine-navbar-bar-actions">{actionGroup}</div>}
         <Disclosure className="mezzanine-navbar-mobile" isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
           <Heading className="mezzanine-navbar-heading" level={2}>
-            {/* Icon-only to leave room for actions; the tooltip shows the same name as aria-label. */}
-            <TooltipTrigger>
-              <Button ref={triggerRef} className="mezzanine-navbar-trigger" size="sm" aria-label={isExpanded ? closeLabel : menuLabel} iconLeading={isExpanded ? <CloseIcon /> : <MenuIcon />} slot="trigger" variant="secondary" />
-              <Tooltip>{isExpanded ? closeLabel : menuLabel}</Tooltip>
-            </TooltipTrigger>
+            {/* Its label shows in a tooltip, to leave room for actions. */}
+            <Button ref={triggerRef} className="mezzanine-navbar-trigger" size="sm" iconLeading={isExpanded ? <CloseIcon /> : <MenuIcon />} labelPlacement="tooltip" slot="trigger" variant="secondary">
+              {isExpanded ? closeLabel : menuLabel}
+            </Button>
           </Heading>
           <DisclosurePanel className="mezzanine-navbar-panel">{links(true)}</DisclosurePanel>
         </Disclosure>

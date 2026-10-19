@@ -19,6 +19,7 @@ export type { CodeBlockProps } from './components/CodeBlock/CodeBlock'
 export { Button } from './components/Button/Button'
 
 export type {
+  ButtonLabelPlacement,
   ButtonProps,
   ButtonSize,
   ButtonVariant,
