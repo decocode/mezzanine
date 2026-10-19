@@ -3,14 +3,8 @@ import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const splitPage: StagePage = {
-  key: 'split', id: 'lab-split', stage: 'sideBySide', title: 'Split', href: '/site/lab/layout/side-by-side/split',
-  subtitle: 'When two areas sit side by side.',
-  what: 'Split is a layout technique that Mezzanine uses for placing two areas next to each other, such as a side panel and the main content.',
-  why: 'You can choose how the two areas share that space by using either fractions, such as one third and two thirds, or Auto Start, where the width of the first area is based on the content inside it.',
-  details: [
-    'If using fractions each area has a default minimum width of 15rem. If using Auto Start, the width of the first area is based on the content inside it, and the width of the second area fills the remaining space, down to 15rem. When there isn’t enough room for both areas to be side by side, the second area moves underneath the first, and both become full width.',
-  ],
-  similarTo: [everyLayout('Sidebar', 'sidebar'), bedrock('Split', 'split')],
+  key: 'split', id: 'lab-split', kind: 'foundation', stage: 'sideBySide', title: 'Split', href: '/site/lab/layout/side-by-side/split',
+  description: 'When two areas sit side by side.',
   alsoKnownAs: [
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap. One child is set to Fill container.' },
     { where: 'CSS', called: 'Flexbox with `flex-wrap`, `flex-grow` and `flex-basis`. CSS has no single name for this pattern.' },
@@ -18,7 +12,20 @@ export const splitPage: StagePage = {
     { where: 'Bootstrap', called: 'A `row` with two columns, such as `col-md-4` and `col-md-8`. These stack below a set screen width.' },
     { where: 'Material Design', called: 'Supporting pane layout, or list-detail when one side lists items.' },
   ],
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Split is a layout technique that Mezzanine uses for placing two areas next to each other, such as a side panel and the main content.',
+        'You can choose how the two areas share that space by using either fractions, such as one third and two thirds, or Auto Start, where the width of the first area is based on the content inside it.',
+        'If using fractions each area has a default minimum width of 15rem. If using Auto Start, the width of the first area is based on the content inside it, and the width of the second area fills the remaining space, down to 15rem. When there isn’t enough room for both areas to be side by side, the second area moves underneath the first, and both become full width.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
+    everyLayout('Sidebar', 'sidebar'),
+    bedrock('Split', 'split'),
     { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
     { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },
     { label: 'Bootstrap: Grid system', href: 'https://getbootstrap.com/docs/5.3/layout/grid/' },

@@ -3,7 +3,7 @@ import { Badge, CodeBlock, Heading, Label, Text, ToggleButton, ToggleButtonGroup
 import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'react-aria-components/Slider'
 import type { CssNote } from './labTypes'
 import { framePresets, labBadgeLabel } from './labValues'
-import { splitInlineCode } from './labLogic'
+import { RichText } from '../../components/RichText'
 
 // A frame whose width you set with a slider or presets. Its contents are a size container. When the example
 // is meant to stick out of the frame, the frame is a named region that takes focus, so keyboard users can scroll it.
@@ -56,7 +56,7 @@ export function CssNotesBody({ note }: { note: CssNote }) {
   return <div className="lab-css-notes-body">
     {note.isExample && <Text elementType="p" className="mz-text-body-md">This CSS is for an app to use; the example on this page doesn’t use it.</Text>}
     {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
-      {splitInlineCode(paragraph).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part)}
+      <RichText text={paragraph} />
     </Text>)}
     <CodeBlock>{note.code}</CodeBlock>
   </div>

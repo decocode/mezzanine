@@ -2,6 +2,7 @@
 // named after what you want to do: box basics, space, what goes inside a box, ways to place boxes,
 // and how boxes respond to their container, the browser and the device. Illustrative and unapproved.
 
+import type { DocsPageContent } from '../../templates/docsPageContent'
 import type { LayoutStage, StageKey, StagePage } from '../shared/labTypes'
 import { theBoxModelPage } from './box-basics/the-box-model/theBoxModelContent'
 import { typesOfBoxPage } from './box-basics/types-of-box/typesOfBoxContent'
@@ -30,11 +31,14 @@ import { subgridPage } from './grid-formation/subgrid/subgridContent'
 import { containerQueriesPage } from './container/container-queries/containerQueriesContent'
 import { fluidSizingPage } from './container/fluid-sizing/fluidSizingContent'
 
-export const layoutLabIntro = {
-  title: 'Layout',
-  summary: 'Layout is how boxes are sized, spaced and arranged. Everything on a web page is a box, from a single word to a whole section of a page.',
-  principles: 'Mezzanine’s layouts are mobile first: they start with the narrowest space and add to it as the space grows. Components respond to the room their container gives them, not to the size of the screen.',
-  groupsHeading: 'Groups',
+// The Layout overview: what layout is, then a Card for each group in its Groups section.
+export const layoutOverview: DocsPageContent = {
+  id: 'lab-layout', kind: 'foundation', title: 'Layout',
+  description: [
+    'Layout is how boxes are sized, spaced and arranged. Everything on a web page is a box, from a single word to a whole section of a page.',
+    'Mezzanine’s layouts are mobile first: they start with the narrowest space and add to it as the space grows. Components respond to the room their container gives them, not to the size of the screen.',
+  ],
+  sections: [{ key: 'groups', title: 'Groups' }],
 }
 
 export const layoutStages: LayoutStage[] = [

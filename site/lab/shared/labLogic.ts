@@ -1,4 +1,5 @@
 import { useSyncExternalStore, type RefObject } from 'react'
+import type { DocsPageContent } from '../../templates/docsPageContent'
 
 // Live media query matching without effects: the browser notifies React of changes.
 export function useMediaQuery(query: string) {
@@ -77,7 +78,8 @@ export function useSafeAreas(probe: RefObject<HTMLElement | null>) {
   ]
 }
 
-// Splits text on backticks: odd-numbered parts were inside backticks and are code.
-export function splitInlineCode(text: string) {
-  return text.split('`').map((part, index) => ({ part, isCode: index % 2 === 1 }))
+// The first paragraph of a page's How it works section, which its Card on an overview also shows.
+export function howItWorksLead(page: DocsPageContent): string {
+  const block = page.sections?.find((section) => section.key === 'howItWorks')?.body?.[0]
+  return typeof block === 'string' ? block : ''
 }

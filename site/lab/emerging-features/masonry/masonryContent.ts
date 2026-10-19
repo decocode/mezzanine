@@ -1,7 +1,14 @@
 // The Lab's Masonry page, in Emerging features: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, FuturePage } from '../../shared/labTypes'
 
-export const masonryPage: FuturePage = { key: 'masonry', id: 'lab-masonry', title: 'Masonry', href: '/site/lab/emerging-features/masonry', references: [{ label: 'MDN: Grid lanes layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout' }, { label: 'WebKit: Introducing CSS Grid Lanes', href: 'https://webkit.org/blog/17660/introducing-css-grid-lanes/' }] }
+export const masonryPage: FuturePage = {
+  key: 'masonry', id: 'lab-masonry', kind: 'foundation', title: 'Masonry', href: '/site/lab/emerging-features/masonry',
+  sections: [{ key: 'howItWorks' }],
+  references: [
+    { label: 'MDN: Grid lanes layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout' },
+    { label: 'WebKit: Introducing CSS Grid Lanes', href: 'https://webkit.org/blog/17660/introducing-css-grid-lanes/' },
+  ],
+}
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.

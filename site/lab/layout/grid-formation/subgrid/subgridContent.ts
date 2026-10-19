@@ -2,10 +2,18 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const subgridPage: StagePage = {
-  key: 'subgrid', id: 'lab-subgrid', stage: 'gridFormation', title: 'Subgrid', href: '/site/lab/layout/grid-formation/subgrid',
-  subtitle: 'When the parts inside boxes line up with the boxes beside them.',
-  what: 'Subgrid lets the parts inside boxes that sit side by side share the same rows. Headings, text and buttons then line up across the row, even when each box has a different amount of content.',
-  why: 'Lined-up rows look intentional and are easier to scan, and you get them without fixing heights or cutting text short.',
+  key: 'subgrid', id: 'lab-subgrid', kind: 'foundation', stage: 'gridFormation', title: 'Subgrid', href: '/site/lab/layout/grid-formation/subgrid',
+  description: 'When the parts inside boxes line up with the boxes beside them.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Subgrid lets the parts inside boxes that sit side by side share the same rows. Headings, text and buttons then line up across the row, even when each box has a different amount of content.',
+        'Lined-up rows look intentional and are easier to scan, and you get them without fixing heights or cutting text short.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Subgrid', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Subgrid' },
   ],

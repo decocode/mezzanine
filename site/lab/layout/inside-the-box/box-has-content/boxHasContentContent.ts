@@ -2,10 +2,18 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const boxHasContentPage: StagePage = {
-  key: 'boxHasContent', id: 'lab-box-has-content', stage: 'insideTheBox', title: 'Box has content', href: '/site/lab/layout/inside-the-box/box-has-content',
-  subtitle: 'When a box changes its layout depending on what’s inside it.',
-  what: 'A selector is the part of a CSS rule that picks which boxes the rule applies to. Usually it picks a box by what it is, or where it sits, such as “a link inside the Navbar”. The :has() selector works the other way round: it picks a box by what it contains, such as “a list that has five or more items” or “a box that has a picture”.',
-  why: 'Think of a restaurant pushing two tables together when a fifth guest arrives. The table reacts to who actually turns up. In the same way, a box can react to its real content, so you don’t need a separate version, or an extra setting, for every case.',
+  key: 'boxHasContent', id: 'lab-box-has-content', kind: 'foundation', stage: 'insideTheBox', title: 'Box has content', href: '/site/lab/layout/inside-the-box/box-has-content',
+  description: 'When a box changes its layout depending on what’s inside it.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'A selector is the part of a CSS rule that picks which boxes the rule applies to. Usually it picks a box by what it is, or where it sits, such as “a link inside the Navbar”. The :has() selector works the other way round: it picks a box by what it contains, such as “a list that has five or more items” or “a box that has a picture”.',
+        'Think of a restaurant pushing two tables together when a fifth guest arrives. The table reacts to who actually turns up. In the same way, a box can react to its real content, so you don’t need a separate version, or an extra setting, for every case.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: :has()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/:has' },
   ],

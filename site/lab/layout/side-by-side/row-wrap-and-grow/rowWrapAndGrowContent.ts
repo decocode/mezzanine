@@ -2,11 +2,19 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const rowWrapAndGrowPage: StagePage = {
-  key: 'rowWrapAndGrow', id: 'lab-row-wrap-and-grow', stage: 'sideBySide', title: 'Row wrap and grow', href: '/site/lab/layout/side-by-side/row-wrap-and-grow',
-  what: 'Grow is used with Row wrap so that the boxes moved onto the new row stretch to fill the available space.',
-  why: 'Row wrap and grow is useful for a few larger boxes such as form fields side by side, summary panels on a dashboard, or groups of footer links. No row is left with a gap at its end, so it looks nice and tidy.',
-  similarTo: [{ label: 'Bedrock: ColumnDrop', href: 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/column-drop' }],
+  key: 'rowWrapAndGrow', id: 'lab-row-wrap-and-grow', kind: 'foundation', stage: 'sideBySide', title: 'Row wrap and grow', href: '/site/lab/layout/side-by-side/row-wrap-and-grow',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Grow is used with Row wrap so that the boxes moved onto the new row stretch to fill the available space.',
+        'Row wrap and grow is useful for a few larger boxes such as form fields side by side, summary panels on a dashboard, or groups of footer links. No row is left with a gap at its end, so it looks nice and tidy.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
+    { label: 'Bedrock: ColumnDrop', href: 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/column-drop' },
     { label: 'web.dev: Macro layouts', href: 'https://web.dev/learn/design/macro-layouts' },
     { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap' },
   ],

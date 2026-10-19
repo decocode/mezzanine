@@ -3,12 +3,21 @@ import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const columnPage: StagePage = {
-  key: 'column', id: 'lab-column', stage: 'oneBelowAnother', title: 'Column', href: '/site/lab/layout/one-below-another/column',
-  subtitle: 'When boxes sit one below another, evenly spaced.',
-  what: 'Column puts boxes one below another, in the same order as the HTML, like items on a to-do list. It’s a Flexbox column, not a Grid column or a newspaper-style column.',
-  why: 'The space between items is set once, by the parent, so no item needs its own outer margin. Move an item and the spacing still works.',
-  similarTo: [everyLayout('Stack', 'stack'), bedrock('Stack', 'stack')],
+  key: 'column', id: 'lab-column', kind: 'foundation', stage: 'oneBelowAnother', title: 'Column', href: '/site/lab/layout/one-below-another/column',
+  description: 'When boxes sit one below another, evenly spaced.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Column puts boxes one below another, in the same order as the HTML, like items on a to-do list. It’s a Flexbox column, not a Grid column or a newspaper-style column.',
+        'The space between items is set once, by the parent, so no item needs its own outer margin. Move an item and the spacing still works.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
+    everyLayout('Stack', 'stack'),
+    bedrock('Stack', 'stack'),
     { label: 'MDN: Basic concepts of flexbox', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts' },
   ],
 }

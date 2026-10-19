@@ -1,8 +1,9 @@
 // The example for the Lab's Supports page, in Browser and device.
-import { Badge, Cell, Column, Link, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { RichText } from '../../../components/RichText'
 import { CssNotes, ExampleText } from '../../shared/LabParts'
 import { supportsCondition, supportsCss } from '../../shared/labLogic'
-import { supportsCssNotes } from './supportsContent'
+import { supportsCssNotes, supportsExampleLinkText } from './supportsContent'
 
 const supportChecks = [
   { label: 'Subgrid', check: () => supportsCss('grid-template-rows', 'subgrid') },
@@ -14,7 +15,7 @@ const supportChecks = [
 
 export function SupportsExample() {
   return <>
-    <ExampleText>The same question, asked live in your browser. The last three are in <Link href="/site/lab/emerging-features">Emerging features</Link>.</ExampleText>
+    <ExampleText><RichText text={supportsExampleLinkText} /></ExampleText>
     <div className="lab-table">
       <Table aria-label="Features this browser supports">
         <TableHeader>

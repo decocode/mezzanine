@@ -1,14 +1,20 @@
 // The Lab's Safe areas page, in Browser and device: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../../shared/labTypes'
+import type { CssNote, LabPage } from '../../shared/labTypes'
 
-export const safeAreasPage: LabTopLevelPage = {
-  id: 'lab-safe-areas',
-  href: '/site/lab/browser-and-device/safe-areas',
-  title: 'Safe areas',
-  subtitle: 'When content stays clear of notches and home indicators.',
-  what: 'Safe areas tell you how much room notches and home indicators take up.',
-  why: 'Installed apps run edge to edge, so content has to stay clear of the notch. Since iOS 26, any site added to the Home Screen opens this way.',
-  support: 'Safe areas work in every browser on devices that have them, and are mostly zero on a laptop.',
+export const safeAreasPage: LabPage = {
+  id: 'lab-safe-areas', kind: 'foundation', title: 'Safe areas', href: '/site/lab/browser-and-device/safe-areas',
+  description: 'When content stays clear of notches and home indicators.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Safe areas tell you how much room notches and home indicators take up.',
+        'Installed apps run edge to edge, so content has to stay clear of the notch. Since iOS 26, any site added to the Home Screen opens this way.',
+      ],
+      subheadings: [{ key: 'browserSupport', title: 'Browser support', body: ['Safe areas work in every browser on devices that have them, and are mostly zero on a laptop.'] }],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: env()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/env' },
   ],

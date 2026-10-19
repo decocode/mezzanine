@@ -2,14 +2,25 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const gapPage: StagePage = {
-  key: 'gap', id: 'lab-gap', stage: 'addSpace', title: 'Gap', href: '/site/lab/layout/add-space/gap',
-  subtitle: 'When an outer box makes sure inner boxes are equally spaced out.',
-  what: 'Gap is set on a parent and goes only between its children, like boxes holding hands at arm’s length.',
-  why: 'Gap never adds stray space before the first item or after the last, so it’s usually the best choice between items. Mezzanine’s spacing tokens give every gap a size from the same scale.',
+  key: 'gap', id: 'lab-gap', kind: 'foundation', stage: 'addSpace', title: 'Gap', href: '/site/lab/layout/add-space/gap',
+  description: 'When an outer box makes sure inner boxes are equally spaced out.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Gap is set on a parent and goes only between its children, like boxes holding hands at arm’s length.',
+        'Gap never adds stray space before the first item or after the last, so it’s usually the best choice between items. Mezzanine’s spacing tokens give every gap a size from the same scale.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: gap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/gap' },
   ],
 }
+
+// Example copy with a link to another Lab page.
+export const gapExampleLinkText = 'Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so `--space-4` is four steps: `1rem`, normally 16px. The tokens are in `rem`, so space grows when someone enlarges their text. [Measuring the box](/site/lab/layout/box-basics/measuring-the-box) explains `rem`.'
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.

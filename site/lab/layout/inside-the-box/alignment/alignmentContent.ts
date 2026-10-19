@@ -2,10 +2,18 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const alignmentPage: StagePage = {
-  key: 'alignment', id: 'lab-alignment', stage: 'insideTheBox', title: 'Alignment', href: '/site/lab/layout/inside-the-box/alignment',
-  subtitle: 'When things are centred, or pushed to one side.',
-  what: 'Alignment moves items around inside the space they have. In Flexbox, justify-content moves them along the row, and align-items moves them across it, from top to bottom.',
-  why: '“How do I centre something?” is one of the most asked questions in CSS. With Flexbox or Grid, the answer is one or two lines.',
+  key: 'alignment', id: 'lab-alignment', kind: 'foundation', stage: 'insideTheBox', title: 'Alignment', href: '/site/lab/layout/inside-the-box/alignment',
+  description: 'When things are centred, or pushed to one side.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Alignment moves items around inside the space they have. In Flexbox, justify-content moves them along the row, and align-items moves them across it, from top to bottom.',
+        '“How do I centre something?” is one of the most asked questions in CSS. With Flexbox or Grid, the answer is one or two lines.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Box alignment', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_alignment' },
     { label: 'MDN: Center an element', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook/Center_an_element' },

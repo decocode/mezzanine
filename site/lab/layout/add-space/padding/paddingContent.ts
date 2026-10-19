@@ -2,10 +2,18 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const paddingPage: StagePage = {
-  key: 'padding', id: 'lab-padding', stage: 'addSpace', title: 'Padding', href: '/site/lab/layout/add-space/padding',
-  subtitle: 'When a box cushions its content.',
-  what: 'Padding is a way to add space inside a box, between its edge and its content. It pushes the content in, away from the border.',
-  why: 'A box’s background fills its padding, so the space looks like part of the box. Padding also makes the box bigger, unless the box uses box-sizing: border-box.',
+  key: 'padding', id: 'lab-padding', kind: 'foundation', stage: 'addSpace', title: 'Padding', href: '/site/lab/layout/add-space/padding',
+  description: 'When a box cushions its content.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Padding is a way to add space inside a box, between its edge and its content. It pushes the content in, away from the border.',
+        'A box’s background fills its padding, so the space looks like part of the box. Padding also makes the box bigger, unless the box uses box-sizing: border-box.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: padding', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/padding' },
   ],

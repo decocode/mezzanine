@@ -1,14 +1,20 @@
 // The Lab's Reading order page: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../shared/labTypes'
+import type { CssNote, LabPage } from '../shared/labTypes'
 
-export const readingOrderPage: LabTopLevelPage = {
-  id: 'lab-reading-order',
-  href: '/site/lab/reading-order',
-  title: 'Reading order',
-  subtitle: 'When the order still makes sense to keyboard and screen reader users.',
-  what: 'Reading order is the order people meet things when they use a keyboard or a screen reader. It always follows the HTML, even when CSS moves things around on screen.',
-  why: 'Flexbox and Grid can show things in a different order from the HTML. Then what people see and what they hear or tab through no longer match, and WCAG counts that as a failure. To change the order, change the HTML.',
-  support: 'A newer property, reading-flow, may one day let CSS change the reading order too, but only some browsers have it.',
+export const readingOrderPage: LabPage = {
+  id: 'lab-reading-order', kind: 'foundation', title: 'Reading order', href: '/site/lab/reading-order',
+  description: 'When the order still makes sense to keyboard and screen reader users.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Reading order is the order people meet things when they use a keyboard or a screen reader. It always follows the HTML, even when CSS moves things around on screen.',
+        'Flexbox and Grid can show things in a different order from the HTML. Then what people see and what they hear or tab through no longer match, and WCAG counts that as a failure. To change the order, change the HTML.',
+      ],
+      subheadings: [{ key: 'browserSupport', title: 'Browser support', body: ['A newer property, reading-flow, may one day let CSS change the reading order too, but only some browsers have it.'] }],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Grid layout and accessibility', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Accessibility' },
     { label: 'WCAG 2.2: Meaningful sequence', href: 'https://www.w3.org/WAI/WCAG22/Understanding/meaningful-sequence.html' },

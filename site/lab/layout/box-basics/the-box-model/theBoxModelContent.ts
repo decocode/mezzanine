@@ -2,10 +2,18 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const theBoxModelPage: StagePage = {
-  key: 'boxModel', id: 'lab-box-model', stage: 'boxBasics', title: 'The box model', href: '/site/lab/layout/box-basics/the-box-model',
-  subtitle: 'When every box is made of content, padding, a border and margin.',
-  what: 'Everything on a web page is a box, even a single word or a picture. Each box has four layers, like rings in a tree trunk. In the middle is the content. Around it is padding, then a border, then margin on the outside.',
-  why: 'Most layout puzzles come down to these four layers. Padding is space inside the box, so it pushes the content in. Margin is space outside the box, so it pushes other boxes away. Once you can picture the layers, you can tell which one to change.',
+  key: 'boxModel', id: 'lab-box-model', kind: 'foundation', stage: 'boxBasics', title: 'The box model', href: '/site/lab/layout/box-basics/the-box-model',
+  description: 'When every box is made of content, padding, a border and margin.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Everything on a web page is a box, even a single word or a picture. Each box has four layers, like rings in a tree trunk. In the middle is the content. Around it is padding, then a border, then margin on the outside.',
+        'Most layout puzzles come down to these four layers. Padding is space inside the box, so it pushes the content in. Margin is space outside the box, so it pushes other boxes away. Once you can picture the layers, you can tell which one to change.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Introduction to the CSS box model', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Introduction' },
   ],

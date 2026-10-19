@@ -1,7 +1,13 @@
 // The Lab's Scroll-state queries page, in Emerging features: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, FuturePage } from '../../shared/labTypes'
 
-export const scrollStateQueriesPage: FuturePage = { key: 'scrollStateQueries', id: 'lab-scroll-state-queries', title: 'Scroll-state queries', href: '/site/lab/emerging-features/scroll-state-queries', references: [{ label: 'MDN: Container scroll-state queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Conditional_rules/Container_scroll-state_queries' }] }
+export const scrollStateQueriesPage: FuturePage = {
+  key: 'scrollStateQueries', id: 'lab-scroll-state-queries', kind: 'foundation', title: 'Scroll-state queries', href: '/site/lab/emerging-features/scroll-state-queries',
+  sections: [{ key: 'howItWorks' }],
+  references: [
+    { label: 'MDN: Container scroll-state queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Conditional_rules/Container_scroll-state_queries' },
+  ],
+}
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.

@@ -27,7 +27,7 @@ formatting:
 
 A paragraph can also be a short bulleted list: `{ list: ['First item', 'Second item'] }`.
 
-When a page moves in the navigation, move its folder to match, so the folders always read like the navigation. The Lab in `site/lab/` follows the same pattern.
+When a page moves in the navigation, move its folder to match, so the folders always read like the navigation. The Lab in `site/lab/` follows the same pattern: each Lab page's content file exports the same `DocsPageContent` shape (as a `LabPage`, which adds its Lab address), and `ContentPage` builds it, with its examples as `parts`.
 
 ## Adding a page
 
@@ -57,9 +57,18 @@ parts:
 <ContentPage content={badgeContent} parts={{ example: <ExampleZone>…</ExampleZone> }} />
 ```
 
+Every page, in the Docs or the Lab, follows the same order:
+
+1. Also known as, when the page's name is agreed: what Figma, CSS, Tailwind CSS,
+   Bootstrap and Material Design call the same thing, in a closed Disclosure.
+2. The page's own sections, such as Example and Variants, or How it works and
+   Example in the Lab.
+3. Technical details, where the page has them.
+4. Related pages and References.
+
 The content file sets the page's `id`, `kind` (`component` or `foundation`),
-title, description, its `sections` in order, its `technicalDetails`, Related
-pages and References.
+title, description, its `alsoKnownAs` rows, its `sections` in order, its
+`technicalDetails`, Related pages and References.
 
 - Each section has a `key`. Standard keys, such as `example`, `anatomy`,
   `usage` and `tokens`, supply their own title; any other key needs a `title`.
@@ -69,6 +78,8 @@ pages and References.
   then `body` paragraphs, then the page's part for that key, then the section's
   two-column `table`.
 - Optional `subsections` add On this page links to headings inside a section.
+- Optional `subheadings` add headed blocks inside a section, such as Browser
+  support, each with a level-3 heading and its own On this page link.
 - On this page appears after the page heading and description on narrower
   screens, and in the right column on wide screens.
 - The Technical details group's heading is level 2 and its sections become a

@@ -3,12 +3,21 @@ import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const aspectRatioPage: StagePage = {
-  key: 'aspectRatio', id: 'lab-aspect-ratio', stage: 'insideTheBox', title: 'Aspect ratio', href: '/site/lab/layout/inside-the-box/aspect-ratio',
-  subtitle: 'When a picture is cropped to a set shape.',
-  what: 'Aspect ratio gives a box a fixed shape, such as 16:9, and crops the picture inside to fill it.',
-  why: 'Pictures from different places come in different shapes. A shared aspect ratio lines them up as a tidy set, without squashing any of them.',
-  similarTo: [everyLayout('Frame', 'frame'), bedrock('Frame', 'frame')],
+  key: 'aspectRatio', id: 'lab-aspect-ratio', kind: 'foundation', stage: 'insideTheBox', title: 'Aspect ratio', href: '/site/lab/layout/inside-the-box/aspect-ratio',
+  description: 'When a picture is cropped to a set shape.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Aspect ratio gives a box a fixed shape, such as 16:9, and crops the picture inside to fill it.',
+        'Pictures from different places come in different shapes. A shared aspect ratio lines them up as a tidy set, without squashing any of them.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
+    everyLayout('Frame', 'frame'),
+    bedrock('Frame', 'frame'),
     { label: 'MDN: aspect-ratio', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio' },
     { label: 'MDN: object-fit', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit' },
   ],

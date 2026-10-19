@@ -1,13 +1,19 @@
 // The Lab's Media queries page, in Browser and device: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../../shared/labTypes'
+import type { CssNote, LabPage } from '../../shared/labTypes'
 
-export const mediaQueriesPage: LabTopLevelPage = {
-  id: 'lab-media-queries',
-  href: '/site/lab/browser-and-device/media-queries',
-  title: 'Media queries',
-  subtitle: 'Respect the person’s settings and device.',
-  what: 'Media queries were once used to tell layouts when to rearrange themselves based on browser window sizes that were typical for different devices such as mobile, tablet and desktop. This approach to responsive layouts is being phased out.',
-  why: 'Media queries now answer a different question: how is this person using the site? Have they asked for less motion? Are they using a finger or a mouse? Have they installed the site as an app? Questions about space belong to each component, which asks its container how much room it has. Keeping the two apart stops screen sizes creeping into every component.',
+export const mediaQueriesPage: LabPage = {
+  id: 'lab-media-queries', kind: 'foundation', title: 'Media queries', href: '/site/lab/browser-and-device/media-queries',
+  description: 'Respect the person’s settings and device.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Media queries were once used to tell layouts when to rearrange themselves based on browser window sizes that were typical for different devices such as mobile, tablet and desktop. This approach to responsive layouts is being phased out.',
+        'Media queries now answer a different question: how is this person using the site? Have they asked for less motion? Are they using a finger or a mouse? Have they installed the site as an app? Questions about space belong to each component, which asks its container how much room it has. Keeping the two apart stops screen sizes creeping into every component.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Using media queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Media_queries/Using' },
   ],

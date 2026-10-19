@@ -1,7 +1,13 @@
 // The Lab's Anchor positioning page, in Emerging features: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, FuturePage } from '../../shared/labTypes'
 
-export const anchorPositioningPage: FuturePage = { key: 'anchorPositioning', id: 'lab-anchor-positioning', title: 'Anchor positioning', href: '/site/lab/emerging-features/anchor-positioning', references: [{ label: 'MDN: Using anchor positioning', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning/Using' }] }
+export const anchorPositioningPage: FuturePage = {
+  key: 'anchorPositioning', id: 'lab-anchor-positioning', kind: 'foundation', title: 'Anchor positioning', href: '/site/lab/emerging-features/anchor-positioning',
+  sections: [{ key: 'howItWorks' }],
+  references: [
+    { label: 'MDN: Using anchor positioning', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning/Using' },
+  ],
+}
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.

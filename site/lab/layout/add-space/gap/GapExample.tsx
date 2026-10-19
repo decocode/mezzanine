@@ -1,10 +1,10 @@
 // The example for the Lab's Gap page, in Add space.
 import { useState, type CSSProperties } from 'react'
-import { Link } from '@decocode/mezzanine'
+import { RichText } from '../../../../components/RichText'
 import { CssNotes, ExampleHeading, ExampleText, ValuePicker } from '../../../shared/LabParts'
 import { Block } from '../../../shared/LabPrimitives'
 import { SpacingScale } from './SpacingScale'
-import { gapCssNotes } from './gapContent'
+import { gapCssNotes, gapExampleLinkText } from './gapContent'
 
 const gapOptions = [
   { label: '--space-2', value: '--space-2' },
@@ -26,7 +26,7 @@ export function SpacingTokens() {
   const [gap, setGap] = useState<(typeof gapOptions)[number]['value']>('--space-4')
   return <>
     <ExampleHeading>Spacing tokens</ExampleHeading>
-    <ExampleText>Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so <code>--space-4</code> is four steps: <code>1rem</code>, normally 16px. The tokens are in <code>rem</code>, so space grows when someone enlarges their text. <Link href="/site/lab/layout/box-basics/measuring-the-box">Measuring the box</Link> explains <code>rem</code>.</ExampleText>
+    <ExampleText><RichText text={gapExampleLinkText} /></ExampleText>
     <ExampleText>These are the real tokens, with their values read live.</ExampleText>
     <SpacingScale />
     <ExampleHeading>Sizes from the spacing scale</ExampleHeading>

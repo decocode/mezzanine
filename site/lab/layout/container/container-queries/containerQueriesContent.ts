@@ -2,9 +2,17 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const containerQueriesPage: StagePage = {
-  key: 'containerQueries', id: 'lab-container-queries', stage: 'container', title: 'Container queries', href: '/site/lab/layout/container/container-queries',
-  what: 'A container query lets a component change its layout depending on how much space its container gives it, rather than how wide the whole screen is.',
-  why: 'The same component can sit in a narrow sidebar and a wide main column on the same screen, and suit both. A screen breakpoint would give both copies the same layout, because the screen is the same width for each.',
+  key: 'containerQueries', id: 'lab-container-queries', kind: 'foundation', stage: 'container', title: 'Container queries', href: '/site/lab/layout/container/container-queries',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'A container query lets a component change its layout depending on how much space its container gives it, rather than how wide the whole screen is.',
+        'The same component can sit in a narrow sidebar and a wide main column on the same screen, and suit both. A screen breakpoint would give both copies the same layout, because the screen is the same width for each.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Container queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_queries' },
   ],

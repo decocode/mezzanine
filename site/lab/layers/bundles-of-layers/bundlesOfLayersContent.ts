@@ -1,13 +1,19 @@
 // The Lab's Bundles of layers page, in Layers: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../../shared/labTypes'
+import type { CssNote, LabPage } from '../../shared/labTypes'
 
-export const bundlesOfLayersPage: LabTopLevelPage = {
-  id: 'lab-stacking-contexts',
-  href: '/site/lab/layers/bundles-of-layers',
-  title: 'Bundles of layers',
-  subtitle: 'When there’s more than one z-index.',
-  what: 'A bundle of layers with their own z-index can also be treated as a unified layer. Anything placed on top of that bundle is considered a separate layer, and so that creates an additional z-index. You can place bundles on top of other bundles!',
-  why: 'The technical term for a bundle of layers is a Stacking Context.',
+export const bundlesOfLayersPage: LabPage = {
+  id: 'lab-stacking-contexts', kind: 'foundation', title: 'Bundles of layers', href: '/site/lab/layers/bundles-of-layers',
+  description: 'When there’s more than one z-index.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'A bundle of layers with their own z-index can also be treated as a unified layer. Anything placed on top of that bundle is considered a separate layer, and so that creates an additional z-index. You can place bundles on top of other bundles!',
+        'The technical term for a bundle of layers is a Stacking Context.',
+      ],
+    },
+    { key: 'example' },
+  ],
   relatedPages: [
     { label: 'Ordering layers', href: '/site/lab/layers/ordering-layers' },
     { label: 'Positioning', href: '/site/lab/layers/positioning' },

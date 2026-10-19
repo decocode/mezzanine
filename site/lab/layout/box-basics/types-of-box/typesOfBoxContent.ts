@@ -2,10 +2,18 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const typesOfBoxPage: StagePage = {
-  key: 'typesOfBox', id: 'lab-types-of-box', stage: 'boxBasics', title: 'Types of box', href: '/site/lab/layout/box-basics/types-of-box',
-  subtitle: 'When boxes decide whether to stack up or line up.',
-  what: 'Every box is a type, set with the display property. A block box starts a new row and fills the width of its parent. An inline box sits in a row with its neighbours and wraps like words. An inline-block box sits in a row too, but takes a width, height and padding like a block. And display: none removes a box completely, even for screen readers.',
-  why: 'Left alone, block boxes stack one above another and inline boxes line up in rows. This natural arrangement is called normal flow, and it follows the order of the HTML, which is also the order keyboards and screen readers follow. A box can also arrange the boxes inside it, with `display: flex` or `display: grid`, which Side by side, One below another and Grid formation explain.',
+  key: 'typesOfBox', id: 'lab-types-of-box', kind: 'foundation', stage: 'boxBasics', title: 'Types of box', href: '/site/lab/layout/box-basics/types-of-box',
+  description: 'When boxes decide whether to stack up or line up.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Every box is a type, set with the display property. A block box starts a new row and fills the width of its parent. An inline box sits in a row with its neighbours and wraps like words. An inline-block box sits in a row too, but takes a width, height and padding like a block. And display: none removes a box completely, even for screen readers.',
+        'Left alone, block boxes stack one above another and inline boxes line up in rows. This natural arrangement is called normal flow, and it follows the order of the HTML, which is also the order keyboards and screen readers follow. A box can also arrange the boxes inside it, with `display: flex` or `display: grid`, which Side by side, One below another and Grid formation explain.',
+      ],
+    },
+    { key: 'example' },
+  ],
   relatedPages: [
     { label: 'Side by side', href: '/site/lab/layout/side-by-side' },
     { label: 'One below another', href: '/site/lab/layout/one-below-another' },

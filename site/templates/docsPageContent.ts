@@ -36,6 +36,16 @@ export interface ContentSection {
   readonly table?: ContentTable
   // On this page links to headings inside the section, such as one a live example adds.
   readonly subsections?: readonly { readonly id: string; readonly label: string }[]
+  // Headed blocks within the section, such as Browser support, shown after its paragraphs with
+  // level-3 headings and their own On this page links.
+  readonly subheadings?: readonly { readonly key: string; readonly title: string; readonly body: readonly Block[] }[]
+}
+
+// What designers, engineers and other design systems call the same thing as the page's subject.
+export interface AlsoKnownAs {
+  // Such as Figma, CSS, Tailwind CSS, Bootstrap or Material Design.
+  readonly where: string
+  readonly called: Copy
 }
 
 export interface DocsPageContent {
@@ -45,6 +55,8 @@ export interface DocsPageContent {
   readonly kind: 'component' | 'foundation'
   readonly title: string
   readonly description?: Copy | readonly Copy[]
+  // Shown first, in a closed Disclosure, once the page's name is agreed.
+  readonly alsoKnownAs?: readonly AlsoKnownAs[]
   // The sections before Technical details, in order.
   readonly sections?: readonly ContentSection[]
   // The Technical details group, in the order PAGES.md sets.
@@ -54,6 +66,8 @@ export interface DocsPageContent {
 }
 
 const standardTitles: Record<string, string> = {
+  alsoKnownAs: 'Also known as',
+  howItWorks: 'How it works',
   example: 'Example',
   states: 'States',
   variants: 'Variants',
@@ -82,7 +96,7 @@ export function withValues(content: DocsPageContent, values: Record<string, stri
   const fill = (block: Block): Block => typeof block === 'string'
     ? block.replace(/\{(\w+)\}/g, (match, name: string) => values[name] ?? match)
     : { list: block.list.map((item) => item.replace(/\{(\w+)\}/g, (match, name: string) => values[name] ?? match)) }
-  const fillSection = (section: ContentSection): ContentSection => ({ ...section, intro: section.intro?.map(fill), body: section.body?.map(fill) })
+  const fillSection = (section: ContentSection): ContentSection => ({ ...section, intro: section.intro?.map(fill), body: section.body?.map(fill), subheadings: section.subheadings?.map((subheading) => ({ ...subheading, body: subheading.body.map(fill) })) })
   return { ...content, sections: content.sections?.map(fillSection), technicalDetails: content.technicalDetails?.map(fillSection) }
 }
 

@@ -23,10 +23,20 @@
   min-width: 0;
 }
 
-.lab-explainer {
-  display: grid;
-  gap: var(--space-3);
+/* How it works paragraphs and Browser support, which ContentPage places straight into the section:
+   the same spacing and line length the Lab's explanations have always had. */
+.lab-layout .component-section > p,
+.lab-layout .component-section > section > p {
   max-inline-size: 70ch;
+  margin: 0;
+}
+
+.lab-layout .component-section > p + p {
+  margin-block-start: var(--space-3);
+}
+
+.lab-layout .component-section > section {
+  margin-block-start: var(--space-8);
 }
 
 /* Extra space above each example, so one example's frame doesn't run into the next one's heading. */

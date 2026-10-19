@@ -2,10 +2,18 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const marginPage: StagePage = {
-  key: 'margin', id: 'lab-margin', stage: 'addSpace', title: 'Margin', href: '/site/lab/layout/add-space/margin',
-  subtitle: 'When boxes assert their need for personal space.',
-  what: 'Margin is a way to add space outside of a box. It pushes other boxes away, including from the edge of its parent box, if the parent has a border or padding.',
-  why: 'When one box sits above another and both have a margin, the browser uses only the larger of the two. This is called “margin collapsing”.',
+  key: 'margin', id: 'lab-margin', kind: 'foundation', stage: 'addSpace', title: 'Margin', href: '/site/lab/layout/add-space/margin',
+  description: 'When boxes assert their need for personal space.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Margin is a way to add space outside of a box. It pushes other boxes away, including from the edge of its parent box, if the parent has a border or padding.',
+        'When one box sits above another and both have a margin, the browser uses only the larger of the two. This is called “margin collapsing”.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: margin', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/margin' },
     { label: 'MDN: Mastering margin collapsing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Margin_collapsing' },

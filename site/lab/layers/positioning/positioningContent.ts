@@ -1,12 +1,18 @@
 // The Lab's Positioning page, in Layers: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../../shared/labTypes'
+import type { CssNote, LabPage } from '../../shared/labTypes'
 
-export const positioningPage: LabTopLevelPage = {
-  id: 'lab-positioning',
-  href: '/site/lab/layers/positioning',
-  title: 'Positioning',
-  what: 'Positioning takes a box out of normal flow, so it can sit on top of other boxes, or stay in place while the page scrolls.',
-  why: 'It’s how sticky headers, badges on corners and pop-ups work. A positioned box no longer pushes other boxes away, so they can end up underneath it.',
+export const positioningPage: LabPage = {
+  id: 'lab-positioning', kind: 'foundation', title: 'Positioning', href: '/site/lab/layers/positioning',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Positioning takes a box out of normal flow, so it can sit on top of other boxes, or stay in place while the page scrolls.',
+        'It’s how sticky headers, badges on corners and pop-ups work. A positioned box no longer pushes other boxes away, so they can end up underneath it.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: position', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/position' },
     { label: 'MDN: Positioning (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Positioning' },

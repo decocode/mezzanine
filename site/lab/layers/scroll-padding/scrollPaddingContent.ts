@@ -1,12 +1,18 @@
 // The Lab's Scroll padding page, in Layers: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../../shared/labTypes'
+import type { CssNote, LabPage } from '../../shared/labTypes'
 
-export const scrollPaddingPage: LabTopLevelPage = {
-  id: 'lab-scroll-padding',
-  href: '/site/lab/layers/scroll-padding',
-  title: 'Scroll padding',
-  what: 'Scroll padding tells the browser how much room a sticky header takes up, so when you jump to a section, it stops just below the header instead of underneath it.',
-  why: 'Without it, the heading you jumped to, or the control you tabbed to, can end up hidden under the header. WCAG 2.2 has a rule about exactly this, called Focus Not Obscured.',
+export const scrollPaddingPage: LabPage = {
+  id: 'lab-scroll-padding', kind: 'foundation', title: 'Scroll padding', href: '/site/lab/layers/scroll-padding',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Scroll padding tells the browser how much room a sticky header takes up, so when you jump to a section, it stops just below the header instead of underneath it.',
+        'Without it, the heading you jumped to, or the control you tabbed to, can end up hidden under the header. WCAG 2.2 has a rule about exactly this, called Focus Not Obscured.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: scroll-padding', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding' },
     { label: 'WCAG 2.2: Focus not obscured (minimum)', href: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html' },

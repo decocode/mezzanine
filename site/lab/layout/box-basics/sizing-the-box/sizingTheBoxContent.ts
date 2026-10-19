@@ -2,10 +2,18 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const sizingTheBoxPage: StagePage = {
-  key: 'sizingTheBox', id: 'lab-sizing-the-box', stage: 'boxBasics', title: 'Sizing the box', href: '/site/lab/layout/box-basics/sizing-the-box',
-  subtitle: 'When you decide how big a box is, and what that size includes.',
-  what: 'You can give a box a size with width and height, or limits with min-width and max-width. box-sizing decides what a width includes: just the content box, or everything up to the border.',
-  why: 'A box asks for a size, but its parent, its content and its arrangement also have a say. With the default content-box, padding and border are added on top, which is why a width: 100% box with padding can poke out of its parent.',
+  key: 'sizingTheBox', id: 'lab-sizing-the-box', kind: 'foundation', stage: 'boxBasics', title: 'Sizing the box', href: '/site/lab/layout/box-basics/sizing-the-box',
+  description: 'When you decide how big a box is, and what that size includes.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'You can give a box a size with width and height, or limits with min-width and max-width. box-sizing decides what a width includes: just the content box, or everything up to the border.',
+        'A box asks for a size, but its parent, its content and its arrangement also have a say. With the default content-box, padding and border are added on top, which is why a width: 100% box with padding can poke out of its parent.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: box-sizing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing' },
     { label: 'MDN: min-width', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/min-width' },

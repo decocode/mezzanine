@@ -1,121 +1,44 @@
-import type { JSX, ReactNode } from 'react'
-import { Badge, Button, Card, Heading, Text } from '@decocode/mezzanine'
-import { DocsPageTemplate } from '../../templates/DocsPageTemplate'
-import { DocsTable } from '../../components/DocsTable'
-import { splitInlineCode } from './labLogic'
-import type { FuturePage, LabSection, LayoutStage, StagePage } from './labTypes'
-import { childPageCardAction, labBadgeLabel, stagePageHeadings } from './labValues'
-import { stagePagesByStage } from '../layout/layoutContent'
-import { stageExamples as examples } from '../layout/layoutExamples'
-import { emergingFeatures, futurePages } from '../emerging-features/emergingFeaturesContent'
-import { futureExamples } from '../emerging-features/emergingFeaturesExamples'
+import type { ReactNode } from 'react'
+import { Badge, Button, Card, Heading } from '@decocode/mezzanine'
+import { ContentPage } from '../../templates/ContentPage'
+import type { DocsPageContent } from '../../templates/docsPageContent'
+import { childPageCardAction, labBadgeLabel } from './labValues'
 
-// The "How it works" and "Example" sections shared by every Layout page: what it is, why it matters
-// and browser support, then the examples with the CSS behind them. Each is a section of the docs page template.
-function howItWorksSections(page: { id: string; what: string; why?: string; details?: readonly string[]; support?: string }, examples: ReactNode) {
-  return [{
-    id: `${page.id}-how-it-works`,
-    title: stagePageHeadings.howItWorks,
-    content: <div className="lab-section-body">
-      <div className="lab-explainer">
-        {[page.what, page.why, ...(page.details ?? [])].filter((paragraph) => paragraph !== undefined).map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">{splitInlineCode(paragraph).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part)}</Text>)}
-      </div>
-      {page.support && <>
-        <Heading level={3} className="lab-section-heading mz-text-heading-sm">{stagePageHeadings.browserSupport}</Heading>
-        <Text elementType="p" className="lab-example-text mz-text-body-md">{page.support}</Text>
-      </>}
-    </div>,
-  }, {
-    id: `${page.id}-example`,
-    title: stagePageHeadings.example,
-    content: <div className="lab-section-body">{examples}</div>,
-  }]
+// One Lab page, built by the docs site's ContentPage from its content file: Also known as when its
+// name is agreed, How it works (with Browser support where it matters), then the page's example(s)
+// in the section the part names. The wrapper gives examples the Lab's spacing.
+export function LabContentPage({ content, parts }: { content: DocsPageContent; parts: Partial<Record<string, ReactNode>> }) {
+  return <div className="lab-layout">
+    <ContentPage content={content} parts={Object.fromEntries(Object.entries(parts).map(([key, part]) => [key, <div className="lab-section-body">{part}</div>]))} />
+  </div>
 }
 
-// A group's overview: what the group is about, then a Card for each of its pages, with no On this
-// page list. The Button is described by the Card's heading, so each "Read docs" is distinguishable
-// to screen reader users.
-export function StageOverview({ stage }: { stage: LayoutStage }) {
-  return <DocsPageTemplate title={stage.title} description={stage.summary} showContents={false} sections={[
-    {
-      id: `${stage.id}-pages`,
-      title: stage.pagesHeading ?? stagePageHeadings.pages,
-      content: <ul className="lab-child-page-cards">
-        {stagePagesByStage(stage.key).map((page) => <li key={page.key}>
+export interface PageCard {
+  // The Card's heading id, which describes its Button.
+  headingId: string
+  title: string
+  href: string
+  text?: string
+  // Emerging features show the Lab badge instead of text.
+  isLab?: boolean
+}
+
+// An overview page: its content file's introduction, then its one section holding a Card for each
+// page, usually with no On this page list. The Button is described by the Card's heading, so each
+// "Read docs" is distinguishable to screen reader users.
+export function OverviewPage({ content, cards, showContents = false }: { content: DocsPageContent; cards: readonly PageCard[]; showContents?: boolean }) {
+  const sectionKey = content.sections?.[0]?.key ?? ''
+  return <div className="lab-layout">
+    <ContentPage content={content} showContents={showContents} parts={{
+      [sectionKey]: <ul className="lab-child-page-cards">
+        {cards.map((card) => <li key={card.href}>
           <Card>
-            <Heading level={3} id={`lab-child-page-card-${page.key}`}>{page.title}</Heading>
-            <p>{page.subtitle}</p>
-            <Button variant="secondary" href={page.href} aria-describedby={`lab-child-page-card-${page.key}`}>{childPageCardAction}</Button>
+            <Heading level={3} id={card.headingId}>{card.title}</Heading>
+            {card.isLab ? <p className="lab-page-badges"><Badge variant="warning">{labBadgeLabel}</Badge></p> : <p>{card.text}</p>}
+            <Button variant="secondary" href={card.href} aria-describedby={card.headingId}>{childPageCardAction}</Button>
           </Card>
         </li>)}
       </ul>,
-    },
-  ]} />
-}
-
-// What designers, engineers, print and other design systems call the same thing, in a closed Disclosure.
-function alsoKnownAsSection(id: string, title: string, names: NonNullable<StagePage['alsoKnownAs']>) {
-  return {
-    id: `${id}-also-known-as`,
-    title: stagePageHeadings.alsoKnownAs,
-    isCollapsible: true,
-    content: <DocsTable aria-label={`Other names for ${title}`} nameColumn="Where" descriptionColumn="Called" namesAreCode={false} rows={names.map(({ where, called }) => ({
-      name: where,
-      description: splitInlineCode(called).map(({ part, isCode }, index) => isCode ? <code key={index}>{part}</code> : part),
-    }))} />,
-  }
-}
-
-// One stage page: Also known as when its name is agreed, How it works, then Example. A building
-// block's Every Layout and Bedrock sources are its References.
-export function StagePageView({ page }: { page: StagePage }) {
-  const { Example, Detail } = examples[page.key]
-  return <DocsPageTemplate
-    title={page.title}
-    description={page.subtitle}
-    sections={[
-      ...(page.alsoKnownAs ? [alsoKnownAsSection(page.id, page.title, page.alsoKnownAs)] : []),
-      ...howItWorksSections(page, <><Example />{Detail && <Detail />}</>),
-    ]}
-    relatedPages={page.relatedPages ?? []}
-    references={[...(page.similarTo ?? []), ...(page.references ?? [])]}
-  />
-}
-
-// A page still to be sorted into a stage, or a Lab page outside Layout: its "How it works" and "Example" sections.
-export function SectionPageView({ section, Example }: { section: Pick<LabSection, 'id' | 'title' | 'subtitle' | 'what' | 'why' | 'details' | 'support' | 'similarTo' | 'references'> & { relatedPages?: { label: string; href: string }[] }; Example: () => JSX.Element }) {
-  return <DocsPageTemplate
-    title={section.title}
-    description={section.subtitle}
-    sections={howItWorksSections(section, <Example />)}
-    relatedPages={section.relatedPages ?? []}
-    references={section.references ?? section.similarTo ?? []}
-  />
-}
-
-// Emerging features' overview: what emerging features are, then a Card for each, marked Lab.
-export function FutureOverview() {
-  return <DocsPageTemplate title={emergingFeatures.title} description={[emergingFeatures.what, emergingFeatures.why, emergingFeatures.support]} sections={[{
-    id: `${emergingFeatures.id}-pages`,
-    title: stagePageHeadings.pages,
-    content: <ul className="lab-child-page-cards">
-      {futurePages.map((page) => <li key={page.key}>
-        <Card>
-          <Heading level={3} id={`lab-child-page-card-${page.key}`}>{page.title}</Heading>
-          <p className="lab-page-badges"><Badge variant="warning">{labBadgeLabel}</Badge></p>
-          <Button variant="secondary" href={page.href} aria-describedby={`lab-child-page-card-${page.key}`}>{childPageCardAction}</Button>
-        </Card>
-      </li>)}
-    </ul>,
-  }]} />
-}
-
-// One emerging feature: its example, which says which browsers support it, in a "How it works" section.
-export function FuturePageView({ page }: { page: FuturePage }) {
-  const Example = futureExamples[page.key]
-  return <DocsPageTemplate title={page.title} references={page.references ?? []} sections={[{
-    id: `${page.id}-how-it-works`,
-    title: stagePageHeadings.howItWorks,
-    content: <div className="lab-section-body"><Example /></div>,
-  }]} />
+    }} />
+  </div>
 }

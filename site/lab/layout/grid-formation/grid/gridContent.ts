@@ -3,10 +3,18 @@ import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const gridPage: StagePage = {
-  key: 'grid', id: 'lab-grid', stage: 'gridFormation', title: 'Grid', href: '/site/lab/layout/grid-formation/grid',
-  subtitle: 'When boxes line up in rows and columns at once.',
-  what: 'Grid arranges boxes in rows and columns at the same time. You describe the columns, and each item takes the next cell, or spans more than one.',
-  why: 'When things need to line up in both directions, such as a gallery or a page with a header and a sidebar, Grid keeps every edge aligned.',
+  key: 'grid', id: 'lab-grid', kind: 'foundation', stage: 'gridFormation', title: 'Grid', href: '/site/lab/layout/grid-formation/grid',
+  description: 'When boxes line up in rows and columns at once.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Grid arranges boxes in rows and columns at the same time. You describe the columns, and each item takes the next cell, or spans more than one.',
+        'When things need to line up in both directions, such as a gallery or a page with a header and a sidebar, Grid keeps every edge aligned.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Basic concepts of grid layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Basic_concepts' },
     { label: 'MDN: Grids (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Grids' },

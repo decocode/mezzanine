@@ -1,12 +1,18 @@
 // The Lab's Ordering layers page, in Layers: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../../shared/labTypes'
+import type { CssNote, LabPage } from '../../shared/labTypes'
 
-export const orderingLayersPage: LabTopLevelPage = {
-  id: 'lab-named-layers',
-  href: '/site/lab/layers/ordering-layers',
-  title: 'Ordering layers',
-  what: 'The page background is always right at the back. Boxes are displayed on the surface of that page. But boxes can also be placed on top of the surface of other boxes, in layers. The order of those layers is called the z-index.',
-  why: 'Ordering layers means agreeing an order for things that sit on top of each other, such as a sticky header, a dialog and a notification. Mezzanine names five steps once, as tokens, so a decision like “a dialog sits above the sticky header” is made in one place and stays consistent. Every pop-up shares the overlay step, and the newest one sits on top.',
+export const orderingLayersPage: LabPage = {
+  id: 'lab-named-layers', kind: 'foundation', title: 'Ordering layers', href: '/site/lab/layers/ordering-layers',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'The page background is always right at the back. Boxes are displayed on the surface of that page. But boxes can also be placed on top of the surface of other boxes, in layers. The order of those layers is called the z-index.',
+        'Ordering layers means agreeing an order for things that sit on top of each other, such as a sticky header, a dialog and a notification. Mezzanine names five steps once, as tokens, so a decision like “a dialog sits above the sticky header” is made in one place and stays consistent. Every pop-up shares the overlay step, and the newest one sits on top.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/z-index' },
     { label: 'MDN: Understanding z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Understanding_z-index' },

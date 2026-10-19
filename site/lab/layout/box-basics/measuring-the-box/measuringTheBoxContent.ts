@@ -2,15 +2,26 @@
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const measuringTheBoxPage: StagePage = {
-  key: 'measuringTheBox', id: 'lab-measuring-the-box', stage: 'boxBasics', title: 'Measuring the box', href: '/site/lab/layout/box-basics/measuring-the-box',
-  subtitle: 'When a box needs a unit of measurement.',
-  what: 'Every size needs a unit of measurement. Some are fixed, like px. Others depend on something else: the text size (rem, em), the box around it (%), the browser window (vw) or the width of a character (ch).',
-  why: 'The right unit lets a layout look after itself. A size in rem grows when someone enlarges their text, and a width in % follows the box around it. Functions such as clamp() combine units, so a size can grow and shrink within limits.',
+  key: 'measuringTheBox', id: 'lab-measuring-the-box', kind: 'foundation', stage: 'boxBasics', title: 'Measuring the box', href: '/site/lab/layout/box-basics/measuring-the-box',
+  description: 'When a box needs a unit of measurement.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Every size needs a unit of measurement. Some are fixed, like px. Others depend on something else: the text size (rem, em), the box around it (%), the browser window (vw) or the width of a character (ch).',
+        'The right unit lets a layout look after itself. A size in rem grows when someone enlarges their text, and a width in % follows the box around it. Functions such as clamp() combine units, so a size can grow and shrink within limits.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Values and units', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Values_and_units' },
     { label: 'MDN: clamp()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/clamp' },
   ],
 }
+
+// Example copy with a link to another Lab page.
+export const measuringTheBoxExampleLinkText = 'The % bar follows the frame. The vw bar follows the window, so it ignores the frame. The px and rem bars stay put, but rem grows if you enlarge your text. That’s why Mezzanine’s [spacing tokens](/site/lab/layout/add-space/gap) are in rem.'
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.

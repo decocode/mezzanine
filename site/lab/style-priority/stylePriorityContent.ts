@@ -1,13 +1,19 @@
 // The Lab's Style priority page: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../shared/labTypes'
+import type { CssNote, LabPage } from '../shared/labTypes'
 
-export const stylePriorityPage: LabTopLevelPage = {
-  id: 'lab-layers',
-  href: '/site/lab/style-priority',
-  title: 'Style priority',
-  subtitle: 'When the style council decides which rule wins.',
-  what: 'When several styles apply to the same box, the browser’s cascade, the C in CSS, decides which one wins. It checks importance first (!important), then layers, then specificity, where a more specific selector beats a general one, and finally order, where the rule written last wins. Elsewhere you’ll see this called the cascade, precedence or specificity.',
-  why: 'Cascade layers are the second step. They put rules into ranked groups, so a whole group, such as Mezzanine’s styles, always loses to an app’s styles, however specific its selectors. Apps could then adjust Mezzanine without fighting over selector strength or reaching for !important. Mezzanine’s CSS isn’t in a layer today.',
+export const stylePriorityPage: LabPage = {
+  id: 'lab-layers', kind: 'foundation', title: 'Style priority', href: '/site/lab/style-priority',
+  description: 'When the style council decides which rule wins.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'When several styles apply to the same box, the browser’s cascade, the C in CSS, decides which one wins. It checks importance first (!important), then layers, then specificity, where a more specific selector beats a general one, and finally order, where the rule written last wins. Elsewhere you’ll see this called the cascade, precedence or specificity.',
+        'Cascade layers are the second step. They put rules into ranked groups, so a whole group, such as Mezzanine’s styles, always loses to an app’s styles, however specific its selectors. Apps could then adjust Mezzanine without fighting over selector strength or reaching for !important. Mezzanine’s CSS isn’t in a layer today.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
     { label: 'MDN: Introducing the CSS cascade', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction' },
     { label: 'MDN: Handling conflicts', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts' },

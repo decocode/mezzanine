@@ -3,12 +3,26 @@ import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const reelPage: StagePage = {
-  key: 'reel', id: 'lab-reel', stage: 'sideBySide', title: 'Reel', href: '/site/lab/layout/side-by-side/reel',
-  subtitle: 'When a row scrolls sideways.',
-  what: 'Reel is a row of items that scrolls sideways, like a conga line going off the edge of the screen.',
-  why: 'It shows lots of items without wrapping them onto new rows. Keyboard users need to reach it too, so the scrolling area can take focus and has a name.',
-  similarTo: [everyLayout('Reel', 'reel'), bedrock('Reel', 'reel')],
+  key: 'reel', id: 'lab-reel', kind: 'foundation', stage: 'sideBySide', title: 'Reel', href: '/site/lab/layout/side-by-side/reel',
+  description: 'When a row scrolls sideways.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Reel is a row of items that scrolls sideways, like a conga line going off the edge of the screen.',
+        'It shows lots of items without wrapping them onto new rows. Keyboard users need to reach it too, so the scrolling area can take focus and has a name.',
+      ],
+    },
+    { key: 'example' },
+  ],
+  references: [
+    everyLayout('Reel', 'reel'),
+    bedrock('Reel', 'reel'),
+  ],
 }
+
+// Example copy with a link to another Lab page.
+export const reelExampleLinkText = 'The reel scrolls sideways. Keyboard users reach it with Tab and scroll it with the arrow keys. The scrolling comes from overflow: see [Overflowing the box](/site/lab/layout/inside-the-box/overflowing-the-box).'
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.

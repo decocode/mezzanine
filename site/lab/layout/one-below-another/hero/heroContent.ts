@@ -3,11 +3,22 @@ import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const heroPage: StagePage = {
-  key: 'hero', id: 'lab-hero', stage: 'oneBelowAnother', title: 'Hero', href: '/site/lab/layout/one-below-another/hero',
-  subtitle: 'When one item takes centre stage, like the title on a book cover.',
-  what: 'Hero is a tall box, like the opening section of a homepage. One item sits in the middle, and anything before or after it is pushed to the top and bottom edges, like the title, publisher and author on a book cover.',
-  why: 'The box has a minimum height, not a fixed one, so if the content needs more room, such as on a small phone or with enlarged text, the box grows instead of cutting anything off.',
-  similarTo: [everyLayout('Cover', 'cover'), bedrock('Cover', 'cover')],
+  key: 'hero', id: 'lab-hero', kind: 'foundation', stage: 'oneBelowAnother', title: 'Hero', href: '/site/lab/layout/one-below-another/hero',
+  description: 'When one item takes centre stage, like the title on a book cover.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Hero is a tall box, like the opening section of a homepage. One item sits in the middle, and anything before or after it is pushed to the top and bottom edges, like the title, publisher and author on a book cover.',
+        'The box has a minimum height, not a fixed one, so if the content needs more room, such as on a small phone or with enlarged text, the box grows instead of cutting anything off.',
+      ],
+    },
+    { key: 'example' },
+  ],
+  references: [
+    everyLayout('Cover', 'cover'),
+    bedrock('Cover', 'cover'),
+  ],
 }
 
 // What the example's CSS does. Unless marked as an example, the code is copied from

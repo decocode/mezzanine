@@ -3,11 +3,8 @@ import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const rowWrapPage: StagePage = {
-  key: 'rowWrap', id: 'lab-row-wrap', stage: 'sideBySide', title: 'Row wrap', href: '/site/lab/layout/side-by-side/row-wrap',
-  subtitle: 'When squeezed boxes enjoy a spacious new row.',
-  what: 'Row wrap moves boxes into a new row when they no longer fit. The word “wrap” is borrowed from how words in a string of text behave. Each box keeps its own width, so the rows can end at different places.',
-  why: 'Row wrap is useful for small items that come in any number and any length, such as tags, Badges and filter buttons. Every item stays visible, with the same space between each one.',
-  similarTo: [everyLayout('Cluster', 'cluster'), bedrock('InlineCluster', 'inline-cluster')],
+  key: 'rowWrap', id: 'lab-row-wrap', kind: 'foundation', stage: 'sideBySide', title: 'Row wrap', href: '/site/lab/layout/side-by-side/row-wrap',
+  description: 'When squeezed boxes enjoy a spacious new row.',
   alsoKnownAs: [
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap.' },
     { where: 'CSS', called: 'Flexbox with `flex-wrap: wrap`. CSS has no single name for this pattern.' },
@@ -15,7 +12,19 @@ export const rowWrapPage: StagePage = {
     { where: 'Bootstrap', called: '`d-flex flex-wrap` on the parent, with a `gap` utility. There’s no named pattern.' },
     { where: 'Material Design', called: 'A chip set: a group of chips that wraps onto new rows.' },
   ],
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Row wrap moves boxes into a new row when they no longer fit. The word “wrap” is borrowed from how words in a string of text behave. Each box keeps its own width, so the rows can end at different places.',
+        'Row wrap is useful for small items that come in any number and any length, such as tags, Badges and filter buttons. Every item stays visible, with the same space between each one.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
+    everyLayout('Cluster', 'cluster'),
+    bedrock('InlineCluster', 'inline-cluster'),
     { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
     { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap' },
     { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },

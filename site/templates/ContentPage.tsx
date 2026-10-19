@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { Heading } from '@decocode/mezzanine'
 import { DocsTable } from '../components/DocsTable'
 import { RichText } from '../components/RichText'
 import { DocsPageTemplate, type DocumentationSection } from './DocsPageTemplate'
@@ -21,27 +22,45 @@ interface ContentPageProps {
   showContents?: boolean
 }
 
-// Builds a documentation page from its content file: the sections in order, then the Technical
-// details group, Related pages and References, through DocsPageTemplate.
+// Builds a page, in the Docs or the Lab, from its content file: Also known as, the sections in order,
+// then the Technical details group, Related pages and References, through DocsPageTemplate.
 export function ContentPage({ content, parts = {}, showContents }: ContentPageProps) {
-  const toSection = (section: ContentSection): DocumentationSection => ({
-    id: sectionId(content.id, section.key),
-    title: sectionTitle(section, content.kind),
-    subsections: section.subsections,
-    content: <>
-      {section.intro && <Blocks blocks={section.intro} className="component-section-description" />}
-      {section.body && <Blocks blocks={section.body} />}
-      {parts[section.key]}
-      {section.table && <DocsTable
-        aria-label={section.table.label}
-        nameColumn={section.table.nameColumn}
-        descriptionColumn={section.table.descriptionColumn}
-        namesAreCode={section.table.namesAreCode}
-        className={section.table.className}
-        rows={section.table.rows.map(({ name, description }) => ({ name, description: <RichText text={description} /> }))}
-      />}
-    </>,
-  })
+  const toSection = (section: ContentSection): DocumentationSection => {
+    const id = sectionId(content.id, section.key)
+    const subheadings = (section.subheadings ?? []).map((subheading) => ({ ...subheading, id: sectionId(id, subheading.key) }))
+    return {
+      id,
+      title: sectionTitle(section, content.kind),
+      subsections: section.subsections || subheadings.length
+        ? [...(section.subsections ?? []), ...subheadings.map(({ id, title }) => ({ id, label: title }))]
+        : undefined,
+      content: <>
+        {section.intro && <Blocks blocks={section.intro} className="component-section-description" />}
+        {section.body && <Blocks blocks={section.body} />}
+        {subheadings.map((subheading) => <section key={subheading.key} aria-labelledby={subheading.id}>
+          <Heading id={subheading.id} level={3} className="mz-text-heading-sm">{subheading.title}</Heading>
+          <Blocks blocks={subheading.body} />
+        </section>)}
+        {parts[section.key]}
+        {section.table && <DocsTable
+          aria-label={section.table.label}
+          nameColumn={section.table.nameColumn}
+          descriptionColumn={section.table.descriptionColumn}
+          namesAreCode={section.table.namesAreCode}
+          className={section.table.className}
+          rows={section.table.rows.map(({ name, description }) => ({ name, description: <RichText text={description} /> }))}
+        />}
+      </>,
+    }
+  }
+  // What other tools call the same thing, in a closed Disclosure whose header is the section heading.
+  const alsoKnownAs: DocumentationSection[] = content.alsoKnownAs ? [{
+    id: sectionId(content.id, 'alsoKnownAs'),
+    title: sectionTitle({ key: 'alsoKnownAs' }, content.kind),
+    isCollapsible: true,
+    content: <DocsTable aria-label={`Other names for ${content.title}`} nameColumn="Where" descriptionColumn="Called" namesAreCode={false}
+      rows={content.alsoKnownAs.map(({ where, called }) => ({ name: where, description: <RichText text={called} /> }))} />,
+  }] : []
   const technicalDetails = content.technicalDetails ?? []
   const description = content.description === undefined
     ? undefined
@@ -54,6 +73,7 @@ export function ContentPage({ content, parts = {}, showContents }: ContentPagePr
       relatedPages={content.relatedPages}
       references={content.references}
       sections={[
+        ...alsoKnownAs,
         ...(content.sections ?? []).map(toSection),
         ...(technicalDetails.length ? [{ id: sectionId(content.id, 'technicalDetails'), title: technicalDetailsTitle, sections: technicalDetails.map(toSection) }] : []),
       ]}

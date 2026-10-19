@@ -3,12 +3,21 @@ import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const rowPage: StagePage = {
-  key: 'row', id: 'lab-row', stage: 'sideBySide', title: 'Row', href: '/site/lab/layout/side-by-side/row',
-  subtitle: 'When boxes stay together in one row.',
-  what: 'Row keeps items in a single row, like boxes holding hands. It can also switch to a column when its space is narrower than a limit you set.',
-  why: 'A row of buttons, or a logo beside a title, should stay together. The switch stops the row getting squashed in narrow space, and the limit is a size, not a screen width.',
-  similarTo: [everyLayout('Switcher', 'switcher'), bedrock('Inline', 'inline')],
+  key: 'row', id: 'lab-row', kind: 'foundation', stage: 'sideBySide', title: 'Row', href: '/site/lab/layout/side-by-side/row',
+  description: 'When boxes stay together in one row.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'Row keeps items in a single row, like boxes holding hands. It can also switch to a column when its space is narrower than a limit you set.',
+        'A row of buttons, or a logo beside a title, should stay together. The switch stops the row getting squashed in narrow space, and the limit is a size, not a screen width.',
+      ],
+    },
+    { key: 'example' },
+  ],
   references: [
+    everyLayout('Switcher', 'switcher'),
+    bedrock('Inline', 'inline'),
     { label: 'MDN: Basic concepts of flexbox', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts' },
     { label: 'MDN: Flexbox (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Flexbox' },
   ],

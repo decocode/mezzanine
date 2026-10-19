@@ -1,13 +1,19 @@
 // The Lab's Touch targets page, in Browser and device: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabTopLevelPage } from '../../shared/labTypes'
+import type { CssNote, LabPage } from '../../shared/labTypes'
 
-export const touchTargetsPage: LabTopLevelPage = {
-  id: 'lab-target-size',
-  href: '/site/lab/browser-and-device/touch-targets',
-  title: 'Touch targets',
-  subtitle: 'When something is big enough to hit with a finger, or an unsteady hand.',
-  what: 'A target size is the smallest area that something you tap or click should cover, so it’s easy to hit with a finger or an unsteady hand.',
-  why: 'WCAG 2.2 sets a minimum of 24 by 24 pixels. Mezzanine’s buttons use 44 pixels today, but the value, 2.75rem, is written by hand. As a token, every control can share it.',
+export const touchTargetsPage: LabPage = {
+  id: 'lab-target-size', kind: 'foundation', title: 'Touch targets', href: '/site/lab/browser-and-device/touch-targets',
+  description: 'When something is big enough to hit with a finger, or an unsteady hand.',
+  sections: [
+    {
+      key: 'howItWorks',
+      body: [
+        'A target size is the smallest area that something you tap or click should cover, so it’s easy to hit with a finger or an unsteady hand.',
+        'WCAG 2.2 sets a minimum of 24 by 24 pixels. Mezzanine’s buttons use 44 pixels today, but the value, 2.75rem, is written by hand. As a token, every control can share it.',
+      ],
+    },
+    { key: 'example' },
+  ],
   relatedPages: [{ label: 'Target size', href: '/interaction/target-size' }],
   references: [
     { label: 'WCAG 2.2: Target size (minimum)', href: 'https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html' },
