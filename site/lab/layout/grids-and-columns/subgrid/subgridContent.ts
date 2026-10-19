@@ -1,8 +1,8 @@
-// The Lab's Subgrid page, in Grid formation: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+// The Lab's Subgrid page, in Grids and columns: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
 export const subgridPage: StagePage = {
-  key: 'subgrid', id: 'lab-subgrid', kind: 'foundation', stage: 'gridFormation', title: 'Subgrid', href: '/site/lab/layout/grid-formation/subgrid',
+  key: 'subgrid', id: 'lab-subgrid', kind: 'foundation', stage: 'gridsAndColumns', title: 'Subgrid', href: '/site/lab/layout/grids-and-columns/subgrid',
   description: 'When the parts inside boxes line up with the boxes beside them.',
   sections: [
     {

@@ -24,10 +24,9 @@ import { rowWrapPage } from './side-by-side/row-wrap/rowWrapContent'
 import { rowWrapGrowPage } from './side-by-side/row-wrap-grow/rowWrapGrowContent'
 import { reelPage } from './side-by-side/reel/reelContent'
 import { ratioPairPage } from './side-by-side/ratio-pair/ratioPairContent'
-import { columnPage } from './one-below-another/column/columnContent'
-import { heroPage } from './one-below-another/hero/heroContent'
-import { gridPage } from './grid-formation/grid/gridContent'
-import { subgridPage } from './grid-formation/subgrid/subgridContent'
+import { columnPage } from './grids-and-columns/column/columnContent'
+import { gridPage } from './grids-and-columns/grid/gridContent'
+import { subgridPage } from './grids-and-columns/subgrid/subgridContent'
 import { containerQueriesPage } from './container/container-queries/containerQueriesContent'
 import { fluidSizingPage } from './container/fluid-sizing/fluidSizingContent'
 
@@ -46,8 +45,7 @@ export const layoutStages: LayoutStage[] = [
   { key: 'addSpace', id: 'lab-stage-add-space', slug: 'add-space', title: 'Add space', summary: 'Space outside a box, inside it, and between the boxes it holds.' },
   { key: 'insideTheBox', id: 'lab-stage-inside-the-box', slug: 'inside-the-box', title: 'Inside the box', summary: 'A box holds content: text, pictures, other boxes. These pages are about how that content behaves inside its box.' },
   { key: 'sideBySide', id: 'lab-stage-side-by-side', slug: 'side-by-side', title: 'Side by side', summary: 'Ways to place boxes next to each other.' },
-  { key: 'oneBelowAnother', id: 'lab-stage-one-below-another', slug: 'one-below-another', title: 'One below another', summary: 'Ways to place boxes one below another.' },
-  { key: 'gridFormation', id: 'lab-stage-grid-formation', slug: 'grid-formation', title: 'Grid formation', summary: 'Boxes in rows and columns at the same time.' },
+  { key: 'gridsAndColumns', id: 'lab-stage-grids-and-columns', slug: 'grids-and-columns', title: 'Grids and columns', summary: 'Boxes in a column, or in rows and columns at the same time.' },
   { key: 'container', id: 'lab-stage-container', slug: 'container', title: 'Container', summary: 'When a box responds to the space its container gives it.' },
 ]
 
@@ -57,8 +55,7 @@ const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
   addSpace: [marginPage, paddingPage, gapPage],
   insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, aspectRatioPage, contentColumnsPage, boxHasContentPage],
   sideBySide: [rowPage, rowWrapPage, rowWrapGrowPage, reelPage, ratioPairPage],
-  oneBelowAnother: [columnPage, heroPage],
-  gridFormation: [gridPage, subgridPage],
+  gridsAndColumns: [columnPage, gridPage, subgridPage],
   container: [containerQueriesPage, fluidSizingPage],
 }
 

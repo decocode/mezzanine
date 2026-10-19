@@ -9,15 +9,14 @@ export const typesOfBoxPage: StagePage = {
       key: 'howItWorks',
       body: [
         'Every box is a type, set with the display property. A block box starts a new row and fills the width of its parent. An inline box sits in a row with its neighbours and wraps like words. An inline-block box sits in a row too, but takes a width, height and padding like a block. And display: none removes a box completely, even for screen readers.',
-        'Left alone, block boxes stack one above another and inline boxes line up in rows. This natural arrangement is called normal flow, and it follows the order of the HTML, which is also the order keyboards and screen readers follow. A box can also arrange the boxes inside it, with `display: flex` or `display: grid`, which Side by side, One below another and Grid formation explain.',
+        'Left alone, block boxes stack one above another and inline boxes line up in rows. This natural arrangement is called normal flow, and it follows the order of the HTML, which is also the order keyboards and screen readers follow. A box can also arrange the boxes inside it, with `display: flex` or `display: grid`, which Side by side and Grids and columns explain.',
       ],
     },
     { key: 'example' },
   ],
   relatedPages: [
     { label: 'Side by side', href: '/site/lab/layout/side-by-side' },
-    { label: 'One below another', href: '/site/lab/layout/one-below-another' },
-    { label: 'Grid formation', href: '/site/lab/layout/grid-formation' },
+    { label: 'Grids and columns', href: '/site/lab/layout/grids-and-columns' },
   ],
   references: [
     { label: 'MDN: display', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display' },

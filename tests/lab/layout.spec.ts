@@ -76,7 +76,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
 
   // A stage page explains how it works, then shows an example with the CSS behind it. A building
   // block page also links to its sources.
-  await page.goto('/site/lab/layout/one-below-another/column')
+  await page.goto('/site/lab/layout/grids-and-columns/column')
   await expect(page).toHaveTitle('Column | Lab')
   await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Example', exact: true, level: 2 })).toBeVisible()

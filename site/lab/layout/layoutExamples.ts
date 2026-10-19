@@ -20,10 +20,9 @@ import { RowWrapExample } from './side-by-side/row-wrap/RowWrapExample'
 import { RowWrapGrowExample } from './side-by-side/row-wrap-grow/RowWrapGrowExample'
 import { ReelExample } from './side-by-side/reel/ReelExample'
 import { RatioPairExample } from './side-by-side/ratio-pair/RatioPairExample'
-import { ColumnExample } from './one-below-another/column/ColumnExample'
-import { HeroExample } from './one-below-another/hero/HeroExample'
-import { GridExample } from './grid-formation/grid/GridExample'
-import { SubgridExample } from './grid-formation/subgrid/SubgridExample'
+import { ColumnExample } from './grids-and-columns/column/ColumnExample'
+import { GridExample } from './grids-and-columns/grid/GridExample'
+import { SubgridExample } from './grids-and-columns/subgrid/SubgridExample'
 import { ContainerQueriesExample } from './container/container-queries/ContainerQueriesExample'
 import { FluidSizingExample } from './container/fluid-sizing/FluidSizingExample'
 
@@ -49,7 +48,6 @@ export const stageExamples: StageExamples = {
   reel: { Example: ReelExample },
   ratioPair: { Example: RatioPairExample },
   column: { Example: ColumnExample },
-  hero: { Example: HeroExample },
   grid: { Example: GridExample },
   subgrid: { Example: SubgridExample },
   containerQueries: { Example: ContainerQueriesExample },

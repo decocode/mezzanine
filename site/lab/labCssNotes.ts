@@ -20,10 +20,9 @@ import { rowWrapCssNotes } from './layout/side-by-side/row-wrap/rowWrapContent'
 import { rowWrapGrowCssNotes } from './layout/side-by-side/row-wrap-grow/rowWrapGrowContent'
 import { reelCssNotes } from './layout/side-by-side/reel/reelContent'
 import { ratioPairCssNotes } from './layout/side-by-side/ratio-pair/ratioPairContent'
-import { columnCssNotes } from './layout/one-below-another/column/columnContent'
-import { heroCssNotes } from './layout/one-below-another/hero/heroContent'
-import { gridCssNotes } from './layout/grid-formation/grid/gridContent'
-import { subgridCssNotes } from './layout/grid-formation/subgrid/subgridContent'
+import { columnCssNotes } from './layout/grids-and-columns/column/columnContent'
+import { gridCssNotes } from './layout/grids-and-columns/grid/gridContent'
+import { subgridCssNotes } from './layout/grids-and-columns/subgrid/subgridContent'
 import { containerQueriesCssNotes } from './layout/container/container-queries/containerQueriesContent'
 import { fluidSizingCssNotes } from './layout/container/fluid-sizing/fluidSizingContent'
 import { positioningCssNotes } from './layers/positioning/positioningContent'
@@ -63,7 +62,6 @@ export const cssNotes: Record<string, CssNote> = {
   ...reelCssNotes,
   ...ratioPairCssNotes,
   ...columnCssNotes,
-  ...heroCssNotes,
   ...gridCssNotes,
   ...subgridCssNotes,
   ...containerQueriesCssNotes,

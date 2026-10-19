@@ -363,7 +363,7 @@
   background: var(--color-surface);
 }
 
-/* Grid formation, and alignment inside the box. */
+/* Grids and columns, and alignment inside the box. */
 .lab-grid-example {
   display: grid;
   grid-template-columns: var(--lab-grid-columns);
@@ -494,38 +494,6 @@
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
-}
-
-.lab-hero {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  min-block-size: var(--lab-hero-min, 20rem);
-  padding: var(--space-4);
-}
-
-.lab-hero-centre {
-  margin-block: auto;
-}
-
-/* The Hero example's outline, so you can see the box the middle item is centred in. */
-.lab-hero-example {
-  border: 1px dashed var(--color-text-muted);
-}
-
-/* The example's items: small labels at the edges and a large centred headline. */
-.lab-hero-example .lab-hero-small {
-  align-self: flex-start;
-  padding: var(--space-1) var(--space-2);
-  border: 1px solid var(--color-border);
-}
-
-.lab-hero-example .lab-hero-end {
-  align-self: center;
-}
-
-.lab-hero-headline {
-  text-align: center;
 }
 
 .lab-reel {

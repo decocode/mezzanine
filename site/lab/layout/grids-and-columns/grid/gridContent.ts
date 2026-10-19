@@ -1,9 +1,9 @@
-// The Lab's Grid page, in Grid formation: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+// The Lab's Grid page, in Grids and columns: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const gridPage: StagePage = {
-  key: 'grid', id: 'lab-grid', kind: 'foundation', stage: 'gridFormation', title: 'Grid', href: '/site/lab/layout/grid-formation/grid',
+  key: 'grid', id: 'lab-grid', kind: 'foundation', stage: 'gridsAndColumns', title: 'Grid', href: '/site/lab/layout/grids-and-columns/grid',
   description: 'When boxes line up in rows and columns at once.',
   sections: [
     {

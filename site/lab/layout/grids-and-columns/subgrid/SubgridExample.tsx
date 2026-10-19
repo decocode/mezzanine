@@ -1,4 +1,4 @@
-// The example for the Lab's Subgrid page, in Grid formation.
+// The example for the Lab's Subgrid page, in Grids and columns.
 import { useState } from 'react'
 import { Button, Checkbox, Heading, Text } from '@decocode/mezzanine'
 import { CssNotes, ExampleFrame, ExampleText } from '../../../shared/LabParts'

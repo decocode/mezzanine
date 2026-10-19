@@ -51,15 +51,6 @@ export function AspectRatio({ children, ratio }: Children & { ratio?: string }) 
   return <div className="lab-aspect-ratio" style={vars({ '--lab-aspect-ratio': ratio })}>{children}</div>
 }
 
-// Hero: a tall area with one item in the middle and optional items at the top and bottom.
-export function Hero({ children, top, bottom, minHeight }: Children & { top?: ReactNode; bottom?: ReactNode; minHeight?: string }) {
-  return <div className="lab-hero" style={vars({ '--lab-hero-min': minHeight })}>
-    {top}
-    <div className="lab-hero-centre">{children}</div>
-    {bottom}
-  </div>
-}
-
 // Reel: a row that scrolls sideways. It is a named region that takes focus, so keyboard users can scroll it.
 export function Reel({ children, label, itemWidth }: Children & { label: string; itemWidth?: string }) {
   return <div className="lab-reel" role="region" aria-label={label} tabIndex={0} style={vars({ '--lab-reel-item': itemWidth })}>{children}</div>

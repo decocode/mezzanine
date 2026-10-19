@@ -1,4 +1,4 @@
-// The example for the Lab's Column page, in One below another.
+// The example for the Lab's Column page, in Grids and columns.
 import { CssNotes, ExampleFrame, ExampleText } from '../../../shared/LabParts'
 import { Block, Column } from '../../../shared/LabPrimitives'
 import { columnCssNotes } from './columnContent'

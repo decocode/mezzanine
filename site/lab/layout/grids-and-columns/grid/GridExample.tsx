@@ -1,4 +1,4 @@
-// The example for the Lab's Grid page, in Grid formation.
+// The example for the Lab's Grid page, in Grids and columns.
 import { useState, type CSSProperties } from 'react'
 import { CssNotes, ExampleFrame, ExampleHeading, ExampleText, ValuePicker } from '../../../shared/LabParts'
 import { AutoFillGrid, Block, FixedColumnGrid, FixedColumnGridItem } from '../../../shared/LabPrimitives'

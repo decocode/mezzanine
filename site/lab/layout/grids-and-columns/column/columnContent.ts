@@ -1,9 +1,9 @@
-// The Lab's Column page, in One below another: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+// The Lab's Column page, in Grids and columns: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
 export const columnPage: StagePage = {
-  key: 'column', id: 'lab-column', kind: 'foundation', stage: 'oneBelowAnother', title: 'Column', href: '/site/lab/layout/one-below-another/column',
+  key: 'column', id: 'lab-column', kind: 'foundation', stage: 'gridsAndColumns', title: 'Column', href: '/site/lab/layout/grids-and-columns/column',
   description: 'When boxes sit one below another, evenly spaced.',
   sections: [
     {
