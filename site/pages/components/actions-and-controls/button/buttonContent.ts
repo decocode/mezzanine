@@ -41,7 +41,7 @@ export const buttonStates: {
     { name: 'Pressed', state: 'pressed', reactAriaState: 'data-pressed', description: 'Holding a pointer or activation key down shows the pressed background.' },
     { name: 'Focused', state: 'focused', reactAriaState: 'data-focus-visible', description: 'Keyboard focus adds a visible outline.' },
     { name: 'Pending', state: 'pending', reactAriaState: 'isPending', description: 'Shows a progress indicator and prevents further activation while remaining focusable.' },
-    { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled', description: 'Unavailable for activation and skipped by keyboard focus.' },
+    { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled', description: 'Unavailable for activation, shown faded and skipped by keyboard focus.' },
   ]
 
 export const buttonSizes: {
@@ -55,9 +55,9 @@ export const buttonSizes: {
     { label: 'Extra large', size: 'xl', usage: 'Highly prominent actions in heroes and landing pages.' },
   ]
 
-// Rows of the Content table in Content and sizes; the page renders a live Button in each.
+// Rows of the table in Button label and Icon placement; the page renders a live Button in each.
 export const buttonContentOptions: {
-  id: 'text-only' | 'leading-icon' | 'trailing-icon' | 'icon-only'
+  id: 'text-only' | 'leading-icon' | 'trailing-icon' | 'label-tooltip' | 'label-below' | 'label-above'
   name: string
   prop?: string
   description: string
@@ -65,13 +65,14 @@ export const buttonContentOptions: {
     { id: 'text-only', name: 'Text-only', description: 'Buttons use a text label without an icon by default.' },
     { id: 'leading-icon', name: 'Text + icon leading', prop: 'iconLeading', description: 'Places an icon before the label.' },
     { id: 'trailing-icon', name: 'Text + icon trailing', prop: 'iconTrailing', description: 'Places an icon after the label.' },
-    { id: 'icon-only', name: 'Icon only', prop: 'aria-label', description: 'No visible text. Supply an accessible name and a tooltip for hover and keyboard focus.' },
+    { id: 'label-tooltip', name: 'Icon, label in a tooltip', prop: 'labelPlacement="tooltip"', description: 'Shows only the icon. The label appears in a tooltip on hover and keyboard focus, and is the button’s accessible name.' },
+    { id: 'label-below', name: 'Icon, label below', prop: 'labelPlacement="below"', description: 'Shows the label under the icon, as in a Rail.' },
+    { id: 'label-above', name: 'Icon, label above', prop: 'labelPlacement="above"', description: 'Shows the label over the icon.' },
   ]
 
 // Copy shown inside the live examples.
 export const buttonExampleCopy = {
   pressCount: 'Press count:',
-  sizesTitle: 'Sizes',
   navigation: {
     lead: 'Want to know how a navigational button works with a keyboard or screen reader?',
     label: 'Read accessibility details',
@@ -80,15 +81,15 @@ export const buttonExampleCopy = {
   },
 } as const
 
-export const buttonContent: DocsPageContent & { readonly iconOnlyLabel: Copy } = {
+export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy } = {
   id: 'button',
   kind: 'component',
   // Also used by the Toggle button page.
-  iconOnlyLabel: 'Download',
+  iconButtonLabel: 'Download',
   title: 'Button',
-  description: 'A button lets someone do something, such as submit a form, save their work or open a menu. Its label tells them what will happen when they press it.',
+  description: 'A button lets someone do something, such as submit a form, save their work or trigger a dialog. Its label tells them what will happen when they press it.',
   sections: [
-    { key: 'example', intro: ['`Button` defaults to the primary variant and medium size. Activate this example to see its `onPress` handler update the count.'] },
+    { key: 'example', intro: ['`Button` defaults to the primary variant and medium size. Pressing it runs its `onPress` handler, which updates the count.'] },
     {
       key: 'navigationalButtons',
       title: 'Navigational buttons',
@@ -97,10 +98,11 @@ export const buttonContent: DocsPageContent & { readonly iconOnlyLabel: Copy } =
         'Use this when the button’s main job is to go somewhere. For links within a sentence, use `Link`.',
       ],
     },
-    { key: 'contentAndSizes', title: 'Content and sizes', subsections: [{ id: 'button-sizes-heading', label: 'Sizes' }] },
+    { key: 'labelAndIconPlacement', title: 'Button label and Icon placement' },
+    { key: 'sizes', title: 'Button sizes' },
     {
       key: 'hierarchy',
-      title: 'Hierarchy',
+      title: 'Button hierarchy',
       intro: [
         'Button hierarchy communicates the relative importance of actions.',
         {
@@ -117,13 +119,13 @@ export const buttonContent: DocsPageContent & { readonly iconOnlyLabel: Copy } =
   technicalDetails: [
     {
       key: 'anatomy',
-      intro: ['`Button` supports four content options: text-only, text with a leading icon, text with a trailing icon, and icon only. Use `iconLeading` or `iconTrailing`for icons. For icon only, omit children and supply `aria-label` or `aria-labelledby`. Compose with `TooltipTrigger` and `Tooltip` to show its label on hover or keyboard focus.'],
+      intro: ['`Button` places its label and icon in six ways: text only; an icon before or after the label, with `iconLeading` or `iconTrailing`; or an icon button, whose label sits in a tooltip, below the icon or above it, with `labelPlacement`. An icon button’s label is always its children, so the visible words and the accessible name match.'],
       table: {
         label: 'Button anatomy',
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'Button', description: 'The action control, containing a text label and optional leading or trailing icons.' },
+          { name: 'Button', description: 'The control. It holds the label and, optionally, an icon before or after it, or an icon with the label in a tooltip, below or above.' },
         ],
       },
     },
@@ -133,8 +135,8 @@ export const buttonContent: DocsPageContent & { readonly iconOnlyLabel: Copy } =
       intro: [
         'Handle actions with `onPress`. To navigate instead, supply `href`; the styling, sizes and icons stay the same. Use `Link` for ordinary text links.',
         'With `href`, Button also accepts React Aria Link props such as `target`, `rel`, `download` and `isDisabled`. Form props and `isPending` work only without `href`.',
-        'Use `isPending` while an action is in progress: `Button` displays its progress indicator and prevents further presses while remaining focusable. Use `isDisabled` when the action is unavailable.',
-        'Button labels wrap when space is limited, allowing the control to grow taller without shrinking the text. Icons retain their size.',
+        'Use `isPending` while an action is in progress: `Button` shows a progress indicator and ignores further presses, but stays focusable. Use `isDisabled` when the action is unavailable.',
+        'When space is limited, visible labels wrap and the button grows taller; the text never shrinks. Icons keep their size.',
       ],
     },
     {
@@ -142,7 +144,7 @@ export const buttonContent: DocsPageContent & { readonly iconOnlyLabel: Copy } =
       intro: [
         'Without `href`, Button is a native `<button>`. Screen readers announce it as a button, and both Enter and Space activate it.',
         'With `href`, Button is a React Aria `Link`. Screen readers announce it as a link, Enter activates it but Space does not, and people can open it in a new tab or copy its address. React Aria keeps Button and Link separate for these reasons; Mezzanine’s Button chooses the right one for you.',
-        'Keep visible labels clear. Icon-only buttons need an accessible name even when they have a tooltip.',
+        'An icon button’s label is its accessible name, wherever it appears. A tooltip label shows on hover and keyboard focus, but not on touch screens, so use `below` or `above` where people need to read the label on touch.',
       ],
     },
     {

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
   Button, Checkbox, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel,
   HomeIcon, Link, PanelLeftOpenIcon, PanelRightOpenIcon, Sidebar, SidebarPanel, SidebarTrigger,
-  ToggleButton, ToggleButtonGroup, Tooltip, TooltipTrigger,
+  ToggleButton, ToggleButtonGroup,
 } from '@decocode/mezzanine'
 import { ExampleZone } from '../../../../components/ExampleZone'
 import { Sidebar as DocumentationSidebar } from '../../../../components/Sidebar'
@@ -20,10 +20,8 @@ function SidebarExample() {
   const [optionA, setOptionA] = useState(false)
   const [optionB, setOptionB] = useState(false)
   const [expandedKeys, setExpandedKeys] = useState(new Set(['options']))
-  const rail = <TooltipTrigger>
-    <Button aria-label={sidebarExampleLabels.expand} iconLeading={side === 'left' ? <PanelLeftOpenIcon /> : <PanelRightOpenIcon />} variant="tertiary" onPress={() => setExpanded(true)} />
-    <Tooltip placement={side === 'left' ? 'right' : 'left'}>{sidebarExampleLabels.expand}</Tooltip>
-  </TooltipTrigger>
+  const rail = <Button iconLeading={side === 'left' ? <PanelLeftOpenIcon /> : <PanelRightOpenIcon />} labelPlacement="tooltip"
+    tooltipPlacement={side === 'left' ? 'right' : 'left'} variant="tertiary" onPress={() => setExpanded(true)}>{sidebarExampleLabels.expand}</Button>
 
   return <ExampleZone className="sidebar-example">
     <div className="sidebar-example-frame">
@@ -65,8 +63,9 @@ function SidebarExample() {
       </Sidebar>
       <Sidebar presentation="inline" isExpanded={controlsExpanded} onExpandedChange={setControlsExpanded}>
         {!controlsExpanded && <div className="sidebar-example-controls-reopen">
-          <SidebarTrigger variant="tertiary" aria-label={sidebarExampleLabels.controls}
-            iconLeading={<PanelRightOpenIcon />} />
+          <SidebarTrigger variant="tertiary" iconLeading={<PanelRightOpenIcon />} labelPlacement="tooltip">
+            {sidebarExampleLabels.controls}
+          </SidebarTrigger>
         </div>}
         <SidebarPanel className="sidebar-example-controls" title={sidebarExampleLabels.controls} headingLevel={4}
           side="right" closeLabel={sidebarExampleLabels.closeControls}>
@@ -100,10 +99,8 @@ function MultipleSidebarsExample() {
         <div className="sidebar-example-column">
           <SidebarTrigger variant="secondary">{sidebarExampleLabels.navigation}</SidebarTrigger>
           <SidebarPanel title="Navigation" headingLevel={3} collapseMode="rail" rail={
-            <TooltipTrigger>
-              <Button aria-label={sidebarExampleLabels.navigation} iconLeading={<HomeIcon />} variant="tertiary" onPress={() => setNavigationExpanded(true)} />
-              <Tooltip placement="right">{sidebarExampleLabels.navigation}</Tooltip>
-            </TooltipTrigger>
+            <Button iconLeading={<HomeIcon />} labelPlacement="tooltip" tooltipPlacement="right" variant="tertiary"
+              onPress={() => setNavigationExpanded(true)}>{sidebarExampleLabels.navigation}</Button>
           }>
             <nav aria-label="Example destinations" className="sidebar-example-links">
               {sidebarExampleLinks.map(link => <Link key={link.href} href={link.href}>{link.label}</Link>)}

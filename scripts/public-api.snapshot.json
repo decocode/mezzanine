@@ -76,6 +76,10 @@
     "kind": "value"
   },
   {
+    "name": "ButtonLabelPlacement",
+    "kind": "type"
+  },
+  {
     "name": "ButtonProps",
     "kind": "type"
   },

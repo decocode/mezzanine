@@ -2,17 +2,20 @@ import { expect, test } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, themes } from '../display'
 
-// Checks the Button page shows all four kinds of button content (text only, icon before, icon
-// after, icon only), and that an icon-only button shows its name in a tooltip when focused and
-// hides it again with Escape.
-test('Button documents four content options and gives icon-only buttons a tooltip', async ({ page }) => {
+// Checks the Button page shows all six label and icon placements (text only, icon before, icon
+// after, and an icon button with its label in a tooltip, below or above), that each icon button is
+// named by its label, and that the tooltip label shows when focused and hides again with Escape.
+test('Button documents six label and icon placements and names icon buttons by their label', async ({ page }) => {
   await page.goto('/button')
   const examples = page.getByRole('grid', { name: 'Button content', exact: true })
-  await expect(examples.getByRole('row')).toHaveCount(5)
-  for (const label of ['Text-only', 'Text + icon leading', 'Text + icon trailing', 'Icon only']) {
+  await expect(examples.getByRole('row')).toHaveCount(7)
+  for (const label of ['Text-only', 'Text + icon leading', 'Text + icon trailing', 'Icon, label in a tooltip', 'Icon, label below', 'Icon, label above']) {
     await expect(examples.getByText(label, { exact: true })).toBeVisible()
   }
-  const iconOnly = examples.getByRole('button', { name: 'Download', exact: true })
+  // Three icon buttons, each named by its label; the tooltip one shows no visible text.
+  await expect(examples.getByRole('button', { name: 'Download', exact: true })).toHaveCount(3)
+  await expect(examples.getByText('Download', { exact: true })).toHaveCount(2)
+  const iconOnly = examples.getByRole('row', { name: /label in a tooltip/ }).getByRole('button', { name: 'Download', exact: true })
   await iconOnly.scrollIntoViewIfNeeded()
   await iconOnly.focus()
   await expect(page.getByRole('tooltip')).toHaveText('Download')

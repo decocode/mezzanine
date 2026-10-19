@@ -5,8 +5,6 @@ import {
   Cell,
   Column,
   DownloadIcon,
-  Tooltip,
-  TooltipTrigger,
   PlusIcon,
   Row,
   Table,
@@ -53,11 +51,10 @@ const contentOptionExamples: Record<(typeof buttonContentOptions)[number]['id'],
   'text-only': <Button>Button</Button>,
   'leading-icon': <Button iconLeading={<PlusIcon />}>Button</Button>,
   'trailing-icon': <Button iconTrailing={<ArrowRightIcon />}>Button</Button>,
-  'icon-only': (
-    <TooltipTrigger>
-      <Button iconLeading={<DownloadIcon />} aria-label={buttonContent.iconOnlyLabel} />
-      <Tooltip>{buttonContent.iconOnlyLabel}</Tooltip>
-    </TooltipTrigger>
+  'label-tooltip': <Button iconLeading={<DownloadIcon />} labelPlacement="tooltip">{buttonContent.iconButtonLabel}</Button>,
+  'label-below': <Button iconLeading={<DownloadIcon />} labelPlacement="below" variant="tertiary">{buttonContent.iconButtonLabel}</Button>,
+  'label-above': (
+    <Button iconLeading={<DownloadIcon />} labelPlacement="above" variant="tertiary">{buttonContent.iconButtonLabel}</Button>
   ),
 }
 
@@ -82,7 +79,7 @@ export default function ButtonPage() {
             <p className="mz-text-body-sm">{navigation.hint}</p>
           </ExampleZone>
         ),
-        contentAndSizes: (<>
+        labelAndIconPlacement: (<>
           <div className="documentation-table documentation-comparison-table">
             <Table aria-label="Button content">
               <TableHeader>
@@ -105,41 +102,35 @@ export default function ButtonPage() {
               </TableBody>
             </Table>
           </div>
-          <section aria-labelledby="button-sizes-heading">
-            <h3 id="button-sizes-heading" className="mz-text-heading-sm">
-              {buttonExampleCopy.sizesTitle}
-            </h3>
-            <div className="documentation-table button-sizes-table">
-              <Table aria-label="Button sizes">
-                <TableHeader>
-                  <Column id="size" isRowHeader>Size</Column>
-                  <Column id="example">Example</Column>
-                  <Column id="icon-only">Icon only buttons</Column>
-                </TableHeader>
-                <TableBody>
-                  {buttonSizes.map(({ label, size, usage }) => (
-                    <Row id={size} key={size}>
-                      <Cell>
-                        <span className="table-item-heading">
-                          <strong>{label}</strong>
-                          <code>{size}</code>
-                          <span>{usage}</span>
-                        </span>
-                      </Cell>
-                      <Cell><Button size={size}>Button</Button></Cell>
-                      <Cell>
-                        <TooltipTrigger>
-                          <Button size={size} iconLeading={<DownloadIcon />} aria-label={buttonContent.iconOnlyLabel} />
-                          <Tooltip>{buttonContent.iconOnlyLabel}</Tooltip>
-                        </TooltipTrigger>
-                      </Cell>
-                    </Row>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </section>
         </>),
+        sizes: (
+          <div className="documentation-table button-sizes-table">
+            <Table aria-label="Button sizes">
+              <TableHeader>
+                <Column id="size" isRowHeader>Size</Column>
+                <Column id="example">Example</Column>
+                <Column id="label-tooltip">Icon buttons, label in a tooltip</Column>
+              </TableHeader>
+              <TableBody>
+                {buttonSizes.map(({ label, size, usage }) => (
+                  <Row id={size} key={size}>
+                    <Cell>
+                      <span className="table-item-heading">
+                        <strong>{label}</strong>
+                        <code>{size}</code>
+                        <span>{usage}</span>
+                      </span>
+                    </Cell>
+                    <Cell><Button size={size}>Button</Button></Cell>
+                    <Cell>
+                      <Button size={size} iconLeading={<DownloadIcon />} labelPlacement="tooltip">{buttonContent.iconButtonLabel}</Button>
+                    </Cell>
+                  </Row>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        ),
         hierarchy: (
           <div className="documentation-table documentation-state-matrix">
             <Table aria-label="Button hierarchy and states">

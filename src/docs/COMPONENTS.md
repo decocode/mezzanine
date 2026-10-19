@@ -18,9 +18,12 @@ including `target`, `rel`, `download` and `isDisabled`. Without `href`, it uses
 React Aria's Button, including form behaviour and `isPending`. Both share
 variants, sizes and icons.
 
-Button supports text only, text with a leading or trailing icon, and icon only.
-For icon-only content, omit children and give it an accessible name, such as
-`aria-label`. To add a tooltip, compose it with `TooltipTrigger` and `Tooltip`.
+Button supports text only, text with a leading or trailing icon, and icon
+buttons. An icon button still has a label, its children, and `labelPlacement`
+chooses where it shows: `tooltip` (only the icon is visible; the label appears
+on hover and keyboard focus), `below` or `above` the icon. The label is always
+the accessible name. `tooltipPlacement` sets where a tooltip label appears.
+ToggleButton has the same two props.
 
 ### Sizes
 
@@ -39,7 +42,7 @@ containers decide position and available space.
 stay in the bar at every width. The children function receives `isMenu`, which
 is true inside the narrow-screen menu, so menu-only content such as section
 navigation can sit between links.
-The menu button is icon-only, with a tooltip. `menuLabel` replaces its default
+The menu button shows its label in a tooltip. `menuLabel` replaces its default
 "Menu" name and tooltip, and `className` adds your own styling.
 
 ```tsx
@@ -112,7 +115,8 @@ Compose `TooltipTrigger`, a focusable control and `Tooltip`:
 
 The trigger waits 500ms on hover before showing the tooltip; change this with
 `delay`. Keyboard focus shows it immediately. Tooltips do not appear on touch,
-so icon-only controls still need their own accessible name. The fade is removed
+so icon buttons keep their label as their accessible name (Button's
+`labelPlacement="tooltip"` does this for you). The fade is removed
 when motion is reduced. The API follows the
 [React Aria Tooltip](https://react-aria.adobe.com/Tooltip).
 

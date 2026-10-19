@@ -118,8 +118,8 @@ export function SidebarPanel({
     {(!hideInlineHeader || state.isModal) && <div className="mezzanine-sidebar-header">
       <Heading id={titleId} level={headingLevel} slot={state.isModal ? 'title' : undefined}>{title}</Heading>
       {(state.isModal || state.isCollapsible) && <Button
-        aria-label={closeLabel}
         iconLeading={side === 'left' ? <PanelLeftCloseIcon /> : <PanelRightCloseIcon />}
+        labelPlacement="tooltip"
         variant="tertiary"
         onPress={() => {
           if (state.isModal) state.setOpen(false)
@@ -128,7 +128,7 @@ export function SidebarPanel({
             state.setExpanded(false)
           }
         }}
-      />}
+      >{closeLabel}</Button>}
       {header != null && <div className="mezzanine-sidebar-header-content">{header}</div>}
     </div>}
     <div className="mezzanine-sidebar-content">{children}</div>

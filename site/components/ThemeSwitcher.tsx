@@ -1,4 +1,4 @@
-import { LayoutIcon, MoonIcon, SunIcon, ToggleButton, ToggleButtonGroup, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
+import { LayoutIcon, MoonIcon, SunIcon, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
 import { useSyncExternalStore } from 'react'
 import { getDisplayedTheme, isTheme, prefersDarkColorScheme, subscribeToColorScheme, type Theme } from '../themeSwitcherLogic'
 
@@ -26,18 +26,9 @@ export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherPro
       selectedKeys={[displayedTheme]}
       selectionMode="single"
     >
-      <TooltipTrigger>
-        <ToggleButton aria-label="Light theme" id="light" iconLeading={<SunIcon />} />
-        <Tooltip placement="bottom">Light theme</Tooltip>
-      </TooltipTrigger>
-      <TooltipTrigger>
-        <ToggleButton aria-label="Dark theme" id="dark" iconLeading={<MoonIcon />} />
-        <Tooltip placement="bottom">Dark theme</Tooltip>
-      </TooltipTrigger>
-      <TooltipTrigger>
-        <ToggleButton aria-label="Wireframe theme" id="wireframe" iconLeading={<LayoutIcon />} />
-        <Tooltip placement="bottom">Wireframe theme</Tooltip>
-      </TooltipTrigger>
+      <ToggleButton id="light" iconLeading={<SunIcon />} labelPlacement="tooltip" tooltipPlacement="bottom">Light theme</ToggleButton>
+      <ToggleButton id="dark" iconLeading={<MoonIcon />} labelPlacement="tooltip" tooltipPlacement="bottom">Dark theme</ToggleButton>
+      <ToggleButton id="wireframe" iconLeading={<LayoutIcon />} labelPlacement="tooltip" tooltipPlacement="bottom">Wireframe theme</ToggleButton>
     </ToggleButtonGroup>
   )
 }
