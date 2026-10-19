@@ -4,11 +4,11 @@
   gap: var(--navigation-tree-gap);
   color: var(--navigation-tree-item-content);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-title-sm);
+  font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-default);
-  letter-spacing: var(--letter-spacing-title);
-  line-height: var(--line-height-title-sm);
-  text-transform: var(--text-transform-title);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
 }
 .mz-nav-tree-item {
   display: flex;
@@ -22,9 +22,6 @@
   background: var(--navigation-tree-item-background);
   color: var(--navigation-tree-item-content);
   overflow-wrap: anywhere;
-}
-.mz-nav-tree-item[data-level='1'][data-has-child-items]:not(:first-child) {
-  margin-block-start: var(--space-2);
 }
 /* Sections are larger groups than parent rows, so they get more space above. */
 .mz-nav-tree-section:not(:first-child) {
