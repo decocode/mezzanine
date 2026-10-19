@@ -15,7 +15,7 @@ export const gapPage: StagePage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: gap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/gap' },
+    { label: 'MDN: gap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/gap' },
   ],
 }
 

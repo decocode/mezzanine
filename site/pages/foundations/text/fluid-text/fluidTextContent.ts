@@ -47,6 +47,6 @@ export const fluidTextContent: DocsPageContent = {
     { label: 'Typography', href: '/typography' },
   ],
   references: [
-    { label: 'MDN: clamp()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/clamp' },
+    { label: 'MDN: clamp()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp' },
   ],
 }

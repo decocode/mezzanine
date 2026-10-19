@@ -20,7 +20,7 @@ export const typesOfBoxPage: StagePage = {
     { label: 'Grid formation', href: '/site/lab/layout/grid-formation' },
   ],
   references: [
-    { label: 'MDN: display', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/display' },
+    { label: 'MDN: display', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display' },
     { label: 'MDN: Block and inline layout in normal flow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Display/Block_and_inline_layout' },
   ],
 }

@@ -14,8 +14,8 @@ export const viewportUnitsPage: StagePage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: length units', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/length' },
-    { label: 'MDN: Viewport meta tag', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Viewport_meta_element' },
+    { label: 'MDN: length units', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length' },
+    { label: 'MDN: Viewport meta tag', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/name/viewport' },
   ],
 }
 

@@ -16,7 +16,7 @@ export const contentColumnsPage: StagePage = {
   ],
   references: [
     { label: 'MDN: Multi-column layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Multicol_layout' },
-    { label: 'MDN: break-inside', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside' },
+    { label: 'MDN: break-inside', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/break-inside' },
   ],
 }
 

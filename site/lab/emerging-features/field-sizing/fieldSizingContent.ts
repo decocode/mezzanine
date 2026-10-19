@@ -5,7 +5,7 @@ export const fieldSizingPage: FuturePage = {
   key: 'fieldSizing', id: 'lab-field-sizing', kind: 'foundation', title: 'Field sizing', href: '/site/lab/emerging-features/field-sizing',
   sections: [{ key: 'howItWorks' }],
   references: [
-    { label: 'MDN: field-sizing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/field-sizing' },
+    { label: 'MDN: field-sizing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/field-sizing' },
   ],
 }
 

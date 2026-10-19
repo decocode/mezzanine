@@ -16,7 +16,7 @@ export const rowWrapAndGrowPage: StagePage = {
   references: [
     { label: 'Bedrock: ColumnDrop', href: 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/column-drop' },
     { label: 'web.dev: Macro layouts', href: 'https://web.dev/learn/design/macro-layouts' },
-    { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap' },
+    { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap' },
   ],
 }
 

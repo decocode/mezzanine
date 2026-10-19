@@ -15,7 +15,7 @@ export const boxHasContentPage: StagePage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: :has()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/:has' },
+    { label: 'MDN: :has()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:has' },
   ],
 }
 

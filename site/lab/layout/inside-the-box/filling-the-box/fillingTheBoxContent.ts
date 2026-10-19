@@ -15,8 +15,8 @@ export const fillingTheBoxPage: StagePage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: object-fit', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit' },
-    { label: 'MDN: aspect-ratio', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio' },
+    { label: 'MDN: object-fit', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/object-fit' },
+    { label: 'MDN: aspect-ratio', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/aspect-ratio' },
   ],
 }
 

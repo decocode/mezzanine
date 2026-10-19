@@ -16,7 +16,7 @@ export const safeAreasPage: LabPage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: env()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/env' },
+    { label: 'MDN: env()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/env' },
   ],
 }
 

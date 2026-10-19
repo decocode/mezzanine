@@ -26,7 +26,7 @@ export const rowWrapPage: StagePage = {
     everyLayout('Cluster', 'cluster'),
     bedrock('InlineCluster', 'inline-cluster'),
     { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
-    { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap' },
+    { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap' },
     { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },
     { label: 'Bootstrap: Flex', href: 'https://getbootstrap.com/docs/5.3/utilities/flex/' },
     { label: 'Material Design: Chips', href: 'https://m3.material.io/components/chips/overview' },

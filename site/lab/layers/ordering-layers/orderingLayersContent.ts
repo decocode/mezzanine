@@ -14,7 +14,7 @@ export const orderingLayersPage: LabPage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/z-index' },
+    { label: 'MDN: z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/z-index' },
     { label: 'MDN: Understanding z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Understanding_z-index' },
   ],
 }

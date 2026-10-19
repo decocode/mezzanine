@@ -22,8 +22,8 @@ export const bundlesOfLayersPage: LabPage = {
   references: [
     { label: 'MDN: Stacking context', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Stacking_context' },
     { label: 'MDN: Understanding z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Positioned_layout/Understanding_z-index' },
-    { label: 'MDN: z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/z-index' },
-    { label: 'MDN: isolation', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/isolation' },
+    { label: 'MDN: z-index', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/z-index' },
+    { label: 'MDN: isolation', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/isolation' },
   ],
 }
 

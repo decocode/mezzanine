@@ -15,8 +15,8 @@ export const sizingTheBoxPage: StagePage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: box-sizing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing' },
-    { label: 'MDN: min-width', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/min-width' },
+    { label: 'MDN: box-sizing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing' },
+    { label: 'MDN: min-width', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/min-width' },
   ],
 }
 

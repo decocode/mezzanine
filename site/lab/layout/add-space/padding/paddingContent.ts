@@ -15,7 +15,7 @@ export const paddingPage: StagePage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: padding', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/padding' },
+    { label: 'MDN: padding', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/padding' },
   ],
 }
 

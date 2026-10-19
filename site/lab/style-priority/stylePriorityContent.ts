@@ -17,8 +17,8 @@ export const stylePriorityPage: LabPage = {
   references: [
     { label: 'MDN: Introducing the CSS cascade', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Introduction' },
     { label: 'MDN: Handling conflicts', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts' },
-    { label: 'MDN: Specificity', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity' },
-    { label: 'MDN: @layer', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/@layer' },
+    { label: 'MDN: Specificity', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Cascade/Specificity' },
+    { label: 'MDN: @layer', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer' },
     { label: 'W3Schools: CSS Specificity', href: 'https://www.w3schools.com/css/css_specificity.asp' },
     { label: 'W3Schools: CSS !important', href: 'https://www.w3schools.com/css/css_important.asp' },
   ],

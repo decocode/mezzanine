@@ -15,7 +15,7 @@ export const marginPage: StagePage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: margin', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/margin' },
+    { label: 'MDN: margin', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/margin' },
     { label: 'MDN: Mastering margin collapsing', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Box_model/Margin_collapsing' },
   ],
 }

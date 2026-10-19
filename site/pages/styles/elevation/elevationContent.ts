@@ -76,6 +76,6 @@ export const elevationContent: DocsPageContent = {
     { label: 'Interaction', href: '/interaction' },
   ],
   references: [
-    { label: 'MDN: box-shadow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow' },
+    { label: 'MDN: box-shadow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-shadow' },
   ],
 }

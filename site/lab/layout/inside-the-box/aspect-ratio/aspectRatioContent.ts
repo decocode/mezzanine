@@ -18,8 +18,8 @@ export const aspectRatioPage: StagePage = {
   references: [
     everyLayout('Frame', 'frame'),
     bedrock('Frame', 'frame'),
-    { label: 'MDN: aspect-ratio', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio' },
-    { label: 'MDN: object-fit', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit' },
+    { label: 'MDN: aspect-ratio', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/aspect-ratio' },
+    { label: 'MDN: object-fit', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/object-fit' },
   ],
 }
 

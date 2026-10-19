@@ -5,7 +5,7 @@ export const masonryPage: FuturePage = {
   key: 'masonry', id: 'lab-masonry', kind: 'foundation', title: 'Masonry', href: '/site/lab/emerging-features/masonry',
   sections: [{ key: 'howItWorks' }],
   references: [
-    { label: 'MDN: Grid lanes layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Masonry_layout' },
+    { label: 'MDN: Grid lanes layout', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Grid_layout/Grid_lanes' },
     { label: 'WebKit: Introducing CSS Grid Lanes', href: 'https://webkit.org/blog/17660/introducing-css-grid-lanes/' },
   ],
 }

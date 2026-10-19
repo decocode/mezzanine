@@ -14,7 +14,7 @@ export const positioningPage: LabPage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: position', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/position' },
+    { label: 'MDN: position', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/position' },
     { label: 'MDN: Positioning (learn)', href: 'https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Positioning' },
   ],
 }

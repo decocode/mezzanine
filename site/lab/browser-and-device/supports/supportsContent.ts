@@ -14,7 +14,7 @@ export const supportsPage: LabPage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: @supports', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/@supports' },
+    { label: 'MDN: @supports', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@supports' },
     { label: 'MDN: Using feature queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Conditional_rules/Using_feature_queries' },
   ],
 }

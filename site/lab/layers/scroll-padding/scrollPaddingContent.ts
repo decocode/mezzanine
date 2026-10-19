@@ -14,7 +14,7 @@ export const scrollPaddingPage: LabPage = {
     { key: 'example' },
   ],
   references: [
-    { label: 'MDN: scroll-padding', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding' },
+    { label: 'MDN: scroll-padding', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/scroll-padding' },
     { label: 'WCAG 2.2: Focus not obscured (minimum)', href: 'https://www.w3.org/WAI/WCAG22/Understanding/focus-not-obscured-minimum.html' },
   ],
 }

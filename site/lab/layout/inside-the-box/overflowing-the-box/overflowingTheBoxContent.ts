@@ -16,7 +16,7 @@ export const overflowingTheBoxPage: StagePage = {
   ],
   references: [
     { label: 'MDN: Overflow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Overflow' },
-    { label: 'MDN: overflow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/overflow' },
+    { label: 'MDN: overflow', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/overflow' },
   ],
 }
 
