@@ -29,7 +29,7 @@
 .react-aria-SearchField > .react-aria-Input {
   grid-area: input;
   padding-inline-start: calc(var(--input-padding-inline) + var(--search-field-icon-size) + var(--search-field-icon-gap));
-  padding-inline-end: calc(var(--target-size) + var(--input-border-width));
+  padding-inline-end: calc(var(--target-size-sm) + var(--input-border-width));
 }
 
 /* Hide the browser's own clear button and search decoration; the field supplies its own. */

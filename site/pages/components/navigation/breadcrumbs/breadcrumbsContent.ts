@@ -40,6 +40,7 @@ export const breadcrumbsContent: DocsPageContent = {
     { label: 'Link', href: '/link' },
     { label: 'Navbar', href: '/navbar' },
     { label: 'Navigation tree', href: '/navigation-tree' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Breadcrumbs', href: 'https://react-aria.adobe.com/Breadcrumbs' },

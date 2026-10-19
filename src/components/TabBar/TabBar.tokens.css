@@ -12,7 +12,7 @@
   --tab-bar-item-min-width: 5rem;
   --tab-bar-item-gap: var(--space-1);
   --tab-bar-item-padding: var(--space-2);
-  --tab-bar-icon-size: 1.25rem;
+  --tab-bar-icon-size: var(--icon-size-sm);
   --tab-bar-indicator-width: 0.125rem;
   --tab-bar-focus-ring-width: 0.125rem;
   --tab-bar-focus-ring-offset: -0.125rem;

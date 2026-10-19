@@ -52,9 +52,9 @@ const contentOptionExamples: Record<(typeof buttonContentOptions)[number]['id'],
   'leading-icon': <Button iconLeading={<PlusIcon />}>Button</Button>,
   'trailing-icon': <Button iconTrailing={<ArrowRightIcon />}>Button</Button>,
   'label-tooltip': <Button iconLeading={<DownloadIcon />} labelPlacement="tooltip">{buttonContent.iconButtonLabel}</Button>,
-  'label-below': <Button iconLeading={<DownloadIcon />} labelPlacement="below" variant="tertiary">{buttonContent.iconButtonLabel}</Button>,
+  'label-below': <Button iconLeading={<DownloadIcon />} labelPlacement="below">{buttonContent.iconButtonLabel}</Button>,
   'label-above': (
-    <Button iconLeading={<DownloadIcon />} labelPlacement="above" variant="tertiary">{buttonContent.iconButtonLabel}</Button>
+    <Button iconLeading={<DownloadIcon />} labelPlacement="above">{buttonContent.iconButtonLabel}</Button>
   ),
 }
 

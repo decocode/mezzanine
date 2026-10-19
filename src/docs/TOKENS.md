@@ -65,7 +65,7 @@ Mezzanine component CSS must not depend on product palette names such as
 ## Naming rule
 
 Size segments use `xs`, `sm`, `md`, `lg` and `xl` where those levels exist.
-Typography currently uses `sm`, `md` and `lg`; Button uses `sm`, `md`, `lg` and `xl`.
+Typography currently uses `sm`, `md` and `lg`; Button uses `xs`, `sm`, `md`, `lg` and `xl`.
 This replaces the spelled-out size segments in those public token names; consumers
 must update their references and overrides. Typography CSS classes use the same
 abbreviations: for example, `mz-text-body-md`. This also replaces the previous
@@ -226,6 +226,21 @@ only as a familiar reference.
 | `--space-20` | `5rem` | 80px |
 | `--space-24` | `6rem` | 96px |
 
+## Current icon size inventory
+
+Icons take their size from one shared scale, from extra small to extra large.
+Button and ToggleButton use the step with the same name as their own size, so a
+small Button has a small icon. Values are stored in `rem`, so icons grow with
+the text size; the pixel values assume `1rem = 16px`.
+
+| Token | Stored value | Reference value |
+| --- | --- | --- |
+| `--icon-size-xs` | `1rem` | 16px |
+| `--icon-size-sm` | `1.25rem` | 20px |
+| `--icon-size-md` | `1.5rem` | 24px |
+| `--icon-size-lg` | `1.75rem` | 28px |
+| `--icon-size-xl` | `2rem` | 32px |
+
 ## Current shape inventory
 
 Corner-radius levels use `rem` to follow the root font size. None is unitless zero;
@@ -288,410 +303,26 @@ separate `--color-focus` token for visible focus indicators.
 
 ## Current target size inventory
 
-Target size is how big something you tap or click must be. It lives in
-`src/tokens/interaction.css`. Components use the shared token directly rather
-than their own minimum heights, so a theme changes every target at once.
-
-| Token | Meaning |
-| --- | --- |
-| `--target-size-min` | The WCAG 2.2 AA minimum, 24px (1.5rem) |
-| `--target-size` | The size Mezzanine's controls use, 44px (2.75rem): Button's small size, Tabs, Navbar menu items, NavTree rows and expand buttons, ListBox options and SearchField's clear button |
-
-## Current control size inventory
-
-Every control's height comes from one shared scale in `src/tokens/interaction.css`,
-so a text field and a Button of the same size always line up, and a theme can
-change every control at once.
+Target size is how big something you tap or click is. Every interactive element
+takes its height from one shared scale in `src/tokens/interaction.css`, so a text
+field and a Button of the same size always line up, and a theme can change every
+target at once. Every step is above the WCAG 2.2 AA minimum. For an app that needs
+44px targets (WCAG 2.2 AAA), use `md` or larger.
 
 | Token | Value | Used by |
 | --- | --- | --- |
-| `--control-size-sm` | `--target-size` (44px) | Button and ToggleButton `size="sm"` |
-| `--control-size-md` | 3rem (48px) | Button and ToggleButton `size="md"` (the default), text fields, Disclosure triggers, TabBar items |
-| `--control-size-lg` | 3.25rem (52px) | Button and ToggleButton `size="lg"` |
-| `--control-size-xl` | 3.5rem (56px) | Button and ToggleButton `size="xl"` |
-
-## Current stacking inventory
-
-Stacking order (CSS `z-index`) comes from one shared scale in
-`src/tokens/z-index.css`. Components choose a step by name and never set their
-own number. Every pop-up (Tooltip, Modal, the Sidebar drawer and the TabBar
-sheet) uses the overlay step. React Aria adds each pop-up to the end of the page
-in the order it opens, so the newest one sits on top.
-
-| Token | Meaning |
-| --- | --- |
-| `--z-index-base` | The normal page flow |
-| `--z-index-raised` | Lifted just above neighbours, such as a focused button in a group |
-| `--z-index-sticky` | Bars that stay in view while the page scrolls, such as Navbar and TabBar |
-| `--z-index-overlay` | Pop-ups: tooltips, popovers, drawers and dialogs |
-| `--z-index-toast` | Notifications that must appear above everything, including dialogs |
-
-## Navbar tokens
-
-Navbar provides a sticky container and a compact Disclosure menu. Applications supply
-branding, navigation and optional actions. The trigger defaults to Menu when closed
-and Close menu when open; both labels can be changed.
-Its own container switches to desktop navigation at 48rem, relative to the root text size.
-
-| Token | Meaning |
-| --- | --- |
-| `--navbar-border-width` | Navbar and trigger border thickness |
-| `--navbar-min-height` | Minimum height of the content row |
-| `--navbar-wide-padding-inline` | Horizontal padding in the desktop layout |
-| `--navbar-focus-ring-width`, `--navbar-focus-ring-offset` | Menu trigger focus outline |
-| `--navbar-panel-max-height` | Maximum panel height before it scrolls |
-| `--motion-duration-interface`, `--motion-distance-reveal` | Panel entry timing and initial vertical displacement; disabled with reduced motion |
-
-## Current component tokens
-
-Tabs uses semantic text, link, border and surface colours across the official themes.
-
-| Token | Meaning |
-| --- | --- |
-| `--tabs-content-gap` | Space between the tab list and its panel |
-| `--tabs-border-width`, `--tabs-border` | Tab-list divider thickness and colour |
-| `--tabs-content` | Panel text colour |
-| `--tabs-focus-ring-width`, `--tabs-focus-ring-offset` | Keyboard-focus outline thickness and position |
-| `--tab-padding-block`, `--tab-padding-inline` | Tab padding |
-| `--tab-content`, `--tab-content-selected` | Default and selected tab text colours |
-| `--tab-background-hovered`, `--tab-background-pressed` | Pointer interaction backgrounds |
-| `--tab-indicator`, `--tab-indicator-width` | Selection indicator colour and thickness |
-| `--motion-duration-interface` | Selection indicator movement duration; disabled with reduced motion |
-| `--tab-panel-padding` | Space inside the content panel |
-| `--tab-panel-preferred-width` | Preferred panel width before a vertical layout wraps the panel below the list |
-
-Modal and Dialog use the existing neutral surface, text, border and focus roles and
-the `--elevation-raised-3` elevation level. Their component tokens are shared across all three themes and can
-be overridden independently by a consuming product.
-
-| Token | Meaning |
-| --- | --- |
-| `--modal-viewport-padding` | Minimum space between the modal and viewport edges |
-| `--modal-max-width` | Maximum modal width |
-| `--modal-border-width` | Modal border thickness |
-| `--modal-border-radius` | Modal corner shape |
-| `--modal-backdrop` | Background behind the modal |
-| `--modal-background` | Modal surface color |
-| `--modal-content` | Modal text color |
-| `--modal-border` | Modal border color |
-| `--motion-duration-interface` | Entry and exit duration |
-| `--motion-scale-enter` | Modal scale at the start of entry and end of exit |
-| `--dialog-padding` | Space inside the dialog |
-| `--dialog-content-gap` | Separation between the title, content and actions |
-| `--dialog-actions-gap` | Separation between action buttons |
-| `--dialog-focus-ring-width` | Width of the dialog's keyboard focus indicator |
-
-Badge, Button, Checkbox, Link, RadioGroup, Disclosure, Dialog, Modal, NavTree, Table,
-ToggleButton and ToggleButtonGroup are implemented components. Their component-specific tokens
-keep shared structure easy to identify and override without pretending that
-component-specific spacing decisions are part of the shared spacing scale.
-Component radius tokens remain independent of the shared radius scale until a
-product explicitly connects them.
-
-Badge uses structural and color-role tokens for a compact, non-interactive
-status label. Neutral is the default, Violet uses Mezzanine's core palette, and
-the `info`, `success`, `warning` and `danger` variants use the matching
-semantic color palettes.
-
-| Token | Meaning |
-| --- | --- |
-| `--badge-padding-block` | Vertical space inside a Badge |
-| `--badge-padding-inline` | Horizontal space inside a Badge |
-| `--badge-border-width` | Badge border width |
-| `--badge-border-radius` | Badge corner radius |
-| `--badge-neutral-background` | Neutral Badge background color |
-| `--badge-neutral-content` | Neutral Badge text color |
-| `--badge-neutral-border` | Neutral Badge border color |
-| `--badge-violet-background` | Violet Badge background color |
-| `--badge-violet-content` | Violet Badge text color |
-| `--badge-violet-border` | Violet Badge border color |
-| `--badge-info-background` | Informational Badge background color |
-| `--badge-info-content` | Informational Badge text color |
-| `--badge-info-border` | Informational Badge border color |
-| `--badge-success-background` | Successful Badge background color |
-| `--badge-success-content` | Successful Badge text color |
-| `--badge-success-border` | Successful Badge border color |
-| `--badge-warning-background` | Warning Badge background color |
-| `--badge-warning-content` | Warning Badge text color |
-| `--badge-warning-border` | Warning Badge border color |
-| `--badge-danger-background` | Danger Badge background color |
-| `--badge-danger-content` | Danger Badge text color |
-| `--badge-danger-border` | Danger Badge border color |
-
-Link uses shared semantic colors and component tokens for its underline and
-focus treatment.
-
-Breadcrumbs uses `--space-1` between wrapped rows and `--space-2` between
-items and between each separator and its label. It has no separate spacing tokens.
-
-| Token | Meaning |
-| --- | --- |
-| `--link-content-gap` | Space between Link text and an icon |
-| `--link-icon-size` | Size of an icon inside a Link |
-| `--link-underline-thickness` | Link underline thickness |
-| `--link-underline-offset` | Space between Link text and its underline |
-| `--link-focus-ring-width` | Keyboard-focus indicator width |
-| `--link-focus-ring-offset` | Keyboard-focus indicator position |
-
-RadioGroup uses structural tokens for its layout and indicator, plus theme
-tokens for its interactive colors.
-
-| Token | Meaning |
-| --- | --- |
-| `--radio-group-gap` | Space between vertically arranged RadioGroup content |
-| `--radio-group-horizontal-gap` | Space between horizontally arranged RadioField options |
-| `--radio-field-gap-block` | Vertical space between a RadioButton and its description |
-| `--radio-content-gap` | Space between a Radio indicator and label |
-| `--radio-indicator-size` | Radio indicator width and height |
-| `--radio-selection-size` | Selected mark width and height |
-| `--radio-border-width` | Radio indicator border width |
-| `--radio-indicator-border-radius` | Radio indicator shape |
-| `--radio-selection-border-radius` | Selected mark shape |
-| `--radio-focus-ring-width` | Keyboard-focus indicator width |
-| `--radio-focus-ring-offset` | Keyboard-focus indicator position |
-| `--radio-background` | Unselected Radio indicator background |
-| `--radio-background-hovered` | Radio indicator background while hovered |
-| `--radio-selection` | Selected mark and selected indicator border color |
-| `--radio-border` | Unselected Radio indicator border color |
-| `--radio-border-invalid` | Invalid Radio indicator border color |
-
-Disclosure uses structural tokens for its trigger, panel, grouping and
-interaction feedback. Trigger and panel horizontal padding default to zero,
-aligning labels and expanded content with the container edges. Themes can
-override the inline-padding tokens when an inset is needed.
-
-| Token | Meaning |
-| --- | --- |
-| `--disclosure-group-gap` | Space between items in a DisclosureGroup |
-| `--disclosure-border-width` | Divider width between Disclosure items |
-| `--disclosure-trigger-padding-block` | Vertical space inside a DisclosureHeader trigger |
-| `--disclosure-trigger-padding-inline` | Horizontal space inside a DisclosureHeader trigger |
-| `--disclosure-trigger-gap` | Space between a Disclosure label and chevron |
-| `--disclosure-panel-padding-block` | Bottom space inside a DisclosurePanel |
-| `--disclosure-panel-padding-inline` | Horizontal space inside a DisclosurePanel |
-| `--chevron-size` | Size of the expand and collapse chevron shared by Disclosure and NavTree |
-| `--disclosure-icon-size` | DisclosureHeader chevron size; defaults to `--chevron-size` |
-| `--disclosure-focus-ring-width` | Keyboard-focus indicator width |
-| `--disclosure-focus-ring-offset` | Keyboard-focus indicator position |
-| `--motion-duration-interface`, `--motion-easing-enter` | Chevron rotation timing; the panel itself opens and closes immediately |
-| `--disclosure-trigger-background` | Default DisclosureHeader trigger background |
-
-| Token | Meaning |
-| --- | --- |
-| `--table-border-width` | Table grid-line width |
-| `--table-cell-padding-block` | Vertical space inside a table header or cell |
-| `--table-cell-padding-inline` | Horizontal space inside a table header or cell |
-| `--table-focus-ring-width` | Keyboard-focus indicator width |
-| `--table-focus-ring-offset` | Keyboard-focus indicator position |
-| `--table-disabled-opacity` | Visual treatment for a disabled row |
-| `--table-row-background-selected` | Selected-row background |
-| `--table-row-background-selected-hovered` | Selected-row background while hovered |
-| `--table-row-background-selected-pressed` | Selected-row background while pressed |
-| `--table-row-content-selected` | Content on a selected row |
-| `--table-header-background` | Table header background |
-| `--table-drop-target-color` | Drop-target indicator color |
-
-ToggleButton uses structural tokens for its control and grouping, plus theme
-tokens for its unselected and selected interaction states.
-
-| Token | Meaning |
-| --- | --- |
-| `--toggle-button-border-width` | ToggleButton border width |
-| `--toggle-button-border-radius` | ToggleButton corner radius |
-| `--toggle-button-focus-ring-width` | Keyboard-focus indicator width |
-| `--toggle-button-focus-ring-offset` | Keyboard-focus indicator position |
-| `--toggle-button-group-gap` | Space between ToggleButtons in a ToggleButtonGroup |
-| `--toggle-button-background` | Unselected ToggleButton background |
-| `--toggle-button-background-hovered` | Unselected background while hovered |
-| `--toggle-button-background-pressed` | Unselected background while pressed |
-| `--toggle-button-content` | Unselected label and icon color |
-| `--toggle-button-border` | Unselected border color |
-| `--toggle-button-background-selected` | Selected ToggleButton background |
-| `--toggle-button-background-selected-hovered` | Selected background while hovered |
-| `--toggle-button-background-selected-pressed` | Selected background while pressed |
-| `--toggle-button-content-selected` | Selected label and icon color |
-| `--toggle-button-border-selected` | Selected border color |
-
-NavTree uses the `--navigation-tree-*` structural tokens for hierarchy and
-route indication, `--chevron-size` and `--color-chevron` for its chevron, shared
-small-button tokens for the expand control's target size, and theme tokens for
-interaction and current-route states.
-
-| Token | Meaning |
-| --- | --- |
-| `--navigation-tree-gap` | Space between NavTree rows and sections |
-| `--navigation-tree-item-padding-block` | Vertical space inside a navigation item |
-| `--navigation-tree-item-padding-inline` | Base row inset, increased by nesting level on the start edge |
-| `--navigation-tree-item-gap` | Space between item content and controls |
-| `--navigation-tree-indent` | Additional label indentation for each nested level; chevrons remain aligned at the inline end |
-| `--navigation-tree-current-indicator-width` | Width of the current-route indicator |
-| `--navigation-tree-focus-ring-width` | Keyboard-focus indicator width |
-| `--navigation-tree-focus-ring-offset` | Keyboard-focus indicator position |
-| `--navigation-tree-header-padding-block` | Vertical space around a section header |
-| `--motion-duration-interface` | Nav Tree chevron rotation duration; rows change immediately |
-| `--navigation-tree-item-background` | Default item background |
-| `--navigation-tree-item-background-hovered` | Item background while hovered |
-| `--navigation-tree-item-background-pressed` | Item background while pressed |
-| `--navigation-tree-item-background-current` | Current-route item background; transparent in the official themes, which mark the current page with the bar and Emphasis weight |
-| `--navigation-tree-item-content` | Default item content color |
-| `--navigation-tree-item-content-current` | Current-route item content color |
-| `--navigation-tree-current-indicator` | Current-route indicator color |
-| `--navigation-tree-header-content` | Section header content color |
-
-Checkbox uses component tokens for its indicator while its visible label uses
-the shared text roles.
-
-| Token | Meaning |
-| --- | --- |
-| `--checkbox-size` | Width and height of the selection indicator |
-| `--checkbox-icon-size` | Size of the check or indeterminate icon |
-| `--checkbox-content-gap` | Space between the indicator and visible label |
-| `--checkbox-border-width` | Indicator border width |
-| `--checkbox-border-radius` | Indicator corner radius |
-| `--checkbox-focus-ring-width` | Keyboard-focus indicator width |
-| `--checkbox-focus-ring-offset` | Keyboard-focus indicator position |
-| `--checkbox-background` | Unselected indicator background |
-| `--checkbox-background-hovered` | Unselected indicator background while hovered |
-| `--checkbox-background-selected` | Selected or indeterminate indicator background |
-| `--checkbox-background-selected-hovered` | Selected or indeterminate indicator background while hovered |
-| `--checkbox-content-selected` | Check or indeterminate icon color |
-| `--checkbox-border` | Unselected indicator border color |
-| `--checkbox-border-invalid` | Invalid indicator border color |
-
-Button uses an approved color-role contract so the official themes can define
-its appearance without tying the component to particular palette values.
-
-| Token | Meaning |
-| --- | --- |
-| `--button-{variant}-background` | Enabled background for Primary, Secondary, Tertiary or Destructive |
-| `--button-{variant}-background-hovered` | Background while React Aria reports `data-hovered` |
-| `--button-{variant}-background-pressed` | Background while React Aria reports `data-pressed` |
-| `--button-{variant}-content` | Label and icon color |
-| `--button-{variant}-border` | Border color |
-| `--opacity-disabled` | Shared disabled-state opacity, currently `0.5` |
-| `--button-{size}-min-height` | Minimum target height for Small, Medium, Large or Extra Large |
-| `--button-{size}-padding-block` | Vertical space for Small, Medium, Large or Extra Large |
-| `--button-{size}-padding-inline` | Horizontal space for Small, Medium, Large or Extra Large |
-| `--button-{size}-font-size` | Label size for Small, Medium, Large or Extra Large; points to `label-md`, `label-lg`, `title-sm` and `title-md` |
-| `--button-{size}-line-height` | Label line height for Small, Medium, Large or Extra Large; points to the same type-scale step |
-| `--button-{size}-icon-size` | Icon size for Small, Medium, Large or Extra Large |
-| `--button-content-gap` | Space between an icon and the Button label |
-| `--button-border-width` | Border width |
-| `--button-border-radius` | Corner radius |
-| `--button-focus-ring-width` | Keyboard-focus indicator width |
-| `--button-focus-ring-offset` | Keyboard-focus indicator position |
-| `--button-progress-size` | Pending indicator size |
-| `--button-progress-stroke-width` | Pending indicator stroke width |
-| `--button-progress-border-radius` | Pending indicator shape |
-| `--motion-duration-loading` | Duration of one pending-indicator rotation; defaults to `1s`; system reduction stops rotation, Wireframe alone does not |
-
-Button focus uses the shared `--color-focus` role. Pending retains the enabled
-colors while displaying progress. Disabled Buttons retain their variant colors
-at `--opacity-disabled` and do not add elevation.
-
-NavTree owns its row appearance and chevron using the existing tree tokens and
-shared small-button sizing tokens. Top-level expandable groups retain `--space-2`
-spacing. Only the chevron animates, using `--motion-duration-interface`,
-`--motion-easing-enter` and `--motion-rotation-expanded`. Rows change immediately;
-the central policy suppresses rotation in Wireframe scopes and under system
-reduced motion. No tree tokens were added, renamed or removed in this build.
-The former optional animation hook and consumer recipe classes have been removed.
-
-## What is not currently a Mezzanine foundation
-
-Beyond corner radius, the library does not currently define other public shape,
-breakpoint or responsive-behavior tokens. DecoCode values for those areas are not Mezzanine
-defaults. They will only be added after their cross-product rules are discussed,
-agreed and implemented.
-
-## Adding a token
-
-Before adding a public token, answer:
-
-1. What design decision does it represent?
-2. Is the decision shared by more than one component or product?
-3. Is an existing semantic token already suitable?
-4. Does the name describe a purpose rather than an appearance?
-5. What contrast relationships must it maintain?
-6. What would a product owner expect to change by overriding it?
-
-If those answers are unclear, the token is not ready to become public API.
-
-## Text field tokens
-
-TextField composes the public Label, Input or TextArea, description Text and FieldError.
-Its initial appearance uses square corners, a 3rem minimum input height and the
-existing theme colours. Light and Dark visual refinements are deferred.
-
-| Token | Meaning |
-| --- | --- |
-| `--text-field-gap` | Space between field parts |
-| `--text-field-error-content` | Validation message colour |
-| `--text-area-min-height` | Minimum multiline height, initially 4rem |
-| `--input-padding-block`, `--input-padding-inline` | Input text padding |
-| `--input-border-width`, `--input-border-radius` | Input border and corner shape |
-| `--input-background` | Input surface colour |
-| `--input-border`, `--input-border-hovered`, `--input-border-invalid` | Default, hovered and invalid borders |
-| `--input-focus-ring-width`, `--input-focus-ring-offset` | Focus outline thickness and spacing |
-
-Input text, placeholder, descriptions and focus use existing semantic colour
-roles. Disabled fields use the shared disabled opacity; read-only fields retain
-the normal appearance and can receive focus. No motion is applied.
-
-TextArea shares Input’s appearance and state tokens. It permits vertical resizing,
-remains within its container width, and accepts the native `rows` prop for the
-initial visible line count. Its minimum height still applies when resized.
-
-## RatioPair tokens
-
-RatioPair shares a row between two areas and stacks them when they can't both have
-their minimum width. Apps can pass `gap` (a spacing step) and `minAreaWidth` for
-one RatioPair; these tokens set the defaults.
-
-| Token | Meaning |
-| --- | --- |
-| `--ratio-pair-gap` | Default space between the two areas |
-| `--ratio-pair-min-area-width` | Default narrowest width of each sharing area before the areas stack |
-
-## Tab bar tokens
-
-TabBar uses the existing semantic text, border, hover, pressed and focus colours.
-The More sheet uses the existing modal backdrop, elevation and motion duration.
-
-| Token | Purpose |
-| --- | --- |
-| `--tab-bar-background`, `--tab-bar-item-background-current` | Bar/sheet surface and current destination background |
-| `--tab-bar-border-width`, `--tab-bar-indicator-width` | Surface border and current destination marker |
-| `--tab-bar-safe-area-bottom` | Device bottom inset; defaults to `env(safe-area-inset-bottom, 0px)` |
-| `--tab-bar-gap`, `--tab-bar-padding` | Space between items and inside the bar |
-| `--tab-bar-item-min-width` | Minimum slot width used to decide which links move into More |
-| `--tab-bar-item-padding`, `--tab-bar-item-gap` | Inner padding and icon/label spacing; the item's height is the shared `--control-size-md` |
-| `--tab-bar-icon-size` | Decorative icon dimensions |
-| `--tab-bar-focus-ring-width`, `--tab-bar-focus-ring-offset` | Visible keyboard focus outline |
-| `--tab-bar-sheet-max-height` | Maximum sheet height before its content scrolls |
-
-Overflow uses More rather than horizontal scrolling. The minimum slot width scales
-with root text size; labels can wrap within a slot. Sheet motion is disabled when
-the visitor prefers reduced motion.
-
-## Tooltip tokens
-
-Tooltips use the shared surface, text, border, spacing, small body type and small
-radius tokens, and `--elevation-raised-2`. These tokens control their remaining values:
-
-| Token | Purpose |
-| --- | --- |
-| `--tooltip-max-width` | Maximum tooltip width, additionally limited to the viewport |
-| `--tooltip-border-width` | Tooltip border thickness |
-| `--motion-duration-interface` | Fade duration; disabled for reduced motion |
-
-The hover delay is controlled by the `TooltipTrigger` `delay` prop, not CSS.
+| `--target-size-min` | 1.5rem (24px) | The WCAG 2.2 AA minimum; not used by components |
+| `--target-size-xs` | 2rem (32px) | Button and ToggleButton `size="xs"`, NavTree rows and expand buttons, Table of contents links, ListBox options, Breadcrumbs, links in a Footer list |
+| `--target-size-sm` | 2.25rem (36px) | Button and ToggleButton `size="sm"`, Checkbox, Radio, SearchField's clear button |
+| `--target-size-md` | 2.75rem (44px) | Button and ToggleButton `size="md"` (the default), text fields, Tabs, Disclosure triggers, Navbar links and brand, TabBar items, sortable Table headers and selectable Table rows |
+| `--target-size-lg` | 3rem (48px) | Button and ToggleButton `size="lg"` |
+| `--target-size-xl` | 3.5rem (56px) | Button and ToggleButton `size="xl"` |
 
 ### Shared button sizing
 
-Button and ToggleButton use the same `--button-sm-*`, `--button-md-*`,
+Button and ToggleButton use the same `--button-xs-*`, `--button-sm-*`, `--button-md-*`,
 `--button-lg-*` and `--button-xl-*` size tokens. Their minimum heights come from the shared
-`--control-size-*` scale. Both default to `md`.
+`--target-size-*` scale. Both default to `md`.
 Select sizes through `size`; ToggleButtonGroup supplies a size to its children,
 which an individual ToggleButton can override with its own `size`.
 For icon buttons, give the label as children and choose `labelPlacement`: `tooltip`, `below` or `above`.

@@ -86,6 +86,7 @@ export const navbarContent: DocsPageContent = {
     { label: 'Tab bar', href: '/tab-bar' },
     { label: 'Sidebar', href: '/sidebar' },
     { label: 'Footer', href: '/footer' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Disclosure', href: 'https://react-aria.adobe.com/Disclosure' },

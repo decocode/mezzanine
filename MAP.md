@@ -86,12 +86,13 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
 | `src/themes/wireframe.css` | Monochrome Wireframe theme with semantic status colors and blue focus |
 | `src/tokens/color.css` | Colour palettes; semantic colour roles are set per theme (Styles › Color) |
-| `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) target sizes: `--target-size-min` (the WCAG minimum) and `--target-size` (the size controls use), documented on Interaction › Target size; and the shared control-size scale, `--control-size-sm` to `--control-size-xl`, which Button, ToggleButton, text fields, Disclosure and TabBar take their heights from |
+| `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) target sizes: `--target-size-min` (the WCAG minimum) and the shared scale `--target-size-xs` to `--target-size-xl`, which every interactive element takes its height from, documented on Interaction › Target size |
 | `src/tokens/elevation.css` | Elevation levels built from the shadow and highlight colours; each theme sets its shadow colour (Styles › Elevation) |
 | `src/tokens/motion.css` | Durations, easing, distances, scale and rotation (Styles › Motion) |
 | `src/tokens/z-index.css` | The shared stacking scale: base, raised, sticky, overlay (every pop-up) and toast; not yet documented on a site page |
 | `src/tokens/shape.css` | Corner-radius and border-width scales (Styles › Shape › Corners and Borders) |
 | `src/tokens/text.css` | Text behaviour tokens: `--line-length` (Foundations › Text) |
+| `src/tokens/icon.css` | Icon size scale, `--icon-size-xs` to `--icon-size-xl`, which Button, ToggleButton, Checkbox, the Disclosure and NavTree chevrons, SearchField and TabBar take their icon sizes from; not yet documented on a site page |
 | `src/tokens/space.css` | Spacing scale; shown on the Lab's Gap page, with no docs page until the Lab pages are promoted |
 | `src/tokens/typography.css` | Font families, weights, type-scale roles and inline-code tokens (Styles › Typography) |
 
@@ -241,10 +242,10 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/lab/shared/layout-lab.css` | Lab-scoped styles and illustrative --lab-* candidate tokens for the Lab's pages |
 | `site/lab/layout/layoutContent.ts` | The Layout overview's content, the seven groups, and each group's pages in reading order, gathered from the page folders |
 | `site/lab/layout/layoutExamples.ts` | Each Layout page's examples, keyed by the page's key, gathered from the page folders |
-| `site/lab/layout/<group>/<page>/<page>Content.ts` | One folder per Layout page, named after its address (for example `site/lab/layout/side-by-side/row/rowContent.ts`): the page's content in the docs site's shape (description, any Also known as names, How it works with any Browser support, Example, Related pages and References) with its address, plus the CSS notes and any linked copy its example uses. Groups: box-basics (the-box-model, types-of-box, measuring-the-box, viewport-units, sizing-the-box, center), add-space (margin, padding, gap), inside-the-box (alignment, filling-the-box, overflowing-the-box, aspect-ratio, content-columns, box-has-content), side-by-side (row, row-wrap, row-wrap-grow, reel, ratio-pair), grids-and-columns (column, grid, subgrid) and container (container-queries, fluid-sizing) |
+| `site/lab/layout/<group>/<page>/<page>Content.ts` | One folder per Layout page, named after its address (for example `site/lab/layout/side-by-side/row/rowContent.ts`): the page's content in the docs site's shape (description, any Also known as names, How it works with any Browser support, Example, Related pages and References) with its address, plus the CSS notes and any linked copy its example uses. Groups: box-basics (the-box-model, types-of-box, measuring-the-box, viewport-units, sizing-the-box, center), add-space (margin-and-padding, gap, spacing), inside-the-box (alignment, filling-the-box, overflowing-the-box, aspect-ratio, content-columns, box-has-content), side-by-side (row, row-wrap, row-wrap-grow, reel, ratio-pair), grids-and-columns (column, grid, subgrid) and container (container-queries, fluid-sizing) |
 | `site/lab/layout/<group>/<page>/<Page>Example.tsx` | The page's example, with any options it alone uses (for example `RowExample.tsx`); Gap's also exports the spacing tokens shown after it |
-| `site/lab/layout/add-space/gap/SpacingScale.tsx` | Every spacing token with a bar of its size, its live value and its usual pixel size; used by the Lab's Gap page |
-| `site/lab/layout/add-space/gap/spacingContent.ts` | Spacing scale steps displayed by SpacingScale on the Lab's Gap page |
+| `site/lab/layout/add-space/spacing/SpacingScale.tsx` | Every spacing token with a bar of its size, its live value and its usual pixel size; used by the Lab's Spacing page |
+| `site/lab/layout/add-space/spacing/spacingContent.ts` | Spacing scale steps displayed by SpacingScale on the Lab's Spacing page |
 | `site/lab/layers/layersContent.ts` | The Layers experiment's overview content and its pages in order, gathered from its page folders |
 | `site/lab/layers/<page>/` | One folder per Layers page, each with its content and CSS notes and its example: positioning, ordering-layers, bundles-of-layers and scroll-padding |
 | `site/lab/browser-and-device/browserAndDeviceContent.ts` | The Browser and device experiment's overview content and its pages in order, gathered from its page folders |

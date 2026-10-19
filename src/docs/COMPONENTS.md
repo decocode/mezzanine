@@ -27,8 +27,9 @@ ToggleButton has the same two props.
 
 ### Sizes
 
-Use `size="sm"`, `"md"`, `"lg"` or `"xl"` on Button and ToggleButton. The default
-is `md`. ToggleButtonGroup can set one size for all its children.
+Use `size="xs"`, `"sm"`, `"md"`, `"lg"` or `"xl"` on Button and ToggleButton. The default
+is `md`. `xs` is below the 44px target size, so keep it for dense areas such as
+toolbars and tables. ToggleButtonGroup can set one size for all its children.
 
 Size recipes live in `Button.css`. To change sizes across a product, override the
 shared button tokens in a theme. `npm run check:rules` rejects local overrides of

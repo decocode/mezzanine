@@ -70,6 +70,7 @@ export const disclosureContent: DocsPageContent = {
   relatedPages: [
     { label: 'Dialog', href: '/dialog' },
     { label: 'Navbar', href: '/navbar' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Disclosure', href: 'https://react-aria.adobe.com/Disclosure' },

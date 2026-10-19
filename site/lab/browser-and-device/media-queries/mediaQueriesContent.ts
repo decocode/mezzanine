@@ -36,7 +36,7 @@ export const mediaQueriesCssNotes: Record<string, CssNote> = {
 
 @media (pointer: coarse) {
   .example {
-    min-block-size: var(--target-size);
+    min-block-size: var(--target-size-md);
   }
 }`,
   },

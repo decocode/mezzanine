@@ -10,6 +10,7 @@
 @import './tokens/interaction.css';
 @import './tokens/typography.css';
 @import './tokens/space.css';
+@import './tokens/icon.css';
 @import './tokens/text.css';
 @import './tokens/shape.css';
 @import './tokens/elevation.css';

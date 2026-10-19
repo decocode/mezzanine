@@ -5,9 +5,9 @@
   --sidebar-width: 18rem;
   --sidebar-rail-width: 4.5rem;
   --sidebar-max-height: 80dvh;
-  --sidebar-padding: 1rem;
-  --sidebar-rail-padding: 0.5rem;
-  --sidebar-gap: 0.5rem;
+  --sidebar-padding: var(--space-4);
+  --sidebar-rail-padding: var(--space-2);
+  --sidebar-gap: var(--space-2);
   --sidebar-border-width: var(--border-width-baseline);
-  --sidebar-drawer-gap: 1rem;
+  --sidebar-drawer-gap: var(--space-4);
 }

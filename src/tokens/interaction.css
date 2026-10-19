@@ -4,15 +4,13 @@
   /* Shared disabled-state treatment for interactive components. */
   --opacity-disabled: 0.5;
 
-  /* Target size: how big something you tap or click must be. --target-size-min is the
-     WCAG 2.2 AA minimum of 24px; --target-size is the size Mezzanine's controls use. */
+  /* Target size: how big something you tap or click is. --target-size-min is the WCAG 2.2 AA
+     minimum of 24px. Every interactive element picks a step from the scale, all above that
+     minimum; md and up are 44px or more. Button and ToggleButton use all five steps. */
   --target-size-min: 1.5rem;
-  --target-size: 2.75rem;
-
-  /* Control size: the heights every control picks from. The smallest is the target size. Button
-     and ToggleButton use all four; text fields, Disclosure and TabBar use md. */
-  --control-size-sm: var(--target-size);
-  --control-size-md: 3rem;
-  --control-size-lg: 3.25rem;
-  --control-size-xl: 3.5rem;
+  --target-size-xs: 2rem;
+  --target-size-sm: 2.25rem;
+  --target-size-md: 2.75rem;
+  --target-size-lg: 3rem;
+  --target-size-xl: 3.5rem;
 }

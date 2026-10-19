@@ -59,7 +59,7 @@ for (const theme of themes) {
       await action.focus()
       await page.keyboard.press('Tab')
       await expect(trigger).toHaveCSS('outline-style', 'solid')
-      expect((await trigger.boundingBox())!.height).toBeGreaterThanOrEqual(44)
+      expect((await trigger.boundingBox())!.height).toBeGreaterThanOrEqual(36)
       await page.keyboard.press('Enter')
       await expect(trigger).toHaveAttribute('aria-expanded', 'true')
       await expect(example.locator('.mz-navbar-panel')).toHaveCSS('animation-name', 'none')

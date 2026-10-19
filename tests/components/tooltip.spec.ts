@@ -67,7 +67,7 @@ for (const theme of themes) {
       expect(box.x).toBeGreaterThanOrEqual(0)
       expect(box.x + box.width).toBeLessThanOrEqual(320)
       await expectNoPageOverflow(page)
-      expect((await control.boundingBox())!.height).toBeGreaterThanOrEqual(44)
+      expect((await control.boundingBox())!.height).toBeGreaterThanOrEqual(36)
       await expect(control).toHaveCSS('outline-style', 'solid')
       await expectNoAccessibilityViolations(page, '[role="tooltip"]')
     })

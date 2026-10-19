@@ -71,7 +71,7 @@ test('Navbar exposes related pages and external references through On this page'
   await contents.getByRole('link', { name: 'Related pages', exact: true }).click()
   await expect(page).toHaveURL(/#related-pages$/)
   await expect(related).toBeVisible()
-  await expect(related.getByRole('link')).toHaveText(['Tab bar', 'Sidebar', 'Footer'])
+  await expect(related.getByRole('link')).toHaveText(['Tab bar', 'Sidebar', 'Footer', 'Target size'])
   for (const link of await related.getByRole('link').all()) {
     const href = await link.getAttribute('href')
     expect(sitePages.some(item => item.path === href)).toBe(true)

@@ -6,9 +6,9 @@ import { MeasuringTheBoxExample } from './box-basics/measuring-the-box/Measuring
 import { ViewportUnitsExample } from './box-basics/viewport-units/ViewportUnitsExample'
 import { SizingTheBoxExample } from './box-basics/sizing-the-box/SizingTheBoxExample'
 import { CenterExample } from './box-basics/center/CenterExample'
-import { MarginExample } from './add-space/margin/MarginExample'
-import { PaddingExample } from './add-space/padding/PaddingExample'
-import { GapExample, SpacingTokens } from './add-space/gap/GapExample'
+import { MarginAndPaddingExample } from './add-space/margin-and-padding/MarginAndPaddingExample'
+import { GapExample } from './add-space/gap/GapExample'
+import { SpacingExample } from './add-space/spacing/SpacingExample'
 import { AlignmentExample } from './inside-the-box/alignment/AlignmentExample'
 import { FillingTheBoxExample } from './inside-the-box/filling-the-box/FillingTheBoxExample'
 import { OverflowingTheBoxExample } from './inside-the-box/overflowing-the-box/OverflowingTheBoxExample'
@@ -33,9 +33,9 @@ export const stageExamples: StageExamples = {
   viewportUnits: { Example: ViewportUnitsExample },
   sizingTheBox: { Example: SizingTheBoxExample },
   center: { Example: CenterExample },
-  margin: { Example: MarginExample },
-  padding: { Example: PaddingExample },
-  gap: { Example: GapExample, Detail: SpacingTokens },
+  marginAndPadding: { Example: MarginAndPaddingExample },
+  gap: { Example: GapExample },
+  spacing: { Example: SpacingExample },
   alignment: { Example: AlignmentExample },
   fillingTheBox: { Example: FillingTheBoxExample },
   overflowingTheBox: { Example: OverflowingTheBoxExample },

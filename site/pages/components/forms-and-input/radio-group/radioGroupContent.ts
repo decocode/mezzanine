@@ -78,6 +78,7 @@ export const radioGroupContent: DocsPageContent = {
     { label: 'Checkbox', href: '/checkbox' },
     { label: 'Toggle button', href: '/toggle-button' },
     { label: 'Color', href: '/color' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria RadioGroup', href: 'https://react-aria.adobe.com/RadioGroup' },

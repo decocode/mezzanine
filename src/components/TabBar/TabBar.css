@@ -44,7 +44,7 @@
   align-items: center;
   gap: var(--tab-bar-item-gap);
   width: 100%;
-  min-height: var(--control-size-md);
+  min-height: var(--target-size-md);
   padding: var(--tab-bar-item-padding);
   border-block-end: var(--tab-bar-indicator-width) solid transparent;
   color: var(--color-link);

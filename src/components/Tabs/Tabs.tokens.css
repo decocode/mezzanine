@@ -2,20 +2,20 @@
 
 :where(:root) {
   /* Tabs: shared structure and theme-aware semantic colours. */
-  --tabs-content-gap: 0.5rem;
+  --tabs-content-gap: var(--space-2);
   --tabs-border-width: var(--border-width-baseline);
   --tabs-border: var(--color-border);
   --tabs-content: var(--color-text);
   --tabs-focus-ring-width: 0.1875rem;
   --tabs-focus-ring-offset: -0.1875rem;
-  --tab-padding-block: 0.75rem;
-  --tab-padding-inline: 1rem;
+  --tab-padding-block: var(--space-3);
+  --tab-padding-inline: var(--space-4);
   --tab-content: var(--color-text);
   --tab-content-selected: var(--color-text);
   --tab-background-hovered: var(--color-surface-hover);
   --tab-background-pressed: var(--color-surface-pressed);
   --tab-indicator: var(--color-link);
   --tab-indicator-width: 0.1875rem;
-  --tab-panel-padding: 0.75rem;
+  --tab-panel-padding: var(--space-3);
   --tab-panel-preferred-width: 12rem;
 }

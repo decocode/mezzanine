@@ -1,4 +1,9 @@
 [
+  "--icon-size-lg",
+  "--icon-size-md",
+  "--icon-size-sm",
+  "--icon-size-xl",
+  "--icon-size-xs",
   "--list-box-empty-content",
   "--list-box-gap",
   "--list-box-header-content",

@@ -632,8 +632,8 @@
 }
 
 .lab-target-comfortable {
-  inline-size: var(--target-size);
-  block-size: var(--target-size);
+  inline-size: var(--target-size-md);
+  block-size: var(--target-size-md);
 }
 
 .lab-layer-stack {

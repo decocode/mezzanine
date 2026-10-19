@@ -25,7 +25,7 @@ export const touchTargetsPage: LabPage = {
 export const touchTargetsCssNotes: Record<string, CssNote> = {
   targetSize: {
     paragraphs: [
-      'Each square takes its size from a Mezzanine token: `--target-size-min` is 1.5rem, the WCAG minimum of 24px, and `--target-size` is 2.75rem, or 44px.',
+      'Each square takes its size from a Mezzanine token: `--target-size-min` is 1.5rem, the WCAG minimum of 24px, and `--target-size-md` is 2.75rem, or 44px.',
       'A component would use the same token for the minimum width and height of anything you tap or click.',
     ],
     code: `.lab-target-wcag {
@@ -34,8 +34,8 @@ export const touchTargetsCssNotes: Record<string, CssNote> = {
 }
 
 .lab-target-comfortable {
-  inline-size: var(--target-size);
-  block-size: var(--target-size);
+  inline-size: var(--target-size-md);
+  block-size: var(--target-size-md);
 }`,
   },
 }

@@ -112,6 +112,7 @@ export const navigationTreeContent: DocsPageContent = {
     { label: 'Navbar', href: '/navbar' },
     { label: 'Breadcrumbs', href: '/breadcrumbs' },
     { label: 'Table of contents', href: '/table-of-contents' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [{ label: 'React Aria NavigationTree', href: 'https://react-aria.adobe.com/NavigationTree' }],
 }

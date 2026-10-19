@@ -9,7 +9,7 @@ import { ProgressBar } from 'react-aria-components/ProgressBar'
 import { Tooltip, TooltipTrigger, type TooltipProps } from '../Tooltip/Tooltip'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'destructive'
-export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 // Where an icon button shows its label: in a tooltip, or visibly below or above the icon. The label
 // is always the button's children, so the accessible name and the visible words always match.
@@ -58,12 +58,15 @@ export function Button({
   }
 
   function renderContent(children: ReactNode, isPending = false) {
+    const leading = iconLeading != null && <span aria-hidden="true" className="mz-button-icon">{iconLeading}</span>
+    const trailing = iconTrailing != null && <span aria-hidden="true" className="mz-button-icon">{iconTrailing}</span>
     return (
       <>
         <span className="mz-button-content">
-          {iconLeading != null && <span aria-hidden="true" className="mz-button-icon">{iconLeading}</span>}
-          {tooltipLabel === undefined && children}
-          {iconTrailing != null && <span aria-hidden="true" className="mz-button-icon">{iconTrailing}</span>}
+          {appearance['data-label-placement'] !== undefined
+            // The icon sits in the button's box and the label sits outside it, below or above.
+            ? <><span className="mz-button-icon-box">{leading}{trailing}</span>{children}</>
+            : <>{leading}{tooltipLabel === undefined && children}{trailing}</>}
         </span>
         {isPending && (
           <ProgressBar aria-label="Loading" className="mz-button-progress" isIndeterminate>

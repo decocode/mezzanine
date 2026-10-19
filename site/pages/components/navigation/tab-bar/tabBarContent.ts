@@ -97,6 +97,7 @@ export const tabBarContent: DocsPageContent = {
     { label: 'Navbar', href: '/navbar' },
     { label: 'Tabs', href: '/tabs' },
     { label: 'Link', href: '/link' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Link', href: 'https://react-aria.adobe.com/Link' },

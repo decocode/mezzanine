@@ -3,7 +3,7 @@
   gap: var(--checkbox-content-gap);
   align-items: center;
   /* The whole row is the target, so it is at least the shared target size tall. */
-  min-height: var(--target-size);
+  min-height: var(--target-size-sm);
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);

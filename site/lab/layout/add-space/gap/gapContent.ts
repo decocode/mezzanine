@@ -19,9 +19,6 @@ export const gapPage: StagePage = {
   ],
 }
 
-// Example copy with a link to another Lab page.
-export const gapExampleLinkText = 'Mezzanine’s spaces come from a scale of tokens built on a 4px step. The number in each name counts the steps, so `--space-4` is four steps: `1rem`, normally 16px. The tokens are in `rem`, so space grows when someone enlarges their text. [Measuring the box](/site/lab/layout/box-basics/measuring-the-box) explains `rem`.'
-
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.
 export const gapCssNotes: Record<string, CssNote> = {
@@ -33,16 +30,6 @@ export const gapCssNotes: Record<string, CssNote> = {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-}`,
-  },
-  spacingScale: {
-    paragraphs: [
-      'The gap comes from one of Mezzanine’s spacing tokens. The number in each name counts 4px steps, so `--space-4` is 1rem, normally 16px.',
-    ],
-    code: `.lab-spacing-scale {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--lab-gap);
 }`,
   },
 }

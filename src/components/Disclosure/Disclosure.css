@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  min-height: var(--control-size-md);
+  min-height: var(--target-size-md);
   padding: var(--disclosure-trigger-padding-block) var(--disclosure-trigger-padding-inline);
   border: 0;
   background: var(--disclosure-trigger-background);

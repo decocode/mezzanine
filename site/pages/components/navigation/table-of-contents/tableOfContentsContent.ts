@@ -61,6 +61,7 @@ export const tableOfContentsContent: DocsPageContent = {
     { label: 'Link', href: '/link' },
     { label: 'Button', href: '/button' },
     { label: 'Radio group', href: '/radio-group' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Link', href: 'https://react-aria.adobe.com/Link' },

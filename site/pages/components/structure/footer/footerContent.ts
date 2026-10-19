@@ -63,6 +63,7 @@ export const footerContent: DocsPageContent = {
   relatedPages: [
     { label: 'AppShell', href: '/app-shell' },
     { label: 'Link', href: '/link' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'MDN: The footer element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/footer' },

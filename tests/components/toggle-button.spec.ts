@@ -100,14 +100,14 @@ test('group example tabs switch selection modes and preserve choices', async ({ 
 })
 
 // Checks, at normal and double text size, that Button and ToggleButton are exactly the same size at
-// each of the four sizes, and that the theme switcher uses the small size.
+// each of the five sizes, and that the theme switcher uses the small size.
 for (const fontSize of textSizes) {
   test(`Button and ToggleButton share all size dimensions at ${fontSize}px root text`, async ({ page }) => {
     const dimensions = async (route: string, tableName: string) => {
       await page.goto(route)
       await setTextSize(page, fontSize)
       const table = page.getByRole('grid', { name: tableName, exact: true })
-      await expect(table.locator('[data-icon-only]')).toHaveCount(4)
+      await expect(table.locator('[data-icon-only]')).toHaveCount(5)
       return table.locator('[data-icon-only]').evaluateAll(buttons => buttons.map(button => {
         const style = getComputedStyle(button)
         const icon = button.querySelector('svg')!
@@ -118,12 +118,12 @@ for (const fontSize of textSizes) {
     const buttons = await dimensions('/button', 'Button sizes')
     const toggles = await dimensions('/toggle-button', 'ToggleButton sizes')
     expect(toggles).toEqual(buttons)
-    expect(buttons.map(button => button.size)).toEqual(['sm', 'md', 'lg', 'xl'])
-    expect(buttons.map(button => parseFloat(button.iconWidth))).toEqual([1, 1.125, 1.25, 1.5].map(size => size * fontSize))
-    expect(buttons.map(button => parseFloat(button.height))).toEqual([2.75, 3, 3.25, 3.5].map(size => size * fontSize))
+    expect(buttons.map(button => button.size)).toEqual(['xs', 'sm', 'md', 'lg', 'xl'])
+    expect(buttons.map(button => parseFloat(button.iconWidth))).toEqual([1, 1.25, 1.5, 1.75, 2].map(size => size * fontSize))
+    expect(buttons.map(button => parseFloat(button.height))).toEqual([2, 2.25, 2.75, 3, 3.5].map(size => size * fontSize))
     const themes = page.getByRole('radiogroup', { name: 'Theme', exact: true }).filter({ visible: true })
     if (!(await themes.count())) await page.locator('header.mz-navbar').first().getByRole('button', { name: 'Menu', exact: true }).click()
     await expect(themes.getByRole('radio').first()).toHaveAttribute('data-size', 'sm')
-    await expect(themes.getByRole('radio').first().locator('svg')).toHaveCSS('width', `${fontSize}px`)
+    await expect(themes.getByRole('radio').first().locator('svg')).toHaveCSS('width', `${fontSize * 1.25}px`)
   })
 }
