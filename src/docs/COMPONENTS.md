@@ -174,6 +174,32 @@ styled yet.
 Split follows its container, not the screen, and adds no behaviour. It is not
 yet documented on the site.
 
+## AppShell and Panel
+
+AppShell frames an app's screen. Put the app's own `<header>`, its Panels and
+its own `<main>` inside, in reading order; AppShell lays them out and fills the
+window's height, and the main content and each Panel scroll on their own.
+
+```tsx
+<AppShell>
+  <header>…<PanelTrigger panel="filters">Filters</PanelTrigger></header>
+  <Panel id="filters" edge="start" title="Filters">…</Panel>
+  <main>…</main>
+</AppShell>
+```
+
+A Panel sits at its `edge` (`start`, `end` or `bottom`) and shares the space:
+the main content gets smaller. It's closed until opened, unless it has
+`defaultOpen`; `isOpen` and `onOpenChange` control it. `minimized` gives it a
+condensed version to show when it isn't open. A `PanelTrigger` anywhere in the
+AppShell, with `panel` set to the Panel's `id`, opens and closes it; it accepts
+every Button prop.
+
+When the main content would drop below `--app-shell-min-main-width`, a side
+Panel opens as a modal drawer instead, end Panels first. A drawer only opens
+when someone opens it. `bottomPanelSpan="full"` runs a bottom Panel under the
+side Panels too.
+
 ## Sidebar
 
 `Sidebar` manages two separate states: inline expansion and the modal drawer.

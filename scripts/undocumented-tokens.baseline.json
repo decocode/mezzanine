@@ -33,7 +33,6 @@
   "--space-5",
   "--space-8",
   "--split-gap",
-  "--split-min-area-width",
   "--z-index-base",
   "--z-index-overlay",
   "--z-index-raised",

@@ -199,9 +199,9 @@ test('AppShell and documentation example share permanent library panels and navi
   }
   expect(await shellPanel.getByRole('link').evaluateAll(links => links.map(link => link.getAttribute('href'))))
     .toEqual(await examplePanel.getByRole('link').evaluateAll(links => links.map(link => link.getAttribute('href'))))
-  await examplePanel.getByRole('link', { name: 'Navbar', exact: true }).click()
-  await expect(page).toHaveURL(/\/navbar$/)
-  await expect(page.getByRole('heading', { name: 'Navbar', level: 1, exact: true })).toBeVisible()
+  await examplePanel.getByRole('link', { name: 'Tab bar', exact: true }).click()
+  await expect(page).toHaveURL(/\/tab-bar$/)
+  await expect(page.getByRole('heading', { name: 'Tab bar', level: 1, exact: true })).toBeVisible()
 })
 
 // Checks that at phone width the Sidebar page's documentation example stays in the page instead of

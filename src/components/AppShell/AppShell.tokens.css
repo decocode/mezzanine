@@ -1,0 +1,6 @@
+/* Component tokens shared by every theme. */
+
+:where(:root) {
+  /* AppShell: the narrowest the main content gets before a side Panel becomes a drawer. */
+  --app-shell-min-main-width: var(--split-min-area-width);
+}

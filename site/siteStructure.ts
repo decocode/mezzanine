@@ -117,6 +117,18 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     label: 'Components',
     groups: [
       {
+        // The components that frame an app's screen: its header, side and bottom areas, and footer.
+        id: 'structure',
+        label: 'Structure',
+        pages: [
+          { id: 'app-shell', label: 'AppShell', path: '/app-shell', status: 'implemented' },
+          { id: 'navbar', label: 'Navbar', path: '/navbar', status: 'implemented' },
+          { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
+          { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
+          { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },
+        ],
+      },
+      {
         id: 'navigation',
         label: 'Navigation',
         pages: [
@@ -128,9 +140,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
           { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
           { id: 'tab-bar', label: 'Tab bar', path: '/tab-bar', status: 'implemented' },
-          { id: 'navbar', label: 'Navbar', path: '/navbar', status: 'implemented' },
           { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'implemented' },
-          { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },
         ],
       },
       {

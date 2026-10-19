@@ -257,6 +257,11 @@ export type { SearchFieldProps } from './components/SearchField/SearchField'
 export { TextArea } from './components/TextArea/TextArea'
 export type { TextAreaProps } from './components/TextArea/TextArea'
 
+export { AppShell } from './components/AppShell/AppShell'
+export type { AppShellProps } from './components/AppShell/AppShell'
+export { Panel, PanelTrigger } from './components/Panel/Panel'
+export type { PanelProps, PanelTriggerProps } from './components/Panel/Panel'
+export type { PanelEdge } from './components/AppShell/panelStore'
 export { Split } from './components/Split/Split'
 export type { SplitProps } from './components/Split/Split'
 

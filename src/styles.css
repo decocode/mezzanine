@@ -31,5 +31,7 @@
 
 @import './components/Sidebar/Sidebar.css';
 @import './components/Split/Split.css';
+@import './components/AppShell/AppShell.css';
+@import './components/Panel/Panel.css';
 
 @import './motion.css';

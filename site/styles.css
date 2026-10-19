@@ -1129,3 +1129,21 @@ a:focus-visible {
 .text-direction-example p { margin: 0 0 var(--space-2); }
 .text-direction-physical { padding-block: var(--space-3); border-left: var(--space-2) solid var(--color-warning-600); padding-left: var(--space-4); }
 .text-direction-logical { padding-block: var(--space-3); border-inline-start: var(--space-2) solid var(--color-warning-600); padding-inline-start: var(--space-4); }
+
+/* AppShell example on the AppShell and Panel pages: the site gives the frame a fixed height inside its example zone. */
+.app-shell-example-zone { padding: 0; }
+.app-shell-example { block-size: 28rem; }
+
+.app-shell-example-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
+}
+
+.app-shell-example-triggers { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.app-shell-example-main { padding: var(--space-4); }
+.app-shell-example-minimized { margin: 0; padding: var(--space-2) var(--space-4); }

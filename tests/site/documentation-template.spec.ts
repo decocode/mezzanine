@@ -54,7 +54,8 @@ for (const definition of componentPages) {
     await page.setViewportSize({ width: 320, height: 900 })
     for (const fontSize of [16, 32]) {
       await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
-      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
+      // Polled, so a Panel still animating its space closed after the resize can settle first.
+      await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
     }
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
     expect((await new AxeBuilder({ page }).include('section[aria-labelledby$="-technical-details"]').include('section[aria-labelledby="related-pages"]').include('section[aria-labelledby*="references"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])

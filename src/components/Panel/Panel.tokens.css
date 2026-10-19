@@ -1,0 +1,7 @@
+/* Component tokens shared by every theme. */
+
+:where(:root) {
+  /* Panel: a side Panel's open width, and the tallest a bottom Panel grows, as a share of the AppShell. */
+  --panel-width: 20rem;
+  --panel-max-height: 50%;
+}

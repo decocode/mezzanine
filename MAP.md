@@ -53,6 +53,10 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/RadioGroup/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/SelectionIndicator/SelectionIndicator.ts` | Public React Aria SelectionIndicator export and prop type |
 | `src/components/Sidebar/Sidebar.css` | Token-based sidebar regions, left/right placement, rail and modal drawer styling |
+| `src/components/AppShell/AppShell.tsx`, `src/components/AppShell/AppShell.css`, `src/components/AppShell/AppShell.tokens.css` | Public AppShell: frames an app's screen with a header row, Panels at the start, end and bottom edges and the app's own main content; measures itself to decide when a side Panel becomes a drawer |
+| `src/components/AppShell/panelStore.ts` | Every Panel's open state in one AppShell, shared with PanelTriggers; drawers open only when someone opens them |
+| `src/components/AppShell/appShellLayout.ts` | Decides whether each side Panel shares the space or becomes a drawer (end Panel first), and converts length tokens to pixels |
+| `src/components/Panel/Panel.tsx`, `src/components/Panel/Panel.css`, `src/components/Panel/Panel.tokens.css` | Public Panel and PanelTrigger: an area at an AppShell edge that shares the space, with an optional minimised version, and the Button that opens and closes it; a side Panel without room opens as a React Aria Modal drawer |
 | `src/components/Sidebar/Sidebar.tsx` | Public Sidebar state boundary, Button-based SidebarTrigger and generic inline or modal SidebarPanel with optional compact rail, permanent inline expansion and optional inline header |
 | `src/components/Split/Split.tsx`, `src/components/Split/Split.css` | Public Split layout building block: two areas side by side that share the row by a fraction or by auto and stack when they can't both have their minimum width; layout only, following its container through flexbox wrapping |
 | `src/components/Sidebar/sidebarState.ts` | Internal sidebar context and responsive media-query subscription |
@@ -143,7 +147,10 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/get-started/introduction/introductionContent.ts` | Introduction page title and description |
 | `site/pages/components/navigation/link/linkContent.ts` | Link written guidance, reference entries, related pages and external references |
 | `site/pages/styles/motion/motionContent.ts` | Motion timing, token and reduced-motion reference descriptions |
-| `site/pages/components/navigation/navbar/navbarContent.ts` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
+| `site/pages/components/structure/app-shell/appShellContent.ts`, `site/pages/components/structure/app-shell/AppShellPage.tsx` | AppShell docs page: anatomy, behaviour, usage, accessibility, props and token |
+| `site/pages/components/structure/app-shell/AppShellExample.tsx` | The live AppShell example with Panels A, B and C, shared by the AppShell and Panel pages |
+| `site/pages/components/structure/panel/panelContent.ts`, `site/pages/components/structure/panel/PanelPage.tsx` | Panel docs page, covering Panel and PanelTrigger |
+| `site/pages/components/structure/navbar/navbarContent.ts` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
 | `site/pages/components/navigation/navigation-tree/navigationTreeContent.ts` | Nav Tree written guidance, reference entries, related pages and external references |
 | `site/pages/components/forms-and-input/radio-group/radioGroupContent.ts` | RadioGroup guidance, anatomy, states, token descriptions, related pages and references |
 | `site/pages/styles/shape/shapeContent.ts` | Shape overview page wording, and the corner-radius and border-width levels the Corners and Borders pages display |
@@ -181,7 +188,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/get-started/introduction/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
 | `site/pages/components/navigation/link/LinkPage.tsx` | Link states and content examples; loaded only when its route is requested |
 | `site/pages/styles/motion/MotionPage.tsx` | Motion timing, tokens and reduced-motion guidance; loaded only when its route is requested |
-| `site/pages/components/navigation/navbar/NavbarPage.tsx` | Composes Navbar content with the shared template and owns the live example state |
+| `site/pages/components/structure/navbar/NavbarPage.tsx` | Composes Navbar content with the shared template and owns the live example state |
 | `site/pages/components/navigation/navigation-tree/NavigationTreePage.tsx` | Hierarchical navigation example; loaded only when its route is requested |
 | `site/pages/not-found/NotFoundPage.tsx` | Unknown-route heading and return-home link |
 | `site/pages/not-implemented/NotImplementedPage.tsx` | WIP page heading and not-implemented message |
@@ -256,6 +263,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/components/code-block.spec.ts` | Code block structure, kept line breaks, reflow at 320px with normal and doubled text, and accessibility in each theme |
 | `tests/components/disclosure.spec.ts` | Disclosure reflow, immediate panels in every theme and motion setting, find-in-page and group switching |
 | `tests/components/navbar.spec.ts` | Navbar example keyboard, responsive, theme, contrast and forced-colour checks |
+| `tests/components/app-shell.spec.ts` | AppShell and Panel: sharing the space, closing back to the trigger, the bottom Panel's minimised version, the end Panel becoming a drawer, and 320px, text size, theme and axe checks |
 | `tests/components/split.spec.ts` | Split sharing by fraction and by auto, and stacking at full width in a narrow container at normal and doubled text, using the Lab's Split page |
 | `tests/components/sidebar.spec.ts` | Sidebar collapse, independent state, modal focus, responsiveness and accessibility checks |
 | `tests/components/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |

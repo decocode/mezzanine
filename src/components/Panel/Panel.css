@@ -1,0 +1,139 @@
+/* A Panel shares the space beside or below the main content. Its AppShell sizes the space. */
+.mezzanine-panel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: hidden;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+  overflow-wrap: anywhere;
+  transition:
+    opacity calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter),
+    visibility calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
+}
+
+.mezzanine-panel[data-edge='start'] { border-inline-end: var(--border-width-baseline) solid var(--color-border); }
+.mezzanine-panel[data-edge='end'] { border-inline-start: var(--border-width-baseline) solid var(--color-border); }
+.mezzanine-panel[data-edge='bottom'] { border-block-start: var(--border-width-baseline) solid var(--color-border); }
+
+/* Closed: the content fades while its space closes, and leaves keyboard and screen reader reach. */
+.mezzanine-panel[data-state='closed'] {
+  visibility: hidden;
+  opacity: 0;
+  border-width: 0;
+}
+
+/* Side content keeps its open width while the space animates, so it's revealed rather than squeezed. */
+:is(.mezzanine-panel[data-edge='start'], .mezzanine-panel[data-edge='end']):not([data-state='minimized']) > * {
+  min-inline-size: var(--panel-width);
+}
+
+.mezzanine-panel-header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
+}
+
+.mezzanine-panel-header .react-aria-Heading {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-title-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-md);
+  text-transform: var(--text-transform-title);
+}
+
+.mezzanine-panel-content {
+  flex: 1 1 auto;
+  min-block-size: 0;
+  overflow: auto;
+  padding: var(--space-4);
+}
+
+.mezzanine-panel-minimized {
+  display: flex;
+  min-block-size: 0;
+  overflow: auto;
+}
+
+/* A side Panel without room beside the content opens as a drawer: React Aria owns modality, focus
+   containment, scroll locking and dismissal. */
+.mezzanine-panel-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-overlay);
+  background: var(--modal-backdrop);
+}
+
+.mezzanine-panel-overlay > .mezzanine-panel {
+  position: absolute;
+  inset-block: 0;
+  inline-size: min(var(--panel-width), 100%);
+  box-shadow: var(--elevation-raised-3);
+}
+
+.mezzanine-panel-overlay > .mezzanine-panel[data-edge='start'] { inset-inline-start: 0; }
+.mezzanine-panel-overlay > .mezzanine-panel[data-edge='end'] { inset-inline-end: 0; }
+
+.mezzanine-panel-dialog {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-block-size: 0;
+  outline: none;
+}
+
+.mezzanine-panel-dialog:focus-visible {
+  outline: var(--dialog-focus-ring-width) solid var(--color-focus);
+  outline-offset: calc(-1 * var(--dialog-focus-ring-width));
+}
+
+.mezzanine-panel-overlay[data-entering] { animation: mezzanine-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-modal-fade); }
+.mezzanine-panel-overlay[data-exiting] { animation: mezzanine-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-modal-fade-exit); }
+/* Drawers slide in from their own edge: the start edge is on the left in left-to-right text and on the
+   right in right-to-left text, so each slide is chosen by the edge it moves on screen. */
+.mezzanine-panel-overlay > .mezzanine-panel:is([data-edge='start']:dir(ltr), [data-edge='end']:dir(rtl))[data-entering] { animation: mezzanine-panel-enter-left var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-panel-enter-left); }
+.mezzanine-panel-overlay > .mezzanine-panel:is([data-edge='start']:dir(ltr), [data-edge='end']:dir(rtl))[data-exiting] { animation: mezzanine-panel-exit-left var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-panel-exit-left); }
+.mezzanine-panel-overlay > .mezzanine-panel:is([data-edge='end']:dir(ltr), [data-edge='start']:dir(rtl))[data-entering] { animation: mezzanine-panel-enter-right var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-panel-enter-right); }
+.mezzanine-panel-overlay > .mezzanine-panel:is([data-edge='end']:dir(ltr), [data-edge='start']:dir(rtl))[data-exiting] { animation: mezzanine-panel-exit-right var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-panel-exit-right); }
+
+@keyframes mezzanine-panel-enter-left {
+  from { transform: translateX(calc(-1 * var(--motion-distance-offscreen))); }
+  to { transform: translateX(0); }
+}
+
+@keyframes mezzanine-panel-exit-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-1 * var(--motion-distance-offscreen))); }
+}
+
+@keyframes mezzanine-panel-enter-right {
+  from { transform: translateX(var(--motion-distance-offscreen)); }
+  to { transform: translateX(0); }
+}
+
+@keyframes mezzanine-panel-exit-right {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--motion-distance-offscreen)); }
+}
+
+@media (forced-colors: active) {
+  .mezzanine-panel { background: Canvas; color: CanvasText; border-color: CanvasText; }
+  .mezzanine-panel-header { border-color: CanvasText; }
+  .mezzanine-panel-dialog:focus-visible { outline-color: Highlight; }
+}

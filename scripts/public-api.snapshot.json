@@ -4,6 +4,14 @@
     "kind": "value"
   },
   {
+    "name": "AppShell",
+    "kind": "value"
+  },
+  {
+    "name": "AppShellProps",
+    "kind": "type"
+  },
+  {
     "name": "ArrowDownIcon",
     "kind": "value"
   },
@@ -464,6 +472,14 @@
     "kind": "type"
   },
   {
+    "name": "Panel",
+    "kind": "value"
+  },
+  {
+    "name": "PanelEdge",
+    "kind": "type"
+  },
+  {
     "name": "PanelLeftCloseIcon",
     "kind": "value"
   },
@@ -472,12 +488,24 @@
     "kind": "value"
   },
   {
+    "name": "PanelProps",
+    "kind": "type"
+  },
+  {
     "name": "PanelRightCloseIcon",
     "kind": "value"
   },
   {
     "name": "PanelRightOpenIcon",
     "kind": "value"
+  },
+  {
+    "name": "PanelTrigger",
+    "kind": "value"
+  },
+  {
+    "name": "PanelTriggerProps",
+    "kind": "type"
   },
   {
     "name": "PauseIcon",

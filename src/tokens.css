@@ -15,12 +15,14 @@
 @import './tokens/elevation.css';
 @import './tokens/z-index.css';
 
+@import './components/AppShell/AppShell.tokens.css';
 @import './components/Badge/Badge.tokens.css';
 @import './components/Button/Button.tokens.css';
 @import './components/Card/Card.tokens.css';
 @import './components/CodeBlock/CodeBlock.tokens.css';
 @import './components/Checkbox/Checkbox.tokens.css';
 @import './components/Dialog/Dialog.tokens.css';
+@import './components/Panel/Panel.tokens.css';
 @import './components/Disclosure/Disclosure.tokens.css';
 @import './components/Link/Link.tokens.css';
 @import './components/ListBox/ListBox.tokens.css';

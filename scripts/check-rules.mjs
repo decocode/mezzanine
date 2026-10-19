@@ -360,7 +360,7 @@ function checkSnapshot(api, update) {
 // Each Props table, by content file and section key, and the exported types it documents. Rows prefixed with a
 // component name, or following a row that is only that name, use its type.
 const propTables = [
-  { file: 'site/pages/components/navigation/navbar/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
+  { file: 'site/pages/components/structure/navbar/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
   { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
   { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
   { file: 'site/pages/components/navigation/tab-bar/tabBarContent.ts', key: 'props', types: ['TabBarProps'] },
@@ -368,6 +368,9 @@ const propTables = [
     components: { Sidebar: ['SidebarProps'], SidebarTrigger: ['SidebarTriggerProps'], SidebarPanel: ['SidebarPanelProps'] } },
   { file: 'site/pages/components/navigation/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
   { file: 'site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
+  { file: 'site/pages/components/structure/app-shell/appShellContent.ts', key: 'props', types: ['AppShellProps'] },
+  { file: 'site/pages/components/structure/panel/panelContent.ts', key: 'props', types: ['PanelProps'],
+    components: { PanelTrigger: ['PanelTriggerProps'] } },
   { file: 'site/pages/components/overlays/tooltip/tooltipContent.ts', key: 'props', types: [],
     components: { TooltipTrigger: ['TooltipTriggerComponentProps'], Tooltip: ['TooltipProps'] } },
 ]
