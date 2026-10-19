@@ -296,6 +296,14 @@
     "kind": "value"
   },
   {
+    "name": "Footer",
+    "kind": "value"
+  },
+  {
+    "name": "FooterProps",
+    "kind": "type"
+  },
+  {
     "name": "Header",
     "kind": "value"
   },

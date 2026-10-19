@@ -33,5 +33,6 @@
 @import './components/RatioPair/RatioPair.css';
 @import './components/AppShell/AppShell.css';
 @import './components/Panel/Panel.css';
+@import './components/Footer/Footer.css';
 
 @import './motion.css';

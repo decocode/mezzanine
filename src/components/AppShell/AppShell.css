@@ -29,12 +29,17 @@
 
 .mezzanine-app-shell > header { grid-area: header; }
 
-.mezzanine-app-shell > main {
+/* The main content and any Footer scroll together, the Footer at the end. */
+.mezzanine-app-shell-content {
   grid-area: main;
+  display: flex;
+  flex-direction: column;
   min-inline-size: 0;
   min-block-size: 0;
   overflow: auto;
 }
+
+.mezzanine-app-shell-content > main { flex: 1 0 auto; }
 
 .mezzanine-app-shell > .mezzanine-panel[data-edge='start'] { grid-area: start; }
 .mezzanine-app-shell > .mezzanine-panel[data-edge='end'] { grid-area: end; }

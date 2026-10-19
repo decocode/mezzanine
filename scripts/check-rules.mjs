@@ -369,6 +369,7 @@ const propTables = [
   { file: 'site/pages/components/navigation/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
   { file: 'site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
   { file: 'site/pages/components/structure/app-shell/appShellContent.ts', key: 'props', types: ['AppShellProps'] },
+  { file: 'site/pages/components/structure/footer/footerContent.ts', key: 'props', types: ['FooterProps'] },
   { file: 'site/pages/components/structure/panel/panelContent.ts', key: 'props', types: ['PanelProps'],
     components: { PanelTrigger: ['PanelTriggerProps'] } },
   { file: 'site/pages/components/overlays/tooltip/tooltipContent.ts', key: 'props', types: [],

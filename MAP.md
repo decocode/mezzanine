@@ -53,9 +53,10 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/RadioGroup/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/SelectionIndicator/SelectionIndicator.ts` | Public React Aria SelectionIndicator export and prop type |
 | `src/components/Sidebar/Sidebar.css` | Token-based sidebar regions, left/right placement, rail and modal drawer styling |
-| `src/components/AppShell/AppShell.tsx`, `src/components/AppShell/AppShell.css`, `src/components/AppShell/AppShell.tokens.css` | Public AppShell: frames an app's screen with a header row, Panels at the start, end and bottom edges and the app's own main content; measures itself to decide when a side Panel becomes a drawer |
+| `src/components/AppShell/AppShell.tsx`, `src/components/AppShell/AppShell.css`, `src/components/AppShell/AppShell.tokens.css` | Public AppShell: frames an app's screen with a header row, Panels at the start, end and bottom edges, and the app's own main content followed by an optional Footer, which scroll together; measures itself to decide when a side Panel becomes a drawer |
 | `src/components/AppShell/panelStore.ts` | Every Panel's open state in one AppShell, shared with PanelTriggers; drawers open only when someone opens them |
 | `src/components/AppShell/appShellLayout.ts` | Decides whether each side Panel shares the space or becomes a drawer (end Panel first), and converts length tokens to pixels |
+| `src/components/Footer/Footer.tsx`, `src/components/Footer/Footer.css` | Public Footer: a page's closing strip that arranges the app's small print and links in a row that wraps; inside AppShell it follows main and scrolls with it |
 | `src/components/Panel/Panel.tsx`, `src/components/Panel/Panel.css`, `src/components/Panel/Panel.tokens.css` | Public Panel and PanelTrigger: an area at an AppShell edge that shares the space, with an optional minimised version, and the Button that opens and closes it; a side Panel without room opens as a React Aria Modal drawer |
 | `src/components/Sidebar/Sidebar.tsx` | Public Sidebar state boundary, Button-based SidebarTrigger and generic inline or modal SidebarPanel with optional compact rail, permanent inline expansion and optional inline header |
 | `src/components/RatioPair/RatioPair.tsx`, `src/components/RatioPair/RatioPair.css` | Public RatioPair (formerly Split) layout building block: two areas side by side that share the row by a fraction or by auto and stack when they can't both have their minimum width; layout only, following its container through flexbox wrapping |
@@ -149,6 +150,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/styles/motion/motionContent.ts` | Motion timing, token and reduced-motion reference descriptions |
 | `site/pages/components/structure/app-shell/appShellContent.ts`, `site/pages/components/structure/app-shell/AppShellPage.tsx` | AppShell docs page: anatomy, behaviour, usage, accessibility, props and token |
 | `site/pages/components/structure/app-shell/AppShellExample.tsx` | The live AppShell example with Panels A, B and C, shared by the AppShell and Panel pages |
+| `site/pages/components/structure/footer/footerContent.ts`, `site/pages/components/structure/footer/FooterPage.tsx` | Footer docs page with a live example of small print and links |
 | `site/pages/components/structure/panel/panelContent.ts`, `site/pages/components/structure/panel/PanelPage.tsx` | Panel docs page, covering Panel and PanelTrigger |
 | `site/pages/components/structure/navbar/navbarContent.ts` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
 | `site/pages/components/navigation/navigation-tree/navigationTreeContent.ts` | Nav Tree written guidance, reference entries, related pages and external references |

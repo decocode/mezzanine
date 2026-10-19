@@ -200,6 +200,13 @@ Panel opens as a modal drawer instead, end Panels first. A drawer only opens
 when someone opens it. `bottomPanelSpan="full"` runs a bottom Panel under the
 side Panels too.
 
+## Footer
+
+`Footer` is a page's closing strip: put small print and links inside, and it
+arranges them in a row that wraps, with a border above. In an AppShell, place it
+straight after `<main>`; it sits at the end of the content and scrolls with it,
+outside `<main>`, so it stays the page's footer landmark.
+
 ## Sidebar
 
 `Sidebar` manages two separate states: inline expansion and the modal drawer.

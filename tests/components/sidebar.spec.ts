@@ -58,7 +58,11 @@ test('mobile drawer traps focus, dismisses and restores focus, and keeps control
   await expect(dialog.getByRole('button', { name: 'Reset options' })).toBeFocused()
   await page.keyboard.press('Tab')
   await expect(close).toBeFocused()
+  // The close button's label shows in a tooltip on keyboard focus. Escape always closes the tooltip;
+  // depending on timing, the same press may close the drawer too, or a second press does.
   await page.keyboard.press('Escape')
+  await expect(page.getByRole('tooltip')).toHaveCount(0)
+  if (await dialog.count()) await page.keyboard.press('Escape')
   await expect(dialog).toHaveCount(0)
   await expect(trigger).toBeFocused()
   await trigger.click()

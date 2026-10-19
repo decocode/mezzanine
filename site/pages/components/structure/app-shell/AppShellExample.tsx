@@ -1,4 +1,4 @@
-import { AppShell, Panel, PanelTrigger } from '@decocode/mezzanine'
+import { AppShell, Footer, Panel, PanelTrigger } from '@decocode/mezzanine'
 import { ExampleZone } from '../../../../components/ExampleZone'
 import { appShellExampleLabels as labels } from './appShellContent'
 
@@ -21,6 +21,7 @@ export function AppShellExample() {
         <main aria-label={labels.main} className="app-shell-example-main">
           <p>{labels.mainText}</p>
         </main>
+        <Footer>{labels.footer}</Footer>
         <Panel id="example-end" edge="end" title={labels.endPanel} headingLevel={3}>
           <p>{labels.endPanelText}</p>
         </Panel>

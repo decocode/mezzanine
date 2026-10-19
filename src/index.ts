@@ -259,6 +259,8 @@ export type { TextAreaProps } from './components/TextArea/TextArea'
 
 export { AppShell } from './components/AppShell/AppShell'
 export type { AppShellProps } from './components/AppShell/AppShell'
+export { Footer } from './components/Footer/Footer'
+export type { FooterProps } from './components/Footer/Footer'
 export { Panel, PanelTrigger } from './components/Panel/Panel'
 export type { PanelProps, PanelTriggerProps } from './components/Panel/Panel'
 export type { PanelEdge } from './components/AppShell/panelStore'

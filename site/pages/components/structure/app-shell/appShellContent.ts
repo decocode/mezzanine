@@ -13,6 +13,7 @@ export const appShellExampleLabels = {
   bottomPanel: 'Panel C',
   bottomPanelText: 'A bottom Panel.',
   bottomMinimized: 'Panel C, minimised',
+  footer: 'Footer',
 } as const
 
 export const appShellContent: DocsPageContent = {
@@ -34,7 +35,8 @@ export const appShellContent: DocsPageContent = {
           { name: 'AppShell', description: 'The frame. It lays out its children in a grid that responds to its own size.' },
           { name: 'header', description: 'The app’s own `<header>`, across the top, such as one holding a `Navbar`.' },
           { name: 'Panel', description: 'An area at the start, end or bottom edge. See [Panel](/panel).' },
-          { name: 'main', description: 'The app’s own `<main>`, in the middle. It scrolls on its own and keeps a minimum width.' },
+          { name: 'main', description: 'The app’s own `<main>`, in the middle. It keeps a minimum width.' },
+          { name: 'Footer', description: 'Optional. It follows the main content, and the two scroll together. See [Footer](/footer).' },
         ],
       },
     },
@@ -43,13 +45,13 @@ export const appShellContent: DocsPageContent = {
       body: [
         'Open Panels share the space: the main content gets smaller to make room. AppShell responds to its own width, not the screen’s.',
         'When the main content would drop below its minimum width, a side Panel opens as a drawer in front of the page instead. With two side Panels open, the end Panel becomes a drawer first, and the start Panel stays beside the content as long as it can. Bottom Panels always share the space.',
-        'AppShell fills the height of the window, and the main content and each Panel scroll on their own.',
+        'AppShell fills the height of the window. The main content and its Footer scroll together, and each Panel scrolls on its own.',
       ],
     },
     {
       key: 'usage',
       body: [
-        'Put a `<header>`, your Panels and a `<main>` inside `AppShell`, in reading order. Give each Panel an `id` and an `edge`, and place a `PanelTrigger` with that `id` wherever suits the app, such as in the header.',
+        'Put a `<header>`, your Panels, a `<main>` and an optional `Footer` inside `AppShell`, in reading order. Give each Panel an `id` and an `edge`, and place a `PanelTrigger` with that `id` wherever suits the app, such as in the header.',
         'Set `bottomPanelSpan="full"` to run a bottom Panel under the side Panels too, as in a code editor. By default it sits under the main content only.',
       ],
     },
@@ -66,7 +68,7 @@ export const appShellContent: DocsPageContent = {
         nameColumn: 'Prop',
         className: 'documentation-props-table',
         rows: [
-          { name: 'children', description: 'A `<header>`, Panels and a `<main>`.' },
+          { name: 'children', description: 'A `<header>`, Panels, a `<main>` and an optional Footer.' },
           { name: 'bottomPanelSpan', description: '`main` (default) puts a bottom Panel under the main content only; `full` puts it under the side Panels too.' },
           { name: 'className', description: 'Adds your own class, for example to set the AppShell’s height.' },
         ],

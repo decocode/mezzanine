@@ -1,4 +1,5 @@
-import { createContext, useCallback, useContext, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { Children, createContext, isValidElement, useCallback, useContext, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { Footer } from '../Footer/Footer'
 import { lengthInPixels, panelPresentations, type PanelPresentation } from './appShellLayout'
 import { PanelStore, type PanelEdge } from './panelStore'
 
@@ -16,7 +17,7 @@ export function useAppShell(component: string) {
 }
 
 export interface AppShellProps {
-  // A <header>, Panels at their edges and the app's own <main>.
+  // A <header>, Panels at their edges, the app's own <main> and an optional Footer.
   children: ReactNode
   // Whether a bottom Panel sits under the main content only, or under the side Panels too.
   bottomPanelSpan?: 'main' | 'full'
@@ -70,6 +71,13 @@ export function AppShell({ children, bottomPanelSpan = 'main', className }: AppS
     return entry.hasMinimized ? 'minimized' : 'closed'
   }
 
+  // The main content and Footer scroll together, so the Footer comes at the end of the content
+  // while staying outside <main>.
+  const isContent = (child: ReactNode) => isValidElement(child) && (child.type === 'main' || child.type === Footer)
+  const childList = Children.toArray(children)
+  const content = childList.filter(isContent)
+  const contentIndex = childList.findIndex(isContent)
+
   return (
     <AppShellContext.Provider value={{ store, presentation }}>
       <div
@@ -80,7 +88,9 @@ export function AppShell({ children, bottomPanelSpan = 'main', className }: AppS
         data-end={trackState(end, 'end')}
         data-bottom={trackState(bottom, 'bottom')}
       >
-        {children}
+        {childList.slice(0, Math.max(contentIndex, 0))}
+        {content.length > 0 && <div className="mezzanine-app-shell-content">{content}</div>}
+        {childList.slice(Math.max(contentIndex, 0)).filter((child) => !isContent(child))}
       </div>
     </AppShellContext.Provider>
   )

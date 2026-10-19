@@ -125,7 +125,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'navbar', label: 'Navbar', path: '/navbar', status: 'implemented' },
           { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
           { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
-          { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },
+          { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
         ],
       },
       {
