@@ -1,10 +1,10 @@
-// The Lab's Split page, in Side by side: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+// The Lab's Ratio pair page, in Side by side: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 import { everyLayout, bedrock } from '../../../shared/labValues'
 
-export const splitPage: StagePage = {
-  key: 'split', id: 'lab-split', kind: 'foundation', stage: 'sideBySide', title: 'Split', href: '/site/lab/layout/side-by-side/split',
-  description: 'When two areas sit side by side.',
+export const ratioPairPage: StagePage = {
+  key: 'ratioPair', id: 'lab-ratio-pair', kind: 'foundation', stage: 'sideBySide', title: 'Ratio pair', href: '/site/lab/layout/side-by-side/ratio-pair',
+  description: 'When two boxes agree to divvy up their shared space.',
   alsoKnownAs: [
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap. One child is set to Fill container.' },
     { where: 'CSS', called: 'Flexbox with `flex-wrap`, `flex-grow` and `flex-basis`. CSS has no single name for this pattern.' },
@@ -16,7 +16,7 @@ export const splitPage: StagePage = {
     {
       key: 'howItWorks',
       body: [
-        'Split is a layout technique that Mezzanine uses for placing two areas next to each other, such as a side panel and the main content.',
+        'Ratio pair is used to decide how space should be shared between two items placed side by side. For example, a picture beside its description, or a form beside its live preview.',
         'You can choose how the two areas share that space by using either fractions, such as one third and two thirds, or Auto Start, where the width of the first area is based on the content inside it.',
         'If using fractions each area has a default minimum width of 15rem. If using Auto Start, the width of the first area is based on the content inside it, and the width of the second area fills the remaining space, down to 15rem. When there isn’t enough room for both areas to be side by side, the second area moves underneath the first, and both become full width.',
       ],
@@ -35,40 +35,40 @@ export const splitPage: StagePage = {
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.
-export const splitCssNotes: Record<string, CssNote> = {
+export const ratioPairCssNotes: Record<string, CssNote> = {
   split: {
     paragraphs: [
-      'Split is a Flexbox row: `display: flex` places the two areas next to each other. `flex-wrap: wrap` allows an area to move onto a new line when the row is full, and `gap` sets the space between them, whether they’re side by side or one above the other.',
+      'Ratio pair is a Flexbox row: `display: flex` places the two areas next to each other. `flex-wrap: wrap` allows an area to move onto a new line when the row is full, and `gap` sets the space between them, whether they’re side by side or one above the other.',
       'Each area has a `flex-basis` of zero, so it starts with no width of its own. `flex-grow` then shares out the space: for one third and two thirds, the first area gets a `flex-grow` of 1 and the second gets 2, so the second takes twice as much.',
-      '`min-inline-size` is the minimum width. Flexbox checks it before placing an area on the row; when two minimums plus the gap are more than the row’s width, the second area goes onto the next line. Alone on its line, `flex-grow` makes it fill the full width. The `min()` function stops the minimum from ever being wider than the Split itself.',
+      '`min-inline-size` is the minimum width. Flexbox checks it before placing an area on the row; when two minimums plus the gap are more than the row’s width, the second area goes onto the next line. Alone on its line, `flex-grow` makes it fill the full width. The `min()` function stops the minimum from ever being wider than the Ratio pair itself.',
       'With Auto Start, the first area has a `flex-basis` of `auto`, which means its width comes from its content. The second area has a `flex-grow` of 999, so it takes almost all of the space that’s left, and keeps the minimum width.',
     ],
-    code: `.mezzanine-split {
+    code: `.mezzanine-ratio-pair {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--_split-gap, var(--split-gap));
+  gap: var(--_ratio-pair-gap, var(--ratio-pair-gap));
   min-inline-size: 0;
 }
 
-.mezzanine-split[data-fraction] > * {
+.mezzanine-ratio-pair[data-fraction] > * {
   flex-basis: 0;
   flex-grow: 1;
-  min-inline-size: min(100%, var(--_split-min-area-width, var(--split-min-area-width)));
+  min-inline-size: min(100%, var(--_ratio-pair-min-area-width, var(--ratio-pair-min-area-width)));
 }
 
-.mezzanine-split[data-fraction='1/4'] > :last-child { flex-grow: 3; }
-.mezzanine-split[data-fraction='1/3'] > :last-child { flex-grow: 2; }
-.mezzanine-split[data-fraction='2/3'] > :first-child { flex-grow: 2; }
-.mezzanine-split[data-fraction='3/4'] > :first-child { flex-grow: 3; }
+.mezzanine-ratio-pair[data-fraction='1/4'] > :last-child { flex-grow: 3; }
+.mezzanine-ratio-pair[data-fraction='1/3'] > :last-child { flex-grow: 2; }
+.mezzanine-ratio-pair[data-fraction='2/3'] > :first-child { flex-grow: 2; }
+.mezzanine-ratio-pair[data-fraction='3/4'] > :first-child { flex-grow: 3; }
 
-.mezzanine-split[data-fraction='auto-start'] > :first-child,
-.mezzanine-split[data-fraction='auto-end'] > :last-child {
+.mezzanine-ratio-pair[data-fraction='auto-start'] > :first-child,
+.mezzanine-ratio-pair[data-fraction='auto-end'] > :last-child {
   flex-basis: auto;
   min-inline-size: 0;
 }
 
-.mezzanine-split[data-fraction='auto-start'] > :last-child,
-.mezzanine-split[data-fraction='auto-end'] > :first-child {
+.mezzanine-ratio-pair[data-fraction='auto-start'] > :last-child,
+.mezzanine-ratio-pair[data-fraction='auto-end'] > :first-child {
   flex-grow: 999;
 }`,
   },

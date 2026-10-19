@@ -564,6 +564,14 @@
     "kind": "type"
   },
   {
+    "name": "RatioPair",
+    "kind": "value"
+  },
+  {
+    "name": "RatioPairProps",
+    "kind": "type"
+  },
+  {
     "name": "RedoIcon",
     "kind": "value"
   },
@@ -650,14 +658,6 @@
   {
     "name": "SparkleIcon",
     "kind": "value"
-  },
-  {
-    "name": "Split",
-    "kind": "value"
-  },
-  {
-    "name": "SplitProps",
-    "kind": "type"
   },
   {
     "name": "SunIcon",

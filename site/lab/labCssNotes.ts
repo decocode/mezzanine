@@ -17,9 +17,9 @@ import { contentColumnsCssNotes } from './layout/inside-the-box/content-columns/
 import { boxHasContentCssNotes } from './layout/inside-the-box/box-has-content/boxHasContentContent'
 import { rowCssNotes } from './layout/side-by-side/row/rowContent'
 import { rowWrapCssNotes } from './layout/side-by-side/row-wrap/rowWrapContent'
-import { rowWrapAndGrowCssNotes } from './layout/side-by-side/row-wrap-and-grow/rowWrapAndGrowContent'
+import { rowWrapGrowCssNotes } from './layout/side-by-side/row-wrap-grow/rowWrapGrowContent'
 import { reelCssNotes } from './layout/side-by-side/reel/reelContent'
-import { splitCssNotes } from './layout/side-by-side/split/splitContent'
+import { ratioPairCssNotes } from './layout/side-by-side/ratio-pair/ratioPairContent'
 import { columnCssNotes } from './layout/one-below-another/column/columnContent'
 import { heroCssNotes } from './layout/one-below-another/hero/heroContent'
 import { gridCssNotes } from './layout/grid-formation/grid/gridContent'
@@ -59,9 +59,9 @@ export const cssNotes: Record<string, CssNote> = {
   ...boxHasContentCssNotes,
   ...rowCssNotes,
   ...rowWrapCssNotes,
-  ...rowWrapAndGrowCssNotes,
+  ...rowWrapGrowCssNotes,
   ...reelCssNotes,
-  ...splitCssNotes,
+  ...ratioPairCssNotes,
   ...columnCssNotes,
   ...heroCssNotes,
   ...gridCssNotes,

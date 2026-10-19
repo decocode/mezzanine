@@ -36,8 +36,8 @@ export function AutoFillGrid({ children, min }: Children & { min?: string }) {
   return <div className="lab-auto-fill-grid" style={vars({ '--lab-auto-fill-min': min })}>{children}</div>
 }
 
-// Row wrap and grow: a row that wraps, where the boxes on each new row grow to fill it.
-export function RowWrapAndGrow({ children, min }: Children & { min?: string }) {
+// Row wrap grow: a row that wraps, where the boxes on each new row grow to fill it.
+export function RowWrapGrow({ children, min }: Children & { min?: string }) {
   return <div className="lab-row-wrap-grow" style={vars({ '--lab-row-wrap-grow-min': min })}>{children}</div>
 }
 

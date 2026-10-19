@@ -138,12 +138,12 @@ test('Lab Layout examples respond to their space and content', async ({ page }) 
   await expect(page.getByRole('button', { name: 'Button 2', exact: true })).toBeFocused()
 })
 
-// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet (or, for Split, the library's), apart from example CSS,
+// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet (or, for RatioPair, the library's), apart from example CSS,
 // so the explanation cannot drift from the rules it describes.
 test('Lab Layout CSS notes match the Lab stylesheet', () => {
   const normalise = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim()
-  // Split's note shows the library's own CSS, since the Lab uses the library component.
-  const stylesheet = normalise(['site/lab/shared/layout-lab.css', 'src/components/Split/Split.css'].map((file) => readFileSync(file, 'utf8')).join('\n'))
+  // RatioPair's note shows the library's own CSS, since the Lab uses the library component.
+  const stylesheet = normalise(['site/lab/shared/layout-lab.css', 'src/components/RatioPair/RatioPair.css'].map((file) => readFileSync(file, 'utf8')).join('\n'))
   for (const note of Object.values(cssNotes).filter((note) => !note.isExample)) {
     for (const rule of note.code.split(/\n\s*\n/)) expect(stylesheet).toContain(normalise(rule))
   }
@@ -152,9 +152,9 @@ test('Lab Layout CSS notes match the Lab stylesheet', () => {
 // Checks that a page's "Also known as" names start in a closed Disclosure, open from its button,
 // and open when its On this page link is followed.
 test('Also known as starts closed and opens from its button or On this page', async ({ page }) => {
-  await page.goto('/site/lab/layout/side-by-side/split')
+  await page.goto('/site/lab/layout/side-by-side/ratio-pair')
   const trigger = page.getByRole('button', { name: 'Also known as', exact: true })
-  const names = page.getByRole('grid', { name: 'Other names for Split' })
+  const names = page.getByRole('grid', { name: 'Other names for Ratio pair' })
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   await expect(names).toBeHidden()
   await trigger.click()

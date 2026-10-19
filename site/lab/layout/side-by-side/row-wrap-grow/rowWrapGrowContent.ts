@@ -1,14 +1,14 @@
-// The Lab's Row wrap and grow page, in Side by side: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+// The Lab's Row wrap grow page, in Side by side: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
-export const rowWrapAndGrowPage: StagePage = {
-  key: 'rowWrapAndGrow', id: 'lab-row-wrap-and-grow', kind: 'foundation', stage: 'sideBySide', title: 'Row wrap and grow', href: '/site/lab/layout/side-by-side/row-wrap-and-grow',
+export const rowWrapGrowPage: StagePage = {
+  key: 'rowWrapGrow', id: 'lab-row-wrap-grow', kind: 'foundation', stage: 'sideBySide', title: 'Row wrap grow', href: '/site/lab/layout/side-by-side/row-wrap-grow',
   sections: [
     {
       key: 'howItWorks',
       body: [
         'Grow is used with Row wrap so that the boxes moved onto the new row stretch to fill the available space.',
-        'Row wrap and grow is useful for a few larger boxes such as form fields side by side, summary panels on a dashboard, or groups of footer links. No row is left with a gap at its end, so it looks nice and tidy.',
+        'Row wrap grow is useful for a few larger boxes such as form fields side by side, summary panels on a dashboard, or groups of footer links. No row is left with a gap at its end, so it looks nice and tidy.',
       ],
     },
     { key: 'example' },
@@ -22,10 +22,10 @@ export const rowWrapAndGrowPage: StagePage = {
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.
-export const rowWrapAndGrowCssNotes: Record<string, CssNote> = {
-  rowWrapAndGrow: {
+export const rowWrapGrowCssNotes: Record<string, CssNote> = {
+  rowWrapGrow: {
     paragraphs: [
-      'Row wrap and grow is a Flexbox row, from `display: flex`, that may wrap, from `flex-wrap: wrap`. Each box has `flex: 1 1 12rem`, which sets `flex-grow`, `flex-shrink` and `flex-basis` at once: it starts at 12rem, can shrink, and grows to share the spare room.',
+      'Row wrap grow is a Flexbox row, from `display: flex`, that may wrap, from `flex-wrap: wrap`. Each box has `flex: 1 1 12rem`, which sets `flex-grow`, `flex-shrink` and `flex-basis` at once: it starts at 12rem, can shrink, and grows to share the spare room.',
       'When the boxes no longer fit, the last one wraps onto a new row, and its `flex-grow` makes it grow across the full width.',
     ],
     code: `.lab-row-wrap-grow {

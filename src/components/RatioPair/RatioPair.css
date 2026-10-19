@@ -1,0 +1,33 @@
+/* Flexbox wraps the second area underneath when the areas can't both have their minimum width,
+   so RatioPair follows its container without a media or container query. */
+.mezzanine-ratio-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--_ratio-pair-gap, var(--ratio-pair-gap));
+  min-inline-size: 0;
+}
+
+/* Each sharing area starts from nothing and grows by its share, but never below its minimum.
+   The attribute makes this stronger than a single class, so an area's own class can't cancel it. */
+.mezzanine-ratio-pair[data-fraction] > * {
+  flex-basis: 0;
+  flex-grow: 1;
+  min-inline-size: min(100%, var(--_ratio-pair-min-area-width, var(--ratio-pair-min-area-width)));
+}
+
+.mezzanine-ratio-pair[data-fraction='1/4'] > :last-child { flex-grow: 3; }
+.mezzanine-ratio-pair[data-fraction='1/3'] > :last-child { flex-grow: 2; }
+.mezzanine-ratio-pair[data-fraction='2/3'] > :first-child { flex-grow: 2; }
+.mezzanine-ratio-pair[data-fraction='3/4'] > :first-child { flex-grow: 3; }
+
+/* Auto: one area keeps the width it needs, and the other fills the rest. */
+.mezzanine-ratio-pair[data-fraction='auto-start'] > :first-child,
+.mezzanine-ratio-pair[data-fraction='auto-end'] > :last-child {
+  flex-basis: auto;
+  min-inline-size: 0;
+}
+
+.mezzanine-ratio-pair[data-fraction='auto-start'] > :last-child,
+.mezzanine-ratio-pair[data-fraction='auto-end'] > :first-child {
+  flex-grow: 999;
+}

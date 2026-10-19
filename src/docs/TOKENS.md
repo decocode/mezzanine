@@ -642,16 +642,16 @@ TextArea shares Input’s appearance and state tokens. It permits vertical resiz
 remains within its container width, and accepts the native `rows` prop for the
 initial visible line count. Its minimum height still applies when resized.
 
-## Split tokens
+## RatioPair tokens
 
-Split shares a row between two areas and stacks them when they can't both have
+RatioPair shares a row between two areas and stacks them when they can't both have
 their minimum width. Apps can pass `gap` (a spacing step) and `minAreaWidth` for
-one Split; these tokens set the defaults.
+one RatioPair; these tokens set the defaults.
 
 | Token | Meaning |
 | --- | --- |
-| `--split-gap` | Default space between the two areas |
-| `--split-min-area-width` | Default narrowest width of each sharing area before the areas stack |
+| `--ratio-pair-gap` | Default space between the two areas |
+| `--ratio-pair-min-area-width` | Default narrowest width of each sharing area before the areas stack |
 
 ## Tab bar tokens
 

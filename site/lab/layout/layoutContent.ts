@@ -21,9 +21,9 @@ import { contentColumnsPage } from './inside-the-box/content-columns/contentColu
 import { boxHasContentPage } from './inside-the-box/box-has-content/boxHasContentContent'
 import { rowPage } from './side-by-side/row/rowContent'
 import { rowWrapPage } from './side-by-side/row-wrap/rowWrapContent'
-import { rowWrapAndGrowPage } from './side-by-side/row-wrap-and-grow/rowWrapAndGrowContent'
+import { rowWrapGrowPage } from './side-by-side/row-wrap-grow/rowWrapGrowContent'
 import { reelPage } from './side-by-side/reel/reelContent'
-import { splitPage } from './side-by-side/split/splitContent'
+import { ratioPairPage } from './side-by-side/ratio-pair/ratioPairContent'
 import { columnPage } from './one-below-another/column/columnContent'
 import { heroPage } from './one-below-another/hero/heroContent'
 import { gridPage } from './grid-formation/grid/gridContent'
@@ -56,7 +56,7 @@ const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
   boxBasics: [theBoxModelPage, typesOfBoxPage, measuringTheBoxPage, viewportUnitsPage, sizingTheBoxPage, centerPage],
   addSpace: [marginPage, paddingPage, gapPage],
   insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, aspectRatioPage, contentColumnsPage, boxHasContentPage],
-  sideBySide: [rowPage, rowWrapPage, rowWrapAndGrowPage, reelPage, splitPage],
+  sideBySide: [rowPage, rowWrapPage, rowWrapGrowPage, reelPage, ratioPairPage],
   oneBelowAnother: [columnPage, heroPage],
   gridFormation: [gridPage, subgridPage],
   container: [containerQueriesPage, fluidSizingPage],

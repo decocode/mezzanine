@@ -1,7 +1,0 @@
-/* Component tokens shared by every theme. */
-
-:where(:root) {
-  /* Split: two areas side by side that stack when they can't both have their minimum width. */
-  --split-gap: var(--space-4);
-  --split-min-area-width: 15rem;
-}

@@ -17,9 +17,9 @@ import { ContentColumnsExample } from './inside-the-box/content-columns/ContentC
 import { BoxHasContentExample } from './inside-the-box/box-has-content/BoxHasContentExample'
 import { RowExample } from './side-by-side/row/RowExample'
 import { RowWrapExample } from './side-by-side/row-wrap/RowWrapExample'
-import { RowWrapAndGrowExample } from './side-by-side/row-wrap-and-grow/RowWrapAndGrowExample'
+import { RowWrapGrowExample } from './side-by-side/row-wrap-grow/RowWrapGrowExample'
 import { ReelExample } from './side-by-side/reel/ReelExample'
-import { SplitExample } from './side-by-side/split/SplitExample'
+import { RatioPairExample } from './side-by-side/ratio-pair/RatioPairExample'
 import { ColumnExample } from './one-below-another/column/ColumnExample'
 import { HeroExample } from './one-below-another/hero/HeroExample'
 import { GridExample } from './grid-formation/grid/GridExample'
@@ -45,9 +45,9 @@ export const stageExamples: StageExamples = {
   boxHasContent: { Example: BoxHasContentExample },
   row: { Example: RowExample },
   rowWrap: { Example: RowWrapExample },
-  rowWrapAndGrow: { Example: RowWrapAndGrowExample },
+  rowWrapGrow: { Example: RowWrapGrowExample },
   reel: { Example: ReelExample },
-  split: { Example: SplitExample },
+  ratioPair: { Example: RatioPairExample },
   column: { Example: ColumnExample },
   hero: { Example: HeroExample },
   grid: { Example: GridExample },

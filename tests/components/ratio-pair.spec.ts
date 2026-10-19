@@ -1,11 +1,11 @@
 import { expect, test, type Page } from '@playwright/test'
 import { expectNoPageOverflow } from '../display'
 
-// Split has no docs page yet, so these checks use the Lab's Split page, which renders the library
+// RatioPair has no docs page yet, so these checks use the Lab's Ratio pair page, which renders the library
 // component inside a frame whose width can be changed.
 
 async function areas(page: Page) {
-  const split = page.locator('.mezzanine-split')
+  const split = page.locator('.mezzanine-ratio-pair')
   const [first, second] = [split.locator('> *').first(), split.locator('> *').last()]
   return { split, first: (await first.boundingBox())!, second: (await second.boundingBox())! }
 }
@@ -16,9 +16,9 @@ async function chooseFraction(page: Page, label: string) {
 
 // Checks that the fractions share the row in proportion, and that auto start keeps the first area
 // at the width its content needs while the second fills the rest.
-test('Split shares the row by fraction or by auto', async ({ page }) => {
+test('RatioPair shares the row by fraction or by auto', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
-  await page.goto('/site/lab/layout/side-by-side/split')
+  await page.goto('/site/lab/layout/side-by-side/ratio-pair')
   await chooseFraction(page, '1/3')
   let { first, second } = await areas(page)
   expect(Math.abs(first.y - second.y)).toBeLessThan(1)
@@ -35,9 +35,9 @@ test('Split shares the row by fraction or by auto', async ({ page }) => {
 // Checks that the areas stack, each at full width, when the frame is too narrow for both to have
 // their 15rem minimum, at normal and doubled text, without widening the page.
 for (const fontSize of [16, 32]) {
-  test(`Split stacks its areas in a narrow container at ${fontSize}px text`, async ({ page }) => {
+  test(`RatioPair stacks its areas in a narrow container at ${fontSize}px text`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
-    await page.goto('/site/lab/layout/side-by-side/split')
+    await page.goto('/site/lab/layout/side-by-side/ratio-pair')
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
     const width = page.getByRole('slider', { name: 'Width' })
     await width.focus()
