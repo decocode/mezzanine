@@ -1,5 +1,9 @@
 import { expect, test } from '@playwright/test'
-import { sitePages } from '../../site/siteStructure'
+import { sitePageFile, sitePages } from '../../site/siteStructure'
+
+// The file name of every page component, such as "ButtonPage". Shared modules whose names also end
+// in "Page", such as the ContentPage builder, may load with any page and aren't counted.
+const pageComponents = new Set(sitePages.map((page) => sitePageFile(page.id).replace(/\.tsx$/, '')))
 
 for (const sitePage of sitePages) {
   test(`${sitePage.path} loads only its own documentation page`, async ({ page }) => {
@@ -8,7 +12,7 @@ for (const sitePage of sitePages) {
     page.on('pageerror', (error) => errors.push(error.message))
     page.on('request', (request) => {
       const match = new URL(request.url()).pathname.match(/\/([A-Za-z]+Page)-[^/]+\.js$/)
-      if (match) pageChunks.push(match[1])
+      if (match && pageComponents.has(match[1])) pageChunks.push(match[1])
     })
 
     await page.goto(sitePage.path)
@@ -16,9 +20,7 @@ for (const sitePage of sitePages) {
     await expect(page.getByText('Loading documentation…', { exact: true })).toHaveCount(0)
     await expect(page.getByRole('button', { name: 'Reload page', exact: true })).toHaveCount(0)
 
-    const expectedPage = sitePage.id.split('-').map((word) => (
-      word[0].toUpperCase() + word.slice(1)
-    )).join('') + 'Page'
+    const expectedPage = sitePageFile(sitePage.id).replace(/\.tsx$/, '')
     expect(pageChunks).toEqual(sitePage.status === 'implemented'
       ? [expectedPage]
       : [])
