@@ -3,7 +3,7 @@ import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
 
 // Checks each page passes an accessibility scan in every theme and fits a phone screen at double text size.
-for (const path of ['/search-field', '/autocomplete', '/list-box']) {
+for (const path of ['/search-field', '/autocomplete', '/list-box', '/search-trigger']) {
   for (const theme of themes) {
     test(`${path} is accessible in ${theme} and fits a narrow screen`, async ({ page }) => {
       await page.emulateMedia({ reducedMotion: 'reduce' })
@@ -51,4 +51,29 @@ test('ListBox moves with the arrow keys and selects with Space', async ({ page }
   await page.keyboard.press('ArrowDown')
   await page.keyboard.press('Space')
   await expect(list.getByRole('option', { name: /Option B/ })).toHaveAttribute('aria-selected', 'true')
+})
+
+// Checks that the trigger opens its dialog from the keyboard and gets focus back when it closes.
+test('SearchTrigger opens its dialog and gets focus back', async ({ page }) => {
+  await page.goto('/search-trigger')
+  const trigger = page.getByRole('main').getByRole('button', { name: 'Search', exact: true })
+  await trigger.focus()
+  await page.keyboard.press('Enter')
+  await expect(page.getByRole('dialog', { name: 'Search' }).getByRole('searchbox')).toBeFocused()
+  await page.keyboard.press('Escape')
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('dialog')).toHaveCount(0)
+  await expect(trigger).toBeFocused()
+})
+
+// Checks that the shortcut Badge sits at the end and stays out of the button's accessible name.
+test('SearchTrigger shows its shortcut without changing its name', async ({ page }) => {
+  await page.goto('/search-trigger')
+  const trigger = page.getByRole('main').getByRole('button', { name: 'Search', exact: true })
+  const badge = trigger.locator('.mz-search-trigger-shortcut')
+  await expect(badge).toHaveText('⌘ K')
+  await expect(badge).toHaveAttribute('aria-hidden', 'true')
+  const triggerBox = (await trigger.boundingBox())!
+  const badgeBox = (await badge.boundingBox())!
+  expect(triggerBox.x + triggerBox.width - (badgeBox.x + badgeBox.width)).toBeLessThan(20)
 })

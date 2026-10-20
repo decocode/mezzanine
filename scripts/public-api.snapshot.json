@@ -812,6 +812,14 @@
     "kind": "value"
   },
   {
+    "name": "SearchTrigger",
+    "kind": "value"
+  },
+  {
+    "name": "SearchTriggerProps",
+    "kind": "type"
+  },
+  {
     "name": "Select",
     "kind": "value"
   },

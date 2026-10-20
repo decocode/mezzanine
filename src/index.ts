@@ -254,6 +254,9 @@ export type { TextFieldProps, TextFieldRenderProps, InputProps } from './compone
 export { SearchField } from './components/SearchField/SearchField'
 export type { SearchFieldProps } from './components/SearchField/SearchField'
 
+export { SearchTrigger } from './components/SearchTrigger/SearchTrigger'
+export type { SearchTriggerProps } from './components/SearchTrigger/SearchTrigger'
+
 export { TextArea } from './components/TextArea/TextArea'
 export type { TextAreaProps } from './components/TextArea/TextArea'
 

@@ -53,10 +53,12 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await expect(page.getByRole('banner').getByRole('radiogroup', { name: 'Theme', exact: true })).toBeVisible()
       await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Mezzanine documentation' })).toBeVisible()
       await expect(page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Home', exact: true })).toHaveCount(0)
-      // The menu reads Docs, then the docs tree, then Lab.
+      // The menu reads Docs, then Search, then the docs tree, then Lab.
       await page.keyboard.press('Tab')
       await expect(docsLink).toBeFocused()
       expect(await docsLink.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
+      await page.keyboard.press('Tab')
+      await expect(page.getByRole('banner').getByRole('button', { name: 'Search docs', exact: true })).toBeFocused()
       await page.keyboard.press('Tab')
       expect(await page.evaluate(() => document.activeElement?.closest('header [role="treegrid"]') != null)).toBe(true)
       await page.keyboard.press('Tab')

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from 'react'
 import { Link } from '@decocode/mezzanine'
 import { SiteTopBar } from './components/SiteTopBar'
+import { docsSearchSection } from './components/siteSearchLogic'
 import { docsNavigationItems } from './components/docsNavigationItems'
 import { DocsShell } from './components/DocsShell'
 import { PageLoader } from './PageLoader'
@@ -78,6 +79,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
           navigationLabel: siteContent.docsNavigation.treeLabel,
           items: docsNavigationItems,
           selectedRoute: currentPage.path,
+          searchSections: [docsSearchSection],
         }}
       >
         {currentPage.status === 'implemented'

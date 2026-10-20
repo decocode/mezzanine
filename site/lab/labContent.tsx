@@ -9,12 +9,10 @@ export const labContent = {
   // The heading of the Lab's navigation Panel.
   navigationTitle: 'Lab',
   layoutPage: { label: 'Layout', href: '/site/lab/layout', description: 'How boxes are sized, spaced and arranged: mobile first, and responding to their container.' },
-  componentsPage: { label: 'Components', href: '/site/lab/components' },
-  searchPage: { label: 'Search', href: '/site/lab/components/search' },
 }
 
 // The Lab's own navigation tree, shown in its start Panel and the TopBar menu on Lab pages.
-// Each experiment is a top-level item: Layout, Emerging features, then Components, then pages not specific to layout.
+// Each experiment is a top-level item: Layout, Emerging features, then pages not specific to layout.
 // Layout is a top-level group. Its stages come first, each holding its pages in reading order,
 // Emerging features carries the Lab badge.
 export const labNavigationItems: NavTreeItemData[] = [
@@ -29,10 +27,6 @@ export const labNavigationItems: NavTreeItemData[] = [
     id: 'emerging-features', label: emergingFeatures.title, href: emergingFeatures.href,
     content: <Badge variant="warning">{labBadgeLabel}</Badge>,
     children: futurePages.map((page) => ({ id: `emerging-features-${page.key}`, label: page.title, href: page.href })),
-  },
-  {
-    id: 'components', label: labContent.componentsPage.label, href: labContent.componentsPage.href,
-    children: [{ id: 'components-search', label: labContent.searchPage.label, href: labContent.searchPage.href }],
   },
   // Pages that aren't specific to layout sit at the bottom until they find a home.
   ...Object.values(labTopLevelPages).map((page) => ({ id: `lab-${page.href.split('/').pop()}`, label: page.title, href: page.href })),

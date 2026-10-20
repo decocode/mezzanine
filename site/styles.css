@@ -382,6 +382,32 @@ a:focus-visible {
   gap: var(--space-2);
 }
 
+/* Search sits above the navigation tree, in the start Panel and the narrow-screen menu. */
+.navigation-panel {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* Inset like the navigation items' text, so the Search button lines up with them. */
+.navigation-panel-search {
+  display: grid;
+  padding-inline: var(--space-4);
+}
+
+/* The site search dialog. A fixed height stops it jumping as the results change. */
+.site-search-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  block-size: 28rem;
+  max-block-size: inherit;
+}
+
+.site-search-dialog .react-aria-ListBox {
+  flex: 1;
+  min-block-size: 0;
+}
+
 /* Documentation controls layout; Mezzanine supplies table appearance and states. */
 .documentation-table {
   /* Contain absolutely positioned hidden inputs, such as Checkbox's, inside the scroll area. */

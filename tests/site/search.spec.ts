@@ -3,11 +3,12 @@ import { expect, test, type Page } from '@playwright/test'
 import { wcagTags } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// The Lab search experiment composes SearchField, ListBox and Autocomplete in a modal Dialog.
+// The site search composes SearchField, ListBox and Autocomplete in a modal Dialog, opened from the
+// navigation Panel, or from the TopBar menu on narrow screens.
 
-async function openSearch(page: Page) {
-  await page.goto('/site/lab/components/search')
-  const trigger = page.getByRole('main').getByRole('button', { name: 'Search', exact: true })
+async function openSearch(page: Page, path = '/introduction') {
+  await page.goto(path)
+  const trigger = page.getByRole('complementary').getByRole('button', { name: 'Search docs', exact: true })
   await trigger.focus()
   await page.keyboard.press('Enter')
   const field = page.getByRole('dialog', { name: 'Search' }).getByRole('searchbox', { name: 'Search', exact: true })
@@ -38,10 +39,13 @@ test('search results filter as you type and open with the keyboard', async ({ pa
   await expect(page).toHaveURL(new RegExp(`${destination}$`))
 })
 
-// Checks that results are grouped under Docs and Lab, that groups with no matches disappear, and that
-// a search with no matches says so.
+// Checks that docs pages search the docs only, that Lab pages group results under Docs and Lab, that
+// groups with no matches disappear, and that a search with no matches says so.
 test('search groups results by area and reports no results', async ({ page }) => {
-  const { field } = await openSearch(page)
+  await openSearch(page)
+  await expect(page.getByRole('listbox', { name: 'Results' }).getByRole('group')).toHaveCount(1)
+  await page.keyboard.press('Escape')
+  const { field } = await openSearch(page, '/site/lab')
   const results = page.getByRole('listbox', { name: 'Results' })
   await expect(results.getByRole('group')).toHaveCount(2)
   await expect(results.getByText('Docs', { exact: true })).toBeVisible()
@@ -83,10 +87,11 @@ for (const theme of themes) {
     test(`${theme} search reflows at 320px with ${fontSize}px root text`, async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 640 })
       await page.emulateMedia({ reducedMotion: 'reduce' })
-      await page.goto('/site/lab/components/search')
+      await page.goto('/introduction')
       await setTheme(page, theme)
       await setTextSize(page, fontSize)
-      await page.getByRole('main').getByRole('button', { name: 'Search', exact: true }).click()
+      await page.getByRole('button', { name: 'Menu', exact: true }).click()
+      await page.getByRole('banner').getByRole('button', { name: 'Search docs', exact: true }).click()
       const dialog = page.getByRole('dialog', { name: 'Search' })
       const field = dialog.getByRole('searchbox', { name: 'Search', exact: true })
       await field.fill('a long search phrase that should stay inside the field')
@@ -109,7 +114,8 @@ for (const theme of themes) {
 // Checks that the arrow keys reach the last result and scroll it into view, so every result in the
 // scrolling list can be reached from the field.
 test('the arrow keys reach and reveal every result', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 640 })
+  // Short enough that the results scroll, and wide enough to keep the navigation Panel beside the page.
+  await page.setViewportSize({ width: 1280, height: 480 })
   const { field } = await openSearch(page)
   const options = page.getByRole('listbox', { name: 'Results' }).getByRole('option')
   const last = options.last()
@@ -128,4 +134,23 @@ test('forced colours keep the highlighted result visible', async ({ page }) => {
   await openSearch(page)
   await page.keyboard.type('corn')
   await expect(page.getByRole('option', { name: 'Corners' })).toHaveCSS('outline-style', 'solid')
+})
+
+// Checks that Cmd+K or Ctrl+K opens search from anywhere on the page, with focus in the field.
+for (const shortcut of ['Meta+k', 'Control+k']) {
+  test(`${shortcut} opens search`, async ({ page }) => {
+    await page.goto('/introduction')
+    await expect(page.getByText('Loading documentation…', { exact: true })).toHaveCount(0)
+    await page.keyboard.press(shortcut)
+    await expect(page.getByRole('dialog', { name: 'Search' })).toHaveCount(1)
+    await expect(page.getByRole('dialog', { name: 'Search' }).getByRole('searchbox', { name: 'Search', exact: true })).toBeFocused()
+  })
+}
+
+// Checks that the Search button lines up with the navigation items' text.
+test('the Search button lines up with the navigation items', async ({ page }) => {
+  await page.goto('/introduction')
+  const button = (await page.getByRole('complementary').getByRole('button', { name: 'Search docs', exact: true }).boundingBox())!
+  const text = (await page.getByRole('complementary').getByText('Introduction', { exact: true }).boundingBox())!
+  expect(Math.abs(button.x - text.x)).toBeLessThan(2)
 })

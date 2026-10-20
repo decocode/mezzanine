@@ -6,10 +6,10 @@ import type { Theme } from '../themeSwitcherLogic'
 import NotFoundPage from '../pages/not-found/NotFoundPage'
 import { LabTopLevelPageView, LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutStageChildPage, LayoutStagePage } from './shared/LayoutPage'
 import { labContent, labNavigationItems } from './labContent'
-import { ComponentsPage, SearchPage } from './ComponentsPage'
 import { layoutStages, stagePages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
 import { labTopLevelPages } from './labTopLevelPages'
+import { collectResults, docsSearchSection } from '../components/siteSearchLogic'
 import './lab-page.css'
 
 interface LabPageProps {
@@ -18,12 +18,13 @@ interface LabPageProps {
   selectedTheme: Theme
 }
 
+// What search lists on Lab pages: the docs, then the Lab's own pages.
+const labSearchSections = [docsSearchSection, { id: 'lab', label: 'Lab', results: collectResults(labNavigationItems, 'lab') }]
+
 // The Lab's entry: the site's docs frame, with the Lab's navigation tree.
 export default function LabPage({ currentPath, onThemeChange, selectedTheme }: LabPageProps) {
   const isIndex = currentPath === labContent.index.href
   const isLayout = currentPath === labContent.layoutPage.href
-  const isComponents = currentPath === labContent.componentsPage.href
-  const isSearch = currentPath === labContent.searchPage.href
   const sectionSlug = currentPath.startsWith(`${labContent.layoutPage.href}/`) ? currentPath.slice(labContent.layoutPage.href.length + 1) : ''
   const stage = layoutStages.find((item) => item.slug === sectionSlug)
   const stagePage = stagePages.find((item) => item.href === currentPath)
@@ -31,15 +32,15 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const futurePage = futurePages.find((item) => item.href === currentPath)
   const topLevelPage = Object.values(labTopLevelPages).find((item) => item.href === currentPath)
   const pageTitle = topLevelPage?.title ?? stage?.title ?? stagePage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title)
-  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : isComponents ? `${labContent.componentsPage.label} | Lab` : isSearch ? `${labContent.searchPage.label} | Lab` : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
-  const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} />
+  const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
+  const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} searchSections={labSearchSections} />
 
   return <>
     <title>{title}</title>
     <Link className="skip-link" href="#main-content">Skip to main content</Link>
     <DocsShell
       topBar={<SiteTopBar currentPath={currentPath} onThemeChange={onThemeChange} selectedTheme={selectedTheme} labNavigation={navigation} />}
-      navigation={{ title: labContent.navigationTitle, 'aria-label': 'Lab sections', navigationLabel: 'Lab experiments', items: labNavigationItems, selectedRoute: currentPath }}
+      navigation={{ title: labContent.navigationTitle, 'aria-label': 'Lab sections', navigationLabel: 'Lab experiments', items: labNavigationItems, selectedRoute: currentPath, searchSections: labSearchSections }}
       mainClassName="lab-page-main"
       mainTabIndex={-1}
     >
@@ -52,7 +53,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : isComponents ? <ComponentsPage /> : isSearch ? <SearchPage /> : topLevelPage ? <LabTopLevelPageView page={topLevelPage} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : topLevelPage ? <LabTopLevelPageView page={topLevelPage} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
     </DocsShell>
   </>
 }

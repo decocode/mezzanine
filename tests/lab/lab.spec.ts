@@ -18,10 +18,12 @@ for (const fontSize of [16, 32]) {
     const tree = page.getByRole('banner').getByRole('treegrid', { name: 'Lab experiments' })
     await expect(tree).toBeVisible()
     await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Mezzanine documentation' })).toHaveCount(0)
-    // The menu reads Docs, then Lab, then the Lab tree.
+    // The menu reads Docs, then Lab, then Search, then the Lab tree.
     await showcase.getByRole('link', { name: 'Docs', exact: true }).focus()
     await page.keyboard.press('Tab')
     await expect(showcase.getByRole('link', { name: 'Lab', exact: true })).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(page.getByRole('banner').getByRole('button', { name: 'Search docs', exact: true })).toBeFocused()
     await page.keyboard.press('Tab')
     expect(await page.evaluate(() => document.activeElement?.closest('header [role="treegrid"]') != null)).toBe(true)
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)

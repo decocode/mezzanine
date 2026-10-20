@@ -183,6 +183,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         pages: [
           { id: 'search-field', label: 'SearchField', path: '/search-field', status: 'implemented' },
           { id: 'autocomplete', label: 'Autocomplete', path: '/autocomplete', status: 'implemented' },
+          { id: 'search-trigger', label: 'SearchTrigger', path: '/search-trigger', status: 'implemented' },
         ],
       },
       {
