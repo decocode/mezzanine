@@ -31,7 +31,7 @@ export const targetSizeContent: DocsPageContent = {
     {
       key: 'components',
       title: 'Components',
-      intro: ['Button, ToggleButton, text fields, Checkbox, Radio, Tabs, Disclosure, TopBar menu items, NavTree, ListBox, SearchField’s clear button, Breadcrumbs, Table of contents links, links in a Footer list, and sortable Table headers and selectable Table rows.'],
+      intro: ['Button, ToggleButton, text fields, Checkbox, Radio, Tabs, Disclosure, TopBar menu items, NavTree, ListBox, SearchField’s clear button, Breadcrumbs, Table of contents links, links in a Footer list, and Table rows and headers.'],
     },
   ],
   relatedPages: [

@@ -3,7 +3,7 @@
 :where(:root) {
   /* Table: component-specific structure, shared by every theme. */
   --table-border-width: var(--border-width-baseline);
-  --table-cell-padding-block: var(--space-3);
+  --table-cell-padding-block: var(--space-2);
   --table-cell-padding-inline: var(--space-4);
   --table-focus-ring-width: 0.1875rem;
   --table-focus-ring-offset: -0.1875rem;
