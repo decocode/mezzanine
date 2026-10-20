@@ -33,12 +33,16 @@ export const tableOfContentsContent: DocsPageContent = {
     },
     {
       key: 'usage',
-      intro: ['Place the component after the page introduction. Match link labels to the section headings and give each destination a unique ID. Nest children to match the heading hierarchy.'],
+      intro: [
+        'Place the component after the page introduction. Match link labels to the section headings and give each destination a unique ID. Nest children to match the heading hierarchy.',
+        'As the page scrolls, the link to the section being read shows Nav Tree’s current-page bar, with its text in the bar’s colour. It’s the last section to pass a line a third of the way down the window, or the last section once the page reaches its end.',
+      ],
     },
     {
       key: 'accessibility',
       intro: [
         'The visible heading names the navigation landmark; use a distinct heading when more than one Table of Contents appears on a page.',
+        'The link to the section being read has `aria-current="location"`, so screen readers announce it as the current location.',
         'Tab moves between links and Enter follows a link. Following a link updates the URL fragment to identify the section. The showcase keeps target headings below its sticky header.',
       ],
     },

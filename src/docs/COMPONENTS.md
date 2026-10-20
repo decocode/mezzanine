@@ -107,6 +107,14 @@ Mezzanine does not export React Aria's low-level `NavigationTree` parts. NavTree
 its only tree; for a different kind of tree, import the parts from
 `react-aria-components` and style them yourself.
 
+## TableOfContents
+
+`TableOfContents` lists a page's sections as links. Pass `sections`, each with
+an `id` matching its heading and a `label`, nested to match the headings. As the
+page scrolls, the link to the section being read gets `aria-current="location"`
+and the nav item's current-page bar, with its text in the bar's colour; no
+setup is needed.
+
 ## Tooltip
 
 Compose `TooltipTrigger`, a focusable control and `Tooltip`:

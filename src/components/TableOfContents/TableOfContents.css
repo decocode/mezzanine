@@ -30,7 +30,9 @@
   align-items: center;
   min-height: var(--target-size-xs);
   max-width: 100%;
-  padding-inline: var(--space-4);
+  /* The current-page bar's room is kept on every link, so the text doesn't move when it appears. */
+  padding-inline: calc(var(--space-4) - var(--nav-item-current-indicator-width)) var(--space-4);
+  border-inline-start: var(--nav-item-current-indicator-width) solid transparent;
   background: var(--nav-item-background);
   color: var(--nav-item-foreground);
   font-family: var(--font-family-body);
@@ -51,4 +53,18 @@
 .mz-table-of-contents .react-aria-Link[data-pressed] {
   background: var(--nav-item-background-pressed);
   color: var(--nav-item-foreground);
+}
+
+/* The section being read: NavTree's current-page bar, with the text in the bar's colour. The weight
+   stays the same, so nothing changes width or wraps differently as reading moves down the page. */
+.mz-table-of-contents .react-aria-Link[aria-current='location'] {
+  border-inline-start-color: var(--nav-item-current-indicator);
+  background: var(--nav-item-background-current);
+  color: var(--nav-item-current-indicator);
+}
+
+@media (forced-colors: active) {
+  .mz-table-of-contents .react-aria-Link[aria-current='location'] {
+    border-inline-start-color: Highlight;
+  }
 }
