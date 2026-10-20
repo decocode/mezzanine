@@ -36,7 +36,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     ],
   },
   {
-    // Foundations do not change with the theme.
+    // Foundations: how Mezzanine works, such as accessibility, interaction and text.
     id: 'foundations',
     label: 'Foundations',
     pages: [
@@ -63,7 +63,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     ],
   },
   {
-    // Styles change with the theme.
+    // Styles: Mezzanine's visual values, such as color, shape and motion. Themes can change many of them.
     id: 'styles',
     label: 'Styles',
     groups: [

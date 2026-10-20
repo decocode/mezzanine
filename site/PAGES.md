@@ -130,9 +130,9 @@ Shared accessibility information (the WCAG target, what React Aria provides,
 what Mezzanine adds and how it is checked) lives on the Foundations
 Accessibility page at `/accessibility`, so other pages do not repeat it.
 
-The Foundations group has an overview page at `/foundations`. It explains what
-applies to every Foundation, including that Foundations do not change with the
-theme, so individual Foundations pages do not repeat it.
+Foundations pages cover how Mezzanine works, such as accessibility, interaction
+and text. Styles pages cover its visual values, such as color, shape, opacity
+and motion, many of which a theme can change.
 
 Foundations and Styles pages open with their own sections, such as a scale or a
 table of states. Their content files use `kind: 'foundation'`, and where they
