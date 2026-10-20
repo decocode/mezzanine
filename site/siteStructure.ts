@@ -181,15 +181,15 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'search',
         label: 'Search',
         pages: [
-          { id: 'search-field', label: 'SearchField', path: '/search-field', status: 'empty' },
-          { id: 'autocomplete', label: 'Autocomplete', path: '/autocomplete', status: 'empty' },
+          { id: 'search-field', label: 'SearchField', path: '/search-field', status: 'implemented' },
+          { id: 'autocomplete', label: 'Autocomplete', path: '/autocomplete', status: 'implemented' },
         ],
       },
       {
         id: 'options',
         label: 'Options',
         pages: [
-          { id: 'list-box', label: 'ListBox', path: '/list-box', status: 'empty' },
+          { id: 'list-box', label: 'ListBox', path: '/list-box', status: 'implemented' },
           { id: 'select', label: 'Select', path: '/select', status: 'empty' },
           { id: 'combo-box', label: 'Combo box', path: '/combo-box', status: 'empty' },
           { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
