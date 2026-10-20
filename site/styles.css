@@ -329,7 +329,7 @@ a:focus-visible {
 
 .token-scale[data-sample='radius'] .token-scale-sample { border-radius: var(--_token-scale-value); }
 .token-scale[data-sample='border-width'] .token-scale-sample { border-width: var(--_token-scale-value); border-color: var(--color-text); }
-.token-scale[data-sample='shadow'] .token-scale-sample { border-color: transparent; box-shadow: var(--_token-scale-value); }
+.token-scale[data-sample='shadow'] .token-scale-sample { box-shadow: var(--_token-scale-value); }
 .token-scale[data-sample='length'] .token-scale-sample {
   inline-size: var(--_token-scale-value);
   max-inline-size: 100%;
