@@ -6,7 +6,7 @@
   --radio-group-horizontal-gap: var(--space-6);
   --radio-field-gap-block: var(--space-1);
   --radio-content-gap: var(--space-2);
-  --radio-indicator-size: 1.25rem;
+  --radio-indicator-size: var(--icon-size-sm);
   --radio-selection-size: 0.625rem;
   --radio-border-width: var(--border-width-baseline);
   --radio-indicator-border-radius: 50%;

@@ -34,7 +34,7 @@
   --button-border-radius: var(--radius-control);
   --button-focus-ring-width: var(--focus-ring-width);
   --button-focus-ring-offset: var(--focus-ring-offset);
-  --button-progress-size: 1.25rem;
+  --button-progress-size: var(--icon-size-sm);
   --button-progress-stroke-width: 0.125rem;
   --button-progress-border-radius: 50%;
 }
