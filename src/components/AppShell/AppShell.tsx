@@ -55,7 +55,8 @@ export function AppShell({ children, bottomPanelSpan = 'main', className }: AppS
   const [start, end, bottom] = [onEdge('start'), onEdge('end'), onEdge('bottom')]
   const presentations = panelPresentations({
     shellSize,
-    panelSize: tokenInPixels(element, '--panel-width'),
+    startSize: tokenInPixels(element, '--panel-start-width'),
+    endSize: tokenInPixels(element, '--panel-end-width'),
     minMainSize: tokenInPixels(element, '--app-shell-min-main-width'),
     hasStart: start != null,
     hasEnd: end != null,

@@ -32,9 +32,8 @@
 }
 
 /* Side content keeps its open width while the space animates, so it's revealed rather than squeezed. */
-:is(.mz-panel[data-edge='start'], .mz-panel[data-edge='end']):not([data-state='minimized']) > * {
-  min-inline-size: var(--panel-width);
-}
+.mz-panel[data-edge='start']:not([data-state='minimized']) > * { min-inline-size: var(--panel-start-width); }
+.mz-panel[data-edge='end']:not([data-state='minimized']) > * { min-inline-size: var(--panel-end-width); }
 
 .mz-panel-header {
   display: flex;
@@ -42,28 +41,39 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
-  border-block-end: var(--border-width-baseline) solid var(--color-border);
+  /* The heading starts --space-4 from the edge, the same inset as the rows below and the TopBar, and
+     its row is as tall as a list row, so a Panel's first line sits at the same height with or
+     without a heading. */
+  min-block-size: var(--target-size-xs);
+  margin-block-start: var(--space-2);
+  padding-inline: var(--space-4) var(--space-2);
 }
+
+/* A Panel named only by aria-label keeps its close button at the end. */
+.mz-panel-header > .react-aria-Button:only-child { margin-inline-start: auto; }
 
 .mz-panel-header .react-aria-Heading {
   flex: 1 1 auto;
   min-inline-size: 0;
   margin: 0;
   font-family: var(--font-family-body);
-  font-size: var(--font-size-title-md);
+  font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-title);
-  line-height: var(--line-height-title-md);
-  text-transform: var(--text-transform-title);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
 }
 
 .mz-panel-content {
   flex: 1 1 auto;
   min-block-size: 0;
   overflow: auto;
-  padding: var(--space-4);
+  /* Rows such as NavTree and TableOfContents run edge to edge and set their own --space-4 inset;
+     other content supplies its own padding, as the app's <main> does. */
+  padding-block: var(--space-2);
 }
+
+.mz-panel-header + .mz-panel-content { padding-block-start: 0; }
 
 .mz-panel-minimized {
   display: flex;
@@ -83,13 +93,13 @@
 .mz-panel-overlay > .mz-panel {
   position: absolute;
   inset-block: 0;
-  inline-size: min(var(--panel-width), 100%);
+  inline-size: min(var(--_panel-drawer-width), 100%);
   background: var(--elevation-raised-3-surface);
   box-shadow: var(--elevation-raised-3);
 }
 
-.mz-panel-overlay > .mz-panel[data-edge='start'] { inset-inline-start: 0; }
-.mz-panel-overlay > .mz-panel[data-edge='end'] { inset-inline-end: 0; }
+.mz-panel-overlay > .mz-panel[data-edge='start'] { --_panel-drawer-width: var(--panel-start-width); inset-inline-start: 0; }
+.mz-panel-overlay > .mz-panel[data-edge='end'] { --_panel-drawer-width: var(--panel-end-width); inset-inline-end: 0; }
 
 .mz-panel-dialog {
   display: flex;

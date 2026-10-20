@@ -196,11 +196,18 @@ condensed version to show when it isn't open. A `PanelTrigger` anywhere in the
 AppShell, with `panel` set to the Panel's `id`, opens and closes it; it accepts
 every Button prop.
 
+A Panel is named by `title`, its visible heading, or by `aria-label` alone when
+the app already shows what it is, such as a navigation Panel under a TopBar;
+it then has no heading.
+
 `isCollapsible={false}` keeps a Panel open with no close button, for content
 that should always be there, such as an app's navigation. It needs no
 PanelTrigger. When there's no room beside the content it's hidden rather than
 becoming a drawer, so offer the same content another way, such as in a TopBar
 menu.
+
+Side Panels are `--panel-width` wide. Set `--panel-start-width` or
+`--panel-end-width` to give one side its own width, such as a wide chat Panel.
 
 When the main content would drop below `--app-shell-min-main-width`, a side
 Panel opens as a modal drawer instead, end Panels first. A drawer only opens

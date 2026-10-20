@@ -7,7 +7,8 @@
 :where(:root[data-theme='light']) {
   color-scheme: light;
 
-  --color-page: var(--color-neutral-50);
+  /* A pure white page, so surfaces and cards separate cleanly. */
+  --color-page: #FFFFFF;
   --color-surface: var(--color-neutral-100);
   --color-surface-hover: var(--color-neutral-200);
   --color-surface-pressed: var(--color-neutral-300);
@@ -20,7 +21,12 @@
   --color-link-pressed: var(--color-signature-900);
   --color-chevron: var(--color-signature-700);
 
-  --color-border: var(--color-neutral-500);
+  /* Decorative lines (cards, tables, panels, dividers) are soft. Controls keep their own stronger
+     borders, which need 3:1 contrast so people can find them. */
+  --color-border: var(--color-neutral-200);
+  /* Rounded corners: small on controls, larger on surfaces. Wireframe stays square. */
+  --radius-control: var(--radius-sm);
+  --radius-surface: var(--radius-md);
 
   --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) 18%, transparent);
 

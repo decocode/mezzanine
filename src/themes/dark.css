@@ -2,8 +2,9 @@
 :where(:root[data-theme='dark']) {
   color-scheme: dark;
 
-  --color-page: var(--color-neutral-950);
-  --color-surface: var(--color-neutral-900);
+  /* A deeper black page, so raised surfaces stand out. */
+  --color-page: #0A0A0A;
+  --color-surface: var(--color-neutral-950);
   --color-surface-hover: var(--color-neutral-800);
   --color-surface-pressed: var(--color-neutral-700);
 
@@ -15,12 +16,15 @@
   --color-link-pressed: var(--color-signature-100);
   --color-chevron: var(--color-signature-300);
 
-  --color-border: var(--color-neutral-500);
+  /* Decorative lines are soft; controls keep their own 3:1 borders. Corners are rounded. */
+  --color-border: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
+  --radius-control: var(--radius-sm);
+  --radius-surface: var(--radius-md);
 
   --elevation-shadow-color: rgb(0 0 0 / 72%);
   --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
   /* Higher levels sit on lighter surfaces, as if closer to a light source. */
-  --elevation-sunken-1-surface: var(--color-neutral-950);
+  --elevation-sunken-1-surface: var(--color-page);
   --elevation-flat-surface: var(--color-page);
   --elevation-raised-1-surface: var(--color-neutral-900);
   --elevation-raised-2-surface: color-mix(in srgb, var(--color-neutral-900), var(--color-neutral-800));
@@ -122,8 +126,8 @@
   :where(:root:not([data-theme]), :root[data-theme='system']) {
     color-scheme: dark;
 
-    --color-page: var(--color-neutral-950);
-    --color-surface: var(--color-neutral-900);
+    --color-page: #0A0A0A;
+    --color-surface: var(--color-neutral-950);
     --color-surface-hover: var(--color-neutral-800);
     --color-surface-pressed: var(--color-neutral-700);
 
@@ -135,11 +139,13 @@
     --color-link-pressed: var(--color-signature-100);
     --color-chevron: var(--color-signature-300);
 
-    --color-border: var(--color-neutral-500);
+    --color-border: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
+    --radius-control: var(--radius-sm);
+    --radius-surface: var(--radius-md);
 
     --elevation-shadow-color: rgb(0 0 0 / 72%);
     --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
-    --elevation-sunken-1-surface: var(--color-neutral-950);
+    --elevation-sunken-1-surface: var(--color-page);
     --elevation-flat-surface: var(--color-page);
     --elevation-raised-1-surface: var(--color-neutral-900);
     --elevation-raised-2-surface: color-mix(in srgb, var(--color-neutral-900), var(--color-neutral-800));
