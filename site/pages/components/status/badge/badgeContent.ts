@@ -1,4 +1,4 @@
-import type { DocsPageContent } from '../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 export const badgeContent: DocsPageContent = {
   id: 'badge',

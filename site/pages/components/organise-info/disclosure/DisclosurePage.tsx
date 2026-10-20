@@ -1,4 +1,4 @@
-import { ExampleZone } from '../../../components/ExampleZone'
+import { ExampleZone } from '../../../../components/ExampleZone'
 import {
   Disclosure,
   DisclosureGroup,
@@ -8,7 +8,7 @@ import {
   Link
 } from '@decocode/mezzanine'
 import { disclosureContent, disclosureGroupReactAriaLink } from './disclosureContent'
-import { ContentPage } from '../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function DisclosurePage() {
   return (

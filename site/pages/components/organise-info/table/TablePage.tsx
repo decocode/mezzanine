@@ -1,4 +1,4 @@
-import { ExampleZone } from '../../../components/ExampleZone'
+import { ExampleZone } from '../../../../components/ExampleZone'
 import {
   Cell,
   Checkbox,
@@ -11,7 +11,7 @@ import {
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { tableContent, tableExampleColumns, tableExampleGroups, tableExampleRows } from './tableContent'
-import { ContentPage } from '../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function TablePage() {
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({

@@ -103,24 +103,39 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     ],
   },
   {
+    // Agreed groups, 20 October 2026. They don't follow React Aria's own grouping.
     id: 'components',
     label: 'Components',
+    pages: [],
     groups: [
       {
-        // The components that frame an app's screen: its header, side and bottom areas, and footer.
-        id: 'structure',
-        label: 'Structure',
+        id: 'control',
+        label: 'Control',
         pages: [
-          { id: 'app-shell', label: 'AppShell', path: '/app-shell', status: 'implemented' },
-          { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
-          { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
-          { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
-          { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
+          { id: 'button', label: 'Button', path: '/button', status: 'implemented' },
+          { id: 'toggle-button', label: 'Toggle button', path: '/toggle-button', status: 'implemented' },
+          { id: 'slider', label: 'Slider', path: '/slider', status: 'empty' },
+          { id: 'switch', label: 'Switch', path: '/switch', status: 'empty' },
+          { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'implemented' },
+          { id: 'radio-group', label: 'Radio group', path: '/radio-group', status: 'implemented' },
+          { id: 'drop-zone', label: 'Drop zone', path: '/drop-zone', status: 'empty' },
         ],
       },
       {
-        id: 'navigation',
-        label: 'Navigation',
+        // For typing only, plus Form.
+        id: 'input',
+        label: 'Input',
+        pages: [
+          { id: 'form', label: 'Form', path: '/form', status: 'empty' },
+          { id: 'text-field', label: 'Text field', path: '/text-field', status: 'implemented' },
+          { id: 'text-area', label: 'Text area', path: '/text-area', status: 'implemented' },
+          { id: 'number-field', label: 'Number field', path: '/number-field', status: 'empty' },
+          { id: 'token-field', label: 'Token field', path: '/token-field', status: 'empty' },
+        ],
+      },
+      {
+        id: 'navigate',
+        label: 'Navigate',
         pages: [
           { id: 'link', label: 'Link', path: '/link', status: 'implemented' },
           { id: 'breadcrumbs', label: 'Breadcrumbs', path: '/breadcrumbs', status: 'implemented' },
@@ -128,49 +143,75 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'table-of-contents', label: 'Table of contents', path: '/table-of-contents', status: 'implemented' },
           { id: 'tabs', label: 'Tabs', path: '/tabs', status: 'implemented' },
           { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
+        ],
+      },
+      {
+        id: 'organise-info',
+        label: 'Organise info',
+        pages: [
+          { id: 'table', label: 'Table', path: '/table', status: 'implemented' },
+          { id: 'grid-list', label: 'Grid list', path: '/grid-list', status: 'empty' },
+          { id: 'tree', label: 'Tree', path: '/tree', status: 'empty' },
+          { id: 'tag-group', label: 'Tag group', path: '/tag-group', status: 'empty' },
+          { id: 'code-block', label: 'Code block', path: '/code-block', status: 'implemented' },
+          { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
+          { id: 'card', label: 'Card', path: '/card', status: 'implemented' },
+          { id: 'separator', label: 'Separator', path: '/separator', status: 'empty' },
+          { id: 'virtualizer', label: 'Virtualizer', path: '/virtualizer', status: 'empty' },
+        ],
+      },
+      {
+        id: 'search',
+        label: 'Search',
+        pages: [
+          { id: 'search-field', label: 'SearchField', path: '/search-field', status: 'empty' },
+          { id: 'autocomplete', label: 'Autocomplete', path: '/autocomplete', status: 'empty' },
+        ],
+      },
+      {
+        id: 'options',
+        label: 'Options',
+        pages: [
+          { id: 'list-box', label: 'ListBox', path: '/list-box', status: 'empty' },
+          { id: 'select', label: 'Select', path: '/select', status: 'empty' },
+          { id: 'combo-box', label: 'Combo box', path: '/combo-box', status: 'empty' },
           { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
         ],
       },
       {
-        id: 'actions-and-controls',
-        label: 'Actions and controls',
+        id: 'status',
+        label: 'Status',
         pages: [
-          { id: 'button', label: 'Button', path: '/button', status: 'implemented' },
-          { id: 'toggle-button', label: 'Toggle button', path: '/toggle-button', status: 'implemented' },
+          { id: 'badge', label: 'Badge', path: '/badge', status: 'implemented' },
+          { id: 'progress-bar', label: 'Progress bar', path: '/progress-bar', status: 'empty' },
+          { id: 'meter', label: 'Meter', path: '/meter', status: 'empty' },
         ],
       },
       {
-        id: 'forms-and-input',
-        label: 'Forms and input',
-        pages: [
-          { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'implemented' },
-          { id: 'radio-group', label: 'Radio group', path: '/radio-group', status: 'implemented' },
-          { id: 'text-field', label: 'Text field', path: '/text-field', status: 'implemented' },
-          { id: 'text-area', label: 'Text area', path: '/text-area', status: 'implemented' },
-        ],
-      },
-      {
-        id: 'overlays',
-        label: 'Overlays',
+        id: 'overlay',
+        label: 'Overlay',
         pages: [
           { id: 'tooltip', label: 'Tooltip', path: '/tooltip', status: 'implemented' },
           { id: 'dialog', label: 'Dialog', path: '/dialog', status: 'implemented' },
+          { id: 'modal', label: 'Modal', path: '/modal', status: 'empty' },
+          { id: 'popover', label: 'Popover', path: '/popover', status: 'empty' },
+          { id: 'preview-trigger', label: 'Preview trigger', path: '/preview-trigger', status: 'empty' },
+          { id: 'sheet', label: 'Sheet', path: '/sheet', status: 'empty' },
         ],
       },
       {
-        id: 'cards',
-        label: 'Cards',
+        // The components that frame an app's screen. Last, because it may move out of Components.
+        id: 'structure',
+        label: 'Structure',
         pages: [
-          { id: 'card', label: 'Card', path: '/card', status: 'implemented' },
+          { id: 'app-shell', label: 'AppShell', path: '/app-shell', status: 'implemented' },
+          { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
+          { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
+          { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
+          { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
+          { id: 'toolbar', label: 'Toolbar', path: '/toolbar', status: 'empty' },
         ],
       },
-    ],
-    pages: [
-      { id: 'badge', label: 'Badge', path: '/badge', status: 'implemented' },
-      { id: 'code-block', label: 'Code block', path: '/code-block', status: 'implemented' },
-      { id: 'table', label: 'Table', path: '/table', status: 'implemented' },
-      { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
-      { id: 'tag-group', label: 'Tag group', path: '/tag-group', status: 'empty' },
     ],
   },
 ]

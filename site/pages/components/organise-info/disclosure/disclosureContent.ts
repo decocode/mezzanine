@@ -1,4 +1,4 @@
-import type { DocsPageContent, LinkItem } from '../../../templates/docsPageContent'
+import type { DocsPageContent, LinkItem } from '../../../../templates/docsPageContent'
 
 export const disclosureContent: DocsPageContent = {
   id: 'disclosure',

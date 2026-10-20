@@ -1,7 +1,7 @@
-import { ExampleZone } from '../../../components/ExampleZone'
+import { ExampleZone } from '../../../../components/ExampleZone'
 import { CodeBlock } from '@decocode/mezzanine'
 import { codeBlockContent, codeBlockExampleCode } from './codeBlockContent'
-import { ContentPage } from '../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function CodeBlockPage() {
   return (

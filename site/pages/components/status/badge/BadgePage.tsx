@@ -1,7 +1,7 @@
 import { Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../components/ExampleZone'
+import { ExampleZone } from '../../../../components/ExampleZone'
 import { badgeContent } from './badgeContent'
-import { ContentPage } from '../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 
 const variants = ['neutral', 'violet', 'info', 'success', 'warning', 'danger'] as const
 
