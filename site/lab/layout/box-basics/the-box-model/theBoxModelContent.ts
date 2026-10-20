@@ -8,8 +8,8 @@ export const theBoxModelPage: StagePage = {
     {
       key: 'howItWorks',
       body: [
-        'Everything on a web page is a box, even a single word or a picture. Each box has four layers, like rings in a tree trunk. In the middle is the content. Around it is padding, then a border, then margin on the outside.',
-        'Most layout puzzles come down to these four layers. Padding is space inside the box, so it pushes the content in. Margin is space outside the box, so it pushes other boxes away. Once you can picture the layers, you can tell which one to change.',
+        'Everything on a web page is a box, even a single word or a picture. Each box has four parts, nested like rings in a tree trunk. In the middle is the content. Around it is padding, then a border, then margin on the outside.',
+        'Most layout puzzles come down to these four parts. Padding is space inside the box, so it pushes the content in. Margin is space outside the box, so it pushes other boxes away. Once you can picture the parts, you can tell which one to change.',
       ],
     },
     { key: 'example' },

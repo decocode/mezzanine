@@ -4,7 +4,7 @@ import { theBoxModelCssNotes } from './theBoxModelContent'
 
 export function TheBoxModelExample() {
   return <>
-    <ExampleText>The box, with each layer drawn so you can see it.</ExampleText>
+    <ExampleText>The box, with each part drawn so you can see it.</ExampleText>
     <ul className="lab-legend mz-text-body-md">
       <li>Content: the innermost box, holding the word “Content”.</li>
       <li>Padding: the shaded space between the content and the thick line.</li>
@@ -16,6 +16,6 @@ export function TheBoxModelExample() {
         <div className="lab-box-content mz-text-body-md">Content</div>
       </div>
     </div>
-    <CssNotes name="the four layers" note={theBoxModelCssNotes.boxAnatomy} level={3} />
+    <CssNotes name="the four parts" note={theBoxModelCssNotes.boxAnatomy} level={3} />
   </>
 }

@@ -6,6 +6,7 @@ import { appRoutes } from './generate-routes.mjs'
 import { sitePageFile, sitePageFolder, sitePages } from '../site/siteStructure.ts'
 import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
 import { checkColorPointers, checkThemeColors, checkThemesMatch, themeRoles } from './color-rules.mjs'
+import { checkRawLengths } from './length-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -507,6 +508,7 @@ function checkColors() {
   for (const file of libraryCss) {
     const text = read(file)
     for (const problem of checkColorPointers(text, roles)) report(file, text, problem.position, 'colors', problem.message)
+    if (!isTokenFile(file)) for (const problem of checkRawLengths(file, text)) report(file, text, problem.position, 'lengths', problem.message)
   }
 }
 
