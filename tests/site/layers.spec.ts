@@ -4,17 +4,17 @@ import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize } from '../display'
 import { positioningCssNotes } from '../../site/pages/foundations/layers/positioning/positioningContent'
 import { orderingLayersCssNotes } from '../../site/pages/foundations/layers/ordering-layers/orderingLayersContent'
-import { bundlesOfLayersCssNotes } from '../../site/pages/foundations/layers/bundles-of-layers/bundlesOfLayersContent'
+import { layerGroupsCssNotes } from '../../site/pages/foundations/layers/layer-groups/layerGroupsContent'
 import { scrollPaddingCssNotes } from '../../site/pages/foundations/layers/scroll-padding/scrollPaddingContent'
 
-const pages = ['/layers', '/layers/positioning', '/layers/ordering-layers', '/layers/bundles-of-layers', '/layers/scroll-padding']
+const pages = ['/layers', '/layers/positioning', '/layers/ordering-layers', '/layers/layer-groups', '/layers/scroll-padding']
 
 // Checks the CSS quoted in each "The CSS behind" panel matches layers.css, so the explanation
 // cannot drift from the rules it describes.
 test('Layers CSS notes match the Layers stylesheet', () => {
   const normalise = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim()
   const stylesheet = normalise(readFileSync('site/pages/foundations/layers/layers.css', 'utf8'))
-  const notes = [positioningCssNotes, orderingLayersCssNotes, bundlesOfLayersCssNotes, scrollPaddingCssNotes].flatMap(Object.values)
+  const notes = [positioningCssNotes, orderingLayersCssNotes, layerGroupsCssNotes, scrollPaddingCssNotes].flatMap(Object.values)
   for (const note of notes.filter((note) => !note.isExample)) {
     for (const rule of note.code.split(/\n\s*\n/)) expect(stylesheet).toContain(normalise(rule))
   }
@@ -42,13 +42,13 @@ test('Positioning picker sets the second box position', async ({ page }) => {
   await expect(item).toHaveCSS('position', 'sticky')
 })
 
-// Checks that unbundling removes the bundles' z-index, so their layers compete directly.
-test('Bundles of layers checkbox removes the bundles', async ({ page }) => {
-  await page.goto('/layers/bundles-of-layers')
-  const bundleB = page.locator('.layers-bundle-b')
-  await expect(bundleB).toHaveCSS('z-index', '2')
-  await page.getByText('Bundle the layers', { exact: true }).click()
-  await expect(bundleB).toHaveCSS('z-index', 'auto')
+// Checks that ungrouping removes the layer groups' z-index, so their layers compete directly.
+test('Layer groups checkbox removes the layer groups', async ({ page }) => {
+  await page.goto('/layers/layer-groups')
+  const groupB = page.locator('.layers-group-b')
+  await expect(groupB).toHaveCSS('z-index', '2')
+  await page.getByText('Group the layers', { exact: true }).click()
+  await expect(groupB).toHaveCSS('z-index', 'auto')
 })
 
 // Checks that with scroll padding, a section you jump to lands below the sticky header.

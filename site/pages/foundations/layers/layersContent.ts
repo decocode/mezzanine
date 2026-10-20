@@ -21,10 +21,10 @@ export const layersContent: DocsPageContent = {
       body: ['[Explore ordering layers](/layers/ordering-layers)'],
     },
     {
-      key: 'bundlesOfLayers',
-      title: 'Bundles of layers',
-      intro: ['A bundle of layers with their own z-index can also be treated as a unified layer. Anything placed on top of that bundle is considered a separate layer, and so that creates an additional z-index. You can place bundles on top of other bundles!'],
-      body: ['[Explore bundles of layers](/layers/bundles-of-layers)'],
+      key: 'layerGroups',
+      title: 'Layer groups',
+      intro: ['A layer group is a set of layers, each with its own z-index, that is treated as one unified layer. Anything placed on top of that layer group is considered a separate layer, and so that creates an additional z-index. You can place layer groups on top of other layer groups!'],
+      body: ['[Explore layer groups](/layers/layer-groups)'],
     },
     {
       key: 'scrollPadding',

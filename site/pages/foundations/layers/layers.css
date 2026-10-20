@@ -108,13 +108,13 @@
   padding: var(--space-4);
 }
 
-/* Layers: stacking contexts. Bundle B (two layers) sits on top of bundle A (three layers). */
-.layers-bundles {
+/* Layer groups: stacking contexts. Layer group B (two layers) sits on top of layer group A (three layers). */
+.layers-groups {
   position: relative;
   padding-bottom: var(--space-4);
 }
 
-.layers-bundle {
+.layers-group {
   position: relative;
   box-sizing: border-box;
   width: 65%;
@@ -123,31 +123,31 @@
   border: var(--border-width-md) dashed var(--color-text-muted);
 }
 
-/* Each bundle's label sits in its top right corner. */
-.layers-bundle > p {
+/* Each layer group's label sits in its top right corner. */
+.layers-group > p {
   text-align: end;
 }
 
-.layers-bundle-a-grouped {
+.layers-group-a-grouped {
   z-index: 1;
 }
 
-.layers-bundle-b-grouped {
+.layers-group-b-grouped {
   z-index: 2;
 }
 
-/* Unbundled: the dashed border goes, so the three layers sit loose on the page. */
-.layers-bundle-loose {
+/* Ungrouped: the dashed border goes, so the layers sit loose on the page. */
+.layers-group-loose {
   border-color: transparent;
 }
 
-.layers-bundle-b {
+.layers-group-b {
   height: 10rem;
   margin-top: -7rem;
   margin-left: 35%;
 }
 
-.layers-bundle-layer {
+.layers-group-layer {
   position: absolute;
   z-index: var(--_layer-z);
   top: calc(2.5rem + var(--_layer-step) * 1.75rem);

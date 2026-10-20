@@ -93,7 +93,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         pages: [
           { id: 'positioning', label: 'Positioning', path: '/layers/positioning', status: 'implemented' },
           { id: 'ordering-layers', label: 'Ordering layers', path: '/layers/ordering-layers', status: 'implemented' },
-          { id: 'bundles-of-layers', label: 'Bundles of layers', path: '/layers/bundles-of-layers', status: 'implemented' },
+          { id: 'layer-groups', label: 'Layer groups', path: '/layers/layer-groups', status: 'implemented' },
           { id: 'scroll-padding', label: 'Scroll padding', path: '/layers/scroll-padding', status: 'implemented' },
         ],
       },
