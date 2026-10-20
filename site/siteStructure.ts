@@ -36,15 +36,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     ],
   },
   {
-    id: 'principles',
-    label: 'Principles',
-    pages: [
-      { id: 'usability', label: 'Usability', path: '/usability', status: 'empty' },
-      { id: 'inclusivity', label: 'Inclusivity', path: '/inclusivity', status: 'empty' },
-      { id: 'creativity', label: 'Creativity', path: '/creativity', status: 'empty' },
-    ],
-  },
-  {
     // Foundations do not change with the theme.
     id: 'foundations',
     label: 'Foundations',
