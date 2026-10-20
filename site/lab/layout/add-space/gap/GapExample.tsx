@@ -5,7 +5,7 @@ import { Block } from '../../../shared/LabPrimitives'
 import { gapCssNotes } from './gapContent'
 
 const gapOptions = [
-  { label: '--space-2', value: '--space-2' },
+  { label: '--space-0', value: '--space-0' },
   { label: '--space-4', value: '--space-4' },
   { label: '--space-8', value: '--space-8' },
 ] as const
