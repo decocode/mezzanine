@@ -612,6 +612,7 @@ a:focus-visible {
   margin-top: var(--space-4);
   padding: var(--space-4);
   border: var(--border-width-baseline) solid var(--color-border);
+  border-radius: var(--radius-surface);
   background: var(--color-page);
 }
 
@@ -829,6 +830,7 @@ a:focus-visible {
   margin: 0 0 var(--space-6);
   padding: var(--space-4);
   border: var(--border-width-baseline) solid var(--color-border);
+  border-radius: var(--radius-surface);
   background: var(--color-surface);
 }
 .example-zone-controls legend {

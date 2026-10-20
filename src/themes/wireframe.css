@@ -19,6 +19,9 @@
   --color-chevron: var(--color-text);
 
   --color-border: var(--color-neutral-950);
+  /* Square corners, even inside an area showing another theme. */
+  --radius-control: var(--radius-none);
+  --radius-surface: var(--radius-none);
 
   --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) 20%, transparent);
 
