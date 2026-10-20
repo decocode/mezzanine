@@ -13,6 +13,6 @@
   --disclosure-panel-padding-block: var(--space-4);
   --disclosure-panel-padding-inline: 0;
   --disclosure-icon-size: var(--chevron-size);
-  --disclosure-focus-ring-width: 0.1875rem;
-  --disclosure-focus-ring-offset: -0.1875rem;
+  --disclosure-focus-ring-width: var(--focus-ring-width);
+  --disclosure-focus-ring-offset: var(--focus-ring-offset-inset);
 }

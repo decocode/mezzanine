@@ -241,6 +241,19 @@ the text size; the pixel values assume `1rem = 16px`.
 | `--icon-size-lg` | `1.75rem` | 28px |
 | `--icon-size-xl` | `2rem` | 32px |
 
+## Current focus ring inventory
+
+Every component's keyboard focus outline comes from one role in
+`src/tokens/interaction.css`. Each component keeps its own
+`--*-focus-ring-width` and `--*-focus-ring-offset` tokens, but they point at
+these roles, so a theme changes every ring at once.
+
+| Token | Value | Meaning |
+| --- | --- | --- |
+| `--focus-ring-width` | 0.1875rem (3px) | Outline thickness |
+| `--focus-ring-offset` | 0.1875rem (3px) | Gap outside a control |
+| `--focus-ring-offset-inset` | minus the width | Places the ring inside full-width rows, such as NavTree, Table, Tabs, ListBox and Disclosure, where an outside ring would be clipped |
+
 ## Current nav item inventory
 
 NavTree rows, TopBar links and TableOfContents links share one row style, so

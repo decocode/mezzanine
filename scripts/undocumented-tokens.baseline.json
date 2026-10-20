@@ -1,4 +1,5 @@
 [
+  "--focus-ring-offset-inset",
   "--icon-size-lg",
   "--icon-size-md",
   "--icon-size-sm",

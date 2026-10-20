@@ -5,5 +5,5 @@
   --dialog-padding: var(--space-6);
   --dialog-content-gap: var(--space-4);
   --dialog-actions-gap: var(--space-2);
-  --dialog-focus-ring-width: 0.1875rem;
+  --dialog-focus-ring-width: var(--focus-ring-width);
 }

@@ -14,6 +14,12 @@
   --target-size-lg: 3rem;
   --target-size-xl: 3.5rem;
 
+  /* Focus ring: the keyboard focus outline every component shares. It sits outside a control, or
+     inside full-width rows (such as NavTree, Table and Tabs) where outside would be clipped. */
+  --focus-ring-width: 0.1875rem;
+  --focus-ring-offset: 0.1875rem;
+  --focus-ring-offset-inset: calc(var(--focus-ring-width) * -1);
+
   /* Nav items: the shared row style of NavTree, TopBar links and TableOfContents links. Colours are
      set per theme as --nav-item-*; the current page's indicator bar has this width. */
   --nav-item-current-indicator-width: 0.1875rem;

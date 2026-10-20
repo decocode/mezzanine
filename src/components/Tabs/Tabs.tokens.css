@@ -6,8 +6,8 @@
   --tabs-border-width: var(--border-width-baseline);
   --tabs-border: var(--color-border);
   --tabs-content: var(--color-text);
-  --tabs-focus-ring-width: 0.1875rem;
-  --tabs-focus-ring-offset: -0.1875rem;
+  --tabs-focus-ring-width: var(--focus-ring-width);
+  --tabs-focus-ring-offset: var(--focus-ring-offset-inset);
   --tab-padding-block: var(--space-3);
   --tab-padding-inline: var(--space-4);
   --tab-content: var(--color-text);

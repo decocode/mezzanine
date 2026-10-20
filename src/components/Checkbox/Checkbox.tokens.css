@@ -7,6 +7,6 @@
   --checkbox-content-gap: var(--space-2);
   --checkbox-border-width: var(--border-width-baseline);
   --checkbox-border-radius: 0;
-  --checkbox-focus-ring-width: 0.1875rem;
-  --checkbox-focus-ring-offset: 0.1875rem;
+  --checkbox-focus-ring-width: var(--focus-ring-width);
+  --checkbox-focus-ring-offset: var(--focus-ring-offset);
 }

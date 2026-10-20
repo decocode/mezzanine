@@ -10,6 +10,6 @@
   --list-box-item-padding-block: var(--space-2);
   --list-box-item-padding-inline: var(--space-3);
   --list-box-item-gap: var(--space-1);
-  --list-box-focus-ring-width: 0.1875rem;
-  --list-box-focus-ring-offset: -0.1875rem;
+  --list-box-focus-ring-width: var(--focus-ring-width);
+  --list-box-focus-ring-offset: var(--focus-ring-offset-inset);
 }

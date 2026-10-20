@@ -6,6 +6,6 @@
   --link-icon-size: 1em;
   --link-underline-thickness: 0.0625rem;
   --link-underline-offset: 0.1875rem;
-  --link-focus-ring-width: 0.1875rem;
-  --link-focus-ring-offset: 0.1875rem;
+  --link-focus-ring-width: var(--focus-ring-width);
+  --link-focus-ring-offset: var(--focus-ring-offset);
 }
