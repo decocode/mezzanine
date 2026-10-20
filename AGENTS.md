@@ -115,11 +115,12 @@ Agreed by the owner on 18 October 2026.
 ## Documentation accuracy
 
 - `src/` shows what Mezzanine currently contains. The site documents the library. It does not design, extend or simulate it.
-- Document only components, variants, states, tokens, behaviours and rules that are implemented and available through the public API.
+- Document only components, variants, states, tokens and behaviours that are implemented and available through the public API. Approach pages, described below, are the one exception.
 - If the implementation and an approved requirement disagree, find out which is correct before changing either. Do not document a bug as intended behaviour.
 - Before adding documentation, check the implementation and its agreed behaviour. If something is missing or ambiguous, ask the user before defining or documenting it.
 - Examples render the real exported components. Do not create documentation-only replicas, variants, styles or behaviours.
 - The approved information architecture may include an empty route before its subject exists. That page says `Not implemented`, has no speculative examples or rules, and is marked `WIP` in navigation. An empty route is not evidence that its subject exists.
+- Two kinds of documentation. **Component, token and class pages** match the implementation exactly and stay current. **Approach pages** (concepts, methods, practices and terminology for interface design) describe Mezzanine's approved way of working, whether or not a built component uses it yet. An approach page moves from the Lab only with the owner's approval, page by page, and never describes a component, token or class that doesn't exist.
 - Show token values from the token source. Do not copy values by hand into site code.
 - Use descriptive teaching labels in examples, such as `Toggle A`, `Column A` or `Current page`. Use realistic product copy only when it is needed to demonstrate agreed behaviour. Sample text must not imply that an unimplemented feature exists.
 - When React Aria names a component part or concept, keep that exact term in code references and API explanations. Readable labels such as "Navigation tree" are fine when the page gives the exact React Aria name in code and links to the official React Aria page.
