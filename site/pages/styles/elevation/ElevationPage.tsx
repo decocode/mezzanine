@@ -1,32 +1,21 @@
 import { Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { RichText } from '../../../components/RichText'
+import { TokenScale } from '../../../components/TokenScale'
 import { TokenValue } from '../../../components/TokenValue'
 import {
-  elevationColourTokens, elevationColourTokensIntro, elevationContent, elevationDefinitions, type ElevationDefinition,
+  elevationColourTokens, elevationColourTokensIntro, elevationContent, elevationDefinitions,
 } from './elevationContent'
 import { ContentPage } from '../../../templates/ContentPage'
 
-function ElevationLevel({ elevation }: { elevation: ElevationDefinition }) {
-  return (
-    <li className="elevation-role-card">
-      <span aria-hidden="true" className="elevation-role-sample" style={{ boxShadow: `var(${elevation.token})` }} />
-      <strong>{elevation.label}</strong>
-      <p>Level {elevation.level}</p>
-      <p>{elevation.useFor}</p>
-    </li>
-  )
-}
+// Each level's card shows its shadow, with its level number and what it's for.
+const elevationLevels = elevationDefinitions.map(({ token, label, level, useFor }) => ({ token, label, description: `Level ${level}. ${useFor}`, surface: `${token}-surface` }))
 
 export default function ElevationPage() {
   return (
     <ContentPage
       content={elevationContent}
       parts={{
-        levels: (
-          <ol className="elevation-role-list">
-            {elevationDefinitions.map((elevation) => <ElevationLevel elevation={elevation} key={elevation.token} />)}
-          </ol>
-        ),
+        levels: <TokenScale items={elevationLevels} sample="shadow" showValue={false} />,
         tokens: (<>
           <div className="documentation-table">
             <Table aria-label="Elevation tokens">

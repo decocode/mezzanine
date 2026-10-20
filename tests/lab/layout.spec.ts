@@ -85,7 +85,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   await expect(main.getByRole('link', { name: 'Bedrock: Stack (opens in a new tab)', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/stack')
   // The Spacing page lists the real spacing tokens with their live values.
   await page.goto('/site/lab/layout/add-space/spacing')
-  await expect(main.locator('.spacing-scale-item').filter({ hasText: '--space-4' }).locator('.spacing-scale-rem')).toHaveText('1rem')
+  await expect(main.locator('.token-scale > li').filter({ hasText: '--space-4' }).getByText('1rem', { exact: true })).toBeVisible()
   await page.goto('/site/lab/layout/not-a-page')
   await expect(page).toHaveTitle('Page not found | Lab')
 })

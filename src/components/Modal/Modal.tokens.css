@@ -7,7 +7,7 @@
   --modal-border-width: var(--border-width-baseline);
   --modal-border-radius: var(--radius-surface);
   --modal-backdrop: color-mix(in srgb, var(--color-neutral-950) 50%, transparent);
-  --modal-background: var(--color-surface);
+  --modal-background: var(--elevation-raised-3-surface);
   --modal-content: var(--color-text);
   --modal-border: var(--color-border);
 }

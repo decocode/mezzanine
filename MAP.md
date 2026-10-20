@@ -123,6 +123,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/components/NavigationPanel.tsx` | NavigationPanel (a section's NavTree in a navigation landmark) for the Panels and the TopBar menu, and DocsNavigation for the docs |
 | `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
+| `site/components/TokenScale.tsx` | One way to show any token scale: a card per step with a sample drawn from the token (corners, border width, shadow or length), its readable name, token name and live value; used by Corners, Borders, Elevation and the Lab's Spacing page |
 | `site/components/tokenValueLogic.ts` | Reads current CSS token values and re-reads them when the theme, device colour scheme or motion setting changes, and describes font-size tokens in pixels |
 | `site/pages/foundations/accessibility/accessibilityContent.ts` | Target, React Aria and Mezzanine rows, checking notes and links for the Accessibility page |
 | `site/pages/components/badge/badgeContent.ts` | Badge written guidance, reference entries, related pages and external references |
@@ -236,7 +237,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/lab/layout/layoutExamples.ts` | Each Layout page's examples, keyed by the page's key, gathered from the page folders |
 | `site/lab/layout/<group>/<page>/<page>Content.ts` | One folder per Layout page, named after its address (for example `site/lab/layout/side-by-side/row/rowContent.ts`): the page's content in the docs site's shape (description, any Also known as names, How it works with any Browser support, Example, Related pages and References) with its address, plus the CSS notes and any linked copy its example uses. Groups: box-basics (the-box-model, types-of-box, measuring-the-box, viewport-units, sizing-the-box, center), add-space (margin-and-padding, gap, spacing), inside-the-box (alignment, filling-the-box, overflowing-the-box, aspect-ratio, content-columns, box-has-content), side-by-side (row, row-wrap, row-wrap-grow, reel, ratio-pair), grids-and-columns (column, grid, subgrid) and container (container-queries, fluid-sizing) |
 | `site/lab/layout/<group>/<page>/<Page>Example.tsx` | The page's example, with any options it alone uses (for example `RowExample.tsx`); Gap's also exports the spacing tokens shown after it |
-| `site/lab/layout/add-space/spacing/SpacingScale.tsx` | Every spacing token with a bar of its size, its live value and its usual pixel size; used by the Lab's Spacing page |
+| `site/lab/layout/add-space/spacing/SpacingScale.tsx` | Every spacing token as a TokenScale bar, labelled with its usual pixel size; used by the Lab's Spacing page |
 | `site/lab/layout/add-space/spacing/spacingContent.ts` | Spacing scale steps displayed by SpacingScale on the Lab's Spacing page |
 | `site/lab/layers/layersContent.ts` | The Layers experiment's overview content and its pages in order, gathered from its page folders |
 | `site/lab/layers/<page>/` | One folder per Layers page, each with its content and CSS notes and its example: positioning, ordering-layers, bundles-of-layers and scroll-padding |

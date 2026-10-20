@@ -10,9 +10,9 @@ for (const fontSize of [16, 32]) {
         document.documentElement.style.fontSize = `${size}px`
       }, fontSize)
 
-      await expect(page.locator('.elevation-role-card')).toHaveCount(5)
+      await expect(page.locator('.token-scale > li')).toHaveCount(5)
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width)
-      expect(await page.locator('.elevation-role-card').evaluateAll((cards) => (
+      expect(await page.locator('.token-scale > li').evaluateAll((cards) => (
         cards.every((card) => card.scrollWidth <= card.clientWidth)
       ))).toBe(true)
 

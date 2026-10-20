@@ -6,7 +6,7 @@
   --card-content-gap: var(--space-4);
   --card-border-width: var(--border-width-baseline);
   --card-border-radius: var(--radius-surface);
-  --card-background: var(--color-page);
+  --card-background: var(--elevation-raised-1-surface);
   --card-content: var(--color-text);
   --card-border: var(--color-border);
   --card-elevation: var(--elevation-raised-1);
