@@ -363,6 +363,49 @@
   gap: var(--lab-gap);
 }
 
+/* Spacing in use: a form grouped by space, headings joined to their text, and the candidate ladder. */
+.lab-grouping {
+  display: grid;
+  gap: var(--space-4);
+  max-inline-size: 20rem;
+}
+
+.lab-grouping .react-aria-Button {
+  justify-self: start;
+}
+
+.lab-grouping-equal {
+  --text-field-gap: var(--space-4);
+}
+
+.lab-grouping-grouped {
+  --text-field-gap: var(--space-2);
+  gap: var(--space-6);
+}
+
+.lab-grouping-grouped .react-aria-Button {
+  margin-block-start: var(--space-4);
+}
+
+.lab-headings h4 {
+  margin-block: var(--space-4);
+}
+
+.lab-headings-spaced h4 {
+  margin-block: var(--space-10) var(--space-2);
+}
+
+.lab-headings p {
+  margin: 0;
+}
+
+.lab-ladder-sample {
+  display: block;
+  inline-size: var(--lab-ladder-step);
+  block-size: var(--space-4);
+  background: var(--color-accent-500);
+}
+
 /* Reading order. */
 .lab-order-row {
   display: flex;
