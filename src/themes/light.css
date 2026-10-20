@@ -9,7 +9,7 @@
   color-scheme: light;
 
   /* A pure white page, so surfaces and cards separate cleanly. */
-  --color-page: #FFFFFF;
+  --color-page: var(--color-white);
   --color-surface: var(--color-neutral-100);
 
   --color-text: var(--color-neutral-900);

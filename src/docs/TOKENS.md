@@ -125,6 +125,7 @@ curve. Verify contrast against the actual colors rather than the step number.
 | `--color-accent-{50–980}` | The interface color that every accent role reads |
 | `--color-signature-{50–980}` | The brand's second, decorative color. No role reads it yet |
 | `--color-neutral-{50–980}` | Greys for page, surfaces, text and lines |
+| `--color-white`, `--color-black` | Pure white and black, at each end of every palette |
 | `--color-info-{50–980}` | Information, and the keyboard-focus color |
 | `--color-success-{50–980}` | Successful outcomes |
 | `--color-warning-{50–980}` | Caution and warnings |

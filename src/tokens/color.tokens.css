@@ -17,6 +17,10 @@
   --color-neutral-950: #0F0F0F;
   --color-neutral-980: #080808;
 
+  /* Pure white and black, at each end of every palette. */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
   /* Accent palette: the interface colour that every accent role reads. A brand swaps this palette to
      restyle the interface. */
   --color-accent-50: #F9FAFE;

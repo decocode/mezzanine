@@ -77,7 +77,7 @@
   /* The space between an app's surfaces, such as AppShell's cards. */
   --surface-gap: var(--space-2);
 
-  --elevation-shadow-color: rgb(0 0 0 / 72%);
+  --elevation-shadow-color: color-mix(in srgb, var(--color-black) var(--opacity-50), transparent);
   --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
   /* Higher levels sit on lighter surfaces, as if closer to a light source. */
   --elevation-sunken-1-surface: var(--color-page);
@@ -175,7 +175,7 @@
   /* The space between an app's surfaces, such as AppShell's cards. */
   --surface-gap: var(--space-2);
 
-    --elevation-shadow-color: rgb(0 0 0 / 72%);
+    --elevation-shadow-color: color-mix(in srgb, var(--color-black) var(--opacity-50), transparent);
     --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
     /* Higher levels sit on lighter surfaces, as if closer to a light source. */
     --elevation-sunken-1-surface: var(--color-page);

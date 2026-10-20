@@ -94,7 +94,7 @@ export const semanticColorPalettes: ColorPaletteDefinition[] = [
       content: [
         'Used to indicate statuses without a positive or negative inference. Very light and dark Neutral tones can be used when high contrast is required. Gray tones are often used to indicate that something is disabled or archived.',
         'Pair the color with a clear label, such as “Draft” or “Archived”, so people can understand the status without relying on color alone.',
-        'Mezzanine Neutral tones sit between pure white (#FFFFFF) and pure black (#000000). It is used in the Wireframe theme to help product teams focus on the functionality of their designs.',
+        'Mezzanine Neutral tones sit between pure white (--color-white) and pure black (--color-black). It is used in the Wireframe theme to help product teams focus on the functionality of their designs.',
         'For custom themes, the Neutral palette can be easily adjusted to suit different brands - be that cool slates, warm taupes or icy silver tones.',
       ],
     },

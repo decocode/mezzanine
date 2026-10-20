@@ -1,7 +1,7 @@
 // Colour has three layers: palettes, roles set by each theme, and component tokens that point at
 // roles. These checks keep each layer reading only the one beneath it.
 
-const paletteStep = /--color-(?:accent|signature|neutral|info|success|warning|danger)-\d+\b/g
+const paletteStep = /--color-(?:(?:accent|signature|neutral|info|success|warning|danger)-\d+|white|black)\b/g
 const colorReference = /var\(\s*(--color-[a-z0-9-]+)/g
 // Theme-only values that are not colour roles: corner and surface-gap roles, elevation, and one component
 // override every theme genuinely needs.
