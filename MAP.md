@@ -10,9 +10,10 @@ The `@decocode/mezzanine` package. `npm run build:lib` builds it into `dist/`.
 | --- | --- |
 | `index.ts` | The only public entry point. Everything an app can use is exported here. |
 | `components/<Name>/` | One folder per component, named after it: `<Name>.tsx`, `<Name>.css` and `<Name>.tokens.css`, plus any private `.ts` logic. Some are thin React Aria re-exports that Mezzanine hasn't designed yet. |
-| `tokens/` | The shared scales and roles, one file per subject: colour, elevation, icon size, interaction (target size, focus ring, nav item), motion, shape (radius, border width), space, text, typography and z-index. |
+| `tokens/` | The shared scales and roles, one file per subject: colour, elevation, icon size, interaction (target size, focus ring, nav item), motion, shape (radius, border width), space, layout, text, typography and z-index. |
 | `themes/` | Light, Dark and Wireframe. Each sets colours and any role values that differ. |
-| `tokens.css`, `styles.css`, `text-styles.css`, `motion.css` | Entry stylesheets: tokens, then component styles, the public `mz-text-*` classes and the motion policy. |
+| `styles/` | The shared classes that apps write in their markup, built from tokens: `typography.css` holds the public `mz-text-*` text styles. |
+| `tokens.css`, `styles.css`, `motion.css` | Entry stylesheets: `tokens.css` gathers the tokens, `styles.css` gathers every stylesheet into the one file apps import, and `motion.css` is the motion policy. |
 | `icons/` | The icons in active use. |
 | `docs/` | How apps use Mezzanine: `COMPONENTS.md`, `TOKENS.md` and `TYPOGRAPHY.md`. |
 

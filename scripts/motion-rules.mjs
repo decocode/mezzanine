@@ -43,7 +43,7 @@ export function checkMotionCss(file, text) {
   const problems = []
   const report = (position, message) => problems.push({ position, message })
   const parsed = declarations(text)
-  const tokenSource = file === 'src/tokens/motion.css'
+  const tokenSource = file === 'src/tokens/motion.tokens.css'
   const policy = file === 'src/motion.css'
   for (const match of parsed.masked.matchAll(oldToken)) report(match.index, `Removed component motion token ${match[0]}.`)
   if (!policy && /prefers-reduced-motion/.test(parsed.masked)) report(0, 'Reduced-motion conditions belong only in src/motion.css.')

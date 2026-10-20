@@ -5,16 +5,17 @@
   names rather than product-specific values.
 */
 
-@import './tokens/motion.css';
-@import './tokens/color.css';
-@import './tokens/interaction.css';
-@import './tokens/typography.css';
-@import './tokens/space.css';
-@import './tokens/icon.css';
-@import './tokens/text.css';
-@import './tokens/shape.css';
-@import './tokens/elevation.css';
-@import './tokens/z-index.css';
+@import './tokens/motion.tokens.css';
+@import './tokens/color.tokens.css';
+@import './tokens/interaction.tokens.css';
+@import './tokens/typography.tokens.css';
+@import './tokens/space.tokens.css';
+@import './tokens/layout.tokens.css';
+@import './tokens/icon.tokens.css';
+@import './tokens/text.tokens.css';
+@import './tokens/shape.tokens.css';
+@import './tokens/elevation.tokens.css';
+@import './tokens/z-index.tokens.css';
 
 @import './components/AppShell/AppShell.tokens.css';
 @import './components/Badge/Badge.tokens.css';

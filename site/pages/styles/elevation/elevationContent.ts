@@ -53,7 +53,7 @@ export const elevationContent: DocsPageContent = {
     },
     {
       key: 'tokens',
-      intro: ['The levels are defined in `src/tokens/elevation.css`. Values shown are for the theme you are viewing.'],
+      intro: ['The levels are defined in `src/tokens/elevation.tokens.css`. Values shown are for the theme you are viewing.'],
     },
     {
       key: 'theming',

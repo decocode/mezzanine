@@ -119,7 +119,7 @@ export const typographyStyles: TypographyStyleDefinition[] = [
   { className: 'mz-text-label-sm', role: 'label', label: 'Label small', purpose: 'Supplementary labels where space is constrained.' },
 ]
 
-// Each role's family and weight, as set in src/text-styles.css.
+// Each role's family and weight, as set in src/styles/typography.css.
 const textRoleFonts: { id: TextRole; fontFamilyToken: string; fontWeightToken: string }[] = [
   { id: 'display', fontFamilyToken: '--font-family-heading', fontWeightToken: '--font-weight-regular' },
   { id: 'heading', fontFamilyToken: '--font-family-heading', fontWeightToken: '--font-weight-regular' },

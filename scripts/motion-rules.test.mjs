@@ -31,7 +31,7 @@ const rejected = [
 for (const css of accepted) test(`accept ${css}`, () => assert.deepEqual(checkMotionCss('src/components/Example/Example.css', css), []))
 for (const css of rejected) test(`reject ${css}`, () => assert.ok(checkMotionCss('src/components/Example/Example.css', css).length))
 test('policy and defaults own literals', () => {
-  assert.deepEqual(checkMotionCss('src/tokens/motion.css', ':root { --motion-duration-interface: 180ms; }'), [])
+  assert.deepEqual(checkMotionCss('src/tokens/motion.tokens.css', ':root { --motion-duration-interface: 180ms; }'), [])
   assert.deepEqual(checkMotionCss('src/motion.css', '@media (prefers-reduced-motion: reduce) { :root { --_motion-enabled: 0; } }'), [])
 })
 test('source timing and preference boundaries', () => {

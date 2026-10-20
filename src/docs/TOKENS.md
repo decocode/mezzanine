@@ -244,7 +244,7 @@ the text size; the pixel values assume `1rem = 16px`.
 ## Current focus ring inventory
 
 Every component's keyboard focus outline comes from one role in
-`src/tokens/interaction.css`. Each component keeps its own
+`src/tokens/interaction.tokens.css`. Each component keeps its own
 `--*-focus-ring-width` and `--*-focus-ring-offset` tokens, but they point at
 these roles, so a theme changes every ring at once.
 
@@ -259,7 +259,7 @@ these roles, so a theme changes every ring at once.
 NavTree rows, TopBar links and TableOfContents links share one row style, so
 navigation looks alike wherever it sits: `body-sm` text, a background on hover
 and press, and the current page in Emphasis weight with an indicator bar. The
-colours are set per theme; the bar width lives in `src/tokens/interaction.css`.
+colours are set per theme; the bar width lives in `src/tokens/interaction.tokens.css`.
 
 | Token | Meaning |
 | --- | --- |
@@ -317,7 +317,7 @@ Elevation tokens form a ladder around `--elevation-flat`, which is level 0.
 Numbers count away from flat in each direction: `sunken-1` sits one step into
 the surface, and `raised-1` to `raised-3` sit one, two and three steps above it.
 A higher number means more separation from flat. The levels are shared, in
-`src/tokens/elevation.css`, and are built from `--elevation-shadow-color` and
+`src/tokens/elevation.tokens.css`, and are built from `--elevation-shadow-color` and
 `--elevation-highlight-color`. Each theme sets its own shadow colour; Dark also
 sets an edge highlight and larger shapes for the raised levels.
 
@@ -337,7 +337,7 @@ separate `--color-focus` token for visible focus indicators.
 ## Current target size inventory
 
 Target size is how big something you tap or click is. Every interactive element
-takes its height from one shared scale in `src/tokens/interaction.css`, so a text
+takes its height from one shared scale in `src/tokens/interaction.tokens.css`, so a text
 field and a Button of the same size always line up, and a theme can change every
 target at once. Every step is above the WCAG 2.2 AA minimum. For an app that needs
 44px targets (WCAG 2.2 AAA), use `md` or larger.

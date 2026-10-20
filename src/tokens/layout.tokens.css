@@ -1,0 +1,6 @@
+/* Layout tokens: the shared sizes that layout patterns (rows, reels, grids, ratio pairs) take their
+   measurements from, the same in every theme. Tokens are added here only once the owner approves
+   their names. */
+
+:where(:root) {
+}
