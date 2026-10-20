@@ -4,7 +4,7 @@
 
   /* A deeper black page, so raised surfaces stand out. */
   --color-page: #0A0A0A;
-  --color-surface: var(--color-neutral-900);
+  --color-surface: var(--color-neutral-950);
   --color-surface-hover: var(--color-neutral-800);
   --color-surface-pressed: var(--color-neutral-700);
 
@@ -24,7 +24,7 @@
   --elevation-shadow-color: rgb(0 0 0 / 72%);
   --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
   /* Higher levels sit on lighter surfaces, as if closer to a light source. */
-  --elevation-sunken-1-surface: var(--color-neutral-950);
+  --elevation-sunken-1-surface: var(--color-page);
   --elevation-flat-surface: var(--color-page);
   --elevation-raised-1-surface: var(--color-neutral-900);
   --elevation-raised-2-surface: color-mix(in srgb, var(--color-neutral-900), var(--color-neutral-800));
@@ -127,7 +127,7 @@
     color-scheme: dark;
 
     --color-page: #0A0A0A;
-    --color-surface: var(--color-neutral-900);
+    --color-surface: var(--color-neutral-950);
     --color-surface-hover: var(--color-neutral-800);
     --color-surface-pressed: var(--color-neutral-700);
 
@@ -145,7 +145,7 @@
 
     --elevation-shadow-color: rgb(0 0 0 / 72%);
     --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) 12%, transparent);
-    --elevation-sunken-1-surface: var(--color-neutral-950);
+    --elevation-sunken-1-surface: var(--color-page);
     --elevation-flat-surface: var(--color-page);
     --elevation-raised-1-surface: var(--color-neutral-900);
     --elevation-raised-2-surface: color-mix(in srgb, var(--color-neutral-900), var(--color-neutral-800));
