@@ -276,7 +276,7 @@ a:focus-visible {
   grid-row: span 2;
   min-width: 0;
   padding: var(--space-2) var(--space-2) var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-page);
   color: var(--color-text);
 }
@@ -287,7 +287,7 @@ a:focus-visible {
   align-items: flex-end;
   height: 6rem;
   padding: var(--space-2);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .color-palette-step code {
@@ -306,7 +306,7 @@ a:focus-visible {
 .spacing-scale-list {
   margin: 1.5rem 0 0;
   padding: 0;
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   border-radius: var(--radius-sm);
   list-style: none;
   overflow: hidden;
@@ -321,7 +321,7 @@ a:focus-visible {
 }
 
 .spacing-scale-item + .spacing-scale-item {
-  border-top: 1px solid var(--color-border);
+  border-top: var(--border-width-baseline) solid var(--color-border);
 }
 
 .spacing-scale-example {
@@ -336,7 +336,7 @@ a:focus-visible {
   max-width: 100%;
   height: 1.5rem;
   background: var(--color-signature-300);
-  border: 1px solid var(--color-signature-700);
+  border: var(--border-width-baseline) solid var(--color-signature-700);
 }
 
 .spacing-scale-not-applicable {
@@ -425,7 +425,7 @@ a:focus-visible {
 
 .typography-layers > li {
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   border-radius: var(--radius-sm);
   counter-increment: typography-layer;
 }
@@ -455,7 +455,7 @@ a:focus-visible {
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .typography-theme-caption {
@@ -542,7 +542,7 @@ a:focus-visible {
   display: block;
   width: 100%;
   height: 6rem;
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-surface);
 }
 
@@ -699,7 +699,7 @@ a:focus-visible {
   max-width: 40rem;
   margin-top: var(--space-4);
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-page);
 }
 
@@ -916,7 +916,7 @@ a:focus-visible {
   min-width: 0;
   margin: 0 0 var(--space-6);
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-surface);
 }
 .example-zone-controls legend {
@@ -959,8 +959,8 @@ a:focus-visible {
 .text-vertical-example { writing-mode: vertical-rl; inline-size: 12rem; margin-top: var(--space-4); }
 /* Reading direction › Start and end: one box uses physical sides on purpose, to show it doesn't mirror. */
 .text-direction-example p { margin: 0 0 var(--space-2); }
-.text-direction-physical { padding-block: var(--space-3); border-left: var(--space-2) solid var(--color-warning-600); padding-left: var(--space-4); }
-.text-direction-logical { padding-block: var(--space-3); border-inline-start: var(--space-2) solid var(--color-warning-600); padding-inline-start: var(--space-4); }
+.text-direction-physical { padding-block: var(--space-3); border-left: var(--border-width-xl) solid var(--color-warning-600); padding-left: var(--space-4); }
+.text-direction-logical { padding-block: var(--space-3); border-inline-start: var(--border-width-xl) solid var(--color-warning-600); padding-inline-start: var(--space-4); }
 
 /* AppShell example on the AppShell and Panel pages: the site gives the frame a fixed height inside its example zone. */
 .app-shell-example-zone { padding: 0; }

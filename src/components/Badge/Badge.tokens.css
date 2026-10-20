@@ -5,7 +5,7 @@
   --badge-padding-block: var(--space-1);
   --badge-padding-inline: var(--space-2);
   --badge-border-width: var(--border-width-baseline);
-  --badge-border-radius: 0.25rem;
+  --badge-border-radius: var(--radius-control);
   --badge-neutral-background: var(--color-neutral-100);
   --badge-neutral-content: var(--color-neutral-800);
   --badge-neutral-border: var(--color-neutral-300);

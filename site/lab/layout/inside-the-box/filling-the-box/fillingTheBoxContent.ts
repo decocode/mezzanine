@@ -43,7 +43,7 @@ export const fillingTheBoxCssNotes: Record<string, CssNote> = {
   width: 100%;
   aspect-ratio: 1;
   object-fit: var(--lab-object-fit);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
 }`,
   },
 }

@@ -30,7 +30,7 @@ export const theBoxModelCssNotes: Record<string, CssNote> = {
     code: `.lab-box-anatomy {
   margin: var(--space-6);
   padding: var(--space-6);
-  border: var(--space-1) solid var(--color-text);
+  border: var(--border-width-xl) solid var(--color-text);
   background: var(--color-surface);
 }`,
   },

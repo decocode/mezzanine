@@ -7,7 +7,7 @@
   --input-padding-block: var(--space-2);
   --input-padding-inline: var(--space-3);
   --input-border-width: var(--border-width-baseline);
-  --input-border-radius: 0;
+  --input-border-radius: var(--radius-control);
   --input-focus-ring-width: var(--focus-ring-width);
   --input-focus-ring-offset: var(--focus-ring-offset);
 }

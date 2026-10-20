@@ -3,7 +3,7 @@
   max-width: min(var(--tooltip-max-width), calc(100vw - var(--space-4) * 2));
   padding: var(--space-2) var(--space-3);
   border: var(--tooltip-border-width) solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-surface);
   background: var(--color-surface);
   color: var(--color-text);
   box-shadow: var(--elevation-raised-2);

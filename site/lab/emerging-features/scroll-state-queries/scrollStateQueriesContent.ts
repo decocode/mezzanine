@@ -24,7 +24,7 @@ export const scrollStateQueriesCssNotes: Record<string, CssNote> = {
 @container scroll-state(stuck: top) {
   .lab-stuck-aware > span {
     display: inline-block;
-    outline: 2px solid var(--color-warning-600);
+    outline: var(--border-width-md) solid var(--color-warning-600);
     outline-offset: var(--space-1);
   }
 }`,

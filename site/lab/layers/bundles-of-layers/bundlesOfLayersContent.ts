@@ -58,7 +58,7 @@ export const bundlesOfLayersCssNotes: Record<string, CssNote> = {
   width: 70%;
   min-height: 4rem;
   padding: var(--space-1) var(--space-2);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   background: var(--color-surface);
   box-shadow: var(--elevation-raised-1);
 }`,

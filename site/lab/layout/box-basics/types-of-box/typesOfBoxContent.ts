@@ -35,7 +35,7 @@ export const typesOfBoxCssNotes: Record<string, CssNote> = {
     code: `.lab-flow-item {
   display: var(--lab-flow-display);
   padding: var(--space-2);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   background: var(--color-surface);
 }`,
   },

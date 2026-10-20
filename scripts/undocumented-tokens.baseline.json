@@ -24,6 +24,8 @@
   "--list-box-item-padding-inline",
   "--list-box-padding",
   "--list-box-section-gap",
+  "--radius-control",
+  "--radius-surface",
   "--ratio-pair-gap",
   "--search-field-gap",
   "--search-field-icon-content",

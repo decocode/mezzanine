@@ -305,6 +305,12 @@ points at `--border-width-sm` (1px), so a theme can make every component border 
 lighter by changing one token. A component that needs a different thickness points its own
 token at another level.
 
+
+Two roles sit on top of the radius scale. `--radius-control` sets the corners of
+Button, ToggleButton, Checkbox, text fields, Badge and inline code;
+`--radius-surface` sets the corners of Card, Modal and Tooltip. Both are
+`--radius-none` (square) by default, so a theme rounds every control or surface by
+changing one token.
 ## Current elevation inventory
 
 Elevation tokens form a ladder around `--elevation-flat`, which is level 0.

@@ -41,7 +41,7 @@ export const marginAndPaddingCssNotes: Record<string, CssNote> = {
     ],
     code: `.lab-padding-box {
   padding: var(--lab-padding);
-  border: var(--space-1) solid var(--color-text);
+  border: var(--border-width-xl) solid var(--color-text);
   background: var(--color-surface);
 }`,
   },

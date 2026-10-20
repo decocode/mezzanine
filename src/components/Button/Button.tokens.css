@@ -31,7 +31,7 @@
   --button-xl-icon-size: var(--icon-size-xl);
   --button-content-gap: var(--space-2);
   --button-border-width: var(--border-width-baseline);
-  --button-border-radius: 0;
+  --button-border-radius: var(--radius-control);
   --button-focus-ring-width: var(--focus-ring-width);
   --button-focus-ring-offset: var(--focus-ring-offset);
   --button-progress-size: 1.25rem;

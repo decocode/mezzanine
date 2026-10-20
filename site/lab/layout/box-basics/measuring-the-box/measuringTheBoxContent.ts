@@ -45,7 +45,7 @@ export const measuringTheBoxCssNotes: Record<string, CssNote> = {
   box-sizing: border-box;
   width: clamp(10rem, 50%, 30rem);
   padding: var(--space-3);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   background: var(--color-surface);
 }`,
   },
