@@ -47,7 +47,7 @@ for (const theme of themes) {
       await expect(field).toBeVisible()
       await field.fill('A long value that should remain within the input rather than widen the page')
       await expectNoPageOverflow(page)
-      expect((await field.boundingBox())!.height).toBeGreaterThanOrEqual(48)
+      expect((await field.boundingBox())!.height).toBeGreaterThanOrEqual(44)
       await expectNoAccessibilityViolations(page, 'main')
     })
   }

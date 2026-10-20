@@ -1,0 +1,10 @@
+/* Icon size scale. */
+
+:where(:root) {
+  /* Icon sizes, from extra small to extra large, stored in rem so icons grow with the text size. */
+  --icon-size-xs: 1rem;
+  --icon-size-sm: 1.25rem;
+  --icon-size-md: 1.5rem;
+  --icon-size-lg: 1.75rem;
+  --icon-size-xl: 2rem;
+}

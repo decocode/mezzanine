@@ -1,6 +1,6 @@
 // This file describes how the site's pages are organised: their navigation
 // groups, display names, URLs and implementation status.
-// It also helps the site find a page from its URL and the sidebar groups that
+// It also helps the site find a page from its URL and the navigation groups that
 // contain it, and says which folder in site/pages holds each page.
 
 export type SitePageStatus = 'implemented' | 'empty'
@@ -33,15 +33,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     label: 'Get started',
     pages: [
       { id: 'introduction', label: 'Introduction', path: '/introduction', status: 'implemented' },
-    ],
-  },
-  {
-    id: 'principles',
-    label: 'Principles',
-    pages: [
-      { id: 'usability', label: 'Usability', path: '/usability', status: 'empty' },
-      { id: 'inclusivity', label: 'Inclusivity', path: '/inclusivity', status: 'empty' },
-      { id: 'creativity', label: 'Creativity', path: '/creativity', status: 'empty' },
     ],
   },
   {
@@ -117,6 +108,18 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     label: 'Components',
     groups: [
       {
+        // The components that frame an app's screen: its header, side and bottom areas, and footer.
+        id: 'structure',
+        label: 'Structure',
+        pages: [
+          { id: 'app-shell', label: 'AppShell', path: '/app-shell', status: 'implemented' },
+          { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
+          { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
+          { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
+          { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
+        ],
+      },
+      {
         id: 'navigation',
         label: 'Navigation',
         pages: [
@@ -127,10 +130,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'tabs', label: 'Tabs', path: '/tabs', status: 'implemented' },
           { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
           { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
-          { id: 'tab-bar', label: 'Tab bar', path: '/tab-bar', status: 'implemented' },
-          { id: 'navbar', label: 'Navbar', path: '/navbar', status: 'implemented' },
-          { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'implemented' },
-          { id: 'footer', label: 'Footer', path: '/footer', status: 'empty' },
         ],
       },
       {
@@ -193,10 +192,6 @@ export const sitePages = [
 export function findSitePage(pathname: string) {
   const path = pathname === '/' ? pathname : pathname.replace(/\/$/, '')
   return sitePages.find((page) => page.path === path)
-}
-
-export function findSiteNavigationGroup(pageId: string) {
-  return findSiteNavigationGroups(pageId).at(-1)
 }
 
 export function findSiteNavigationGroups(

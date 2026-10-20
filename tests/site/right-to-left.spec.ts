@@ -12,7 +12,7 @@ test('Checkbox puts its box at the start of the line in right to left', async ({
   await page.goto('/checkbox')
   await readRightToLeft(page)
   const checkbox = page.locator('main .react-aria-Checkbox').first()
-  const box = (await checkbox.locator('.mezzanine-checkbox-indicator').boundingBox())!
+  const box = (await checkbox.locator('.mz-checkbox-indicator').boundingBox())!
   const row = (await checkbox.boundingBox())!
   expect(box.x + box.width).toBeGreaterThan(row.x + row.width - 2)
 })
@@ -32,7 +32,7 @@ test('Table of contents indents nested links from the start of the line in right
   await page.setViewportSize({ width: 800, height: 900 })
   await page.goto('/button')
   await readRightToLeft(page)
-  const nested = page.locator('.mezzanine-table-of-contents ul ul').first()
+  const nested = page.locator('.mz-table-of-contents ul ul').first()
   await expect(nested).toHaveCSS('padding-right', /^[1-9]/)
   await expect(nested).toHaveCSS('padding-left', '0px')
 })

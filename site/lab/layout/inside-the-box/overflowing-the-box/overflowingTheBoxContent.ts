@@ -32,7 +32,7 @@ export const overflowingTheBoxCssNotes: Record<string, CssNote> = {
   width: min(100%, 14rem);
   height: 6rem;
   padding: var(--space-2);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   overflow: var(--lab-overflow);
 }`,
   },

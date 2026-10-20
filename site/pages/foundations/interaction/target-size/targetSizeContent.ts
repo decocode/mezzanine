@@ -3,21 +3,26 @@ import type { DocsPageContent } from '../../../../templates/docsPageContent'
 // Token names only; their values are read from the token source on the page.
 export const targetSizeTokens = [
   { token: '--target-size-min', label: 'The WCAG 2.2 AA minimum' },
-  { token: '--target-size', label: 'The size Mezzanine’s controls use' },
+  { token: '--target-size-xs', label: 'Extra small: dense lists, such as NavTree, Table of contents and ListBox' },
+  { token: '--target-size-sm', label: 'Small: Checkbox, Radio and SearchField’s clear button' },
+  { token: '--target-size-md', label: 'Medium: the default for Button, text fields, Tabs and Disclosure' },
+  { token: '--target-size-lg', label: 'Large' },
+  { token: '--target-size-xl', label: 'Extra large' },
 ]
 
 export const targetSizeContent: DocsPageContent = {
   id: 'target-size',
   kind: 'foundation',
   title: 'Target size',
-  description: 'Everything you can tap or click in Mezzanine is at least 44 pixels tall, so it’s easy to hit with a finger, a stylus or an unsteady hand.',
+  description: 'Controls such as buttons and form fields all take their size from one scale, called Target size.',
   sections: [
     {
       key: 'howItWorks',
       title: 'How it works',
       intro: [
-        'WCAG 2.2 asks for targets of at least 24 by 24 pixels. Mezzanine’s controls go further, to 44 pixels (2.75rem), from the shared `--target-size` token. Because the size is in `rem`, it grows when someone enlarges their text.',
-        'Links inside a sentence are the exception. They follow the line of text, as WCAG allows.',
+        'Target size makes sure people using touchscreens can tap controls with ease. Every size on the scale meets WCAG 2.2 AA. If your app aims to meet WCAG 2.2 AAA, use the medium target size as your minimum.',
+        'Target sizes are measured in `rem`, rather than pixels. That way, controls will increase in size for people who opt for larger text sizes in their browser or device settings.',
+        'The exception is links within a line of text, as WCAG allows.',
       ],
     },
   ],
@@ -26,7 +31,7 @@ export const targetSizeContent: DocsPageContent = {
     {
       key: 'components',
       title: 'Components',
-      intro: ['Button, ToggleButton, Checkbox, Radio, Tabs, TabBar, Disclosure, Navbar menu items, NavTree, ListBox, SearchField’s clear button, Breadcrumbs and Table of contents links.'],
+      intro: ['Button, ToggleButton, text fields, Checkbox, Radio, Tabs, Disclosure, TopBar menu items, NavTree, ListBox, SearchField’s clear button, Breadcrumbs, Table of contents links, links in a Footer list, and Table rows and headers.'],
     },
   ],
   relatedPages: [

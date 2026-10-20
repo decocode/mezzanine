@@ -10,7 +10,7 @@ for (const theme of themes) {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.goto('/card')
     await setTheme(page, theme)
-    const card = page.locator('main .mezzanine-card')
+    const card = page.locator('main .mz-card')
     await expect(card).toHaveCount(1)
     await expect(card).not.toHaveAttribute('role')
     await expect(card.getByRole('heading', { name: 'Card title', level: 3 })).toBeVisible()
@@ -20,6 +20,6 @@ for (const theme of themes) {
       await expectNoPageOverflow(page)
       expect(await card.evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true)
     }
-    await expectNoAccessibilityViolations(page, 'main .mezzanine-card')
+    await expectNoAccessibilityViolations(page, 'main .mz-card')
   })
 }

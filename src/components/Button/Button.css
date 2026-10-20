@@ -17,7 +17,8 @@
   max-width: 100%;
   border: var(--button-border-width) solid var(--button-border);
   border-radius: var(--button-border-radius);
-  background: var(--button-background);
+  --_button-current-background: var(--button-background);
+  background: var(--_button-current-background);
   color: var(--button-content);
   font-family: var(--font-family-body);
   font-weight: var(--font-weight-semibold);
@@ -30,8 +31,17 @@
   cursor: pointer;
 }
 
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xs'] {
+  --button-min-height: var(--target-size-xs);
+  --button-padding-block: var(--button-xs-padding-block);
+  --button-padding-inline: var(--button-xs-padding-inline);
+  --button-font-size: var(--button-xs-font-size);
+  --button-line-height: var(--button-xs-line-height);
+  --button-icon-size: var(--button-xs-icon-size);
+}
+
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='sm'] {
-  --button-min-height: var(--control-size-sm);
+  --button-min-height: var(--target-size-sm);
   --button-padding-block: var(--button-sm-padding-block);
   --button-padding-inline: var(--button-sm-padding-inline);
   --button-font-size: var(--button-sm-font-size);
@@ -40,7 +50,7 @@
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='md'] {
-  --button-min-height: var(--control-size-md);
+  --button-min-height: var(--target-size-md);
   --button-padding-block: var(--button-md-padding-block);
   --button-padding-inline: var(--button-md-padding-inline);
   --button-font-size: var(--button-md-font-size);
@@ -49,7 +59,7 @@
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='lg'] {
-  --button-min-height: var(--control-size-lg);
+  --button-min-height: var(--target-size-lg);
   --button-padding-block: var(--button-lg-padding-block);
   --button-padding-inline: var(--button-lg-padding-inline);
   --button-font-size: var(--button-lg-font-size);
@@ -58,7 +68,7 @@
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xl'] {
-  --button-min-height: var(--control-size-xl);
+  --button-min-height: var(--target-size-xl);
   --button-padding-block: var(--button-xl-padding-block);
   --button-padding-inline: var(--button-xl-padding-inline);
   --button-font-size: var(--button-xl-font-size);
@@ -66,7 +76,7 @@
   --button-icon-size: var(--button-xl-icon-size);
 }
 
-.mezzanine-button-content {
+.mz-button-content {
   display: inline-flex;
   min-width: 0;
   max-width: 100%;
@@ -75,12 +85,16 @@
   gap: var(--button-content-gap);
 }
 
-.mezzanine-button-icon {
+/* The icon takes up one line of text, so a larger icon never makes the button taller than its
+   control size; it stays centred and may extend into the padding. */
+.mz-button-icon {
   display: inline-flex;
   flex: 0 0 auto;
+  align-items: center;
+  block-size: 1lh;
 }
 
-.mezzanine-button-icon svg {
+.mz-button-icon svg {
   width: var(--button-icon-size);
   height: var(--button-icon-size);
 }
@@ -90,13 +104,38 @@
   padding-inline: 0;
 }
 
-/* An icon with its label below or above it, as in a Rail: the label stays visible. */
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement] .mezzanine-button-content {
+/* An icon with its label below or above it, as in a Rail. The icon sits in the button's box and the
+   label sits outside it, but they're one control, so pressing the label presses the button too. */
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement] .mz-button-content {
   flex-direction: column;
-  gap: var(--button-content-gap);
+  gap: var(--space-1);
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement='above'] .mezzanine-button-content {
+.mz-button-icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  inline-size: var(--button-min-height);
+  block-size: var(--button-min-height);
+}
+
+.react-aria-Button[data-variant][data-label-placement] {
+  min-height: 0;
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.react-aria-Button[data-label-placement] .mz-button-icon-box {
+  border: var(--button-border-width) solid var(--button-border);
+  border-radius: var(--button-border-radius);
+  background: var(--_button-current-background);
+  color: var(--button-content);
+}
+
+:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement='above'] .mz-button-content {
   flex-direction: column-reverse;
 }
 
@@ -134,12 +173,12 @@
 
 .react-aria-Button[data-variant][data-hovered],
 .react-aria-Button[data-variant][data-preview-state='hovered'] {
-  background: var(--button-background-hovered);
+  --_button-current-background: var(--button-background-hovered);
 }
 
 .react-aria-Button[data-variant][data-pressed],
 .react-aria-Button[data-variant][data-preview-state='pressed'] {
-  background: var(--button-background-pressed);
+  --_button-current-background: var(--button-background-pressed);
 }
 
 .react-aria-Button[data-variant][data-focus-visible],
@@ -157,27 +196,27 @@
   cursor: progress;
 }
 
-.react-aria-Button[data-variant][data-pending] .mezzanine-button-content {
+.react-aria-Button[data-variant][data-pending] .mz-button-content {
   opacity: 0;
 }
 
-.mezzanine-button-progress {
+.mz-button-progress {
   position: absolute;
   display: grid;
   place-items: center;
   color: inherit;
 }
 
-.mezzanine-button-progress-indicator {
+.mz-button-progress-indicator {
   width: var(--button-progress-size);
   height: var(--button-progress-size);
   border: var(--button-progress-stroke-width) solid currentColor;
   border-inline-end-color: transparent;
   border-radius: var(--button-progress-border-radius);
-  animation: mezzanine-button-progress-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite; animation-name: var(--_motion-loading-animation, mezzanine-button-progress-spin);
+  animation: mz-button-progress-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite; animation-name: var(--_motion-loading-animation, mz-button-progress-spin);
 }
 
-@keyframes mezzanine-button-progress-spin {
+@keyframes mz-button-progress-spin {
   to {
     rotate: var(--motion-rotation-cycle);
   }

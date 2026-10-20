@@ -8,12 +8,14 @@ import { labTopLevelPages } from './labTopLevelPages'
 
 export const labContent = {
   index: { label: 'Lab', href: '/site/lab' },
+  // The heading of the Lab's navigation Panel.
+  navigationTitle: 'Lab',
   layoutPage: { label: 'Layout', href: '/site/lab/layout', description: 'How boxes are sized, spaced and arranged: mobile first, and responding to their container.' },
   componentsPage: { label: 'Components', href: '/site/lab/components' },
   searchPage: { label: 'Search', href: '/site/lab/components/search' },
 }
 
-// The Lab's own navigation tree, shown in the site sidebar and the Navbar menu on Lab pages.
+// The Lab's own navigation tree, shown in its start Panel and the TopBar menu on Lab pages.
 // Each experiment is a top-level item: Layout, Layers, Browser and device, Emerging features, then Components, then pages not specific to layout.
 // Layout is a top-level group. Its stages come first, each holding its pages in reading order,
 // Emerging features carries the Lab badge.

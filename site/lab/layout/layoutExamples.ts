@@ -6,9 +6,9 @@ import { MeasuringTheBoxExample } from './box-basics/measuring-the-box/Measuring
 import { ViewportUnitsExample } from './box-basics/viewport-units/ViewportUnitsExample'
 import { SizingTheBoxExample } from './box-basics/sizing-the-box/SizingTheBoxExample'
 import { CenterExample } from './box-basics/center/CenterExample'
-import { MarginExample } from './add-space/margin/MarginExample'
-import { PaddingExample } from './add-space/padding/PaddingExample'
-import { GapExample, SpacingTokens } from './add-space/gap/GapExample'
+import { MarginAndPaddingExample } from './add-space/margin-and-padding/MarginAndPaddingExample'
+import { GapExample } from './add-space/gap/GapExample'
+import { SpacingExample } from './add-space/spacing/SpacingExample'
 import { AlignmentExample } from './inside-the-box/alignment/AlignmentExample'
 import { FillingTheBoxExample } from './inside-the-box/filling-the-box/FillingTheBoxExample'
 import { OverflowingTheBoxExample } from './inside-the-box/overflowing-the-box/OverflowingTheBoxExample'
@@ -17,13 +17,12 @@ import { ContentColumnsExample } from './inside-the-box/content-columns/ContentC
 import { BoxHasContentExample } from './inside-the-box/box-has-content/BoxHasContentExample'
 import { RowExample } from './side-by-side/row/RowExample'
 import { RowWrapExample } from './side-by-side/row-wrap/RowWrapExample'
-import { RowWrapAndGrowExample } from './side-by-side/row-wrap-and-grow/RowWrapAndGrowExample'
+import { RowWrapGrowExample } from './side-by-side/row-wrap-grow/RowWrapGrowExample'
 import { ReelExample } from './side-by-side/reel/ReelExample'
-import { SplitExample } from './side-by-side/split/SplitExample'
-import { ColumnExample } from './one-below-another/column/ColumnExample'
-import { HeroExample } from './one-below-another/hero/HeroExample'
-import { GridExample } from './grid-formation/grid/GridExample'
-import { SubgridExample } from './grid-formation/subgrid/SubgridExample'
+import { RatioPairExample } from './side-by-side/ratio-pair/RatioPairExample'
+import { ColumnExample } from './grids-and-columns/column/ColumnExample'
+import { GridExample } from './grids-and-columns/grid/GridExample'
+import { SubgridExample } from './grids-and-columns/subgrid/SubgridExample'
 import { ContainerQueriesExample } from './container/container-queries/ContainerQueriesExample'
 import { FluidSizingExample } from './container/fluid-sizing/FluidSizingExample'
 
@@ -34,9 +33,9 @@ export const stageExamples: StageExamples = {
   viewportUnits: { Example: ViewportUnitsExample },
   sizingTheBox: { Example: SizingTheBoxExample },
   center: { Example: CenterExample },
-  margin: { Example: MarginExample },
-  padding: { Example: PaddingExample },
-  gap: { Example: GapExample, Detail: SpacingTokens },
+  marginAndPadding: { Example: MarginAndPaddingExample },
+  gap: { Example: GapExample },
+  spacing: { Example: SpacingExample },
   alignment: { Example: AlignmentExample },
   fillingTheBox: { Example: FillingTheBoxExample },
   overflowingTheBox: { Example: OverflowingTheBoxExample },
@@ -45,11 +44,10 @@ export const stageExamples: StageExamples = {
   boxHasContent: { Example: BoxHasContentExample },
   row: { Example: RowExample },
   rowWrap: { Example: RowWrapExample },
-  rowWrapAndGrow: { Example: RowWrapAndGrowExample },
+  rowWrapGrow: { Example: RowWrapGrowExample },
   reel: { Example: ReelExample },
-  split: { Example: SplitExample },
+  ratioPair: { Example: RatioPairExample },
   column: { Example: ColumnExample },
-  hero: { Example: HeroExample },
   grid: { Example: GridExample },
   subgrid: { Example: SubgridExample },
   containerQueries: { Example: ContainerQueriesExample },

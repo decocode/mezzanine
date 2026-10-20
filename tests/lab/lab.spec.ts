@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
-// On narrow screens, the Lab uses the site's own Navbar menu: Docs, then Lab, then the Lab's
+// On narrow screens, the Lab uses the site's own TopBar menu: Docs, then Lab, then the Lab's
 // navigation tree with Layout at the top level.
 for (const fontSize of [16, 32]) {
   test(`Lab navigation works from the site menu at 320px and ${fontSize}px text`, async ({ page }) => {
@@ -34,17 +34,17 @@ for (const fontSize of [16, 32]) {
   })
 }
 
-// On wide screens, the Lab tree sits in the same sidebar column as the docs navigation, and the
+// On wide screens, the Lab tree sits in the same start Panel as the docs navigation, and the
 // saved theme carries between Docs and Lab.
-test('Lab shares the site sidebar layout and the saved theme with Docs', async ({ page }) => {
+test('Lab shares the docs frame and the saved theme with Docs', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto('/site/lab')
   await expect(page.getByRole('banner')).toHaveCount(1)
-  const sidebar = page.locator('.site-layout > .site-sidebar')
-  await expect(sidebar.getByRole('treegrid', { name: 'Lab experiments' })).toBeVisible()
+  const navigation = page.locator('.mz-panel[data-edge="start"]')
+  await expect(navigation.getByRole('treegrid', { name: 'Lab experiments' })).toBeVisible()
   await page.getByRole('radio', { name: 'Dark theme', exact: true }).click()
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
-  await sidebar.getByRole('link', { name: 'Layout', exact: true }).click()
+  await navigation.getByRole('link', { name: 'Layout', exact: true }).click()
   await expect(page).toHaveURL(/\/site\/lab\/layout$/)
   await expect(page.getByRole('radio', { name: 'Dark theme', exact: true })).toBeChecked()
   await page.getByRole('radio', { name: 'Wireframe theme', exact: true }).click()

@@ -109,6 +109,7 @@ export const tableContent: DocsPageContent = {
   relatedPages: [
     { label: 'Checkbox', href: '/checkbox' },
     { label: 'Badge', href: '/badge' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Table', href: 'https://react-aria.adobe.com/Table' },

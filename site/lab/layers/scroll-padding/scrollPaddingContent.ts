@@ -38,7 +38,7 @@ export const scrollPaddingCssNotes: Record<string, CssNote> = {
   box-sizing: border-box;
   min-block-size: var(--lab-sticky-height);
   padding: var(--space-3);
-  border-block-end: 1px solid var(--color-border);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-surface);
 }`,
   },

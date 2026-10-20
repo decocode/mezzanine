@@ -29,7 +29,7 @@
 .react-aria-SearchField > .react-aria-Input {
   grid-area: input;
   padding-inline-start: calc(var(--input-padding-inline) + var(--search-field-icon-size) + var(--search-field-icon-gap));
-  padding-inline-end: calc(var(--target-size) + var(--input-border-width));
+  padding-inline-end: calc(var(--target-size-sm) + var(--input-border-width));
 }
 
 /* Hide the browser's own clear button and search decoration; the field supplies its own. */
@@ -38,7 +38,7 @@
   appearance: none;
 }
 
-.mezzanine-search-field-icon {
+.mz-search-field-icon {
   grid-area: input;
   justify-self: start;
   width: var(--search-field-icon-size);
@@ -48,13 +48,13 @@
   pointer-events: none;
 }
 
-.react-aria-SearchField > .mezzanine-search-field-clear {
+.react-aria-SearchField > .mz-search-field-clear {
   grid-area: input;
   justify-self: end;
   margin-inline-end: var(--input-border-width);
 }
 
-.react-aria-SearchField[data-empty] > .mezzanine-search-field-clear {
+.react-aria-SearchField[data-empty] > .mz-search-field-clear {
   display: none;
 }
 
@@ -82,7 +82,7 @@
 }
 
 @media (forced-colors: active) {
-  .mezzanine-search-field-icon {
+  .mz-search-field-icon {
     color: FieldText;
   }
 
@@ -91,7 +91,7 @@
     color: GrayText;
   }
 
-  .react-aria-SearchField[data-disabled] .mezzanine-search-field-icon {
+  .react-aria-SearchField[data-disabled] .mz-search-field-icon {
     color: GrayText;
   }
 

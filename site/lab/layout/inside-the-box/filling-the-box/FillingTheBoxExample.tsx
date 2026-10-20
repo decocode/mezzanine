@@ -1,7 +1,7 @@
 // The example for the Lab's Filling the box page, in Inside the box.
 import { useState, type CSSProperties } from 'react'
 import { Checkbox } from '@decocode/mezzanine'
-import exampleImage from '../../../../assets/sidebar-example.svg'
+import exampleImage from '../../../../assets/example-picture.svg'
 import { CssNotes, ExampleFrame, ExampleHeading, ExampleText, ValuePicker } from '../../../shared/LabParts'
 import { exampleImageAlt } from '../../../shared/labValues'
 import { fillingTheBoxCssNotes } from './fillingTheBoxContent'

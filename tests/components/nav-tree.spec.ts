@@ -98,7 +98,7 @@ test.describe('isolated recipe', () => {
       await focusedRow.focus()
       await expect(focusedRow).toBeFocused()
       await expect(focusedRow).toHaveCSS('outline-style', 'solid')
-      expect((await branch.boundingBox())!.height).toBeGreaterThanOrEqual(44)
+      expect((await branch.boundingBox())!.height).toBeGreaterThanOrEqual(32)
       await expectNoPageOverflow(page)
       await expectNoAccessibilityViolations(page, '[role="treegrid"]')
       await page.emulateMedia({ forcedColors: 'active' })

@@ -25,7 +25,7 @@
 .react-aria-Breadcrumb > .react-aria-Link {
   display: inline-flex;
   align-items: center;
-  min-height: var(--target-size);
+  min-height: var(--target-size-xs);
 }
 
 .react-aria-Breadcrumb + .react-aria-Breadcrumb::before {

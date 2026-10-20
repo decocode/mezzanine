@@ -2,17 +2,17 @@
 
 :where(:root) {
   /* Expand and collapse chevrons, shared by Disclosure and NavTree; defined here with Disclosure. */
-  --chevron-size: 1.25rem;
+  --chevron-size: var(--icon-size-sm);
 
   /* Disclosure: component-specific structure, shared by every theme. */
   --disclosure-group-gap: 0;
   --disclosure-border-width: var(--border-width-baseline);
-  --disclosure-trigger-padding-block: 0.75rem;
+  --disclosure-trigger-padding-block: var(--space-3);
   --disclosure-trigger-padding-inline: 0;
-  --disclosure-trigger-gap: 1rem;
-  --disclosure-panel-padding-block: 1rem;
+  --disclosure-trigger-gap: var(--space-4);
+  --disclosure-panel-padding-block: var(--space-4);
   --disclosure-panel-padding-inline: 0;
   --disclosure-icon-size: var(--chevron-size);
-  --disclosure-focus-ring-width: 0.1875rem;
-  --disclosure-focus-ring-offset: -0.1875rem;
+  --disclosure-focus-ring-width: var(--focus-ring-width);
+  --disclosure-focus-ring-offset: var(--focus-ring-offset-inset);
 }

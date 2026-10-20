@@ -66,7 +66,7 @@ export const textFieldContent: DocsPageContent = {
     },
     {
       key: 'tokens',
-      intro: ["These tokens style `TextField` and its `Input`. `TextArea` shares all of them. A single-line field's height is the shared `--control-size-md`, and `TextArea` sets its own minimum. The field also uses shared typography, text colour, focus colour and disabled-opacity tokens."],
+      intro: ["These tokens style `TextField` and its `Input`. `TextArea` shares all of them. A single-line field's height is the shared `--target-size-md`, and `TextArea` sets its own minimum. The field also uses shared typography, text colour, focus colour and disabled-opacity tokens."],
       table: {
         label: 'TextField CSS tokens',
         nameColumn: 'CSS token',
@@ -78,6 +78,7 @@ export const textFieldContent: DocsPageContent = {
     { label: 'Text area', href: '/text-area' },
     { label: 'Checkbox', href: '/checkbox' },
     { label: 'Radio group', href: '/radio-group' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria TextField', href: 'https://react-aria.adobe.com/TextField' },

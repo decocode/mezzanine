@@ -3,7 +3,7 @@
   max-width: min(var(--tooltip-max-width), calc(100vw - var(--space-4) * 2));
   padding: var(--space-2) var(--space-3);
   border: var(--tooltip-border-width) solid var(--color-border);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-surface);
   background: var(--color-surface);
   color: var(--color-text);
   box-shadow: var(--elevation-raised-2);
@@ -18,19 +18,19 @@
 }
 
 .react-aria-Tooltip[data-entering] {
-  animation: mezzanine-tooltip-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mezzanine-tooltip-fade);
+  animation: mz-tooltip-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-tooltip-fade);
 }
 
 .react-aria-Tooltip[data-exiting] {
-  animation: mezzanine-tooltip-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mezzanine-tooltip-fade-exit);
+  animation: mz-tooltip-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-tooltip-fade-exit);
 }
 
-@keyframes mezzanine-tooltip-fade {
+@keyframes mz-tooltip-fade {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes mezzanine-tooltip-fade-exit {
+@keyframes mz-tooltip-fade-exit {
   from { opacity: 1; }
   to { opacity: 0; }
 }

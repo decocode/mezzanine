@@ -35,7 +35,7 @@ export const alignmentCssNotes: Record<string, CssNote> = {
   gap: var(--space-3);
   min-height: 12rem;
   padding: var(--space-3);
-  border: 1px dashed var(--color-text-muted);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }`,
   },
   centreAnything: {
@@ -46,7 +46,7 @@ export const alignmentCssNotes: Record<string, CssNote> = {
   display: grid;
   place-items: center;
   min-height: 10rem;
-  border: 1px dashed var(--color-text-muted);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }`,
   },
 }

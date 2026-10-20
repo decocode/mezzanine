@@ -80,13 +80,13 @@ export function useNavTreeElement(items: NavTreeProps['items'], forwardedRef: Re
       if (!previous || previous.element.isConnected) return
       focused.current = null
       if (document.activeElement !== document.body && document.activeElement !== tree) return
-      const rows = [...tree.querySelectorAll<HTMLElement>('.mezzanine-nav-tree-item')].filter(row => row.getAttribute('aria-disabled') !== 'true')
+      const rows = [...tree.querySelectorAll<HTMLElement>('.mz-nav-tree-item')].filter(row => row.getAttribute('aria-disabled') !== 'true')
       const ancestor = previous.path.map(key => rows.find(row => row.dataset.key === key)).find(Boolean)
       ;(ancestor ?? tree).focus()
     }
     const rememberFocus = (event: FocusEvent) => {
       const element = event.target as HTMLElement
-      const row = element.closest<HTMLElement>('.mezzanine-nav-tree-item')
+      const row = element.closest<HTMLElement>('.mz-nav-tree-item')
       focused.current = row ? { element, path: paths.get(row.dataset.key ?? '') ?? [] } : null
     }
     const forgetOutsideFocus = (event: FocusEvent) => {
@@ -96,7 +96,7 @@ export function useNavTreeElement(items: NavTreeProps['items'], forwardedRef: Re
       if (readMotionDuration(tree) !== 0) return
       // Changing a transition's duration alone does not finish one already in
       // progress. Complete only owned chevrons when the shared policy suppresses it.
-      for (const icon of tree.querySelectorAll('.mezzanine-nav-tree-chevron')) {
+      for (const icon of tree.querySelectorAll('.mz-nav-tree-chevron')) {
         for (const animation of icon.getAnimations()) animation.finish()
       }
     }

@@ -1,6 +1,6 @@
 // The example for the Lab's Aspect ratio page, in Inside the box.
 import { useState } from 'react'
-import exampleImage from '../../../../assets/sidebar-example.svg'
+import exampleImage from '../../../../assets/example-picture.svg'
 import { CssNotes, ExampleText, ValuePicker } from '../../../shared/LabParts'
 import { AspectRatio, Center } from '../../../shared/LabPrimitives'
 import { exampleImageAlt } from '../../../shared/labValues'

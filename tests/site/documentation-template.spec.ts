@@ -29,7 +29,7 @@ for (const definition of componentPages) {
     }
     const technical = main.getByRole('region', { name: 'Technical details', exact: true })
     await expect(technical).toBeVisible()
-    const triggers = technical.locator('.mezzanine-disclosure-trigger')
+    const triggers = technical.locator('.mz-disclosure-trigger')
     expect(await triggers.count()).toBeGreaterThan(0)
     for (const trigger of await triggers.all()) {
       await expect(trigger).toHaveAttribute('aria-expanded', 'false')
@@ -54,15 +54,15 @@ for (const definition of componentPages) {
     await page.setViewportSize({ width: 320, height: 900 })
     for (const fontSize of [16, 32]) {
       await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
-      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
+      // Polled, so a Panel still animating its space closed after the resize can settle first.
+      await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
     }
-    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
     expect((await new AxeBuilder({ page }).include('section[aria-labelledby$="-technical-details"]').include('section[aria-labelledby="related-pages"]').include('section[aria-labelledby*="references"]').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
   })
 }
 
-test('Navbar exposes related pages and external references through On this page', async ({ page }) => {
-  await page.goto('/navbar')
+test('TopBar exposes related pages and external references through On this page', async ({ page }) => {
+  await page.goto('/top-bar')
   const main = page.getByRole('main')
   const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
   const related = main.getByRole('region', { name: 'Related pages', exact: true })
@@ -70,7 +70,7 @@ test('Navbar exposes related pages and external references through On this page'
   await contents.getByRole('link', { name: 'Related pages', exact: true }).click()
   await expect(page).toHaveURL(/#related-pages$/)
   await expect(related).toBeVisible()
-  await expect(related.getByRole('link')).toHaveText(['Tab bar', 'Sidebar', 'Footer'])
+  await expect(related.getByRole('link')).toHaveText(['Footer', 'Target size'])
   for (const link of await related.getByRole('link').all()) {
     const href = await link.getAttribute('href')
     expect(sitePages.some(item => item.path === href)).toBe(true)
@@ -87,19 +87,19 @@ test('Navbar exposes related pages and external references through On this page'
     await expect(link).not.toHaveText(/opens in a new tab/)
     await expect(link.locator('svg')).toHaveAttribute('aria-hidden', 'true')
   }
-  const tabBar = related.getByRole('link', { name: 'Tab bar', exact: true })
-  await tabBar.focus()
+  const footer = related.getByRole('link', { name: 'Footer', exact: true })
+  await footer.focus()
   await page.keyboard.press('Tab')
-  await expect(related.getByRole('link', { name: 'Sidebar', exact: true })).toBeFocused()
+  await expect(related.getByRole('link', { name: 'Target size', exact: true })).toBeFocused()
   await page.keyboard.press('Shift+Tab')
-  expect(await tabBar.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
+  expect(await footer.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
   await page.keyboard.press('Enter')
-  await expect(page).toHaveURL(/\/tab-bar$/)
-  await expect(page.getByRole('main').getByRole('heading', { level: 1 })).toHaveText('Tab bar')
+  await expect(page).toHaveURL(/\/footer$/)
+  await expect(page.getByRole('main').getByRole('heading', { level: 1 })).toHaveText('Footer')
 })
 
-test('Navbar groups technical sections and preserves their anchors', async ({ page }) => {
-  await page.goto('/navbar#navbar-props')
+test('TopBar groups technical sections and preserves their anchors', async ({ page }) => {
+  await page.goto('/top-bar#top-bar-props')
   const main = page.getByRole('main')
   const group = main.getByRole('region', { name: 'Technical details', exact: true })
   await expect(group.getByRole('heading', { level: 2 })).toHaveText('Technical details')
@@ -116,13 +116,13 @@ test('Navbar groups technical sections and preserves their anchors', async ({ pa
   await expect(group.getByRole('button', { name: 'Props', exact: true })).toHaveAttribute('aria-expanded', 'true')
   await expect(group.getByRole('heading', { name: 'Props', exact: true })).toBeInViewport()
   await contents.getByRole('link', { name: 'Anatomy', exact: true }).click()
-  await expect(page).toHaveURL(/#navbar-anatomy$/)
+  await expect(page).toHaveURL(/#top-bar-anatomy$/)
   await expect(group.getByRole('heading', { name: 'Anatomy', exact: true })).toBeInViewport()
 })
 
 
 test('technical disclosures support keyboard toggling and repeated section links', async ({ page }) => {
-  await page.goto('/navbar')
+  await page.goto('/top-bar')
   const main = page.getByRole('main')
   const group = main.getByRole('region', { name: 'Technical details', exact: true })
   const triggers = group.getByRole('button')
@@ -133,7 +133,7 @@ test('technical disclosures support keyboard toggling and repeated section links
   await anatomy.focus()
   await page.keyboard.press('Enter')
   await expect(anatomy).toHaveAttribute('aria-expanded', 'true')
-  await expect(group.getByRole('grid', { name: 'Navbar anatomy' })).toBeVisible()
+  await expect(group.getByRole('grid', { name: 'TopBar anatomy' })).toBeVisible()
   await behaviour.focus()
   await page.keyboard.press('Space')
   await expect(behaviour).toHaveAttribute('aria-expanded', 'true')
@@ -160,25 +160,25 @@ test('technical disclosures support keyboard toggling and repeated section links
   await expect(props).toBeInViewport()
 })
 
-for (const path of ['/navbar', '/color', '/motion', '/typography/text-styles', '/typography/prose', '/shape', '/shape/corners', '/shape/borders', '/elevation']) {
-  test(`${path} places page contents in the desktop right sidebar`, async ({ page }) => {
+for (const path of ['/top-bar', '/color', '/motion', '/typography/text-styles', '/typography/prose', '/shape', '/shape/corners', '/shape/borders', '/elevation']) {
+  test(`${path} places page contents in the end Panel on wide screens`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto(path)
     const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
     await expect(contents).toBeVisible()
     await expect(page.getByRole('main').getByRole('navigation', { name: 'On this page', exact: true })).toHaveCount(0)
-    const sidebar = page.locator('.site-contents-sidebar')
+    const endPanel = page.locator('.mz-panel[data-edge="end"]')
     const main = await page.getByRole('main').boundingBox()
-    expect((await sidebar.boundingBox())!.x).toBeGreaterThanOrEqual(main!.x + main!.width)
+    expect((await endPanel.boundingBox())!.x).toBeGreaterThanOrEqual(main!.x + main!.width)
     await expect(contents.getByRole('link').first()).toBeVisible()
-    if (path === '/navbar') await page.screenshot({ path: 'reports/test-results/docs-contents-desktop.png' })
+    if (path === '/top-bar') await page.screenshot({ path: 'reports/test-results/docs-contents-desktop.png' })
   })
 }
 
 for (const fontSize of [16, 32]) {
   test(`page contents appear inline after the heading on narrow screens at ${fontSize}px`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 })
-    await page.goto('/navbar')
+    await page.goto('/top-bar')
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
     const main = page.getByRole('main')
     const contents = main.getByRole('navigation', { name: 'On this page', exact: true })
@@ -192,7 +192,7 @@ for (const fontSize of [16, 32]) {
     await page.screenshot({ path: `reports/test-results/docs-contents-${fontSize}.png` })
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
     await contents.getByRole('link', { name: 'Props', exact: true }).click()
-    await expect(page).toHaveURL(/#navbar-props$/)
+    await expect(page).toHaveURL(/#top-bar-props$/)
     await expect(page.getByRole('button', { name: 'Props', exact: true })).toHaveAttribute('aria-expanded', 'true')
     await expect(page.getByRole('heading', { name: 'Props', exact: true })).toBeInViewport()
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
@@ -200,7 +200,7 @@ for (const fontSize of [16, 32]) {
 }
 
 // Links into Technical details follow the motion policy: smooth by default,
-// immediate with reduced motion or in Wireframe.
+// immediate with reduced motion or in Wireframe. The AppShell's content area is what scrolls.
 for (const mode of ['default', 'reduced motion', 'wireframe'] as const) {
   test(`On this page links into Technical details scroll with the ${mode} policy`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
@@ -210,11 +210,11 @@ for (const mode of ['default', 'reduced motion', 'wireframe'] as const) {
     const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
     await contents.getByRole('link', { name: 'Anatomy', exact: true }).click()
     // Two frames: one for the panel to open, one for the scroll to begin.
-    const early = await page.evaluate(() => new Promise<number>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve(scrollY)))))
+    const early = await page.evaluate(() => new Promise<number>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve(document.querySelector('.mz-app-shell-content')!.scrollTop)))))
     await expect(page.getByRole('heading', { name: 'Anatomy', exact: true })).toBeInViewport()
-    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(0)
+    await expect.poll(() => page.evaluate(() => document.querySelector('.mz-app-shell-content')!.scrollTop)).toBeGreaterThan(0)
     await page.waitForTimeout(1500)
-    const settled = await page.evaluate(() => scrollY)
+    const settled = await page.evaluate(() => document.querySelector('.mz-app-shell-content')!.scrollTop)
     if (mode === 'default') expect(early).toBeLessThan(settled)
     else expect(early).toBe(settled)
   })

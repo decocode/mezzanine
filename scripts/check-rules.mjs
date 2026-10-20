@@ -14,7 +14,7 @@ const root = fileURLToPath(new URL('../', import.meta.url))
 const snapshotFile = 'scripts/public-api.snapshot.json'
 const tokenBaselineFile = 'scripts/undocumented-tokens.baseline.json'
 const problems = []
-const allowedPrefixes = ['react-aria-', 'mezzanine-', 'mz-text-']
+const allowedPrefixes = ['react-aria-', 'mz-']
 const read = file => readFileSync(path.join(root, file), 'utf8')
 // Files that define token values: the entry point, src/tokens/, each component's
 // *.tokens.css and the themes. Literal design values belong only here.
@@ -157,10 +157,9 @@ function checkSite(source, checker, exportedNames) {
 
 function checkClasses(file, text, value, position) {
   for (const match of value.matchAll(/\S+/g)) {
-    // navbar-link is an explicitly approved public class name.
-    if (match[0] !== 'navbar-link' && !allowedPrefixes.some(prefix => match[0].startsWith(prefix))) {
+    if (!allowedPrefixes.some(prefix => match[0].startsWith(prefix))) {
       report(file, text, position + match.index, 'class-prefix',
-        `Class "${match[0]}" must start with react-aria-, mezzanine-, or mz-text-.`)
+        `Class "${match[0]}" must start with react-aria- or mz-.`)
     }
   }
 }
@@ -290,14 +289,14 @@ function checkCss(file) {
 
 // Button dimensions belong to the shared size scale, not consuming selectors.
 // Collect consumer class names too, so statically named consumer classes are checked as well.
-const buttonClasses = new Set(['react-aria-Button', 'react-aria-ToggleButton', 'mezzanine-button-icon', 'mezzanine-button-content'])
+const buttonClasses = new Set(['react-aria-Button', 'react-aria-ToggleButton', 'mz-button-icon', 'mz-button-content'])
 const sizingProperty = /^(?:(?:min-|max-)?(?:width|height|inline-size|block-size)|padding(?:-.+)?|font(?:-.+)?|line-height|letter-spacing|text-transform|zoom|scale|transform)$/
 
 function collectButtonClasses(source) {
   const file = path.relative(root, source.fileName)
   walk(source, node => {
     if (!(ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node))) return
-    if (!['Button', 'ToggleButton', 'SidebarTrigger'].includes(node.tagName.getText(source))) return
+    if (!['Button', 'ToggleButton'].includes(node.tagName.getText(source))) return
     for (const attribute of node.attributes.properties) {
       if (!ts.isJsxAttribute(attribute)) continue
       if (attribute.name.text === 'className' && attribute.initializer && ts.isStringLiteral(attribute.initializer)) {
@@ -360,14 +359,15 @@ function checkSnapshot(api, update) {
 // Each Props table, by content file and section key, and the exported types it documents. Rows prefixed with a
 // component name, or following a row that is only that name, use its type.
 const propTables = [
-  { file: 'site/pages/components/navigation/navbar/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
+  { file: 'site/pages/components/structure/top-bar/topBarContent.ts', key: 'props', types: ['TopBarProps'] },
   { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
   { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
-  { file: 'site/pages/components/navigation/tab-bar/tabBarContent.ts', key: 'props', types: ['TabBarProps'] },
-  { file: 'site/pages/components/navigation/sidebar/sidebarContent.ts', key: 'props', types: ['SidebarProps'],
-    components: { Sidebar: ['SidebarProps'], SidebarTrigger: ['SidebarTriggerProps'], SidebarPanel: ['SidebarPanelProps'] } },
   { file: 'site/pages/components/navigation/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
   { file: 'site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
+  { file: 'site/pages/components/structure/app-shell/appShellContent.ts', key: 'props', types: ['AppShellProps'] },
+  { file: 'site/pages/components/structure/footer/footerContent.ts', key: 'props', types: ['FooterProps'] },
+  { file: 'site/pages/components/structure/panel/panelContent.ts', key: 'props', types: ['PanelProps'],
+    components: { PanelTrigger: ['PanelTriggerProps'] } },
   { file: 'site/pages/components/overlays/tooltip/tooltipContent.ts', key: 'props', types: [],
     components: { TooltipTrigger: ['TooltipTriggerComponentProps'], Tooltip: ['TooltipProps'] } },
 ]

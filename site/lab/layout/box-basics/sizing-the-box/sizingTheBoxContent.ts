@@ -31,7 +31,7 @@ export const sizingTheBoxCssNotes: Record<string, CssNote> = {
     code: `.lab-sizing-box {
   width: 12rem;
   padding: var(--space-6);
-  border: var(--space-1) solid var(--color-text);
+  border: var(--border-width-xl) solid var(--color-text);
 }
 
 .lab-sizing-content-box {

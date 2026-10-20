@@ -65,6 +65,7 @@ export const checkboxContent: DocsPageContent = {
     { label: 'Radio group', href: '/radio-group' },
     { label: 'Toggle button', href: '/toggle-button' },
     { label: 'Text field', href: '/text-field' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Checkbox', href: 'https://react-aria.adobe.com/Checkbox' },

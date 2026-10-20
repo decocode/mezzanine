@@ -2,34 +2,39 @@
 
 :where(:root) {
   /* Button: component-specific structure, shared by every theme.
-     Text sizes point to the type scale: label sizes for Small and Medium, and
+     Text sizes point to the type scale: label sizes for Extra Small, Small and Medium, and
      the matching title sizes for Large and Extra Large, where Label has no step. */
-  --button-sm-padding-block: 0.5rem;
-  --button-sm-padding-inline: 0.875rem;
+  --button-xs-padding-block: var(--space-1);
+  --button-xs-padding-inline: var(--space-3);
+  --button-xs-font-size: var(--font-size-label-sm);
+  --button-xs-line-height: var(--line-height-label-sm);
+  --button-xs-icon-size: var(--icon-size-xs);
+  --button-sm-padding-block: var(--space-2);
+  --button-sm-padding-inline: var(--space-4);
   --button-sm-font-size: var(--font-size-label-md);
   --button-sm-line-height: var(--line-height-label-md);
-  --button-sm-icon-size: 1rem;
-  --button-md-padding-block: 0.625rem;
-  --button-md-padding-inline: 1rem;
+  --button-sm-icon-size: var(--icon-size-sm);
+  --button-md-padding-block: var(--space-2);
+  --button-md-padding-inline: var(--space-4);
   --button-md-font-size: var(--font-size-label-lg);
   --button-md-line-height: var(--line-height-label-lg);
-  --button-md-icon-size: 1.125rem;
-  --button-lg-padding-block: 0.75rem;
-  --button-lg-padding-inline: 1.25rem;
+  --button-md-icon-size: var(--icon-size-md);
+  --button-lg-padding-block: var(--space-2);
+  --button-lg-padding-inline: var(--space-5);
   --button-lg-font-size: var(--font-size-title-sm);
   --button-lg-line-height: var(--line-height-title-sm);
-  --button-lg-icon-size: 1.25rem;
-  --button-xl-padding-block: 0.875rem;
-  --button-xl-padding-inline: 1.5rem;
+  --button-lg-icon-size: var(--icon-size-lg);
+  --button-xl-padding-block: var(--space-3);
+  --button-xl-padding-inline: var(--space-6);
   --button-xl-font-size: var(--font-size-title-md);
   --button-xl-line-height: var(--line-height-title-md);
-  --button-xl-icon-size: 1.5rem;
-  --button-content-gap: 0.5rem;
+  --button-xl-icon-size: var(--icon-size-xl);
+  --button-content-gap: var(--space-2);
   --button-border-width: var(--border-width-baseline);
-  --button-border-radius: 0;
-  --button-focus-ring-width: 0.1875rem;
-  --button-focus-ring-offset: 0.1875rem;
-  --button-progress-size: 1.25rem;
+  --button-border-radius: var(--radius-control);
+  --button-focus-ring-width: var(--focus-ring-width);
+  --button-focus-ring-offset: var(--focus-ring-offset);
+  --button-progress-size: var(--icon-size-sm);
   --button-progress-stroke-width: 0.125rem;
   --button-progress-border-radius: 50%;
 }

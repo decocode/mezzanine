@@ -1,8 +1,8 @@
 import { lazy, Suspense, useState } from 'react'
 import { Link } from '@decocode/mezzanine'
-import { MezzanineNavbar } from './components/MezzanineNavbar'
-import { Sidebar } from './components/Sidebar'
-import { DocsContentsContext } from './components/docsContentsContext'
+import { SiteTopBar } from './components/SiteTopBar'
+import { docsNavigationItems } from './components/docsNavigationItems'
+import { DocsShell } from './components/DocsShell'
 import { PageLoader } from './PageLoader'
 import NotFoundPage from './pages/not-found/NotFoundPage'
 import NotImplementedPage from './pages/not-implemented/NotImplementedPage'
@@ -17,7 +17,6 @@ interface AppShellProps {
 }
 
 export function AppShell({ initialTheme }: AppShellProps) {
-  const [contentsHost, setContentsHost] = useState<HTMLDivElement | null>(null)
   const [selectedTheme, setSelectedTheme] = useState(initialTheme)
   const currentPath = window.location.pathname === '/'
     ? '/'
@@ -38,7 +37,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
     return (
       <>
         <title>{`${siteContent.notFound.title} | ${siteContent.name}`}</title>
-        <MezzanineNavbar
+        <SiteTopBar
           currentPath={currentPath}
           onThemeChange={changeTheme}
           selectedTheme={selectedTheme}
@@ -55,7 +54,7 @@ export function AppShell({ initialTheme }: AppShellProps) {
       <>
         <title>{siteContent.name}</title>
         <Link className="skip-link" href="#main-content">{siteContent.skipLink}</Link>
-        <MezzanineNavbar
+        <SiteTopBar
           currentPath={currentPath}
           onThemeChange={changeTheme}
           selectedTheme={selectedTheme}
@@ -71,22 +70,20 @@ export function AppShell({ initialTheme }: AppShellProps) {
     <>
       <title>{`${currentPage.label} | ${siteContent.name}`}</title>
       <Link className="skip-link" href="#main-content">{siteContent.skipLink}</Link>
-      <MezzanineNavbar
-        currentPath={currentPath}
-        onThemeChange={changeTheme}
-        selectedTheme={selectedTheme}
-      />
-      <DocsContentsContext.Provider value={contentsHost}>
-        <div className="site-layout">
-          <Sidebar currentPage={currentPage} />
-          <main className="site-content" id="main-content">
-            {currentPage.status === 'implemented'
-              ? <PageLoader page={currentPage} />
-              : <NotImplementedPage title={currentPage.label} />}
-          </main>
-          <div className="site-contents-sidebar" ref={setContentsHost} />
-        </div>
-      </DocsContentsContext.Provider>
+      <DocsShell
+        topBar={<SiteTopBar currentPath={currentPath} onThemeChange={changeTheme} selectedTheme={selectedTheme} />}
+        navigation={{
+          title: siteContent.docsNavigation.title,
+          'aria-label': siteContent.docsNavigation.label,
+          navigationLabel: siteContent.docsNavigation.treeLabel,
+          items: docsNavigationItems,
+          selectedRoute: currentPage.path,
+        }}
+      >
+        {currentPage.status === 'implemented'
+          ? <PageLoader page={currentPage} />
+          : <NotImplementedPage title={currentPage.label} />}
+      </DocsShell>
     </>
   )
 }

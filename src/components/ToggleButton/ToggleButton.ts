@@ -33,18 +33,20 @@ export function ToggleButton({ variant, size, iconLeading, iconTrailing, labelPl
   const groupSize = useContext(ToggleButtonSizeContext)
   // A tooltip label is the accessible name; the button itself shows only its icon.
   const tooltipLabel = labelPlacement === 'tooltip' && typeof children === 'string' ? children : undefined
+  const isLabelOutside = labelPlacement === 'below' || labelPlacement === 'above'
+  const leading = iconLeading != null && createElement('span', { className: 'mz-button-icon', 'aria-hidden': true }, iconLeading)
+  const trailing = iconTrailing != null && createElement('span', { className: 'mz-button-icon', 'aria-hidden': true }, iconTrailing)
   const appearanceProps = {
     ...props,
     ...(tooltipLabel !== undefined && { 'aria-label': props['aria-label'] ?? tooltipLabel }),
     'data-variant': variant,
     'data-size': size ?? groupSize,
     'data-icon-only': (labelPlacement === 'tooltip' || (children == null && (iconLeading != null || iconTrailing != null))) || undefined,
-    'data-label-placement': labelPlacement === 'below' || labelPlacement === 'above' ? labelPlacement : undefined,
-    children: composeRenderProps(children, content => createElement('span', { className: 'mezzanine-button-content' },
-      iconLeading != null && createElement('span', { className: 'mezzanine-button-icon', 'aria-hidden': true }, iconLeading),
-      tooltipLabel === undefined && content,
-      iconTrailing != null && createElement('span', { className: 'mezzanine-button-icon', 'aria-hidden': true }, iconTrailing),
-    )),
+    'data-label-placement': isLabelOutside ? labelPlacement : undefined,
+    // As on Button: with the label below or above, the icon sits in the box and the label outside it.
+    children: composeRenderProps(children, content => isLabelOutside
+      ? createElement('span', { className: 'mz-button-content' }, createElement('span', { className: 'mz-button-icon-box' }, leading, trailing), content)
+      : createElement('span', { className: 'mz-button-content' }, leading, tooltipLabel === undefined && content, trailing)),
   }
   const toggle = createElement(ReactAriaToggleButton, appearanceProps)
   return tooltipLabel === undefined ? toggle : createElement(TooltipTrigger, null, toggle, createElement(Tooltip, { placement: tooltipPlacement }, tooltipLabel))

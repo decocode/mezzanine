@@ -27,17 +27,18 @@ ToggleButton has the same two props.
 
 ### Sizes
 
-Use `size="sm"`, `"md"`, `"lg"` or `"xl"` on Button and ToggleButton. The default
-is `md`. ToggleButtonGroup can set one size for all its children.
+Use `size="xs"`, `"sm"`, `"md"`, `"lg"` or `"xl"` on Button and ToggleButton. The default
+is `md`. `xs` is below the 44px target size, so keep it for dense areas such as
+toolbars and tables. ToggleButtonGroup can set one size for all its children.
 
 Size recipes live in `Button.css`. To change sizes across a product, override the
 shared button tokens in a theme. `npm run check:rules` rejects local overrides of
 button dimensions, padding, text and icon size, and inline button styles. Parent
 containers decide position and available space.
 
-## Navbar
+## TopBar
 
-`Navbar` supplies the sticky layout and the mobile menu. Pass your branding as
+`TopBar` supplies the sticky layout and the mobile menu. Pass your branding as
 `brand`, your links as children and optional controls as `actions`. Actions
 stay in the bar at every width. The children function receives `isMenu`, which
 is true inside the narrow-screen menu, so menu-only content such as section
@@ -46,13 +47,13 @@ The menu button shows its label in a tooltip. `menuLabel` replaces its default
 "Menu" name and tooltip, and `className` adds your own styling.
 
 ```tsx
-import { Navbar, Link } from '@decocode/mezzanine'
+import { TopBar, Link } from '@decocode/mezzanine'
 
-<Navbar aria-label="Main navigation" brand={<Link href="/">My application</Link>}>
+<TopBar aria-label="Main navigation" brand={<Link href="/">My application</Link>}>
   {({ closeMenu }) => (
     <Link href="/about" onPress={closeMenu}>About</Link>
   )}
-</Navbar>
+</TopBar>
 ```
 
 The children and actions render twice, in separate mobile and desktop
@@ -152,15 +153,15 @@ The APIs follow [React Aria SearchField](https://react-aria.adobe.com/SearchFiel
 vertical stack layout; horizontal and grid layouts and drag and drop are not
 styled yet.
 
-## Split
+## RatioPair
 
-`Split` puts two areas side by side. Give it exactly two children:
+`RatioPair` puts two areas side by side, sharing the row in a set ratio. Give it exactly two children:
 
 ```tsx
-<Split fraction="1/3" minAreaWidth="18rem" gap={6}>
+<RatioPair fraction="1/3" minAreaWidth="18rem" gap={6}>
   <section aria-label="Area A">…</section>
   <section aria-label="Area B">…</section>
-</Split>
+</RatioPair>
 ```
 
 - `fraction` shares the row: `1/4`, `1/3`, `1/2` (the default), `2/3` or `3/4`
@@ -168,43 +169,60 @@ styled yet.
   keep the width its content needs, and the other fills the rest.
 - When the areas can't both have their minimum width, the second wraps
   underneath and each takes the full width. Set the minimum with `minAreaWidth`
-  (any CSS length); the default is `--split-min-area-width`.
+  (any CSS length); the default is `--ratio-pair-min-area-width`.
 - `gap` takes a step on the spacing scale, such as `4` for `--space-4`.
 
-Split follows its container, not the screen, and adds no behaviour. It is not
+RatioPair follows its container, not the screen, and adds no behaviour. It is not
 yet documented on the site.
 
-## Sidebar
+## AppShell and Panel
 
-`Sidebar` manages two separate states: inline expansion and the modal drawer.
-Put one `SidebarTrigger` and one `SidebarPanel` inside it. Keep the trigger
-outside the panel so it can reopen a fully hidden sidebar.
+AppShell frames an app's screen. Put the app's own `<header>`, its Panels and
+its own `<main>` inside, in reading order; AppShell lays them out and fills the
+window's height, and the main content and each Panel scroll on their own.
 
 ```tsx
-<Sidebar>
-  <SidebarTrigger>Filters</SidebarTrigger>
-  <div className="application-layout">
-    <SidebarPanel title="Filters" side="left" collapseMode="hide">
-      <Checkbox>Option A</Checkbox>
-    </SidebarPanel>
-    <section aria-label="Workspace">…</section>
-  </div>
-</Sidebar>
+<AppShell>
+  <header>…<PanelTrigger panel="filters">Filters</PanelTrigger></header>
+  <Panel id="filters" edge="start" title="Filters">…</Panel>
+  <main>…</main>
+</AppShell>
 ```
 
-- The app owns the surrounding layout. `SidebarPanel` accepts any content in
-  `header`, `children` and `footer`.
-- `collapseMode="rail"` with `rail` content shows compact controls when collapsed.
-- Use a separate Sidebar for each additional panel.
-- Below 64rem the panel opens as a modal drawer. Change the threshold with
-  `inlineMediaQuery`, or choose with `presentation="inline"` or `"modal"`.
-- Inline `isExpanded` and modal `isOpen` can each be controlled, with change
-  callbacks. By default the inline panel is expanded and the drawer is closed.
-- Content remounts when the presentation changes, so keep form values and
-  expanded disclosure keys in app state.
-- Panel `className` and `style` apply in both presentations, and theme tokens
-  set on the root reach the drawer too.
-- `isCollapsible={false}` on Sidebar keeps the inline panel permanently expanded
-  and removes its trigger and close button; the mobile drawer still works.
-- `hideInlineHeader` on SidebarPanel hides the inline heading row but keeps the
-  panel's accessible name. The drawer's heading and close button remain.
+A Panel sits at its `edge` (`start`, `end` or `bottom`) and shares the space:
+the main content gets smaller. It's closed until opened, unless it has
+`defaultOpen`; `isOpen` and `onOpenChange` control it. `minimized` gives it a
+condensed version to show when it isn't open. A `PanelTrigger` anywhere in the
+AppShell, with `panel` set to the Panel's `id`, opens and closes it; it accepts
+every Button prop.
+
+`isCollapsible={false}` keeps a Panel open with no close button, for content
+that should always be there, such as an app's navigation. It needs no
+PanelTrigger. When there's no room beside the content it's hidden rather than
+becoming a drawer, so offer the same content another way, such as in a TopBar
+menu.
+
+When the main content would drop below `--app-shell-min-main-width`, a side
+Panel opens as a modal drawer instead, end Panels first. A drawer only opens
+when someone opens it. `bottomPanelSpan="full"` runs a bottom Panel under the
+side Panels too.
+
+## Footer
+
+`Footer` is a page's closing strip: put small print and links inside, and it
+arranges them in a row that wraps, with a border above. In an AppShell, place it
+straight after `<main>`; it sits at the end of the content and scrolls with it,
+outside `<main>`, so it stays the page's footer landmark.
+
+## Unstyled React Aria exports
+
+These pass React Aria's components straight through, with no Mezzanine
+styles yet: `CheckboxGroup`, `ComboBox` and `ComboBoxValue`, `DropZone`, `FileTrigger`, `Form`, the `GridList`
+family, `Group`, the `Menu` family, `Meter`, `NumberField`, `Popover`, `PreviewTrigger`,
+`ProgressBar`, `Select` and `SelectValue`, `Separator`, the `Sheet` family,
+the `Slider` family,
+the `Switch` family, the
+`TagGroup` family, the `TokenField` family, `Toolbar`, the `Tree` family, and
+`Virtualizer` with `ListLayout`. Use them as the
+[React Aria documentation](https://react-aria.adobe.com/) describes, and style
+them in the app until Mezzanine designs them.

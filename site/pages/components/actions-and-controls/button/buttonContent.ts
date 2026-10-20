@@ -49,6 +49,7 @@ export const buttonSizes: {
   size: ButtonSize
   usage: string
 }[] = [
+    { label: 'Extra small', size: 'xs', usage: 'Dense areas only, such as toolbars and tables.' },
     { label: 'Small', size: 'sm', usage: 'Compact interfaces where space is limited.' },
     { label: 'Medium', size: 'md', usage: 'The default size for most actions.' },
     { label: 'Large', size: 'lg', usage: 'Prominent actions in forms and page sections.' },
@@ -174,10 +175,16 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
           { name: '--button-destructive-background-pressed', description: 'Destructive `Button` background when pressed.' },
           { name: '--button-destructive-content', description: 'Destructive `Button` label and icon.' },
           { name: '--button-destructive-border', description: 'Destructive `Button` border.' },
-          { name: '--control-size-sm', description: 'Small `Button` minimum height, shared with other controls. It is the shared `--target-size`.' },
-          { name: '--control-size-md', description: 'Medium `Button` minimum height, shared with text fields, Disclosure and TabBar.' },
-          { name: '--control-size-lg', description: 'Large `Button` minimum height, shared with other controls.' },
-          { name: '--control-size-xl', description: 'Extra-large `Button` minimum height, shared with other controls.' },
+          { name: '--target-size-xs', description: 'Extra-small `Button` minimum height, shared with other controls.' },
+          { name: '--target-size-sm', description: 'Small `Button` minimum height, shared with other controls.' },
+          { name: '--target-size-md', description: 'Medium `Button` minimum height, shared with text fields, Tabs and Disclosure.' },
+          { name: '--target-size-lg', description: 'Large `Button` minimum height, shared with other controls.' },
+          { name: '--target-size-xl', description: 'Extra-large `Button` minimum height, shared with other controls.' },
+          { name: '--button-xs-padding-block', description: 'Extra-small `Button` vertical padding.' },
+          { name: '--button-xs-padding-inline', description: 'Extra-small `Button` horizontal padding.' },
+          { name: '--button-xs-font-size', description: 'Extra-small `Button` label size.' },
+          { name: '--button-xs-line-height', description: 'Extra-small `Button` label line height.' },
+          { name: '--button-xs-icon-size', description: 'Extra-small `Button` icon size.' },
           { name: '--button-sm-padding-block', description: 'Small `Button` vertical padding.' },
           { name: '--button-sm-padding-inline', description: 'Small `Button` horizontal padding.' },
           { name: '--button-sm-font-size', description: 'Small `Button` label size.' },
@@ -214,6 +221,7 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
   relatedPages: [
     { label: 'Link', href: '/link' },
     { label: 'Toggle button', href: '/toggle-button' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Button', href: 'https://react-aria.adobe.com/Button' },

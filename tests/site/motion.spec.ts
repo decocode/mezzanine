@@ -6,7 +6,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await page.emulateMedia({ reducedMotion })
       await page.goto('/disclosure')
       await page.evaluate(theme => { document.documentElement.dataset.theme = theme }, theme)
-      const trigger = page.locator('main .mezzanine-disclosure-trigger').first()
+      const trigger = page.locator('main .mz-disclosure-trigger').first()
       const icon = trigger.locator('svg')
       await expect(icon.locator('path')).toHaveAttribute('d', 'm9 6 6 6-6 6')
       await expect(icon).toHaveCSS('transition-duration', reducedMotion === 'reduce' || theme === 'wireframe' ? '0s' : '0.18s')
@@ -43,7 +43,7 @@ test('nested themes restore finite motion and system reduction wins over speed o
   await tree.evaluate(element => { element.dataset.theme = 'wireframe' })
   await page.evaluate(() => { document.documentElement.dataset.theme = 'light' })
   await expect(icon).toHaveCSS('transition-duration', '0s')
-  await expect(page.locator('.mezzanine-disclosure-chevron').first()).toHaveCSS('transition-duration', '0.8s')
+  await expect(page.locator('.mz-disclosure-chevron').first()).toHaveCSS('transition-duration', '0.8s')
 })
 
 test('loading remains visible and Wireframe leaves its behaviour unchanged', async ({ page }) => {

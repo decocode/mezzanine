@@ -97,8 +97,8 @@ export const tabsContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'Tab bar', href: '/tab-bar' },
     { label: 'Disclosure', href: '/disclosure' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria Tabs', href: 'https://react-aria.adobe.com/Tabs' },

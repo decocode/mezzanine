@@ -24,8 +24,29 @@ export const scrollStateQueriesCssNotes: Record<string, CssNote> = {
 @container scroll-state(stuck: top) {
   .lab-stuck-aware > span {
     display: inline-block;
-    outline: 2px solid var(--color-warning-600);
+    outline: var(--border-width-md) solid var(--color-warning-600);
     outline-offset: var(--space-1);
+  }
+}`,
+  },
+  scrollStateDivider: {
+    paragraphs: [
+      'The scrolling box itself becomes a scroll-state container. `@container scroll-state(scrollable: top)` matches once there’s content above to scroll back to, which means the list has scrolled, and brings the divider back.',
+      'Hiding the divider by default would leave browsers without scroll-state queries with no divider at all. So the hiding sits inside `@supports (container-type: scroll-state)`: those browsers skip the whole block and keep the divider all the time.',
+    ],
+    code: `.lab-divider-box {
+  container-type: scroll-state;
+}
+
+@supports (container-type: scroll-state) {
+  .lab-divider-heading {
+    border-block-end-color: transparent;
+  }
+
+  @container scroll-state(scrollable: top) {
+    .lab-divider-heading {
+      border-block-end-color: var(--color-border);
+    }
   }
 }`,
   },

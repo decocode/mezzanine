@@ -25,8 +25,8 @@ body {
 
 a {
   color: var(--color-link);
-  text-decoration-thickness: 0.1em;
-  text-underline-offset: 0.18em;
+  text-decoration-thickness: var(--link-underline-thickness);
+  text-underline-offset: var(--link-underline-offset);
 }
 
 a:hover {
@@ -38,8 +38,8 @@ a:active {
 }
 
 a:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
 }
 
 .site-logo {
@@ -112,19 +112,6 @@ a:focus-visible {
   color: var(--color-text);
 }
 
-.site-layout {
-  min-width: 0;
-}
-
-.site-sidebar {
-  position: relative;
-}
-
-/* Narrow screens reach the docs navigation from the Navbar menu instead. */
-.desktop-sidebar {
-  display: none;
-}
-
 .landing-page {
   display: grid;
   align-items: center;
@@ -156,12 +143,12 @@ a:focus-visible {
 
 .landing-hero h1 {
   overflow-wrap: anywhere;
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
 }
 
 .landing-hero-description {
   max-width: 42rem;
-  margin: 0 0 2rem;
+  margin: 0 0 var(--space-8);
   color: var(--color-text-muted);
 }
 
@@ -182,7 +169,7 @@ a:focus-visible {
 }
 
 .react-aria-documentation-link {
-  margin-top: 1rem;
+  margin-top: var(--space-4);
   max-inline-size: 100%;
   overflow-wrap: anywhere;
 }
@@ -192,7 +179,7 @@ a:focus-visible {
 }
 
 .section-label {
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-2);
   color: var(--color-text-muted);
 }
 
@@ -219,12 +206,6 @@ a:focus-visible {
 .color-palette-category {
   margin-block-start: var(--space-8);
   margin-bottom: var(--space-8);
-}
-
-.color-palette-category-description {
-  max-width: var(--line-length);
-  margin: 0 0 var(--space-4);
-  color: var(--color-text-muted);
 }
 
 .color-palette-list {
@@ -270,12 +251,12 @@ a:focus-visible {
   min-width: 0;
   max-width: 100%;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--space-2);
 }
 
 .color-palette-viewport:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 3px;
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
 }
 
 .color-palette-scale {
@@ -295,7 +276,7 @@ a:focus-visible {
   grid-row: span 2;
   min-width: 0;
   padding: var(--space-2) var(--space-2) var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-page);
   color: var(--color-text);
 }
@@ -306,7 +287,7 @@ a:focus-visible {
   align-items: flex-end;
   height: 6rem;
   padding: var(--space-2);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .color-palette-step code {
@@ -323,9 +304,9 @@ a:focus-visible {
 }
 
 .spacing-scale-list {
-  margin: 1.5rem 0 0;
+  margin: var(--space-6) 0 0;
   padding: 0;
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   border-radius: var(--radius-sm);
   list-style: none;
   overflow: hidden;
@@ -340,12 +321,12 @@ a:focus-visible {
 }
 
 .spacing-scale-item + .spacing-scale-item {
-  border-top: 1px solid var(--color-border);
+  border-top: var(--border-width-baseline) solid var(--color-border);
 }
 
 .spacing-scale-example {
   display: grid;
-  gap: 0.5rem;
+  gap: var(--space-2);
   min-width: 0;
 }
 
@@ -353,21 +334,21 @@ a:focus-visible {
   display: block;
   min-width: 1px;
   max-width: 100%;
-  height: 1.5rem;
+  height: var(--space-6);
   background: var(--color-signature-300);
-  border: 1px solid var(--color-signature-700);
+  border: var(--border-width-baseline) solid var(--color-signature-700);
 }
 
 .spacing-scale-not-applicable {
   color: var(--color-text-muted);
   font-size: var(--font-size-body-sm);
-  line-height: 1.5rem;
+  line-height: var(--space-6);
 }
 
 .spacing-scale-value {
   display: grid;
   justify-items: end;
-  gap: 0.125rem;
+  gap: var(--space-1);
   color: var(--color-text-muted);
   white-space: nowrap;
 }
@@ -381,14 +362,6 @@ a:focus-visible {
 .spacing-scale-pixels {
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);
-}
-
-.token-group + .token-group {
-  margin-top: var(--space-8);
-}
-
-.token-group h3 {
-  margin: 0 0 var(--space-4);
 }
 
 /* Documentation controls layout; Mezzanine supplies table appearance and states. */
@@ -452,7 +425,7 @@ a:focus-visible {
 
 .typography-layers > li {
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   border-radius: var(--radius-sm);
   counter-increment: typography-layer;
 }
@@ -482,7 +455,7 @@ a:focus-visible {
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .typography-theme-caption {
@@ -569,7 +542,7 @@ a:focus-visible {
   display: block;
   width: 100%;
   height: 6rem;
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-surface);
 }
 
@@ -642,15 +615,15 @@ a:focus-visible {
 .table-selection-example .react-aria-Column:first-child,
 .table-selection-example .react-aria-Cell:first-child {
   width: 3.5rem;
-  padding-inline: 0.75rem;
+  padding-inline: var(--space-3);
   text-align: center;
   vertical-align: middle;
 }
 
 .component-section :is(h2, h3, h4)[id],
 .table-of-contents-example :is(h3, h4)[id] {
-  /* Keep anchor destinations clear of the sticky site header. */
-  scroll-margin-top: var(--space-24);
+  /* The header sits above the scrolling content, so anchors only need a little breathing room. */
+  scroll-margin-top: var(--space-8);
 }
 
 .table-of-contents-example {
@@ -662,11 +635,11 @@ a:focus-visible {
 }
 
 .table-of-contents-example section > :is(h3, h4) {
-  margin: 0 0 0.5rem;
+  margin: 0 0 var(--space-2);
 }
 
 .table-of-contents-example section > p {
-  margin: 0 0 1rem;
+  margin: 0 0 var(--space-4);
 }
 
 .component-section {
@@ -726,11 +699,11 @@ a:focus-visible {
   max-width: 40rem;
   margin-top: var(--space-4);
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-page);
 }
 
-.navbar-example {
+.top-bar-example {
   max-width: none;
   padding: 0;
 }
@@ -756,7 +729,7 @@ a:focus-visible {
 .foundations-page-list {
   display: grid;
   gap: var(--space-4);
-  max-width: 44rem;
+  max-width: var(--line-length);
   margin: 0;
   padding-inline-start: var(--space-5);
 }
@@ -769,7 +742,7 @@ a:focus-visible {
 .component-reference-links {
   display: grid;
   gap: var(--space-3);
-  max-width: 44rem;
+  max-width: var(--line-length);
   margin: 0;
   padding-inline-start: var(--space-5);
 }
@@ -800,7 +773,7 @@ a:focus-visible {
 }
 
 .breadcrumbs-examples p {
-  max-width: 36rem;
+  max-width: var(--line-length);
   color: var(--color-text-muted);
 }
 
@@ -826,14 +799,14 @@ a:focus-visible {
 .icon-sample {
   display: grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: var(--target-size-md);
+  height: var(--target-size-md);
   color: var(--color-link);
 }
 
 .icon-sample svg {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
 }
 
 .icon-loading {
@@ -894,23 +867,6 @@ a:focus-visible {
     margin-inline-start: var(--space-2);
   }
 
-  .site-layout {
-    display: grid;
-    grid-template-columns: 17.5rem minmax(0, 1fr);
-  }
-
-  .desktop-sidebar {
-    position: sticky;
-    top: 4rem;
-    display: block;
-    align-self: start;
-    height: calc(100dvh - 4rem);
-    padding: var(--space-8) var(--space-2);
-    overflow-y: auto;
-    border-inline-end: 1px solid var(--color-border);
-    scrollbar-gutter: stable;
-  }
-
   .site-content {
     width: 100%;
     padding-inline: clamp(2rem, 5vw, 5rem);
@@ -955,15 +911,12 @@ a:focus-visible {
   margin-top: var(--space-4);
 }
 
-/* Application layout around real Sidebar components; panel styling is public. */
-.sidebar-example-layout,
-.sidebar-example-columns { display: flex; flex-wrap: wrap; gap: var(--space-4); min-width: 0; }
 /* Settings for an example are grouped separately from the demonstrated component. */
 .example-zone-controls {
   min-width: 0;
   margin: 0 0 var(--space-6);
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-surface);
 }
 .example-zone-controls legend {
@@ -980,129 +933,8 @@ a:focus-visible {
   min-width: 0;
 }
 .example-zone-controls-content > * { min-width: 0; max-width: 100%; }
-.sidebar-example-layout { margin-block-start: var(--space-4); align-items: stretch; }
-.sidebar-example-workspace { flex: 1; min-width: min(100%, 10rem); padding: var(--space-3); overflow-wrap: anywhere; }
-.sidebar-example-column { display: flex; flex-direction: column; align-items: start; gap: var(--space-3); min-width: 0; max-width: 100%; }
-.sidebar-example-column .mezzanine-sidebar-panel { order: 0; }
-.sidebar-example-image { display: block; width: 100%; height: auto; margin-block-end: var(--space-4); }
-.sidebar-example-caption { margin: 0; }
-.sidebar-example-links { display: grid; gap: var(--space-3); }
-
-.sidebar-example, .sidebar-multiple-example { max-width: none; }
-.sidebar-example-options { display: grid; gap: var(--space-3); }
-
-/* Sidebar-only trial: preview actions above, configuration alongside. */
-.sidebar-example { container-type: inline-size; padding: 0; }
-.sidebar-example-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  border-block-end: 1px solid var(--color-border);
-  font-weight: var(--font-weight-semibold);
-}
-.sidebar-example-frame {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-}
-.sidebar-example-toolbar { grid-column: 1 / -1; grid-row: 1; }
-.sidebar-example-controls-reopen {
-  grid-column: 2;
-  grid-row: 2 / 4;
-  padding: var(--space-2);
-  border-inline-start: 1px solid var(--color-border);
-}
-.sidebar-example-frame:has(.sidebar-example-controls-reopen) > .sidebar-example-layout {
-  grid-column: 1;
-}
-.sidebar-example-controls {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  order: 0;
-  width: 100%;
-  max-height: none;
-  background: transparent;
-  border: 0;
-  border-block-end: 1px solid var(--color-border);
-}
-/* Only offer a launcher when the example has no visible panel or icon rail. */
-.sidebar-example-launcher { flex-basis: 100%; }
-.sidebar-example-layout:has(> .mezzanine-sidebar-panel[data-expanded], > .mezzanine-sidebar-panel[data-collapse-mode='rail']) > .sidebar-example-launcher {
-  display: none;
-}
-.sidebar-example-control { display: grid; gap: var(--space-2); }
-.sidebar-example-alignment {
-  align-self: stretch;
-  padding-block-start: var(--space-4);
-  border-block-start: 1px solid var(--color-border);
-}
-.sidebar-example-alignment > .react-aria-ToggleButtonGroup { justify-self: start; }
-.sidebar-example-controls .example-zone-controls-content {
-  flex-direction: column;
-  align-items: start;
-}
-.sidebar-example-frame > .sidebar-example-layout {
-  grid-column: 1 / -1;
-  grid-row: 3;
-  margin: 0;
-  padding: var(--space-4);
-  background: var(--color-surface-hover);
-}
-@container (min-width: 40rem) {
-  .sidebar-example-frame:has(.sidebar-example-controls[data-expanded]) {
-    grid-template-columns: minmax(0, 1fr) 15rem;
-  }
-  .sidebar-example-controls {
-    grid-column: 2;
-    grid-row: 2;
-    border-block-end: 0;
-    border-inline-start: 1px solid var(--color-border);
-  }
-  .sidebar-example-frame > .sidebar-example-layout { grid-row: 2; }
-  .sidebar-example-frame:has(.sidebar-example-controls[data-expanded]) > .sidebar-example-layout {
-    grid-column: 1;
-  }
-}
-
-
-/* The docs shell supplies its existing sizing and scroll area. */
-.site-sidebar-panel {
-  --sidebar-width: 100%;
-  --sidebar-max-height: none;
-  --sidebar-padding: 0;
-  --sidebar-border-width: 0;
-  background: var(--color-page);
-}
-
-.sidebar-documentation-example { max-width: 17.5rem; }
-.sidebar-documentation-example .desktop-sidebar {
-  display: block;
-  position: static;
-  height: auto;
-  max-height: 32rem;
-  border-inline-end: 0;
-}
-
-/* Narrower screens show page contents inline after the heading; wide screens use the right column. */
-.site-contents-sidebar { display: none; }
+/* Page contents sit inline after the heading until DocsShell's end Panel has room for them. */
 .docs-contents-inline { margin-block-end: var(--space-8); }
-.site-layout { display: flex; flex-direction: column; }
-.site-layout > .site-sidebar { order: -2; }
-@container showcase (min-width: 48rem) {
-  /* The empty first row stays empty, so short pages start at the top instead of sharing the sidebar's height. */
-  .site-layout { display: grid; grid-template-rows: auto 1fr; }
-  .site-layout > .site-sidebar { grid-column: 1; grid-row: 1 / 3; }
-  .site-content { grid-column: 2; grid-row: 2; }
-}
-@container showcase (min-width: 80rem) {
-  .docs-contents-inline { display: none; }
-  .site-layout:has(.site-contents-sidebar:not(:empty)) { grid-template-columns: 17.5rem minmax(0, 1fr) 17rem; }
-  .site-contents-sidebar:not(:empty) { display: block; grid-column: 3; grid-row: 1 / 3; position: sticky; top: 4rem; align-self: start; height: calc(100dvh - 4rem); padding: var(--space-8) var(--space-2); border-inline-start: 1px solid var(--color-border); }
-  .docs-contents-panel { --sidebar-width: 100%; --sidebar-max-height: calc(100dvh - 9rem); border: 0; background: transparent; }
-  .site-layout:has(.site-contents-sidebar:not(:empty)) > .site-content { padding-inline: var(--space-8); }
-}
 
 /* Three equal columns, with local scrolling instead of compressed state examples. */
 .toggle-button-states-table .react-aria-Table { min-width: 30rem; table-layout: fixed; }
@@ -1119,7 +951,7 @@ a:focus-visible {
 .text-comparison { display: grid; gap: var(--space-2); }
 .text-comparison > p { margin: 0; }
 .text-comparison > p + .mz-text-label-md { margin-top: var(--space-4); }
-.text-narrow-example .mezzanine-card { max-width: 12rem; }
+.text-narrow-example .mz-card { max-width: 12rem; }
 /* Language examples: as many per row as fit. */
 .text-language-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
 /* In vertical writing, inline-size is the height, so lines wrap after 12rem. */
@@ -1127,5 +959,37 @@ a:focus-visible {
 .text-vertical-example { writing-mode: vertical-rl; inline-size: 12rem; margin-top: var(--space-4); }
 /* Reading direction › Start and end: one box uses physical sides on purpose, to show it doesn't mirror. */
 .text-direction-example p { margin: 0 0 var(--space-2); }
-.text-direction-physical { padding-block: var(--space-3); border-left: var(--space-2) solid var(--color-warning-600); padding-left: var(--space-4); }
-.text-direction-logical { padding-block: var(--space-3); border-inline-start: var(--space-2) solid var(--color-warning-600); padding-inline-start: var(--space-4); }
+.text-direction-physical { padding-block: var(--space-3); border-left: var(--border-width-xl) solid var(--color-warning-600); padding-left: var(--space-4); }
+.text-direction-logical { padding-block: var(--space-3); border-inline-start: var(--border-width-xl) solid var(--color-warning-600); padding-inline-start: var(--space-4); }
+
+/* AppShell example on the AppShell and Panel pages: the site gives the frame a fixed height inside its example zone. */
+.app-shell-example-zone { padding: 0; }
+.app-shell-example { block-size: 28rem; }
+
+.app-shell-example-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
+}
+
+.app-shell-example-triggers { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.app-shell-example-main { padding: var(--space-4); }
+.app-shell-example-minimized { margin: 0; padding: var(--space-2) var(--space-4); }
+
+/* Footer example: the site lays out its small print and links. */
+.footer-example { inline-size: 100%; }
+.footer-example p { margin: 0; }
+.footer-example-links { display: flex; flex-wrap: wrap; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+
+/* Docs pages: the library AppShell frames the page, with the docs navigation in a start Panel and
+   the page's sections in an end Panel. The main content keeps enough room for reading, so the end
+   Panel only appears on wide screens; until then the sections sit inline after the heading. */
+.docs-app-shell { --app-shell-min-main-width: 28rem; }
+/* Custom properties inherit, so an AppShell shown as an example inside the docs keeps the library's own minimum. */
+.docs-app-shell .mz-app-shell { --app-shell-min-main-width: var(--ratio-pair-min-area-width); }
+.docs-app-shell:has(> .mz-panel[data-edge='end'][data-state='open']) .docs-contents-inline { display: none; }
+

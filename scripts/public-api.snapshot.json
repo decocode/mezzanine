@@ -4,6 +4,14 @@
     "kind": "value"
   },
   {
+    "name": "AppShell",
+    "kind": "value"
+  },
+  {
+    "name": "AppShellProps",
+    "kind": "type"
+  },
+  {
     "name": "ArrowDownIcon",
     "kind": "value"
   },
@@ -124,6 +132,18 @@
     "kind": "value"
   },
   {
+    "name": "CheckboxGroup",
+    "kind": "value"
+  },
+  {
+    "name": "CheckboxGroupProps",
+    "kind": "type"
+  },
+  {
+    "name": "CheckboxGroupRenderProps",
+    "kind": "type"
+  },
+  {
     "name": "CheckboxProps",
     "kind": "type"
   },
@@ -165,6 +185,30 @@
   },
   {
     "name": "ColumnRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "ComboBox",
+    "kind": "value"
+  },
+  {
+    "name": "ComboBoxProps",
+    "kind": "type"
+  },
+  {
+    "name": "ComboBoxRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "ComboBoxValue",
+    "kind": "value"
+  },
+  {
+    "name": "ComboBoxValueProps",
+    "kind": "type"
+  },
+  {
+    "name": "ComboBoxValueRenderProps",
     "kind": "type"
   },
   {
@@ -244,6 +288,18 @@
     "kind": "value"
   },
   {
+    "name": "DropZone",
+    "kind": "value"
+  },
+  {
+    "name": "DropZoneProps",
+    "kind": "type"
+  },
+  {
+    "name": "DropZoneRenderProps",
+    "kind": "type"
+  },
+  {
     "name": "DrumIcon",
     "kind": "value"
   },
@@ -286,6 +342,82 @@
   {
     "name": "FigureIcon",
     "kind": "value"
+  },
+  {
+    "name": "FileTrigger",
+    "kind": "value"
+  },
+  {
+    "name": "FileTriggerProps",
+    "kind": "type"
+  },
+  {
+    "name": "Footer",
+    "kind": "value"
+  },
+  {
+    "name": "FooterProps",
+    "kind": "type"
+  },
+  {
+    "name": "Form",
+    "kind": "value"
+  },
+  {
+    "name": "FormProps",
+    "kind": "type"
+  },
+  {
+    "name": "GridList",
+    "kind": "value"
+  },
+  {
+    "name": "GridListHeader",
+    "kind": "value"
+  },
+  {
+    "name": "GridListHeaderProps",
+    "kind": "type"
+  },
+  {
+    "name": "GridListItem",
+    "kind": "value"
+  },
+  {
+    "name": "GridListItemProps",
+    "kind": "type"
+  },
+  {
+    "name": "GridListItemRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "GridListProps",
+    "kind": "type"
+  },
+  {
+    "name": "GridListRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "GridListSection",
+    "kind": "value"
+  },
+  {
+    "name": "GridListSectionProps",
+    "kind": "type"
+  },
+  {
+    "name": "Group",
+    "kind": "value"
+  },
+  {
+    "name": "GroupProps",
+    "kind": "type"
+  },
+  {
+    "name": "GroupRenderProps",
+    "kind": "type"
   },
   {
     "name": "Header",
@@ -380,6 +512,10 @@
     "kind": "type"
   },
   {
+    "name": "ListLayout",
+    "kind": "value"
+  },
+  {
     "name": "LoadingIcon",
     "kind": "value"
   },
@@ -388,8 +524,56 @@
     "kind": "value"
   },
   {
+    "name": "Menu",
+    "kind": "value"
+  },
+  {
     "name": "MenuIcon",
     "kind": "value"
+  },
+  {
+    "name": "MenuItem",
+    "kind": "value"
+  },
+  {
+    "name": "MenuItemProps",
+    "kind": "type"
+  },
+  {
+    "name": "MenuItemRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "MenuProps",
+    "kind": "type"
+  },
+  {
+    "name": "MenuSection",
+    "kind": "value"
+  },
+  {
+    "name": "MenuSectionProps",
+    "kind": "type"
+  },
+  {
+    "name": "MenuTrigger",
+    "kind": "value"
+  },
+  {
+    "name": "MenuTriggerProps",
+    "kind": "type"
+  },
+  {
+    "name": "Meter",
+    "kind": "value"
+  },
+  {
+    "name": "MeterProps",
+    "kind": "type"
+  },
+  {
+    "name": "MeterRenderProps",
+    "kind": "type"
   },
   {
     "name": "MicIcon",
@@ -452,15 +636,23 @@
     "kind": "type"
   },
   {
-    "name": "Navbar",
+    "name": "NumberField",
     "kind": "value"
   },
   {
-    "name": "NavbarProps",
+    "name": "NumberFieldProps",
     "kind": "type"
   },
   {
-    "name": "NavbarRenderProps",
+    "name": "NumberFieldRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "Panel",
+    "kind": "value"
+  },
+  {
+    "name": "PanelEdge",
     "kind": "type"
   },
   {
@@ -472,12 +664,24 @@
     "kind": "value"
   },
   {
+    "name": "PanelProps",
+    "kind": "type"
+  },
+  {
     "name": "PanelRightCloseIcon",
     "kind": "value"
   },
   {
     "name": "PanelRightOpenIcon",
     "kind": "value"
+  },
+  {
+    "name": "PanelTrigger",
+    "kind": "value"
+  },
+  {
+    "name": "PanelTriggerProps",
+    "kind": "type"
   },
   {
     "name": "PauseIcon",
@@ -494,6 +698,38 @@
   {
     "name": "PlusIcon",
     "kind": "value"
+  },
+  {
+    "name": "Popover",
+    "kind": "value"
+  },
+  {
+    "name": "PopoverProps",
+    "kind": "type"
+  },
+  {
+    "name": "PopoverRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "PreviewTrigger",
+    "kind": "value"
+  },
+  {
+    "name": "PreviewTriggerProps",
+    "kind": "type"
+  },
+  {
+    "name": "ProgressBar",
+    "kind": "value"
+  },
+  {
+    "name": "ProgressBarProps",
+    "kind": "type"
+  },
+  {
+    "name": "ProgressBarRenderProps",
+    "kind": "type"
   },
   {
     "name": "PulseIcon",
@@ -533,6 +769,14 @@
   },
   {
     "name": "RadioGroupRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "RatioPair",
+    "kind": "value"
+  },
+  {
+    "name": "RatioPairProps",
     "kind": "type"
   },
   {
@@ -576,6 +820,30 @@
     "kind": "value"
   },
   {
+    "name": "Select",
+    "kind": "value"
+  },
+  {
+    "name": "SelectProps",
+    "kind": "type"
+  },
+  {
+    "name": "SelectRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SelectValue",
+    "kind": "value"
+  },
+  {
+    "name": "SelectValueProps",
+    "kind": "type"
+  },
+  {
+    "name": "SelectValueRenderProps",
+    "kind": "type"
+  },
+  {
     "name": "SelectionIndicator",
     "kind": "value"
   },
@@ -584,31 +852,115 @@
     "kind": "type"
   },
   {
+    "name": "Separator",
+    "kind": "value"
+  },
+  {
+    "name": "SeparatorProps",
+    "kind": "type"
+  },
+  {
     "name": "SettingsIcon",
     "kind": "value"
   },
   {
-    "name": "Sidebar",
+    "name": "Sheet",
     "kind": "value"
   },
   {
-    "name": "SidebarPanel",
+    "name": "SheetBackdrop",
     "kind": "value"
   },
   {
-    "name": "SidebarPanelProps",
+    "name": "SheetBackdropProps",
     "kind": "type"
   },
   {
-    "name": "SidebarProps",
-    "kind": "type"
-  },
-  {
-    "name": "SidebarTrigger",
+    "name": "SheetContent",
     "kind": "value"
   },
   {
-    "name": "SidebarTriggerProps",
+    "name": "SheetContentProps",
+    "kind": "type"
+  },
+  {
+    "name": "SheetOverlay",
+    "kind": "value"
+  },
+  {
+    "name": "SheetOverlayProps",
+    "kind": "type"
+  },
+  {
+    "name": "SheetProps",
+    "kind": "type"
+  },
+  {
+    "name": "SheetRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SheetTrigger",
+    "kind": "value"
+  },
+  {
+    "name": "SheetTriggerProps",
+    "kind": "type"
+  },
+  {
+    "name": "Slider",
+    "kind": "value"
+  },
+  {
+    "name": "SliderFill",
+    "kind": "value"
+  },
+  {
+    "name": "SliderFillProps",
+    "kind": "type"
+  },
+  {
+    "name": "SliderFillRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SliderOutput",
+    "kind": "value"
+  },
+  {
+    "name": "SliderOutputProps",
+    "kind": "type"
+  },
+  {
+    "name": "SliderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SliderRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SliderThumb",
+    "kind": "value"
+  },
+  {
+    "name": "SliderThumbProps",
+    "kind": "type"
+  },
+  {
+    "name": "SliderThumbRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SliderTrack",
+    "kind": "value"
+  },
+  {
+    "name": "SliderTrackProps",
+    "kind": "type"
+  },
+  {
+    "name": "SliderTrackRenderProps",
     "kind": "type"
   },
   {
@@ -624,11 +976,11 @@
     "kind": "value"
   },
   {
-    "name": "Split",
+    "name": "SubmenuTrigger",
     "kind": "value"
   },
   {
-    "name": "SplitProps",
+    "name": "SubmenuTriggerProps",
     "kind": "type"
   },
   {
@@ -636,20 +988,44 @@
     "kind": "value"
   },
   {
+    "name": "Switch",
+    "kind": "value"
+  },
+  {
+    "name": "SwitchButton",
+    "kind": "value"
+  },
+  {
+    "name": "SwitchButtonProps",
+    "kind": "type"
+  },
+  {
+    "name": "SwitchButtonRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SwitchField",
+    "kind": "value"
+  },
+  {
+    "name": "SwitchFieldProps",
+    "kind": "type"
+  },
+  {
+    "name": "SwitchFieldRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SwitchProps",
+    "kind": "type"
+  },
+  {
+    "name": "SwitchRenderProps",
+    "kind": "type"
+  },
+  {
     "name": "Tab",
     "kind": "value"
-  },
-  {
-    "name": "TabBar",
-    "kind": "value"
-  },
-  {
-    "name": "TabBarItem",
-    "kind": "type"
-  },
-  {
-    "name": "TabBarProps",
-    "kind": "type"
   },
   {
     "name": "TabList",
@@ -740,6 +1116,38 @@
     "kind": "type"
   },
   {
+    "name": "Tag",
+    "kind": "value"
+  },
+  {
+    "name": "TagGroup",
+    "kind": "value"
+  },
+  {
+    "name": "TagGroupProps",
+    "kind": "type"
+  },
+  {
+    "name": "TagList",
+    "kind": "value"
+  },
+  {
+    "name": "TagListProps",
+    "kind": "type"
+  },
+  {
+    "name": "TagListRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "TagProps",
+    "kind": "type"
+  },
+  {
+    "name": "TagRenderProps",
+    "kind": "type"
+  },
+  {
     "name": "Text",
     "kind": "value"
   },
@@ -792,6 +1200,58 @@
     "kind": "type"
   },
   {
+    "name": "Token",
+    "kind": "value"
+  },
+  {
+    "name": "TokenField",
+    "kind": "value"
+  },
+  {
+    "name": "TokenFieldProps",
+    "kind": "type"
+  },
+  {
+    "name": "TokenFieldRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "TokenFieldValue",
+    "kind": "value"
+  },
+  {
+    "name": "TokenInput",
+    "kind": "value"
+  },
+  {
+    "name": "TokenInputProps",
+    "kind": "type"
+  },
+  {
+    "name": "TokenInputRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "TokenProps",
+    "kind": "type"
+  },
+  {
+    "name": "TokenRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "Toolbar",
+    "kind": "value"
+  },
+  {
+    "name": "ToolbarProps",
+    "kind": "type"
+  },
+  {
+    "name": "ToolbarRenderProps",
+    "kind": "type"
+  },
+  {
     "name": "Tooltip",
     "kind": "value"
   },
@@ -812,8 +1272,72 @@
     "kind": "type"
   },
   {
+    "name": "TopBar",
+    "kind": "value"
+  },
+  {
+    "name": "TopBarProps",
+    "kind": "type"
+  },
+  {
+    "name": "TopBarRenderProps",
+    "kind": "type"
+  },
+  {
     "name": "TrashIcon",
     "kind": "value"
+  },
+  {
+    "name": "Tree",
+    "kind": "value"
+  },
+  {
+    "name": "TreeHeader",
+    "kind": "value"
+  },
+  {
+    "name": "TreeHeaderProps",
+    "kind": "type"
+  },
+  {
+    "name": "TreeItem",
+    "kind": "value"
+  },
+  {
+    "name": "TreeItemContent",
+    "kind": "value"
+  },
+  {
+    "name": "TreeItemContentProps",
+    "kind": "type"
+  },
+  {
+    "name": "TreeItemContentRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "TreeItemProps",
+    "kind": "type"
+  },
+  {
+    "name": "TreeItemRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "TreeProps",
+    "kind": "type"
+  },
+  {
+    "name": "TreeRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "TreeSection",
+    "kind": "value"
+  },
+  {
+    "name": "TreeSectionProps",
+    "kind": "type"
   },
   {
     "name": "TrustIcon",
@@ -826,6 +1350,14 @@
   {
     "name": "VideoCameraIcon",
     "kind": "value"
+  },
+  {
+    "name": "Virtualizer",
+    "kind": "value"
+  },
+  {
+    "name": "VirtualizerProps",
+    "kind": "type"
   },
   {
     "name": "VolumeHighIcon",

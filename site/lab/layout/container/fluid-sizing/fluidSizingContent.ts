@@ -35,7 +35,7 @@ export const fluidSizingCssNotes: Record<string, CssNote> = {
   display: grid;
   gap: clamp(var(--space-2), 4cqi, var(--space-8));
   padding: clamp(var(--space-2), 4cqi, var(--space-8));
-  border: 1px dashed var(--color-border);
+  border: var(--border-width-baseline) dashed var(--color-border);
 }`,
   },
   fluidWidth: {

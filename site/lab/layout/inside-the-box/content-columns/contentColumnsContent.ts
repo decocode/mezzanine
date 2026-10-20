@@ -31,7 +31,7 @@ export const contentColumnsCssNotes: Record<string, CssNote> = {
     code: `.lab-content-columns {
   columns: 12rem;
   column-gap: var(--space-6);
-  column-rule: 1px solid var(--color-border);
+  column-rule: var(--border-width-baseline) solid var(--color-border);
 }`,
   },
 }

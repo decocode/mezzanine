@@ -1,36 +1,33 @@
-.mezzanine-nav-tree, .mezzanine-nav-tree-section {
+.mz-nav-tree, .mz-nav-tree-section {
   display: grid;
   min-width: 0;
   gap: var(--navigation-tree-gap);
-  color: var(--navigation-tree-item-content);
+  color: var(--nav-item-content);
   font-family: var(--font-family-body);
-  font-size: var(--font-size-title-sm);
+  font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-default);
-  letter-spacing: var(--letter-spacing-title);
-  line-height: var(--line-height-title-sm);
-  text-transform: var(--text-transform-title);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
 }
-.mezzanine-nav-tree-item {
+.mz-nav-tree-item {
   display: flex;
   align-items: stretch;
   min-width: 0;
-  min-height: var(--target-size);
+  min-height: var(--target-size-xs);
   gap: var(--navigation-tree-item-gap);
   padding-block: var(--navigation-tree-item-padding-block);
   padding-inline: calc(var(--navigation-tree-item-padding-inline) + (var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent)) var(--navigation-tree-item-padding-inline);
-  border-inline-start: var(--navigation-tree-current-indicator-width) solid transparent;
-  background: var(--navigation-tree-item-background);
-  color: var(--navigation-tree-item-content);
+  border-inline-start: var(--nav-item-current-indicator-width) solid transparent;
+  background: var(--nav-item-background);
+  color: var(--nav-item-content);
   overflow-wrap: anywhere;
 }
-.mezzanine-nav-tree-item[data-level='1'][data-has-child-items]:not(:first-child) {
-  margin-block-start: var(--space-2);
-}
 /* Sections are larger groups than parent rows, so they get more space above. */
-.mezzanine-nav-tree-section:not(:first-child) {
+.mz-nav-tree-section:not(:first-child) {
   margin-block-start: var(--space-4);
 }
-.mezzanine-nav-tree-label {
+.mz-nav-tree-label {
   display: flex;
   align-items: center;
   flex: 1;
@@ -40,14 +37,14 @@
   text-decoration: none;
   text-align: start;
 }
-.mezzanine-nav-tree-label > span:first-child { min-width: 0; }
-.mezzanine-nav-tree-label[href] { cursor: pointer; }
-.mezzanine-nav-tree-toggle {
+.mz-nav-tree-label > span:first-child { min-width: 0; }
+.mz-nav-tree-label[href] { cursor: pointer; }
+.mz-nav-tree-toggle {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: var(--target-size);
-  min-height: var(--target-size);
+  min-width: var(--target-size-xs);
+  min-height: var(--target-size-xs);
   padding: 0;
   border: 0;
   background: transparent;
@@ -58,9 +55,9 @@
   cursor: pointer;
 }
 /* A linked parent's chevron sits at the row end, aligned with unlinked parents. */
-.mezzanine-nav-tree-toggle:not(.mezzanine-nav-tree-label) { justify-content: flex-end; flex: none; }
-.mezzanine-nav-tree-content { display: inline-flex; flex: none; margin-inline-start: auto; }
-.mezzanine-nav-tree-chevron {
+.mz-nav-tree-toggle:not(.mz-nav-tree-label) { justify-content: flex-end; flex: none; }
+.mz-nav-tree-content { display: inline-flex; flex: none; margin-inline-start: auto; }
+.mz-nav-tree-chevron {
   flex: none;
   width: var(--chevron-size);
   height: var(--chevron-size);
@@ -68,35 +65,35 @@
   rotate: 0deg;
   transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
-.mezzanine-nav-tree-item[data-expanded] .mezzanine-nav-tree-chevron { rotate: var(--motion-rotation-expanded); }
-.mezzanine-nav-tree-item[data-hovered],
-.mezzanine-nav-tree-item:has(.mezzanine-nav-tree-label[data-hovered], .mezzanine-nav-tree-toggle[data-hovered]) {
-  background: var(--navigation-tree-item-background-hovered);
+.mz-nav-tree-item[data-expanded] .mz-nav-tree-chevron { rotate: var(--motion-rotation-expanded); }
+.mz-nav-tree-item[data-hovered],
+.mz-nav-tree-item:has(.mz-nav-tree-label[data-hovered], .mz-nav-tree-toggle[data-hovered]) {
+  background: var(--nav-item-background-hovered);
 }
-.mezzanine-nav-tree-item[data-pressed],
-.mezzanine-nav-tree-item:has(.mezzanine-nav-tree-label[data-pressed], .mezzanine-nav-tree-toggle[data-pressed]) {
-  background: var(--navigation-tree-item-background-pressed);
+.mz-nav-tree-item[data-pressed],
+.mz-nav-tree-item:has(.mz-nav-tree-label[data-pressed], .mz-nav-tree-toggle[data-pressed]) {
+  background: var(--nav-item-background-pressed);
 }
 /* Every row shares one size and weight; indentation shows depth, so Emphasis marks only the current page. */
-.mezzanine-nav-tree-item[data-current] {
-  border-inline-start-color: var(--navigation-tree-current-indicator);
-  background: var(--navigation-tree-item-background-current);
-  color: var(--navigation-tree-item-content-current);
+.mz-nav-tree-item[data-current] {
+  border-inline-start-color: var(--nav-item-current-indicator);
+  background: var(--nav-item-background-current);
+  color: var(--nav-item-content-current);
   font-weight: var(--font-weight-emphasis);
 }
-.mezzanine-nav-tree-item[data-focus-visible],
-.mezzanine-nav-tree-label[data-focus-visible],
-.mezzanine-nav-tree-toggle[data-focus-visible] {
+.mz-nav-tree-item[data-focus-visible],
+.mz-nav-tree-label[data-focus-visible],
+.mz-nav-tree-toggle[data-focus-visible] {
   outline: var(--navigation-tree-focus-ring-width) solid var(--color-focus);
   outline-offset: var(--navigation-tree-focus-ring-offset);
 }
-.mezzanine-nav-tree-item[data-disabled] { opacity: var(--opacity-disabled); }
-.mezzanine-nav-tree-item[data-disabled] .mezzanine-nav-tree-label,
-.mezzanine-nav-tree-item[data-disabled] .mezzanine-nav-tree-toggle { cursor: default; }
-.mezzanine-nav-tree-header {
+.mz-nav-tree-item[data-disabled] { opacity: var(--opacity-disabled); }
+.mz-nav-tree-item[data-disabled] .mz-nav-tree-label,
+.mz-nav-tree-item[data-disabled] .mz-nav-tree-toggle { cursor: default; }
+.mz-nav-tree-header {
   padding: var(--navigation-tree-header-padding-block) var(--navigation-tree-item-padding-inline);
   /* Matches the rows' current-page bar space so header and row text line up. */
-  border-inline-start: var(--navigation-tree-current-indicator-width) solid transparent;
+  border-inline-start: var(--nav-item-current-indicator-width) solid transparent;
   color: var(--navigation-tree-header-content);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);

@@ -10,6 +10,11 @@
   --radius-xl: 1.25rem;
   --radius-full: 9999rem;
 
+  /* Roles: the corners of controls (buttons, fields, checkboxes, badges, inline code) and of surfaces
+     (cards, dialogs, modals, tooltips). Square by default; a theme rounds things by changing these two. */
+  --radius-control: var(--radius-none);
+  --radius-surface: var(--radius-none);
+
   /* Border-width scale, in 1px steps after a hairline; component defaults remain independently controlled. */
   --border-width-none: 0;
   --border-width-xs: 0.03125rem;

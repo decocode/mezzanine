@@ -7,9 +7,9 @@ Mezzanine has two parts that share this repository:
 - **The library** (`src/`) is the `@decocode/mezzanine` package. `src/index.ts` is its only public entry point. `npm run build:lib` builds it into `dist/`.
 - **The showcase** (`site/`) is the website for mezzanine.fly.dev. `site/index.html` provides the `#root` element, `site/main.tsx` mounts `site/AppShell.tsx`. It imports the library as `@decocode/mezzanine`, which `vite.config.ts` resolves to `src/index.ts`. `npm run build:site` builds it into `site-dist/`, which the Docker image serves with nginx on Fly.io.
 
-The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the navbar at `/site/lab`, with four experiments and a Components section. Components, at `/site/lab/components`, shows only its heading so far; its child page, Search, at `/site/lab/components/search`, holds the search dialog experiment. Layers, at `/site/lab/layers`, holds Positioning, Ordering layers, Bundles of layers and Scroll padding. Browser and device, at `/site/lab/browser-and-device`, holds Media queries, Supports, Safe areas and Touch targets. Emerging features, at `/site/lab/emerging-features`, holds a page, marked Lab, for each feature not yet well supported (Masonry, Scroll-state queries, Anchor positioning and Field sizing). The other is Layout: an overview at `/site/lab/layout`, seven groups named after what you want to do (Box basics, Add space, Inside the box, Side by side, One below another, Grid formation and Container), each with an overview at `/site/lab/layout/<group>` and a page for each topic or building block at `/site/lab/layout/<group>/<page>`. Reading order and Style priority are Lab pages outside the experiments, at `/site/lab/<page>`. Its illustrative candidates are not approved library features.
+The showcase includes an experimental sandbox in `site/lab/`, reached through **Lab** in the top bar at `/site/lab`, with four experiments and a Components section. Components, at `/site/lab/components`, shows only its heading so far; its child page, Search, at `/site/lab/components/search`, holds the search dialog experiment. Layers, at `/site/lab/layers`, holds Positioning, Ordering layers, Bundles of layers and Scroll padding. Browser and device, at `/site/lab/browser-and-device`, holds Media queries, Supports, Safe areas and Touch targets. Emerging features, at `/site/lab/emerging-features`, holds a page, marked Lab, for each feature not yet well supported (Masonry, Scroll-state queries, Anchor positioning and Field sizing). The other is Layout: an overview at `/site/lab/layout`, six groups named after what you want to do (Box basics, Add space, Inside the box, Side by side, Grids and columns and Container), each with an overview at `/site/lab/layout/<group>` and a page for each topic or building block at `/site/lab/layout/<group>/<page>`. Reading order and Style priority are Lab pages outside the experiments, at `/site/lab/<page>`. Its illustrative candidates are not approved library features.
 
-The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `DisclosureHeader`, `TableOfContents`, `Navbar`, `NavTree` and `Sidebar` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
+The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `Link`, `RadioGroup`, `Disclosure`, `DisclosureGroup`, `Dialog`, `DialogTrigger`, `Heading`, `Modal`, `ModalOverlay`, `ToggleButton`, `ToggleButtonGroup` and the `Table` family, the semantic `Badge`, composed `DisclosureHeader`, `TableOfContents`, `TopBar`, `NavTree`, `AppShell`, `Panel` and `Footer` patterns, the icons in active DecoCode use, three official color themes and fifteen public typography classes. Components arrive during extraction from the decocode repository.
 
 ## Files and directories
 
@@ -18,7 +18,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | Path | Purpose |
 | --- | --- |
 | `src/index.ts` | Public entry point of the package; imports the default tokens and library styles and exports every component |
-| `src/motion.css` | Internal finite/loading/scroll motion policy for theme scopes and the system preference; shared backdrop fade keyframes used by Modal, Sidebar and TabBar |
+| `src/motion.css` | Internal finite/loading/scroll motion policy for theme scopes and the system preference; shared backdrop fade keyframes used by Modal and Panel drawers |
 | `src/motionPolicy.ts` | Internal resolved-duration reader, preference/theme observation and token-display notification |
 | `src/styles.css` | Library stylesheet entry point; imports typography and, as components arrive, their structural styles |
 | `src/tokens.css` | Token entry point: imports the three themes, then the shared token files in `src/tokens/`, then each component's tokens, then the themes last so they can override defaults |
@@ -47,23 +47,24 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/Link/Link.css` | Token-led styling for Link interaction states |
 | `src/components/Link/Link.ts` | Public React Aria Link export and prop types |
 | `src/components/Modal/Modal.ts`, `src/components/Modal/Modal.css` | Public React Aria Modal and ModalOverlay exports; token-led backdrop, responsive container and reduced-motion-aware entry/exit styling |
-| `src/components/Navbar/Navbar.css` | Token-based Navbar layout, text-size-aware container breakpoint and reduced-motion-aware menu panel |
-| `src/components/Navbar/Navbar.tsx` | Public sticky Navbar with brand, navigation and action areas, a React Aria Disclosure mobile menu with a menu trigger whose label shows in a tooltip, actions kept in the bar on narrow screens, and an isMenu render value for menu-only content |
+| `src/components/TopBar/TopBar.css` | Token-based TopBar layout, text-size-aware container breakpoint and reduced-motion-aware menu panel |
+| `src/components/TopBar/TopBar.tsx` | Public sticky TopBar with brand, navigation and action areas, a React Aria Disclosure mobile menu with a menu trigger whose label shows in a tooltip, actions kept in the bar on narrow screens, and an isMenu render value for menu-only content |
 | `src/components/RadioGroup/RadioGroup.css` | Token-led styling for RadioGroup, RadioField, RadioButton and SelectionIndicator |
 | `src/components/RadioGroup/RadioGroup.ts` | Public current React Aria RadioGroup composition exports and prop types |
 | `src/components/SelectionIndicator/SelectionIndicator.ts` | Public React Aria SelectionIndicator export and prop type |
-| `src/components/Sidebar/Sidebar.css` | Token-based sidebar regions, left/right placement, rail and modal drawer styling |
-| `src/components/Sidebar/Sidebar.tsx` | Public Sidebar state boundary, Button-based SidebarTrigger and generic inline or modal SidebarPanel with optional compact rail, permanent inline expansion and optional inline header |
-| `src/components/Split/Split.tsx`, `src/components/Split/Split.css` | Public Split layout building block: two areas side by side that share the row by a fraction or by auto and stack when they can't both have their minimum width; layout only, following its container through flexbox wrapping |
-| `src/components/Sidebar/sidebarState.ts` | Internal sidebar context and responsive media-query subscription |
-| `src/components/TabBar/TabBar.css` | TabBar states, safe-area spacing and responsive bottom-sheet presentation |
-| `src/components/TabBar/TabBar.tsx` | Primary route navigation with built-in capacity measurement and a More bottom sheet composed from library links, buttons and modal parts |
+| `src/components/AppShell/AppShell.tsx`, `src/components/AppShell/AppShell.css`, `src/components/AppShell/AppShell.tokens.css` | Public AppShell: frames an app's screen with a header row, Panels at the start, end and bottom edges, and the app's own main content followed by an optional Footer, which scroll together; measures itself to decide when a side Panel becomes a drawer |
+| `src/components/AppShell/panelStore.ts` | Every Panel's open state in one AppShell, shared with PanelTriggers; drawers open only when someone opens them |
+| `src/components/AppShell/appShellLayout.ts` | Decides whether each side Panel shares the space or becomes a drawer (end Panel first), and converts length tokens to pixels |
+| `src/components/Footer/Footer.tsx`, `src/components/Footer/Footer.css` | Public Footer: a page's closing strip that arranges the app's small print and links in a row that wraps; inside AppShell it follows main and scrolls with it |
+| `src/components/Panel/Panel.tsx`, `src/components/Panel/Panel.css`, `src/components/Panel/Panel.tokens.css` | Public Panel and PanelTrigger: an area at an AppShell edge that shares the space, with an optional minimised version, and the Button that opens and closes it; a side Panel without room opens as a React Aria Modal drawer |
+| `src/components/RatioPair/RatioPair.tsx`, `src/components/RatioPair/RatioPair.css` | Public RatioPair (formerly Split) layout building block: two areas side by side that share the row by a fraction or by auto and stack when they can't both have their minimum width; layout only, following its container through flexbox wrapping |
 | `src/components/Table/Table.css` | Token-led structural and interaction-state styling for the exported Table parts |
 | `src/components/Table/Table.tsx` | React Aria Table parts and a Column wrapper that adds a shared sort-direction indicator |
 | `src/components/TableOfContents/TableOfContents.css` | TableOfContents spacing, nested list layout and link targets using shared design tokens |
 | `src/components/TableOfContents/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |
 | `src/components/Tabs/Tabs.tsx`, `src/components/Tabs/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
 | `src/components/Text/Text.ts` | Public React Aria Text export and prop type |
+| `src/components/{CheckboxGroup,ComboBox,DropZone,FileTrigger,Form,GridList,Group,Menu,Meter,NumberField,Popover,PreviewTrigger,ProgressBar,Select,Separator,Sheet,Slider,Switch,TagGroup,TokenField,Toolbar,Tree,Virtualizer}/*.ts` | Thin React Aria re-exports, mostly for AI chat interfaces (one component family per file, with prop types); no Mezzanine styles yet |
 | `src/components/TextArea/TextArea.ts` | Public React Aria TextArea export and type; composes with TextField for multiline input |
 | `src/components/SearchField/SearchField.tsx`, `src/components/SearchField/SearchField.css` | Public React Aria SearchField wrapper that adds the search icon and a clear button (the shared Button) around the app's Label and Input; the Input keeps the shared field appearance |
 | `src/components/TextField/TextField.css` | Shared TextField, Input and TextArea layout, interaction states and forced-colour styling |
@@ -72,7 +73,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/ToggleButton/ToggleButton.ts` | React Aria ToggleButton and ToggleButtonGroup with shared button sizes, icon content, optional secondary appearance and preserved selection APIs |
 | `src/components/Tooltip/Tooltip.css` | Token-based tooltip layout, fade animation, reduced-motion and forced-colour rules |
 | `src/components/Tooltip/Tooltip.tsx` | React Aria Tooltip exports and TooltipTrigger with a configurable 500ms default hover delay |
-| `src/docs/COMPONENTS.md` | How apps use Button, Navbar, Table sorting, NavTree, Tooltip and Sidebar |
+| `src/docs/COMPONENTS.md` | How apps use Button, TopBar, Table sorting, NavTree, Tooltip, AppShell, Panel and Footer |
 | `src/docs/TOKENS.md` | Plain-language guide to the token model, official themes, current inventory and naming rules |
 | `src/docs/TYPOGRAPHY.md` | Typography roles, named styles, defaults, pattern mappings, theming guidance, and accessibility checks |
 | `src/icons/Icons.tsx` | Public Mezzanine icon library extracted from the icons in active DecoCode use |
@@ -81,12 +82,13 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/themes/light.css` | Neutral Light theme and the fallback when no preference is available |
 | `src/themes/wireframe.css` | Monochrome Wireframe theme with semantic status colors and blue focus |
 | `src/tokens/color.css` | Colour palettes; semantic colour roles are set per theme (Styles › Color) |
-| `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) target sizes: `--target-size-min` (the WCAG minimum) and `--target-size` (the size controls use), documented on Interaction › Target size; and the shared control-size scale, `--control-size-sm` to `--control-size-xl`, which Button, ToggleButton, text fields, Disclosure and TabBar take their heights from |
+| `src/tokens/interaction.css` | Shared disabled opacity (Foundations › Interaction) target sizes: `--target-size-min` (the WCAG minimum) and the shared scale `--target-size-xs` to `--target-size-xl`, which every interactive element takes its height from, documented on Interaction › Target size |
 | `src/tokens/elevation.css` | Elevation levels built from the shadow and highlight colours; each theme sets its shadow colour (Styles › Elevation) |
 | `src/tokens/motion.css` | Durations, easing, distances, scale and rotation (Styles › Motion) |
 | `src/tokens/z-index.css` | The shared stacking scale: base, raised, sticky, overlay (every pop-up) and toast; not yet documented on a site page |
 | `src/tokens/shape.css` | Corner-radius and border-width scales (Styles › Shape › Corners and Borders) |
 | `src/tokens/text.css` | Text behaviour tokens: `--line-length` (Foundations › Text) |
+| `src/tokens/icon.css` | Icon size scale, `--icon-size-xs` to `--icon-size-xl`, which Button, ToggleButton, Checkbox, the Disclosure and NavTree chevrons, and SearchField take their icon sizes from; not yet documented on a site page |
 | `src/tokens/space.css` | Spacing scale; shown on the Lab's Gap page, with no docs page until the Lab pages are promoted |
 | `src/tokens/typography.css` | Font families, weights, type-scale roles and inline-code tokens (Styles › Typography) |
 
@@ -96,29 +98,29 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 
 | Path | Purpose |
 | --- | --- |
-| `site/AppShell.tsx` | Site layout, theme state and route selection; applies and saves a theme change before rendering; delegates page rendering to page components and the loading boundary |
+| `site/AppShell.tsx` | Site layout, theme state and route selection; applies and saves a theme change before rendering; docs pages render inside DocsShell, and page rendering is delegated to page components and the loading boundary |
 | `site/favicon.svg` | Staircase Z favicon with neutral-200 background and neutral-950 mark, embedded for use outside the site CSS |
 | `site/index.html` | HTML shell for the showcase site, including its favicon reference |
 | `site/main.tsx` | Showcase browser entry point; restores and applies the saved theme before rendering |
 | `site/PageLoader.tsx` | Documentation loading and error states, reload action, and section-link scrolling after a page loads |
 | `site/pageRegistry.ts` | Finds each implemented page's component in the folder its place in the navigation gives it, loading it only when the page is visited |
 | `site/PAGES.md` | How documentation site pages are built: folders, the component page template, and Related pages and References |
-| `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; top-level groups are Get started, Principles, Foundations (does not change with the theme; Interaction is a group with Target size under it, and Text a group with Fluid text and Reading direction under it), Styles (changes with the theme), Themes and Components; Components contains Navigation, Actions and controls, Forms and input, Overlays, and Cards, with the top-navigation page at `/navbar` and remaining pages awaiting categorisation |
+| `site/siteStructure.ts` | Single source of truth for nested IA groups, routes, labels, implementation status; top-level groups are Get started, Foundations (does not change with the theme; Interaction is a group with Target size under it, and Text a group with Fluid text and Reading direction under it), Styles (changes with the theme), Themes and Components; Components contains Navigation, Actions and controls, Forms and input, Overlays, Cards and Structure (AppShell, TopBar, Panel, Rail and Footer), with remaining pages awaiting categorisation |
 | `site/styles.css` | Responsive layout and presentation used only by the showcase site |
 | `site/themeSwitcherLogic.ts` | Theme option validation, device colour-scheme subscription, system-theme resolution, root-attribute application and saved visitor preference |
 | `site/assets/mezzanine-logo.svg` | Mezzanine brand icon: a Z with a staircase diagonal; standalone SVG using currentColor |
-| `site/assets/sidebar-example.svg` | Neutral geometric image demonstrating sidebar content composition |
 | `site/pages/styles/color/ColorSwatch.tsx` | Displays a palette shade, its number and resolved colour value with readable text |
 | `site/pages/styles/color/colorSwatchLogic.ts` | Contrast calculation used to choose light or dark text inside ColorSwatch |
-| `site/components/docsContentsContext.ts` | Shares the AppShell contents destination with documentation pages |
+| `site/components/docsContentsContext.ts` | The store through which a page hands its sections to DocsShell, registered from a ref callback |
+| `site/components/DocsShell.tsx` | The frame shared by docs and Lab pages: the library AppShell with the navigation in a start Panel and the page's sections in an end Panel, both always open |
 | `site/components/DocsDisclosureGroup.tsx` | Composes Mezzanine disclosures for grouped technical documentation sections (level 3 headers), or for a single collapsible top-level section (level 2) |
 | `site/components/DocsDisclosureGroupLogic.ts` | Opens the containing documentation disclosure for initial, changed and repeated URL anchors; scrolls to changed and repeated anchors using the motion policy's scroll behaviour |
 | `site/components/DocsTable.tsx` | Shared Mezzanine Table presentation for named documentation entries and their purposes, with an optional description column label |
 | `site/components/RichText.tsx` | Renders content-file copy, turning its `code`, **strong** and [label](href) markers into elements |
-| `site/components/DocsTableOfContents.tsx` | Page contents shown inline after the page heading on narrower screens and in the right column on wide screens |
+| `site/components/DocsTableOfContents.tsx` | Page contents shown inline after the page heading; also hands the sections to DocsShell's end Panel, which replaces the inline copy when there's room |
 | `site/components/ExampleZone.tsx` | Shared documentation example frame, preserving the standard CSS and optional example-specific classes |
-| `site/components/MezzanineNavbar.tsx` | Supplies Mezzanine branding, Docs and Lab links, theme actions and, in the narrow-screen menu, the docs NavTree under Docs on docs pages or the Lab's NavTree (passed in as `labNavigation`) under Lab on Lab pages, to the library Navbar |
-| `site/components/Sidebar.tsx` | Docs composition of the public non-collapsible SidebarPanel and NavTree navigation for wider screens, expanding the current page's ancestor groups; exports DocsNavigation for the Navbar menu, plus NavigationPanel and SidebarColumn so the Lab can pass in its own NavTree without the site importing Lab code |
+| `site/components/SiteTopBar.tsx` | Supplies Mezzanine branding, Docs and Lab links, theme actions and, in the narrow-screen menu, the docs NavTree under Docs on docs pages or the Lab's NavTree (passed in as `labNavigation`) under Lab on Lab pages, to the library TopBar |
+| `site/components/NavigationPanel.tsx` | NavigationPanel (a section's NavTree in a navigation landmark) for the Panels and the TopBar menu, and DocsNavigation for the docs |
 | `site/components/ThemeSwitcher.tsx` | Site theme switcher composing Mezzanine toggle buttons for Light, Dark and Wireframe |
 | `site/components/TokenValue.tsx` | Displays a live CSS token value as code |
 | `site/components/tokenValueLogic.ts` | Reads current CSS token values and re-reads them when the theme, device colour scheme or motion setting changes, and describes font-size tokens in pixels |
@@ -139,18 +141,20 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/home/homeContent.ts` | Home attribution, title, description and documentation link |
 | `site/pages/styles/icons/iconsContent.ts` | Names and rendered examples for every icon exported by Mezzanine |
 | `site/pages/foundations/interaction/interactionContent.ts` | Interaction states, behaviour descriptions, token notes and lists, and links for the Interaction page |
-| `site/pages/foundations/interaction/target-size/targetSizeContent.ts` | Target size page wording, the two size tokens and links |
+| `site/pages/foundations/interaction/target-size/targetSizeContent.ts` | Target size page wording, the target size tokens (`--target-size-min` and `--target-size-xs` to `--target-size-xl`) and links |
 | `site/pages/get-started/introduction/introductionContent.ts` | Introduction page title and description |
 | `site/pages/components/navigation/link/linkContent.ts` | Link written guidance, reference entries, related pages and external references |
 | `site/pages/styles/motion/motionContent.ts` | Motion timing, token and reduced-motion reference descriptions |
-| `site/pages/components/navigation/navbar/navbarContent.ts` | Navbar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
+| `site/pages/components/structure/app-shell/appShellContent.ts`, `site/pages/components/structure/app-shell/AppShellPage.tsx` | AppShell docs page: anatomy, behaviour, usage, accessibility, props and token |
+| `site/pages/components/structure/app-shell/AppShellExample.tsx` | The live AppShell example with Panels A, B and C, shared by the AppShell and Panel pages |
+| `site/pages/components/structure/footer/footerContent.ts`, `site/pages/components/structure/footer/FooterPage.tsx` | Footer docs page with a live example of small print and links |
+| `site/pages/components/structure/panel/panelContent.ts`, `site/pages/components/structure/panel/PanelPage.tsx` | Panel docs page, covering Panel and PanelTrigger |
+| `site/pages/components/structure/top-bar/topBarContent.ts` | TopBar introduction, rich-text guidance and Anatomy, Props and CSS token reference entries |
 | `site/pages/components/navigation/navigation-tree/navigationTreeContent.ts` | Nav Tree written guidance, reference entries, related pages and external references |
 | `site/pages/components/forms-and-input/radio-group/radioGroupContent.ts` | RadioGroup guidance, anatomy, states, token descriptions, related pages and references |
 | `site/pages/styles/shape/shapeContent.ts` | Shape overview page wording, and the corner-radius and border-width levels the Corners and Borders pages display |
 | `site/pages/styles/typography/prose/proseContent.ts` | Prose page wording: lists and inline code, with placeholders for live values |
-| `site/pages/components/navigation/sidebar/sidebarContent.ts` | Sidebar guidance, prop and token references, and neutral example labels |
 | `site/siteContent.ts` | Shared site name, skip-link label and not-found/not-implemented messages |
-| `site/pages/components/navigation/tab-bar/tabBarContent.ts` | TabBar written guidance, reference entries, related pages and external references |
 | `site/pages/components/table/tableContent.ts` | Table sample rows and column definitions, written guidance, reference entries, related pages and external references |
 | `site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts` | TableOfContents written guidance, reference entries, related pages and external references |
 | `site/pages/components/navigation/tabs/tabsContent.ts` | Tabs written guidance, reference entries, related pages and external references |
@@ -181,7 +185,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/get-started/introduction/IntroductionPage.tsx` | Design-system introduction; loaded only when its route is requested |
 | `site/pages/components/navigation/link/LinkPage.tsx` | Link states and content examples; loaded only when its route is requested |
 | `site/pages/styles/motion/MotionPage.tsx` | Motion timing, tokens and reduced-motion guidance; loaded only when its route is requested |
-| `site/pages/components/navigation/navbar/NavbarPage.tsx` | Composes Navbar content with the shared template and owns the live example state |
+| `site/pages/components/structure/top-bar/TopBarPage.tsx` | Composes TopBar content with the shared template and owns the live example state |
 | `site/pages/components/navigation/navigation-tree/NavigationTreePage.tsx` | Hierarchical navigation example; loaded only when its route is requested |
 | `site/pages/not-found/NotFoundPage.tsx` | Unknown-route heading and return-home link |
 | `site/pages/not-implemented/NotImplementedPage.tsx` | WIP page heading and not-implemented message |
@@ -190,17 +194,15 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/pages/styles/shape/ShapePage.tsx` | Shape overview linking to Corners and Borders; loaded only when its route is requested |
 | `site/pages/styles/shape/corners/CornersPage.tsx` | Corner-radius scale and guidance for styling all corners or individual corners; loaded only when its route is requested |
 | `site/pages/styles/shape/borders/BordersPage.tsx` | Border-width scale, hairline guidance and how to use the scale; loaded only when its route is requested |
-| `site/pages/components/navigation/sidebar/SidebarPage.tsx` | Real Sidebar examples for mixed content, collapse options, multiple independent panels and the actual documentation sidebar |
-| `site/pages/components/navigation/tab-bar/TabBarPage.tsx` | Live TabBar example and verified composition, overflow and placement guidance |
 | `site/pages/components/navigation/table-of-contents/TableOfContentsPage.tsx` | Showcase table-of-contents examples and props; loaded only when its route is requested |
 | `site/pages/components/table/TablePage.tsx` | Table selection, sorting, empty-state and anatomy examples; loaded only when its route is requested |
 | `site/pages/components/navigation/tabs/TabsPage.tsx` | Tabs documentation content and examples, composed with the shared template; loaded only when requested |
 | `site/pages/components/forms-and-input/text-area/TextAreaPage.tsx` | Multiline field examples, states, composition and vertical resizing guidance |
 | `site/pages/components/forms-and-input/text-field/TextFieldPage.tsx` | TextField composition, editing, states and local validation examples |
 | `site/pages/foundations/text/TextPage.tsx` | Foundations › Text: line length and long words, with real Card examples and the `--line-length` token; loaded only when its route is requested |
-| `site/pages/foundations/text/reading-direction/ReadingDirectionPage.tsx` | Foundations › Text › Reading direction in three sections: Start and end (physical and logical sides, with a right-to-left example built on Split and a Checkbox), Right to left (Arabic, Persian, Urdu and Hebrew) and Top to bottom (Japanese, Simplified and Traditional Chinese), with real Card examples |
+| `site/pages/foundations/text/reading-direction/ReadingDirectionPage.tsx` | Foundations › Text › Reading direction in three sections: Start and end (physical and logical sides, with a right-to-left example built on RatioPair and a Checkbox), Right to left (Arabic, Persian, Urdu and Hebrew) and Top to bottom (Japanese, Simplified and Traditional Chinese), with real Card examples |
 | `site/pages/foundations/text/fluid-text/FluidTextPage.tsx` | Foundations › Text › Fluid text: how Display and Heading sizes grow with the screen through `clamp()` while other text stays fixed, an example of the real text styles, and Technical details with CSS properties and the fluid size tokens read from the token source |
-| `site/pages/foundations/interaction/target-size/TargetSizePage.tsx`, `site/pages/foundations/interaction/target-size/targetSizeContent.ts` | Foundations › Interaction › Target size: the WCAG minimum and Mezzanine's 44px target size, the two target-size tokens read from the token source, and the components that use them |
+| `site/pages/foundations/interaction/target-size/TargetSizePage.tsx`, `site/pages/foundations/interaction/target-size/targetSizeContent.ts` | Foundations › Interaction › Target size: the WCAG minimum and Mezzanine's target size scale, the target-size tokens read from the token source, and the components that use them |
 | `site/pages/styles/typography/text-styles/TextStylesPage.tsx` | Beginner guide to the text styles: quick start, roles, grouped styles, choosing, weights, base elements, small screens, line height and token reference; loaded only when its route is requested |
 | `site/pages/components/actions-and-controls/toggle-button/ToggleButtonPage.tsx` | Standalone and grouped toggle examples; loaded only when its route is requested |
 | `site/pages/components/overlays/tooltip/TooltipPage.tsx` | Live Tooltip example and shared-template documentation under Overlays |
@@ -216,7 +218,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | Path | Purpose |
 | --- | --- |
 | `site/lab/labContent.tsx` | Lab labels, the experiment list and the Lab's NavTree items: Layout at the top level, its groups each holding their pages, then Layers, Browser and device, Emerging features, Components (holding Search), and the pages outside the experiments: Reading order and Style priority |
-| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry: the site's Navbar and sidebar layout with the Lab's NavTree, Components and Search, the Layers, Browser and device and Emerging features experiments, the top-level Reading order and Style priority pages and the On this page column used by DocsPageTemplate; chooses the index, the Layout overview, a group, a group page, an experiment page or the not-found page from the address |
+| `site/lab/LabPage.tsx`, `site/lab/lab-page.css` | Lab route entry: the site's TopBar and DocsShell frame with the Lab's NavTree, Components and Search, the Layers, Browser and device and Emerging features experiments, the top-level Reading order and Style priority pages and the On this page end Panel supplied by DocsShell; chooses the index, the Layout overview, a group, a group page, an experiment page or the not-found page from the address |
 | `site/lab/ComponentsPage.tsx` | Lab Components section (heading only) and its Search page, built with DocsPageTemplate |
 | `site/lab/labTopLevelPages.ts` | The Lab pages outside the experiments, Reading order and Style priority, gathered from their folders |
 | `site/lab/labCssNotes.ts` | Every page's CSS notes gathered into one list, which a browser test checks against layout-lab.css |
@@ -228,14 +230,14 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `site/lab/shared/labValues.ts` | Values shared by Lab pages: the overview Cards' heading, the Lab badge and Card button labels, frame presets, the example picture's alt text, and Every Layout and Bedrock source links |
 | `site/lab/shared/labLogic.ts` | Live media-query matching without effects, CSS support checks, and live viewport-height and safe-area measurement that updates on resize, rotation and toolbar changes, and the How it works paragraph an overview Card shows |
 | `site/lab/shared/LabParts.tsx` | Width-slider example frame, example headings and text, CSS notes, value pickers and emerging-feature support badges |
-| `site/lab/shared/LabPrimitives.tsx` | Lab-only layout components following Bedrock Layouts and Every Layout: Column, Row, RowWrap, RowWrapAndGrow, Reel, Hero, Center, AspectRatio, and the two grid recipes FixedColumnGrid and AutoFillGrid, with limits as custom properties |
+| `site/lab/shared/LabPrimitives.tsx` | Lab-only layout components following Bedrock Layouts and Every Layout: Column, Row, RowWrap, RowWrapGrow, Reel, Center, AspectRatio, and the two grid recipes FixedColumnGrid and AutoFillGrid, with limits as custom properties |
 | `site/lab/shared/layout-lab.css` | Lab-scoped styles and illustrative --lab-* candidate tokens for the Lab's pages |
-| `site/lab/layout/layoutContent.ts` | The Layout overview's content, the seven groups, and each group's pages in reading order, gathered from the page folders |
+| `site/lab/layout/layoutContent.ts` | The Layout overview's content, the six groups, and each group's pages in reading order, gathered from the page folders |
 | `site/lab/layout/layoutExamples.ts` | Each Layout page's examples, keyed by the page's key, gathered from the page folders |
-| `site/lab/layout/<group>/<page>/<page>Content.ts` | One folder per Layout page, named after its address (for example `site/lab/layout/side-by-side/row/rowContent.ts`): the page's content in the docs site's shape (description, any Also known as names, How it works with any Browser support, Example, Related pages and References) with its address, plus the CSS notes and any linked copy its example uses. Groups: box-basics (the-box-model, types-of-box, measuring-the-box, viewport-units, sizing-the-box, center), add-space (margin, padding, gap), inside-the-box (alignment, filling-the-box, overflowing-the-box, aspect-ratio, content-columns, box-has-content), side-by-side (row, row-wrap, row-wrap-and-grow, reel, split), one-below-another (column, hero), grid-formation (grid, subgrid) and container (container-queries, fluid-sizing) |
+| `site/lab/layout/<group>/<page>/<page>Content.ts` | One folder per Layout page, named after its address (for example `site/lab/layout/side-by-side/row/rowContent.ts`): the page's content in the docs site's shape (description, any Also known as names, How it works with any Browser support, Example, Related pages and References) with its address, plus the CSS notes and any linked copy its example uses. Groups: box-basics (the-box-model, types-of-box, measuring-the-box, viewport-units, sizing-the-box, center), add-space (margin-and-padding, gap, spacing), inside-the-box (alignment, filling-the-box, overflowing-the-box, aspect-ratio, content-columns, box-has-content), side-by-side (row, row-wrap, row-wrap-grow, reel, ratio-pair), grids-and-columns (column, grid, subgrid) and container (container-queries, fluid-sizing) |
 | `site/lab/layout/<group>/<page>/<Page>Example.tsx` | The page's example, with any options it alone uses (for example `RowExample.tsx`); Gap's also exports the spacing tokens shown after it |
-| `site/lab/layout/add-space/gap/SpacingScale.tsx` | Every spacing token with a bar of its size, its live value and its usual pixel size; used by the Lab's Gap page |
-| `site/lab/layout/add-space/gap/spacingContent.ts` | Spacing scale steps displayed by SpacingScale on the Lab's Gap page |
+| `site/lab/layout/add-space/spacing/SpacingScale.tsx` | Every spacing token with a bar of its size, its live value and its usual pixel size; used by the Lab's Spacing page |
+| `site/lab/layout/add-space/spacing/spacingContent.ts` | Spacing scale steps displayed by SpacingScale on the Lab's Spacing page |
 | `site/lab/layers/layersContent.ts` | The Layers experiment's overview content and its pages in order, gathered from its page folders |
 | `site/lab/layers/<page>/` | One folder per Layers page, each with its content and CSS notes and its example: positioning, ordering-layers, bundles-of-layers and scroll-padding |
 | `site/lab/browser-and-device/browserAndDeviceContent.ts` | The Browser and device experiment's overview content and its pages in order, gathered from its page folders |
@@ -255,23 +257,22 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `tests/components/card.spec.ts` | Card example structure, reflow at 320px with normal and doubled text, and accessibility in each theme |
 | `tests/components/code-block.spec.ts` | Code block structure, kept line breaks, reflow at 320px with normal and doubled text, and accessibility in each theme |
 | `tests/components/disclosure.spec.ts` | Disclosure reflow, immediate panels in every theme and motion setting, find-in-page and group switching |
-| `tests/components/navbar.spec.ts` | Navbar example keyboard, responsive, theme, contrast and forced-colour checks |
-| `tests/components/split.spec.ts` | Split sharing by fraction and by auto, and stacking at full width in a narrow container at normal and doubled text, using the Lab's Split page |
-| `tests/components/sidebar.spec.ts` | Sidebar collapse, independent state, modal focus, responsiveness and accessibility checks |
-| `tests/components/tab-bar.spec.ts` | TabBar overflow, navigation, sheet focus and responsive accessibility regression checks |
+| `tests/components/top-bar.spec.ts` | TopBar example keyboard, responsive, theme, contrast and forced-colour checks |
+| `tests/components/app-shell.spec.ts` | AppShell and Panel: sharing the space, closing back to the trigger, the bottom Panel's minimised version, the end Panel becoming a drawer, and 320px, text size, theme and axe checks |
+| `tests/components/ratio-pair.spec.ts` | RatioPair sharing by fraction and by auto, and stacking at full width in a narrow container at normal and doubled text, using the Lab's Ratio pair page |
 | `tests/components/table.spec.ts` | Table sorting interactions, keyboard and pointer activation, sort indicators and responsive contrast checks |
 | `tests/components/text-field.spec.ts` | TextField keyboard, validation, responsive and automated accessibility checks |
 | `tests/components/toggle-button.spec.ts` | Secondary toggle selection, keyboard, theme, responsive and forced-colour checks |
 | `tests/components/tooltip.spec.ts` | Theme tooltip hover, keyboard dismissal, responsive positioning and accessibility checks |
 | `tests/lab/search.spec.ts` | Lab search experiment: filtering while focus stays in the field, arrow keys and Enter, Docs and Lab groups, the empty state, clearing with the button and Escape, closing and focus return, every result reachable by keyboard, 320px reflow at normal and doubled text with accessibility scans in each theme, and forced colours |
-| `tests/lab/lab.spec.ts` | Lab navigation through the site menu at 320px with normal and doubled text, the shared sidebar layout, and the saved theme shared between Docs and Lab |
-| `tests/lab/layout.spec.ts` | Lab Layout pages: 320px reflow at normal and doubled text and accessibility in each theme for the overview, every stage and every page, links from the overview, group Cards and navigation, container-query, Row switch, :has(), overflow and reading-order behaviour, CSS notes matching the stylesheet (and, for Split, the library's), and the closed Also known as Disclosure opening from its button or On this page |
+| `tests/lab/lab.spec.ts` | Lab navigation through the site menu at 320px with normal and doubled text, the shared docs frame, and the saved theme shared between Docs and Lab |
+| `tests/lab/layout.spec.ts` | Lab Layout pages: 320px reflow at normal and doubled text and accessibility in each theme for the overview, every stage and every page, links from the overview, group Cards and navigation, container-query, Row switch, :has(), overflow and reading-order behaviour, CSS notes matching the stylesheet (and, for Ratio pair, the library's), and the closed Also known as Disclosure opening from its button or On this page |
 | `tests/site/right-to-left.spec.ts` | Right-to-left mirroring: Checkbox's box at the start of the line, Breadcrumbs running from the right, nested Table of contents links indented from the right, and the Reading direction example's logical box mirroring while its physical box stays put |
 | `tests/site/documentation-template.spec.ts` | Checks every implemented component page for matching headings and Contents links, unique anchors and narrow-screen reflow, plus inline On this page placement and anchor scrolling under each motion policy |
 | `tests/site/elevation.spec.ts` | Checks the Elevation page fits each breakpoint width with normal and doubled text |
 | `tests/site/motion.spec.ts` | Shared motion policy in each theme, nested themes, system precedence, loading indicators and the live Motion reference |
 | `tests/site/route-loading.spec.ts` | Verifies route-specific downloads, delayed and failed loads, section links and theme-state preservation |
-| `tests/site/site-navigation.spec.ts` | Documentation site Navbar: mobile menu, current section, landing and unknown routes |
+| `tests/site/site-navigation.spec.ts` | Documentation site TopBar: mobile menu, current section, landing and unknown routes |
 | `tests/site/wireframe-links.spec.ts` | Checks Wireframe underlines across link patterns and narrow layouts while preserving Light and Dark treatments |
 
 ### Rule checks (`scripts/`)
@@ -309,7 +310,7 @@ Typography retains its overview at `/typography`. Its child pages are `/typograp
 | `.github/workflows/gitleaks.yml` | Gitleaks scan of the full history for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/lighthouse.yml` | Runs mobile and desktop Lighthouse CI audits of the showcase for pull requests, pushes to `main`, and manual workflow dispatches |
 | `.github/workflows/playwright.yml` | Runs lint, builds and Chromium tests on pull requests and pushes to `main`, with downloadable reports and failure traces |
-| `config/lighthouserc.mobile.json`, `config/lighthouserc.desktop.json` | Representative home, Button, Table, TabBar, Navbar and Tooltip page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
+| `config/lighthouserc.mobile.json`, `config/lighthouserc.desktop.json` | Representative home, Button, Table, Tabs, TopBar, Tooltip and Lab page audits, mobile/desktop profiles, warning-only performance thresholds and local report destinations |
 | `config/nginx.conf` | Static server for the showcase: includes the generated allowed routes, real 404s, caching, gzip, and the pre-launch `noindex` header |
 | `config/tsconfig.app.json` | Type checking for `src/` and `site/`, including the package-name path |
 | `config/tsconfig.lib.json` | Emits the package's type declarations into `dist/` |
@@ -349,6 +350,6 @@ Browser tests are grouped by subject: `tests/components/` has one file per compo
 | `src/components/NavTree/NavTree.tsx` | Composed data-driven tree with owned controls, accessible labels, badges and sections |
 | `src/components/NavTree/NavTree.css` | Tree-row appearance, control focus and policy-aware quarter-turn chevron |
 | `src/components/NavTree/navTreeLogic.ts` | Private route/expansion reconciliation and recovery of focus lost through row removal |
-| `site/components/sidebarNavigationItems.tsx` | Converts site structure to navigation data and WIP badge content |
+| `site/components/docsNavigationItems.tsx` | Converts site structure to navigation data and WIP badge content |
 | `scripts/nav-tree-rules.mjs`, `scripts/nav-tree-rules.test.mjs` | Ownership checks and regression fixtures for removed recipes, consumer internals and aliased composition |
 | `tests/components/nav-tree.spec.ts`, `tests/components/fixtures/NavTreeHarness.tsx` | Isolated public-library checks for data, controlled state, focus, themes and reflow without site CSS, plus the documentation example's immediate rows, chevron motion and rapid toggles |

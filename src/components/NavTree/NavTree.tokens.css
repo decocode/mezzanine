@@ -4,11 +4,10 @@
   /* NavigationTree: component-specific structure, shared by every theme. */
   --navigation-tree-gap: 0;
   --navigation-tree-item-padding-block: 0;
-  --navigation-tree-item-padding-inline: 0.75rem;
-  --navigation-tree-item-gap: 0.5rem;
-  --navigation-tree-indent: 1rem;
-  --navigation-tree-current-indicator-width: 0.1875rem;
-  --navigation-tree-focus-ring-width: 0.1875rem;
-  --navigation-tree-focus-ring-offset: -0.1875rem;
-  --navigation-tree-header-padding-block: 0.5rem;
+  --navigation-tree-item-padding-inline: var(--space-3);
+  --navigation-tree-item-gap: var(--space-2);
+  --navigation-tree-indent: var(--space-4);
+  --navigation-tree-focus-ring-width: var(--focus-ring-width);
+  --navigation-tree-focus-ring-offset: var(--focus-ring-offset-inset);
+  --navigation-tree-header-padding-block: var(--space-2);
 }

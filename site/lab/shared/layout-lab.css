@@ -1,5 +1,5 @@
-/* Lab only: the Layout pages. Every rule is scoped to .lab-layout or to a
-   class used only here, so nothing can reach documentation pages. --lab-* values
+/* Lab only: the Layout pages and the other Lab experiments. Every rule uses a
+   class used only in the Lab, so nothing can reach documentation pages. --lab-* values
    are illustrative candidates, not Mezzanine tokens. */
 
 .lab-layout {
@@ -54,7 +54,7 @@
 }
 
 .lab-child-page-cards > li,
-.lab-child-page-cards .mezzanine-card {
+.lab-child-page-cards .mz-card {
   block-size: 100%;
 }
 
@@ -134,7 +134,7 @@
   /* Half a thumb each side, so the thumb stays inside the slider at both ends. */
   margin-inline: calc(var(--target-size-min) / 2);
   margin-block: calc((var(--target-size-min) - var(--space-2)) / 2);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   border-radius: var(--radius-full);
   background: var(--color-page);
 }
@@ -157,14 +157,14 @@
   box-sizing: border-box;
   inline-size: var(--target-size-min);
   block-size: var(--target-size-min);
-  border: 1px solid var(--color-text-muted);
+  border: var(--border-width-baseline) solid var(--color-text-muted);
   border-radius: var(--radius-full);
   background: var(--color-surface);
 }
 
 .lab-slider-thumb[data-focus-visible] {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
 }
 
 /* High contrast mode drops background colours, so the fill uses a system colour instead. */
@@ -182,11 +182,11 @@
   overflow-x: auto;
   inline-size: min(var(--lab-frame-width), 100%);
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .lab-frame-stage:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--space-1);
 }
 
@@ -195,7 +195,7 @@
   box-sizing: border-box;
   min-width: 0;
   padding: var(--space-3);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-surface);
 }
 
@@ -205,27 +205,6 @@
 
 /* The Layout groups. Pages that teach a CSS idea use the familiar physical names, such as
    width and margin-left; the layout components use logical names, as a library would. */
-
-.lab-subtitle {
-  max-inline-size: 70ch;
-}
-
-.lab-stage-list {
-  display: grid;
-  gap: var(--space-8);
-  padding: 0;
-  list-style: none;
-}
-
-.lab-stage-list > li,
-.lab-stage-pages {
-  display: grid;
-  gap: var(--space-2);
-}
-
-.lab-stage-pages {
-  padding-inline-start: var(--space-6);
-}
 
 .lab-picker {
   display: flex;
@@ -240,12 +219,6 @@
   gap: var(--space-2);
 }
 
-.lab-similar-to {
-  display: grid;
-  gap: var(--space-2);
-  padding-inline-start: var(--space-6);
-}
-
 .lab-legend {
   display: grid;
   gap: var(--space-1);
@@ -255,26 +228,26 @@
 
 /* The box: the box model. */
 .lab-box-margin-area {
-  border: 1px dashed var(--color-text-muted);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }
 
 .lab-box-anatomy {
   margin: var(--space-6);
   padding: var(--space-6);
-  border: var(--space-1) solid var(--color-text);
+  border: var(--border-width-xl) solid var(--color-text);
   background: var(--color-surface);
 }
 
 .lab-box-content {
   padding: var(--space-3);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-page);
 }
 
 .lab-sizing-box {
   width: 12rem;
   padding: var(--space-6);
-  border: var(--space-1) solid var(--color-text);
+  border: var(--border-width-xl) solid var(--color-text);
 }
 
 .lab-sizing-content-box {
@@ -287,7 +260,7 @@
 
 .lab-padding-box {
   padding: var(--lab-padding);
-  border: var(--space-1) solid var(--color-text);
+  border: var(--border-width-xl) solid var(--color-text);
   background: var(--color-surface);
 }
 
@@ -295,7 +268,7 @@
 .lab-unit-bar {
   box-sizing: border-box;
   padding: var(--space-2);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   background: var(--color-surface);
 }
 
@@ -308,7 +281,7 @@
   box-sizing: border-box;
   width: clamp(10rem, 50%, 30rem);
   padding: var(--space-3);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   background: var(--color-surface);
 }
 
@@ -321,12 +294,12 @@
   width: min(100%, 14rem);
   height: 6rem;
   padding: var(--space-2);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   overflow: var(--lab-overflow);
 }
 
 .lab-overflow-box:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--space-1);
 }
 
@@ -345,25 +318,25 @@
   width: 100%;
   aspect-ratio: 1;
   object-fit: var(--lab-object-fit);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
 }
 
 /* Inside the box: content columns, using CSS multi-column layout. */
 .lab-content-columns {
   columns: 12rem;
   column-gap: var(--space-6);
-  column-rule: 1px solid var(--color-border);
+  column-rule: var(--border-width-baseline) solid var(--color-border);
 }
 
 /* Box basics: types of box. */
 .lab-flow-item {
   display: var(--lab-flow-display);
   padding: var(--space-2);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   background: var(--color-surface);
 }
 
-/* Grid formation, and alignment inside the box. */
+/* Grids and columns, and alignment inside the box. */
 .lab-grid-example {
   display: grid;
   grid-template-columns: var(--lab-grid-columns);
@@ -381,19 +354,19 @@
   gap: var(--space-3);
   min-height: 12rem;
   padding: var(--space-3);
-  border: 1px dashed var(--color-text-muted);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }
 
 .lab-centre-anything {
   display: grid;
   place-items: center;
   min-height: 10rem;
-  border: 1px dashed var(--color-text-muted);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }
 
 /* Add space: gap and the spacing scale. */
 .lab-spacing-example {
-  border: 1px dashed var(--color-text-muted);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }
 
 .lab-spacing-margin > * {
@@ -496,38 +469,6 @@
   object-fit: cover;
 }
 
-.lab-hero {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  min-block-size: var(--lab-hero-min, 20rem);
-  padding: var(--space-4);
-}
-
-.lab-hero-centre {
-  margin-block: auto;
-}
-
-/* The Hero example's outline, so you can see the box the middle item is centred in. */
-.lab-hero-example {
-  border: 1px dashed var(--color-text-muted);
-}
-
-/* The example's items: small labels at the edges and a large centred headline. */
-.lab-hero-example .lab-hero-small {
-  align-self: flex-start;
-  padding: var(--space-1) var(--space-2);
-  border: 1px solid var(--color-border);
-}
-
-.lab-hero-example .lab-hero-end {
-  align-self: center;
-}
-
-.lab-hero-headline {
-  text-align: center;
-}
-
 .lab-reel {
   display: flex;
   gap: var(--space-3);
@@ -540,7 +481,7 @@
 }
 
 .lab-reel:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--space-1);
 }
 
@@ -550,11 +491,11 @@
   max-height: 14rem;
   overflow: auto;
   padding: var(--space-3);
-  border: 1px dashed var(--color-text-muted);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }
 
 .lab-position-stage:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--space-1);
 }
 
@@ -574,7 +515,7 @@
   display: grid;
   gap: clamp(var(--space-2), 4cqi, var(--space-8));
   padding: clamp(var(--space-2), 4cqi, var(--space-8));
-  border: 1px dashed var(--color-border);
+  border: var(--border-width-baseline) dashed var(--color-border);
 }
 
 .lab-fluid-width {
@@ -655,7 +596,7 @@
 .lab-target {
   display: block;
   box-sizing: border-box;
-  border: 2px solid var(--color-warning-600);
+  border: var(--border-width-md) solid var(--color-warning-600);
 }
 
 .lab-target-wcag {
@@ -664,8 +605,8 @@
 }
 
 .lab-target-comfortable {
-  inline-size: var(--target-size);
-  block-size: var(--target-size);
+  inline-size: var(--target-size-md);
+  block-size: var(--target-size-md);
 }
 
 .lab-layer-stack {
@@ -678,7 +619,7 @@
   box-sizing: border-box;
   inline-size: 60%;
   padding: var(--space-3);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-page);
   box-shadow: var(--elevation-raised-1);
   inset-block-start: calc(var(--lab-layer-step) * 2.5rem);
@@ -703,7 +644,7 @@
   align-content: start;
   gap: var(--space-3);
   padding: var(--space-4);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .lab-subgrid-box > * {
@@ -770,11 +711,11 @@
   position: relative;
   max-block-size: 16rem;
   overflow: auto;
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .lab-scroll-box:focus-visible {
-  outline: 2px solid var(--color-focus);
+  outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--space-1);
 }
 
@@ -789,7 +730,7 @@
   box-sizing: border-box;
   min-block-size: var(--lab-sticky-height);
   padding: var(--space-3);
-  border-block-end: 1px solid var(--color-border);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-surface);
 }
 
@@ -804,7 +745,7 @@
 .lab-chip {
   display: inline-block;
   padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--color-border);
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .lab-layout .lab-cascade-unlayered .lab-chip.lab-chip {
@@ -863,8 +804,25 @@
 @container scroll-state(stuck: top) {
   .lab-stuck-aware > span {
     display: inline-block;
-    outline: 2px solid var(--color-warning-600);
+    outline: var(--border-width-md) solid var(--color-warning-600);
     outline-offset: var(--space-1);
+  }
+}
+
+/* Emerging feature: a heading's divider appears only once the list under it has scrolled. */
+.lab-divider-box {
+  container-type: scroll-state;
+}
+
+@supports (container-type: scroll-state) {
+  .lab-divider-heading {
+    border-block-end-color: transparent;
+  }
+
+  @container scroll-state(scrollable: top) {
+    .lab-divider-heading {
+      border-block-end-color: var(--color-border);
+    }
   }
 }
 
@@ -885,7 +843,7 @@
   justify-self: start;
   max-inline-size: 100%;
   padding: var(--space-2);
-  border: 2px dashed var(--color-warning-600);
+  border: var(--border-width-md) dashed var(--color-warning-600);
   background: var(--color-page);
 }
 
@@ -917,7 +875,7 @@
   width: 65%;
   height: 12rem;
   padding: var(--space-2);
-  border: 2px dashed var(--color-text-muted);
+  border: var(--border-width-md) dashed var(--color-text-muted);
 }
 
 /* Each bundle's label sits in its top right corner. */
@@ -953,7 +911,7 @@
   width: 70%;
   min-height: 4rem;
   padding: var(--space-1) var(--space-2);
-  border: 1px solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-text);
   background: var(--color-surface);
   box-shadow: var(--elevation-raised-1);
 }

@@ -44,7 +44,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   const main = page.locator('main')
   // Each group is a Card with a Read docs Button to its overview, described by the group's name.
   for (const stage of stageOverviewPages) {
-    const readDocs = main.locator('.mezzanine-card').filter({ has: page.getByRole('heading', { name: stage.title, exact: true, level: 3 }) }).getByRole('link', { name: 'Read docs', exact: true })
+    const readDocs = main.locator('.mz-card').filter({ has: page.getByRole('heading', { name: stage.title, exact: true, level: 3 }) }).getByRole('link', { name: 'Read docs', exact: true })
     await expect(readDocs).toHaveAttribute('href', stage.path)
     await expect(readDocs).toHaveAccessibleDescription(stage.title)
   }
@@ -53,7 +53,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   await expect(page).toHaveTitle('Box basics | Lab')
 
   // A stage shows a Card for each of its pages, each with a Read docs Button to the page.
-  const card = (title: string) => page.locator('main .mezzanine-card').filter({ has: page.getByRole('heading', { name: title, exact: true, level: 3 }) })
+  const card = (title: string) => page.locator('main .mz-card').filter({ has: page.getByRole('heading', { name: title, exact: true, level: 3 }) })
   for (const stagePage of stagePagesByStage('boxBasics')) {
     const readDocs = card(stagePage.title).getByRole('link', { name: 'Read docs', exact: true })
     await expect(readDocs).toHaveAttribute('href', stagePage.href)
@@ -61,13 +61,13 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   }
   // Box basics is an index of Cards; the box model has its own page, first among them.
   await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toHaveCount(0)
-  await expect(page.locator('main .mezzanine-card').first().getByRole('heading', { level: 3 })).toHaveText('The box model')
+  await expect(page.locator('main .mz-card').first().getByRole('heading', { level: 3 })).toHaveText('The box model')
   await card('Types of box').getByRole('link', { name: 'Read docs', exact: true }).click()
   await expect(page).toHaveTitle('Types of box | Lab')
   await expect(page.getByText('When boxes decide whether to stack up or line up.', { exact: true })).toBeVisible()
 
   // On a stage page, the tree lists every stage and page, and the pages still to be sorted.
-  const tree = page.locator('.site-layout > .site-sidebar').getByRole('treegrid', { name: 'Lab experiments' })
+  const tree = page.locator('.mz-panel[data-edge="start"]').getByRole('treegrid', { name: 'Lab experiments' })
   for (const layoutPage of [...stageOverviewPages, ...stagePagesByStage('boxBasics').map(item => ({ path: item.href, title: item.title }))]) {
     await expect(tree.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
   }
@@ -76,15 +76,15 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
 
   // A stage page explains how it works, then shows an example with the CSS behind it. A building
   // block page also links to its sources.
-  await page.goto('/site/lab/layout/one-below-another/column')
+  await page.goto('/site/lab/layout/grids-and-columns/column')
   await expect(page).toHaveTitle('Column | Lab')
   await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Example', exact: true, level: 2 })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'The CSS behind Column', level: 3 })).toBeVisible()
   await expect(main.getByRole('heading', { name: 'References', exact: true, level: 2 })).toBeVisible()
   await expect(main.getByRole('link', { name: 'Bedrock: Stack (opens in a new tab)', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/stack')
-  // The Gap page lists the real spacing tokens with their live values.
-  await page.goto('/site/lab/layout/add-space/gap')
+  // The Spacing page lists the real spacing tokens with their live values.
+  await page.goto('/site/lab/layout/add-space/spacing')
   await expect(main.locator('.spacing-scale-item').filter({ hasText: '--space-4' }).locator('.spacing-scale-rem')).toHaveText('1rem')
   await page.goto('/site/lab/layout/not-a-page')
   await expect(page).toHaveTitle('Page not found | Lab')
@@ -138,12 +138,12 @@ test('Lab Layout examples respond to their space and content', async ({ page }) 
   await expect(page.getByRole('button', { name: 'Button 2', exact: true })).toBeFocused()
 })
 
-// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet (or, for Split, the library's), apart from example CSS,
+// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet (or, for RatioPair, the library's), apart from example CSS,
 // so the explanation cannot drift from the rules it describes.
 test('Lab Layout CSS notes match the Lab stylesheet', () => {
   const normalise = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim()
-  // Split's note shows the library's own CSS, since the Lab uses the library component.
-  const stylesheet = normalise(['site/lab/shared/layout-lab.css', 'src/components/Split/Split.css'].map((file) => readFileSync(file, 'utf8')).join('\n'))
+  // RatioPair's note shows the library's own CSS, since the Lab uses the library component.
+  const stylesheet = normalise(['site/lab/shared/layout-lab.css', 'src/components/RatioPair/RatioPair.css'].map((file) => readFileSync(file, 'utf8')).join('\n'))
   for (const note of Object.values(cssNotes).filter((note) => !note.isExample)) {
     for (const rule of note.code.split(/\n\s*\n/)) expect(stylesheet).toContain(normalise(rule))
   }
@@ -152,9 +152,9 @@ test('Lab Layout CSS notes match the Lab stylesheet', () => {
 // Checks that a page's "Also known as" names start in a closed Disclosure, open from its button,
 // and open when its On this page link is followed.
 test('Also known as starts closed and opens from its button or On this page', async ({ page }) => {
-  await page.goto('/site/lab/layout/side-by-side/split')
+  await page.goto('/site/lab/layout/side-by-side/ratio-pair')
   const trigger = page.getByRole('button', { name: 'Also known as', exact: true })
-  const names = page.getByRole('grid', { name: 'Other names for Split' })
+  const names = page.getByRole('grid', { name: 'Other names for Ratio pair' })
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   await expect(names).toBeHidden()
   await trigger.click()

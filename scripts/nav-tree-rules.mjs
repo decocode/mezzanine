@@ -30,7 +30,7 @@ export function checkNavTreeSource(file, source) {
     ts.forEachChild(node, visit)
   }
   visit(ast)
-  for (const match of source.matchAll(/\bmezzanine-nav-tree(?:-(?:item|label|toggle|chevron|content|section|header))?\b/g)) problems.push({ position: match.index, message: 'The library supplies NavTree recipe classes; consumers use their own className for layout.' })
+  for (const match of source.matchAll(/\bmz-nav-tree(?:-(?:item|label|toggle|chevron|content|section|header))?\b/g)) problems.push({ position: match.index, message: 'The library supplies NavTree recipe classes; consumers use their own className for layout.' })
   return problems
 }
 
@@ -40,9 +40,9 @@ export function checkNavTreeCss(file, source) {
   for (const match of css.matchAll(obsolete)) problems.push({ position: match.index, message: `Removed tree recipe class ${match[0]}.` })
   for (const block of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
     const selector = block[1]
-    if (file.startsWith('site/') && /\.(?:mezzanine-nav-tree-(?:item|label|toggle|chevron|content|section|header)|react-aria-NavigationTree(?:Item|Section|Header))\b/.test(selector)) problems.push({ position: block.index, message: 'NavTree internal appearance and spacing belong in the library.' })
+    if (file.startsWith('site/') && /\.(?:mz-nav-tree-(?:item|label|toggle|chevron|content|section|header)|react-aria-NavigationTree(?:Item|Section|Header))\b/.test(selector)) problems.push({ position: block.index, message: 'NavTree internal appearance and spacing belong in the library.' })
     if (!/Nav(?:igation)?Tree\.css$/.test(file)) continue
-    if (/\.(?:react-aria-(?:Button|Link)|mezzanine-button-[\w-]+)\b|\bsvg\b/.test(selector)) problems.push({ position: block.index, message: 'Style owned tree parts directly, not generic Button/Link internals or every SVG.' })
+    if (/\.(?:react-aria-(?:Button|Link)|mz-button-[\w-]+)\b|\bsvg\b/.test(selector)) problems.push({ position: block.index, message: 'Style owned tree parts directly, not generic Button/Link internals or every SVG.' })
     if (/!important\b/.test(block[2])) problems.push({ position: block.index, message: 'Do not force tree appearance over another component.' })
   }
   return problems

@@ -39,7 +39,8 @@
   grid-column: 1 / -1;
   gap: var(--radio-content-gap);
   align-items: center;
-  min-height: var(--radio-indicator-size);
+  /* The whole row is the target, so it takes its height from the shared target size, as Checkbox does. */
+  min-height: var(--target-size-sm);
   padding-inline-start: calc(var(--radio-indicator-size) + var(--radio-content-gap));
   cursor: pointer;
 }

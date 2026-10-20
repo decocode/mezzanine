@@ -1,7 +1,6 @@
 import { ExampleZone } from '../../../../components/ExampleZone'
-import { Button, FieldError, Input, Label, Text, TextField } from '@decocode/mezzanine'
+import { Button, FieldError, Form, Input, Label, Text, TextField } from '@decocode/mezzanine'
 import { useState } from 'react'
-import { Form } from 'react-aria-components/Form'
 import { textFieldContent } from './textFieldContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 

@@ -12,6 +12,9 @@
 
 .react-aria-Column,
 .react-aria-Cell {
+  /* Every row takes its height from the shared target size scale. A table cell's height works as a
+     minimum, so longer content still makes its row taller. */
+  height: var(--target-size-md);
   padding: var(--table-cell-padding-block) var(--table-cell-padding-inline);
   border-block-end: var(--table-border-width) solid var(--color-border);
   text-align: start;
@@ -45,7 +48,7 @@
   cursor: pointer;
 }
 
-.mezzanine-table-sort-indicator {
+.mz-table-sort-indicator {
   margin-inline-start: var(--space-1);
 }
 
@@ -69,6 +72,12 @@
 
 .react-aria-Row[data-selection-mode] {
   cursor: pointer;
+}
+
+/* The whole row is the target, so a selection checkbox inside it needn't add its own target height. */
+.react-aria-Row[data-selection-mode] > .react-aria-Cell > .react-aria-Checkbox {
+  min-height: 0;
+  vertical-align: top;
 }
 
 .react-aria-Row[data-selected] .react-aria-Cell {

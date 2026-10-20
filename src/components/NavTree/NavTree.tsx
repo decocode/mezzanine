@@ -45,23 +45,23 @@ function NavTreeRow({ item, state, getToggleLabel }: {
 }) {
   const labelId = useId()
   const toggleId = useId()
-  const label = <><span id={labelId}>{item.label}</span>{item.content != null && <span className="mezzanine-nav-tree-content">{item.content}</span>}</>
-  const icon = <ChevronRightIcon className="mezzanine-nav-tree-chevron" />
+  const label = <><span id={labelId}>{item.label}</span>{item.content != null && <span className="mz-nav-tree-content">{item.content}</span>}</>
+  const icon = <ChevronRightIcon className="mz-nav-tree-chevron" />
   const toggleLabel = getToggleLabel?.(item, state.isExpanded)
   if (item.href) return <>
-    <ReactAriaLink className="mezzanine-nav-tree-label">{label}</ReactAriaLink>
+    <ReactAriaLink className="mz-nav-tree-label">{label}</ReactAriaLink>
     {state.hasChildItems && <ReactAriaButton
-      id={toggleId} slot="chevron" className="mezzanine-nav-tree-toggle"
+      id={toggleId} slot="chevron" className="mz-nav-tree-toggle"
       aria-labelledby={toggleId} aria-expanded={state.isExpanded}
       aria-label={toggleLabel ?? `${state.isExpanded ? 'Collapse' : 'Expand'} ${item.label}`}
     >{icon}</ReactAriaButton>}
   </>
   if (state.hasChildItems) return <ReactAriaButton
-    id={toggleId} slot="chevron" className="mezzanine-nav-tree-label mezzanine-nav-tree-toggle"
+    id={toggleId} slot="chevron" className="mz-nav-tree-label mz-nav-tree-toggle"
     aria-labelledby={toggleLabel ? toggleId : labelId}
     aria-label={toggleLabel} aria-expanded={state.isExpanded}
   >{label}{icon}</ReactAriaButton>
-  return <span className="mezzanine-nav-tree-label">{label}</span>
+  return <span className="mz-nav-tree-label">{label}</span>
 }
 
 // Private renderer returns the real collection parts, with no DOM wrappers.
@@ -69,7 +69,7 @@ function renderNavTreeItem(item: NavTreeItemData, getToggleLabel: NavTreeProps['
   const { type: _type, label, textValue, content: _content, children, className, ...props } = item
   return <NavigationTreeItem {...props} key={item.id} textValue={textValue ?? label}
     isDisabled={item.isDisabled || (!item.href && !children?.length)}
-    className={composeRenderProps(className, value => ['mezzanine-nav-tree-item', value].filter(Boolean).join(' '))}>
+    className={composeRenderProps(className, value => ['mz-nav-tree-item', value].filter(Boolean).join(' '))}>
     <NavigationTreeItemContent>{state => <NavTreeRow item={item} state={state} getToggleLabel={getToggleLabel} />}</NavigationTreeItemContent>
     {children?.map(child => renderNavTreeItem(child, getToggleLabel))}
   </NavigationTreeItem>
@@ -79,11 +79,11 @@ export function NavTree({ items, selectedRoute, expandedKeys, defaultExpandedKey
   const expansion = useNavTreeExpansion({ items, selectedRoute, expandedKeys, defaultExpandedKeys, onExpandedChange })
   const focusRef = useNavTreeElement(items, ref)
   return <NavigationTree {...props} ref={focusRef} selectedRoute={selectedRoute} {...expansion}
-    className={composeRenderProps(className, value => ['mezzanine-nav-tree', value].filter(Boolean).join(' '))}>
+    className={composeRenderProps(className, value => ['mz-nav-tree', value].filter(Boolean).join(' '))}>
     {items.map(item => item.type === 'section'
       ? <NavigationTreeSection key={item.id} id={item.id} aria-label={item['aria-label']} style={item.style}
-          className={['mezzanine-nav-tree-section', item.className].filter(Boolean).join(' ')}>
-          {item.label && <NavigationTreeHeader className="mezzanine-nav-tree-header">{item.label}</NavigationTreeHeader>}
+          className={['mz-nav-tree-section', item.className].filter(Boolean).join(' ')}>
+          {item.label && <NavigationTreeHeader className="mz-nav-tree-header">{item.label}</NavigationTreeHeader>}
           {item.children.map(child => renderNavTreeItem(child, getToggleLabel))}
         </NavigationTreeSection>
       : renderNavTreeItem(item, getToggleLabel))}

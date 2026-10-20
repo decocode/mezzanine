@@ -3,9 +3,9 @@
 :where(:root) {
   /* ToggleButton: component-specific structure, shared by every theme. */
   --toggle-button-border-width: var(--border-width-baseline);
-  --toggle-button-border-radius: 0;
-  --toggle-button-focus-ring-width: 0.1875rem;
-  --toggle-button-focus-ring-offset: 0.1875rem;
+  --toggle-button-border-radius: var(--radius-control);
+  --toggle-button-focus-ring-width: var(--focus-ring-width);
+  --toggle-button-focus-ring-offset: var(--focus-ring-offset);
   --toggle-button-group-gap: 0;
   --toggle-button-selection-indicator-width: 0.125rem;
 }

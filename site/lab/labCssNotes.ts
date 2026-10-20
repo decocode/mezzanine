@@ -6,9 +6,9 @@ import { measuringTheBoxCssNotes } from './layout/box-basics/measuring-the-box/m
 import { viewportUnitsCssNotes } from './layout/box-basics/viewport-units/viewportUnitsContent'
 import { sizingTheBoxCssNotes } from './layout/box-basics/sizing-the-box/sizingTheBoxContent'
 import { centerCssNotes } from './layout/box-basics/center/centerContent'
-import { marginCssNotes } from './layout/add-space/margin/marginContent'
-import { paddingCssNotes } from './layout/add-space/padding/paddingContent'
+import { marginAndPaddingCssNotes } from './layout/add-space/margin-and-padding/marginAndPaddingContent'
 import { gapCssNotes } from './layout/add-space/gap/gapContent'
+import { spacingCssNotes } from './layout/add-space/spacing/spacingPageContent'
 import { alignmentCssNotes } from './layout/inside-the-box/alignment/alignmentContent'
 import { fillingTheBoxCssNotes } from './layout/inside-the-box/filling-the-box/fillingTheBoxContent'
 import { overflowingTheBoxCssNotes } from './layout/inside-the-box/overflowing-the-box/overflowingTheBoxContent'
@@ -17,13 +17,12 @@ import { contentColumnsCssNotes } from './layout/inside-the-box/content-columns/
 import { boxHasContentCssNotes } from './layout/inside-the-box/box-has-content/boxHasContentContent'
 import { rowCssNotes } from './layout/side-by-side/row/rowContent'
 import { rowWrapCssNotes } from './layout/side-by-side/row-wrap/rowWrapContent'
-import { rowWrapAndGrowCssNotes } from './layout/side-by-side/row-wrap-and-grow/rowWrapAndGrowContent'
+import { rowWrapGrowCssNotes } from './layout/side-by-side/row-wrap-grow/rowWrapGrowContent'
 import { reelCssNotes } from './layout/side-by-side/reel/reelContent'
-import { splitCssNotes } from './layout/side-by-side/split/splitContent'
-import { columnCssNotes } from './layout/one-below-another/column/columnContent'
-import { heroCssNotes } from './layout/one-below-another/hero/heroContent'
-import { gridCssNotes } from './layout/grid-formation/grid/gridContent'
-import { subgridCssNotes } from './layout/grid-formation/subgrid/subgridContent'
+import { ratioPairCssNotes } from './layout/side-by-side/ratio-pair/ratioPairContent'
+import { columnCssNotes } from './layout/grids-and-columns/column/columnContent'
+import { gridCssNotes } from './layout/grids-and-columns/grid/gridContent'
+import { subgridCssNotes } from './layout/grids-and-columns/subgrid/subgridContent'
 import { containerQueriesCssNotes } from './layout/container/container-queries/containerQueriesContent'
 import { fluidSizingCssNotes } from './layout/container/fluid-sizing/fluidSizingContent'
 import { positioningCssNotes } from './layers/positioning/positioningContent'
@@ -48,9 +47,9 @@ export const cssNotes: Record<string, CssNote> = {
   ...viewportUnitsCssNotes,
   ...sizingTheBoxCssNotes,
   ...centerCssNotes,
-  ...marginCssNotes,
-  ...paddingCssNotes,
+  ...marginAndPaddingCssNotes,
   ...gapCssNotes,
+  ...spacingCssNotes,
   ...alignmentCssNotes,
   ...fillingTheBoxCssNotes,
   ...overflowingTheBoxCssNotes,
@@ -59,11 +58,10 @@ export const cssNotes: Record<string, CssNote> = {
   ...boxHasContentCssNotes,
   ...rowCssNotes,
   ...rowWrapCssNotes,
-  ...rowWrapAndGrowCssNotes,
+  ...rowWrapGrowCssNotes,
   ...reelCssNotes,
-  ...splitCssNotes,
+  ...ratioPairCssNotes,
   ...columnCssNotes,
-  ...heroCssNotes,
   ...gridCssNotes,
   ...subgridCssNotes,
   ...containerQueriesCssNotes,

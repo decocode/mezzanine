@@ -54,7 +54,7 @@ export const toggleButtonContent: DocsPageContent = {
     {
       key: 'usage',
       body: [
-        "Mezzanine's `size` appearance prop supports `sm`, `md`, `lg` and `xl`, using the same size tokens as Button. Both default to `md`. Set a group size on ToggleButtonGroup or an individual size on ToggleButton. Use `iconLeading` or `iconTrailing` without children for a square icon-only button, with an accessible name and Tooltip. These appearance props extend React Aria without changing selection or keyboard behaviour.",
+        "Mezzanine's `size` appearance prop supports `xs`, `sm`, `md`, `lg` and `xl`, using the same size tokens as Button. Both default to `md`. Set a group size on ToggleButtonGroup or an individual size on ToggleButton. Use `iconLeading` or `iconTrailing` without children for a square icon-only button, with an accessible name and Tooltip. These appearance props extend React Aria without changing selection or keyboard behaviour.",
         'For an independent toggle, use `defaultSelected` for initial state or `isSelected` with `onChange` for controlled state.',
         'For a group, supply an accessible label and stable button `id` values. Choose `selectionMode="single"` or `selectionMode="multiple"`; use `defaultSelectedKeys` or controlled `selectedKeys` with `onSelectionChange`. Set `disallowEmptySelection` when a selection must remain.',
         'Set `variant="secondary"` on a ToggleButtonGroup or an individual ToggleButton. This Mezzanine appearance extension preserves React Aria behaviour. The group applies the appearance to its children. Unselected buttons use standard secondary Button colours; selected buttons keep an inset line and a soft fill. Hover deepens the fill, and pressing a selected button strengthens the bottom line. Omitting the variant preserves the existing appearance. Disabled selection stays visible, and forced-colour mode underlines selected labels.',
@@ -98,6 +98,7 @@ export const toggleButtonContent: DocsPageContent = {
     { label: 'Button', href: '/button' },
     { label: 'Checkbox', href: '/checkbox' },
     { label: 'Radio group', href: '/radio-group' },
+    { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria ToggleButton', href: 'https://react-aria.adobe.com/ToggleButton' },

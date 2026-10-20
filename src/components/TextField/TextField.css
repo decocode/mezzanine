@@ -26,7 +26,7 @@
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  min-height: var(--control-size-md);
+  min-height: var(--target-size-md);
   margin: 0;
   padding: var(--input-padding-block) var(--input-padding-inline);
   border: var(--input-border-width) solid var(--input-border);

@@ -1,7 +1,7 @@
 // This component finds the requested page in pageRegistry.ts and displays it.
 // It shows a loading message while the page downloads, or an error with a reload
 // button if something goes wrong. Once the page loads, it also scrolls to the
-// requested section when the URL includes a section link, such as #navbar-anatomy.
+// requested section when the URL includes a section link, such as #top-bar-anatomy.
 
 import { Component, Suspense, useEffect, type ReactNode } from 'react'
 import { Button } from '@decocode/mezzanine'

@@ -18,7 +18,7 @@ export function Column(props: ColumnProps & RefAttributes<HTMLDivElement | HTMLT
         <>
           {children}
           {allowsSorting && sortDirection && (
-            <span aria-hidden="true" className="mezzanine-table-sort-indicator">
+            <span aria-hidden="true" className="mz-table-sort-indicator">
               {sortDirection === 'ascending' ? '▲' : '▼'}
             </span>
           )}
