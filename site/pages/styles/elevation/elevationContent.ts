@@ -20,10 +20,15 @@ export const elevationDefinitions: ElevationDefinition[] = [
 export const elevationColourTokens: { token: string; purpose: string }[] = [
   { token: '--elevation-shadow-color', purpose: 'Shadow colour for every sunken and raised level.' },
   { token: '--elevation-highlight-color', purpose: 'Thin edge line around every sunken and raised level. Transparent hides it.' },
+  { token: '--elevation-sunken-1-surface', purpose: 'Surface colour for Sunken 1.' }, // gitleaks:allow (a CSS token name, not a secret)
+  { token: '--elevation-flat-surface', purpose: 'Surface colour for Flat.' },
+  { token: '--elevation-raised-1-surface', purpose: 'Surface colour for Raised 1. In Dark, each raised level is lighter than the one below, because a shadow barely shows on a dark page.' }, // gitleaks:allow (a CSS token name, not a secret)
+  { token: '--elevation-raised-2-surface', purpose: 'Surface colour for Raised 2.' }, // gitleaks:allow (a CSS token name, not a secret)
+  { token: '--elevation-raised-3-surface', purpose: 'Surface colour for Raised 3.' }, // gitleaks:allow (a CSS token name, not a secret)
 ]
 
 // Shown between the two token tables, so it is part of the page's Tokens part rather than the section intro.
-export const elevationColourTokensIntro: Copy = 'Every sunken and raised level is built from two colours, set in each theme file in `src/themes/`.'
+export const elevationColourTokensIntro: Copy = 'Every sunken and raised level is built from two colours, plus a surface colour for each level, all set in each theme file in `src/themes/`.'
 
 export const elevationContent: DocsPageContent = {
   id: 'elevation',

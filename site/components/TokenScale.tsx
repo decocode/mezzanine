@@ -9,6 +9,8 @@ export interface TokenScaleItem {
   token: string
   label: string
   description?: string
+  // A second token for the sample's background, such as an elevation level's surface colour.
+  surface?: string
 }
 
 // One way to show any scale of tokens: each step is a card with a sample drawn from the token, its
@@ -17,10 +19,10 @@ export interface TokenScaleItem {
 export function TokenScale({ items, sample, showValue = true }: { items: readonly TokenScaleItem[]; sample: TokenScaleSample; showValue?: boolean }) {
   return (
     <ol className="token-scale" data-sample={sample}>
-      {items.map(({ token, label, description }) => (
+      {items.map(({ token, label, description, surface }) => (
         <li key={token}>
           <Card>
-            <span aria-hidden="true" className="token-scale-sample" style={{ '--_token-scale-value': `var(${token})` } as CSSProperties} />
+            <span aria-hidden="true" className="token-scale-sample" style={{ '--_token-scale-value': `var(${token})`, ...(surface && { '--_token-scale-surface': `var(${surface})` }) } as CSSProperties} />
             <p><strong>{label}</strong></p>
             <p><code>{token}</code></p>
             {showValue && <p><TokenValue token={token} /></p>}

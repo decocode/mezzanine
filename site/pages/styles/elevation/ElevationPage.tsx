@@ -8,7 +8,7 @@ import {
 import { ContentPage } from '../../../templates/ContentPage'
 
 // Each level's card shows its shadow, with its level number and what it's for.
-const elevationLevels = elevationDefinitions.map(({ token, label, level, useFor }) => ({ token, label, description: `Level ${level}. ${useFor}` }))
+const elevationLevels = elevationDefinitions.map(({ token, label, level, useFor }) => ({ token, label, description: `Level ${level}. ${useFor}`, surface: `${token}-surface` }))
 
 export default function ElevationPage() {
   return (

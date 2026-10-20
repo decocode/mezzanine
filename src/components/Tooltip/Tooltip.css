@@ -4,7 +4,7 @@
   padding: var(--space-2) var(--space-3);
   border: var(--tooltip-border-width) solid var(--color-border);
   border-radius: var(--radius-surface);
-  background: var(--color-surface);
+  background: var(--elevation-raised-2-surface);
   color: var(--color-text);
   box-shadow: var(--elevation-raised-2);
   font-family: var(--font-family-body);

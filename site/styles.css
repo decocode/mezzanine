@@ -324,11 +324,13 @@ a:focus-visible {
   inline-size: 100%;
   block-size: var(--space-24);
   border: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-surface);
+  background: var(--_token-scale-surface, var(--color-surface));
 }
 
 .token-scale[data-sample='radius'] .token-scale-sample { border-radius: var(--_token-scale-value); }
 .token-scale[data-sample='border-width'] .token-scale-sample { border-width: var(--_token-scale-value); border-color: var(--color-text); }
+/* Elevation samples are judged against level 0, so their cards sit flat rather than raised. */
+.token-scale[data-sample='shadow'] { --card-background: var(--elevation-flat-surface); --card-elevation: var(--elevation-flat); }
 .token-scale[data-sample='shadow'] .token-scale-sample { border-color: transparent; box-shadow: var(--_token-scale-value); }
 .token-scale[data-sample='length'] .token-scale-sample {
   inline-size: var(--_token-scale-value);

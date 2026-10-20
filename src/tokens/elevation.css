@@ -7,6 +7,15 @@
 :where(:root) {
   --elevation-highlight-color: transparent;
 
+  /* Each level's surface colour. In Light and Wireframe the shadow shows the height, so raised
+     surfaces match the page and sunken ones the surface beneath. Dark sets lighter surfaces for higher
+     levels, because a shadow barely shows on a dark page. */
+  --elevation-sunken-1-surface: var(--color-surface);
+  --elevation-flat-surface: var(--color-page);
+  --elevation-raised-1-surface: var(--color-page);
+  --elevation-raised-2-surface: var(--color-page);
+  --elevation-raised-3-surface: var(--color-page);
+
   --elevation-sunken-1: inset 0 1px 2px var(--elevation-shadow-color), inset 0 0 0 1px var(--elevation-highlight-color);
   --elevation-flat: none;
   --elevation-raised-1: 0 1px 2px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
