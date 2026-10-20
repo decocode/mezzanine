@@ -6,9 +6,17 @@ import { PanelStore, type PanelEdge } from './panelStore'
 interface AppShellState {
   store: PanelStore
   presentation: (edge: PanelEdge) => PanelPresentation
+  // True when the start Panel can't be closed but is hidden for lack of room, so its content (usually
+  // navigation) has to be reached another way, such as a TopBar's menu.
+  isStartPanelHidden: boolean
 }
 
 const AppShellContext = createContext<AppShellState | null>(null)
+
+// The AppShell around a component, or null outside one.
+export function useOptionalAppShell() {
+  return useContext(AppShellContext)
+}
 
 export function useAppShell(component: string) {
   const state = useContext(AppShellContext)
@@ -21,6 +29,9 @@ export interface AppShellProps {
   children: ReactNode
   // Whether a bottom Panel sits under the main content only, or under the side Panels too.
   bottomPanelSpan?: 'main' | 'full'
+  // Whether a side Panel sits beside the main content only, or runs the full height, beside the header too.
+  startPanelSpan?: 'main' | 'full'
+  endPanelSpan?: 'main' | 'full'
   className?: string
 }
 
@@ -42,9 +53,9 @@ function tokenInPixels(element: HTMLElement | null, token: string) {
   return lengthInPixels(styles.getPropertyValue(token), parseFloat(getComputedStyle(document.documentElement).fontSize), parseFloat(styles.fontSize))
 }
 
-// The frame around an app's main content: a header across the top, Panels at the start, end and
+// The frame around an app's main content: an optional header across the top, Panels at the start, end and
 // bottom edges that share the space, and the main content in the middle, which shrinks to make room.
-export function AppShell({ children, bottomPanelSpan = 'main', className }: AppShellProps) {
+export function AppShell({ children, bottomPanelSpan = 'main', startPanelSpan = 'main', endPanelSpan = 'main', className }: AppShellProps) {
   const [store] = useState(() => new PanelStore())
   const [element, setElement] = useState<HTMLDivElement | null>(null)
   useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
@@ -80,11 +91,13 @@ export function AppShell({ children, bottomPanelSpan = 'main', className }: AppS
   const contentIndex = childList.findIndex(isContent)
 
   return (
-    <AppShellContext.Provider value={{ store, presentation }}>
+    <AppShellContext.Provider value={{ store, presentation, isStartPanelHidden: start != null && !start[1].isCollapsible && presentation('start') === 'drawer' }}>
       <div
         ref={setElement}
         className={['mz-app-shell', className].filter(Boolean).join(' ')}
         data-bottom-panel-span={bottomPanelSpan}
+        data-start-panel-span={startPanelSpan}
+        data-end-panel-span={endPanelSpan}
         data-animated={store.hasChanged || undefined}
         data-start={trackState(start, 'start')}
         data-end={trackState(end, 'end')}

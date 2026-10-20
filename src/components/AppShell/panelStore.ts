@@ -10,6 +10,8 @@ export interface PanelEntry {
   isOpen?: boolean
   defaultOpen: boolean
   hasMinimized: boolean
+  // A Panel that can't be closed, such as an app's navigation; it's hidden when there's no room.
+  isCollapsible: boolean
   onOpenChange?: (isOpen: boolean) => void
 }
 

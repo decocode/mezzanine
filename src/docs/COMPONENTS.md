@@ -43,6 +43,10 @@ containers decide position and available space.
 stay in the bar at every width. The children function receives `isMenu`, which
 is true inside the narrow-screen menu, so menu-only content such as section
 navigation can sit between links.
+Below 32rem of its own width, a menu button replaces the links. Inside an
+AppShell whose start Panel has `isCollapsible={false}` but is hidden for lack of
+room, the menu button stays at every width, so that Panel's content (usually
+navigation) can be put in the menu and always reached.
 The menu button shows its label in a tooltip. `menuLabel` replaces its default
 "Menu" name and tooltip, and `className` adds your own styling.
 
@@ -208,6 +212,10 @@ menu.
 
 Side Panels are `--panel-width` wide. Set `--panel-start-width` or
 `--panel-end-width` to give one side its own width, such as a wide chat Panel.
+
+`startPanelSpan="full"` or `endPanelSpan="full"` runs a side Panel the full
+height of the window, with the header beside it rather than above it. The
+`<header>` is optional; without one, the Panels and main content start at the top.
 
 When the main content would drop below `--app-shell-min-main-width`, a side
 Panel opens as a modal drawer instead, end Panels first. A drawer only opens

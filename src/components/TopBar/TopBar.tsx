@@ -3,6 +3,7 @@ import { Button } from '../Button/Button'
 import { Heading } from '../Heading/Heading'
 import { Disclosure, DisclosurePanel } from '../Disclosure/Disclosure'
 import { MenuIcon, CloseIcon } from '../../icons/Icons'
+import { useOptionalAppShell } from '../AppShell/AppShell'
 
 export interface TopBarRenderProps {
   closeMenu: () => void
@@ -27,6 +28,9 @@ export interface TopBarProps {
 // for the bar, and receive isMenu so menu-only content can sit between links.
 export function TopBar({ brand, children, actions, 'aria-label': label, menuLabel = 'Menu', closeLabel = 'Close menu', className }: TopBarProps) {
   const [isExpanded, setIsExpanded] = useState(false)
+  // Inside an AppShell whose navigation Panel is hidden for lack of room, the menu is the only way to
+  // reach that navigation, so the TopBar uses its menu however wide it is.
+  const isMenuOnly = useOptionalAppShell()?.isStartPanelHidden ?? false
   const triggerRef = useRef<HTMLButtonElement>(null)
   const closeMenu = () => {
     if (isExpanded) {
@@ -40,7 +44,7 @@ export function TopBar({ brand, children, actions, 'aria-label': label, menuLabe
   const actionGroup = actionContent != null && <div className="mz-top-bar-actions">{actionContent}</div>
 
   return (
-    <header className={['mz-top-bar', className].filter(Boolean).join(' ')}>
+    <header className={['mz-top-bar', className].filter(Boolean).join(' ')} data-menu-only={isMenuOnly || undefined}>
       <div className="mz-top-bar-content">
         <div className="mz-top-bar-brand">{brand}</div>
         {/* Narrow screens keep actions in the bar, beside the menu button. */}

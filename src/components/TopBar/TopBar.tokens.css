@@ -3,7 +3,6 @@
 :where(:root) {
   /* TopBar: responsive navigation container and disclosure panel. */
   --top-bar-border-width: var(--border-width-baseline);
-  --top-bar-min-height: var(--space-16);
   --top-bar-wide-padding-inline: var(--space-4);
   --top-bar-focus-ring-width: var(--focus-ring-width);
   --top-bar-focus-ring-offset: var(--focus-ring-offset);

@@ -22,8 +22,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: var(--space-3);
-  min-height: var(--top-bar-min-height);
-  padding: var(--space-3) min(var(--space-4), 4cqi);
+  padding: var(--space-2) min(var(--space-4), 4cqi);
 }
 
 .mz-top-bar-brand {
@@ -85,18 +84,19 @@
 }
 
 /* Container-relative layout also follows changes to the root text size. */
-@container mz-top-bar (min-width: 48rem) {
+/* A TopBar marked data-menu-only keeps its menu at every width, because its AppShell's navigation
+   Panel is hidden. */
+@container mz-top-bar (min-width: 32rem) {
   .mz-top-bar-content {
     gap: var(--space-4);
     padding-inline: var(--top-bar-wide-padding-inline);
   }
 
-  .mz-top-bar-mobile,
-  .mz-top-bar-bar-actions {
+  .mz-top-bar:not([data-menu-only]) :is(.mz-top-bar-mobile, .mz-top-bar-bar-actions) {
     display: none;
   }
 
-  .mz-top-bar-desktop {
+  .mz-top-bar:not([data-menu-only]) .mz-top-bar-desktop {
     display: flex;
     flex: 1;
     justify-content: flex-end;

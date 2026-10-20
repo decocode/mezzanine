@@ -52,7 +52,7 @@ export function Panel({
   // Register from a ref callback, so triggers can find this Panel without an effect.
   const register = useCallback((element: HTMLElement | null) => {
     if (!element) return
-    return store.register(id, { edge, elementId, isOpen: isCollapsible ? controlledOpen : true, defaultOpen, hasMinimized: minimized != null, onOpenChange })
+    return store.register(id, { edge, elementId, isOpen: isCollapsible ? controlledOpen : true, defaultOpen, hasMinimized: minimized != null, isCollapsible, onOpenChange })
   }, [store, id, edge, elementId, isCollapsible, controlledOpen, defaultOpen, minimized, onOpenChange])
 
   function close() {

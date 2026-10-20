@@ -1,5 +1,6 @@
 /* The frame: a header row, then the start area, main content and end area, with the bottom area under
-   the main content (or under everything). Each edge's track opens to make room for its Panel. */
+   the main content (or under everything). A side Panel can instead run the full height, beside the
+   header. Each edge's track opens to make room for its Panel. With no header, its row has no height. */
 .mz-app-shell {
   --_app-shell-start: 0;
   --_app-shell-end: 0;
@@ -24,6 +25,43 @@
     'header header header'
     'start main end'
     'bottom bottom bottom';
+}
+
+/* Full-height side Panels take the header row's corner, and the bottom row's when the bottom Panel
+   spans the full width, since a full-height Panel reaches the bottom of the window. */
+.mz-app-shell[data-start-panel-span='full'][data-end-panel-span='main'][data-bottom-panel-span='main'] {
+  grid-template-areas:
+    'start header header'
+    'start main end'
+    'start bottom end';
+}
+
+.mz-app-shell[data-start-panel-span='full'][data-end-panel-span='main'][data-bottom-panel-span='full'] {
+  grid-template-areas:
+    'start header header'
+    'start main end'
+    'start bottom bottom';
+}
+
+.mz-app-shell[data-start-panel-span='main'][data-end-panel-span='full'][data-bottom-panel-span='main'] {
+  grid-template-areas:
+    'header header end'
+    'start main end'
+    'start bottom end';
+}
+
+.mz-app-shell[data-start-panel-span='main'][data-end-panel-span='full'][data-bottom-panel-span='full'] {
+  grid-template-areas:
+    'header header end'
+    'start main end'
+    'bottom bottom end';
+}
+
+.mz-app-shell[data-start-panel-span='full'][data-end-panel-span='full'] {
+  grid-template-areas:
+    'start header end'
+    'start main end'
+    'start bottom end';
 }
 
 .mz-app-shell[data-start='open'] { --_app-shell-start: var(--panel-start-width); }

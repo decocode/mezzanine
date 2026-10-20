@@ -28,7 +28,7 @@ export const topBarContent: DocsPageContent = {
     {
       key: 'behaviour',
       body: [
-        'Below 48rem of container width, a Menu button replaces the inline navigation. Actions stay in the bar, between the brand and the Menu button. The Menu button shows only an icon. Its accessible name is Menu, and a Tooltip shows that name on hover and keyboard focus. Opening it changes the icon and the name to Close menu. The panel expands beneath the bar in document flow and scrolls vertically when needed.',
+        'Below 32rem of container width, a Menu button replaces the inline navigation. Inside an AppShell whose start Panel can’t be closed (such as an app’s navigation) but is hidden for lack of room, the Menu button stays at every width, so that navigation can always be reached. Actions stay in the bar, between the brand and the Menu button. The Menu button shows only an icon. Its accessible name is Menu, and a Tooltip shows that name on hover and keyboard focus. Opening it changes the icon and the name to Close menu. The panel expands beneath the bar in document flow and scrolls vertically when needed.',
         'The mobile panel uses [React Aria Disclosure](https://react-aria.adobe.com/Disclosure).',
         'Enter or Space toggles the trigger. Tab moves through the visible links and actions. This Disclosure is not a modal: focus is not trapped, and Escape and outside clicks do not close it. Motion is removed when reduced motion is requested.',
       ],
@@ -71,7 +71,6 @@ export const topBarContent: DocsPageContent = {
         nameColumn: 'CSS token',
         rows: [
           { name: '--top-bar-border-width', description: 'Header and trigger border thickness.' },
-          { name: '--top-bar-min-height', description: 'Minimum content-row height.' },
           { name: '--top-bar-wide-padding-inline', description: 'Horizontal padding in the wide layout.' },
           { name: '--top-bar-focus-ring-width', description: 'Trigger focus outline thickness.' },
           { name: '--top-bar-focus-ring-offset', description: 'Trigger focus outline offset.' },

@@ -32,7 +32,7 @@ export function DocsShell({ topBar, navigation, mainClassName, mainTabIndex, chi
 
   return (
     <DocsContentsContext.Provider value={contentsStore}>
-      <AppShell className="docs-app-shell">
+      <AppShell className="docs-app-shell" startPanelSpan="full">
         {topBar}
         <Panel id="docs-navigation" edge="start" aria-label={title} isCollapsible={false}>
           <NavigationPanel {...navigationProps} />

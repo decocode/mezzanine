@@ -53,6 +53,8 @@ export const appShellContent: DocsPageContent = {
       body: [
         'Put a `<header>`, your Panels, a `<main>` and an optional `Footer` inside `AppShell`, in reading order. Give each Panel an `id` and an `edge`, and place a `PanelTrigger` with that `id` wherever suits the app, such as in the header.',
         'Set `bottomPanelSpan="full"` to run a bottom Panel under the side Panels too, as in a code editor. By default it sits under the main content only.',
+        'Set `startPanelSpan="full"` or `endPanelSpan="full"` to run a side Panel the full height of the window, with the header beside it rather than above it. On narrow screens nothing changes, as the Panel becomes a drawer or is hidden.',
+        'The `<header>` is optional. Without one, the Panels and main content start at the top.',
       ],
     },
     {
@@ -68,8 +70,10 @@ export const appShellContent: DocsPageContent = {
         nameColumn: 'Prop',
         className: 'documentation-props-table',
         rows: [
-          { name: 'children', description: 'A `<header>`, Panels, a `<main>` and an optional Footer.' },
+          { name: 'children', description: 'An optional `<header>`, Panels, a `<main>` and an optional Footer.' },
           { name: 'bottomPanelSpan', description: '`main` (default) puts a bottom Panel under the main content only; `full` puts it under the side Panels too.' },
+          { name: 'startPanelSpan', description: '`main` (default) puts the start Panel beside the main content; `full` runs it the full height, beside the header.' },
+          { name: 'endPanelSpan', description: '`main` (default) puts the end Panel beside the main content; `full` runs it the full height, beside the header.' },
           { name: 'className', description: 'Adds your own class, for example to set the AppShell’s height.' },
         ],
       },

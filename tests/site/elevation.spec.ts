@@ -17,7 +17,11 @@ for (const fontSize of [16, 32]) {
       ))).toBe(true)
 
       const browse = page.getByRole('banner').getByRole('button', { name: /^(Menu|Close menu)$/ })
-      if (width < 48 * fontSize) {
+      // TopBar uses its menu when it's narrow, or when the navigation Panel is hidden for lack of room,
+      // so the navigation is always reachable.
+      const barWidth = await page.getByRole('banner').evaluate((element) => element.getBoundingClientRect().width)
+      const panelShowing = await page.getByRole('complementary').getByRole('treegrid', { name: 'Mezzanine documentation' }).isVisible()
+      if (barWidth < 32 * fontSize || !panelShowing) {
         await expect(browse).toBeVisible()
         await browse.focus()
         await page.keyboard.press('Enter')
