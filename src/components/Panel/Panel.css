@@ -42,8 +42,9 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2);
-  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
-  border-block-end: var(--border-width-baseline) solid var(--color-border);
+  /* The heading starts --space-4 from the edge, the same inset as the rows below and the TopBar. */
+  padding-block: var(--space-2);
+  padding-inline: var(--space-4) var(--space-2);
 }
 
 .mz-panel-header .react-aria-Heading {
@@ -51,18 +52,20 @@
   min-inline-size: 0;
   margin: 0;
   font-family: var(--font-family-body);
-  font-size: var(--font-size-title-md);
+  font-size: var(--font-size-label-md);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: var(--letter-spacing-title);
-  line-height: var(--line-height-title-md);
-  text-transform: var(--text-transform-title);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
 }
 
 .mz-panel-content {
   flex: 1 1 auto;
   min-block-size: 0;
   overflow: auto;
-  padding: var(--space-4);
+  /* Rows such as NavTree and TableOfContents run edge to edge and set their own --space-4 inset;
+     other content supplies its own padding, as the app's <main> does. */
+  padding-block: var(--space-2);
 }
 
 .mz-panel-minimized {

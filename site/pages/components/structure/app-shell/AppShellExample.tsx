@@ -16,18 +16,18 @@ export function AppShellExample() {
           </span>
         </header>
         <Panel id="example-start" edge="start" title={labels.startPanel} headingLevel={3} defaultOpen>
-          <p>{labels.startPanelText}</p>
+          <p className="app-shell-example-panel-text">{labels.startPanelText}</p>
         </Panel>
         <main aria-label={labels.main} className="app-shell-example-main">
           <p>{labels.mainText}</p>
         </main>
         <Footer>{labels.footer}</Footer>
         <Panel id="example-end" edge="end" title={labels.endPanel} headingLevel={3}>
-          <p>{labels.endPanelText}</p>
+          <p className="app-shell-example-panel-text">{labels.endPanelText}</p>
         </Panel>
         <Panel id="example-bottom" edge="bottom" title={labels.bottomPanel} headingLevel={3}
           minimized={<p className="app-shell-example-minimized">{labels.bottomMinimized}</p>}>
-          <p>{labels.bottomPanelText}</p>
+          <p className="app-shell-example-panel-text">{labels.bottomPanelText}</p>
         </Panel>
       </AppShell>
     </ExampleZone>
