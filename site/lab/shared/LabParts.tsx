@@ -1,6 +1,8 @@
 import { useId, useState, type CSSProperties, type ReactNode } from 'react'
-import { Badge, CodeBlock, Heading, Label, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
-import { Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'react-aria-components/Slider'
+import {
+  Badge, CodeBlock, Heading, Label, Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack, Text,
+  ToggleButton, ToggleButtonGroup,
+} from '@decocode/mezzanine'
 import type { CssNote } from './labTypes'
 import { framePresets, labBadgeLabel } from './labValues'
 import { RichText } from '../../components/RichText'

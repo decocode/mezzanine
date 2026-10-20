@@ -64,6 +64,7 @@ The library currently exports React Aria `Breadcrumbs`, `Button`, `Checkbox`, `L
 | `src/components/TableOfContents/TableOfContents.tsx` | Public Contents navigation composed from Heading and Link, with nested sections and a configurable heading |
 | `src/components/Tabs/Tabs.tsx`, `src/components/Tabs/Tabs.css` | Public Tabs, TabList, Tab and TabPanel APIs, with the official selection-indicator composition and token-based horizontal/vertical styling |
 | `src/components/Text/Text.ts` | Public React Aria Text export and prop type |
+| `src/components/{CheckboxGroup,ComboBox,DropZone,FileTrigger,Form,GridList,Group,Menu,Meter,NumberField,Popover,PreviewTrigger,ProgressBar,Select,Separator,Sheet,Slider,Switch,TagGroup,TokenField,Toolbar,Tree,Virtualizer}/*.ts` | Thin React Aria re-exports, mostly for AI chat interfaces (one component family per file, with prop types); no Mezzanine styles yet |
 | `src/components/TextArea/TextArea.ts` | Public React Aria TextArea export and type; composes with TextField for multiline input |
 | `src/components/SearchField/SearchField.tsx`, `src/components/SearchField/SearchField.css` | Public React Aria SearchField wrapper that adds the search icon and a clear button (the shared Button) around the app's Label and Input; the Input keeps the shared field appearance |
 | `src/components/TextField/TextField.css` | Shared TextField, Input and TextArea layout, interaction states and forced-colour styling |
