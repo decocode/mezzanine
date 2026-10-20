@@ -1,4 +1,4 @@
-import { Badge, type NavTreeItemData } from '@decocode/mezzanine'
+import { Badge, type NavTreeItemData, type NavTreeSectionData } from '@decocode/mezzanine'
 import { siteNavigationGroups, type SiteNavigationGroup } from '../siteStructure'
 
 // Within each group, implemented pages and subgroups come first in alphabetical
@@ -7,7 +7,7 @@ function byStatusThenLabel(a: { label: string; isWip: boolean }, b: { label: str
   return Number(a.isWip) - Number(b.isWip) || a.label.localeCompare(b.label, 'en', { sensitivity: 'base' })
 }
 
-function groupItem(group: SiteNavigationGroup): NavTreeItemData {
+function groupChildren(group: SiteNavigationGroup): NavTreeItemData[] {
   const children = [
     ...(group.groups ?? []).map(child => ({ label: child.label, isWip: false, item: groupItem(child) })),
     ...group.pages.map(page => ({
@@ -19,12 +19,16 @@ function groupItem(group: SiteNavigationGroup): NavTreeItemData {
       },
     })),
   ]
-  return {
-    id: group.id, label: group.label, href: group.path,
-    children: children.sort(byStatusThenLabel).map(child => child.item),
-  }
+  return children.sort(byStatusThenLabel).map(child => child.item)
 }
 
-// Top-level groups keep their reading order: Get started, Foundations,
+// A group inside a section is an expandable row, linked when the group has its own page.
+function groupItem(group: SiteNavigationGroup): NavTreeItemData {
+  return { id: group.id, label: group.label, href: group.path, children: groupChildren(group) }
+}
+
+// Top-level groups are sections with a heading, in their reading order: Get started, Foundations,
 // Styles, Themes, Components.
-export const docsNavigationItems = siteNavigationGroups.map(groupItem)
+export const docsNavigationItems: NavTreeSectionData[] = siteNavigationGroups.map(group => ({
+  type: 'section', id: group.id, label: group.label, children: groupChildren(group),
+}))

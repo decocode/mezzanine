@@ -1,4 +1,4 @@
-import type { NavTreeItemData } from '@decocode/mezzanine'
+import type { NavTreeItemData, NavTreeProps } from '@decocode/mezzanine'
 import { docsNavigationItems } from '../../../components/docsNavigationItems'
 import { labNavigationItems } from '../../labContent'
 
@@ -17,8 +17,15 @@ export interface SearchLabSection {
 }
 
 // Every linked item in a navigation tree, in reading order, with the labels of the groups above it.
-function collectResults(items: readonly NavTreeItemData[], sectionId: string, parents: readonly string[] = []): SearchLabResult[] {
-  return items.flatMap(item => [
+// A section's heading counts as a group.
+function collectResults(items: NavTreeProps['items'], sectionId: string, parents: readonly string[] = []): SearchLabResult[] {
+  return items.flatMap((item): SearchLabResult[] => item.type === 'section'
+    ? collectResults(item.children, sectionId, item.label ? [...parents, item.label] : parents)
+    : collectItem(item, sectionId, parents))
+}
+
+function collectItem(item: NavTreeItemData, sectionId: string, parents: readonly string[]): SearchLabResult[] {
+  return [
     ...(item.href == null ? [] : [{
       id: `${sectionId}-${String(item.id)}`,
       label: item.label,
@@ -26,7 +33,7 @@ function collectResults(items: readonly NavTreeItemData[], sectionId: string, pa
       location: parents.length > 0 ? parents.join(' › ') : undefined,
     }]),
     ...collectResults(item.children ?? [], sectionId, [...parents, item.label]),
-  ])
+  ]
 }
 
 // Sample results for the search experiment: page titles from the docs and Lab navigation.

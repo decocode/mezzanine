@@ -1,11 +1,11 @@
-import { NavTree, type NavTreeItemData } from '@decocode/mezzanine'
+import { NavTree, type NavTreeProps } from '@decocode/mezzanine'
 import type { SitePageDefinition } from '../siteStructure'
 import { docsNavigationItems } from './docsNavigationItems'
 
 interface NavigationPanelProps {
   'aria-label': string
   navigationLabel: string
-  items: NavTreeItemData[]
+  items: NavTreeProps['items']
   selectedRoute: string
 }
 

@@ -86,7 +86,7 @@
   --nav-item-content: var(--color-text);
   --nav-item-content-current: var(--color-text);
   --nav-item-current-indicator: var(--color-link);
-  --navigation-tree-header-content: var(--color-text-muted);
+  --navigation-tree-header-content: var(--color-signature-700);
 
   --disclosure-trigger-background: transparent;
 

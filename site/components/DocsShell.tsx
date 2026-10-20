@@ -1,5 +1,5 @@
 import { useState, useSyncExternalStore, type ReactNode } from 'react'
-import { AppShell, Panel, TableOfContents, type NavTreeItemData } from '@decocode/mezzanine'
+import { AppShell, Panel, TableOfContents, type NavTreeProps } from '@decocode/mezzanine'
 import { DocsContentsContext, DocsContentsStore } from './docsContentsContext'
 import { NavigationPanel } from './NavigationPanel'
 import { siteContent } from '../siteContent'
@@ -12,7 +12,7 @@ interface DocsShellProps {
     title: string
     'aria-label': string
     navigationLabel: string
-    items: NavTreeItemData[]
+    items: NavTreeProps['items']
     selectedRoute: string
   }
   mainClassName?: string

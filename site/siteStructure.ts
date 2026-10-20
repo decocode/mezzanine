@@ -39,7 +39,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     // Foundations do not change with the theme.
     id: 'foundations',
     label: 'Foundations',
-    path: '/foundations',
     pages: [
       { id: 'accessibility', label: 'Accessibility', path: '/accessibility', status: 'implemented' },
     ],
@@ -98,7 +97,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     id: 'themes',
     label: 'Themes',
     pages: [
-      { id: 'wireframe', label: 'Wireframe', path: '/wireframe', status: 'empty' },
+      { id: 'wireframe', label: 'Wireframe', path: '/wireframe', status: 'implemented' },
       { id: 'light-and-dark-mode', label: 'Light & Dark mode', path: '/light-and-dark-mode', status: 'empty' },
       { id: 'custom-themes', label: 'Custom themes', path: '/custom-themes', status: 'empty' },
     ],

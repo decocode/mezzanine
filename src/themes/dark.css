@@ -83,13 +83,13 @@
   --toggle-button-border-selected: var(--toggle-button-border);
 
   --nav-item-background: transparent;
-  --nav-item-background-hovered: var(--color-neutral-700);
-  --nav-item-background-pressed: var(--color-neutral-600);
+  --nav-item-background-hovered: var(--color-neutral-800);
+  --nav-item-background-pressed: var(--color-neutral-700);
   --nav-item-background-current: transparent;
   --nav-item-content: var(--color-text);
   --nav-item-content-current: var(--color-text);
   --nav-item-current-indicator: var(--color-link);
-  --navigation-tree-header-content: var(--color-text-muted);
+  --navigation-tree-header-content: var(--color-signature-300);
 
   --disclosure-trigger-background: transparent;
 
@@ -204,13 +204,13 @@
     --toggle-button-border-selected: var(--toggle-button-border);
 
     --nav-item-background: transparent;
-    --nav-item-background-hovered: var(--color-neutral-700);
-    --nav-item-background-pressed: var(--color-neutral-600);
+    --nav-item-background-hovered: var(--color-neutral-800);
+    --nav-item-background-pressed: var(--color-neutral-700);
     --nav-item-background-current: transparent;
     --nav-item-content: var(--color-text);
     --nav-item-content-current: var(--color-text);
     --nav-item-current-indicator: var(--color-link);
-    --navigation-tree-header-content: var(--color-text-muted);
+    --navigation-tree-header-content: var(--color-signature-300);
 
     --disclosure-trigger-background: transparent;
 
