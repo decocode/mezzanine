@@ -90,6 +90,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
       { id: 'color', label: 'Color', path: '/color', status: 'implemented' },
       { id: 'elevation', label: 'Elevation', path: '/elevation', status: 'implemented' },
       { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
+      { id: 'opacity', label: 'Opacity', path: '/opacity', status: 'implemented' },
       { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
     ],
   },

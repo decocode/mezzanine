@@ -340,6 +340,9 @@ a:focus-visible {
   background: var(--color-accent-500);
 }
 
+/* Opacity samples show the text colour at each step, over the page. */
+.token-scale[data-sample='opacity'] .token-scale-sample { background: color-mix(in srgb, var(--color-text) var(--_token-scale-value), transparent); }
+
 /* Documentation controls layout; Mezzanine supplies table appearance and states. */
 .documentation-table {
   /* Contain absolutely positioned hidden inputs, such as Checkbox's, inside the scroll area. */

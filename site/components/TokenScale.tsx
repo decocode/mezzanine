@@ -2,8 +2,8 @@ import type { CSSProperties } from 'react'
 import { Card } from '@decocode/mezzanine'
 import { TokenValue } from './TokenValue'
 
-// What a token's sample shows: its corners, its border width, its shadow or its length.
-export type TokenScaleSample = 'radius' | 'border-width' | 'shadow' | 'length'
+// What a token's sample shows: its corners, its border width, its shadow, its length or its opacity.
+export type TokenScaleSample = 'radius' | 'border-width' | 'shadow' | 'length' | 'opacity'
 
 export interface TokenScaleItem {
   token: string
