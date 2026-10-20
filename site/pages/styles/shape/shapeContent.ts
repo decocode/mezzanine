@@ -34,7 +34,7 @@ export const radiusLevels = [
 
 export const borderWidthLevels = [
   { label: 'None', token: '--border-width-none' },
-  { label: 'Extra small (hairline)', token: '--border-width-xs' },
+  { label: 'Extra small', token: '--border-width-xs' },
   { label: 'Small', token: '--border-width-sm' },
   { label: 'Medium', token: '--border-width-md' },
   { label: 'Large', token: '--border-width-lg' },
