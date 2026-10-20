@@ -1,4 +1,6 @@
 .react-aria-Checkbox {
+  /* Contains React Aria's hidden input, so focusing it never scrolls the page elsewhere. */
+  position: relative;
   display: inline-flex;
   gap: var(--checkbox-content-gap);
   align-items: center;

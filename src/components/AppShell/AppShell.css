@@ -41,6 +41,9 @@
   min-inline-size: 0;
   min-block-size: 0;
   overflow: auto;
+  /* The scrolling area contains anything positioned inside it, so content such as a control's hidden
+     input scrolls with the page rather than being placed against the whole window. */
+  position: relative;
   /* In-page links scroll smoothly unless motion is reduced, as the page itself does. */
   scroll-behavior: var(--_motion-scroll-behavior);
 }

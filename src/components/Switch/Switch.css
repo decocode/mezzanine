@@ -5,6 +5,8 @@
 }
 
 .react-aria-SwitchButton {
+  /* Contains React Aria's hidden input, so focusing it never scrolls the page elsewhere. */
+  position: relative;
   display: inline-flex;
   gap: var(--switch-content-gap);
   align-items: center;

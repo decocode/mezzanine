@@ -1,6 +1,6 @@
 // The example for the Lab's Spacing page, in Add space.
 import { useState, type CSSProperties } from 'react'
-import { Button, Cell, Checkbox, Column, Input, Label, Row, Table, TableBody, TableHeader, TextField } from '@decocode/mezzanine'
+import { Button, Cell, Checkbox, Column, Form, Input, Label, Row, Table, TableBody, TableHeader, TextField } from '@decocode/mezzanine'
 import { CssNotes, ExampleHeading, ExampleText } from '../../../shared/LabParts'
 import { SpacingScale } from './SpacingScale'
 import { candidateSpacingLadder, spacingCssNotes } from './spacingPageContent'
@@ -23,11 +23,12 @@ function GroupingExample() {
     <ExampleHeading>Grouping with space</ExampleHeading>
     <ExampleText>With equal gaps, every label, field and button looks equally related. Grouped, each label sits close to its field, the fields sit further apart, and the button sits furthest away.</ExampleText>
     <Checkbox isSelected={grouped} onChange={setGrouped}>Group with space</Checkbox>
-    <div className={`lab-grouping ${grouped ? 'lab-grouping-grouped' : 'lab-grouping-equal'}`}>
+    {/* A real form; submitting it does nothing, because there is nowhere for it to go. */}
+    <Form aria-label="Example form" className={`lab-grouping ${grouped ? 'lab-grouping-grouped' : 'lab-grouping-equal'}`} onSubmit={(event) => event.preventDefault()}>
       <TextField><Label>Label A</Label><Input /></TextField>
       <TextField><Label>Label B</Label><Input /></TextField>
-      <Button>Button A</Button>
-    </div>
+      <Button type="submit">Button A</Button>
+    </Form>
     <CssNotes name="the grouping" note={spacingCssNotes.grouping} />
   </>
 }

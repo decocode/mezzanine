@@ -6,7 +6,8 @@
   --checkbox-icon-size: var(--icon-size-xs);
   --checkbox-content-gap: var(--space-2);
   --checkbox-border-width: var(--border-width-baseline);
-  --checkbox-border-radius: var(--radius-control);
+  /* One step less rounded than other controls, and square wherever controls are square (Wireframe). */
+  --checkbox-border-radius: min(var(--radius-control), var(--radius-xs));
   --checkbox-focus-ring-width: var(--focus-ring-width);
   --checkbox-focus-ring-offset: var(--focus-ring-offset);
 
