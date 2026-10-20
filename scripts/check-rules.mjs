@@ -5,6 +5,7 @@ import { checkRoutes, checkTokens, declaredTokens, parsePropRows } from './docs-
 import { appRoutes } from './generate-routes.mjs'
 import { sitePageFile, sitePageFolder, sitePages } from '../site/siteStructure.ts'
 import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
+import { checkColorPointers, checkThemeColors, checkThemesMatch, themeRoles } from './color-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -484,6 +485,31 @@ function checkDocsRoutes() {
   }
 }
 
+// Palettes feed theme roles, and library CSS reads only those roles (see color-rules.mjs).
+function checkColors() {
+  const themeFiles = ['src/themes/light.css', 'src/themes/dark.css', 'src/themes/wireframe.css']
+  const themes = themeFiles.map(file => ({ file, text: read(file) }))
+  for (const { file, text } of themes) {
+    // Only each theme's role blocks count; Wireframe's later link rules hold no declarations of tokens.
+    for (const problem of checkThemeColors(text)) report(file, text, problem.position, 'colors', problem.message)
+  }
+  const darkText = themes[1].text
+  const darkBlocks = [darkText.slice(0, darkText.indexOf('@media')), darkText.slice(darkText.indexOf('@media'))]
+  const roleSets = [
+    { file: themeFiles[0], roles: themeRoles(themes[0].text) },
+    { file: `${themeFiles[1]} (explicit)`, roles: themeRoles(darkBlocks[0]) },
+    { file: `${themeFiles[1]} (system)`, roles: themeRoles(darkBlocks[1]) },
+    { file: themeFiles[2], roles: themeRoles(themes[2].text) },
+  ]
+  for (const problem of checkThemesMatch(roleSets)) report(problem.file.split(' ')[0], '', 0, 'colors', problem.message)
+  const roles = new Set(roleSets[0].roles)
+  const libraryCss = filesIn('src', ['.css']).filter(file => file !== 'src/tokens/color.tokens.css' && !file.startsWith('src/themes/'))
+  for (const file of libraryCss) {
+    const text = read(file)
+    for (const problem of checkColorPointers(text, roles)) report(file, text, problem.position, 'colors', problem.message)
+  }
+}
+
 try {
   const argumentsList = process.argv.slice(2)
   if (argumentsList.some(argument => !['--update-api', '--update-token-baseline'].includes(argument))) throw new Error('Only --update-api and --update-token-baseline are supported.')
@@ -528,6 +554,7 @@ try {
   for (const token of motionTokens) {
     if (!tokens.includes(`${token}:`)) report('src/tokens/motion.tokens.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
   }
+  checkColors()
   checkSnapshot(api, argumentsList.includes('--update-api'))
   checkDocsRoutes()
   checkDocsTokens(argumentsList.includes('--update-token-baseline'))

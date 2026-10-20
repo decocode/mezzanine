@@ -32,7 +32,7 @@
   max-width: 100%;
   padding-inline: var(--space-4);
   background: var(--nav-item-background);
-  color: var(--nav-item-content);
+  color: var(--nav-item-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-default);
@@ -45,10 +45,10 @@
 
 .mz-table-of-contents .react-aria-Link[data-hovered] {
   background: var(--nav-item-background-hovered);
-  color: var(--nav-item-content);
+  color: var(--nav-item-foreground);
 }
 
 .mz-table-of-contents .react-aria-Link[data-pressed] {
   background: var(--nav-item-background-pressed);
-  color: var(--nav-item-content);
+  color: var(--nav-item-foreground);
 }

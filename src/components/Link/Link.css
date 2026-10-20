@@ -17,7 +17,7 @@
 
 .react-aria-Link[data-hovered],
 .react-aria-Link[data-preview-state='hovered'] {
-  color: var(--color-link-hover);
+  color: var(--color-link-hovered);
 }
 
 .react-aria-Link[data-pressed],

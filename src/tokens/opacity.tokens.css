@@ -1,0 +1,11 @@
+/* Opacity scale: how see-through something is, as percentages so the steps work in both
+   color-mix() and the opacity property. */
+
+:where(:root) {
+  --opacity-4: 4%;
+  --opacity-8: 8%;
+  --opacity-12: 12%;
+  --opacity-16: 16%;
+  --opacity-20: 20%;
+  --opacity-50: 50%;
+}

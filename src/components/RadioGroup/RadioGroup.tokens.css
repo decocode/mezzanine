@@ -1,4 +1,4 @@
-/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+/* Component tokens shared by every theme. Colour tokens point at the colour roles, which each theme sets in src/themes/. */
 
 :where(:root) {
   /* RadioGroup: component-specific structure, shared by every theme. */
@@ -13,4 +13,11 @@
   --radio-selection-border-radius: 50%;
   --radio-focus-ring-width: var(--focus-ring-width);
   --radio-focus-ring-offset: var(--focus-ring-offset);
+
+  /* RadioGroup colours: pointers to the colour roles, the same in every theme. */
+  --radio-background: transparent;
+  --radio-background-hovered: var(--color-accent-muted-hovered);
+  --radio-selection: var(--color-accent);
+  --radio-border: var(--color-border-control);
+  --radio-border-invalid: var(--color-danger);
 }

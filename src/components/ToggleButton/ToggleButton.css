@@ -5,7 +5,7 @@
   /* States change these private values, so a label-below or label-above icon box can use them too. */
   --_toggle-button-current-border: var(--toggle-button-border);
   --_toggle-button-current-background: var(--toggle-button-background);
-  --_toggle-button-current-content: var(--toggle-button-content);
+  --_toggle-button-current-content: var(--toggle-button-foreground);
   --_toggle-button-current-shadow: none;
   border: var(--toggle-button-border-width) solid var(--_toggle-button-current-border);
   border-radius: var(--toggle-button-border-radius);
@@ -32,7 +32,7 @@
 .react-aria-ToggleButton[data-selected] {
   --_toggle-button-current-border: var(--toggle-button-border-selected);
   --_toggle-button-current-background: var(--toggle-button-background-selected);
-  --_toggle-button-current-content: var(--toggle-button-content-selected);
+  --_toggle-button-current-content: var(--toggle-button-foreground-selected);
 }
 
 .react-aria-ToggleButton[data-selected][data-hovered] {
@@ -71,12 +71,12 @@
   --toggle-button-background: var(--button-secondary-background);
   --toggle-button-background-hovered: var(--button-secondary-background-hovered);
   --toggle-button-background-pressed: var(--button-secondary-background-pressed);
-  --toggle-button-content: var(--button-secondary-content);
+  --toggle-button-foreground: var(--button-secondary-foreground);
   --toggle-button-border: var(--button-secondary-border);
   --toggle-button-background-selected: var(--button-secondary-background-hovered);
   --toggle-button-background-selected-hovered: var(--button-secondary-background-pressed);
   --toggle-button-background-selected-pressed: var(--button-secondary-background-pressed);
-  --toggle-button-content-selected: var(--button-secondary-content);
+  --toggle-button-foreground-selected: var(--button-secondary-foreground);
   --toggle-button-border-selected: var(--button-secondary-border);
   --toggle-button-selection-shadow: inset 0 calc(-1 * var(--toggle-button-selection-indicator-width)) 0 currentColor;
   --toggle-button-selection-pressed-shadow: inset 0 calc(-2 * var(--toggle-button-selection-indicator-width)) 0 currentColor;

@@ -19,7 +19,7 @@
   border-radius: var(--button-border-radius);
   --_button-current-background: var(--button-background);
   background: var(--_button-current-background);
-  color: var(--button-content);
+  color: var(--button-foreground);
   font-family: var(--font-family-body);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
@@ -132,7 +132,7 @@
   border: var(--button-border-width) solid var(--button-border);
   border-radius: var(--button-border-radius);
   background: var(--_button-current-background);
-  color: var(--button-content);
+  color: var(--button-foreground);
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement='above'] .mz-button-content {
@@ -143,7 +143,7 @@
   --button-background: var(--button-primary-background);
   --button-background-hovered: var(--button-primary-background-hovered);
   --button-background-pressed: var(--button-primary-background-pressed);
-  --button-content: var(--button-primary-content);
+  --button-foreground: var(--button-primary-foreground);
   --button-border: var(--button-primary-border);
 }
 
@@ -151,7 +151,7 @@
   --button-background: var(--button-secondary-background);
   --button-background-hovered: var(--button-secondary-background-hovered);
   --button-background-pressed: var(--button-secondary-background-pressed);
-  --button-content: var(--button-secondary-content);
+  --button-foreground: var(--button-secondary-foreground);
   --button-border: var(--button-secondary-border);
 }
 
@@ -159,7 +159,7 @@
   --button-background: var(--button-tertiary-background);
   --button-background-hovered: var(--button-tertiary-background-hovered);
   --button-background-pressed: var(--button-tertiary-background-pressed);
-  --button-content: var(--button-tertiary-content);
+  --button-foreground: var(--button-tertiary-foreground);
   --button-border: var(--button-tertiary-border);
 }
 
@@ -167,7 +167,7 @@
   --button-background: var(--button-destructive-background);
   --button-background-hovered: var(--button-destructive-background-hovered);
   --button-background-pressed: var(--button-destructive-background-pressed);
-  --button-content: var(--button-destructive-content);
+  --button-foreground: var(--button-destructive-foreground);
   --button-border: var(--button-destructive-border);
 }
 

@@ -10,7 +10,7 @@
   border: var(--code-block-border-width) solid var(--code-block-border);
   border-radius: var(--code-block-border-radius);
   background: var(--code-block-background);
-  color: var(--code-block-content);
+  color: var(--code-block-foreground);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   font-family: var(--font-family-body);

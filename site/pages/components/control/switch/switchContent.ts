@@ -56,7 +56,7 @@ export const switchContent: DocsPageContent = {
           { name: '--switch-track-background-selected-hovered', description: 'Track background and border colour when on and hovered.' },
           { name: '--switch-handle-background', description: 'Handle colour when off.' },
           { name: '--switch-handle-background-selected', description: 'Handle colour when on.' },
-          { name: '--switch-error-content', description: 'Error message colour.' },
+          { name: '--switch-error-foreground', description: 'Error message colour.' },
           { name: '--switch-focus-ring-width', description: 'Keyboard-focus outline thickness.' },
           { name: '--switch-focus-ring-offset', description: 'Distance between the track and its keyboard-focus outline.' },
         ],

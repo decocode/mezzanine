@@ -98,7 +98,7 @@
 }
 
 .react-aria-SwitchField > .react-aria-FieldError {
-  color: var(--switch-error-content);
+  color: var(--switch-error-foreground);
 }
 
 @media (forced-colors: active) {

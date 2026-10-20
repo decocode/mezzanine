@@ -30,7 +30,7 @@
   border: var(--modal-border-width) solid var(--modal-border);
   border-radius: var(--modal-border-radius);
   background: var(--modal-background);
-  color: var(--modal-content);
+  color: var(--modal-foreground);
   box-shadow: var(--elevation-raised-3);
 }
 

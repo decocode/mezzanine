@@ -39,7 +39,7 @@
 .react-aria-Checkbox[data-indeterminate] .mz-checkbox-indicator {
   border-color: var(--checkbox-background-selected);
   background: var(--checkbox-background-selected);
-  color: var(--checkbox-content-selected);
+  color: var(--checkbox-foreground-selected);
 }
 
 .react-aria-Checkbox[data-selected][data-hovered] .mz-checkbox-indicator,

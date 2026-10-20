@@ -1,4 +1,4 @@
-/* Colour palettes. Semantic colour roles are set per theme in src/themes/. */
+/* Colour palettes. Only themes read them: each theme maps them onto the colour roles in src/themes/. */
 
 :where(:root) {
   /* Every palette follows the same perceptual lightness curve. */
@@ -16,18 +16,32 @@
   --color-neutral-900: #292929;
   --color-neutral-950: #121212;
 
-  /* Mezzanine's Signature palette. */
-  --color-signature-50: #F9FAFE;
-  --color-signature-100: #EFF1FD;
-  --color-signature-200: #D8DCF9;
-  --color-signature-300: #BABFF5;
-  --color-signature-400: #999FF0;
-  --color-signature-500: #7D81DC;
-  --color-signature-600: #6163BB;
-  --color-signature-700: #4C4D9B;
-  --color-signature-800: #363675;
-  --color-signature-900: #222251;
-  --color-signature-950: #0D0C2B;
+  /* Accent palette: the interface colour that every accent role reads. A brand swaps this palette to
+     restyle the interface. */
+  --color-accent-50: #F9FAFE;
+  --color-accent-100: #EFF1FD;
+  --color-accent-200: #D8DCF9;
+  --color-accent-300: #BABFF5;
+  --color-accent-400: #999FF0;
+  --color-accent-500: #7D81DC;
+  --color-accent-600: #6163BB;
+  --color-accent-700: #4C4D9B;
+  --color-accent-800: #363675;
+  --color-accent-900: #222251;
+  --color-accent-950: #0D0C2B;
+
+  /* Signature palette: the brand's second colour, for decorative use. No interface role reads it yet. */
+  --color-signature-50: #F6FBFB;
+  --color-signature-100: #E6F5F4;
+  --color-signature-200: #C1E5E2;
+  --color-signature-300: #87CFCC;
+  --color-signature-400: #30B7B3;
+  --color-signature-500: #129996;
+  --color-signature-600: #037976;
+  --color-signature-700: #05605E;
+  --color-signature-800: #034544;
+  --color-signature-900: #002D2C;
+  --color-signature-950: #001313;
 
   /* Product-neutral semantic scales with a deliberately softened character. */
   --color-info-50: #F7FAFF;

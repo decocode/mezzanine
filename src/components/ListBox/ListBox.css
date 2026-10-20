@@ -9,7 +9,7 @@
   overflow: auto;
   padding: var(--list-box-padding);
   outline: none;
-  color: var(--list-box-item-content);
+  color: var(--list-box-item-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-regular);
@@ -25,7 +25,7 @@
 
 .react-aria-ListBox[data-empty] {
   padding: var(--list-box-item-padding-block) var(--list-box-item-padding-inline);
-  color: var(--list-box-empty-content);
+  color: var(--list-box-empty-foreground);
 }
 
 .react-aria-ListBoxSection {
@@ -40,7 +40,7 @@
 
 .react-aria-ListBox .react-aria-Header {
   padding: var(--list-box-header-padding-block) var(--list-box-header-padding-inline);
-  color: var(--list-box-header-content);
+  color: var(--list-box-header-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);
   font-weight: var(--font-weight-semibold);
@@ -62,7 +62,7 @@
   padding: var(--list-box-item-padding-block) var(--list-box-item-padding-inline);
   outline: none;
   background: var(--list-box-item-background);
-  color: var(--list-box-item-content);
+  color: var(--list-box-item-foreground);
   overflow-wrap: anywhere;
   cursor: default;
   -webkit-tap-highlight-color: transparent;
@@ -94,7 +94,7 @@
 
 .react-aria-ListBoxItem[data-selected] {
   background: var(--list-box-item-background-selected);
-  color: var(--list-box-item-content-selected);
+  color: var(--list-box-item-foreground-selected);
 }
 
 .react-aria-ListBoxItem[data-selected]:is([data-hovered], [data-focused]) {
@@ -115,7 +115,7 @@
 }
 
 .react-aria-ListBoxItem [slot='description'] {
-  color: var(--list-box-item-description-content);
+  color: var(--list-box-item-description-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);

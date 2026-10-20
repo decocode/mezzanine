@@ -1,6 +1,7 @@
 /*
   Light is the fallback when no device preference or explicit selection is
   available. The :where() selectors keep theme defaults easy to override.
+  Themes set colour roles only; components point their own tokens at these roles.
 */
 :where(:root),
 :where(:root[data-theme='system']),
@@ -10,120 +11,79 @@
   /* A pure white page, so surfaces and cards separate cleanly. */
   --color-page: #FFFFFF;
   --color-surface: var(--color-neutral-100);
-  --color-surface-hover: var(--color-neutral-200);
-  --color-surface-pressed: var(--color-neutral-300);
 
   --color-text: var(--color-neutral-900);
-  --color-text-muted: var(--color-neutral-600);
+  --color-text-muted: var(--color-neutral-700);
 
-  --color-link: var(--color-signature-700);
-  --color-link-hover: var(--color-signature-800);
-  --color-link-pressed: var(--color-signature-900);
-  --color-chevron: var(--color-signature-700);
-
-  /* Decorative lines (cards, tables, panels, dividers) are soft. Controls keep their own stronger
-     borders, which need 3:1 contrast so people can find them. */
+  /* Decorative lines (cards, tables, panels, dividers) are soft. Controls use --color-border-control,
+     which keeps the 3:1 contrast people need to find them. */
   --color-border: var(--color-neutral-200);
+  --color-border-control: var(--color-neutral-700);
+
+  /* Neutral washes of the text colour darken (or, in Dark, lighten) whatever they sit on. */
+  --color-neutral-muted: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
+  --color-neutral-muted-hovered: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
+  --color-neutral-muted-pressed: color-mix(in srgb, var(--color-text) var(--opacity-16), transparent);
+
+  --color-link: var(--color-accent);
+  --color-link-hovered: var(--color-accent-800);
+  --color-link-pressed: var(--color-accent-900);
+  --color-chevron: var(--color-accent);
+  --color-focus: var(--color-info-700);
+  --color-backdrop: color-mix(in srgb, var(--color-neutral-950) var(--opacity-50), transparent);
+
+  /* Colour families. Each fill carries text and icons from its own palette. */
+  --color-accent-emphasis: var(--color-accent-700);
+  --color-accent-emphasis-hovered: var(--color-accent-800);
+  --color-accent-emphasis-pressed: var(--color-accent-900);
+  --color-accent-inverse: var(--color-accent-50);
+  --color-accent-muted: var(--color-accent-100);
+  --color-accent-muted-hovered: var(--color-accent-100);
+  --color-accent-muted-pressed: var(--color-accent-200);
+  --color-accent: var(--color-accent-700);
+
+  --color-info-emphasis: var(--color-info-700);
+  --color-info-emphasis-hovered: var(--color-info-800);
+  --color-info-emphasis-pressed: var(--color-info-900);
+  --color-info-inverse: var(--color-info-50);
+  --color-info-muted: var(--color-info-100);
+  --color-info-muted-hovered: var(--color-info-100);
+  --color-info-muted-pressed: var(--color-info-200);
+  --color-info: var(--color-info-700);
+
+  --color-success-emphasis: var(--color-success-700);
+  --color-success-emphasis-hovered: var(--color-success-800);
+  --color-success-emphasis-pressed: var(--color-success-900);
+  --color-success-inverse: var(--color-success-50);
+  --color-success-muted: var(--color-success-100);
+  --color-success-muted-hovered: var(--color-success-100);
+  --color-success-muted-pressed: var(--color-success-200);
+  --color-success: var(--color-success-700);
+
+  --color-warning-emphasis: var(--color-warning-700);
+  --color-warning-emphasis-hovered: var(--color-warning-800);
+  --color-warning-emphasis-pressed: var(--color-warning-900);
+  --color-warning-inverse: var(--color-warning-50);
+  --color-warning-muted: var(--color-warning-100);
+  --color-warning-muted-hovered: var(--color-warning-100);
+  --color-warning-muted-pressed: var(--color-warning-200);
+  --color-warning: var(--color-warning-700);
+
+  --color-danger-emphasis: var(--color-danger-700);
+  --color-danger-emphasis-hovered: var(--color-danger-800);
+  --color-danger-emphasis-pressed: var(--color-danger-900);
+  --color-danger-inverse: var(--color-danger-50);
+  --color-danger-muted: var(--color-danger-100);
+  --color-danger-muted-hovered: var(--color-danger-100);
+  --color-danger-muted-pressed: var(--color-danger-200);
+  --color-danger: var(--color-danger-700);
+
   /* Rounded corners: small on controls, larger on surfaces. Wireframe stays square. */
   --radius-control: var(--radius-sm);
   --radius-surface: var(--radius-md);
 
-  --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) 18%, transparent);
+  --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) var(--opacity-20), transparent);
 
-  --button-primary-background: var(--color-signature-700);
-  --button-primary-background-hovered: var(--color-signature-800);
-  --button-primary-background-pressed: var(--color-signature-900);
-  --button-primary-content: var(--color-neutral-50);
-  --button-primary-border: var(--color-signature-900);
-
-  --button-secondary-background: transparent;
-  --button-secondary-background-hovered: var(--color-signature-100);
-  --button-secondary-background-pressed: var(--color-signature-200);
-  --button-secondary-content: var(--color-signature-700);
-  --button-secondary-border: var(--color-signature-700);
-
-  --button-tertiary-background: transparent;
-  --button-tertiary-background-hovered: var(--color-signature-100);
-  --button-tertiary-background-pressed: var(--color-signature-200);
-  --button-tertiary-content: var(--color-signature-700);
-  --button-tertiary-border: transparent;
-
-  --button-destructive-background: var(--color-danger-700);
-  --button-destructive-background-hovered: var(--color-danger-800);
-  --button-destructive-background-pressed: var(--color-danger-900);
-  --button-destructive-content: var(--color-danger-50);
-  --button-destructive-border: var(--color-danger-900);
-
-  --checkbox-background: transparent;
-  --checkbox-background-hovered: var(--color-signature-100);
-  --checkbox-background-selected: var(--color-signature-700);
-  --checkbox-background-selected-hovered: var(--color-signature-800);
-  --checkbox-content-selected: var(--color-neutral-50);
-  --checkbox-border: var(--color-neutral-700);
-  --checkbox-border-invalid: var(--color-danger-700);
-
-  --switch-track-background: transparent;
-  --switch-track-background-hovered: var(--color-signature-100);
-  --switch-track-background-selected: var(--color-signature-700);
-  --switch-track-background-selected-hovered: var(--color-signature-800);
-  --switch-track-border: var(--color-neutral-700);
-  --switch-track-border-invalid: var(--color-danger-700);
-  --switch-handle-background: var(--color-neutral-700);
-  --switch-handle-background-selected: var(--color-neutral-50);
-  --switch-error-content: var(--color-danger-700);
-
-  --radio-background: transparent;
-  --radio-background-hovered: var(--color-signature-100);
-  --radio-selection: var(--color-signature-700);
-  --radio-border: var(--color-neutral-700);
-  --radio-border-invalid: var(--color-danger-700);
-
-  --toggle-button-background: transparent;
-  --toggle-button-background-hovered: var(--color-signature-100);
-  --toggle-button-background-pressed: var(--color-signature-200);
-  --toggle-button-content: var(--color-signature-700);
-  --toggle-button-border: var(--color-signature-700);
-  --toggle-button-background-selected: var(--color-signature-700);
-  --toggle-button-background-selected-hovered: var(--color-signature-800);
-  --toggle-button-background-selected-pressed: var(--color-signature-900);
-  --toggle-button-content-selected: var(--color-neutral-50);
-  --toggle-button-border-selected: var(--toggle-button-border);
-
-  --nav-item-background: transparent;
-  --nav-item-background-hovered: var(--color-neutral-300);
-  --nav-item-background-pressed: var(--color-neutral-400);
-  --nav-item-background-current: transparent;
-  --nav-item-content: var(--color-text);
-  --nav-item-content-current: var(--color-text);
-  --nav-item-current-indicator: var(--color-link);
-  --navigation-tree-header-content: var(--color-signature-700);
-
-  --disclosure-trigger-background: transparent;
-
-  --table-row-background-selected: var(--color-signature-700);
-  --table-row-background-selected-hovered: var(--color-signature-800);
-  --table-row-background-selected-pressed: var(--color-signature-900);
-  --table-row-content-selected: var(--color-neutral-50);
-
-  --list-box-item-background: transparent;
-  --list-box-item-background-hovered: var(--color-surface-hover);
-  --list-box-item-background-pressed: var(--color-surface-pressed);
-  --list-box-item-background-selected: var(--color-signature-700);
-  --list-box-item-background-selected-hovered: var(--color-signature-800);
-  --list-box-item-background-selected-pressed: var(--color-signature-900);
-  --list-box-item-content: var(--color-text);
-  --list-box-item-content-selected: var(--color-neutral-50);
-  --list-box-item-description-content: var(--color-neutral-700);
-  --list-box-header-content: var(--color-neutral-700);
-  --list-box-empty-content: var(--color-neutral-700);
+  /* Table headers sit one step off the page in each theme. */
   --table-header-background: var(--color-neutral-100);
-  --table-drop-target-color: var(--color-signature-700);
-
-  --input-background: var(--color-page);
-  --input-border: var(--color-neutral-700);
-  --input-border-hovered: var(--color-text);
-  --input-border-invalid: var(--color-danger-700);
-  --text-field-error-content: var(--color-danger-700);
-
-  --color-focus: var(--color-info-700);
 }

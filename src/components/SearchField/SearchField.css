@@ -44,7 +44,7 @@
   width: var(--search-field-icon-size);
   height: var(--search-field-icon-size);
   margin-inline-start: var(--input-padding-inline);
-  color: var(--search-field-icon-content);
+  color: var(--search-field-icon-foreground);
   pointer-events: none;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .react-aria-SearchField > .react-aria-FieldError {
-  color: var(--text-field-error-content);
+  color: var(--text-field-error-foreground);
 }
 
 .react-aria-SearchField[data-disabled] {

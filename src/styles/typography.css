@@ -71,7 +71,7 @@ code:not(pre code) {
   overflow-wrap: anywhere;
   padding: var(--inline-code-padding-block) var(--inline-code-padding-inline);
   border-radius: var(--inline-code-border-radius);
-  background: var(--color-surface-hover);
+  background: var(--color-neutral-muted-hovered);
   color: var(--color-text);
   font-size: var(--font-size-body-sm);
   line-height: var(--line-height-body-sm);

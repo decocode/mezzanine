@@ -27,7 +27,7 @@ export const colorContent: DocsPageContent = {
 export const colorPaletteGroups = {
   core: {
     title: 'Core colors',
-    intro: 'Core colors are the palettes your brand can use to communicate its distinct visual identity. Mezzanine uses the Signature palette for its default brand color.',
+    intro: 'Core colors are the palettes your brand can use to communicate its distinct visual identity. Accent is the interface color; Signature is a second, decorative brand color.',
   },
   semantic: {
     title: 'Semantic colors',
@@ -55,7 +55,7 @@ export interface ColorPaletteDefinition {
     content: string[]
     label: string
   }
-  id: 'neutral' | 'signature' | 'info' | 'success' | 'warning' | 'danger'
+  id: 'neutral' | 'accent' | 'signature' | 'info' | 'success' | 'warning' | 'danger'
   label: string
 }
 
@@ -63,13 +63,23 @@ export const colorShadeSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900,
 
 export const foundationColorPalettes: ColorPaletteDefinition[] = [
   {
+    id: 'accent',
+    label: 'Accent',
+    details: {
+      label: 'When to use Accent colors',
+      content: [
+        'The Accent palette is usually based around the main color associated with a brand. In Mezzanine, accent colors are used for primary buttons, links, and selected controls.',
+        'If your main brand color is similar to those used for warnings or errors, consider how people will tell those meanings apart. Some brands use high-contrast neutral colors for buttons and links, reserving their brand color for images and other visual content.',
+      ],
+    },
+  },
+  {
     id: 'signature',
     label: 'Signature',
     details: {
       label: 'When to use Signature colors',
       content: [
-        'The Signature palette is usually based around the main color associated with a brand. In Mezzanine, signature colors are used for primary buttons, links, and selected controls.',
-        'If your main brand color is similar to those used for warnings or errors, consider how people will tell those meanings apart. Some brands use high-contrast neutral colors for buttons and links, reserving their brand color for images and other visual content.',
+        'The Signature palette is a brand\'s second color, for decorative use. No Mezzanine component uses it yet.',
       ],
     },
   },
@@ -137,6 +147,26 @@ export const semanticColorPalettes: ColorPaletteDefinition[] = [
   },
 ]
 
+const colorFamilies = [
+  { id: 'accent', label: 'Accent' },
+  { id: 'info', label: 'Info' },
+  { id: 'success', label: 'Success' },
+  { id: 'warning', label: 'Warning' },
+  { id: 'danger', label: 'Danger' },
+] as const
+
+// Every family has the same roles, so its rows are built from one list.
+const familyRoles = [
+  { suffix: '-emphasis', label: 'emphasis', description: 'A strong fill, such as a primary button or a selected item.' },
+  { suffix: '-emphasis-hovered', label: 'emphasis hovered', description: 'A hovered emphasis fill.' },
+  { suffix: '-emphasis-pressed', label: 'emphasis pressed', description: 'A pressed emphasis fill.' },
+  { suffix: '-inverse', label: 'inverse', description: 'Text and icons on an emphasis fill.' },
+  { suffix: '-muted', label: 'muted', description: 'A resting light fill, such as a badge.' },
+  { suffix: '-muted-hovered', label: 'muted hovered', description: 'A light fill while hovered.' },
+  { suffix: '-muted-pressed', label: 'muted pressed', description: 'A light fill while pressed.' },
+  { suffix: '', label: '', description: 'Text, icons and borders on a muted fill or the page.' },
+]
+
 export const colorTokenGroups: ColorTokenGroup[] = [
   {
     id: 'surfaces',
@@ -144,8 +174,10 @@ export const colorTokenGroups: ColorTokenGroup[] = [
     tokens: [
       { token: '--color-page', label: 'Page', description: 'The background behind the page.' },
       { token: '--color-surface', label: 'Surface', description: 'Content placed on the page.' },
-      { token: '--color-surface-hover', label: 'Surface hover', description: 'A hovered interactive surface.' },
-      { token: '--color-surface-pressed', label: 'Surface pressed', description: 'A pressed interactive surface.' },
+      { token: '--color-neutral-muted', label: 'Neutral muted', description: 'A faint wash of the text color, such as a neutral badge.' },
+      { token: '--color-neutral-muted-hovered', label: 'Neutral muted hovered', description: 'A hovered row or surface, on any background.' },
+      { token: '--color-neutral-muted-pressed', label: 'Neutral muted pressed', description: 'A pressed row or surface, on any background.' },
+      { token: '--color-backdrop', label: 'Backdrop', description: 'The dimmed layer behind modals and drawers.' },
     ],
   },
   {
@@ -155,6 +187,7 @@ export const colorTokenGroups: ColorTokenGroup[] = [
       { token: '--color-text', label: 'Text', description: 'Normal reading and interface text.' },
       { token: '--color-text-muted', label: 'Muted text', description: 'Supporting and secondary text.' },
       { token: '--color-border', label: 'Border', description: 'Outlines and dividing lines.' },
+      { token: '--color-border-control', label: 'Control border', description: 'Borders of controls, such as checkboxes and inputs.' },
     ],
   },
   {
@@ -162,10 +195,19 @@ export const colorTokenGroups: ColorTokenGroup[] = [
     label: 'Actions and focus',
     tokens: [
       { token: '--color-link', label: 'Link', description: 'The normal link color.' },
-      { token: '--color-link-hover', label: 'Link hover', description: 'A hovered link.' },
+      { token: '--color-link-hovered', label: 'Link hovered', description: 'A hovered link.' },
       { token: '--color-link-pressed', label: 'Link pressed', description: 'A pressed link.' },
       { token: '--color-focus', label: 'Focus', description: 'The keyboard-focus indicator color.' },
       { token: '--color-chevron', label: 'Chevron', description: 'Expand and collapse chevrons in Disclosure and Nav Tree.' },
     ],
   },
+  ...colorFamilies.map((family) => ({
+    id: family.id,
+    label: family.label,
+    tokens: familyRoles.map((role) => ({
+      token: `--color-${family.id}${role.suffix}`,
+      label: `${family.label} ${role.label}`.trim(),
+      description: role.description,
+    })),
+  })),
 ]

@@ -30,7 +30,7 @@ a {
 }
 
 a:hover {
-  color: var(--color-link-hover);
+  color: var(--color-link-hovered);
 }
 
 a:active {
@@ -337,7 +337,7 @@ a:focus-visible {
   max-inline-size: 100%;
   block-size: var(--space-6);
   border: 0;
-  background: var(--color-signature-500);
+  background: var(--color-accent-500);
 }
 
 /* Documentation controls layout; Mezzanine supplies table appearance and states. */

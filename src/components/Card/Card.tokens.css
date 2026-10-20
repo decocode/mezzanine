@@ -1,4 +1,4 @@
-/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+/* Component tokens shared by every theme. Colour tokens point at the colour roles, which each theme sets in src/themes/. */
 
 :where(:root) {
   /* Card: a static surface for grouped content. */
@@ -7,7 +7,7 @@
   --card-border-width: var(--border-width-baseline);
   --card-border-radius: var(--radius-surface);
   --card-background: var(--elevation-raised-1-surface);
-  --card-content: var(--color-text);
+  --card-foreground: var(--color-text);
   --card-border: var(--color-border);
   --card-elevation: var(--elevation-raised-1);
 }

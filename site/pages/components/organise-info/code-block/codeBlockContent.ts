@@ -47,7 +47,7 @@ export const codeBlockContent: DocsPageContent = {
           { name: '--code-block-border-width', description: 'Block border thickness.' },
           { name: '--code-block-border-radius', description: 'Rounding of the block corners.' },
           { name: '--code-block-background', description: 'Block surface colour.' },
-          { name: '--code-block-content', description: 'Code text colour.' },
+          { name: '--code-block-foreground', description: 'Code text colour.' },
           { name: '--code-block-border', description: 'Block border colour.' },
         ],
       },

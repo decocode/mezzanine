@@ -56,14 +56,14 @@
 .react-aria-Column[data-hovered],
 .react-aria-Cell[data-hovered],
 .react-aria-Row[data-hovered] .react-aria-Cell {
-  background: var(--color-surface-hover);
+  background: var(--color-neutral-muted-hovered);
 }
 
 .react-aria-Column[data-pressed],
 .react-aria-Column[data-resizing],
 .react-aria-Cell[data-pressed],
 .react-aria-Row[data-pressed] .react-aria-Cell {
-  background: var(--color-surface-pressed);
+  background: var(--color-neutral-muted-pressed);
 }
 
 .react-aria-TableBody[data-empty] {
@@ -82,7 +82,7 @@
 
 .react-aria-Row[data-selected] .react-aria-Cell {
   background: var(--table-row-background-selected);
-  color: var(--table-row-content-selected);
+  color: var(--table-row-foreground-selected);
 }
 
 .react-aria-Row[data-selected][data-hovered] .react-aria-Cell {

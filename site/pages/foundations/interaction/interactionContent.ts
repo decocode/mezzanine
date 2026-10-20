@@ -22,9 +22,9 @@ export const interactionStates: InteractionState[] = [
 
 export const interactionSharedTokens: { token: string; description: string }[] = [
   { token: '--color-focus', description: 'Focus ring colour' },
-  { token: '--color-surface-hover', description: 'Surface colour while hovered' },
-  { token: '--color-surface-pressed', description: 'Surface colour while pressed' },
-  { token: '--color-link-hover', description: 'Link colour while hovered' },
+  { token: '--color-neutral-muted-hovered', description: 'Row or surface colour while hovered' },
+  { token: '--color-neutral-muted-pressed', description: 'Row or surface colour while pressed' },
+  { token: '--color-link-hovered', description: 'Link colour while hovered' },
   { token: '--color-link-pressed', description: 'Link colour while pressed' },
   { token: '--opacity-disabled', description: 'Opacity of disabled controls' },
 ]

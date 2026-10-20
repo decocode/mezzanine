@@ -14,8 +14,9 @@ Mezzanine has three official themes:
 
 - **Light** — a neutral light appearance.
 - **Dark** — a neutral dark appearance.
-- **Wireframe** — monochrome structure and actions, while retaining semantic
-  status colors and a blue keyboard-focus color.
+- **Wireframe** — monochrome structure and actions (the accent palette with its
+  color removed), while retaining semantic status colors and a blue
+  keyboard-focus color.
 
 Choose a theme by setting `data-theme` on the root HTML element:
 
@@ -41,8 +42,8 @@ rules that remove underlines; current-item indicators and focus outlines remain.
 Hovering or visibly focusing an enabled link doubles its `--link-underline-thickness`;
 disabled links keep the normal thickness. Standard Link keyboard focus uses the
 hover text colour and retains its focus ring.
-Pressed links keep the heavier underline and use `--color-surface-pressed` for
-a grey background. Light and Dark retain their existing link treatments.
+Pressed links keep the heavier underline and use `--color-neutral-muted-pressed`
+for a grey background. Light and Dark retain their existing link treatments.
 
 ## Product themes
 
@@ -54,10 +55,15 @@ A product changes the appearance by overriding the same semantic names:
 
 ```css
 :root {
+  --color-accent-700: #1F5FAD;
   --button-primary-background: var(--product-blue-700);
   --font-family-heading: 'Example Display', system-ui, sans-serif;
 }
 ```
+
+Overriding an accent palette step restyles every role that reads it.
+Overriding a component token, such as `--button-primary-background`, restyles
+only that part of that component.
 
 Mezzanine component CSS must not depend on product palette names such as
 `--product-blue-700`.
@@ -92,88 +98,96 @@ Examples:
 - `--font-family-body` is the normal reading and interface font.
 
 Names describe purpose rather than appearance. Component CSS therefore asks
-for `--button-primary-background`, not `--color-signature-700`.
+for `--button-primary-background`, not `--color-accent-700`.
 
 ## Current color inventory
 
-Every official theme defines the same color roles.
+Color has three layers:
 
-### Palette scales
+1. **Palettes** in `src/tokens/color.tokens.css`. Only themes read them.
+2. **Roles**, which name what a color is for. Each theme maps the palettes onto
+   the roles and sets nothing else about color.
+3. **Component tokens**, set once in each component's `*.tokens.css` as
+   pointers to roles, such as `--checkbox-background-selected:
+   var(--color-accent-emphasis)`. They are the same in every theme, and let an
+   app restyle one part of one component.
 
-Mezzanine includes an 11-step Signature core palette, from `50` to `950`.
-Breaking change: `--color-violet-*` has been renamed to `--color-signature-*`.
-Consumers must update palette references and theme overrides; no aliases are provided.
-The existing `violet` Badge variant and its component tokens remain unchanged,
-but reference the Signature palette.
-Roles select a step from a core or semantic palette so a product can change
-the palette without changing what each role means.
+`npm run check:rules` checks that component tokens point only at roles that
+exist, and that themes set only roles.
 
-Every palette follows the same perceptual lightness curve. Verify text contrast
-against the actual foreground and background colours rather than relying on
-the shade number alone.
+### Palettes
+
+Each palette has 11 steps, from `50` to `950`, on the same perceptual lightness
+curve. Verify contrast against the actual colors rather than the step number.
 
 | Token | Meaning |
 | --- | --- |
-| `--color-signature-{50–950}` | Mezzanine's Signature palette |
+| `--color-accent-{50–950}` | The interface color that every accent role reads |
+| `--color-signature-{50–950}` | The brand's second, decorative color. No role reads it yet |
+| `--color-neutral-{50–950}` | Greys for page, surfaces, text and lines |
+| `--color-info-{50–950}` | Information, and the keyboard-focus color |
+| `--color-success-{50–950}` | Successful outcomes |
+| `--color-warning-{50–950}` | Caution and warnings |
+| `--color-danger-{50–950}` | Errors and destructive actions |
 
-Light and Dark use the Signature core palette and the Neutral semantic palette.
-Wireframe uses Neutral for its monochrome presentation and does not use Signature
-for actions.
+Breaking change: the interface now reads `--color-accent-*`. The Signature
+palette is teal and no longer drives any role.
 
-### Page and surfaces
+### Color families
+
+Accent, info, success, warning and danger each have the same roles. A fill
+always carries text and icons from its own palette.
+
+| Token | Meaning |
+| --- | --- |
+| `--color-{family}-emphasis`, `-hovered`, `-pressed` | Strong fill, such as a primary button or a selected item |
+| `--color-{family}-inverse` | Text and icons on an emphasis fill |
+| `--color-{family}-muted` | Resting light fill, such as a Badge |
+| `--color-{family}-muted-hovered`, `-pressed` | Light fill on hover and press |
+| `--color-{family}` | Text, icons and borders on a muted fill or the page |
+
+| Theme | Emphasis | Inverse | Muted, hovered, pressed | Plain |
+| --- | --- | --- | --- | --- |
+| Light | 700, 800, 900 | 50 | 100, 100, 200 | 700 |
+| Dark | 500, 400, 300 | 950 | 900, 900, 800 | 300 |
+| Wireframe | As Light; accent has its color removed | 50 | As Light | 700 |
+
+### Page, text and lines
 
 | Token | Meaning |
 | --- | --- |
 | `--color-page` | The background behind the page |
-| `--color-surface` | Content placed on the page, such as a panel or input |
-| `--color-surface-hover` | A hovered interactive surface |
-| `--color-surface-pressed` | A pressed interactive surface |
-
-### Text and lines
-
-| Token | Meaning |
-| --- | --- |
+| `--color-surface` | Content placed on the page, such as a panel |
 | `--color-text` | Normal reading and interface text |
 | `--color-text-muted` | Supporting and secondary text |
-| `--color-border` | Outlines and dividing lines |
+| `--color-border` | Decorative outlines and dividing lines |
+| `--color-border-control` | Borders of controls such as checkboxes and inputs, at 3:1 or more |
+| `--color-neutral-muted`, `-hovered`, `-pressed` | See-through washes of the text color that darken or lighten whatever they sit on |
+| `--color-backdrop` | The dimmed layer behind Modals and Panel drawers |
 
 ### Links and focus
 
 | Token | Meaning |
 | --- | --- |
-| `--color-link` | The normal link color |
-| `--color-link-hover` | A hovered link |
+| `--color-link` | The normal link color: the accent |
+| `--color-link-hovered` | A hovered link |
 | `--color-link-pressed` | A pressed link |
-| `--color-focus` | The keyboard-focus indicator color |
-| `--color-chevron` | Expand and collapse chevrons in Disclosure and NavTree: Signature in Light and Dark, the text color in Wireframe |
+| `--color-focus` | The keyboard-focus indicator color, from the Info palette |
+| `--color-chevron` | Expand and collapse chevrons in Disclosure and NavTree |
 
-Link and Focus are separate roles. Light and Dark draw Link from the Signature
-palette, while Focus remains tied to the Info palette. Primary actions are
-defined by their components rather than a generic color role. There is no
-generic Accent token.
+## Current opacity inventory
 
-In Light and Dark, text and navigation links—including current destinations,
-linked tabs and TableOfContents—use the Signature link colours. NavTree
-keeps its neutral default and current-item text. Disabled links and links styled
-as buttons keep their own treatments. Wireframe keeps its neutral link colours.
+Defined in `src/tokens/opacity.tokens.css`, as percentages so they work in both
+`color-mix()` and `opacity`.
 
-### Semantic color palettes
-
-Mezzanine includes five 11-step semantic color scales, from `50` to `950`.
-Their defaults use familiar gray, blue, green, amber and red families with a
-softened character.
-
-| Token | Meaning |
+| Token | Value |
 | --- | --- |
-| `--color-neutral-{50–950}` | Statuses without positive or negative meaning |
-| `--color-info-{50–950}` | Information and keyboard-focus scale |
-| `--color-success-{50–950}` | Successful-outcome scale |
-| `--color-warning-{50–950}` | Caution and warning scale |
-| `--color-danger-{50–950}` | Error and destructive-action scale |
-
-All official themes use these conventional neutral, blue, green, amber and red
-status scales. Wireframe therefore remains monochrome except for semantic status
-and focus colors.
+| `--opacity-4` | 4% |
+| `--opacity-8` | 8% |
+| `--opacity-12` | 12% |
+| `--opacity-16` | 16% |
+| `--opacity-20` | 20% |
+| `--opacity-50` | 50% |
 
 ## Current typography inventory
 
@@ -259,11 +273,11 @@ these roles, so a theme changes every ring at once.
 NavTree rows, TopBar links and TableOfContents links share one row style, so
 navigation looks alike wherever it sits: `body-sm` text, a background on hover
 and press, and the current page in Emphasis weight with an indicator bar. The
-colours are set per theme; the bar width lives in `src/tokens/interaction.tokens.css`.
+colours point at the colour roles; they and the bar width live in `src/tokens/interaction.tokens.css`.
 
 | Token | Meaning |
 | --- | --- |
-| `--nav-item-content`, `--nav-item-content-current` | Text colour, and the current page's |
+| `--nav-item-foreground`, `--nav-item-foreground-current` | Text colour, and the current page's |
 | `--nav-item-background`, `-hovered`, `-pressed`, `-current` | Row background in each state |
 | `--nav-item-current-indicator` | Current page bar colour |
 | `--nav-item-current-indicator-width` | Current page bar width |

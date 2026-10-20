@@ -1,8 +1,8 @@
-/* Interaction tokens shared by interactive components. State colours are set per theme in src/themes/. */
+/* Interaction tokens shared by interactive components. Colours point at the colour roles, which each theme sets in src/themes/. */
 
 :where(:root) {
   /* Shared disabled-state treatment for interactive components. */
-  --opacity-disabled: 0.5;
+  --opacity-disabled: var(--opacity-50);
 
   /* Target size: how big something you tap or click is. --target-size-min is the WCAG 2.2 AA
      minimum of 24px. Every interactive element picks a step from the scale, all above that
@@ -23,4 +23,13 @@
   /* Nav items: the shared row style of NavTree, TopBar links and TableOfContents links. Colours are
      set per theme as --nav-item-*; the current page's indicator bar has this width. */
   --nav-item-current-indicator-width: 0.1875rem;
+
+  /* Nav item colours: pointers to the colour roles, the same in every theme. */
+  --nav-item-background: transparent;
+  --nav-item-background-hovered: var(--color-neutral-muted-hovered);
+  --nav-item-background-pressed: var(--color-neutral-muted-pressed);
+  --nav-item-background-current: transparent;
+  --nav-item-foreground: var(--color-text);
+  --nav-item-foreground-current: var(--color-text);
+  --nav-item-current-indicator: var(--color-link);
 }

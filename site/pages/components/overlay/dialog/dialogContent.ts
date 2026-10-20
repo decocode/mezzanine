@@ -62,7 +62,7 @@ export const dialogContent: DocsPageContent = {
           { name: '--modal-border-radius', description: 'Modal corner radius.' },
           { name: '--modal-backdrop', description: 'Backdrop behind the modal.' },
           { name: '--modal-background', description: 'Modal surface colour.' },
-          { name: '--modal-content', description: 'Modal text colour.' },
+          { name: '--modal-foreground', description: 'Modal text colour.' },
           { name: '--modal-border', description: 'Modal border colour.' },
           { name: '--motion-duration-interface', description: 'Entry and exit duration; motion stops with reduced motion.' },
           { name: '--motion-scale-enter', description: 'Modal scale at the start of entry and end of exit.' },

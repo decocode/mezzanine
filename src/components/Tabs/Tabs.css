@@ -3,7 +3,7 @@
   gap: var(--tabs-content-gap);
   min-width: 0;
   max-width: 100%;
-  color: var(--tabs-content);
+  color: var(--tabs-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-regular);
@@ -50,7 +50,7 @@
   flex-shrink: 0;
   min-height: var(--target-size-md);
   padding: var(--tab-padding-block) var(--tab-padding-inline);
-  color: var(--tab-content);
+  color: var(--tab-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -70,7 +70,7 @@
 }
 
 .react-aria-Tab[data-selected] {
-  color: var(--tab-content-selected);
+  color: var(--tab-foreground-selected);
 }
 
 .react-aria-Tab > .react-aria-SelectionIndicator {

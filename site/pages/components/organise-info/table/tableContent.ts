@@ -97,7 +97,7 @@ export const tableContent: DocsPageContent = {
           { name: '--table-row-background-selected', description: 'Selected row background.' },
           { name: '--table-row-background-selected-hovered', description: 'Selected row background when hovered.' },
           { name: '--table-row-background-selected-pressed', description: 'Selected row background when pressed.' },
-          { name: '--table-row-content-selected', description: 'Selected row text colour.' },
+          { name: '--table-row-foreground-selected', description: 'Selected row text colour.' },
           { name: '--table-disabled-opacity', description: 'Opacity of disabled rows and cells.' },
           { name: '--table-focus-ring-width', description: 'Thickness of the keyboard-focus and drop-target outlines.' },
           { name: '--table-focus-ring-offset', description: 'Position of the keyboard-focus and drop-target outlines.' },

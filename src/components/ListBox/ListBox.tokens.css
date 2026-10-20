@@ -1,4 +1,4 @@
-/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+/* Component tokens shared by every theme. Colour tokens point at the colour roles, which each theme sets in src/themes/. */
 
 :where(:root) {
   /* ListBox: a vertical list of options, optionally grouped into sections with a Header. */
@@ -12,4 +12,17 @@
   --list-box-item-gap: var(--space-1);
   --list-box-focus-ring-width: var(--focus-ring-width);
   --list-box-focus-ring-offset: var(--focus-ring-offset-inset);
+
+  /* ListBox colours: pointers to the colour roles, the same in every theme. */
+  --list-box-item-background: transparent;
+  --list-box-item-background-hovered: var(--color-neutral-muted-hovered);
+  --list-box-item-background-pressed: var(--color-neutral-muted-pressed);
+  --list-box-item-background-selected: var(--color-accent-emphasis);
+  --list-box-item-background-selected-hovered: var(--color-accent-emphasis-hovered);
+  --list-box-item-background-selected-pressed: var(--color-accent-emphasis-pressed);
+  --list-box-item-foreground: var(--color-text);
+  --list-box-item-foreground-selected: var(--color-accent-inverse);
+  --list-box-item-description-foreground: var(--color-text-muted);
+  --list-box-header-foreground: var(--color-text-muted);
+  --list-box-empty-foreground: var(--color-text-muted);
 }

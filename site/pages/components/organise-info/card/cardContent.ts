@@ -48,7 +48,7 @@ export const cardContent: DocsPageContent = {
           { name: '--card-border-width', description: 'Card border thickness.' },
           { name: '--card-border-radius', description: 'Rounding of the card corners.' },
           { name: '--card-background', description: 'Card surface colour.' },
-          { name: '--card-content', description: 'Text colour inside the card.' },
+          { name: '--card-foreground', description: 'Text colour inside the card.' },
           { name: '--card-border', description: 'Card border colour.' },
           { name: '--card-elevation', description: 'Card shadow; defaults to --elevation-raised-1.' },
         ],

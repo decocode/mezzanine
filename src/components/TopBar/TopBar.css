@@ -146,7 +146,7 @@
   padding: var(--space-2) var(--space-3);
   border-block-end: var(--nav-item-current-indicator-width) solid transparent;
   background: var(--nav-item-background);
-  color: var(--nav-item-content);
+  color: var(--nav-item-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-default);
@@ -163,17 +163,17 @@
 
 .mz-top-bar .mz-top-bar-link[data-hovered] {
   background: var(--nav-item-background-hovered);
-  color: var(--nav-item-content);
+  color: var(--nav-item-foreground);
 }
 
 .mz-top-bar .mz-top-bar-link[data-pressed] {
   background: var(--nav-item-background-pressed);
-  color: var(--nav-item-content);
+  color: var(--nav-item-foreground);
 }
 
 .mz-top-bar .mz-top-bar-link[aria-current]:where(:not([aria-current='false'])) {
   border-block-end-color: var(--nav-item-current-indicator);
   background: var(--nav-item-background-current);
-  color: var(--nav-item-content-current);
+  color: var(--nav-item-foreground-current);
   font-weight: var(--font-weight-emphasis);
 }

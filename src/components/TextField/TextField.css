@@ -75,7 +75,7 @@
 }
 
 .react-aria-TextField > .react-aria-FieldError {
-  color: var(--text-field-error-content);
+  color: var(--text-field-error-foreground);
 }
 
 .react-aria-TextField[data-disabled] {

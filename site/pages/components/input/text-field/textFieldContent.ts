@@ -13,7 +13,7 @@ export const fieldTokensRows = [
   { name: '--input-border-invalid', description: 'Field border colour when invalid.' },
   { name: '--input-focus-ring-width', description: 'Focus outline thickness.' },
   { name: '--input-focus-ring-offset', description: 'Distance between the field and its focus outline.' },
-  { name: '--text-field-error-content', description: '`FieldError` text colour.' },
+  { name: '--text-field-error-foreground', description: '`FieldError` text colour.' },
 ]
 
 export const textFieldContent: DocsPageContent = {

@@ -2,7 +2,7 @@
   display: grid;
   min-width: 0;
   gap: var(--navigation-tree-gap);
-  color: var(--nav-item-content);
+  color: var(--nav-item-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-default);
@@ -20,7 +20,7 @@
   padding-inline: calc(var(--navigation-tree-item-padding-inline) + (var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent)) var(--navigation-tree-item-padding-inline);
   border-inline-start: var(--nav-item-current-indicator-width) solid transparent;
   background: var(--nav-item-background);
-  color: var(--nav-item-content);
+  color: var(--nav-item-foreground);
   overflow-wrap: anywhere;
 }
 /* Sections are larger groups than parent rows, so they get more space above. */
@@ -78,7 +78,7 @@
 .mz-nav-tree-item[data-current] {
   border-inline-start-color: var(--nav-item-current-indicator);
   background: var(--nav-item-background-current);
-  color: var(--nav-item-content-current);
+  color: var(--nav-item-foreground-current);
   font-weight: var(--font-weight-emphasis);
 }
 .mz-nav-tree-item[data-focus-visible],
@@ -94,7 +94,7 @@
   padding: var(--navigation-tree-header-padding-block) var(--navigation-tree-item-padding-inline);
   /* Matches the rows' current-page bar space so header and row text line up. */
   border-inline-start: var(--nav-item-current-indicator-width) solid transparent;
-  color: var(--navigation-tree-header-content);
+  color: var(--navigation-tree-header-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);
   font-weight: var(--font-weight-semibold);

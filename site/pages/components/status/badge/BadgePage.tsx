@@ -3,7 +3,7 @@ import { ExampleZone } from '../../../../components/ExampleZone'
 import { badgeContent } from './badgeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
-const variants = ['neutral', 'violet', 'info', 'success', 'warning', 'danger'] as const
+const variants = ['neutral', 'accent', 'info', 'success', 'warning', 'danger'] as const
 
 export default function BadgePage() {
   return (

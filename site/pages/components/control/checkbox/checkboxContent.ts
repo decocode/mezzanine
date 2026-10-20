@@ -54,7 +54,7 @@ export const checkboxContent: DocsPageContent = {
           { name: '--checkbox-background-hovered', description: 'Box background when not selected and hovered.' },
           { name: '--checkbox-background-selected', description: 'Box background and border colour when selected or indeterminate.' },
           { name: '--checkbox-background-selected-hovered', description: 'Box background and border colour when selected or indeterminate and hovered.' },
-          { name: '--checkbox-content-selected', description: 'Icon colour when selected or indeterminate.' },
+          { name: '--checkbox-foreground-selected', description: 'Icon colour when selected or indeterminate.' },
           { name: '--checkbox-focus-ring-width', description: 'Keyboard-focus outline thickness.' },
           { name: '--checkbox-focus-ring-offset', description: 'Distance between the box and its keyboard-focus outline.' },
         ],
