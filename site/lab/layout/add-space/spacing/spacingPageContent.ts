@@ -21,16 +21,6 @@ export const spacingPage: StagePage = {
 // What the example's CSS does. The code is copied from layout-lab.css, and a browser test checks
 // that it still matches.
 export const spacingCssNotes: Record<string, CssNote> = {
-  spacingScale: {
-    paragraphs: [
-      'The gap comes from one of Mezzanine’s spacing tokens. The number in each name counts 4px steps, so `--space-4` is 1rem, normally 16px.',
-    ],
-    code: `.lab-spacing-scale {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--lab-gap);
-}`,
-  },
   grouping: {
     paragraphs: [
       'Equal gaps use `--space-4` everywhere, including inside each field, by setting the TextField’s own `--text-field-gap` token. Grouped, each label keeps the field’s usual `--space-2`, the fields sit `--space-6` apart, and the button gets an extra `--space-4` above it.',

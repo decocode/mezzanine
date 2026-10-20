@@ -24,12 +24,12 @@ export const gapPage: StagePage = {
 export const gapCssNotes: Record<string, CssNote> = {
   gap: {
     paragraphs: [
-      'The parent sets a `gap`, which only ever goes between its children.',
+      'The parent sets a `gap`, which only ever goes between its children. Its size comes from one of Mezzanine’s spacing tokens. The number in each name counts 4px steps, so `--space-4` is 1rem, normally 16px.',
     ],
     code: `.lab-spacing-gap {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--lab-gap);
 }`,
   },
 }

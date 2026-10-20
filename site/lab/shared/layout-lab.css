@@ -353,12 +353,6 @@
 
 .lab-spacing-gap {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.lab-spacing-scale {
-  display: flex;
   flex-wrap: wrap;
   gap: var(--lab-gap);
 }
