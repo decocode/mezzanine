@@ -340,8 +340,13 @@ a:focus-visible {
   background: var(--color-accent-500);
 }
 
-/* Opacity samples show the text colour at each step, over the page. */
-.token-scale[data-sample='opacity'] .token-scale-sample { background: color-mix(in srgb, var(--color-text) var(--_token-scale-value), transparent); }
+/* Opacity samples: a block of the accent colour at each step, over a checkerboard, so the pattern
+   shows through more at low steps and less at high ones. */
+.token-scale[data-sample='opacity'] .token-scale-sample {
+  background:
+    linear-gradient(color-mix(in srgb, var(--color-accent-emphasis) var(--_token-scale-value), transparent), color-mix(in srgb, var(--color-accent-emphasis) var(--_token-scale-value), transparent)),
+    repeating-conic-gradient(var(--color-border) 0 25%, var(--color-page) 0 50%) 0 0 / var(--space-4) var(--space-4);
+}
 
 /* Example parts shared by the docs and the Lab: an example's explanation, the CSS behind it, and value pickers. */
 .example-text {

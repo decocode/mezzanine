@@ -187,8 +187,10 @@ Defined in `src/tokens/opacity.tokens.css`, as percentages so they work in both
 | `--opacity-8` | 8% |
 | `--opacity-12` | 12% |
 | `--opacity-16` | 16% |
-| `--opacity-20` | 20% |
+| `--opacity-24` | 24% |
+| `--opacity-32` | 32% |
 | `--opacity-50` | 50% |
+| `--opacity-75` | 75% |
 
 ## Current typography inventory
 

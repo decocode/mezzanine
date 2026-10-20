@@ -79,7 +79,7 @@
   /* The space between an app's surfaces, such as AppShell's cards. Wireframe keeps them joined. */
   --surface-gap: 0;
 
-  --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) var(--opacity-20), transparent);
+  --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) var(--opacity-24), transparent);
 
   /* Table headers sit one step off the page in each theme. */
   --table-header-background: var(--color-neutral-100);

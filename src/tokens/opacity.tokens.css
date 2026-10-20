@@ -1,11 +1,14 @@
 /* Opacity scale: how see-through something is, as percentages so the steps work in both
-   color-mix() and the opacity property. */
+   color-mix() and the opacity property. Fine steps for faint washes, then gaps that grow, so each
+   step looks clearly different from the last. */
 
 :where(:root) {
   --opacity-4: 4%;
   --opacity-8: 8%;
   --opacity-12: 12%;
   --opacity-16: 16%;
-  --opacity-20: 20%;
+  --opacity-24: 24%;
+  --opacity-32: 32%;
   --opacity-50: 50%;
+  --opacity-75: 75%;
 }
