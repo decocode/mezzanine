@@ -19,10 +19,6 @@ Public typography classes begin with `mz-`, which is short for Mezzanine. The
 namespace identifies the library that supplied the class and helps prevent a
 product's own class names from clashing with it.
 
-Size suffixes now match the tokens: `small` → `sm`, `medium` → `md`, and
-`large` → `lg`. This is a breaking class-name change; update consuming apps.
-The previous class names are not retained as aliases. Visual values are unchanged.
-
 These are visual styles, not HTML elements. A heading's HTML level still comes
 from its position in the document outline.
 

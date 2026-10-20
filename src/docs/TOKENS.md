@@ -360,12 +360,6 @@ Select sizes through `size`; ToggleButtonGroup supplies a size to its children,
 which an individual ToggleButton can override with its own `size`.
 For icon buttons, give the label as children and choose `labelPlacement`: `tooltip`, `below` or `above`.
 
-Migration: `--toggle-button-min-height`, `--toggle-button-padding-block`,
-`--toggle-button-padding-inline` and `--navigation-tree-chevron-size` were removed.
-Replace local size overrides with size props; theme-wide changes belong in the
-shared button size tokens. TopBar and navigation-tree action buttons now
-use those sizes instead of their own dimensions.
-
 ## Shared motion
 
 All components consume these shared roles directly; there are no component motion
@@ -392,23 +386,6 @@ NavTree uses the same quarter turn as Disclosure. Plain zero/full endpoints and 
 centring remain literals. Spinner duration stays positive: system reduction removes
 its animation and keeps the ring visible. Wireframe alone leaves loading unchanged.
 The same rule applies to the documentation's loading icon preview.
-
-### Breaking token migration
-
-Remove old overrides and choose a shared role. No compatibility aliases remain.
-The old names below are historical migration instructions, not supported tokens.
-
-| Removed | Replacement |
-| --- | --- |
-| `--modal-motion-duration` | `--motion-duration-interface` |
-| `--disclosure-motion-duration` | `--motion-duration-interface` |
-| `--tab-motion-duration` | `--motion-duration-interface` |
-| `--navbar-motion-duration` | `--motion-duration-interface` |
-| `--navigation-tree-motion-duration` | `--motion-duration-interface` |
-| `--tooltip-motion-duration` | `--motion-duration-interface` |
-| `--button-progress-motion-duration` | `--motion-duration-loading` |
-| `--modal-enter-scale` | `--motion-scale-enter` |
-| `--navbar-motion-offset` | `--motion-distance-reveal`; recipe supplies direction |
 
 Products may override shared durations on their theme boundary. All components in
 that scope use the same speed. Do not override the internal policy controls or
