@@ -13,7 +13,7 @@ export const colorContent: DocsPageContent = {
       key: 'colorPalettes',
       title: 'Color palettes',
       subsections: [{ id: 'color-core-colors', label: 'Core colors' }, { id: 'color-semantic-colors', label: 'Semantic colors' }],
-      intro: ['Each palette brings together eleven shades of a color, ranging from light to dark. Lower numbers indicate lighter shades; higher numbers indicate darker shades. Each swatch shows its shade number and color value. Expand Color tokens beneath a palette to see its token names and values.'],
+      intro: ['Each palette brings together twelve shades of a color, ranging from light to dark. Lower numbers indicate lighter shades; higher numbers indicate darker shades. Each swatch shows its shade number and color value. Expand Color tokens beneath a palette to see its token names and values.'],
     },
     {
       key: 'colorRoles',
@@ -59,7 +59,7 @@ export interface ColorPaletteDefinition {
   label: string
 }
 
-export const colorShadeSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const
+export const colorShadeSteps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 980] as const
 
 export const foundationColorPalettes: ColorPaletteDefinition[] = [
   {

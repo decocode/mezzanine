@@ -11,9 +11,33 @@
     'header header header'
     'start main end'
     'start bottom end';
+  box-sizing: border-box;
   block-size: 100dvh;
   min-inline-size: 0;
+  /* With no gap, neighbouring cards overlap by one border so lines stay single, and the frame's outer
+     borders are clipped away, so Wireframe looks as it did before cards. */
+  --_app-shell-overlap: max(0px, var(--app-shell-surface-border-width) - var(--app-shell-gap));
+  --_app-shell-join: calc(var(--app-shell-gap) - var(--_app-shell-overlap));
+  padding: var(--app-shell-gap);
+  background: var(--app-shell-background);
+  clip-path: inset(var(--_app-shell-overlap));
 }
+
+/* Each area is a card. */
+.mz-app-shell > header,
+.mz-app-shell > .mz-panel[data-edge],
+.mz-app-shell-content {
+  box-sizing: border-box;
+  border: var(--app-shell-surface-border-width) solid var(--color-border);
+  border-radius: var(--app-shell-surface-radius);
+  background: var(--app-shell-surface-background);
+}
+
+.mz-app-shell > header { margin-block-end: var(--_app-shell-join); }
+.mz-app-shell > .mz-panel[data-edge='start'] { margin-inline-end: var(--_app-shell-join); }
+.mz-app-shell > .mz-panel[data-edge='end'] { margin-inline-start: var(--_app-shell-join); }
+.mz-app-shell > .mz-panel[data-edge='bottom'] { margin-block-start: var(--_app-shell-join); }
+.mz-app-shell > .mz-panel[data-state='closed'] { border-width: 0; }
 
 /* Tracks animate only once someone opens or closes a Panel, not as Panels appear on load. */
 .mz-app-shell[data-animated] {

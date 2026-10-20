@@ -19,6 +19,13 @@
   cursor: pointer;
 }
 
+/* Icon only: a square as tall as the trigger, with the icon centred. */
+.mz-search-trigger[data-icon-only] {
+  justify-content: center;
+  min-width: var(--search-trigger-min-height);
+  padding-inline: 0;
+}
+
 .mz-search-trigger-icon {
   width: var(--search-trigger-icon-size);
   height: var(--search-trigger-icon-size);

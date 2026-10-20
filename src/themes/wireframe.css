@@ -76,6 +76,8 @@
   /* Square corners, even inside an area showing another theme. */
   --radius-control: var(--radius-none);
   --radius-surface: var(--radius-none);
+  /* The space between an app's surfaces, such as AppShell's cards. Wireframe keeps them joined. */
+  --surface-gap: 0;
 
   --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) var(--opacity-20), transparent);
 

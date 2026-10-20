@@ -3,9 +3,9 @@
 
 const paletteStep = /--color-(?:accent|signature|neutral|info|success|warning|danger)-\d+\b/g
 const colorReference = /var\(\s*(--color-[a-z0-9-]+)/g
-// Theme-only values that are not colour roles: corner roles, elevation, and one component
+// Theme-only values that are not colour roles: corner and surface-gap roles, elevation, and one component
 // override every theme genuinely needs.
-const themeExceptions = [/^--radius-/, /^--elevation-/, /^--table-header-background$/]
+const themeExceptions = [/^--radius-/, /^--surface-gap$/, /^--elevation-/, /^--table-header-background$/]
 
 function declarations(text) {
   const masked = text.replace(/\/\*[\s\S]*?\*\//g, value => value.replace(/[^\n]/g, ' '))

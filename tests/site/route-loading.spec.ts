@@ -57,8 +57,11 @@ test('delayed loading keeps the shell usable and restores a direct section link'
   await expect(heading).toBeVisible()
   await expect.poll(() => heading.evaluate((element) => element.getBoundingClientRect().top))
     .toBeGreaterThanOrEqual(0)
-  await expect.poll(() => heading.evaluate((element) => element.getBoundingClientRect().top))
-    .toBeLessThan(400)
+  // The heading lands near the top of the scrolling content, below the TopBar and AppShell's frame.
+  await expect.poll(() => heading.evaluate((element) => {
+    const content = element.closest('.mz-app-shell-content')!
+    return element.getBoundingClientRect().top - content.getBoundingClientRect().top
+  })).toBeLessThan(150)
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
 })
 

@@ -221,6 +221,10 @@ menu.
 Side Panels are `--panel-width` wide. Set `--panel-start-width` or
 `--panel-end-width` to give one side its own width, such as a wide chat Panel.
 
+Each area (the header, Panels and main content) is a card on a darker
+background, separated by the theme's `--surface-gap` role. Wireframe sets the
+gap to 0, so its cards join into one flat frame.
+
 `startPanelSpan="full"` or `endPanelSpan="full"` runs a side Panel the full
 height of the window, with the header beside it rather than above it. The
 `<header>` is optional; without one, the Panels and main content start at the top.

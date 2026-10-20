@@ -3,7 +3,7 @@
   color-scheme: dark;
 
   /* A deeper black page, so raised surfaces stand out. */
-  --color-page: #0A0A0A;
+  --color-page: var(--color-neutral-980);
   --color-surface: var(--color-neutral-950);
 
   --color-text: var(--color-neutral-50);
@@ -26,45 +26,45 @@
   --color-backdrop: color-mix(in srgb, var(--color-neutral-950) var(--opacity-50), transparent);
 
   /* Colour families. Each fill carries text and icons from its own palette. */
-  --color-accent-emphasis: var(--color-accent-500);
-  --color-accent-emphasis-hovered: var(--color-accent-400);
-  --color-accent-emphasis-pressed: var(--color-accent-300);
+  --color-accent-emphasis: var(--color-accent-400);
+  --color-accent-emphasis-hovered: var(--color-accent-300);
+  --color-accent-emphasis-pressed: var(--color-accent-200);
   --color-accent-inverse: var(--color-accent-950);
   --color-accent-muted: var(--color-accent-900);
   --color-accent-muted-hovered: var(--color-accent-900);
   --color-accent-muted-pressed: var(--color-accent-800);
   --color-accent: var(--color-accent-300);
 
-  --color-info-emphasis: var(--color-info-500);
-  --color-info-emphasis-hovered: var(--color-info-400);
-  --color-info-emphasis-pressed: var(--color-info-300);
+  --color-info-emphasis: var(--color-info-400);
+  --color-info-emphasis-hovered: var(--color-info-300);
+  --color-info-emphasis-pressed: var(--color-info-200);
   --color-info-inverse: var(--color-info-950);
   --color-info-muted: var(--color-info-900);
   --color-info-muted-hovered: var(--color-info-900);
   --color-info-muted-pressed: var(--color-info-800);
   --color-info: var(--color-info-300);
 
-  --color-success-emphasis: var(--color-success-500);
-  --color-success-emphasis-hovered: var(--color-success-400);
-  --color-success-emphasis-pressed: var(--color-success-300);
+  --color-success-emphasis: var(--color-success-400);
+  --color-success-emphasis-hovered: var(--color-success-300);
+  --color-success-emphasis-pressed: var(--color-success-200);
   --color-success-inverse: var(--color-success-950);
   --color-success-muted: var(--color-success-900);
   --color-success-muted-hovered: var(--color-success-900);
   --color-success-muted-pressed: var(--color-success-800);
   --color-success: var(--color-success-300);
 
-  --color-warning-emphasis: var(--color-warning-500);
-  --color-warning-emphasis-hovered: var(--color-warning-400);
-  --color-warning-emphasis-pressed: var(--color-warning-300);
+  --color-warning-emphasis: var(--color-warning-400);
+  --color-warning-emphasis-hovered: var(--color-warning-300);
+  --color-warning-emphasis-pressed: var(--color-warning-200);
   --color-warning-inverse: var(--color-warning-950);
   --color-warning-muted: var(--color-warning-900);
   --color-warning-muted-hovered: var(--color-warning-900);
   --color-warning-muted-pressed: var(--color-warning-800);
   --color-warning: var(--color-warning-300);
 
-  --color-danger-emphasis: var(--color-danger-500);
-  --color-danger-emphasis-hovered: var(--color-danger-400);
-  --color-danger-emphasis-pressed: var(--color-danger-300);
+  --color-danger-emphasis: var(--color-danger-400);
+  --color-danger-emphasis-hovered: var(--color-danger-300);
+  --color-danger-emphasis-pressed: var(--color-danger-200);
   --color-danger-inverse: var(--color-danger-950);
   --color-danger-muted: var(--color-danger-900);
   --color-danger-muted-hovered: var(--color-danger-900);
@@ -74,15 +74,17 @@
   /* Rounded corners. */
   --radius-control: var(--radius-sm);
   --radius-surface: var(--radius-md);
+  /* The space between an app's surfaces, such as AppShell's cards. */
+  --surface-gap: var(--space-2);
 
   --elevation-shadow-color: rgb(0 0 0 / 72%);
   --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
   /* Higher levels sit on lighter surfaces, as if closer to a light source. */
   --elevation-sunken-1-surface: var(--color-page);
-  --elevation-flat-surface: var(--color-page);
-  --elevation-raised-1-surface: var(--color-neutral-900);
-  --elevation-raised-2-surface: color-mix(in srgb, var(--color-neutral-900), var(--color-neutral-800));
-  --elevation-raised-3-surface: var(--color-neutral-800);
+  --elevation-flat-surface: var(--color-surface);
+  --elevation-raised-1-surface: color-mix(in srgb, var(--color-neutral-950), var(--color-neutral-900));
+  --elevation-raised-2-surface: var(--color-neutral-900);
+  --elevation-raised-3-surface: var(--color-neutral-900);
   --elevation-raised-1: 0 2px 4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
   --elevation-raised-2: 0 8px 16px -4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
   --elevation-raised-3: 0 16px 32px -8px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
@@ -97,7 +99,7 @@
     color-scheme: dark;
 
     /* A deeper black page, so raised surfaces stand out. */
-    --color-page: #0A0A0A;
+    --color-page: var(--color-neutral-980);
     --color-surface: var(--color-neutral-950);
 
     --color-text: var(--color-neutral-50);
@@ -120,45 +122,45 @@
     --color-backdrop: color-mix(in srgb, var(--color-neutral-950) var(--opacity-50), transparent);
 
     /* Colour families. Each fill carries text and icons from its own palette. */
-    --color-accent-emphasis: var(--color-accent-500);
-    --color-accent-emphasis-hovered: var(--color-accent-400);
-    --color-accent-emphasis-pressed: var(--color-accent-300);
+    --color-accent-emphasis: var(--color-accent-400);
+    --color-accent-emphasis-hovered: var(--color-accent-300);
+    --color-accent-emphasis-pressed: var(--color-accent-200);
     --color-accent-inverse: var(--color-accent-950);
     --color-accent-muted: var(--color-accent-900);
     --color-accent-muted-hovered: var(--color-accent-900);
     --color-accent-muted-pressed: var(--color-accent-800);
     --color-accent: var(--color-accent-300);
 
-    --color-info-emphasis: var(--color-info-500);
-    --color-info-emphasis-hovered: var(--color-info-400);
-    --color-info-emphasis-pressed: var(--color-info-300);
+    --color-info-emphasis: var(--color-info-400);
+    --color-info-emphasis-hovered: var(--color-info-300);
+    --color-info-emphasis-pressed: var(--color-info-200);
     --color-info-inverse: var(--color-info-950);
     --color-info-muted: var(--color-info-900);
     --color-info-muted-hovered: var(--color-info-900);
     --color-info-muted-pressed: var(--color-info-800);
     --color-info: var(--color-info-300);
 
-    --color-success-emphasis: var(--color-success-500);
-    --color-success-emphasis-hovered: var(--color-success-400);
-    --color-success-emphasis-pressed: var(--color-success-300);
+    --color-success-emphasis: var(--color-success-400);
+    --color-success-emphasis-hovered: var(--color-success-300);
+    --color-success-emphasis-pressed: var(--color-success-200);
     --color-success-inverse: var(--color-success-950);
     --color-success-muted: var(--color-success-900);
     --color-success-muted-hovered: var(--color-success-900);
     --color-success-muted-pressed: var(--color-success-800);
     --color-success: var(--color-success-300);
 
-    --color-warning-emphasis: var(--color-warning-500);
-    --color-warning-emphasis-hovered: var(--color-warning-400);
-    --color-warning-emphasis-pressed: var(--color-warning-300);
+    --color-warning-emphasis: var(--color-warning-400);
+    --color-warning-emphasis-hovered: var(--color-warning-300);
+    --color-warning-emphasis-pressed: var(--color-warning-200);
     --color-warning-inverse: var(--color-warning-950);
     --color-warning-muted: var(--color-warning-900);
     --color-warning-muted-hovered: var(--color-warning-900);
     --color-warning-muted-pressed: var(--color-warning-800);
     --color-warning: var(--color-warning-300);
 
-    --color-danger-emphasis: var(--color-danger-500);
-    --color-danger-emphasis-hovered: var(--color-danger-400);
-    --color-danger-emphasis-pressed: var(--color-danger-300);
+    --color-danger-emphasis: var(--color-danger-400);
+    --color-danger-emphasis-hovered: var(--color-danger-300);
+    --color-danger-emphasis-pressed: var(--color-danger-200);
     --color-danger-inverse: var(--color-danger-950);
     --color-danger-muted: var(--color-danger-900);
     --color-danger-muted-hovered: var(--color-danger-900);
@@ -168,15 +170,19 @@
     /* Rounded corners. */
     --radius-control: var(--radius-sm);
     --radius-surface: var(--radius-md);
+    /* The space between an app's surfaces, such as AppShell's cards. */
+    --surface-gap: var(--space-2);
+  /* The space between an app's surfaces, such as AppShell's cards. */
+  --surface-gap: var(--space-2);
 
     --elevation-shadow-color: rgb(0 0 0 / 72%);
     --elevation-highlight-color: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
     /* Higher levels sit on lighter surfaces, as if closer to a light source. */
     --elevation-sunken-1-surface: var(--color-page);
-    --elevation-flat-surface: var(--color-page);
-    --elevation-raised-1-surface: var(--color-neutral-900);
-    --elevation-raised-2-surface: color-mix(in srgb, var(--color-neutral-900), var(--color-neutral-800));
-    --elevation-raised-3-surface: var(--color-neutral-800);
+    --elevation-flat-surface: var(--color-surface);
+    --elevation-raised-1-surface: color-mix(in srgb, var(--color-neutral-950), var(--color-neutral-900));
+    --elevation-raised-2-surface: var(--color-neutral-900);
+    --elevation-raised-3-surface: var(--color-neutral-900);
     --elevation-raised-1: 0 2px 4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
     --elevation-raised-2: 0 8px 16px -4px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);
     --elevation-raised-3: 0 16px 32px -8px var(--elevation-shadow-color), 0 0 0 1px var(--elevation-highlight-color);

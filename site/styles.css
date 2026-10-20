@@ -261,7 +261,7 @@ a:focus-visible {
 
 .color-palette-scale {
   display: grid;
-  grid-template-columns: repeat(11, 8rem);
+  grid-template-columns: repeat(12, 8rem);
   grid-template-rows: auto auto;
   gap: var(--space-2) var(--space-4);
   width: max-content;

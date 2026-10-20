@@ -56,7 +56,7 @@ test('ListBox moves with the arrow keys and selects with Space', async ({ page }
 // Checks that the trigger opens its dialog from the keyboard and gets focus back when it closes.
 test('SearchTrigger opens its dialog and gets focus back', async ({ page }) => {
   await page.goto('/search-trigger')
-  const trigger = page.getByRole('main').getByRole('button', { name: 'Search', exact: true })
+  const trigger = page.getByRole('main').getByRole('button', { name: 'Search', exact: true }).first()
   await trigger.focus()
   await page.keyboard.press('Enter')
   await expect(page.getByRole('dialog', { name: 'Search' }).getByRole('searchbox')).toBeFocused()
@@ -69,11 +69,24 @@ test('SearchTrigger opens its dialog and gets focus back', async ({ page }) => {
 // Checks that the shortcut Badge sits at the end and stays out of the button's accessible name.
 test('SearchTrigger shows its shortcut without changing its name', async ({ page }) => {
   await page.goto('/search-trigger')
-  const trigger = page.getByRole('main').getByRole('button', { name: 'Search', exact: true })
+  const trigger = page.getByRole('main').getByRole('button', { name: 'Search', exact: true }).first()
   const badge = trigger.locator('.mz-search-trigger-shortcut')
   await expect(badge).toHaveText('⌘ K')
   await expect(badge).toHaveAttribute('aria-hidden', 'true')
   const triggerBox = (await trigger.boundingBox())!
   const badgeBox = (await badge.boundingBox())!
   expect(triggerBox.x + triggerBox.width - (badgeBox.x + badgeBox.width)).toBeLessThan(20)
+})
+
+// Checks that the icon-only trigger keeps its label as its accessible name, shows it in a tooltip on
+// keyboard focus, and has no shortcut Badge.
+test('icon-only SearchTrigger names itself and shows its label in a tooltip', async ({ page }) => {
+  await page.goto('/search-trigger')
+  const iconOnly = page.locator('.mz-search-trigger[data-icon-only]')
+  await expect(iconOnly).toHaveAccessibleName('Search')
+  await expect(iconOnly.locator('.mz-search-trigger-shortcut')).toHaveCount(0)
+  await iconOnly.focus()
+  await expect(page.getByRole('tooltip')).toHaveText('Search')
+  const box = (await iconOnly.boundingBox())!
+  expect(Math.abs(box.width - box.height)).toBeLessThan(2)
 })

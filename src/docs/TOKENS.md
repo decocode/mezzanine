@@ -117,18 +117,18 @@ exist, and that themes set only roles.
 
 ### Palettes
 
-Each palette has 11 steps, from `50` to `950`, on the same perceptual lightness
+Each palette has 12 steps, from `50` to `980`, on the same perceptual lightness
 curve. Verify contrast against the actual colors rather than the step number.
 
 | Token | Meaning |
 | --- | --- |
-| `--color-accent-{50–950}` | The interface color that every accent role reads |
-| `--color-signature-{50–950}` | The brand's second, decorative color. No role reads it yet |
-| `--color-neutral-{50–950}` | Greys for page, surfaces, text and lines |
-| `--color-info-{50–950}` | Information, and the keyboard-focus color |
-| `--color-success-{50–950}` | Successful outcomes |
-| `--color-warning-{50–950}` | Caution and warnings |
-| `--color-danger-{50–950}` | Errors and destructive actions |
+| `--color-accent-{50–980}` | The interface color that every accent role reads |
+| `--color-signature-{50–980}` | The brand's second, decorative color. No role reads it yet |
+| `--color-neutral-{50–980}` | Greys for page, surfaces, text and lines |
+| `--color-info-{50–980}` | Information, and the keyboard-focus color |
+| `--color-success-{50–980}` | Successful outcomes |
+| `--color-warning-{50–980}` | Caution and warnings |
+| `--color-danger-{50–980}` | Errors and destructive actions |
 
 Breaking change: the interface now reads `--color-accent-*`. The Signature
 palette is teal and no longer drives any role.
@@ -149,7 +149,7 @@ always carries text and icons from its own palette.
 | Theme | Emphasis | Inverse | Muted, hovered, pressed | Plain |
 | --- | --- | --- | --- | --- |
 | Light | 700, 800, 900 | 50 | 100, 100, 200 | 700 |
-| Dark | 500, 400, 300 | 950 | 900, 900, 800 | 300 |
+| Dark | 400, 300, 200 | 950 | 900, 900, 800 | 300 |
 | Wireframe | As Light; accent has its color removed | 50 | As Light | 700 |
 
 ### Page, text and lines
@@ -322,9 +322,14 @@ token at another level.
 
 Two roles sit on top of the radius scale. `--radius-control` sets the corners of
 Button, ToggleButton, Checkbox, text fields, Badge and inline code;
-`--radius-surface` sets the corners of Card, Modal and Tooltip. Both are
-`--radius-none` (square) by default, so a theme rounds every control or surface by
-changing one token.
+`--radius-surface` sets the corners of Card, Modal, Tooltip and AppShell's cards.
+Both are `--radius-none` (square) by default, so a theme rounds every control or
+surface by changing one token. Light and Dark set `--radius-sm` and `--radius-md`.
+
+`--surface-gap` is the space between an app's surfaces, such as AppShell's cards:
+`--space-2` in Light and Dark, and 0 in Wireframe, where the cards join into one
+flat frame.
+
 ## Current elevation inventory
 
 Elevation tokens form a ladder around `--elevation-flat`, which is level 0.

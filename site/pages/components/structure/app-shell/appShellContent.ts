@@ -55,6 +55,7 @@ export const appShellContent: DocsPageContent = {
         'Set `bottomPanelSpan="full"` to run a bottom Panel under the side Panels too, as in a code editor. By default it sits under the main content only.',
         'Set `startPanelSpan="full"` or `endPanelSpan="full"` to run a side Panel the full height of the window, with the header beside it rather than above it. On narrow screens nothing changes, as the Panel becomes a drawer or is hidden.',
         'The `<header>` is optional. Without one, the Panels and main content start at the top.',
+        'Each area (the header, the Panels and the main content) is a card with rounded corners and a hairline border, on a darker background. In Wireframe the gap is 0 and the cards join into one flat, square frame.',
       ],
     },
     {
@@ -85,6 +86,11 @@ export const appShellContent: DocsPageContent = {
         nameColumn: 'CSS token',
         rows: [
           { name: '--app-shell-min-main-width', description: 'The narrowest the main content gets before a side Panel becomes a drawer. Defaults to `--ratio-pair-min-area-width`.' },
+          { name: '--app-shell-gap', description: 'Space around and between the cards. Points at the theme’s `--surface-gap` role: `--space-2` in Light and Dark, 0 in Wireframe, where the cards join into one flat frame.' },
+          { name: '--app-shell-background', description: 'The background behind the cards. Points at `--elevation-sunken-1-surface`.' },
+          { name: '--app-shell-surface-background', description: 'The cards’ background: the header, Panels and main content. Points at `--elevation-flat-surface`, so Cards and other raised surfaces lift off it.' },
+          { name: '--app-shell-surface-radius', description: 'Rounding of the cards’ corners: one step less than `--radius-surface`, and square where surfaces are square.' },
+          { name: '--app-shell-surface-border-width', description: 'The cards’ border thickness: `--border-width-xs`, a half-pixel hairline.' },
         ],
       },
     },
