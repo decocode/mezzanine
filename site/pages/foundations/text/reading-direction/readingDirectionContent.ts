@@ -55,7 +55,6 @@ export const readingDirectionContent: DocsPageContent = {
         'A box has four sides, and CSS can name them in two ways. Physical names, such as top, right, bottom and left, always mean the same side of the box, whatever language the page is in. Logical names follow the text instead: start is where a line of text begins, and end is where it finishes.',
         'In English, start is the left and end is the right. In Arabic or Hebrew, which are read from right to left, start is the right. So a border placed at the start of a line moves to the correct side by itself.',
         'Top and bottom have logical names too, block-start and block-end. On most web pages they mean the same as top and bottom.',
-        'The Sidebar is the exception: its `side` prop names a physical side, so `side="left"` stays on the left in either direction.',
       ],
     },
     {

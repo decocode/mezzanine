@@ -5,9 +5,9 @@ import { expectNoPageOverflow } from '../display'
 // component inside a frame whose width can be changed.
 
 async function areas(page: Page) {
-  const split = page.locator('.mz-ratio-pair')
-  const [first, second] = [split.locator('> *').first(), split.locator('> *').last()]
-  return { split, first: (await first.boundingBox())!, second: (await second.boundingBox())! }
+  const pair = page.locator('.mz-ratio-pair')
+  const [first, second] = [pair.locator('> *').first(), pair.locator('> *').last()]
+  return { pair, first: (await first.boundingBox())!, second: (await second.boundingBox())! }
 }
 
 async function chooseFraction(page: Page, label: string) {
@@ -46,11 +46,11 @@ for (const fontSize of [16, 32]) {
     await expect(width).toHaveValue('320')
     // Measure inside the wait, so a layout that is still settling can't make the check flaky.
     await expect.poll(async () => {
-      const { split, first, second } = await areas(page)
-      const splitBox = (await split.boundingBox())!
+      const { pair, first, second } = await areas(page)
+      const pairBox = (await pair.boundingBox())!
       return second.y >= first.y + first.height - 1
-        && Math.abs(first.width - splitBox.width) < 1
-        && Math.abs(second.width - splitBox.width) < 1
+        && Math.abs(first.width - pairBox.width) < 1
+        && Math.abs(second.width - pairBox.width) < 1
     }).toBe(true)
     await expectNoPageOverflow(page)
   })

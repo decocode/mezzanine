@@ -33,7 +33,7 @@ export const appShellContent: DocsPageContent = {
         className: 'documentation-anatomy-table',
         rows: [
           { name: 'AppShell', description: 'The frame. It lays out its children in a grid that responds to its own size.' },
-          { name: 'header', description: 'The app’s own `<header>`, across the top, such as one holding a `Navbar`.' },
+          { name: 'header', description: 'The app’s own `<header>`, across the top, such as one holding a `TopBar`.' },
           { name: 'Panel', description: 'An area at the start, end or bottom edge. See [Panel](/panel).' },
           { name: 'main', description: 'The app’s own `<main>`, in the middle. It keeps a minimum width.' },
           { name: 'Footer', description: 'Optional. It follows the main content, and the two scroll together. See [Footer](/footer).' },
@@ -87,7 +87,7 @@ export const appShellContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Panel', href: '/panel' },
-    { label: 'Navbar', href: '/navbar' },
+    { label: 'Top bar', href: '/top-bar' },
   ],
   references: [
     { label: 'MDN: grid-template-areas', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-areas' },

@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react'
-import { Navbar, Link } from '@decocode/mezzanine'
+import { TopBar, Link } from '@decocode/mezzanine'
 import { findSitePage } from '../siteStructure'
 import type { Theme } from '../themeSwitcherLogic'
 import { ThemeSwitcher } from './ThemeSwitcher'
-import { DocsNavigation } from './Sidebar'
+import { DocsNavigation } from './NavigationPanel'
 
-interface MezzanineNavbarProps {
+interface SiteTopBarProps {
   currentPath: string
   onThemeChange: (selection: Theme) => void
   selectedTheme: Theme
@@ -13,18 +13,18 @@ interface MezzanineNavbarProps {
   labNavigation?: ReactNode
 }
 
-export function MezzanineNavbar({
+export function SiteTopBar({
   currentPath,
   onThemeChange,
   selectedTheme,
   labNavigation,
-}: MezzanineNavbarProps) {
+}: SiteTopBarProps) {
   const currentPage = currentPath === '/' ? undefined : findSitePage(currentPath)
   const isDocsPage = currentPage != null
   const labCurrent = currentPath === '/site/lab' ? 'page' : currentPath.startsWith('/site/lab/') ? true : undefined
 
   return (
-    <Navbar aria-label="Showcase navigation" actions={<ThemeSwitcher onThemeChange={onThemeChange} selectedTheme={selectedTheme} />} brand={(
+    <TopBar aria-label="Showcase navigation" actions={<ThemeSwitcher onThemeChange={onThemeChange} selectedTheme={selectedTheme} />} brand={(
       <Link
         aria-current={currentPath === '/' ? 'page' : undefined}
         aria-label="Mezzanine home"
@@ -47,13 +47,13 @@ export function MezzanineNavbar({
         )
         return (
           <>
-            <Link className="navbar-link" aria-current={currentPath === '/introduction' ? 'page' : isDocsPage ? true : undefined} href="/introduction" onPress={closeMenu}>Docs</Link>
+            <Link className="mz-top-bar-link" aria-current={currentPath === '/introduction' ? 'page' : isDocsPage ? true : undefined} href="/introduction" onPress={closeMenu}>Docs</Link>
             {isMenu && currentPage && inMenu(<DocsNavigation currentPage={currentPage} />)}
-            <Link className="navbar-link" aria-current={labCurrent} href="/site/lab" onPress={closeMenu}>Lab</Link>
+            <Link className="mz-top-bar-link" aria-current={labCurrent} href="/site/lab" onPress={closeMenu}>Lab</Link>
             {isMenu && labNavigation != null && inMenu(labNavigation)}
           </>
         )
       }}
-    </Navbar>
+    </TopBar>
   )
 }

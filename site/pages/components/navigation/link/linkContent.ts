@@ -61,7 +61,7 @@ export const linkContent: DocsPageContent = {
   relatedPages: [
     { label: 'Button', href: '/button' },
     { label: 'Breadcrumbs', href: '/breadcrumbs' },
-    { label: 'Navbar', href: '/navbar' },
+    { label: 'Top bar', href: '/top-bar' },
   ],
   references: [
     { label: 'React Aria Link', href: 'https://react-aria.adobe.com/Link' },

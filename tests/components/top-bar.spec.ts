@@ -2,14 +2,14 @@ import { expect, test } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// Checks the Navbar example at phone width with only the keyboard: the menu button opens and closes
+// Checks the TopBar example at phone width with only the keyboard: the menu button opens and closes
 // the menu, links inside it work, focus returns to the menu button, and the action button still
 // works.
-test('Navbar menu works with the keyboard at 320px', async ({ page }) => {
+test('TopBar menu works with the keyboard at 320px', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
-  await page.goto('/navbar')
-  const example = page.locator('main .mz-navbar')
+  await page.goto('/top-bar')
+  const example = page.locator('main .mz-top-bar')
   const trigger = example.getByRole('button', { name: /^(Menu|Close menu)$/ })
   // Actions stay in the bar on narrow screens, before the menu button.
   const action = example.getByRole('button', { name: 'Button', exact: true })
@@ -27,7 +27,7 @@ test('Navbar menu works with the keyboard at 320px', async ({ page }) => {
   await page.keyboard.press('Enter')
   await expect(trigger).toBeFocused()
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
-  await expect(page).toHaveURL(/\/navbar$/)
+  await expect(page).toHaveURL(/\/top-bar$/)
   await page.keyboard.press('Space')
   await expect(example.getByRole('link', { name: 'Link A', exact: true })).toHaveAttribute('aria-current', 'page')
   await page.keyboard.press('Tab')
@@ -41,18 +41,18 @@ test('Navbar menu works with the keyboard at 320px', async ({ page }) => {
   await expect(example.getByRole('navigation', { name: 'Example navigation' })).toBeHidden()
 })
 
-// Checks, in each theme at normal and double text size, that the Navbar example fits a phone
+// Checks, in each theme at normal and double text size, that the TopBar example fits a phone
 // screen: the menu button has a visible focus outline and is large enough to tap, the menu opens
 // without animating, nothing overflows and the page passes an accessibility scan.
 for (const theme of themes) {
   for (const fontSize of textSizes) {
-    test(`${theme} Navbar at 320px and ${fontSize}px text`, async ({ page }) => {
+    test(`${theme} TopBar at 320px and ${fontSize}px text`, async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 900 })
       await page.emulateMedia({ reducedMotion: 'reduce' })
-      await page.goto('/navbar')
+      await page.goto('/top-bar')
       await setTheme(page, theme)
       await setTextSize(page, fontSize)
-      const example = page.locator('main .mz-navbar')
+      const example = page.locator('main .mz-top-bar')
       const trigger = example.getByRole('button', { name: /^(Menu|Close menu)$/ })
       const action = example.getByRole('button', { name: 'Button', exact: true })
       await expect(action).toBeVisible()
@@ -62,7 +62,7 @@ for (const theme of themes) {
       expect((await trigger.boundingBox())!.height).toBeGreaterThanOrEqual(36)
       await page.keyboard.press('Enter')
       await expect(trigger).toHaveAttribute('aria-expanded', 'true')
-      await expect(example.locator('.mz-navbar-panel')).toHaveCSS('animation-name', 'none')
+      await expect(example.locator('.mz-top-bar-panel')).toHaveCSS('animation-name', 'none')
       await expectNoPageOverflow(page)
       const technicalDetails = page.getByRole('region', { name: 'Technical details', exact: true })
       for (const detailsTrigger of await technicalDetails.getByRole('button').all()) {
@@ -72,19 +72,17 @@ for (const theme of themes) {
         await expect(detailsTrigger.locator('svg')).toHaveCSS('transition-duration', '0s')
       }
       await expectNoPageOverflow(page)
-      // Scan from the page start: keyboard scrolling can leave unrelated Contents links behind the sticky site header.
-      await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
       await expectNoAccessibilityViolations(page, 'main')
     })
   }
 }
 
-// Checks that on a wide screen the Navbar shows its links directly instead of a menu button, and
+// Checks that on a wide screen the TopBar shows its links directly instead of a menu button, and
 // that links keep a visible focus outline in high-contrast mode.
 test('desktop navigation and showcase actions remain accessible', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
-  await page.goto('/navbar')
-  const example = page.locator('main .mz-navbar')
+  await page.goto('/top-bar')
+  const example = page.locator('main .mz-top-bar')
   await expect(example.getByRole('button', { name: /^(Menu|Close menu)$/ })).toBeHidden()
   await expect(example.getByRole('navigation', { name: 'Example navigation' })).toBeVisible()
   await expect(page.getByRole('radiogroup', { name: 'Theme', exact: true })).toBeVisible()

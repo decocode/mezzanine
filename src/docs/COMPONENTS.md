@@ -36,9 +36,9 @@ shared button tokens in a theme. `npm run check:rules` rejects local overrides o
 button dimensions, padding, text and icon size, and inline button styles. Parent
 containers decide position and available space.
 
-## Navbar
+## TopBar
 
-`Navbar` supplies the sticky layout and the mobile menu. Pass your branding as
+`TopBar` supplies the sticky layout and the mobile menu. Pass your branding as
 `brand`, your links as children and optional controls as `actions`. Actions
 stay in the bar at every width. The children function receives `isMenu`, which
 is true inside the narrow-screen menu, so menu-only content such as section
@@ -47,13 +47,13 @@ The menu button shows its label in a tooltip. `menuLabel` replaces its default
 "Menu" name and tooltip, and `className` adds your own styling.
 
 ```tsx
-import { Navbar, Link } from '@decocode/mezzanine'
+import { TopBar, Link } from '@decocode/mezzanine'
 
-<Navbar aria-label="Main navigation" brand={<Link href="/">My application</Link>}>
+<TopBar aria-label="Main navigation" brand={<Link href="/">My application</Link>}>
   {({ closeMenu }) => (
     <Link href="/about" onPress={closeMenu}>About</Link>
   )}
-</Navbar>
+</TopBar>
 ```
 
 The children and actions render twice, in separate mobile and desktop
@@ -199,7 +199,7 @@ every Button prop.
 `isCollapsible={false}` keeps a Panel open with no close button, for content
 that should always be there, such as an app's navigation. It needs no
 PanelTrigger. When there's no room beside the content it's hidden rather than
-becoming a drawer, so offer the same content another way, such as in a Navbar
+becoming a drawer, so offer the same content another way, such as in a TopBar
 menu.
 
 When the main content would drop below `--app-shell-min-main-width`, a side
@@ -213,38 +213,3 @@ side Panels too.
 arranges them in a row that wraps, with a border above. In an AppShell, place it
 straight after `<main>`; it sits at the end of the content and scrolls with it,
 outside `<main>`, so it stays the page's footer landmark.
-
-## Sidebar
-
-`Sidebar` manages two separate states: inline expansion and the modal drawer.
-Put one `SidebarTrigger` and one `SidebarPanel` inside it. Keep the trigger
-outside the panel so it can reopen a fully hidden sidebar.
-
-```tsx
-<Sidebar>
-  <SidebarTrigger>Filters</SidebarTrigger>
-  <div className="application-layout">
-    <SidebarPanel title="Filters" side="left" collapseMode="hide">
-      <Checkbox>Option A</Checkbox>
-    </SidebarPanel>
-    <section aria-label="Workspace">…</section>
-  </div>
-</Sidebar>
-```
-
-- The app owns the surrounding layout. `SidebarPanel` accepts any content in
-  `header`, `children` and `footer`.
-- `collapseMode="rail"` with `rail` content shows compact controls when collapsed.
-- Use a separate Sidebar for each additional panel.
-- Below 64rem the panel opens as a modal drawer. Change the threshold with
-  `inlineMediaQuery`, or choose with `presentation="inline"` or `"modal"`.
-- Inline `isExpanded` and modal `isOpen` can each be controlled, with change
-  callbacks. By default the inline panel is expanded and the drawer is closed.
-- Content remounts when the presentation changes, so keep form values and
-  expanded disclosure keys in app state.
-- Panel `className` and `style` apply in both presentations, and theme tokens
-  set on the root reach the drawer too.
-- `isCollapsible={false}` on Sidebar keeps the inline panel permanently expanded
-  and removes its trigger and close button; the mobile drawer still works.
-- `hideInlineHeader` on SidebarPanel hides the inline heading row but keeps the
-  panel's accessible name. The drawer's heading and close button remain.

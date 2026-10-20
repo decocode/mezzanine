@@ -62,19 +62,18 @@ test('state comparison keeps three readable columns and scrolls locally on narro
   }
 })
 
-// Checks that the toggle button group in the Sidebar page's controls can be moved through with the
-// arrow keys and selected with Space.
-test('secondary group preserves keyboard selection in the Sidebar controls', async ({ page }) => {
-  await page.goto('/sidebar')
-  const controls = page.getByRole('complementary', { name: 'Control panel', exact: true })
-  const left = controls.getByRole('radio', { name: 'Left', exact: true })
-  const right = controls.getByRole('radio', { name: 'Right', exact: true })
-  await left.focus()
+// Checks that a single-selection group can be moved through with the arrow keys and selected with Space.
+test('single-selection group keeps keyboard selection', async ({ page }) => {
+  await page.goto('/toggle-button')
+  const panel = page.getByRole('tabpanel')
+  const first = panel.getByRole('radio', { name: 'Toggle A' })
+  const second = panel.getByRole('radio', { name: 'Toggle B' })
+  await first.focus()
   await page.keyboard.press('ArrowRight')
-  await expect(right).toBeFocused()
+  await expect(second).toBeFocused()
   await page.keyboard.press('Space')
-  await expect(right).toBeChecked()
-  await expect(left).not.toBeChecked()
+  await expect(second).toBeChecked()
+  await expect(first).not.toBeChecked()
 })
 
 // Checks the group example's Single and Multi tabs: Single allows one choice, Multi allows several,
@@ -122,7 +121,7 @@ for (const fontSize of textSizes) {
     expect(buttons.map(button => parseFloat(button.iconWidth))).toEqual([1, 1.25, 1.5, 1.75, 2].map(size => size * fontSize))
     expect(buttons.map(button => parseFloat(button.height))).toEqual([2, 2.25, 2.75, 3, 3.5].map(size => size * fontSize))
     const themes = page.getByRole('radiogroup', { name: 'Theme', exact: true }).filter({ visible: true })
-    if (!(await themes.count())) await page.locator('header.mz-navbar').first().getByRole('button', { name: 'Menu', exact: true }).click()
+    if (!(await themes.count())) await page.locator('header.mz-top-bar').first().getByRole('button', { name: 'Menu', exact: true }).click()
     await expect(themes.getByRole('radio').first()).toHaveAttribute('data-size', 'sm')
     await expect(themes.getByRole('radio').first().locator('svg')).toHaveCSS('width', `${fontSize * 1.25}px`)
   })

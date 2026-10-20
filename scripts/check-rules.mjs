@@ -157,8 +157,7 @@ function checkSite(source, checker, exportedNames) {
 
 function checkClasses(file, text, value, position) {
   for (const match of value.matchAll(/\S+/g)) {
-    // navbar-link is an explicitly approved public class name.
-    if (match[0] !== 'navbar-link' && !allowedPrefixes.some(prefix => match[0].startsWith(prefix))) {
+    if (!allowedPrefixes.some(prefix => match[0].startsWith(prefix))) {
       report(file, text, position + match.index, 'class-prefix',
         `Class "${match[0]}" must start with react-aria- or mz-.`)
     }
@@ -297,7 +296,7 @@ function collectButtonClasses(source) {
   const file = path.relative(root, source.fileName)
   walk(source, node => {
     if (!(ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node))) return
-    if (!['Button', 'ToggleButton', 'SidebarTrigger'].includes(node.tagName.getText(source))) return
+    if (!['Button', 'ToggleButton'].includes(node.tagName.getText(source))) return
     for (const attribute of node.attributes.properties) {
       if (!ts.isJsxAttribute(attribute)) continue
       if (attribute.name.text === 'className' && attribute.initializer && ts.isStringLiteral(attribute.initializer)) {
@@ -360,11 +359,9 @@ function checkSnapshot(api, update) {
 // Each Props table, by content file and section key, and the exported types it documents. Rows prefixed with a
 // component name, or following a row that is only that name, use its type.
 const propTables = [
-  { file: 'site/pages/components/structure/navbar/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
+  { file: 'site/pages/components/structure/top-bar/topBarContent.ts', key: 'props', types: ['TopBarProps'] },
   { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
   { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
-  { file: 'site/pages/components/navigation/sidebar/sidebarContent.ts', key: 'props', types: ['SidebarProps'],
-    components: { Sidebar: ['SidebarProps'], SidebarTrigger: ['SidebarTriggerProps'], SidebarPanel: ['SidebarPanelProps'] } },
   { file: 'site/pages/components/navigation/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
   { file: 'site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
   { file: 'site/pages/components/structure/app-shell/appShellContent.ts', key: 'props', types: ['AppShellProps'] },

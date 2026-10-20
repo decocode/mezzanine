@@ -21,6 +21,6 @@ export function RatioPairExample() {
     <ExampleFrame label="RatioPair">
       <RatioPair fraction={fraction} gap={3}><Block tall>First area</Block><Block tall>Second area</Block></RatioPair>
     </ExampleFrame>
-    <CssNotes name="RatioPair" note={ratioPairCssNotes.split} level={3} />
+    <CssNotes name="RatioPair" note={ratioPairCssNotes.ratioPair} level={3} />
   </>
 }

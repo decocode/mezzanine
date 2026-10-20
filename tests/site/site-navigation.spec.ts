@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
-test('mobile navigation opens from the Navbar menu and retains expanded groups', async ({ page }) => {
+test('mobile navigation opens from the TopBar menu and retains expanded groups', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/button')
@@ -22,7 +22,7 @@ test('mobile navigation opens from the Navbar menu and retains expanded groups',
 })
 
 for (const theme of ['light', 'dark', 'wireframe']) {
-  test(`${theme} site Navbar distinguishes the current documentation section`, async ({ page }) => {
+  test(`${theme} site TopBar distinguishes the current documentation section`, async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/tooltip')
     await page.evaluate(theme => document.documentElement.dataset.theme = theme, theme)
@@ -66,7 +66,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       expect(await labLink.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
       expect((await new AxeBuilder({ page }).include('header').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze()).violations).toEqual([])
-      await page.getByRole('banner').screenshot({ path: `reports/test-results/site-navbar-current-${theme}-${fontSize}.png` })
+      await page.getByRole('banner').screenshot({ path: `reports/test-results/site-top-bar-current-${theme}-${fontSize}.png` })
       await page.getByRole('banner').getByRole('button', { name: 'Close menu', exact: true }).click()
     }
     await page.emulateMedia({ forcedColors: 'active' })
@@ -75,7 +75,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
   })
 }
 
-test('site Navbar leaves Docs inactive on the landing page and unknown routes', async ({ page }) => {
+test('site TopBar leaves Docs inactive on the landing page and unknown routes', async ({ page }) => {
   for (const path of ['/', '/not-a-page']) {
     await page.goto(path)
     await page.evaluate(() => document.documentElement.dataset.theme = 'wireframe')

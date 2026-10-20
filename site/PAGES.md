@@ -7,7 +7,7 @@ in `src/docs/`.
 
 | Folder or file | What it holds |
 | --- | --- |
-| `site/AppShell.tsx` | The site layout, navigation and theme. Loads each page separately through `PageLoader.tsx`. |
+| `site/AppShell.tsx` | Route selection and theme. Docs pages render inside `components/DocsShell.tsx` (the library AppShell with navigation and On this page Panels) and load separately through `PageLoader.tsx`. |
 | `site/templates/ContentPage.tsx` | Builds a page from its content file: the sections, the Technical details group, Related pages and References |
 | `site/templates/docsPageContent.ts` | The one shape every content file follows (`DocsPageContent`), the standard section titles and how section ids are made |
 | `site/templates/DocsPageTemplate.tsx` | The layout underneath `ContentPage`, and the site-only `PageHeading` used for every page title and introduction |
@@ -46,7 +46,7 @@ Useful site components:
   classes for special layouts.
 - `DocsTable` shows Anatomy, Props and CSS token entries with Mezzanine's Table.
 - The disclosure group and its anchor-link handling.
-- `MezzanineNavbar` and `Sidebar`, the site's own navbar and sidebar.
+- `SiteTopBar` and `DocsShell`, the site's own top bar and the AppShell frame around docs and Lab pages.
 
 ## Component pages
 
@@ -81,7 +81,7 @@ title, description, its `alsoKnownAs` rows, its `sections` in order, its
 - Optional `subheadings` add headed blocks inside a section, such as Browser
   support, each with a level-3 heading and its own On this page link.
 - On this page appears after the page heading and description on narrower
-  screens, and in the right column on wide screens.
+  screens, and in DocsShell's end Panel on wide screens.
 - The Technical details group's heading is level 2 and its sections become a
   Disclosure group with level-3 headings. The disclosures start closed, several
   can be open, and an On this page link opens the right panel before scrolling

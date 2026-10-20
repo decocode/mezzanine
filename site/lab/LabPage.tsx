@@ -1,7 +1,7 @@
 import { Heading, Link, Text } from '@decocode/mezzanine'
 import { DocsShell } from '../components/DocsShell'
-import { MezzanineNavbar } from '../components/MezzanineNavbar'
-import { NavigationPanel } from '../components/Sidebar'
+import { SiteTopBar } from '../components/SiteTopBar'
+import { NavigationPanel } from '../components/NavigationPanel'
 import type { Theme } from '../themeSwitcherLogic'
 import NotFoundPage from '../pages/not-found/NotFoundPage'
 import { BrowserAndDeviceOverviewPage, LabTopLevelPageView, LayersOverviewPage, LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutStageChildPage, LayoutStagePage } from './shared/LayoutPage'
@@ -42,7 +42,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
     <title>{title}</title>
     <Link className="skip-link" href="#main-content">Skip to main content</Link>
     <DocsShell
-      navbar={<MezzanineNavbar currentPath={currentPath} onThemeChange={onThemeChange} selectedTheme={selectedTheme} labNavigation={navigation} />}
+      topBar={<SiteTopBar currentPath={currentPath} onThemeChange={onThemeChange} selectedTheme={selectedTheme} labNavigation={navigation} />}
       navigation={{ title: labContent.navigationTitle, 'aria-label': 'Lab sections', navigationLabel: 'Lab experiments', items: labNavigationItems, selectedRoute: currentPath }}
       mainClassName="lab-page-main"
       mainTabIndex={-1}

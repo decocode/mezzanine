@@ -1,6 +1,6 @@
 // This file describes how the site's pages are organised: their navigation
 // groups, display names, URLs and implementation status.
-// It also helps the site find a page from its URL and the sidebar groups that
+// It also helps the site find a page from its URL and the navigation groups that
 // contain it, and says which folder in site/pages holds each page.
 
 export type SitePageStatus = 'implemented' | 'empty'
@@ -113,7 +113,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         label: 'Structure',
         pages: [
           { id: 'app-shell', label: 'AppShell', path: '/app-shell', status: 'implemented' },
-          { id: 'navbar', label: 'Navbar', path: '/navbar', status: 'implemented' },
+          { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
           { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
           { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
           { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
@@ -130,7 +130,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'tabs', label: 'Tabs', path: '/tabs', status: 'implemented' },
           { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
           { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
-          { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'implemented' },
         ],
       },
       {
@@ -193,10 +192,6 @@ export const sitePages = [
 export function findSitePage(pathname: string) {
   const path = pathname === '/' ? pathname : pathname.replace(/\/$/, '')
   return sitePages.find((page) => page.path === path)
-}
-
-export function findSiteNavigationGroup(pageId: string) {
-  return findSiteNavigationGroups(pageId).at(-1)
 }
 
 export function findSiteNavigationGroups(

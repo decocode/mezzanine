@@ -13,4 +13,8 @@
   --target-size-md: 2.75rem;
   --target-size-lg: 3rem;
   --target-size-xl: 3.5rem;
+
+  /* Nav items: the shared row style of NavTree, TopBar links and TableOfContents links. Colours are
+     set per theme as --nav-item-*; the current page's indicator bar has this width. */
+  --nav-item-current-indicator-width: 0.1875rem;
 }

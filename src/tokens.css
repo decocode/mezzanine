@@ -29,10 +29,9 @@
 @import './components/ListBox/ListBox.tokens.css';
 @import './components/Modal/Modal.tokens.css';
 @import './components/NavTree/NavTree.tokens.css';
-@import './components/Navbar/Navbar.tokens.css';
+@import './components/TopBar/TopBar.tokens.css';
 @import './components/RadioGroup/RadioGroup.tokens.css';
 @import './components/SearchField/SearchField.tokens.css';
-@import './components/Sidebar/Sidebar.tokens.css';
 @import './components/RatioPair/RatioPair.tokens.css';
 @import './components/Table/Table.tokens.css';
 @import './components/Tabs/Tabs.tokens.css';

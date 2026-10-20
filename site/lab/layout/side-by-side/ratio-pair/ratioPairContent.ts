@@ -36,7 +36,7 @@ export const ratioPairPage: StagePage = {
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.
 export const ratioPairCssNotes: Record<string, CssNote> = {
-  split: {
+  ratioPair: {
     paragraphs: [
       'Ratio pair is a Flexbox row: `display: flex` places the two areas next to each other. `flex-wrap: wrap` allows an area to move onto a new line when the row is full, and `gap` sets the space between them, whether they’re side by side or one above the other.',
       'Each area has a `flex-basis` of zero, so it starts with no width of its own. `flex-grow` then shares out the space: for one third and two thirds, the first area gets a `flex-grow` of 1 and the second gets 2, so the second takes twice as much.',

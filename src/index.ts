@@ -245,8 +245,8 @@ export { TableOfContents } from './components/TableOfContents/TableOfContents'
 export type { TableOfContentsProps, TableOfContentsSection } from './components/TableOfContents/TableOfContents'
 
 
-export { Navbar } from './components/Navbar/Navbar'
-export type { NavbarProps, NavbarRenderProps } from './components/Navbar/Navbar'
+export { TopBar } from './components/TopBar/TopBar'
+export type { TopBarProps, TopBarRenderProps } from './components/TopBar/TopBar'
 
 export { TextField, Input } from './components/TextField/TextField'
 export type { TextFieldProps, TextFieldRenderProps, InputProps } from './components/TextField/TextField'
@@ -271,8 +271,6 @@ export type { RatioPairProps } from './components/RatioPair/RatioPair'
 export { Tooltip, TooltipTrigger } from './components/Tooltip/Tooltip'
 export type { TooltipProps, TooltipRenderProps, TooltipTriggerComponentProps } from './components/Tooltip/Tooltip'
 
-export { Sidebar, SidebarTrigger, SidebarPanel } from './components/Sidebar/Sidebar'
-export type { SidebarProps, SidebarTriggerProps, SidebarPanelProps } from './components/Sidebar/Sidebar'
 
 export { NavTree } from './components/NavTree/NavTree'
 export type { NavTreeProps, NavTreeItemData, NavTreeSectionData } from './components/NavTree/NavTree'

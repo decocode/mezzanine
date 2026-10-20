@@ -1,0 +1,179 @@
+.mz-top-bar {
+  container: mz-top-bar / inline-size;
+  position: sticky;
+  z-index: var(--z-index-sticky);
+  inset-block-start: 0;
+  border-block-end: var(--top-bar-border-width) solid var(--color-border);
+  background: var(--color-page);
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-top-bar-content {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  /* The brand's auto margin keeps actions and the menu button at the end, even when they wrap. */
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--top-bar-min-height);
+  padding: var(--space-3) min(var(--space-4), 4cqi);
+}
+
+.mz-top-bar-brand {
+  display: flex;
+  align-items: center;
+  margin-inline-end: auto;
+}
+
+.mz-top-bar-content > * {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.mz-top-bar-mobile {
+  display: contents;
+}
+
+.mz-top-bar-heading {
+  margin: 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+
+
+.mz-top-bar-panel {
+  box-sizing: border-box;
+  flex-basis: 100%;
+  width: 100%;
+  max-height: var(--top-bar-panel-max-height);
+  padding: var(--space-2) 0 var(--space-4);
+  overflow-y: auto;
+  background: var(--color-page);
+}
+
+.mz-top-bar-panel[hidden] {
+  display: none;
+}
+
+.mz-top-bar-panel:not([hidden]) {
+  animation: top-bar-navigation-reveal var(--motion-duration-interface) var(--motion-easing-enter) both; animation-name: var(--_motion-animation, top-bar-navigation-reveal);
+}
+
+.mz-top-bar-desktop {
+  display: none;
+}
+
+@keyframes top-bar-navigation-reveal {
+  from {
+    opacity: 0;
+    translate: 0 calc(-1 * var(--motion-distance-reveal));
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Container-relative layout also follows changes to the root text size. */
+@container mz-top-bar (min-width: 48rem) {
+  .mz-top-bar-content {
+    gap: var(--space-4);
+    padding-inline: var(--top-bar-wide-padding-inline);
+  }
+
+  .mz-top-bar-mobile,
+  .mz-top-bar-bar-actions {
+    display: none;
+  }
+
+  .mz-top-bar-desktop {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+}
+
+.mz-top-bar-links,
+.mz-top-bar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.mz-top-bar-panel .mz-top-bar-links {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.mz-top-bar-links > .react-aria-Link {
+  min-height: var(--target-size-md);
+  overflow-wrap: anywhere;
+}
+
+/* The brand link keeps a full touch target even when it shows only a logo,
+   and whatever class the app gives it. */
+.mz-top-bar-brand > a {
+  min-width: var(--target-size-md);
+  min-height: var(--target-size-md);
+  overflow-wrap: anywhere;
+}
+
+.mz-top-bar-links > .react-aria-Link[aria-current='page'] {
+  text-decoration: underline;
+}
+
+/* Navigation link appearance shared by TopBar consumers: the shared nav item style, with the current
+   page's indicator bar underneath because the links sit in a row. Scoped to the TopBar so these states
+   win over Link's own link colours. */
+.mz-top-bar .mz-top-bar-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-size-md);
+  padding: var(--space-2) var(--space-3);
+  border-block-end: var(--nav-item-current-indicator-width) solid transparent;
+  background: var(--nav-item-background);
+  color: var(--nav-item-content);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+  text-decoration: none;
+}
+
+.mz-top-bar .mz-top-bar-link[data-focus-visible] {
+  outline: var(--top-bar-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--top-bar-focus-ring-offset);
+}
+
+.mz-top-bar .mz-top-bar-link[data-hovered] {
+  background: var(--nav-item-background-hovered);
+  color: var(--nav-item-content);
+}
+
+.mz-top-bar .mz-top-bar-link[data-pressed] {
+  background: var(--nav-item-background-pressed);
+  color: var(--nav-item-content);
+}
+
+.mz-top-bar .mz-top-bar-link[aria-current]:where(:not([aria-current='false'])) {
+  border-block-end-color: var(--nav-item-current-indicator);
+  background: var(--nav-item-background-current);
+  color: var(--nav-item-content-current);
+  font-weight: var(--font-weight-emphasis);
+}

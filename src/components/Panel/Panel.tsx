@@ -20,7 +20,7 @@ export interface PanelProps {
   closeLabel?: string
   // Whether the Panel can be closed, with its own close button and a PanelTrigger elsewhere. When
   // false it stays open, has no close button, and is hidden when there's no room beside the content,
-  // so the app offers the same content another way, such as in a Navbar menu.
+  // so the app offers the same content another way, such as in a TopBar menu.
   isCollapsible?: boolean
   isOpen?: boolean
   defaultOpen?: boolean
@@ -90,7 +90,7 @@ export type PanelTriggerProps = Omit<Extract<ButtonProps, { href?: never }>, 're
   panel: string
 }
 
-// A Mezzanine Button that opens and closes a Panel, placed wherever suits the app: in a Navbar, a Rail
+// A Mezzanine Button that opens and closes a Panel, placed wherever suits the app: in a TopBar, a Rail
 // or a toolbar. It reports whether the Panel is expanded and which element it controls.
 export function PanelTrigger({ panel, onPress, ...props }: PanelTriggerProps) {
   const { store, presentation } = useAppShell('PanelTrigger')

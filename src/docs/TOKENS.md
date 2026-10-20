@@ -241,6 +241,20 @@ the text size; the pixel values assume `1rem = 16px`.
 | `--icon-size-lg` | `1.75rem` | 28px |
 | `--icon-size-xl` | `2rem` | 32px |
 
+## Current nav item inventory
+
+NavTree rows, TopBar links and TableOfContents links share one row style, so
+navigation looks alike wherever it sits: `body-sm` text, a background on hover
+and press, and the current page in Emphasis weight with an indicator bar. The
+colours are set per theme; the bar width lives in `src/tokens/interaction.css`.
+
+| Token | Meaning |
+| --- | --- |
+| `--nav-item-content`, `--nav-item-content-current` | Text colour, and the current page's |
+| `--nav-item-background`, `-hovered`, `-pressed`, `-current` | Row background in each state |
+| `--nav-item-current-indicator` | Current page bar colour |
+| `--nav-item-current-indicator-width` | Current page bar width |
+
 ## Current shape inventory
 
 Corner-radius levels use `rem` to follow the root font size. None is unitless zero;
@@ -314,7 +328,7 @@ target at once. Every step is above the WCAG 2.2 AA minimum. For an app that nee
 | `--target-size-min` | 1.5rem (24px) | The WCAG 2.2 AA minimum; not used by components |
 | `--target-size-xs` | 2rem (32px) | Button and ToggleButton `size="xs"`, NavTree rows and expand buttons, Table of contents links, ListBox options, Breadcrumbs, links in a Footer list |
 | `--target-size-sm` | 2.25rem (36px) | Button and ToggleButton `size="sm"`, Checkbox, Radio, SearchField's clear button |
-| `--target-size-md` | 2.75rem (44px) | Button and ToggleButton `size="md"` (the default), text fields, Tabs, Disclosure triggers, Navbar links and brand, sortable Table headers and selectable Table rows |
+| `--target-size-md` | 2.75rem (44px) | Button and ToggleButton `size="md"` (the default), text fields, Tabs, Disclosure triggers, TopBar links and brand, sortable Table headers and selectable Table rows |
 | `--target-size-lg` | 3rem (48px) | Button and ToggleButton `size="lg"` |
 | `--target-size-xl` | 3.5rem (56px) | Button and ToggleButton `size="xl"` |
 
@@ -330,7 +344,7 @@ For icon buttons, give the label as children and choose `labelPlacement`: `toolt
 Migration: `--toggle-button-min-height`, `--toggle-button-padding-block`,
 `--toggle-button-padding-inline` and `--navigation-tree-chevron-size` were removed.
 Replace local size overrides with size props; theme-wide changes belong in the
-shared button size tokens. Navbar and navigation-tree action buttons now
+shared button size tokens. TopBar and navigation-tree action buttons now
 use those sizes instead of their own dimensions.
 
 ## Shared motion
@@ -371,13 +385,11 @@ The old names below are historical migration instructions, not supported tokens.
 | `--disclosure-motion-duration` | `--motion-duration-interface` |
 | `--tab-motion-duration` | `--motion-duration-interface` |
 | `--navbar-motion-duration` | `--motion-duration-interface` |
-| `--sidebar-motion-duration` | `--motion-duration-interface` |
 | `--navigation-tree-motion-duration` | `--motion-duration-interface` |
 | `--tooltip-motion-duration` | `--motion-duration-interface` |
 | `--button-progress-motion-duration` | `--motion-duration-loading` |
 | `--modal-enter-scale` | `--motion-scale-enter` |
 | `--navbar-motion-offset` | `--motion-distance-reveal`; recipe supplies direction |
-| `--sidebar-enter-offset` (previously local) | `--motion-distance-offscreen`; recipe supplies direction |
 
 Products may override shared durations on their theme boundary. All components in
 that scope use the same speed. Do not override the internal policy controls or

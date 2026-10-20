@@ -1,10 +1,10 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
-export const navbarContent: DocsPageContent = {
-  id: 'navbar',
+export const topBarContent: DocsPageContent = {
+  id: 'top-bar',
   kind: 'component',
-  title: 'Navbar',
-  description: 'A navbar is a bar at the top of a website that helps people find its main pages. It can include a logo, links and buttons; on smaller screens, the links appear inside a menu and the buttons stay in the bar.',
+  title: 'Top bar',
+  description: 'A top bar runs across the top of a website and helps people find its main pages. It can include a logo, links and buttons; on smaller screens, the links appear inside a menu and the buttons stay in the bar.',
   sections: [
     { key: 'example', body: ['Home link, Link A and Link B change the current link in this example without navigating away. Button demonstrates an action. Reduce the available width to reveal the mobile menu.'] },
   ],
@@ -12,10 +12,10 @@ export const navbarContent: DocsPageContent = {
     {
       key: 'anatomy',
       table: {
-        label: 'Navbar anatomy',
+        label: 'TopBar anatomy',
         nameColumn: 'Component',
         rows: [
-          { name: 'Navbar', description: 'Sticky header with separate brand, navigation and action areas.' },
+          { name: 'TopBar', description: 'Sticky header with separate brand, navigation and action areas.' },
           { name: 'Link', description: 'Brand home link and navigation destinations, supplied by the app.' },
           { name: 'Disclosure', description: 'Controls the mobile panel’s expanded state.' },
           { name: 'Heading', description: 'Contains the mobile trigger.' },
@@ -39,7 +39,7 @@ export const navbarContent: DocsPageContent = {
         'Supply a home Link through `brand`, links through `children`, and optional controls through `actions`. Labels and destinations belong to the consuming app.',
         '`children` and `actions` accept a function receiving `closeMenu` and `isMenu`. The children render once in the compact menu and once in the bar; `isMenu` is true inside the menu, so content such as a site’s section navigation can appear only there, between links. Call it from a link’s `onPress` to close the compact panel and return focus to its trigger. Override `menuLabel` and `closeLabel` for translated trigger text.',
         'The desktop and mobile content are rendered separately; avoid fixed IDs in supplied content. Use React-generated IDs for associated controls. Very long desktop content wraps rather than overflowing. Search is not included.',
-        '`Navbar`, `NavbarProps`, `NavbarRenderProps` and `--navbar-*` tokens replace the previous Header API and tokens.',
+        '`TopBar`, `TopBarProps`, `TopBarRenderProps` and `--top-bar-*` tokens replace the previous `Navbar` API and its tokens.',
       ],
     },
     {
@@ -49,12 +49,12 @@ export const navbarContent: DocsPageContent = {
     {
       key: 'props',
       table: {
-        label: 'Navbar props',
+        label: 'TopBar props',
         nameColumn: 'Prop',
         className: 'documentation-props-table',
         rows: [
           { name: 'brand', description: 'Required branding content. Supply a Link for a home destination.' },
-          { name: 'children', description: 'Required navigation content, or a function receiving closeMenu and isMenu. Navbar supplies the nav element.' },
+          { name: 'children', description: 'Required navigation content, or a function receiving closeMenu and isMenu. TopBar supplies the nav element.' },
           { name: 'actions', description: 'Optional action controls, or a function receiving closeMenu. Shown in the bar at every width.' },
           { name: 'aria-label', description: 'Required accessible name for the navigation.' },
           { name: 'menuLabel', description: 'Closed trigger’s accessible name and tooltip. Defaults to Menu.' },
@@ -67,15 +67,15 @@ export const navbarContent: DocsPageContent = {
       key: 'tokens',
       body: ['Override these CSS custom properties on the component or a containing theme. Defaults come from Mezzanine’s token stylesheet; shared colour, spacing tokens also apply.'],
       table: {
-        label: 'Navbar tokens',
+        label: 'TopBar tokens',
         nameColumn: 'CSS token',
         rows: [
-          { name: '--navbar-border-width', description: 'Header and trigger border thickness.' },
-          { name: '--navbar-min-height', description: 'Minimum content-row height.' },
-          { name: '--navbar-wide-padding-inline', description: 'Horizontal padding in the wide layout.' },
-          { name: '--navbar-focus-ring-width', description: 'Trigger focus outline thickness.' },
-          { name: '--navbar-focus-ring-offset', description: 'Trigger focus outline offset.' },
-          { name: '--navbar-panel-max-height', description: 'Maximum panel height before scrolling.' },
+          { name: '--top-bar-border-width', description: 'Header and trigger border thickness.' },
+          { name: '--top-bar-min-height', description: 'Minimum content-row height.' },
+          { name: '--top-bar-wide-padding-inline', description: 'Horizontal padding in the wide layout.' },
+          { name: '--top-bar-focus-ring-width', description: 'Trigger focus outline thickness.' },
+          { name: '--top-bar-focus-ring-offset', description: 'Trigger focus outline offset.' },
+          { name: '--top-bar-panel-max-height', description: 'Maximum panel height before scrolling.' },
           { name: '--motion-duration-interface', description: 'Panel entry animation duration; disabled for reduced motion.' },
           { name: '--motion-distance-reveal', description: 'Shared reveal distance; the recipe applies the upward starting direction.' },
         ],
@@ -83,7 +83,6 @@ export const navbarContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'Sidebar', href: '/sidebar' },
     { label: 'Footer', href: '/footer' },
     { label: 'Target size', href: '/interaction/target-size' },
   ],

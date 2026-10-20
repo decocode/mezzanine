@@ -1,0 +1,11 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* TopBar: responsive navigation container and disclosure panel. */
+  --top-bar-border-width: var(--border-width-baseline);
+  --top-bar-min-height: 4rem;
+  --top-bar-wide-padding-inline: clamp(var(--space-6), 4vw, var(--space-12));
+  --top-bar-focus-ring-width: 0.1875rem;
+  --top-bar-focus-ring-offset: 0.125rem;
+  --top-bar-panel-max-height: 75dvh;
+}

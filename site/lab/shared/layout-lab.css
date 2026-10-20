@@ -1,5 +1,5 @@
-/* Lab only: the Layout pages. Every rule is scoped to .lab-layout or to a
-   class used only here, so nothing can reach documentation pages. --lab-* values
+/* Lab only: the Layout pages and the other Lab experiments. Every rule uses a
+   class used only in the Lab, so nothing can reach documentation pages. --lab-* values
    are illustrative candidates, not Mezzanine tokens. */
 
 .lab-layout {
@@ -206,27 +206,6 @@
 /* The Layout groups. Pages that teach a CSS idea use the familiar physical names, such as
    width and margin-left; the layout components use logical names, as a library would. */
 
-.lab-subtitle {
-  max-inline-size: 70ch;
-}
-
-.lab-stage-list {
-  display: grid;
-  gap: var(--space-8);
-  padding: 0;
-  list-style: none;
-}
-
-.lab-stage-list > li,
-.lab-stage-pages {
-  display: grid;
-  gap: var(--space-2);
-}
-
-.lab-stage-pages {
-  padding-inline-start: var(--space-6);
-}
-
 .lab-picker {
   display: flex;
   flex-wrap: wrap;
@@ -238,12 +217,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-}
-
-.lab-similar-to {
-  display: grid;
-  gap: var(--space-2);
-  padding-inline-start: var(--space-6);
 }
 
 .lab-legend {

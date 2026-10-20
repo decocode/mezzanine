@@ -468,18 +468,6 @@
     "kind": "type"
   },
   {
-    "name": "Navbar",
-    "kind": "value"
-  },
-  {
-    "name": "NavbarProps",
-    "kind": "type"
-  },
-  {
-    "name": "NavbarRenderProps",
-    "kind": "type"
-  },
-  {
     "name": "Panel",
     "kind": "value"
   },
@@ -630,30 +618,6 @@
   {
     "name": "SettingsIcon",
     "kind": "value"
-  },
-  {
-    "name": "Sidebar",
-    "kind": "value"
-  },
-  {
-    "name": "SidebarPanel",
-    "kind": "value"
-  },
-  {
-    "name": "SidebarPanelProps",
-    "kind": "type"
-  },
-  {
-    "name": "SidebarProps",
-    "kind": "type"
-  },
-  {
-    "name": "SidebarTrigger",
-    "kind": "value"
-  },
-  {
-    "name": "SidebarTriggerProps",
-    "kind": "type"
   },
   {
     "name": "SlidersVerticalIcon",
@@ -833,6 +797,18 @@
   },
   {
     "name": "TooltipTriggerComponentProps",
+    "kind": "type"
+  },
+  {
+    "name": "TopBar",
+    "kind": "value"
+  },
+  {
+    "name": "TopBarProps",
+    "kind": "type"
+  },
+  {
+    "name": "TopBarRenderProps",
     "kind": "type"
   },
   {

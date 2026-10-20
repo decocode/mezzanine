@@ -38,7 +38,7 @@ export const breadcrumbsContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Link', href: '/link' },
-    { label: 'Navbar', href: '/navbar' },
+    { label: 'Top bar', href: '/top-bar' },
     { label: 'Navigation tree', href: '/navigation-tree' },
     { label: 'Target size', href: '/interaction/target-size' },
   ],
