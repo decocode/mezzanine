@@ -4,8 +4,7 @@ import {
   type SearchFieldProps as ReactAriaSearchFieldProps,
 } from 'react-aria-components/SearchField'
 import { Button } from '../Button/Button'
-import { SearchIcon } from '../../icons/Icons'
-import { CloseIcon } from '../../icons/StudioIcons'
+import { SearchIcon, CloseIcon } from '../../icons/Icons'
 
 export interface SearchFieldProps extends ReactAriaSearchFieldProps {}
 

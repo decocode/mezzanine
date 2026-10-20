@@ -211,7 +211,7 @@ export {
   WavesIcon,
   ZoomInIcon,
   ZoomOutIcon,
-} from './icons/StudioIcons'
+} from './icons/Icons'
 
 export type {
   CellProps,

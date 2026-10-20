@@ -3,7 +3,7 @@ import { Button, type ButtonProps } from '../Button/Button'
 import { Dialog } from '../Dialog/Dialog'
 import { Heading } from '../Heading/Heading'
 import { Modal, ModalOverlay } from '../Modal/Modal'
-import { CloseIcon } from '../../icons/StudioIcons'
+import { CloseIcon } from '../../icons/Icons'
 import { useAppShell } from '../AppShell/AppShell'
 import type { PanelEdge } from '../AppShell/panelStore'
 

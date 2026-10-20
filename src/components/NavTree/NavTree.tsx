@@ -8,7 +8,7 @@ import {
   type NavigationTreeItemProps, type NavigationTreeItemContentRenderProps,
   type NavigationTreeProps, type NavigationTreeSectionProps,
 } from 'react-aria-components/NavigationTree'
-import { ChevronRightIcon } from '../../icons/StudioIcons'
+import { ChevronRightIcon } from '../../icons/Icons'
 import { useNavTreeExpansion, useNavTreeElement } from './navTreeLogic'
 
 export interface NavTreeItemData extends Pick<NavigationTreeItemProps,

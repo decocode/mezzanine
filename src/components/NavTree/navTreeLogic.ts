@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useEffectEvent, useMemo, useRef, useState, type Ref, type RefCallback } from 'react'
 import type { Key } from 'react-aria-components'
 import type { NavTreeItemData, NavTreeProps } from './NavTree'
-import { observeMotionPolicy, readMotionDuration } from '../../motionPolicy'
 
 function indexNavTree(items: NavTreeProps['items'], route: NavTreeProps['selectedRoute']) {
   const keys = new Set<Key>()
@@ -92,24 +91,13 @@ export function useNavTreeElement(items: NavTreeProps['items'], forwardedRef: Re
     const forgetOutsideFocus = (event: FocusEvent) => {
       if (event.relatedTarget && !tree.contains(event.relatedTarget as Node)) focused.current = null
     }
-    const settleChevronMotion = () => {
-      if (readMotionDuration(tree) !== 0) return
-      // Changing a transition's duration alone does not finish one already in
-      // progress. Complete only owned chevrons when the shared policy suppresses it.
-      for (const icon of tree.querySelectorAll('.mz-nav-tree-chevron')) {
-        for (const animation of icon.getAnimations()) animation.finish()
-      }
-    }
     recover()
-    settleChevronMotion()
-    const stopObservingMotion = observeMotionPolicy(settleChevronMotion)
     const observer = new MutationObserver(recover)
     observer.observe(tree, { childList: true, subtree: true })
     tree.addEventListener('focusin', rememberFocus)
     tree.addEventListener('focusout', forgetOutsideFocus)
     return () => {
       observer.disconnect()
-      stopObservingMotion()
       tree.removeEventListener('focusin', rememberFocus)
       tree.removeEventListener('focusout', forgetOutsideFocus)
       releaseForwardedRef()

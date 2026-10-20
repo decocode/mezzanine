@@ -93,7 +93,7 @@ export function checkMotionSource(file, text) {
   function visit(node) {
     if (ts.isStringLiteralLike(node)) {
       // A query such as (prefers-reduced-motion: reduce); copy may still name the setting.
-      if (file !== 'src/motionPolicy.ts' && /prefers-reduced-motion\s*[:)]/.test(node.text)) report(node.pos, 'Only the internal motion reader may query the system preference.')
+      if (file !== 'site/components/tokenValueLogic.ts' && /prefers-reduced-motion\s*[:)]/.test(node.text)) report(node.pos, 'Reduced motion comes from the CSS motion policy; only the docs site\'s live token values may listen for the setting.')
       for (const match of node.text.matchAll(oldToken)) report(node.pos, `Removed motion token ${match[0]}.`)
     }
     if (ts.isPropertyAssignment(node)) {

@@ -181,25 +181,9 @@ test.describe('documentation example', () => {
     })
   }
 
-  // Checks that switching on reduced motion part-way through an arrow rotation finishes it straight
-  // away.
-  test('enabling reduced motion completes a pending Nav Tree chevron rotation', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'no-preference' })
-    await page.goto('/navigation-tree')
-    const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
-    await tree.evaluate(element => { element.style.setProperty('--motion-duration-interface', '10s') })
-    const trigger = tree.getByRole('button', { name: 'Fruit', exact: true })
-    await trigger.click()
-    await expect(tree.getByRole('row', { name: 'Apples', exact: true })).toHaveCount(0)
-    await page.emulateMedia({ reducedMotion: 'reduce' })
-    await expect(trigger.locator('svg')).toHaveCSS('rotate', '0deg')
-    await expect(trigger.locator('svg')).toHaveCSS('transition-duration', '0s')
-  })
-
-
-  // Checks that switching theme mid-rotation settles the arrow straight away, and that clicking a
-  // branch quickly several times always shows the rows that match its final state.
-  test('theme changes settle a tree chevron; rapid toggles leave truthful immediate rows', async ({ page }) => {
+  // Checks that clicking a branch quickly several times always shows the rows that match its final
+  // state, whatever the theme and motion speed.
+  test('rapid toggles leave truthful immediate rows', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' })
     await page.goto('/navigation-tree')
     const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
@@ -210,7 +194,6 @@ test.describe('documentation example', () => {
     await expect(child).toHaveCount(0)
     await expect(trigger).toHaveAttribute('aria-expanded', 'false')
     await tree.evaluate(element => { element.dataset.theme = 'wireframe' })
-    await expect(trigger.locator('svg')).toHaveCSS('rotate', '0deg')
     await trigger.click()
     await expect(child).toBeVisible()
     await trigger.click()

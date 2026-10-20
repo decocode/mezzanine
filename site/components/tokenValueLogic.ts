@@ -1,14 +1,17 @@
 import { useCallback, useSyncExternalStore } from 'react'
 import { subscribeToColorScheme } from '../themeSwitcherLogic'
 
-// The library announces theme and motion changes on this internal event.
-const motionChangeEvent = 'mezzanine-internal-motion-change'
-
+// Token values change when the page's theme changes (its data-theme attribute), the system colour
+// scheme changes, or the system reduced-motion setting changes, so watch just those three.
 function subscribeToTokenChanges(notify: () => void) {
-  window.addEventListener(motionChangeEvent, notify)
+  const observer = new MutationObserver(notify)
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+  reducedMotion.addEventListener('change', notify)
   const stopColorScheme = subscribeToColorScheme(notify)
   return () => {
-    window.removeEventListener(motionChangeEvent, notify)
+    observer.disconnect()
+    reducedMotion.removeEventListener('change', notify)
     stopColorScheme()
   }
 }

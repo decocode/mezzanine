@@ -5,7 +5,7 @@
   Each consuming app supplies its own token values in its own theme file.
 */
 
-@import './typography.css';
+@import './text-styles.css';
 @import './components/Badge/Badge.css';
 @import './components/Breadcrumbs/Breadcrumbs.css';
 @import './components/Button/Button.css';

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Button as ReactAriaButton } from 'react-aria-components/Button'
 import { Heading, type HeadingProps } from '../Heading/Heading'
-import { ChevronRightIcon } from '../../icons/StudioIcons'
+import { ChevronRightIcon } from '../../icons/Icons'
 
 export {
   Disclosure,
