@@ -27,7 +27,7 @@ The website for mezzanine.fly.dev. It imports the library as `@decocode/mezzanin
 | `AppShell.tsx`, `main.tsx`, `PageLoader.tsx`, `pageRegistry.ts` | Route selection, theme state, and loading each page separately. |
 | `pages/<group>/<page>/` | One folder per page, mirroring the information architecture. Each has a `<Name>Page.tsx` and a `<name>Content.ts` holding its copy. See `PAGES.md`. |
 | `templates/` | `ContentPage`, which builds a page from its content file, and the content shape every page follows. |
-| `components/` | The site's own parts: `DocsShell` (the AppShell frame around docs and Lab pages), `SiteTopBar`, navigation, `TokenScale`, `ExampleZone` and similar. |
+| `components/` | The site's own parts: `DocsShell` (the AppShell frame around docs and Lab pages), `SiteTopBar`, navigation, `TokenScale`, `ExampleZone`, the example parts shared with the Lab (`ExampleParts.tsx`, `browserLogic.ts`) and similar. |
 | `styles.css` | The site's own styles. |
 | `assets/`, `public/` | Images and static files. |
 
@@ -38,8 +38,8 @@ An experimental sandbox at `/site/lab`. Nothing here is approved library work.
 | Folder | What it holds |
 | --- | --- |
 | `layout/<group>/<page>/` | The Layout pages, in six groups: Box basics, Add space, Inside the box, Side by side, Grids and columns, and Container. |
-| `browser-and-device/`, `emerging-features/`, `components/` | The other experiments, one folder per page. |
-| `reading-order/`, `style-priority/` | Top-level Lab pages. |
+| `emerging-features/`, `components/` | The other experiments, one folder per page. |
+| `style-priority/` | A top-level Lab page. |
 | `shared/` | Shared Lab parts, types and values, and `layout-lab.css`, which each page's "The CSS behind" panel quotes. The panel itself, the example text and the value picker come from the site's `components/ExampleParts.tsx`, shared with promoted docs pages. |
 | `LabPage.tsx`, `labContent.tsx` | The Lab's entry and its navigation. |
 

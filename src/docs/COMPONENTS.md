@@ -173,7 +173,7 @@ class, not a component: put it on your own element, with exactly two children.
 - To change one pair's spacing or minimum, set `--ratio-pair-gap` (a spacing
   token, such as `var(--space-6)`) or `--ratio-pair-min-area-width` on it.
 
-It follows its container, not the screen. It is not yet documented on the site.
+It follows its container, not the screen. The site's Foundations › Layout › Ratio pair page shows it.
 
 ## AppShell and Panel
 

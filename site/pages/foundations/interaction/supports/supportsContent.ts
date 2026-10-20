@@ -1,8 +1,9 @@
-// The Lab's Supports page, in Browser and device: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabPage } from '../../shared/labTypes'
+// The Supports page, in Foundations › Interaction: its explanation and the CSS behind its example, in plain English.
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
-export const supportsPage: LabPage = {
-  id: 'lab-supports', kind: 'foundation', title: 'Supports', href: '/site/lab/browser-and-device/supports',
+export const supportsContent: DocsPageContent = {
+  id: 'supports', kind: 'foundation', title: 'Supports',
   sections: [
     {
       key: 'howItWorks',
@@ -19,18 +20,19 @@ export const supportsPage: LabPage = {
   ],
 }
 
-// Example copy with a link to another Lab page.
-export const supportsExampleLinkText = 'The same question, asked live in your browser. The last three are in [Emerging features](/site/lab/emerging-features).'
+// Example copy.
+export const supportsExampleText = 'The same question, asked live in your browser. The last three are newer features that not every browser has yet.'
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
-// layout-lab.css, and a browser test checks that it still matches.
+// supports.css, and a browser test checks that it still matches.
 export const supportsCssNotes: Record<string, CssNote> = {
   supports: {
+    isExample: true,
     paragraphs: [
-      'Every browser first gets an ordinary rule. Then `@supports` checks whether the browser understands `display: grid-lanes`, and only then uses it. This is the masonry rule from Emerging features.',
+      'Every browser first gets an ordinary rule. Then `@supports` checks whether the browser understands `display: grid-lanes`, a newer way to build masonry layouts, and only then uses it.',
     ],
     code: `@supports (display: grid-lanes) {
-  .lab-masonry {
+  .masonry {
     display: grid-lanes;
   }
 }`,

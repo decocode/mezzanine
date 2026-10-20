@@ -19,20 +19,15 @@ import { rowCssNotes } from './layout/side-by-side/row/rowContent'
 import { rowWrapCssNotes } from './layout/side-by-side/row-wrap/rowWrapContent'
 import { rowWrapGrowCssNotes } from './layout/side-by-side/row-wrap-grow/rowWrapGrowContent'
 import { reelCssNotes } from './layout/side-by-side/reel/reelContent'
-import { ratioPairCssNotes } from './layout/side-by-side/ratio-pair/ratioPairContent'
 import { columnCssNotes } from './layout/grids-and-columns/column/columnContent'
 import { gridCssNotes } from './layout/grids-and-columns/grid/gridContent'
 import { subgridCssNotes } from './layout/grids-and-columns/subgrid/subgridContent'
 import { containerQueriesCssNotes } from './layout/container/container-queries/containerQueriesContent'
 import { fluidSizingCssNotes } from './layout/container/fluid-sizing/fluidSizingContent'
-import { mediaQueriesCssNotes } from './browser-and-device/media-queries/mediaQueriesContent'
-import { supportsCssNotes } from './browser-and-device/supports/supportsContent'
-import { safeAreasCssNotes } from './browser-and-device/safe-areas/safeAreasContent'
 import { masonryCssNotes } from './emerging-features/masonry/masonryContent'
 import { scrollStateQueriesCssNotes } from './emerging-features/scroll-state-queries/scrollStateQueriesContent'
 import { anchorPositioningCssNotes } from './emerging-features/anchor-positioning/anchorPositioningContent'
 import { fieldSizingCssNotes } from './emerging-features/field-sizing/fieldSizingContent'
-import { readingOrderCssNotes } from './reading-order/readingOrderContent'
 import { stylePriorityCssNotes } from './style-priority/stylePriorityContent'
 
 export const cssNotes: Record<string, CssNote> = {
@@ -55,19 +50,14 @@ export const cssNotes: Record<string, CssNote> = {
   ...rowWrapCssNotes,
   ...rowWrapGrowCssNotes,
   ...reelCssNotes,
-  ...ratioPairCssNotes,
   ...columnCssNotes,
   ...gridCssNotes,
   ...subgridCssNotes,
   ...containerQueriesCssNotes,
   ...fluidSizingCssNotes,
-  ...mediaQueriesCssNotes,
-  ...supportsCssNotes,
-  ...safeAreasCssNotes,
   ...masonryCssNotes,
   ...scrollStateQueriesCssNotes,
   ...anchorPositioningCssNotes,
   ...fieldSizingCssNotes,
-  ...readingOrderCssNotes,
   ...stylePriorityCssNotes,
 }

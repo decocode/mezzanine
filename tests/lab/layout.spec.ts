@@ -1,7 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
 import { layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutContent'
-import { browserAndDeviceLab, browserAndDevicePages } from '../../site/lab/browser-and-device/browserAndDeviceContent'
 import { emergingFeatures, futurePages } from '../../site/lab/emerging-features/emergingFeaturesContent'
 import { labTopLevelPages } from '../../site/lab/labTopLevelPages'
 import { cssNotes } from '../../site/lab/labCssNotes'
@@ -12,7 +11,7 @@ const stageOverviewPages = layoutStages.map(stage => ({ path: `/site/lab/layout/
 const stageChildPages = stagePages.map(page => ({ path: page.href, title: page.title }))
 const futureOverviewPage = { path: emergingFeatures.href, title: emergingFeatures.title }
 const futureChildPages = futurePages.map(page => ({ path: page.href, title: page.title }))
-const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages, ...Object.values(labTopLevelPages).map(page => ({ path: page.href, title: page.title })), { path: browserAndDeviceLab.href, title: browserAndDeviceLab.title }, ...Object.values(browserAndDevicePages).map(page => ({ path: page.href, title: page.title }))]
+const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages, ...Object.values(labTopLevelPages).map(page => ({ path: page.href, title: page.title }))]
 
 // Checks the Layout overview, each stage, each stage page and each page still to be sorted fit a 320px
 // screen at normal and doubled text in every theme, and pass an automated accessibility scan.
@@ -124,43 +123,14 @@ test('Lab Layout examples respond to their space and content', async ({ page }) 
   await page.getByRole('radio', { name: 'auto', exact: true }).click()
   await expect(box).toHaveCSS('overflow-y', 'auto')
   await expect(page.getByRole('region', { name: 'Box with too much text', exact: true })).toHaveAttribute('tabindex', '0')
-
-  await page.goto('/site/lab/reading-order')
-  const buttons = page.locator('.lab-order-row').getByRole('button')
-  await expect(buttons).toHaveCount(3)
-  const leftToRight = () => buttons.evaluateAll(items => items.map(item => ({ name: item.textContent, left: item.getBoundingClientRect().left })).sort((a, b) => a.left - b.left).map(item => item.name))
-  expect(await leftToRight()).toEqual(['Button 1', 'Button 2', 'Button 3'])
-  await page.locator('label').filter({ hasText: 'Reverse on screen' }).click()
-  await expect.poll(leftToRight).toEqual(['Button 3', 'Button 2', 'Button 1'])
-  await buttons.first().focus()
-  await page.keyboard.press('Tab')
-  await expect(page.getByRole('button', { name: 'Button 2', exact: true })).toBeFocused()
 })
 
-// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet (or, for Ratio pair, the library's layout classes), apart from example CSS,
+// Checks the CSS shown in each "The CSS behind" panel matches the Lab stylesheet (or the library's layout classes), apart from example CSS,
 // so the explanation cannot drift from the rules it describes.
 test('Lab Layout CSS notes match the Lab stylesheet', () => {
   const normalise = (css: string) => css.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').trim()
-  // Ratio pair's note shows the library's own CSS, since the Lab uses the library class.
   const stylesheet = normalise(['site/lab/shared/layout-lab.css', 'src/styles/layout.css'].map((file) => readFileSync(file, 'utf8')).join('\n'))
   for (const note of Object.values(cssNotes).filter((note) => !note.isExample)) {
     for (const rule of note.code.split(/\n\s*\n/)) expect(stylesheet).toContain(normalise(rule))
   }
-})
-
-// Checks that a page's "Also known as" names start in a closed Disclosure, open from its button,
-// and open when its On this page link is followed.
-test('Also known as starts closed and opens from its button or On this page', async ({ page }) => {
-  await page.goto('/site/lab/layout/side-by-side/ratio-pair')
-  const trigger = page.getByRole('button', { name: 'Also known as', exact: true })
-  const names = page.getByRole('grid', { name: 'Other names for Ratio pair' })
-  await expect(trigger).toHaveAttribute('aria-expanded', 'false')
-  await expect(names).toBeHidden()
-  await trigger.click()
-  await expect(names).toBeVisible()
-  await expect(names.getByRole('rowheader', { name: 'Figma', exact: true })).toBeVisible()
-  await page.reload()
-  await page.getByRole('navigation', { name: 'On this page' }).getByRole('link', { name: 'Also known as', exact: true }).click()
-  await expect(page.getByRole('button', { name: 'Also known as', exact: true })).toHaveAttribute('aria-expanded', 'true')
-  await expect(names).toBeVisible()
 })

@@ -400,17 +400,6 @@
   background: var(--color-accent-500);
 }
 
-/* Reading order. */
-.lab-order-row {
-  display: flex;
-  gap: var(--space-2);
-}
-
-.lab-order-reversed {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-
 /* Layout components. Each limit is a custom property, so it could be a token. */
 .lab-column {
   display: flex;
@@ -624,8 +613,7 @@
   overflow: hidden;
 }
 
-.lab-probes > *,
-.lab-safe-probe {
+.lab-probes > * {
   position: absolute;
   visibility: hidden;
   inline-size: 0;
@@ -635,14 +623,6 @@
 .lab-probe-svh { block-size: 100svh; }
 .lab-probe-lvh { block-size: 100lvh; }
 .lab-probe-dvh { block-size: 100dvh; }
-
-.lab-safe-probe {
-  padding:
-    env(safe-area-inset-top, 0px)
-    env(safe-area-inset-right, 0px)
-    env(safe-area-inset-bottom, 0px)
-    env(safe-area-inset-left, 0px);
-}
 
 /* Cascade layers: the same simple app rule against a library rule, unlayered and layered. */
 .lab-chip {

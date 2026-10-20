@@ -1,0 +1,15 @@
+/* The Ratio pair example: a box of the chosen width around the library's mz-ratio-pair class. */
+
+.ratio-pair-frame {
+  inline-size: min(var(--_frame-width), 100%);
+  padding: var(--space-3);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
+}
+
+.ratio-pair-area {
+  box-sizing: border-box;
+  min-block-size: var(--space-24);
+  padding: var(--space-3);
+  border: var(--border-width-baseline) solid var(--color-border);
+  background: var(--color-surface);
+}

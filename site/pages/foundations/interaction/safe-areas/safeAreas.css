@@ -1,0 +1,16 @@
+/* The Safe areas example: an invisible probe whose padding reads each safe area. The page's CSS
+   notes quote these rules, and a browser test checks that they still match. */
+
+.safe-areas-probe {
+  position: absolute;
+  visibility: hidden;
+  inline-size: 0;
+}
+
+.safe-areas-probe {
+  padding:
+    env(safe-area-inset-top, 0px)
+    env(safe-area-inset-right, 0px)
+    env(safe-area-inset-bottom, 0px)
+    env(safe-area-inset-left, 0px);
+}

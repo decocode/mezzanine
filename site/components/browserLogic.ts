@@ -1,0 +1,62 @@
+import { useSyncExternalStore, type RefObject } from 'react'
+
+// What this browser and device report about themselves, read live without effects. Shared by
+// docs examples and the Lab.
+
+// Live media query matching without effects: the browser notifies React of changes.
+export function useMediaQuery(query: string) {
+  return useSyncExternalStore(
+    (onChange) => {
+      const list = window.matchMedia(query)
+      list.addEventListener('change', onChange)
+      return () => list.removeEventListener('change', onChange)
+    },
+    () => window.matchMedia(query).matches,
+    () => false,
+  )
+}
+
+// Whether this browser supports a CSS property and value. Checked during rendering.
+export function supportsCss(property: string, value: string) {
+  return typeof CSS !== 'undefined' && CSS.supports(property, value)
+}
+
+// Whether a CSS at-rule condition is supported, such as a scroll-state container query.
+export function supportsCondition(condition: string) {
+  return typeof CSS !== 'undefined' && CSS.supports(condition)
+}
+
+// Window and screen changes that can alter a measurement: resizing, rotating, and on phones the
+// browser's toolbar showing or hiding, which resizes the visual viewport.
+export function subscribeToScreenChanges(onChange: () => void) {
+  window.addEventListener('resize', onChange)
+  window.addEventListener('orientationchange', onChange)
+  window.visualViewport?.addEventListener('resize', onChange)
+  return () => {
+    window.removeEventListener('resize', onChange)
+    window.removeEventListener('orientationchange', onChange)
+    window.visualViewport?.removeEventListener('resize', onChange)
+  }
+}
+
+// Reads env(safe-area-inset-*) through a probe whose padding uses each inset. React reads it
+// again once the probe is on the page, and whenever the window resizes or the screen rotates.
+// Safe areas are physical: they belong to the screen's own edges, not the reading direction.
+export function useSafeAreas(probe: RefObject<HTMLElement | null>) {
+  const snapshot = useSyncExternalStore(
+    subscribeToScreenChanges,
+    () => {
+      if (!probe.current) return ''
+      const style = getComputedStyle(probe.current)
+      return [style.paddingTop, style.paddingRight, style.paddingBottom, style.paddingLeft].join(' ')
+    },
+    () => '',
+  )
+  const [top = '0px', right = '0px', bottom = '0px', left = '0px'] = snapshot ? snapshot.split(' ') : []
+  return [
+    { label: 'Top', pixels: top },
+    { label: 'Right', pixels: right },
+    { label: 'Bottom', pixels: bottom },
+    { label: 'Left', pixels: left },
+  ]
+}

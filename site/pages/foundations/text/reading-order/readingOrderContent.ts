@@ -1,8 +1,9 @@
-// The Lab's Reading order page: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabPage } from '../shared/labTypes'
+// The Reading order page, in Foundations › Text: its explanation and the CSS behind its example, in plain English.
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
-export const readingOrderPage: LabPage = {
-  id: 'lab-reading-order', kind: 'foundation', title: 'Reading order', href: '/site/lab/reading-order',
+export const readingOrderContent: DocsPageContent = {
+  id: 'reading-order', kind: 'foundation', title: 'Reading order',
   description: 'When the order still makes sense to keyboard and screen reader users.',
   sections: [
     {
@@ -22,19 +23,19 @@ export const readingOrderPage: LabPage = {
 }
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
-// layout-lab.css, and a browser test checks that it still matches.
+// readingOrder.css, and a browser test checks that it still matches.
 export const readingOrderCssNotes: Record<string, CssNote> = {
   readingOrder: {
     paragraphs: [
       'The rule `flex-direction: row-reverse` lays the row out from the other end, so the last button in the HTML appears first on screen.',
       'Only the picture changes. The keyboard and screen readers still follow the HTML.',
     ],
-    code: `.lab-order-row {
+    code: `.reading-order-row {
   display: flex;
   gap: var(--space-2);
 }
 
-.lab-order-reversed {
+.reading-order-reversed {
   flex-direction: row-reverse;
   justify-content: flex-end;
 }`,

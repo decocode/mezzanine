@@ -1,8 +1,8 @@
 import { expect, test, type Page } from '@playwright/test'
 import { expectNoPageOverflow } from '../display'
 
-// The mz-ratio-pair class has no docs page yet, so these checks use the Lab's Ratio pair page, which uses the
-// library class inside a frame whose width can be changed.
+// These checks use the Ratio pair docs page, which shows the library class inside a box whose width
+// can be chosen.
 
 async function areas(page: Page) {
   const pair = page.locator('.mz-ratio-pair')
@@ -19,7 +19,7 @@ async function chooseFraction(page: Page, label: string) {
 test('RatioPair shares the row by fraction or by auto', async ({ page }) => {
   // Wide enough that, beside both Panels, each area stays above its minimum width.
   await page.setViewportSize({ width: 1800, height: 900 })
-  await page.goto('/site/lab/layout/side-by-side/ratio-pair')
+  await page.goto('/layout/ratio-pair')
   await chooseFraction(page, '1/3')
   let { first, second } = await areas(page)
   expect(Math.abs(first.y - second.y)).toBeLessThan(1)
@@ -33,17 +33,14 @@ test('RatioPair shares the row by fraction or by auto', async ({ page }) => {
   expect(second.width).toBeGreaterThan(first.width * 2)
 })
 
-// Checks that the areas stack, each at full width, when the frame is too narrow for both to have
+// Checks that the areas stack, each at full width, when the box is too narrow for both to have
 // their 15rem minimum, at normal and doubled text, without widening the page.
 for (const fontSize of [16, 32]) {
   test(`RatioPair stacks its areas in a narrow container at ${fontSize}px text`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
-    await page.goto('/site/lab/layout/side-by-side/ratio-pair')
+    await page.goto('/layout/ratio-pair')
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
-    const width = page.getByRole('slider', { name: 'Width' })
-    await width.focus()
-    await page.keyboard.press('Home')
-    await expect(width).toHaveValue('320')
+    await page.getByRole('radio', { name: '320px', exact: true }).check()
     // Measure inside the wait, so a layout that is still settling can't make the check flaky.
     await expect.poll(async () => {
       const { pair, first, second } = await areas(page)

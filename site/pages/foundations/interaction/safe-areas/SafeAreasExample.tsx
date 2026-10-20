@@ -1,8 +1,8 @@
-// The example for the Lab's Safe areas page, in Browser and device.
+// The example for the Safe areas page, in Foundations › Interaction.
 import { useRef } from 'react'
 import { Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { CssNotes, ExampleText } from '../../shared/LabParts'
-import { useMediaQuery, useSafeAreas } from '../../shared/labLogic'
+import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
+import { useMediaQuery, useSafeAreas } from '../../../../components/browserLogic'
 import { safeAreasCssNotes } from './safeAreasContent'
 
 export function SafeAreasExample() {
@@ -11,8 +11,8 @@ export function SafeAreasExample() {
   const standalone = useMediaQuery('(display-mode: standalone)')
   return <>
     <ExampleText>On a laptop the safe areas are zero. Installed as an app here: {standalone ? 'yes' : 'no'}.</ExampleText>
-    <div ref={safe} className="lab-safe-probe" aria-hidden="true" />
-    <div className="lab-table">
+    <div ref={safe} className="safe-areas-probe" aria-hidden="true" />
+    <div className="documentation-table">
       <Table aria-label="Safe areas">
         <TableHeader><Column isRowHeader>Measurement</Column><Column>Value</Column></TableHeader>
         <TableBody>

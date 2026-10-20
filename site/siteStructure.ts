@@ -44,7 +44,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
       { id: 'color', label: 'Color', path: '/color', status: 'implemented' },
       { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
       { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
-      { id: 'layout', label: 'Layout', path: '/layout', status: 'implemented' },
     ],
     groups: [
       {
@@ -54,6 +53,9 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         pages: [
           { id: 'states', label: 'States', path: '/interaction/states', status: 'implemented' },
           { id: 'target-size', label: 'Target size', path: '/interaction/target-size', status: 'implemented' },
+          { id: 'media-queries', label: 'Media queries', path: '/interaction/media-queries', status: 'implemented' },
+          { id: 'safe-areas', label: 'Safe areas', path: '/interaction/safe-areas', status: 'implemented' },
+          { id: 'supports', label: 'Supports', path: '/interaction/supports', status: 'implemented' },
         ],
       },
       {
@@ -66,6 +68,15 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'fonts', label: 'Fonts', path: '/fonts', status: 'empty' },
           { id: 'fluid-text', label: 'Fluid text', path: '/text/fluid-text', status: 'implemented' },
           { id: 'reading-direction', label: 'Reading direction', path: '/text/reading-direction', status: 'implemented' },
+          { id: 'reading-order', label: 'Reading order', path: '/text/reading-order', status: 'implemented' },
+        ],
+      },
+      {
+        id: 'layout',
+        label: 'Layout',
+        path: '/layout',
+        pages: [
+          { id: 'ratio-pair', label: 'Ratio pair', path: '/layout/ratio-pair', status: 'implemented' },
         ],
       },
       {

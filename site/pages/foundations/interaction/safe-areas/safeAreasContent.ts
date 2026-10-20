@@ -1,8 +1,9 @@
-// The Lab's Safe areas page, in Browser and device: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabPage } from '../../shared/labTypes'
+// The Safe areas page, in Foundations › Interaction: its explanation and the CSS behind its example, in plain English.
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
-export const safeAreasPage: LabPage = {
-  id: 'lab-safe-areas', kind: 'foundation', title: 'Safe areas', href: '/site/lab/browser-and-device/safe-areas',
+export const safeAreasContent: DocsPageContent = {
+  id: 'safe-areas', kind: 'foundation', title: 'Safe areas',
   description: 'When content stays clear of notches and home indicators.',
   sections: [
     {
@@ -21,13 +22,13 @@ export const safeAreasPage: LabPage = {
 }
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
-// layout-lab.css, and a browser test checks that it still matches.
+// safeAreas.css, and a browser test checks that it still matches.
 export const safeAreasCssNotes: Record<string, CssNote> = {
   safeAreas: {
     paragraphs: [
       'An invisible box uses `env()` to read the four safe areas, with `0px` as the fallback where a device has none. Pressing the button reads them.',
     ],
-    code: `.lab-safe-probe {
+    code: `.safe-areas-probe {
   padding:
     env(safe-area-inset-top, 0px)
     env(safe-area-inset-right, 0px)

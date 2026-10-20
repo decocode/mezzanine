@@ -1,8 +1,9 @@
-// The Lab's Media queries page, in Browser and device: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, LabPage } from '../../shared/labTypes'
+// The Media queries page, in Foundations › Interaction: its explanation and the CSS behind its example, in plain English.
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
-export const mediaQueriesPage: LabPage = {
-  id: 'lab-media-queries', kind: 'foundation', title: 'Media queries', href: '/site/lab/browser-and-device/media-queries',
+export const mediaQueriesContent: DocsPageContent = {
+  id: 'media-queries', kind: 'foundation', title: 'Media queries',
   description: 'Respect the person’s settings and device.',
   sections: [
     {
@@ -20,7 +21,7 @@ export const mediaQueriesPage: LabPage = {
 }
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
-// layout-lab.css, and a browser test checks that it still matches.
+// mediaQueries.css, and a browser test checks that it still matches.
 export const mediaQueriesCssNotes: Record<string, CssNote> = {
   environment: {
     isExample: true,

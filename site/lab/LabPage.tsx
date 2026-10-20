@@ -4,11 +4,10 @@ import { SiteTopBar } from '../components/SiteTopBar'
 import { NavigationPanel } from '../components/NavigationPanel'
 import type { Theme } from '../themeSwitcherLogic'
 import NotFoundPage from '../pages/not-found/NotFoundPage'
-import { BrowserAndDeviceOverviewPage, LabTopLevelPageView, LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutStageChildPage, LayoutStagePage } from './shared/LayoutPage'
+import { LabTopLevelPageView, LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutStageChildPage, LayoutStagePage } from './shared/LayoutPage'
 import { labContent, labNavigationItems } from './labContent'
 import { ComponentsPage, SearchPage } from './ComponentsPage'
 import { layoutStages, stagePages } from './layout/layoutContent'
-import { browserAndDeviceLab, browserAndDevicePages } from './browser-and-device/browserAndDeviceContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
 import { labTopLevelPages } from './labTopLevelPages'
 import './lab-page.css'
@@ -30,9 +29,8 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const stagePage = stagePages.find((item) => item.href === currentPath)
   const isFuture = currentPath === emergingFeatures.href
   const futurePage = futurePages.find((item) => item.href === currentPath)
-  const isBrowserAndDevice = currentPath === browserAndDeviceLab.href
-  const topLevelPage = [...Object.values(labTopLevelPages), ...Object.values(browserAndDevicePages)].find((item) => item.href === currentPath)
-  const pageTitle = (isBrowserAndDevice ? browserAndDeviceLab.title : undefined) ?? topLevelPage?.title ?? stage?.title ?? stagePage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title)
+  const topLevelPage = Object.values(labTopLevelPages).find((item) => item.href === currentPath)
+  const pageTitle = topLevelPage?.title ?? stage?.title ?? stagePage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title)
   const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : isComponents ? `${labContent.componentsPage.label} | Lab` : isSearch ? `${labContent.searchPage.label} | Lab` : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} />
 
@@ -54,7 +52,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : isComponents ? <ComponentsPage /> : isSearch ? <SearchPage /> : isBrowserAndDevice ? <BrowserAndDeviceOverviewPage /> : topLevelPage ? <LabTopLevelPageView page={topLevelPage} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : isComponents ? <ComponentsPage /> : isSearch ? <SearchPage /> : topLevelPage ? <LabTopLevelPageView page={topLevelPage} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
     </DocsShell>
   </>
 }

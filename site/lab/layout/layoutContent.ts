@@ -23,7 +23,6 @@ import { rowPage } from './side-by-side/row/rowContent'
 import { rowWrapPage } from './side-by-side/row-wrap/rowWrapContent'
 import { rowWrapGrowPage } from './side-by-side/row-wrap-grow/rowWrapGrowContent'
 import { reelPage } from './side-by-side/reel/reelContent'
-import { ratioPairPage } from './side-by-side/ratio-pair/ratioPairContent'
 import { columnPage } from './grids-and-columns/column/columnContent'
 import { gridPage } from './grids-and-columns/grid/gridContent'
 import { subgridPage } from './grids-and-columns/subgrid/subgridContent'
@@ -54,7 +53,7 @@ const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
   boxBasics: [theBoxModelPage, typesOfBoxPage, measuringTheBoxPage, viewportUnitsPage, sizingTheBoxPage, centerPage],
   addSpace: [marginAndPaddingPage, gapPage, spacingPage],
   insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, aspectRatioPage, contentColumnsPage, boxHasContentPage],
-  sideBySide: [rowPage, rowWrapPage, rowWrapGrowPage, reelPage, ratioPairPage],
+  sideBySide: [rowPage, rowWrapPage, rowWrapGrowPage, reelPage],
   gridsAndColumns: [columnPage, gridPage, subgridPage],
   container: [containerQueriesPage, fluidSizingPage],
 }

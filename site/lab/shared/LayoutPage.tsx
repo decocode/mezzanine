@@ -1,17 +1,11 @@
 import type { JSX } from 'react'
 import type { FuturePage, LabPage, LayoutStage, StagePage } from './labTypes'
-import { howItWorksLead } from './labLogic'
 import { overviewPagesHeading } from './labValues'
 import { layoutOverview, layoutStages, stagePagesByStage } from '../layout/layoutContent'
 import { stageExamples } from '../layout/layoutExamples'
-import { browserAndDeviceLab, browserAndDevicePages } from '../browser-and-device/browserAndDeviceContent'
 import { emergingFeatures, futurePages } from '../emerging-features/emergingFeaturesContent'
 import { futureExamples } from '../emerging-features/emergingFeaturesExamples'
 import { labTopLevelPages } from '../labTopLevelPages'
-import { MediaQueriesExample } from '../browser-and-device/media-queries/MediaQueriesExample'
-import { SupportsExample } from '../browser-and-device/supports/SupportsExample'
-import { SafeAreasExample } from '../browser-and-device/safe-areas/SafeAreasExample'
-import { ReadingOrderExample } from '../reading-order/ReadingOrderExample'
 import { StylePriorityExample } from '../style-priority/StylePriorityExample'
 import { LabContentPage, OverviewPage } from './StagePages'
 import './layout-lab.css'
@@ -51,10 +45,6 @@ export function LayoutFutureChildPage({ page }: { page: FuturePage }) {
 
 // Lab pages outside Layout, keyed by their address.
 const topLevelExamples: Record<string, () => JSX.Element> = {
-  [browserAndDevicePages.mediaQueries.href]: MediaQueriesExample,
-  [browserAndDevicePages.safeAreas.href]: SafeAreasExample,
-  [labTopLevelPages.readingOrder.href]: ReadingOrderExample,
-  [browserAndDevicePages.supports.href]: SupportsExample,
   [labTopLevelPages.stylePriority.href]: StylePriorityExample,
 }
 
@@ -62,15 +52,4 @@ const topLevelExamples: Record<string, () => JSX.Element> = {
 export function LabTopLevelPageView({ page }: { page: LabPage }) {
   const Example = topLevelExamples[page.href]
   return <LabContentPage content={page} parts={{ example: <Example /> }} />
-}
-
-// An experiment's overview outside Layout: what it covers, then a Card for each page with the
-// first paragraph of its How it works.
-function ExperimentOverview({ experiment, pages }: { experiment: LabPage; pages: Record<string, LabPage> }) {
-  return <OverviewPage content={experiment} cards={Object.values(pages).map((page) => ({ headingId: `lab-card-${page.id}`, title: page.title, href: page.href, text: howItWorksLead(page) }))} />
-}
-
-// The Browser and device experiment's overview.
-export function BrowserAndDeviceOverviewPage() {
-  return <ExperimentOverview experiment={browserAndDeviceLab} pages={browserAndDevicePages} />
 }

@@ -1,9 +1,9 @@
-// The Lab's Ratio pair page, in Side by side: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
-import { everyLayout, bedrock } from '../../../shared/labValues'
+// The Ratio pair page, in Foundations › Layout: its explanation and the CSS behind its example, in plain English.
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
-export const ratioPairPage: StagePage = {
-  key: 'ratioPair', id: 'lab-ratio-pair', kind: 'foundation', stage: 'sideBySide', title: 'Ratio pair', href: '/site/lab/layout/side-by-side/ratio-pair',
+export const ratioPairContent: DocsPageContent = {
+  id: 'ratio-pair', kind: 'foundation', title: 'Ratio pair',
   description: 'When two boxes agree to divvy up their shared space.',
   alsoKnownAs: [
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap. One child is set to Fill container.' },
@@ -24,8 +24,8 @@ export const ratioPairPage: StagePage = {
     { key: 'example' },
   ],
   references: [
-    everyLayout('Sidebar', 'sidebar'),
-    bedrock('Split', 'split'),
+    { label: 'Every Layout: Sidebar', href: 'https://every-layout.dev/layouts/sidebar/' },
+    { label: 'Bedrock: Split', href: 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/split' },
     { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
     { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },
     { label: 'Bootstrap: Grid system', href: 'https://getbootstrap.com/docs/5.3/layout/grid/' },
@@ -33,8 +33,8 @@ export const ratioPairPage: StagePage = {
   ],
 }
 
-// What the example's CSS does. Unless marked as an example, the code is copied from
-// layout-lab.css, and a browser test checks that it still matches.
+// What the example's CSS does: the library's own mz-ratio-pair rules, quoted from src/styles/layout.css.
+// A browser test checks that they still match.
 export const ratioPairCssNotes: Record<string, CssNote> = {
   ratioPair: {
     paragraphs: [

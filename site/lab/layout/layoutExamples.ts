@@ -19,7 +19,6 @@ import { RowExample } from './side-by-side/row/RowExample'
 import { RowWrapExample } from './side-by-side/row-wrap/RowWrapExample'
 import { RowWrapGrowExample } from './side-by-side/row-wrap-grow/RowWrapGrowExample'
 import { ReelExample } from './side-by-side/reel/ReelExample'
-import { RatioPairExample } from './side-by-side/ratio-pair/RatioPairExample'
 import { ColumnExample } from './grids-and-columns/column/ColumnExample'
 import { GridExample } from './grids-and-columns/grid/GridExample'
 import { SubgridExample } from './grids-and-columns/subgrid/SubgridExample'
@@ -46,7 +45,6 @@ export const stageExamples: StageExamples = {
   rowWrap: { Example: RowWrapExample },
   rowWrapGrow: { Example: RowWrapGrowExample },
   reel: { Example: ReelExample },
-  ratioPair: { Example: RatioPairExample },
   column: { Example: ColumnExample },
   grid: { Example: GridExample },
   subgrid: { Example: SubgridExample },

@@ -1,7 +1,7 @@
-// The example for the Lab's Media queries page, in Browser and device.
+// The example for the Media queries page, in Foundations › Interaction.
 import { Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { CssNotes, ExampleText } from '../../shared/LabParts'
-import { useMediaQuery } from '../../shared/labLogic'
+import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
+import { useMediaQuery } from '../../../../components/browserLogic'
 import { mediaQueriesCssNotes, environmentQueries } from './mediaQueriesContent'
 
 function EnvironmentRow({ label, query }: { label: string; query: string }) {
@@ -16,7 +16,7 @@ function EnvironmentRow({ label, query }: { label: string; query: string }) {
 export function MediaQueriesExample() {
   return <>
     <ExampleText>The answers come from this browser, and change as soon as a setting does, such as dark mode or increased contrast.</ExampleText>
-    <div className="lab-table">
+    <div className="documentation-table">
       <Table aria-label="Environment media queries in this browser">
         <TableHeader>
           <Column isRowHeader>Question</Column>
