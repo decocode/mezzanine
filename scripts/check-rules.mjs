@@ -363,7 +363,6 @@ const propTables = [
   { file: 'site/pages/components/structure/navbar/navbarContent.ts', key: 'props', types: ['NavbarProps'] },
   { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
   { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
-  { file: 'site/pages/components/navigation/tab-bar/tabBarContent.ts', key: 'props', types: ['TabBarProps'] },
   { file: 'site/pages/components/navigation/sidebar/sidebarContent.ts', key: 'props', types: ['SidebarProps'],
     components: { Sidebar: ['SidebarProps'], SidebarTrigger: ['SidebarTriggerProps'], SidebarPanel: ['SidebarPanelProps'] } },
   { file: 'site/pages/components/navigation/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },

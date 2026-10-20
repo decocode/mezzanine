@@ -60,6 +60,7 @@ export const panelContent: DocsPageContent = {
           { name: 'headingLevel', description: 'The heading’s level, from 2 to 6. Defaults to 2.' },
           { name: 'minimized', description: 'Content shown when the Panel isn’t open: the same content, condensed.' },
           { name: 'closeLabel', description: 'The close button’s label. Defaults to “Close” followed by the title.' },
+          { name: 'isCollapsible', description: 'Whether the Panel can be closed. Defaults to `true`, with a close button, and a `PanelTrigger` elsewhere reopens it. When `false`, it stays open with no close button, and it’s hidden when there’s no room beside the content, so offer the same content another way.' },
           { name: 'isOpen / defaultOpen / onOpenChange', description: 'Control the open state, set its starting value, or respond to changes.' },
           { name: 'children', description: 'The Panel’s content.' },
           { name: 'className', description: 'Adds your own class.' },

@@ -8,6 +8,8 @@ import { labTopLevelPages } from './labTopLevelPages'
 
 export const labContent = {
   index: { label: 'Lab', href: '/site/lab' },
+  // The heading of the Lab's navigation Panel.
+  navigationTitle: 'Lab',
   layoutPage: { label: 'Layout', href: '/site/lab/layout', description: 'How boxes are sized, spaced and arranged: mobile first, and responding to their container.' },
   componentsPage: { label: 'Components', href: '/site/lab/components' },
   searchPage: { label: 'Search', href: '/site/lab/components/search' },

@@ -12,6 +12,10 @@
     'start bottom end';
   block-size: 100dvh;
   min-inline-size: 0;
+}
+
+/* Tracks animate only once someone opens or closes a Panel, not as Panels appear on load. */
+.mz-app-shell[data-animated] {
   transition: grid-template-columns calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
@@ -37,6 +41,8 @@
   min-inline-size: 0;
   min-block-size: 0;
   overflow: auto;
+  /* In-page links scroll smoothly unless motion is reduced, as the page itself does. */
+  scroll-behavior: var(--_motion-scroll-behavior);
 }
 
 .mz-app-shell-content > main { flex: 1 0 auto; }

@@ -40,7 +40,6 @@ export const interactionFocusRingComponents: { component: string; prefix: string
   { component: 'Navbar', prefix: '--navbar' },
   { component: 'NavTree', prefix: '--navigation-tree' },
   { component: 'RadioGroup', prefix: '--radio' },
-  { component: 'TabBar', prefix: '--tab-bar' },
   { component: 'Table', prefix: '--table' },
   { component: 'Tabs', prefix: '--tabs' },
   { component: 'TextField and TextArea', prefix: '--input' },

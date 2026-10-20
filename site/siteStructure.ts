@@ -139,7 +139,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'tabs', label: 'Tabs', path: '/tabs', status: 'implemented' },
           { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
           { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
-          { id: 'tab-bar', label: 'Tab bar', path: '/tab-bar', status: 'implemented' },
           { id: 'sidebar', label: 'Sidebar', path: '/sidebar', status: 'implemented' },
         ],
       },

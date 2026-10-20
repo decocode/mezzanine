@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-for (const path of ['/', '/navigation-tree', '/link', '/navbar', '/tabs', '/tab-bar', '/breadcrumbs']) {
+for (const path of ['/', '/navigation-tree', '/link', '/navbar', '/tabs', '/breadcrumbs']) {
   test(`Wireframe underlines text links except the wordmark and button-style links on ${path}`, async ({ page }) => {
     await page.addInitScript(() => localStorage.setItem('mezzanine-theme', 'wireframe'))
     await page.setViewportSize({ width: 320, height: 900 })

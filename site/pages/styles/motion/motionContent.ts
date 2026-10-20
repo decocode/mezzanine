@@ -81,7 +81,6 @@ export const motionPatternDefinitions: MotionPatternDefinition[] = [
   { id: 'navigation-tree', name: 'Nav Tree', scope: 'Library', movement: 'Chevron turns from right to down; rows appear and disappear immediately.', reducedMotion: 'Hierarchy and chevron orientation change immediately.' },
   { id: 'navbar-navigation', name: 'Mobile Navbar navigation', scope: 'Library', movement: 'Fades in and moves by the shared reveal distance.', reducedMotion: 'Appears immediately.' },
   { id: 'sidebar', name: 'Sidebar drawer', scope: 'Library', movement: 'Slides from its side while the backdrop fades.', reducedMotion: 'Opens and closes immediately.' },
-  { id: 'tab-bar', name: 'TabBar More sheet', scope: 'Library', movement: 'Slides from below while the backdrop fades.', reducedMotion: 'Opens and closes immediately.' },
   { id: 'button-progress', name: 'Pending Button indicator', scope: 'Library', movement: 'Rotates continuously while pending.', reducedMotion: 'System reduction stops rotation and keeps the ring visible. Wireframe alone leaves loading unchanged.' },
   { id: 'page-scrolling', name: 'Page scrolling', scope: 'Documentation layout', movement: 'Same-page links scroll smoothly; direct-load anchors scroll immediately.', reducedMotion: 'Scrolling is immediate.' },
   { id: 'loading-icon-preview', name: 'Loading icon preview', scope: 'Documentation only', movement: 'Rotates continuously.', reducedMotion: 'System reduction stops rotation and keeps the icon visible. Wireframe alone leaves it unchanged.' },

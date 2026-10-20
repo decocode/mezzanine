@@ -14,5 +14,11 @@ export function ScrollStateQueriesExample() {
         {[1, 2, 3].map((index) => <Text key={index} elementType="p" className="lab-scroll-section mz-text-body-sm">Paragraph {index} of filler content to make the box scroll.</Text>)}
       </div>
     <CssNotes name="the stuck header" note={scrollStateQueriesCssNotes.scrollState} level={3} />
+    <ExampleText>A heading over a list, as in a Panel. Its divider appears only once the list has scrolled, so until then the heading reads as part of the list. Browsers without scroll-state queries show the divider all the time.</ExampleText>
+    <div className="lab-scroll-box lab-divider-box" role="region" aria-label="Scrolling list under Heading A" tabIndex={0}>
+      <div className="lab-sticky-header lab-divider-heading mz-text-label-md"><span>Heading A</span></div>
+      {[1, 2, 3].map((index) => <Text key={index} elementType="p" className="lab-scroll-section mz-text-body-sm">Item {index} of the list.</Text>)}
+    </div>
+    <CssNotes name="the divider" note={scrollStateQueriesCssNotes.scrollStateDivider} level={3} />
   </>
 }

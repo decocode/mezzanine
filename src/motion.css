@@ -34,7 +34,7 @@
   }
 }
 
-/* Backdrop fades shared by Modal, Sidebar and the TabBar sheet. Each use
+/* Backdrop fades shared by Modal and Sidebar. Each use
    consumes the policy switch in its own animation-name. */
 @keyframes mz-modal-fade {
   from { opacity: 0; }

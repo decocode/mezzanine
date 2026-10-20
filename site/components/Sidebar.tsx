@@ -10,16 +10,12 @@ interface NavigationPanelProps {
   selectedRoute: string
 }
 
-// A section's navigation tree in the site's sidebar panel. Docs and the Lab each pass their own items.
+// A section's navigation tree, in its Panel or the Navbar menu. Docs and the Lab each pass their own items.
 export function NavigationPanel({ 'aria-label': label, navigationLabel, items, selectedRoute }: NavigationPanelProps) {
   return (
-    <MezzanineSidebar presentation="inline" isCollapsible={false}>
-      <SidebarPanel title={label} hideInlineHeader className="site-sidebar-panel">
-        <nav aria-label={label}>
-          <NavTree aria-label={navigationLabel} selectedRoute={selectedRoute} items={items} />
-        </nav>
-      </SidebarPanel>
-    </MezzanineSidebar>
+    <nav aria-label={label}>
+      <NavTree aria-label={navigationLabel} selectedRoute={selectedRoute} items={items} />
+    </nav>
   )
 }
 
@@ -45,6 +41,16 @@ export function SidebarColumn({ children }: { children: ReactNode }) {
   )
 }
 
-export function Sidebar(props: DocsNavigationProps) {
-  return <SidebarColumn><DocsNavigation {...props} /></SidebarColumn>
+// The Sidebar page's example: the docs navigation in the library Sidebar, as the site used it before
+// AppShell. It goes when Sidebar is removed.
+export function Sidebar({ 'aria-label': label = 'Mezzanine sections', ...props }: DocsNavigationProps) {
+  return (
+    <SidebarColumn>
+      <MezzanineSidebar presentation="inline" isCollapsible={false}>
+        <SidebarPanel title={label} hideInlineHeader className="site-sidebar-panel">
+          <DocsNavigation aria-label={label} {...props} />
+        </SidebarPanel>
+      </MezzanineSidebar>
+    </SidebarColumn>
+  )
 }

@@ -36,11 +36,11 @@ for (const fontSize of [16, 32]) {
 
 // On wide screens, the Lab tree sits in the same sidebar column as the docs navigation, and the
 // saved theme carries between Docs and Lab.
-test('Lab shares the site sidebar layout and the saved theme with Docs', async ({ page }) => {
+test('Lab shares the docs frame and the saved theme with Docs', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 })
   await page.goto('/site/lab')
   await expect(page.getByRole('banner')).toHaveCount(1)
-  const sidebar = page.locator('.site-layout > .site-sidebar')
+  const sidebar = page.locator('.mz-panel[data-edge="start"]')
   await expect(sidebar.getByRole('treegrid', { name: 'Lab experiments' })).toBeVisible()
   await page.getByRole('radio', { name: 'Dark theme', exact: true }).click()
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')

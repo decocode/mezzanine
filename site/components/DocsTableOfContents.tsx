@@ -1,26 +1,24 @@
-import { useContext } from 'react'
-import { createPortal } from 'react-dom'
-import { Sidebar, SidebarPanel, TableOfContents, type TableOfContentsProps } from '@decocode/mezzanine'
+import { useCallback, useContext } from 'react'
+import { TableOfContents, type TableOfContentsProps } from '@decocode/mezzanine'
 import { DocsContentsContext } from './docsContentsContext'
 
-// The same section links appear inline after the page heading on narrower
-// screens and in the right column on wide screens. CSS shows one copy at a time.
+// The page's section links sit inline after its heading on narrower screens. The page also hands its
+// sections to the shell, which shows them in its end Panel when there's room; CSS then hides this copy.
 export function DocsTableOfContents(props: TableOfContentsProps) {
-  const host = useContext(DocsContentsContext)
-  if (!host || props.sections.length === 0) return null
+  const store = useContext(DocsContentsContext)
+  // Keyed by content, so a re-render with the same sections doesn't register again.
+  const sectionsKey = JSON.stringify(props.sections)
+  const register = useCallback((element: HTMLDivElement | null) => {
+    if (!element || !store) return
+    store.setSections(JSON.parse(sectionsKey))
+    return () => store.setSections(null)
+  }, [store, sectionsKey])
+
+  if (props.sections.length === 0) return null
 
   return (
-    <>
-      <div className="docs-contents-inline">
-        <TableOfContents {...props} heading="On this page" />
-      </div>
-      {createPortal(
-        <Sidebar isCollapsible={false} presentation="inline">
-          <SidebarPanel title="On this page" side="right" hideInlineHeader className="docs-contents-panel">
-            <TableOfContents {...props} heading="On this page" />
-          </SidebarPanel>
-        </Sidebar>, host,
-      )}
-    </>
+    <div className="docs-contents-inline" ref={register}>
+      <TableOfContents {...props} heading="On this page" />
+    </div>
   )
 }

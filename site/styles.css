@@ -1152,3 +1152,15 @@ a:focus-visible {
 .footer-example { inline-size: 100%; }
 .footer-example p { margin: 0; }
 .footer-example-links { display: flex; flex-wrap: wrap; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+
+/* Docs pages: the library AppShell frames the page, with the docs navigation in a start Panel and
+   the page's sections in an end Panel. The main content keeps enough room for reading, so the end
+   Panel only appears on wide screens; until then the sections sit inline after the heading. */
+.docs-app-shell { --app-shell-min-main-width: 28rem; }
+/* Custom properties inherit, so an AppShell shown as an example inside the docs keeps the library's own minimum. */
+.docs-app-shell .mz-app-shell { --app-shell-min-main-width: var(--ratio-pair-min-area-width); }
+.docs-app-shell:has(> .mz-panel[data-edge='end'][data-state='open']) .docs-contents-inline { display: none; }
+.docs-app-shell .site-content { grid-column: auto; grid-row: auto; }
+/* The header sits above the scrolling content here, so anchors only need a little breathing room. */
+.docs-app-shell .component-section :is(h2, h3, h4)[id],
+.docs-app-shell .table-of-contents-example :is(h3, h4)[id] { scroll-margin-top: var(--space-8); }

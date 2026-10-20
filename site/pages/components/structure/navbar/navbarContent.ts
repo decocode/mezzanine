@@ -83,7 +83,6 @@ export const navbarContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'Tab bar', href: '/tab-bar' },
     { label: 'Sidebar', href: '/sidebar' },
     { label: 'Footer', href: '/footer' },
     { label: 'Target size', href: '/interaction/target-size' },

@@ -836,6 +836,23 @@
   }
 }
 
+/* Emerging feature: a heading's divider appears only once the list under it has scrolled. */
+.lab-divider-box {
+  container-type: scroll-state;
+}
+
+@supports (container-type: scroll-state) {
+  .lab-divider-heading {
+    border-block-end-color: transparent;
+  }
+
+  @container scroll-state(scrollable: top) {
+    .lab-divider-heading {
+      border-block-end-color: var(--color-border);
+    }
+  }
+}
+
 /* Emerging feature: anchor positioning, with a static fallback. */
 .lab-anchor-stage {
   position: relative;

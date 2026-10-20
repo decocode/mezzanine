@@ -267,8 +267,6 @@ export type { PanelEdge } from './components/AppShell/panelStore'
 export { RatioPair } from './components/RatioPair/RatioPair'
 export type { RatioPairProps } from './components/RatioPair/RatioPair'
 
-export { TabBar } from './components/TabBar/TabBar'
-export type { TabBarProps, TabBarItem } from './components/TabBar/TabBar'
 
 export { Tooltip, TooltipTrigger } from './components/Tooltip/Tooltip'
 export type { TooltipProps, TooltipRenderProps, TooltipTriggerComponentProps } from './components/Tooltip/Tooltip'

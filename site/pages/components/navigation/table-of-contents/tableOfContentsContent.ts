@@ -52,6 +52,7 @@ export const tableOfContentsContent: DocsPageContent = {
           { name: 'sections', description: 'Required list of sections, each with an `id` matching a destination heading and a `label` for its link. Optional `children` contain sections with the same structure, rendered as a nested list. List order is preserved. An empty list renders nothing.' },
           { name: 'heading', description: 'Visible heading and navigation landmark name. Defaults to Contents.' },
           { name: 'headingLevel', description: 'Heading level: 2 by default, or 3 when nested within a page section.' },
+          { name: 'aria-label / aria-labelledby', description: 'Names the navigation from something already on screen, such as the Panel it sits in. Either one leaves out the visible heading, so the name isn’t shown twice.' },
           { name: 'className', description: 'Optional CSS class added alongside the component’s default class.' },
         ],
       },

@@ -71,7 +71,7 @@ test('Navbar exposes related pages and external references through On this page'
   await contents.getByRole('link', { name: 'Related pages', exact: true }).click()
   await expect(page).toHaveURL(/#related-pages$/)
   await expect(related).toBeVisible()
-  await expect(related.getByRole('link')).toHaveText(['Tab bar', 'Sidebar', 'Footer', 'Target size'])
+  await expect(related.getByRole('link')).toHaveText(['Sidebar', 'Footer', 'Target size'])
   for (const link of await related.getByRole('link').all()) {
     const href = await link.getAttribute('href')
     expect(sitePages.some(item => item.path === href)).toBe(true)
@@ -88,15 +88,15 @@ test('Navbar exposes related pages and external references through On this page'
     await expect(link).not.toHaveText(/opens in a new tab/)
     await expect(link.locator('svg')).toHaveAttribute('aria-hidden', 'true')
   }
-  const tabBar = related.getByRole('link', { name: 'Tab bar', exact: true })
-  await tabBar.focus()
+  const sidebar = related.getByRole('link', { name: 'Sidebar', exact: true })
+  await sidebar.focus()
   await page.keyboard.press('Tab')
-  await expect(related.getByRole('link', { name: 'Sidebar', exact: true })).toBeFocused()
+  await expect(related.getByRole('link', { name: 'Footer', exact: true })).toBeFocused()
   await page.keyboard.press('Shift+Tab')
-  expect(await tabBar.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
+  expect(await sidebar.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
   await page.keyboard.press('Enter')
-  await expect(page).toHaveURL(/\/tab-bar$/)
-  await expect(page.getByRole('main').getByRole('heading', { level: 1 })).toHaveText('Tab bar')
+  await expect(page).toHaveURL(/\/sidebar$/)
+  await expect(page.getByRole('main').getByRole('heading', { level: 1 })).toHaveText('Sidebar')
 })
 
 test('Navbar groups technical sections and preserves their anchors', async ({ page }) => {
@@ -168,7 +168,7 @@ for (const path of ['/navbar', '/color', '/motion', '/typography/text-styles', '
     const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
     await expect(contents).toBeVisible()
     await expect(page.getByRole('main').getByRole('navigation', { name: 'On this page', exact: true })).toHaveCount(0)
-    const sidebar = page.locator('.site-contents-sidebar')
+    const sidebar = page.locator('.mz-panel[data-edge="end"]')
     const main = await page.getByRole('main').boundingBox()
     expect((await sidebar.boundingBox())!.x).toBeGreaterThanOrEqual(main!.x + main!.width)
     await expect(contents.getByRole('link').first()).toBeVisible()
@@ -201,7 +201,7 @@ for (const fontSize of [16, 32]) {
 }
 
 // Links into Technical details follow the motion policy: smooth by default,
-// immediate with reduced motion or in Wireframe.
+// immediate with reduced motion or in Wireframe. The AppShell's content area is what scrolls.
 for (const mode of ['default', 'reduced motion', 'wireframe'] as const) {
   test(`On this page links into Technical details scroll with the ${mode} policy`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
@@ -211,11 +211,11 @@ for (const mode of ['default', 'reduced motion', 'wireframe'] as const) {
     const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
     await contents.getByRole('link', { name: 'Anatomy', exact: true }).click()
     // Two frames: one for the panel to open, one for the scroll to begin.
-    const early = await page.evaluate(() => new Promise<number>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve(scrollY)))))
+    const early = await page.evaluate(() => new Promise<number>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve(document.querySelector('.mz-app-shell-content')!.scrollTop)))))
     await expect(page.getByRole('heading', { name: 'Anatomy', exact: true })).toBeInViewport()
-    await expect.poll(() => page.evaluate(() => scrollY)).toBeGreaterThan(0)
+    await expect.poll(() => page.evaluate(() => document.querySelector('.mz-app-shell-content')!.scrollTop)).toBeGreaterThan(0)
     await page.waitForTimeout(1500)
-    const settled = await page.evaluate(() => scrollY)
+    const settled = await page.evaluate(() => document.querySelector('.mz-app-shell-content')!.scrollTop)
     if (mode === 'default') expect(early).toBeLessThan(settled)
     else expect(early).toBe(settled)
   })

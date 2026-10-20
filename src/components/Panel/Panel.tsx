@@ -18,6 +18,10 @@ export interface PanelProps {
   minimized?: ReactNode
   // The close button's label, shown in its tooltip. Defaults to "Close" and the title.
   closeLabel?: string
+  // Whether the Panel can be closed, with its own close button and a PanelTrigger elsewhere. When
+  // false it stays open, has no close button, and is hidden when there's no room beside the content,
+  // so the app offers the same content another way, such as in a Navbar menu.
+  isCollapsible?: boolean
   isOpen?: boolean
   defaultOpen?: boolean
   onOpenChange?: (isOpen: boolean) => void
@@ -28,7 +32,7 @@ export interface PanelProps {
 // An area at the start, end or bottom of an AppShell that shares the space with the main content.
 // When there's no room beside the content, a side Panel opens as a drawer instead.
 export function Panel({
-  id, edge, title, headingLevel = 2, minimized, closeLabel = `Close ${title}`,
+  id, edge, title, headingLevel = 2, minimized, closeLabel = `Close ${title}`, isCollapsible = true,
   isOpen: controlledOpen, defaultOpen = false, onOpenChange, children, className,
 }: PanelProps) {
   const { store, presentation } = useAppShell('Panel')
@@ -36,14 +40,14 @@ export function Panel({
   const elementId = useId()
   const headingId = useId()
   const isDrawer = presentation(edge) === 'drawer'
-  const isOpen = (controlledOpen ?? store.isOpen(id)) && (!isDrawer || store.isShownOpen(id, true))
+  const isOpen = (isCollapsible ? controlledOpen ?? store.isOpen(id) : true) && (!isDrawer || store.isShownOpen(id, true))
   const classes = ['mz-panel', className].filter(Boolean).join(' ')
 
   // Register from a ref callback, so triggers can find this Panel without an effect.
   const register = useCallback((element: HTMLElement | null) => {
     if (!element) return
-    return store.register(id, { edge, elementId, isOpen: controlledOpen, defaultOpen, hasMinimized: minimized != null, onOpenChange })
-  }, [store, id, edge, elementId, controlledOpen, defaultOpen, minimized, onOpenChange])
+    return store.register(id, { edge, elementId, isOpen: isCollapsible ? controlledOpen : true, defaultOpen, hasMinimized: minimized != null, onOpenChange })
+  }, [store, id, edge, elementId, isCollapsible, controlledOpen, defaultOpen, minimized, onOpenChange])
 
   function close() {
     // Closing from inside a shared-space Panel hides the focused button, so return focus to the trigger.
@@ -54,7 +58,7 @@ export function Panel({
   const contents = <>
     <div className="mz-panel-header">
       <Heading id={headingId} level={headingLevel} slot={isDrawer ? 'title' : undefined}>{title}</Heading>
-      <Button iconLeading={<CloseIcon />} labelPlacement="tooltip" size="sm" variant="tertiary" onPress={close}>{closeLabel}</Button>
+      {isCollapsible && <Button iconLeading={<CloseIcon />} labelPlacement="tooltip" size="sm" variant="tertiary" onPress={close}>{closeLabel}</Button>}
     </div>
     <div className="mz-panel-content">{children}</div>
   </>
@@ -73,7 +77,7 @@ export function Panel({
     >
       {isShown ? contents : minimized != null && <div className="mz-panel-minimized">{minimized}</div>}
     </aside>
-    {isDrawer && <ModalOverlay isOpen={isOpen} onOpenChange={(open) => store.setOpen(id, open, true)} isDismissable className="mz-panel-overlay" data-edge={edge}>
+    {isDrawer && isCollapsible && <ModalOverlay isOpen={isOpen} onOpenChange={(open) => store.setOpen(id, open, true)} isDismissable className="mz-panel-overlay" data-edge={edge}>
       <Modal className={classes} data-edge={edge}>
         <Dialog id={elementId} className="mz-panel-dialog">{contents}</Dialog>
       </Modal>

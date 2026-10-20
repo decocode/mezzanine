@@ -67,7 +67,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   await expect(page.getByText('When boxes decide whether to stack up or line up.', { exact: true })).toBeVisible()
 
   // On a stage page, the tree lists every stage and page, and the pages still to be sorted.
-  const tree = page.locator('.site-layout > .site-sidebar').getByRole('treegrid', { name: 'Lab experiments' })
+  const tree = page.locator('.mz-panel[data-edge="start"]').getByRole('treegrid', { name: 'Lab experiments' })
   for (const layoutPage of [...stageOverviewPages, ...stagePagesByStage('boxBasics').map(item => ({ path: item.href, title: item.title }))]) {
     await expect(tree.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
   }

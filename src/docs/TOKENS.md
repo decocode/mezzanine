@@ -314,7 +314,7 @@ target at once. Every step is above the WCAG 2.2 AA minimum. For an app that nee
 | `--target-size-min` | 1.5rem (24px) | The WCAG 2.2 AA minimum; not used by components |
 | `--target-size-xs` | 2rem (32px) | Button and ToggleButton `size="xs"`, NavTree rows and expand buttons, Table of contents links, ListBox options, Breadcrumbs, links in a Footer list |
 | `--target-size-sm` | 2.25rem (36px) | Button and ToggleButton `size="sm"`, Checkbox, Radio, SearchField's clear button |
-| `--target-size-md` | 2.75rem (44px) | Button and ToggleButton `size="md"` (the default), text fields, Tabs, Disclosure triggers, Navbar links and brand, TabBar items, sortable Table headers and selectable Table rows |
+| `--target-size-md` | 2.75rem (44px) | Button and ToggleButton `size="md"` (the default), text fields, Tabs, Disclosure triggers, Navbar links and brand, sortable Table headers and selectable Table rows |
 | `--target-size-lg` | 3rem (48px) | Button and ToggleButton `size="lg"` |
 | `--target-size-xl` | 3.5rem (56px) | Button and ToggleButton `size="xl"` |
 
@@ -330,7 +330,7 @@ For icon buttons, give the label as children and choose `labelPlacement`: `toolt
 Migration: `--toggle-button-min-height`, `--toggle-button-padding-block`,
 `--toggle-button-padding-inline` and `--navigation-tree-chevron-size` were removed.
 Replace local size overrides with size props; theme-wide changes belong in the
-shared button size tokens. Navbar, navigation-tree and TabBar action buttons now
+shared button size tokens. Navbar and navigation-tree action buttons now
 use those sizes instead of their own dimensions.
 
 ## Shared motion

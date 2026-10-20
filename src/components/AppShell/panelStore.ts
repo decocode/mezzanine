@@ -22,6 +22,9 @@ export class PanelStore {
   private openedAsDrawer = new Set<string>()
   private listeners = new Set<() => void>()
   private version = 0
+  // Whether someone has opened or closed a Panel yet. Panels that are open from the start appear in
+  // place rather than sliding open on every page load.
+  hasChanged = false
 
   subscribe = (listener: () => void) => {
     this.listeners.add(listener)
@@ -67,6 +70,7 @@ export class PanelStore {
     if (isOpen && isDrawer) this.openedAsDrawer.add(id)
     else this.openedAsDrawer.delete(id)
     if (entry?.isOpen === undefined) this.uncontrolled.set(id, isOpen)
+    this.hasChanged = true
     this.notify()
     entry?.onOpenChange?.(isOpen)
   }

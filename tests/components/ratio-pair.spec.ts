@@ -17,7 +17,8 @@ async function chooseFraction(page: Page, label: string) {
 // Checks that the fractions share the row in proportion, and that auto start keeps the first area
 // at the width its content needs while the second fills the rest.
 test('RatioPair shares the row by fraction or by auto', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 })
+  // Wide enough that, beside both Panels, each area stays above its minimum width.
+  await page.setViewportSize({ width: 1800, height: 900 })
   await page.goto('/site/lab/layout/side-by-side/ratio-pair')
   await chooseFraction(page, '1/3')
   let { first, second } = await areas(page)

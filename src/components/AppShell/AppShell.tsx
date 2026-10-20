@@ -84,6 +84,7 @@ export function AppShell({ children, bottomPanelSpan = 'main', className }: AppS
         ref={setElement}
         className={['mz-app-shell', className].filter(Boolean).join(' ')}
         data-bottom-panel-span={bottomPanelSpan}
+        data-animated={store.hasChanged || undefined}
         data-start={trackState(start, 'start')}
         data-end={trackState(end, 'end')}
         data-bottom={trackState(bottom, 'bottom')}

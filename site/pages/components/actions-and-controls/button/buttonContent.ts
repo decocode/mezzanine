@@ -177,7 +177,7 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
           { name: '--button-destructive-border', description: 'Destructive `Button` border.' },
           { name: '--target-size-xs', description: 'Extra-small `Button` minimum height, shared with other controls.' },
           { name: '--target-size-sm', description: 'Small `Button` minimum height, shared with other controls.' },
-          { name: '--target-size-md', description: 'Medium `Button` minimum height, shared with text fields, Tabs, Disclosure and TabBar.' },
+          { name: '--target-size-md', description: 'Medium `Button` minimum height, shared with text fields, Tabs and Disclosure.' },
           { name: '--target-size-lg', description: 'Large `Button` minimum height, shared with other controls.' },
           { name: '--target-size-xl', description: 'Extra-large `Button` minimum height, shared with other controls.' },
           { name: '--button-xs-padding-block', description: 'Extra-small `Button` vertical padding.' },

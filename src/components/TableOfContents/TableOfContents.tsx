@@ -13,6 +13,10 @@ export interface TableOfContentsProps {
   className?: string
   heading?: string
   headingLevel?: 2 | 3
+  // Name the navigation from something already on screen, such as the Panel it sits in, instead of
+  // its own heading. Either one leaves out the visible heading.
+  'aria-label'?: string
+  'aria-labelledby'?: string
 }
 
 function TableOfContentsList({ sections }: { sections: readonly TableOfContentsSection[] }) {
@@ -34,17 +38,21 @@ export function TableOfContents({
   className,
   heading = 'Contents',
   headingLevel = 2,
+  'aria-label': label,
+  'aria-labelledby': labelledBy,
 }: TableOfContentsProps) {
   const headingId = useId()
+  const isNamedElsewhere = label != null || labelledBy != null
 
   if (sections.length === 0) return null
 
   return (
     <nav
-      aria-labelledby={headingId}
+      aria-label={label}
+      aria-labelledby={isNamedElsewhere ? labelledBy : headingId}
       className={['mz-table-of-contents', className].filter(Boolean).join(' ')}
     >
-      <Heading className="mz-text-heading-sm" id={headingId} level={headingLevel}>{heading}</Heading>
+      {!isNamedElsewhere && <Heading className="mz-text-heading-sm" id={headingId} level={headingLevel}>{heading}</Heading>}
       <TableOfContentsList sections={sections} />
     </nav>
   )

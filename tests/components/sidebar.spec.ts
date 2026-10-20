@@ -185,29 +185,6 @@ test('non-collapsible inline panels stay expanded while mobile drawers remain di
   await expect(trigger).toBeFocused()
 })
 
-// Checks that the documentation site's own sidebar and the Sidebar page example use the same
-// library component, show the same links and mark the current page.
-test('AppShell and documentation example share permanent library panels and navigation', async ({ page }) => {
-  await page.setViewportSize({ width: 1600, height: 1000 })
-  await page.goto('/sidebar')
-  const shell = page.locator('.site-layout > .site-sidebar')
-  const example = page.locator('.sidebar-documentation-example')
-  const shellPanel = shell.locator('.desktop-sidebar .mz-sidebar-panel')
-  const examplePanel = example.locator('.desktop-sidebar .mz-sidebar-panel')
-  await expect(shellPanel).toBeVisible()
-  await expect(examplePanel).toBeVisible()
-  for (const panel of [shellPanel, examplePanel]) {
-    await expect(panel.locator('.mz-sidebar-header')).toHaveCount(0)
-    await expect(panel).toHaveAttribute('data-expanded')
-    await expect(panel.getByRole('link', { name: 'Sidebar', exact: true })).toHaveAttribute('aria-current', 'page')
-  }
-  expect(await shellPanel.getByRole('link').evaluateAll(links => links.map(link => link.getAttribute('href'))))
-    .toEqual(await examplePanel.getByRole('link').evaluateAll(links => links.map(link => link.getAttribute('href'))))
-  await examplePanel.getByRole('link', { name: 'Tab bar', exact: true }).click()
-  await expect(page).toHaveURL(/\/tab-bar$/)
-  await expect(page.getByRole('heading', { name: 'Tab bar', level: 1, exact: true })).toBeVisible()
-})
-
 // Checks that at phone width the Sidebar page's documentation example stays in the page instead of
 // becoming a drawer, at normal and double text size.
 for (const fontSize of textSizes) {
@@ -217,7 +194,7 @@ for (const fontSize of textSizes) {
     await page.goto('/sidebar')
     await setTextSize(page, fontSize)
     await expect(page.getByRole('button', { name: 'Browse sections', exact: true })).toHaveCount(0)
-    await expect(page.locator('.site-layout > .site-sidebar').getByRole('treegrid')).toHaveCount(0)
+    await expect(page.locator('.mz-panel[data-edge="start"]').getByRole('treegrid')).toHaveCount(0)
     const example = page.locator('.sidebar-documentation-example')
     await expect(example.getByRole('treegrid')).toBeVisible()
     await expect(page.getByRole('dialog')).toHaveCount(0)
