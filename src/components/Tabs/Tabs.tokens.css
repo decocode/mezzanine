@@ -15,7 +15,7 @@
   --tab-background-hovered: var(--color-neutral-muted-hovered);
   --tab-background-pressed: var(--color-neutral-muted-pressed);
   --tab-indicator: var(--color-link);
-  --tab-indicator-width: 0.1875rem;
+  --tab-indicator-width: var(--indicator-width);
   --tab-panel-padding: var(--space-3);
   --tab-panel-preferred-width: 12rem;
 }

@@ -280,7 +280,7 @@ colours point at the colour roles; they and the bar width live in `src/tokens/in
 | `--nav-item-foreground`, `--nav-item-foreground-current` | Text colour, and the current page's |
 | `--nav-item-background`, `-hovered`, `-pressed`, `-current` | Row background in each state |
 | `--nav-item-current-indicator` | Current page bar colour |
-| `--nav-item-current-indicator-width` | Current page bar width |
+| `--nav-item-current-indicator-width` | Current page bar width, pointing at `--indicator-width`, which Tabs' selected bar shares |
 
 ## Current shape inventory
 

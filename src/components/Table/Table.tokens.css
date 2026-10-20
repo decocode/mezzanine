@@ -7,7 +7,7 @@
   --table-cell-padding-inline: var(--space-4);
   --table-focus-ring-width: var(--focus-ring-width);
   --table-focus-ring-offset: var(--focus-ring-offset-inset);
-  --table-disabled-opacity: 0.5;
+  --table-disabled-opacity: var(--opacity-disabled);
 
   /* Table colours: pointers to the colour roles, the same in every theme. */
   --table-row-background-selected: var(--color-accent-emphasis);

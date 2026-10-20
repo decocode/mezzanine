@@ -7,6 +7,7 @@ export const interactionSharedTokens: { token: string; description: string }[] =
   { token: '--color-link-hovered', description: 'Link colour while hovered' },
   { token: '--color-link-pressed', description: 'Link colour while pressed' },
   { token: '--opacity-disabled', description: 'Opacity of disabled controls' },
+  { token: '--indicator-width', description: 'Thickness of the bar that marks the current page or selected tab' },
 ]
 
 // Shown between the two token tables, so it is part of the page's Tokens part rather than the section intro.

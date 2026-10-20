@@ -20,9 +20,12 @@
   --focus-ring-offset: 0.1875rem;
   --focus-ring-offset-inset: calc(var(--focus-ring-width) * -1);
 
-  /* Nav items: the shared row style of NavTree, TopBar links and TableOfContents links. Colours are
-     set per theme as --nav-item-*; the current page's indicator bar has this width. */
-  --nav-item-current-indicator-width: 0.1875rem;
+  /* Indicator: the thickness of the bar that marks the current page or the selected tab. */
+  --indicator-width: 0.1875rem;
+
+  /* Nav items: the shared row style of NavTree, TopBar links and TableOfContents links. The current
+     page's indicator bar has the shared indicator width. */
+  --nav-item-current-indicator-width: var(--indicator-width);
 
   /* Nav item colours: pointers to the colour roles, the same in every theme. */
   --nav-item-background: transparent;
