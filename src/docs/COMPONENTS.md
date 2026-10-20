@@ -214,6 +214,22 @@ Panel opens as a modal drawer instead, end Panels first. A drawer only opens
 when someone opens it. `bottomPanelSpan="full"` runs a bottom Panel under the
 side Panels too.
 
+## SwitchField and SwitchButton
+
+Put the visible label inside `SwitchButton`, and the `SwitchButton` inside
+`SwitchField`. The SwitchButton draws the track and handle itself. Set
+`defaultSelected`, or `isSelected` with `onChange`, on the SwitchField. A
+`Text slot="description"` and a `FieldError` can follow the SwitchButton.
+
+```tsx
+<SwitchField defaultSelected>
+  <SwitchButton>Switch A</SwitchButton>
+</SwitchField>
+```
+
+React Aria 1.22 deprecated its one-part `Switch`, so Mezzanine doesn't export
+it. The APIs follow [React Aria Switch](https://react-aria.adobe.com/Switch).
+
 ## Footer
 
 `Footer` is a page's closing strip: put small print and links inside, and it
@@ -227,8 +243,7 @@ These pass React Aria's components straight through, with no Mezzanine
 styles yet: `CheckboxGroup`, `ComboBox` and `ComboBoxValue`, `DropZone`, `FileTrigger`, `Form`, the `GridList`
 family, `Group`, the `Menu` family, `Meter`, `NumberField`, `Popover`, `PreviewTrigger`,
 `ProgressBar`, `Select` and `SelectValue`, `Separator`, the `Sheet` family,
-the `Slider` family,
-the `Switch` family, the
+the `Slider` family, the
 `TagGroup` family, the `TokenField` family, `Toolbar`, the `Tree` family, and
 `Virtualizer` with `ListLayout`. Use them as the
 [React Aria documentation](https://react-aria.adobe.com/) describes, and style

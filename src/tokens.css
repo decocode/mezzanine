@@ -23,6 +23,7 @@
 @import './components/Card/Card.tokens.css';
 @import './components/CodeBlock/CodeBlock.tokens.css';
 @import './components/Checkbox/Checkbox.tokens.css';
+@import './components/Switch/Switch.tokens.css';
 @import './components/Dialog/Dialog.tokens.css';
 @import './components/Panel/Panel.tokens.css';
 @import './components/Disclosure/Disclosure.tokens.css';

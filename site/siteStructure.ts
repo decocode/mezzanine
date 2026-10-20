@@ -115,7 +115,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'button', label: 'Button', path: '/button', status: 'implemented' },
           { id: 'toggle-button', label: 'Toggle button', path: '/toggle-button', status: 'implemented' },
           { id: 'slider', label: 'Slider', path: '/slider', status: 'empty' },
-          { id: 'switch', label: 'Switch', path: '/switch', status: 'empty' },
+          { id: 'switch', label: 'Switch', path: '/switch', status: 'implemented' },
           { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'implemented' },
           { id: 'radio-group', label: 'Radio group', path: '/radio-group', status: 'implemented' },
           { id: 'drop-zone', label: 'Drop zone', path: '/drop-zone', status: 'empty' },

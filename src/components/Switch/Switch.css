@@ -1,0 +1,145 @@
+.react-aria-SwitchField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.react-aria-SwitchButton {
+  display: inline-flex;
+  gap: var(--switch-content-gap);
+  align-items: center;
+  /* The whole row is the target, so it is at least the shared target size tall. */
+  min-height: var(--target-size-sm);
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+  cursor: pointer;
+}
+
+.mz-switch-track {
+  display: flex;
+  box-sizing: border-box;
+  width: var(--switch-track-width);
+  height: var(--switch-track-height);
+  flex: none;
+  align-items: center;
+  /* Centres the handle with equal space on every side. */
+  padding-inline: calc((var(--switch-track-height) - var(--switch-handle-size)) / 2 - var(--switch-border-width));
+  border: var(--switch-border-width) solid var(--switch-track-border);
+  border-radius: var(--switch-border-radius);
+  background: var(--switch-track-background);
+}
+
+.mz-switch-handle {
+  width: var(--switch-handle-size);
+  height: var(--switch-handle-size);
+  border-radius: var(--switch-border-radius);
+  background: var(--switch-handle-background);
+  /* A logical margin slides the handle towards the end in either reading direction. */
+  transition: margin-inline-start calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
+}
+
+.react-aria-SwitchButton[data-hovered] .mz-switch-track {
+  background: var(--switch-track-background-hovered);
+}
+
+.react-aria-SwitchButton[data-selected] .mz-switch-track {
+  border-color: var(--switch-track-background-selected);
+  background: var(--switch-track-background-selected);
+}
+
+.react-aria-SwitchButton[data-selected][data-hovered] .mz-switch-track {
+  border-color: var(--switch-track-background-selected-hovered);
+  background: var(--switch-track-background-selected-hovered);
+}
+
+.react-aria-SwitchButton[data-selected] .mz-switch-handle {
+  margin-inline-start: calc(var(--switch-track-width) - var(--switch-track-height));
+  background: var(--switch-handle-background-selected);
+}
+
+.react-aria-SwitchButton[data-invalid] .mz-switch-track {
+  border-color: var(--switch-track-border-invalid);
+}
+
+.react-aria-SwitchButton[data-focus-visible] .mz-switch-track {
+  outline: var(--switch-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--switch-focus-ring-offset);
+}
+
+.react-aria-SwitchButton[data-readonly] {
+  cursor: default;
+}
+
+.react-aria-SwitchField[data-disabled] {
+  opacity: var(--opacity-disabled);
+}
+
+.react-aria-SwitchField[data-disabled] .react-aria-SwitchButton {
+  cursor: default;
+}
+
+.react-aria-SwitchField > [slot='description'],
+.react-aria-SwitchField > .react-aria-FieldError {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-SwitchField > [slot='description'] {
+  color: var(--color-text-muted);
+}
+
+.react-aria-SwitchField > .react-aria-FieldError {
+  color: var(--switch-error-content);
+}
+
+@media (forced-colors: active) {
+  /* System colours replace the theme, so the selected track stays distinct from the unselected one. */
+  .mz-switch-track {
+    forced-color-adjust: none;
+    border-color: ButtonText;
+    background: Canvas;
+  }
+
+  .mz-switch-handle {
+    background: ButtonText;
+  }
+
+  .react-aria-SwitchButton[data-selected] .mz-switch-track,
+  .react-aria-SwitchButton[data-selected][data-hovered] .mz-switch-track {
+    border-color: Highlight;
+    background: Highlight;
+  }
+
+  .react-aria-SwitchButton[data-selected] .mz-switch-handle {
+    background: HighlightText;
+  }
+
+  .react-aria-SwitchField[data-disabled] {
+    opacity: 1;
+    color: GrayText;
+  }
+
+  .react-aria-SwitchButton[data-disabled] .mz-switch-track,
+  .react-aria-SwitchButton[data-disabled][data-selected] .mz-switch-track {
+    border-color: GrayText;
+    background: Canvas;
+  }
+
+  .react-aria-SwitchButton[data-disabled] .mz-switch-handle,
+  .react-aria-SwitchButton[data-disabled][data-selected] .mz-switch-handle {
+    background: GrayText;
+  }
+
+  .react-aria-SwitchField > .react-aria-FieldError {
+    color: Mark;
+  }
+}

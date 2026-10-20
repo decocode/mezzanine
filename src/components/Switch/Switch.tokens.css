@@ -1,0 +1,13 @@
+/* Component tokens shared by every theme. Theme-specific colours for this component are set in src/themes/. */
+
+:where(:root) {
+  /* Switch: component-specific structure, shared by every theme. */
+  --switch-track-width: calc(var(--switch-track-height) * 2);
+  --switch-track-height: var(--icon-size-sm);
+  --switch-handle-size: var(--icon-size-xs);
+  --switch-content-gap: var(--space-2);
+  --switch-border-width: var(--border-width-baseline);
+  --switch-border-radius: var(--radius-full);
+  --switch-focus-ring-width: var(--focus-ring-width);
+  --switch-focus-ring-offset: var(--focus-ring-offset);
+}

@@ -62,6 +62,16 @@
   --checkbox-border: var(--color-neutral-700);
   --checkbox-border-invalid: var(--color-danger-700);
 
+  --switch-track-background: transparent;
+  --switch-track-background-hovered: var(--color-signature-100);
+  --switch-track-background-selected: var(--color-signature-700);
+  --switch-track-background-selected-hovered: var(--color-signature-800);
+  --switch-track-border: var(--color-neutral-700);
+  --switch-track-border-invalid: var(--color-danger-700);
+  --switch-handle-background: var(--color-neutral-700);
+  --switch-handle-background-selected: var(--color-neutral-50);
+  --switch-error-content: var(--color-danger-700);
+
   --radio-background: transparent;
   --radio-background-hovered: var(--color-signature-100);
   --radio-selection: var(--color-signature-700);

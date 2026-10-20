@@ -347,8 +347,8 @@ export type { VirtualizerProps } from './components/Virtualizer/Virtualizer'
 export { Group } from './components/Group/Group'
 export type { GroupProps, GroupRenderProps } from './components/Group/Group'
 
-export { Switch, SwitchButton, SwitchField } from './components/Switch/Switch'
-export type { SwitchButtonProps, SwitchButtonRenderProps, SwitchFieldProps, SwitchFieldRenderProps, SwitchProps, SwitchRenderProps } from './components/Switch/Switch'
+export { SwitchButton, SwitchField } from './components/Switch/Switch'
+export type { SwitchButtonProps, SwitchButtonRenderProps, SwitchFieldProps, SwitchFieldRenderProps } from './components/Switch/Switch'
 
 export { CheckboxGroup } from './components/CheckboxGroup/CheckboxGroup'
 export type { CheckboxGroupProps, CheckboxGroupRenderProps } from './components/CheckboxGroup/CheckboxGroup'
