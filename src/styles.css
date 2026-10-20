@@ -6,6 +6,7 @@
 */
 
 @import './styles/typography.css';
+@import './styles/layout.css';
 @import './components/Badge/Badge.css';
 @import './components/Breadcrumbs/Breadcrumbs.css';
 @import './components/Button/Button.css';
@@ -28,7 +29,6 @@
 @import './components/SearchField/SearchField.css';
 @import './components/Tooltip/Tooltip.css';
 
-@import './components/RatioPair/RatioPair.css';
 @import './components/AppShell/AppShell.css';
 @import './components/Panel/Panel.css';
 @import './components/Footer/Footer.css';

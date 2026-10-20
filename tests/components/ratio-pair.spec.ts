@@ -1,8 +1,8 @@
 import { expect, test, type Page } from '@playwright/test'
 import { expectNoPageOverflow } from '../display'
 
-// RatioPair has no docs page yet, so these checks use the Lab's Ratio pair page, which renders the library
-// component inside a frame whose width can be changed.
+// The mz-ratio-pair class has no docs page yet, so these checks use the Lab's Ratio pair page, which uses the
+// library class inside a frame whose width can be changed.
 
 async function areas(page: Page) {
   const pair = page.locator('.mz-ratio-pair')

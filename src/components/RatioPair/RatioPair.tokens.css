@@ -1,7 +1,0 @@
-/* Component tokens shared by every theme. */
-
-:where(:root) {
-  /* RatioPair: two areas side by side that stack when they can't both have their minimum width. */
-  --ratio-pair-gap: var(--space-4);
-  --ratio-pair-min-area-width: 15rem;
-}

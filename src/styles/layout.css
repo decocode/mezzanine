@@ -1,9 +1,14 @@
-/* Flexbox wraps the second area underneath when the areas can't both have their minimum width,
-   so RatioPair follows its container without a media or container query. */
+/* Layout classes: the shared layout patterns apps put on their own elements. Their measurements come
+   from layout.tokens.css and the spacing scale. */
+
+/* Ratio pair: two areas side by side that share the row in a set ratio, chosen with data-fraction,
+   and stack when they can't both have their minimum width. Flexbox does the wrapping, so it follows
+   its container without a media or container query. To change one pair's gap or minimum, set
+   --ratio-pair-gap or --ratio-pair-min-area-width on it. */
 .mz-ratio-pair {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--_ratio-pair-gap, var(--ratio-pair-gap));
+  gap: var(--ratio-pair-gap);
   min-inline-size: 0;
 }
 
@@ -12,7 +17,7 @@
 .mz-ratio-pair[data-fraction] > * {
   flex-basis: 0;
   flex-grow: 1;
-  min-inline-size: min(100%, var(--_ratio-pair-min-area-width, var(--ratio-pair-min-area-width)));
+  min-inline-size: min(100%, var(--ratio-pair-min-area-width));
 }
 
 .mz-ratio-pair[data-fraction='1/4'] > :last-child { flex-grow: 3; }

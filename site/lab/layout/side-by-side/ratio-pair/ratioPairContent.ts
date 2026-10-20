@@ -46,14 +46,14 @@ export const ratioPairCssNotes: Record<string, CssNote> = {
     code: `.mz-ratio-pair {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--_ratio-pair-gap, var(--ratio-pair-gap));
+  gap: var(--ratio-pair-gap);
   min-inline-size: 0;
 }
 
 .mz-ratio-pair[data-fraction] > * {
   flex-basis: 0;
   flex-grow: 1;
-  min-inline-size: min(100%, var(--_ratio-pair-min-area-width, var(--ratio-pair-min-area-width)));
+  min-inline-size: min(100%, var(--ratio-pair-min-area-width));
 }
 
 .mz-ratio-pair[data-fraction='1/4'] > :last-child { flex-grow: 3; }

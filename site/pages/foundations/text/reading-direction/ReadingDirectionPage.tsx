@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card, Checkbox, CodeBlock, RatioPair } from '@decocode/mezzanine'
+import { Card, Checkbox, CodeBlock } from '@decocode/mezzanine'
 import { ExampleZone } from '../../../../components/ExampleZone'
 import { RichText } from '../../../../components/RichText'
 import {
@@ -17,7 +17,7 @@ export default function ReadingDirectionPage() {
         startAndEnd: (<>
           <ExampleZone>
             <Checkbox isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</Checkbox>
-            <RatioPair dir={isRightToLeft ? 'rtl' : 'ltr'} className="text-direction-example">
+            <div dir={isRightToLeft ? 'rtl' : 'ltr'} className="mz-ratio-pair text-direction-example" data-fraction="1/2">
               <div>
                 <p className="mz-text-label-md">{startAndEndExample.physicalLabel}</p>
                 <p className="text-direction-physical mz-text-body-md"><RichText text={startAndEndExample.physicalText} /></p>
@@ -26,7 +26,7 @@ export default function ReadingDirectionPage() {
                 <p className="mz-text-label-md">{startAndEndExample.logicalLabel}</p>
                 <p className="text-direction-logical mz-text-body-md"><RichText text={startAndEndExample.logicalText} /></p>
               </div>
-            </RatioPair>
+            </div>
           </ExampleZone>
           <CodeBlock className="docs-code-block">{startAndEndCode}</CodeBlock>
         </>),

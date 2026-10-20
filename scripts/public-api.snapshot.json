@@ -772,14 +772,6 @@
     "kind": "type"
   },
   {
-    "name": "RatioPair",
-    "kind": "value"
-  },
-  {
-    "name": "RatioPairProps",
-    "kind": "type"
-  },
-  {
     "name": "RedoIcon",
     "kind": "value"
   },

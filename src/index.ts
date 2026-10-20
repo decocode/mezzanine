@@ -264,8 +264,6 @@ export type { FooterProps } from './components/Footer/Footer'
 export { Panel, PanelTrigger } from './components/Panel/Panel'
 export type { PanelProps, PanelTriggerProps } from './components/Panel/Panel'
 export type { PanelEdge } from './components/AppShell/panelStore'
-export { RatioPair } from './components/RatioPair/RatioPair'
-export type { RatioPairProps } from './components/RatioPair/RatioPair'
 
 
 export { Tooltip, TooltipTrigger } from './components/Tooltip/Tooltip'
