@@ -25,14 +25,9 @@ import { gridCssNotes } from './layout/grids-and-columns/grid/gridContent'
 import { subgridCssNotes } from './layout/grids-and-columns/subgrid/subgridContent'
 import { containerQueriesCssNotes } from './layout/container/container-queries/containerQueriesContent'
 import { fluidSizingCssNotes } from './layout/container/fluid-sizing/fluidSizingContent'
-import { positioningCssNotes } from './layers/positioning/positioningContent'
-import { orderingLayersCssNotes } from './layers/ordering-layers/orderingLayersContent'
-import { bundlesOfLayersCssNotes } from './layers/bundles-of-layers/bundlesOfLayersContent'
-import { scrollPaddingCssNotes } from './layers/scroll-padding/scrollPaddingContent'
 import { mediaQueriesCssNotes } from './browser-and-device/media-queries/mediaQueriesContent'
 import { supportsCssNotes } from './browser-and-device/supports/supportsContent'
 import { safeAreasCssNotes } from './browser-and-device/safe-areas/safeAreasContent'
-import { touchTargetsCssNotes } from './browser-and-device/touch-targets/touchTargetsContent'
 import { masonryCssNotes } from './emerging-features/masonry/masonryContent'
 import { scrollStateQueriesCssNotes } from './emerging-features/scroll-state-queries/scrollStateQueriesContent'
 import { anchorPositioningCssNotes } from './emerging-features/anchor-positioning/anchorPositioningContent'
@@ -66,14 +61,9 @@ export const cssNotes: Record<string, CssNote> = {
   ...subgridCssNotes,
   ...containerQueriesCssNotes,
   ...fluidSizingCssNotes,
-  ...positioningCssNotes,
-  ...orderingLayersCssNotes,
-  ...bundlesOfLayersCssNotes,
-  ...scrollPaddingCssNotes,
   ...mediaQueriesCssNotes,
   ...supportsCssNotes,
   ...safeAreasCssNotes,
-  ...touchTargetsCssNotes,
   ...masonryCssNotes,
   ...scrollStateQueriesCssNotes,
   ...anchorPositioningCssNotes,

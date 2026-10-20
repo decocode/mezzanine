@@ -36,11 +36,15 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     ],
   },
   {
-    // Foundations: how Mezzanine works, such as accessibility, interaction and text.
+    // Foundations: how Mezzanine works and its visual values. Themes can change many of the values.
     id: 'foundations',
     label: 'Foundations',
     pages: [
       { id: 'accessibility', label: 'Accessibility', path: '/accessibility', status: 'implemented' },
+      { id: 'color', label: 'Color', path: '/color', status: 'implemented' },
+      { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
+      { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
+      { id: 'layout', label: 'Layout', path: '/layout', status: 'implemented' },
     ],
     groups: [
       {
@@ -48,6 +52,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         label: 'Interaction',
         path: '/interaction',
         pages: [
+          { id: 'states', label: 'States', path: '/interaction/states', status: 'implemented' },
           { id: 'target-size', label: 'Target size', path: '/interaction/target-size', status: 'implemented' },
         ],
       },
@@ -56,24 +61,19 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         label: 'Text',
         path: '/text',
         pages: [
+          { id: 'typography', label: 'Typography', path: '/typography', status: 'implemented' },
+          { id: 'prose', label: 'Prose', path: '/typography/prose', status: 'implemented' },
+          { id: 'fonts', label: 'Fonts', path: '/fonts', status: 'empty' },
           { id: 'fluid-text', label: 'Fluid text', path: '/text/fluid-text', status: 'implemented' },
           { id: 'reading-direction', label: 'Reading direction', path: '/text/reading-direction', status: 'implemented' },
         ],
       },
-    ],
-  },
-  {
-    // Styles: Mezzanine's visual values, such as color, shape and motion. Themes can change many of them.
-    id: 'styles',
-    label: 'Styles',
-    groups: [
       {
-        id: 'typography',
-        label: 'Typography',
-        path: '/typography',
+        id: 'effects',
+        label: 'Effects',
         pages: [
-          { id: 'text-styles', label: 'Text styles', path: '/typography/text-styles', status: 'implemented' },
-          { id: 'prose', label: 'Prose', path: '/typography/prose', status: 'implemented' },
+          { id: 'elevation', label: 'Elevation', path: '/elevation', status: 'implemented' },
+          { id: 'opacity', label: 'Opacity', path: '/opacity', status: 'implemented' },
         ],
       },
       {
@@ -85,13 +85,18 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'borders', label: 'Borders', path: '/shape/borders', status: 'implemented' },
         ],
       },
-    ],
-    pages: [
-      { id: 'color', label: 'Color', path: '/color', status: 'implemented' },
-      { id: 'elevation', label: 'Elevation', path: '/elevation', status: 'implemented' },
-      { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
-      { id: 'opacity', label: 'Opacity', path: '/opacity', status: 'implemented' },
-      { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
+      {
+        // "Layers" here means stacking, not CSS cascade layers: an agreed exception to the CSS-word rule.
+        id: 'layers',
+        label: 'Layers',
+        path: '/layers',
+        pages: [
+          { id: 'positioning', label: 'Positioning', path: '/layers/positioning', status: 'implemented' },
+          { id: 'ordering-layers', label: 'Ordering layers', path: '/layers/ordering-layers', status: 'implemented' },
+          { id: 'bundles-of-layers', label: 'Bundles of layers', path: '/layers/bundles-of-layers', status: 'implemented' },
+          { id: 'scroll-padding', label: 'Scroll padding', path: '/layers/scroll-padding', status: 'implemented' },
+        ],
+      },
     ],
   },
   {

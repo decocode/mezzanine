@@ -4,19 +4,13 @@ import { howItWorksLead } from './labLogic'
 import { overviewPagesHeading } from './labValues'
 import { layoutOverview, layoutStages, stagePagesByStage } from '../layout/layoutContent'
 import { stageExamples } from '../layout/layoutExamples'
-import { layersLab, layersPages } from '../layers/layersContent'
 import { browserAndDeviceLab, browserAndDevicePages } from '../browser-and-device/browserAndDeviceContent'
 import { emergingFeatures, futurePages } from '../emerging-features/emergingFeaturesContent'
 import { futureExamples } from '../emerging-features/emergingFeaturesExamples'
 import { labTopLevelPages } from '../labTopLevelPages'
-import { PositioningExample } from '../layers/positioning/PositioningExample'
-import { OrderingLayersExample } from '../layers/ordering-layers/OrderingLayersExample'
-import { BundlesOfLayersExample } from '../layers/bundles-of-layers/BundlesOfLayersExample'
-import { ScrollPaddingExample } from '../layers/scroll-padding/ScrollPaddingExample'
 import { MediaQueriesExample } from '../browser-and-device/media-queries/MediaQueriesExample'
 import { SupportsExample } from '../browser-and-device/supports/SupportsExample'
 import { SafeAreasExample } from '../browser-and-device/safe-areas/SafeAreasExample'
-import { TouchTargetsExample } from '../browser-and-device/touch-targets/TouchTargetsExample'
 import { ReadingOrderExample } from '../reading-order/ReadingOrderExample'
 import { StylePriorityExample } from '../style-priority/StylePriorityExample'
 import { LabContentPage, OverviewPage } from './StagePages'
@@ -57,13 +51,8 @@ export function LayoutFutureChildPage({ page }: { page: FuturePage }) {
 
 // Lab pages outside Layout, keyed by their address.
 const topLevelExamples: Record<string, () => JSX.Element> = {
-  [layersPages.positioning.href]: PositioningExample,
-  [layersPages.layerOrder.href]: OrderingLayersExample,
-  [layersPages.stackingContexts.href]: BundlesOfLayersExample,
-  [layersPages.scrollPadding.href]: ScrollPaddingExample,
   [browserAndDevicePages.mediaQueries.href]: MediaQueriesExample,
   [browserAndDevicePages.safeAreas.href]: SafeAreasExample,
-  [browserAndDevicePages.targetSize.href]: TouchTargetsExample,
   [labTopLevelPages.readingOrder.href]: ReadingOrderExample,
   [browserAndDevicePages.supports.href]: SupportsExample,
   [labTopLevelPages.stylePriority.href]: StylePriorityExample,
@@ -79,11 +68,6 @@ export function LabTopLevelPageView({ page }: { page: LabPage }) {
 // first paragraph of its How it works.
 function ExperimentOverview({ experiment, pages }: { experiment: LabPage; pages: Record<string, LabPage> }) {
   return <OverviewPage content={experiment} cards={Object.values(pages).map((page) => ({ headingId: `lab-card-${page.id}`, title: page.title, href: page.href, text: howItWorksLead(page) }))} />
-}
-
-// The Layers experiment's overview.
-export function LayersOverviewPage() {
-  return <ExperimentOverview experiment={layersLab} pages={layersPages} />
 }
 
 // The Browser and device experiment's overview.

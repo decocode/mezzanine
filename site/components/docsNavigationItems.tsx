@@ -28,7 +28,7 @@ function groupItem(group: SiteNavigationGroup): NavTreeItemData {
 }
 
 // Top-level groups are sections with a heading, in their reading order: Get started, Foundations,
-// Styles, Themes, Components.
+// Themes, Components.
 export const docsNavigationItems: NavTreeSectionData[] = siteNavigationGroups.map(group => ({
   type: 'section', id: group.id, label: group.label, children: groupChildren(group),
 }))

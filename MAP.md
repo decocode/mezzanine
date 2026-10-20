@@ -38,9 +38,9 @@ An experimental sandbox at `/site/lab`. Nothing here is approved library work.
 | Folder | What it holds |
 | --- | --- |
 | `layout/<group>/<page>/` | The Layout pages, in six groups: Box basics, Add space, Inside the box, Side by side, Grids and columns, and Container. |
-| `layers/`, `browser-and-device/`, `emerging-features/`, `components/` | The other experiments, one folder per page. |
+| `browser-and-device/`, `emerging-features/`, `components/` | The other experiments, one folder per page. |
 | `reading-order/`, `style-priority/` | Top-level Lab pages. |
-| `shared/` | Shared Lab parts, types and values, and `layout-lab.css`, which each page's "The CSS behind" panel quotes. |
+| `shared/` | Shared Lab parts, types and values, and `layout-lab.css`, which each page's "The CSS behind" panel quotes. The panel itself, the example text and the value picker come from the site's `components/ExampleParts.tsx`, shared with promoted docs pages. |
 | `LabPage.tsx`, `labContent.tsx` | The Lab's entry and its navigation. |
 
 ## Tests, checks and configuration

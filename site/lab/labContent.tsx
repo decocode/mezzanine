@@ -1,7 +1,6 @@
 import { Badge, type NavTreeItemData } from '@decocode/mezzanine'
 import { labBadgeLabel } from './shared/labValues'
 import { layoutStages, stagePagesByStage } from './layout/layoutContent'
-import { layersLab, layersPages } from './layers/layersContent'
 import { browserAndDeviceLab, browserAndDevicePages } from './browser-and-device/browserAndDeviceContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
 import { labTopLevelPages } from './labTopLevelPages'
@@ -16,7 +15,7 @@ export const labContent = {
 }
 
 // The Lab's own navigation tree, shown in its start Panel and the TopBar menu on Lab pages.
-// Each experiment is a top-level item: Layout, Layers, Browser and device, Emerging features, then Components, then pages not specific to layout.
+// Each experiment is a top-level item: Layout, Browser and device, Emerging features, then Components, then pages not specific to layout.
 // Layout is a top-level group. Its stages come first, each holding its pages in reading order,
 // Emerging features carries the Lab badge.
 export const labNavigationItems: NavTreeItemData[] = [
@@ -26,10 +25,6 @@ export const labNavigationItems: NavTreeItemData[] = [
       id: `layout-${stage.slug}`, label: stage.title, href: `${labContent.layoutPage.href}/${stage.slug}`,
       children: stagePagesByStage(stage.key).map((page) => ({ id: `layout-${page.key}`, label: page.title, href: page.href })),
     })),
-  },
-  {
-    id: 'layers', label: layersLab.title, href: '/site/lab/layers',
-    children: Object.values(layersPages).map((page) => ({ id: `layers-${page.id}`, label: page.title, href: page.href })),
   },
   {
     id: 'browser-and-device', label: browserAndDeviceLab.title, href: browserAndDeviceLab.href,

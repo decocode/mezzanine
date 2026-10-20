@@ -187,7 +187,7 @@ must now supply their own code-block styles.
 
 Common patterns should reuse the foundation instead of creating new sizes:
 
-<!-- The site's Text styles page shows this table from site/pages/styles/typography/text-styles/textStylesContent.ts.
+<!-- The site's Typography page shows this table from site/pages/foundations/text/typography/typographyContent.ts.
      npm run check:rules fails if the two differ, so change both together. -->
 
 | Text | Style |

@@ -34,13 +34,7 @@ export interface StagePage extends LabPage {
   readonly stage: StageKey
 }
 
-export interface CssNote {
-  // Copy with `code`, **strong** and [label](href) markers, like the page's content.
-  paragraphs: string[]
-  code: string
-  // True when the code is an example for apps rather than the rules this page uses.
-  isExample?: boolean
-}
+export type { CssNote } from '../../components/ExampleParts'
 
 // Each stage page's examples, keyed by the page's key. Pages with several examples give each a
 // third-level heading; pages with one put the CSS behind it under a third-level heading. A page can

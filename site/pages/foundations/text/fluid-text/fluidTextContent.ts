@@ -43,7 +43,6 @@ export const fluidTextContent: DocsPageContent = {
     { key: 'tokens' },
   ],
   relatedPages: [
-    { label: 'Text styles', href: '/typography/text-styles' },
     { label: 'Typography', href: '/typography' },
   ],
   references: [

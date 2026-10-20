@@ -1,7 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
 import { layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutContent'
-import { layersLab, layersPages } from '../../site/lab/layers/layersContent'
 import { browserAndDeviceLab, browserAndDevicePages } from '../../site/lab/browser-and-device/browserAndDeviceContent'
 import { emergingFeatures, futurePages } from '../../site/lab/emerging-features/emergingFeaturesContent'
 import { labTopLevelPages } from '../../site/lab/labTopLevelPages'
@@ -13,7 +12,7 @@ const stageOverviewPages = layoutStages.map(stage => ({ path: `/site/lab/layout/
 const stageChildPages = stagePages.map(page => ({ path: page.href, title: page.title }))
 const futureOverviewPage = { path: emergingFeatures.href, title: emergingFeatures.title }
 const futureChildPages = futurePages.map(page => ({ path: page.href, title: page.title }))
-const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages, ...Object.values(labTopLevelPages).map(page => ({ path: page.href, title: page.title })), { path: layersLab.href, title: layersLab.title }, ...Object.values(layersPages).map(page => ({ path: page.href, title: page.title })), { path: browserAndDeviceLab.href, title: browserAndDeviceLab.title }, ...Object.values(browserAndDevicePages).map(page => ({ path: page.href, title: page.title }))]
+const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages, ...Object.values(labTopLevelPages).map(page => ({ path: page.href, title: page.title })), { path: browserAndDeviceLab.href, title: browserAndDeviceLab.title }, ...Object.values(browserAndDevicePages).map(page => ({ path: page.href, title: page.title }))]
 
 // Checks the Layout overview, each stage, each stage page and each page still to be sorted fit a 320px
 // screen at normal and doubled text in every theme, and pass an automated accessibility scan.

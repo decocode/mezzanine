@@ -1,11 +1,9 @@
-import { useId, useState, type CSSProperties, type ReactNode } from 'react'
+import { useState, type CSSProperties, type ReactNode } from 'react'
 import {
-  Badge, CodeBlock, Heading, Label, Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack, Text,
+  Badge, Heading, Label, Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack,
   ToggleButton, ToggleButtonGroup,
 } from '@decocode/mezzanine'
-import type { CssNote } from './labTypes'
 import { framePresets, labBadgeLabel } from './labValues'
-import { RichText } from '../../components/RichText'
 
 // A frame whose width you set with a slider or presets. Its contents are a size container. When the example
 // is meant to stick out of the frame, the frame is a named region that takes focus, so keyboard users can scroll it.
@@ -47,32 +45,8 @@ export function ExampleHeading({ children }: { children: ReactNode }) {
   return <Heading level={3} className="lab-example-heading mz-text-heading-sm">{children}</Heading>
 }
 
-// The explanation that goes with an example.
-export function ExampleText({ children }: { children: ReactNode }) {
-  return <Text elementType="p" className="lab-example-text mz-text-body-md">{children}</Text>
-}
-
-// The explanation of the CSS behind one example, with the rules themselves
-// (or, when marked, example rules for an app).
-export function CssNotesBody({ note }: { note: CssNote }) {
-  return <div className="lab-css-notes-body">
-    {note.isExample && <Text elementType="p" className="mz-text-body-md">This CSS is for an app to use; the example on this page doesn’t use it.</Text>}
-    {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
-      <RichText text={paragraph} />
-    </Text>)}
-    <CodeBlock>{note.code}</CodeBlock>
-  </div>
-}
-
-// The same explanation under its own heading: level 4 under an example's heading, level 3 on a
-// stage page with a single example, or level 2 on a page with a single example and no halves.
-export function CssNotes({ name, note, level = 4 }: { name: string; note: CssNote; level?: 2 | 3 | 4 }) {
-  const className = level === 2 ? 'lab-section-heading mz-text-heading-md' : level === 3 ? 'lab-section-heading mz-text-heading-sm' : 'mz-text-title-md'
-  return <div className="lab-css-notes">
-    <Heading level={level} className={className}>The CSS behind {name}</Heading>
-    <CssNotesBody note={note} />
-  </div>
-}
+// The explanation, CSS notes and value picker are shared with the docs, which use them on promoted pages.
+export { CssNotes, CssNotesBody, ExampleText, ValuePicker } from '../../components/ExampleParts'
 
 // An emerging feature's status: Lab, then whether this browser supports it.
 export function FeatureStatus({ supported }: { supported: boolean }) {
@@ -82,23 +56,4 @@ export function FeatureStatus({ supported }: { supported: boolean }) {
       ? <Badge variant="success">Active in this browser</Badge>
       : <Badge variant="neutral">Not in this browser</Badge>}
   </p>
-}
-
-// Buttons that choose one CSS value for an example, such as overflow: hidden, with a visible label.
-export function ValuePicker<Value extends string>({ label, options, value, onChange }: { label: string; options: readonly { label: string; value: Value }[]; value: Value; onChange: (value: Value) => void }) {
-  const labelId = useId()
-  return <div className="lab-picker">
-    <span id={labelId} className="mz-text-label-md">{label}</span>
-    <ToggleButtonGroup
-      size="sm"
-      variant="secondary"
-      aria-labelledby={labelId}
-      selectionMode="single"
-      disallowEmptySelection
-      selectedKeys={[value]}
-      onSelectionChange={(keys) => { const option = options.find((item) => keys.has(item.value)); if (option) onChange(option.value) }}
-    >
-      {options.map((option) => <ToggleButton key={option.value} id={option.value}>{option.label}</ToggleButton>)}
-    </ToggleButtonGroup>
-  </div>
 }

@@ -93,7 +93,7 @@ export function checkTypographyChoices(markdown, content) {
     .map(row => `${row[1]}: ${[...row[2].matchAll(/`([\w-]+)`/g)].map(match => match[1]).join(', ')}`)
   const shown = [...content.matchAll(/\{ use: '([^']+)', classNames: \[([^\]]*)\] \}/g)]
     .map(row => `${row[1]}: ${[...row[2].matchAll(/'mz-text-([\w-]+)'/g)].map(match => match[1]).join(', ')}`)
-  if (!documented.length || !shown.length) return [{ position: 0, message: 'Could not read the typography choices from TYPOGRAPHY.md or textStylesContent.ts.' }]
+  if (!documented.length || !shown.length) return [{ position: 0, message: 'Could not read the typography choices from TYPOGRAPHY.md or typographyContent.ts.' }]
   if (documented.join('\n') === shown.join('\n')) return []
   const first = documented.findIndex((row, index) => row !== shown[index])
   return [{ position: 0, message: `Typography choices differ at row ${first + 1}: TYPOGRAPHY.md has "${documented[first] ?? 'nothing'}", the site has "${shown[first] ?? 'nothing'}".` }]

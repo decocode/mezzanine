@@ -124,23 +124,23 @@ path for Related pages, an external URL for References. External links show a
 trailing icon and announce that they open in a new tab. An empty list produces
 no section and no On this page link.
 
-## Foundations and Styles pages
+## Foundations pages
 
 Shared accessibility information (the WCAG target, what React Aria provides,
 what Mezzanine adds and how it is checked) lives on the Foundations
 Accessibility page at `/accessibility`, so other pages do not repeat it.
 
 Foundations pages cover how Mezzanine works, such as accessibility, interaction
-and text. Styles pages cover its visual values, such as color, shape, opacity
-and motion, many of which a theme can change.
+and text, and its visual values, such as color, shape, opacity and motion, many
+of which a theme can change.
 
-Foundations and Styles pages open with their own sections, such as a scale or a
+Foundations pages open with their own sections, such as a scale or a
 table of states. Their content files use `kind: 'foundation'`, and where they
 have a Technical details group, its sections always appear in this order:
 
 1. CSS properties: the CSS properties the page governs.
 2. Tokens: token names, purposes and values read from the token source.
-3. Theming: Styles pages only. The Wireframe baseline and what a theme changes.
+3. Theming: pages whose values a theme changes. The Wireframe baseline and what a theme changes.
 4. Accessibility: only what is specific to this page. Leave it out when there
    is nothing specific; what applies everywhere is on the Accessibility page.
 5. Localisation: direction and text expansion, only once verified.

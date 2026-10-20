@@ -59,23 +59,8 @@
 }
 
 /* A page's second-level headings start a new part, so they get more space above. */
-.lab-layout .lab-section-heading {
+.lab-layout :is(.lab-section-heading, .css-notes-heading) {
   margin-block-start: var(--space-4);
-}
-
-.lab-css-notes {
-  display: grid;
-  gap: var(--space-3);
-}
-
-.lab-css-notes-body {
-  display: grid;
-  gap: var(--space-3);
-  max-inline-size: 70ch;
-}
-
-.lab-example-text {
-  max-inline-size: 70ch;
 }
 
 .lab-controls {
@@ -205,13 +190,6 @@
 
 /* The Layout groups. Pages that teach a CSS idea use the familiar physical names, such as
    width and margin-left; the layout components use logical names, as a library would. */
-
-.lab-picker {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
-}
 
 .lab-page-badges {
   display: flex;
@@ -485,31 +463,6 @@
   outline-offset: var(--space-1);
 }
 
-/* Positioning. */
-.lab-position-stage {
-  position: relative;
-  max-height: 14rem;
-  overflow: auto;
-  padding: var(--space-3);
-  border: var(--border-width-baseline) dashed var(--color-text-muted);
-}
-
-.lab-position-stage:focus-visible {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--space-1);
-}
-
-.lab-position-stage > * + * {
-  margin-top: var(--space-3);
-}
-
-.lab-position-item {
-  position: var(--lab-position);
-  top: var(--space-4);
-  left: var(--space-4);
-  z-index: 1;
-}
-
 /* Fluid sizing: the size follows the frame, between two limits. */
 .lab-fluid-space {
   display: grid;
@@ -609,29 +562,6 @@
   block-size: var(--target-size-md);
 }
 
-.lab-layer-stack {
-  position: relative;
-  min-block-size: 18rem;
-}
-
-.lab-layer {
-  position: absolute;
-  box-sizing: border-box;
-  inline-size: 60%;
-  padding: var(--space-3);
-  border: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-page);
-  box-shadow: var(--elevation-raised-1);
-  inset-block-start: calc(var(--lab-layer-step) * 2.5rem);
-  inset-inline-start: calc(var(--lab-layer-step) * 6%);
-}
-
-.lab-layer-base { --lab-layer-step: 0; z-index: var(--z-index-base); }
-.lab-layer-raised { --lab-layer-step: 1; z-index: var(--z-index-raised); }
-.lab-layer-sticky { --lab-layer-step: 2; z-index: var(--z-index-sticky); }
-.lab-layer-overlay { --lab-layer-step: 3; z-index: var(--z-index-overlay); }
-.lab-layer-toast { --lab-layer-step: 4; z-index: var(--z-index-toast); }
-
 /* Subgrid. */
 .lab-subgrid-list {
   display: grid;
@@ -704,41 +634,6 @@
     env(safe-area-inset-right, 0px)
     env(safe-area-inset-bottom, 0px)
     env(safe-area-inset-left, 0px);
-}
-
-/* Scroll padding under a sticky header. */
-.lab-scroll-box {
-  position: relative;
-  max-block-size: 16rem;
-  overflow: auto;
-  border: var(--border-width-baseline) solid var(--color-border);
-}
-
-.lab-scroll-box:focus-visible {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--space-1);
-}
-
-.lab-scroll-padded {
-  scroll-padding-block-start: var(--lab-sticky-height);
-}
-
-.lab-sticky-header {
-  position: sticky;
-  z-index: var(--z-index-sticky);
-  inset-block-start: 0;
-  box-sizing: border-box;
-  min-block-size: var(--lab-sticky-height);
-  padding: var(--space-3);
-  border-block-end: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-surface);
-}
-
-.lab-scroll-section {
-  display: grid;
-  gap: var(--space-2);
-  min-block-size: 10rem;
-  padding: var(--space-4);
 }
 
 /* Cascade layers: the same simple app rule against a library rule, unlayered and layered. */
@@ -863,55 +758,33 @@
   field-sizing: content;
 }
 
-/* Layers: stacking contexts. Bundle B (two layers) sits on top of bundle A (three layers). */
-.lab-bundles {
+/* A scrolling box with a sticky header, used by the Scroll-state queries example. */
+.lab-scroll-box {
   position: relative;
-  padding-bottom: var(--space-4);
+  max-block-size: 16rem;
+  overflow: auto;
+  border: var(--border-width-baseline) solid var(--color-border);
 }
 
-.lab-bundle {
-  position: relative;
+.lab-scroll-box:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--space-1);
+}
+
+.lab-sticky-header {
+  position: sticky;
+  z-index: var(--z-index-sticky);
+  inset-block-start: 0;
   box-sizing: border-box;
-  width: 65%;
-  height: 12rem;
-  padding: var(--space-2);
-  border: var(--border-width-md) dashed var(--color-text-muted);
-}
-
-/* Each bundle's label sits in its top right corner. */
-.lab-bundle > p {
-  text-align: end;
-}
-
-.lab-bundle-a-grouped {
-  z-index: 1;
-}
-
-.lab-bundle-b-grouped {
-  z-index: 2;
-}
-
-/* Unbundled: the dashed border goes, so the three layers sit loose on the page. */
-.lab-bundle-loose {
-  border-color: transparent;
-}
-
-.lab-bundle-b {
-  height: 10rem;
-  margin-top: -7rem;
-  margin-left: 35%;
-}
-
-.lab-bundle-layer {
-  position: absolute;
-  z-index: var(--lab-layer-z);
-  top: calc(2.5rem + var(--lab-layer-step) * 1.75rem);
-  left: calc(var(--space-2) + var(--lab-layer-step) * 10%);
-  box-sizing: border-box;
-  width: 70%;
-  min-height: 4rem;
-  padding: var(--space-1) var(--space-2);
-  border: var(--border-width-baseline) solid var(--color-text);
+  min-block-size: var(--lab-sticky-height);
+  padding: var(--space-3);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
   background: var(--color-surface);
-  box-shadow: var(--elevation-raised-1);
+}
+
+.lab-scroll-section {
+  display: grid;
+  gap: var(--space-2);
+  min-block-size: 10rem;
+  padding: var(--space-4);
 }

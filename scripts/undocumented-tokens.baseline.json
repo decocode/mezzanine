@@ -31,18 +31,11 @@
   "--search-field-icon-gap",
   "--search-field-icon-size",
   "--space-0",
-  "--space-1",
   "--space-10",
   "--space-12",
   "--space-16",
   "--space-20",
   "--space-24",
-  "--space-3",
   "--space-5",
-  "--space-8",
-  "--z-index-base",
-  "--z-index-overlay",
-  "--z-index-raised",
-  "--z-index-sticky",
-  "--z-index-toast"
+  "--space-8"
 ]

@@ -550,7 +550,7 @@ try {
   for (const problem of checkTypographyTokens(buttonTokens)) report(buttonTokensFile, buttonTokens, problem.position, 'typography', problem.message)
   const tokens = read('src/tokens/motion.tokens.css')
   const typographyGuide = read('src/docs/TYPOGRAPHY.md')
-  for (const problem of checkTypographyChoices(typographyGuide, read('site/pages/styles/typography/text-styles/textStylesContent.ts'))) report('src/docs/TYPOGRAPHY.md', typographyGuide, problem.position, 'typography', problem.message)
+  for (const problem of checkTypographyChoices(typographyGuide, read('site/pages/foundations/text/typography/typographyContent.ts'))) report('src/docs/TYPOGRAPHY.md', typographyGuide, problem.position, 'typography', problem.message)
   for (const token of motionTokens) {
     if (!tokens.includes(`${token}:`)) report('src/tokens/motion.tokens.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
   }

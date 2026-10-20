@@ -1,0 +1,162 @@
+/* The examples on the Layers pages. The CSS-notes quotes on each page are copied from here,
+   and a browser test checks that they still match. Teaching examples use the familiar physical
+   names, such as top and left, where that's what they teach. */
+
+.layers-example {
+  --layers-sticky-height: 3rem;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.layers-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* A plain block for showing layout. */
+.layers-block {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: var(--space-3);
+  border: var(--border-width-baseline) solid var(--color-border);
+  background: var(--color-surface);
+}
+
+/* Positioning. */
+.layers-position-stage {
+  position: relative;
+  max-height: 14rem;
+  overflow: auto;
+  padding: var(--space-3);
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
+}
+
+.layers-position-stage:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--space-1);
+}
+
+.layers-position-stage > * + * {
+  margin-top: var(--space-3);
+}
+
+.layers-position-item {
+  position: var(--_position);
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 1;
+}
+
+.layers-layer-stack {
+  position: relative;
+  min-block-size: 18rem;
+}
+
+.layers-layer {
+  position: absolute;
+  box-sizing: border-box;
+  inline-size: 60%;
+  padding: var(--space-3);
+  border: var(--border-width-baseline) solid var(--color-border);
+  background: var(--color-page);
+  box-shadow: var(--elevation-raised-1);
+  inset-block-start: calc(var(--_layer-step) * 2.5rem);
+  inset-inline-start: calc(var(--_layer-step) * 6%);
+}
+
+.layers-layer-base { --_layer-step: 0; z-index: var(--z-index-base); }
+.layers-layer-raised { --_layer-step: 1; z-index: var(--z-index-raised); }
+.layers-layer-sticky { --_layer-step: 2; z-index: var(--z-index-sticky); }
+.layers-layer-overlay { --_layer-step: 3; z-index: var(--z-index-overlay); }
+.layers-layer-toast { --_layer-step: 4; z-index: var(--z-index-toast); }
+
+/* Scroll padding under a sticky header. */
+.layers-scroll-box {
+  position: relative;
+  max-block-size: 16rem;
+  overflow: auto;
+  border: var(--border-width-baseline) solid var(--color-border);
+}
+
+.layers-scroll-box:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--space-1);
+}
+
+.layers-scroll-padded {
+  scroll-padding-block-start: var(--layers-sticky-height);
+}
+
+.layers-sticky-header {
+  position: sticky;
+  z-index: var(--z-index-sticky);
+  inset-block-start: 0;
+  box-sizing: border-box;
+  min-block-size: var(--layers-sticky-height);
+  padding: var(--space-3);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.layers-scroll-section {
+  display: grid;
+  gap: var(--space-2);
+  min-block-size: 10rem;
+  padding: var(--space-4);
+}
+
+/* Layers: stacking contexts. Bundle B (two layers) sits on top of bundle A (three layers). */
+.layers-bundles {
+  position: relative;
+  padding-bottom: var(--space-4);
+}
+
+.layers-bundle {
+  position: relative;
+  box-sizing: border-box;
+  width: 65%;
+  height: 12rem;
+  padding: var(--space-2);
+  border: var(--border-width-md) dashed var(--color-text-muted);
+}
+
+/* Each bundle's label sits in its top right corner. */
+.layers-bundle > p {
+  text-align: end;
+}
+
+.layers-bundle-a-grouped {
+  z-index: 1;
+}
+
+.layers-bundle-b-grouped {
+  z-index: 2;
+}
+
+/* Unbundled: the dashed border goes, so the three layers sit loose on the page. */
+.layers-bundle-loose {
+  border-color: transparent;
+}
+
+.layers-bundle-b {
+  height: 10rem;
+  margin-top: -7rem;
+  margin-left: 35%;
+}
+
+.layers-bundle-layer {
+  position: absolute;
+  z-index: var(--_layer-z);
+  top: calc(2.5rem + var(--_layer-step) * 1.75rem);
+  left: calc(var(--space-2) + var(--_layer-step) * 10%);
+  box-sizing: border-box;
+  width: 70%;
+  min-height: 4rem;
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-width-baseline) solid var(--color-text);
+  background: var(--color-surface);
+  box-shadow: var(--elevation-raised-1);
+}
