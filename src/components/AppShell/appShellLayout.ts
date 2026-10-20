@@ -6,21 +6,23 @@ export type PanelPresentation = 'inline' | 'drawer'
 export interface SidePanels {
   // The AppShell's inline size in pixels; 0 before it has been measured.
   shellSize: number
-  panelSize: number
+  startSize: number
+  endSize: number
   minMainSize: number
   hasStart: boolean
   hasEnd: boolean
   isStartOpen: boolean
 }
 
-export function panelPresentations({ shellSize, panelSize, minMainSize, hasStart, hasEnd, isStartOpen }: SidePanels) {
+export function panelPresentations({ shellSize, startSize, endSize, minMainSize, hasStart, hasEnd, isStartOpen }: SidePanels) {
   // Unmeasured, as during the first render: share the space rather than flash a drawer.
   if (shellSize <= 0) return { start: 'inline', end: 'inline' } as const
   const fits = (...panels: number[]) => shellSize >= minMainSize + panels.reduce((total, size) => total + size, 0)
   // A Panel is placed as if it were open, so its trigger always knows how it will appear.
-  const startInline = !hasStart || fits(panelSize)
+  const startInline = !hasStart || fits(startSize)
   const startTakesSpace = hasStart && startInline && isStartOpen
-  const endInline = !hasEnd || fits(startTakesSpace ? panelSize : 0, panelSize)
+  // The end Panel gives way first, so it never shares the space while the start Panel can't.
+  const endInline = !hasEnd || (startInline && fits(startTakesSpace ? startSize : 0, endSize))
   const presentation = (inline: boolean): PanelPresentation => inline ? 'inline' : 'drawer'
   return { start: presentation(startInline), end: presentation(endInline) }
 }

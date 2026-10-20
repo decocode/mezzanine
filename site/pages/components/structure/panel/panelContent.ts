@@ -56,7 +56,8 @@ export const panelContent: DocsPageContent = {
         rows: [
           { name: 'id', description: 'Names the Panel for its PanelTrigger.' },
           { name: 'edge', description: '`start`, `end` or `bottom`.' },
-          { name: 'title', description: 'The Panel’s heading, and the name of its landmark.' },
+          { name: 'title', description: 'The Panel’s visible heading, and the name of its landmark.' },
+          { name: 'aria-label', description: 'Use instead of `title` when the app already shows what the Panel is, such as a navigation Panel under a TopBar. The Panel then has no heading, and screen readers announce this name.' },
           { name: 'headingLevel', description: 'The heading’s level, from 2 to 6. Defaults to 2.' },
           { name: 'minimized', description: 'Content shown when the Panel isn’t open: the same content, condensed.' },
           { name: 'closeLabel', description: 'The close button’s label. Defaults to “Close” followed by the title.' },
@@ -75,7 +76,9 @@ export const panelContent: DocsPageContent = {
         label: 'Panel CSS tokens',
         nameColumn: 'CSS token',
         rows: [
-          { name: '--panel-width', description: 'How wide a side Panel is when open, and as a drawer.' },
+          { name: '--panel-width', description: 'How wide a side Panel is when open, and as a drawer. Both sides default to it.' },
+          { name: '--panel-start-width', description: 'How wide the start Panel is. Defaults to `--panel-width`.' },
+          { name: '--panel-end-width', description: 'How wide the end Panel is, such as wider for a chat Panel or narrower for a list of contents. Defaults to `--panel-width`.' },
           { name: '--panel-max-height', description: 'The tallest a bottom Panel grows, as a share of the AppShell’s height.' },
         ],
       },

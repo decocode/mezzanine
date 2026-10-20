@@ -7,12 +7,10 @@ import { CloseIcon } from '../../icons/StudioIcons'
 import { useAppShell } from '../AppShell/AppShell'
 import type { PanelEdge } from '../AppShell/panelStore'
 
-export interface PanelProps {
+interface PanelBaseProps {
   // Names the Panel for PanelTrigger's `panel` prop.
   id: string
   edge: PanelEdge
-  // The Panel's heading, and the name of its landmark.
-  title: string
   headingLevel?: 2 | 3 | 4 | 5 | 6
   // Shown in place of nothing when the Panel isn't open: the same content, condensed.
   minimized?: ReactNode
@@ -29,12 +27,20 @@ export interface PanelProps {
   className?: string
 }
 
+// A Panel is named either by a visible heading, `title`, or, when the app already shows what it is
+// (such as a navigation Panel under a TopBar), by `aria-label` alone, with no heading.
+export type PanelProps = PanelBaseProps & (
+  | { title: string; 'aria-label'?: never }
+  | { title?: never; 'aria-label': string }
+)
+
 // An area at the start, end or bottom of an AppShell that shares the space with the main content.
 // When there's no room beside the content, a side Panel opens as a drawer instead.
 export function Panel({
-  id, edge, title, headingLevel = 2, minimized, closeLabel = `Close ${title}`, isCollapsible = true,
+  id, edge, title, 'aria-label': label, headingLevel = 2, minimized, closeLabel, isCollapsible = true,
   isOpen: controlledOpen, defaultOpen = false, onOpenChange, children, className,
 }: PanelProps) {
+  const name = title ?? label
   const { store, presentation } = useAppShell('Panel')
   useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
   const elementId = useId()
@@ -56,10 +62,10 @@ export function Panel({
   }
 
   const contents = <>
-    <div className="mz-panel-header">
-      <Heading id={headingId} level={headingLevel} slot={isDrawer ? 'title' : undefined}>{title}</Heading>
-      {isCollapsible && <Button iconLeading={<CloseIcon />} labelPlacement="tooltip" size="sm" variant="tertiary" onPress={close}>{closeLabel}</Button>}
-    </div>
+    {(title != null || isCollapsible) && <div className="mz-panel-header">
+      {title != null && <Heading id={headingId} level={headingLevel} slot={isDrawer ? 'title' : undefined}>{title}</Heading>}
+      {isCollapsible && <Button iconLeading={<CloseIcon />} labelPlacement="tooltip" size="sm" variant="tertiary" onPress={close}>{closeLabel ?? `Close ${name}`}</Button>}
+    </div>}
     <div className="mz-panel-content">{children}</div>
   </>
 
@@ -71,15 +77,15 @@ export function Panel({
       className={classes}
       data-edge={edge}
       data-state={isShown ? 'open' : minimized != null ? 'minimized' : 'closed'}
-      aria-labelledby={isShown ? headingId : undefined}
-      aria-label={isShown ? undefined : title}
+      aria-labelledby={isShown && title != null ? headingId : undefined}
+      aria-label={isShown && title != null ? undefined : name}
       inert={!isShown && minimized == null}
     >
       {isShown ? contents : minimized != null && <div className="mz-panel-minimized">{minimized}</div>}
     </aside>
     {isDrawer && isCollapsible && <ModalOverlay isOpen={isOpen} onOpenChange={(open) => store.setOpen(id, open, true)} isDismissable className="mz-panel-overlay" data-edge={edge}>
       <Modal className={classes} data-edge={edge}>
-        <Dialog id={elementId} className="mz-panel-dialog">{contents}</Dialog>
+        <Dialog id={elementId} className="mz-panel-dialog" aria-label={title == null ? name : undefined}>{contents}</Dialog>
       </Modal>
     </ModalOverlay>}
   </>

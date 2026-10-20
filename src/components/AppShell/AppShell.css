@@ -26,9 +26,9 @@
     'bottom bottom bottom';
 }
 
-.mz-app-shell[data-start='open'] { --_app-shell-start: var(--panel-width); }
+.mz-app-shell[data-start='open'] { --_app-shell-start: var(--panel-start-width); }
 .mz-app-shell[data-start='minimized'] { --_app-shell-start: auto; }
-.mz-app-shell[data-end='open'] { --_app-shell-end: var(--panel-width); }
+.mz-app-shell[data-end='open'] { --_app-shell-end: var(--panel-end-width); }
 .mz-app-shell[data-end='minimized'] { --_app-shell-end: auto; }
 
 .mz-app-shell > header { grid-area: header; }

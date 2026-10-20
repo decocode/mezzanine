@@ -8,6 +8,7 @@ interface DocsShellProps {
   // The site TopBar, which renders the shell's <header>.
   topBar: ReactNode
   navigation: {
+    // Names the navigation Panel for screen readers; the TopBar already shows which section it is.
     title: string
     'aria-label': string
     navigationLabel: string
@@ -31,7 +32,7 @@ export function DocsShell({ topBar, navigation, mainClassName, mainTabIndex, chi
     <DocsContentsContext.Provider value={contentsStore}>
       <AppShell className="docs-app-shell">
         {topBar}
-        <Panel id="docs-navigation" edge="start" title={title} isCollapsible={false}>
+        <Panel id="docs-navigation" edge="start" aria-label={title} isCollapsible={false}>
           <NavigationPanel {...navigationProps} />
         </Panel>
         <main className={['site-content', mainClassName].filter(Boolean).join(' ')} id="main-content" tabIndex={mainTabIndex}>
