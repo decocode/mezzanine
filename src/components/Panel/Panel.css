@@ -31,9 +31,10 @@
   border-width: 0;
 }
 
-/* Side content keeps its open width while the space animates, so it's revealed rather than squeezed. */
-.mz-panel[data-edge='start']:not([data-state='minimized']) > * { min-inline-size: var(--panel-start-width); }
-.mz-panel[data-edge='end']:not([data-state='minimized']) > * { min-inline-size: var(--panel-end-width); }
+/* Side content keeps its open width while the space animates, so it's revealed rather than squeezed.
+   In an AppShell, the gap beside the Panel's card comes out of that width. */
+.mz-panel[data-edge='start']:not([data-state='minimized']) > * { min-inline-size: calc(var(--panel-start-width) - var(--_app-shell-join, 0px)); }
+.mz-panel[data-edge='end']:not([data-state='minimized']) > * { min-inline-size: calc(var(--panel-end-width) - var(--_app-shell-join, 0px)); }
 
 .mz-panel-header {
   display: flex;
