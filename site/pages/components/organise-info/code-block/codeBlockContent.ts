@@ -6,7 +6,7 @@ export const codeBlockContent: DocsPageContent = {
   title: 'Code block',
   description: 'A code block shows several lines of code, such as an example or a set of instructions, on its own surface. It keeps the code’s line breaks and indentation, and wraps long lines so nothing is hidden on a narrow screen.',
   sections: [
-    { key: 'example', intro: ['`CodeBlock` renders the code you pass as its children in a monospace font, with a border and space around it.'] },
+    { key: 'example', intro: ['`CodeBlock` renders the code you pass as its children in a monospace font, with a border and space around it. Its copy button copies the code to the clipboard.'] },
   ],
   technicalDetails: [
     {
@@ -18,6 +18,7 @@ export const codeBlockContent: DocsPageContent = {
         rows: [
           { name: 'CodeBlock', description: 'Renders a `pre` element with the code block surface. It keeps line breaks and indentation, and wraps long lines.' },
           { name: 'code', description: 'Added by `CodeBlock` inside the `pre`, so the content is marked up as code.' },
+          { name: 'Button', description: 'Added by `CodeBlock` at the top end. An icon button labelled “Copy code” that copies the text of the `code` element. The code wraps beside and below it, so the button never covers it.' },
         ],
       },
     },
@@ -34,6 +35,7 @@ export const codeBlockContent: DocsPageContent = {
       body: [
         'Long lines wrap instead of scrolling sideways, so the block never needs keyboard focus to be read, and content still reflows at 320 CSS pixels with text enlarged to 200%.',
         'Screen readers read the code as ordinary text. If the code needs explaining, put the explanation in the text around the block.',
+        'The copy button’s label, “Copy code”, shows in a tooltip and is its accessible name. After copying, the label changes to “Copied”, the icon changes to a check mark, and screen readers hear “Copied” through a polite status message. The button returns to “Copy code” after two seconds.',
       ],
     },
     {
@@ -44,6 +46,7 @@ export const codeBlockContent: DocsPageContent = {
         nameColumn: 'CSS token',
         rows: [
           { name: '--code-block-padding', description: 'Space between the block edge and the code.' },
+          { name: '--code-block-copy-gap', description: 'Space between the copy button and the code beside it.' },
           { name: '--code-block-border-width', description: 'Block border thickness.' },
           { name: '--code-block-border-radius', description: 'Rounding of the block corners.' },
           { name: '--code-block-background', description: 'Block surface colour.' },

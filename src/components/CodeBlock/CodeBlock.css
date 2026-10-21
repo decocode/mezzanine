@@ -1,7 +1,8 @@
 /* Long lines wrap rather than scroll, so narrow screens need no sideways scrolling and
    the block never needs to take keyboard focus. Indentation and line breaks are kept.
    The block sets the Body small role; the code element inside takes the shared monospace
-   family from Mezzanine's rule for every code element. */
+   family from Mezzanine's rule for every code element. The copy button floats at the top
+   end, so the code wraps beside and below it and is never covered. */
 .mz-code-block {
   box-sizing: border-box;
   max-inline-size: 100%;
@@ -19,4 +20,9 @@
   letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-sm);
   text-transform: var(--text-transform-body);
+}
+
+.mz-code-block-copy {
+  float: inline-end;
+  margin-inline-start: var(--code-block-copy-gap);
 }

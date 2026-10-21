@@ -2,7 +2,9 @@
 
 :where(:root) {
   /* CodeBlock: a static block of code. */
-  --code-block-padding: var(--space-4);
+  --code-block-padding: var(--space-padding-surface);
+  /* Space between the copy button and the code beside it. */
+  --code-block-copy-gap: var(--space-gap-control);
   --code-block-border-width: var(--border-width-baseline);
   --code-block-border-radius: var(--radius-sm);
   --code-block-background: var(--color-surface);

@@ -22,3 +22,20 @@ for (const theme of themes) {
     await expectNoAccessibilityViolations(page, 'main pre.mz-code-block')
   })
 }
+
+// Checks that the copy button, reached with the keyboard, copies the code's text, then says
+// "Copied" in its name and in a polite status message.
+test('Code block copy button copies the code', async ({ context, page }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+  await page.goto('/code-block')
+  const block = page.locator('main pre.mz-code-block')
+  const button = block.getByRole('button', { name: 'Copy code' })
+  await button.focus()
+  await expect(button).toBeFocused()
+  await page.keyboard.press('Enter')
+  await expect(block.getByRole('button', { name: 'Copied' })).toBeVisible()
+  await expect(block.getByRole('status')).toHaveText('Copied')
+  const code = await block.locator('> code').textContent()
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(code)
+  await expect(block.getByRole('button', { name: 'Copy code' })).toBeVisible({ timeout: 4000 })
+})
