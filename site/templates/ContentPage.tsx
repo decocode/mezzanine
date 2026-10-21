@@ -8,7 +8,8 @@ import { sectionId, sectionTitle, technicalDetailsTitle, type Block, type Conten
 // Lists in body text use the body text style; intro lists share the muted description style.
 function Blocks({ blocks, className }: { blocks: readonly Block[]; className?: string }) {
   return blocks.map((block, index) => typeof block === 'string'
-    ? <p className={className} key={index}><RichText text={block} /></p>
+    // Body paragraphs take the body text style, which also stops them at the reading width.
+    ? <p className={className ?? 'mz-text-body-md'} key={index}><RichText text={block} /></p>
     : <ul className={className ?? 'mz-text-body-md'} key={index}>{block.list.map((item) => <li key={item}><RichText text={item} /></li>)}</ul>)
 }
 

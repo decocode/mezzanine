@@ -1,6 +1,9 @@
 :root {
   /* PageHeading: existing page introduction widths and fluid title size. */
   --page-heading-max-width: 58rem;
+  /* The widest that examples, reference tables and Technical details get: the reading width plus room
+     for a column of names, so they share one edge just beyond the text. */
+  --docs-wide-content-width: calc(var(--line-length) + var(--width-xs));
   --page-heading-description-max-width: var(--line-length);
   --page-heading-title-font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-md));
 }
@@ -451,6 +454,13 @@ a:focus-visible {
   padding: calc(var(--table-focus-ring-width) + var(--table-focus-ring-offset) + var(--space-1));
 }
 
+/* A two-column reference table (a name and its description), and the Technical details group, stop at
+   the wide content width, so descriptions read as comfortably as the paragraphs around them. */
+.documentation-reference-table,
+.docs-disclosure-group {
+  max-inline-size: var(--docs-wide-content-width);
+}
+
 .documentation-table .react-aria-Column,
 .documentation-table .react-aria-Cell {
   /* break-word keeps words whole when they fit; anywhere would let a column
@@ -703,10 +713,7 @@ a:focus-visible {
 }
 
 .typography-guidance,
-.component-section :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm),
-/* A section's body paragraphs, and those under its subheadings, stop at the reading width too. */
-.component-section > p,
-.component-section > section > p {
+.component-section :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm) {
   max-inline-size: var(--line-length);
 }
 
@@ -716,7 +723,7 @@ a:focus-visible {
 
 .component-example {
   min-width: 0;
-  max-width: 40rem;
+  max-width: var(--docs-wide-content-width);
   margin-top: var(--space-4);
   padding: var(--space-4);
   border: var(--border-width-baseline) solid var(--color-border);

@@ -14,7 +14,7 @@ interface DocsTableProps {
 // Shared presentation for Anatomy, Props and CSS token reference data.
 export function DocsTable({ 'aria-label': label, nameColumn, rows, className, descriptionColumn = 'Purpose', namesAreCode = true }: DocsTableProps) {
   return (
-    <div className={['documentation-table', className].filter(Boolean).join(' ')}>
+    <div className={['documentation-table', 'documentation-reference-table', className].filter(Boolean).join(' ')}>
       <Table aria-label={label}>
         <TableHeader>
           <Column isRowHeader>{nameColumn}</Column>

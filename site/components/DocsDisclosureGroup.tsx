@@ -13,7 +13,7 @@ export function DocsDisclosureGroup({ labelledBy, sections, headingLevel = 3 }: 
   const { groupRef, expandedKeys, setExpandedKeys } = useDocsDisclosureGroupLogic()
 
   return (
-    <DisclosureGroup ref={groupRef} aria-labelledby={labelledBy} allowsMultipleExpanded expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
+    <DisclosureGroup ref={groupRef} className="docs-disclosure-group" aria-labelledby={labelledBy} allowsMultipleExpanded expandedKeys={expandedKeys} onExpandedChange={setExpandedKeys}>
       {sections.map(({ id, title, content }) => (
         <Disclosure key={id} id={id} data-documentation-disclosure={id}>
           <DisclosureHeader id={id} level={headingLevel}>{title}</DisclosureHeader>
