@@ -6,6 +6,8 @@
   min-inline-size: 0;
   min-block-size: 0;
   overflow: hidden;
+  /* Holds a resizable Panel's handle on its edge. */
+  position: relative;
   background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-family-body);
@@ -33,8 +35,45 @@
 
 /* Side content keeps its open width while the space animates, so it's revealed rather than squeezed.
    In an AppShell, the gap beside the Panel's card comes out of that width. */
-.mz-panel[data-edge='start']:not([data-state='minimized']) > * { min-inline-size: calc(var(--panel-start-width) - var(--_app-shell-join, 0px)); }
-.mz-panel[data-edge='end']:not([data-state='minimized']) > * { min-inline-size: calc(var(--panel-end-width) - var(--_app-shell-join, 0px)); }
+.mz-panel[data-edge='start']:not([data-state='minimized']) > :not(.mz-panel-resize-handle) { min-inline-size: calc(var(--_panel-start-size, var(--panel-start-width)) - var(--_app-shell-join, 0px)); }
+.mz-panel[data-edge='end']:not([data-state='minimized']) > :not(.mz-panel-resize-handle) { min-inline-size: calc(var(--_panel-end-size, var(--panel-end-width)) - var(--_app-shell-join, 0px)); }
+
+/* A resizable Panel's handle: a strip along its inner edge, wide enough to grab, with a line that
+   shows on hover, while dragging and with keyboard focus. */
+.mz-panel-resize-handle {
+  position: absolute;
+  inset-block: 0;
+  z-index: var(--z-index-raised);
+  inline-size: var(--panel-resize-handle-size);
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.mz-panel[data-edge='start'] > .mz-panel-resize-handle { inset-inline-end: 0; }
+.mz-panel[data-edge='end'] > .mz-panel-resize-handle { inset-inline-start: 0; }
+
+.mz-panel-resize-handle::after {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inline-size: var(--panel-resize-indicator-width);
+}
+
+.mz-panel[data-edge='start'] > .mz-panel-resize-handle::after { inset-inline-end: 0; }
+.mz-panel[data-edge='end'] > .mz-panel-resize-handle::after { inset-inline-start: 0; }
+
+.mz-panel-resize-handle:is([data-hovered], [data-moving])::after {
+  background: var(--panel-resize-indicator-color);
+}
+
+.mz-panel-resize-handle[data-focus-visible] {
+  outline: var(--panel-resize-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--panel-resize-focus-ring-offset);
+}
+
+@media (forced-colors: active) {
+  .mz-panel-resize-handle:is([data-hovered], [data-moving])::after { background: Highlight; }
+}
 
 .mz-panel-header {
   display: flex;

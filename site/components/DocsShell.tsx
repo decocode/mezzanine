@@ -34,7 +34,7 @@ export function DocsShell({ topBar, navigation, mainClassName, mainTabIndex, chi
     <DocsContentsContext.Provider value={contentsStore}>
       <AppShell className="docs-app-shell" startPanelSpan="full">
         {topBar}
-        <Panel id="docs-navigation" edge="start" aria-label={title} isCollapsible={false}>
+        <Panel id="docs-navigation" edge="start" aria-label={title} isCollapsible={false} isResizable>
           <NavigationPanel {...navigationProps} />
         </Panel>
         <main className={['site-content', mainClassName].filter(Boolean).join(' ')} id="main-content" tabIndex={mainTabIndex}>

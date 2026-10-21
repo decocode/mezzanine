@@ -1,10 +1,16 @@
-import { useCallback, useId, useSyncExternalStore, type ReactNode } from 'react'
+import { useCallback, useId, useRef, useState, useSyncExternalStore, type KeyboardEvent, type ReactNode, type RefObject } from 'react'
+import { Focusable, useLocale } from 'react-aria-components'
+import { mergeProps } from 'react-aria/mergeProps'
+import { useFocusRing } from 'react-aria/useFocusRing'
+import { useHover } from 'react-aria/useHover'
+import { useMove } from 'react-aria/useMove'
 import { Button, type ButtonProps } from '../Button/Button'
 import { Dialog } from '../Dialog/Dialog'
 import { Heading } from '../Heading/Heading'
 import { Modal, ModalOverlay } from '../Modal/Modal'
+import { Tooltip, TooltipTrigger } from '../Tooltip/Tooltip'
 import { CloseIcon } from '../../icons/Icons'
-import { useAppShell } from '../AppShell/AppShell'
+import { tokenInPixels, useAppShell } from '../AppShell/AppShell'
 import type { PanelEdge } from '../AppShell/panelStore'
 
 interface PanelBaseProps {
@@ -20,6 +26,10 @@ interface PanelBaseProps {
   // false it stays open, has no close button, and is hidden when there's no room beside the content,
   // so the app offers the same content another way, such as in a TopBar menu.
   isCollapsible?: boolean
+  // Whether people can change a side Panel's width, between --panel-min-width and --panel-max-width:
+  // by dragging its inner edge, clicking it to step through the widths, or with the arrow keys. A double
+  // click restores its width.
+  isResizable?: boolean
   isOpen?: boolean
   defaultOpen?: boolean
   onOpenChange?: (isOpen: boolean) => void
@@ -37,7 +47,7 @@ export type PanelProps = PanelBaseProps & (
 // An area at the start, end or bottom of an AppShell that shares the space with the main content.
 // When there's no room beside the content, a side Panel opens as a drawer instead.
 export function Panel({
-  id, edge, title, 'aria-label': label, headingLevel = 2, minimized, closeLabel, isCollapsible = true,
+  id, edge, title, 'aria-label': label, headingLevel = 2, minimized, closeLabel, isCollapsible = true, isResizable = false,
   isOpen: controlledOpen, defaultOpen = false, onOpenChange, children, className,
 }: PanelProps) {
   const name = title ?? label
@@ -48,9 +58,11 @@ export function Panel({
   const isDrawer = presentation(edge) === 'drawer'
   const isOpen = (isCollapsible ? controlledOpen ?? store.isOpen(id) : true) && (!isDrawer || store.isShownOpen(id, true))
   const classes = ['mz-panel', className].filter(Boolean).join(' ')
+  const panelRef = useRef<HTMLElement | null>(null)
 
   // Register from a ref callback, so triggers can find this Panel without an effect.
   const register = useCallback((element: HTMLElement | null) => {
+    panelRef.current = element
     if (!element) return
     return store.register(id, { edge, elementId, isOpen: isCollapsible ? controlledOpen : true, defaultOpen, hasMinimized: minimized != null, isCollapsible, onOpenChange })
   }, [store, id, edge, elementId, isCollapsible, controlledOpen, defaultOpen, minimized, onOpenChange])
@@ -82,6 +94,7 @@ export function Panel({
       inert={!isShown && minimized == null}
     >
       {isShown ? contents : minimized != null && <div className="mz-panel-minimized">{minimized}</div>}
+      {isShown && isResizable && edge !== 'bottom' && <PanelResizeHandle id={id} edge={edge} name={name} controls={elementId} panelRef={panelRef} />}
     </aside>
     {isDrawer && isCollapsible && <ModalOverlay isOpen={isOpen} onOpenChange={(open) => store.setOpen(id, open, true)} isDismissable className="mz-panel-overlay" data-edge={edge}>
       <Modal className={classes} data-edge={edge}>
@@ -89,6 +102,116 @@ export function Panel({
       </Modal>
     </ModalOverlay>}
   </>
+}
+
+// How far, in pixels, a press has to move before it counts as a drag rather than a click.
+const dragThreshold = 4
+
+interface PanelResizeHandleProps {
+  id: string
+  edge: 'start' | 'end'
+  name: string
+  // The Panel element's id, which the handle controls.
+  controls: string
+  panelRef: RefObject<HTMLElement | null>
+}
+
+// A side Panel's resize handle, following the window splitter pattern: a focusable separator that
+// pointer, touch and arrow keys move with React Aria's useMove, and Home and End take to the limits.
+// A click without dragging steps to the next width, so people who can't drag can still resize it, and
+// a double click restores the token width (its two clicks step first, then the reset wins).
+function PanelResizeHandle({ id, edge, name, controls, panelRef }: PanelResizeHandleProps) {
+  const { store, maxPanelSize } = useAppShell('Panel')
+  const { direction } = useLocale()
+  const [isMoving, setMoving] = useState(false)
+  const dragStart = useRef({ size: 0, distance: 0 })
+  // Whether the pointer moved past the threshold since it went down, so the click that ends a drag
+  // doesn't also step. Cleared on every press, in case a drag ended away from the handle.
+  const hasDragged = useRef(false)
+  // Dragging toward the main content widens the Panel; which way that is depends on the edge and the reading direction.
+  const widening = (edge === 'start') === (direction === 'ltr') ? 1 : -1
+
+  // The Panel's limits, read from its tokens, and never so wide that the main content drops below its minimum.
+  const limits = () => {
+    const panel = panelRef.current
+    const min = tokenInPixels(panel, '--panel-min-width')
+    const max = Math.max(min, Math.min(tokenInPixels(panel, '--panel-max-width'), maxPanelSize(edge)))
+    const size = store.size(id) ?? tokenInPixels(panel, edge === 'start' ? '--panel-start-width' : '--panel-end-width')
+    const base = tokenInPixels(panel, edge === 'start' ? '--panel-start-width' : '--panel-end-width')
+    return { min, max, size, base, step: tokenInPixels(panel, '--panel-resize-step') }
+  }
+  const resize = (size: number) => {
+    const { min, max } = limits()
+    store.setSize(id, Math.min(max, Math.max(min, size)))
+  }
+
+  const { moveProps } = useMove({
+    onMoveStart() {
+      dragStart.current = { size: limits().size, distance: 0 }
+    },
+    onMove({ deltaX, pointerType }) {
+      if (pointerType === 'keyboard') {
+        const { size, step } = limits()
+        resize(size + Math.sign(deltaX) * step * widening)
+        return
+      }
+      dragStart.current.distance += deltaX
+      // A press that wobbles a little is still a click; it becomes a drag once it moves further.
+      if (!hasDragged.current && Math.abs(dragStart.current.distance) < dragThreshold) return
+      if (!hasDragged.current) {
+        hasDragged.current = true
+        setMoving(true)
+        store.setResizing(true)
+      }
+      resize(dragStart.current.size + dragStart.current.distance * widening)
+    },
+    onMoveEnd() {
+      if (!isMoving && !store.isResizing) return
+      setMoving(false)
+      store.setResizing(false)
+    },
+  })
+  const { hoverProps, isHovered } = useHover({})
+  const { focusProps, isFocusVisible } = useFocusRing()
+
+  // Each click steps through the narrowest, the token width and the widest, then back to the narrowest.
+  function onClick() {
+    if (hasDragged.current) return
+    const { min, max, size, base } = limits()
+    const next = [min, base, max].find((width) => width > size + 1)
+    resize(next ?? min)
+  }
+
+  function onKeyDown(event: KeyboardEvent) {
+    if (event.key !== 'Home' && event.key !== 'End') return
+    event.preventDefault()
+    const { min, max } = limits()
+    resize(event.key === 'Home' ? min : max)
+  }
+
+  const { min, max, size } = limits()
+  return (
+    <TooltipTrigger>
+      <Focusable>
+        <div
+          {...mergeProps(moveProps, hoverProps, focusProps, { onKeyDown, onClick, onPointerDown: () => { hasDragged.current = false }, onDoubleClick: () => store.setSize(id, undefined) })}
+          className="mz-panel-resize-handle"
+          role="separator"
+          aria-orientation="vertical"
+          aria-label={`Resize ${name}`}
+          aria-controls={controls}
+          aria-valuenow={Math.round(size)}
+          aria-valuemin={Math.round(min)}
+          aria-valuemax={Math.round(max)}
+          tabIndex={0}
+          data-hovered={isHovered || undefined}
+          data-moving={isMoving || undefined}
+          data-focus-visible={isFocusVisible || undefined}
+        />
+      </Focusable>
+      <Tooltip placement={edge === 'start' ? 'end' : 'start'}>Resize</Tooltip>
+    </TooltipTrigger>
+  )
 }
 
 export type PanelTriggerProps = Omit<Extract<ButtonProps, { href?: never }>, 'ref' | 'aria-controls' | 'aria-expanded'> & {

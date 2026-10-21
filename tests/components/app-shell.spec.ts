@@ -99,3 +99,43 @@ test('Footer is the page footer landmark and fits 320px', async ({ page }) => {
   await expectNoPageOverflow(page)
   await expectNoAccessibilityViolations(page, '.footer-example')
 })
+
+// Checks the docs navigation Panel's resize handle: a named separator that reports its width, arrow
+// keys change it by the step, Home and End reach the limits, a click steps through the widths without
+// dragging, and dragging widens the Panel.
+test('A resizable Panel resizes by keyboard and pointer, within its limits', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 1000 })
+  await page.goto('/dimension')
+  const handle = page.getByRole('separator', { name: /^Resize / })
+  const navigation = page.locator('.mz-panel[data-edge="start"]')
+  await expect(handle).toHaveAttribute('aria-orientation', 'vertical')
+  const start = Number(await handle.getAttribute('aria-valuenow'))
+  const min = Number(await handle.getAttribute('aria-valuemin'))
+  const max = Number(await handle.getAttribute('aria-valuemax'))
+  expect(min).toBeLessThan(start)
+  expect(max).toBeGreaterThan(start)
+
+  await handle.focus()
+  await page.keyboard.press('ArrowRight')
+  await expect(handle).toHaveAttribute('aria-valuenow', String(start + 16))
+  await expect(handle).toHaveAttribute('data-focus-visible', 'true')
+  await page.keyboard.press('Home')
+  await expect(handle).toHaveAttribute('aria-valuenow', String(min))
+  await page.keyboard.press('End')
+  await expect(handle).toHaveAttribute('aria-valuenow', String(max))
+  await expect.poll(async () => Math.round((await navigation.boundingBox())!.width)).toBeGreaterThanOrEqual(max - 16)
+
+  await handle.click()
+  await expect(handle).toHaveAttribute('aria-valuenow', String(min))
+  await handle.click()
+  await expect(handle).toHaveAttribute('aria-valuenow', String(start))
+  await page.keyboard.press('End')
+  await handle.dblclick()
+  await expect(handle).toHaveAttribute('aria-valuenow', String(start))
+  const box = (await handle.boundingBox())!
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(box.x + box.width / 2 + 60, box.y + box.height / 2, { steps: 5 })
+  await page.mouse.up()
+  await expect(handle).toHaveAttribute('aria-valuenow', String(start + 60))
+})

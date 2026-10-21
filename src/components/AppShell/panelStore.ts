@@ -22,11 +22,15 @@ export class PanelStore {
   // Panels someone opened while they were drawers. A drawer never opens by itself, such as from
   // defaultOpen or after its AppShell narrows, because it would cover the page uninvited.
   private openedAsDrawer = new Set<string>()
+  // Widths, in pixels, that people have dragged resizable Panels to.
+  private sizes = new Map<string, number>()
   private listeners = new Set<() => void>()
   private version = 0
   // Whether someone has opened or closed a Panel yet. Panels that are open from the start appear in
   // place rather than sliding open on every page load.
   hasChanged = false
+  // Whether someone is dragging a Panel's edge, so the frame follows the pointer without animating.
+  isResizing = false
 
   subscribe = (listener: () => void) => {
     this.listeners.add(listener)
@@ -75,6 +79,22 @@ export class PanelStore {
     this.hasChanged = true
     this.notify()
     entry?.onOpenChange?.(isOpen)
+  }
+
+  // The width someone resized a Panel to, or undefined for its token width.
+  size(id: string) {
+    return this.sizes.get(id)
+  }
+
+  setSize(id: string, size: number | undefined) {
+    if (size === undefined) this.sizes.delete(id)
+    else this.sizes.set(id, size)
+    this.notify()
+  }
+
+  setResizing(isResizing: boolean) {
+    this.isResizing = isResizing
+    this.notify()
   }
 
   // The trigger that most recently attached for a Panel, so closing from inside the Panel can return focus to it.

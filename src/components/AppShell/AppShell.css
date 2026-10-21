@@ -39,9 +39,16 @@
 .mz-app-shell > .mz-panel[data-edge='bottom'] { margin-block-start: var(--_app-shell-join); }
 .mz-app-shell > .mz-panel[data-state='closed'] { border-width: 0; }
 
-/* Tracks animate only once someone opens or closes a Panel, not as Panels appear on load. */
-.mz-app-shell[data-animated] {
+/* Tracks animate only once someone opens or closes a Panel, not as Panels appear on load, and not while
+   someone drags a Panel's edge, so the frame follows the pointer directly. */
+.mz-app-shell[data-animated]:not([data-resizing]) {
   transition: grid-template-columns calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
+}
+
+/* While a Panel's edge is dragged, text isn't selected. */
+.mz-app-shell[data-resizing] {
+  cursor: col-resize;
+  user-select: none;
 }
 
 .mz-app-shell[data-bottom-panel-span='full'] {
@@ -88,9 +95,9 @@
     'start bottom end';
 }
 
-.mz-app-shell[data-start='open'] { --_app-shell-start: var(--panel-start-width); }
+.mz-app-shell[data-start='open'] { --_app-shell-start: var(--_panel-start-size, var(--panel-start-width)); }
 .mz-app-shell[data-start='minimized'] { --_app-shell-start: auto; }
-.mz-app-shell[data-end='open'] { --_app-shell-end: var(--panel-end-width); }
+.mz-app-shell[data-end='open'] { --_app-shell-end: var(--_panel-end-size, var(--panel-end-width)); }
 .mz-app-shell[data-end='minimized'] { --_app-shell-end: auto; }
 
 .mz-app-shell > header { grid-area: header; }

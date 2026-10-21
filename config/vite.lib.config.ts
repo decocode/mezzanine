@@ -19,7 +19,7 @@ export default defineConfig({
       cssFileName: 'mezzanine',
     },
     rolldownOptions: {
-      external: [/^react($|\/)/, /^react-dom($|\/)/, /^react-aria-components($|\/)/],
+      external: [/^react($|\/)/, /^react-dom($|\/)/, /^react-aria($|\/)/, /^react-aria-components($|\/)/],
     },
   },
 })

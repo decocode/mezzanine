@@ -1,4 +1,4 @@
-import { Children, createContext, isValidElement, useCallback, useContext, useState, useSyncExternalStore, type ReactNode } from 'react'
+import { Children, createContext, isValidElement, useCallback, useContext, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from 'react'
 import { Footer } from '../Footer/Footer'
 import { lengthInPixels, panelPresentations, type PanelPresentation } from './appShellLayout'
 import { PanelStore, type PanelEdge } from './panelStore'
@@ -9,6 +9,8 @@ interface AppShellState {
   // True when the start Panel can't be closed but is hidden for lack of room, so its content (usually
   // navigation) has to be reached another way, such as a TopBar's menu.
   isStartPanelHidden: boolean
+  // The widest a side Panel can be resized to before the main content drops below its minimum.
+  maxPanelSize: (edge: 'start' | 'end') => number
 }
 
 const AppShellContext = createContext<AppShellState | null>(null)
@@ -46,8 +48,8 @@ function useInlineSize(element: HTMLElement | null) {
   return useSyncExternalStore(subscribe, () => element?.getBoundingClientRect().width ?? 0, () => 0)
 }
 
-// Reads a length token from the AppShell element, in pixels.
-function tokenInPixels(element: HTMLElement | null, token: string) {
+// Reads a length token from an element, in pixels.
+export function tokenInPixels(element: HTMLElement | null, token: string) {
   if (!element) return 0
   const styles = getComputedStyle(element)
   return lengthInPixels(styles.getPropertyValue(token), parseFloat(getComputedStyle(document.documentElement).fontSize), parseFloat(styles.fontSize))
@@ -64,16 +66,28 @@ export function AppShell({ children, bottomPanelSpan = 'main', startPanelSpan = 
   const panels = store.panels()
   const onEdge = (edge: PanelEdge) => panels.find(([, entry]) => entry.edge === edge)
   const [start, end, bottom] = [onEdge('start'), onEdge('end'), onEdge('bottom')]
+  // A resized Panel's width replaces its token width.
+  const sizeOf = (panel: typeof start, token: string) => (panel && store.size(panel[0])) ?? tokenInPixels(element, token)
+  const startSize = sizeOf(start, '--panel-start-width')
+  const endSize = sizeOf(end, '--panel-end-width')
+  const minMainSize = tokenInPixels(element, '--app-shell-min-main-width')
   const presentations = panelPresentations({
     shellSize,
-    startSize: tokenInPixels(element, '--panel-start-width'),
-    endSize: tokenInPixels(element, '--panel-end-width'),
-    minMainSize: tokenInPixels(element, '--app-shell-min-main-width'),
+    startSize,
+    endSize,
+    minMainSize,
     hasStart: start != null,
     hasEnd: end != null,
     isStartOpen: start != null && store.isOpen(start[0]),
   })
   const presentation = (edge: PanelEdge): PanelPresentation => edge === 'bottom' ? 'inline' : presentations[edge]
+  const isInlineOpen = (panel: typeof start, edge: 'start' | 'end') => panel != null && store.isOpen(panel[0]) && presentations[edge] === 'inline'
+  const maxPanelSize = (edge: 'start' | 'end') => shellSize - minMainSize - (edge === 'start' ? (isInlineOpen(end, 'end') ? endSize : 0) : (isInlineOpen(start, 'start') ? startSize : 0))
+  // Resized widths reach the frame and the Panels through the shell, in place of the width tokens.
+  const resizedSizes = {
+    ...(start && store.size(start[0]) !== undefined && { '--_panel-start-size': `${store.size(start[0])}px` }),
+    ...(end && store.size(end[0]) !== undefined && { '--_panel-end-size': `${store.size(end[0])}px` }),
+  } as CSSProperties
 
   // What each edge's track shows: an open Panel, its minimised version, or nothing.
   const trackState = (panel: typeof start, edge: PanelEdge) => {
@@ -91,7 +105,7 @@ export function AppShell({ children, bottomPanelSpan = 'main', startPanelSpan = 
   const contentIndex = childList.findIndex(isContent)
 
   return (
-    <AppShellContext.Provider value={{ store, presentation, isStartPanelHidden: start != null && !start[1].isCollapsible && presentation('start') === 'drawer' }}>
+    <AppShellContext.Provider value={{ store, presentation, maxPanelSize, isStartPanelHidden: start != null && !start[1].isCollapsible && presentation('start') === 'drawer' }}>
       <div
         ref={setElement}
         className={['mz-app-shell', className].filter(Boolean).join(' ')}
@@ -99,6 +113,8 @@ export function AppShell({ children, bottomPanelSpan = 'main', startPanelSpan = 
         data-start-panel-span={startPanelSpan}
         data-end-panel-span={endPanelSpan}
         data-animated={store.hasChanged || undefined}
+        data-resizing={store.isResizing || undefined}
+        style={resizedSizes}
         data-start={trackState(start, 'start')}
         data-end={trackState(end, 'end')}
         data-bottom={trackState(bottom, 'bottom')}
