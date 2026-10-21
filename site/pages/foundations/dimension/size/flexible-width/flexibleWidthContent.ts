@@ -11,32 +11,30 @@ export const flexibleWidthContent: DocsPageContent = {
   id: 'flexible-width',
   kind: 'foundation',
   title: 'Flexible width',
-  description: 'Lots of random widths can make a page seem disorganised. A shared scale of flexible widths helps to keep things tidy and easy to manage.',
+  description: 'Lots of random widths can make a page seem disorganised. A shared set of widths helps to keep things tidy and easy to manage.',
   sections: [
     {
-      key: 'widthsThatFlex',
-      title: 'A width fit for the content',
-      body: [
-        'In the past, designers used [media queries](/interaction/media-queries) to make widths switch at certain points based on a set of screen sizes. Although better than using fixed widths (which stay the same size no matter what), media queries don’t take into account the space on the page where things are actually placed.',
-        'Flexible width works differently. It takes into account that things stretch to fill available space by default. Limits are set for different types of content, so that it can expand and contract without getting squashed or spreading out too far, no matter the screen size.',
-      ],
+      key: 'screenSize',
+      title: 'Trying to make things fit based on screen size',
+      body: ['Some design systems use [media queries](/interaction/media-queries) to make everything on a page rearrange itself at a set of certain points, based on screen sizes (or browser window widths, to be more specific). Although better than the previous method of using fixed widths, which stay the same size no matter what, media queries come with a limitation; they don’t take into account that specific types of thing need to be a certain width.'],
     },
     {
-      key: 'usingWidthScale',
-      title: 'Using Flexible width',
-      body: ['Flexible width is measured in `rem`, so that if text size is increased, width will follow suit.'],
-    },
-    {
-      key: 'fitToContent',
-      title: 'Fit the width to the content',
+      key: 'suitContent',
+      title: 'Widths that suit the content, whatever the screen size',
       body: [
+        'The default width of anything placed on a page is full-width. That might be ok for something like the surrounding container of a Footer component. However, lines of text become difficult to read if allowed to run beyond a certain number of characters. Conversely, some things end up looking squashed if allowed to become too narrow.',
+        'Flexible width makes sure things placed on a page can expand and contract in a way that suits that particular type of thing, regardless of screen size.',
         { list: [
-          '**Short text, such as a hint or a label:** a small width, so the words stay together and don’t stretch across the page.',
-          '**A few sentences or a short form:** a medium or large width, so lines stay comfortable to read. [Reading width](/text/reading-width) explains how long a line should get.',
-          '**Two things side by side:** the smallest width each one can shrink to before it should move underneath instead.',
+          'If you give something a maximum width - it won’t expand to full-width.',
+          'If you give something a minimum width - it won’t become too narrow, and you can choose to make it wrap onto a new row instead.',
+          'If you give something minimum and maximum width - it will have flexible range in which to expand and contract.',
         ] },
-        'If nothing fits, pick the nearest size rather than adding a new one.',
       ],
+    },
+    {
+      key: 'sharedWidths',
+      title: 'Shared widths',
+      body: ['If minimum or maximum width is needed, it should come from a shared set of widths. This helps to keep everything looking cohesive and orderly. These widths are measured in `rem`, so that if people increase or decrease the text size in their device or browser settings, the set of widths will follow suit.'],
     },
   ],
   relatedPages: [

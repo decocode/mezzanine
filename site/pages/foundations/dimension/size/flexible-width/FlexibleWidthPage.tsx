@@ -8,7 +8,7 @@ export default function FlexibleWidthPage() {
     <ContentPage
       content={flexibleWidthContent}
       parts={{
-        usingWidthScale: (
+        sharedWidths: (
           <div className="width-scale">
             <TokenScale items={widthLevels} sample="length" labelInSample />
           </div>
