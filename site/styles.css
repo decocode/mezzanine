@@ -703,7 +703,10 @@ a:focus-visible {
 }
 
 .typography-guidance,
-.component-section :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm) {
+.component-section :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm),
+/* A section's body paragraphs, and those under its subheadings, stop at the reading width too. */
+.component-section > p,
+.component-section > section > p {
   max-inline-size: var(--line-length);
 }
 

@@ -21,7 +21,7 @@ export const readingWidthContent: DocsPageContent = {
       key: 'lineLength',
       title: 'Line length',
       intro: [
-        '`--line-length` is the longest a line of reading text should get. Use it as the maximum width of reading text: `max-width: var(--line-length)`.',
+        '`--line-length` is the longest a line of reading text should get. Paragraphs and lists with a body text style (`mz-text-body-lg`, `-md` or `-sm`) stop at it automatically. For other reading text, use it as the maximum width: `max-width: var(--line-length)`.',
         'It is `65ch`, roughly 65 characters per line. One `ch` is the width of a zero in the current font, so the limit adapts to each theme’s typeface.',
       ],
     },

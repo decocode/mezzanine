@@ -12,6 +12,12 @@
 
 /* Body-styled prose lists inherit their role's line height. Navigation and
    component lists are unaffected unless explicitly given a body text class. */
+/* Running text stops at the reading width, so long lines stay comfortable to read. Only paragraphs
+   and lists: other elements with a body style, such as a box in a layout, keep their own width. */
+:where(p, ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm) {
+  max-inline-size: var(--line-length);
+}
+
 :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm),
 :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm) :where(ul, ol) {
   padding-inline-start: var(--space-6);

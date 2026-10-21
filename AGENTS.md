@@ -74,7 +74,7 @@ Do not put an idea into code, in the Lab or anywhere else, before the user has a
 ### Library (`src/`)
 
 - `src/` is the package. Everything a consuming app can use is exported from `src/index.ts`. Do not import from `site/` inside `src/`.
-- `react`, `react-dom` and `react-aria-components` are peer dependencies. Do not bundle them. If library code imports another package directly, list it in `package.json`.
+- `react`, `react-dom`, `react-aria-components` and `react-aria` are peer dependencies. `react-aria` provides the lower-level hooks, such as `useMove`, that `react-aria-components` is built on. Do not bundle them. If library code imports another package directly, list it in `package.json`.
 - Library components contain no product-specific content, branding, copy or imagery.
 - The library owns each component's anatomy, appearance, states, motion and behaviour. A consuming app, including the site, supplies content and a theme and positions components in its own layout. If a consumer has to re-add library class names, attach special slots, restyle internals or reimplement behaviour, the component's recipe belongs in `src/`. Move it there and tell the user.
 - A thin re-export of a React Aria component is acceptable until Mezzanine has designed that component. Once it is designed, build the recipe in `src/`.

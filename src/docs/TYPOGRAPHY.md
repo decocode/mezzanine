@@ -78,6 +78,10 @@ The class controls typography without adding colour or container layout.
 On prose lists, body text classes also apply the indentation and item spacing
 described below. Other elements retain their existing margins.
 
+On paragraphs and lists, body text classes also stop lines at the reading
+width, `--line-length`, so running text stays comfortable to read. Other
+elements with a body class, such as a box in a layout, keep their own width.
+
 The style class must not determine the semantic element. Choose `h1`, `h2`,
 `p`, `span`, `label` or another element for its meaning and structure, then
 apply the visual style.
