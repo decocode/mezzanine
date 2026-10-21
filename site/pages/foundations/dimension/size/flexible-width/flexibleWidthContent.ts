@@ -14,13 +14,8 @@ export const flexibleWidthContent: DocsPageContent = {
   description: 'Lots of random widths can make a page seem disorganised. A shared set of widths helps to keep things tidy and easy to manage.',
   sections: [
     {
-      key: 'screenSize',
-      title: 'Trying to make things fit based on screen size',
-      body: ['Some design systems use [media queries](/interaction/media-queries) to make everything on a page rearrange itself at a set of certain points, based on screen sizes (or browser window widths, to be more specific). Although better than the previous method of using fixed widths, which stay the same size no matter what, media queries come with a limitation; they don’t take into account that specific types of thing need to be a certain width.'],
-    },
-    {
       key: 'suitContent',
-      title: 'Widths that suit the content, whatever the screen size',
+      title: 'Widths that suit the content, on every size of screen',
       body: [
         'The default width of anything placed on a page is full-width. That might be ok for something like the surrounding container of a Footer component. However, lines of text become difficult to read if allowed to run beyond a certain number of characters. Conversely, some things end up looking squashed if allowed to become too narrow.',
         'Flexible width makes sure things placed on a page can expand and contract in a way that suits that particular type of thing, regardless of screen size.',
@@ -30,6 +25,12 @@ export const flexibleWidthContent: DocsPageContent = {
           'If you give something minimum and maximum width - it will have flexible range in which to expand and contract.',
         ] },
       ],
+    },
+    {
+      key: 'screenSize',
+      title: 'Why Mezzanine doesn’t use media queries for widths',
+      isCollapsible: true,
+      body: ['Some design systems use [media queries](/interaction/media-queries) to make everything on a page rearrange itself at a set of certain points, based on screen sizes (or browser window widths, to be more specific). Although better than the previous method of using fixed widths, which stay the same size no matter what, media queries come with a limitation; they don’t take into account that specific types of thing need to be a certain width.'],
     },
     {
       key: 'sharedWidths',

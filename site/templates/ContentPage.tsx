@@ -32,6 +32,7 @@ export function ContentPage({ content, parts = {}, showContents }: ContentPagePr
     return {
       id,
       title: sectionTitle(section, content.kind),
+      isCollapsible: section.isCollapsible,
       subsections: section.subsections || subheadings.length
         ? [...(section.subsections ?? []), ...subheadings.map(({ id, title }) => ({ id, label: title }))]
         : undefined,

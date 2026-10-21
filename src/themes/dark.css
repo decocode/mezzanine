@@ -6,8 +6,8 @@
   --color-page: var(--color-neutral-980);
   --color-surface: var(--color-neutral-950);
 
-  --color-text: var(--color-neutral-50);
-  --color-text-muted: var(--color-neutral-300);
+  --color-text: var(--color-neutral-200);
+  --color-text-muted: var(--color-neutral-400);
 
   /* Decorative lines are soft; controls keep 3:1 borders. */
   --color-border: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
@@ -102,8 +102,8 @@
     --color-page: var(--color-neutral-980);
     --color-surface: var(--color-neutral-950);
 
-    --color-text: var(--color-neutral-50);
-    --color-text-muted: var(--color-neutral-300);
+    --color-text: var(--color-neutral-200);
+    --color-text-muted: var(--color-neutral-400);
 
     /* Decorative lines are soft; controls keep 3:1 borders. */
     --color-border: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);

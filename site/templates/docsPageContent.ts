@@ -28,6 +28,8 @@ export interface ContentSection {
   readonly key: string
   // Needed unless the key is one of the standard section titles.
   readonly title?: string
+  // Shown as a closed Disclosure, with the title as its header, for detail some readers can skip.
+  readonly isCollapsible?: boolean
   // Introductory paragraphs, shown in the muted description style.
   readonly intro?: readonly Block[]
   // Body paragraphs, shown as ordinary text.
