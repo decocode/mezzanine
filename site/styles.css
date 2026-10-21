@@ -299,7 +299,7 @@ a:focus-visible {
 /* An index page's cards, one for each child page (see PageCards.tsx). */
 .page-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
   gap: var(--space-4);
   margin: 0;
   padding: 0;
@@ -313,7 +313,7 @@ a:focus-visible {
 /* Token scales: every step is a card with a sample drawn from its token (see TokenScale.tsx). */
 .token-scale {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
   gap: var(--space-4);
   margin: 0;
   padding: 0;
@@ -376,7 +376,7 @@ a:focus-visible {
 
 /* Example parts shared by the docs and the Lab: an example's explanation, the CSS behind it, and value pickers. */
 .example-text {
-  max-inline-size: 70ch;
+  max-inline-size: var(--line-length);
 }
 
 .css-notes,
@@ -386,7 +386,7 @@ a:focus-visible {
 }
 
 .css-notes-body {
-  max-inline-size: 70ch;
+  max-inline-size: var(--line-length);
 }
 
 .example-stack {
@@ -405,7 +405,7 @@ a:focus-visible {
 /* Component examples that need a sensible width inside an ExampleZone. */
 .autocomplete-example,
 .list-box-example {
-  inline-size: min(20rem, 100%);
+  inline-size: min(var(--width-md), 100%);
 }
 
 .autocomplete-example {
@@ -848,8 +848,8 @@ a:focus-visible {
 
 .documentation-state-matrix .react-aria-Column:first-child,
 .documentation-state-matrix .react-aria-Cell:first-child {
-  width: 15rem;
-  min-width: 15rem;
+  inline-size: var(--width-sm);
+  min-inline-size: var(--width-sm);
 }
 
 .documentation-state-matrix .react-aria-Column:not(:first-child),
@@ -968,12 +968,12 @@ a:focus-visible {
 .button-sizes-table .react-aria-Cell { width: calc(100% / 3); }
 
 /* Text and Reading direction page examples: a narrow Card for long words, and vertical text in a Card. */
-.text-narrow-example .mz-card { max-width: 12rem; }
+.text-narrow-example .mz-card { max-inline-size: var(--width-xs); }
 /* Language examples: as many per row as fit. */
 .text-language-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
-/* In vertical writing, inline-size is the height, so lines wrap after 12rem. */
+/* In vertical writing, inline-size is the height, so lines wrap after the xs width (12rem). */
 /* The Card's gap between children follows each child's own direction, so vertical text needs its own space above. */
-.text-vertical-example { writing-mode: vertical-rl; inline-size: 12rem; margin-top: var(--space-4); }
+.text-vertical-example { writing-mode: vertical-rl; inline-size: var(--width-xs); margin-top: var(--space-4); }
 /* Reading direction › Start and end: one box uses physical sides on purpose, to show it doesn't mirror. */
 .text-direction-example p { margin: 0 0 var(--space-2); }
 .text-direction-physical { padding-block: var(--space-3); border-left: var(--border-width-xl) solid var(--color-warning-600); padding-left: var(--space-4); }
@@ -1010,7 +1010,7 @@ a:focus-visible {
    since its links are short. The minimum main width keeps On this page until there's genuinely space
    (60rem), while the navigation Panel still appears from 48rem, where the TopBar stops offering it in
    its menu. */
-.docs-app-shell { --panel-start-width: 16rem; --panel-end-width: 12rem; --app-shell-min-main-width: 32rem; }
+.docs-app-shell { --panel-start-width: 16rem; --panel-end-width: var(--width-xs); --app-shell-min-main-width: var(--width-lg); }
 /* Custom properties inherit, so an AppShell shown as an example inside the docs keeps the library's own minimum. */
 .docs-app-shell .mz-app-shell { --app-shell-min-main-width: var(--ratio-pair-min-area-width); }
 .docs-app-shell:has(> .mz-panel[data-edge='end'][data-state='open']) .docs-contents-inline { display: none; }
