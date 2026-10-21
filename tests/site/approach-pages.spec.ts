@@ -8,6 +8,8 @@ import { safeAreasCssNotes } from '../../site/pages/foundations/interaction/safe
 import { supportsCssNotes } from '../../site/pages/foundations/interaction/supports/supportsContent'
 import { readingOrderCssNotes } from '../../site/pages/foundations/text/reading-order/readingOrderContent'
 import { ratioPairCssNotes } from '../../site/pages/foundations/layout/ratio-pair/ratioPairContent'
+import { aspectRatioCssNotes } from '../../site/pages/foundations/dimension/size/aspect-ratio/aspectRatioContent'
+import { spaceCssNotes } from '../../site/pages/foundations/dimension/space/spaceContent'
 
 // The Foundations pages that came from the Lab, with the stylesheet each one's CSS notes quote.
 const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string }[] = [
@@ -16,6 +18,8 @@ const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string
   { path: '/interaction/supports', notes: supportsCssNotes },
   { path: '/text/reading-order', notes: readingOrderCssNotes, stylesheet: 'site/pages/foundations/text/reading-order/readingOrder.css' },
   { path: '/layout/ratio-pair', notes: ratioPairCssNotes, stylesheet: 'src/styles/layout.css' },
+  { path: '/dimension/size/aspect-ratio', notes: aspectRatioCssNotes, stylesheet: 'site/pages/foundations/dimension/size/aspect-ratio/aspectRatio.css' },
+  { path: '/dimension/space', notes: spaceCssNotes, stylesheet: 'site/pages/foundations/dimension/space/space.css' },
 ]
 
 // Checks the CSS quoted in each "The CSS behind" panel matches its stylesheet, apart from example CSS.

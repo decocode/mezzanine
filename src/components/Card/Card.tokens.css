@@ -10,4 +10,10 @@
   --card-foreground: var(--color-text);
   --card-border: var(--color-border);
   --card-elevation: var(--elevation-raised-1);
+  /* A card with href: its arrow, its border on hover, and its focus ring. */
+  --card-arrow-size: var(--icon-size-sm);
+  --card-arrow-color: var(--color-accent);
+  --card-border-hovered: var(--color-border-control);
+  --card-focus-ring-width: var(--focus-ring-width);
+  --card-focus-ring-offset: var(--focus-ring-offset);
 }

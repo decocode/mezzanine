@@ -46,11 +46,6 @@ export function Center({ children, max }: Children & { max?: string }) {
   return <div className="lab-center" style={vars({ '--lab-center-max': max })}>{children}</div>
 }
 
-// AspectRatio: a fixed shape, such as "16 / 9", that crops the picture inside it.
-export function AspectRatio({ children, ratio }: Children & { ratio?: string }) {
-  return <div className="lab-aspect-ratio" style={vars({ '--lab-aspect-ratio': ratio })}>{children}</div>
-}
-
 // Reel: a row that scrolls sideways. It is a named region that takes focus, so keyboard users can scroll it.
 export function Reel({ children, label, itemWidth }: Children & { label: string; itemWidth?: string }) {
   return <div className="lab-reel" role="region" aria-label={label} tabIndex={0} style={vars({ '--lab-reel-item': itemWidth })}>{children}</div>

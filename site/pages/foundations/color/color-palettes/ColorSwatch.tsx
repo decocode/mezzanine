@@ -1,6 +1,6 @@
-import type { ColorPaletteDefinition } from './colorContent'
+import type { ColorPaletteDefinition } from './colorPalettesContent'
 import { chooseSwatchTextTone } from './colorSwatchLogic'
-import { useTokenValue } from '../../../components/tokenValueLogic'
+import { useTokenValue } from '../../../../components/tokenValueLogic'
 
 export function ColorSwatch({
   darkTextValue,

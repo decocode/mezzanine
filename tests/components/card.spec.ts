@@ -23,3 +23,22 @@ for (const theme of themes) {
     await expectNoAccessibilityViolations(page, 'main .mz-card')
   })
 }
+
+// Checks that a Card with href is one link with a hidden arrow, that keyboard focus shows
+// a ring on it and that pressing Enter follows it.
+test('a Card with href is one link that keyboard users can follow', async ({ page }) => {
+  await page.goto('/dimension')
+  const card = page.locator('main a.mz-card', { has: page.getByRole('heading', { name: 'Size', level: 3 }) })
+  await expect(card).toHaveCount(1)
+  await expect(card).toHaveAttribute('href', '/dimension/size')
+  await expect(card.getByRole('link')).toHaveCount(0)
+  await expect(card.locator('.mz-card-arrow')).toHaveAttribute('aria-hidden', 'true')
+  await card.focus()
+  await page.keyboard.press('Shift+Tab')
+  await page.keyboard.press('Tab')
+  await expect(card).toHaveAttribute('data-focus-visible', 'true')
+  expect(await card.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
+  await page.keyboard.press('Enter')
+  await expect(page).toHaveURL(/\/dimension\/size$/)
+  await expectNoAccessibilityViolations(page, 'main')
+})

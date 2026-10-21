@@ -6,13 +6,10 @@ import { MeasuringTheBoxExample } from './box-basics/measuring-the-box/Measuring
 import { ViewportUnitsExample } from './box-basics/viewport-units/ViewportUnitsExample'
 import { SizingTheBoxExample } from './box-basics/sizing-the-box/SizingTheBoxExample'
 import { CenterExample } from './box-basics/center/CenterExample'
-import { MarginAndPaddingExample } from './add-space/margin-and-padding/MarginAndPaddingExample'
-import { GapExample } from './add-space/gap/GapExample'
 import { SpacingExample } from './add-space/spacing/SpacingExample'
 import { AlignmentExample } from './inside-the-box/alignment/AlignmentExample'
 import { FillingTheBoxExample } from './inside-the-box/filling-the-box/FillingTheBoxExample'
 import { OverflowingTheBoxExample } from './inside-the-box/overflowing-the-box/OverflowingTheBoxExample'
-import { AspectRatioExample } from './inside-the-box/aspect-ratio/AspectRatioExample'
 import { ContentColumnsExample } from './inside-the-box/content-columns/ContentColumnsExample'
 import { BoxHasContentExample } from './inside-the-box/box-has-content/BoxHasContentExample'
 import { RowExample } from './side-by-side/row/RowExample'
@@ -32,13 +29,10 @@ export const stageExamples: StageExamples = {
   viewportUnits: { Example: ViewportUnitsExample },
   sizingTheBox: { Example: SizingTheBoxExample },
   center: { Example: CenterExample },
-  marginAndPadding: { Example: MarginAndPaddingExample },
-  gap: { Example: GapExample },
   spacing: { Example: SpacingExample },
   alignment: { Example: AlignmentExample },
   fillingTheBox: { Example: FillingTheBoxExample },
   overflowingTheBox: { Example: OverflowingTheBoxExample },
-  aspectRatio: { Example: AspectRatioExample },
   contentColumns: { Example: ContentColumnsExample },
   boxHasContent: { Example: BoxHasContentExample },
   row: { Example: RowExample },

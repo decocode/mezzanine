@@ -236,12 +236,6 @@
   box-sizing: border-box;
 }
 
-.lab-padding-box {
-  padding: var(--lab-padding);
-  border: var(--border-width-xl) solid var(--color-text);
-  background: var(--color-surface);
-}
-
 /* The box: sizing and units. */
 .lab-unit-bar {
   box-sizing: border-box;
@@ -340,21 +334,6 @@
   place-items: center;
   min-height: 10rem;
   border: var(--border-width-baseline) dashed var(--color-text-muted);
-}
-
-/* Add space: gap and the spacing scale. */
-.lab-spacing-example {
-  border: var(--border-width-baseline) dashed var(--color-text-muted);
-}
-
-.lab-spacing-margin > * {
-  margin: var(--space-4);
-}
-
-.lab-spacing-gap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--lab-gap);
 }
 
 /* Spacing in use: a form grouped by space, headings joined to their text, and the candidate ladder. */
@@ -460,17 +439,6 @@
   box-sizing: content-box;
   max-inline-size: var(--lab-center-max, 60ch);
   margin-inline: auto;
-}
-
-.lab-aspect-ratio {
-  aspect-ratio: var(--lab-aspect-ratio, 16 / 9);
-  overflow: hidden;
-}
-
-.lab-aspect-ratio > img {
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
 }
 
 .lab-reel {

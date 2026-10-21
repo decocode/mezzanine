@@ -42,7 +42,7 @@ export const accessibilityContent: DocsPageContent = {
         namesAreCode: false,
         rows: [
           { name: 'Visible focus', description: 'Keyboard focus shows a ring in `--color-focus`. See [Interaction](/interaction).' },
-          { name: 'Colour contrast', description: 'Colour roles pair text and surfaces from the shared palettes. Automated scans check contrast. See [Color](/color).' },
+          { name: 'Colour contrast', description: 'Colour roles pair text and surfaces from the shared palettes. Automated scans check contrast. See [Color palettes](/color/palettes).' },
           { name: 'Reduced motion', description: 'Every component with motion follows the system reduced-motion setting, which nothing overrides. The Wireframe theme also removes motion. State changes, such as a chevron turning, then happen immediately, so the state stays visible. See [Motion](/motion).' },
           { name: 'Forced colours', description: 'In Windows high contrast mode, borders, focus rings and selection stay visible. Browser tests check this for several components.' },
           { name: 'Text size', description: 'Library lengths are stored in `rem`, so spacing and sizes grow when someone increases their default text size. See [Spacing](/spacing).' },

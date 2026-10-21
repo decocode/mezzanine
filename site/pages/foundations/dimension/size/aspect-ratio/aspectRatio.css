@@ -1,0 +1,17 @@
+/* The Aspect ratio example. The page's CSS notes quote these rules, and a browser test checks that
+   they still match. */
+
+.aspect-ratio-example {
+  max-inline-size: var(--width-md);
+}
+
+.aspect-ratio-frame {
+  aspect-ratio: var(--_aspect-ratio);
+  overflow: hidden;
+}
+
+.aspect-ratio-frame > img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}

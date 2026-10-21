@@ -184,19 +184,12 @@ a:focus-visible {
 }
 
 .core-color-palettes,
-.color-palette-category,
-.semantic-color-palettes {
+.color-palette-category {
   min-width: 0;
 }
 
-.color-palette-category > h4,
-.core-color-palettes > h3,
-.semantic-color-palettes > h3 {
+.color-palette-category > h3 {
   margin: 0 0 var(--space-4);
-}
-
-.core-color-palettes {
-  margin-bottom: var(--space-12);
 }
 
 .core-color-palettes > .color-palette-category:last-child {
@@ -223,7 +216,7 @@ a:focus-visible {
   margin-bottom: var(--space-4);
 }
 
-.color-palette-heading h4,
+.color-palette-heading h3,
 .color-palette-heading p {
   margin: 0;
 }
@@ -303,6 +296,20 @@ a:focus-visible {
   line-height: 1;
 }
 
+/* An index page's cards, one for each child page (see PageCards.tsx). */
+.page-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-cards > li {
+  display: grid;
+}
+
 /* Token scales: every step is a card with a sample drawn from its token (see TokenScale.tsx). */
 .token-scale {
   display: grid;
@@ -338,6 +345,25 @@ a:focus-visible {
   block-size: var(--space-6);
   border: 0;
   background: var(--color-accent-500);
+}
+
+/* A token and its value on one line, wrapping onto two when the card is narrow. */
+.token-scale-token-value {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* A length sample with its name inside: a taller bar with the name at its start, in the accent
+   pair so it keeps its contrast. */
+.token-scale[data-sample='length'][data-label-in-sample] .token-scale-sample {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  block-size: auto;
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-accent-emphasis);
+  color: var(--color-accent-inverse);
 }
 
 /* Opacity samples: a block of the accent colour at each step, over a checkerboard, so the pattern
@@ -664,6 +690,12 @@ a:focus-visible {
   margin-block-end: 0;
 }
 
+/* An example or table after a subheading's text belongs to that subheading, so it keeps the
+   within-group gap rather than touching the text. */
+.component-section > section + :not(section) {
+  margin-block-start: var(--space-4);
+}
+
 .component-section-description {
   max-width: var(--line-length);
   margin: 0 0 var(--space-4);
@@ -932,12 +964,7 @@ a:focus-visible {
 .button-sizes-table .react-aria-Column,
 .button-sizes-table .react-aria-Cell { width: calc(100% / 3); }
 
-/* Text and Reading direction page examples: a paragraph at the line length, a narrow Card for long words, and vertical text in a Card. */
-.text-line-length-example { max-width: var(--line-length); margin: 0; }
-/* The line length comparison: a label above each paragraph. */
-.text-comparison { display: grid; gap: var(--space-2); }
-.text-comparison > p { margin: 0; }
-.text-comparison > p + .mz-text-label-md { margin-top: var(--space-4); }
+/* Text and Reading direction page examples: a narrow Card for long words, and vertical text in a Card. */
 .text-narrow-example .mz-card { max-width: 12rem; }
 /* Language examples: as many per row as fit. */
 .text-language-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }

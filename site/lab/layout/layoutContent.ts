@@ -10,13 +10,10 @@ import { measuringTheBoxPage } from './box-basics/measuring-the-box/measuringThe
 import { viewportUnitsPage } from './box-basics/viewport-units/viewportUnitsContent'
 import { sizingTheBoxPage } from './box-basics/sizing-the-box/sizingTheBoxContent'
 import { centerPage } from './box-basics/center/centerContent'
-import { marginAndPaddingPage } from './add-space/margin-and-padding/marginAndPaddingContent'
-import { gapPage } from './add-space/gap/gapContent'
 import { spacingPage } from './add-space/spacing/spacingPageContent'
 import { alignmentPage } from './inside-the-box/alignment/alignmentContent'
 import { fillingTheBoxPage } from './inside-the-box/filling-the-box/fillingTheBoxContent'
 import { overflowingTheBoxPage } from './inside-the-box/overflowing-the-box/overflowingTheBoxContent'
-import { aspectRatioPage } from './inside-the-box/aspect-ratio/aspectRatioContent'
 import { contentColumnsPage } from './inside-the-box/content-columns/contentColumnsContent'
 import { boxHasContentPage } from './inside-the-box/box-has-content/boxHasContentContent'
 import { rowPage } from './side-by-side/row/rowContent'
@@ -51,8 +48,8 @@ export const layoutStages: LayoutStage[] = [
 // The pages in each group, in reading order.
 const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
   boxBasics: [theBoxModelPage, typesOfBoxPage, measuringTheBoxPage, viewportUnitsPage, sizingTheBoxPage, centerPage],
-  addSpace: [marginAndPaddingPage, gapPage, spacingPage],
-  insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, aspectRatioPage, contentColumnsPage, boxHasContentPage],
+  addSpace: [spacingPage],
+  insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, contentColumnsPage, boxHasContentPage],
   sideBySide: [rowPage, rowWrapPage, rowWrapGrowPage, reelPage],
   gridsAndColumns: [columnPage, gridPage, subgridPage],
   container: [containerQueriesPage, fluidSizingPage],

@@ -38,3 +38,44 @@
   line-height: var(--line-height-title-md);
   text-transform: var(--text-transform-title);
 }
+
+/* A card with href is one link: its text keeps the card's colour, and hover and keyboard focus
+   show on the card's edge. Its content stacks so the arrow can sit at the end, however tall the card. */
+a.mz-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* The arrow sits at the card's end corner and nudges toward the end on hover. */
+.mz-card > .mz-card-arrow {
+  display: flex;
+  justify-content: flex-end;
+  margin-block-start: auto;
+  padding-block-start: var(--card-content-gap);
+  color: var(--card-arrow-color);
+}
+
+.mz-card-arrow svg {
+  inline-size: var(--card-arrow-size);
+  block-size: var(--card-arrow-size);
+  transition: translate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
+}
+
+a.mz-card[data-hovered] .mz-card-arrow svg {
+  translate: var(--motion-distance-reveal) 0;
+}
+
+a.mz-card[data-hovered] .mz-card-arrow:dir(rtl) svg {
+  translate: calc(var(--motion-distance-reveal) * -1) 0;
+}
+
+a.mz-card[data-hovered] {
+  border-color: var(--card-border-hovered);
+}
+
+a.mz-card[data-focus-visible] {
+  outline: var(--card-focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--card-focus-ring-offset);
+}

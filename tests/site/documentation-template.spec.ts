@@ -160,7 +160,7 @@ test('technical disclosures support keyboard toggling and repeated section links
   await expect(props).toBeInViewport()
 })
 
-for (const path of ['/top-bar', '/color', '/motion', '/typography/prose', '/shape', '/shape/corners', '/shape/borders', '/elevation']) {
+for (const path of ['/top-bar', '/color/palettes', '/motion', '/typography/prose', '/shape', '/shape/corners', '/shape/borders', '/elevation']) {
   test(`${path} places page contents in the end Panel on wide screens`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
     await page.goto(path)

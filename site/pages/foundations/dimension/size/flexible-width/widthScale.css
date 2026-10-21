@@ -1,4 +1,4 @@
 /* Widths are longer than a card in the usual grid, so each step takes a full row. */
-.size-widths .token-scale {
+.width-scale .token-scale {
   grid-template-columns: minmax(0, 1fr);
 }

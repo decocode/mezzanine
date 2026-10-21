@@ -18,6 +18,9 @@ export interface SiteNavigationGroup {
   path?: string
   pages: SitePageDefinition[]
   groups?: SiteNavigationGroup[]
+  // The ids of its pages and child groups in reading order, for a group whose items read as a
+  // sequence. Without it, navigation lists them alphabetically.
+  order?: readonly string[]
 }
 
 export const landingPage: SitePageDefinition = {
@@ -39,9 +42,9 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     // Foundations: how Mezzanine works and its visual values. Themes can change many of the values.
     id: 'foundations',
     label: 'Foundations',
+    order: ['text', 'dimension', 'layout', 'layers', 'color', 'shape', 'effects', 'motion', 'icons', 'interaction', 'accessibility', 'themes'],
     pages: [
       { id: 'accessibility', label: 'Accessibility', path: '/accessibility', status: 'implemented' },
-      { id: 'color', label: 'Color', path: '/color', status: 'implemented' },
       { id: 'motion', label: 'Motion', path: '/motion', status: 'implemented' },
       { id: 'icons', label: 'Icons', path: '/icons', status: 'implemented' },
     ],
@@ -69,6 +72,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'fluid-text', label: 'Fluid text', path: '/text/fluid-text', status: 'implemented' },
           { id: 'reading-direction', label: 'Reading direction', path: '/text/reading-direction', status: 'implemented' },
           { id: 'reading-order', label: 'Reading order', path: '/text/reading-order', status: 'implemented' },
+          { id: 'reading-width', label: 'Reading width', path: '/text/reading-width', status: 'implemented' },
         ],
       },
       {
@@ -76,9 +80,45 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         label: 'Layout',
         path: '/layout',
         pages: [
-          { id: 'spacing', label: 'Spacing', path: '/layout/spacing', status: 'implemented' },
-          { id: 'size', label: 'Size', path: '/layout/size', status: 'implemented' },
           { id: 'ratio-pair', label: 'Ratio pair', path: '/layout/ratio-pair', status: 'implemented' },
+        ],
+      },
+      {
+        id: 'dimension',
+        label: 'Dimension',
+        path: '/dimension',
+        pages: [],
+        groups: [
+          {
+            id: 'size',
+            label: 'Size',
+            path: '/dimension/size',
+            order: ['flexible-width', 'aspect-ratio'],
+            pages: [
+              { id: 'flexible-width', label: 'Flexible width', path: '/dimension/size/flexible-width', status: 'implemented' },
+              { id: 'aspect-ratio', label: 'Aspect ratio', path: '/dimension/size/aspect-ratio', status: 'implemented' },
+            ],
+          },
+          {
+            id: 'space',
+            label: 'Space',
+            path: '/dimension/space',
+            order: ['spacing-scale', 'spacing-roles'],
+            pages: [
+              { id: 'spacing-scale', label: 'Spacing scale', path: '/dimension/space/spacing-scale', status: 'implemented' },
+              { id: 'spacing-roles', label: 'Spacing roles', path: '/dimension/space/spacing-roles', status: 'implemented' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'color',
+        label: 'Color',
+        path: '/color',
+        order: ['color-palettes', 'color-roles'],
+        pages: [
+          { id: 'color-palettes', label: 'Color palettes', path: '/color/palettes', status: 'implemented' },
+          { id: 'color-roles', label: 'Color roles', path: '/color/roles', status: 'implemented' },
         ],
       },
       {
@@ -110,15 +150,18 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'scroll-padding', label: 'Scroll padding', path: '/layers/scroll-padding', status: 'implemented' },
         ],
       },
-    ],
-  },
-  {
-    id: 'themes',
-    label: 'Themes',
-    pages: [
-      { id: 'wireframe', label: 'Wireframe', path: '/wireframe', status: 'implemented' },
-      { id: 'light-and-dark-mode', label: 'Light & Dark mode', path: '/light-and-dark-mode', status: 'empty' },
-      { id: 'custom-themes', label: 'Custom themes', path: '/custom-themes', status: 'empty' },
+      {
+        id: 'themes',
+        label: 'Themes',
+        path: '/themes',
+        order: ['light-mode', 'dark-mode', 'wireframe', 'custom-themes'],
+        pages: [
+          { id: 'light-mode', label: 'Light mode', path: '/themes/light-mode', status: 'empty' },
+          { id: 'dark-mode', label: 'Dark mode', path: '/themes/dark-mode', status: 'empty' },
+          { id: 'wireframe', label: 'Wireframe', path: '/themes/wireframe', status: 'implemented' },
+          { id: 'custom-themes', label: 'Custom themes', path: '/themes/custom-themes', status: 'empty' },
+        ],
+      },
     ],
   },
   {

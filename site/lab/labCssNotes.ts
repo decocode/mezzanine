@@ -6,13 +6,10 @@ import { measuringTheBoxCssNotes } from './layout/box-basics/measuring-the-box/m
 import { viewportUnitsCssNotes } from './layout/box-basics/viewport-units/viewportUnitsContent'
 import { sizingTheBoxCssNotes } from './layout/box-basics/sizing-the-box/sizingTheBoxContent'
 import { centerCssNotes } from './layout/box-basics/center/centerContent'
-import { marginAndPaddingCssNotes } from './layout/add-space/margin-and-padding/marginAndPaddingContent'
-import { gapCssNotes } from './layout/add-space/gap/gapContent'
 import { spacingCssNotes } from './layout/add-space/spacing/spacingPageContent'
 import { alignmentCssNotes } from './layout/inside-the-box/alignment/alignmentContent'
 import { fillingTheBoxCssNotes } from './layout/inside-the-box/filling-the-box/fillingTheBoxContent'
 import { overflowingTheBoxCssNotes } from './layout/inside-the-box/overflowing-the-box/overflowingTheBoxContent'
-import { aspectRatioCssNotes } from './layout/inside-the-box/aspect-ratio/aspectRatioContent'
 import { contentColumnsCssNotes } from './layout/inside-the-box/content-columns/contentColumnsContent'
 import { boxHasContentCssNotes } from './layout/inside-the-box/box-has-content/boxHasContentContent'
 import { rowCssNotes } from './layout/side-by-side/row/rowContent'
@@ -37,13 +34,10 @@ export const cssNotes: Record<string, CssNote> = {
   ...viewportUnitsCssNotes,
   ...sizingTheBoxCssNotes,
   ...centerCssNotes,
-  ...marginAndPaddingCssNotes,
-  ...gapCssNotes,
   ...spacingCssNotes,
   ...alignmentCssNotes,
   ...fillingTheBoxCssNotes,
   ...overflowingTheBoxCssNotes,
-  ...aspectRatioCssNotes,
   ...contentColumnsCssNotes,
   ...boxHasContentCssNotes,
   ...rowCssNotes,

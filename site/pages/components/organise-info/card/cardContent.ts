@@ -4,7 +4,7 @@ export const cardContent: DocsPageContent = {
   id: 'card',
   kind: 'component',
   title: 'Card',
-  description: 'A card groups related content, such as a heading, some text and an action, on its own surface. It is a static container: the card itself does nothing when pressed.',
+  description: 'A card groups related content, such as a heading, some text and an action, on its own surface. On its own the card does nothing when pressed; with `href`, the whole card is a link.',
   sections: [
     { key: 'example', intro: ['`Card` renders a surface with a border, a raised shadow and space around its content. Its content is composed from other components.'] },
   ],
@@ -16,7 +16,7 @@ export const cardContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'Card', description: 'Renders a `div` with the card surface. It adds even space between its direct children.' },
+          { name: 'Card', description: 'Renders a `div` with the card surface, or a React Aria `Link` when given `href`. It adds even space between its direct children.' },
           { name: 'Heading', description: 'Optional. A `Heading` placed directly inside the card uses the Title medium text style.' },
         ],
       },
@@ -26,7 +26,7 @@ export const cardContent: DocsPageContent = {
       body: [
         'Place the content inside `Card` as its children: for example a `Heading`, paragraphs and `Button` or `Link` controls. Card adds the spacing between them.',
         'Content flows as it does elsewhere on a page: headings and paragraphs fill the width, while inline content such as `code`, a `Badge` or a `Link` keeps its natural size. To put inline content on its own line, place it in a paragraph.',
-        'Card has no interaction of its own. Put actions on Buttons or Links inside it rather than making the whole card clickable.',
+        'A card with one destination can be a link: give `Card` an `href`, and the whole card takes people there. An arrow at its end shows that it can be pressed. It accepts React Aria `Link` props, such as `target`. A linked card must not contain other Buttons or Links, so for a card with several actions, leave out `href` and put each action on its own Button or Link.',
         'Pass `className` to position the card in your layout. Card also accepts the other attributes of a `div`.',
       ],
     },
@@ -34,6 +34,7 @@ export const cardContent: DocsPageContent = {
       key: 'accessibility',
       body: [
         'Card adds no role or accessible name. Give it a `Heading` at the right level so people using a screen reader can find and identify it.',
+        'A card with `href` is a link, and its accessible name is all the text inside it, heading first. The arrow is hidden from screen readers, which announce the link instead. Keep that text short so the link’s name stays easy to listen to.',
       ],
     },
     {
@@ -51,6 +52,11 @@ export const cardContent: DocsPageContent = {
           { name: '--card-foreground', description: 'Text colour inside the card.' },
           { name: '--card-border', description: 'Card border colour.' },
           { name: '--card-elevation', description: 'Card shadow; defaults to --elevation-raised-1.' },
+          { name: '--card-arrow-size', description: 'Size of the arrow on a card with `href`.' },
+          { name: '--card-arrow-color', description: 'Colour of the arrow on a card with `href`.' },
+          { name: '--card-border-hovered', description: 'Border colour of a card with `href` on hover.' },
+          { name: '--card-focus-ring-width', description: 'Focus ring thickness of a card with `href`.' },
+          { name: '--card-focus-ring-offset', description: 'Gap between a card with `href` and its focus ring.' },
         ],
       },
     },

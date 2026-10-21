@@ -1,0 +1,36 @@
+/* The Space examples. The page's CSS notes quote these rules, and a browser test checks
+   that they still match. */
+
+.space-area {
+  border: var(--border-width-baseline) dashed var(--color-text-muted);
+}
+
+.space-item {
+  box-sizing: border-box;
+  min-inline-size: 0;
+  padding: var(--space-3);
+  border: var(--border-width-baseline) solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.space-margin > * {
+  margin: var(--space-4);
+}
+
+.space-padding {
+  padding: var(--_padding);
+  border: var(--border-width-xl) solid var(--color-text);
+  background: var(--color-surface);
+}
+
+.space-content {
+  padding: var(--space-3);
+  border: var(--border-width-baseline) solid var(--color-border);
+  background: var(--color-page);
+}
+
+.space-gap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--_gap);
+}
