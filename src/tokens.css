@@ -11,6 +11,7 @@
 @import './tokens/interaction.tokens.css';
 @import './tokens/typography.tokens.css';
 @import './tokens/space.tokens.css';
+@import './tokens/size.tokens.css';
 @import './tokens/layout.tokens.css';
 @import './tokens/icon.tokens.css';
 @import './tokens/text.tokens.css';

@@ -5,7 +5,7 @@
   --switch-track-width: calc(var(--switch-track-height) * 2);
   --switch-track-height: var(--icon-size-sm);
   --switch-handle-size: var(--icon-size-xs);
-  --switch-content-gap: var(--space-2);
+  --switch-content-gap: var(--space-gap-control);
   --switch-border-width: var(--border-width-baseline);
   --switch-border-radius: var(--radius-full);
   --switch-focus-ring-width: var(--focus-ring-width);

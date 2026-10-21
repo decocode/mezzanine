@@ -1,0 +1,9 @@
+/* Size tokens: the named widths that components take their widths from. */
+
+:where(:root) {
+  /* Width scale: how wide or narrow something may be, such as a tooltip's longest line or a Panel. */
+  --width-xs: 12rem;
+  --width-sm: 15rem;
+  --width-md: 20rem;
+  --width-lg: 32rem;
+}

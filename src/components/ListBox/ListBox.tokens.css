@@ -4,12 +4,12 @@
   /* ListBox: a vertical list of options, optionally grouped into sections with a Header. */
   --list-box-padding: 0;
   --list-box-gap: 0;
-  --list-box-section-gap: var(--space-3);
-  --list-box-header-padding-block: var(--space-2);
-  --list-box-header-padding-inline: var(--space-3);
-  --list-box-item-padding-block: var(--space-2);
-  --list-box-item-padding-inline: var(--space-3);
-  --list-box-item-gap: var(--space-1);
+  --list-box-section-gap: var(--space-gap-cluster);
+  --list-box-header-padding-block: var(--space-padding-control-block);
+  --list-box-header-padding-inline: var(--space-padding-control-inline);
+  --list-box-item-padding-block: var(--space-padding-control-block);
+  --list-box-item-padding-inline: var(--space-padding-control-inline);
+  --list-box-item-gap: var(--space-gap-control);
   --list-box-focus-ring-width: var(--focus-ring-width);
   --list-box-focus-ring-offset: var(--focus-ring-offset-inset);
 

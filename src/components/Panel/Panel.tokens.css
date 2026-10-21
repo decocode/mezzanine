@@ -2,7 +2,7 @@
 
 :where(:root) {
   /* Panel: a side Panel's open width, and the tallest a bottom Panel grows, as a share of the AppShell. */
-  --panel-width: 20rem;
+  --panel-width: var(--width-md);
   /* Each side can have its own width, such as a narrow contents list and a wide chat Panel. */
   --panel-start-width: var(--panel-width);
   --panel-end-width: var(--panel-width);

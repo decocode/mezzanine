@@ -4,7 +4,7 @@
   /* Checkbox: component-specific structure, shared by every theme. */
   --checkbox-size: var(--icon-size-sm);
   --checkbox-icon-size: var(--icon-size-xs);
-  --checkbox-content-gap: var(--space-2);
+  --checkbox-content-gap: var(--space-gap-control);
   --checkbox-border-width: var(--border-width-baseline);
   /* One step less rounded than other controls, and square wherever controls are square (Wireframe). */
   --checkbox-border-radius: min(var(--radius-control), var(--radius-xs));

@@ -5,11 +5,11 @@
   --navigation-tree-gap: 0;
   --navigation-tree-item-padding-block: 0;
   --navigation-tree-item-padding-inline: calc(var(--space-4) - var(--nav-item-current-indicator-width));
-  --navigation-tree-item-gap: var(--space-2);
+  --navigation-tree-item-gap: var(--space-gap-control);
   --navigation-tree-indent: var(--space-4);
   --navigation-tree-focus-ring-width: var(--focus-ring-width);
   --navigation-tree-focus-ring-offset: var(--focus-ring-offset-inset);
-  --navigation-tree-header-padding-block: var(--space-2);
+  --navigation-tree-header-padding-block: var(--space-padding-control-block);
 
   /* NavTree colours: pointers to the colour roles, the same in every theme. */
   --navigation-tree-header-foreground: var(--color-accent);

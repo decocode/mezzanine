@@ -2,6 +2,6 @@
 
 :where(:root) {
   /* Tooltip: short descriptions shown on hover or keyboard focus. */
-  --tooltip-max-width: 20rem;
+  --tooltip-max-width: var(--width-md);
   --tooltip-border-width: var(--border-width-baseline);
 }

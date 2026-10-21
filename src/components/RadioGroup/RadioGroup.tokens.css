@@ -2,10 +2,10 @@
 
 :where(:root) {
   /* RadioGroup: component-specific structure, shared by every theme. */
-  --radio-group-gap: var(--space-3);
-  --radio-group-horizontal-gap: var(--space-6);
-  --radio-field-gap-block: var(--space-1);
-  --radio-content-gap: var(--space-2);
+  --radio-group-gap: var(--space-gap-field);
+  --radio-group-horizontal-gap: var(--space-gap-cluster);
+  --radio-field-gap-block: var(--space-gap-field);
+  --radio-content-gap: var(--space-gap-control);
   --radio-indicator-size: var(--icon-size-sm);
   --radio-selection-size: 0.625rem;
   --radio-border-width: var(--border-width-baseline);

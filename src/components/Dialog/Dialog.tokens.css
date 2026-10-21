@@ -2,8 +2,8 @@
 
 :where(:root) {
   /* Dialog: content inside a Modal. */
-  --dialog-padding: var(--space-6);
-  --dialog-content-gap: var(--space-4);
-  --dialog-actions-gap: var(--space-2);
+  --dialog-padding: var(--space-padding-surface);
+  --dialog-content-gap: var(--space-gap-cluster);
+  --dialog-actions-gap: var(--space-gap-cluster);
   --dialog-focus-ring-width: var(--focus-ring-width);
 }

@@ -4,5 +4,5 @@
 :where(:root) {
   /* Ratio pair: the space between its two areas, and the narrowest each area may be before they stack. */
   --ratio-pair-gap: var(--space-4);
-  --ratio-pair-min-area-width: 15rem;
+  --ratio-pair-min-area-width: var(--width-sm);
 }

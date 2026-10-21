@@ -5,13 +5,5 @@
   "--icon-size-sm",
   "--icon-size-xl",
   "--icon-size-xs",
-  "--radius-control",
-  "--space-0",
-  "--space-10",
-  "--space-12",
-  "--space-16",
-  "--space-20",
-  "--space-24",
-  "--space-5",
-  "--space-8"
+  "--radius-control"
 ]

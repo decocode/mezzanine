@@ -76,6 +76,8 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         label: 'Layout',
         path: '/layout',
         pages: [
+          { id: 'spacing', label: 'Spacing', path: '/layout/spacing', status: 'implemented' },
+          { id: 'size', label: 'Size', path: '/layout/size', status: 'implemented' },
           { id: 'ratio-pair', label: 'Ratio pair', path: '/layout/ratio-pair', status: 'implemented' },
         ],
       },

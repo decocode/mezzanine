@@ -3,7 +3,7 @@
 :where(:root) {
   /* SearchTrigger: the button that opens search. Work in progress. */
   --search-trigger-min-height: var(--target-size-sm);
-  --search-trigger-gap: var(--space-2);
+  --search-trigger-gap: var(--space-gap-control);
   --search-trigger-padding-inline-start: var(--space-2);
   --search-trigger-padding-inline-end: var(--space-1);
   --search-trigger-icon-size: var(--icon-size-sm);

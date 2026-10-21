@@ -243,6 +243,32 @@ only as a familiar reference.
 | `--space-20` | `5rem` | 80px |
 | `--space-24` | `6rem` | 96px |
 
+### Spacing roles
+
+Components point at these roles rather than at the scale, named by how closely
+things belong together: inside a control is closest, then a field, then a cluster
+of components.
+
+| Token | Default | Meaning |
+| --- | --- | --- |
+| `--space-gap-control` | `--space-2` | An icon or box and its label, inside one control |
+| `--space-gap-field` | `--space-2` | A label, its input and its help text |
+| `--space-gap-cluster` | `--space-4` | Components in a group, such as the blocks in a card |
+| `--space-padding-control-block`, `-inline` | `--space-2`, `--space-3` | Inside a control or row: an input, a list row, a table cell |
+| `--space-padding-surface` | `--space-6` | Inside a surface, such as a card or dialog |
+
+## Current size inventory
+
+Defined in `src/tokens/size.tokens.css`. Named widths that components take their
+widths from.
+
+| Token | Value | Used by |
+| --- | --- | --- |
+| `--width-xs` | `12rem` | Tab panel's preferred width |
+| `--width-sm` | `15rem` | Ratio pair's minimum area width |
+| `--width-md` | `20rem` | Panel width, Tooltip's maximum width |
+| `--width-lg` | `32rem` | Modal's maximum width |
+
 ## Current icon size inventory
 
 Icons take their size from one shared scale, from extra small to extra large.
