@@ -152,6 +152,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-danger-inverse)"
     },
     {
+      "name": "--button-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--button-focus-ring-offset",
       "fallback": "var(--focus-ring-offset)"
     },
@@ -182,6 +186,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--button-md-padding-inline",
       "fallback": "var(--space-4)"
+    },
+    {
+      "name": "--button-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--button-primary-background",
@@ -330,6 +338,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--elevation-raised-1)"
     },
     {
+      "name": "--card-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--card-focus-ring-offset",
       "fallback": "var(--focus-ring-offset)"
     },
@@ -460,6 +472,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-cluster)"
     },
     {
+      "name": "--dialog-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--dialog-focus-ring-width",
       "fallback": "var(--focus-ring-width)"
     },
@@ -478,6 +494,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--disclosure-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--disclosure-focus-ring-offset",
       "fallback": "var(--focus-ring-offset-inset)"
     },
@@ -492,6 +512,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--disclosure-icon-size",
       "fallback": "var(--chevron-size, var(--icon-size-sm))"
+    },
+    {
+      "name": "--disclosure-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--disclosure-panel-padding-block",
@@ -524,6 +548,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-control)"
     },
     {
+      "name": "--link-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--link-focus-ring-offset",
       "fallback": "var(--focus-ring-offset)"
     },
@@ -534,6 +562,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--link-icon-size",
       "fallback": "var(--icon-size-inline)"
+    },
+    {
+      "name": "--link-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--link-underline-offset",
@@ -548,6 +580,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--list-box-empty-foreground",
       "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--list-box-focus-ring-color",
+      "fallback": "var(--color-focus)"
     },
     {
       "name": "--list-box-focus-ring-offset",
@@ -630,6 +666,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--target-size-xs)"
     },
     {
+      "name": "--list-box-item-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
       "name": "--list-box-item-padding-block",
       "fallback": "var(--space-padding-control-block)"
     },
@@ -690,6 +730,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--icon-size-sm)"
     },
     {
+      "name": "--navigation-tree-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--navigation-tree-focus-ring-offset",
       "fallback": "var(--focus-ring-offset-inset)"
     },
@@ -726,6 +770,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--target-size-xs)"
     },
     {
+      "name": "--navigation-tree-item-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
       "name": "--navigation-tree-item-padding-block",
       "fallback": "0"
     },
@@ -760,12 +808,24 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--elevation-raised-3)"
     },
     {
+      "name": "--panel-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--panel-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
       "name": "--panel-foreground",
       "fallback": "var(--color-text)"
     },
     {
       "name": "--panel-header-foreground",
       "fallback": "currentColor"
+    },
+    {
+      "name": "--panel-resize-focus-ring-color",
+      "fallback": "var(--color-focus)"
     },
     {
       "name": "--panel-resize-focus-ring-offset",
@@ -934,6 +994,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--search-trigger-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--search-trigger-focus-ring-offset",
       "fallback": "var(--focus-ring-offset)"
     },
@@ -956,6 +1020,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--search-trigger-min-height",
       "fallback": "var(--target-size-sm)"
+    },
+    {
+      "name": "--search-trigger-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--search-trigger-padding-inline-end",
@@ -1074,6 +1142,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-accent-emphasis)"
     },
     {
+      "name": "--table-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--table-focus-ring-offset",
       "fallback": "var(--focus-ring-offset-inset)"
     },
@@ -1156,6 +1228,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--indicator-width)"
     },
     {
+      "name": "--tab-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
       "name": "--tab-padding-block",
       "fallback": "var(--space-padding-control-block)"
     },
@@ -1182,6 +1258,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--tabs-content-gap",
       "fallback": "var(--space-gap-cluster)"
+    },
+    {
+      "name": "--tabs-focus-ring-color",
+      "fallback": "var(--color-focus)"
     },
     {
       "name": "--tabs-focus-ring-offset",
@@ -1336,6 +1416,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--toggle-button-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--toggle-button-focus-ring-offset",
       "fallback": "var(--focus-ring-offset)"
     },
@@ -1354,6 +1438,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--toggle-button-group-gap",
       "fallback": "0"
+    },
+    {
+      "name": "--toggle-button-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--toggle-button-selection-indicator-width",
@@ -1402,6 +1490,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--top-bar-border-width",
       "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--top-bar-focus-ring-color",
+      "fallback": "var(--color-focus)"
     },
     {
       "name": "--top-bar-focus-ring-offset",

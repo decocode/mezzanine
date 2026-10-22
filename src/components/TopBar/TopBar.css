@@ -167,7 +167,7 @@
 }
 
 .mz-top-bar .mz-top-bar-link[data-focus-visible] {
-  outline: var(--top-bar-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--top-bar-focus-ring-width, var(--focus-ring-width)) solid var(--top-bar-focus-ring-color, var(--color-focus));
   outline-offset: var(--top-bar-focus-ring-offset, var(--focus-ring-offset));
 }
 

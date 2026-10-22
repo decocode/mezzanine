@@ -46,12 +46,12 @@
 }
 
 .mz-search-trigger[data-focus-visible] {
-  outline: var(--search-trigger-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--search-trigger-focus-ring-width, var(--focus-ring-width)) solid var(--search-trigger-focus-ring-color, var(--color-focus));
   outline-offset: var(--search-trigger-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .mz-search-trigger[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--search-trigger-opacity-disabled, var(--opacity-disabled));
   cursor: default;
 }
 

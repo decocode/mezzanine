@@ -76,6 +76,6 @@ a.mz-card[data-hovered] {
 }
 
 a.mz-card[data-focus-visible] {
-  outline: var(--card-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--card-focus-ring-width, var(--focus-ring-width)) solid var(--card-focus-ring-color, var(--color-focus));
   outline-offset: var(--card-focus-ring-offset, var(--focus-ring-offset));
 }

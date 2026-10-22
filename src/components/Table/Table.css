@@ -135,7 +135,7 @@
 .react-aria-Row[data-focus-visible-within] .react-aria-Cell,
 .react-aria-Cell[data-focus-visible],
 .react-aria-Cell[data-focus-visible-within-row] {
-  outline: var(--table-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--table-focus-ring-width, var(--focus-ring-width)) solid var(--table-focus-ring-color, var(--color-focus));
   outline-offset: var(--table-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 

@@ -44,7 +44,7 @@
 }
 
 .mz-disclosure-trigger[data-focus-visible] {
-  outline: var(--disclosure-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--disclosure-focus-ring-width, var(--focus-ring-width)) solid var(--disclosure-focus-ring-color, var(--color-focus));
   outline-offset: var(--disclosure-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
@@ -73,7 +73,7 @@
 }
 
 .react-aria-Disclosure[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--disclosure-opacity-disabled, var(--opacity-disabled));
 }
 
 .react-aria-Disclosure[data-disabled] .mz-disclosure-trigger {

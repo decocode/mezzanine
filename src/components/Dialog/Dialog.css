@@ -14,7 +14,7 @@
 }
 
 .react-aria-Dialog:focus-visible {
-  outline: var(--dialog-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--dialog-focus-ring-width, var(--focus-ring-width)) solid var(--dialog-focus-ring-color, var(--color-focus));
   outline-offset: calc(-1 * var(--dialog-focus-ring-width, var(--focus-ring-width)));
 }
 

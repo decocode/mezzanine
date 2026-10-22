@@ -99,7 +99,7 @@
 }
 
 .react-aria-Tab[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--tab-opacity-disabled, var(--opacity-disabled));
 }
 
 .react-aria-Tab[href] {
@@ -128,7 +128,7 @@
 
 .react-aria-Tab[data-focus-visible],
 .react-aria-TabPanel[data-focus-visible] {
-  outline: var(--tabs-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--tabs-focus-ring-width, var(--focus-ring-width)) solid var(--tabs-focus-ring-color, var(--color-focus));
   outline-offset: var(--tabs-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 

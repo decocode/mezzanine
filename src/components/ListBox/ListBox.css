@@ -19,7 +19,7 @@
 }
 
 .react-aria-ListBox[data-focus-visible] {
-  outline: var(--list-box-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--list-box-focus-ring-width, var(--focus-ring-width)) solid var(--list-box-focus-ring-color, var(--color-focus));
   outline-offset: var(--list-box-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
@@ -90,7 +90,7 @@
 }
 
 .react-aria-ListBoxItem[data-focus-visible] {
-  outline: var(--list-box-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--list-box-focus-ring-width, var(--focus-ring-width)) solid var(--list-box-focus-ring-color, var(--color-focus));
   outline-offset: var(--list-box-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
@@ -143,7 +143,7 @@
 }
 
 .react-aria-ListBoxItem[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--list-box-item-opacity-disabled, var(--opacity-disabled));
   cursor: default;
 }
 

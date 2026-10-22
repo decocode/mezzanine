@@ -185,12 +185,12 @@
 
 .react-aria-Button[data-variant][data-focus-visible],
 .react-aria-Button[data-variant][data-preview-state='focused'] {
-  outline: var(--button-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--button-focus-ring-width, var(--focus-ring-width)) solid var(--button-focus-ring-color, var(--color-focus));
   outline-offset: var(--button-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-Button[data-variant][data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--button-opacity-disabled, var(--opacity-disabled));
   cursor: default;
 }
 

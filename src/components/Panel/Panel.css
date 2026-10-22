@@ -72,7 +72,7 @@
 }
 
 .mz-panel-resize-handle[data-focus-visible] {
-  outline: var(--panel-resize-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--panel-resize-focus-ring-width, var(--focus-ring-width)) solid var(--panel-resize-focus-ring-color, var(--color-focus));
   outline-offset: var(--panel-resize-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
@@ -156,7 +156,7 @@
 }
 
 .mz-panel-dialog:focus-visible {
-  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline: var(--panel-focus-ring-width, var(--focus-ring-width)) solid var(--panel-focus-ring-color, var(--color-focus));
   outline-offset: calc(-1 * var(--focus-ring-width));
 }
 

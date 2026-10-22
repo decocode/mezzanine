@@ -44,12 +44,12 @@
 }
 
 .react-aria-ToggleButton[data-focus-visible] {
-  outline: var(--toggle-button-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--toggle-button-focus-ring-width, var(--focus-ring-width)) solid var(--toggle-button-focus-ring-color, var(--color-focus));
   outline-offset: var(--toggle-button-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-ToggleButton[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--toggle-button-opacity-disabled, var(--opacity-disabled));
   cursor: default;
 }
 

@@ -96,10 +96,10 @@
 .mz-nav-tree-item[data-focus-visible],
 .mz-nav-tree-label[data-focus-visible],
 .mz-nav-tree-toggle[data-focus-visible] {
-  outline: var(--navigation-tree-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--navigation-tree-focus-ring-width, var(--focus-ring-width)) solid var(--navigation-tree-focus-ring-color, var(--color-focus));
   outline-offset: var(--navigation-tree-focus-ring-offset, var(--focus-ring-offset-inset));
 }
-.mz-nav-tree-item[data-disabled] { opacity: var(--opacity-disabled); }
+.mz-nav-tree-item[data-disabled] { opacity: var(--navigation-tree-item-opacity-disabled, var(--opacity-disabled)); }
 .mz-nav-tree-item[data-disabled] .mz-nav-tree-label,
 .mz-nav-tree-item[data-disabled] .mz-nav-tree-toggle { cursor: default; }
 .mz-nav-tree-header {

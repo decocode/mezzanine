@@ -35,13 +35,13 @@
 
 .react-aria-Link[data-focus-visible],
 .react-aria-Link[data-preview-state='focused'] {
-  outline: var(--link-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--link-focus-ring-width, var(--focus-ring-width)) solid var(--link-focus-ring-color, var(--color-focus));
   outline-offset: var(--link-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-Link[data-disabled] {
   color: var(--color-text-muted);
   text-decoration: none;
-  opacity: var(--opacity-disabled);
+  opacity: var(--link-opacity-disabled, var(--opacity-disabled));
   cursor: default;
 }
