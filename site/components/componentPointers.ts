@@ -605,7 +605,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--list-box-header-foreground",
-      "fallback": "var(--color-text-muted)"
+      "fallback": "var(--color-accent)"
     },
     {
       "name": "--list-box-header-padding-block",
