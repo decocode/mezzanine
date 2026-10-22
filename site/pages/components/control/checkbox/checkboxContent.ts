@@ -1,6 +1,13 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
 
+// The Checkbox group example's teaching labels.
+export const checkboxGroupExampleLabels = {
+  group: 'Group A',
+  checkboxes: ['Checkbox A', 'Checkbox B', 'Checkbox C'],
+  description: 'Group A help text.',
+}
+
 export const checkboxContent: DocsPageContent = {
   id: 'checkbox',
   kind: 'component',
@@ -9,6 +16,7 @@ export const checkboxContent: DocsPageContent = {
   sections: [
     { key: 'example', intro: ['Select or clear the `Checkbox` using its label or the Space key when focused.'] },
     { key: 'states' },
+    { key: 'checkboxGroup', title: 'Checkbox group', intro: ['`CheckboxGroup` gives related checkboxes one label, with any help text or error message after them.'] },
   ],
   technicalDetails: [
     {

@@ -17,8 +17,11 @@ export const pointerPrefixes = {
   Button: ['button'],
   Card: ['card'],
   Checkbox: ['checkbox'],
+  CheckboxGroup: ['checkbox-group'],
   CodeBlock: ['code-block'],
   Dialog: ['dialog'],
+  // Group joins fields, so it shares the input pointers.
+  Group: ['group', 'input'],
   // Disclosure and NavTree share the chevron that turns as they open.
   Disclosure: ['disclosure', 'chevron'],
   Link: ['link'],

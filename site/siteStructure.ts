@@ -207,6 +207,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'implemented' },
           { id: 'radio-group', label: 'Radio group', path: '/radio-group', status: 'implemented' },
           { id: 'drop-zone', label: 'Drop zone', path: '/drop-zone', status: 'implemented' },
+          { id: 'toolbar', label: 'Toolbar', path: '/toolbar', status: 'implemented' },
         ],
       },
       {
@@ -219,6 +220,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'text-area', label: 'Text area', path: '/text-area', status: 'implemented' },
           { id: 'number-field', label: 'Number field', path: '/number-field', status: 'implemented' },
           { id: 'token-field', label: 'Token field', path: '/token-field', status: 'implemented' },
+          { id: 'group', label: 'Group', path: '/group', status: 'implemented' },
         ],
       },
       {
@@ -299,7 +301,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
           { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
           { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
-          { id: 'toolbar', label: 'Toolbar', path: '/toolbar', status: 'implemented' },
         ],
       },
     ],

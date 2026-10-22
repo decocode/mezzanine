@@ -1,5 +1,5 @@
-import { Cell, Checkbox, Column, DemoArea, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { checkboxContent, checkboxStateLabels } from './checkboxContent'
+import { Cell, Checkbox, CheckboxGroup, Column, DemoArea, Label, Row, Table, TableBody, TableHeader, Text } from '@decocode/mezzanine'
+import { checkboxContent, checkboxGroupExampleLabels, checkboxStateLabels } from './checkboxContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function CheckboxPage() {
@@ -35,6 +35,15 @@ export default function CheckboxPage() {
               </TableBody>
             </Table>
           </div>
+        ),
+        checkboxGroup: (
+          <DemoArea>
+            <CheckboxGroup defaultValue={[checkboxGroupExampleLabels.checkboxes[0]]}>
+              <Label>{checkboxGroupExampleLabels.group}</Label>
+              {checkboxGroupExampleLabels.checkboxes.map((checkbox) => <Checkbox key={checkbox} value={checkbox}>{checkbox}</Checkbox>)}
+              <Text slot="description">{checkboxGroupExampleLabels.description}</Text>
+            </CheckboxGroup>
+          </DemoArea>
         ),
       }}
     />

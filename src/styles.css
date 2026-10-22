@@ -14,6 +14,7 @@
 @import './components/Card/Card.css';
 @import './components/CodeBlock/CodeBlock.css';
 @import './components/Checkbox/Checkbox.css';
+@import './components/CheckboxGroup/CheckboxGroup.css';
 @import './components/Switch/Switch.css';
 @import './components/Slider/Slider.css';
 @import './components/ProgressBar/ProgressBar.css';
@@ -28,6 +29,7 @@
 @import './components/TokenField/TokenField.css';
 @import './components/DropZone/DropZone.css';
 @import './components/GridList/GridList.css';
+@import './components/Group/Group.css';
 @import './components/Tree/Tree.css';
 @import './components/Toolbar/Toolbar.css';
 @import './components/Sheet/Sheet.css';

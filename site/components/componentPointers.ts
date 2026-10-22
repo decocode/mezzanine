@@ -367,7 +367,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   "Checkbox": [
     {
       "name": "--checkbox-background",
-      "fallback": "transparent"
+      "fallback": "var(--color-page)"
     },
     {
       "name": "--checkbox-background-hovered",
@@ -436,6 +436,24 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--checkbox-size",
       "fallback": "var(--icon-size-sm)"
+    }
+  ],
+  "CheckboxGroup": [
+    {
+      "name": "--checkbox-group-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--checkbox-group-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--checkbox-group-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--checkbox-group-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     }
   ],
   "CodeBlock": [
@@ -546,18 +564,6 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--demo-area-border-width",
       "fallback": "var(--border-width-baseline)"
-    },
-    {
-      "name": "--demo-area-dot-color",
-      "fallback": "color-mix(in srgb, var(--color-text) var(--opacity-24), transparent)"
-    },
-    {
-      "name": "--demo-area-dot-gap",
-      "fallback": "var(--space-4)"
-    },
-    {
-      "name": "--demo-area-dot-size",
-      "fallback": "var(--border-width-sm)"
     },
     {
       "name": "--demo-area-end-panel-background",
@@ -908,6 +914,32 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--grid-list-padding",
       "fallback": "var(--space-1)"
+    }
+  ],
+  "Group": [
+    {
+      "name": "--group-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--input-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--input-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--input-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--input-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset)"
+    },
+    {
+      "name": "--input-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
     }
   ],
   "Link": [
@@ -1509,7 +1541,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   "RadioGroup": [
     {
       "name": "--radio-background",
-      "fallback": "transparent"
+      "fallback": "var(--color-page)"
     },
     {
       "name": "--radio-background-hovered",
@@ -1971,7 +2003,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--switch-track-background",
-      "fallback": "transparent"
+      "fallback": "var(--color-page)"
     },
     {
       "name": "--switch-track-background-hovered",
