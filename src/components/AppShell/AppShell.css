@@ -16,7 +16,7 @@
   min-inline-size: 0;
   /* With no gap, neighbouring cards overlap by one border so lines stay single, and the frame's outer
      borders are clipped away, so Wireframe looks as it did before cards. */
-  --_app-shell-overlap: max(0px, var(--app-shell-surface-border-width, var(--border-width-xs)) - var(--app-shell-gap, var(--surface-gap)));
+  --_app-shell-overlap: max(0px, var(--app-shell-surface-border-width, var(--border-width-hairline)) - var(--app-shell-gap, var(--surface-gap)));
   --_app-shell-join: calc(var(--app-shell-gap, var(--surface-gap)) - var(--_app-shell-overlap));
   padding: var(--app-shell-gap, var(--surface-gap));
   background: var(--app-shell-background, var(--elevation-sunken-1-surface));
@@ -28,7 +28,7 @@
 .mz-app-shell > .mz-panel[data-edge],
 .mz-app-shell-content {
   box-sizing: border-box;
-  border: var(--app-shell-surface-border-width, var(--border-width-xs)) solid var(--color-border);
+  border: var(--app-shell-surface-border-width, var(--border-width-hairline)) solid var(--app-shell-surface-border, var(--color-border));
   border-radius: var(--app-shell-surface-radius, min(var(--radius-surface), var(--radius-sm)));
   background: var(--app-shell-surface-background, var(--elevation-flat-surface));
 }

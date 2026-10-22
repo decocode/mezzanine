@@ -371,6 +371,9 @@ for decorative lines only; control edges use Small or thicker.
 points at `--border-width-sm` (1px), so a theme can make every component border heavier or
 lighter by changing one token. A component that needs a different thickness points its own
 token at another level.
+`--border-width-hairline` points at `--border-width-xs` for the edges between an app's main areas,
+such as AppShell's. Border colours are set by purpose in the colour roles: `--color-border` for
+decorative lines and `--color-border-control` for control borders at 3:1 or more.
 
 
 Two roles sit on top of the radius scale. `--radius-control` sets the corners of

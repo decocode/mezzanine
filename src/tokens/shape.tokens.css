@@ -25,4 +25,6 @@
 
   /* Role: the baseline thickness of a component's border. A theme changes this one role to make every border heavier or lighter. */
   --border-width-baseline: var(--border-width-sm);
+  /* Role: the thinner edge between an app's main areas, such as AppShell's. */
+  --border-width-hairline: var(--border-width-xs);
 }

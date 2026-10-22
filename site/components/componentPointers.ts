@@ -16,8 +16,12 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--elevation-flat-surface)"
     },
     {
+      "name": "--app-shell-surface-border",
+      "fallback": "var(--color-border)"
+    },
+    {
       "name": "--app-shell-surface-border-width",
-      "fallback": "var(--border-width-xs)"
+      "fallback": "var(--border-width-hairline)"
     },
     {
       "name": "--app-shell-surface-radius",

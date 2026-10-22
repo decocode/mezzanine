@@ -18,6 +18,7 @@ export const bordersContent: DocsPageContent = {
       intro: [
         "`--border-width-baseline` is the thickness of a component's border whenever it has one. It points at Small, `var(--border-width-sm)`, which is `{baseline}`. Every component's border-width token uses it, so a theme can make every border heavier or lighter by changing this one token, for example to `var(--border-width-md)`.",
         'It sets thickness only. Each component still decides whether it has a border at all, and`--color-border` on the [Color roles](/color/roles) page sets its colour.',
+        '`--border-width-hairline` is the thinner role for the edges between an app’s main areas, such as the AppShell’s areas. It points at Extra small, `var(--border-width-xs)`.',
       ],
     },
     {
