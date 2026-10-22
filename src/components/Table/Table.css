@@ -61,14 +61,14 @@
 .react-aria-Column[data-hovered],
 .react-aria-Cell[data-hovered],
 .react-aria-Row[data-hovered] .react-aria-Cell {
-  background: var(--color-accent-muted-hovered);
+  background: var(--table-row-background-hovered, var(--color-accent-muted-hovered));
 }
 
 .react-aria-Column[data-pressed],
 .react-aria-Column[data-resizing],
 .react-aria-Cell[data-pressed],
 .react-aria-Row[data-pressed] .react-aria-Cell {
-  background: var(--color-accent-muted-pressed);
+  background: var(--table-row-background-pressed, var(--color-accent-muted-pressed));
 }
 
 .react-aria-TableBody[data-empty] {

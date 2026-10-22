@@ -58,7 +58,7 @@
   gap: var(--list-box-item-gap, var(--space-gap-control));
   box-sizing: border-box;
   min-width: 0;
-  min-height: var(--target-size-xs);
+  min-height: var(--list-box-item-min-height, var(--target-size-xs));
   padding: var(--list-box-item-padding-block, var(--space-padding-control-block)) var(--list-box-item-padding-inline, var(--space-padding-control-inline));
   outline: none;
   background: var(--list-box-item-background, transparent);

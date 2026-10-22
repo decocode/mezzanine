@@ -606,6 +606,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-control)"
     },
     {
+      "name": "--list-box-item-min-height",
+      "fallback": "var(--target-size-xs)"
+    },
+    {
       "name": "--list-box-item-padding-block",
       "fallback": "var(--space-padding-control-block)"
     },
@@ -692,6 +696,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--navigation-tree-item-gap",
       "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--navigation-tree-item-min-height",
+      "fallback": "var(--target-size-xs)"
     },
     {
       "name": "--navigation-tree-item-padding-block",
@@ -1044,6 +1052,14 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--table-header-foreground",
       "fallback": "currentColor"
+    },
+    {
+      "name": "--table-row-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--table-row-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
     },
     {
       "name": "--table-row-background-selected",

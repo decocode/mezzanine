@@ -14,7 +14,7 @@
   display: flex;
   align-items: stretch;
   min-width: 0;
-  min-height: var(--target-size-xs);
+  min-height: var(--navigation-tree-item-min-height, var(--target-size-xs));
   gap: var(--navigation-tree-item-gap, var(--space-gap-control));
   padding-block: var(--navigation-tree-item-padding-block, 0);
   padding-inline: calc(var(--navigation-tree-item-padding-inline, calc(var(--space-4) - var(--nav-item-current-indicator-width))) + (var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent, var(--space-4))) var(--navigation-tree-item-padding-inline, calc(var(--space-4) - var(--nav-item-current-indicator-width)));
