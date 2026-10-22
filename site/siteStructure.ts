@@ -236,7 +236,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'input',
         label: 'Input',
         pages: [
-          { id: 'form', label: 'Form', path: '/form', status: 'empty' },
+          { id: 'form', label: 'Form', path: '/form', status: 'implemented' },
           { id: 'text-field', label: 'Text field', path: '/text-field', status: 'implemented' },
           { id: 'text-area', label: 'Text area', path: '/text-area', status: 'implemented' },
           { id: 'number-field', label: 'Number field', path: '/number-field', status: 'implemented' },
@@ -267,7 +267,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
           { id: 'card', label: 'Card', path: '/card', status: 'implemented' },
           { id: 'separator', label: 'Separator', path: '/separator', status: 'implemented' },
-          { id: 'virtualizer', label: 'Virtualizer', path: '/virtualizer', status: 'empty' },
+          { id: 'virtualizer', label: 'Virtualizer', path: '/virtualizer', status: 'implemented' },
         ],
       },
       {
@@ -304,10 +304,10 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         pages: [
           { id: 'tooltip', label: 'Tooltip', path: '/tooltip', status: 'implemented' },
           { id: 'dialog', label: 'Dialog', path: '/dialog', status: 'implemented' },
-          { id: 'modal', label: 'Modal', path: '/modal', status: 'empty' },
+          { id: 'modal', label: 'Modal', path: '/modal', status: 'implemented' },
           { id: 'popover', label: 'Popover', path: '/popover', status: 'implemented' },
-          { id: 'preview-trigger', label: 'Preview trigger', path: '/preview-trigger', status: 'empty' },
-          { id: 'sheet', label: 'Sheet', path: '/sheet', status: 'empty' },
+          { id: 'preview-trigger', label: 'Preview trigger', path: '/preview-trigger', status: 'implemented' },
+          { id: 'sheet', label: 'Sheet', path: '/sheet', status: 'implemented' },
         ],
       },
       {

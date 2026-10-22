@@ -18,6 +18,12 @@
   text-transform: var(--text-transform-body);
 }
 
+/* Items keep their height in a long list, and a Virtualizer's tall inner area keeps its full height
+   so the list scrolls through every item. */
+.react-aria-Tree > * {
+  flex-shrink: 0;
+}
+
 .react-aria-Tree[data-focus-visible] {
   outline: var(--tree-focus-ring-width, var(--focus-ring-width)) solid var(--tree-focus-ring-color, var(--color-focus));
   outline-offset: var(--tree-focus-ring-offset, var(--focus-ring-offset-inset));

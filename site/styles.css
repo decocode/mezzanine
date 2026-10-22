@@ -996,3 +996,13 @@ a:focus-visible {
   display: flex;
   align-items: center;
 }
+
+/* The Preview trigger page's preview: its content's own padding inside the popover. */
+.preview-trigger-example {
+  padding: var(--space-padding-surface);
+}
+
+/* The Virtualizer page's list: a set height, so it scrolls and only the rows in view are drawn. */
+.virtualizer-example .react-aria-ListBox {
+  block-size: var(--width-xs);
+}

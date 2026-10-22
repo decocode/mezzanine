@@ -1,0 +1,11 @@
+/* Follows React Aria's vanilla Form: fields one above another, with room between them. */
+.react-aria-Form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--form-gap, var(--space-gap-cluster));
+}
+
+.react-aria-Form > * {
+  max-inline-size: 100%;
+}

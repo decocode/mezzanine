@@ -312,6 +312,15 @@ they apply, and each level indents. Chosen rows in both take the soft tint and
 the indicator bar. `Toolbar` gives its ToggleButtonGroups its orientation and
 stands its Separators across it.
 
+## Sheet and Form
+
+`Sheet` draws the backdrop, the panel, its swipe handle and the scrolling
+content, following React Aria's starter: put a `Button` and a `Sheet` inside
+`SheetTrigger`, with a `Heading slot="title"` in the sheet. `position` chooses
+its edge. `Form` lays its fields out one above another, with room between them.
+`PreviewTrigger` and `Virtualizer` draw nothing of their own: a preview's
+`Popover` takes the Popover look, and a virtualized collection keeps its own.
+
 ## Popover and Menu
 
 `Popover` is the raised surface for content opened from a trigger; it adds no
@@ -328,8 +337,6 @@ layout it sits in. With `orientation="vertical"` it stands upright in a row.
 ## Unstyled React Aria exports
 
 These pass React Aria's components straight through, with no Mezzanine
-styles yet: `CheckboxGroup`, `FileTrigger`, `Form`, `Group`,
-`PreviewTrigger`, the `Sheet` family, and
-`Virtualizer` with `ListLayout`. Use them as the
+styles yet: `CheckboxGroup`, `FileTrigger` and `Group`. Use them as the
 [React Aria documentation](https://react-aria.adobe.com/) describes, and style
 them in the app until Mezzanine designs them.

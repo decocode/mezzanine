@@ -1,0 +1,123 @@
+/* Follows React Aria's vanilla Sheet: a raised panel at an edge of the screen, with a handle on the
+   side it is swiped from. React Aria moves it as it is swiped. */
+.react-aria-Sheet {
+  /* React Aria pads the sheet past the screen edge for its overscroll, so its size stays content-box,
+     and its edge is an outline rather than a border. */
+  box-sizing: content-box;
+  inline-size: calc(100% - var(--sheet-viewport-padding, var(--space-overlay-inset)) * 2);
+  max-inline-size: var(--sheet-max-width, var(--width-xl));
+  max-block-size: calc(100% - var(--sheet-viewport-padding, var(--space-overlay-inset)) * 2);
+  margin: var(--sheet-viewport-padding, var(--space-overlay-inset));
+  overflow: clip;
+  outline: var(--sheet-border-width, var(--border-width-baseline)) solid var(--sheet-border, var(--color-border));
+  border-radius: var(--sheet-border-radius, var(--radius-surface));
+  background: var(--sheet-background, var(--elevation-raised-3-surface));
+  color: var(--sheet-foreground, var(--color-text));
+  box-shadow: var(--sheet-elevation, var(--elevation-raised-3));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+/* physical: React Aria reports the screen side the sheet comes from. */
+.react-aria-Sheet:is([data-position='left'], [data-position='right']) {
+  inline-size: var(--sheet-side-width, var(--width-md));
+  max-inline-size: calc(100% - var(--sheet-viewport-padding, var(--space-overlay-inset)) * 2);
+  block-size: calc(100% - var(--sheet-viewport-padding, var(--space-overlay-inset)) * 2);
+  max-block-size: none;
+}
+
+.mz-sheet-handle {
+  position: absolute;
+  z-index: var(--z-index-raised);
+  border-radius: var(--radius-full);
+  background: var(--sheet-handle-background, var(--color-border-control));
+}
+
+.react-aria-Sheet:is([data-swipe-direction='bottom'], [data-swipe-direction='vertical']) .mz-sheet-handle {
+  top: var(--space-3); /* physical: the handle sits on the screen side it is swiped from. */
+  left: 50%; /* physical: the handle sits on the screen side it is swiped from. */
+  inline-size: var(--sheet-handle-size, var(--space-20));
+  block-size: var(--sheet-handle-thickness, var(--space-1));
+  translate: -50% 0;
+}
+
+.react-aria-Sheet[data-swipe-direction='top'] .mz-sheet-handle {
+  bottom: var(--space-3); /* physical: the handle sits on the screen side it is swiped from. */
+  left: 50%; /* physical: the handle sits on the screen side it is swiped from. */
+  inline-size: var(--sheet-handle-size, var(--space-20));
+  block-size: var(--sheet-handle-thickness, var(--space-1));
+  translate: -50% 0;
+}
+
+.react-aria-Sheet:is([data-swipe-direction='left'], [data-swipe-direction='horizontal']) .mz-sheet-handle {
+  right: var(--space-3); /* physical: the handle sits on the screen side it is swiped from. */
+  top: 50%; /* physical: the handle sits on the screen side it is swiped from. */
+  inline-size: var(--sheet-handle-thickness, var(--space-1));
+  block-size: var(--sheet-handle-size, var(--space-20));
+  translate: 0 -50%;
+}
+
+.react-aria-Sheet[data-swipe-direction='right'] .mz-sheet-handle {
+  left: var(--space-3); /* physical: the handle sits on the screen side it is swiped from. */
+  top: 50%; /* physical: the handle sits on the screen side it is swiped from. */
+  inline-size: var(--sheet-handle-thickness, var(--space-1));
+  block-size: var(--sheet-handle-size, var(--space-20));
+  translate: 0 -50%;
+}
+
+/* A sheet opened on top of this one takes over the swipe. */
+.react-aria-Sheet[data-has-descendants] .mz-sheet-handle {
+  visibility: hidden;
+}
+
+/* Only the bottom-most sheet in a stack dims the page behind it. */
+.react-aria-SheetBackdrop[data-stack-index='0'] {
+  background: var(--sheet-backdrop, var(--color-backdrop));
+}
+
+.react-aria-SheetContent {
+  box-sizing: border-box;
+  block-size: 100%;
+  padding: var(--sheet-padding, var(--space-padding-surface));
+  padding-block-end: calc(var(--sheet-padding, var(--space-padding-surface)) + var(--sheet-scroll-padding-y, 0px));
+  outline: none;
+  /* The content scrolls only once the sheet is fully open; before that a swipe moves the sheet. */
+  overflow: hidden;
+  overscroll-behavior: auto;
+  scrollbar-gutter: stable;
+}
+
+.react-aria-SheetOverlay[data-expanded] .react-aria-SheetContent {
+  overflow: auto;
+}
+
+.react-aria-SheetContent .react-aria-Heading[slot='title'] {
+  margin: 0 0 var(--space-gap-control);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-title-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-lg);
+  text-transform: var(--text-transform-title);
+}
+
+/* React Aria plays this as the sheet is swiped in, so the backdrop follows the finger. */
+@keyframes mz-sheet-backdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (forced-colors: active) {
+  .react-aria-Sheet {
+    outline-color: CanvasText;
+  }
+
+  .mz-sheet-handle {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
+}

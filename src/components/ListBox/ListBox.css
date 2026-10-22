@@ -24,6 +24,12 @@
   padding: var(--list-box-padding, var(--space-1));
 }
 
+/* Items keep their height in a long list, and a Virtualizer's tall inner area keeps its full height
+   so the list scrolls through every item. */
+.react-aria-ListBox > * {
+  flex-shrink: 0;
+}
+
 .react-aria-ListBox[data-focus-visible] {
   outline: var(--list-box-focus-ring-width, var(--focus-ring-width)) solid var(--list-box-focus-ring-color, var(--color-focus));
   outline-offset: var(--list-box-focus-ring-offset, var(--focus-ring-offset-inset));

@@ -17,6 +17,12 @@
   text-transform: var(--text-transform-body);
 }
 
+/* Items keep their height in a long list, and a Virtualizer's tall inner area keeps its full height
+   so the list scrolls through every item. */
+.react-aria-Menu > * {
+  flex-shrink: 0;
+}
+
 .react-aria-MenuSection:not(:first-child) {
   margin-block-start: var(--menu-section-gap, var(--space-gap-control));
 }

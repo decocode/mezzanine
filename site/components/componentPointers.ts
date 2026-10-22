@@ -652,6 +652,12 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-padding-surface)"
     }
   ],
+  "Form": [
+    {
+      "name": "--form-gap",
+      "fallback": "var(--space-gap-cluster)"
+    }
+  ],
   "GridList": [
     {
       "name": "--grid-list-card-background",
@@ -1646,6 +1652,64 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--separator-border-width",
       "fallback": "var(--border-width-baseline)"
+    }
+  ],
+  "Sheet": [
+    {
+      "name": "--sheet-backdrop",
+      "fallback": "var(--color-backdrop)"
+    },
+    {
+      "name": "--sheet-background",
+      "fallback": "var(--elevation-raised-3-surface)"
+    },
+    {
+      "name": "--sheet-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--sheet-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
+      "name": "--sheet-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--sheet-elevation",
+      "fallback": "var(--elevation-raised-3)"
+    },
+    {
+      "name": "--sheet-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--sheet-handle-background",
+      "fallback": "var(--color-border-control)"
+    },
+    {
+      "name": "--sheet-handle-size",
+      "fallback": "var(--space-20)"
+    },
+    {
+      "name": "--sheet-handle-thickness",
+      "fallback": "var(--space-1)"
+    },
+    {
+      "name": "--sheet-max-width",
+      "fallback": "var(--width-xl)"
+    },
+    {
+      "name": "--sheet-padding",
+      "fallback": "var(--space-padding-surface)"
+    },
+    {
+      "name": "--sheet-side-width",
+      "fallback": "var(--width-md)"
+    },
+    {
+      "name": "--sheet-viewport-padding",
+      "fallback": "var(--space-overlay-inset)"
     }
   ],
   "Slider": [

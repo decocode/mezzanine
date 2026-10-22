@@ -24,6 +24,12 @@
   gap: var(--grid-list-gap, var(--space-gap-cluster));
 }
 
+/* Items keep their height in a long list, and a Virtualizer's tall inner area keeps its full height
+   so the list scrolls through every item. */
+.react-aria-GridList > * {
+  flex-shrink: 0;
+}
+
 .react-aria-GridList[data-focus-visible] {
   outline: var(--grid-list-focus-ring-width, var(--focus-ring-width)) solid var(--grid-list-focus-ring-color, var(--color-focus));
   outline-offset: var(--grid-list-focus-ring-offset, var(--focus-ring-offset-inset));
