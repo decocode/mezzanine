@@ -732,6 +732,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-text)"
     },
     {
+      "name": "--panel-header-foreground",
+      "fallback": "currentColor"
+    },
+    {
       "name": "--panel-resize-focus-ring-offset",
       "fallback": "var(--focus-ring-offset-inset)"
     },
@@ -1036,6 +1040,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--table-focus-ring-width",
       "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--table-header-foreground",
+      "fallback": "currentColor"
     },
     {
       "name": "--table-row-background-selected",

@@ -26,6 +26,7 @@
 .react-aria-Column {
   border-block-start: var(--table-border-width, var(--border-width-baseline)) solid var(--color-border);
   background: var(--table-header-background);
+  color: var(--table-header-foreground, currentColor);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
