@@ -50,7 +50,7 @@ test('search groups results by area and reports no results', async ({ page }) =>
   await expect(results.getByRole('group')).toHaveCount(2)
   await expect(results.getByText('Docs', { exact: true })).toBeVisible()
   await expect(results.getByText('Lab', { exact: true })).toBeVisible()
-  await field.fill('reel')
+  await field.fill('masonry')
   await expect(results.getByText('Docs', { exact: true })).toHaveCount(0)
   await expect(results.getByText('Lab', { exact: true })).toBeVisible()
   await field.fill('zzzz')

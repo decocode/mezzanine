@@ -1,7 +1,7 @@
 // The example for the Ratio pair page, in Foundations › Layout: the library's mz-ratio-pair class,
 // in a box whose width can be chosen, so the second area can be seen wrapping underneath.
 import { useState, type CSSProperties } from 'react'
-import { CssNotes, ValuePicker } from '../../../../components/ExampleParts'
+import { CssNotes, ValuePicker } from '../../../../../components/ExampleParts'
 import { ratioPairCssNotes } from './ratioPairContent'
 
 type RatioPairFraction = '1/4' | '1/3' | '1/2' | 'auto-start'

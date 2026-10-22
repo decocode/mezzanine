@@ -15,7 +15,7 @@ export const typesOfBoxPage: StagePage = {
     { key: 'example' },
   ],
   relatedPages: [
-    { label: 'Side by side', href: '/site/lab/layout/side-by-side' },
+    { label: 'Side by side', href: '/layout/side-by-side' },
     { label: 'Grids and columns', href: '/site/lab/layout/grids-and-columns' },
   ],
   references: [

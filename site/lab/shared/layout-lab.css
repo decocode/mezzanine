@@ -343,29 +343,6 @@
   gap: var(--lab-column-space, var(--space-3));
 }
 
-.lab-row {
-  display: flex;
-  align-items: center;
-  gap: var(--lab-row-space, var(--space-3));
-}
-
-.lab-row-switch {
-  flex-wrap: wrap;
-}
-
-/* Below the switch width the basis is huge, so items stack; above it, it is negative and ignored. */
-.lab-row-switch > * {
-  flex-grow: 1;
-  flex-basis: calc((var(--lab-switch-at) - 100%) * 999);
-}
-
-.lab-row-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--lab-row-wrap-space, var(--space-2));
-}
-
 .lab-fixed-column-grid {
   display: grid;
   grid-template-columns: repeat(var(--lab-fixed-columns, 3), minmax(0, 1fr));
@@ -382,36 +359,10 @@
   gap: var(--space-3);
 }
 
-.lab-row-wrap-grow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.lab-row-wrap-grow > * {
-  flex: 1 1 var(--lab-row-wrap-grow-min, 12rem);
-}
-
 .lab-center {
   box-sizing: content-box;
   max-inline-size: var(--lab-center-max, 60ch);
   margin-inline: auto;
-}
-
-.lab-reel {
-  display: flex;
-  gap: var(--space-3);
-  overflow-x: auto;
-  padding-block-end: var(--space-2);
-}
-
-.lab-reel > * {
-  flex: 0 0 var(--lab-reel-item, 12rem);
-}
-
-.lab-reel:focus-visible {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--space-1);
 }
 
 /* Fluid sizing: the size follows the frame, between two limits. */

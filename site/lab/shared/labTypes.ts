@@ -14,7 +14,7 @@ export interface FuturePage extends LabPage {
   readonly key: string
 }
 
-export type StageKey = 'boxBasics' | 'insideTheBox' | 'sideBySide' | 'gridsAndColumns' | 'container'
+export type StageKey = 'boxBasics' | 'insideTheBox' | 'gridsAndColumns' | 'container'
 
 // A Layout group: a set of pages with an overview page of its own.
 export interface LayoutStage {

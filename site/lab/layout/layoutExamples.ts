@@ -11,10 +11,6 @@ import { FillingTheBoxExample } from './inside-the-box/filling-the-box/FillingTh
 import { OverflowingTheBoxExample } from './inside-the-box/overflowing-the-box/OverflowingTheBoxExample'
 import { ContentColumnsExample } from './inside-the-box/content-columns/ContentColumnsExample'
 import { BoxHasContentExample } from './inside-the-box/box-has-content/BoxHasContentExample'
-import { RowExample } from './side-by-side/row/RowExample'
-import { RowWrapExample } from './side-by-side/row-wrap/RowWrapExample'
-import { RowWrapGrowExample } from './side-by-side/row-wrap-grow/RowWrapGrowExample'
-import { ReelExample } from './side-by-side/reel/ReelExample'
 import { ColumnExample } from './grids-and-columns/column/ColumnExample'
 import { GridExample } from './grids-and-columns/grid/GridExample'
 import { SubgridExample } from './grids-and-columns/subgrid/SubgridExample'
@@ -33,10 +29,6 @@ export const stageExamples: StageExamples = {
   overflowingTheBox: { Example: OverflowingTheBoxExample },
   contentColumns: { Example: ContentColumnsExample },
   boxHasContent: { Example: BoxHasContentExample },
-  row: { Example: RowExample },
-  rowWrap: { Example: RowWrapExample },
-  rowWrapGrow: { Example: RowWrapGrowExample },
-  reel: { Example: ReelExample },
   column: { Example: ColumnExample },
   grid: { Example: GridExample },
   subgrid: { Example: SubgridExample },

@@ -9,6 +9,6 @@ export const sizeContent: DocsPageContent = {
 }
 
 export const sizePages = [
-  { label: 'Flexible width', href: '/dimension/size/flexible-width', description: 'The steps every width comes from.' },
+  { label: 'Width', href: '/dimension/size/width', description: 'The steps every width comes from.' },
   { label: 'Aspect ratio', href: '/dimension/size/aspect-ratio', description: 'A set shape that crops pictures to fit.' },
 ]

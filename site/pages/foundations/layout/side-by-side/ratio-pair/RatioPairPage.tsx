@@ -1,6 +1,6 @@
 import { ratioPairContent } from './ratioPairContent'
 import { RatioPairExample } from './RatioPairExample'
-import { ContentPage } from '../../../../templates/ContentPage'
+import { ContentPage } from '../../../../../templates/ContentPage'
 import './ratioPair.css'
 
 export default function RatioPairPage() {

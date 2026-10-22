@@ -7,7 +7,11 @@ import { mediaQueriesCssNotes } from '../../site/pages/foundations/interaction/m
 import { safeAreasCssNotes } from '../../site/pages/foundations/interaction/safe-areas/safeAreasContent'
 import { supportsCssNotes } from '../../site/pages/foundations/interaction/supports/supportsContent'
 import { readingOrderCssNotes } from '../../site/pages/foundations/text/reading-order/readingOrderContent'
-import { ratioPairCssNotes } from '../../site/pages/foundations/layout/ratio-pair/ratioPairContent'
+import { ratioPairCssNotes } from '../../site/pages/foundations/layout/side-by-side/ratio-pair/ratioPairContent'
+import { rowCssNotes } from '../../site/pages/foundations/layout/side-by-side/row/rowContent'
+import { rowWrapCssNotes } from '../../site/pages/foundations/layout/side-by-side/row-wrap/rowWrapContent'
+import { rowWrapGrowCssNotes } from '../../site/pages/foundations/layout/side-by-side/row-wrap-grow/rowWrapGrowContent'
+import { reelCssNotes } from '../../site/pages/foundations/layout/side-by-side/reel/reelContent'
 import { aspectRatioCssNotes } from '../../site/pages/foundations/dimension/size/aspect-ratio/aspectRatioContent'
 import { spaceCssNotes } from '../../site/pages/foundations/dimension/space/spaceContent'
 
@@ -17,7 +21,11 @@ const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string
   { path: '/interaction/safe-areas', notes: safeAreasCssNotes, stylesheet: 'site/pages/foundations/interaction/safe-areas/safeAreas.css' },
   { path: '/interaction/supports', notes: supportsCssNotes },
   { path: '/text/reading-order', notes: readingOrderCssNotes, stylesheet: 'site/pages/foundations/text/reading-order/readingOrder.css' },
-  { path: '/layout/ratio-pair', notes: ratioPairCssNotes, stylesheet: 'src/styles/layout.css' },
+  { path: '/layout/side-by-side/ratio-pair', notes: ratioPairCssNotes, stylesheet: 'src/styles/layout.css' },
+  { path: '/layout/side-by-side/row', notes: rowCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
+  { path: '/layout/side-by-side/row-wrap', notes: rowWrapCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
+  { path: '/layout/side-by-side/row-wrap-grow', notes: rowWrapGrowCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
+  { path: '/layout/side-by-side/reel', notes: reelCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
   { path: '/dimension/size/aspect-ratio', notes: aspectRatioCssNotes, stylesheet: 'site/pages/foundations/dimension/size/aspect-ratio/aspectRatio.css' },
   { path: '/dimension/space', notes: spaceCssNotes, stylesheet: 'site/pages/foundations/dimension/space/space.css' },
 ]
@@ -63,7 +71,7 @@ test('Reading order follows the HTML when the row is reversed', async ({ page })
 // Checks that a page's "Also known as" names start in a closed Disclosure, open from its button,
 // and open when its On this page link is followed.
 test('Also known as starts closed and opens from its button or On this page', async ({ page }) => {
-  await page.goto('/layout/ratio-pair')
+  await page.goto('/layout/side-by-side/ratio-pair')
   const trigger = page.getByRole('button', { name: 'Also known as', exact: true })
   const names = page.getByRole('grid', { name: 'Other names for Ratio pair' })
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
@@ -75,4 +83,17 @@ test('Also known as starts closed and opens from its button or On this page', as
   await page.getByRole('navigation', { name: 'On this page' }).getByRole('link', { name: 'Also known as', exact: true }).click()
   await expect(page.getByRole('button', { name: 'Also known as', exact: true })).toHaveAttribute('aria-expanded', 'true')
   await expect(names).toBeVisible()
+})
+
+// Checks Row: with the switch, a narrow frame turns the row into a column; without it, the items stay
+// in one row.
+test('Row switches to a column below the lg width', async ({ page }) => {
+  await page.goto('/layout/side-by-side/row')
+  const items = page.locator('.example-row > *')
+  const rows = () => items.evaluateAll(list => new Set(list.map(item => Math.round(item.getBoundingClientRect().top))).size)
+  await expect.poll(rows).toBe(1)
+  await page.getByRole('radio', { name: '320px', exact: true }).click()
+  await expect.poll(rows).toBe(3)
+  await page.locator('label').filter({ hasText: 'Switch to a column below the lg width' }).click()
+  await expect.poll(rows).toBe(1)
 })

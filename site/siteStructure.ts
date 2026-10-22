@@ -92,8 +92,21 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'layout',
         label: 'Layout',
         path: '/layout',
-        pages: [
-          { id: 'ratio-pair', label: 'Ratio pair', path: '/layout/ratio-pair', status: 'implemented' },
+        pages: [],
+        groups: [
+          {
+            id: 'side-by-side',
+            label: 'Side by side',
+            path: '/layout/side-by-side',
+            order: ['row', 'row-wrap', 'row-wrap-grow', 'ratio-pair', 'reel'],
+            pages: [
+              { id: 'row', label: 'Row', path: '/layout/side-by-side/row', status: 'implemented' },
+              { id: 'row-wrap', label: 'Row wrap', path: '/layout/side-by-side/row-wrap', status: 'implemented' },
+              { id: 'row-wrap-grow', label: 'Row wrap grow', path: '/layout/side-by-side/row-wrap-grow', status: 'implemented' },
+              { id: 'ratio-pair', label: 'Ratio pair', path: '/layout/side-by-side/ratio-pair', status: 'implemented' },
+              { id: 'reel', label: 'Reel', path: '/layout/side-by-side/reel', status: 'implemented' },
+            ],
+          },
         ],
       },
       {
@@ -106,9 +119,9 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
             id: 'size',
             label: 'Size',
             path: '/dimension/size',
-            order: ['flexible-width', 'aspect-ratio'],
+            order: ['width', 'aspect-ratio'],
             pages: [
-              { id: 'flexible-width', label: 'Flexible width', path: '/dimension/size/flexible-width', status: 'implemented' },
+              { id: 'width', label: 'Width', path: '/dimension/size/width', status: 'implemented' },
               { id: 'aspect-ratio', label: 'Aspect ratio', path: '/dimension/size/aspect-ratio', status: 'implemented' },
             ],
           },

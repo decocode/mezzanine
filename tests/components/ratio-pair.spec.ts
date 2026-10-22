@@ -19,7 +19,7 @@ async function chooseFraction(page: Page, label: string) {
 test('RatioPair shares the row by fraction or by auto', async ({ page }) => {
   // Wide enough that, beside both Panels, each area stays above its minimum width.
   await page.setViewportSize({ width: 1800, height: 900 })
-  await page.goto('/layout/ratio-pair')
+  await page.goto('/layout/side-by-side/ratio-pair')
   await chooseFraction(page, '1/3')
   let { first, second } = await areas(page)
   expect(Math.abs(first.y - second.y)).toBeLessThan(1)
@@ -38,7 +38,7 @@ test('RatioPair shares the row by fraction or by auto', async ({ page }) => {
 for (const fontSize of [16, 32]) {
   test(`RatioPair stacks its areas in a narrow container at ${fontSize}px text`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 })
-    await page.goto('/layout/ratio-pair')
+    await page.goto('/layout/side-by-side/ratio-pair')
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
     await page.getByRole('radio', { name: '320px', exact: true }).check()
     // Measure inside the wait, so a layout that is still settling can't make the check flaky.

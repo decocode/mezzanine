@@ -11,16 +11,6 @@ export function Column({ children, space }: Children & { space?: string }) {
   return <div className="lab-column" style={vars({ '--lab-column-space': space })}>{children}</div>
 }
 
-// Row: items in one row; with switchAt, one below another whenever the row is narrower than that width.
-export function Row({ children, space, switchAt }: Children & { space?: string; switchAt?: string }) {
-  return <div className={`lab-row${switchAt ? ' lab-row-switch' : ''}`} style={vars({ '--lab-row-space': space, '--lab-switch-at': switchAt })}>{children}</div>
-}
-
-// Row wrap: items that wrap like words in a sentence.
-export function RowWrap({ children, space }: Children & { space?: string }) {
-  return <div className="lab-row-wrap" style={vars({ '--lab-row-wrap-space': space })}>{children}</div>
-}
-
 // FixedColumnGrid: a grid with a set number of equal columns.
 export function FixedColumnGrid({ children, columns }: Children & { columns?: number }) {
   return <div className="lab-fixed-column-grid" style={vars({ '--lab-fixed-columns': columns?.toString() })}>{children}</div>
@@ -36,19 +26,9 @@ export function AutoFillGrid({ children, min }: Children & { min?: string }) {
   return <div className="lab-auto-fill-grid" style={vars({ '--lab-auto-fill-min': min })}>{children}</div>
 }
 
-// Row wrap grow: a row that wraps, where the boxes on each new row grow to fill it.
-export function RowWrapGrow({ children, min }: Children & { min?: string }) {
-  return <div className="lab-row-wrap-grow" style={vars({ '--lab-row-wrap-grow-min': min })}>{children}</div>
-}
-
 // Center: caps the width of content and centres it.
 export function Center({ children, max }: Children & { max?: string }) {
   return <div className="lab-center" style={vars({ '--lab-center-max': max })}>{children}</div>
-}
-
-// Reel: a row that scrolls sideways. It is a named region that takes focus, so keyboard users can scroll it.
-export function Reel({ children, label, itemWidth }: Children & { label: string; itemWidth?: string }) {
-  return <div className="lab-reel" role="region" aria-label={label} tabIndex={0} style={vars({ '--lab-reel-item': itemWidth })}>{children}</div>
 }
 
 // A plain coloured block for showing layout without real content.

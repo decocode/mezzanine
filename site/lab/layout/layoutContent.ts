@@ -15,10 +15,6 @@ import { fillingTheBoxPage } from './inside-the-box/filling-the-box/fillingTheBo
 import { overflowingTheBoxPage } from './inside-the-box/overflowing-the-box/overflowingTheBoxContent'
 import { contentColumnsPage } from './inside-the-box/content-columns/contentColumnsContent'
 import { boxHasContentPage } from './inside-the-box/box-has-content/boxHasContentContent'
-import { rowPage } from './side-by-side/row/rowContent'
-import { rowWrapPage } from './side-by-side/row-wrap/rowWrapContent'
-import { rowWrapGrowPage } from './side-by-side/row-wrap-grow/rowWrapGrowContent'
-import { reelPage } from './side-by-side/reel/reelContent'
 import { columnPage } from './grids-and-columns/column/columnContent'
 import { gridPage } from './grids-and-columns/grid/gridContent'
 import { subgridPage } from './grids-and-columns/subgrid/subgridContent'
@@ -38,7 +34,6 @@ export const layoutOverview: DocsPageContent = {
 export const layoutStages: LayoutStage[] = [
   { key: 'boxBasics', id: 'lab-stage-box-basics', slug: 'box-basics', title: 'Box basics', summary: 'Everything on a web page is a box. Start with just one: what it’s made of, how big it is, and how its sides are named.' },
   { key: 'insideTheBox', id: 'lab-stage-inside-the-box', slug: 'inside-the-box', title: 'Inside the box', summary: 'A box holds content: text, pictures, other boxes. These pages are about how that content behaves inside its box.' },
-  { key: 'sideBySide', id: 'lab-stage-side-by-side', slug: 'side-by-side', title: 'Side by side', summary: 'Ways to place boxes next to each other.' },
   { key: 'gridsAndColumns', id: 'lab-stage-grids-and-columns', slug: 'grids-and-columns', title: 'Grids and columns', summary: 'Boxes in a column, or in rows and columns at the same time.' },
   { key: 'container', id: 'lab-stage-container', slug: 'container', title: 'Container', summary: 'When a box responds to the space its container gives it.' },
 ]
@@ -47,7 +42,6 @@ export const layoutStages: LayoutStage[] = [
 const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
   boxBasics: [theBoxModelPage, typesOfBoxPage, measuringTheBoxPage, viewportUnitsPage, sizingTheBoxPage, centerPage],
   insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, contentColumnsPage, boxHasContentPage],
-  sideBySide: [rowPage, rowWrapPage, rowWrapGrowPage, reelPage],
   gridsAndColumns: [columnPage, gridPage, subgridPage],
   container: [containerQueriesPage, fluidSizingPage],
 }

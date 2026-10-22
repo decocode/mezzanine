@@ -39,7 +39,7 @@ export const readingWidthContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Text', href: '/text' },
-    { label: 'Flexible width', href: '/dimension/size/flexible-width' },
+    { label: 'Width', href: '/dimension/size/width' },
     { label: 'Typography', href: '/typography' },
   ],
 }

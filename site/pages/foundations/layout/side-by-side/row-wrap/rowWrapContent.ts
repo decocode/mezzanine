@@ -1,10 +1,11 @@
-// The Lab's Row wrap page, in Side by side: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
-import { everyLayout, bedrock } from '../../../shared/labValues'
+// The Row wrap page, in Foundations › Layout › Side by side: its explanation and the CSS behind its
+// example, in plain English.
+import type { DocsPageContent } from '../../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../../components/ExampleParts'
 
-export const rowWrapPage: StagePage = {
-  key: 'rowWrap', id: 'lab-row-wrap', kind: 'foundation', stage: 'sideBySide', title: 'Row wrap', href: '/site/lab/layout/side-by-side/row-wrap',
-  description: 'When squeezed boxes enjoy a spacious new row.',
+export const rowWrapContent: DocsPageContent = {
+  id: 'row-wrap', kind: 'foundation', title: 'Row wrap',
+  description: 'When squeezed items move onto a spacious new row.',
   alsoKnownAs: [
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap.' },
     { where: 'CSS', called: 'Flexbox with `flex-wrap: wrap`. CSS has no single name for this pattern.' },
@@ -16,15 +17,15 @@ export const rowWrapPage: StagePage = {
     {
       key: 'howItWorks',
       body: [
-        'Row wrap moves boxes into a new row when they no longer fit. The word “wrap” is borrowed from how words in a string of text behave. Each box keeps its own width, so the rows can end at different places.',
+        'Row wrap moves items onto a new row when they no longer fit. The word “wrap” is borrowed from how words in a sentence behave. Each item keeps its own width, so the rows can end at different places.',
         'Row wrap is useful for small items that come in any number and any length, such as tags, Badges and filter buttons. Every item stays visible, with the same space between each one.',
       ],
     },
     { key: 'example' },
   ],
   references: [
-    everyLayout('Cluster', 'cluster'),
-    bedrock('InlineCluster', 'inline-cluster'),
+    { label: 'Every Layout: Cluster', href: 'https://every-layout.dev/layouts/cluster/' },
+    { label: 'Bedrock: InlineCluster', href: 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/inline-cluster' },
     { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
     { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap' },
     { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },
@@ -33,19 +34,19 @@ export const rowWrapPage: StagePage = {
   ],
 }
 
-// What the example's CSS does. Unless marked as an example, the code is copied from
-// layout-lab.css, and a browser test checks that it still matches.
+// What the example's CSS does. The code is copied from sideBySide.css, and a browser test checks
+// that it still matches.
 export const rowWrapCssNotes: Record<string, CssNote> = {
   rowWrap: {
     paragraphs: [
       'The rule `display: flex` makes the container a Flexbox row. The key line is `flex-wrap: wrap`: when the row runs out of room, the next item moves onto a new line instead of squashing or overflowing, just like words in a sentence.',
       'Setting `align-items: center` lines up items of different heights, and `gap` spaces them both along each line and between lines.',
     ],
-    code: `.lab-row-wrap {
+    code: `.example-row-wrap {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--lab-row-wrap-space, var(--space-2));
+  gap: var(--space-2);
 }`,
   },
 }

@@ -9,10 +9,10 @@ export const widthLevels = [
   { token: '--width-2xl', label: 'Width 2xl', description: 'Used for the widest page areas, such as a page heading.' },
 ]
 
-export const flexibleWidthContent: DocsPageContent = {
-  id: 'flexible-width',
+export const widthContent: DocsPageContent = {
+  id: 'width',
   kind: 'foundation',
-  title: 'Flexible width',
+  title: 'Width',
   description: 'Lots of random widths can make a page seem disorganised. A shared set of widths helps to keep things tidy and easy to manage.',
   sections: [
     {
@@ -20,7 +20,7 @@ export const flexibleWidthContent: DocsPageContent = {
       title: 'Widths that suit the content, on every size of screen',
       body: [
         'The default width of anything placed on a page is full-width. That might be ok for something like the surrounding container of a Footer component. However, lines of text become difficult to read if allowed to run beyond a certain number of characters. Conversely, some things end up looking squashed if allowed to become too narrow.',
-        'Flexible width makes sure things placed on a page can expand and contract in a way that suits that particular type of thing, regardless of screen size.',
+        'Instead, Mezzanine’s method of using widths makes sure things placed on a page can expand and contract in a way that suits that particular type of thing, regardless of screen size.',
         { list: [
           'If you give something a maximum width - it won’t expand to full-width.',
           'If you give something a minimum width - it won’t become too narrow, and you can choose to make it wrap onto a new row instead.',
