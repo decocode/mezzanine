@@ -22,7 +22,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-2) min(var(--space-4), 4cqi);
+  padding: var(--space-2) min(var(--space-padding-area), 4cqi);
 }
 
 .mz-top-bar-brand {
@@ -89,7 +89,7 @@
 @container mz-top-bar (min-width: 32rem) {
   .mz-top-bar-content {
     gap: var(--top-bar-content-gap, var(--space-gap-cluster));
-    padding-inline: var(--top-bar-wide-padding-inline, var(--space-4));
+    padding-inline: var(--top-bar-wide-padding-inline, var(--space-padding-area));
   }
 
   .mz-top-bar:not([data-menu-only]) :is(.mz-top-bar-mobile, .mz-top-bar-bar-actions) {
@@ -133,13 +133,14 @@
   overflow-wrap: anywhere;
 }
 
-/* The current page's bar sits under the link, short of its sides. */
+/* The current page's bar sits along the bottom of the link, inside its tint, short of its sides. */
 .mz-top-bar-links > .react-aria-Link[aria-current]:where(:not([aria-current='false']))::after,
 .mz-top-bar .mz-top-bar-link[aria-current]:where(:not([aria-current='false']))::after {
   content: '';
   position: absolute;
   inset-inline: var(--indicator-inset);
-  inset-block-end: 0;
+  /* Centred in the space between the tint's bottom edge and the text. */
+  inset-block-end: calc((var(--top-bar-link-padding-block, var(--space-padding-control-block)) - var(--nav-item-current-indicator-width)) / 2);
   block-size: var(--nav-item-current-indicator-width);
   border-radius: var(--indicator-radius);
   background: var(--nav-item-current-indicator);

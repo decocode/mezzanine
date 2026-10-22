@@ -1,12 +1,12 @@
 import React, { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Badge, NavTree, type NavTreeProps } from '../../../src/index'
+import { Badge, HomeIcon, NavTree, type NavTreeProps } from '../../../src/index'
 import '../../../src/themes/light.css'
 import '../../../src/themes/dark.css'
 import '../../../src/themes/wireframe.css'
 
 const initialItems: NavTreeProps['items'] = [
-  { type: 'section', id: 'section', label: 'Section', children: [
+  { type: 'section', id: 'section', label: 'Section', iconLeading: <HomeIcon />, children: [
     { id: 'a', label: 'Branch A', children: [
       { id: 'nested', label: 'Nested', children: [{ id: 'leaf-a', label: 'Leaf A', href: '#a', content: <Badge>WIP</Badge> }] },
     ] },

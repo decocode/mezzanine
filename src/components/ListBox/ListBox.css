@@ -105,7 +105,8 @@
   content: '';
   position: absolute;
   inset-block: var(--indicator-inset);
-  inset-inline-start: 0;
+  /* Centred in the space between the tint's edge and the text. */
+  inset-inline-start: calc((var(--list-box-item-padding-inline, var(--space-padding-control-inline)) - var(--list-box-item-indicator-width, var(--indicator-width))) / 2);
   inline-size: var(--list-box-item-indicator-width, var(--indicator-width));
   border-radius: var(--indicator-radius);
   background: var(--list-box-item-indicator, var(--color-indicator));

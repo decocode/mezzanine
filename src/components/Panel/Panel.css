@@ -86,12 +86,12 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--panel-header-gap, var(--space-gap-control));
-  /* The heading starts --space-4 from the edge, the same inset as the rows below and the TopBar, and
+  /* The heading starts --space-padding-area from the edge, the same inset as the rows below and the TopBar, and
      its row is as tall as a list row, so a Panel's first line sits at the same height with or
      without a heading. */
   min-block-size: var(--target-size-xs);
   margin-block-start: var(--space-2);
-  padding-inline: var(--space-4) var(--space-2);
+  padding-inline: var(--panel-header-padding-inline-start, var(--space-padding-area)) var(--space-2);
 }
 
 /* A Panel named only by aria-label keeps its close button at the end. */
@@ -114,8 +114,8 @@
   flex: 1 1 auto;
   min-block-size: 0;
   overflow: auto;
-  /* Rows such as NavTree and TableOfContents run edge to edge and set their own --space-4 inset;
-     other content supplies its own padding, as the app's <main> does. */
+  /* Rows such as NavTree and TableOfContents set their own inset from the edges with the nav item
+     tokens; other content supplies its own padding, as the app's <main> does. */
   padding-block: var(--space-2);
 }
 

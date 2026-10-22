@@ -281,6 +281,7 @@ of components.
 | `--space-gap-cluster` | `--space-4` | Components in a group, such as the blocks in a card |
 | `--space-padding-control-block`, `-inline` | `--space-2`, `--space-3` | Inside a control or row: an input, a list row, a table cell |
 | `--space-padding-surface` | `--space-6` | Inside a surface, such as a card or dialog |
+| `--space-padding-area` | `--space-6` | Between the edge of an app area, such as a Panel or the TopBar, and its content |
 | `--space-overlay-inset` | `--space-4` | Between a pop-up, such as a Modal or Tooltip, and the edges of the screen |
 
 ## Current size inventory
@@ -338,6 +339,7 @@ colours point at the colour roles; they and the bar width live in `src/tokens/in
 | `--nav-item-current-indicator` | Current page bar colour |
 | `--nav-item-current-indicator-width` | Current page bar width, pointing at `--indicator-width`, which Tabs' selected bar shares |
 | `--nav-item-inset` | Space between a nav row's wash and its container's edges |
+| `--nav-item-padding-inline` | Space between a nav row's wash and its text |
 | `--nav-item-border-radius` | Corners of a nav row's wash, the controls' corners |
 | `--indicator-radius` | Rounding of every indicator bar's ends, the controls' corners, so square in Wireframe |
 | `--indicator-inset` | Space between an indicator bar's ends and its item's edges |

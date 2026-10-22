@@ -100,7 +100,8 @@
   content: '';
   position: absolute;
   inset-block: var(--indicator-inset);
-  inset-inline-start: 0;
+  /* Centred in the space between the row's edge and the text. */
+  inset-inline-start: calc((var(--table-cell-padding-inline, var(--space-padding-control-inline)) - var(--table-row-indicator-width, var(--indicator-width))) / 2);
   inline-size: var(--table-row-indicator-width, var(--indicator-width));
   border-radius: var(--indicator-radius);
   background: var(--table-row-indicator, var(--color-indicator));

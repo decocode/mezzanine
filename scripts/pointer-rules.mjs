@@ -32,6 +32,7 @@ export const pointerPrefixes = {
   SearchTrigger: ['search-trigger'],
   Switch: ['switch'],
   Table: ['table'],
+  TableOfContents: ['table-of-contents'],
   Tabs: ['tabs', 'tab'],
   TextField: ['input', 'text-field', 'text-area'],
   ToggleButton: ['toggle-button', 'button-secondary'],

@@ -18,9 +18,9 @@
   gap: var(--navigation-tree-item-gap, var(--space-gap-control));
   padding-block: var(--navigation-tree-item-padding-block, 0);
   position: relative;
-  /* The row is set in from its container's edges, so the text still starts --space-4 from the edge. */
+  /* The row is set in from its container's edges, and its text is padded in from the row's tint. */
   margin-inline: var(--nav-item-inset);
-  padding-inline: calc(var(--navigation-tree-item-padding-inline, calc(var(--space-4) - var(--nav-item-inset))) + (var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent, var(--space-4))) var(--navigation-tree-item-padding-inline, calc(var(--space-4) - var(--nav-item-inset)));
+  padding-inline: calc(var(--navigation-tree-item-padding-inline, var(--nav-item-padding-inline)) + (var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent, var(--space-4))) var(--navigation-tree-item-padding-inline, var(--nav-item-padding-inline));
   border-radius: var(--navigation-tree-item-border-radius, var(--nav-item-border-radius));
   background: var(--nav-item-background);
   color: var(--nav-item-foreground);
@@ -79,16 +79,34 @@
 }
 /* Every row shares one size and weight; indentation shows depth, so Emphasis marks only the current page. */
 .mz-nav-tree-item[data-current] {
-  background: var(--nav-item-background-current);
+  background: var(--navigation-tree-item-background-current, var(--nav-item-background-current));
   color: var(--nav-item-foreground-current);
   font-weight: var(--font-weight-emphasis);
 }
-/* The current page's bar sits at the row's start, short of its top and bottom. */
-.mz-nav-tree-item[data-current]::before {
+/* A nested row shows a guide line at the start of each ancestor's text, so it's clear which rows
+   belong together. The lines repeat every indent, one for each level above the row. */
+.mz-nav-tree-item:not([aria-level='1'])::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--navigation-tree-item-padding-inline, var(--nav-item-padding-inline)) + var(--space-1));
+  inline-size: calc((var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent, var(--space-4)));
+  /* physical: the gradient runs from the start edge, which is the left in left-to-right text. */
+  background: repeating-linear-gradient(to right, var(--navigation-tree-guide-color, var(--color-border)) 0 var(--navigation-tree-guide-width, var(--border-width-baseline)), transparent 0 var(--navigation-tree-indent, var(--space-4)));
+  pointer-events: none;
+}
+/* physical: in right-to-left text the start edge is the right. */
+.mz-nav-tree-item:not([aria-level='1']):dir(rtl)::before {
+  background: repeating-linear-gradient(to left, var(--navigation-tree-guide-color, var(--color-border)) 0 var(--navigation-tree-guide-width, var(--border-width-baseline)), transparent 0 var(--navigation-tree-indent, var(--space-4)));
+}
+/* The current page's bar sits at the row's start, short of its top and bottom. It is the row's last
+   pseudo-element, so it paints over the guide lines. */
+.mz-nav-tree-item[data-current]::after {
   content: '';
   position: absolute;
   inset-block: var(--indicator-inset);
-  inset-inline-start: 0;
+  /* Centred in the space between the tint's edge and the text. */
+  inset-inline-start: calc((var(--nav-item-padding-inline) - var(--nav-item-current-indicator-width)) / 2);
   inline-size: var(--nav-item-current-indicator-width);
   border-radius: var(--indicator-radius);
   background: var(--nav-item-current-indicator);
@@ -103,8 +121,11 @@
 .mz-nav-tree-item[data-disabled] .mz-nav-tree-label,
 .mz-nav-tree-item[data-disabled] .mz-nav-tree-toggle { cursor: default; }
 .mz-nav-tree-header {
+  display: flex;
+  align-items: center;
+  gap: var(--navigation-tree-header-gap, var(--space-gap-control));
   /* Matches the rows' inset and padding, so header and row text line up. */
-  padding: var(--navigation-tree-header-padding-block, var(--space-padding-control-block)) calc(var(--navigation-tree-item-padding-inline, calc(var(--space-4) - var(--nav-item-inset))) + var(--nav-item-inset));
+  padding: var(--navigation-tree-header-padding-block, var(--space-padding-control-block)) calc(var(--navigation-tree-item-padding-inline, var(--nav-item-padding-inline)) + var(--nav-item-inset));
   color: var(--navigation-tree-header-foreground, var(--color-accent));
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);
@@ -113,9 +134,24 @@
   line-height: var(--line-height-label-md);
   text-transform: var(--text-transform-label);
 }
+/* A section's optional icon sits before its label, at the icon size used inside controls. The icon is
+   whatever the app passes, so it is sized through NavTree's own wrapper. */
+.mz-nav-tree-header-icon {
+  display: inline-flex;
+  flex: none;
+}
+.mz-nav-tree-header-icon > * {
+  width: var(--navigation-tree-header-icon-size, var(--icon-size-sm));
+  height: var(--navigation-tree-header-icon-size, var(--icon-size-sm));
+}
 
+/* In a nested row the bar sits on the nearest guide line, centred over it, so it marks the branch the
+   row belongs to. */
+.mz-nav-tree-item[data-current]:not([aria-level='1'])::after {
+  inset-inline-start: calc(var(--navigation-tree-item-padding-inline, var(--nav-item-padding-inline)) + var(--space-1) + (var(--tree-item-level, 1) - 2) * var(--navigation-tree-indent, var(--space-4)) - (var(--nav-item-current-indicator-width) - var(--navigation-tree-guide-width, var(--border-width-baseline))) / 2);
+}
 @media (forced-colors: active) {
-  .mz-nav-tree-item[data-current]::before {
+  .mz-nav-tree-item[data-current]::after {
     forced-color-adjust: none;
     background: Highlight;
   }

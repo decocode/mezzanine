@@ -81,8 +81,9 @@ expansion controls, row states, spacing and chevron.
 
 Each item has a unique `id`, a text `label`, an optional `href`, optional
 non-interactive badge `content` and optional child items. A section uses
-`type: 'section'`, a label (or `aria-label`) and child items. Sections cannot
-sit inside items.
+`type: 'section'`, a label (or `aria-label`), an optional decorative
+`iconLeading` before the label, and child items. Sections cannot sit inside
+items.
 
 - A parent with `href` has a link and a separate expand control. A parent
   without one uses its label as the expand control's name and announces its

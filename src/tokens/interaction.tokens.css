@@ -23,23 +23,28 @@
   /* Indicator: the bar that marks the current page, section or tab, and a selected row. Its ends are
      rounded with the controls' corners, so it is square in Wireframe, and they stop short of the
      item's edges by the inset. */
-  --indicator-width: 0.1875rem;
+  --indicator-width: var(--border-width-md);
   --indicator-radius: var(--radius-control);
   --indicator-inset: var(--space-2);
 
   /* Nav items: the shared row style of NavTree, TopBar links and TableOfContents links. The current
      page's indicator bar has the shared indicator width. */
   --nav-item-current-indicator-width: var(--indicator-width);
-  /* Each row's wash has the controls' corners and stops short of its container's edges by the inset. */
+  /* Each row's wash has the controls' corners and stops short of its container's edges by the inset,
+     and its text is padded in from the wash. */
   --nav-item-inset: var(--space-2);
+  /* The text starts at the area padding, like every other area's content. */
+  --nav-item-padding-inline: calc(var(--space-padding-area) - var(--nav-item-inset));
   --nav-item-border-radius: var(--radius-control);
 
   /* Nav item colours: pointers to the colour roles, the same in every theme. */
   --nav-item-background: transparent;
   --nav-item-background-hovered: var(--color-accent-muted-hovered);
   --nav-item-background-pressed: var(--color-accent-muted-pressed);
-  --nav-item-background-current: transparent;
+  /* The current item keeps a soft tint, as well as its bar. */
+  --nav-item-background-current: var(--color-accent-muted);
   --nav-item-foreground: var(--color-text);
-  --nav-item-foreground-current: var(--color-text);
+  /* The current item's text takes the indicator colour, like its bar. */
+  --nav-item-foreground-current: var(--color-indicator);
   --nav-item-current-indicator: var(--color-indicator);
 }

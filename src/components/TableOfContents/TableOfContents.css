@@ -16,8 +16,30 @@
 }
 
 .mz-table-of-contents ul ul {
+  --_toc-depth: 1;
+  position: relative;
   margin-block-start: var(--space-1);
-  padding-inline-start: var(--space-5);
+}
+
+.mz-table-of-contents ul ul ul {
+  --_toc-depth: 2;
+}
+
+/* A nested list shows a guide line at the start of its parent's text, like NavTree, so it's clear
+   which sections belong together. */
+.mz-table-of-contents ul ul::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--nav-item-inset) + var(--nav-item-padding-inline) + var(--space-1) + (var(--_toc-depth) - 1) * var(--table-of-contents-indent, var(--space-4)));
+  inline-size: var(--table-of-contents-guide-width, var(--border-width-baseline));
+  background: var(--table-of-contents-guide-color, var(--color-border));
+  pointer-events: none;
+}
+
+/* A nested link keeps its full-width tint and indents its text instead. */
+.mz-table-of-contents ul ul .react-aria-Link {
+  padding-inline-start: calc(var(--nav-item-padding-inline) + var(--_toc-depth) * var(--table-of-contents-indent, var(--space-4)));
 }
 
 .mz-table-of-contents li {
@@ -32,9 +54,9 @@
   position: relative;
   box-sizing: border-box;
   max-width: calc(100% - var(--nav-item-inset) * 2);
-  /* The row is set in from its container's edges, so the text still starts --space-4 from the edge. */
+  /* The row is set in from its container's edges, and its text is padded in from the row's tint. */
   margin-inline: var(--nav-item-inset);
-  padding-inline: calc(var(--space-4) - var(--nav-item-inset));
+  padding-inline: var(--nav-item-padding-inline);
   border-radius: var(--nav-item-border-radius);
   background: var(--nav-item-background);
   color: var(--nav-item-foreground);
@@ -69,10 +91,16 @@
   content: '';
   position: absolute;
   inset-block: var(--indicator-inset);
-  inset-inline-start: 0;
+  /* Centred in the space between the tint's edge and the text. */
+  inset-inline-start: calc((var(--nav-item-padding-inline) - var(--nav-item-current-indicator-width)) / 2);
   inline-size: var(--nav-item-current-indicator-width);
   border-radius: var(--indicator-radius);
   background: var(--nav-item-current-indicator);
+}
+
+/* In a nested link the bar sits on the nearest guide line, centred over it. */
+.mz-table-of-contents ul ul .react-aria-Link[aria-current='location']::before {
+  inset-inline-start: calc(var(--nav-item-padding-inline) + var(--space-1) + (var(--_toc-depth) - 1) * var(--table-of-contents-indent, var(--space-4)) - (var(--nav-item-current-indicator-width) - var(--table-of-contents-guide-width, var(--border-width-baseline))) / 2);
 }
 
 @media (forced-colors: active) {

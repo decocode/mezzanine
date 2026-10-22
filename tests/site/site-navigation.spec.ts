@@ -37,10 +37,10 @@ for (const theme of ['light', 'dark', 'wireframe']) {
     await expect(wordmark).toHaveCSS('text-decoration-line', 'none')
     const docsLink = page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Docs', exact: true })
     await expect(docsLink).toHaveAttribute('aria-current', 'true')
-    // The current section's indicator bar sits under the link, and the link itself has no fill.
+    // The current section's link has a soft tint, with its indicator bar along the bottom inside it.
     expect(await docsLink.evaluate(element => {
       const bar = getComputedStyle(element, '::after')
-      return bar.content !== 'none' && bar.backgroundColor !== 'rgba(0, 0, 0, 0)' && Number.parseFloat(bar.height) > 0 && getComputedStyle(element).backgroundColor === 'rgba(0, 0, 0, 0)'
+      return bar.content !== 'none' && bar.backgroundColor !== 'rgba(0, 0, 0, 0)' && Number.parseFloat(bar.height) > 0 && Number.parseFloat(bar.bottom) > 0 && getComputedStyle(element).backgroundColor !== 'rgba(0, 0, 0, 0)'
     })).toBe(true)
     if (theme === 'wireframe') {
       expect(await docsLink.evaluate(element => getComputedStyle(element).textDecorationLine)).toBe('underline')

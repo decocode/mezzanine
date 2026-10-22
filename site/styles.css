@@ -455,10 +455,12 @@ a:focus-visible {
   gap: var(--space-3);
 }
 
-/* Inset like the navigation items' text, so the Search button lines up with them. */
+/* Inset like the navigation items' text, so the Search button lines up with them, and set down a
+   little so its middle lines up with the TopBar's content beside it. */
 .navigation-panel-search {
   display: grid;
-  padding-inline: var(--space-4);
+  padding-block-start: var(--space-1);
+  padding-inline: var(--space-padding-area);
 }
 
 /* The site search dialog. A fixed height stops it jumping as the results change. */

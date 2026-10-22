@@ -29,6 +29,8 @@ export interface NavTreeSectionData extends Pick<NavigationTreeSectionProps<NavT
   type: 'section'
   id: Key
   label?: string
+  // An optional decorative icon before the label, such as a section's symbol.
+  iconLeading?: ReactNode
   children: readonly NavTreeItemData[]
 }
 
@@ -83,7 +85,10 @@ export function NavTree({ items, selectedRoute, expandedKeys, defaultExpandedKey
     {items.map(item => item.type === 'section'
       ? <NavigationTreeSection key={item.id} id={item.id} aria-label={item['aria-label']} style={item.style}
           className={['mz-nav-tree-section', item.className].filter(Boolean).join(' ')}>
-          {item.label && <NavigationTreeHeader className="mz-nav-tree-header">{item.label}</NavigationTreeHeader>}
+          {item.label && <NavigationTreeHeader className="mz-nav-tree-header">
+            {item.iconLeading != null && <span className="mz-nav-tree-header-icon" aria-hidden="true">{item.iconLeading}</span>}
+            {item.label}
+          </NavigationTreeHeader>}
           {item.children.map(child => renderNavTreeItem(child, getToggleLabel))}
         </NavigationTreeSection>
       : renderNavTreeItem(item, getToggleLabel))}

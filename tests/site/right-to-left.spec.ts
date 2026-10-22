@@ -32,9 +32,10 @@ test('Table of contents indents nested links from the start of the line in right
   await page.setViewportSize({ width: 800, height: 900 })
   await page.goto('/button')
   await readRightToLeft(page)
-  const nested = page.locator('.mz-table-of-contents ul ul').first()
-  await expect(nested).toHaveCSS('padding-right', /^[1-9]/)
-  await expect(nested).toHaveCSS('padding-left', '0px')
+  // A nested link keeps its full-width tint and indents its text from the start, the right.
+  const nested = page.locator('.mz-table-of-contents ul ul .react-aria-Link').first()
+  const padding = await nested.evaluate(element => { const style = getComputedStyle(element); return [Number.parseFloat(style.paddingRight), Number.parseFloat(style.paddingLeft)] })
+  expect(padding[0]).toBeGreaterThan(padding[1])
 })
 
 // Checks the Reading direction example: in right to left, the logical box's border moves to the right

@@ -752,8 +752,24 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "0"
     },
     {
+      "name": "--navigation-tree-guide-color",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--navigation-tree-guide-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
       "name": "--navigation-tree-header-foreground",
       "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--navigation-tree-header-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--navigation-tree-header-icon-size",
+      "fallback": "var(--icon-size-sm)"
     },
     {
       "name": "--navigation-tree-header-padding-block",
@@ -762,6 +778,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--navigation-tree-indent",
       "fallback": "var(--space-4)"
+    },
+    {
+      "name": "--navigation-tree-item-background-current",
+      "fallback": "var(--nav-item-background-current)"
     },
     {
       "name": "--navigation-tree-item-border-radius",
@@ -785,7 +805,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--navigation-tree-item-padding-inline",
-      "fallback": "calc(var(--space-4) - var(--nav-item-inset))"
+      "fallback": "var(--nav-item-padding-inline)"
     }
   ],
   "Panel": [
@@ -832,6 +852,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--panel-header-gap",
       "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--panel-header-padding-inline-start",
+      "fallback": "var(--space-padding-area)"
     },
     {
       "name": "--panel-resize-focus-ring-color",
@@ -1204,6 +1228,20 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--icon-size-inline)"
     }
   ],
+  "TableOfContents": [
+    {
+      "name": "--table-of-contents-guide-color",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--table-of-contents-guide-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--table-of-contents-indent",
+      "fallback": "var(--space-4)"
+    }
+  ],
   "Tabs": [
     {
       "name": "--tab-background-hovered",
@@ -1539,7 +1577,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--top-bar-wide-padding-inline",
-      "fallback": "var(--space-4)"
+      "fallback": "var(--space-padding-area)"
     }
   ]
 }

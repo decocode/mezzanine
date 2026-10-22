@@ -25,6 +25,15 @@ test.describe('isolated recipe', () => {
     await expect(page.getByRole('treegrid', { name: 'Isolated navigation' })).toBeVisible()
   })
 
+  // Checks that a section's icon sits before its label and is hidden from screen readers.
+  test('a section header shows its icon before the label', async ({ page }) => {
+    const header = page.locator('.mz-nav-tree-header')
+    await expect(header).toHaveText('Section')
+    const icon = header.locator('.mz-nav-tree-header-icon')
+    await expect(icon).toHaveAttribute('aria-hidden', 'true')
+    await expect(icon.locator('svg')).toBeVisible()
+  })
+
   // Checks that branches and links get the right names and states, that empty and disabled rows are
   // marked unavailable, and that collapsing a branch moves focus to the branch instead of losing
   // it.
