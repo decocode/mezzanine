@@ -112,7 +112,8 @@ test('A resizable Panel resizes by keyboard and pointer, within its limits', asy
   const start = Number(await handle.getAttribute('aria-valuenow'))
   const min = Number(await handle.getAttribute('aria-valuemin'))
   const max = Number(await handle.getAttribute('aria-valuemax'))
-  expect(min).toBeLessThan(start)
+  // The docs navigation's usual width is the narrowest it can be.
+  expect(min).toBeLessThanOrEqual(start)
   expect(max).toBeGreaterThan(start)
 
   await handle.focus()
@@ -125,10 +126,11 @@ test('A resizable Panel resizes by keyboard and pointer, within its limits', asy
   await expect(handle).toHaveAttribute('aria-valuenow', String(max))
   await expect.poll(async () => Math.round((await navigation.boundingBox())!.width)).toBeGreaterThanOrEqual(max - 16)
 
+  // From the widest, a click steps back to the narrowest, then on to the next width up.
   await handle.click()
   await expect(handle).toHaveAttribute('aria-valuenow', String(min))
   await handle.click()
-  await expect(handle).toHaveAttribute('aria-valuenow', String(start))
+  await expect.poll(async () => Number(await handle.getAttribute('aria-valuenow'))).toBeGreaterThan(min)
   await page.keyboard.press('End')
   await handle.dblclick()
   await expect(handle).toHaveAttribute('aria-valuenow', String(start))

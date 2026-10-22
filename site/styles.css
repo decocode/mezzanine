@@ -1,6 +1,6 @@
 :root {
   /* PageHeading: existing page introduction widths and fluid title size. */
-  --page-heading-max-width: 58rem;
+  --page-heading-max-width: var(--width-2xl);
   /* The widest that examples, reference tables and Technical details get: the reading width plus room
      for a column of names, so they share one edge just beyond the text. */
   --docs-wide-content-width: calc(var(--line-length) + var(--width-xs));
@@ -125,7 +125,7 @@ a:focus-visible {
 }
 
 .landing-hero {
-  max-width: 52rem;
+  max-inline-size: var(--width-xl);
 }
 
 .landing-wordmark {
@@ -150,7 +150,7 @@ a:focus-visible {
 }
 
 .landing-hero-description {
-  max-width: 42rem;
+  max-inline-size: var(--width-xl);
   margin: 0 0 var(--space-8);
   color: var(--color-text-muted);
 }
@@ -478,7 +478,7 @@ a:focus-visible {
 
 :is(.documentation-props-table, .documentation-anatomy-table) .react-aria-Table {
   /* Scroll on narrow screens instead of crushing names or descriptions. */
-  min-width: 28rem;
+  min-inline-size: var(--width-lg);
 }
 
 :is(.documentation-props-table, .documentation-anatomy-table) .react-aria-Column:first-child,
@@ -676,7 +676,7 @@ a:focus-visible {
 
 .component-example.documentation-table > .react-aria-Table {
   /* Preserve readable example columns; the documentation wrapper scrolls. */
-  min-width: 28rem;
+  min-inline-size: var(--width-lg);
 }
 
 .component-example-feedback {
@@ -735,13 +735,13 @@ a:focus-visible {
 }
 
 .navigation-tree-example {
-  max-width: 24rem;
+  max-inline-size: var(--width-md);
 }
 
 /* Each icon is shown in a library Card; the list only lays the cards out. */
 .icon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
   gap: var(--space-4);
   margin: 0;
   padding: 0;
@@ -895,18 +895,18 @@ a:focus-visible {
 .docs-contents-inline { margin-block-end: var(--space-8); }
 
 /* Three equal columns, with local scrolling instead of compressed state examples. */
-.toggle-button-states-table .react-aria-Table { min-width: 30rem; table-layout: fixed; }
+.toggle-button-states-table .react-aria-Table { min-inline-size: var(--width-lg); table-layout: fixed; }
 .toggle-button-states-table .react-aria-Column,
 .toggle-button-states-table .react-aria-Cell { width: calc(100% / 3); }
 
-.button-sizes-table .react-aria-Table { min-width: 30rem; table-layout: fixed; }
+.button-sizes-table .react-aria-Table { min-inline-size: var(--width-lg); table-layout: fixed; }
 .button-sizes-table .react-aria-Column,
 .button-sizes-table .react-aria-Cell { width: calc(100% / 3); }
 
 /* Text and Reading direction page examples: a narrow Card for long words, and vertical text in a Card. */
 .text-narrow-example .mz-card { max-inline-size: var(--width-xs); }
 /* Language examples: as many per row as fit. */
-.text-language-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
+.text-language-examples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-sm)), 1fr)); gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
 /* In vertical writing, inline-size is the height, so lines wrap after the xs width (12rem). */
 /* The Card's gap between children follows each child's own direction, so vertical text needs its own space above. */
 .text-vertical-example { writing-mode: vertical-rl; inline-size: var(--width-xs); margin-top: var(--space-4); }
@@ -942,11 +942,11 @@ a:focus-visible {
 /* Docs pages: the library AppShell frames the page, with the docs navigation in a start Panel and
    the page's sections in an end Panel. The main content keeps enough room for reading, so the end
    Panel only appears on wide screens; until then the sections sit inline after the heading. */
-/* Narrower Panels leave the reading column more room: navigation at 16rem, and On this page at 12rem,
+/* Narrower Panels leave the reading column more room: navigation at sm (15rem), and On this page at xs (12rem),
    since its links are short. The minimum main width keeps On this page until there's genuinely space
-   (60rem), while the navigation Panel still appears from 48rem, where the TopBar stops offering it in
+   (59rem), while the navigation Panel still appears from 47rem, where the TopBar stops offering it in
    its menu. */
-.docs-app-shell { --panel-start-width: 16rem; --panel-end-width: var(--width-xs); --app-shell-min-main-width: var(--width-lg); }
+.docs-app-shell { --panel-start-width: var(--width-sm); --panel-end-width: var(--width-xs); --app-shell-min-main-width: var(--width-lg); }
 /* Custom properties inherit, so an AppShell shown as an example inside the docs keeps the library's own minimum. */
 .docs-app-shell .mz-app-shell { --app-shell-min-main-width: var(--ratio-pair-min-area-width); }
 .docs-app-shell:has(> .mz-panel[data-edge='end'][data-state='open']) .docs-contents-inline { display: none; }

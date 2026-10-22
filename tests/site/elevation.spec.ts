@@ -19,7 +19,11 @@ for (const fontSize of [16, 32]) {
       const browse = page.getByRole('banner').getByRole('button', { name: /^(Menu|Close menu)$/ })
       // TopBar uses its menu when it's narrow, or when the navigation Panel is hidden for lack of room,
       // so the navigation is always reachable.
-      const barWidth = await page.getByRole('banner').evaluate((element) => element.getBoundingClientRect().width)
+      // The TopBar switches on the width inside its own padding, as its container query measures it.
+      const barWidth = await page.locator('.mz-top-bar').evaluate((element) => {
+        const style = getComputedStyle(element)
+        return element.clientWidth - parseFloat(style.paddingInlineStart) - parseFloat(style.paddingInlineEnd)
+      })
       const panelShowing = await page.getByRole('complementary').getByRole('treegrid', { name: 'Mezzanine documentation' }).isVisible()
       if (barWidth < 32 * fontSize || !panelShowing) {
         await expect(browse).toBeVisible()

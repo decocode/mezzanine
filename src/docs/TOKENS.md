@@ -287,6 +287,8 @@ widths from.
 | `--width-sm` | `15rem` | Ratio pair's minimum area width |
 | `--width-md` | `20rem` | Panel width, Tooltip's maximum width |
 | `--width-lg` | `32rem` | Modal's maximum width |
+| `--width-xl` | `48rem` | Wide page areas, such as the docs landing hero |
+| `--width-2xl` | `64rem` | The widest page areas, such as docs page headings |
 
 ## Current icon size inventory
 

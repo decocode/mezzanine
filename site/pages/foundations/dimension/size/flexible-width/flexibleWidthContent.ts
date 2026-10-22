@@ -5,6 +5,8 @@ export const widthLevels = [
   { token: '--width-sm', label: 'Width sm', description: 'Used for layouts such as [Ratio pair](/layout/ratio-pair).' },
   { token: '--width-md', label: 'Width md', description: 'Used for components such as [Tooltip](/tooltip) and [Panel](/panel).' },
   { token: '--width-lg', label: 'Width lg', description: 'Used for components such as Modal.' },
+  { token: '--width-xl', label: 'Width xl', description: 'Used for wide page areas, such as a hero.' },
+  { token: '--width-2xl', label: 'Width 2xl', description: 'Used for the widest page areas, such as a page heading.' },
 ]
 
 export const flexibleWidthContent: DocsPageContent = {
