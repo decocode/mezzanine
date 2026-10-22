@@ -6,8 +6,6 @@
   min-inline-size: 0;
   min-block-size: 0;
   overflow: hidden;
-  /* Holds a resizable Panel's handle on its edge. */
-  position: relative;
   background: var(--color-surface);
   color: var(--color-text);
   font-family: var(--font-family-body);
@@ -35,40 +33,47 @@
 
 /* Side content keeps its open width while the space animates, so it's revealed rather than squeezed.
    In an AppShell, the gap beside the Panel's card comes out of that width. */
-.mz-panel[data-edge='start']:not([data-state='minimized']) > :not(.mz-panel-resize-handle) { min-inline-size: calc(var(--_panel-start-size, var(--panel-start-width)) - var(--_app-shell-join, 0px)); }
-.mz-panel[data-edge='end']:not([data-state='minimized']) > :not(.mz-panel-resize-handle) { min-inline-size: calc(var(--_panel-end-size, var(--panel-end-width)) - var(--_app-shell-join, 0px)); }
+.mz-panel[data-edge='start']:not([data-state='minimized']) > * { min-inline-size: calc(var(--_panel-start-size, var(--panel-start-width)) - var(--_app-shell-join, 0px)); }
+.mz-panel[data-edge='end']:not([data-state='minimized']) > * { min-inline-size: calc(var(--_panel-end-size, var(--panel-end-width)) - var(--_app-shell-join, 0px)); }
 
-/* A resizable Panel's handle: a strip along its inner edge, wide enough to grab, with a line that
-   shows on hover, while dragging and with keyboard focus. */
+/* A resizable Panel's handle sits on the gap between the Panel and the main content, centred on it,
+   so nothing in the Panel or the main content is under it. A line along its middle shows on hover,
+   while dragging and with keyboard focus. */
 .mz-panel-resize-handle {
-  position: absolute;
-  inset-block: 0;
+  position: relative;
   z-index: var(--z-index-raised);
-  inline-size: var(--panel-resize-handle-size);
+  inline-size: var(--space-2);
   cursor: col-resize;
   touch-action: none;
 }
 
-.mz-panel[data-edge='start'] > .mz-panel-resize-handle { inset-inline-end: 0; }
-.mz-panel[data-edge='end'] > .mz-panel-resize-handle { inset-inline-start: 0; }
+.mz-app-shell > .mz-panel-resize-handle[data-edge='start'] {
+  grid-area: start;
+  justify-self: end;
+  margin-inline-end: calc((var(--space-2) - var(--_app-shell-join, 0px)) / -2);
+}
+
+.mz-app-shell > .mz-panel-resize-handle[data-edge='end'] {
+  grid-area: end;
+  justify-self: start;
+  margin-inline-start: calc((var(--space-2) - var(--_app-shell-join, 0px)) / -2);
+}
 
 .mz-panel-resize-handle::after {
   content: '';
   position: absolute;
   inset-block: 0;
-  inline-size: var(--panel-resize-indicator-width);
+  inset-inline-start: calc(50% - var(--indicator-width) / 2);
+  inline-size: var(--indicator-width);
 }
 
-.mz-panel[data-edge='start'] > .mz-panel-resize-handle::after { inset-inline-end: 0; }
-.mz-panel[data-edge='end'] > .mz-panel-resize-handle::after { inset-inline-start: 0; }
-
 .mz-panel-resize-handle:is([data-hovered], [data-moving])::after {
-  background: var(--panel-resize-indicator-color);
+  background: var(--color-accent-emphasis);
 }
 
 .mz-panel-resize-handle[data-focus-visible] {
-  outline: var(--panel-resize-focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--panel-resize-focus-ring-offset);
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset-inset);
 }
 
 @media (forced-colors: active) {
@@ -127,7 +132,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-index-overlay);
-  background: var(--modal-backdrop);
+  background: var(--color-backdrop);
 }
 
 .mz-panel-overlay > .mz-panel {
@@ -150,8 +155,8 @@
 }
 
 .mz-panel-dialog:focus-visible {
-  outline: var(--dialog-focus-ring-width) solid var(--color-focus);
-  outline-offset: calc(-1 * var(--dialog-focus-ring-width));
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: calc(-1 * var(--focus-ring-width));
 }
 
 .mz-panel-overlay[data-entering] { animation: mz-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-modal-fade); }

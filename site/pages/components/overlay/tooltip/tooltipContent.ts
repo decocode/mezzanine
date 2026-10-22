@@ -75,8 +75,6 @@ export const tooltipContent: DocsPageContent = {
         label: 'Tooltip CSS tokens',
         nameColumn: 'CSS token',
         rows: [
-          { name: '--tooltip-max-width', description: 'Maximum tooltip width, additionally constrained by the viewport.' },
-          { name: '--tooltip-border-width', description: 'Tooltip border thickness.' },
           { name: '--motion-duration-interface', description: 'Entry and exit fade duration; disabled for reduced motion.' },
         ],
       },

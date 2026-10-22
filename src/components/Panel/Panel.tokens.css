@@ -1,20 +1,11 @@
-/* Component tokens shared by every theme. */
+/* Panel settings an app can change. These are layout choices rather than styling, so they stay as
+   named settings: each side Panel's width, the tallest a bottom Panel grows as a share of the
+   AppShell, and the range a resizable side Panel can be dragged across. */
 
 :where(:root) {
-  /* Panel: a side Panel's open width, and the tallest a bottom Panel grows, as a share of the AppShell. */
-  --panel-width: var(--width-md);
-  /* Each side can have its own width, such as a narrow contents list and a wide chat Panel. */
-  --panel-start-width: var(--panel-width);
-  --panel-end-width: var(--panel-width);
+  --panel-start-width: var(--width-md);
+  --panel-end-width: var(--width-md);
   --panel-max-height: 50%;
-  /* A resizable side Panel: the narrowest and widest it can be dragged to, how far an arrow key moves
-     it, the handle's reach on its edge, and the line that shows on hover, while dragging and on focus. */
   --panel-min-width: var(--width-sm);
   --panel-max-width: var(--width-lg);
-  --panel-resize-step: var(--space-4);
-  --panel-resize-handle-size: var(--space-6);
-  --panel-resize-indicator-width: var(--indicator-width);
-  --panel-resize-indicator-color: var(--color-accent-emphasis);
-  --panel-resize-focus-ring-width: var(--focus-ring-width);
-  --panel-resize-focus-ring-offset: var(--focus-ring-offset-inset);
 }

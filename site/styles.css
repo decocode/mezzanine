@@ -28,8 +28,8 @@ body {
 
 a {
   color: var(--color-link);
-  text-decoration-thickness: var(--link-underline-thickness);
-  text-underline-offset: var(--link-underline-offset);
+  text-decoration-thickness: var(--border-width-baseline);
+  text-underline-offset: 0.1875rem;
 }
 
 a:hover {
@@ -340,7 +340,7 @@ a:focus-visible {
 .token-scale[data-sample='radius'] .token-scale-sample { border-radius: var(--_token-scale-value); }
 .token-scale[data-sample='border-width'] .token-scale-sample { border-width: var(--_token-scale-value); border-color: var(--color-text); }
 /* Elevation samples are judged against level 0, so their cards sit flat rather than raised. */
-.token-scale[data-sample='shadow'] { --card-background: var(--elevation-flat-surface); --card-elevation: var(--elevation-flat); }
+.token-scale[data-sample='shadow'] { --elevation-raised-1-surface: var(--elevation-flat-surface); --elevation-raised-1: var(--elevation-flat); }
 .token-scale[data-sample='shadow'] .token-scale-sample { border-color: transparent; box-shadow: var(--_token-scale-value); }
 .token-scale[data-sample='length'] .token-scale-sample {
   inline-size: var(--_token-scale-value);
@@ -451,7 +451,7 @@ a:focus-visible {
   max-width: 100%;
   overflow-x: auto;
   /* Keep cell and example focus rings inside the scrollable area. */
-  padding: calc(var(--table-focus-ring-width) + var(--table-focus-ring-offset) + var(--space-1));
+  padding: calc(var(--focus-ring-width) + var(--focus-ring-offset-inset) + var(--space-1));
 }
 
 /* A two-column reference table (a name and its description), and the Technical details group, stop at
@@ -533,7 +533,7 @@ a:focus-visible {
     /* Wide enough for a large sample's descenders, which reach below its tight line height. */
     gap: var(--space-4);
     margin-block-end: var(--space-4);
-    border: var(--table-border-width) solid var(--color-border);
+    border: var(--border-width-baseline) solid var(--color-border);
   }
 
   .text-style-table .react-aria-Cell {

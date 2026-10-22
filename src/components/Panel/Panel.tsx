@@ -94,8 +94,8 @@ export function Panel({
       inert={!isShown && minimized == null}
     >
       {isShown ? contents : minimized != null && <div className="mz-panel-minimized">{minimized}</div>}
-      {isShown && isResizable && edge !== 'bottom' && <PanelResizeHandle id={id} edge={edge} name={name} controls={elementId} panelRef={panelRef} />}
     </aside>
+    {isShown && isResizable && edge !== 'bottom' && <PanelResizeHandle id={id} edge={edge} name={name} controls={elementId} panelRef={panelRef} />}
     {isDrawer && isCollapsible && <ModalOverlay isOpen={isOpen} onOpenChange={(open) => store.setOpen(id, open, true)} isDismissable className="mz-panel-overlay" data-edge={edge}>
       <Modal className={classes} data-edge={edge}>
         <Dialog id={elementId} className="mz-panel-dialog" aria-label={title == null ? name : undefined}>{contents}</Dialog>
@@ -138,7 +138,7 @@ function PanelResizeHandle({ id, edge, name, controls, panelRef }: PanelResizeHa
     const max = Math.max(min, Math.min(tokenInPixels(panel, '--panel-max-width'), maxPanelSize(edge)))
     const size = store.size(id) ?? tokenInPixels(panel, edge === 'start' ? '--panel-start-width' : '--panel-end-width')
     const base = tokenInPixels(panel, edge === 'start' ? '--panel-start-width' : '--panel-end-width')
-    return { min, max, size, base, step: tokenInPixels(panel, '--panel-resize-step') }
+    return { min, max, size, base, step: tokenInPixels(panel, '--space-4') }
   }
   const resize = (size: number) => {
     const { min, max } = limits()
@@ -196,6 +196,7 @@ function PanelResizeHandle({ id, edge, name, controls, panelRef }: PanelResizeHa
         <div
           {...mergeProps(moveProps, hoverProps, focusProps, { onKeyDown, onClick, onPointerDown: () => { hasDragged.current = false }, onDoubleClick: () => store.setSize(id, undefined) })}
           className="mz-panel-resize-handle"
+          data-edge={edge}
           role="separator"
           aria-orientation="vertical"
           aria-label={`Resize ${name}`}

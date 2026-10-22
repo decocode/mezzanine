@@ -7,4 +7,8 @@
   --icon-size-md: 1.5rem;
   --icon-size-lg: 1.75rem;
   --icon-size-xl: 2rem;
+  /* An icon inside a line of text, such as a Link's: the size of the text around it. */
+  --icon-size-inline: 1em;
+  /* The filled dot that marks a selected Radio. */
+  --icon-size-dot: 0.625rem;
 }

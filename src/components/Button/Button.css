@@ -1,10 +1,10 @@
 /* Button and ToggleButton share one size scale. Consumers select size via props. */
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size] {
   box-sizing: border-box;
-  min-height: var(--button-min-height);
-  padding: var(--button-padding-block) var(--button-padding-inline);
-  font-size: var(--button-font-size);
-  line-height: var(--button-line-height);
+  min-height: var(--_button-min-height);
+  padding: var(--_button-padding-block) var(--_button-padding-inline);
+  font-size: var(--_button-font-size);
+  line-height: var(--_button-line-height);
 }
 
 .react-aria-Button[data-variant] {
@@ -15,11 +15,11 @@
   box-sizing: border-box;
   min-width: 0;
   max-width: 100%;
-  border: var(--button-border-width) solid var(--button-border);
-  border-radius: var(--button-border-radius);
-  --_button-current-background: var(--button-background);
+  border: var(--border-width-baseline) solid var(--_button-border);
+  border-radius: var(--radius-control);
+  --_button-current-background: var(--_button-background);
   background: var(--_button-current-background);
-  color: var(--button-foreground);
+  color: var(--_button-foreground);
   font-family: var(--font-family-body);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
@@ -32,48 +32,48 @@
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xs'] {
-  --button-min-height: var(--target-size-xs);
-  --button-padding-block: var(--button-xs-padding-block);
-  --button-padding-inline: var(--button-xs-padding-inline);
-  --button-font-size: var(--button-xs-font-size);
-  --button-line-height: var(--button-xs-line-height);
-  --button-icon-size: var(--button-xs-icon-size);
+  --_button-min-height: var(--target-size-xs);
+  --_button-padding-block: var(--space-1);
+  --_button-padding-inline: var(--space-3);
+  --_button-font-size: var(--font-size-label-sm);
+  --_button-line-height: var(--line-height-label-sm);
+  --_button-icon-size: var(--icon-size-xs);
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='sm'] {
-  --button-min-height: var(--target-size-sm);
-  --button-padding-block: var(--button-sm-padding-block);
-  --button-padding-inline: var(--button-sm-padding-inline);
-  --button-font-size: var(--button-sm-font-size);
-  --button-line-height: var(--button-sm-line-height);
-  --button-icon-size: var(--button-sm-icon-size);
+  --_button-min-height: var(--target-size-sm);
+  --_button-padding-block: var(--space-2);
+  --_button-padding-inline: var(--space-4);
+  --_button-font-size: var(--font-size-label-md);
+  --_button-line-height: var(--line-height-label-md);
+  --_button-icon-size: var(--icon-size-sm);
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='md'] {
-  --button-min-height: var(--target-size-md);
-  --button-padding-block: var(--button-md-padding-block);
-  --button-padding-inline: var(--button-md-padding-inline);
-  --button-font-size: var(--button-md-font-size);
-  --button-line-height: var(--button-md-line-height);
-  --button-icon-size: var(--button-md-icon-size);
+  --_button-min-height: var(--target-size-md);
+  --_button-padding-block: var(--space-2);
+  --_button-padding-inline: var(--space-4);
+  --_button-font-size: var(--font-size-label-lg);
+  --_button-line-height: var(--line-height-label-lg);
+  --_button-icon-size: var(--icon-size-md);
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='lg'] {
-  --button-min-height: var(--target-size-lg);
-  --button-padding-block: var(--button-lg-padding-block);
-  --button-padding-inline: var(--button-lg-padding-inline);
-  --button-font-size: var(--button-lg-font-size);
-  --button-line-height: var(--button-lg-line-height);
-  --button-icon-size: var(--button-lg-icon-size);
+  --_button-min-height: var(--target-size-lg);
+  --_button-padding-block: var(--space-2);
+  --_button-padding-inline: var(--space-5);
+  --_button-font-size: var(--font-size-title-sm);
+  --_button-line-height: var(--line-height-title-sm);
+  --_button-icon-size: var(--icon-size-lg);
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xl'] {
-  --button-min-height: var(--target-size-xl);
-  --button-padding-block: var(--button-xl-padding-block);
-  --button-padding-inline: var(--button-xl-padding-inline);
-  --button-font-size: var(--button-xl-font-size);
-  --button-line-height: var(--button-xl-line-height);
-  --button-icon-size: var(--button-xl-icon-size);
+  --_button-min-height: var(--target-size-xl);
+  --_button-padding-block: var(--space-3);
+  --_button-padding-inline: var(--space-6);
+  --_button-font-size: var(--font-size-title-md);
+  --_button-line-height: var(--line-height-title-md);
+  --_button-icon-size: var(--icon-size-xl);
 }
 
 .mz-button-content {
@@ -82,7 +82,7 @@
   max-width: 100%;
   align-items: center;
   justify-content: center;
-  gap: var(--button-content-gap);
+  gap: var(--space-gap-control);
 }
 
 /* The icon takes up one line of text, so a larger icon never makes the button taller than its
@@ -95,12 +95,12 @@
 }
 
 .mz-button-icon svg {
-  width: var(--button-icon-size);
-  height: var(--button-icon-size);
+  width: var(--_button-icon-size);
+  height: var(--_button-icon-size);
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-icon-only] {
-  width: var(--button-min-height);
+  width: var(--_button-min-height);
   padding-inline: 0;
 }
 
@@ -116,8 +116,8 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  inline-size: var(--button-min-height);
-  block-size: var(--button-min-height);
+  inline-size: var(--_button-min-height);
+  block-size: var(--_button-min-height);
 }
 
 .react-aria-Button[data-variant][data-label-placement] {
@@ -129,10 +129,10 @@
 }
 
 .react-aria-Button[data-label-placement] .mz-button-icon-box {
-  border: var(--button-border-width) solid var(--button-border);
-  border-radius: var(--button-border-radius);
+  border: var(--border-width-baseline) solid var(--_button-border);
+  border-radius: var(--radius-control);
   background: var(--_button-current-background);
-  color: var(--button-foreground);
+  color: var(--_button-foreground);
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement='above'] .mz-button-content {
@@ -140,51 +140,51 @@
 }
 
 .react-aria-Button[data-variant='primary'] {
-  --button-background: var(--button-primary-background);
-  --button-background-hovered: var(--button-primary-background-hovered);
-  --button-background-pressed: var(--button-primary-background-pressed);
-  --button-foreground: var(--button-primary-foreground);
-  --button-border: var(--button-primary-border);
+  --_button-background: var(--color-accent-emphasis);
+  --_button-background-hovered: var(--color-accent-emphasis-hovered);
+  --_button-background-pressed: var(--color-accent-emphasis-pressed);
+  --_button-foreground: var(--color-accent-inverse);
+  --_button-border: var(--color-accent-emphasis-pressed);
 }
 
 .react-aria-Button[data-variant='secondary'] {
-  --button-background: var(--button-secondary-background);
-  --button-background-hovered: var(--button-secondary-background-hovered);
-  --button-background-pressed: var(--button-secondary-background-pressed);
-  --button-foreground: var(--button-secondary-foreground);
-  --button-border: var(--button-secondary-border);
+  --_button-background: transparent;
+  --_button-background-hovered: var(--color-accent-muted-hovered);
+  --_button-background-pressed: var(--color-accent-muted-pressed);
+  --_button-foreground: var(--color-accent);
+  --_button-border: var(--color-accent);
 }
 
 .react-aria-Button[data-variant='tertiary'] {
-  --button-background: var(--button-tertiary-background);
-  --button-background-hovered: var(--button-tertiary-background-hovered);
-  --button-background-pressed: var(--button-tertiary-background-pressed);
-  --button-foreground: var(--button-tertiary-foreground);
-  --button-border: var(--button-tertiary-border);
+  --_button-background: transparent;
+  --_button-background-hovered: var(--color-accent-muted-hovered);
+  --_button-background-pressed: var(--color-accent-muted-pressed);
+  --_button-foreground: var(--color-accent);
+  --_button-border: transparent;
 }
 
 .react-aria-Button[data-variant='destructive'] {
-  --button-background: var(--button-destructive-background);
-  --button-background-hovered: var(--button-destructive-background-hovered);
-  --button-background-pressed: var(--button-destructive-background-pressed);
-  --button-foreground: var(--button-destructive-foreground);
-  --button-border: var(--button-destructive-border);
+  --_button-background: var(--color-danger-emphasis);
+  --_button-background-hovered: var(--color-danger-emphasis-hovered);
+  --_button-background-pressed: var(--color-danger-emphasis-pressed);
+  --_button-foreground: var(--color-danger-inverse);
+  --_button-border: var(--color-danger-emphasis-pressed);
 }
 
 .react-aria-Button[data-variant][data-hovered],
 .react-aria-Button[data-variant][data-preview-state='hovered'] {
-  --_button-current-background: var(--button-background-hovered);
+  --_button-current-background: var(--_button-background-hovered);
 }
 
 .react-aria-Button[data-variant][data-pressed],
 .react-aria-Button[data-variant][data-preview-state='pressed'] {
-  --_button-current-background: var(--button-background-pressed);
+  --_button-current-background: var(--_button-background-pressed);
 }
 
 .react-aria-Button[data-variant][data-focus-visible],
 .react-aria-Button[data-variant][data-preview-state='focused'] {
-  outline: var(--button-focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--button-focus-ring-offset);
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
 }
 
 .react-aria-Button[data-variant][data-disabled] {
@@ -208,11 +208,11 @@
 }
 
 .mz-button-progress-indicator {
-  width: var(--button-progress-size);
-  height: var(--button-progress-size);
-  border: var(--button-progress-stroke-width) solid currentColor;
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  border: var(--border-width-md) solid currentColor;
   border-inline-end-color: transparent;
-  border-radius: var(--button-progress-border-radius);
+  border-radius: 50%;
   animation: mz-button-progress-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite; animation-name: var(--_motion-loading-animation, mz-button-progress-spin);
 }
 

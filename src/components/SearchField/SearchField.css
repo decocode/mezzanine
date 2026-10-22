@@ -4,7 +4,7 @@
   grid-template-areas: 'label' 'input' 'help';
   grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  row-gap: var(--search-field-gap);
+  row-gap: var(--space-gap-field);
   min-width: 0;
   color: var(--color-text);
   font-family: var(--font-family-body);
@@ -28,8 +28,8 @@
 
 .react-aria-SearchField > .react-aria-Input {
   grid-area: input;
-  padding-inline-start: calc(var(--input-padding-inline) + var(--search-field-icon-size) + var(--search-field-icon-gap));
-  padding-inline-end: calc(var(--target-size-sm) + var(--input-border-width));
+  padding-inline-start: calc(var(--space-padding-control-inline) + var(--icon-size-sm) + var(--space-gap-control));
+  padding-inline-end: calc(var(--target-size-sm) + var(--border-width-baseline));
 }
 
 /* Hide the browser's own clear button and search decoration; the field supplies its own. */
@@ -41,17 +41,17 @@
 .mz-search-field-icon {
   grid-area: input;
   justify-self: start;
-  width: var(--search-field-icon-size);
-  height: var(--search-field-icon-size);
-  margin-inline-start: var(--input-padding-inline);
-  color: var(--search-field-icon-foreground);
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  margin-inline-start: var(--space-padding-control-inline);
+  color: var(--color-text-muted);
   pointer-events: none;
 }
 
 .react-aria-SearchField > .mz-search-field-clear {
   grid-area: input;
   justify-self: end;
-  margin-inline-end: var(--input-border-width);
+  margin-inline-end: var(--border-width-baseline);
 }
 
 .react-aria-SearchField[data-empty] > .mz-search-field-clear {
@@ -74,7 +74,7 @@
 }
 
 .react-aria-SearchField > .react-aria-FieldError {
-  color: var(--text-field-error-foreground);
+  color: var(--color-danger);
 }
 
 .react-aria-SearchField[data-disabled] {

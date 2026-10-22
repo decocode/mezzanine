@@ -1,7 +1,0 @@
-/* Component tokens shared by every theme. Colour tokens point at the colour roles, which each theme sets in src/themes/. */
-
-:where(:root) {
-  /* Tooltip: short descriptions shown on hover or keyboard focus. */
-  --tooltip-max-width: var(--width-md);
-  --tooltip-border-width: var(--border-width-baseline);
-}

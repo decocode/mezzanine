@@ -9,7 +9,7 @@ The `@decocode/mezzanine` package. `npm run build:lib` builds it into `dist/`.
 | Folder or file | What it holds |
 | --- | --- |
 | `index.ts` | The only public entry point. Everything an app can use is exported here. |
-| `components/<Name>/` | One folder per component, named after it: `<Name>.tsx`, `<Name>.css` and `<Name>.tokens.css`, plus any private `.ts` logic. Some are thin React Aria re-exports that Mezzanine hasn't designed yet. |
+| `components/<Name>/` | One folder per component, named after it: `<Name>.tsx` and `<Name>.css`, plus any private `.ts` logic. Panel and AppShell also have a `<Name>.tokens.css` holding the layout settings an app may change. Some are thin React Aria re-exports that Mezzanine hasn't designed yet. |
 | `tokens/` | The shared scales, one file per subject: colour palettes, elevation, icon size, interaction (target size, focus ring, nav item), motion, opacity, shape (radius, border width), space, layout, text, typography and z-index. |
 | `themes/` | Light, Dark and Wireframe. Each maps the palettes onto the colour roles, and sets any other role values that differ. |
 | `styles/` | The shared classes that apps write in their markup, built from tokens: `typography.css` holds the public `mz-text-*` text styles, and `layout.css` the layout classes, such as `mz-ratio-pair`. |

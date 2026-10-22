@@ -218,7 +218,7 @@ PanelTrigger. When there's no room beside the content it's hidden rather than
 becoming a drawer, so offer the same content another way, such as in a TopBar
 menu.
 
-Side Panels are `--panel-width` wide. Set `--panel-start-width` or
+Side Panels are the md width (`--width-md`) by default. Set `--panel-start-width` or
 `--panel-end-width` to give one side its own width, such as a wide chat Panel.
 
 Each area (the header, Panels and main content) is a card on a darker

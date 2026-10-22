@@ -23,17 +23,17 @@ test('numeric weights are allowed only as the role default', () => {
   assert.ok(checkTypographyCss(file, '.a { font-weight: var(--font-weight-semibold); }').length)
   assert.ok(checkTypographyCss(file, `.a { ${labelLarge.replace('semibold', 'medium')} }`).length)
 })
-test('button size tokens and a role face are accepted together', () => {
-  assert.deepEqual(checkTypographyCss(file, '.b { font-size: var(--button-font-size); line-height: var(--button-line-height); }'), [])
+test('button size settings and a role face are accepted together', () => {
+  assert.deepEqual(checkTypographyCss(file, '.b { font-size: var(--_button-font-size); line-height: var(--_button-line-height); }'), [])
   assert.deepEqual(checkTypographyCss(file, `.b { font-family: var(--font-family-body); font-weight: var(--font-weight-semibold);
     letter-spacing: var(--letter-spacing-label); text-transform: var(--text-transform-label); }`), [])
 })
 test('site styles and Lab are outside this rule', () => {
   assert.deepEqual(checkTypographyCss('site/styles.css', '.a { font-size: 1rem; }'), [])
 })
-test('button text tokens must point to the scale', () => {
-  assert.deepEqual(checkTypographyTokens('--button-sm-font-size: var(--font-size-label-md);'), [])
-  assert.ok(checkTypographyTokens('--button-sm-font-size: 0.75rem;').length)
+test('button text settings must point to the scale', () => {
+  assert.deepEqual(checkTypographyTokens('--_button-font-size: var(--font-size-label-md);'), [])
+  assert.ok(checkTypographyTokens('--_button-font-size: 0.75rem;').length)
 })
 test('documented and displayed style choices must match', async () => {
   const { checkTypographyChoices } = await import('./typography-rules.mjs')

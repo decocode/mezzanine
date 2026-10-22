@@ -547,7 +547,7 @@ try {
     for (const problem of checkEffectSource(file, text)) report(file, text, problem.position, 'effects', problem.message)
   }
   for (const message of checkAllowedEffectFiles(sourceFiles)) report('scripts/effect-rules.mjs', '', 0, 'effects', message)
-  const buttonTokensFile = 'src/components/Button/Button.tokens.css'
+  const buttonTokensFile = 'src/components/Button/Button.css'
   const buttonTokens = read(buttonTokensFile)
   for (const problem of checkTypographyTokens(buttonTokens)) report(buttonTokensFile, buttonTokens, problem.position, 'typography', problem.message)
   const tokens = read('src/tokens/motion.tokens.css')

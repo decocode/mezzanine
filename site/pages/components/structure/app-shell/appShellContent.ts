@@ -86,11 +86,6 @@ export const appShellContent: DocsPageContent = {
         nameColumn: 'CSS token',
         rows: [
           { name: '--app-shell-min-main-width', description: 'The narrowest the main content gets before a side Panel becomes a drawer. Defaults to `--ratio-pair-min-area-width`.' },
-          { name: '--app-shell-gap', description: 'Space around and between the cards. Points at the theme’s `--surface-gap` role: `--space-2` in Light and Dark, 0 in Wireframe, where the cards join into one flat frame.' },
-          { name: '--app-shell-background', description: 'The background behind the cards. Points at `--elevation-sunken-1-surface`.' },
-          { name: '--app-shell-surface-background', description: 'The cards’ background: the header, Panels and main content. Points at `--elevation-flat-surface`, so Cards and other raised surfaces lift off it.' },
-          { name: '--app-shell-surface-radius', description: 'Rounding of the cards’ corners: one step less than `--radius-surface`, and square where surfaces are square.' },
-          { name: '--app-shell-surface-border-width', description: 'The cards’ border thickness: `--border-width-xs`, a half-pixel hairline.' },
         ],
       },
     },

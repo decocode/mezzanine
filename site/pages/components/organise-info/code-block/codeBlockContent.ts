@@ -38,23 +38,6 @@ export const codeBlockContent: DocsPageContent = {
         'The copy button’s label, “Copy code”, shows in a tooltip and is its accessible name. After copying, the label changes to “Copied”, the icon changes to a check mark, and screen readers hear “Copied” through a polite status message. The button returns to “Copy code” after two seconds.',
       ],
     },
-    {
-      key: 'tokens',
-      intro: ['`CodeBlock` also uses the shared Body small typography tokens for its text. The code inside takes the shared monospace font family, which Mezzanine sets on every `code` element.'],
-      table: {
-        label: 'Code block CSS tokens',
-        nameColumn: 'CSS token',
-        rows: [
-          { name: '--code-block-padding', description: 'Space between the block edge and the code.' },
-          { name: '--code-block-copy-gap', description: 'Space between the copy button and the code beside it.' },
-          { name: '--code-block-border-width', description: 'Block border thickness.' },
-          { name: '--code-block-border-radius', description: 'Rounding of the block corners.' },
-          { name: '--code-block-background', description: 'Block surface colour.' },
-          { name: '--code-block-foreground', description: 'Code text colour.' },
-          { name: '--code-block-border', description: 'Block border colour.' },
-        ],
-      },
-    },
   ],
   relatedPages: [
     { label: 'Prose', href: '/typography/prose' },

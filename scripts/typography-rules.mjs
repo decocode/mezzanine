@@ -40,9 +40,9 @@ export function checkTypographyCss(file, source) {
     const report = message => problems.push({ position: block.index, message })
     if (found.has('font') && found.get('font') !== 'inherit') report('Use font: inherit or a complete text role, not the font shorthand.')
     const size = found.get('font-size')
-    // Button and ToggleButton select their size through button tokens that point to the scale.
-    if (size === 'var(--button-font-size)') {
-      if (found.get('line-height') !== 'var(--button-line-height)') report('Pair --button-font-size with --button-line-height.')
+    // Button and ToggleButton select their size through private size settings that point to the scale.
+    if (size === 'var(--_button-font-size)') {
+      if (found.get('line-height') !== 'var(--_button-line-height)') report('Pair --_button-font-size with --_button-line-height.')
       continue
     }
     const sized = size?.match(/^var\(--font-size-(\w+)-(sm|md|lg)\)$/)
@@ -78,7 +78,8 @@ export function checkTypographyCss(file, source) {
 // Button text sizes must point to the type scale rather than copy its values.
 export function checkTypographyTokens(source) {
   const problems = []
-  for (const match of source.matchAll(/--button-(?:sm|md|lg|xl)-(font-size|line-height):\s*([^;]+);/g)) {
+  // Each Button size sets its private text size from the type scale.
+  for (const match of source.matchAll(/--_button-(font-size|line-height):\s*([^;]+);/g)) {
     if (!new RegExp(`^var\\(--${match[1]}-(?:title|body|label)-(?:sm|md|lg)\\)$`).test(match[2].trim())) {
       problems.push({ position: match.index, message: `Button ${match[1]} must reference a type-scale token.` })
     }

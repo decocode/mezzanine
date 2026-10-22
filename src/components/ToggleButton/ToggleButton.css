@@ -3,12 +3,12 @@
   align-items: center;
   justify-content: center;
   /* States change these private values, so a label-below or label-above icon box can use them too. */
-  --_toggle-button-current-border: var(--toggle-button-border);
-  --_toggle-button-current-background: var(--toggle-button-background);
-  --_toggle-button-current-content: var(--toggle-button-foreground);
+  --_toggle-button-current-border: var(--_toggle-button-border, var(--color-accent));
+  --_toggle-button-current-background: var(--_toggle-button-background, transparent);
+  --_toggle-button-current-content: var(--_toggle-button-foreground, var(--color-accent));
   --_toggle-button-current-shadow: none;
-  border: var(--toggle-button-border-width) solid var(--_toggle-button-current-border);
-  border-radius: var(--toggle-button-border-radius);
+  border: var(--border-width-baseline) solid var(--_toggle-button-current-border);
+  border-radius: var(--radius-control);
   background: var(--_toggle-button-current-background);
   color: var(--_toggle-button-current-content);
   box-shadow: var(--_toggle-button-current-shadow);
@@ -22,30 +22,30 @@
 }
 
 .react-aria-ToggleButton[data-hovered] {
-  --_toggle-button-current-background: var(--toggle-button-background-hovered);
+  --_toggle-button-current-background: var(--_toggle-button-background-hovered, var(--color-accent-muted-hovered));
 }
 
 .react-aria-ToggleButton[data-pressed] {
-  --_toggle-button-current-background: var(--toggle-button-background-pressed);
+  --_toggle-button-current-background: var(--_toggle-button-background-pressed, var(--color-accent-muted-pressed));
 }
 
 .react-aria-ToggleButton[data-selected] {
-  --_toggle-button-current-border: var(--toggle-button-border-selected);
-  --_toggle-button-current-background: var(--toggle-button-background-selected);
-  --_toggle-button-current-content: var(--toggle-button-foreground-selected);
+  --_toggle-button-current-border: var(--_toggle-button-border-selected, var(--color-accent));
+  --_toggle-button-current-background: var(--_toggle-button-background-selected, var(--color-accent-emphasis));
+  --_toggle-button-current-content: var(--_toggle-button-foreground-selected, var(--color-accent-inverse));
 }
 
 .react-aria-ToggleButton[data-selected][data-hovered] {
-  --_toggle-button-current-background: var(--toggle-button-background-selected-hovered);
+  --_toggle-button-current-background: var(--_toggle-button-background-selected-hovered, var(--color-accent-emphasis-hovered));
 }
 
 .react-aria-ToggleButton[data-selected][data-pressed] {
-  --_toggle-button-current-background: var(--toggle-button-background-selected-pressed);
+  --_toggle-button-current-background: var(--_toggle-button-background-selected-pressed, var(--color-accent-emphasis-pressed));
 }
 
 .react-aria-ToggleButton[data-focus-visible] {
-  outline: var(--toggle-button-focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--toggle-button-focus-ring-offset);
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
 }
 
 .react-aria-ToggleButton[data-disabled] {
@@ -56,7 +56,7 @@
 .react-aria-ToggleButtonGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--toggle-button-group-gap);
+  gap: 0;
   align-items: center;
 }
 
@@ -68,26 +68,26 @@
 /* Group appearance is inherited; a button may also opt into secondary on its own. */
 .react-aria-ToggleButtonGroup[data-variant='secondary'],
 .react-aria-ToggleButton[data-variant='secondary'] {
-  --toggle-button-background: var(--button-secondary-background);
-  --toggle-button-background-hovered: var(--button-secondary-background-hovered);
-  --toggle-button-background-pressed: var(--button-secondary-background-pressed);
-  --toggle-button-foreground: var(--button-secondary-foreground);
-  --toggle-button-border: var(--button-secondary-border);
-  --toggle-button-background-selected: var(--button-secondary-background-hovered);
-  --toggle-button-background-selected-hovered: var(--button-secondary-background-pressed);
-  --toggle-button-background-selected-pressed: var(--button-secondary-background-pressed);
-  --toggle-button-foreground-selected: var(--button-secondary-foreground);
-  --toggle-button-border-selected: var(--button-secondary-border);
-  --toggle-button-selection-shadow: inset 0 calc(-1 * var(--toggle-button-selection-indicator-width)) 0 currentColor;
-  --toggle-button-selection-pressed-shadow: inset 0 calc(-2 * var(--toggle-button-selection-indicator-width)) 0 currentColor;
+  --_toggle-button-background: transparent;
+  --_toggle-button-background-hovered: var(--color-accent-muted-hovered);
+  --_toggle-button-background-pressed: var(--color-accent-muted-pressed);
+  --_toggle-button-foreground: var(--color-accent);
+  --_toggle-button-border: var(--color-accent);
+  --_toggle-button-background-selected: var(--color-accent-muted-hovered);
+  --_toggle-button-background-selected-hovered: var(--color-accent-muted-pressed);
+  --_toggle-button-background-selected-pressed: var(--color-accent-muted-pressed);
+  --_toggle-button-foreground-selected: var(--color-accent);
+  --_toggle-button-border-selected: var(--color-accent);
+  --_toggle-button-selection-shadow: inset 0 calc(-1 * var(--border-width-md)) 0 currentColor;
+  --_toggle-button-selection-pressed-shadow: inset 0 calc(-2 * var(--border-width-md)) 0 currentColor;
 }
 
 .react-aria-ToggleButton[data-selected] {
-  --_toggle-button-current-shadow: var(--toggle-button-selection-shadow, none);
+  --_toggle-button-current-shadow: var(--_toggle-button-selection-shadow, none);
 }
 
 .react-aria-ToggleButton[data-selected][data-pressed]:not([data-disabled]) {
-  --_toggle-button-current-shadow: var(--toggle-button-selection-pressed-shadow, none);
+  --_toggle-button-current-shadow: var(--_toggle-button-selection-pressed-shadow, none);
 }
 
 /* As on Button: with the label below or above, the icon box shows the state and the label sits outside it. */
@@ -101,8 +101,8 @@
 }
 
 .react-aria-ToggleButton[data-label-placement] .mz-button-icon-box {
-  border: var(--toggle-button-border-width) solid var(--_toggle-button-current-border);
-  border-radius: var(--toggle-button-border-radius);
+  border: var(--border-width-baseline) solid var(--_toggle-button-current-border);
+  border-radius: var(--radius-control);
   background: var(--_toggle-button-current-background);
   box-shadow: var(--_toggle-button-current-shadow);
   color: var(--_toggle-button-current-content);
@@ -112,7 +112,7 @@
   .react-aria-ToggleButton[data-selected] {
     border-color: Highlight;
     text-decoration: underline;
-    text-decoration-thickness: var(--toggle-button-selection-indicator-width);
+    text-decoration-thickness: var(--border-width-md);
   }
   .react-aria-ToggleButton[data-label-placement][data-selected] .mz-button-icon-box { border-color: Highlight; }
   .react-aria-ToggleButton[data-disabled] { color: GrayText; opacity: 1; }
@@ -129,11 +129,11 @@
 
 /* Adjacent secondary toggles share one border rather than doubling the divider. */
 .react-aria-ToggleButtonGroup[data-variant='secondary']:not([data-orientation='vertical']) > .react-aria-ToggleButton + .react-aria-ToggleButton {
-  margin-inline-start: calc(-1 * var(--toggle-button-border-width));
+  margin-inline-start: calc(-1 * var(--border-width-baseline));
 }
 
 .react-aria-ToggleButtonGroup[data-variant='secondary'][data-orientation='vertical'] > .react-aria-ToggleButton + .react-aria-ToggleButton {
-  margin-block-start: calc(-1 * var(--toggle-button-border-width));
+  margin-block-start: calc(-1 * var(--border-width-baseline));
 }
 
 /* Toggles in a group sit side by side with no gap, so only the group's outer corners are rounded. */

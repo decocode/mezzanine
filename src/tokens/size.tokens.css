@@ -1,4 +1,4 @@
-/* Size tokens: the named widths that components take their widths from. */
+/* Size tokens: the named widths and heights that components take their sizes from. */
 
 :where(:root) {
   /* Width scale: how wide or narrow something may be, such as a tooltip's longest line or a Panel. */
@@ -6,4 +6,8 @@
   --width-sm: 15rem;
   --width-md: 20rem;
   --width-lg: 32rem;
+  /* The shortest a multi-line text field gets, about three lines. */
+  --height-text-area-min: 4rem;
+  /* The tallest a menu that opens over the page gets, leaving some of the page in view. */
+  --height-overlay-max: 75dvh;
 }

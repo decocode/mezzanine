@@ -1,4 +1,4 @@
-import type { Copy, DocsPageContent } from '../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../templates/docsPageContent'
 
 export const interactionSharedTokens: { token: string; description: string }[] = [
   { token: '--color-focus', description: 'Focus ring colour' },
@@ -8,23 +8,6 @@ export const interactionSharedTokens: { token: string; description: string }[] =
   { token: '--color-link-pressed', description: 'Link colour while pressed' },
   { token: '--opacity-disabled', description: 'Opacity of disabled controls' },
   { token: '--indicator-width', description: 'Thickness of the bar that marks the current page or selected tab' },
-]
-
-// Shown between the two token tables, so it is part of the page's Tokens part rather than the section intro.
-export const interactionFocusRingIntro: Copy = 'Focus ring width and offset are set per component:'
-
-export const interactionFocusRingComponents: { component: string; prefix: string }[] = [
-  { component: 'Button', prefix: '--button' },
-  { component: 'Checkbox', prefix: '--checkbox' },
-  { component: 'Disclosure', prefix: '--disclosure' },
-  { component: 'Link', prefix: '--link' },
-  { component: 'TopBar', prefix: '--top-bar' },
-  { component: 'NavTree', prefix: '--navigation-tree' },
-  { component: 'RadioGroup', prefix: '--radio' },
-  { component: 'Table', prefix: '--table' },
-  { component: 'Tabs', prefix: '--tabs' },
-  { component: 'TextField and TextArea', prefix: '--input' },
-  { component: 'ToggleButton', prefix: '--toggle-button' },
 ]
 
 export const interactionContent: DocsPageContent = {
@@ -38,7 +21,7 @@ export const interactionContent: DocsPageContent = {
       title: 'Focus',
       intro: [
         'React Aria sets `data-focus-visible` only when focus comes from the keyboard, so clicking a button does not leave a ring behind. Text inputs are the exception: they use `data-focused` and show the ring after a click as well, because people need to see where they are typing.',
-        'Focus rings use the `--color-focus` colour role. Each component sets its own ring width and offset with component tokens, listed under Tokens below.',
+        'Focus rings use the `--color-focus` colour role and the shared ring width and offset, `--focus-ring-width` and `--focus-ring-offset`. Controls that sit edge to edge, such as tabs and table cells, draw the ring inside with `--focus-ring-offset-inset`.',
         'When a Dialog opens, React Aria keeps focus inside it until it closes, then returns focus to the control that opened it.',
       ],
     },

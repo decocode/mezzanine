@@ -89,12 +89,12 @@
    data-no-wireframe-underline opts an element out (e.g. a brand wordmark). */
 :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])) {
   text-decoration-line: underline !important;
-  text-decoration-thickness: var(--link-underline-thickness);
-  text-underline-offset: var(--link-underline-offset);
+  text-decoration-thickness: var(--border-width-baseline);
+  text-underline-offset: var(--underline-offset);
 }
 
 :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
-  text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
+  text-decoration-thickness: calc(var(--border-width-baseline) * 2);
 }
 
 :where(:root[data-theme='wireframe']) .react-aria-Link:is([data-focus-visible], [data-preview-state='focused']):not(:where([data-disabled], [aria-disabled='true'])) {
@@ -103,13 +103,13 @@
 
 @media (hover: hover) {
   :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):hover:not([data-disabled], [aria-disabled='true']) {
-    text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
+    text-decoration-thickness: calc(var(--border-width-baseline) * 2);
   }
 }
 
 :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
   background-color: var(--color-neutral-muted-pressed);
-  text-decoration-thickness: calc(var(--link-underline-thickness) * 2);
+  text-decoration-thickness: calc(var(--border-width-baseline) * 2);
 }
 
 /* Nav items keep their own pressed background, a step darker than hover. */

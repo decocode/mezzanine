@@ -1,7 +1,7 @@
 .mz-nav-tree, .mz-nav-tree-section {
   display: grid;
   min-width: 0;
-  gap: var(--navigation-tree-gap);
+  gap: 0;
   color: var(--nav-item-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
@@ -15,9 +15,9 @@
   align-items: stretch;
   min-width: 0;
   min-height: var(--target-size-xs);
-  gap: var(--navigation-tree-item-gap);
-  padding-block: var(--navigation-tree-item-padding-block);
-  padding-inline: calc(var(--navigation-tree-item-padding-inline) + (var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent)) var(--navigation-tree-item-padding-inline);
+  gap: var(--space-gap-control);
+  padding-block: 0;
+  padding-inline: calc(calc(var(--space-4) - var(--nav-item-current-indicator-width)) + (var(--tree-item-level, 1) - 1) * var(--space-4)) calc(var(--space-4) - var(--nav-item-current-indicator-width));
   border-inline-start: var(--nav-item-current-indicator-width) solid transparent;
   background: var(--nav-item-background);
   color: var(--nav-item-foreground);
@@ -32,7 +32,7 @@
   align-items: center;
   flex: 1;
   min-width: 0;
-  gap: var(--navigation-tree-item-gap);
+  gap: var(--space-gap-control);
   color: inherit;
   text-decoration: none;
   text-align: start;
@@ -59,8 +59,8 @@
 .mz-nav-tree-content { display: inline-flex; flex: none; margin-inline-start: auto; }
 .mz-nav-tree-chevron {
   flex: none;
-  width: var(--chevron-size);
-  height: var(--chevron-size);
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
   color: var(--color-chevron);
   rotate: 0deg;
   transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
@@ -84,17 +84,17 @@
 .mz-nav-tree-item[data-focus-visible],
 .mz-nav-tree-label[data-focus-visible],
 .mz-nav-tree-toggle[data-focus-visible] {
-  outline: var(--navigation-tree-focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--navigation-tree-focus-ring-offset);
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset-inset);
 }
 .mz-nav-tree-item[data-disabled] { opacity: var(--opacity-disabled); }
 .mz-nav-tree-item[data-disabled] .mz-nav-tree-label,
 .mz-nav-tree-item[data-disabled] .mz-nav-tree-toggle { cursor: default; }
 .mz-nav-tree-header {
-  padding: var(--navigation-tree-header-padding-block) var(--navigation-tree-item-padding-inline);
+  padding: var(--space-padding-control-block) calc(var(--space-4) - var(--nav-item-current-indicator-width));
   /* Matches the rows' current-page bar space so header and row text line up. */
   border-inline-start: var(--nav-item-current-indicator-width) solid transparent;
-  color: var(--navigation-tree-header-foreground);
+  color: var(--color-accent);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);
   font-weight: var(--font-weight-semibold);

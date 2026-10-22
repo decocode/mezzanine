@@ -39,7 +39,7 @@ export const topBarContent: DocsPageContent = {
         'Supply a home Link through `brand`, links through `children`, and optional controls through `actions`. Labels and destinations belong to the consuming app.',
         '`children` and `actions` accept a function receiving `closeMenu` and `isMenu`. The children render once in the compact menu and once in the bar; `isMenu` is true inside the menu, so content such as a site’s section navigation can appear only there, between links. Call it from a link’s `onPress` to close the compact panel and return focus to its trigger. Override `menuLabel` and `closeLabel` for translated trigger text.',
         'The desktop and mobile content are rendered separately; avoid fixed IDs in supplied content. Use React-generated IDs for associated controls. Very long desktop content wraps rather than overflowing. Search is not included.',
-        '`TopBar`, `TopBarProps`, `TopBarRenderProps` and `--top-bar-*` tokens replace the previous `Navbar` API and its tokens.',
+        '`TopBar`, `TopBarProps` and `TopBarRenderProps` replace the previous `Navbar` API.',
       ],
     },
     {
@@ -70,11 +70,6 @@ export const topBarContent: DocsPageContent = {
         label: 'TopBar tokens',
         nameColumn: 'CSS token',
         rows: [
-          { name: '--top-bar-border-width', description: 'Header and trigger border thickness.' },
-          { name: '--top-bar-wide-padding-inline', description: 'Horizontal padding in the wide layout.' },
-          { name: '--top-bar-focus-ring-width', description: 'Trigger focus outline thickness.' },
-          { name: '--top-bar-focus-ring-offset', description: 'Trigger focus outline offset.' },
-          { name: '--top-bar-panel-max-height', description: 'Maximum panel height before scrolling.' },
           { name: '--motion-duration-interface', description: 'Panel entry animation duration; disabled for reduced motion.' },
           { name: '--motion-distance-reveal', description: 'Shared reveal distance; the recipe applies the upward starting direction.' },
         ],

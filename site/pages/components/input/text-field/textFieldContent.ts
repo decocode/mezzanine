@@ -2,18 +2,6 @@ import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 // Field tokens shared by Input and TextArea.
 export const fieldTokensRows = [
-  { name: '--text-field-gap', description: 'Space between the label, field, description and error message.' },
-  { name: '--input-padding-block', description: 'Vertical padding inside the field.' },
-  { name: '--input-padding-inline', description: 'Horizontal padding inside the field.' },
-  { name: '--input-border-width', description: 'Field border thickness.' },
-  { name: '--input-border-radius', description: 'Rounding of the field corners.' },
-  { name: '--input-background', description: 'Field background.' },
-  { name: '--input-border', description: 'Field border colour.' },
-  { name: '--input-border-hovered', description: 'Field border colour when hovered, unless the field is disabled, read-only or invalid.' },
-  { name: '--input-border-invalid', description: 'Field border colour when invalid.' },
-  { name: '--input-focus-ring-width', description: 'Focus outline thickness.' },
-  { name: '--input-focus-ring-offset', description: 'Distance between the field and its focus outline.' },
-  { name: '--text-field-error-foreground', description: '`FieldError` text colour.' },
 ]
 
 export const textFieldContent: DocsPageContent = {

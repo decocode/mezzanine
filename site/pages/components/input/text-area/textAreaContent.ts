@@ -37,7 +37,7 @@ export const textAreaContent: DocsPageContent = {
       body: [
         '`TextArea` replaces `Input` inside `TextField`.',
         'Set `defaultValue` on `TextField` for an initial value, or use `value` and `onChange` to manage its value in your application. Set `isRequired`, `isReadOnly`, `isDisabled` and `isInvalid` on `TextField`. The invalid example above remains invalid while you edit it.',
-        'Set `rows` on `TextArea` to choose its initial visible line count. The field permits vertical resizing and stays within its container width. The `--text-area-min-height` token sets its minimum height; it shares Input’s appearance and state tokens.',
+        'Set `rows` on `TextArea` to choose its initial visible line count. The field permits vertical resizing and stays within its container width. `--height-text-area-min` sets its minimum height; otherwise it looks and behaves like a text field.',
         'Put `placeholder` on `TextArea`.',
       ],
     },
@@ -55,7 +55,6 @@ export const textAreaContent: DocsPageContent = {
         label: 'TextArea CSS tokens',
         nameColumn: 'CSS token',
         rows: [
-          { name: '--text-area-min-height', description: 'Minimum `TextArea` height.' },
           ...fieldTokensRows,
         ],
       },

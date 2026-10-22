@@ -34,20 +34,6 @@ export const searchFieldContent: DocsPageContent = {
       key: 'accessibility',
       body: ['React Aria names the clear button and keeps it out of the Tab order. Escape clears the field.'],
     },
-    {
-      key: 'tokens',
-      intro: ['`SearchField` also uses the shared field, typography, focus and colour tokens.'],
-      table: {
-        label: 'SearchField CSS tokens',
-        nameColumn: 'CSS token',
-        rows: [
-          { name: '--search-field-gap', description: 'Space between the label, field and help text.' },
-          { name: '--search-field-icon-size', description: 'Size of the search icon.' },
-          { name: '--search-field-icon-gap', description: 'Space between the search icon and the text.' },
-          { name: '--search-field-icon-foreground', description: 'Colour of the search icon.' },
-        ],
-      },
-    },
   ],
   relatedPages: [
     { label: 'Autocomplete', href: '/autocomplete' },

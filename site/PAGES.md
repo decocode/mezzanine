@@ -161,7 +161,7 @@ Leave out sections that do not apply.
 - The server's allowed routes are not written by hand: `scripts/generate-routes.mjs`
   lists every docs and Lab page, and the Docker build gives that list to nginx.
 - Every token the site mentions must exist, and every public token in
-  `src/tokens/`, the components' `*.tokens.css` files and the theme files must
+  `src/tokens/`, the Panel and AppShell settings files and the theme files must
   be documented on some page.
   Known gaps are listed in `scripts/undocumented-tokens.baseline.json`. After
   documenting a token, or when a gap is accepted, run

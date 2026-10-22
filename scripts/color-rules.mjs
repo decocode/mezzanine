@@ -1,5 +1,5 @@
-// Colour has three layers: palettes, roles set by each theme, and component tokens that point at
-// roles. These checks keep each layer reading only the one beneath it.
+// Colour has two layers: palettes, and roles set by each theme that components read directly.
+// These checks keep themes setting roles only, and components reading roles rather than palettes.
 
 const paletteStep = /--color-(?:(?:accent|signature|neutral|info|success|warning|danger)-\d+|white|black)\b/g
 const colorReference = /var\(\s*(--color-[a-z0-9-]+)/g
@@ -18,13 +18,13 @@ export function themeRoles(text) {
   return declarations(text).map(item => item.property).filter(property => property.startsWith('--color-'))
 }
 
-// Themes set colour roles (and the listed exceptions) only, never component tokens or palettes.
+// Themes set colour roles (and the listed exceptions) only, never palettes or anything else.
 export function checkThemeColors(text) {
   return declarations(text).flatMap(({ property, position }) => {
     if (paletteStep.test(property)) { paletteStep.lastIndex = 0; return [{ position, message: `${property} is a palette step; themes read palettes but never set them.` }] }
     paletteStep.lastIndex = 0
     if (property.startsWith('--color-') || themeExceptions.some(pattern => pattern.test(property))) return []
-    return [{ position, message: `${property} is not a colour role; set it once in its component's *.tokens.css as a pointer to a role.` }]
+    return [{ position, message: `${property} is not a colour role; themes set colour roles only, and components read them directly.` }]
   })
 }
 

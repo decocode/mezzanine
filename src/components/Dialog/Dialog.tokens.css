@@ -1,9 +1,0 @@
-/* Component tokens shared by every theme. Colour tokens point at the colour roles, which each theme sets in src/themes/. */
-
-:where(:root) {
-  /* Dialog: content inside a Modal. */
-  --dialog-padding: var(--space-padding-surface);
-  --dialog-content-gap: var(--space-gap-cluster);
-  --dialog-actions-gap: var(--space-gap-cluster);
-  --dialog-focus-ring-width: var(--focus-ring-width);
-}

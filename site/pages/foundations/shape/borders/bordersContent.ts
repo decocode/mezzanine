@@ -24,7 +24,7 @@ export const bordersContent: DocsPageContent = {
       key: 'usingTheScale',
       title: 'Using the scale',
       intro: [
-        'Reference a level from a component token, for example `--card-border-width: var(--border-width-sm)`. A border only takes up space when its style is set: with `border-style: none`, the default, the width counts as zero.',
+        'Components read a level directly, for example `border-width: var(--border-width-sm)`. A border only takes up space when its style is set: with `border-style: none`, the default, the width counts as zero.',
         'To give one component a different thickness from the rest, point its own token at another level instead of the baseline.',
       ],
     },

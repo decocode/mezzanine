@@ -1,15 +1,6 @@
-/* Component tokens shared by every theme. */
+/* AppShell settings an app can change: the narrowest the main content gets before a side Panel
+   becomes a drawer. */
 
 :where(:root) {
-  /* AppShell: the narrowest the main content gets before a side Panel becomes a drawer. */
   --app-shell-min-main-width: var(--ratio-pair-min-area-width);
-
-  /* The frame's areas (header, Panels and main content) are cards on a background, separated by the
-     theme's surface gap. In Wireframe the gap is 0 and both surfaces match, so the frame stays flat. */
-  --app-shell-gap: var(--surface-gap);
-  --app-shell-background: var(--elevation-sunken-1-surface);
-  --app-shell-surface-background: var(--elevation-flat-surface);
-  /* One step less rounded than other surfaces, and square wherever surfaces are square (Wireframe). */
-  --app-shell-surface-radius: min(var(--radius-surface), var(--radius-sm));
-  --app-shell-surface-border-width: var(--border-width-xs);
 }

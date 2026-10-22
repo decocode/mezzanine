@@ -3,7 +3,7 @@
   max-height: inherit;
   overflow: auto;
   overflow-wrap: anywhere;
-  padding: var(--dialog-padding);
+  padding: var(--space-padding-surface);
   outline: none;
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
@@ -14,12 +14,12 @@
 }
 
 .react-aria-Dialog:focus-visible {
-  outline: var(--dialog-focus-ring-width) solid var(--color-focus);
-  outline-offset: calc(-1 * var(--dialog-focus-ring-width));
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: calc(-1 * var(--focus-ring-width));
 }
 
 .react-aria-Dialog .react-aria-Heading[slot='title'] {
-  margin: 0 0 var(--dialog-content-gap);
+  margin: 0 0 var(--space-gap-cluster);
   font-family: var(--font-family-body);
   font-size: var(--font-size-title-lg);
   font-weight: var(--font-weight-semibold);
@@ -29,13 +29,13 @@
 }
 
 .react-aria-Dialog > p {
-  margin: 0 0 var(--dialog-content-gap);
+  margin: 0 0 var(--space-gap-cluster);
 }
 
 .mz-dialog-actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: var(--dialog-actions-gap);
-  margin-block-start: var(--dialog-content-gap);
+  gap: var(--space-gap-cluster);
+  margin-block-start: var(--space-gap-cluster);
 }

@@ -20,7 +20,7 @@ export const cornersContent: DocsPageContent = {
       key: 'usingTheScale',
       title: 'Using the scale',
       intro: [
-        'Reference a level from a component token, for example `--button-border-radius: var(--radius-sm)`. Adding this scale does not change existing component corners; their current defaults remain intact.',
+        'Components read a level directly, for example `border-radius: var(--radius-sm)`.',
         'Full is a pill treatment, not another incremental step. For a circle, use `50%` on a square element; on a rectangle, that percentage produces an ellipse.',
       ],
     },

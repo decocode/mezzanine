@@ -1,13 +1,13 @@
 .react-aria-DisclosureGroup {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--disclosure-group-gap);
+  gap: 0;
 }
 
 .react-aria-Disclosure {
   min-width: 0;
   overflow-wrap: anywhere;
-  border-block-end: var(--disclosure-border-width) solid var(--color-border);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
   color: var(--color-text);
 }
 
@@ -18,14 +18,14 @@
 .mz-disclosure-trigger {
   box-sizing: border-box;
   display: flex;
-  gap: var(--disclosure-trigger-gap);
+  gap: var(--space-gap-control);
   align-items: center;
   justify-content: space-between;
   width: 100%;
   min-height: var(--target-size-md);
-  padding: var(--disclosure-trigger-padding-block) var(--disclosure-trigger-padding-inline);
+  padding: var(--space-padding-control-block) 0;
   border: 0;
-  background: var(--disclosure-trigger-background);
+  background: transparent;
   color: var(--color-text);
   text-align: start;
   cursor: pointer;
@@ -44,13 +44,13 @@
 }
 
 .mz-disclosure-trigger[data-focus-visible] {
-  outline: var(--disclosure-focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--disclosure-focus-ring-offset);
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset-inset);
 }
 
 .mz-disclosure-chevron {
-  width: var(--disclosure-icon-size);
-  height: var(--disclosure-icon-size);
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
   color: var(--color-chevron);
   flex: none;
   transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
@@ -63,7 +63,7 @@
 /* The panel opens and closes immediately; only the chevron turns. */
 .react-aria-DisclosurePanel {
   box-sizing: border-box;
-  padding: 0 var(--disclosure-panel-padding-inline) var(--disclosure-panel-padding-block);
+  padding: 0 0 var(--space-padding-surface);
   color: var(--color-text-muted);
 }
 

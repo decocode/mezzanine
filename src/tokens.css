@@ -20,28 +20,7 @@
 @import './tokens/z-index.tokens.css';
 
 @import './components/AppShell/AppShell.tokens.css';
-@import './components/Badge/Badge.tokens.css';
-@import './components/Button/Button.tokens.css';
-@import './components/Card/Card.tokens.css';
-@import './components/CodeBlock/CodeBlock.tokens.css';
-@import './components/Checkbox/Checkbox.tokens.css';
-@import './components/Switch/Switch.tokens.css';
-@import './components/Dialog/Dialog.tokens.css';
 @import './components/Panel/Panel.tokens.css';
-@import './components/Disclosure/Disclosure.tokens.css';
-@import './components/Link/Link.tokens.css';
-@import './components/ListBox/ListBox.tokens.css';
-@import './components/Modal/Modal.tokens.css';
-@import './components/NavTree/NavTree.tokens.css';
-@import './components/TopBar/TopBar.tokens.css';
-@import './components/RadioGroup/RadioGroup.tokens.css';
-@import './components/SearchField/SearchField.tokens.css';
-@import './components/SearchTrigger/SearchTrigger.tokens.css';
-@import './components/Table/Table.tokens.css';
-@import './components/Tabs/Tabs.tokens.css';
-@import './components/TextField/TextField.tokens.css';
-@import './components/ToggleButton/ToggleButton.tokens.css';
-@import './components/Tooltip/Tooltip.tokens.css';
 
 /* Themes load last so they can override any shared or component default. */
 @import './themes/light.css';

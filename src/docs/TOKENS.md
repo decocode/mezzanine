@@ -1,10 +1,10 @@
 # Mezzanine token guide
 
 A design token is a named design decision. Mezzanine components ask for the
-role they need, such as `--button-primary-background`, rather than a
+role they need, such as `--color-accent-emphasis`, rather than a
 product-specific value such as a particular blue or purple.
 
-The source of truth is the CSS in [`src/tokens/`](../tokens/) (one file per documentation page), each component's `*.tokens.css` file in `src/components/<Name>/`, and
+The source of truth is the CSS in [`src/tokens/`](../tokens/) (one file per documentation page), the layout settings in `src/components/Panel/Panel.tokens.css` and `src/components/AppShell/AppShell.tokens.css`, and
 [`src/themes/`](../themes/). This document explains that implementation; it
 does not define additional tokens.
 
@@ -62,8 +62,8 @@ A product changes the appearance by overriding the same semantic names:
 ```
 
 Overriding an accent palette step restyles every role that reads it.
-Overriding a component token, such as `--button-primary-background`, restyles
-only that part of that component.
+Overriding a role, such as `--color-accent-emphasis`, restyles every component
+that reads it.
 
 Mezzanine component CSS must not depend on product palette names such as
 `--product-blue-700`.
@@ -102,18 +102,16 @@ for `--button-primary-background`, not `--color-accent-700`.
 
 ## Current color inventory
 
-Color has three layers:
+Color has two layers:
 
 1. **Palettes** in `src/tokens/color.tokens.css`. Only themes read them.
 2. **Roles**, which name what a color is for. Each theme maps the palettes onto
-   the roles and sets nothing else about color.
-3. **Component tokens**, set once in each component's `*.tokens.css` as
-   pointers to roles, such as `--checkbox-background-selected:
-   var(--color-accent-emphasis)`. They are the same in every theme, and let an
-   app restyle one part of one component.
+   the roles and sets nothing else about color. Components read the roles
+   directly, such as `background: var(--color-accent-emphasis)` for a selected
+   Checkbox.
 
-`npm run check:rules` checks that component tokens point only at roles that
-exist, and that themes set only roles.
+`npm run check:rules` checks that components never read a palette step, and
+that themes set only roles.
 
 ### Palettes
 
@@ -287,9 +285,8 @@ the text size; the pixel values assume `1rem = 16px`.
 ## Current focus ring inventory
 
 Every component's keyboard focus outline comes from one role in
-`src/tokens/interaction.tokens.css`. Each component keeps its own
-`--*-focus-ring-width` and `--*-focus-ring-offset` tokens, but they point at
-these roles, so a theme changes every ring at once.
+`src/tokens/interaction.tokens.css`. Components read these roles directly, so a
+theme changes every ring at once.
 
 | Token | Value | Meaning |
 | --- | --- | --- |
@@ -326,8 +323,7 @@ Full is a deliberately oversized radius for pill ends, not an incremental level.
 | `--radius-xl` | `1.25rem` |
 | `--radius-full` | `9999rem` |
 
-Existing component radius defaults are unchanged. Products can opt in by referencing
-a level from a component token, such as `--button-border-radius: var(--radius-sm)`.
+Components read a level directly, such as `border-radius: var(--radius-sm)`.
 For a circle, use `50%` on a square element; on a rectangle it produces an ellipse.
 
 Border-width levels use `rem` and go up in 1px steps after a hairline. Extra small is
