@@ -1,8 +1,8 @@
-// The Lab's Overflowing the box page, in Inside the box: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+// The Lab's Overflow page, in Inside the box: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
 import type { CssNote, StagePage } from '../../../shared/labTypes'
 
-export const overflowingTheBoxPage: StagePage = {
-  key: 'overflowingTheBox', id: 'lab-overflowing-the-box', kind: 'foundation', stage: 'insideTheBox', title: 'Overflowing the box', href: '/site/lab/layout/inside-the-box/overflowing-the-box',
+export const overflowPage: StagePage = {
+  key: 'overflow', id: 'lab-overflow', kind: 'foundation', stage: 'insideTheBox', title: 'Overflow', href: '/site/lab/layout/inside-the-box/overflow',
   description: 'When the content doesn’t fit.',
   sections: [
     {
@@ -22,7 +22,7 @@ export const overflowingTheBoxPage: StagePage = {
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.
-export const overflowingTheBoxCssNotes: Record<string, CssNote> = {
+export const overflowCssNotes: Record<string, CssNote> = {
   overflow: {
     paragraphs: [
       'The box has a fixed `height`, so the text can’t make it taller. The `overflow` property decides what happens to the text that doesn’t fit: `visible` lets it spill out, `hidden` cuts it off, `scroll` always adds scroll bars, and `auto` adds them only when they’re needed.',

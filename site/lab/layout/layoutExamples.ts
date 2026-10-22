@@ -6,7 +6,7 @@ import { SizingTheBoxExample } from './box-basics/sizing-the-box/SizingTheBoxExa
 import { CenterExample } from './box-basics/center/CenterExample'
 import { AlignmentExample } from './inside-the-box/alignment/AlignmentExample'
 import { FillingTheBoxExample } from './inside-the-box/filling-the-box/FillingTheBoxExample'
-import { OverflowingTheBoxExample } from './inside-the-box/overflowing-the-box/OverflowingTheBoxExample'
+import { OverflowExample } from './inside-the-box/overflow/OverflowExample'
 import { ContentColumnsExample } from './inside-the-box/content-columns/ContentColumnsExample'
 import { BoxHasContentExample } from './inside-the-box/box-has-content/BoxHasContentExample'
 
@@ -17,7 +17,7 @@ export const stageExamples: StageExamples = {
   center: { Example: CenterExample },
   alignment: { Example: AlignmentExample },
   fillingTheBox: { Example: FillingTheBoxExample },
-  overflowingTheBox: { Example: OverflowingTheBoxExample },
+  overflow: { Example: OverflowExample },
   contentColumns: { Example: ContentColumnsExample },
   boxHasContent: { Example: BoxHasContentExample },
 }

@@ -1,7 +1,7 @@
-// The example for the Lab's Overflowing the box page, in Inside the box.
+// The example for the Lab's Overflow page, in Inside the box.
 import { useState, type CSSProperties } from 'react'
 import { CssNotes, ExampleText, ValuePicker } from '../../../shared/LabParts'
-import { overflowingTheBoxCssNotes } from './overflowingTheBoxContent'
+import { overflowCssNotes } from './overflowContent'
 
 const overflowOptions = [
   { label: 'visible', value: 'visible' },
@@ -10,7 +10,7 @@ const overflowOptions = [
   { label: 'auto', value: 'auto' },
 ] as const
 
-export function OverflowingTheBoxExample() {
+export function OverflowExample() {
   const [overflow, setOverflow] = useState<(typeof overflowOptions)[number]['value']>('visible')
   const canScroll = overflow === 'scroll' || overflow === 'auto'
   return <>
@@ -25,6 +25,6 @@ export function OverflowingTheBoxExample() {
         This box is only 6rem tall, but this text needs more room than that. With visible, the rest spills out over whatever comes next. With hidden, it’s cut off and nobody can reach it. With scroll or auto, you can scroll to read it.
       </div>
     </div>
-    <CssNotes name="the box" note={overflowingTheBoxCssNotes.overflow} level={3} />
+    <CssNotes name="the box" note={overflowCssNotes.overflow} level={3} />
   </>
 }

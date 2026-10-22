@@ -9,7 +9,7 @@ import { sizingTheBoxPage } from './box-basics/sizing-the-box/sizingTheBoxConten
 import { centerPage } from './box-basics/center/centerContent'
 import { alignmentPage } from './inside-the-box/alignment/alignmentContent'
 import { fillingTheBoxPage } from './inside-the-box/filling-the-box/fillingTheBoxContent'
-import { overflowingTheBoxPage } from './inside-the-box/overflowing-the-box/overflowingTheBoxContent'
+import { overflowPage } from './inside-the-box/overflow/overflowContent'
 import { contentColumnsPage } from './inside-the-box/content-columns/contentColumnsContent'
 import { boxHasContentPage } from './inside-the-box/box-has-content/boxHasContentContent'
 
@@ -31,7 +31,7 @@ export const layoutStages: LayoutStage[] = [
 // The pages in each group, in reading order.
 const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
   boxBasics: [theBoxModelPage, typesOfBoxPage, sizingTheBoxPage, centerPage],
-  insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, contentColumnsPage, boxHasContentPage],
+  insideTheBox: [alignmentPage, fillingTheBoxPage, overflowPage, contentColumnsPage, boxHasContentPage],
 }
 
 // Every Layout page, group by group.

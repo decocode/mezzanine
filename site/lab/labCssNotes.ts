@@ -6,7 +6,7 @@ import { sizingTheBoxCssNotes } from './layout/box-basics/sizing-the-box/sizingT
 import { centerCssNotes } from './layout/box-basics/center/centerContent'
 import { alignmentCssNotes } from './layout/inside-the-box/alignment/alignmentContent'
 import { fillingTheBoxCssNotes } from './layout/inside-the-box/filling-the-box/fillingTheBoxContent'
-import { overflowingTheBoxCssNotes } from './layout/inside-the-box/overflowing-the-box/overflowingTheBoxContent'
+import { overflowCssNotes } from './layout/inside-the-box/overflow/overflowContent'
 import { contentColumnsCssNotes } from './layout/inside-the-box/content-columns/contentColumnsContent'
 import { boxHasContentCssNotes } from './layout/inside-the-box/box-has-content/boxHasContentContent'
 import { masonryCssNotes } from './emerging-features/masonry/masonryContent'
@@ -21,7 +21,7 @@ export const cssNotes: Record<string, CssNote> = {
   ...centerCssNotes,
   ...alignmentCssNotes,
   ...fillingTheBoxCssNotes,
-  ...overflowingTheBoxCssNotes,
+  ...overflowCssNotes,
   ...contentColumnsCssNotes,
   ...boxHasContentCssNotes,
   ...masonryCssNotes,

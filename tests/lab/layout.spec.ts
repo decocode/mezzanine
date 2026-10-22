@@ -95,7 +95,7 @@ test('Lab Layout examples respond to their space and content', async ({ page }) 
   await page.getByRole('button', { name: 'Add an item', exact: true }).click()
   await expect(list).toHaveCSS('display', 'grid')
 
-  await page.goto('/site/lab/layout/inside-the-box/overflowing-the-box')
+  await page.goto('/site/lab/layout/inside-the-box/overflow')
   const box = page.locator('.lab-overflow-box')
   await expect(box).toHaveCSS('overflow-y', 'visible')
   await page.getByRole('radio', { name: 'auto', exact: true }).click()
