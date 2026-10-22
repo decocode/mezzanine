@@ -380,6 +380,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-control)"
     },
     {
+      "name": "--checkbox-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--checkbox-focus-ring-offset",
       "fallback": "var(--focus-ring-offset)"
     },
@@ -394,6 +398,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--checkbox-icon-size",
       "fallback": "var(--icon-size-xs)"
+    },
+    {
+      "name": "--checkbox-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--checkbox-size",
@@ -766,8 +774,16 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-control)"
     },
     {
+      "name": "--radio-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
       "name": "--radio-field-gap-block",
       "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--radio-focus-ring-color",
+      "fallback": "var(--color-focus)"
     },
     {
       "name": "--radio-focus-ring-offset",
@@ -792,6 +808,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--radio-indicator-size",
       "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--radio-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--radio-selection",
@@ -916,8 +936,16 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-control)"
     },
     {
+      "name": "--switch-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
       "name": "--switch-error-foreground",
       "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--switch-focus-ring-color",
+      "fallback": "var(--color-focus)"
     },
     {
       "name": "--switch-focus-ring-offset",
@@ -938,6 +966,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--switch-handle-size",
       "fallback": "var(--icon-size-xs)"
+    },
+    {
+      "name": "--switch-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--switch-track-background",

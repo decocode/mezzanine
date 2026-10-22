@@ -55,12 +55,12 @@
 }
 
 .react-aria-Checkbox[data-focus-visible] .mz-checkbox-indicator {
-  outline: var(--checkbox-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--checkbox-focus-ring-width, var(--focus-ring-width)) solid var(--checkbox-focus-ring-color, var(--color-focus));
   outline-offset: var(--checkbox-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-Checkbox[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--checkbox-opacity-disabled, var(--opacity-disabled));
   cursor: default;
 }
 
