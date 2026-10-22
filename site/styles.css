@@ -972,3 +972,19 @@ a:focus-visible {
 .virtualizer-example .react-aria-ListBox {
   block-size: var(--width-xs);
 }
+
+/* A demo with a heading above it: the heading sits close to its demo, and each pair has room around it. */
+.demo-headed-list {
+  display: grid;
+  gap: var(--space-8);
+  margin-block-start: var(--space-4);
+}
+
+.demo-headed {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.demo-headed > :is(h3, .mz-demo-area) {
+  margin: 0;
+}

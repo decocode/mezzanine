@@ -45,12 +45,15 @@
   min-inline-size: 0;
 }
 
-/* The demo's own theme applies here, so it sets its colours afresh. */
+/* The demo's own theme applies here, so it sets its colours afresh. A dotted grid on the page colour
+   marks the demo as a canvas, so it can't be mistaken for the site around it. */
 .mz-demo-area-content {
   flex: 999 1 0;
   min-inline-size: min(100%, var(--width-md));
   padding: var(--demo-area-padding, var(--space-4));
-  background: var(--demo-area-preview-background, var(--color-page));
+  background-color: var(--demo-area-preview-background, var(--color-page));
+  background-image: radial-gradient(circle, var(--demo-area-dot-color, color-mix(in srgb, var(--color-text) var(--opacity-24), transparent)) var(--demo-area-dot-size, var(--border-width-sm)), transparent var(--demo-area-dot-size, var(--border-width-sm)));
+  background-size: var(--demo-area-dot-gap, var(--space-4)) var(--demo-area-dot-gap, var(--space-4));
   color: var(--color-text);
 }
 

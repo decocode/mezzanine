@@ -346,7 +346,7 @@ or below it when there isn't room. The demo's pop-ups render inside it, so they
 take its theme.
 
 ```tsx
-<DemoArea endPanel={<SwitchField><SwitchButton>Disable Button A</SwitchButton></SwitchField>}>
+<DemoArea endPanel={<SwitchField><SwitchButton>Disable</SwitchButton></SwitchField>}>
   <Button>Button A</Button>
 </DemoArea>
 ```

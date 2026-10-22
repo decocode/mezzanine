@@ -548,6 +548,18 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--demo-area-dot-color",
+      "fallback": "color-mix(in srgb, var(--color-text) var(--opacity-24), transparent)"
+    },
+    {
+      "name": "--demo-area-dot-gap",
+      "fallback": "var(--space-4)"
+    },
+    {
+      "name": "--demo-area-dot-size",
+      "fallback": "var(--border-width-sm)"
+    },
+    {
       "name": "--demo-area-end-panel-background",
       "fallback": "var(--color-surface)"
     },

@@ -63,7 +63,7 @@ export const demoAreaContent: DocsPageContent = {
 }
 
 // The examples' labels.
-export const demoAreaExampleLabels = { panelHeading: 'End panel', codeHeading: 'Code', button: 'Button A', switch: 'Disable Button A' } as const
+export const demoAreaExampleLabels = { panelHeading: 'End panel', codeHeading: 'Code', button: 'Button A', switch: 'Disable' } as const
 
 // The source shown in the Code tab example.
 export const demoAreaExampleCode = `<DemoArea code={source}>

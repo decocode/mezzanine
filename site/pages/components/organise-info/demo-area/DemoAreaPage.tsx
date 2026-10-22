@@ -18,11 +18,15 @@ export default function DemoAreaPage() {
       content={demoAreaContent}
       parts={{
         example: <DemoArea><Button>{demoAreaExampleLabels.button}</Button></DemoArea>,
-        variants: <div className="example-stack">
-          <Heading level={3} className="mz-text-heading-sm">{demoAreaExampleLabels.panelHeading}</Heading>
-          <DemoWithEndPanel />
-          <Heading level={3} className="mz-text-heading-sm">{demoAreaExampleLabels.codeHeading}</Heading>
-          <DemoArea code={demoAreaExampleCode}><Button>{demoAreaExampleLabels.button}</Button></DemoArea>
+        variants: <div className="demo-headed-list">
+          <div className="demo-headed">
+            <Heading level={3} className="mz-text-heading-sm">{demoAreaExampleLabels.panelHeading}</Heading>
+            <DemoWithEndPanel />
+          </div>
+          <div className="demo-headed">
+            <Heading level={3} className="mz-text-heading-sm">{demoAreaExampleLabels.codeHeading}</Heading>
+            <DemoArea code={demoAreaExampleCode}><Button>{demoAreaExampleLabels.button}</Button></DemoArea>
+          </div>
         </div>,
       }}
     />
