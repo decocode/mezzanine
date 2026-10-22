@@ -58,6 +58,10 @@ export function checkMotionCss(file, text) {
       report(position, 'Do not create component or site motion aliases.')
     }
     if (tokenSource || policy) continue
+    // A scroll-linked animation follows the person's own scrolling, not a clock, so it is a state rather
+    // than motion: it needs no duration, easing or reduced-motion switch.
+    const scrollLinked = parsed.declarations.some(other => other.contexts.join() === contexts.join() && other.property === 'animation-timeline' && /\b(?:scroll|view)\(/.test(other.value))
+    if (scrollLinked && (timing || property === 'animation-name')) continue
     if ((timing || movement || property === 'animation-name' || property === 'scroll-behavior') && contexts.some(context => /data-theme.*wireframe/.test(context))) report(position, 'Wireframe motion conditions belong in the central policy.')
     if (timing) {
       if (/(?:\d|\.)\d*(?:ms|s)\b|\b(?:ease(?:-in-out|-in|-out)?|linear|step-start|step-end)\b|(?:cubic-bezier|steps)\(/.test(value)) report(position, 'Use shared duration and easing tokens, including in fallbacks.')

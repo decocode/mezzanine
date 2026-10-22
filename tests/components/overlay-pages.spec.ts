@@ -45,5 +45,5 @@ test('virtualizer draws only the options in view', async ({ page }) => {
   expect(await list.getByRole('option').count()).toBeLessThan(50)
   await list.evaluate(element => { element.scrollTop = 16000 })
   // Halfway down, the first drawn option is far into the list, not Option 1.
-  await expect.poll(async () => Number((await list.getByRole('option').first().textContent())?.replace('Option ', ''))).toBeGreaterThan(400)
+  await expect.poll(async () => Number((await list.getByRole('option').first().textContent())?.replace('Option ', ''))).toBeGreaterThan(300)
 })

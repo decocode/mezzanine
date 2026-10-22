@@ -12,6 +12,9 @@ export const allowedRawLengths = [
   { file: 'src/components/TopBar/TopBar.css', value: '4cqi' },
   // ProgressBar's indeterminate segment covers a share of its track, not a design size.
   { file: 'src/components/ProgressBar/ProgressBar.css', value: '40%' },
+  // The scroll fade's keyframe positions, just in from each end of the scroll range, not sizes.
+  { file: 'src/styles/scroll.css', value: '1%' },
+  { file: 'src/styles/scroll.css', value: '99%' },
 ]
 
 function masked(text) {

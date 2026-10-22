@@ -1,0 +1,41 @@
+/* Scrolling lists and panels fade softly at an edge where there is more to see, so it's clear they
+   scroll. The fade follows the scroll position rather than time, so it is a state, not motion, and
+   reduced motion leaves it in place. A list that doesn't scroll, or a browser without scroll-linked
+   styles, shows no fade. */
+@property --_scroll-fade-start {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --_scroll-fade-end {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+@supports (animation-timeline: scroll()) {
+  :is(.react-aria-ListBox, .react-aria-Menu, .react-aria-GridList, .react-aria-Tree, .mz-panel-content) {
+    mask-image: linear-gradient(to bottom, transparent, currentColor var(--_scroll-fade-start), currentColor calc(100% - var(--_scroll-fade-end)), transparent);
+    animation: mz-scroll-fade linear both;
+    animation-timeline: scroll(self block);
+  }
+}
+
+/* At the top only the end fades; at the bottom only the start; in between, both. */
+@keyframes mz-scroll-fade {
+  from {
+    --_scroll-fade-start: 0px;
+    --_scroll-fade-end: var(--scroll-fade-size, var(--space-6));
+  }
+
+  1%, 99% {
+    --_scroll-fade-start: var(--scroll-fade-size, var(--space-6));
+    --_scroll-fade-end: var(--scroll-fade-size, var(--space-6));
+  }
+
+  to {
+    --_scroll-fade-start: var(--scroll-fade-size, var(--space-6));
+    --_scroll-fade-end: 0px;
+  }
+}

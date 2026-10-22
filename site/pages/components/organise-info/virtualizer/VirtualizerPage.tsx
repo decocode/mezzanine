@@ -10,7 +10,7 @@ export default function VirtualizerPage() {
       parts={{
         example: <ExampleZone>
           <div className="virtualizer-example">
-            <Virtualizer layout={ListLayout} layoutOptions={{ rowHeight: 32 }}>
+            <Virtualizer layout={ListLayout} layoutOptions={{ estimatedRowHeight: 40 }}>
               <ListBox aria-label={virtualizerExampleLabel} items={virtualizerExampleItems}>
                 {(item) => <ListBoxItem>{item.name}</ListBoxItem>}
               </ListBox>

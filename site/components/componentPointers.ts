@@ -624,6 +624,18 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-md)"
     },
     {
+      "name": "--drop-zone-button-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--drop-zone-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--drop-zone-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
       "name": "--drop-zone-focus-ring-color",
       "fallback": "var(--color-focus)"
     },
@@ -644,8 +656,28 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-text)"
     },
     {
+      "name": "--drop-zone-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--drop-zone-icon-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--drop-zone-icon-size",
+      "fallback": "var(--icon-size-xl)"
+    },
+    {
+      "name": "--drop-zone-label-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
       "name": "--drop-zone-min-height",
       "fallback": "var(--space-24)"
+    },
+    {
+      "name": "--drop-zone-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--drop-zone-padding",

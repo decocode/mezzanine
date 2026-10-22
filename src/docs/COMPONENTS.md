@@ -299,8 +299,10 @@ lets people choose them, and `onRemove` adds a remove button to each.
 
 ## DropZone
 
-`DropZone` is a dashed area with a `Text slot="label"` inside. While something
-is dragged over it, it turns solid and takes the accent tint.
+`DropZone` is a dashed area that stacks its content in the middle: an optional
+icon, a `Text slot="label"`, a help paragraph, an error paragraph with
+`role="alert"` and a `FileTrigger` button. While something is dragged over it,
+it turns solid and takes the accent tint.
 
 ## GridList, Tree and Toolbar
 
