@@ -1,6 +1,23 @@
-/* The Units page's examples: the same kind of item measured in different units. */
+/* The Units page's first example: the same kind of item measured in different units. */
 .example-unit-px { inline-size: 160px; }
 .example-unit-rem { inline-size: 10rem; }
 .example-unit-percent { inline-size: 50%; }
 .example-unit-vw { inline-size: 30vw; }
 
+/* The viewport example: invisible probes, one for each unit, that the page measures. */
+.example-probes {
+  position: relative;
+  block-size: 0;
+  overflow: hidden;
+}
+
+.example-probes > * {
+  position: absolute;
+  visibility: hidden;
+  inline-size: 0;
+}
+
+.example-probe-vh { block-size: 100vh; }
+.example-probe-svh { block-size: 100svh; }
+.example-probe-lvh { block-size: 100lvh; }
+.example-probe-dvh { block-size: 100dvh; }

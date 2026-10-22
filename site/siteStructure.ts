@@ -125,16 +125,15 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'dimension',
         label: 'Dimension',
         path: '/dimension',
-        order: ['width', 'aspect-ratio', 'fluid-sizing', 'space', 'spacing-scale', 'spacing-roles', 'units', 'viewport-units'],
+        order: ['width', 'aspect-ratio', 'fluid-sizing', 'space', 'spacing-scale', 'spacing-roles', 'units'],
         pages: [
           { id: 'width', label: 'Width', path: '/dimension/width', status: 'implemented' },
           { id: 'aspect-ratio', label: 'Aspect ratio', path: '/dimension/aspect-ratio', status: 'implemented' },
           { id: 'fluid-sizing', label: 'Fluid sizing', path: '/dimension/fluid-sizing', status: 'implemented' },
           { id: 'space', label: 'Space', path: '/dimension/space', status: 'implemented' },
-          { id: 'spacing-scale', label: 'Spacing scale', path: '/dimension/spacing-scale', status: 'implemented' },
+          { id: 'spacing-scale', label: 'Shared spacing', path: '/dimension/spacing-scale', status: 'implemented' },
           { id: 'spacing-roles', label: 'Spacing roles', path: '/dimension/spacing-roles', status: 'implemented' },
           { id: 'units', label: 'Units', path: '/dimension/units', status: 'implemented' },
-          { id: 'viewport-units', label: 'Viewport units', path: '/dimension/viewport-units', status: 'implemented' },
         ],
       },
       {

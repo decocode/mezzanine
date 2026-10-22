@@ -19,7 +19,6 @@ import { gridCssNotes } from '../../site/pages/foundations/layout/grid/gridConte
 import { subgridCssNotes } from '../../site/pages/foundations/layout/grid/subgrid/subgridContent'
 import { containerQueriesCssNotes } from '../../site/pages/foundations/layout/container-queries/containerQueriesContent'
 import { unitsCssNotes } from '../../site/pages/foundations/dimension/units/unitsContent'
-import { viewportUnitsCssNotes } from '../../site/pages/foundations/dimension/viewport-units/viewportUnitsContent'
 import { fluidSizingCssNotes } from '../../site/pages/foundations/dimension/fluid-sizing/fluidSizingContent'
 import { stylePriorityCssNotes } from '../../site/pages/foundations/themes/style-priority/stylePriorityContent'
 
@@ -41,7 +40,6 @@ const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string
   { path: '/layout/grid/subgrid', notes: subgridCssNotes, stylesheet: 'site/pages/foundations/layout/grid/subgrid/subgrid.css' },
   { path: '/layout/container-queries', notes: containerQueriesCssNotes, stylesheet: 'site/pages/foundations/layout/container-queries/containerQueries.css' },
   { path: '/dimension/units', notes: unitsCssNotes, stylesheet: 'site/pages/foundations/dimension/units/units.css' },
-  { path: '/dimension/viewport-units', notes: viewportUnitsCssNotes, stylesheet: 'site/pages/foundations/dimension/viewport-units/viewportUnits.css' },
   { path: '/dimension/fluid-sizing', notes: fluidSizingCssNotes, stylesheet: 'site/pages/foundations/dimension/fluid-sizing/fluidSizing.css' },
   { path: '/themes/style-priority', notes: stylePriorityCssNotes, stylesheet: 'site/pages/foundations/themes/style-priority/stylePriority.css' },
 ]

@@ -1,10 +1,10 @@
-// The example for the Viewport units page, in Foundations › Dimension › Units.
+// The Units page's viewport example, in Foundations › Dimension: the screen height in four units.
 import { useRef } from 'react'
 import { CodeBlock } from '@decocode/mezzanine'
 import { useProbeHeights } from '../../../../components/browserLogic'
 import { DocsTable } from '../../../../components/DocsTable'
 import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
-import { viewportUnitsCssNotes } from './viewportUnitsContent'
+import { unitsCssNotes } from './unitsContent'
 
 const probes = [
   { label: '100vh', className: 'example-probe-vh' },
@@ -29,6 +29,6 @@ export function ViewportUnitsExample() {
       descriptionColumn="Height"
       rows={heights.map((item) => ({ name: item.label, description: `${item.pixels}px` }))}
     />}
-    <CssNotes name="the measurements" note={viewportUnitsCssNotes.viewport} level={3} />
+    <CssNotes name="the measurements" note={unitsCssNotes.viewport} level={3} />
   </>
 }
