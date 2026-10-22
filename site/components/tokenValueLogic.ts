@@ -25,14 +25,11 @@ export function useTokenValue(token: string) {
   return useSyncExternalStore(subscribeToTokenChanges, readValue)
 }
 
-const pixelsPerRem = 16
-const roundPixels = (rem: string) => `${Math.round(parseFloat(rem) * pixelsPerRem * 100) / 100}`
-
-// Turns a font-size token into pixels at the browser's default 16px text size:
-// a fixed rem value gives one size, and a rem clamp() gives its smallest–largest range.
+// Describes a font-size token in rem: a fixed value gives one size, and a clamp() gives its
+// smallest–largest range.
 export function describeFontSize(value: string) {
   const range = value.match(/^clamp\(\s*([\d.]+)rem\s*,.*,\s*([\d.]+)rem\s*\)$/)
-  if (range) return `${roundPixels(range[1])}–${roundPixels(range[2])}px`
+  if (range) return `${parseFloat(range[1])}–${parseFloat(range[2])}rem`
   const fixed = value.match(/^([\d.]+)rem$/)
-  return fixed ? `${roundPixels(fixed[1])}px` : value
+  return fixed ? `${parseFloat(fixed[1])}rem` : value
 }

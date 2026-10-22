@@ -12,94 +12,33 @@ interface TypographyStyleDefinition {
   className: string
   role: TextRole
   label: string
-  purpose: string
 }
 
+// The Typography page: why shared text styles matter, with a card for each child page. The data
+// below is shared by the child pages.
 export const typographyContent: DocsPageContent = {
   id: 'typography',
   kind: 'foundation',
   title: 'Typography',
-  description: [
-    'Typography helps people understand what matters, scan a page and read its content. Mezzanine provides consistent text styles for everything from prominent headings to body copy and compact interface labels.',
-    'A text style is a ready-made set of font settings that you apply with one CSS class. Mezzanine has fifteen, grouped into five roles.',
-  ],
-  sections: [
-    {
-      key: 'howTypographyWorks',
-      title: 'How typography works',
-      intro: ['Typography in Mezzanine is built in layers. Each layer uses the one before it.'],
-    },
-    {
-      key: 'quickStart',
-      title: 'Quick start',
-      intro: ["Add a style's class to any element. The class sets the font, size, weight, line height, letter spacing and capitalisation together, so you do not set any of them yourself."],
-    },
-    {
-      key: 'theFiveRoles',
-      title: 'The five roles',
-      intro: ['Each role does one job and comes in three sizes: large (`lg`), medium (`md`) and small (`sm`).'],
-    },
-    {
-      key: 'allStyles',
-      title: 'All styles',
-      intro: ["Each example below is written in its own style. Sizes are shown at the browser's default text size."],
-    },
-    {
-      key: 'choosingAStyle',
-      title: 'Choosing a style',
-      intro: ['Start with these common choices. Use Body medium for anything people need to read properly, and keep Label small for brief extra text in tight spaces. Instructions, errors and anything needed to finish a task need a larger style.'],
-    },
-    {
-      key: 'lighterAndBolderText',
-      title: 'Lighter and bolder text',
-      intro: [
-        'On their own, Title and Label styles are semibold, and Display, Heading and Body styles are regular. To change the weight, add one more class:',
-        { list: [
-          '`mz-text-default` uses the normal weight, currently regular.',
-          '`mz-text-emphasis` uses the strong weight, currently semibold.',
-        ] },
-        "“Default” here means the theme's normal weight, not the style's own weight. Adding `mz-text-default` to a Label style makes it lighter. A brand theme can change both weights, for example to light and extra bold.",
-      ],
-    },
-    {
-      key: 'plainHtmlElements',
-      title: 'Plain HTML elements',
-      intro: ["Text without a style class still gets a style, so it never falls back to the browser's defaults. Any class you add replaces it."],
-    },
-    { key: 'sizesOnSmallScreens', title: 'Sizes on small screens' },
-    { key: 'lineHeight', title: 'Line height' },
-    {
-      key: 'tokenReference',
-      title: 'Token reference',
-      intro: ["Tokens are named CSS values, written as custom properties such as `--font-size-body-md`. Each style reads its size and line height from tokens, and shares its role's font, weight, letter spacing and capitalisation tokens, so a product theme can change the values without changing the class names."],
-    },
-  ],
+  description: 'Text in lots of slightly different sizes and weights is hard to scan. A small set of shared text styles keeps every page clear and consistent.',
+  sections: [{ key: 'pages', title: 'Using typography' }],
 }
+
+export const typographyPages = [
+  { label: 'Text styles', href: '/typography/text-styles', description: 'The fifteen styles, in five roles.' },
+  { label: 'Choosing a style', href: '/typography/choosing-a-style', description: 'Which style suits which text.' },
+  { label: 'Weight and emphasis', href: '/typography/weight-and-emphasis', description: 'Making text lighter or bolder.' },
+]
 
 // Copy the page places around its live parts: after a code sample or table, or in the
 // guidance boxes that have no introduction. {bodyLineHeight} is replaced with the live value.
 export const textStylesPartCopy = {
-  afterQuickStartCode: [
-    'A text style only changes how text looks. Choose the HTML element for its meaning: a section heading is still an `h2`, even if you want it to look small.',
-    "Every class starts with `mz-`, short for Mezzanine, so it cannot clash with your product's own class names.",
-  ],
-  afterRolesTable: ['Heading and Title both label content, but in different places. Use Heading for the outline of a page and Title inside a component. A Title can be smaller than the smallest Heading.'],
   afterWeightTable: ['These classes only change appearance. When words are genuinely important, use the `strong` or `em` element so assistive technology knows too.'],
-  sizesOnSmallScreens: [
-    'Display and Heading styles grow with the width of the screen. They use the smaller size in the All styles tables on a phone and the larger size on a wide screen. Title, Body and Label styles stay the same size at every width.',
-    "Every size also follows the reader's browser text setting, so text gets bigger for people who enlarge it.",
-  ],
   lineHeight: [
-    'Line height is the height of each line of text. Every text style includes its own, so you never need to set it.',
-    'The values are plain numbers that multiply the font size. Body medium uses `{bodyLineHeight}`, so 16px text gets 24px lines. Because the value has no unit, lines stay in proportion when text is enlarged.',
-    'Line height is not the space between paragraphs or list items. That space comes from margins.',
+    'Line height multiplies the font size, so Body medium’s `{bodyLineHeight}` turns 16px text into 24px lines, which stay in proportion when text is enlarged.',
   ],
-  tokenDisclosureLabel: 'Show all text style tokens',
   choiceSeparator: ' or ',
 } satisfies Record<string, Copy | readonly Copy[]>
-
-export const quickStartCode = `<h1 className="mz-text-heading-lg">Page title</h1>
-<p className="mz-text-body-md">A paragraph of reading text.</p>`
 
 export const textRoles: TextRoleDefinition[] = [
   { id: 'display', label: 'Display', purpose: 'Short, eye-catching text, such as a hero headline.' },
@@ -110,21 +49,21 @@ export const textRoles: TextRoleDefinition[] = [
 ]
 
 export const typographyStyles: TypographyStyleDefinition[] = [
-  { className: 'mz-text-display-lg', role: 'display', label: 'Display large', purpose: 'Very prominent, short text in a spacious hero.' },
-  { className: 'mz-text-display-md', role: 'display', label: 'Display medium', purpose: 'Prominent, short text in a hero or marketing section.' },
-  { className: 'mz-text-display-sm', role: 'display', label: 'Display small', purpose: 'Short display text where less space is available.' },
-  { className: 'mz-text-heading-lg', role: 'heading', label: 'Heading large', purpose: 'A page title or top-level content heading.' },
-  { className: 'mz-text-heading-md', role: 'heading', label: 'Heading medium', purpose: 'A major section heading.' },
-  { className: 'mz-text-heading-sm', role: 'heading', label: 'Heading small', purpose: 'A subsection heading.' },
-  { className: 'mz-text-title-lg', role: 'title', label: 'Title large', purpose: 'A prominent component or panel title.' },
-  { className: 'mz-text-title-md', role: 'title', label: 'Title medium', purpose: 'A standard component or panel title.' },
-  { className: 'mz-text-title-sm', role: 'title', label: 'Title small', purpose: 'A compact component or grouped-content title.' },
-  { className: 'mz-text-body-lg', role: 'body', label: 'Body large', purpose: 'Introductory copy that needs additional prominence.' },
-  { className: 'mz-text-body-md', role: 'body', label: 'Body medium', purpose: 'Paragraphs and ordinary interface content.' },
-  { className: 'mz-text-body-sm', role: 'body', label: 'Body small', purpose: 'Supporting information, descriptions, and captions.' },
-  { className: 'mz-text-label-lg', role: 'label', label: 'Label large', purpose: 'Standard controls and navigation labels.' },
-  { className: 'mz-text-label-md', role: 'label', label: 'Label medium', purpose: 'Compact controls, badges, and metadata.' },
-  { className: 'mz-text-label-sm', role: 'label', label: 'Label small', purpose: 'Supplementary labels where space is constrained.' },
+  { className: 'mz-text-display-lg', role: 'display', label: 'Display large' },
+  { className: 'mz-text-display-md', role: 'display', label: 'Display medium' },
+  { className: 'mz-text-display-sm', role: 'display', label: 'Display small' },
+  { className: 'mz-text-heading-lg', role: 'heading', label: 'Heading large' },
+  { className: 'mz-text-heading-md', role: 'heading', label: 'Heading medium' },
+  { className: 'mz-text-heading-sm', role: 'heading', label: 'Heading small' },
+  { className: 'mz-text-title-lg', role: 'title', label: 'Title large' },
+  { className: 'mz-text-title-md', role: 'title', label: 'Title medium' },
+  { className: 'mz-text-title-sm', role: 'title', label: 'Title small' },
+  { className: 'mz-text-body-lg', role: 'body', label: 'Body large' },
+  { className: 'mz-text-body-md', role: 'body', label: 'Body medium' },
+  { className: 'mz-text-body-sm', role: 'body', label: 'Body small' },
+  { className: 'mz-text-label-lg', role: 'label', label: 'Label large' },
+  { className: 'mz-text-label-md', role: 'label', label: 'Label medium' },
+  { className: 'mz-text-label-sm', role: 'label', label: 'Label small' },
 ]
 
 // Each role's family and weight, as set in src/styles/typography.css.
@@ -196,22 +135,3 @@ export const baseTextElements: { element: string; className: string; label: stri
   { element: 'h5', className: 'mz-text-title-md', label: 'Title medium' },
   { element: 'h6', className: 'mz-text-title-sm', label: 'Title small' },
 ]
-
-export const typographyLayers: readonly { title: string; description: Copy }[] = [
-  { title: 'Tokens hold the values', description: 'Named CSS values, such as `--font-size-body-md`, store every font, size, weight, letter spacing, line height and capitalisation setting.' },
-  { title: 'Text styles bundle them', description: 'Each of the fifteen text styles, such as Body medium, combines one complete set of those tokens.' },
-  { title: 'Three routes reach the page', description: "The same sets are used by the `mz-text-*` classes you add to markup, by the base styles for plain body text and `h1`–`h6` headings, and by every component's own CSS." },
-  { title: 'Themes change the tokens', description: 'A theme gives tokens new values. Everything that uses a token updates together, with no change to classes, markup or components.' },
-  { title: 'Checks keep components in line', description: '`npm run check:rules` fails if a component sets text without a complete text style, so components cannot drift away from the scale.' },
-]
-
-// The "See it work" part of How typography works: copy before and after the theme code.
-export const typographyThemeExample = {
-  title: 'See it work',
-  beforeCode: 'This theme change makes every Label style uppercase with wider letter spacing. A product theme puts these lines on `:root`, so they apply everywhere:',
-  afterCode: 'Here the same two tokens are set on the second box only, so you can compare. The Button, the Badge and the `mz-text-label-lg` class all change together, because they all read the Label tokens. Nothing else was edited.',
-  code: `:root {
-  --text-transform-label: uppercase;
-  --letter-spacing-label: 0.08em;
-}`,
-} as const

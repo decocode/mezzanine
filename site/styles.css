@@ -498,69 +498,11 @@ a:focus-visible {
   margin-block-end: var(--space-4);
 }
 
-.typography-layers {
-  display: grid;
-  gap: var(--space-3);
-  max-inline-size: var(--line-length);
-  margin: 0 0 var(--space-8);
-  padding: 0;
-  list-style: none;
-  counter-reset: typography-layer;
-}
-
-.typography-layers > li {
-  padding: var(--space-4);
-  border: var(--border-width-baseline) solid var(--color-border);
-  border-radius: var(--radius-sm);
-  counter-increment: typography-layer;
-}
-
-.typography-layers h3::before {
-  content: counter(typography-layer) ". ";
-}
-
-.typography-layers :is(h3, p) {
-  margin: 0;
-}
-
-.typography-layers p {
-  margin-block-start: var(--space-1);
-  color: var(--color-text-muted);
-}
-
-.typography-theme-example {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
-  gap: var(--space-4);
-}
-
-.typography-theme-panel {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  border: var(--border-width-baseline) solid var(--color-border);
-}
-
-.typography-theme-caption {
-  flex-basis: 100%;
-  margin: 0;
-  color: var(--color-text-muted);
-}
-
-/* Illustrates a product theme override; a real theme sets these on :root. */
-.typography-theme-panel-changed {
-  --text-transform-label: uppercase;
-  --letter-spacing-label: 0.08em;
-}
-
 .text-style-table {
   container-type: inline-size;
 }
 
-.text-style-sample,
-.text-style-purpose {
+.text-style-sample {
   display: block;
   overflow-wrap: break-word;
 }
@@ -568,11 +510,6 @@ a:focus-visible {
 /* Keep a size range such as 44–72px on one line. */
 .text-style-size {
   white-space: nowrap;
-}
-
-.text-style-purpose {
-  margin-block-start: var(--space-1);
-  color: var(--color-text-muted);
 }
 
 /* On narrow screens each style becomes a stacked card so large samples keep their size. */
@@ -593,6 +530,8 @@ a:focus-visible {
 
   .text-style-table .react-aria-Table > tbody > tr {
     display: grid;
+    /* Wide enough for a large sample's descenders, which reach below its tight line height. */
+    gap: var(--space-4);
     margin-block-end: var(--space-4);
     border: var(--table-border-width) solid var(--color-border);
   }
@@ -602,10 +541,6 @@ a:focus-visible {
     min-width: 0;
     border: 0;
   }
-}
-
-.typography-token-disclosure {
-  margin-block-start: var(--space-8);
 }
 
 /* Each radius step is shown in a library Card; the list only lays the cards out. */
@@ -674,8 +609,7 @@ a:focus-visible {
 
 /* Documentation rhythm: 4rem between major sections, 3rem before topics,
    2rem before subtopics, and 1rem within groups. Keep component examples untouched. */
-.component-section > h3,
-.typography-guidance > h3 {
+.component-section > h3 {
   margin: var(--space-12) 0 var(--space-4);
 }
 
@@ -706,19 +640,14 @@ a:focus-visible {
   margin-block-start: var(--space-4);
 }
 
+/* A section's introduction reads as ordinary body text; only the page subtitle under the h1 is muted. */
 .component-section-description {
   max-width: var(--line-length);
   margin: 0 0 var(--space-4);
-  color: var(--color-text-muted);
 }
 
-.typography-guidance,
 .component-section :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm) {
   max-inline-size: var(--line-length);
-}
-
-.typography-guidance > p {
-  margin: 0;
 }
 
 .component-example {

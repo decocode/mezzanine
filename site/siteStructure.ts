@@ -65,14 +65,27 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'text',
         label: 'Text',
         path: '/text',
+        order: ['fonts', 'typography', 'fluid-text', 'reading-width', 'reading-direction', 'reading-order', 'prose'],
         pages: [
-          { id: 'typography', label: 'Typography', path: '/typography', status: 'implemented' },
           { id: 'prose', label: 'Prose', path: '/typography/prose', status: 'implemented' },
           { id: 'fonts', label: 'Fonts', path: '/fonts', status: 'empty' },
           { id: 'fluid-text', label: 'Fluid text', path: '/text/fluid-text', status: 'implemented' },
           { id: 'reading-direction', label: 'Reading direction', path: '/text/reading-direction', status: 'implemented' },
           { id: 'reading-order', label: 'Reading order', path: '/text/reading-order', status: 'implemented' },
           { id: 'reading-width', label: 'Reading width', path: '/text/reading-width', status: 'implemented' },
+        ],
+        groups: [
+          {
+            id: 'typography',
+            label: 'Typography',
+            path: '/typography',
+            order: ['text-styles', 'choosing-a-style', 'weight-and-emphasis'],
+            pages: [
+              { id: 'text-styles', label: 'Text styles', path: '/typography/text-styles', status: 'implemented' },
+              { id: 'choosing-a-style', label: 'Choosing a style', path: '/typography/choosing-a-style', status: 'implemented' },
+              { id: 'weight-and-emphasis', label: 'Weight and emphasis', path: '/typography/weight-and-emphasis', status: 'implemented' },
+            ],
+          },
         ],
       },
       {
