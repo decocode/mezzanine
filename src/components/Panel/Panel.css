@@ -6,8 +6,8 @@
   min-inline-size: 0;
   min-block-size: 0;
   overflow: hidden;
-  background: var(--color-surface);
-  color: var(--color-text);
+  background: var(--panel-background, var(--color-surface));
+  color: var(--panel-foreground, var(--color-text));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-regular);
@@ -20,9 +20,9 @@
     visibility calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
-.mz-panel[data-edge='start'] { border-inline-end: var(--border-width-baseline) solid var(--color-border); }
-.mz-panel[data-edge='end'] { border-inline-start: var(--border-width-baseline) solid var(--color-border); }
-.mz-panel[data-edge='bottom'] { border-block-start: var(--border-width-baseline) solid var(--color-border); }
+.mz-panel[data-edge='start'] { border-inline-end: var(--panel-border-width, var(--border-width-baseline)) solid var(--panel-border, var(--color-border)); }
+.mz-panel[data-edge='end'] { border-inline-start: var(--panel-border-width, var(--border-width-baseline)) solid var(--panel-border, var(--color-border)); }
+.mz-panel[data-edge='bottom'] { border-block-start: var(--panel-border-width, var(--border-width-baseline)) solid var(--panel-border, var(--color-border)); }
 
 /* Closed: the content fades while its space closes, and leaves keyboard and screen reader reach. */
 .mz-panel[data-state='closed'] {
@@ -132,15 +132,15 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-index-overlay);
-  background: var(--color-backdrop);
+  background: var(--panel-backdrop, var(--color-backdrop));
 }
 
 .mz-panel-overlay > .mz-panel {
   position: absolute;
   inset-block: 0;
   inline-size: min(var(--_panel-drawer-width), 100%);
-  background: var(--elevation-raised-3-surface);
-  box-shadow: var(--elevation-raised-3);
+  background: var(--panel-drawer-background, var(--elevation-raised-3-surface));
+  box-shadow: var(--panel-drawer-elevation, var(--elevation-raised-3));
 }
 
 .mz-panel-overlay > .mz-panel[data-edge='start'] { --_panel-drawer-width: var(--panel-start-width); inset-inline-start: 0; }

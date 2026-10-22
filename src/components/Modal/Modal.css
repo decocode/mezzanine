@@ -31,7 +31,7 @@
   border-radius: var(--modal-border-radius, var(--radius-surface));
   background: var(--modal-background, var(--elevation-raised-3-surface));
   color: var(--modal-foreground, var(--color-text));
-  box-shadow: var(--elevation-raised-3);
+  box-shadow: var(--modal-elevation, var(--elevation-raised-3));
 }
 
 .react-aria-ModalOverlay[data-entering] {

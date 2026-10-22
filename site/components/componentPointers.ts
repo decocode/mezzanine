@@ -632,6 +632,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--modal-elevation",
+      "fallback": "var(--elevation-raised-3)"
+    },
+    {
       "name": "--modal-foreground",
       "fallback": "var(--color-text)"
     },
@@ -687,6 +691,34 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     }
   ],
   "Panel": [
+    {
+      "name": "--panel-backdrop",
+      "fallback": "var(--color-backdrop)"
+    },
+    {
+      "name": "--panel-background",
+      "fallback": "var(--color-surface)"
+    },
+    {
+      "name": "--panel-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--panel-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--panel-drawer-background",
+      "fallback": "var(--elevation-raised-3-surface)"
+    },
+    {
+      "name": "--panel-drawer-elevation",
+      "fallback": "var(--elevation-raised-3)"
+    },
+    {
+      "name": "--panel-foreground",
+      "fallback": "var(--color-text)"
+    },
     {
       "name": "--panel-resize-focus-ring-offset",
       "fallback": "var(--focus-ring-offset-inset)"
@@ -1190,12 +1222,40 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   ],
   "Tooltip": [
     {
+      "name": "--tooltip-background",
+      "fallback": "var(--elevation-raised-2-surface)"
+    },
+    {
+      "name": "--tooltip-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--tooltip-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
       "name": "--tooltip-border-width",
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--tooltip-elevation",
+      "fallback": "var(--elevation-raised-2)"
+    },
+    {
+      "name": "--tooltip-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
       "name": "--tooltip-max-width",
       "fallback": "var(--width-md)"
+    },
+    {
+      "name": "--tooltip-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--tooltip-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
     }
   ],
   "TopBar": [

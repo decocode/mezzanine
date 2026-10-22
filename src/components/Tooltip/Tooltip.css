@@ -1,12 +1,13 @@
 .react-aria-Tooltip {
   box-sizing: border-box;
   max-inline-size: min(var(--tooltip-max-width, var(--width-md)), calc(100vw - var(--space-4) * 2));
-  padding: var(--space-2) var(--space-3);
-  border: var(--tooltip-border-width, var(--border-width-baseline)) solid var(--color-border);
-  border-radius: var(--radius-surface);
-  background: var(--elevation-raised-2-surface);
-  color: var(--color-text);
-  box-shadow: var(--elevation-raised-2);
+  /* A Tooltip is a compact surface, padded like a control. */
+  padding: var(--tooltip-padding-block, var(--space-padding-control-block)) var(--tooltip-padding-inline, var(--space-padding-control-inline));
+  border: var(--tooltip-border-width, var(--border-width-baseline)) solid var(--tooltip-border, var(--color-border));
+  border-radius: var(--tooltip-border-radius, var(--radius-surface));
+  background: var(--tooltip-background, var(--elevation-raised-2-surface));
+  color: var(--tooltip-foreground, var(--color-text));
+  box-shadow: var(--tooltip-elevation, var(--elevation-raised-2));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
