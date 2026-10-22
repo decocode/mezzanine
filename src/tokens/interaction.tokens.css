@@ -20,12 +20,19 @@
   --focus-ring-offset: 0.1875rem;
   --focus-ring-offset-inset: calc(var(--focus-ring-width) * -1);
 
-  /* Indicator: the thickness of the bar that marks the current page or the selected tab. */
+  /* Indicator: the bar that marks the current page, section or tab, and a selected row. Its ends are
+     rounded with the controls' corners, so it is square in Wireframe, and they stop short of the
+     item's edges by the inset. */
   --indicator-width: 0.1875rem;
+  --indicator-radius: var(--radius-control);
+  --indicator-inset: var(--space-2);
 
   /* Nav items: the shared row style of NavTree, TopBar links and TableOfContents links. The current
      page's indicator bar has the shared indicator width. */
   --nav-item-current-indicator-width: var(--indicator-width);
+  /* Each row's wash has the controls' corners and stops short of its container's edges by the inset. */
+  --nav-item-inset: var(--space-2);
+  --nav-item-border-radius: var(--radius-control);
 
   /* Nav item colours: pointers to the colour roles, the same in every theme. */
   --nav-item-background: transparent;

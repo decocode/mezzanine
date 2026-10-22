@@ -9,6 +9,8 @@ export const interactionSharedTokens: { token: string; description: string }[] =
   { token: '--opacity-disabled', description: 'Opacity of disabled controls' },
   { token: '--indicator-width', description: 'Thickness of the bar that marks the current page, section or tab, and a selected row' },
   { token: '--color-indicator', description: 'Colour of that bar' },
+  { token: '--indicator-radius', description: 'Rounding of the bar’s ends, the controls’ corners' },
+  { token: '--indicator-inset', description: 'Space between the bar’s ends and the edges of its item' },
 ]
 
 export const interactionContent: DocsPageContent = {

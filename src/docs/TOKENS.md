@@ -336,6 +336,10 @@ colours point at the colour roles; they and the bar width live in `src/tokens/in
 | `--nav-item-background`, `-hovered`, `-pressed`, `-current` | Row background in each state |
 | `--nav-item-current-indicator` | Current page bar colour |
 | `--nav-item-current-indicator-width` | Current page bar width, pointing at `--indicator-width`, which Tabs' selected bar shares |
+| `--nav-item-inset` | Space between a nav row's wash and its container's edges |
+| `--nav-item-border-radius` | Corners of a nav row's wash, the controls' corners |
+| `--indicator-radius` | Rounding of every indicator bar's ends, the controls' corners, so square in Wireframe |
+| `--indicator-inset` | Space between an indicator bar's ends and its item's edges |
 
 ## Current shape inventory
 

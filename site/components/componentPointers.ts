@@ -598,6 +598,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-accent-muted-pressed)"
     },
     {
+      "name": "--list-box-item-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
       "name": "--list-box-item-description-foreground",
       "fallback": "var(--color-text-muted)"
     },
@@ -710,6 +714,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-4)"
     },
     {
+      "name": "--navigation-tree-item-border-radius",
+      "fallback": "var(--nav-item-border-radius)"
+    },
+    {
       "name": "--navigation-tree-item-gap",
       "fallback": "var(--space-gap-control)"
     },
@@ -723,7 +731,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--navigation-tree-item-padding-inline",
-      "fallback": "calc(var(--space-4) - var(--nav-item-current-indicator-width))"
+      "fallback": "calc(var(--space-4) - var(--nav-item-inset))"
     }
   ],
   "Panel": [
@@ -1124,6 +1132,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-accent-muted-pressed)"
     },
     {
+      "name": "--tab-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
       "name": "--tab-foreground",
       "fallback": "var(--color-text)"
     },
@@ -1134,6 +1146,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--tab-indicator",
       "fallback": "var(--color-indicator)"
+    },
+    {
+      "name": "--tab-indicator-border-radius",
+      "fallback": "var(--indicator-radius)"
     },
     {
       "name": "--tab-indicator-width",

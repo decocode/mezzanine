@@ -29,10 +29,13 @@
   display: flex;
   align-items: center;
   min-height: var(--target-size-xs);
-  max-width: 100%;
-  /* The current-page bar's room is kept on every link, so the text doesn't move when it appears. */
-  padding-inline: calc(var(--space-4) - var(--nav-item-current-indicator-width)) var(--space-4);
-  border-inline-start: var(--nav-item-current-indicator-width) solid transparent;
+  position: relative;
+  box-sizing: border-box;
+  max-width: calc(100% - var(--nav-item-inset) * 2);
+  /* The row is set in from its container's edges, so the text still starts --space-4 from the edge. */
+  margin-inline: var(--nav-item-inset);
+  padding-inline: calc(var(--space-4) - var(--nav-item-inset));
+  border-radius: var(--nav-item-border-radius);
   background: var(--nav-item-background);
   color: var(--nav-item-foreground);
   font-family: var(--font-family-body);
@@ -58,13 +61,23 @@
 /* The section being read: NavTree's current-page bar. The weight stays the same, so nothing changes
    width or wraps differently as reading moves down the page. */
 .mz-table-of-contents .react-aria-Link[aria-current='location'] {
-  border-inline-start-color: var(--nav-item-current-indicator);
   background: var(--nav-item-background-current);
   color: var(--nav-item-foreground-current);
 }
 
+.mz-table-of-contents .react-aria-Link[aria-current='location']::before {
+  content: '';
+  position: absolute;
+  inset-block: var(--indicator-inset);
+  inset-inline-start: 0;
+  inline-size: var(--nav-item-current-indicator-width);
+  border-radius: var(--indicator-radius);
+  background: var(--nav-item-current-indicator);
+}
+
 @media (forced-colors: active) {
-  .mz-table-of-contents .react-aria-Link[aria-current='location'] {
-    border-inline-start-color: Highlight;
+  .mz-table-of-contents .react-aria-Link[aria-current='location']::before {
+    forced-color-adjust: none;
+    background: Highlight;
   }
 }

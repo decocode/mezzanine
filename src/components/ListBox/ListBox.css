@@ -61,6 +61,7 @@
   min-width: 0;
   min-height: var(--list-box-item-min-height, var(--target-size-xs));
   padding: var(--list-box-item-padding-block, var(--space-padding-control-block)) var(--list-box-item-padding-inline, var(--space-padding-control-inline));
+  border-radius: var(--list-box-item-border-radius, var(--radius-control));
   outline: none;
   background: var(--list-box-item-background, transparent);
   color: var(--list-box-item-foreground, var(--color-text));
@@ -103,9 +104,10 @@
 .react-aria-ListBoxItem[data-selected]::before {
   content: '';
   position: absolute;
-  inset-block: 0;
+  inset-block: var(--indicator-inset);
   inset-inline-start: 0;
   inline-size: var(--list-box-item-indicator-width, var(--indicator-width));
+  border-radius: var(--indicator-radius);
   background: var(--list-box-item-indicator, var(--color-indicator));
 }
 

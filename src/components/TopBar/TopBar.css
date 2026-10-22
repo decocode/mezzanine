@@ -120,9 +120,8 @@
 }
 
 .mz-top-bar-links > .react-aria-Link {
+  position: relative;
   min-height: var(--target-size-md);
-  /* Room for the current-page bar, kept on every link so nothing moves when it appears. */
-  border-block-end: var(--nav-item-current-indicator-width) solid transparent;
   overflow-wrap: anywhere;
 }
 
@@ -134,19 +133,28 @@
   overflow-wrap: anywhere;
 }
 
-.mz-top-bar-links > .react-aria-Link[aria-current='page'] {
-  border-block-end-color: var(--nav-item-current-indicator);
+/* The current page's bar sits under the link, short of its sides. */
+.mz-top-bar-links > .react-aria-Link[aria-current]:where(:not([aria-current='false']))::after,
+.mz-top-bar .mz-top-bar-link[aria-current]:where(:not([aria-current='false']))::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--indicator-inset);
+  inset-block-end: 0;
+  block-size: var(--nav-item-current-indicator-width);
+  border-radius: var(--indicator-radius);
+  background: var(--nav-item-current-indicator);
 }
 
 /* Navigation link appearance shared by TopBar consumers: the shared nav item style, with the current
    page's indicator bar underneath because the links sit in a row. Scoped to the TopBar so these states
    win over Link's own link colours. */
 .mz-top-bar .mz-top-bar-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   min-height: var(--target-size-md);
   padding: var(--space-2) var(--space-3);
-  border-block-end: var(--nav-item-current-indicator-width) solid transparent;
+  border-radius: var(--nav-item-border-radius);
   background: var(--nav-item-background);
   color: var(--nav-item-foreground);
   font-family: var(--font-family-body);
@@ -174,8 +182,15 @@
 }
 
 .mz-top-bar .mz-top-bar-link[aria-current]:where(:not([aria-current='false'])) {
-  border-block-end-color: var(--nav-item-current-indicator);
   background: var(--nav-item-background-current);
   color: var(--nav-item-foreground-current);
   font-weight: var(--font-weight-emphasis);
+}
+
+@media (forced-colors: active) {
+  .mz-top-bar-links > .react-aria-Link[aria-current]:where(:not([aria-current='false']))::after,
+  .mz-top-bar .mz-top-bar-link[aria-current]:where(:not([aria-current='false']))::after {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
 }

@@ -12,7 +12,7 @@ test('Table of contents follows the section being read', async ({ page }) => {
   const content = page.locator('.mz-app-shell-content')
   await page.locator('#button-sizes').evaluate((element) => element.scrollIntoView({ block: 'start' }))
   await expect(current).toHaveText('Button sizes')
-  expect(await current.evaluate((element) => Number.parseFloat(getComputedStyle(element).borderInlineStartWidth))).toBeGreaterThan(0)
+  expect(await current.evaluate((element) => Number.parseFloat(getComputedStyle(element, '::before').width))).toBeGreaterThan(0)
   await content.evaluate((element) => { element.scrollTop = element.scrollHeight })
   await expect(current).toHaveText('References')
 })

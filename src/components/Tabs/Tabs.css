@@ -57,6 +57,7 @@
   letter-spacing: var(--letter-spacing-label);
   line-height: var(--line-height-label-lg);
   text-transform: var(--text-transform-label);
+  border-radius: var(--tab-border-radius, var(--radius-control));
   overflow-wrap: anywhere;
   cursor: default;
 }
@@ -75,25 +76,25 @@
 
 .react-aria-Tab > .react-aria-SelectionIndicator {
   position: absolute;
-  border-radius: var(--radius-none);
+  border-radius: var(--tab-indicator-border-radius, var(--indicator-radius));
   background: var(--tab-indicator, var(--color-indicator));
   transition-timing-function: var(--motion-easing-enter);
   transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
 }
 
 .react-aria-TabList[data-orientation='horizontal'] .react-aria-SelectionIndicator {
-  inset-inline-start: 0;
+  inset-inline-start: var(--indicator-inset);
   inset-block-end: 0;
-  width: 100%;
+  width: calc(100% - var(--indicator-inset) * 2);
   height: var(--tab-indicator-width, var(--indicator-width));
   transition-property: translate, width;
 }
 
 .react-aria-TabList[data-orientation='vertical'] .react-aria-SelectionIndicator {
   inset-inline-end: 0;
-  inset-block-start: 0;
+  inset-block-start: var(--indicator-inset);
   width: var(--tab-indicator-width, var(--indicator-width));
-  height: 100%;
+  height: calc(100% - var(--indicator-inset) * 2);
   transition-property: translate, height;
 }
 

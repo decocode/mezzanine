@@ -37,9 +37,10 @@ for (const theme of ['light', 'dark', 'wireframe']) {
     await expect(wordmark).toHaveCSS('text-decoration-line', 'none')
     const docsLink = page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Docs', exact: true })
     await expect(docsLink).toHaveAttribute('aria-current', 'true')
+    // The current section's indicator bar sits under the link, and the link itself has no fill.
     expect(await docsLink.evaluate(element => {
-      const style = getComputedStyle(element)
-      return style.borderBottomColor !== 'rgba(0, 0, 0, 0)' && Number.parseFloat(style.borderBottomWidth) > 0 && style.backgroundColor === 'rgba(0, 0, 0, 0)'
+      const bar = getComputedStyle(element, '::after')
+      return bar.content !== 'none' && bar.backgroundColor !== 'rgba(0, 0, 0, 0)' && Number.parseFloat(bar.height) > 0 && getComputedStyle(element).backgroundColor === 'rgba(0, 0, 0, 0)'
     })).toBe(true)
     if (theme === 'wireframe') {
       expect(await docsLink.evaluate(element => getComputedStyle(element).textDecorationLine)).toBe('underline')
@@ -73,7 +74,8 @@ for (const theme of ['light', 'dark', 'wireframe']) {
     }
     await page.emulateMedia({ forcedColors: 'active' })
     await page.getByRole('banner').getByRole('button', { name: 'Menu', exact: true }).click()
-    expect(await docsLink.evaluate(element => getComputedStyle(element).borderBottomStyle)).toBe('solid')
+    // In forced colours the bar keeps the system's Highlight colour.
+    expect(await docsLink.evaluate(element => getComputedStyle(element, '::after').forcedColorAdjust)).toBe('none')
   })
 }
 
@@ -88,6 +90,6 @@ test('site TopBar leaves Docs inactive on the landing page and unknown routes', 
     if (path === '/') await expect(homeLink).toHaveAttribute('aria-current', 'page')
     else await expect(homeLink).not.toHaveAttribute('aria-current')
     expect(await docsLink.evaluate(element => getComputedStyle(element).textDecorationLine)).toBe('underline')
-    expect(await docsLink.evaluate(element => getComputedStyle(element).borderBottomColor)).toBe('rgba(0, 0, 0, 0)')
+    expect(await docsLink.evaluate(element => getComputedStyle(element, '::after').content)).toBe('none')
   }
 })
