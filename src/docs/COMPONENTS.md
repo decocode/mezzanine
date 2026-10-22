@@ -288,6 +288,20 @@ options as people type. Their lists open in a `Popover` as wide as the field.
 </Select>
 ```
 
+## NumberField, TagGroup and TokenField
+
+These also draw their own field, with a `label` and optional `description` (and
+`errorMessage` for NumberField and TagGroup). `NumberField` joins its input to
+minus and plus buttons. `TagGroup` takes `Tag`s as children; `selectionMode`
+lets people choose them, and `onRemove` adds a remove button to each.
+`TokenField` takes a function that renders a `Token` for each token in its
+`TokenFieldValue`.
+
+## DropZone
+
+`DropZone` is a dashed area with a `Text slot="label"` inside. While something
+is dragged over it, it turns solid and takes the accent tint.
+
 ## Popover and Menu
 
 `Popover` is the raised surface for content opened from a trigger; it adds no
@@ -304,9 +318,8 @@ layout it sits in. With `orientation="vertical"` it stands upright in a row.
 ## Unstyled React Aria exports
 
 These pass React Aria's components straight through, with no Mezzanine
-styles yet: `CheckboxGroup`, `DropZone`, `FileTrigger`, `Form`, the `GridList`
-family, `Group`, `NumberField`, `PreviewTrigger`, the `Sheet` family, the
-`TagGroup` family, the `TokenField` family, `Toolbar`, the `Tree` family, and
+styles yet: `CheckboxGroup`, `FileTrigger`, `Form`, the `GridList`
+family, `Group`, `PreviewTrigger`, the `Sheet` family, `Toolbar`, the `Tree` family, and
 `Virtualizer` with `ListLayout`. Use them as the
 [React Aria documentation](https://react-aria.adobe.com/) describes, and style
 them in the app until Mezzanine designs them.

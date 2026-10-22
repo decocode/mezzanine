@@ -1,0 +1,110 @@
+/* Follows React Aria's vanilla NumberField: the input takes the shared text field look, joined to
+   its minus and plus buttons at the end. */
+.react-aria-NumberField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--number-field-gap, var(--space-gap-field));
+  min-inline-size: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-NumberField > .react-aria-Label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-NumberField > :is([slot='description'], [slot='errorMessage'], .react-aria-FieldError) {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-NumberField > [slot='description'] {
+  color: var(--number-field-description-foreground, var(--color-text-muted));
+}
+
+.react-aria-NumberField > :is([slot='errorMessage'], .react-aria-FieldError) {
+  color: var(--number-field-error-foreground, var(--color-danger));
+}
+
+.mz-number-field-group {
+  display: flex;
+  min-inline-size: 0;
+}
+
+.mz-number-field-group > .react-aria-Input {
+  flex: 1;
+  min-inline-size: 0;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+/* The buttons share the field's border, so the three parts read as one control. */
+.mz-number-field-step {
+  display: grid;
+  flex: none;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--number-field-step-width, var(--target-size-md));
+  min-block-size: var(--target-size-md);
+  margin: 0;
+  margin-inline-start: calc(var(--input-border-width, var(--border-width-baseline)) * -1);
+  padding: 0;
+  border: var(--input-border-width, var(--border-width-baseline)) solid var(--number-field-step-border, var(--color-border-control));
+  border-radius: 0;
+  background: var(--number-field-step-background, var(--color-page));
+  color: var(--number-field-step-foreground, var(--color-text));
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mz-number-field-step:last-child {
+  border-start-end-radius: var(--input-border-radius, var(--radius-control));
+  border-end-end-radius: var(--input-border-radius, var(--radius-control));
+}
+
+.mz-number-field-step[data-hovered] {
+  background: var(--number-field-step-background-hovered, var(--color-accent-muted-hovered));
+}
+
+.mz-number-field-step[data-pressed] {
+  background: var(--number-field-step-background-pressed, var(--color-accent-muted-pressed));
+}
+
+.mz-number-field-step[data-focus-visible] {
+  position: relative;
+  outline: var(--number-field-focus-ring-width, var(--focus-ring-width)) solid var(--number-field-focus-ring-color, var(--color-focus));
+  outline-offset: var(--number-field-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+.mz-number-field-step[data-disabled] {
+  opacity: var(--number-field-step-opacity-disabled, var(--opacity-disabled));
+}
+
+.mz-number-field-step-icon {
+  inline-size: var(--number-field-step-icon-size, var(--icon-size-sm));
+  block-size: var(--number-field-step-icon-size, var(--icon-size-sm));
+}
+
+.react-aria-NumberField[data-disabled] {
+  opacity: var(--number-field-opacity-disabled, var(--opacity-disabled));
+}
+
+@media (forced-colors: active) {
+  .mz-number-field-step {
+    border-color: ButtonText;
+  }
+}

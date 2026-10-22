@@ -1,0 +1,44 @@
+/* Follows React Aria's vanilla DropZone: a dashed area that tints while something is dragged over it. */
+.react-aria-DropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-block-size: var(--drop-zone-min-height, var(--space-24));
+  padding: var(--drop-zone-padding, var(--space-padding-surface));
+  border: var(--drop-zone-border-width, var(--border-width-md)) dashed var(--drop-zone-border, var(--color-border-control));
+  border-radius: var(--drop-zone-border-radius, var(--radius-surface));
+  background: var(--drop-zone-background, var(--color-page));
+  color: var(--drop-zone-foreground, var(--color-text-muted));
+  outline: none;
+  text-align: center;
+  text-wrap: balance;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-DropZone[data-drop-target] {
+  border-style: solid;
+  border-color: var(--drop-zone-border-current, var(--color-accent-emphasis));
+  background: var(--drop-zone-background-current, var(--color-accent-muted));
+  color: var(--drop-zone-foreground-current, var(--color-text));
+}
+
+.react-aria-DropZone[data-focus-visible] {
+  outline: var(--drop-zone-focus-ring-width, var(--focus-ring-width)) solid var(--drop-zone-focus-ring-color, var(--color-focus));
+  outline-offset: var(--drop-zone-focus-ring-offset, var(--focus-ring-offset));
+}
+
+@media (forced-colors: active) {
+  .react-aria-DropZone {
+    border-color: ButtonText;
+  }
+
+  .react-aria-DropZone[data-drop-target] {
+    border-color: Highlight;
+  }
+}

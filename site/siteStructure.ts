@@ -228,7 +228,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'switch', label: 'Switch', path: '/switch', status: 'implemented' },
           { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'implemented' },
           { id: 'radio-group', label: 'Radio group', path: '/radio-group', status: 'implemented' },
-          { id: 'drop-zone', label: 'Drop zone', path: '/drop-zone', status: 'empty' },
+          { id: 'drop-zone', label: 'Drop zone', path: '/drop-zone', status: 'implemented' },
         ],
       },
       {
@@ -239,8 +239,8 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'form', label: 'Form', path: '/form', status: 'empty' },
           { id: 'text-field', label: 'Text field', path: '/text-field', status: 'implemented' },
           { id: 'text-area', label: 'Text area', path: '/text-area', status: 'implemented' },
-          { id: 'number-field', label: 'Number field', path: '/number-field', status: 'empty' },
-          { id: 'token-field', label: 'Token field', path: '/token-field', status: 'empty' },
+          { id: 'number-field', label: 'Number field', path: '/number-field', status: 'implemented' },
+          { id: 'token-field', label: 'Token field', path: '/token-field', status: 'implemented' },
         ],
       },
       {
@@ -262,7 +262,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'table', label: 'Table', path: '/table', status: 'implemented' },
           { id: 'grid-list', label: 'Grid list', path: '/grid-list', status: 'empty' },
           { id: 'tree', label: 'Tree', path: '/tree', status: 'empty' },
-          { id: 'tag-group', label: 'Tag group', path: '/tag-group', status: 'empty' },
+          { id: 'tag-group', label: 'Tag group', path: '/tag-group', status: 'implemented' },
           { id: 'code-block', label: 'Code block', path: '/code-block', status: 'implemented' },
           { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
           { id: 'card', label: 'Card', path: '/card', status: 'implemented' },

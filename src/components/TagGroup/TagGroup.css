@@ -1,0 +1,148 @@
+/* Follows React Aria's vanilla TagGroup: small tags that wrap onto new lines, each with an optional
+   remove button. A selected tag takes the selected ToggleButton's fill. */
+.react-aria-TagGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tag-group-gap, var(--space-gap-field));
+  min-inline-size: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-TagGroup > .react-aria-Label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-TagGroup > :is([slot='description'], [slot='errorMessage'], .react-aria-FieldError) {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-TagGroup > [slot='description'] {
+  color: var(--tag-group-description-foreground, var(--color-text-muted));
+}
+
+.react-aria-TagGroup > :is([slot='errorMessage'], .react-aria-FieldError) {
+  color: var(--tag-group-error-foreground, var(--color-danger));
+}
+
+.react-aria-TagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tag-group-list-gap, var(--space-gap-control));
+  outline: none;
+}
+
+.react-aria-Tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tag-gap, var(--space-1));
+  box-sizing: border-box;
+  max-inline-size: 100%;
+  min-block-size: var(--tag-min-height, var(--target-size-xs));
+  padding-block: 0;
+  padding-inline: var(--tag-padding-inline, var(--space-padding-control-inline));
+  border: var(--tag-border-width, var(--border-width-baseline)) solid var(--tag-border, var(--color-border-control));
+  border-radius: var(--tag-border-radius, var(--radius-control));
+  background: var(--tag-background, var(--color-page));
+  color: var(--tag-foreground, var(--color-text));
+  outline: none;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+  overflow-wrap: anywhere;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-aria-Tag:has(.mz-tag-remove) {
+  padding-inline-end: var(--space-1);
+}
+
+.react-aria-Tag[data-href] {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.react-aria-Tag[data-hovered] {
+  background: var(--tag-background-hovered, var(--color-accent-muted-hovered));
+}
+
+.react-aria-Tag[data-pressed] {
+  background: var(--tag-background-pressed, var(--color-accent-muted-pressed));
+}
+
+.react-aria-Tag[data-selected] {
+  border-color: var(--tag-background-selected, var(--color-accent-emphasis));
+  background: var(--tag-background-selected, var(--color-accent-emphasis));
+  color: var(--tag-foreground-selected, var(--color-accent-inverse));
+}
+
+.react-aria-Tag[data-focus-visible] {
+  outline: var(--tag-focus-ring-width, var(--focus-ring-width)) solid var(--tag-focus-ring-color, var(--color-focus));
+  outline-offset: var(--tag-focus-ring-offset, var(--focus-ring-offset));
+}
+
+.react-aria-Tag[data-disabled] {
+  opacity: var(--tag-opacity-disabled, var(--opacity-disabled));
+}
+
+.mz-tag-remove {
+  display: grid;
+  flex: none;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--target-size-min);
+  block-size: var(--target-size-min);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--tag-remove-border-radius, var(--radius-control));
+  background: transparent;
+  color: inherit;
+  cursor: default;
+}
+
+.mz-tag-remove[data-hovered] {
+  background: var(--tag-remove-background-hovered, var(--color-accent-muted-pressed));
+}
+
+.mz-tag-remove[data-focus-visible] {
+  outline: var(--tag-focus-ring-width, var(--focus-ring-width)) solid var(--tag-focus-ring-color, var(--color-focus));
+  outline-offset: var(--tag-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+.mz-tag-remove-icon {
+  inline-size: var(--tag-remove-icon-size, var(--icon-size-xs));
+  block-size: var(--tag-remove-icon-size, var(--icon-size-xs));
+}
+
+@media (forced-colors: active) {
+  .react-aria-Tag {
+    border-color: ButtonText;
+  }
+
+  .react-aria-Tag[data-selected] {
+    forced-color-adjust: none;
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+}

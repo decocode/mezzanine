@@ -598,6 +598,60 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "0"
     }
   ],
+  "DropZone": [
+    {
+      "name": "--drop-zone-background",
+      "fallback": "var(--color-page)"
+    },
+    {
+      "name": "--drop-zone-background-current",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--drop-zone-border",
+      "fallback": "var(--color-border-control)"
+    },
+    {
+      "name": "--drop-zone-border-current",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--drop-zone-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
+      "name": "--drop-zone-border-width",
+      "fallback": "var(--border-width-md)"
+    },
+    {
+      "name": "--drop-zone-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--drop-zone-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset)"
+    },
+    {
+      "name": "--drop-zone-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--drop-zone-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--drop-zone-foreground-current",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--drop-zone-min-height",
+      "fallback": "var(--space-24)"
+    },
+    {
+      "name": "--drop-zone-padding",
+      "fallback": "var(--space-padding-surface)"
+    }
+  ],
   "Link": [
     {
       "name": "--link-content-gap",
@@ -972,6 +1026,76 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--navigation-tree-item-padding-inline",
       "fallback": "var(--nav-item-padding-inline)"
+    }
+  ],
+  "NumberField": [
+    {
+      "name": "--input-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--input-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--number-field-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--number-field-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--number-field-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--number-field-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset-inset)"
+    },
+    {
+      "name": "--number-field-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--number-field-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--number-field-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--number-field-step-background",
+      "fallback": "var(--color-page)"
+    },
+    {
+      "name": "--number-field-step-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--number-field-step-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--number-field-step-border",
+      "fallback": "var(--color-border-control)"
+    },
+    {
+      "name": "--number-field-step-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--number-field-step-icon-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--number-field-step-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--number-field-step-width",
+      "fallback": "var(--target-size-md)"
     }
   ],
   "Panel": [
@@ -1716,6 +1840,100 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-text)"
     }
   ],
+  "TagGroup": [
+    {
+      "name": "--tag-background",
+      "fallback": "var(--color-page)"
+    },
+    {
+      "name": "--tag-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--tag-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--tag-background-selected",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--tag-border",
+      "fallback": "var(--color-border-control)"
+    },
+    {
+      "name": "--tag-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--tag-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--tag-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--tag-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset)"
+    },
+    {
+      "name": "--tag-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--tag-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--tag-foreground-selected",
+      "fallback": "var(--color-accent-inverse)"
+    },
+    {
+      "name": "--tag-gap",
+      "fallback": "var(--space-1)"
+    },
+    {
+      "name": "--tag-group-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--tag-group-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--tag-group-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--tag-group-list-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--tag-min-height",
+      "fallback": "var(--target-size-xs)"
+    },
+    {
+      "name": "--tag-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--tag-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--tag-remove-background-hovered",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--tag-remove-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--tag-remove-icon-size",
+      "fallback": "var(--icon-size-xs)"
+    }
+  ],
   "TextField": [
     {
       "name": "--input-background",
@@ -1886,6 +2104,96 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--toggle-button-selection-indicator-width",
       "fallback": "var(--border-width-md)"
+    }
+  ],
+  "TokenField": [
+    {
+      "name": "--input-background",
+      "fallback": "var(--color-page)"
+    },
+    {
+      "name": "--input-border",
+      "fallback": "var(--color-border-control)"
+    },
+    {
+      "name": "--input-border-hovered",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--input-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--input-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--input-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--input-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset)"
+    },
+    {
+      "name": "--input-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--input-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--input-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--input-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--input-placeholder-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--token-background",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--token-background-selected",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--token-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--token-field-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--token-field-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--token-field-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--token-field-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--token-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--token-foreground-selected",
+      "fallback": "var(--color-accent-inverse)"
+    },
+    {
+      "name": "--token-padding-inline",
+      "fallback": "var(--space-1)"
     }
   ],
   "Tooltip": [
