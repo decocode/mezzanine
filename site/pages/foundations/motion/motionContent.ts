@@ -20,12 +20,12 @@ export const motionContent: DocsPageContent = {
     {
       key: 'currentMotionPatterns',
       title: 'Current motion patterns',
-      intro: ['The scope identifies whether each pattern belongs to the library or the showcase. Reduced-motion behaviour preserves the state change without the animation.'],
+      intro: ['The scope identifies whether each pattern belongs to the library or the documentation site. Reduced-motion behaviour preserves the state change without the animation.'],
     },
     {
       key: 'reducedMotion',
       title: 'Reduced motion',
-      intro: ["Finite motion on this page is currently {motionState}. Wireframe suppresses finite motion in its own area; a nested Light or Dark area restores it. Loading indicators keep their existing behaviour in Wireframe. Mezzanine follows the device's `prefers-reduced-motion` setting. When a person asks for less motion, animations and smooth scrolling are removed while the interface continues to change state and communicate progress."],
+      intro: ["Finite motion on this page is currently {motionState}. Wireframe suppresses finite motion in its own area; a nested Light or Dark area restores it. Loading indicators keep their existing behaviour in Wireframe. Every theme follows the device's `prefers-reduced-motion` setting. When a person asks for less motion, animations and smooth scrolling are removed while the interface continues to change state and communicate progress."],
     },
   ],
 }
@@ -66,7 +66,7 @@ export const motionTokenDefinitions: MotionTokenDefinition[] = [
   { token: '--motion-easing-exit', description: 'Exits accelerate towards their endpoint.' },
   { token: '--motion-easing-loading', description: 'Loading rotates at constant speed.' },
   { token: '--motion-scale-enter', description: 'Modal size at the start of entry and end of exit.' },
-  { token: '--motion-rotation-expanded', description: 'Quarter-turn for the Disclosure and Nav Tree expanded indicators.' },
+  { token: '--motion-rotation-expanded', description: 'Quarter-turn for the Disclosure, NavTree and Tree expanded indicators.' },
   { token: '--motion-rotation-cycle', description: 'One complete loading rotation.' },
   { token: '--motion-distance-reveal', description: 'Shared short reveal distance; each recipe supplies direction.' },
   { token: '--motion-distance-offscreen', description: 'Full proportional travel of a drawer or sheet.' },
@@ -74,14 +74,20 @@ export const motionTokenDefinitions: MotionTokenDefinition[] = [
 
 export const motionPatternDefinitions: MotionPatternDefinition[] = [
   { id: 'modal', name: 'Modal and ModalOverlay', scope: 'Library', movement: 'Backdrop fades; modal scales on entry and exit.', reducedMotion: 'Opens and closes immediately.' },
-  { id: 'disclosure-panel', name: 'Disclosure panel', scope: 'Library', movement: 'Opens and closes immediately, like Nav Tree rows. Only the chevron turns.', reducedMotion: 'Opens and closes immediately.' },
+  { id: 'disclosure-panel', name: 'Disclosure panel', scope: 'Library', movement: 'Opens and closes immediately, like NavTree rows. Only the chevron turns.', reducedMotion: 'Opens and closes immediately.' },
   { id: 'disclosure-chevron', name: 'Disclosure chevron', scope: 'Library', movement: 'Points right when closed and turns down when expanded.', reducedMotion: 'Orientation changes immediately; expanded state remains visible.' },
   { id: 'tabs', name: 'Tabs selection indicator', scope: 'Library', movement: 'Moves and resizes with shared entry easing.', reducedMotion: 'Changes immediately.' },
   { id: 'tooltip', name: 'Tooltip', scope: 'Library', movement: 'Fades using interface timing; the hover delay remains separate.', reducedMotion: 'Appears and disappears without a fade.' },
-  { id: 'navigation-tree', name: 'Nav Tree', scope: 'Library', movement: 'Chevron turns from right to down; rows appear and disappear immediately.', reducedMotion: 'Hierarchy and chevron orientation change immediately.' },
+  { id: 'navigation-tree', name: 'NavTree', scope: 'Library', movement: 'Chevron turns from right to down; rows appear and disappear immediately.', reducedMotion: 'Hierarchy and chevron orientation change immediately.' },
+  { id: 'tree', name: 'Tree chevron', scope: 'Library', movement: 'Turns from right to down as a row expands.', reducedMotion: 'Orientation changes immediately.' },
+  { id: 'popover', name: 'Popover', scope: 'Library', movement: 'Fades in and out with the shared Modal fade.', reducedMotion: 'Appears and disappears without a fade.' },
+  { id: 'switch', name: 'Switch handle', scope: 'Library', movement: 'Slides towards the end when on, and back when off.', reducedMotion: 'Moves immediately.' },
+  { id: 'card-arrow', name: 'Card arrow', scope: 'Library', movement: 'A linked Card’s arrow moves by the shared reveal distance on hover.', reducedMotion: 'Moves immediately.' },
   { id: 'top-bar-navigation', name: 'Mobile top bar navigation', scope: 'Library', movement: 'Fades in and moves by the shared reveal distance.', reducedMotion: 'Appears immediately.' },
   { id: 'panel-drawer', name: 'Panel drawer', scope: 'Library', movement: 'Slides from its side while the backdrop fades.', reducedMotion: 'Opens and closes immediately.' },
+  { id: 'app-shell-panels', name: 'AppShell Panels', scope: 'Library', movement: 'The frame widens and narrows as a Panel opens or closes; dragging an edge follows the pointer.', reducedMotion: 'Opens and closes immediately.' },
   { id: 'button-progress', name: 'Pending Button indicator', scope: 'Library', movement: 'Rotates continuously while pending.', reducedMotion: 'System reduction stops rotation and keeps the ring visible. Wireframe alone leaves loading unchanged.' },
+  { id: 'progress-bar', name: 'Indeterminate ProgressBar', scope: 'Library', movement: 'A segment slides along the track while the amount is unknown.', reducedMotion: 'System reduction stops it and keeps the segment visible at the start. Wireframe alone leaves loading unchanged.' },
   { id: 'page-scrolling', name: 'Page scrolling', scope: 'Documentation layout', movement: 'Same-page links scroll smoothly; direct-load anchors scroll immediately.', reducedMotion: 'Scrolling is immediate.' },
   { id: 'loading-icon-preview', name: 'Loading icon preview', scope: 'Documentation only', movement: 'Rotates continuously.', reducedMotion: 'System reduction stops rotation and keeps the icon visible. Wireframe alone leaves it unchanged.' },
 ]

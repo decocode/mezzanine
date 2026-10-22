@@ -5,19 +5,19 @@ export const bordersContent: DocsPageContent = {
   id: 'borders',
   kind: 'foundation',
   title: 'Borders',
-  description: "Border width controls how heavy a surface's outline is. Mezzanine provides a shared scale that products can reference from their component tokens.",
+  description: "Border width controls how heavy a surface's outline is. A shared scale gives every component the same steps to choose from.",
   sections: [
     {
       key: 'borderWidth',
       title: 'Border width',
-      intro: ['The border-width scale goes up in 1px steps after a hairline. It uses `rem`, so borders thicken slightly when text is enlarged. Values below come from the active CSS tokens.'],
+      intro: ['The border-width scale goes up in 1px steps after a hairline. It uses `rem`, so borders thicken slightly when text is enlarged. Values come from the active CSS tokens.'],
     },
     {
       key: 'baselineBorderWidth',
       title: 'Baseline border width',
       intro: [
         "`--border-width-baseline` is the thickness of a component's border whenever it has one. It points at Small, `var(--border-width-sm)`, which is `{baseline}`. Every component's border-width token uses it, so a theme can make every border heavier or lighter by changing this one token, for example to `var(--border-width-md)`.",
-        'It sets thickness only. Each component still decides whether it has a border at all, and`--color-border` on the [Color roles](/color/roles) page sets its colour.',
+        'It sets thickness only. Each component still decides whether it has a border at all, and `--color-border` on the [Color roles](/color/roles) page sets its color.',
         '`--border-width-hairline` is the thinner role for the edges between an app’s main areas, such as the AppShell’s areas. It points at Extra small, `var(--border-width-xs)`.',
       ],
     },

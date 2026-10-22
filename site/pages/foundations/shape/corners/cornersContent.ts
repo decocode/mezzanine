@@ -4,17 +4,17 @@ export const cornersContent: DocsPageContent = {
   id: 'corners',
   kind: 'foundation',
   title: 'Corners',
-  description: 'Corner radius controls how square or rounded a surface appears. Mezzanine provides a shared scale that products can reference from their component tokens.',
+  description: 'Corner radius controls how square or rounded a surface appears. A shared scale gives every component the same steps to choose from.',
   sections: [
     {
       key: 'cornerRadius',
       title: 'Corner radius',
-      intro: ['Extra small through Extra large use `rem`, so they respond to the root font size. None keeps square corners. Full uses a deliberately large radius to produce pill ends. Values below come from the active CSS tokens.'],
+      intro: ['Extra small through Extra large use `rem`, so they respond to the root font size. None keeps square corners. Full uses a deliberately large radius to produce pill ends. Values come from the active CSS tokens.'],
     },
     {
       key: 'individualCorners',
       title: 'Individual corners',
-      intro: ['Use `border-radius` to make all four corners match, or target a specific corner with a property such as `border-top-left-radius`. Both can use the same radius tokens, for example `var(--radius-sm)`.'],
+      intro: ['Use `border-radius` to make all four corners match, or target a specific corner with a property such as `border-start-start-radius`, the corner where a line of text starts. Both can use the same radius tokens, for example `var(--radius-sm)`.'],
     },
     {
       key: 'usingTheScale',
