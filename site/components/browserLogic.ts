@@ -60,3 +60,22 @@ export function useSafeAreas(probe: RefObject<HTMLElement | null>) {
     { label: 'Left', pixels: left },
   ]
 }
+
+// Reads the rendered height of each probe element, for the viewport-unit comparison.
+// The height of each [data-probe] inside the container, read again once the probes are on the
+// page and whenever the screen changes. The snapshot is a string, so React only re-renders when a
+// height actually changes.
+export function useProbeHeights(container: RefObject<HTMLElement | null>) {
+  const snapshot = useSyncExternalStore(
+    subscribeToScreenChanges,
+    () => container.current
+      ? [...container.current.querySelectorAll<HTMLElement>('[data-probe]')]
+        .map((probe) => `${probe.dataset.probe ?? ''}\t${Math.round(probe.getBoundingClientRect().height)}`).join('\n')
+      : '',
+    () => '',
+  )
+  return snapshot ? snapshot.split('\n').map((line) => {
+    const [label, pixels] = line.split('\t')
+    return { label, pixels: Number(pixels) }
+  }) : []
+}

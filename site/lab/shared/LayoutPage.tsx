@@ -1,12 +1,9 @@
-import type { JSX } from 'react'
-import type { FuturePage, LabPage, LayoutStage, StagePage } from './labTypes'
+import type { FuturePage, LayoutStage, StagePage } from './labTypes'
 import { overviewPagesHeading } from './labValues'
 import { layoutOverview, layoutStages, stagePagesByStage } from '../layout/layoutContent'
 import { stageExamples } from '../layout/layoutExamples'
 import { emergingFeatures, futurePages } from '../emerging-features/emergingFeaturesContent'
 import { futureExamples } from '../emerging-features/emergingFeaturesExamples'
-import { labTopLevelPages } from '../labTopLevelPages'
-import { StylePriorityExample } from '../style-priority/StylePriorityExample'
 import { LabContentPage, OverviewPage } from './StagePages'
 import './layout-lab.css'
 
@@ -41,15 +38,4 @@ export function LayoutFuturePage() {
 export function LayoutFutureChildPage({ page }: { page: FuturePage }) {
   const Example = futureExamples[page.key]
   return <LabContentPage content={page} parts={{ howItWorks: <Example /> }} />
-}
-
-// Lab pages outside Layout, keyed by their address.
-const topLevelExamples: Record<string, () => JSX.Element> = {
-  [labTopLevelPages.stylePriority.href]: StylePriorityExample,
-}
-
-// A Lab page outside Layout: How it works, then its example.
-export function LabTopLevelPageView({ page }: { page: LabPage }) {
-  const Example = topLevelExamples[page.href]
-  return <LabContentPage content={page} parts={{ example: <Example /> }} />
 }

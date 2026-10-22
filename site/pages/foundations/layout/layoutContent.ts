@@ -1,6 +1,6 @@
 import type { DocsPageContent } from '../../../templates/docsPageContent'
 
-// The Layout page: what layout is. Its child pages are still in the Lab.
+// The Layout page: what layout is.
 export const layoutContent: DocsPageContent = {
   id: 'layout',
   kind: 'foundation',

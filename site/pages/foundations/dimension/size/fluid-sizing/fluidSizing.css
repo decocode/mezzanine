@@ -1,0 +1,16 @@
+/* The Fluid sizing page's examples: sizes that follow the frame, between two limits. The frame is
+   a size container, so cqi measures it. */
+.example-fluid-space {
+  display: grid;
+  gap: clamp(var(--space-2), 4cqi, var(--space-8));
+  padding: clamp(var(--space-2), 4cqi, var(--space-8));
+  border: var(--border-width-baseline) dashed var(--color-border);
+}
+
+.example-fluid-width {
+  inline-size: clamp(var(--width-xs), 60%, var(--width-lg));
+}
+
+.example-safe-minimum {
+  inline-size: min(100%, var(--width-md));
+}

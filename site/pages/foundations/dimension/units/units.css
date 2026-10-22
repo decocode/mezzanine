@@ -1,0 +1,9 @@
+/* The Units page's examples: the same kind of item measured in different units. */
+.example-unit-px { inline-size: 160px; }
+.example-unit-rem { inline-size: 10rem; }
+.example-unit-percent { inline-size: 50%; }
+.example-unit-vw { inline-size: 30vw; }
+
+.example-clamp {
+  inline-size: clamp(10rem, 50%, 30rem);
+}

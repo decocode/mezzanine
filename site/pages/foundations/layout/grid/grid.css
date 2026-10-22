@@ -1,0 +1,22 @@
+/* The Grid page's examples: items in rows and columns at once. */
+.example-grid {
+  display: grid;
+  grid-template-columns: var(--_grid-columns);
+  gap: var(--space-3);
+}
+
+.example-grid-wide {
+  grid-column: span 2;
+}
+
+.example-fixed-column-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--_column-count), minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.example-auto-fill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
+  gap: var(--space-3);
+}

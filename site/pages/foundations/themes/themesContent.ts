@@ -14,4 +14,5 @@ export const themesPages = [
   { label: 'Dark mode', href: '/themes/dark-mode', description: 'Rest your weary eyes. Save battery life.' },
   { label: 'Wireframe', href: '/themes/wireframe', description: 'Like an x-ray. Assess the bare bones, not the skin.' },
   { label: 'Custom themes', href: '/themes/custom-themes', description: 'Make of it what you will.' },
+  { label: 'Style priority', href: '/themes/style-priority', description: 'How the browser decides which rule wins.' },
 ]

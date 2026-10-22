@@ -2,7 +2,6 @@ import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
 import { layoutStages, stagePages, stagePagesByStage } from '../../site/lab/layout/layoutContent'
 import { emergingFeatures, futurePages } from '../../site/lab/emerging-features/emergingFeaturesContent'
-import { labTopLevelPages } from '../../site/lab/labTopLevelPages'
 import { cssNotes } from '../../site/lab/labCssNotes'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
@@ -11,7 +10,7 @@ const stageOverviewPages = layoutStages.map(stage => ({ path: `/site/lab/layout/
 const stageChildPages = stagePages.map(page => ({ path: page.href, title: page.title }))
 const futureOverviewPage = { path: emergingFeatures.href, title: emergingFeatures.title }
 const futureChildPages = futurePages.map(page => ({ path: page.href, title: page.title }))
-const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages, ...Object.values(labTopLevelPages).map(page => ({ path: page.href, title: page.title }))]
+const layoutPages = [{ path: '/site/lab/layout', title: 'Layout' }, ...stageOverviewPages, ...stageChildPages, futureOverviewPage, ...futureChildPages]
 
 // Checks the Layout overview, each stage, each stage page and each page still to be sorted fit a 320px
 // screen at normal and doubled text in every theme, and pass an automated accessibility scan.
@@ -74,29 +73,21 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
 
   // A stage page explains how it works, then shows an example with the CSS behind it. A building
   // block page also links to its sources.
-  await page.goto('/site/lab/layout/grids-and-columns/column')
-  await expect(page).toHaveTitle('Column | Lab')
+  await page.goto('/site/lab/layout/box-basics/center')
+  await expect(page).toHaveTitle('Center | Lab')
   await expect(page.getByRole('heading', { name: 'How it works', exact: true, level: 2 })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Example', exact: true, level: 2 })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'The CSS behind Column', level: 3 })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'The CSS behind Center', level: 3 })).toBeVisible()
   await expect(main.getByRole('heading', { name: 'References', exact: true, level: 2 })).toBeVisible()
-  await expect(main.getByRole('link', { name: 'Bedrock: Stack (opens in a new tab)', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/stack')
+  await expect(main.getByRole('link', { name: 'Bedrock: Center (opens in a new tab)', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/center')
   await page.goto('/site/lab/layout/not-a-page')
   await expect(page).toHaveTitle('Page not found | Lab')
 })
 
-// Checks the examples do what their captions say: the same tile responds to its own slot, Row switches
-// to a column below its switch width, the list becomes a grid with a fifth item, the overflow box
-// becomes scrollable, and reversing the row changes what you see but not the keyboard order.
+// Checks the examples do what their captions say: the list becomes a grid with a fifth item, and the
+// overflow box becomes scrollable.
 test('Lab Layout examples respond to their space and content', async ({ page }) => {
-  // Wide enough that the wide slot has room for two columns beside the On this page column.
   await page.setViewportSize({ width: 1600, height: 900 })
-  await page.goto('/site/lab/layout/container/container-queries')
-  const tiles = page.locator('.lab-two-slots .lab-cq-tile')
-  const columns = (index: number) => tiles.nth(index).evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length)
-  expect(await columns(0)).toBe(1)
-  expect(await columns(1)).toBe(2)
-
   await page.goto('/site/lab/layout/inside-the-box/box-has-content')
   const list = page.locator('.lab-has-list')
   await expect(list).toHaveCSS('display', 'flex')

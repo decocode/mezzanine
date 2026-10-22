@@ -1,35 +1,9 @@
 /* The Side by side examples. The pages' CSS notes quote the pattern rules, and a browser test checks
    that they still match. */
 
-/* A frame of the chosen width, so items can be seen wrapping or switching. */
-.side-by-side-frame {
-  box-sizing: border-box;
-  inline-size: min(var(--_frame-width), 100%);
-  padding: var(--space-3);
-  border: var(--border-width-baseline) dashed var(--color-text-muted);
-}
-
-/* A frame whose content may stick out scrolls, and keyboard users can reach it. */
-.side-by-side-frame[role='region'] {
-  overflow-x: auto;
-}
-
-.side-by-side-frame[role='region']:focus-visible,
 .example-reel:focus-visible {
   outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--space-1);
-}
-
-.side-by-side-item {
-  box-sizing: border-box;
-  min-inline-size: 0;
-  padding: var(--space-3);
-  border: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-surface);
-}
-
-.side-by-side-item-tall {
-  min-block-size: var(--space-24);
 }
 
 .example-row {

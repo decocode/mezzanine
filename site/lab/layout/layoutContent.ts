@@ -1,13 +1,10 @@
 // Plain-English explanations for the Lab's Layout pages, told through boxes, in groups
-// named after what you want to do: box basics, space, what goes inside a box, ways to place boxes,
-// and how boxes respond to their container, the browser and the device. Illustrative and unapproved.
+// named after what you want to do: box basics and what goes inside a box. Illustrative and unapproved.
 
 import type { DocsPageContent } from '../../templates/docsPageContent'
 import type { LayoutStage, StageKey, StagePage } from '../shared/labTypes'
 import { theBoxModelPage } from './box-basics/the-box-model/theBoxModelContent'
 import { typesOfBoxPage } from './box-basics/types-of-box/typesOfBoxContent'
-import { measuringTheBoxPage } from './box-basics/measuring-the-box/measuringTheBoxContent'
-import { viewportUnitsPage } from './box-basics/viewport-units/viewportUnitsContent'
 import { sizingTheBoxPage } from './box-basics/sizing-the-box/sizingTheBoxContent'
 import { centerPage } from './box-basics/center/centerContent'
 import { alignmentPage } from './inside-the-box/alignment/alignmentContent'
@@ -15,11 +12,6 @@ import { fillingTheBoxPage } from './inside-the-box/filling-the-box/fillingTheBo
 import { overflowingTheBoxPage } from './inside-the-box/overflowing-the-box/overflowingTheBoxContent'
 import { contentColumnsPage } from './inside-the-box/content-columns/contentColumnsContent'
 import { boxHasContentPage } from './inside-the-box/box-has-content/boxHasContentContent'
-import { columnPage } from './grids-and-columns/column/columnContent'
-import { gridPage } from './grids-and-columns/grid/gridContent'
-import { subgridPage } from './grids-and-columns/subgrid/subgridContent'
-import { containerQueriesPage } from './container/container-queries/containerQueriesContent'
-import { fluidSizingPage } from './container/fluid-sizing/fluidSizingContent'
 
 // The Layout overview: what layout is, then a Card for each group in its Groups section.
 export const layoutOverview: DocsPageContent = {
@@ -34,16 +26,12 @@ export const layoutOverview: DocsPageContent = {
 export const layoutStages: LayoutStage[] = [
   { key: 'boxBasics', id: 'lab-stage-box-basics', slug: 'box-basics', title: 'Box basics', summary: 'Everything on a web page is a box. Start with just one: what it’s made of, how big it is, and how its sides are named.' },
   { key: 'insideTheBox', id: 'lab-stage-inside-the-box', slug: 'inside-the-box', title: 'Inside the box', summary: 'A box holds content: text, pictures, other boxes. These pages are about how that content behaves inside its box.' },
-  { key: 'gridsAndColumns', id: 'lab-stage-grids-and-columns', slug: 'grids-and-columns', title: 'Grids and columns', summary: 'Boxes in a column, or in rows and columns at the same time.' },
-  { key: 'container', id: 'lab-stage-container', slug: 'container', title: 'Container', summary: 'When a box responds to the space its container gives it.' },
 ]
 
 // The pages in each group, in reading order.
 const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
-  boxBasics: [theBoxModelPage, typesOfBoxPage, measuringTheBoxPage, viewportUnitsPage, sizingTheBoxPage, centerPage],
+  boxBasics: [theBoxModelPage, typesOfBoxPage, sizingTheBoxPage, centerPage],
   insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, contentColumnsPage, boxHasContentPage],
-  gridsAndColumns: [columnPage, gridPage, subgridPage],
-  container: [containerQueriesPage, fluidSizingPage],
 }
 
 // Every Layout page, group by group.

@@ -1,0 +1,52 @@
+/* The Container queries page's examples: the tile responds to its slot, not the screen. */
+.example-two-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.example-two-slots > :first-child {
+  flex: 1 1 var(--width-sm);
+}
+
+.example-two-slots > :last-child {
+  flex: 999 1 0;
+  min-inline-size: 55%;
+}
+
+.example-two-slots > * {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  min-inline-size: 0;
+}
+
+.example-slot {
+  container: example-slot / inline-size;
+  min-inline-size: 0;
+}
+
+.example-tile {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.example-tile-text {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.example-tile-text > * {
+  margin: 0;
+}
+
+.example-tile-image {
+  min-block-size: var(--space-24);
+}
+
+@container example-slot (width >= 26rem) {
+  .example-tile {
+    grid-template-columns: var(--space-24) minmax(0, 1fr);
+    align-items: start;
+  }
+}

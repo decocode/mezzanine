@@ -11,4 +11,5 @@ export const sizeContent: DocsPageContent = {
 export const sizePages = [
   { label: 'Width', href: '/dimension/size/width', description: 'The steps every width comes from.' },
   { label: 'Aspect ratio', href: '/dimension/size/aspect-ratio', description: 'A set shape that crops pictures to fit.' },
+  { label: 'Fluid sizing', href: '/dimension/size/fluid-sizing', description: 'Sizes that grow and shrink with their space.' },
 ]

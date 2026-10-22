@@ -2,8 +2,6 @@
 import type { StageExamples } from '../shared/labTypes'
 import { TheBoxModelExample } from './box-basics/the-box-model/TheBoxModelExample'
 import { TypesOfBoxExample } from './box-basics/types-of-box/TypesOfBoxExample'
-import { MeasuringTheBoxExample } from './box-basics/measuring-the-box/MeasuringTheBoxExample'
-import { ViewportUnitsExample } from './box-basics/viewport-units/ViewportUnitsExample'
 import { SizingTheBoxExample } from './box-basics/sizing-the-box/SizingTheBoxExample'
 import { CenterExample } from './box-basics/center/CenterExample'
 import { AlignmentExample } from './inside-the-box/alignment/AlignmentExample'
@@ -11,17 +9,10 @@ import { FillingTheBoxExample } from './inside-the-box/filling-the-box/FillingTh
 import { OverflowingTheBoxExample } from './inside-the-box/overflowing-the-box/OverflowingTheBoxExample'
 import { ContentColumnsExample } from './inside-the-box/content-columns/ContentColumnsExample'
 import { BoxHasContentExample } from './inside-the-box/box-has-content/BoxHasContentExample'
-import { ColumnExample } from './grids-and-columns/column/ColumnExample'
-import { GridExample } from './grids-and-columns/grid/GridExample'
-import { SubgridExample } from './grids-and-columns/subgrid/SubgridExample'
-import { ContainerQueriesExample } from './container/container-queries/ContainerQueriesExample'
-import { FluidSizingExample } from './container/fluid-sizing/FluidSizingExample'
 
 export const stageExamples: StageExamples = {
   boxModel: { Example: TheBoxModelExample },
   typesOfBox: { Example: TypesOfBoxExample },
-  measuringTheBox: { Example: MeasuringTheBoxExample },
-  viewportUnits: { Example: ViewportUnitsExample },
   sizingTheBox: { Example: SizingTheBoxExample },
   center: { Example: CenterExample },
   alignment: { Example: AlignmentExample },
@@ -29,9 +20,4 @@ export const stageExamples: StageExamples = {
   overflowingTheBox: { Example: OverflowingTheBoxExample },
   contentColumns: { Example: ContentColumnsExample },
   boxHasContent: { Example: BoxHasContentExample },
-  column: { Example: ColumnExample },
-  grid: { Example: GridExample },
-  subgrid: { Example: SubgridExample },
-  containerQueries: { Example: ContainerQueriesExample },
-  fluidSizing: { Example: FluidSizingExample },
 }

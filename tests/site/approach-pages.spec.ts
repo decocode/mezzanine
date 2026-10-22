@@ -14,6 +14,14 @@ import { rowWrapGrowCssNotes } from '../../site/pages/foundations/layout/side-by
 import { reelCssNotes } from '../../site/pages/foundations/layout/side-by-side/reel/reelContent'
 import { aspectRatioCssNotes } from '../../site/pages/foundations/dimension/size/aspect-ratio/aspectRatioContent'
 import { spaceCssNotes } from '../../site/pages/foundations/dimension/space/spaceContent'
+import { stackCssNotes } from '../../site/pages/foundations/layout/stack/stackContent'
+import { gridCssNotes } from '../../site/pages/foundations/layout/grid/gridContent'
+import { subgridCssNotes } from '../../site/pages/foundations/layout/grid/subgrid/subgridContent'
+import { containerQueriesCssNotes } from '../../site/pages/foundations/layout/container-queries/containerQueriesContent'
+import { unitsCssNotes } from '../../site/pages/foundations/dimension/units/unitsContent'
+import { viewportUnitsCssNotes } from '../../site/pages/foundations/dimension/units/viewport-units/viewportUnitsContent'
+import { fluidSizingCssNotes } from '../../site/pages/foundations/dimension/size/fluid-sizing/fluidSizingContent'
+import { stylePriorityCssNotes } from '../../site/pages/foundations/themes/style-priority/stylePriorityContent'
 
 // The Foundations pages that came from the Lab, with the stylesheet each one's CSS notes quote.
 const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string }[] = [
@@ -28,6 +36,14 @@ const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string
   { path: '/layout/side-by-side/reel', notes: reelCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
   { path: '/dimension/size/aspect-ratio', notes: aspectRatioCssNotes, stylesheet: 'site/pages/foundations/dimension/size/aspect-ratio/aspectRatio.css' },
   { path: '/dimension/space', notes: spaceCssNotes, stylesheet: 'site/pages/foundations/dimension/space/space.css' },
+  { path: '/layout/stack', notes: stackCssNotes, stylesheet: 'site/pages/foundations/layout/stack/stack.css' },
+  { path: '/layout/grid', notes: gridCssNotes, stylesheet: 'site/pages/foundations/layout/grid/grid.css' },
+  { path: '/layout/grid/subgrid', notes: subgridCssNotes, stylesheet: 'site/pages/foundations/layout/grid/subgrid/subgrid.css' },
+  { path: '/layout/container-queries', notes: containerQueriesCssNotes, stylesheet: 'site/pages/foundations/layout/container-queries/containerQueries.css' },
+  { path: '/dimension/units', notes: unitsCssNotes, stylesheet: 'site/pages/foundations/dimension/units/units.css' },
+  { path: '/dimension/units/viewport-units', notes: viewportUnitsCssNotes, stylesheet: 'site/pages/foundations/dimension/units/viewport-units/viewportUnits.css' },
+  { path: '/dimension/size/fluid-sizing', notes: fluidSizingCssNotes, stylesheet: 'site/pages/foundations/dimension/size/fluid-sizing/fluidSizing.css' },
+  { path: '/themes/style-priority', notes: stylePriorityCssNotes, stylesheet: 'site/pages/foundations/themes/style-priority/stylePriority.css' },
 ]
 
 // Checks the CSS quoted in each "The CSS behind" panel matches its stylesheet, apart from example CSS.
@@ -53,6 +69,25 @@ for (const { path } of pages) {
     await expectNoPageOverflow(page)
   })
 }
+
+// Checks the same tile responds to its own slot: one column in the narrow slot, two in the wide one.
+test('Container queries tiles follow their own slot', async ({ page }) => {
+  // Wide enough that the wide slot has room for two columns beside the On this page column.
+  await page.setViewportSize({ width: 1600, height: 900 })
+  await page.goto('/layout/container-queries')
+  const tiles = page.locator('.example-two-slots .example-tile')
+  const columns = (index: number) => tiles.nth(index).evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length)
+  expect(await columns(0)).toBe(1)
+  expect(await columns(1)).toBe(2)
+})
+
+// Checks the cascade layer decides the winner: the library rule wins outside a layer, the app rule inside one.
+test('Style priority chips show which rule won', async ({ page }) => {
+  await page.goto('/themes/style-priority')
+  const label = (selector: string) => page.locator(`${selector} .example-chip`).evaluate(element => getComputedStyle(element, '::after').content)
+  expect(await label('.example-cascade-unlayered')).toBe('"Library style won"')
+  expect(await label('.example-cascade-layered')).toBe('"App style won"')
+})
 
 // Checks that reversing the row changes only what's seen: Tab still follows the HTML.
 test('Reading order follows the HTML when the row is reversed', async ({ page }) => {

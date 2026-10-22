@@ -1,0 +1,23 @@
+/* The Subgrid page's example: the parts inside items line up across a row. */
+.example-subgrid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
+  gap: var(--space-4);
+}
+
+.example-subgrid-item {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: var(--border-width-baseline) solid var(--color-border);
+}
+
+.example-subgrid-item > * {
+  margin: 0;
+}
+
+.example-subgrid-on .example-subgrid-item {
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+}

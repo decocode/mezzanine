@@ -92,8 +92,20 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'layout',
         label: 'Layout',
         path: '/layout',
-        pages: [],
+        order: ['side-by-side', 'stack', 'grid', 'container-queries'],
+        pages: [
+          { id: 'stack', label: 'Stack', path: '/layout/stack', status: 'implemented' },
+          { id: 'container-queries', label: 'Container queries', path: '/layout/container-queries', status: 'implemented' },
+        ],
         groups: [
+          {
+            id: 'grid',
+            label: 'Grid',
+            path: '/layout/grid',
+            pages: [
+              { id: 'subgrid', label: 'Subgrid', path: '/layout/grid/subgrid', status: 'implemented' },
+            ],
+          },
           {
             id: 'side-by-side',
             label: 'Side by side',
@@ -119,10 +131,11 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
             id: 'size',
             label: 'Size',
             path: '/dimension/size',
-            order: ['width', 'aspect-ratio'],
+            order: ['width', 'aspect-ratio', 'fluid-sizing'],
             pages: [
               { id: 'width', label: 'Width', path: '/dimension/size/width', status: 'implemented' },
               { id: 'aspect-ratio', label: 'Aspect ratio', path: '/dimension/size/aspect-ratio', status: 'implemented' },
+              { id: 'fluid-sizing', label: 'Fluid sizing', path: '/dimension/size/fluid-sizing', status: 'implemented' },
             ],
           },
           {
@@ -133,6 +146,14 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
             pages: [
               { id: 'spacing-scale', label: 'Spacing scale', path: '/dimension/space/spacing-scale', status: 'implemented' },
               { id: 'spacing-roles', label: 'Spacing roles', path: '/dimension/space/spacing-roles', status: 'implemented' },
+            ],
+          },
+          {
+            id: 'units',
+            label: 'Units',
+            path: '/dimension/units',
+            pages: [
+              { id: 'viewport-units', label: 'Viewport units', path: '/dimension/units/viewport-units', status: 'implemented' },
             ],
           },
         ],
@@ -180,12 +201,13 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'themes',
         label: 'Themes',
         path: '/themes',
-        order: ['light-mode', 'dark-mode', 'wireframe', 'custom-themes'],
+        order: ['light-mode', 'dark-mode', 'wireframe', 'custom-themes', 'style-priority'],
         pages: [
           { id: 'light-mode', label: 'Light mode', path: '/themes/light-mode', status: 'empty' },
           { id: 'dark-mode', label: 'Dark mode', path: '/themes/dark-mode', status: 'empty' },
           { id: 'wireframe', label: 'Wireframe', path: '/themes/wireframe', status: 'implemented' },
           { id: 'custom-themes', label: 'Custom themes', path: '/themes/custom-themes', status: 'empty' },
+          { id: 'style-priority', label: 'Style priority', path: '/themes/style-priority', status: 'implemented' },
         ],
       },
     ],

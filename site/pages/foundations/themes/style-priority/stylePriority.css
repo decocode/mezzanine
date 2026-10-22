@@ -1,0 +1,46 @@
+/* The Style priority page's example: the same simple app rule against a library rule, outside a
+   cascade layer and inside one. */
+.example-cascade-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.example-cascade-pair > * {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+}
+
+.example-chip {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width-baseline) solid var(--color-border);
+}
+
+.example-cascade-unlayered .example-chip.example-chip {
+  background: var(--color-surface);
+}
+
+.example-cascade-unlayered .example-chip.example-chip::after {
+  content: 'Library style won';
+}
+
+@layer example-library {
+  .example-cascade-layered .example-chip.example-chip {
+    background: var(--color-surface);
+  }
+
+  .example-cascade-layered .example-chip.example-chip::after {
+    content: 'Library style won';
+  }
+}
+
+/* The app rule: one simple class, outside any layer. */
+.example-app-style {
+  background: var(--color-success-muted);
+}
+
+.example-app-style::after {
+  content: 'App style won';
+}

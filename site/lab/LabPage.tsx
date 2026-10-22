@@ -4,11 +4,10 @@ import { SiteTopBar } from '../components/SiteTopBar'
 import { NavigationPanel } from '../components/NavigationPanel'
 import type { Theme } from '../themeSwitcherLogic'
 import NotFoundPage from '../pages/not-found/NotFoundPage'
-import { LabTopLevelPageView, LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutStageChildPage, LayoutStagePage } from './shared/LayoutPage'
+import { LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutStageChildPage, LayoutStagePage } from './shared/LayoutPage'
 import { labContent, labNavigationItems } from './labContent'
 import { layoutStages, stagePages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
-import { labTopLevelPages } from './labTopLevelPages'
 import { collectResults, docsSearchSection } from '../components/siteSearchLogic'
 import './lab-page.css'
 
@@ -30,8 +29,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const stagePage = stagePages.find((item) => item.href === currentPath)
   const isFuture = currentPath === emergingFeatures.href
   const futurePage = futurePages.find((item) => item.href === currentPath)
-  const topLevelPage = Object.values(labTopLevelPages).find((item) => item.href === currentPath)
-  const pageTitle = topLevelPage?.title ?? stage?.title ?? stagePage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title)
+  const pageTitle = stage?.title ?? stagePage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title)
   const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} searchSections={labSearchSections} />
 
@@ -53,7 +51,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : topLevelPage ? <LabTopLevelPageView page={topLevelPage} /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
     </DocsShell>
   </>
 }

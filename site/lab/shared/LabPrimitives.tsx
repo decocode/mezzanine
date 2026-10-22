@@ -6,24 +6,9 @@ import type { CSSProperties, ReactNode } from 'react'
 type Children = { children: ReactNode }
 const vars = (values: Record<string, string | undefined>) => Object.fromEntries(Object.entries(values).filter(([, value]) => value)) as CSSProperties
 
-// Column: boxes one below another, with even space between them set by the parent.
-export function Column({ children, space }: Children & { space?: string }) {
-  return <div className="lab-column" style={vars({ '--lab-column-space': space })}>{children}</div>
-}
-
-// FixedColumnGrid: a grid with a set number of equal columns.
-export function FixedColumnGrid({ children, columns }: Children & { columns?: number }) {
-  return <div className="lab-fixed-column-grid" style={vars({ '--lab-fixed-columns': columns?.toString() })}>{children}</div>
-}
-
-// An item in FixedColumnGrid that spans more than one column.
-export function FixedColumnGridItem({ children, span }: Children & { span?: number }) {
-  return <div className="lab-fixed-column-grid-item" style={vars({ '--lab-span': span?.toString() })}>{children}</div>
-}
-
-// AutoFillGrid: a grid with as many columns as fit, none narrower than the minimum.
-export function AutoFillGrid({ children, min }: Children & { min?: string }) {
-  return <div className="lab-auto-fill-grid" style={vars({ '--lab-auto-fill-min': min })}>{children}</div>
+// Stack: items one below another, with even space between them set by the parent.
+export function Stack({ children, space }: Children & { space?: string }) {
+  return <div className="lab-stack" style={vars({ '--lab-stack-space': space })}>{children}</div>
 }
 
 // Center: caps the width of content and centres it.
