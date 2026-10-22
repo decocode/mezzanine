@@ -10,7 +10,6 @@ import { measuringTheBoxPage } from './box-basics/measuring-the-box/measuringThe
 import { viewportUnitsPage } from './box-basics/viewport-units/viewportUnitsContent'
 import { sizingTheBoxPage } from './box-basics/sizing-the-box/sizingTheBoxContent'
 import { centerPage } from './box-basics/center/centerContent'
-import { spacingPage } from './add-space/spacing/spacingPageContent'
 import { alignmentPage } from './inside-the-box/alignment/alignmentContent'
 import { fillingTheBoxPage } from './inside-the-box/filling-the-box/fillingTheBoxContent'
 import { overflowingTheBoxPage } from './inside-the-box/overflowing-the-box/overflowingTheBoxContent'
@@ -38,7 +37,6 @@ export const layoutOverview: DocsPageContent = {
 
 export const layoutStages: LayoutStage[] = [
   { key: 'boxBasics', id: 'lab-stage-box-basics', slug: 'box-basics', title: 'Box basics', summary: 'Everything on a web page is a box. Start with just one: what it’s made of, how big it is, and how its sides are named.' },
-  { key: 'addSpace', id: 'lab-stage-add-space', slug: 'add-space', title: 'Add space', summary: 'Space outside a box, inside it, and between the boxes it holds.' },
   { key: 'insideTheBox', id: 'lab-stage-inside-the-box', slug: 'inside-the-box', title: 'Inside the box', summary: 'A box holds content: text, pictures, other boxes. These pages are about how that content behaves inside its box.' },
   { key: 'sideBySide', id: 'lab-stage-side-by-side', slug: 'side-by-side', title: 'Side by side', summary: 'Ways to place boxes next to each other.' },
   { key: 'gridsAndColumns', id: 'lab-stage-grids-and-columns', slug: 'grids-and-columns', title: 'Grids and columns', summary: 'Boxes in a column, or in rows and columns at the same time.' },
@@ -48,7 +46,6 @@ export const layoutStages: LayoutStage[] = [
 // The pages in each group, in reading order.
 const stagePagesInOrder: Record<StageKey, readonly StagePage[]> = {
   boxBasics: [theBoxModelPage, typesOfBoxPage, measuringTheBoxPage, viewportUnitsPage, sizingTheBoxPage, centerPage],
-  addSpace: [spacingPage],
   insideTheBox: [alignmentPage, fillingTheBoxPage, overflowingTheBoxPage, contentColumnsPage, boxHasContentPage],
   sideBySide: [rowPage, rowWrapPage, rowWrapGrowPage, reelPage],
   gridsAndColumns: [columnPage, gridPage, subgridPage],

@@ -21,7 +21,7 @@ export const measuringTheBoxPage: StagePage = {
 }
 
 // Example copy with a link to another Lab page.
-export const measuringTheBoxExampleLinkText = 'The % bar follows the frame. The vw bar follows the window, so it ignores the frame. The px and rem bars stay put, but rem grows if you enlarge your text. That’s why Mezzanine’s [spacing tokens](/site/lab/layout/add-space/spacing) are in rem.'
+export const measuringTheBoxExampleLinkText = 'The % bar follows the frame. The vw bar follows the window, so it ignores the frame. The px and rem bars stay put, but rem grows if you enlarge your text. That’s why Mezzanine’s [spacing tokens](/dimension/space/spacing-scale) are in rem.'
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
 // layout-lab.css, and a browser test checks that it still matches.

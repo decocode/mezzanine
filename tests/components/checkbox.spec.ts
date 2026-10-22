@@ -4,8 +4,8 @@ import { expect, test } from '@playwright/test'
 // hidden input must stay beside the checkbox, so focusing it doesn't scroll somewhere else.
 test('pressing a checkbox keeps the scroll position', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
-  await page.goto('/site/lab/layout/add-space/spacing')
-  const checkbox = page.locator('label', { hasText: 'Group with space' })
+  await page.goto('/text/reading-order')
+  const checkbox = page.locator('label', { hasText: 'Reverse on screen' })
   await checkbox.scrollIntoViewIfNeeded()
   const content = page.locator('.mz-app-shell-content')
   const before = await content.evaluate(element => element.scrollTop)

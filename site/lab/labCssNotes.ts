@@ -6,7 +6,6 @@ import { measuringTheBoxCssNotes } from './layout/box-basics/measuring-the-box/m
 import { viewportUnitsCssNotes } from './layout/box-basics/viewport-units/viewportUnitsContent'
 import { sizingTheBoxCssNotes } from './layout/box-basics/sizing-the-box/sizingTheBoxContent'
 import { centerCssNotes } from './layout/box-basics/center/centerContent'
-import { spacingCssNotes } from './layout/add-space/spacing/spacingPageContent'
 import { alignmentCssNotes } from './layout/inside-the-box/alignment/alignmentContent'
 import { fillingTheBoxCssNotes } from './layout/inside-the-box/filling-the-box/fillingTheBoxContent'
 import { overflowingTheBoxCssNotes } from './layout/inside-the-box/overflowing-the-box/overflowingTheBoxContent'
@@ -34,7 +33,6 @@ export const cssNotes: Record<string, CssNote> = {
   ...viewportUnitsCssNotes,
   ...sizingTheBoxCssNotes,
   ...centerCssNotes,
-  ...spacingCssNotes,
   ...alignmentCssNotes,
   ...fillingTheBoxCssNotes,
   ...overflowingTheBoxCssNotes,
