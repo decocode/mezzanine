@@ -2,7 +2,8 @@
    tokens, so a theme changes elevation by setting those colours, and can also
    override a level's shape. Each theme sets --elevation-shadow-color itself:
    Light is the fallback on every page, so a shared default here would never
-   apply. The shapes are the Wireframe baseline. */
+   apply. The shapes are shared; Wireframe's shadow colour is transparent, so it
+   shows none. */
 
 :where(:root) {
   --elevation-highlight-color: transparent;

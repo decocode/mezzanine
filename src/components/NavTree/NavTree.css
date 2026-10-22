@@ -92,12 +92,12 @@
   inset-inline-start: calc(var(--navigation-tree-item-padding-inline, var(--nav-item-padding-inline)) + var(--space-1));
   inline-size: calc((var(--tree-item-level, 1) - 1) * var(--navigation-tree-indent, var(--space-4)));
   /* physical: the gradient runs from the start edge, which is the left in left-to-right text. */
-  background: repeating-linear-gradient(to right, var(--navigation-tree-guide-color, var(--color-border)) 0 var(--navigation-tree-guide-width, var(--border-width-baseline)), transparent 0 var(--navigation-tree-indent, var(--space-4)));
+  background: repeating-linear-gradient(to right, var(--navigation-tree-guide-color, var(--color-border-muted)) 0 var(--navigation-tree-guide-width, var(--border-width-baseline)), transparent 0 var(--navigation-tree-indent, var(--space-4)));
   pointer-events: none;
 }
 /* physical: in right-to-left text the start edge is the right. */
 .mz-nav-tree-item:not([aria-level='1']):dir(rtl)::before {
-  background: repeating-linear-gradient(to left, var(--navigation-tree-guide-color, var(--color-border)) 0 var(--navigation-tree-guide-width, var(--border-width-baseline)), transparent 0 var(--navigation-tree-indent, var(--space-4)));
+  background: repeating-linear-gradient(to left, var(--navigation-tree-guide-color, var(--color-border-muted)) 0 var(--navigation-tree-guide-width, var(--border-width-baseline)), transparent 0 var(--navigation-tree-indent, var(--space-4)));
 }
 /* The current page's bar sits at the row's start, short of its top and bottom. It is the row's last
    pseudo-element, so it paints over the guide lines. */

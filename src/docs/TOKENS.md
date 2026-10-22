@@ -186,6 +186,7 @@ always carries text and icons from its own palette.
 | `--color-text` | Normal reading and interface text |
 | `--color-text-muted` | Supporting and secondary text |
 | `--color-border` | Decorative outlines and dividing lines |
+| `--color-border-muted` | Quieter lines that guide the eye, such as NavTree's guide lines |
 | `--color-border-control` | Borders of controls such as checkboxes and inputs, at 3:1 or more |
 | `--color-neutral-muted` | A see-through wash of the text color that darkens or lightens whatever it sits on |
 | `--color-backdrop` | The dimmed layer behind Modals and Panel drawers |

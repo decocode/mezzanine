@@ -11,6 +11,7 @@
 
   /* Decorative lines are soft; controls keep 3:1 borders. */
   --color-border: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
+  --color-border-muted: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
   --color-border-control: var(--color-neutral-400);
 
   /* A neutral wash of the text colour darkens (or, in Dark, lightens) whatever it sits on. */
@@ -73,6 +74,7 @@
 
   /* Rounded corners. */
   --radius-control: var(--radius-sm);
+  --indicator-width: var(--border-width-md);
   --radius-surface: var(--radius-md);
   /* The space between an app's surfaces, such as AppShell's cards. */
   --surface-gap: var(--space-2);
@@ -107,6 +109,7 @@
 
     /* Decorative lines are soft; controls keep 3:1 borders. */
     --color-border: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
+  --color-border-muted: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
     --color-border-control: var(--color-neutral-400);
 
     /* A neutral wash of the text colour darkens (or, in Dark, lightens) whatever it sits on. */
@@ -169,6 +172,7 @@
 
     /* Rounded corners. */
     --radius-control: var(--radius-sm);
+  --indicator-width: var(--border-width-md);
     --radius-surface: var(--radius-md);
     /* The space between an app's surfaces, such as AppShell's cards. */
     --surface-gap: var(--space-2);

@@ -13,6 +13,7 @@
   --color-text-muted: var(--color-neutral-700);
 
   --color-border: var(--color-neutral-950);
+  --color-border-muted: var(--color-neutral-400);
   --color-border-control: var(--color-neutral-700);
 
   /* A neutral wash of the text colour darkens (or, in Dark, lightens) whatever it sits on. */
@@ -33,9 +34,10 @@
   --color-accent-emphasis-hovered: oklch(from var(--color-accent-800) l 0 h);
   --color-accent-emphasis-pressed: oklch(from var(--color-accent-900) l 0 h);
   --color-accent-inverse: oklch(from var(--color-accent-50) l 0 h);
-  --color-accent-muted: oklch(from var(--color-accent-100) l 0 h);
+  /* One step stronger than Light's, so the wash still shows without colour. */
+  --color-accent-muted: oklch(from var(--color-accent-200) l 0 h);
   --color-accent-muted-hovered: oklch(from var(--color-accent-100) l 0 h);
-  --color-accent-muted-pressed: oklch(from var(--color-accent-200) l 0 h);
+  --color-accent-muted-pressed: oklch(from var(--color-accent-300) l 0 h);
   --color-accent: oklch(from var(--color-accent-700) l 0 h);
 
   --color-info-emphasis: var(--color-info-700);
@@ -77,10 +79,13 @@
   /* Square corners, even inside an area showing another theme. */
   --radius-control: var(--radius-none);
   --radius-surface: var(--radius-none);
+  /* Without colour, a heavier indicator bar stands out from the lines around it. */
+  --indicator-width: var(--border-width-xl);
   /* The space between an app's surfaces, such as AppShell's cards. Wireframe keeps them joined. */
   --surface-gap: 0;
 
-  --elevation-shadow-color: color-mix(in srgb, var(--color-neutral-950) var(--opacity-24), transparent);
+  /* No shadows: surfaces are told apart by their borders. */
+  --elevation-shadow-color: transparent;
 
   /* Table headers sit one step off the page in each theme. */
   --table-header-background: var(--color-neutral-100);

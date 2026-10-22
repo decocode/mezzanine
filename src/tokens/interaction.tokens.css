@@ -53,6 +53,7 @@
    theme. Other tokens are left alone, so an app's overrides above a themed area still apply. */
 :where([data-theme]) {
   --indicator-radius: var(--radius-control);
+  --nav-item-current-indicator-width: var(--indicator-width);
   --nav-item-border-radius: var(--radius-control);
   --nav-item-background-hovered: var(--color-accent-muted-hovered);
   --nav-item-background-pressed: var(--color-accent-muted-pressed);

@@ -1231,7 +1231,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--navigation-tree-guide-color",
-      "fallback": "var(--color-border)"
+      "fallback": "var(--color-border-muted)"
     },
     {
       "name": "--navigation-tree-guide-width",
