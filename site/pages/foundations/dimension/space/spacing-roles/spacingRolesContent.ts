@@ -7,6 +7,7 @@ export const spacingRoleLevels = [
   { token: '--space-padding-control-block', label: 'Padding: control, block', description: 'Above and below the content of a control or row' },
   { token: '--space-padding-control-inline', label: 'Padding: control, inline', description: 'Before and after the content of a control or row' },
   { token: '--space-padding-surface', label: 'Padding: surface', description: 'Inside a surface, such as a card or dialog' },
+  { token: '--space-overlay-inset', label: 'Overlay inset', description: 'Between a pop-up, such as a Modal or Tooltip, and the edges of the screen' },
 ]
 
 export const spacingRolesContent: DocsPageContent = {

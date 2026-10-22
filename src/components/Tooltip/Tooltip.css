@@ -1,6 +1,6 @@
 .react-aria-Tooltip {
   box-sizing: border-box;
-  max-inline-size: min(var(--tooltip-max-width, var(--width-md)), calc(100vw - var(--space-4) * 2));
+  max-inline-size: min(var(--tooltip-max-width, var(--width-md)), calc(100vw - var(--tooltip-viewport-padding, var(--space-overlay-inset)) * 2));
   /* A Tooltip is a compact surface, padded like a control. */
   padding: var(--tooltip-padding-block, var(--space-padding-control-block)) var(--tooltip-padding-inline, var(--space-padding-control-inline));
   border: var(--tooltip-border-width, var(--border-width-baseline)) solid var(--tooltip-border, var(--color-border));

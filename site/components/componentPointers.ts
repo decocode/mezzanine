@@ -721,7 +721,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--modal-viewport-padding",
-      "fallback": "var(--space-4)"
+      "fallback": "var(--space-overlay-inset)"
     }
   ],
   "NavTree": [
@@ -1484,6 +1484,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--tooltip-padding-inline",
       "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--tooltip-viewport-padding",
+      "fallback": "var(--space-overlay-inset)"
     }
   ],
   "TopBar": [

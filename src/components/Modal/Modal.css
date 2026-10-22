@@ -24,9 +24,9 @@
   /* Auto inline margins centre the modal in either reading direction. */
   margin-inline: auto;
   translate: 0 -50%;
-  inline-size: calc(100vw - var(--modal-viewport-padding, var(--space-4)) * 2);
+  inline-size: calc(100vw - var(--modal-viewport-padding, var(--space-overlay-inset)) * 2);
   max-inline-size: var(--modal-max-width, var(--width-lg));
-  max-height: calc(var(--visual-viewport-height) - var(--modal-viewport-padding, var(--space-4)) * 2);
+  max-height: calc(var(--visual-viewport-height) - var(--modal-viewport-padding, var(--space-overlay-inset)) * 2);
   border: var(--modal-border-width, var(--border-width-baseline)) solid var(--modal-border, var(--color-border));
   border-radius: var(--modal-border-radius, var(--radius-surface));
   background: var(--modal-background, var(--elevation-raised-3-surface));

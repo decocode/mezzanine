@@ -281,6 +281,7 @@ of components.
 | `--space-gap-cluster` | `--space-4` | Components in a group, such as the blocks in a card |
 | `--space-padding-control-block`, `-inline` | `--space-2`, `--space-3` | Inside a control or row: an input, a list row, a table cell |
 | `--space-padding-surface` | `--space-6` | Inside a surface, such as a card or dialog |
+| `--space-overlay-inset` | `--space-4` | Between a pop-up, such as a Modal or Tooltip, and the edges of the screen |
 
 ## Current size inventory
 

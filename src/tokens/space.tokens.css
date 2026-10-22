@@ -27,4 +27,6 @@
   --space-padding-control-block: var(--space-2);
   --space-padding-control-inline: var(--space-3);
   --space-padding-surface: var(--space-6);
+  /* The space a pop-up, such as a Modal or Tooltip, keeps from the edges of the screen. */
+  --space-overlay-inset: var(--space-4);
 }
