@@ -1,7 +1,7 @@
 .react-aria-SwitchField {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: var(--switch-field-gap, var(--space-gap-field));
 }
 
 .react-aria-SwitchButton {

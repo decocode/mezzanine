@@ -87,7 +87,8 @@
 }
 
 .react-aria-RadioField > [slot='description'],
-.react-aria-RadioGroup > [slot='description'] {
+.react-aria-RadioGroup > [slot='description'],
+.react-aria-RadioGroup > .react-aria-FieldError {
   color: var(--radio-description-foreground, var(--color-text-muted));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
@@ -99,6 +100,10 @@
 
 .react-aria-RadioField > [slot='description'] {
   grid-column: 2;
+}
+
+.react-aria-RadioGroup > .react-aria-FieldError {
+  color: var(--radio-error-foreground, var(--color-danger));
 }
 
 .react-aria-RadioField[data-disabled],

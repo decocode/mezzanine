@@ -384,6 +384,14 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-control)"
     },
     {
+      "name": "--checkbox-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--checkbox-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
       "name": "--checkbox-focus-ring-color",
       "fallback": "var(--color-focus)"
     },
@@ -794,6 +802,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-text-muted)"
     },
     {
+      "name": "--radio-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
       "name": "--radio-field-gap-block",
       "fallback": "var(--space-gap-field)"
     },
@@ -958,6 +970,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--switch-error-foreground",
       "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--switch-field-gap",
+      "fallback": "var(--space-gap-field)"
     },
     {
       "name": "--switch-focus-ring-color",
