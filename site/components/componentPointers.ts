@@ -118,6 +118,12 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-warning)"
     }
   ],
+  "Breadcrumbs": [
+    {
+      "name": "--breadcrumb-gap",
+      "fallback": "var(--space-gap-control)"
+    }
+  ],
   "Button": [
     {
       "name": "--button-border-radius",
@@ -824,6 +830,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "currentColor"
     },
     {
+      "name": "--panel-header-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
       "name": "--panel-resize-focus-ring-color",
       "fallback": "var(--color-focus)"
     },
@@ -1496,6 +1506,14 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--top-bar-content-gap",
+      "fallback": "var(--space-gap-cluster)"
+    },
+    {
+      "name": "--top-bar-desktop-gap",
+      "fallback": "var(--space-gap-cluster)"
+    },
+    {
       "name": "--top-bar-focus-ring-color",
       "fallback": "var(--color-focus)"
     },
@@ -1506,6 +1524,14 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--top-bar-focus-ring-width",
       "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--top-bar-link-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--top-bar-link-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
     },
     {
       "name": "--top-bar-panel-max-height",

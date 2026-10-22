@@ -16,7 +16,7 @@
 
 .react-aria-Breadcrumb {
   display: inline-flex;
-  gap: var(--space-2);
+  gap: var(--breadcrumb-gap, var(--space-gap-control));
   align-items: center;
   min-width: 0;
 }

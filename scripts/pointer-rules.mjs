@@ -13,6 +13,7 @@ export const runtimeProperties = new Set(['--tree-item-level', '--page-width', '
 export const pointerPrefixes = {
   AppShell: ['app-shell'],
   Badge: ['badge'],
+  Breadcrumbs: ['breadcrumbs', 'breadcrumb'],
   Button: ['button'],
   Card: ['card'],
   Checkbox: ['checkbox'],

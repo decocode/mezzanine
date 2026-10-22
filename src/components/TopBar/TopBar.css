@@ -88,7 +88,7 @@
    Panel is hidden. */
 @container mz-top-bar (min-width: 32rem) {
   .mz-top-bar-content {
-    gap: var(--space-4);
+    gap: var(--top-bar-content-gap, var(--space-gap-cluster));
     padding-inline: var(--top-bar-wide-padding-inline, var(--space-4));
   }
 
@@ -100,7 +100,7 @@
     display: flex;
     flex: 1;
     justify-content: flex-end;
-    gap: var(--space-4);
+    gap: var(--top-bar-desktop-gap, var(--space-gap-cluster));
     flex-wrap: wrap;
   }
 }
@@ -153,7 +153,7 @@
   display: inline-flex;
   align-items: center;
   min-height: var(--target-size-md);
-  padding: var(--space-2) var(--space-3);
+  padding: var(--top-bar-link-padding-block, var(--space-padding-control-block)) var(--top-bar-link-padding-inline, var(--space-padding-control-inline));
   border-radius: var(--nav-item-border-radius);
   background: var(--nav-item-background);
   color: var(--nav-item-foreground);
