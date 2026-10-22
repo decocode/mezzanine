@@ -1,15 +1,15 @@
 .mz-search-trigger {
   display: inline-flex;
-  gap: var(--space-gap-control);
+  gap: var(--search-trigger-gap, var(--space-gap-control));
   align-items: center;
   box-sizing: border-box;
-  min-height: var(--target-size-sm);
+  min-height: var(--search-trigger-min-height, var(--target-size-sm));
   max-width: 100%;
-  padding-inline: var(--space-2) var(--space-1);
-  border: var(--border-width-baseline) solid var(--color-border-control);
-  border-radius: var(--radius-control);
-  background: transparent;
-  color: var(--color-text-muted);
+  padding-inline: var(--search-trigger-padding-inline-start, var(--space-2)) var(--search-trigger-padding-inline-end, var(--space-1));
+  border: var(--search-trigger-border-width, var(--border-width-baseline)) solid var(--search-trigger-border, var(--color-border-control));
+  border-radius: var(--search-trigger-border-radius, var(--radius-control));
+  background: var(--search-trigger-background, transparent);
+  color: var(--search-trigger-foreground, var(--color-text-muted));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -22,13 +22,13 @@
 /* Icon only: a square as tall as the trigger, with the icon centred. */
 .mz-search-trigger[data-icon-only] {
   justify-content: center;
-  min-width: var(--target-size-sm);
+  min-width: var(--search-trigger-min-height, var(--target-size-sm));
   padding-inline: 0;
 }
 
 .mz-search-trigger-icon {
-  width: var(--icon-size-sm);
-  height: var(--icon-size-sm);
+  width: var(--search-trigger-icon-size, var(--icon-size-sm));
+  height: var(--search-trigger-icon-size, var(--icon-size-sm));
   flex: none;
 }
 
@@ -42,12 +42,12 @@
 }
 
 .mz-search-trigger[data-hovered] {
-  background: var(--color-neutral-muted-hovered);
+  background: var(--search-trigger-background-hovered, var(--color-neutral-muted-hovered));
 }
 
 .mz-search-trigger[data-focus-visible] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--search-trigger-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--search-trigger-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .mz-search-trigger[data-disabled] {

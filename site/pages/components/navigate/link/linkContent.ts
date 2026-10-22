@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const linkContent: DocsPageContent = {
   id: 'link',
@@ -40,6 +41,17 @@ export const linkContent: DocsPageContent = {
         'Give the link text enough context to make its destination clear. Use `aria-current="page"` for the current destination.',
         'Tab focuses enabled links and Enter follows them.',
       ],
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'Link pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('Link'),
+      },
     },
   ],
   relatedPages: [

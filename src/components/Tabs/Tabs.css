@@ -1,9 +1,9 @@
 .react-aria-Tabs {
   display: flex;
-  gap: var(--space-gap-cluster);
+  gap: var(--tabs-content-gap, var(--space-gap-cluster));
   min-width: 0;
   max-width: 100%;
-  color: var(--color-text);
+  color: var(--tabs-foreground, var(--color-text));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-regular);
@@ -22,7 +22,7 @@
 }
 
 .react-aria-Tabs[data-orientation='vertical'] > .react-aria-TabPanel {
-  flex-basis: var(--width-xs);
+  flex-basis: var(--tab-panel-preferred-width, var(--width-xs));
 }
 
 .react-aria-TabList {
@@ -34,13 +34,13 @@
 
 .react-aria-TabList[data-orientation='horizontal'] {
   overflow-x: auto;
-  border-block-end: var(--border-width-baseline) solid var(--color-border);
+  border-block-end: var(--tabs-border-width, var(--border-width-baseline)) solid var(--tabs-border, var(--color-border));
 }
 
 .react-aria-TabList[data-orientation='vertical'] {
   flex-direction: column;
   max-width: 100%;
-  border-inline-end: var(--border-width-baseline) solid var(--color-border);
+  border-inline-end: var(--tabs-border-width, var(--border-width-baseline)) solid var(--tabs-border, var(--color-border));
 }
 
 .react-aria-Tab {
@@ -49,8 +49,8 @@
   align-items: center;
   flex-shrink: 0;
   min-height: var(--target-size-md);
-  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
-  color: var(--color-text);
+  padding: var(--tab-padding-block, var(--space-padding-control-block)) var(--tab-padding-inline, var(--space-padding-control-inline));
+  color: var(--tab-foreground, var(--color-text));
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -62,21 +62,21 @@
 }
 
 .react-aria-Tab[data-hovered] {
-  background: var(--color-neutral-muted-hovered);
+  background: var(--tab-background-hovered, var(--color-neutral-muted-hovered));
 }
 
 .react-aria-Tab[data-pressed] {
-  background: var(--color-neutral-muted-pressed);
+  background: var(--tab-background-pressed, var(--color-neutral-muted-pressed));
 }
 
 .react-aria-Tab[data-selected] {
-  color: var(--color-text);
+  color: var(--tab-foreground-selected, var(--color-text));
 }
 
 .react-aria-Tab > .react-aria-SelectionIndicator {
   position: absolute;
   border-radius: var(--radius-none);
-  background: var(--color-link);
+  background: var(--tab-indicator, var(--color-link));
   transition-timing-function: var(--motion-easing-enter);
   transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
 }
@@ -85,14 +85,14 @@
   inset-inline-start: 0;
   inset-block-end: 0;
   width: 100%;
-  height: var(--indicator-width);
+  height: var(--tab-indicator-width, var(--indicator-width));
   transition-property: translate, width;
 }
 
 .react-aria-TabList[data-orientation='vertical'] .react-aria-SelectionIndicator {
   inset-inline-end: 0;
   inset-block-start: 0;
-  width: var(--indicator-width);
+  width: var(--tab-indicator-width, var(--indicator-width));
   height: 100%;
   transition-property: translate, height;
 }
@@ -117,7 +117,7 @@
 .react-aria-TabPanel {
   flex: 1;
   min-width: 0;
-  padding: var(--space-padding-surface);
+  padding: var(--tab-panel-padding, var(--space-padding-surface));
   overflow-wrap: anywhere;
 }
 
@@ -127,8 +127,8 @@
 
 .react-aria-Tab[data-focus-visible],
 .react-aria-TabPanel[data-focus-visible] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset-inset);
+  outline: var(--tabs-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--tabs-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
 @media (forced-colors: active) {

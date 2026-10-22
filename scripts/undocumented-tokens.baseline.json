@@ -1,13 +1,1 @@
-[
-  "--height-overlay-max",
-  "--icon-size-dot",
-  "--icon-size-inline",
-  "--icon-size-lg",
-  "--icon-size-md",
-  "--icon-size-sm",
-  "--icon-size-xl",
-  "--icon-size-xs",
-  "--radius-control",
-  "--surface-gap",
-  "--underline-offset"
-]
+[]

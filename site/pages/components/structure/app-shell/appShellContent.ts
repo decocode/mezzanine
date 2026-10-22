@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 // Teaching labels for the live example, shared with the Panel page.
 export const appShellExampleLabels = {
@@ -87,6 +88,17 @@ export const appShellContent: DocsPageContent = {
         rows: [
           { name: '--app-shell-min-main-width', description: 'The narrowest the main content gets before a side Panel becomes a drawer. Defaults to `--ratio-pair-min-area-width`.' },
         ],
+      },
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'AppShell pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('AppShell'),
       },
     },
   ],

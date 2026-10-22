@@ -104,14 +104,14 @@ test('TopBar groups technical sections and preserves their anchors', async ({ pa
   const group = main.getByRole('region', { name: 'Technical details', exact: true })
   await expect(group.getByRole('heading', { level: 2 })).toHaveText('Technical details')
   await expect(group.getByRole('heading', { level: 3 })).toHaveText([
-    'Anatomy', 'Behaviour', 'Usage', 'Accessibility', 'Props', 'CSS tokens',
+    'Anatomy', 'Behaviour', 'Usage', 'Accessibility', 'Props', 'CSS tokens', 'Pointers',
   ])
   const contents = page.getByRole('navigation', { name: 'On this page', exact: true })
   const groupItem = contents.locator(':scope > ul > li').filter({
     has: page.getByRole('link', { name: 'Technical details', exact: true }),
   })
   await expect(groupItem.locator(':scope > ul > li > a')).toHaveText([
-    'Anatomy', 'Behaviour', 'Usage', 'Accessibility', 'Props', 'CSS tokens',
+    'Anatomy', 'Behaviour', 'Usage', 'Accessibility', 'Props', 'CSS tokens', 'Pointers',
   ])
   await expect(group.getByRole('button', { name: 'Props', exact: true })).toHaveAttribute('aria-expanded', 'true')
   await expect(group.getByRole('heading', { name: 'Props', exact: true })).toBeInViewport()
@@ -126,7 +126,7 @@ test('technical disclosures support keyboard toggling and repeated section links
   const main = page.getByRole('main')
   const group = main.getByRole('region', { name: 'Technical details', exact: true })
   const triggers = group.getByRole('button')
-  await expect(triggers).toHaveCount(6)
+  await expect(triggers).toHaveCount(7)
   for (const trigger of await triggers.all()) await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   const anatomy = group.getByRole('button', { name: 'Anatomy', exact: true })
   const behaviour = group.getByRole('button', { name: 'Behaviour', exact: true })

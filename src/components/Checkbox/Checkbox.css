@@ -2,7 +2,7 @@
   /* Contains React Aria's hidden input, so focusing it never scrolls the page elsewhere. */
   position: relative;
   display: inline-flex;
-  gap: var(--space-gap-control);
+  gap: var(--checkbox-content-gap, var(--space-gap-control));
   align-items: center;
   /* The whole row is the target, so it is at least the shared target size tall. */
   min-height: var(--target-size-sm);
@@ -18,45 +18,45 @@
 
 .mz-checkbox-indicator {
   display: grid;
-  width: var(--icon-size-sm);
-  height: var(--icon-size-sm);
+  width: var(--checkbox-size, var(--icon-size-sm));
+  height: var(--checkbox-size, var(--icon-size-sm));
   flex: none;
   place-items: center;
-  border: var(--border-width-baseline) solid var(--color-border-control);
-  border-radius: min(var(--radius-control), var(--radius-xs));
-  background: transparent;
+  border: var(--checkbox-border-width, var(--border-width-baseline)) solid var(--checkbox-border, var(--color-border-control));
+  border-radius: var(--checkbox-border-radius, min(var(--radius-control), var(--radius-xs)));
+  background: var(--checkbox-background, transparent);
   color: transparent;
 }
 
 .mz-checkbox-indicator svg {
-  width: var(--icon-size-xs);
-  height: var(--icon-size-xs);
+  width: var(--checkbox-icon-size, var(--icon-size-xs));
+  height: var(--checkbox-icon-size, var(--icon-size-xs));
 }
 
 .react-aria-Checkbox[data-hovered] .mz-checkbox-indicator {
-  background: var(--color-accent-muted-hovered);
+  background: var(--checkbox-background-hovered, var(--color-accent-muted-hovered));
 }
 
 .react-aria-Checkbox[data-selected] .mz-checkbox-indicator,
 .react-aria-Checkbox[data-indeterminate] .mz-checkbox-indicator {
-  border-color: var(--color-accent-emphasis);
-  background: var(--color-accent-emphasis);
-  color: var(--color-accent-inverse);
+  border-color: var(--checkbox-background-selected, var(--color-accent-emphasis));
+  background: var(--checkbox-background-selected, var(--color-accent-emphasis));
+  color: var(--checkbox-foreground-selected, var(--color-accent-inverse));
 }
 
 .react-aria-Checkbox[data-selected][data-hovered] .mz-checkbox-indicator,
 .react-aria-Checkbox[data-indeterminate][data-hovered] .mz-checkbox-indicator {
-  border-color: var(--color-accent-emphasis-hovered);
-  background: var(--color-accent-emphasis-hovered);
+  border-color: var(--checkbox-background-selected-hovered, var(--color-accent-emphasis-hovered));
+  background: var(--checkbox-background-selected-hovered, var(--color-accent-emphasis-hovered));
 }
 
 .react-aria-Checkbox[data-invalid] .mz-checkbox-indicator {
-  border-color: var(--color-danger);
+  border-color: var(--checkbox-border-invalid, var(--color-danger));
 }
 
 .react-aria-Checkbox[data-focus-visible] .mz-checkbox-indicator {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--checkbox-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--checkbox-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-Checkbox[data-disabled] {

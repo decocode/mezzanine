@@ -5,12 +5,12 @@
   box-sizing: border-box;
   display: flow-root;
   min-width: 0;
-  padding: var(--space-padding-surface);
-  border: var(--border-width-baseline) solid var(--color-border);
-  border-radius: var(--radius-surface);
-  background: var(--elevation-raised-1-surface);
-  box-shadow: var(--elevation-raised-1);
-  color: var(--color-text);
+  padding: var(--card-padding, var(--space-padding-surface));
+  border: var(--card-border-width, var(--border-width-baseline)) solid var(--card-border, var(--color-border));
+  border-radius: var(--card-border-radius, var(--radius-surface));
+  background: var(--card-background, var(--elevation-raised-1-surface));
+  box-shadow: var(--card-elevation, var(--elevation-raised-1));
+  color: var(--card-foreground, var(--color-text));
   overflow-wrap: anywhere;
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
@@ -26,7 +26,7 @@
 }
 
 .mz-card > * + * {
-  margin-block-start: var(--space-gap-cluster);
+  margin-block-start: var(--card-content-gap, var(--space-gap-cluster));
 }
 
 /* TYPOGRAPHY.md: a heading inside a card or panel uses title-md. */
@@ -53,13 +53,13 @@ a.mz-card {
   display: flex;
   justify-content: flex-end;
   margin-block-start: auto;
-  padding-block-start: var(--space-gap-cluster);
-  color: var(--color-accent);
+  padding-block-start: var(--card-content-gap, var(--space-gap-cluster));
+  color: var(--card-arrow-color, var(--color-accent));
 }
 
 .mz-card-arrow svg {
-  inline-size: var(--icon-size-sm);
-  block-size: var(--icon-size-sm);
+  inline-size: var(--card-arrow-size, var(--icon-size-sm));
+  block-size: var(--card-arrow-size, var(--icon-size-sm));
   transition: translate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
@@ -72,10 +72,10 @@ a.mz-card[data-hovered] .mz-card-arrow:dir(rtl) svg {
 }
 
 a.mz-card[data-hovered] {
-  border-color: var(--color-border-control);
+  border-color: var(--card-border-hovered, var(--color-border-control));
 }
 
 a.mz-card[data-focus-visible] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--card-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--card-focus-ring-offset, var(--focus-ring-offset));
 }

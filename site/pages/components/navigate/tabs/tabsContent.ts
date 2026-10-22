@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const tabsContent: DocsPageContent = {
   id: 'tabs',
@@ -77,6 +78,17 @@ export const tabsContent: DocsPageContent = {
         rows: [
           { name: '--motion-duration-interface', description: 'Selection indicator movement duration; motion stops with reduced motion.' },
         ],
+      },
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'Tabs pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('Tabs'),
       },
     },
   ],

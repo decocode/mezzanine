@@ -15,8 +15,8 @@
   box-sizing: border-box;
   min-width: 0;
   max-width: 100%;
-  border: var(--border-width-baseline) solid var(--_button-border);
-  border-radius: var(--radius-control);
+  border: var(--button-border-width, var(--border-width-baseline)) solid var(--_button-border);
+  border-radius: var(--button-border-radius, var(--radius-control));
   --_button-current-background: var(--_button-background);
   background: var(--_button-current-background);
   color: var(--_button-foreground);
@@ -33,47 +33,47 @@
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xs'] {
   --_button-min-height: var(--target-size-xs);
-  --_button-padding-block: var(--space-1);
-  --_button-padding-inline: var(--space-3);
+  --_button-padding-block: var(--button-xs-padding-block, var(--space-1));
+  --_button-padding-inline: var(--button-xs-padding-inline, var(--space-3));
   --_button-font-size: var(--font-size-label-sm);
   --_button-line-height: var(--line-height-label-sm);
-  --_button-icon-size: var(--icon-size-xs);
+  --_button-icon-size: var(--button-xs-icon-size, var(--icon-size-xs));
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='sm'] {
   --_button-min-height: var(--target-size-sm);
-  --_button-padding-block: var(--space-2);
-  --_button-padding-inline: var(--space-4);
+  --_button-padding-block: var(--button-sm-padding-block, var(--space-2));
+  --_button-padding-inline: var(--button-sm-padding-inline, var(--space-4));
   --_button-font-size: var(--font-size-label-md);
   --_button-line-height: var(--line-height-label-md);
-  --_button-icon-size: var(--icon-size-sm);
+  --_button-icon-size: var(--button-sm-icon-size, var(--icon-size-sm));
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='md'] {
   --_button-min-height: var(--target-size-md);
-  --_button-padding-block: var(--space-2);
-  --_button-padding-inline: var(--space-4);
+  --_button-padding-block: var(--button-md-padding-block, var(--space-2));
+  --_button-padding-inline: var(--button-md-padding-inline, var(--space-4));
   --_button-font-size: var(--font-size-label-lg);
   --_button-line-height: var(--line-height-label-lg);
-  --_button-icon-size: var(--icon-size-md);
+  --_button-icon-size: var(--button-md-icon-size, var(--icon-size-md));
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='lg'] {
   --_button-min-height: var(--target-size-lg);
-  --_button-padding-block: var(--space-2);
-  --_button-padding-inline: var(--space-5);
+  --_button-padding-block: var(--button-lg-padding-block, var(--space-2));
+  --_button-padding-inline: var(--button-lg-padding-inline, var(--space-5));
   --_button-font-size: var(--font-size-title-sm);
   --_button-line-height: var(--line-height-title-sm);
-  --_button-icon-size: var(--icon-size-lg);
+  --_button-icon-size: var(--button-lg-icon-size, var(--icon-size-lg));
 }
 
 :is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xl'] {
   --_button-min-height: var(--target-size-xl);
-  --_button-padding-block: var(--space-3);
-  --_button-padding-inline: var(--space-6);
+  --_button-padding-block: var(--button-xl-padding-block, var(--space-3));
+  --_button-padding-inline: var(--button-xl-padding-inline, var(--space-6));
   --_button-font-size: var(--font-size-title-md);
   --_button-line-height: var(--line-height-title-md);
-  --_button-icon-size: var(--icon-size-xl);
+  --_button-icon-size: var(--button-xl-icon-size, var(--icon-size-xl));
 }
 
 .mz-button-content {
@@ -82,7 +82,7 @@
   max-width: 100%;
   align-items: center;
   justify-content: center;
-  gap: var(--space-gap-control);
+  gap: var(--button-content-gap, var(--space-gap-control));
 }
 
 /* The icon takes up one line of text, so a larger icon never makes the button taller than its
@@ -129,8 +129,8 @@
 }
 
 .react-aria-Button[data-label-placement] .mz-button-icon-box {
-  border: var(--border-width-baseline) solid var(--_button-border);
-  border-radius: var(--radius-control);
+  border: var(--button-border-width, var(--border-width-baseline)) solid var(--_button-border);
+  border-radius: var(--button-border-radius, var(--radius-control));
   background: var(--_button-current-background);
   color: var(--_button-foreground);
 }
@@ -140,35 +140,35 @@
 }
 
 .react-aria-Button[data-variant='primary'] {
-  --_button-background: var(--color-accent-emphasis);
-  --_button-background-hovered: var(--color-accent-emphasis-hovered);
-  --_button-background-pressed: var(--color-accent-emphasis-pressed);
-  --_button-foreground: var(--color-accent-inverse);
-  --_button-border: var(--color-accent-emphasis-pressed);
+  --_button-background: var(--button-primary-background, var(--color-accent-emphasis));
+  --_button-background-hovered: var(--button-primary-background-hovered, var(--color-accent-emphasis-hovered));
+  --_button-background-pressed: var(--button-primary-background-pressed, var(--color-accent-emphasis-pressed));
+  --_button-foreground: var(--button-primary-foreground, var(--color-accent-inverse));
+  --_button-border: var(--button-primary-border, var(--color-accent-emphasis-pressed));
 }
 
 .react-aria-Button[data-variant='secondary'] {
-  --_button-background: transparent;
-  --_button-background-hovered: var(--color-accent-muted-hovered);
-  --_button-background-pressed: var(--color-accent-muted-pressed);
-  --_button-foreground: var(--color-accent);
-  --_button-border: var(--color-accent);
+  --_button-background: var(--button-secondary-background, transparent);
+  --_button-background-hovered: var(--button-secondary-background-hovered, var(--color-accent-muted-hovered));
+  --_button-background-pressed: var(--button-secondary-background-pressed, var(--color-accent-muted-pressed));
+  --_button-foreground: var(--button-secondary-foreground, var(--color-accent));
+  --_button-border: var(--button-secondary-border, var(--color-accent));
 }
 
 .react-aria-Button[data-variant='tertiary'] {
-  --_button-background: transparent;
-  --_button-background-hovered: var(--color-accent-muted-hovered);
-  --_button-background-pressed: var(--color-accent-muted-pressed);
-  --_button-foreground: var(--color-accent);
-  --_button-border: transparent;
+  --_button-background: var(--button-tertiary-background, transparent);
+  --_button-background-hovered: var(--button-tertiary-background-hovered, var(--color-accent-muted-hovered));
+  --_button-background-pressed: var(--button-tertiary-background-pressed, var(--color-accent-muted-pressed));
+  --_button-foreground: var(--button-tertiary-foreground, var(--color-accent));
+  --_button-border: var(--button-tertiary-border, transparent);
 }
 
 .react-aria-Button[data-variant='destructive'] {
-  --_button-background: var(--color-danger-emphasis);
-  --_button-background-hovered: var(--color-danger-emphasis-hovered);
-  --_button-background-pressed: var(--color-danger-emphasis-pressed);
-  --_button-foreground: var(--color-danger-inverse);
-  --_button-border: var(--color-danger-emphasis-pressed);
+  --_button-background: var(--button-destructive-background, var(--color-danger-emphasis));
+  --_button-background-hovered: var(--button-destructive-background-hovered, var(--color-danger-emphasis-hovered));
+  --_button-background-pressed: var(--button-destructive-background-pressed, var(--color-danger-emphasis-pressed));
+  --_button-foreground: var(--button-destructive-foreground, var(--color-danger-inverse));
+  --_button-border: var(--button-destructive-border, var(--color-danger-emphasis-pressed));
 }
 
 .react-aria-Button[data-variant][data-hovered],
@@ -183,8 +183,8 @@
 
 .react-aria-Button[data-variant][data-focus-visible],
 .react-aria-Button[data-variant][data-preview-state='focused'] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--button-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--button-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-Button[data-variant][data-disabled] {
@@ -208,11 +208,11 @@
 }
 
 .mz-button-progress-indicator {
-  width: var(--icon-size-sm);
-  height: var(--icon-size-sm);
-  border: var(--border-width-md) solid currentColor;
+  width: var(--button-progress-size, var(--icon-size-sm));
+  height: var(--button-progress-size, var(--icon-size-sm));
+  border: var(--button-progress-stroke-width, var(--border-width-md)) solid currentColor;
   border-inline-end-color: transparent;
-  border-radius: 50%;
+  border-radius: var(--button-progress-border-radius, 50%);
   animation: mz-button-progress-spin var(--motion-duration-loading) var(--motion-easing-loading) infinite; animation-name: var(--_motion-loading-animation, mz-button-progress-spin);
 }
 

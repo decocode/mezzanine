@@ -1,4 +1,5 @@
 import type { Copy, DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const radioGroupContent: DocsPageContent = {
   id: 'radio-group',
@@ -46,6 +47,17 @@ export const radioGroupContent: DocsPageContent = {
         'Use a visible `Label` for the group and a clear label inside each `RadioButton`.',
         'Tab moves into the group and arrow keys move between available options. Disabled options cannot be selected. Use a description or `FieldError` to explain an option or validation problem in text.',
       ],
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'Radio group pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('RadioGroup'),
+      },
     },
   ],
   relatedPages: [

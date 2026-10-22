@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const checkboxContent: DocsPageContent = {
   id: 'checkbox',
@@ -35,6 +36,17 @@ export const checkboxContent: DocsPageContent = {
         'Tab focuses the checkbox and Space changes its selection.',
         'Provide visible error guidance and associate it using `aria-describedby`; this wrapper does not insert error text automatically.',
       ],
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'Checkbox pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('Checkbox'),
+      },
     },
   ],
   relatedPages: [

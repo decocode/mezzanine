@@ -1,5 +1,6 @@
 import type { ButtonSize, ButtonVariant } from '@decocode/mezzanine'
 import type { Copy, DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export type ButtonPreviewState = 'enabled' | 'hovered' | 'pressed' | 'focused' | 'pending' | 'disabled'
 
@@ -162,6 +163,17 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
           { name: '--target-size-xl', description: 'Extra-large `Button` minimum height, shared with other controls.' },
           { name: '--motion-duration-loading', description: 'Duration of one loading-indicator rotation; animation stops with reduced motion.' },
         ],
+      },
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'Button pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('Button'),
       },
     },
   ],

@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const codeBlockContent: DocsPageContent = {
   id: 'code-block',
@@ -37,6 +38,17 @@ export const codeBlockContent: DocsPageContent = {
         'Screen readers read the code as ordinary text. If the code needs explaining, put the explanation in the text around the block.',
         'The copy button’s label, “Copy code”, shows in a tooltip and is its accessible name. After copying, the label changes to “Copied”, the icon changes to a check mark, and screen readers hear “Copied” through a polite status message. The button returns to “Copy code” after two seconds.',
       ],
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'Code block pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('CodeBlock'),
+      },
     },
   ],
   relatedPages: [

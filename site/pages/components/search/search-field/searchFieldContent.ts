@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const searchFieldContent: DocsPageContent = {
   id: 'search-field',
@@ -33,6 +34,17 @@ export const searchFieldContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: ['React Aria names the clear button and keeps it out of the Tab order. Escape clears the field.'],
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'SearchField pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('SearchField'),
+      },
     },
   ],
   relatedPages: [

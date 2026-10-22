@@ -1,7 +1,7 @@
 .react-aria-TextField {
   display: flex;
   flex-direction: column;
-  gap: var(--space-gap-field);
+  gap: var(--text-field-gap, var(--space-gap-field));
   min-width: 0;
   color: var(--color-text);
   font-family: var(--font-family-body);
@@ -28,10 +28,10 @@
   min-width: 0;
   min-height: var(--target-size-md);
   margin: 0;
-  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
-  border: var(--border-width-baseline) solid var(--color-border-control);
-  border-radius: var(--radius-control);
-  background: var(--color-page);
+  padding: var(--input-padding-block, var(--space-padding-control-block)) var(--input-padding-inline, var(--space-padding-control-inline));
+  border: var(--input-border-width, var(--border-width-baseline)) solid var(--input-border, var(--color-border-control));
+  border-radius: var(--input-border-radius, var(--radius-control));
+  background: var(--input-background, var(--color-page));
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
@@ -48,16 +48,16 @@
 }
 
 :is(.react-aria-Input, .react-aria-TextArea)[data-hovered]:not([data-disabled]):not([data-readonly]):not([data-invalid]) {
-  border-color: var(--color-text);
+  border-color: var(--input-border-hovered, var(--color-text));
 }
 
 :is(.react-aria-Input, .react-aria-TextArea)[data-invalid] {
-  border-color: var(--color-danger);
+  border-color: var(--input-border-invalid, var(--color-danger));
 }
 
 :is(.react-aria-Input, .react-aria-TextArea)[data-focused] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--input-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-TextField > [slot='description'],
@@ -75,7 +75,7 @@
 }
 
 .react-aria-TextField > .react-aria-FieldError {
-  color: var(--color-danger);
+  color: var(--text-field-error-foreground, var(--color-danger));
 }
 
 .react-aria-TextField[data-disabled] {
@@ -127,7 +127,7 @@
 
 /* Share field appearance and states; only multiline sizing differs. */
 .react-aria-TextArea {
-  min-height: var(--height-text-area-min);
+  min-height: var(--text-area-min-height, var(--height-text-area-min));
   max-width: 100%;
   resize: vertical;
 }

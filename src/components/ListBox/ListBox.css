@@ -2,14 +2,14 @@
 .react-aria-ListBox {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: var(--list-box-gap, 0);
   box-sizing: border-box;
   min-width: 0;
   max-height: inherit;
   overflow: auto;
-  padding: 0;
+  padding: var(--list-box-padding, 0);
   outline: none;
-  color: var(--color-text);
+  color: var(--list-box-item-foreground, var(--color-text));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-regular);
@@ -19,28 +19,28 @@
 }
 
 .react-aria-ListBox[data-focus-visible] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset-inset);
+  outline: var(--list-box-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--list-box-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
 .react-aria-ListBox[data-empty] {
-  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
-  color: var(--color-text-muted);
+  padding: var(--list-box-item-padding-block, var(--space-padding-control-block)) var(--list-box-item-padding-inline, var(--space-padding-control-inline));
+  color: var(--list-box-empty-foreground, var(--color-text-muted));
 }
 
 .react-aria-ListBoxSection {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: var(--list-box-gap, 0);
 }
 
 .react-aria-ListBoxSection:not(:first-child) {
-  margin-block-start: var(--space-gap-cluster);
+  margin-block-start: var(--list-box-section-gap, var(--space-gap-cluster));
 }
 
 .react-aria-ListBox .react-aria-Header {
-  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
-  color: var(--color-text-muted);
+  padding: var(--list-box-header-padding-block, var(--space-padding-control-block)) var(--list-box-header-padding-inline, var(--space-padding-control-inline));
+  color: var(--list-box-header-foreground, var(--color-text-muted));
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);
   font-weight: var(--font-weight-semibold);
@@ -55,14 +55,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--space-gap-control);
+  gap: var(--list-box-item-gap, var(--space-gap-control));
   box-sizing: border-box;
   min-width: 0;
   min-height: var(--target-size-xs);
-  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
+  padding: var(--list-box-item-padding-block, var(--space-padding-control-block)) var(--list-box-item-padding-inline, var(--space-padding-control-inline));
   outline: none;
-  background: transparent;
-  color: var(--color-text);
+  background: var(--list-box-item-background, transparent);
+  color: var(--list-box-item-foreground, var(--color-text));
   overflow-wrap: anywhere;
   cursor: default;
   -webkit-tap-highlight-color: transparent;
@@ -80,29 +80,29 @@
 
 /* Focused covers the option highlighted from an Autocomplete's input as well as keyboard focus. */
 .react-aria-ListBoxItem:is([data-hovered], [data-focused]) {
-  background: var(--color-neutral-muted-hovered);
+  background: var(--list-box-item-background-hovered, var(--color-neutral-muted-hovered));
 }
 
 .react-aria-ListBoxItem[data-pressed] {
-  background: var(--color-neutral-muted-pressed);
+  background: var(--list-box-item-background-pressed, var(--color-neutral-muted-pressed));
 }
 
 .react-aria-ListBoxItem[data-focus-visible] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset-inset);
+  outline: var(--list-box-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--list-box-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
 .react-aria-ListBoxItem[data-selected] {
-  background: var(--color-accent-emphasis);
-  color: var(--color-accent-inverse);
+  background: var(--list-box-item-background-selected, var(--color-accent-emphasis));
+  color: var(--list-box-item-foreground-selected, var(--color-accent-inverse));
 }
 
 .react-aria-ListBoxItem[data-selected]:is([data-hovered], [data-focused]) {
-  background: var(--color-accent-emphasis-hovered);
+  background: var(--list-box-item-background-selected-hovered, var(--color-accent-emphasis-hovered));
 }
 
 .react-aria-ListBoxItem[data-selected][data-pressed] {
-  background: var(--color-accent-emphasis-pressed);
+  background: var(--list-box-item-background-selected-pressed, var(--color-accent-emphasis-pressed));
 }
 
 .react-aria-ListBoxItem [slot='label'] {
@@ -115,7 +115,7 @@
 }
 
 .react-aria-ListBoxItem [slot='description'] {
-  color: var(--color-text-muted);
+  color: var(--list-box-item-description-foreground, var(--color-text-muted));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);

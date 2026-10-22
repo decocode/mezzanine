@@ -39,7 +39,7 @@ literal values.
 Wireframe underlines all links, including navigation, current and disabled links,
 and links styled as buttons. Its theme rule deliberately overrides component
 rules that remove underlines; current-item indicators and focus outlines remain.
-Hovering or visibly focusing an enabled link doubles its `--link-underline-thickness`;
+Hovering or visibly focusing an enabled link doubles its underline thickness;
 disabled links keep the normal thickness. Standard Link keyboard focus uses the
 hover text colour and retains its focus ring.
 Pressed links keep the heavier underline and use `--color-neutral-muted-pressed`
@@ -51,19 +51,37 @@ Mezzanine's defaults deliberately contain no DecoCode branding. DecoCode's
 pastel palette, IBM Plex Sans, Barlow Condensed and hard offset shadows belong
 in a separate DecoCode product theme.
 
-A product changes the appearance by overriding the same semantic names:
+A product changes the appearance at two levels.
+
+**Themes set roles, which restyle every component.** A role names what a value
+is for, and every component that needs it reads it. Set roles in the product
+theme:
 
 ```css
 :root {
-  --color-accent-700: #1F5FAD;
-  --button-primary-background: var(--product-blue-700);
+  --color-accent-emphasis: var(--product-blue-700);
   --font-family-heading: 'Example Display', system-ui, sans-serif;
 }
 ```
 
-Overriding an accent palette step restyles every role that reads it.
-Overriding a role, such as `--color-accent-emphasis`, restyles every component
-that reads it.
+Every primary Button, selected Checkbox, Switch and tab now uses the product
+blue.
+
+**Pointers restyle one part of one component.** Each component reads its shared
+tokens through optional pointers named `--component-variant-property-state`,
+such as `var(--button-primary-background, var(--color-accent-emphasis))`.
+Nothing declares a pointer, so it costs nothing until it's set. Set one on the
+component, or on any element around it, to change only that part:
+
+```css
+.checkout {
+  --button-primary-background: var(--product-green-700);
+}
+```
+
+Primary Buttons inside `.checkout` turn green; everything else still follows
+the role. Each component's docs page lists its pointers, generated from its CSS,
+with the shared token each falls back to.
 
 Mezzanine component CSS must not depend on product palette names such as
 `--product-blue-700`.
@@ -84,7 +102,7 @@ Foundation token names use this pattern where applicable:
 --category-role-state
 ```
 
-Component token names add the component and, where needed, its variant and
+Component pointers add the component and, where needed, its variant and
 property:
 
 ```text
@@ -93,12 +111,15 @@ property:
 
 Examples:
 
-- `--button-primary-background-hovered` is the Primary Button background while hovered.
-- `--color-text-muted` is supporting text that should be less prominent than normal text.
-- `--font-family-body` is the normal reading and interface font.
+- `--color-text-muted` is a role: supporting text that should be less prominent than normal text.
+- `--font-family-body` is a role: the normal reading and interface font.
+- `--button-primary-background-hovered` is a pointer: the Primary Button background while hovered.
+  It isn't declared anywhere, and falls back to the role `--color-accent-emphasis-hovered`.
 
 Names describe purpose rather than appearance. Component CSS therefore asks
-for `--button-primary-background`, not `--color-accent-700`.
+for `--color-accent-emphasis`, not `--color-accent-700`. `npm run check:rules`
+checks that every pointer follows the naming pattern, always has a fallback, and
+falls back to a token that exists.
 
 ## Current color inventory
 

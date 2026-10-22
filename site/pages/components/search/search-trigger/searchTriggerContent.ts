@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const searchTriggerContent: DocsPageContent = {
   id: 'search-trigger',
@@ -33,6 +34,17 @@ export const searchTriggerContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: ['It is a real button, so screen readers announce it as one and it takes all of React Aria’s press handling. Keep its label visible.'],
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'SearchTrigger pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('SearchTrigger'),
+      },
     },
   ],
   relatedPages: [

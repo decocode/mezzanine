@@ -8,7 +8,7 @@
   /* Contains React Aria's hidden input, so focusing it never scrolls the page elsewhere. */
   position: relative;
   display: inline-flex;
-  gap: var(--space-gap-control);
+  gap: var(--switch-content-gap, var(--space-gap-control));
   align-items: center;
   /* The whole row is the target, so it is at least the shared target size tall. */
   min-height: var(--target-size-sm);
@@ -25,52 +25,52 @@
 .mz-switch-track {
   display: flex;
   box-sizing: border-box;
-  width: calc(var(--icon-size-sm) * 2);
-  height: var(--icon-size-sm);
+  width: var(--switch-track-width, calc(var(--switch-track-height, var(--icon-size-sm)) * 2));
+  height: var(--switch-track-height, var(--icon-size-sm));
   flex: none;
   align-items: center;
   /* Centres the handle with equal space on every side. */
-  padding-inline: calc((var(--icon-size-sm) - var(--icon-size-xs)) / 2 - var(--border-width-baseline));
-  border: var(--border-width-baseline) solid var(--color-border-control);
-  border-radius: var(--radius-full);
-  background: transparent;
+  padding-inline: calc((var(--switch-track-height, var(--icon-size-sm)) - var(--switch-handle-size, var(--icon-size-xs))) / 2 - var(--switch-border-width, var(--border-width-baseline)));
+  border: var(--switch-border-width, var(--border-width-baseline)) solid var(--switch-track-border, var(--color-border-control));
+  border-radius: var(--switch-border-radius, var(--radius-full));
+  background: var(--switch-track-background, transparent);
 }
 
 .mz-switch-handle {
-  width: var(--icon-size-xs);
-  height: var(--icon-size-xs);
-  border-radius: var(--radius-full);
-  background: var(--color-border-control);
+  width: var(--switch-handle-size, var(--icon-size-xs));
+  height: var(--switch-handle-size, var(--icon-size-xs));
+  border-radius: var(--switch-border-radius, var(--radius-full));
+  background: var(--switch-handle-background, var(--color-border-control));
   /* A logical margin slides the handle towards the end in either reading direction. */
   transition: margin-inline-start calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
 .react-aria-SwitchButton[data-hovered] .mz-switch-track {
-  background: var(--color-accent-muted-hovered);
+  background: var(--switch-track-background-hovered, var(--color-accent-muted-hovered));
 }
 
 .react-aria-SwitchButton[data-selected] .mz-switch-track {
-  border-color: var(--color-accent-emphasis);
-  background: var(--color-accent-emphasis);
+  border-color: var(--switch-track-background-selected, var(--color-accent-emphasis));
+  background: var(--switch-track-background-selected, var(--color-accent-emphasis));
 }
 
 .react-aria-SwitchButton[data-selected][data-hovered] .mz-switch-track {
-  border-color: var(--color-accent-emphasis-hovered);
-  background: var(--color-accent-emphasis-hovered);
+  border-color: var(--switch-track-background-selected-hovered, var(--color-accent-emphasis-hovered));
+  background: var(--switch-track-background-selected-hovered, var(--color-accent-emphasis-hovered));
 }
 
 .react-aria-SwitchButton[data-selected] .mz-switch-handle {
-  margin-inline-start: calc(calc(var(--icon-size-sm) * 2) - var(--icon-size-sm));
-  background: var(--color-accent-inverse);
+  margin-inline-start: calc(var(--switch-track-width, calc(var(--switch-track-height, var(--icon-size-sm)) * 2)) - var(--switch-track-height, var(--icon-size-sm)));
+  background: var(--switch-handle-background-selected, var(--color-accent-inverse));
 }
 
 .react-aria-SwitchButton[data-invalid] .mz-switch-track {
-  border-color: var(--color-danger);
+  border-color: var(--switch-track-border-invalid, var(--color-danger));
 }
 
 .react-aria-SwitchButton[data-focus-visible] .mz-switch-track {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--switch-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--switch-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-SwitchButton[data-readonly] {
@@ -100,7 +100,7 @@
 }
 
 .react-aria-SwitchField > .react-aria-FieldError {
-  color: var(--color-danger);
+  color: var(--switch-error-foreground, var(--color-danger));
 }
 
 @media (forced-colors: active) {

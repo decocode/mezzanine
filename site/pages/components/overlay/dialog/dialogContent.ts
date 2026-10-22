@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const dialogContent: DocsPageContent = {
   id: 'dialog',
@@ -59,6 +60,17 @@ export const dialogContent: DocsPageContent = {
           { name: '--motion-duration-interface', description: 'Entry and exit duration; motion stops with reduced motion.' },
           { name: '--motion-scale-enter', description: 'Modal scale at the start of entry and end of exit.' },
         ],
+      },
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'Dialog pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('Dialog', 'Modal'),
       },
     },
   ],

@@ -7,11 +7,11 @@
   box-sizing: border-box;
   max-inline-size: 100%;
   margin: 0;
-  padding: var(--space-padding-surface);
-  border: var(--border-width-baseline) solid var(--color-border);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface);
-  color: var(--color-text);
+  padding: var(--code-block-padding, var(--space-padding-surface));
+  border: var(--code-block-border-width, var(--border-width-baseline)) solid var(--code-block-border, var(--color-border));
+  border-radius: var(--code-block-border-radius, var(--radius-sm));
+  background: var(--code-block-background, var(--color-surface));
+  color: var(--code-block-foreground, var(--color-text));
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   font-family: var(--font-family-body);
@@ -24,5 +24,5 @@
 
 .mz-code-block-copy {
   float: inline-end;
-  margin-inline-start: var(--space-gap-control);
+  margin-inline-start: var(--code-block-copy-gap, var(--space-gap-control));
 }

@@ -15,8 +15,8 @@
   /* Every row takes its height from the shared target size scale. A table cell's height works as a
      minimum, so longer content still makes its row taller. */
   height: var(--target-size-md);
-  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
-  border-block-end: var(--border-width-baseline) solid var(--color-border);
+  padding: var(--table-cell-padding-block, var(--space-padding-control-block)) var(--table-cell-padding-inline, var(--space-padding-control-inline));
+  border-block-end: var(--table-border-width, var(--border-width-baseline)) solid var(--color-border);
   text-align: start;
   vertical-align: top;
   overflow-wrap: normal;
@@ -24,7 +24,7 @@
 }
 
 .react-aria-Column {
-  border-block-start: var(--border-width-baseline) solid var(--color-border);
+  border-block-start: var(--table-border-width, var(--border-width-baseline)) solid var(--color-border);
   background: var(--table-header-background);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
@@ -36,12 +36,12 @@
 
 .react-aria-Column:first-child,
 .react-aria-Cell:first-child {
-  border-inline-start: var(--border-width-baseline) solid var(--color-border);
+  border-inline-start: var(--table-border-width, var(--border-width-baseline)) solid var(--color-border);
 }
 
 .react-aria-Column:last-child,
 .react-aria-Cell:last-child {
-  border-inline-end: var(--border-width-baseline) solid var(--color-border);
+  border-inline-end: var(--table-border-width, var(--border-width-baseline)) solid var(--color-border);
 }
 
 .react-aria-Column[data-allows-sorting] {
@@ -81,24 +81,24 @@
 }
 
 .react-aria-Row[data-selected] .react-aria-Cell {
-  background: var(--color-accent-emphasis);
-  color: var(--color-accent-inverse);
+  background: var(--table-row-background-selected, var(--color-accent-emphasis));
+  color: var(--table-row-foreground-selected, var(--color-accent-inverse));
 }
 
 .react-aria-Row[data-selected][data-hovered] .react-aria-Cell {
-  background: var(--color-accent-emphasis-hovered);
+  background: var(--table-row-background-selected-hovered, var(--color-accent-emphasis-hovered));
 }
 
 .react-aria-Row[data-selected][data-pressed] .react-aria-Cell {
-  background: var(--color-accent-emphasis-pressed);
+  background: var(--table-row-background-selected-pressed, var(--color-accent-emphasis-pressed));
 }
 
 .react-aria-Row[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--table-disabled-opacity, var(--opacity-disabled));
 }
 
 .react-aria-Cell[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--table-disabled-opacity, var(--opacity-disabled));
 }
 
 .react-aria-Table[data-focus-visible],
@@ -107,12 +107,12 @@
 .react-aria-Row[data-focus-visible-within] .react-aria-Cell,
 .react-aria-Cell[data-focus-visible],
 .react-aria-Cell[data-focus-visible-within-row] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset-inset);
+  outline: var(--table-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--table-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
 .react-aria-Table[data-drop-target],
 .react-aria-TableBody[data-drop-target] {
-  outline: var(--focus-ring-width) solid var(--color-accent-emphasis);
-  outline-offset: var(--focus-ring-offset-inset);
+  outline: var(--table-focus-ring-width, var(--focus-ring-width)) solid var(--table-drop-target-color, var(--color-accent-emphasis));
+  outline-offset: var(--table-focus-ring-offset, var(--focus-ring-offset-inset));
 }

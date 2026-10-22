@@ -1,5 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { fieldTokensRows } from '../text-field/textFieldContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const textAreaContent: DocsPageContent = {
   id: 'text-area',
@@ -49,14 +49,14 @@ export const textAreaContent: DocsPageContent = {
       ],
     },
     {
-      key: 'tokens',
-      intro: ['`TextArea` shares these tokens with `Input`; only its minimum height token differs. The field also uses shared typography, text colour, focus colour and disabled-opacity tokens.'],
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
       table: {
-        label: 'TextArea CSS tokens',
-        nameColumn: 'CSS token',
-        rows: [
-          ...fieldTokensRows,
-        ],
+        label: 'Text area pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('TextField'),
       },
     },
   ],

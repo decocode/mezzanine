@@ -3,7 +3,7 @@
   position: sticky;
   z-index: var(--z-index-sticky);
   inset-block-start: 0;
-  border-block-end: var(--border-width-baseline) solid var(--color-border);
+  border-block-end: var(--top-bar-border-width, var(--border-width-baseline)) solid var(--color-border);
   background: var(--color-page);
   color: var(--color-text);
   font-family: var(--font-family-body);
@@ -53,7 +53,7 @@
   box-sizing: border-box;
   flex-basis: 100%;
   width: 100%;
-  max-height: var(--height-overlay-max);
+  max-height: var(--top-bar-panel-max-height, var(--height-overlay-max));
   padding: var(--space-2) 0 var(--space-4);
   overflow-y: auto;
   background: var(--color-page);
@@ -89,7 +89,7 @@
 @container mz-top-bar (min-width: 32rem) {
   .mz-top-bar-content {
     gap: var(--space-4);
-    padding-inline: var(--space-4);
+    padding-inline: var(--top-bar-wide-padding-inline, var(--space-4));
   }
 
   .mz-top-bar:not([data-menu-only]) :is(.mz-top-bar-mobile, .mz-top-bar-bar-actions) {
@@ -157,8 +157,8 @@
 }
 
 .mz-top-bar .mz-top-bar-link[data-focus-visible] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--top-bar-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--top-bar-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .mz-top-bar .mz-top-bar-link[data-hovered] {

@@ -7,6 +7,7 @@ import { sitePageFile, sitePageFolder, sitePages } from '../site/siteStructure.t
 import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
 import { checkColorPointers, checkThemeColors, checkThemesMatch, themeRoles } from './color-rules.mjs'
 import { checkRawLengths } from './length-rules.mjs'
+import { checkComponentPointers, componentPointers } from './pointer-rules.mjs'
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -457,6 +458,11 @@ function checkDocsTokens(update) {
   const tokenFiles = filesIn('src', ['.css']).filter(file => isTokenFile(file) && file !== 'src/tokens.css')
   const publicTokens = declaredTokens(tokenFiles.map(read))
   const knownTokens = declaredTokens([...filesIn('src', ['.css']), ...filesIn('site', ['.css'])].map(read))
+  // Component pointers are undeclared on purpose, but the docs may name them.
+  const declared = new Set(knownTokens)
+  for (const file of filesIn('src/components', ['.css']).filter(file => !file.endsWith('.tokens.css'))) {
+    for (const { name } of componentPointers(read(file), declared)) knownTokens.add(name)
+  }
   const siteSources = filesIn('site', ['.ts', '.tsx']).filter(file => !file.startsWith('site/lab/'))
     .map(file => ({ file, text: read(file) }))
   const baselineText = read(tokenBaselineFile)
@@ -487,6 +493,29 @@ function checkDocsRoutes() {
 }
 
 // Palettes feed theme roles, and library CSS reads only those roles (see color-rules.mjs).
+// Component pointers: named, with a fallback that exists. Their list for the docs pages is generated
+// from the CSS into site/components/componentPointers.ts; --update-pointers rewrites it.
+const pointersFile = 'site/components/componentPointers.ts'
+function checkPointers(update) {
+  const declared = new Set(filesIn('src', ['.css']).flatMap(file => [...read(file).matchAll(/(--[\w-]+)\s*:/g)].map(match => match[1])))
+  const lists = {}
+  for (const file of filesIn('src/components', ['.css']).filter(file => !file.endsWith('.tokens.css'))) {
+    const component = file.split('/')[2]
+    const text = read(file)
+    for (const problem of checkComponentPointers(component, text, declared)) report(file, text, problem.position, 'pointers', problem.message)
+    const pointers = componentPointers(text, declared)
+    if (pointers.length) lists[component] = [...(lists[component] ?? []), ...pointers]
+  }
+  const sorted = Object.fromEntries(Object.keys(lists).sort().map(component => [component, lists[component]]))
+  const generated = `// Generated from each component's CSS by npm run check:rules with the update-pointers flag. Do not edit.
+// The parts of each component an app can restyle on its own, with the shared token each falls back to.
+
+export const componentPointers: Record<string, readonly { name: string; fallback: string }[]> = ${JSON.stringify(sorted, null, 2)}
+`
+  if (update) writeFileSync(path.join(root, pointersFile), generated)
+  else if (read(pointersFile) !== generated) report(pointersFile, '', 0, 'pointers', 'The pointer list is out of date; run check:rules with --update-pointers.')
+}
+
 function checkColors() {
   const themeFiles = ['src/themes/light.css', 'src/themes/dark.css', 'src/themes/wireframe.css']
   const themes = themeFiles.map(file => ({ file, text: read(file) }))
@@ -514,7 +543,7 @@ function checkColors() {
 
 try {
   const argumentsList = process.argv.slice(2)
-  if (argumentsList.some(argument => !['--update-api', '--update-token-baseline'].includes(argument))) throw new Error('Only --update-api and --update-token-baseline are supported.')
+  if (argumentsList.some(argument => !['--update-api', '--update-token-baseline', '--update-pointers'].includes(argument))) throw new Error('Only --update-api, --update-token-baseline and --update-pointers are supported.')
   const configFile = ts.readConfigFile(path.join(root, 'config/tsconfig.app.json'), ts.sys.readFile)
   if (configFile.error) throw new Error(ts.flattenDiagnosticMessageText(configFile.error.messageText, '\n'))
   const config = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.join(root, 'config'))
@@ -557,6 +586,7 @@ try {
     if (!tokens.includes(`${token}:`)) report('src/tokens/motion.tokens.css', tokens, 0, 'motion-contract', `Missing shared token ${token}.`)
   }
   checkColors()
+  checkPointers(argumentsList.includes('--update-pointers'))
   checkSnapshot(api, argumentsList.includes('--update-api'))
   checkDocsRoutes()
   checkDocsTokens(argumentsList.includes('--update-token-baseline'))

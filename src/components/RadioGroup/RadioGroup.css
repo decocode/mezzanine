@@ -1,6 +1,6 @@
 .react-aria-RadioGroup {
   display: grid;
-  gap: var(--space-gap-field);
+  gap: var(--radio-group-gap, var(--space-gap-field));
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
@@ -14,7 +14,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: start;
-  column-gap: var(--space-gap-cluster);
+  column-gap: var(--radio-group-horizontal-gap, var(--space-gap-cluster));
 }
 
 .react-aria-RadioGroup > .react-aria-Label {
@@ -29,7 +29,7 @@
 .react-aria-RadioField {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--space-gap-field) var(--space-gap-control);
+  gap: var(--radio-field-gap-block, var(--space-gap-field)) var(--radio-content-gap, var(--space-gap-control));
   align-items: start;
 }
 
@@ -37,11 +37,11 @@
   position: relative;
   display: inline-flex;
   grid-column: 1 / -1;
-  gap: var(--space-gap-control);
+  gap: var(--radio-content-gap, var(--space-gap-control));
   align-items: center;
   /* The whole row is the target, so it takes its height from the shared target size, as Checkbox does. */
   min-height: var(--target-size-sm);
-  padding-inline-start: calc(var(--icon-size-sm) + var(--space-gap-control));
+  padding-inline-start: calc(var(--radio-indicator-size, var(--icon-size-sm)) + var(--radio-content-gap, var(--space-gap-control)));
   cursor: pointer;
 }
 
@@ -49,11 +49,11 @@
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: 0;
-  width: var(--icon-size-sm);
-  height: var(--icon-size-sm);
-  border: var(--border-width-baseline) solid var(--color-border-control);
-  border-radius: 50%;
-  background: transparent;
+  width: var(--radio-indicator-size, var(--icon-size-sm));
+  height: var(--radio-indicator-size, var(--icon-size-sm));
+  border: var(--radio-border-width, var(--border-width-baseline)) solid var(--radio-border, var(--color-border-control));
+  border-radius: var(--radio-indicator-border-radius, 50%);
+  background: var(--radio-background, transparent);
   content: '';
   translate: 0 -50%;
 }
@@ -61,29 +61,29 @@
 .react-aria-RadioButton > .react-aria-SelectionIndicator {
   position: absolute;
   inset-block-start: 50%;
-  inset-inline-start: calc((var(--icon-size-sm) - var(--icon-size-dot)) / 2);
-  width: var(--icon-size-dot);
-  height: var(--icon-size-dot);
-  border-radius: 50%;
-  background: var(--color-accent);
+  inset-inline-start: calc((var(--radio-indicator-size, var(--icon-size-sm)) - var(--radio-selection-size, var(--icon-size-dot))) / 2);
+  width: var(--radio-selection-size, var(--icon-size-dot));
+  height: var(--radio-selection-size, var(--icon-size-dot));
+  border-radius: var(--radio-selection-border-radius, 50%);
+  background: var(--radio-selection, var(--color-accent));
   translate: 0 -50%;
 }
 
 .react-aria-RadioButton[data-hovered]::before {
-  background: var(--color-accent-muted-hovered);
+  background: var(--radio-background-hovered, var(--color-accent-muted-hovered));
 }
 
 .react-aria-RadioButton[data-selected]::before {
-  border-color: var(--color-accent);
+  border-color: var(--radio-selection, var(--color-accent));
 }
 
 .react-aria-RadioButton[data-focus-visible]::before {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  outline: var(--radio-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--radio-focus-ring-offset, var(--focus-ring-offset));
 }
 
 .react-aria-RadioButton[data-invalid]::before {
-  border-color: var(--color-danger);
+  border-color: var(--radio-border-invalid, var(--color-danger));
 }
 
 .react-aria-RadioField > [slot='description'],

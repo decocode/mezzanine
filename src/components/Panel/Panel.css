@@ -42,7 +42,7 @@
 .mz-panel-resize-handle {
   position: relative;
   z-index: var(--z-index-raised);
-  inline-size: var(--space-2);
+  inline-size: var(--panel-resize-handle-size, var(--space-2));
   cursor: col-resize;
   touch-action: none;
 }
@@ -50,30 +50,30 @@
 .mz-app-shell > .mz-panel-resize-handle[data-edge='start'] {
   grid-area: start;
   justify-self: end;
-  margin-inline-end: calc((var(--space-2) - var(--_app-shell-join, 0px)) / -2);
+  margin-inline-end: calc((var(--panel-resize-handle-size, var(--space-2)) - var(--_app-shell-join, 0px)) / -2);
 }
 
 .mz-app-shell > .mz-panel-resize-handle[data-edge='end'] {
   grid-area: end;
   justify-self: start;
-  margin-inline-start: calc((var(--space-2) - var(--_app-shell-join, 0px)) / -2);
+  margin-inline-start: calc((var(--panel-resize-handle-size, var(--space-2)) - var(--_app-shell-join, 0px)) / -2);
 }
 
 .mz-panel-resize-handle::after {
   content: '';
   position: absolute;
   inset-block: 0;
-  inset-inline-start: calc(50% - var(--indicator-width) / 2);
-  inline-size: var(--indicator-width);
+  inset-inline-start: calc(50% - var(--panel-resize-indicator-width, var(--indicator-width)) / 2);
+  inline-size: var(--panel-resize-indicator-width, var(--indicator-width));
 }
 
 .mz-panel-resize-handle:is([data-hovered], [data-moving])::after {
-  background: var(--color-accent-emphasis);
+  background: var(--panel-resize-indicator-color, var(--color-accent-emphasis));
 }
 
 .mz-panel-resize-handle[data-focus-visible] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset-inset);
+  outline: var(--panel-resize-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline-offset: var(--panel-resize-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
 @media (forced-colors: active) {

@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const listBoxContent: DocsPageContent = {
   id: 'list-box',
@@ -34,6 +35,17 @@ export const listBoxContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: ['The list is one Tab stop; the arrow keys move between options, and typing jumps to an option that starts with those letters.'],
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'ListBox pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('ListBox'),
+      },
     },
   ],
   relatedPages: [

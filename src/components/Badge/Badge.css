@@ -1,8 +1,8 @@
 .mz-badge {
   display: inline-block;
-  padding: var(--space-1) var(--space-2);
-  border: var(--border-width-baseline) solid var(--_badge-border);
-  border-radius: var(--radius-control);
+  padding: var(--badge-padding-block, var(--space-1)) var(--badge-padding-inline, var(--space-2));
+  border: var(--badge-border-width, var(--border-width-baseline)) solid var(--_badge-border);
+  border-radius: var(--badge-border-radius, var(--radius-control));
   background: var(--_badge-background);
   color: var(--_badge-foreground);
   font-family: var(--font-family-body);
@@ -21,37 +21,37 @@
 }
 
 .mz-badge[data-variant='neutral'] {
-  --_badge-background: var(--color-neutral-muted);
-  --_badge-foreground: var(--color-text);
-  --_badge-border: var(--color-border);
+  --_badge-background: var(--badge-neutral-background, var(--color-neutral-muted));
+  --_badge-foreground: var(--badge-neutral-foreground, var(--color-text));
+  --_badge-border: var(--badge-neutral-border, var(--color-border));
 }
 
 .mz-badge[data-variant='accent'] {
-  --_badge-background: var(--color-accent-muted);
-  --_badge-foreground: var(--color-accent);
-  --_badge-border: var(--color-accent-muted-pressed);
+  --_badge-background: var(--badge-accent-background, var(--color-accent-muted));
+  --_badge-foreground: var(--badge-accent-foreground, var(--color-accent));
+  --_badge-border: var(--badge-accent-border, var(--color-accent-muted-pressed));
 }
 
 .mz-badge[data-variant='info'] {
-  --_badge-background: var(--color-info-muted);
-  --_badge-foreground: var(--color-info);
-  --_badge-border: var(--color-info-muted-pressed);
+  --_badge-background: var(--badge-info-background, var(--color-info-muted));
+  --_badge-foreground: var(--badge-info-foreground, var(--color-info));
+  --_badge-border: var(--badge-info-border, var(--color-info-muted-pressed));
 }
 
 .mz-badge[data-variant='success'] {
-  --_badge-background: var(--color-success-muted);
-  --_badge-foreground: var(--color-success);
-  --_badge-border: var(--color-success-muted-pressed);
+  --_badge-background: var(--badge-success-background, var(--color-success-muted));
+  --_badge-foreground: var(--badge-success-foreground, var(--color-success));
+  --_badge-border: var(--badge-success-border, var(--color-success-muted-pressed));
 }
 
 .mz-badge[data-variant='warning'] {
-  --_badge-background: var(--color-warning-muted);
-  --_badge-foreground: var(--color-warning);
-  --_badge-border: var(--color-warning-muted-pressed);
+  --_badge-background: var(--badge-warning-background, var(--color-warning-muted));
+  --_badge-foreground: var(--badge-warning-foreground, var(--color-warning));
+  --_badge-border: var(--badge-warning-border, var(--color-warning-muted-pressed));
 }
 
 .mz-badge[data-variant='danger'] {
-  --_badge-background: var(--color-danger-muted);
-  --_badge-foreground: var(--color-danger);
-  --_badge-border: var(--color-danger-muted-pressed);
+  --_badge-background: var(--badge-danger-background, var(--color-danger-muted));
+  --_badge-foreground: var(--badge-danger-foreground, var(--color-danger));
+  --_badge-border: var(--badge-danger-border, var(--color-danger-muted-pressed));
 }

@@ -1,4 +1,5 @@
 import type { DocsPageContent, LinkItem } from '../../../../templates/docsPageContent'
+import { pointerRows } from '../../../../components/pointerRows'
 
 export const disclosureContent: DocsPageContent = {
   id: 'disclosure',
@@ -53,6 +54,17 @@ export const disclosureContent: DocsPageContent = {
         rows: [
           { name: '--motion-duration-interface', description: 'Chevron rotation duration; the chevron turns immediately with reduced motion.' },
         ],
+      },
+    },
+    {
+      key: 'pointers',
+      title: 'Pointers',
+      intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
+      table: {
+        label: 'Disclosure pointers',
+        nameColumn: 'Pointer',
+        descriptionColumn: 'Falls back to',
+        rows: pointerRows('Disclosure'),
       },
     },
   ],
