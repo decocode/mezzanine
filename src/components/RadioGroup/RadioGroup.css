@@ -53,7 +53,7 @@
   height: var(--radio-indicator-size, var(--icon-size-sm));
   border: var(--radio-border-width, var(--border-width-baseline)) solid var(--radio-border, var(--color-border-control));
   border-radius: var(--radio-indicator-border-radius, 50%);
-  background: var(--radio-background, transparent);
+  background: var(--radio-background, var(--color-page));
   content: '';
   translate: 0 -50%;
 }

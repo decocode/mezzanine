@@ -24,7 +24,7 @@
   place-items: center;
   border: var(--checkbox-border-width, var(--border-width-baseline)) solid var(--checkbox-border, var(--color-border-control));
   border-radius: var(--checkbox-border-radius, min(var(--radius-control), var(--radius-xs)));
-  background: var(--checkbox-background, transparent);
+  background: var(--checkbox-background, var(--color-page));
   color: transparent;
 }
 

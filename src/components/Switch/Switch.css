@@ -33,7 +33,7 @@
   padding-inline: calc((var(--switch-track-height, var(--icon-size-sm)) - var(--switch-handle-size, var(--icon-size-xs))) / 2 - var(--switch-border-width, var(--border-width-baseline)));
   border: var(--switch-border-width, var(--border-width-baseline)) solid var(--switch-track-border, var(--color-border-control));
   border-radius: var(--switch-border-radius, var(--radius-full));
-  background: var(--switch-track-background, transparent);
+  background: var(--switch-track-background, var(--color-page));
 }
 
 .mz-switch-handle {
