@@ -1,0 +1,23 @@
+/* The Elevation page's levels: one surface per level, each with that level's shadow and surface colour. */
+.elevation-levels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
+  gap: var(--space-6);
+  margin: 0;
+  padding: var(--space-2);
+  list-style: none;
+}
+
+.elevation-level {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: var(--space-2);
+  min-block-size: var(--space-24);
+  overflow-wrap: anywhere;
+  text-align: center;
+  padding: var(--space-4);
+  border-radius: var(--radius-surface);
+  background: var(--_elevation-surface);
+  box-shadow: var(--_elevation-shadow);
+}

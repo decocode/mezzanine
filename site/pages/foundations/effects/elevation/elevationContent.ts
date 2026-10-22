@@ -16,29 +16,38 @@ export const elevationDefinitions: ElevationDefinition[] = [
   { token: '--elevation-raised-3', label: 'Raised 3', level: '3', useFor: 'Content above the main interface that needs the strongest separation.' },
 ]
 
-// The two colours every sunken and raised level is built from.
+// The two colors every sunken and raised level is built from.
 export const elevationColourTokens: { token: string; purpose: string }[] = [
-  { token: '--elevation-shadow-color', purpose: 'Shadow colour for every sunken and raised level.' },
+  { token: '--elevation-shadow-color', purpose: 'Shadow color for every sunken and raised level.' },
   { token: '--elevation-highlight-color', purpose: 'Thin edge line around every sunken and raised level. Transparent hides it.' },
-  { token: '--elevation-sunken-1-surface', purpose: 'Surface colour for Sunken 1.' }, // gitleaks:allow (a CSS token name, not a secret)
-  { token: '--elevation-flat-surface', purpose: 'Surface colour for Flat.' },
-  { token: '--elevation-raised-1-surface', purpose: 'Surface colour for Raised 1. In Dark, each raised level is lighter than the one below, because a shadow barely shows on a dark page.' }, // gitleaks:allow (a CSS token name, not a secret)
-  { token: '--elevation-raised-2-surface', purpose: 'Surface colour for Raised 2.' }, // gitleaks:allow (a CSS token name, not a secret)
-  { token: '--elevation-raised-3-surface', purpose: 'Surface colour for Raised 3.' }, // gitleaks:allow (a CSS token name, not a secret)
+  { token: '--elevation-sunken-1-surface', purpose: 'Surface color for Sunken 1.' }, // gitleaks:allow (a CSS token name, not a secret)
+  { token: '--elevation-flat-surface', purpose: 'Surface color for Flat.' },
+  { token: '--elevation-raised-1-surface', purpose: 'Surface color for Raised 1. In Dark, each raised level is lighter than the one below, because a shadow barely shows on a dark page.' }, // gitleaks:allow (a CSS token name, not a secret)
+  { token: '--elevation-raised-2-surface', purpose: 'Surface color for Raised 2.' }, // gitleaks:allow (a CSS token name, not a secret)
+  { token: '--elevation-raised-3-surface', purpose: 'Surface color for Raised 3.' }, // gitleaks:allow (a CSS token name, not a secret)
 ]
 
 // Shown between the two token tables, so it is part of the page's Tokens part rather than the section intro.
-export const elevationColourTokensIntro: Copy = 'Every sunken and raised level is built from two colours, plus a surface colour for each level, all set in each theme file in `src/themes/`.'
+export const elevationColourTokensIntro: Copy = 'Every sunken and raised level is built from two colors, plus a surface color for each level, all set in each theme file in `src/themes/`.'
 
 export const elevationContent: DocsPageContent = {
   id: 'elevation',
   kind: 'foundation',
   title: 'Elevation',
-  description: 'Elevation shows whether a surface sits into, on or above the surface around it. Mezzanine uses soft shadows for this, and themes can change them without changing any token names.',
+  description: 'Elevation uses shadow effects to help emphasise how surfaces are layered, or if something is indented.',
   sections: [
     {
+      key: 'howItWorks',
+      title: 'Using elevation effects',
+      body: [
+        'In the real world, a shadow shows that one thing sits above another. Screens borrow the idea: the deeper the shadow beneath a surface, the higher it seems to float.',
+        'That only works where there’s room for darkness. On a dark page a shadow has almost nothing darker to show against, so Dark works differently: a raised surface is lighter than the one beneath it, and a faint light edge outlines it.',
+        'Wireframe uses no shadows at all. Its surfaces are told apart by their borders, so every level looks the same there.',
+      ],
+    },
+    {
       key: 'levels',
-      title: 'Levels',
+      title: 'Example',
       intro: ['There are five levels. Flat is level 0; sunken goes into the surface, and raised levels sit above it. A higher number means more separation from flat.'],
     },
   ],
@@ -57,7 +66,7 @@ export const elevationContent: DocsPageContent = {
     },
     {
       key: 'theming',
-      intro: ['The level shapes are shared and come from the Wireframe baseline. Each theme then sets what makes it different:'],
+      intro: ['The level shapes are shared. Each theme then sets what makes it different:'],
       // What each official theme sets itself, as defined in src/themes/.
       table: {
         label: 'What each theme sets',
@@ -65,15 +74,15 @@ export const elevationContent: DocsPageContent = {
         descriptionColumn: 'Sets',
         namesAreCode: false,
         rows: [
-          { name: 'Wireframe', description: 'Its shadow colour. The levels use the shared shapes.' },
-          { name: 'Light', description: 'Its shadow colour. The levels use the shared shapes.' },
-          { name: 'Dark', description: 'Its shadow colour, an edge highlight, and larger shapes for Raised 1 to Raised 3, so surfaces stay distinct on a dark page.' },
+          { name: 'Wireframe', description: 'A transparent shadow color, so it shows no shadows.' },
+          { name: 'Light', description: 'Its shadow color. The levels use the shared shapes.' },
+          { name: 'Dark', description: 'Its shadow color, an edge highlight, and larger shapes for Raised 1 to Raised 3, so surfaces stay distinct on a dark page.' },
         ],
       },
     },
     {
       key: 'accessibility',
-      intro: ['Keyboard focus is shown with --color-focus, not with elevation. Never use a shadow as the only sign of which control has focus.'],
+      intro: ['Keyboard focus is shown with `--color-focus`, not with elevation. Never use a shadow as the only sign of which control has focus.'],
     },
   ],
   relatedPages: [

@@ -3,28 +3,26 @@ import { Card } from '@decocode/mezzanine'
 import { RichText } from './RichText'
 import { TokenValue } from './TokenValue'
 
-// What a token's sample shows: its corners, its border width, its shadow, its length or its opacity.
-export type TokenScaleSample = 'radius' | 'border-width' | 'shadow' | 'length' | 'opacity'
+// What a token's sample shows: its corners, its border width, its length or its opacity.
+export type TokenScaleSample = 'radius' | 'border-width' | 'length' | 'opacity'
 
 export interface TokenScaleItem {
   token: string
   label: string
   description?: string
-  // A second token for the sample's background, such as an elevation level's surface colour.
-  surface?: string
 }
 
 // One way to show any scale of tokens: each step is a card with a sample drawn from the token, its
 // readable name, the token name and its current value read from the token source. Pages whose values
-// are too long for a card, such as shadows, list them in a table instead and pass showValue={false}.
+// are too long for a card list them in a table instead and pass showValue={false}.
 // With labelInSample, the readable name sits inside the sample, as a colour palette's step does.
 export function TokenScale({ items, sample, showValue = true, labelInSample = false }: { items: readonly TokenScaleItem[]; sample: TokenScaleSample; showValue?: boolean; labelInSample?: boolean }) {
   return (
     <ol className="token-scale" data-sample={sample} data-label-in-sample={labelInSample || undefined}>
-      {items.map(({ token, label, description, surface }) => (
+      {items.map(({ token, label, description }) => (
         <li key={token}>
           <Card>
-            <span aria-hidden={labelInSample ? undefined : true} className="token-scale-sample" style={{ '--_token-scale-value': `var(${token})`, ...(surface && { '--_token-scale-surface': `var(${surface})` }) } as CSSProperties}>
+            <span aria-hidden={labelInSample ? undefined : true} className="token-scale-sample" style={{ '--_token-scale-value': `var(${token})` } as CSSProperties}>
               {labelInSample && <strong>{label}</strong>}
             </span>
             {!labelInSample && <p><strong>{label}</strong></p>}
