@@ -23,13 +23,3 @@ export function FourUnitsExample() {
     <CssNotes name="the units" note={unitsCssNotes.fourUnits} level={3} />
   </>
 }
-
-export function WithinLimitsExample() {
-  return <>
-    <ExampleText>This item tries to be half the frame, but it stops shrinking at 10rem and stops growing at 30rem.</ExampleText>
-    <WidthFrame label="Grow, but within limits">
-      <div className="example-item example-clamp mz-text-body-sm">Half the frame, between 10rem and 30rem</div>
-    </WidthFrame>
-    <CssNotes name="clamp()" note={unitsCssNotes.withinLimits} level={3} />
-  </>
-}

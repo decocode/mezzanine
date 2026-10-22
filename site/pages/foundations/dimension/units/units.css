@@ -4,6 +4,3 @@
 .example-unit-percent { inline-size: 50%; }
 .example-unit-vw { inline-size: 30vw; }
 
-.example-clamp {
-  inline-size: clamp(10rem, 50%, 30rem);
-}
