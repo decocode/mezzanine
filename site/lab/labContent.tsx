@@ -2,6 +2,7 @@ import { Badge, type NavTreeItemData } from '@decocode/mezzanine'
 import { labBadgeLabel } from './shared/labValues'
 import { layoutStages, stagePagesByStage } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
+import { noticePage } from './notice/noticeContent'
 
 export const labContent = {
   index: { label: 'Lab', href: '/site/lab' },
@@ -27,4 +28,5 @@ export const labNavigationItems: NavTreeItemData[] = [
     content: <Badge variant="warning">{labBadgeLabel}</Badge>,
     children: futurePages.map((page) => ({ id: `emerging-features-${page.key}`, label: page.title, href: page.href })),
   },
+  { id: 'notice', label: noticePage.title, href: noticePage.href, content: <Badge variant="warning">{labBadgeLabel}</Badge> },
 ]

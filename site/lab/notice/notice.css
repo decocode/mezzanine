@@ -1,0 +1,94 @@
+/* The candidate Notice, scoped to the Lab's .lab-notice class. Illustrative and unapproved. Like
+   Badge, each tone is a pale wash with a thin border all round, so rounded corners stay even. */
+.lab-notice {
+  --_notice-background: var(--color-neutral-muted);
+  --_notice-foreground: var(--color-text);
+  --_notice-border: var(--color-border);
+
+  display: flex;
+  align-items: start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-padding-surface);
+  border: var(--border-width-baseline) solid var(--_notice-border);
+  border-radius: var(--radius-surface);
+  /* Some washes are see-through, so they sit on the page colour to hide what's behind. */
+  background: linear-gradient(var(--_notice-background), var(--_notice-background)), var(--color-page);
+  color: var(--color-text);
+}
+
+.lab-notice[data-variant='accent'] {
+  --_notice-background: var(--color-accent-muted);
+  --_notice-foreground: var(--color-accent);
+  --_notice-border: var(--color-accent-muted-pressed);
+}
+
+/* Without colour, Accent would look like Neutral, so in Wireframe it takes a darker wash and border,
+   and Neutral a lighter border. */
+@scope ([data-theme='wireframe']) to ([data-theme]:not([data-theme='wireframe'])) {
+  .lab-notice[data-variant='neutral'] {
+    --_notice-border: var(--color-border-muted);
+  }
+
+  .lab-notice[data-variant='accent'] {
+    --_notice-background: var(--color-accent-muted-pressed);
+    --_notice-border: var(--color-accent);
+  }
+}
+
+.lab-notice[data-variant='info'] {
+  --_notice-background: var(--color-info-muted);
+  --_notice-foreground: var(--color-info);
+  --_notice-border: var(--color-info-muted-pressed);
+}
+
+.lab-notice[data-variant='success'] {
+  --_notice-background: var(--color-success-muted);
+  --_notice-foreground: var(--color-success);
+  --_notice-border: var(--color-success-muted-pressed);
+}
+
+.lab-notice[data-variant='warning'] {
+  --_notice-background: var(--color-warning-muted);
+  --_notice-foreground: var(--color-warning);
+  --_notice-border: var(--color-warning-muted-pressed);
+}
+
+.lab-notice[data-variant='danger'] {
+  --_notice-background: var(--color-danger-muted);
+  --_notice-foreground: var(--color-danger);
+  --_notice-border: var(--color-danger-muted-pressed);
+}
+
+.lab-notice-icon {
+  display: flex;
+  flex-shrink: 0;
+  color: var(--_notice-foreground);
+}
+
+.lab-notice-icon svg {
+  inline-size: var(--icon-size-md);
+  block-size: var(--icon-size-md);
+}
+
+.lab-notice-body {
+  display: grid;
+  flex: 1;
+  gap: var(--space-1);
+  min-inline-size: 0;
+}
+
+.lab-notice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-block-start: var(--space-2);
+}
+
+.lab-notice-title {
+  color: var(--_notice-foreground);
+}
+
+.lab-notice-content > :where(p) {
+  margin: 0;
+}

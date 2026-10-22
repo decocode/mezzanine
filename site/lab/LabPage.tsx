@@ -8,6 +8,8 @@ import { LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutStag
 import { labContent, labNavigationItems } from './labContent'
 import { layoutStages, stagePages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
+import { noticePage } from './notice/noticeContent'
+import { NoticeExperiment } from './notice/NoticeExperiment'
 import { collectResults, docsSearchSection } from '../components/siteSearchLogic'
 import './lab-page.css'
 
@@ -29,7 +31,8 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const stagePage = stagePages.find((item) => item.href === currentPath)
   const isFuture = currentPath === emergingFeatures.href
   const futurePage = futurePages.find((item) => item.href === currentPath)
-  const pageTitle = stage?.title ?? stagePage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title)
+  const isNotice = currentPath === noticePage.href
+  const pageTitle = stage?.title ?? stagePage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title ?? (isNotice ? noticePage.title : undefined))
   const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} searchSections={labSearchSections} />
 
@@ -51,7 +54,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : isNotice ? <NoticeExperiment /> : <NotFoundPage />}
     </DocsShell>
   </>
 }
