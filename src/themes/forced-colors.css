@@ -1,0 +1,70 @@
+/*
+  Forced colours, such as Windows high contrast, replace the theme with the person's own system
+  colours. Browsers already force text, background and border colours, but not what a component
+  draws with forced-color-adjust: none or reads in other ways, such as a selection dot or an
+  indicator bar. Pointing every colour role at a system colour keeps those in step, in every
+  theme and themed area. Components add their own forced-colour rules only where a part needs more.
+  The backdrop is left alone: browsers keep its see-through dimming.
+*/
+@media (forced-colors: active) {
+  :root,
+  [data-theme] {
+    --color-page: Canvas;
+    --color-surface: Canvas;
+    --color-text: CanvasText;
+    --color-text-muted: CanvasText;
+    --color-border: CanvasText;
+    --color-border-control: ButtonText;
+    --color-neutral-muted: Canvas;
+    --color-chevron: CanvasText;
+    --color-focus: Highlight;
+
+    --color-link: LinkText;
+    --color-link-hovered: LinkText;
+    --color-link-pressed: LinkText;
+
+    /* The accent marks what is selected or current, as the system's Highlight does. */
+    --color-accent: Highlight;
+    --color-accent-emphasis: Highlight;
+    --color-accent-emphasis-hovered: Highlight;
+    --color-accent-emphasis-pressed: Highlight;
+    --color-accent-inverse: HighlightText;
+    --color-accent-muted: Canvas;
+    --color-accent-muted-hovered: Canvas;
+    --color-accent-muted-pressed: Canvas;
+
+    /* System colours have no status hues, so status colours fall back to plain text on the page. */
+    --color-info: CanvasText;
+    --color-info-emphasis: CanvasText;
+    --color-info-emphasis-hovered: CanvasText;
+    --color-info-emphasis-pressed: CanvasText;
+    --color-info-inverse: Canvas;
+    --color-info-muted: Canvas;
+    --color-info-muted-hovered: Canvas;
+    --color-info-muted-pressed: Canvas;
+    --color-success: CanvasText;
+    --color-success-emphasis: CanvasText;
+    --color-success-emphasis-hovered: CanvasText;
+    --color-success-emphasis-pressed: CanvasText;
+    --color-success-inverse: Canvas;
+    --color-success-muted: Canvas;
+    --color-success-muted-hovered: Canvas;
+    --color-success-muted-pressed: Canvas;
+    --color-warning: CanvasText;
+    --color-warning-emphasis: CanvasText;
+    --color-warning-emphasis-hovered: CanvasText;
+    --color-warning-emphasis-pressed: CanvasText;
+    --color-warning-inverse: Canvas;
+    --color-warning-muted: Canvas;
+    --color-warning-muted-hovered: Canvas;
+    --color-warning-muted-pressed: Canvas;
+    --color-danger: CanvasText;
+    --color-danger-emphasis: CanvasText;
+    --color-danger-emphasis-hovered: CanvasText;
+    --color-danger-emphasis-pressed: CanvasText;
+    --color-danger-inverse: Canvas;
+    --color-danger-muted: Canvas;
+    --color-danger-muted-hovered: Canvas;
+    --color-danger-muted-pressed: Canvas;
+  }
+}

@@ -80,11 +80,11 @@
 
 /* Focused covers the option highlighted from an Autocomplete's input as well as keyboard focus. */
 .react-aria-ListBoxItem:is([data-hovered], [data-focused]) {
-  background: var(--list-box-item-background-hovered, var(--color-neutral-muted-hovered));
+  background: var(--list-box-item-background-hovered, var(--color-accent-muted-hovered));
 }
 
 .react-aria-ListBoxItem[data-pressed] {
-  background: var(--list-box-item-background-pressed, var(--color-neutral-muted-pressed));
+  background: var(--list-box-item-background-pressed, var(--color-accent-muted-pressed));
 }
 
 .react-aria-ListBoxItem[data-focus-visible] {

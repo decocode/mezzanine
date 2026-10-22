@@ -42,8 +42,13 @@ rules that remove underlines; current-item indicators and focus outlines remain.
 Hovering or visibly focusing an enabled link doubles its underline thickness;
 disabled links keep the normal thickness. Standard Link keyboard focus uses the
 hover text colour and retains its focus ring.
-Pressed links keep the heavier underline and use `--color-neutral-muted-pressed`
-for a grey background. Light and Dark retain their existing link treatments.
+Pressed links keep the heavier underline and use `--color-accent-muted-pressed`,
+which is grey in Wireframe, for their background. Light and Dark retain their existing link treatments.
+
+In forced colours, such as Windows high contrast, `themes/forced-colors.css` points every colour
+role at a system colour in every theme: text and borders at `CanvasText`, surfaces and washes at
+`Canvas`, links at `LinkText`, focus and the accent at `Highlight`, and status colours at plain
+text on the page. Components add their own forced-colour rules only where a part needs more.
 
 ## Product themes
 
@@ -182,7 +187,7 @@ always carries text and icons from its own palette.
 | `--color-text-muted` | Supporting and secondary text |
 | `--color-border` | Decorative outlines and dividing lines |
 | `--color-border-control` | Borders of controls such as checkboxes and inputs, at 3:1 or more |
-| `--color-neutral-muted`, `-hovered`, `-pressed` | See-through washes of the text color that darken or lighten whatever they sit on |
+| `--color-neutral-muted` | A see-through wash of the text color that darkens or lightens whatever it sits on |
 | `--color-backdrop` | The dimmed layer behind Modals and Panel drawers |
 
 ### Links and focus

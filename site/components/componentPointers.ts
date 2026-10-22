@@ -559,11 +559,11 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--list-box-item-background-hovered",
-      "fallback": "var(--color-neutral-muted-hovered)"
+      "fallback": "var(--color-accent-muted-hovered)"
     },
     {
       "name": "--list-box-item-background-pressed",
-      "fallback": "var(--color-neutral-muted-pressed)"
+      "fallback": "var(--color-accent-muted-pressed)"
     },
     {
       "name": "--list-box-item-background-selected",
@@ -815,7 +815,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--search-trigger-background-hovered",
-      "fallback": "var(--color-neutral-muted-hovered)"
+      "fallback": "var(--color-accent-muted-hovered)"
     },
     {
       "name": "--search-trigger-border",
@@ -976,16 +976,20 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--table-row-foreground-selected",
       "fallback": "var(--color-accent-inverse)"
+    },
+    {
+      "name": "--table-sort-indicator-size",
+      "fallback": "var(--icon-size-inline)"
     }
   ],
   "Tabs": [
     {
       "name": "--tab-background-hovered",
-      "fallback": "var(--color-neutral-muted-hovered)"
+      "fallback": "var(--color-accent-muted-hovered)"
     },
     {
       "name": "--tab-background-pressed",
-      "fallback": "var(--color-neutral-muted-pressed)"
+      "fallback": "var(--color-accent-muted-pressed)"
     },
     {
       "name": "--tab-foreground",

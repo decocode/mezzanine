@@ -55,6 +55,8 @@
   border-color: var(--input-border-invalid, var(--color-danger));
 }
 
+/* Text entry shows its focus ring on mouse focus too, not only from the keyboard, so everyone can
+   see where typing will go. Decided by the owner on 22 October 2026. */
 :is(.react-aria-Input, .react-aria-TextArea)[data-focused] {
   outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
   outline-offset: var(--input-focus-ring-offset, var(--focus-ring-offset));

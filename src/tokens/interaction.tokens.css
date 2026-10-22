@@ -29,8 +29,8 @@
 
   /* Nav item colours: pointers to the colour roles, the same in every theme. */
   --nav-item-background: transparent;
-  --nav-item-background-hovered: var(--color-neutral-muted-hovered);
-  --nav-item-background-pressed: var(--color-neutral-muted-pressed);
+  --nav-item-background-hovered: var(--color-accent-muted-hovered);
+  --nav-item-background-pressed: var(--color-accent-muted-pressed);
   --nav-item-background-current: transparent;
   --nav-item-foreground: var(--color-text);
   --nav-item-foreground-current: var(--color-text);

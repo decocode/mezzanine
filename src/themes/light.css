@@ -20,10 +20,8 @@
   --color-border: var(--color-neutral-200);
   --color-border-control: var(--color-neutral-700);
 
-  /* Neutral washes of the text colour darken (or, in Dark, lighten) whatever they sit on. */
+  /* A neutral wash of the text colour darkens (or, in Dark, lightens) whatever it sits on. */
   --color-neutral-muted: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
-  --color-neutral-muted-hovered: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
-  --color-neutral-muted-pressed: color-mix(in srgb, var(--color-text) var(--opacity-16), transparent);
 
   --color-link: var(--color-accent);
   --color-link-hovered: var(--color-accent-800);

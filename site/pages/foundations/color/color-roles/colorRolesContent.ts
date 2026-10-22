@@ -48,8 +48,6 @@ export const colorTokenGroups: ColorTokenGroup[] = [
       { token: '--color-page', label: 'Page', description: 'The background behind the page.' },
       { token: '--color-surface', label: 'Surface', description: 'Content placed on the page.' },
       { token: '--color-neutral-muted', label: 'Neutral muted', description: 'A faint wash of the text color, such as a neutral badge.' },
-      { token: '--color-neutral-muted-hovered', label: 'Neutral muted hovered', description: 'A hovered row or surface, on any background.' },
-      { token: '--color-neutral-muted-pressed', label: 'Neutral muted pressed', description: 'A pressed row or surface, on any background.' },
       { token: '--color-backdrop', label: 'Backdrop', description: 'The dimmed layer behind modals and drawers.' },
     ],
   },

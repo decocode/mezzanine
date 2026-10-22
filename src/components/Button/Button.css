@@ -171,6 +171,8 @@
   --_button-border: var(--button-destructive-border, var(--color-danger-emphasis-pressed));
 }
 
+/* data-preview-state is internal to the docs: it lets a state table show a hovered, pressed or
+   focused example without interaction. It isn't part of the public API. */
 .react-aria-Button[data-variant][data-hovered],
 .react-aria-Button[data-variant][data-preview-state='hovered'] {
   --_button-current-background: var(--_button-background-hovered);

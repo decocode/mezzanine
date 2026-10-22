@@ -11,7 +11,7 @@ export const opacityContent: DocsPageContent = {
       title: 'Opacity scale',
       intro: [
         'Each step is a percentage, so it works in both `color-mix()` and the `opacity` property. Each sample is a block of the accent color at that step, over a checkerboard: the more the pattern shows through, the more see-through the step. Values below come from the active CSS tokens.',
-        'For example, `--color-neutral-muted-hovered` mixes the text color at `--opacity-8` with transparent, and `--opacity-disabled` points at `--opacity-50`.',
+        'For example, `--color-neutral-muted` mixes the text color at `--opacity-8` with transparent, and `--opacity-disabled` points at `--opacity-50`.',
       ],
     },
   ],

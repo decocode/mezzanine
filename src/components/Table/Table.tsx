@@ -1,6 +1,7 @@
 import { Column as ReactAriaColumn, type ColumnProps } from 'react-aria-components/Table'
 import { composeRenderProps } from 'react-aria-components/composeRenderProps'
 import type { RefAttributes } from 'react'
+import { ArrowDownIcon, ArrowUpIcon } from '../../icons/Icons'
 
 export {
   Cell,
@@ -17,11 +18,9 @@ export function Column(props: ColumnProps & RefAttributes<HTMLDivElement | HTMLT
       {composeRenderProps(props.children, (children, { allowsSorting, sortDirection }) => (
         <>
           {children}
-          {allowsSorting && sortDirection && (
-            <span aria-hidden="true" className="mz-table-sort-indicator">
-              {sortDirection === 'ascending' ? '▲' : '▼'}
-            </span>
-          )}
+          {allowsSorting && sortDirection && (sortDirection === 'ascending'
+            ? <ArrowUpIcon className="mz-table-sort-indicator" />
+            : <ArrowDownIcon className="mz-table-sort-indicator" />)}
         </>
       ))}
     </ReactAriaColumn>

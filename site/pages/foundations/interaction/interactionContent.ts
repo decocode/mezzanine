@@ -2,8 +2,8 @@ import type { DocsPageContent } from '../../../templates/docsPageContent'
 
 export const interactionSharedTokens: { token: string; description: string }[] = [
   { token: '--color-focus', description: 'Focus ring colour' },
-  { token: '--color-neutral-muted-hovered', description: 'Row or surface colour while hovered' },
-  { token: '--color-neutral-muted-pressed', description: 'Row or surface colour while pressed' },
+  { token: '--color-accent-muted-hovered', description: 'Background of a control, row or link while hovered' },
+  { token: '--color-accent-muted-pressed', description: 'Background of a control, row or link while pressed' },
   { token: '--color-link-hovered', description: 'Link colour while hovered' },
   { token: '--color-link-pressed', description: 'Link colour while pressed' },
   { token: '--opacity-disabled', description: 'Opacity of disabled controls' },

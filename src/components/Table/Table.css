@@ -48,22 +48,26 @@
   cursor: pointer;
 }
 
+/* The sort arrow follows the header's text size, and sits on its line. */
 .mz-table-sort-indicator {
+  inline-size: var(--table-sort-indicator-size, var(--icon-size-inline));
+  block-size: var(--table-sort-indicator-size, var(--icon-size-inline));
   margin-inline-start: var(--space-1);
+  vertical-align: middle;
 }
 
 .react-aria-TableHeader[data-hovered] .react-aria-Column,
 .react-aria-Column[data-hovered],
 .react-aria-Cell[data-hovered],
 .react-aria-Row[data-hovered] .react-aria-Cell {
-  background: var(--color-neutral-muted-hovered);
+  background: var(--color-accent-muted-hovered);
 }
 
 .react-aria-Column[data-pressed],
 .react-aria-Column[data-resizing],
 .react-aria-Cell[data-pressed],
 .react-aria-Row[data-pressed] .react-aria-Cell {
-  background: var(--color-neutral-muted-pressed);
+  background: var(--color-accent-muted-pressed);
 }
 
 .react-aria-TableBody[data-empty] {

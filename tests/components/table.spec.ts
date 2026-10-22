@@ -25,7 +25,8 @@ test('Table sorting works with pointer and keyboard and supplies one accessible 
   const indicator = table.locator('.mz-table-sort-indicator')
   await expect(indicator).toHaveCount(1)
   await expect(indicator).toHaveAttribute('aria-hidden', 'true')
-  await expect(indicator).toHaveText('▼')
+  // Descending shows the down arrow, drawn from the shared icon set.
+  await expect(indicator.locator('path')).toHaveAttribute('d', /^M12 4v15\.5/)
   await expect(page.getByRole('grid', { name: 'Table with single row selection', exact: true }).locator('.mz-table-sort-indicator')).toHaveCount(0)
 })
 

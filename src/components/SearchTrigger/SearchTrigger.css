@@ -42,7 +42,7 @@
 }
 
 .mz-search-trigger[data-hovered] {
-  background: var(--search-trigger-background-hovered, var(--color-neutral-muted-hovered));
+  background: var(--search-trigger-background-hovered, var(--color-accent-muted-hovered));
 }
 
 .mz-search-trigger[data-focus-visible] {

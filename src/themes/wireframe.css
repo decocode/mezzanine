@@ -15,10 +15,8 @@
   --color-border: var(--color-neutral-950);
   --color-border-control: var(--color-neutral-700);
 
-  /* Neutral washes of the text colour darken (or, in Dark, lighten) whatever they sit on. */
+  /* A neutral wash of the text colour darkens (or, in Dark, lightens) whatever it sits on. */
   --color-neutral-muted: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
-  --color-neutral-muted-hovered: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
-  --color-neutral-muted-pressed: color-mix(in srgb, var(--color-text) var(--opacity-16), transparent);
 
   --color-link: var(--color-accent);
   --color-link-hovered: oklch(from var(--color-accent-800) l 0 h);
@@ -86,7 +84,8 @@
 }
 
 /* Wireframe underlines text links; button-styled links use the shared Button treatment.
-   data-no-wireframe-underline opts an element out (e.g. a brand wordmark). */
+   data-no-wireframe-underline opts an element out (e.g. a brand wordmark). data-preview-state is
+   internal to the docs' state tables, not part of the public API. */
 :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])) {
   text-decoration-line: underline !important;
   text-decoration-thickness: var(--border-width-baseline);
@@ -108,7 +107,7 @@
 }
 
 :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
-  background-color: var(--color-neutral-muted-pressed);
+  background-color: var(--color-accent-muted-pressed);
   text-decoration-thickness: calc(var(--border-width-baseline) * 2);
 }
 

@@ -36,11 +36,11 @@
 }
 
 .mz-disclosure-trigger[data-hovered] {
-  background: var(--color-neutral-muted-hovered);
+  background: var(--color-accent-muted-hovered);
 }
 
 .mz-disclosure-trigger[data-pressed] {
-  background: var(--color-neutral-muted-pressed);
+  background: var(--color-accent-muted-pressed);
 }
 
 .mz-disclosure-trigger[data-focus-visible] {

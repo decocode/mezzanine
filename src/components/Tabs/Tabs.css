@@ -62,11 +62,11 @@
 }
 
 .react-aria-Tab[data-hovered] {
-  background: var(--tab-background-hovered, var(--color-neutral-muted-hovered));
+  background: var(--tab-background-hovered, var(--color-accent-muted-hovered));
 }
 
 .react-aria-Tab[data-pressed] {
-  background: var(--tab-background-pressed, var(--color-neutral-muted-pressed));
+  background: var(--tab-background-pressed, var(--color-accent-muted-pressed));
 }
 
 .react-aria-Tab[data-selected] {
