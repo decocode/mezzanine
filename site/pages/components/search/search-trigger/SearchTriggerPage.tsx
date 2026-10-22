@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { Dialog, DialogTrigger, Heading, Input, Modal, ModalOverlay, SearchField, SearchTrigger, Text } from '@decocode/mezzanine'
+import { DemoArea, Dialog, DialogTrigger, Heading, Input, Modal, ModalOverlay, SearchField, SearchTrigger, Text } from '@decocode/mezzanine'
 import { searchTriggerContent, searchTriggerDialogText } from './searchTriggerContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -9,7 +8,7 @@ export default function SearchTriggerPage() {
       content={searchTriggerContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <DialogTrigger>
               <SearchTrigger aria-keyshortcuts="Meta+K Control+K" shortcut="⌘ K">Search</SearchTrigger>
               <ModalOverlay isDismissable>
@@ -22,10 +21,10 @@ export default function SearchTriggerPage() {
                 </Modal>
               </ModalOverlay>
             </DialogTrigger>
-          </ExampleZone>
+          </DemoArea>
         ),
         iconOnly: (
-          <ExampleZone>
+          <DemoArea>
             <DialogTrigger>
               <SearchTrigger aria-keyshortcuts="Meta+K Control+K" labelPlacement="tooltip">Search</SearchTrigger>
               <ModalOverlay isDismissable>
@@ -38,7 +37,7 @@ export default function SearchTriggerPage() {
                 </Modal>
               </ModalOverlay>
             </DialogTrigger>
-          </ExampleZone>
+          </DemoArea>
         ),
       }}
     />

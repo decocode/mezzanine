@@ -1,17 +1,5 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
 import {
-  Cell,
-  DownloadIcon,
-  Column,
-  ExternalLinkIcon,
-  Link,
-  Row,
-  Table,
-  TableBody,
-  TableHeader,
-  Tabs, TabList, Tab, TabPanel,
-  ToggleButton,
-  ToggleButtonGroup,
+  Cell, Column, DemoArea, DownloadIcon, ExternalLinkIcon, Link, Row, Tab, Table, TableBody, TableHeader, TabList, TabPanel, Tabs, ToggleButton, ToggleButtonGroup,
 } from '@decocode/mezzanine'
 import { buttonSizes, buttonContent } from '../button/buttonContent'
 import { toggleButtonContent, toggleButtonGroupExample, toggleButtonSizesTable, toggleButtonStatesTable } from './toggleButtonContent'
@@ -26,9 +14,9 @@ export default function ToggleButtonPage() {
       content={toggleButtonContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <ToggleButton>Toggle</ToggleButton>
-          </ExampleZone>
+          </DemoArea>
         ),
         sizes: (
           <div className="documentation-table button-sizes-table">
@@ -87,7 +75,7 @@ export default function ToggleButtonPage() {
             <span>{documentationLink.label}</span>
             <ExternalLinkIcon />
           </Link>
-          <ExampleZone>
+          <DemoArea>
             <Tabs defaultSelectedKey="single">
               <TabList aria-label="Selection mode">
                 <Tab id="single">Single</Tab>
@@ -110,7 +98,7 @@ export default function ToggleButtonPage() {
                 </ToggleButtonGroup>
               </TabPanel>
             </Tabs>
-          </ExampleZone>
+          </DemoArea>
         </>),
       }}
     />

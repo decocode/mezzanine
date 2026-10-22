@@ -1,5 +1,4 @@
-import { Link, Popover, PreviewTrigger, Text } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { DemoArea, Link, Popover, PreviewTrigger, Text } from '@decocode/mezzanine'
 import { previewTriggerContent, previewTriggerExampleLabels } from './previewTriggerContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function PreviewTriggerPage() {
     <ContentPage
       content={previewTriggerContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <PreviewTrigger>
             <Link href="/popover">{previewTriggerExampleLabels.trigger}</Link>
             <Popover>
@@ -17,7 +16,7 @@ export default function PreviewTriggerPage() {
               </div>
             </Popover>
           </PreviewTrigger>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

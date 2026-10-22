@@ -1,5 +1,4 @@
-import { Badge, Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Badge, Cell, Column, DemoArea, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { badgeContent } from './badgeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -10,7 +9,7 @@ export default function BadgePage() {
     <ContentPage
       content={badgeContent}
       parts={{
-        example: <ExampleZone><Badge>Badge label</Badge></ExampleZone>,
+        example: <DemoArea><Badge>Badge label</Badge></DemoArea>,
         variants: (
           <div className="documentation-table documentation-comparison-table">
             <Table aria-label="Badge variants">

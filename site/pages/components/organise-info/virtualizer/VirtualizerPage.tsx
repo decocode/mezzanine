@@ -1,5 +1,4 @@
-import { ListBox, ListBoxItem, ListLayout, Virtualizer } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { DemoArea, ListBox, ListBoxItem, ListLayout, Virtualizer } from '@decocode/mezzanine'
 import { virtualizerContent, virtualizerExampleItems, virtualizerExampleLabel } from './virtualizerContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function VirtualizerPage() {
     <ContentPage
       content={virtualizerContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <div className="virtualizer-example">
             <Virtualizer layout={ListLayout} layoutOptions={{ estimatedRowHeight: 40 }}>
               <ListBox aria-label={virtualizerExampleLabel} items={virtualizerExampleItems}>
@@ -16,7 +15,7 @@ export default function VirtualizerPage() {
               </ListBox>
             </Virtualizer>
           </div>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

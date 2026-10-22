@@ -336,6 +336,21 @@ the `Menu`. `MenuItem` adds a tick for chosen items when the menu has a
 `Separator` draws a line between groups; the space around it comes from the
 layout it sits in. With `orientation="vertical"` it stands upright in a row.
 
+## DemoArea
+
+`DemoArea` frames a live demo, such as on a documentation page. Every demo has
+the same bar: a theme picker that changes only this demo, and Preview and Code
+tabs when you pass its source as `code`. Put a heading above it to name the demo. Pass
+controls for the component as `endPanel`; they sit at the end of the preview,
+or below it when there isn't room. The demo's pop-ups render inside it, so they
+take its theme.
+
+```tsx
+<DemoArea endPanel={<SwitchField><SwitchButton>Disable Button A</SwitchButton></SwitchField>}>
+  <Button>Button A</Button>
+</DemoArea>
+```
+
 ## Unstyled React Aria exports
 
 These pass React Aria's components straight through, with no Mezzanine

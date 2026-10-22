@@ -1,5 +1,4 @@
-import { Button, Group, Separator, ToggleButton, ToggleButtonGroup, Toolbar } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Button, DemoArea, Group, Separator, ToggleButton, ToggleButtonGroup, Toolbar } from '@decocode/mezzanine'
 import { toolbarContent, toolbarExampleLabels } from './toolbarContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function ToolbarPage() {
     <ContentPage
       content={toolbarContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <Toolbar aria-label={toolbarExampleLabels.toolbar}>
             <ToggleButtonGroup aria-label={toolbarExampleLabels.toggleGroup} selectionMode="single" size="sm" variant="secondary">
               {toolbarExampleLabels.toggles.map((toggle) => <ToggleButton key={toggle} id={toggle}>{toggle}</ToggleButton>)}
@@ -18,7 +17,7 @@ export default function ToolbarPage() {
               {toolbarExampleLabels.actions.map((action) => <Button key={action} size="sm" variant="secondary">{action}</Button>)}
             </Group>
           </Toolbar>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

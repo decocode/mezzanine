@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { Header, ListBox, ListBoxItem, ListBoxSection, Text } from '@decocode/mezzanine'
+import { DemoArea, Header, ListBox, ListBoxItem, ListBoxSection, Text } from '@decocode/mezzanine'
 import { listBoxContent, listBoxSections } from './listBoxContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -9,7 +8,7 @@ export default function ListBoxPage() {
       content={listBoxContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <ListBox aria-label="Options" selectionMode="single" className="react-aria-ListBox list-box-example">
               {listBoxSections.map((section) => (
                 <ListBoxSection key={section.id} id={section.id}>
@@ -23,7 +22,7 @@ export default function ListBoxPage() {
                 </ListBoxSection>
               ))}
             </ListBox>
-          </ExampleZone>
+          </DemoArea>
         ),
       }}
     />

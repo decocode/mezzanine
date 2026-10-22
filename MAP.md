@@ -27,7 +27,7 @@ The website for mezzanine.fly.dev. It imports the library as `@decocode/mezzanin
 | `AppShell.tsx`, `main.tsx`, `PageLoader.tsx`, `pageRegistry.ts` | Route selection, theme state, and loading each page separately. |
 | `pages/<group>/<page>/` | One folder per page, mirroring the information architecture. Each has a `<Name>Page.tsx` and a `<name>Content.ts` holding its copy. See `PAGES.md`. |
 | `templates/` | `ContentPage`, which builds a page from its content file, and the content shape every page follows. |
-| `components/` | The site's own parts: `DocsShell` (the AppShell frame around docs and Lab pages), `SiteTopBar`, navigation, `TokenScale`, `PageCards` (an index page's linked cards), `ExampleZone`, `SiteSearch`, the example parts shared with the Lab (`ExampleParts.tsx`, `browserLogic.ts`), `WidthFrame` (an example's frame of a chosen width) and similar. |
+| `components/` | The site's own parts: `DocsShell` (the AppShell frame around docs and Lab pages), `SiteTopBar`, navigation, `TokenScale`, `PageCards` (an index page's linked cards), `SiteSearch`, the example parts shared with the Lab (`ExampleParts.tsx`, `browserLogic.ts`), `WidthFrame` (an example's frame of a chosen width) and similar. |
 | `styles.css` | The site's own styles. |
 | `assets/`, `public/` | Images and static files. |
 

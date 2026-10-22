@@ -48,3 +48,16 @@
   --nav-item-foreground-current: var(--color-indicator);
   --nav-item-current-indicator: var(--color-indicator);
 }
+
+/* These tokens point at values a theme sets, so a themed area works them out again from its own
+   theme. Other tokens are left alone, so an app's overrides above a themed area still apply. */
+:where([data-theme]) {
+  --indicator-radius: var(--radius-control);
+  --nav-item-border-radius: var(--radius-control);
+  --nav-item-background-hovered: var(--color-accent-muted-hovered);
+  --nav-item-background-pressed: var(--color-accent-muted-pressed);
+  --nav-item-background-current: var(--color-accent-muted);
+  --nav-item-foreground: var(--color-text);
+  --nav-item-foreground-current: var(--color-indicator);
+  --nav-item-current-indicator: var(--color-indicator);
+}

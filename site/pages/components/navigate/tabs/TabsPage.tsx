@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
+import { DemoArea, Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
 import { tabsContent } from './tabsContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -9,7 +8,7 @@ export default function TabsPage() {
       content={tabsContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <Tabs defaultSelectedKey="a">
               <TabList aria-label="Example sections">
                 <Tab id="a">Tab A</Tab>
@@ -22,10 +21,10 @@ export default function TabsPage() {
               <TabPanel id="c">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</TabPanel>
               <TabPanel id="d">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</TabPanel>
             </Tabs>
-          </ExampleZone>
+          </DemoArea>
         ),
         verticalTabs: (
-          <ExampleZone>
+          <DemoArea>
             <Tabs orientation="vertical" keyboardActivation="manual" defaultSelectedKey="a">
               <TabList aria-label="Vertical example sections">
                 <Tab id="a">Tab A</Tab>
@@ -38,7 +37,7 @@ export default function TabsPage() {
               <TabPanel id="c">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</TabPanel>
               <TabPanel id="d">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</TabPanel>
             </Tabs>
-          </ExampleZone>
+          </DemoArea>
         ),
       }}
     />

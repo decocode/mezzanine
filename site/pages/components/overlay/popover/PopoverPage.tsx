@@ -1,5 +1,4 @@
-import { Button, Dialog, DialogTrigger, Popover, Text } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Button, DemoArea, Dialog, DialogTrigger, Popover, Text } from '@decocode/mezzanine'
 import { popoverContent, popoverExampleLabels } from './popoverContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function PopoverPage() {
     <ContentPage
       content={popoverContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <DialogTrigger>
             <Button variant="secondary">{popoverExampleLabels.trigger}</Button>
             <Popover>
@@ -17,7 +16,7 @@ export default function PopoverPage() {
               </Dialog>
             </Popover>
           </DialogTrigger>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

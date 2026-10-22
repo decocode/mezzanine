@@ -1,0 +1,100 @@
+/* A framed area for a live demo: a bar across the top with the demo's title and tools, then the
+   preview on the page's colour, with optional component controls in an area at its end. */
+.mz-demo-area {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  overflow: hidden;
+  border: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
+  border-radius: var(--demo-area-border-radius, var(--radius-surface));
+  background: var(--demo-area-background, var(--color-surface));
+  color: var(--color-text);
+}
+
+/* The bar keeps the same layout on every demo: Preview and Code tabs at the start, tools at the end. */
+.mz-demo-area-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--demo-area-bar-gap, var(--space-gap-control));
+  min-inline-size: 0;
+  padding: var(--demo-area-bar-padding-block, var(--space-padding-control-block)) var(--demo-area-bar-padding-inline, var(--space-padding-control-inline));
+}
+
+.mz-demo-area-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--demo-area-bar-gap, var(--space-gap-control));
+  margin-inline-start: auto;
+}
+
+.mz-demo-area-body {
+  min-inline-size: 0;
+  border-block-start: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
+  background: var(--demo-area-preview-background, var(--color-page));
+  color: var(--color-text);
+}
+
+/* The preview, and the end panel when there is room beside it; without room the panel moves below. */
+.mz-demo-area-preview {
+  display: flex;
+  flex-wrap: wrap;
+  min-inline-size: 0;
+}
+
+/* The demo's own theme applies here, so it sets its colours afresh. */
+.mz-demo-area-content {
+  flex: 999 1 0;
+  min-inline-size: min(100%, var(--width-md));
+  padding: var(--demo-area-padding, var(--space-4));
+  background: var(--demo-area-preview-background, var(--color-page));
+  color: var(--color-text);
+}
+
+.mz-demo-area-content > :is(p, ul, ol):first-child {
+  margin-block-start: 0;
+}
+
+.mz-demo-area-content > :is(p, ul, ol):last-child {
+  margin-block-end: 0;
+}
+
+.mz-demo-area-end-panel {
+  display: flex;
+  flex: 1 1 var(--demo-area-end-panel-width, var(--width-xs));
+  flex-direction: column;
+  align-items: start;
+  gap: var(--demo-area-end-panel-gap, var(--space-gap-cluster));
+  min-inline-size: 0;
+  padding: var(--demo-area-end-panel-padding, var(--space-4));
+  border-inline-start: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
+  background: var(--demo-area-end-panel-background, var(--color-surface));
+}
+
+.mz-demo-area-end-panel > * {
+  max-inline-size: 100%;
+}
+
+.mz-demo-area-body > .react-aria-TabPanel {
+  outline: none;
+}
+
+.mz-demo-area-body > .react-aria-TabPanel[data-focus-visible] {
+  outline: var(--focus-ring-width) solid var(--demo-area-focus-ring-color, var(--color-focus));
+  outline-offset: var(--focus-ring-offset-inset);
+}
+
+/* The code fills the body, without a second frame. */
+.mz-demo-area-body .react-aria-TabPanel > pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+/* The bar's tabs have no line of their own under the bar's border. */
+.mz-demo-area-bar .react-aria-TabList {
+  border-block-end: 0;
+}

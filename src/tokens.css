@@ -22,7 +22,9 @@
 @import './components/AppShell/AppShell.tokens.css';
 @import './components/Panel/Panel.tokens.css';
 
-/* Themes load last so they can override any shared or component default. */
+/* Themes load last so they can override any shared or component default. A theme applies to the page
+   or to any element with data-theme; the token files re-declare the tokens that point at theme values
+   on those elements, so they take the nearest theme's values. */
 @import './themes/light.css';
 @import './themes/dark.css';
 @import './themes/wireframe.css';

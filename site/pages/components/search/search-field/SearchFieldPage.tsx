@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { Input, Label, SearchField } from '@decocode/mezzanine'
+import { DemoArea, Input, Label, SearchField } from '@decocode/mezzanine'
 import { searchFieldContent } from './searchFieldContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function SearchFieldPage() {
     <ContentPage
       content={searchFieldContent}
       parts={{
-        example: <ExampleZone><SearchField><Label>Search A</Label><Input /></SearchField></ExampleZone>,
+        example: <DemoArea><SearchField><Label>Search A</Label><Input /></SearchField></DemoArea>,
       }}
     />
   )

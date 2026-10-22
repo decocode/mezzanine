@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Tag, TagGroup } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { DemoArea, Tag, TagGroup } from '@decocode/mezzanine'
 import { tagGroupContent, tagGroupExampleLabels } from './tagGroupContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -18,12 +17,12 @@ export default function TagGroupPage() {
     <ContentPage
       content={tagGroupContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <TagGroup label={tagGroupExampleLabels.selectable} selectionMode="multiple" defaultSelectedKeys={[tagGroupExampleLabels.tags[0]]}>
             {tagGroupExampleLabels.tags.map((tag) => <Tag key={tag} id={tag}>{tag}</Tag>)}
           </TagGroup>
-        </ExampleZone>,
-        variants: <ExampleZone><RemovableTags /></ExampleZone>,
+        </DemoArea>,
+        variants: <DemoArea><RemovableTags /></DemoArea>,
       }}
     />
   )

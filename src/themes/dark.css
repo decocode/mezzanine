@@ -1,5 +1,5 @@
 /* Explicit dark selection. */
-:where(:root[data-theme='dark']) {
+:where([data-theme='dark']) {
   color-scheme: dark;
 
   /* A deeper black page, so raised surfaces stand out. */
@@ -95,7 +95,7 @@
 
 /* System follows a dark device preference. Light remains the fallback. */
 @media (prefers-color-scheme: dark) {
-  :where(:root:not([data-theme]), :root[data-theme='system']) {
+  :where(:root:not([data-theme]), [data-theme='system']) {
     color-scheme: dark;
 
     /* A deeper black page, so raised surfaces stand out. */

@@ -1,6 +1,5 @@
 import { useId } from 'react'
-import { Button, DropZone, FileTrigger, PlaceholderIcon, Text } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Button, DemoArea, DropZone, FileTrigger, PlaceholderIcon, Text } from '@decocode/mezzanine'
 import { dropZoneContent, dropZoneExampleLabels } from './dropZoneContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -19,5 +18,5 @@ function DropZoneExample() {
 }
 
 export default function DropZonePage() {
-  return <ContentPage content={dropZoneContent} parts={{ example: <ExampleZone><DropZoneExample /></ExampleZone> }} />
+  return <ContentPage content={dropZoneContent} parts={{ example: <DemoArea><DropZoneExample /></DemoArea> }} />
 }

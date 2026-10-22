@@ -1,5 +1,4 @@
-import { Footer, Link } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { DemoArea, Footer, Link } from '@decocode/mezzanine'
 import { footerContent, footerExampleLabels as labels } from './footerContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -9,7 +8,7 @@ export default function FooterPage() {
       content={footerContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <Footer className="footer-example">
               <p>{labels.smallPrint}</p>
               <nav aria-label={labels.linksLabel}>
@@ -18,7 +17,7 @@ export default function FooterPage() {
                 </ul>
               </nav>
             </Footer>
-          </ExampleZone>
+          </DemoArea>
         ),
       }}
     />

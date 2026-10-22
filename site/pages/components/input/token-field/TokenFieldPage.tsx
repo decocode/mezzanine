@@ -1,5 +1,4 @@
-import { Token, TokenField, TokenFieldValue } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { DemoArea, Token, TokenField, TokenFieldValue } from '@decocode/mezzanine'
 import { tokenFieldContent, tokenFieldExampleLabels } from './tokenFieldContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -11,11 +10,11 @@ export default function TokenFieldPage() {
     <ContentPage
       content={tokenFieldContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <TokenField label={tokenFieldExampleLabels.label} defaultValue={exampleValue}>
             {(segment) => <Token>{segment.text}</Token>}
           </TokenField>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

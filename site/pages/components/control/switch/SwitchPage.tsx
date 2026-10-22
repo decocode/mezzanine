@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { Cell, Column, Row, SwitchButton, SwitchField, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Cell, Column, DemoArea, Row, SwitchButton, SwitchField, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { switchContent, switchStateLabels } from './switchContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function SwitchPage() {
     <ContentPage
       content={switchContent}
       parts={{
-        example: <ExampleZone><SwitchField><SwitchButton>Switch label</SwitchButton></SwitchField></ExampleZone>,
+        example: <DemoArea><SwitchField><SwitchButton>Switch label</SwitchButton></SwitchField></DemoArea>,
         states: (
           <div className="documentation-table documentation-comparison-table">
             <Table aria-label="Switch states">

@@ -1,13 +1,5 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
 import {
-  Cell,
-  Column,
-  ExternalLinkIcon,
-  Link,
-  Row,
-  Table,
-  TableBody,
-  TableHeader,
+  Cell, Column, DemoArea, ExternalLinkIcon, Link, Row, Table, TableBody, TableHeader,
 } from '@decocode/mezzanine'
 import { linkContent, linkContentRows, linkStates } from './linkContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -18,9 +10,9 @@ export default function LinkPage() {
       content={linkContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <Link href="#link-content">Link content examples</Link>
-          </ExampleZone>
+          </DemoArea>
         ),
         states: (
           <div className="documentation-table documentation-comparison-table">

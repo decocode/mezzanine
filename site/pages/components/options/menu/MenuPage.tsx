@@ -1,5 +1,4 @@
-import { Button, Menu, MenuItem, MenuTrigger, Popover } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Button, DemoArea, Menu, MenuItem, MenuTrigger, Popover } from '@decocode/mezzanine'
 import { menuContent, menuExampleLabels } from './menuContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,15 +7,15 @@ export default function MenuPage() {
     <ContentPage
       content={menuContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <MenuTrigger>
             <Button variant="secondary">{menuExampleLabels.trigger}</Button>
             <Popover>
               <Menu>{menuExampleLabels.items.map((item) => <MenuItem key={item} id={item}>{item}</MenuItem>)}</Menu>
             </Popover>
           </MenuTrigger>
-        </ExampleZone>,
-        variants: <ExampleZone>
+        </DemoArea>,
+        variants: <DemoArea>
           <MenuTrigger>
             <Button variant="secondary">{menuExampleLabels.selectionTrigger}</Button>
             <Popover>
@@ -25,7 +24,7 @@ export default function MenuPage() {
               </Menu>
             </Popover>
           </MenuTrigger>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

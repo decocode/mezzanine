@@ -7,6 +7,11 @@ import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '
 // address.
 test('text fields support keyboard editing, descriptions and validation', async ({ page }) => {
   await page.goto('/text-field')
+  // Tab on to a field, past any demo's theme picker on the way.
+  const tabTo = async (target: ReturnType<typeof page.getByRole>) => {
+    for (let presses = 0; presses < 4 && !(await target.evaluate(element => element === document.activeElement)); presses += 1) await page.keyboard.press('Tab')
+    await expect(target).toBeFocused()
+  }
   const field = page.getByRole('textbox', { name: 'Field label', exact: true })
   await expect(field).toHaveAccessibleDescription('Supporting information about this field.')
   await field.focus()
@@ -14,12 +19,12 @@ test('text fields support keyboard editing, descriptions and validation', async 
   await expect(page.getByText('Current value: Example value')).toBeVisible()
   await expect(field).toHaveAttribute('data-focused')
   await expect(field).toHaveCSS('outline-style', 'solid')
-  await page.keyboard.press('Tab')
-  await expect(page.getByRole('textbox', { name: 'Read-only field', exact: true })).toBeFocused()
+  // Tab on to the read-only field in the next demo, past that demo's theme picker.
+  const readOnly = page.getByRole('textbox', { name: 'Read-only field', exact: true })
+  await tabTo(readOnly)
   await page.keyboard.type('Changed')
   await expect(page.getByRole('textbox', { name: 'Read-only field', exact: true })).toHaveValue('Read-only value')
-  await page.keyboard.press('Tab')
-  await expect(page.getByRole('textbox', { name: 'Invalid field', exact: true })).toBeFocused()
+  await tabTo(page.getByRole('textbox', { name: 'Invalid field', exact: true }))
   await expect(page.getByRole('textbox', { name: 'Disabled field', exact: true })).toBeDisabled()
   const email = page.getByRole('textbox', { name: 'Email address (required)', exact: true })
   await page.getByRole('button', { name: 'Validate field' }).click()

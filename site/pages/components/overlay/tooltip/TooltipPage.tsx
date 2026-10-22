@@ -1,5 +1,4 @@
-import { Button, SettingsIcon, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Button, DemoArea, SettingsIcon, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
 import { tooltipContent } from './tooltipContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -9,12 +8,12 @@ export default function TooltipPage() {
       content={tooltipContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <TooltipTrigger>
               <Button iconLeading={<SettingsIcon />} aria-label="Settings" />
               <Tooltip placement="bottom">Settings</Tooltip>
             </TooltipTrigger>
-          </ExampleZone>
+          </DemoArea>
         ),
       }}
     />

@@ -220,6 +220,14 @@
     "kind": "value"
   },
   {
+    "name": "DemoArea",
+    "kind": "value"
+  },
+  {
+    "name": "DemoAreaProps",
+    "kind": "type"
+  },
+  {
     "name": "Dialog",
     "kind": "value"
   },

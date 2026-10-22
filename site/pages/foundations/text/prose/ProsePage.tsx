@@ -1,5 +1,5 @@
+import { DemoArea } from '@decocode/mezzanine'
 import type { ReactNode } from 'react'
-import { ExampleZone } from '../../../../components/ExampleZone'
 import { RichText } from '../../../../components/RichText'
 import { useTokenValue } from '../../../../components/tokenValueLogic'
 import { proseContent, proseExampleTitle, proseListKinds } from './proseContent'
@@ -46,17 +46,17 @@ export default function ProsePage() {
             <h3 id={`prose-${kind.key}-lists`} className="mz-text-heading-sm">{kind.title}</h3>
             <p className="component-section-description mz-text-body-md"><RichText text={kind.intro} /></p>
             <h4 className="mz-text-title-lg">{proseExampleTitle}</h4>
-            <ExampleZone>{listExamples[kind.key]}</ExampleZone>
+            <DemoArea>{listExamples[kind.key]}</DemoArea>
           </section>
         )),
         inlineCode: (
           <>
             <h4 className="mz-text-title-lg">{proseExampleTitle}</h4>
-            <ExampleZone>
+            <DemoArea>
               <p className="mz-text-body-md">
                 The <code>--space-4</code> token stores <code>1rem</code> by default.
               </p>
-            </ExampleZone>
+            </DemoArea>
           </>
         ),
       }}

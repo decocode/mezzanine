@@ -48,6 +48,7 @@ export const pointerPrefixes = {
   Toolbar: ['toolbar'],
   Sheet: ['sheet'],
   Form: ['form'],
+  DemoArea: ['demo-area'],
   Table: ['table'],
   TableOfContents: ['table-of-contents'],
   Tabs: ['tabs', 'tab'],

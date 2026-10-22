@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { Button, FieldError, Form, Input, Label, Text, TextField } from '@decocode/mezzanine'
+import { Button, DemoArea, FieldError, Form, Input, Label, Text, TextField } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { textFieldContent } from './textFieldContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -13,36 +12,36 @@ export default function TextFieldPage() {
       content={textFieldContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <TextField value={value} onChange={setValue}>
               <Label>Field label</Label>
               <Input placeholder="Enter text" />
               <Text slot="description">Supporting information about this field.</Text>
             </TextField>
             <p>Current value: {value || 'Empty'}</p>
-          </ExampleZone>
+          </DemoArea>
         ),
         states: (<>
-          <ExampleZone>
+          <DemoArea>
             <TextField isReadOnly defaultValue="Read-only value">
               <Label>Read-only field</Label><Input />
             </TextField>
-          </ExampleZone>
-          <ExampleZone>
+          </DemoArea>
+          <DemoArea>
             <TextField isDisabled defaultValue="Disabled value">
               <Label>Disabled field</Label><Input />
             </TextField>
-          </ExampleZone>
-          <ExampleZone>
+          </DemoArea>
+          <DemoArea>
             <TextField isInvalid validationBehavior="aria" defaultValue="Invalid value">
               <Label>Invalid field</Label><Input />
               <FieldError>This example shows an externally supplied error.</FieldError>
             </TextField>
-          </ExampleZone>
+          </DemoArea>
         </>),
         validation: (
           <Form onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>
-            <ExampleZone>
+            <DemoArea>
               <TextField name="email" type="email" isRequired onChange={() => setSubmitted(false)}>
                 <Label>Email address (required)</Label>
                 <Input autoComplete="email" />
@@ -51,7 +50,7 @@ export default function TextFieldPage() {
               </TextField>
               <p><Button type="submit">Validate field</Button></p>
               <p role="status">{submitted ? 'The email address passed validation.' : ''}</p>
-            </ExampleZone>
+            </DemoArea>
           </Form>
         ),
       }}

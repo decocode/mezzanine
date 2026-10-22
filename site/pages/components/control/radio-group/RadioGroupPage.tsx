@@ -1,18 +1,5 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
 import {
-  Cell,
-  Column,
-  FieldError,
-  Label,
-  RadioButton,
-  RadioField,
-  RadioGroup,
-  Row,
-  SelectionIndicator,
-  Table,
-  TableBody,
-  TableHeader,
-  Text
+  Cell, Column, DemoArea, FieldError, Label, RadioButton, RadioField, RadioGroup, Row, SelectionIndicator, Table, TableBody, TableHeader, Text,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { radioGroupContent, radioGroupStateExamples, radioGroupStates } from './radioGroupContent'
@@ -26,7 +13,7 @@ export default function RadioGroupPage() {
       content={radioGroupContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <RadioGroup defaultValue="option-a">
               <Label>RadioGroup label</Label>
               <Text slot="description">RadioGroup description</Text>
@@ -53,7 +40,7 @@ export default function RadioGroupPage() {
               </RadioField>
               <FieldError />
             </RadioGroup>
-          </ExampleZone>
+          </DemoArea>
         ),
         states: (<>
           <div className="documentation-table">
@@ -80,18 +67,18 @@ export default function RadioGroupPage() {
           <section aria-labelledby="radio-group-read-only">
             <h3 id="radio-group-read-only" className="mz-text-heading-sm">{radioGroupStateExamples.readOnly.title}</h3>
             <p className="component-section-description"><RichText text={radioGroupStateExamples.readOnly.description} /></p>
-            <ExampleZone>
+            <DemoArea>
               <RadioGroup defaultValue="option-a" isReadOnly>
                 <Label>Read-only options</Label>
                 <RadioField value="option-a"><RadioButton><SelectionIndicator />Option A</RadioButton></RadioField>
                 <RadioField value="option-b"><RadioButton><SelectionIndicator />Option B</RadioButton></RadioField>
               </RadioGroup>
-            </ExampleZone>
+            </DemoArea>
           </section>
           <section aria-labelledby="radio-group-validation">
             <h3 id="radio-group-validation" className="mz-text-heading-sm">{radioGroupStateExamples.validation.title}</h3>
             <p className="component-section-description"><RichText text={radioGroupStateExamples.validation.description} /></p>
-            <ExampleZone>
+            <DemoArea>
               <RadioGroup value={validationValue} onChange={setValidationValue} isRequired isInvalid={validationValue === null} validationBehavior="aria">
                 <Label>Required options</Label>
                 <Text slot="description">Choose one option.</Text>
@@ -99,7 +86,7 @@ export default function RadioGroupPage() {
                 <RadioField value="option-b"><RadioButton><SelectionIndicator />Option B</RadioButton></RadioField>
                 <FieldError>Select an option to continue.</FieldError>
               </RadioGroup>
-            </ExampleZone>
+            </DemoArea>
           </section>
         </>),
       }}

@@ -16,6 +16,7 @@ export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherPro
       aria-label="Theme"
       className="theme-toggle-group"
       size="sm"
+      variant="secondary"
       disallowEmptySelection
       onSelectionChange={(keys) => {
         const selectedKey = keys.values().next().value

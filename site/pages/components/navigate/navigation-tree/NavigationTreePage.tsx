@@ -1,7 +1,6 @@
 import { Fragment, useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { NavTree } from '@decocode/mezzanine'
+import { DemoArea, NavTree } from '@decocode/mezzanine'
 import {
   navigationTreeContent,
   navigationTreeExampleExpandedKeys,
@@ -27,14 +26,16 @@ export default function NavigationTreePage() {
       content={navigationTreeContent}
       parts={{
         example: (
-          <ExampleZone className="navigation-tree-example">
-            <RouterProvider navigate={setRoute}>
-              <nav aria-label="Nav Tree example">
-                <NavTree aria-label="Nav Tree items" items={navigationTreeExampleItems}
-                  defaultExpandedKeys={navigationTreeExampleExpandedKeys} selectedRoute={route} />
-              </nav>
-            </RouterProvider>
-          </ExampleZone>
+          <DemoArea>
+            <div className="navigation-tree-example">
+              <RouterProvider navigate={setRoute}>
+                <nav aria-label="Nav Tree example">
+                  <NavTree aria-label="Nav Tree items" items={navigationTreeExampleItems}
+                    defaultExpandedKeys={navigationTreeExampleExpandedKeys} selectedRoute={route} />
+                </nav>
+              </RouterProvider>
+            </div>
+          </DemoArea>
         ),
         usage: navigationTreeUsageTopics.map((topic) => (
           <Fragment key={topic.title}>

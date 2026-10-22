@@ -4,8 +4,8 @@
   Themes set colour roles only; components point their own tokens at these roles.
 */
 :where(:root),
-:where(:root[data-theme='system']),
-:where(:root[data-theme='light']) {
+:where([data-theme='system']),
+:where([data-theme='light']) {
   color-scheme: light;
 
   /* A pure white page, so surfaces and cards separate cleanly. */

@@ -1,5 +1,4 @@
-import { Button, Dialog, DialogTrigger, Heading, Modal, ModalOverlay, Text } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Button, DemoArea, Dialog, DialogTrigger, Heading, Modal, ModalOverlay, Text } from '@decocode/mezzanine'
 import { modalContent, modalExampleLabels } from './modalContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function ModalPage() {
     <ContentPage
       content={modalContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <DialogTrigger>
             <Button variant="secondary">{modalExampleLabels.trigger}</Button>
             <ModalOverlay isDismissable>
@@ -23,7 +22,7 @@ export default function ModalPage() {
               </Modal>
             </ModalOverlay>
           </DialogTrigger>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

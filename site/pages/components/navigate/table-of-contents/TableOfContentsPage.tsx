@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { TableOfContents } from '@decocode/mezzanine'
+import { DemoArea, TableOfContents } from '@decocode/mezzanine'
 import { RichText } from '../../../../components/RichText'
 import { tableOfContentsContent, tableOfContentsImportParagraph } from './tableOfContentsContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -27,25 +26,27 @@ export default function TableOfContentsPage() {
       content={tableOfContentsContent}
       parts={{
         example: (<>
-          <ExampleZone className="table-of-contents-example">
-            <TableOfContents
-              heading="Example contents"
-              headingLevel={3}
-              sections={exampleSections}
-            />
-            {exampleSections.map(({ id, label, children }) => (
-              <section aria-labelledby={id} key={id}>
-                <h3 className="mz-text-heading-sm" id={id}>{label}</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                {children.map((child) => (
-                  <section aria-labelledby={child.id} key={child.id}>
-                    <h4 className="mz-text-title-md" id={child.id}>{child.label}</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                  </section>
-                ))}
-              </section>
-            ))}
-          </ExampleZone>
+          <DemoArea>
+            <div className="table-of-contents-example">
+              <TableOfContents
+                heading="Example contents"
+                headingLevel={3}
+                sections={exampleSections}
+              />
+              {exampleSections.map(({ id, label, children }) => (
+                <section aria-labelledby={id} key={id}>
+                  <h3 className="mz-text-heading-sm" id={id}>{label}</h3>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  {children.map((child) => (
+                    <section aria-labelledby={child.id} key={child.id}>
+                      <h4 className="mz-text-title-md" id={child.id}>{child.label}</h4>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </section>
+                  ))}
+                </section>
+              ))}
+            </div>
+          </DemoArea>
           <p className="component-section-description"><RichText text={tableOfContentsImportParagraph} /></p>
         </>),
       }}

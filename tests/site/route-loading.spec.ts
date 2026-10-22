@@ -80,7 +80,8 @@ test('theme changes preserve the loaded page and example state', async ({ page }
   await page.goto('/button')
   await page.getByRole('button', { name: 'Press', exact: true }).focus()
   await page.keyboard.press('Enter')
-  await page.getByRole('radio', { name: 'Dark theme', exact: true }).click()
+  // The page's own theme switcher is in the top bar; each demo has its own too.
+  await page.getByRole('banner').getByRole('radio', { name: 'Dark theme', exact: true }).click()
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
   await expect(page.getByRole('status')).toHaveText('Press count: 1')
 })

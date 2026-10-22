@@ -1,5 +1,4 @@
-import { Tree, TreeItem } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { DemoArea, Tree, TreeItem } from '@decocode/mezzanine'
 import { treeContent, treeExampleLabels } from './treeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function TreePage() {
     <ContentPage
       content={treeContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <Tree aria-label={treeExampleLabels.label} selectionMode="single" selectionBehavior="replace" defaultExpandedKeys={[treeExampleLabels.branches[0].title]}>
             {treeExampleLabels.branches.map((branch) => (
               <TreeItem key={branch.title} id={branch.title} title={branch.title}>
@@ -17,7 +16,7 @@ export default function TreePage() {
             ))}
             <TreeItem id={treeExampleLabels.leaf} title={treeExampleLabels.leaf} />
           </Tree>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

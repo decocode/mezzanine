@@ -1,11 +1,10 @@
-import { AppShell, Footer, Panel, PanelTrigger } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { AppShell, DemoArea, Footer, Panel, PanelTrigger } from '@decocode/mezzanine'
 import { appShellExampleLabels as labels } from './appShellContent'
 
 // A small AppShell with a Panel at each edge, used on the AppShell and Panel pages.
 export function AppShellExample() {
   return (
-    <ExampleZone className="app-shell-example-zone">
+    <DemoArea className="app-shell-example-demo">
       <AppShell className="app-shell-example" bottomPanelSpan="main">
         <header className="app-shell-example-header">
           <span className="mz-text-title-sm">{labels.header}</span>
@@ -30,6 +29,6 @@ export function AppShellExample() {
           <p className="app-shell-example-panel-text">{labels.bottomPanelText}</p>
         </Panel>
       </AppShell>
-    </ExampleZone>
+    </DemoArea>
   )
 }

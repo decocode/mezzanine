@@ -518,6 +518,64 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     }
   ],
+  "DemoArea": [
+    {
+      "name": "--demo-area-background",
+      "fallback": "var(--color-surface)"
+    },
+    {
+      "name": "--demo-area-bar-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--demo-area-bar-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--demo-area-bar-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--demo-area-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--demo-area-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
+      "name": "--demo-area-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--demo-area-end-panel-background",
+      "fallback": "var(--color-surface)"
+    },
+    {
+      "name": "--demo-area-end-panel-gap",
+      "fallback": "var(--space-gap-cluster)"
+    },
+    {
+      "name": "--demo-area-end-panel-padding",
+      "fallback": "var(--space-4)"
+    },
+    {
+      "name": "--demo-area-end-panel-width",
+      "fallback": "var(--width-xs)"
+    },
+    {
+      "name": "--demo-area-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--demo-area-padding",
+      "fallback": "var(--space-4)"
+    },
+    {
+      "name": "--demo-area-preview-background",
+      "fallback": "var(--color-page)"
+    }
+  ],
   "Dialog": [
     {
       "name": "--dialog-actions-gap",

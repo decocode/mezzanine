@@ -1,7 +1,5 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
 import {
-  Button,
-  Dialog, DialogTrigger, Heading, Modal, ModalOverlay
+  Button, DemoArea, Dialog, DialogTrigger, Heading, Modal, ModalOverlay,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { confirmationFeedback, dialogContent, dialogExampleCopy } from './dialogContent'
@@ -15,7 +13,7 @@ export default function DialogPage() {
       content={dialogContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <DialogTrigger>
               <Button>Open dialog</Button>
               <ModalOverlay isDismissable>
@@ -30,10 +28,10 @@ export default function DialogPage() {
                 </Modal>
               </ModalOverlay>
             </DialogTrigger>
-          </ExampleZone>
+          </DemoArea>
         ),
         confirmationDialog: (
-          <ExampleZone>
+          <DemoArea>
             <DialogTrigger>
               <Button variant="secondary">Open confirmation</Button>
               <ModalOverlay>
@@ -57,7 +55,7 @@ export default function DialogPage() {
               </ModalOverlay>
             </DialogTrigger>
             <p className="component-example-feedback" role="status">{confirmationFeedback(confirmationCount)}</p>
-          </ExampleZone>
+          </DemoArea>
         ),
       }}
     />

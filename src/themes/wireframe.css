@@ -3,7 +3,7 @@
   keyboard-focus color: the accent family is the accent palette with its colour
   removed, so it keeps the same lightness. It is selected explicitly, never by the OS.
 */
-:where(:root[data-theme='wireframe']) {
+:where([data-theme='wireframe']) {
   color-scheme: light;
 
   --color-page: var(--color-neutral-50);
@@ -86,35 +86,38 @@
   --table-header-background: var(--color-neutral-100);
 }
 
-/* Wireframe underlines text links; button-styled links use the shared Button treatment.
-   data-no-wireframe-underline opts an element out (e.g. a brand wordmark). data-preview-state is
-   internal to the docs' state tables, not part of the public API. */
-:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])) {
-  text-decoration-line: underline !important;
-  text-decoration-thickness: var(--border-width-baseline);
-  text-underline-offset: var(--underline-offset);
-}
+/* These rules apply inside a Wireframe area and stop at a nested area with another theme. */
+@scope ([data-theme='wireframe']) to ([data-theme]:not([data-theme='wireframe'])) {
+  /* Wireframe underlines text links; button-styled links use the shared Button treatment.
+     data-no-wireframe-underline opts an element out (e.g. a brand wordmark). data-preview-state is
+     internal to the docs' state tables, not part of the public API. */
+  :scope :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])) {
+    text-decoration-line: underline !important;
+    text-decoration-thickness: var(--border-width-baseline);
+    text-underline-offset: var(--underline-offset);
+  }
 
-:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
-  text-decoration-thickness: calc(var(--border-width-baseline) * 2);
-}
-
-:where(:root[data-theme='wireframe']) .react-aria-Link:is([data-focus-visible], [data-preview-state='focused']):not(:where([data-disabled], [aria-disabled='true'])) {
-  color: var(--color-link-hovered);
-}
-
-@media (hover: hover) {
-  :root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):hover:not([data-disabled], [aria-disabled='true']) {
+  :scope :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
     text-decoration-thickness: calc(var(--border-width-baseline) * 2);
   }
-}
 
-:root[data-theme='wireframe'] :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
-  background-color: var(--color-accent-muted-pressed);
-  text-decoration-thickness: calc(var(--border-width-baseline) * 2);
-}
+  :scope .react-aria-Link:is([data-focus-visible], [data-preview-state='focused']):not(:where([data-disabled], [aria-disabled='true'])) {
+    color: var(--color-link-hovered);
+  }
 
-/* Nav items keep their own pressed background, a step darker than hover. */
-:root[data-theme='wireframe'] :is(.mz-top-bar .mz-top-bar-link, .mz-table-of-contents .react-aria-Link)[data-pressed] {
-  background-color: var(--nav-item-background-pressed);
+  @media (hover: hover) {
+    :scope :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):hover:not([data-disabled], [aria-disabled='true']) {
+      text-decoration-thickness: calc(var(--border-width-baseline) * 2);
+    }
+  }
+
+  :scope :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
+    background-color: var(--color-accent-muted-pressed);
+    text-decoration-thickness: calc(var(--border-width-baseline) * 2);
+  }
+
+  /* Nav items keep their own pressed background, a step darker than hover. */
+  :scope :is(.mz-top-bar .mz-top-bar-link, .mz-table-of-contents .react-aria-Link)[data-pressed] {
+    background-color: var(--nav-item-background-pressed);
+  }
 }

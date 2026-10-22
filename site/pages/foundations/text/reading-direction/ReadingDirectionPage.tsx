@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Card, Checkbox, CodeBlock } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Card, Checkbox, CodeBlock, DemoArea } from '@decocode/mezzanine'
 import { RichText } from '../../../../components/RichText'
 import {
   readingDirectionContent, readingDirectionRightToLeftExamples, readingDirectionVerticalExamples,
@@ -15,7 +14,7 @@ export default function ReadingDirectionPage() {
       content={readingDirectionContent}
       parts={{
         startAndEnd: (<>
-          <ExampleZone>
+          <DemoArea>
             <Checkbox isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</Checkbox>
             <div dir={isRightToLeft ? 'rtl' : 'ltr'} className="mz-ratio-pair text-direction-example" data-fraction="1/2">
               <div>
@@ -27,12 +26,12 @@ export default function ReadingDirectionPage() {
                 <p className="text-direction-logical mz-text-body-md"><RichText text={startAndEndExample.logicalText} /></p>
               </div>
             </div>
-          </ExampleZone>
+          </DemoArea>
           <CodeBlock className="docs-code-block">{startAndEndCode}</CodeBlock>
         </>),
         rightToLeft: (<>
           <CodeBlock className="docs-code-block">{rightToLeftCode}</CodeBlock>
-          <ExampleZone>
+          <DemoArea>
             <ul className="text-language-examples">
               {readingDirectionRightToLeftExamples.map(({ language, lang, text }) => <li key={lang} dir="rtl" lang={lang}>
                 <Card>
@@ -41,11 +40,11 @@ export default function ReadingDirectionPage() {
                 </Card>
               </li>)}
             </ul>
-          </ExampleZone>
+          </DemoArea>
         </>),
         topToBottom: (<>
           <CodeBlock className="docs-code-block">{topToBottomCode}</CodeBlock>
-          <ExampleZone>
+          <DemoArea>
             <ul className="text-language-examples">
               {readingDirectionVerticalExamples.map(({ language, lang, text }) => <li key={lang}>
                 <Card>
@@ -54,7 +53,7 @@ export default function ReadingDirectionPage() {
                 </Card>
               </li>)}
             </ul>
-          </ExampleZone>
+          </DemoArea>
         </>),
       }}
     />

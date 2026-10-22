@@ -1,16 +1,5 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
 import {
-  ArrowRightIcon,
-  Button,
-  Cell,
-  Column,
-  DownloadIcon,
-  PlusIcon,
-  Row,
-  Table,
-  TableBody,
-  TableHeader,
-  type ButtonVariant
+  ArrowRightIcon, Button, Cell, Column, DemoArea, DownloadIcon, PlusIcon, Row, Table, TableBody, TableHeader, type ButtonVariant,
 } from '@decocode/mezzanine'
 import { useState, type ReactNode } from 'react'
 import {
@@ -67,17 +56,17 @@ export default function ButtonPage() {
       content={buttonContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <Button onPress={() => setPressCount((count) => count + 1)}>Press</Button>
             <p className="component-example-feedback" role="status">{buttonExampleCopy.pressCount} {pressCount}</p>
-          </ExampleZone>
+          </DemoArea>
         ),
         navigationalButtons: (
-          <ExampleZone>
+          <DemoArea>
             <p>{navigation.lead}</p>
             <Button href={navigation.href}>{navigation.label}</Button>
             <p className="mz-text-body-sm">{navigation.hint}</p>
-          </ExampleZone>
+          </DemoArea>
         ),
         labelAndIconPlacement: (<>
           <div className="documentation-table documentation-comparison-table">

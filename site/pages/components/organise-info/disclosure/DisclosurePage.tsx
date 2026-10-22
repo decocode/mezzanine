@@ -1,11 +1,5 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
 import {
-  Disclosure,
-  DisclosureGroup,
-  DisclosureHeader,
-  DisclosurePanel,
-  ExternalLinkIcon,
-  Link
+  DemoArea, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel, ExternalLinkIcon, Link,
 } from '@decocode/mezzanine'
 import { disclosureContent, disclosureGroupReactAriaLink } from './disclosureContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -16,14 +10,14 @@ export default function DisclosurePage() {
       content={disclosureContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <Disclosure defaultExpanded>
               <DisclosureHeader>Disclosure A</DisclosureHeader>
               <DisclosurePanel>
                 DisclosurePanel A content.
               </DisclosurePanel>
             </Disclosure>
-          </ExampleZone>
+          </DemoArea>
         ),
         disclosureGroup: (<>
           <Link
@@ -36,7 +30,7 @@ export default function DisclosurePage() {
             <span>{disclosureGroupReactAriaLink.label}</span>
             <ExternalLinkIcon />
           </Link>
-          <ExampleZone>
+          <DemoArea>
             <DisclosureGroup defaultExpandedKeys={['disclosure-a']}>
               <Disclosure id="disclosure-a">
                 <DisclosureHeader>Disclosure A</DisclosureHeader>
@@ -51,7 +45,7 @@ export default function DisclosurePage() {
                 <DisclosurePanel>DisclosurePanel C content.</DisclosurePanel>
               </Disclosure>
             </DisclosureGroup>
-          </ExampleZone>
+          </DemoArea>
         </>),
       }}
     />

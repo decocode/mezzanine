@@ -438,7 +438,7 @@ a:focus-visible {
   gap: var(--space-2);
 }
 
-/* Component examples that need a sensible width inside an ExampleZone. */
+/* Component examples that need a sensible width inside a DemoArea. */
 .autocomplete-example,
 .list-box-example {
   inline-size: min(var(--width-md), 100%);
@@ -685,31 +685,19 @@ a:focus-visible {
   max-inline-size: var(--line-length);
 }
 
-.component-example {
-  min-width: 0;
+/* A page's demos sit below their introduction, up to the wide content width. */
+.mz-demo-area {
   max-width: var(--docs-wide-content-width);
   margin-top: var(--space-4);
-  padding: var(--space-4);
-  border: var(--border-width-baseline) solid var(--color-border);
-  border-radius: var(--radius-surface);
-  background: var(--color-page);
 }
 
 .top-bar-example {
+  --demo-area-padding: 0;
   max-width: none;
-  padding: 0;
 }
 
-/* The frame supplies outer spacing; retain spacing within nested prose lists. */
-.component-example > :is(p, ul, ol):first-child {
-  margin-block-start: 0;
-}
-
-.component-example > :is(p, ul, ol):last-child {
-  margin-block-end: 0;
-}
-
-.component-example.documentation-table > .react-aria-Table {
+/* A table example keeps readable columns; its documentation wrapper scrolls. */
+.table-example > .react-aria-Table {
   /* Preserve readable example columns; the documentation wrapper scrolls. */
   min-inline-size: var(--width-lg);
 }
@@ -904,28 +892,6 @@ a:focus-visible {
 }
 
 /* Settings for an example are grouped separately from the demonstrated component. */
-.example-zone-controls {
-  min-width: 0;
-  margin: 0 0 var(--space-6);
-  padding: var(--space-4);
-  border: var(--border-width-baseline) solid var(--color-border);
-  border-radius: var(--radius-surface);
-  background: var(--color-surface);
-}
-.example-zone-controls legend {
-  padding-inline: var(--space-2);
-  color: var(--color-text);
-  font-size: var(--font-size-label-lg);
-  font-weight: var(--font-weight-semibold);
-}
-.example-zone-controls-content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-4);
-  min-width: 0;
-}
-.example-zone-controls-content > * { min-width: 0; max-width: 100%; }
 /* Page contents sit inline after the heading until DocsShell's end Panel has room for them. */
 .docs-contents-inline { margin-block-end: var(--space-8); }
 
@@ -951,7 +917,7 @@ a:focus-visible {
 .text-direction-logical { padding-block: var(--space-3); border-inline-start: var(--border-width-xl) solid var(--color-warning-600); padding-inline-start: var(--space-4); }
 
 /* AppShell example on the AppShell and Panel pages: the site gives the frame a fixed height inside its example zone. */
-.app-shell-example-zone { padding: 0; }
+.app-shell-example-demo { --demo-area-padding: 0; }
 .app-shell-example { block-size: 28rem; }
 
 .app-shell-example-header {

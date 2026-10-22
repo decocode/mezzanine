@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { Button,Link,TopBar } from '@decocode/mezzanine'
+import { Button, DemoArea, Link, TopBar } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
 import { topBarContent } from './topBarContent'
@@ -13,7 +12,7 @@ export default function TopBarPage() {
       content={topBarContent}
       parts={{
         example: (
-          <ExampleZone className="top-bar-example">
+          <DemoArea className="top-bar-example">
             <RouterProvider navigate={(href) => setDestination(decodeURIComponent(href.slice(1)))}>
               <TopBar aria-label="Example navigation"
                 brand={<Link href="#Home%20link" aria-label="Example home"><span aria-hidden="true" className="site-logo" /></Link>}
@@ -25,7 +24,7 @@ export default function TopBarPage() {
               </TopBar>
             </RouterProvider>
             <p role="status">{isSaved ? 'Changes saved.' : ''}</p>
-          </ExampleZone>
+          </DemoArea>
         ),
       }}
     />

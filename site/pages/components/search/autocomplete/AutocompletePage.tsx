@@ -1,5 +1,4 @@
-import { ExampleZone } from '../../../../components/ExampleZone'
-import { Autocomplete, Input, ListBox, ListBoxItem, SearchField, useFilter } from '@decocode/mezzanine'
+import { Autocomplete, DemoArea, Input, ListBox, ListBoxItem, SearchField, useFilter } from '@decocode/mezzanine'
 import { autocompleteContent, autocompleteOptions } from './autocompleteContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -10,7 +9,7 @@ export default function AutocompletePage() {
       content={autocompleteContent}
       parts={{
         example: (
-          <ExampleZone>
+          <DemoArea>
             <div className="autocomplete-example">
               <Autocomplete filter={contains}>
                 <SearchField aria-label="Search options"><Input /></SearchField>
@@ -19,7 +18,7 @@ export default function AutocompletePage() {
                 </ListBox>
               </Autocomplete>
             </div>
-          </ExampleZone>
+          </DemoArea>
         ),
       }}
     />

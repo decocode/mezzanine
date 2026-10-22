@@ -1,5 +1,4 @@
-import { Button, Heading, Sheet, SheetTrigger, Text } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { Button, DemoArea, Heading, Sheet, SheetTrigger, Text } from '@decocode/mezzanine'
 import { sheetContent, sheetExampleLabels } from './sheetContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,7 +7,7 @@ export default function SheetPage() {
     <ContentPage
       content={sheetContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <SheetTrigger>
             <Button variant="secondary">{sheetExampleLabels.trigger}</Button>
             <Sheet>
@@ -17,7 +16,7 @@ export default function SheetPage() {
               <Button slot="close" variant="secondary">{sheetExampleLabels.close}</Button>
             </Sheet>
           </SheetTrigger>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

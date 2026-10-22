@@ -9,6 +9,8 @@ import './tokens.css'
 import './styles.css'
 
 export { Badge } from './components/Badge/Badge'
+export { DemoArea } from './components/DemoArea/DemoArea'
+export type { DemoAreaProps } from './components/DemoArea/DemoArea'
 export { Card } from './components/Card/Card'
 export { CodeBlock } from './components/CodeBlock/CodeBlock'
 

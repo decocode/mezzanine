@@ -42,8 +42,8 @@ or in the wrong folder.
 
 Useful site components:
 
-- `ExampleZone` is the standard frame around an example. It accepts extra
-  classes for special layouts.
+- The library's `DemoArea` is the standard frame around an example. It takes
+  optional `controls` above the demo, and extra classes for special layouts.
 - `DocsTable` shows Anatomy, Props and CSS token entries with Mezzanine's Table.
 - The disclosure group and its anchor-link handling.
 - `SiteTopBar` and `DocsShell`, the site's own top bar and the AppShell frame around docs and Lab pages.
@@ -54,7 +54,7 @@ Every page uses `ContentPage`. The page passes its content file and any live
 parts:
 
 ```tsx
-<ContentPage content={badgeContent} parts={{ example: <ExampleZone>…</ExampleZone> }} />
+<ContentPage content={badgeContent} parts={{ example: <DemoArea>…</DemoArea> }} />
 ```
 
 Every page, in the Docs or the Lab, follows the same order:

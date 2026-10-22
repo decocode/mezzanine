@@ -1,5 +1,4 @@
-import { ComboBox, ListBoxItem } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { ComboBox, DemoArea, ListBoxItem } from '@decocode/mezzanine'
 import { comboBoxContent, comboBoxExampleLabels } from './comboBoxContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,11 +7,11 @@ export default function ComboBoxPage() {
     <ContentPage
       content={comboBoxContent}
       parts={{
-        example: <ExampleZone>
+        example: <DemoArea>
           <ComboBox label={comboBoxExampleLabels.label}>
             {comboBoxExampleLabels.options.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
           </ComboBox>
-        </ExampleZone>,
+        </DemoArea>,
       }}
     />
   )

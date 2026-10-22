@@ -1,5 +1,4 @@
-import { Slider } from '@decocode/mezzanine'
-import { ExampleZone } from '../../../../components/ExampleZone'
+import { DemoArea, Slider } from '@decocode/mezzanine'
 import { sliderContent } from './sliderContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -8,8 +7,8 @@ export default function SliderPage() {
     <ContentPage
       content={sliderContent}
       parts={{
-        example: <ExampleZone><Slider label="Slider A" defaultValue={40} /></ExampleZone>,
-        variants: <ExampleZone><Slider label="Range A" defaultValue={[20, 70]} thumbLabels={['Minimum', 'Maximum']} /></ExampleZone>,
+        example: <DemoArea><Slider label="Slider A" defaultValue={40} /></DemoArea>,
+        variants: <DemoArea><Slider label="Range A" defaultValue={[20, 70]} thumbLabels={['Minimum', 'Maximum']} /></DemoArea>,
       }}
     />
   )
