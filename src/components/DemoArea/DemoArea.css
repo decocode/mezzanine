@@ -99,7 +99,9 @@
   text-transform: var(--text-transform-label);
 }
 
+/* The tab panels fill the body edge to edge; the preview and code set their own space. */
 .mz-demo-area-body > .react-aria-TabPanel {
+  padding: 0;
   outline: none;
 }
 

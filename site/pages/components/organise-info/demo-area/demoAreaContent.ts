@@ -66,7 +66,7 @@ export const demoAreaContent: DocsPageContent = {
 export const demoAreaExampleLabels = {
   panelHeading: 'End panel',
   panelDescription: '`endPanel` adds a control panel for the demo.',
-  codeHeading: 'Code',
+  codeHeading: 'Code view',
   codeDescription: '`codeView` adds Code and Preview tabs.',
   button: 'Button A',
   switch: 'Disable',
