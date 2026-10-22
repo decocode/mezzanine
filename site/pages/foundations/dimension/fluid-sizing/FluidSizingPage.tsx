@@ -1,6 +1,6 @@
 import { fluidSizingContent } from './fluidSizingContent'
 import { FluidSpaceExample, FluidWidthExample, SafeMinimumExample } from './FluidSizingExamples'
-import { ContentPage } from '../../../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 import './fluidSizing.css'
 
 export default function FluidSizingPage() {

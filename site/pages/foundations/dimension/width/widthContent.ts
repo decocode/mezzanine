@@ -1,4 +1,4 @@
-import type { DocsPageContent } from '../../../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 export const widthLevels = [
   { token: '--width-xs', label: 'Width xs', description: 'Used for components such as [Tabs](/tabs).' },
@@ -41,8 +41,7 @@ export const widthContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'Size', href: '/dimension/size' },
-    { label: 'Aspect ratio', href: '/dimension/size/aspect-ratio' },
+    { label: 'Aspect ratio', href: '/dimension/aspect-ratio' },
     { label: 'Reading width', href: '/text/reading-width' },
     { label: 'Accessibility', href: '/accessibility' },
     { label: 'Panel', href: '/panel' },

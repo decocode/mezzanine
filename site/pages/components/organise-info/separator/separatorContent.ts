@@ -48,7 +48,7 @@ export const separatorContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Toolbar', href: '/toolbar' },
-    { label: 'Spacing roles', href: '/dimension/space/spacing-roles' },
+    { label: 'Spacing roles', href: '/dimension/spacing-roles' },
   ],
   references: [
     { label: 'React Aria Separator', href: 'https://react-aria.adobe.com/Separator' },

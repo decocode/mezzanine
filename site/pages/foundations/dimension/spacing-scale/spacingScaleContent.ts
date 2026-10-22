@@ -1,4 +1,4 @@
-import type { DocsPageContent } from '../../../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 // The scale's steps; each token's number × 4 gives its usual pixel size.
 export const spacingScaleLevels = [0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24].map((step) => ({

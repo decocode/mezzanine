@@ -28,9 +28,9 @@ for (const theme of themes) {
 // a ring on it and that pressing Enter follows it.
 test('a Card with href is one link that keyboard users can follow', async ({ page }) => {
   await page.goto('/dimension')
-  const card = page.locator('main a.mz-card', { has: page.getByRole('heading', { name: 'Size', level: 3 }) })
+  const card = page.locator('main a.mz-card', { has: page.getByRole('heading', { name: 'Width', level: 3 }) })
   await expect(card).toHaveCount(1)
-  await expect(card).toHaveAttribute('href', '/dimension/size')
+  await expect(card).toHaveAttribute('href', '/dimension/width')
   await expect(card.getByRole('link')).toHaveCount(0)
   await expect(card.locator('.mz-card-arrow')).toHaveAttribute('aria-hidden', 'true')
   await card.focus()
@@ -39,6 +39,6 @@ test('a Card with href is one link that keyboard users can follow', async ({ pag
   await expect(card).toHaveAttribute('data-focus-visible', 'true')
   expect(await card.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
   await page.keyboard.press('Enter')
-  await expect(page).toHaveURL(/\/dimension\/size$/)
+  await expect(page).toHaveURL(/\/dimension\/width$/)
   await expectNoAccessibilityViolations(page, 'main')
 })

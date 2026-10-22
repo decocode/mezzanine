@@ -1,4 +1,4 @@
-import type { DocsPageContent } from '../../../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 export const spacingRoleLevels = [
   { token: '--space-gap-control', label: 'Gap: control', description: 'An icon or indicator and its label, inside one control' },
@@ -15,6 +15,6 @@ export const spacingRolesContent: DocsPageContent = {
   id: 'spacing-roles',
   kind: 'foundation',
   title: 'Spacing roles',
-  description: 'Components take their spacing from shared roles, which point at the [spacing scale](/dimension/space/spacing-scale). Roles are named by how closely things belong together: inside a control is closest, then a field, then a cluster of components.',
+  description: 'Components take their spacing from shared roles, which point at the [spacing scale](/dimension/spacing-scale). Roles are named by how closely things belong together: inside a control is closest, then a field, then a cluster of components.',
   sections: [{ key: 'spacingRoles', title: 'Roles' }],
 }

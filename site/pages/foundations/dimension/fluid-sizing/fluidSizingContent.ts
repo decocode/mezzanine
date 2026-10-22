@@ -1,7 +1,7 @@
 // The Fluid sizing page, in Foundations › Dimension › Size: its explanation and the CSS behind its
 // examples, in plain English.
-import type { DocsPageContent } from '../../../../../templates/docsPageContent'
-import type { CssNote } from '../../../../../components/ExampleParts'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
 export const fluidSizingContent: DocsPageContent = {
   id: 'fluid-sizing', kind: 'foundation', title: 'Fluid sizing',

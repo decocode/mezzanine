@@ -1,7 +1,7 @@
 // The Aspect ratio page, in Foundations › Dimension › Size: its explanation and the CSS behind its
 // example, in plain English.
-import type { DocsPageContent } from '../../../../../templates/docsPageContent'
-import type { CssNote } from '../../../../../components/ExampleParts'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
 export const aspectRatioContent: DocsPageContent = {
   id: 'aspect-ratio', kind: 'foundation', title: 'Aspect ratio',

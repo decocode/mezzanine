@@ -1,6 +1,6 @@
 import { aspectRatioContent } from './aspectRatioContent'
 import { AspectRatioExample } from './AspectRatioExample'
-import { ContentPage } from '../../../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 import './aspectRatio.css'
 
 export default function AspectRatioPage() {

@@ -1,6 +1,6 @@
 // The examples for the Fluid sizing page, in Foundations › Dimension › Size.
-import { CssNotes, ExampleText } from '../../../../../components/ExampleParts'
-import { WidthFrame } from '../../../../../components/WidthFrame'
+import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
+import { WidthFrame } from '../../../../components/WidthFrame'
 import { fluidSizingCssNotes } from './fluidSizingContent'
 
 export function FluidSpaceExample() {

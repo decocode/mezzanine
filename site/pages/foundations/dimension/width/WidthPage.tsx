@@ -1,6 +1,6 @@
 import { widthLevels, widthContent } from './widthContent'
-import { TokenScale } from '../../../../../components/TokenScale'
-import { ContentPage } from '../../../../../templates/ContentPage'
+import { TokenScale } from '../../../../components/TokenScale'
+import { ContentPage } from '../../../../templates/ContentPage'
 import './widthScale.css'
 
 export default function WidthPage() {

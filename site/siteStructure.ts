@@ -125,37 +125,16 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'dimension',
         label: 'Dimension',
         path: '/dimension',
-        pages: [],
-        groups: [
-          {
-            id: 'size',
-            label: 'Size',
-            path: '/dimension/size',
-            order: ['width', 'aspect-ratio', 'fluid-sizing'],
-            pages: [
-              { id: 'width', label: 'Width', path: '/dimension/size/width', status: 'implemented' },
-              { id: 'aspect-ratio', label: 'Aspect ratio', path: '/dimension/size/aspect-ratio', status: 'implemented' },
-              { id: 'fluid-sizing', label: 'Fluid sizing', path: '/dimension/size/fluid-sizing', status: 'implemented' },
-            ],
-          },
-          {
-            id: 'space',
-            label: 'Space',
-            path: '/dimension/space',
-            order: ['spacing-scale', 'spacing-roles'],
-            pages: [
-              { id: 'spacing-scale', label: 'Spacing scale', path: '/dimension/space/spacing-scale', status: 'implemented' },
-              { id: 'spacing-roles', label: 'Spacing roles', path: '/dimension/space/spacing-roles', status: 'implemented' },
-            ],
-          },
-          {
-            id: 'units',
-            label: 'Units',
-            path: '/dimension/units',
-            pages: [
-              { id: 'viewport-units', label: 'Viewport units', path: '/dimension/units/viewport-units', status: 'implemented' },
-            ],
-          },
+        order: ['width', 'aspect-ratio', 'fluid-sizing', 'space', 'spacing-scale', 'spacing-roles', 'units', 'viewport-units'],
+        pages: [
+          { id: 'width', label: 'Width', path: '/dimension/width', status: 'implemented' },
+          { id: 'aspect-ratio', label: 'Aspect ratio', path: '/dimension/aspect-ratio', status: 'implemented' },
+          { id: 'fluid-sizing', label: 'Fluid sizing', path: '/dimension/fluid-sizing', status: 'implemented' },
+          { id: 'space', label: 'Space', path: '/dimension/space', status: 'implemented' },
+          { id: 'spacing-scale', label: 'Spacing scale', path: '/dimension/spacing-scale', status: 'implemented' },
+          { id: 'spacing-roles', label: 'Spacing roles', path: '/dimension/spacing-roles', status: 'implemented' },
+          { id: 'units', label: 'Units', path: '/dimension/units', status: 'implemented' },
+          { id: 'viewport-units', label: 'Viewport units', path: '/dimension/viewport-units', status: 'implemented' },
         ],
       },
       {

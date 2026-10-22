@@ -1,7 +1,7 @@
 // The example for the Aspect ratio page, in Foundations › Dimension › Size.
 import { useState, type CSSProperties } from 'react'
-import exampleImage from '../../../../../assets/example-picture.svg'
-import { CssNotes, ExampleText, ValuePicker } from '../../../../../components/ExampleParts'
+import exampleImage from '../../../../assets/example-picture.svg'
+import { CssNotes, ExampleText, ValuePicker } from '../../../../components/ExampleParts'
 import { aspectRatioCssNotes, aspectRatioImageAlt } from './aspectRatioContent'
 
 const ratioOptions = [
