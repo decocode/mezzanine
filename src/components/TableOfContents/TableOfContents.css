@@ -55,12 +55,12 @@
   color: var(--nav-item-foreground);
 }
 
-/* The section being read: NavTree's current-page bar, with the text in the bar's colour. The weight
-   stays the same, so nothing changes width or wraps differently as reading moves down the page. */
+/* The section being read: NavTree's current-page bar. The weight stays the same, so nothing changes
+   width or wraps differently as reading moves down the page. */
 .mz-table-of-contents .react-aria-Link[aria-current='location'] {
   border-inline-start-color: var(--nav-item-current-indicator);
   background: var(--nav-item-background-current);
-  color: var(--nav-item-current-indicator);
+  color: var(--nav-item-foreground-current);
 }
 
 @media (forced-colors: active) {

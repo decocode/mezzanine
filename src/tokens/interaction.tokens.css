@@ -34,5 +34,5 @@
   --nav-item-background-current: transparent;
   --nav-item-foreground: var(--color-text);
   --nav-item-foreground-current: var(--color-text);
-  --nav-item-current-indicator: var(--color-link);
+  --nav-item-current-indicator: var(--color-indicator);
 }

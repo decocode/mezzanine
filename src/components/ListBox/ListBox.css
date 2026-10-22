@@ -56,6 +56,7 @@
   flex-direction: column;
   justify-content: center;
   gap: var(--list-box-item-gap, var(--space-gap-control));
+  position: relative;
   box-sizing: border-box;
   min-width: 0;
   min-height: var(--list-box-item-min-height, var(--target-size-xs));
@@ -93,16 +94,27 @@
 }
 
 .react-aria-ListBoxItem[data-selected] {
-  background: var(--list-box-item-background-selected, var(--color-accent-emphasis));
-  color: var(--list-box-item-foreground-selected, var(--color-accent-inverse));
+  background: var(--list-box-item-background-selected, var(--color-accent-muted));
+  color: var(--list-box-item-foreground-selected, var(--color-text));
+}
+
+/* A selected option shows the shared indicator bar at its start, so selection doesn't rely on
+   colour alone. */
+.react-aria-ListBoxItem[data-selected]::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: var(--list-box-item-indicator-width, var(--indicator-width));
+  background: var(--list-box-item-indicator, var(--color-indicator));
 }
 
 .react-aria-ListBoxItem[data-selected]:is([data-hovered], [data-focused]) {
-  background: var(--list-box-item-background-selected-hovered, var(--color-accent-emphasis-hovered));
+  background: var(--list-box-item-background-selected-hovered, var(--color-accent-muted-pressed));
 }
 
 .react-aria-ListBoxItem[data-selected][data-pressed] {
-  background: var(--list-box-item-background-selected-pressed, var(--color-accent-emphasis-pressed));
+  background: var(--list-box-item-background-selected-pressed, var(--color-accent-muted-pressed));
 }
 
 .react-aria-ListBoxItem [slot='label'] {

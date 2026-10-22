@@ -199,6 +199,7 @@ always carries text and icons from its own palette.
 | `--color-link-pressed` | A pressed link |
 | `--color-focus` | The keyboard-focus indicator color, from the Info palette |
 | `--color-chevron` | Expand and collapse chevrons in Disclosure and NavTree |
+| `--color-indicator` | The bar that marks the current page, section or tab, and a selected row: the accent, or the text color in Wireframe |
 
 ## Current opacity inventory
 

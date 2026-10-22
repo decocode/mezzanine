@@ -121,6 +121,8 @@
 
 .mz-top-bar-links > .react-aria-Link {
   min-height: var(--target-size-md);
+  /* Room for the current-page bar, kept on every link so nothing moves when it appears. */
+  border-block-end: var(--nav-item-current-indicator-width) solid transparent;
   overflow-wrap: anywhere;
 }
 
@@ -133,7 +135,7 @@
 }
 
 .mz-top-bar-links > .react-aria-Link[aria-current='page'] {
-  text-decoration: underline;
+  border-block-end-color: var(--nav-item-current-indicator);
 }
 
 /* Navigation link appearance shared by TopBar consumers: the shared nav item style, with the current

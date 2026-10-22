@@ -112,8 +112,7 @@ its only tree; for a different kind of tree, import the parts from
 `TableOfContents` lists a page's sections as links. Pass `sections`, each with
 an `id` matching its heading and a `label`, nested to match the headings. As the
 page scrolls, the link to the section being read gets `aria-current="location"`
-and the nav item's current-page bar, with its text in the bar's colour; no
-setup is needed.
+and the nav item's current-page bar; no setup is needed.
 
 ## Tooltip
 

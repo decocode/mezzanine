@@ -86,16 +86,38 @@
 }
 
 .react-aria-Row[data-selected] .react-aria-Cell {
-  background: var(--table-row-background-selected, var(--color-accent-emphasis));
-  color: var(--table-row-foreground-selected, var(--color-accent-inverse));
+  background: var(--table-row-background-selected, var(--color-accent-muted));
+  color: var(--table-row-foreground-selected, var(--color-text));
+}
+
+/* A selected row shows the shared indicator bar at its start, so selection doesn't rely on colour
+   alone. */
+.react-aria-Row[data-selected] .react-aria-Cell:first-child {
+  position: relative;
+}
+
+.react-aria-Row[data-selected] .react-aria-Cell:first-child::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: var(--table-row-indicator-width, var(--indicator-width));
+  background: var(--table-row-indicator, var(--color-indicator));
 }
 
 .react-aria-Row[data-selected][data-hovered] .react-aria-Cell {
-  background: var(--table-row-background-selected-hovered, var(--color-accent-emphasis-hovered));
+  background: var(--table-row-background-selected-hovered, var(--color-accent-muted-pressed));
 }
 
 .react-aria-Row[data-selected][data-pressed] .react-aria-Cell {
-  background: var(--table-row-background-selected-pressed, var(--color-accent-emphasis-pressed));
+  background: var(--table-row-background-selected-pressed, var(--color-accent-muted-pressed));
+}
+
+@media (forced-colors: active) {
+  .react-aria-Row[data-selected] .react-aria-Cell:first-child::before {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
 }
 
 .react-aria-Row[data-disabled] {

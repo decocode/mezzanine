@@ -35,7 +35,7 @@ export const tableOfContentsContent: DocsPageContent = {
       key: 'usage',
       intro: [
         'Place the component after the page introduction. Match link labels to the section headings and give each destination a unique ID. Nest children to match the heading hierarchy.',
-        'As the page scrolls, the link to the section being read shows Nav Tree’s current-page bar, with its text in the bar’s colour. It’s the last section to pass a line a third of the way down the window, or the last section once the page reaches its end.',
+        'As the page scrolls, the link to the section being read shows Nav Tree’s current-page bar. It’s the last section to pass a line a third of the way down the window, or the last section once the page reaches its end.',
       ],
     },
     {

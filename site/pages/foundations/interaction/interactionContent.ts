@@ -7,7 +7,8 @@ export const interactionSharedTokens: { token: string; description: string }[] =
   { token: '--color-link-hovered', description: 'Link colour while hovered' },
   { token: '--color-link-pressed', description: 'Link colour while pressed' },
   { token: '--opacity-disabled', description: 'Opacity of disabled controls' },
-  { token: '--indicator-width', description: 'Thickness of the bar that marks the current page or selected tab' },
+  { token: '--indicator-width', description: 'Thickness of the bar that marks the current page, section or tab, and a selected row' },
+  { token: '--color-indicator', description: 'Colour of that bar' },
 ]
 
 export const interactionContent: DocsPageContent = {

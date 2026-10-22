@@ -587,15 +587,15 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--list-box-item-background-selected",
-      "fallback": "var(--color-accent-emphasis)"
+      "fallback": "var(--color-accent-muted)"
     },
     {
       "name": "--list-box-item-background-selected-hovered",
-      "fallback": "var(--color-accent-emphasis-hovered)"
+      "fallback": "var(--color-accent-muted-pressed)"
     },
     {
       "name": "--list-box-item-background-selected-pressed",
-      "fallback": "var(--color-accent-emphasis-pressed)"
+      "fallback": "var(--color-accent-muted-pressed)"
     },
     {
       "name": "--list-box-item-description-foreground",
@@ -607,11 +607,19 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--list-box-item-foreground-selected",
-      "fallback": "var(--color-accent-inverse)"
+      "fallback": "var(--color-text)"
     },
     {
       "name": "--list-box-item-gap",
       "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--list-box-item-indicator",
+      "fallback": "var(--color-indicator)"
+    },
+    {
+      "name": "--list-box-item-indicator-width",
+      "fallback": "var(--indicator-width)"
     },
     {
       "name": "--list-box-item-min-height",
@@ -1079,19 +1087,27 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--table-row-background-selected",
-      "fallback": "var(--color-accent-emphasis)"
+      "fallback": "var(--color-accent-muted)"
     },
     {
       "name": "--table-row-background-selected-hovered",
-      "fallback": "var(--color-accent-emphasis-hovered)"
+      "fallback": "var(--color-accent-muted-pressed)"
     },
     {
       "name": "--table-row-background-selected-pressed",
-      "fallback": "var(--color-accent-emphasis-pressed)"
+      "fallback": "var(--color-accent-muted-pressed)"
     },
     {
       "name": "--table-row-foreground-selected",
-      "fallback": "var(--color-accent-inverse)"
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--table-row-indicator",
+      "fallback": "var(--color-indicator)"
+    },
+    {
+      "name": "--table-row-indicator-width",
+      "fallback": "var(--indicator-width)"
     },
     {
       "name": "--table-sort-indicator-size",
@@ -1117,7 +1133,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--tab-indicator",
-      "fallback": "var(--color-link)"
+      "fallback": "var(--color-indicator)"
     },
     {
       "name": "--tab-indicator-width",

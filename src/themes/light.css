@@ -27,6 +27,8 @@
   --color-link-hovered: var(--color-accent-800);
   --color-link-pressed: var(--color-accent-900);
   --color-chevron: var(--color-accent);
+  /* The bar that marks the current page, section or tab, and a selected row. */
+  --color-indicator: var(--color-accent);
   --color-focus: var(--color-info-700);
   --color-backdrop: color-mix(in srgb, var(--color-neutral-950) var(--opacity-50), transparent);
 

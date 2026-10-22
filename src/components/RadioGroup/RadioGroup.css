@@ -82,8 +82,11 @@
   outline-offset: var(--radio-focus-ring-offset, var(--focus-ring-offset));
 }
 
+/* Invalid shows a heavier border, the md width, as well as the danger colour, so it doesn't rely on
+   colour alone. The extra weight is an inner line, so the indicator keeps its size. */
 .react-aria-RadioButton[data-invalid]::before {
   border-color: var(--radio-border-invalid, var(--color-danger));
+  box-shadow: inset 0 0 0 calc(var(--border-width-md) - var(--radio-border-width, var(--border-width-baseline))) var(--radio-border-invalid, var(--color-danger));
 }
 
 .react-aria-RadioField > [slot='description'],

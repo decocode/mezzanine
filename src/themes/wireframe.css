@@ -22,6 +22,9 @@
   --color-link-hovered: oklch(from var(--color-accent-800) l 0 h);
   --color-link-pressed: oklch(from var(--color-accent-900) l 0 h);
   --color-chevron: var(--color-accent);
+  /* The bar that marks the current page, section or tab, and a selected row, in the text colour so it
+     has the strongest contrast in a monochrome theme. */
+  --color-indicator: var(--color-text);
   --color-focus: var(--color-info-700);
   --color-backdrop: color-mix(in srgb, var(--color-neutral-950) var(--opacity-50), transparent);
 

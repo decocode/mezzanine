@@ -76,7 +76,7 @@
 .react-aria-Tab > .react-aria-SelectionIndicator {
   position: absolute;
   border-radius: var(--radius-none);
-  background: var(--tab-indicator, var(--color-link));
+  background: var(--tab-indicator, var(--color-indicator));
   transition-timing-function: var(--motion-easing-enter);
   transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
 }

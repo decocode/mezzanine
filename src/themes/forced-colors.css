@@ -18,6 +18,7 @@
     --color-neutral-muted: Canvas;
     --color-chevron: CanvasText;
     --color-focus: Highlight;
+    --color-indicator: Highlight;
 
     --color-link: LinkText;
     --color-link-hovered: LinkText;
