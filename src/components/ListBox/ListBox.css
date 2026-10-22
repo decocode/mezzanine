@@ -18,6 +18,12 @@
   text-transform: var(--text-transform-body);
 }
 
+/* In a Popover, such as a Select's or ComboBox's list, the options sit a little in from its edges,
+   like a Menu's items. */
+.react-aria-Popover .react-aria-ListBox {
+  padding: var(--list-box-padding, var(--space-1));
+}
+
 .react-aria-ListBox[data-focus-visible] {
   outline: var(--list-box-focus-ring-width, var(--focus-ring-width)) solid var(--list-box-focus-ring-color, var(--color-focus));
   outline-offset: var(--list-box-focus-ring-offset, var(--focus-ring-offset-inset));

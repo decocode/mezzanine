@@ -6,7 +6,7 @@
 
 // Custom properties that the browser, React Aria or a component's own script set at run time. They
 // are read without a fallback on purpose and are not pointers.
-export const runtimeProperties = new Set(['--tree-item-level', '--page-width', '--page-height', '--visual-viewport-height'])
+export const runtimeProperties = new Set(['--tree-item-level', '--page-width', '--page-height', '--visual-viewport-height', '--trigger-width'])
 
 // The prefixes each component's pointers may start with: its own name, and any other component whose
 // look it shares on purpose, such as ToggleButton's secondary Button look.
@@ -35,6 +35,10 @@ export const pointerPrefixes = {
   ProgressBar: ['progress-bar'],
   Meter: ['meter'],
   Separator: ['separator'],
+  Popover: ['popover'],
+  Menu: ['menu'],
+  Select: ['select'],
+  ComboBox: ['combo-box', 'input'],
   Table: ['table'],
   TableOfContents: ['table-of-contents'],
   Tabs: ['tabs', 'tab'],

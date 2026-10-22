@@ -273,6 +273,29 @@ value, so an array `defaultValue` makes a range; name the thumbs with
 <Slider label="Range A" defaultValue={[20, 70]} thumbLabels={['Minimum', 'Maximum']} />
 ```
 
+## Select and ComboBox
+
+Both draw their own field, following React Aria's starter: pass a `label`, an
+optional `description` and `errorMessage`, and `ListBoxItem`s as children (or
+`items` with a render function). `Select` shows a trigger with the chosen option
+and a chevron; `ComboBox` is a text field with a chevron button, filtering its
+options as people type. Their lists open in a `Popover` as wide as the field.
+
+```tsx
+<Select label="Select A" defaultSelectedKey="a">
+  <ListBoxItem id="a">Option A</ListBoxItem>
+  <ListBoxItem id="b">Option B</ListBoxItem>
+</Select>
+```
+
+## Popover and Menu
+
+`Popover` is the raised surface for content opened from a trigger; it adds no
+padding, so the `Dialog`, `Menu` or `ListBox` inside sets the space. Compose a
+menu as React Aria does: `MenuTrigger` holding a `Button` and a `Popover` with
+the `Menu`. `MenuItem` adds a tick for chosen items when the menu has a
+`selectionMode`, and a chevron for a `SubmenuTrigger`.
+
 ## Separator
 
 `Separator` draws a line between groups; the space around it comes from the
@@ -281,9 +304,8 @@ layout it sits in. With `orientation="vertical"` it stands upright in a row.
 ## Unstyled React Aria exports
 
 These pass React Aria's components straight through, with no Mezzanine
-styles yet: `CheckboxGroup`, `ComboBox` and `ComboBoxValue`, `DropZone`, `FileTrigger`, `Form`, the `GridList`
-family, `Group`, the `Menu` family, `NumberField`, `Popover`, `PreviewTrigger`,
-`Select` and `SelectValue`, the `Sheet` family, the
+styles yet: `CheckboxGroup`, `DropZone`, `FileTrigger`, `Form`, the `GridList`
+family, `Group`, `NumberField`, `PreviewTrigger`, the `Sheet` family, the
 `TagGroup` family, the `TokenField` family, `Toolbar`, the `Tree` family, and
 `Virtualizer` with `ListLayout`. Use them as the
 [React Aria documentation](https://react-aria.adobe.com/) describes, and style

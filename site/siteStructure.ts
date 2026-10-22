@@ -284,9 +284,9 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         label: 'Options',
         pages: [
           { id: 'list-box', label: 'ListBox', path: '/list-box', status: 'implemented' },
-          { id: 'select', label: 'Select', path: '/select', status: 'empty' },
-          { id: 'combo-box', label: 'Combo box', path: '/combo-box', status: 'empty' },
-          { id: 'menu', label: 'Menu', path: '/menu', status: 'empty' },
+          { id: 'select', label: 'Select', path: '/select', status: 'implemented' },
+          { id: 'combo-box', label: 'Combo box', path: '/combo-box', status: 'implemented' },
+          { id: 'menu', label: 'Menu', path: '/menu', status: 'implemented' },
         ],
       },
       {
@@ -305,7 +305,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'tooltip', label: 'Tooltip', path: '/tooltip', status: 'implemented' },
           { id: 'dialog', label: 'Dialog', path: '/dialog', status: 'implemented' },
           { id: 'modal', label: 'Modal', path: '/modal', status: 'empty' },
-          { id: 'popover', label: 'Popover', path: '/popover', status: 'empty' },
+          { id: 'popover', label: 'Popover', path: '/popover', status: 'implemented' },
           { id: 'preview-trigger', label: 'Preview trigger', path: '/preview-trigger', status: 'empty' },
           { id: 'sheet', label: 'Sheet', path: '/sheet', status: 'empty' },
         ],

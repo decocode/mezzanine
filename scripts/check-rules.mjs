@@ -314,7 +314,8 @@ function collectButtonClasses(source) {
 }
 
 function checkButtonSizing(file) {
-  if (['src/components/Button/Button.css', 'src/components/ToggleButton/ToggleButton.css'].includes(file) || isTokenFile(file)) return
+  // Select and ComboBox draw their own field-style trigger buttons rather than Mezzanine's Button.
+  if (['src/components/Button/Button.css', 'src/components/ToggleButton/ToggleButton.css', 'src/components/Select/Select.css', 'src/components/ComboBox/ComboBox.css'].includes(file) || isTokenFile(file)) return
   const text = read(file)
   const masked = maskCss(text)
   for (const block of masked.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {

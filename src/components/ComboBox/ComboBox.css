@@ -1,0 +1,94 @@
+/* Follows React Aria's vanilla ComboBox: a label, a text field with a chevron button over its end,
+   help text and the suggestions in a Popover. The Input takes the shared text field look. */
+.react-aria-ComboBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--combo-box-gap, var(--space-gap-field));
+  min-inline-size: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-ComboBox > .react-aria-Label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-ComboBox > :is([slot='description'], .react-aria-FieldError) {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-ComboBox > [slot='description'] {
+  color: var(--combo-box-description-foreground, var(--color-text-muted));
+}
+
+.react-aria-ComboBox > .react-aria-FieldError {
+  color: var(--combo-box-error-foreground, var(--color-danger));
+}
+
+.mz-combo-box-field {
+  display: grid;
+  grid-template-areas: 'field';
+  align-items: center;
+  min-inline-size: 0;
+}
+
+.mz-combo-box-field > .react-aria-Input {
+  grid-area: field;
+  padding-inline-end: calc(var(--target-size-sm) + var(--input-border-width, var(--border-width-baseline)));
+}
+
+/* The chevron button sits over the end of the input, inside its border. */
+.mz-combo-box-trigger {
+  grid-area: field;
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--target-size-sm);
+  block-size: var(--target-size-sm);
+  margin: 0;
+  margin-inline-end: var(--input-border-width, var(--border-width-baseline));
+  padding: 0;
+  border: 0;
+  border-radius: var(--combo-box-trigger-border-radius, var(--radius-control));
+  background: transparent;
+  color: var(--color-chevron);
+  cursor: default;
+}
+
+.mz-combo-box-trigger[data-hovered] {
+  background: var(--combo-box-trigger-background-hovered, var(--color-accent-muted-hovered));
+}
+
+.mz-combo-box-trigger[data-pressed] {
+  background: var(--combo-box-trigger-background-pressed, var(--color-accent-muted-pressed));
+}
+
+.mz-combo-box-trigger[data-focus-visible] {
+  outline: var(--combo-box-focus-ring-width, var(--focus-ring-width)) solid var(--combo-box-focus-ring-color, var(--color-focus));
+  outline-offset: var(--combo-box-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+.mz-combo-box-chevron {
+  inline-size: var(--combo-box-chevron-size, var(--icon-size-sm));
+  block-size: var(--combo-box-chevron-size, var(--icon-size-sm));
+}
+
+.react-aria-ComboBox[data-disabled] {
+  opacity: var(--combo-box-opacity-disabled, var(--opacity-disabled));
+}

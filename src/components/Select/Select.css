@@ -1,0 +1,113 @@
+/* Follows React Aria's vanilla Select: a label, a trigger that looks like a text field, help text and
+   the list in a Popover. */
+.react-aria-Select {
+  display: flex;
+  flex-direction: column;
+  gap: var(--select-gap, var(--space-gap-field));
+  min-inline-size: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-Select > .react-aria-Label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-Select > :is([slot='description'], .react-aria-FieldError) {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-Select > [slot='description'] {
+  color: var(--select-description-foreground, var(--color-text-muted));
+}
+
+.react-aria-Select > .react-aria-FieldError {
+  color: var(--select-error-foreground, var(--color-danger));
+}
+
+/* The trigger has the text field's look, with the chevron at the end. */
+.mz-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--select-trigger-gap, var(--space-gap-control));
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: var(--select-trigger-min-height, var(--target-size-md));
+  margin: 0;
+  padding: var(--select-trigger-padding-block, var(--space-padding-control-block)) var(--select-trigger-padding-inline, var(--space-padding-control-inline));
+  border: var(--select-trigger-border-width, var(--border-width-baseline)) solid var(--select-trigger-border, var(--color-border-control));
+  border-radius: var(--select-trigger-border-radius, var(--radius-control));
+  background: var(--select-trigger-background, var(--color-page));
+  color: var(--select-trigger-foreground, var(--color-text));
+  font: inherit;
+  text-align: start;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mz-select-trigger[data-hovered] {
+  border-color: var(--select-trigger-border-hovered, var(--color-text));
+}
+
+.mz-select-trigger[data-focus-visible] {
+  outline: var(--select-focus-ring-width, var(--focus-ring-width)) solid var(--select-focus-ring-color, var(--color-focus));
+  outline-offset: var(--select-focus-ring-offset, var(--focus-ring-offset));
+}
+
+.react-aria-Select[data-invalid] .mz-select-trigger {
+  border-color: var(--select-trigger-border-invalid, var(--color-danger));
+}
+
+.react-aria-SelectValue {
+  flex: 1;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.react-aria-SelectValue[data-placeholder] {
+  color: var(--select-placeholder-foreground, var(--color-text-muted));
+}
+
+/* An option's description stays in the list, not in the closed field. */
+.react-aria-SelectValue [slot='description'] {
+  display: none;
+}
+
+.mz-select-chevron {
+  flex: none;
+  inline-size: var(--select-chevron-size, var(--icon-size-sm));
+  block-size: var(--select-chevron-size, var(--icon-size-sm));
+  color: var(--color-chevron);
+}
+
+.react-aria-Select[data-disabled] {
+  opacity: var(--select-opacity-disabled, var(--opacity-disabled));
+}
+
+@media (forced-colors: active) {
+  .mz-select-trigger {
+    border-color: ButtonText;
+  }
+
+  .mz-select-trigger[data-focus-visible] {
+    outline-color: Highlight;
+  }
+}

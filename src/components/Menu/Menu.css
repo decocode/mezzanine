@@ -1,0 +1,112 @@
+/* Follows React Aria's vanilla Menu: a list of actions in a Popover, with rows like ListBox options. */
+.react-aria-Menu {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-inline-size: var(--menu-min-width, var(--width-xs));
+  max-block-size: inherit;
+  overflow: auto;
+  padding: var(--menu-padding, var(--space-1));
+  outline: none;
+  color: var(--menu-item-foreground, var(--color-text));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-MenuSection:not(:first-child) {
+  margin-block-start: var(--menu-section-gap, var(--space-gap-control));
+}
+
+.react-aria-Menu .react-aria-Header {
+  padding: var(--menu-header-padding-block, var(--space-padding-control-block)) var(--menu-header-padding-inline, var(--space-padding-control-inline));
+  color: var(--menu-header-foreground, var(--color-accent));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-Menu > .react-aria-Separator {
+  margin-block: var(--menu-separator-gap, var(--space-1));
+}
+
+.react-aria-MenuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--menu-item-gap, var(--space-gap-control));
+  box-sizing: border-box;
+  min-block-size: var(--menu-item-min-height, var(--target-size-xs));
+  padding: var(--menu-item-padding-block, var(--space-padding-control-block)) var(--menu-item-padding-inline, var(--space-padding-control-inline));
+  border-radius: var(--menu-item-border-radius, var(--radius-control));
+  outline: none;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-aria-MenuItem[href] {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Focused covers the item highlighted by the pointer or the arrow keys. */
+.react-aria-MenuItem[data-focused] {
+  background: var(--menu-item-background-hovered, var(--color-accent-muted-hovered));
+}
+
+.react-aria-MenuItem[data-pressed] {
+  background: var(--menu-item-background-pressed, var(--color-accent-muted-pressed));
+}
+
+.react-aria-MenuItem[data-focus-visible] {
+  outline: var(--menu-focus-ring-width, var(--focus-ring-width)) solid var(--menu-focus-ring-color, var(--color-focus));
+  outline-offset: var(--menu-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+.react-aria-MenuItem[data-disabled] {
+  opacity: var(--menu-item-opacity-disabled, var(--opacity-disabled));
+}
+
+.mz-menu-item-check {
+  display: inline-flex;
+  flex: none;
+  inline-size: var(--menu-item-icon-size, var(--icon-size-sm));
+  block-size: var(--menu-item-icon-size, var(--icon-size-sm));
+  color: var(--menu-item-check-foreground, var(--color-accent));
+}
+
+.mz-menu-item-content {
+  display: grid;
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.mz-menu-item-content > [slot='description'] {
+  color: var(--menu-item-description-foreground, var(--color-text-muted));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-menu-item-chevron {
+  flex: none;
+  inline-size: var(--menu-item-icon-size, var(--icon-size-sm));
+  block-size: var(--menu-item-icon-size, var(--icon-size-sm));
+  color: var(--color-chevron);
+}
+
+@media (forced-colors: active) {
+  .react-aria-MenuItem[data-focused] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+}

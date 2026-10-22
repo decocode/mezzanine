@@ -468,6 +468,56 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-padding-surface)"
     }
   ],
+  "ComboBox": [
+    {
+      "name": "--combo-box-chevron-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--combo-box-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--combo-box-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--combo-box-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--combo-box-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset-inset)"
+    },
+    {
+      "name": "--combo-box-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--combo-box-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--combo-box-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--combo-box-trigger-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--combo-box-trigger-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--combo-box-trigger-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--input-border-width",
+      "fallback": "var(--border-width-baseline)"
+    }
+  ],
   "Dialog": [
     {
       "name": "--dialog-actions-gap",
@@ -692,6 +742,96 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-cluster)"
     }
   ],
+  "Menu": [
+    {
+      "name": "--menu-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--menu-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset-inset)"
+    },
+    {
+      "name": "--menu-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--menu-header-foreground",
+      "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--menu-header-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--menu-header-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--menu-item-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--menu-item-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--menu-item-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--menu-item-check-foreground",
+      "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--menu-item-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--menu-item-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--menu-item-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--menu-item-icon-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--menu-item-min-height",
+      "fallback": "var(--target-size-xs)"
+    },
+    {
+      "name": "--menu-item-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--menu-item-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--menu-item-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--menu-min-width",
+      "fallback": "var(--width-xs)"
+    },
+    {
+      "name": "--menu-padding",
+      "fallback": "var(--space-1)"
+    },
+    {
+      "name": "--menu-section-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--menu-separator-gap",
+      "fallback": "var(--space-1)"
+    }
+  ],
   "Meter": [
     {
       "name": "--meter-border-radius",
@@ -908,6 +1048,40 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--indicator-width)"
     }
   ],
+  "Popover": [
+    {
+      "name": "--popover-background",
+      "fallback": "var(--elevation-raised-2-surface)"
+    },
+    {
+      "name": "--popover-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--popover-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
+      "name": "--popover-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--popover-elevation",
+      "fallback": "var(--elevation-raised-2)"
+    },
+    {
+      "name": "--popover-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--popover-max-width",
+      "fallback": "var(--width-md)"
+    },
+    {
+      "name": "--popover-viewport-padding",
+      "fallback": "var(--space-overlay-inset)"
+    }
+  ],
   "ProgressBar": [
     {
       "name": "--progress-bar-border-radius",
@@ -1118,6 +1292,88 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--search-trigger-padding-inline-start",
       "fallback": "var(--space-2)"
+    }
+  ],
+  "Select": [
+    {
+      "name": "--select-chevron-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--select-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--select-error-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--select-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--select-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset)"
+    },
+    {
+      "name": "--select-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--select-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--select-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--select-placeholder-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--select-trigger-background",
+      "fallback": "var(--color-page)"
+    },
+    {
+      "name": "--select-trigger-border",
+      "fallback": "var(--color-border-control)"
+    },
+    {
+      "name": "--select-trigger-border-hovered",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--select-trigger-border-invalid",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--select-trigger-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--select-trigger-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--select-trigger-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--select-trigger-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--select-trigger-min-height",
+      "fallback": "var(--target-size-md)"
+    },
+    {
+      "name": "--select-trigger-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--select-trigger-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
     }
   ],
   "Separator": [
