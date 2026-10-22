@@ -1,0 +1,162 @@
+/* Follows React Aria's vanilla GridList: rows like ListBox options in the stack layout, and cards in
+   a wrapping grid in the grid layout. */
+.react-aria-GridList {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-block-size: inherit;
+  overflow: auto;
+  padding: var(--grid-list-padding, var(--space-1));
+  outline: none;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-GridList[data-layout='grid'] {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-list-item-width, var(--width-xs))), 1fr));
+  gap: var(--grid-list-gap, var(--space-gap-cluster));
+}
+
+.react-aria-GridList[data-focus-visible] {
+  outline: var(--grid-list-focus-ring-width, var(--focus-ring-width)) solid var(--grid-list-focus-ring-color, var(--color-focus));
+  outline-offset: var(--grid-list-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+.react-aria-GridList[data-empty] {
+  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
+  color: var(--grid-list-empty-foreground, var(--color-text-muted));
+}
+
+.react-aria-GridListHeader {
+  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
+  color: var(--grid-list-header-foreground, var(--color-accent));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-GridListItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--grid-list-item-gap, var(--space-gap-control));
+  box-sizing: border-box;
+  min-inline-size: 0;
+  min-block-size: var(--grid-list-item-min-height, var(--target-size-xs));
+  padding: var(--grid-list-item-padding-block, var(--space-padding-control-block)) var(--grid-list-item-padding-inline, var(--space-padding-control-inline));
+  border-radius: var(--grid-list-item-border-radius, var(--radius-control));
+  outline: none;
+  overflow-wrap: anywhere;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-aria-GridListItem[data-href] {
+  cursor: pointer;
+}
+
+/* In the grid layout each item is a card, with its content one part above another. */
+.react-aria-GridList[data-layout='grid'] .react-aria-GridListItem {
+  flex-direction: column;
+  align-items: stretch;
+  padding: var(--grid-list-card-padding, var(--space-padding-control-inline));
+  border: var(--grid-list-card-border-width, var(--border-width-baseline)) solid var(--grid-list-card-border, var(--color-border));
+  border-radius: var(--grid-list-card-border-radius, var(--radius-surface));
+  background: var(--grid-list-card-background, var(--color-page));
+}
+
+.react-aria-GridListItem [slot='description'] {
+  color: var(--grid-list-item-description-foreground, var(--color-text-muted));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-GridListItem[data-hovered] {
+  background: var(--grid-list-item-background-hovered, var(--color-accent-muted-hovered));
+}
+
+.react-aria-GridListItem[data-pressed] {
+  background: var(--grid-list-item-background-pressed, var(--color-accent-muted-pressed));
+}
+
+/* A selected row takes the soft tint and the shared indicator bar, so selection doesn't rely on colour
+   alone. */
+.react-aria-GridListItem[data-selected] {
+  background: var(--grid-list-item-background-selected, var(--color-accent-muted));
+}
+
+.react-aria-GridListItem[data-selected]::before {
+  content: '';
+  position: absolute;
+  inset-block: var(--indicator-inset);
+  inset-inline-start: calc((var(--space-padding-control-inline) - var(--grid-list-item-indicator-width, var(--indicator-width))) / 2);
+  inline-size: var(--grid-list-item-indicator-width, var(--indicator-width));
+  border-radius: var(--indicator-radius);
+  background: var(--grid-list-item-indicator, var(--color-indicator));
+}
+
+.react-aria-GridListItem[data-focus-visible] {
+  outline: var(--grid-list-item-focus-ring-width, var(--focus-ring-width)) solid var(--grid-list-item-focus-ring-color, var(--color-focus));
+  outline-offset: var(--grid-list-item-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+.react-aria-GridListItem[data-disabled] {
+  opacity: var(--grid-list-item-opacity-disabled, var(--opacity-disabled));
+}
+
+.react-aria-GridListItem[data-dragging] {
+  opacity: var(--grid-list-item-dragging-opacity, var(--opacity-disabled));
+}
+
+.react-aria-GridListItem[data-drop-target] {
+  outline: var(--focus-ring-width) solid var(--grid-list-item-drop-target-color, var(--color-accent-emphasis));
+  outline-offset: var(--focus-ring-offset-inset);
+  background: var(--grid-list-item-background-current, var(--color-accent-muted));
+}
+
+.mz-grid-list-drag {
+  display: grid;
+  flex: none;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--target-size-min);
+  block-size: var(--target-size-min);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--grid-list-drag-border-radius, var(--radius-control));
+  background: transparent;
+  color: var(--grid-list-drag-foreground, var(--color-text-muted));
+  cursor: grab;
+}
+
+.mz-grid-list-drag[data-focus-visible] {
+  outline: var(--focus-ring-width) solid var(--grid-list-focus-ring-color, var(--color-focus));
+  outline-offset: var(--focus-ring-offset-inset);
+}
+
+.mz-grid-list-drag > svg {
+  inline-size: var(--grid-list-drag-icon-size, var(--icon-size-sm));
+  block-size: var(--grid-list-drag-icon-size, var(--icon-size-sm));
+}
+
+@media (forced-colors: active) {
+  .react-aria-GridListItem[data-selected]::before {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+}

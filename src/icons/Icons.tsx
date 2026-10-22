@@ -184,6 +184,11 @@ export function CloseIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><Outline d="M6 6l12 12M18 6 6 18" /></StrokeIcon>
 }
 
+// Six dots for a drag handle, as in GridList and Tree rows. Used inside the library, not exported.
+export function DragHandleIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}>{[6, 12, 18].map((y) => <g key={y}><OutlineCircle cx={9} cy={y} r={1} /><OutlineCircle cx={15} cy={y} r={1} /></g>)}</StrokeIcon>
+}
+
 export function ChevronDownIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><Outline d="M6 9l6 6 6-6" /></StrokeIcon>
 }

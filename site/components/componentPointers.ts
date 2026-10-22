@@ -652,6 +652,144 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-padding-surface)"
     }
   ],
+  "GridList": [
+    {
+      "name": "--grid-list-card-background",
+      "fallback": "var(--color-page)"
+    },
+    {
+      "name": "--grid-list-card-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--grid-list-card-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
+      "name": "--grid-list-card-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--grid-list-card-padding",
+      "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--grid-list-drag-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--grid-list-drag-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--grid-list-drag-icon-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--grid-list-empty-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--grid-list-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--grid-list-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset-inset)"
+    },
+    {
+      "name": "--grid-list-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--grid-list-gap",
+      "fallback": "var(--space-gap-cluster)"
+    },
+    {
+      "name": "--grid-list-header-foreground",
+      "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--grid-list-item-background-current",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--grid-list-item-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--grid-list-item-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--grid-list-item-background-selected",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--grid-list-item-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--grid-list-item-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--grid-list-item-dragging-opacity",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--grid-list-item-drop-target-color",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--grid-list-item-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--grid-list-item-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset-inset)"
+    },
+    {
+      "name": "--grid-list-item-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--grid-list-item-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--grid-list-item-indicator",
+      "fallback": "var(--color-indicator)"
+    },
+    {
+      "name": "--grid-list-item-indicator-width",
+      "fallback": "var(--indicator-width)"
+    },
+    {
+      "name": "--grid-list-item-min-height",
+      "fallback": "var(--target-size-xs)"
+    },
+    {
+      "name": "--grid-list-item-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--grid-list-item-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--grid-list-item-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--grid-list-item-width",
+      "fallback": "var(--width-xs)"
+    },
+    {
+      "name": "--grid-list-padding",
+      "fallback": "var(--space-1)"
+    }
+  ],
   "Link": [
     {
       "name": "--link-content-gap",
@@ -2196,6 +2334,16 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-1)"
     }
   ],
+  "Toolbar": [
+    {
+      "name": "--toolbar-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--toolbar-separator-gap",
+      "fallback": "var(--space-1)"
+    }
+  ],
   "Tooltip": [
     {
       "name": "--tooltip-background",
@@ -2278,6 +2426,120 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--top-bar-wide-padding-inline",
       "fallback": "var(--space-padding-area)"
+    }
+  ],
+  "Tree": [
+    {
+      "name": "--chevron-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--tree-chevron-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--tree-drag-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--tree-drag-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--tree-drag-icon-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--tree-empty-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--tree-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--tree-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset-inset)"
+    },
+    {
+      "name": "--tree-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--tree-header-foreground",
+      "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--tree-indent",
+      "fallback": "var(--space-4)"
+    },
+    {
+      "name": "--tree-item-background-current",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--tree-item-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--tree-item-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--tree-item-background-selected",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--tree-item-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--tree-item-dragging-opacity",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--tree-item-drop-target-color",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--tree-item-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--tree-item-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset-inset)"
+    },
+    {
+      "name": "--tree-item-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--tree-item-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--tree-item-indicator",
+      "fallback": "var(--color-indicator)"
+    },
+    {
+      "name": "--tree-item-indicator-width",
+      "fallback": "var(--indicator-width)"
+    },
+    {
+      "name": "--tree-item-min-height",
+      "fallback": "var(--target-size-xs)"
+    },
+    {
+      "name": "--tree-item-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--tree-padding",
+      "fallback": "var(--space-1)"
+    },
+    {
+      "name": "--tree-section-gap",
+      "fallback": "var(--space-gap-cluster)"
     }
   ]
 }

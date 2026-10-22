@@ -1,0 +1,177 @@
+/* Follows React Aria's vanilla Tree: rows like ListBox options, indented by level, with a chevron that
+   turns as a row opens, like NavTree's. */
+.react-aria-Tree {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  max-block-size: inherit;
+  overflow: auto;
+  padding: var(--tree-padding, var(--space-1));
+  outline: none;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-Tree[data-focus-visible] {
+  outline: var(--tree-focus-ring-width, var(--focus-ring-width)) solid var(--tree-focus-ring-color, var(--color-focus));
+  outline-offset: var(--tree-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+.react-aria-Tree[data-empty] {
+  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
+  color: var(--tree-empty-foreground, var(--color-text-muted));
+}
+
+.react-aria-TreeSection:not(:first-child) {
+  margin-block-start: var(--tree-section-gap, var(--space-gap-cluster));
+}
+
+.react-aria-TreeHeader {
+  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
+  color: var(--tree-header-foreground, var(--color-accent));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
+}
+
+/* Each level indents the row's content by one step. */
+.react-aria-TreeItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--tree-item-gap, var(--space-gap-control));
+  box-sizing: border-box;
+  min-block-size: var(--tree-item-min-height, var(--target-size-xs));
+  padding-block: 0;
+  padding-inline: calc(var(--space-padding-control-inline) + (var(--tree-item-level, 1) - 1) * var(--tree-indent, var(--space-4))) var(--space-padding-control-inline);
+  border-radius: var(--tree-item-border-radius, var(--radius-control));
+  outline: none;
+  overflow-wrap: anywhere;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.react-aria-TreeItem[data-href] {
+  cursor: pointer;
+}
+
+.react-aria-TreeItem[data-hovered] {
+  background: var(--tree-item-background-hovered, var(--color-accent-muted-hovered));
+}
+
+.react-aria-TreeItem[data-pressed] {
+  background: var(--tree-item-background-pressed, var(--color-accent-muted-pressed));
+}
+
+/* A selected row takes the soft tint and the shared indicator bar, so selection doesn't rely on colour
+   alone. */
+.react-aria-TreeItem[data-selected] {
+  background: var(--tree-item-background-selected, var(--color-accent-muted));
+}
+
+.react-aria-TreeItem[data-selected]::before {
+  content: '';
+  position: absolute;
+  inset-block: var(--indicator-inset);
+  inset-inline-start: calc((var(--space-padding-control-inline) - var(--tree-item-indicator-width, var(--indicator-width))) / 2);
+  inline-size: var(--tree-item-indicator-width, var(--indicator-width));
+  border-radius: var(--indicator-radius);
+  background: var(--tree-item-indicator, var(--color-indicator));
+}
+
+.react-aria-TreeItem[data-focus-visible] {
+  outline: var(--tree-item-focus-ring-width, var(--focus-ring-width)) solid var(--tree-item-focus-ring-color, var(--color-focus));
+  outline-offset: var(--tree-item-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+.react-aria-TreeItem[data-disabled] {
+  opacity: var(--tree-item-opacity-disabled, var(--opacity-disabled));
+}
+
+.react-aria-TreeItem[data-dragging] {
+  opacity: var(--tree-item-dragging-opacity, var(--opacity-disabled));
+}
+
+.react-aria-TreeItem[data-drop-target] {
+  outline: var(--focus-ring-width) solid var(--tree-item-drop-target-color, var(--color-accent-emphasis));
+  outline-offset: var(--focus-ring-offset-inset);
+  background: var(--tree-item-background-current, var(--color-accent-muted));
+}
+
+/* The chevron keeps its space on every row, so labels line up; it shows only on rows with children. */
+.mz-tree-chevron {
+  display: grid;
+  flex: none;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--target-size-min);
+  block-size: var(--target-size-min);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--tree-chevron-border-radius, var(--radius-control));
+  background: transparent;
+  color: var(--color-chevron);
+  visibility: hidden;
+}
+
+.react-aria-TreeItem[data-has-child-items] .mz-tree-chevron {
+  visibility: visible;
+}
+
+.mz-tree-chevron-icon {
+  inline-size: var(--chevron-size, var(--icon-size-sm));
+  block-size: var(--chevron-size, var(--icon-size-sm));
+  rotate: 0deg;
+  transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
+}
+
+.react-aria-TreeItem[data-expanded] .mz-tree-chevron-icon {
+  rotate: var(--motion-rotation-expanded);
+}
+
+.react-aria-TreeItem[data-expanded]:dir(rtl) .mz-tree-chevron-icon {
+  rotate: calc(var(--motion-rotation-expanded) * -1);
+}
+
+.mz-tree-drag {
+  display: grid;
+  flex: none;
+  place-items: center;
+  box-sizing: border-box;
+  inline-size: var(--target-size-min);
+  block-size: var(--target-size-min);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--tree-drag-border-radius, var(--radius-control));
+  background: transparent;
+  color: var(--tree-drag-foreground, var(--color-text-muted));
+  cursor: grab;
+}
+
+.mz-tree-drag[data-focus-visible] {
+  outline: var(--focus-ring-width) solid var(--tree-focus-ring-color, var(--color-focus));
+  outline-offset: var(--focus-ring-offset-inset);
+}
+
+.mz-tree-drag > svg {
+  inline-size: var(--tree-drag-icon-size, var(--icon-size-sm));
+  block-size: var(--tree-drag-icon-size, var(--icon-size-sm));
+}
+
+@media (forced-colors: active) {
+  .react-aria-TreeItem[data-selected]::before {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+}

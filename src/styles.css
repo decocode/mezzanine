@@ -26,6 +26,9 @@
 @import './components/TagGroup/TagGroup.css';
 @import './components/TokenField/TokenField.css';
 @import './components/DropZone/DropZone.css';
+@import './components/GridList/GridList.css';
+@import './components/Tree/Tree.css';
+@import './components/Toolbar/Toolbar.css';
 @import './components/Dialog/Dialog.css';
 @import './components/Disclosure/Disclosure.css';
 @import './components/TopBar/TopBar.css';

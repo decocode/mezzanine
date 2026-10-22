@@ -314,8 +314,8 @@ function collectButtonClasses(source) {
 }
 
 function checkButtonSizing(file) {
-  // Select, ComboBox, NumberField and TagGroup draw their own field-style buttons rather than Mezzanine's Button.
-  if (['src/components/Button/Button.css', 'src/components/ToggleButton/ToggleButton.css', 'src/components/Select/Select.css', 'src/components/ComboBox/ComboBox.css', 'src/components/NumberField/NumberField.css', 'src/components/TagGroup/TagGroup.css'].includes(file) || isTokenFile(file)) return
+  // Select, ComboBox, NumberField, TagGroup, GridList and Tree draw their own small buttons rather than Mezzanine's Button.
+  if (['src/components/Button/Button.css', 'src/components/ToggleButton/ToggleButton.css', 'src/components/Select/Select.css', 'src/components/ComboBox/ComboBox.css', 'src/components/NumberField/NumberField.css', 'src/components/TagGroup/TagGroup.css', 'src/components/GridList/GridList.css', 'src/components/Tree/Tree.css'].includes(file) || isTokenFile(file)) return
   const text = read(file)
   const masked = maskCss(text)
   for (const block of masked.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {

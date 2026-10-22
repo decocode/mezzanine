@@ -302,6 +302,16 @@ lets people choose them, and `onRemove` adds a remove button to each.
 `DropZone` is a dashed area with a `Text slot="label"` inside. While something
 is dragged over it, it turns solid and takes the accent tint.
 
+## GridList, Tree and Toolbar
+
+`GridListItem` adds a checkbox when several items can be chosen one by one, and a
+drag handle when the list allows dragging. `layout="grid"` turns the items into
+cards that wrap into columns. `TreeItem` takes a `title` and its nested
+`TreeItem`s as children; its row adds the chevron, checkbox and drag handle when
+they apply, and each level indents. Chosen rows in both take the soft tint and
+the indicator bar. `Toolbar` gives its ToggleButtonGroups its orientation and
+stands its Separators across it.
+
 ## Popover and Menu
 
 `Popover` is the raised surface for content opened from a trigger; it adds no
@@ -318,8 +328,8 @@ layout it sits in. With `orientation="vertical"` it stands upright in a row.
 ## Unstyled React Aria exports
 
 These pass React Aria's components straight through, with no Mezzanine
-styles yet: `CheckboxGroup`, `FileTrigger`, `Form`, the `GridList`
-family, `Group`, `PreviewTrigger`, the `Sheet` family, `Toolbar`, the `Tree` family, and
+styles yet: `CheckboxGroup`, `FileTrigger`, `Form`, `Group`,
+`PreviewTrigger`, the `Sheet` family, and
 `Virtualizer` with `ListLayout`. Use them as the
 [React Aria documentation](https://react-aria.adobe.com/) describes, and style
 them in the app until Mezzanine designs them.
