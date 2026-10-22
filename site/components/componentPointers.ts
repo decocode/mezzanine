@@ -832,12 +832,20 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--icon-size-sm)"
     },
     {
+      "name": "--text-field-description-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
       "name": "--text-field-error-foreground",
       "fallback": "var(--color-danger)"
     },
     {
       "name": "--text-field-gap",
       "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--text-field-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     }
   ],
   "SearchTrigger": [
@@ -1106,12 +1114,24 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--input-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
       "name": "--input-focus-ring-offset",
       "fallback": "var(--focus-ring-offset)"
     },
     {
       "name": "--input-focus-ring-width",
       "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--input-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--input-min-height",
+      "fallback": "var(--target-size-md)"
     },
     {
       "name": "--input-padding-block",
@@ -1122,8 +1142,16 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-padding-control-inline)"
     },
     {
+      "name": "--input-placeholder-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
       "name": "--text-area-min-height",
       "fallback": "var(--height-text-area-min)"
+    },
+    {
+      "name": "--text-field-description-foreground",
+      "fallback": "var(--color-text-muted)"
     },
     {
       "name": "--text-field-error-foreground",
@@ -1132,6 +1160,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--text-field-gap",
       "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--text-field-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
     }
   ],
   "ToggleButton": [

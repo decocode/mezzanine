@@ -26,13 +26,13 @@
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
-  min-height: var(--target-size-md);
+  min-height: var(--input-min-height, var(--target-size-md));
   margin: 0;
   padding: var(--input-padding-block, var(--space-padding-control-block)) var(--input-padding-inline, var(--space-padding-control-inline));
   border: var(--input-border-width, var(--border-width-baseline)) solid var(--input-border, var(--color-border-control));
   border-radius: var(--input-border-radius, var(--radius-control));
   background: var(--input-background, var(--color-page));
-  color: var(--color-text);
+  color: var(--input-foreground, var(--color-text));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-regular);
@@ -43,7 +43,7 @@
 }
 
 :is(.react-aria-Input, .react-aria-TextArea)::placeholder {
-  color: var(--color-text-muted);
+  color: var(--input-placeholder-foreground, var(--color-text-muted));
   opacity: 1;
 }
 
@@ -58,7 +58,7 @@
 /* Text entry shows its focus ring on mouse focus too, not only from the keyboard, so everyone can
    see where typing will go. Decided by the owner on 22 October 2026. */
 :is(.react-aria-Input, .react-aria-TextArea)[data-focused] {
-  outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--color-focus);
+  outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--input-focus-ring-color, var(--color-focus));
   outline-offset: var(--input-focus-ring-offset, var(--focus-ring-offset));
 }
 
@@ -73,7 +73,7 @@
 }
 
 .react-aria-TextField > [slot='description'] {
-  color: var(--color-text-muted);
+  color: var(--text-field-description-foreground, var(--color-text-muted));
 }
 
 .react-aria-TextField > .react-aria-FieldError {
@@ -81,7 +81,7 @@
 }
 
 .react-aria-TextField[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--text-field-opacity-disabled, var(--opacity-disabled));
 }
 
 :is(.react-aria-Input, .react-aria-TextArea)[data-disabled],

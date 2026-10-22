@@ -70,7 +70,7 @@
 }
 
 .react-aria-SearchField > [slot='description'] {
-  color: var(--color-text-muted);
+  color: var(--text-field-description-foreground, var(--color-text-muted));
 }
 
 .react-aria-SearchField > .react-aria-FieldError {
@@ -78,7 +78,7 @@
 }
 
 .react-aria-SearchField[data-disabled] {
-  opacity: var(--opacity-disabled);
+  opacity: var(--text-field-opacity-disabled, var(--opacity-disabled));
 }
 
 @media (forced-colors: active) {
