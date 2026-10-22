@@ -257,13 +257,33 @@ arranges them in a row that wraps, with a border above. In an AppShell, place it
 straight after `<main>`; it sits at the end of the content and scrolls with it,
 outside `<main>`, so it stays the page's footer landmark.
 
+## ProgressBar, Meter and Slider
+
+These draw their own parts, following React Aria's starter: pass a `label` and
+the value, and Mezzanine adds the value text, track and fill. `ProgressBar`
+takes `isIndeterminate` while the amount of work is unknown; its moving segment
+stops only for the system's reduced-motion setting, like Button's spinner. A
+`Meter` shows an amount and never animates. `Slider` draws one thumb for each
+value, so an array `defaultValue` makes a range; name the thumbs with
+`thumbLabels`. Without a visible `label`, give each an `aria-label`.
+
+```tsx
+<ProgressBar label="Progress A" value={60} />
+<Meter label="Meter A" value={35} />
+<Slider label="Range A" defaultValue={[20, 70]} thumbLabels={['Minimum', 'Maximum']} />
+```
+
+## Separator
+
+`Separator` draws a line between groups; the space around it comes from the
+layout it sits in. With `orientation="vertical"` it stands upright in a row.
+
 ## Unstyled React Aria exports
 
 These pass React Aria's components straight through, with no Mezzanine
 styles yet: `CheckboxGroup`, `ComboBox` and `ComboBoxValue`, `DropZone`, `FileTrigger`, `Form`, the `GridList`
-family, `Group`, the `Menu` family, `Meter`, `NumberField`, `Popover`, `PreviewTrigger`,
-`ProgressBar`, `Select` and `SelectValue`, `Separator`, the `Sheet` family,
-the `Slider` family, the
+family, `Group`, the `Menu` family, `NumberField`, `Popover`, `PreviewTrigger`,
+`Select` and `SelectValue`, the `Sheet` family, the
 `TagGroup` family, the `TokenField` family, `Toolbar`, the `Tree` family, and
 `Virtualizer` with `ListLayout`. Use them as the
 [React Aria documentation](https://react-aria.adobe.com/) describes, and style

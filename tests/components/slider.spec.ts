@@ -1,0 +1,37 @@
+import { expect, test } from '@playwright/test'
+import { expectNoAccessibilityViolations } from '../accessibility'
+import { expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
+
+// Checks, in each theme, that the arrow keys move the thumb and its value, the fill follows it, the
+// focused thumb shows a ring, the page passes an accessibility scan and fits a phone at double text.
+for (const theme of themes) {
+  test(`slider moves with the arrow keys in ${theme}`, async ({ page }) => {
+    await page.goto('/slider')
+    await setTheme(page, theme)
+    const slider = page.locator('.react-aria-Slider').first()
+    const thumb = slider.getByRole('slider', { name: 'Slider A', exact: true })
+    const fill = slider.locator('.react-aria-SliderFill')
+    const before = (await fill.boundingBox())!.width
+    await thumb.focus()
+    await page.keyboard.press('ArrowRight')
+    await expect(thumb).toHaveValue('41')
+    await expect(slider.locator('.react-aria-SliderOutput')).toHaveText('41')
+    expect((await fill.boundingBox())!.width).toBeGreaterThan(before)
+    await expect(slider.locator('.react-aria-SliderThumb')).toHaveCSS('outline-style', 'solid')
+    await expectNoAccessibilityViolations(page, 'main')
+    await page.setViewportSize({ width: 320, height: 900 })
+    await setTextSize(page, 32)
+    await expectNoPageOverflow(page)
+  })
+}
+
+// Checks that a range has one named thumb for each value, and the fill runs between them.
+test('a range slider has two named thumbs with the fill between them', async ({ page }) => {
+  await page.goto('/slider')
+  const range = page.locator('.react-aria-Slider').nth(1)
+  await expect(range.getByRole('slider', { name: 'Minimum' })).toHaveValue('20')
+  await expect(range.getByRole('slider', { name: 'Maximum' })).toHaveValue('70')
+  const fill = (await range.locator('.react-aria-SliderFill').boundingBox())!
+  const minimum = (await range.locator('.react-aria-SliderThumb').first().boundingBox())!
+  expect(Math.abs(fill.x - (minimum.x + minimum.width / 2))).toBeLessThan(2)
+})

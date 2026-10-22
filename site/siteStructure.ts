@@ -224,7 +224,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         pages: [
           { id: 'button', label: 'Button', path: '/button', status: 'implemented' },
           { id: 'toggle-button', label: 'Toggle button', path: '/toggle-button', status: 'implemented' },
-          { id: 'slider', label: 'Slider', path: '/slider', status: 'empty' },
+          { id: 'slider', label: 'Slider', path: '/slider', status: 'implemented' },
           { id: 'switch', label: 'Switch', path: '/switch', status: 'implemented' },
           { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'implemented' },
           { id: 'radio-group', label: 'Radio group', path: '/radio-group', status: 'implemented' },
@@ -266,7 +266,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'code-block', label: 'Code block', path: '/code-block', status: 'implemented' },
           { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
           { id: 'card', label: 'Card', path: '/card', status: 'implemented' },
-          { id: 'separator', label: 'Separator', path: '/separator', status: 'empty' },
+          { id: 'separator', label: 'Separator', path: '/separator', status: 'implemented' },
           { id: 'virtualizer', label: 'Virtualizer', path: '/virtualizer', status: 'empty' },
         ],
       },
@@ -294,8 +294,8 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         label: 'Status',
         pages: [
           { id: 'badge', label: 'Badge', path: '/badge', status: 'implemented' },
-          { id: 'progress-bar', label: 'Progress bar', path: '/progress-bar', status: 'empty' },
-          { id: 'meter', label: 'Meter', path: '/meter', status: 'empty' },
+          { id: 'progress-bar', label: 'Progress bar', path: '/progress-bar', status: 'implemented' },
+          { id: 'meter', label: 'Meter', path: '/meter', status: 'implemented' },
         ],
       },
       {

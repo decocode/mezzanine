@@ -1,6 +1,6 @@
 import { useState, type CSSProperties, type ReactNode } from 'react'
 import {
-  Badge, Heading, Label, Slider, SliderFill, SliderOutput, SliderThumb, SliderTrack,
+  Badge, Heading, Slider,
   ToggleButton, ToggleButtonGroup,
 } from '@decocode/mezzanine'
 import { framePresets, labBadgeLabel } from './labValues'
@@ -12,15 +12,7 @@ export function ExampleFrame({ label, initialWidth = 720, canOverflow = false, c
   return <div className="lab-frame">
     {/* The group's name tells screen reader users which example this "Width" slider belongs to. */}
     <div className="lab-frame-controls" role="group" aria-label={`Size of “${label}”`}>
-      {/* React Aria's Slider, used directly because Mezzanine has no Slider yet, and styled after React Aria's own example rather than as a Mezzanine component. */}
-      <Slider className="lab-slider" minValue={320} maxValue={1200} step={10} value={width} onChange={setWidth}>
-        <Label className="mz-text-label-md">Width</Label>
-        <SliderOutput className="mz-text-label-md">{({ state }) => `${state.getThumbValue(0)}px`}</SliderOutput>
-        <SliderTrack className="lab-slider-track">
-          <SliderFill className="lab-slider-fill" />
-          <SliderThumb className="lab-slider-thumb" />
-        </SliderTrack>
-      </Slider>
+      <Slider className="lab-slider" label="Width" minValue={320} maxValue={1200} step={10} value={width} onChange={setWidth} />
       {/* The preset matching the current width shows as selected; none does after a slider drag between presets. */}
       <ToggleButtonGroup
         size="sm"

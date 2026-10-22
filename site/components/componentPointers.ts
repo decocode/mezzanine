@@ -692,6 +692,32 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-cluster)"
     }
   ],
+  "Meter": [
+    {
+      "name": "--meter-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--meter-fill-background",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--meter-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--meter-track-background",
+      "fallback": "var(--color-neutral-muted)"
+    },
+    {
+      "name": "--meter-track-height",
+      "fallback": "var(--space-2)"
+    },
+    {
+      "name": "--meter-value-foreground",
+      "fallback": "var(--color-text-muted)"
+    }
+  ],
   "Modal": [
     {
       "name": "--modal-backdrop",
@@ -882,6 +908,32 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--indicator-width)"
     }
   ],
+  "ProgressBar": [
+    {
+      "name": "--progress-bar-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--progress-bar-fill-background",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--progress-bar-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--progress-bar-track-background",
+      "fallback": "var(--color-neutral-muted)"
+    },
+    {
+      "name": "--progress-bar-track-height",
+      "fallback": "var(--space-2)"
+    },
+    {
+      "name": "--progress-bar-value-foreground",
+      "fallback": "var(--color-text-muted)"
+    }
+  ],
   "RadioGroup": [
     {
       "name": "--radio-background",
@@ -1066,6 +1118,90 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--search-trigger-padding-inline-start",
       "fallback": "var(--space-2)"
+    }
+  ],
+  "Separator": [
+    {
+      "name": "--separator-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--separator-border-width",
+      "fallback": "var(--border-width-baseline)"
+    }
+  ],
+  "Slider": [
+    {
+      "name": "--slider-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--slider-fill-background",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--slider-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--slider-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset)"
+    },
+    {
+      "name": "--slider-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
+      "name": "--slider-gap",
+      "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--slider-opacity-disabled",
+      "fallback": "var(--opacity-disabled)"
+    },
+    {
+      "name": "--slider-output-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--slider-thumb-background",
+      "fallback": "var(--color-page)"
+    },
+    {
+      "name": "--slider-thumb-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--slider-thumb-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--slider-thumb-border",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--slider-thumb-border-radius",
+      "fallback": "var(--radius-full)"
+    },
+    {
+      "name": "--slider-thumb-border-width",
+      "fallback": "var(--border-width-md)"
+    },
+    {
+      "name": "--slider-thumb-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
+      "name": "--slider-track-background",
+      "fallback": "var(--color-neutral-muted)"
+    },
+    {
+      "name": "--slider-track-height",
+      "fallback": "var(--space-2)"
+    },
+    {
+      "name": "--slider-vertical-height",
+      "fallback": "var(--width-xs)"
     }
   ],
   "Switch": [

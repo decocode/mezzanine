@@ -90,70 +90,9 @@
   gap: var(--space-3);
 }
 
-/* React Aria's Slider, drawn after React Aria's own example: a rounded track with a fill and a
-   round thumb. Neutral colours rather than an accent, so it isn't mistaken for a Mezzanine component. */
+/* Mezzanine's Slider, kept to a comfortable width in the frame controls. */
 .lab-slider {
-  display: grid;
-  grid-template-areas: "label output" "track track";
-  grid-template-columns: 1fr auto;
-  gap: var(--space-1);
-  inline-size: min(100%, 20rem);
-}
-
-.lab-slider > label {
-  grid-area: label;
-}
-
-.lab-slider > output {
-  grid-area: output;
-}
-
-.lab-slider-track {
-  grid-area: track;
-  box-sizing: border-box;
-  block-size: var(--space-2);
-  /* Half a thumb each side, so the thumb stays inside the slider at both ends. */
-  margin-inline: calc(var(--target-size-min) / 2);
-  margin-block: calc((var(--target-size-min) - var(--space-2)) / 2);
-  border: var(--border-width-baseline) solid var(--color-border);
-  border-radius: var(--radius-full);
-  background: var(--color-page);
-}
-
-/* A taller invisible area, so the track is as easy to press as the thumb. */
-.lab-slider-track::before {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  inset-block: calc((var(--space-2) - var(--target-size-min)) / 2);
-}
-
-.lab-slider-fill {
-  border-radius: var(--radius-full);
-  background: var(--color-text-muted);
-}
-
-.lab-slider-thumb {
-  inset-block-start: 50%;
-  box-sizing: border-box;
-  inline-size: var(--target-size-min);
-  block-size: var(--target-size-min);
-  border: var(--border-width-baseline) solid var(--color-text-muted);
-  border-radius: var(--radius-full);
-  background: var(--color-surface);
-}
-
-.lab-slider-thumb[data-focus-visible] {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
-}
-
-/* High contrast mode drops background colours, so the fill uses a system colour instead. */
-@media (forced-colors: active) {
-  .lab-slider-fill {
-    forced-color-adjust: none;
-    background: Highlight;
-  }
+  inline-size: min(100%, var(--width-md));
 }
 
 .lab-frame-stage {

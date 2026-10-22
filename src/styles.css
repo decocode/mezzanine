@@ -14,6 +14,10 @@
 @import './components/CodeBlock/CodeBlock.css';
 @import './components/Checkbox/Checkbox.css';
 @import './components/Switch/Switch.css';
+@import './components/Slider/Slider.css';
+@import './components/ProgressBar/ProgressBar.css';
+@import './components/Meter/Meter.css';
+@import './components/Separator/Separator.css';
 @import './components/Dialog/Dialog.css';
 @import './components/Disclosure/Disclosure.css';
 @import './components/TopBar/TopBar.css';

@@ -1,0 +1,20 @@
+/* Follows React Aria's vanilla Separator: a thin line between groups of content. The space around it
+   comes from the layout it sits in. */
+.react-aria-Separator {
+  flex: none;
+  align-self: stretch;
+  margin: 0;
+  border: 0;
+  border-block-start: var(--separator-border-width, var(--border-width-baseline)) solid var(--separator-border, var(--color-border));
+}
+
+.react-aria-Separator[aria-orientation='vertical'] {
+  border-block-start: 0;
+  border-inline-start: var(--separator-border-width, var(--border-width-baseline)) solid var(--separator-border, var(--color-border));
+}
+
+@media (forced-colors: active) {
+  .react-aria-Separator {
+    border-color: CanvasText;
+  }
+}

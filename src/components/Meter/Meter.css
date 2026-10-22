@@ -1,0 +1,58 @@
+/* Follows React Aria's vanilla Meter: the label and value text share a row above the track. A meter
+   shows an amount, such as storage used, so it never animates. */
+.react-aria-Meter {
+  display: grid;
+  grid-template-areas:
+    'label value'
+    'bar bar';
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--meter-gap, var(--space-gap-field));
+  min-inline-size: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-Meter > .react-aria-Label {
+  grid-area: label;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
+}
+
+.mz-meter-value {
+  grid-area: value;
+  color: var(--meter-value-foreground, var(--color-text-muted));
+}
+
+.mz-meter-track {
+  grid-area: bar;
+  block-size: var(--meter-track-height, var(--space-2));
+  overflow: hidden;
+  border-radius: var(--meter-border-radius, var(--radius-control));
+  background: var(--meter-track-background, var(--color-neutral-muted));
+}
+
+.mz-meter-fill {
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--meter-fill-background, var(--color-accent-emphasis));
+}
+
+@media (forced-colors: active) {
+  .mz-meter-track {
+    border: var(--border-width-baseline) solid CanvasText;
+  }
+
+  .mz-meter-fill {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+}

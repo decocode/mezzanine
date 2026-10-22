@@ -986,3 +986,13 @@ a:focus-visible {
 .docs-app-shell .mz-app-shell { --app-shell-min-main-width: var(--ratio-pair-min-area-width); }
 .docs-app-shell:has(> .mz-panel[data-edge='end'][data-state='open']) .docs-contents-inline { display: none; }
 
+/* The Separator page's examples: groups one above another, and items in a row. */
+.separator-example {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.separator-example-row {
+  display: flex;
+  align-items: center;
+}

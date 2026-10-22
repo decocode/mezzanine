@@ -1,0 +1,142 @@
+/* Follows React Aria's vanilla Slider: the label and output share a row above the track, and the
+   thumbs ride a rail with the fill inside it. */
+.react-aria-Slider {
+  display: grid;
+  grid-template-areas:
+    'label output'
+    'track track';
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--slider-gap, var(--space-gap-field));
+  min-inline-size: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.react-aria-Slider > .react-aria-Label {
+  grid-area: label;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
+}
+
+.react-aria-SliderOutput {
+  grid-area: output;
+  color: var(--slider-output-foreground, var(--color-text-muted));
+}
+
+/* The track is as tall as a small target, so the thumb is easy to reach. */
+.react-aria-SliderTrack {
+  position: relative;
+  grid-area: track;
+  block-size: var(--target-size-xs);
+  /* Half a thumb at each end, so a thumb at either end stays inside the slider. */
+  margin-inline: calc(var(--slider-thumb-size, var(--icon-size-sm)) / 2);
+}
+
+.mz-slider-rail {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 50%;
+  block-size: var(--slider-track-height, var(--space-2));
+  translate: 0 -50%;
+  overflow: hidden;
+  border-radius: var(--slider-border-radius, var(--radius-control));
+  background: var(--slider-track-background, var(--color-neutral-muted));
+}
+
+.react-aria-SliderFill {
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--slider-fill-background, var(--color-accent-emphasis));
+}
+
+/* React Aria places each thumb along the track and centres it with its own transform; it sits on the
+   rail's line here. */
+.react-aria-SliderThumb {
+  box-sizing: border-box;
+  inset-block-start: 50%;
+  inline-size: var(--slider-thumb-size, var(--icon-size-sm));
+  block-size: var(--slider-thumb-size, var(--icon-size-sm));
+  border: var(--slider-thumb-border-width, var(--border-width-md)) solid var(--slider-thumb-border, var(--color-accent-emphasis));
+  border-radius: var(--slider-thumb-border-radius, var(--radius-full));
+  background: var(--slider-thumb-background, var(--color-page));
+}
+
+.react-aria-SliderThumb[data-hovered] {
+  background: var(--slider-thumb-background-hovered, var(--color-accent-muted-hovered));
+}
+
+.react-aria-SliderThumb[data-dragging] {
+  background: var(--slider-thumb-background-pressed, var(--color-accent-muted-pressed));
+}
+
+.react-aria-SliderThumb[data-focus-visible] {
+  outline: var(--slider-focus-ring-width, var(--focus-ring-width)) solid var(--slider-focus-ring-color, var(--color-focus));
+  outline-offset: var(--slider-focus-ring-offset, var(--focus-ring-offset));
+}
+
+.react-aria-Slider[data-orientation='vertical'] {
+  grid-template-areas: 'track';
+  grid-template-columns: auto;
+  grid-template-rows: minmax(0, 1fr);
+  block-size: var(--slider-vertical-height, var(--width-xs));
+}
+
+.react-aria-Slider[data-orientation='vertical'] > :is(.react-aria-Label, .react-aria-SliderOutput) {
+  display: none;
+}
+
+.react-aria-Slider[data-orientation='vertical'] .react-aria-SliderTrack {
+  inline-size: var(--target-size-xs);
+  block-size: auto;
+  margin-inline: 0;
+  margin-block: calc(var(--slider-thumb-size, var(--icon-size-sm)) / 2);
+}
+
+.react-aria-Slider[data-orientation='vertical'] .mz-slider-rail {
+  inset-block: 0;
+  /* physical: a centring offset across the vertical rail, paired with the horizontal translate. */
+  left: 50%;
+  inline-size: var(--slider-track-height, var(--space-2));
+  block-size: auto;
+  translate: -50% 0;
+}
+
+.react-aria-Slider[data-orientation='vertical'] .react-aria-SliderFill {
+  inline-size: 100%;
+}
+
+.react-aria-Slider[data-orientation='vertical'] .react-aria-SliderThumb {
+  inset-block-start: auto;
+  /* physical: a centring offset across the vertical rail; React Aria's transform does the rest. */
+  left: 50%;
+}
+
+.react-aria-Slider[data-disabled] {
+  opacity: var(--slider-opacity-disabled, var(--opacity-disabled));
+}
+
+@media (forced-colors: active) {
+  .mz-slider-rail {
+    border: var(--border-width-baseline) solid CanvasText;
+  }
+
+  .react-aria-SliderFill {
+    forced-color-adjust: none;
+    background: Highlight;
+  }
+
+  .react-aria-SliderThumb {
+    forced-color-adjust: none;
+    border-color: ButtonText;
+    background: ButtonFace;
+  }
+}
