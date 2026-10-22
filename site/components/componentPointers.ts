@@ -1214,6 +1214,18 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--input-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--input-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset)"
+    },
+    {
+      "name": "--input-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
+    },
+    {
       "name": "--number-field-description-foreground",
       "fallback": "var(--color-text-muted)"
     },
@@ -1236,6 +1248,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--number-field-gap",
       "fallback": "var(--space-gap-field)"
+    },
+    {
+      "name": "--number-field-input-width",
+      "fallback": "var(--space-24)"
     },
     {
       "name": "--number-field-opacity-disabled",

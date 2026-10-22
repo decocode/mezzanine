@@ -42,14 +42,30 @@
 
 .mz-number-field-group {
   display: flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
   min-inline-size: 0;
+  border-radius: var(--input-border-radius, var(--radius-control));
 }
 
+/* A number is short, so the input is narrow rather than filling the row. */
 .mz-number-field-group > .react-aria-Input {
-  flex: 1;
+  flex: 0 1 var(--number-field-input-width, var(--space-24));
+  inline-size: var(--number-field-input-width, var(--space-24));
   min-inline-size: 0;
   border-start-end-radius: 0;
   border-end-end-radius: 0;
+}
+
+/* The focus ring goes round the whole field, buttons included, rather than the input alone. Like a
+   text field, it shows on mouse focus too. */
+.mz-number-field-group > .react-aria-Input[data-focused] {
+  outline: none;
+}
+
+.mz-number-field-group:has(> .react-aria-Input[data-focused]) {
+  outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--input-focus-ring-color, var(--color-focus));
+  outline-offset: var(--input-focus-ring-offset, var(--focus-ring-offset));
 }
 
 /* The buttons share the field's border, so the three parts read as one control. */
@@ -106,5 +122,9 @@
 @media (forced-colors: active) {
   .mz-number-field-step {
     border-color: ButtonText;
+  }
+
+  .mz-number-field-group:has(> .react-aria-Input[data-focused]) {
+    outline-color: Highlight;
   }
 }
