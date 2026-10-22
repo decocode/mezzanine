@@ -11,7 +11,7 @@ for (const theme of themes) {
     await setTheme(page, theme)
     const areas = page.locator('.mz-demo-area')
     await expect(areas.first().getByRole('radio', { name: 'Light theme' })).toBeVisible()
-    const panel = areas.nth(1).getByRole('group', { name: 'Demo controls', exact: true })
+    const panel = areas.nth(1).getByRole('group', { name: 'Properties', exact: true })
     // Choosing Dark for the demo leaves its end panel in the site's theme.
     await areas.nth(1).getByRole('radio', { name: 'Dark theme' }).click()
     await expect(areas.nth(1).locator('.mz-demo-area-content')).toHaveAttribute('data-theme', 'dark')
@@ -20,7 +20,7 @@ for (const theme of themes) {
     await page.keyboard.press('Space')
     await expect(areas.nth(1).getByRole('button', { name: 'Button A', exact: true })).toBeDisabled()
     await areas.nth(2).getByRole('tab', { name: 'Code' }).click()
-    await expect(areas.nth(2).locator('pre')).toContainText('<DemoArea code={source}>')
+    await expect(areas.nth(2).locator('pre')).toContainText('<DemoArea codeView={source}>')
     await expectNoAccessibilityViolations(page, 'main')
     await page.setViewportSize({ width: 320, height: 900 })
     await setTextSize(page, 32)

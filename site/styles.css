@@ -985,6 +985,10 @@ a:focus-visible {
   gap: var(--space-2);
 }
 
-.demo-headed > :is(h3, .mz-demo-area) {
+.demo-headed > :is(h3, p, .mz-demo-area) {
   margin: 0;
+}
+
+.demo-headed > p {
+  max-inline-size: var(--line-length);
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Button, DemoArea, Heading, SwitchButton, SwitchField } from '@decocode/mezzanine'
+import { Button, DemoArea, Heading, SwitchButton, SwitchField, Text } from '@decocode/mezzanine'
+import { RichText } from '../../../../components/RichText'
 import { demoAreaContent, demoAreaExampleCode, demoAreaExampleLabels } from './demoAreaContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -21,11 +22,13 @@ export default function DemoAreaPage() {
         variants: <div className="demo-headed-list">
           <div className="demo-headed">
             <Heading level={3} className="mz-text-heading-sm">{demoAreaExampleLabels.panelHeading}</Heading>
+            <Text elementType="p" className="mz-text-body-md"><RichText text={demoAreaExampleLabels.panelDescription} /></Text>
             <DemoWithEndPanel />
           </div>
           <div className="demo-headed">
             <Heading level={3} className="mz-text-heading-sm">{demoAreaExampleLabels.codeHeading}</Heading>
-            <DemoArea code={demoAreaExampleCode}><Button>{demoAreaExampleLabels.button}</Button></DemoArea>
+            <Text elementType="p" className="mz-text-body-md"><RichText text={demoAreaExampleLabels.codeDescription} /></Text>
+            <DemoArea codeView={demoAreaExampleCode}><Button>{demoAreaExampleLabels.button}</Button></DemoArea>
           </div>
         </div>,
       }}

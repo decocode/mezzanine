@@ -1,4 +1,4 @@
-import { useState, useSyncExternalStore, type ReactNode } from 'react'
+import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { UNSAFE_PortalProvider } from 'react-aria'
 import { CodeBlock } from '../CodeBlock/CodeBlock'
 import { Tab, TabList, TabPanel, Tabs } from '../Tabs/Tabs'
@@ -10,7 +10,7 @@ export interface DemoAreaProps {
   // The live demo.
   children: ReactNode
   // The demo's source. With it, the bar offers Preview and Code tabs.
-  code?: string
+  codeView?: string
   // Controls for the component in the demo, in an area at the end of the preview.
   endPanel?: ReactNode
   className?: string
@@ -25,16 +25,17 @@ const themeOptions: { id: DemoTheme; label: string; icon: ReactNode }[] = [
 // A framed area that shows a live demo of components. Its bar holds Preview and Code tabs when there
 // is code to show, and a theme picker that changes only this demo; a heading above it names the demo. React Aria has
 // no matching component, so Mezzanine composes it from Tabs, ToggleButtonGroup and CodeBlock.
-export function DemoArea({ children, code, endPanel, className }: DemoAreaProps) {
+export function DemoArea({ children, codeView, endPanel, className }: DemoAreaProps) {
   const pageTheme = useSyncExternalStore(subscribeToPageTheme, getPageTheme, getServerPageTheme)
   // Until someone picks a theme, the demo follows the page's.
   const [chosenTheme, setChosenTheme] = useState<DemoTheme | null>(null)
   const [previewElement, setPreviewElement] = useState<HTMLDivElement | null>(null)
+  const propertiesLabelId = useId()
 
   // The tabs sit at the start of the bar, the theme picker at the end.
   const bar = (
     <div className="mz-demo-area-bar">
-      {code != null && (
+      {codeView != null && (
         <TabList aria-label="Demo view">
           <Tab id="preview">Preview</Tab>
           <Tab id="code">Code</Tab>
@@ -69,13 +70,18 @@ export function DemoArea({ children, code, endPanel, className }: DemoAreaProps)
       <div className="mz-demo-area-content" data-theme={theme} ref={setPreviewElement}>
         <UNSAFE_PortalProvider getContainer={() => previewElement}>{children}</UNSAFE_PortalProvider>
       </div>
-      {endPanel != null && <div className="mz-demo-area-end-panel" role="group" aria-label="Demo controls">{endPanel}</div>}
+      {endPanel != null && (
+        <div className="mz-demo-area-end-panel" role="group" aria-labelledby={propertiesLabelId}>
+          <span className="mz-demo-area-end-panel-label" id={propertiesLabelId}>Properties</span>
+          {endPanel}
+        </div>
+      )}
     </div>
   )
 
   const classes = ['mz-demo-area', className].filter(Boolean).join(' ')
 
-  if (code == null) {
+  if (codeView == null) {
     return <div className={classes}>{bar}<div className="mz-demo-area-body">{preview}</div></div>
   }
   return (
@@ -83,7 +89,7 @@ export function DemoArea({ children, code, endPanel, className }: DemoAreaProps)
       {bar}
       <div className="mz-demo-area-body">
         <TabPanel id="preview">{preview}</TabPanel>
-        <TabPanel id="code"><CodeBlock>{code}</CodeBlock></TabPanel>
+        <TabPanel id="code"><CodeBlock>{codeView}</CodeBlock></TabPanel>
       </div>
     </Tabs>
   )

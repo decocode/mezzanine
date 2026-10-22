@@ -561,15 +561,27 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-area-end-panel-background",
-      "fallback": "var(--color-surface)"
+      "fallback": "var(--elevation-flat-surface)"
+    },
+    {
+      "name": "--demo-area-end-panel-border-radius",
+      "fallback": "min(var(--radius-surface), var(--radius-sm))"
+    },
+    {
+      "name": "--demo-area-end-panel-border-width",
+      "fallback": "var(--border-width-hairline)"
     },
     {
       "name": "--demo-area-end-panel-gap",
-      "fallback": "var(--space-gap-cluster)"
+      "fallback": "var(--space-gap-control)"
     },
     {
-      "name": "--demo-area-end-panel-padding",
-      "fallback": "var(--space-4)"
+      "name": "--demo-area-end-panel-label-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--demo-area-end-panel-offset",
+      "fallback": "var(--surface-gap)"
     },
     {
       "name": "--demo-area-end-panel-width",

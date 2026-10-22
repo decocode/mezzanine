@@ -340,9 +340,9 @@ layout it sits in. With `orientation="vertical"` it stands upright in a row.
 
 `DemoArea` frames a live demo, such as on a documentation page. Every demo has
 the same bar: a theme picker that changes only this demo, and Preview and Code
-tabs when you pass its source as `code`. Put a heading above it to name the demo. Pass
-controls for the component as `endPanel`; they sit at the end of the preview,
-or below it when there isn't room. The demo's pop-ups render inside it, so they
+tabs when you pass its source as `codeView`. Put a heading above it to name the demo. Pass
+controls for the component as `endPanel`; they sit under a "Properties" label at
+the end of the preview, or below it when there isn't room. The demo's pop-ups render inside it, so they
 take its theme.
 
 ```tsx
