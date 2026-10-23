@@ -14,10 +14,11 @@ export const ratioPairContent: DocsPageContent = {
   sections: [
     {
       key: 'howItWorks',
+      title: 'How a Ratio pair works',
       body: [
-        'Ratio pair is used to decide how space should be shared between two items placed side by side. For example, a picture beside its description, or a form beside its live preview.',
-        'You can choose how the two areas share that space by using either fractions, such as one third and two thirds, or Auto Start, where the width of the first area is based on the content inside it.',
-        'If using fractions each area has a default minimum width of 15rem. If using Auto Start, the width of the first area is based on the content inside it, and the width of the second area fills the remaining space, down to 15rem. When there isn’t enough room for both areas to be side by side, the second area moves underneath the first, and both become full width.',
+        'When two things need to be placed side by side, like an image next to text or a form next to its preview, Ratio pair controls how they share their row.',
+        'It can split the row by a fraction, such as 1/3 and 2/3, with each item at least 15rem wide. Or it can use Auto start, where the first item fits its content and the second, at least 15rem wide, fills whatever space is left.',
+        'If their container is too narrow for that, they stack, one above the other.',
       ],
     },
     { key: 'example' },
