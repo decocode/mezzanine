@@ -10,9 +10,9 @@ The `@decocode/mezzanine` package. `npm run build:lib` builds it into `dist/`.
 | --- | --- |
 | `index.ts` | The only public entry point. Everything an app can use is exported here. |
 | `components/<Name>/` | One folder per component, named after it: `<Name>.tsx` and `<Name>.css`, plus any private `.ts` logic. Panel and AppShell also have a `<Name>.tokens.css` holding the layout settings an app may change. Some are thin React Aria re-exports that Mezzanine hasn't designed yet. |
-| `tokens/` | The shared scales, one file per subject: colour palettes, elevation, icon size, interaction (target size, focus ring, nav item), motion, opacity, shape (radius, border width), space, layout, text, typography and z-index. |
+| `tokens/` | The shared scales, one file per subject: colour palettes, elevation, icon size, interaction (target size, focus ring, nav item), motion, opacity, shape (radius, border width), size (widths and heights), space, layout, text, typography and z-index. |
 | `themes/` | Light, Dark and Wireframe. Each maps the palettes onto the colour roles, and sets any other role values that differ. `forced-colors.css` points every colour role at a system colour when forced colours, such as Windows high contrast, are on. |
-| `styles/` | The shared classes that apps write in their markup, built from tokens: `typography.css` holds the public `mz-text-*` text styles, and `layout.css` the layout classes, such as `mz-ratio-pair`. |
+| `styles/` | Shared styles built from tokens. `typography.css` holds the public `mz-text-*` text styles and `layout.css` the layout classes, such as `mz-ratio-pair`, which apps write in their markup. `scroll.css` adds the soft fade at the edge of a scrolling ListBox, Menu, GridList, Tree or Panel, with nothing for apps to write. |
 | `tokens.css`, `styles.css`, `motion.css` | Entry stylesheets: `tokens.css` gathers the tokens, `styles.css` gathers every stylesheet into the one file apps import, and `motion.css` is the motion policy. |
 | `icons/` | The icons in active use. |
 | `docs/` | How apps use Mezzanine: `COMPONENTS.md`, `TOKENS.md` and `TYPOGRAPHY.md`. |
