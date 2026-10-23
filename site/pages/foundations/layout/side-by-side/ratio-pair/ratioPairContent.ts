@@ -9,7 +9,6 @@ export const ratioPairContent: DocsPageContent = {
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap. One child is set to Fill container.' },
     { where: 'CSS', called: 'Flexbox with `flex-wrap`, `flex-grow` and `flex-basis`. CSS has no single name for this pattern.' },
     { where: 'Tailwind CSS', called: '`flex flex-wrap` on the parent, with `grow` and `basis-1/3` (for example) on the two areas. There’s no named pattern.' },
-    { where: 'Bootstrap', called: 'A `row` with two columns, such as `col-md-4` and `col-md-8`. These stack below a set screen width.' },
     { where: 'Material Design', called: 'Supporting pane layout, or list-detail when one side lists items.' },
   ],
   sections: [
@@ -28,7 +27,6 @@ export const ratioPairContent: DocsPageContent = {
     { label: 'Bedrock: Split', href: 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/split' },
     { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
     { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },
-    { label: 'Bootstrap: Grid system', href: 'https://getbootstrap.com/docs/5.3/layout/grid/' },
     { label: 'Material Design: Canonical layouts', href: 'https://m3.material.io/foundations/adaptive-design/canonical-layouts' },
   ],
 }

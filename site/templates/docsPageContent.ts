@@ -45,7 +45,7 @@ export interface ContentSection {
 
 // What designers, engineers and other design systems call the same thing as the page's subject.
 export interface AlsoKnownAs {
-  // Such as Figma, CSS, Tailwind CSS, Bootstrap or Material Design.
+  // CSS, Tailwind CSS, Figma, Material Design or shadcn/ui (owner's decision, 23 October 2026).
   readonly where: string
   readonly called: Copy
 }

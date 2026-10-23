@@ -10,7 +10,6 @@ export const rowWrapContent: DocsPageContent = {
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap.' },
     { where: 'CSS', called: 'Flexbox with `flex-wrap: wrap`. CSS has no single name for this pattern.' },
     { where: 'Tailwind CSS', called: '`flex flex-wrap` on the parent, with `gap` for the space. There’s no named pattern.' },
-    { where: 'Bootstrap', called: '`d-flex flex-wrap` on the parent, with a `gap` utility. There’s no named pattern.' },
     { where: 'Material Design', called: 'A chip set: a group of chips that wraps onto new rows.' },
   ],
   sections: [
@@ -29,7 +28,6 @@ export const rowWrapContent: DocsPageContent = {
     { label: 'Figma: Guide to auto layout', href: 'https://help.figma.com/hc/en-us/articles/360040451373-Guide-to-auto-layout' },
     { label: 'MDN: flex-wrap', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/flex-wrap' },
     { label: 'Tailwind CSS: flex-wrap', href: 'https://tailwindcss.com/docs/flex-wrap' },
-    { label: 'Bootstrap: Flex', href: 'https://getbootstrap.com/docs/5.3/utilities/flex/' },
     { label: 'Material Design: Chips', href: 'https://m3.material.io/components/chips/overview' },
   ],
 }
