@@ -4,7 +4,7 @@ import type { CssNote } from '../../../../components/ExampleParts'
 
 export const ratioPairContent: DocsPageContent = {
   id: 'ratio-pair', kind: 'foundation', title: 'Ratio pair',
-  description: 'When two boxes agree to divvy up their shared space.',
+  description: 'When two items agree to divvy up their shared space.',
   alsoKnownAs: [
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap. One child is set to Fill container.' },
     { where: 'CSS', called: 'Flexbox with `flex-wrap`, `flex-grow` and `flex-basis`. CSS has no single name for this pattern.' },
@@ -16,7 +16,7 @@ export const ratioPairContent: DocsPageContent = {
       key: 'howItWorks',
       title: 'How a Ratio pair works',
       body: [
-        'When two things need to be placed side by side, like an image next to text or a form next to its preview, Ratio pair controls how they share their row.',
+        'When two items need to be placed side by side, like an image next to text or a form next to its preview, Ratio pair controls how they share their row.',
         'It can split the row by a fraction, such as 1/3 and 2/3, with each item at least 15rem wide. Or it can use Auto start, where the first item fits its content and the second, at least 15rem wide, fills whatever space is left.',
         'If their container is too narrow for that, they stack, one above the other.',
       ],

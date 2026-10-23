@@ -18,7 +18,7 @@ export const gridContent: DocsPageContent = {
       key: 'howItWorks',
       title: 'Forming a grid',
       body: [
-        'A Row lines things up side by side, and a Stack places them in a column one above another. Grid combines the two.',
+        'A Row lines items up side by side, and a Stack places them in a column one above another. Grid combines the two.',
         'The columns are set first. Items then fill the cells in order, one row at a time, and start a new row when the last one is full. An item can also span more than one cell.',
         'Columns can be fixed widths, such as 8rem, or shares of the space left over, written in `fr`. `1fr 2fr` divides the leftover space into three equal parts, giving the first column one part and the second column two.',
       ],
