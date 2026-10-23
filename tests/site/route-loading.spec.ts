@@ -85,3 +85,23 @@ test('theme changes preserve the loaded page and example state', async ({ page }
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
   await expect(page.getByRole('status')).toHaveText('Press count: 1')
 })
+
+// Checks that switching theme moves nothing: the app's areas, the page heading and the first example keep
+// the same position and size in Light, Dark and Wireframe.
+test('switching theme keeps content in the same place', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 })
+  await page.goto('/button')
+  const selectors = ['main', 'main h1', '.mz-demo-area', '.mz-top-bar', '.mz-panel']
+  for (const selector of selectors) await expect(page.locator(selector).first()).toBeVisible()
+  const boxes = async () => page.evaluate(selectors => selectors.map(selector => {
+    const { x, y, width, height } = document.querySelector(selector)!.getBoundingClientRect()
+    return [selector, Math.round(x), Math.round(y), Math.round(width), Math.round(height)].join(' ')
+  }), selectors)
+  const layouts = []
+  for (const theme of ['light', 'dark', 'wireframe']) {
+    await page.evaluate(theme => { document.documentElement.dataset.theme = theme }, theme)
+    layouts.push(await boxes())
+  }
+  expect(layouts[1]).toEqual(layouts[0])
+  expect(layouts[2]).toEqual(layouts[0])
+})

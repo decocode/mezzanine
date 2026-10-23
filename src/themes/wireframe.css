@@ -89,8 +89,9 @@
   --radius-surface: var(--radius-none);
   /* Without colour, a heavier indicator bar stands out from the lines around it. */
   --indicator-width: var(--border-width-xl);
-  /* The space between an app's surfaces, such as AppShell's cards. Wireframe keeps them joined. */
-  --surface-gap: 0;
+  /* The space between an app's surfaces, such as AppShell's cards. The same as Light and Dark, so content
+     stays in place when the theme changes (owner's decision, 23 October 2026). */
+  --surface-gap: var(--space-2);
 
   /* No shadows: surfaces are told apart by their borders. */
   --elevation-shadow-color: transparent;

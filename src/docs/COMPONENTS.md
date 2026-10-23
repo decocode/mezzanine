@@ -225,8 +225,8 @@ Side Panels are the md width (`--width-md`) by default. Set `--panel-start-width
 `--panel-end-width` to give one side its own width, such as a wide chat Panel.
 
 Each area (the header, Panels and main content) is a card on a darker
-background, separated by the theme's `--surface-gap` role. Wireframe sets the
-gap to 0, so its cards join into one flat frame.
+background, separated by the theme's `--surface-gap` role. Every official theme
+uses the same gap, so content stays in place when the theme changes.
 
 `startPanelSpan="full"` or `endPanelSpan="full"` runs a side Panel the full
 height of the window, with the header beside it rather than above it. The

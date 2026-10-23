@@ -391,8 +391,8 @@ Both are `--radius-none` (square) by default, so a theme rounds every control or
 surface by changing one token. Light and Dark set `--radius-sm` and `--radius-md`.
 
 `--surface-gap` is the space between an app's surfaces, such as AppShell's cards:
-`--space-2` in Light and Dark, and 0 in Wireframe, where the cards join into one
-flat frame.
+`--space-2` in every official theme, so content stays in place when the theme
+changes.
 
 ## Current elevation inventory
 

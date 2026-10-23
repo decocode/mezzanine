@@ -56,7 +56,7 @@ export const appShellContent: DocsPageContent = {
         'Set `bottomPanelSpan="full"` to run a bottom Panel under the side Panels too, as in a code editor. By default it sits under the main content only.',
         'Set `startPanelSpan="full"` or `endPanelSpan="full"` to run a side Panel the full height of the window, with the header beside it rather than above it. On narrow screens nothing changes, as the Panel becomes a drawer or is hidden.',
         'The `<header>` is optional. Without one, the Panels and main content start at the top.',
-        'Each area (the header, the Panels and the main content) is a card with rounded corners and a hairline border, on a darker background. In Wireframe the gap is 0 and the cards join into one flat, square frame.',
+        'Each area (the header, the Panels and the main content) is a card with rounded corners and a hairline border, on a darker background. In Wireframe the cards are square and flat, with the same gap, so nothing moves when the theme changes.',
       ],
     },
     {
