@@ -407,6 +407,17 @@ a:focus-visible {
   gap: var(--space-4);
 }
 
+/* The gap alone spaces an example's text, demo and notes. A grid doesn't overlap its children's
+   margins, so they're cleared to stop the space doubling; the notes keep their larger space above. */
+.example-stack > *,
+.example-stack > .mz-demo-area {
+  margin: 0;
+}
+
+.example-stack > .css-notes {
+  margin-block-start: var(--space-6);
+}
+
 /* An example's frame of a chosen width (see WidthFrame.tsx), so layouts can be seen wrapping and
    switching. It is a size container, so its content can measure it with container units such as
    cqi. A frame whose content may stick out scrolls. */
@@ -668,6 +679,12 @@ a:focus-visible {
 
 .component-section > section {
   margin-block-start: var(--space-12);
+}
+
+/* A sub-section straight under its section's heading sits closer to it than to the sub-sections that
+   follow. (Its margin overlaps the heading's, so this sets the whole gap.) */
+.component-section > h2 + section {
+  margin-block-start: var(--space-6);
 }
 
 .component-section > section > :is(h3, h4) {
