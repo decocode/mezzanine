@@ -48,7 +48,8 @@
 /* The demo's own theme applies here, so it sets its colours afresh on the page colour. */
 .mz-demo-area-content {
   flex: 999 1 0;
-  min-inline-size: min(100%, var(--width-md));
+  /* The narrowest the preview gets beside the end panel; below it, the panel wraps underneath. */
+  min-inline-size: min(100%, var(--demo-area-content-min-width, var(--width-md)));
   padding: var(--demo-area-padding, var(--space-4));
   background-color: var(--demo-area-preview-background, var(--color-page));
   color: var(--color-text);

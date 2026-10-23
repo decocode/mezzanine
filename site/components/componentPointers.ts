@@ -642,6 +642,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
+      "name": "--demo-area-content-min-width",
+      "fallback": "var(--width-md)"
+    },
+    {
       "name": "--demo-area-end-panel-background",
       "fallback": "var(--elevation-flat-surface)"
     },

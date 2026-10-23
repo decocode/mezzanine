@@ -127,7 +127,8 @@ test('Row switches to a column below the lg width', async ({ page }) => {
   const items = page.locator('.example-row > *')
   const rows = () => items.evaluateAll(list => new Set(list.map(item => Math.round(item.getBoundingClientRect().top))).size)
   await expect.poll(rows).toBe(1)
-  await page.getByRole('radio', { name: '320px', exact: true }).click()
+  // The frame fills its demo, so a phone-sized window makes it narrower than the lg width.
+  await page.setViewportSize({ width: 480, height: 900 })
   await expect.poll(rows).toBe(3)
   await page.locator('label').filter({ hasText: 'Switch to a column below the lg width' }).click()
   await expect.poll(rows).toBe(1)

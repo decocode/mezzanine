@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Checkbox } from '@decocode/mezzanine'
 import { CssNotes, ExampleText } from '../../../../../components/ExampleParts'
-import { WidthFrame } from '../../../../../components/WidthFrame'
+import { WidthDemo } from '../../../../../components/WidthFrame'
 import { rowCssNotes } from './rowContent'
 
 export function RowExample() {
@@ -11,11 +11,11 @@ export function RowExample() {
     <ExampleText>Below the lg width, with the switch, the row becomes a column. Without it, the row squashes, then sticks out of the frame.</ExampleText>
     <Checkbox isSelected={isSwitching} onChange={setIsSwitching}>Switch to a column below the lg width</Checkbox>
     {/* The row can stick out of the frame, so the frame scrolls. */}
-    <WidthFrame label="Row" canOverflow>
+    <WidthDemo label="Row" canOverflow code={rowCssNotes.row.code}>
       <div className={`example-row${isSwitching ? ' example-row-switch' : ''}`}>
         {['Item one', 'Item two', 'Item three'].map((item) => <div key={item} className="example-item mz-text-body-sm">{item}</div>)}
       </div>
-    </WidthFrame>
-    <CssNotes name="Row" note={rowCssNotes.row} level={3} />
+    </WidthDemo>
+    <CssNotes name="Row" note={rowCssNotes.row} level={3} showCode={false} />
   </>
 }

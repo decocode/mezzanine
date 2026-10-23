@@ -1,7 +1,8 @@
 // The example for the Ratio pair page, in Foundations › Layout: the library's mz-ratio-pair class,
-// in a box whose width can be chosen, so the second area can be seen wrapping underneath.
+// in a dashed box that fills its demo, so resizing the window shows the second area wrapping underneath.
 import { useState, type CSSProperties } from 'react'
-import { CssNotes, ValuePicker } from '../../../../../components/ExampleParts'
+import { DemoArea } from '@decocode/mezzanine'
+import { CssNotes, PanelPicker } from '../../../../../components/ExampleParts'
 import { ratioPairCssNotes } from './ratioPairContent'
 
 type RatioPairFraction = '1/4' | '1/3' | '1/2' | 'auto-start'
@@ -13,24 +14,18 @@ const fractionOptions: readonly { label: string; value: RatioPairFraction }[] = 
   { label: 'Auto start', value: 'auto-start' },
 ]
 
-const widthOptions = [
-  { label: '320px', value: '20rem' },
-  { label: '480px', value: '30rem' },
-  { label: '720px', value: '45rem' },
-] as const
 
 export function RatioPairExample() {
   const [fraction, setFraction] = useState<RatioPairFraction>('1/3')
-  const [width, setWidth] = useState<(typeof widthOptions)[number]['value']>('45rem')
   return <>
-    <ValuePicker label="Fraction" options={fractionOptions} value={fraction} onChange={setFraction} />
-    <ValuePicker label="Width" options={widthOptions} value={width} onChange={setWidth} />
-    <div className="ratio-pair-frame" style={{ '--_frame-width': width } as CSSProperties}>
-      <div className="mz-ratio-pair" data-fraction={fraction} style={{ '--ratio-pair-gap': 'var(--space-3)' } as CSSProperties}>
-        <div className="ratio-pair-area mz-text-body-sm">First area</div>
-        <div className="ratio-pair-area mz-text-body-sm">Second area</div>
+    <DemoArea className="ratio-pair-demo" codeView={ratioPairCssNotes.ratioPair.code} endPanel={<PanelPicker label="Fraction" options={fractionOptions} value={fraction} onChange={setFraction} />}>
+      <div className="ratio-pair-frame">
+        <div className="mz-ratio-pair" data-fraction={fraction} style={{ '--ratio-pair-gap': 'var(--space-3)' } as CSSProperties}>
+          <div className="ratio-pair-area mz-text-body-sm">First area</div>
+          <div className="ratio-pair-area mz-text-body-sm">Second area</div>
+        </div>
       </div>
-    </div>
-    <CssNotes name="Ratio pair" note={ratioPairCssNotes.ratioPair} level={3} />
+    </DemoArea>
+    <CssNotes name="Ratio pair" note={ratioPairCssNotes.ratioPair} level={3} showCode={false} />
   </>
 }

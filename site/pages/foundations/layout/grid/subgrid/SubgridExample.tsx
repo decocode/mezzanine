@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { Button, Checkbox, Heading, Text } from '@decocode/mezzanine'
 import { CssNotes, ExampleText } from '../../../../../components/ExampleParts'
-import { WidthFrame } from '../../../../../components/WidthFrame'
+import { WidthDemo } from '../../../../../components/WidthFrame'
 import { subgridCssNotes } from './subgridContent'
 
 const items = [
@@ -16,7 +16,7 @@ export function SubgridExample() {
   return <>
     <ExampleText>With subgrid, the text in each item starts at the same height and the buttons line up along the bottom, however long each heading is. Without it, they drift apart. The items are plain elements, because the Card component doesn’t use subgrid.</ExampleText>
     <Checkbox isSelected={isAligned} onChange={setIsAligned}>Use subgrid</Checkbox>
-    <WidthFrame label="Subgrid" initialWidth="100%">
+    <WidthDemo label="Subgrid" code={subgridCssNotes.subgrid.code}>
       <div className={`example-subgrid-list${isAligned ? ' example-subgrid-on' : ''}`}>
         {items.map((item) => <div key={item.title} className="example-subgrid-item">
           <Heading level={3}>{item.title}</Heading>
@@ -24,7 +24,7 @@ export function SubgridExample() {
           <div><Button size="sm" hierarchy="secondary">Action</Button></div>
         </div>)}
       </div>
-    </WidthFrame>
-    <CssNotes name="subgrid" note={subgridCssNotes.subgrid} level={3} />
+    </WidthDemo>
+    <CssNotes name="subgrid" note={subgridCssNotes.subgrid} level={3} showCode={false} />
   </>
 }
