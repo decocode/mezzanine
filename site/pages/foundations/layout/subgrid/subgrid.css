@@ -1,4 +1,5 @@
-/* The Subgrid page's example: the parts inside items line up across a row. */
+/* The Subgrid page's example: the parts inside items line up across a row. The items are Cards, which
+   become grids here so their parts can share the list's rows. */
 .example-subgrid-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
@@ -9,8 +10,6 @@
   display: grid;
   align-content: start;
   gap: var(--space-3);
-  padding: var(--space-4);
-  border: var(--border-width-baseline) solid var(--color-border);
 }
 
 .example-subgrid-item > * {

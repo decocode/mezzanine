@@ -1,51 +1,47 @@
-/* The Container queries page's examples: the tile responds to its slot, not the screen. */
-.example-two-slots {
+/* The Container queries page's examples: the item responds to its container, not the screen. */
+.example-two-containers {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-6);
 }
 
-.example-two-slots > :first-child {
+.example-two-containers > :first-child {
   flex: 1 1 var(--width-sm);
 }
 
-.example-two-slots > :last-child {
+.example-two-containers > :last-child {
   flex: 999 1 0;
   min-inline-size: 55%;
 }
 
-.example-two-slots > * {
+.example-two-containers > * {
   display: grid;
   align-content: start;
   gap: var(--space-2);
   min-inline-size: 0;
 }
 
-.example-slot {
-  container: example-slot / inline-size;
+.example-container {
+  container: example-container / inline-size;
   min-inline-size: 0;
 }
 
-.example-tile {
+.example-item-layout {
   display: grid;
   gap: var(--space-4);
 }
 
-.example-tile-text {
+.example-item-text {
   display: grid;
   gap: var(--space-2);
 }
 
-.example-tile-text > * {
+.example-item-text > * {
   margin: 0;
 }
 
-.example-tile-image {
-  min-block-size: var(--space-24);
-}
-
-@container example-slot (width >= 26rem) {
-  .example-tile {
+@container example-container (width >= 26rem) {
+  .example-item-layout {
     grid-template-columns: var(--space-24) minmax(0, 1fr);
     align-items: start;
   }

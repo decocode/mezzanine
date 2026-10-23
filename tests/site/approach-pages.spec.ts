@@ -68,13 +68,13 @@ for (const { path } of pages) {
   })
 }
 
-// Checks the same tile responds to its own slot: one column in the narrow slot, two in the wide one.
-test('Container queries tiles follow their own slot', async ({ page }) => {
-  // Wide enough that the wide slot has room for two columns beside the On this page column.
+// Checks the same item responds to its own container: one column in the narrow container, two in the wide one.
+test('Container queries items follow their own container', async ({ page }) => {
+  // Wide enough that the wide container has room for two columns beside the On this page column.
   await page.setViewportSize({ width: 1600, height: 900 })
   await page.goto('/layout/container-queries')
-  const tiles = page.locator('.example-two-slots .example-tile')
-  const columns = (index: number) => tiles.nth(index).evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length)
+  const items = page.locator('.example-two-containers .example-item-layout')
+  const columns = (index: number) => items.nth(index).evaluate(element => getComputedStyle(element).gridTemplateColumns.split(' ').length)
   expect(await columns(0)).toBe(1)
   expect(await columns(1)).toBe(2)
 })

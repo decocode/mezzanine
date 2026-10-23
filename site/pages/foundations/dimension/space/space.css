@@ -5,14 +5,6 @@
   border: var(--border-width-baseline) dashed var(--color-text-muted);
 }
 
-.space-item {
-  box-sizing: border-box;
-  min-inline-size: 0;
-  padding: var(--space-3);
-  border: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-surface);
-}
-
 .space-margin > * {
   margin: var(--space-4);
 }
@@ -25,8 +17,8 @@
 
 .space-content {
   padding: var(--space-3);
-  border: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-page);
+  border: var(--border-width-baseline) solid var(--color-accent);
+  background: var(--color-accent-muted);
 }
 
 .space-gap {

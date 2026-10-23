@@ -429,6 +429,12 @@ a:focus-visible {
   border: var(--border-width-baseline) dashed var(--color-text-muted);
 }
 
+/* Inside a DemoArea the demo is already framed, so the frame drops its dashed line and padding. */
+.mz-demo-area .width-frame {
+  padding: 0;
+  border: 0;
+}
+
 .width-frame[role='region'] {
   overflow-x: auto;
 }
@@ -438,16 +444,17 @@ a:focus-visible {
   outline-offset: var(--space-1);
 }
 
-/* A plain item for showing layout without real content. */
+/* A plain box for showing layout without real content, such as an image's place. It uses the accent
+   roles, so it stands out from the demo and follows each theme. */
 .example-item {
   box-sizing: border-box;
   min-inline-size: 0;
   padding: var(--space-3);
-  border: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-surface);
+  border: var(--border-width-baseline) solid var(--color-accent);
+  background: var(--color-accent-muted);
 }
 
-.example-item-tall {
+.example-card-image {
   min-block-size: var(--space-24);
 }
 

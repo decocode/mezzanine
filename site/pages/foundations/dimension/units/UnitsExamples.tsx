@@ -1,7 +1,8 @@
-// The examples for the Units page, in Foundations › Dimension.
+// The examples for the Units page, in Foundations › Dimension. The bars are Cards.
+import { Card } from '@decocode/mezzanine'
 import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
 import { RichText } from '../../../../components/RichText'
-import { WidthFrame } from '../../../../components/WidthFrame'
+import { WidthDemo } from '../../../../components/WidthFrame'
 import { fourUnitsText, unitsCssNotes } from './unitsContent'
 
 const bars = [
@@ -15,11 +16,11 @@ export function FourUnitsExample() {
   return <>
     <ExampleText><RichText text={fourUnitsText} /></ExampleText>
     {/* The vw bar ignores the frame, so it can stick out, and the frame scrolls. */}
-    <WidthFrame label="Four units" canOverflow>
+    <WidthDemo label="Four units" canOverflow code={unitsCssNotes.fourUnits.code}>
       <div className="example-stack">
-        {bars.map((bar) => <div key={bar.label} className={`example-item ${bar.className} mz-text-body-sm`}>{bar.label}</div>)}
+        {bars.map((bar) => <Card key={bar.label} className={bar.className}>{bar.label}</Card>)}
       </div>
-    </WidthFrame>
-    <CssNotes name="the units" note={unitsCssNotes.fourUnits} level={3} />
+    </WidthDemo>
+    <CssNotes name="the units" note={unitsCssNotes.fourUnits} level={3} showCode={false} />
   </>
 }

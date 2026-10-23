@@ -48,3 +48,10 @@
 .example-reel > * {
   flex: 0 0 var(--width-xs);
 }
+
+/* Room for the row: the lg width it switches at, plus the demo's padding. Where that doesn't fit beside
+   the Properties panel, DemoArea moves the panel underneath. */
+.row-demo {
+  --demo-area-content-min-width: calc(var(--width-lg) + var(--space-4) * 2);
+}
+

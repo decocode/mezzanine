@@ -1,5 +1,5 @@
 import { useId, type ReactNode } from 'react'
-import { CodeBlock, Heading, Label, RadioButton, RadioField, RadioGroup, SelectionIndicator, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
+import { Card, CodeBlock, Heading, Label, RadioButton, RadioField, RadioGroup, SelectionIndicator, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
 import { RichText } from './RichText'
 
 // The CSS behind an example: plain-English notes and the rules themselves, quoted from the page's
@@ -38,6 +38,16 @@ export function CssNotes({ name, note, level = 4, showCode = true }: { name: str
     <Heading level={level} className={className}>The CSS behind {name}</Heading>
     <CssNotesBody note={note} showCode={showCode} />
   </div>
+}
+
+// A Card with an image's place, a heading and a line of text, like a real card, for layout examples. The
+// heading level fits where the example sits on its page.
+export function ExampleCard({ title, text = 'Supporting text for the card.', headingLevel, className }: { title: string; text?: string; headingLevel: 3 | 4; className?: string }) {
+  return <Card className={className}>
+    <div className="example-item example-card-image mz-text-body-sm">Image</div>
+    <Heading level={headingLevel}>{title}</Heading>
+    <Text elementType="p" className="mz-text-body-md">{text}</Text>
+  </Card>
 }
 
 // Buttons that choose one CSS value for an example, such as position: sticky, with a visible label.

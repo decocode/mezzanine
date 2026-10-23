@@ -53,7 +53,7 @@ export const spaceCssNotes: Record<string, CssNote> = {
   },
   padding: {
     paragraphs: [
-      'The `padding` property sets the space between the border and the content. The buttons change it to one of Mezzanine’s spacing tokens.',
+      'The `padding` property sets the space between the border and the content. The Properties panel changes it to one of Mezzanine’s spacing tokens.',
       'Like margin, padding can be set for a single side, such as `padding-top`.',
     ],
     code: `.space-padding {

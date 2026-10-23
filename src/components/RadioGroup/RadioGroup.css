@@ -45,7 +45,9 @@
   cursor: pointer;
 }
 
+/* border-box keeps the border inside the indicator size, so the dot stays centred in the ring. */
 .react-aria-RadioButton::before {
+  box-sizing: border-box;
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: 0;
