@@ -36,10 +36,13 @@ export const ratioPairContent: DocsPageContent = {
 export const ratioPairCssNotes: Record<string, CssNote> = {
   ratioPair: {
     paragraphs: [
-      'Ratio pair is a Flexbox row: `display: flex` places the two areas next to each other. `flex-wrap: wrap` allows an area to move onto a new line when the row is full, and `gap` sets the space between them, whether they’re side by side or one above the other.',
-      'Each area has a `flex-basis` of zero, so it starts with no width of its own. `flex-grow` then shares out the space: for one third and two thirds, the first area gets a `flex-grow` of 1 and the second gets 2, so the second takes twice as much.',
-      '`min-inline-size` is the minimum width. Flexbox checks it before placing an area on the row; when two minimums plus the gap are more than the row’s width, the second area goes onto the next line. Alone on its line, `flex-grow` makes it fill the full width. The `min()` function stops the minimum from ever being wider than the Ratio pair itself.',
-      'With Auto Start, the first area has a `flex-basis` of `auto`, which means its width comes from its content. The second area has a `flex-grow` of 999, so it takes almost all of the space that’s left, and keeps the minimum width.',
+      'A Ratio pair puts two items side by side using CSS Flexbox:',
+      { list: [
+        '`display: flex` places them side by side, `gap` adds space between them, and `flex-wrap: wrap` lets them stack, one above the other, when space runs out.',
+        '`flex-grow` sets their width ratio. Both items start from no width (`flex-basis: 0`), so a ratio of `1` and `2` gives you a 1/3 and 2/3 split.',
+        '`min-inline-size` sets each item’s minimum width, 15rem by default. If both can’t fit side by side, they stack. The minimum wins over the ratio, so a 1/3 split needs room for three minimum widths. (The `min()` function keeps an item from overflowing a container narrower than its minimum.)',
+        'Auto start: the first item sizes itself to its content (`flex-basis: auto`, with no minimum width), while the second uses a high `flex-grow: 999` to take the remaining space. The second item keeps its minimum width, so it moves underneath when there isn’t room.',
+      ] },
     ],
     code: `.mz-ratio-pair {
   display: flex;

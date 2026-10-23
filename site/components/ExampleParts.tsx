@@ -5,8 +5,9 @@ import { RichText } from './RichText'
 // The CSS behind an example: plain-English notes and the rules themselves, quoted from the page's
 // stylesheet. A browser test checks that each quote still matches its stylesheet.
 export interface CssNote {
-  // Copy with `code`, **strong** and [label](href) markers, like the page's content.
-  paragraphs: string[]
+  // Copy with `code`, **strong** and [label](href) markers, like the page's content. A paragraph can also be a
+  // bulleted list, as in a page's sections.
+  paragraphs: (string | { list: string[] })[]
   code: string
   // True when the code is an example for apps rather than the rules this page uses.
   isExample?: boolean
@@ -22,9 +23,9 @@ export function ExampleText({ children }: { children: ReactNode }) {
 export function CssNotesBody({ note, showCode = true }: { note: CssNote; showCode?: boolean }) {
   return <div className="css-notes-body">
     {note.isExample && <Text elementType="p" className="mz-text-body-md">This CSS is for an app to use; the example on this page doesn’t use it.</Text>}
-    {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
-      <RichText text={paragraph} />
-    </Text>)}
+    {note.paragraphs.map((paragraph, index) => typeof paragraph === 'string'
+      ? <Text key={index} elementType="p" className="mz-text-body-md"><RichText text={paragraph} /></Text>
+      : <ul key={index} className="mz-text-body-md">{paragraph.list.map((item) => <li key={item}><RichText text={item} /></li>)}</ul>)}
     {showCode && <CodeBlock language="css">{note.code}</CodeBlock>}
   </div>
 }
