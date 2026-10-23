@@ -2,6 +2,7 @@ import {
   Cell, Checkbox, Column, DemoArea, Row, Table, TableBody, TableHeader, type SortDescriptor,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
+import { VisuallyHidden } from 'react-aria-components/VisuallyHidden'
 import { tableContent, tableExampleColumns, tableExampleGroups, tableExampleRows } from './tableContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -34,7 +35,7 @@ export default function TablePage() {
                     selectionMode="single"
                   >
                     <TableHeader>
-                      <Column aria-label="Select row" id="selection" />
+                      <Column id="selection"><VisuallyHidden>{tableExampleGroups.selectionColumn}</VisuallyHidden></Column>
                       {tableExampleColumns.map(({ id, label, isRowHeader }) => (
                         <Column key={id} id={id} isRowHeader={isRowHeader}>{label}</Column>
                       ))}

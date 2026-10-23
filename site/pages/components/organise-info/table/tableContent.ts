@@ -23,6 +23,8 @@ export const tableExampleRows: TableExampleRow[] = [
 // Headings and the note inside the Example section's two live examples. The note also appears in the intro.
 export const tableExampleGroups = {
   singleSelection: 'Single selection',
+  // The single-selection column's header: visually hidden, so the checkbox column still has header text.
+  selectionColumn: 'Select row',
   multipleSelection: 'Multiple selection',
   disabledRowNote: 'Row C is disabled in this example.',
 }
