@@ -23,8 +23,8 @@ interface ContentPageProps {
   showContents?: boolean
 }
 
-// Builds a page, in the Docs or the Lab, from its content file: Also known as, the sections in order,
-// then the Technical details group, Related pages and References, through DocsPageTemplate.
+// Builds a page, in the Docs or the Lab, from its content file: the sections in order, then the Technical
+// details group, which opens with Also known as, then Related pages and References, through DocsPageTemplate.
 export function ContentPage({ content, parts = {}, showContents }: ContentPageProps) {
   const toSection = (section: ContentSection): DocumentationSection => {
     const id = sectionId(content.id, section.key)
@@ -55,15 +55,14 @@ export function ContentPage({ content, parts = {}, showContents }: ContentPagePr
       </>,
     }
   }
-  // What other tools call the same thing, in a closed Disclosure whose header is the section heading.
+  // What other tools call the same thing: the first disclosure in Technical details (owner's decision).
   const alsoKnownAs: DocumentationSection[] = content.alsoKnownAs ? [{
     id: sectionId(content.id, 'alsoKnownAs'),
     title: sectionTitle({ key: 'alsoKnownAs' }, content.kind),
-    isCollapsible: true,
     content: <DocsTable aria-label={`Other names for ${content.title}`} nameColumn="Where" descriptionColumn="Called" namesAreCode={false}
       rows={content.alsoKnownAs.map(({ where, called }) => ({ name: where, description: <RichText text={called} /> }))} />,
   }] : []
-  const technicalDetails = content.technicalDetails ?? []
+  const technicalDetails = [...alsoKnownAs, ...(content.technicalDetails ?? []).map(toSection)]
   const description = content.description === undefined
     ? undefined
     : (typeof content.description === 'string' ? [content.description] : content.description).map((paragraph, index) => <RichText key={index} text={paragraph} />)
@@ -75,9 +74,8 @@ export function ContentPage({ content, parts = {}, showContents }: ContentPagePr
       relatedPages={content.relatedPages}
       references={content.references}
       sections={[
-        ...alsoKnownAs,
         ...(content.sections ?? []).map(toSection),
-        ...(technicalDetails.length ? [{ id: sectionId(content.id, 'technicalDetails'), title: technicalDetailsTitle, sections: technicalDetails.map(toSection) }] : []),
+        ...(technicalDetails.length ? [{ id: sectionId(content.id, 'technicalDetails'), title: technicalDetailsTitle, sections: technicalDetails }] : []),
       ]}
     />
   )

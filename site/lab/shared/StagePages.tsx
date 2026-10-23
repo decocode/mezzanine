@@ -4,9 +4,9 @@ import { ContentPage } from '../../templates/ContentPage'
 import type { DocsPageContent } from '../../templates/docsPageContent'
 import { childPageCardAction, labBadgeLabel } from './labValues'
 
-// One Lab page, built by the docs site's ContentPage from its content file: Also known as when its
-// name is agreed, How it works (with Browser support where it matters), then the page's example(s)
-// in the section the part names. The wrapper gives examples the Lab's spacing.
+// One Lab page, built by the docs site's ContentPage from its content file: How it works (with Browser
+// support where it matters), then the page's example(s) in the section the part names, then Technical
+// details, which open with Also known as when the name is agreed. The wrapper gives examples the Lab's spacing.
 export function LabContentPage({ content, parts }: { content: DocsPageContent; parts: Partial<Record<string, ReactNode>> }) {
   return <div className="lab-layout">
     <ContentPage content={content} parts={Object.fromEntries(Object.entries(parts).map(([key, part]) => [key, <div className="lab-section-body">{part}</div>]))} />

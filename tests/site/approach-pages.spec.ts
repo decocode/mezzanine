@@ -101,11 +101,13 @@ test('Reading order follows the HTML when the row is reversed', async ({ page })
   await expect(page.getByRole('button', { name: 'Button 2', exact: true })).toBeFocused()
 })
 
-// Checks that a page's "Also known as" names start in a closed Disclosure, open from its button,
-// and open when its On this page link is followed.
-test('Also known as starts closed and opens from its button or On this page', async ({ page }) => {
+// Checks that a page's "Also known as" names are the first disclosure in Technical details, start
+// closed, open from their button, and open when their On this page link is followed.
+test('Also known as opens Technical details, starts closed and opens from its button or On this page', async ({ page }) => {
   await page.goto('/layout/side-by-side/ratio-pair')
   const trigger = page.getByRole('button', { name: 'Also known as', exact: true })
+  const technicalDetails = page.locator('section[aria-labelledby$="-technical-details"]')
+  await expect(technicalDetails.getByRole('button').first()).toHaveAccessibleName('Also known as')
   const names = page.getByRole('grid', { name: 'Other names for Ratio pair' })
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   await expect(names).toBeHidden()

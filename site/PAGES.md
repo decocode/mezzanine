@@ -59,14 +59,15 @@ parts:
 
 Every page, in the Docs or the Lab, follows the same order:
 
-1. Also known as, when the page's name is agreed: what CSS, Tailwind CSS, Figma,
-   Material Design and shadcn/ui call the same thing, in a closed Disclosure.
-   Names are given in the page's own words, with links, never copied text or
-   logos (owner's decision, 23 October 2026).
-2. The page's own sections, such as Example and Variants, or How it works and
+1. The page's own sections, such as Example and Variants, or How it works and
    Example in the Lab.
-3. Technical details, where the page has them.
-4. Related pages and References.
+2. Technical details, where the page has them, opening with Also known as.
+3. Related pages and References.
+
+Also known as appears when the page's name is agreed: what CSS, Tailwind CSS,
+Figma, Material Design and shadcn/ui call the same thing. Names are given in the
+page's own words, with links, never copied text or logos. It is the first
+disclosure in Technical details (owner's decisions, 23 October 2026).
 
 The content file sets the page's `id`, `kind` (`component` or `foundation`),
 title, description, its `alsoKnownAs` rows, its `sections` in order, its
@@ -104,18 +105,19 @@ feature that does not exist.
 The Technical details group always uses this order (owner's decision, 23 October
 2026):
 
-1. Anatomy: the parts the component is built from.
-2. Behaviour: how it responds and changes. Page-specific extras, such as
+1. Also known as, when the page has it.
+2. Anatomy: the parts the component is built from.
+3. Behaviour: how it responds and changes. Page-specific extras, such as
    Table's Responsive behaviour, sit next to it.
-3. States: when a page lists them inside Technical details.
-4. Usage: how to set it up and which props to choose.
-5. Accessibility: only what is specific to this component, such as its
+4. States: when a page lists them inside Technical details.
+5. Usage: how to set it up and which props to choose.
+6. Accessibility: only what is specific to this component, such as its
    keyboard keys, the accessible names it needs or what it announces. Guidance
    that applies to every component, such as visible focus or reduced motion,
    belongs on a shared Foundations page, not here. Leave the section out when a
    component has nothing specific to say.
-6. Props.
-7. CSS tokens.
+7. Props.
+8. CSS tokens.
 
 ## Related pages and References
 
@@ -140,12 +142,13 @@ table of states. Their content files use `kind: 'foundation'`, and where they
 have a Technical details group, its sections always appear in this order (owner's
 decision, 23 October 2026):
 
-1. CSS properties: the CSS properties the page governs.
-2. Tokens: token names, purposes and values read from the token source.
-3. Theming: pages whose values a theme changes. The Wireframe baseline and what a theme changes.
-4. Accessibility: only what is specific to this page. Leave it out when there
+1. Also known as, when the page has it.
+2. CSS properties: the CSS properties the page governs.
+3. Tokens: token names, purposes and values read from the token source.
+4. Theming: pages whose values a theme changes. The Wireframe baseline and what a theme changes.
+5. Accessibility: only what is specific to this page. Leave it out when there
    is nothing specific; what applies everywhere is on the Accessibility page.
-5. Localisation: direction and text expansion, only once verified.
+6. Localisation: direction and text expansion, only once verified.
 
 Do not list the components that use a token or state by hand: such lists go
 out of date. Add them only if they can be generated from the code. The "Used by" columns
