@@ -1,8 +1,8 @@
-// The Lab's Types of box page, in Box basics: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
+// The Lab's Types of box page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
 
-export const typesOfBoxPage: StagePage = {
-  key: 'typesOfBox', id: 'lab-types-of-box', kind: 'foundation', stage: 'boxBasics', title: 'Types of box', href: '/site/lab/layout/box-basics/types-of-box',
+export const typesOfBoxPage: LayoutChildPage = {
+  key: 'typesOfBox', id: 'lab-types-of-box', kind: 'foundation', title: 'Types of box', href: '/site/lab/layout/types-of-box',
   description: 'When boxes decide whether to stack up or line up.',
   sections: [
     {
@@ -35,8 +35,8 @@ export const typesOfBoxCssNotes: Record<string, CssNote> = {
     code: `.lab-flow-item {
   display: var(--lab-flow-display);
   padding: var(--space-2);
-  border: var(--border-width-baseline) solid var(--color-text);
-  background: var(--color-surface);
+  border: var(--border-width-baseline) solid var(--color-accent);
+  background: var(--color-accent-muted);
 }`,
   },
 }

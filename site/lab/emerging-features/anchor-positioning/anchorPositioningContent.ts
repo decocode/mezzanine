@@ -18,7 +18,6 @@ export const anchorPositioningCssNotes: Record<string, CssNote> = {
       'If there isn’t room, `position-try-fallbacks` tries flipping it to the other side, then below. Inside `@supports`, so other browsers keep the label in normal flow.',
     ],
     code: `.lab-anchor-target {
-  inline-size: 8rem;
   anchor-name: --lab-anchor;
 }
 

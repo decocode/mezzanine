@@ -1,8 +1,8 @@
-// The Lab's Overflow page, in Inside the box: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
+// The Lab's Overflow page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
 
-export const overflowPage: StagePage = {
-  key: 'overflow', id: 'lab-overflow', kind: 'foundation', stage: 'insideTheBox', title: 'Overflow', href: '/site/lab/layout/inside-the-box/overflow',
+export const overflowPage: LayoutChildPage = {
+  key: 'overflow', id: 'lab-overflow', kind: 'foundation', title: 'Overflow', href: '/site/lab/layout/overflow',
   description: 'When the content doesn’t fit.',
   sections: [
     {
@@ -32,7 +32,8 @@ export const overflowCssNotes: Record<string, CssNote> = {
   width: min(100%, 14rem);
   height: 6rem;
   padding: var(--space-2);
-  border: var(--border-width-baseline) solid var(--color-text);
+  border: var(--border-width-baseline) solid var(--color-accent);
+  background: var(--color-accent-muted);
   overflow: var(--lab-overflow);
 }`,
   },

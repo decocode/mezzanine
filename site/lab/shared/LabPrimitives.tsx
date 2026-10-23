@@ -15,8 +15,3 @@ export function Stack({ children, space }: Children & { space?: string }) {
 export function Center({ children, max }: Children & { max?: string }) {
   return <div className="lab-center" style={vars({ '--lab-center-max': max })}>{children}</div>
 }
-
-// A plain coloured block for showing layout without real content.
-export function Block({ children, tall }: { children: ReactNode; tall?: boolean }) {
-  return <div className={`lab-block mz-text-body-sm${tall ? ' lab-block-tall' : ''}`}>{children}</div>
-}

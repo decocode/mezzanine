@@ -1,9 +1,9 @@
-// The Lab's Center page, in Box basics: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
-import { everyLayout, bedrock } from '../../../shared/labValues'
+// The Lab's Center page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
+import { everyLayout, bedrock } from '../../shared/labValues'
 
-export const centerPage: StagePage = {
-  key: 'center', id: 'lab-center', kind: 'foundation', stage: 'boxBasics', title: 'Center', href: '/site/lab/layout/box-basics/center',
+export const centerPage: LayoutChildPage = {
+  key: 'center', id: 'lab-center', kind: 'foundation', title: 'Center', href: '/site/lab/layout/center',
   description: 'When content stays in the middle, at a comfortable width.',
   sections: [
     {

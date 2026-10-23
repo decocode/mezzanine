@@ -1,4 +1,4 @@
-// Values shared by the Lab's pages: the overview heading, labels, frame sizes, the example picture's alt text
+// Values shared by the Lab's pages: the overview heading, labels, the example picture's alt text
 // and links to where layout components' ideas come from. Illustrative and unapproved.
 import type { LinkItem } from '../../templates/docsPageContent'
 
@@ -10,13 +10,6 @@ export const overviewPagesHeading = 'Pages'
 
 // The label of the Button on each page's Card, which opens that page.
 export const childPageCardAction = 'Read docs'
-
-export const framePresets = [
-  { label: '320px', width: 320 },
-  { label: 'Phone', width: 390 },
-  { label: 'Tablet', width: 768 },
-  { label: 'Wide', width: 1200 },
-]
 
 // The alt text for the example picture used by the Filling the box and Aspect ratio examples.
 export const exampleImageAlt = 'Example picture: a dark square and a grey circle on a light background'

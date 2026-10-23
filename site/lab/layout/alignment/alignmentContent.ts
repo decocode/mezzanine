@@ -1,8 +1,8 @@
-// The Lab's Alignment page, in Inside the box: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
+// The Lab's Alignment page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
 
-export const alignmentPage: StagePage = {
-  key: 'alignment', id: 'lab-alignment', kind: 'foundation', stage: 'insideTheBox', title: 'Alignment', href: '/site/lab/layout/inside-the-box/alignment',
+export const alignmentPage: LayoutChildPage = {
+  key: 'alignment', id: 'lab-alignment', kind: 'foundation', title: 'Alignment', href: '/site/lab/layout/alignment',
   description: 'When things are centred, or pushed to one side.',
   sections: [
     {
@@ -34,8 +34,6 @@ export const alignmentCssNotes: Record<string, CssNote> = {
   align-items: var(--lab-align);
   gap: var(--space-3);
   min-height: 12rem;
-  padding: var(--space-3);
-  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }`,
   },
   centreAnything: {
@@ -46,7 +44,6 @@ export const alignmentCssNotes: Record<string, CssNote> = {
   display: grid;
   place-items: center;
   min-height: 10rem;
-  border: var(--border-width-baseline) dashed var(--color-text-muted);
 }`,
   },
 }

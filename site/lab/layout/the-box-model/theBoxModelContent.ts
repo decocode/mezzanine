@@ -1,8 +1,8 @@
-// The Lab's The box model page, in Box basics: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
+// The Lab's The box model page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
 
-export const theBoxModelPage: StagePage = {
-  key: 'boxModel', id: 'lab-box-model', kind: 'foundation', stage: 'boxBasics', title: 'The box model', href: '/site/lab/layout/box-basics/the-box-model',
+export const theBoxModelPage: LayoutChildPage = {
+  key: 'boxModel', id: 'lab-box-model', kind: 'foundation', title: 'The box model', href: '/site/lab/layout/the-box-model',
   description: 'When every box is made of content, padding, a border and margin.',
   sections: [
     {
@@ -30,8 +30,8 @@ export const theBoxModelCssNotes: Record<string, CssNote> = {
     code: `.lab-box-anatomy {
   margin: var(--space-6);
   padding: var(--space-6);
-  border: var(--border-width-xl) solid var(--color-text);
-  background: var(--color-surface);
+  border: var(--border-width-xl) solid var(--color-accent);
+  background: var(--color-accent-muted);
 }`,
   },
 }

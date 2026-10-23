@@ -1,7 +1,6 @@
-import type { FuturePage, LayoutStage, StagePage } from './labTypes'
-import { overviewPagesHeading } from './labValues'
-import { layoutOverview, layoutStages, stagePagesByStage } from '../layout/layoutContent'
-import { stageExamples } from '../layout/layoutExamples'
+import type { FuturePage, LayoutChildPage as LayoutChildPageContent } from './labTypes'
+import { layoutOverview, layoutPages } from '../layout/layoutContent'
+import { layoutExamples } from '../layout/layoutExamples'
 import { emergingFeatures, futurePages } from '../emerging-features/emergingFeaturesContent'
 import { futureExamples } from '../emerging-features/emergingFeaturesExamples'
 import { LabContentPage, OverviewPage } from './StagePages'
@@ -9,22 +8,14 @@ import './layout-lab.css'
 
 // The Lab's pages, each built with the docs site's ContentPage. Illustrative and unapproved.
 
-// The Layout overview: what layout is, then a Card for each group.
+// The Layout overview: what layout is, then a Card for each of its pages.
 export function LayoutOverviewPage() {
-  return <OverviewPage content={layoutOverview} cards={layoutStages.map((stage) => ({ headingId: stage.id, title: stage.title, href: `/site/lab/layout/${stage.slug}`, text: stage.summary }))} />
+  return <OverviewPage content={layoutOverview} cards={layoutPages.map((page) => ({ headingId: `lab-child-page-card-${page.key}`, title: page.title, href: page.href, text: typeof page.description === 'string' ? page.description : undefined }))} />
 }
 
-// A group's overview: what the group is about, then a Card for each of its pages.
-export function LayoutStagePage({ stage }: { stage: LayoutStage }) {
-  return <OverviewPage
-    content={{ id: stage.id, kind: 'foundation', title: stage.title, description: stage.summary, sections: [{ key: 'pages', title: stage.pagesHeading ?? overviewPagesHeading }] }}
-    cards={stagePagesByStage(stage.key).map((page) => ({ headingId: `lab-child-page-card-${page.key}`, title: page.title, href: page.href, text: typeof page.description === 'string' ? page.description : undefined }))}
-  />
-}
-
-// A page inside a group: its example, and any Mezzanine detail after it, in the Example section.
-export function LayoutStageChildPage({ page }: { page: StagePage }) {
-  const { Example, Detail } = stageExamples[page.key]
+// A Layout page: its example, and any Mezzanine detail after it, in the Example section.
+export function LayoutChildPage({ page }: { page: LayoutChildPageContent }) {
+  const { Example, Detail } = layoutExamples[page.key]
   return <LabContentPage content={page} parts={{ example: <><Example />{Detail && <Detail />}</> }} />
 }
 

@@ -4,9 +4,9 @@ import { SiteTopBar } from '../components/SiteTopBar'
 import { NavigationPanel } from '../components/NavigationPanel'
 import type { Theme } from '../themeSwitcherLogic'
 import NotFoundPage from '../pages/not-found/NotFoundPage'
-import { LayoutFutureChildPage, LayoutFuturePage, LayoutOverviewPage, LayoutStageChildPage, LayoutStagePage } from './shared/LayoutPage'
+import { LayoutFutureChildPage, LayoutFuturePage, LayoutChildPage, LayoutOverviewPage } from './shared/LayoutPage'
 import { labContent, labNavigationItems } from './labContent'
-import { layoutStages, stagePages } from './layout/layoutContent'
+import { layoutPages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
 import { noticePage } from './notice/noticeContent'
 import { NoticeExperiment } from './notice/NoticeExperiment'
@@ -28,14 +28,12 @@ const labSearchSections = [docsSearchSection, { id: 'lab', label: 'Lab', results
 export default function LabPage({ currentPath, onThemeChange, selectedTheme }: LabPageProps) {
   const isIndex = currentPath === labContent.index.href
   const isLayout = currentPath === labContent.layoutPage.href
-  const sectionSlug = currentPath.startsWith(`${labContent.layoutPage.href}/`) ? currentPath.slice(labContent.layoutPage.href.length + 1) : ''
-  const stage = layoutStages.find((item) => item.slug === sectionSlug)
-  const stagePage = stagePages.find((item) => item.href === currentPath)
+  const layoutPage = layoutPages.find((item) => item.href === currentPath)
   const isFuture = currentPath === emergingFeatures.href
   const futurePage = futurePages.find((item) => item.href === currentPath)
   const isNotice = currentPath === noticePage.href
   const isVolumeAndZoom = currentPath === volumeAndZoomPage.href
-  const pageTitle = stage?.title ?? stagePage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title ?? (isNotice ? noticePage.title : isVolumeAndZoom ? volumeAndZoomPage.title : undefined))
+  const pageTitle = layoutPage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title ?? (isNotice ? noticePage.title : isVolumeAndZoom ? volumeAndZoomPage.title : undefined))
   const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} searchSections={labSearchSections} />
 
@@ -57,7 +55,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : stage ? <LayoutStagePage stage={stage} /> : stagePage ? <LayoutStageChildPage page={stagePage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : isNotice ? <NoticeExperiment /> : isVolumeAndZoom ? <VolumeAndZoomExperiment /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : layoutPage ? <LayoutChildPage page={layoutPage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : isNotice ? <NoticeExperiment /> : isVolumeAndZoom ? <VolumeAndZoomExperiment /> : <NotFoundPage />}
     </DocsShell>
   </>
 }

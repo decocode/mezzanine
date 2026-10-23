@@ -1,8 +1,8 @@
-// The Lab's Filling the box page, in Inside the box: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
+// The Lab's Filling the box page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
 
-export const fillingTheBoxPage: StagePage = {
-  key: 'fillingTheBox', id: 'lab-filling-the-box', kind: 'foundation', stage: 'insideTheBox', title: 'Filling the box', href: '/site/lab/layout/inside-the-box/filling-the-box',
+export const fillingTheBoxPage: LayoutChildPage = {
+  key: 'fillingTheBox', id: 'lab-filling-the-box', kind: 'foundation', title: 'Filling the box', href: '/site/lab/layout/filling-the-box',
   description: 'When pictures fill their box.',
   sections: [
     {

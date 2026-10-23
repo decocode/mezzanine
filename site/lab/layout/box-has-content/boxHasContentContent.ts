@@ -1,8 +1,8 @@
-// The Lab's Box has content page, in Inside the box: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
+// The Lab's Box has content page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
 
-export const boxHasContentPage: StagePage = {
-  key: 'boxHasContent', id: 'lab-box-has-content', kind: 'foundation', stage: 'insideTheBox', title: 'Box has content', href: '/site/lab/layout/inside-the-box/box-has-content',
+export const boxHasContentPage: LayoutChildPage = {
+  key: 'boxHasContent', id: 'lab-box-has-content', kind: 'foundation', title: 'Box has content', href: '/site/lab/layout/box-has-content',
   description: 'When a box changes its layout depending on what’s inside it.',
   sections: [
     {

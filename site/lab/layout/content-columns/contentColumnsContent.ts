@@ -1,8 +1,8 @@
-// The Lab's Content columns page, in Inside the box: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
+// The Lab's Content columns page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
 
-export const contentColumnsPage: StagePage = {
-  key: 'contentColumns', id: 'lab-content-columns', kind: 'foundation', stage: 'insideTheBox', title: 'Content columns', href: '/site/lab/layout/inside-the-box/content-columns',
+export const contentColumnsPage: LayoutChildPage = {
+  key: 'contentColumns', id: 'lab-content-columns', kind: 'foundation', title: 'Content columns', href: '/site/lab/layout/content-columns',
   description: 'When content flows into columns, like a newspaper.',
   sections: [
     {

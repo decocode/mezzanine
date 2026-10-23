@@ -1,8 +1,8 @@
-// The Lab's Sizing the box page, in Box basics: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
-import type { CssNote, StagePage } from '../../../shared/labTypes'
+// The Lab's Sizing the box page, in Layout: its explanation and the CSS behind its example, in plain English. Illustrative and unapproved.
+import type { CssNote, LayoutChildPage } from '../../shared/labTypes'
 
-export const sizingTheBoxPage: StagePage = {
-  key: 'sizingTheBox', id: 'lab-sizing-the-box', kind: 'foundation', stage: 'boxBasics', title: 'Sizing the box', href: '/site/lab/layout/box-basics/sizing-the-box',
+export const sizingTheBoxPage: LayoutChildPage = {
+  key: 'sizingTheBox', id: 'lab-sizing-the-box', kind: 'foundation', title: 'Sizing the box', href: '/site/lab/layout/sizing-the-box',
   description: 'When you decide how big a box is, and what that size includes.',
   sections: [
     {
@@ -31,7 +31,8 @@ export const sizingTheBoxCssNotes: Record<string, CssNote> = {
     code: `.lab-sizing-box {
   width: 12rem;
   padding: var(--space-6);
-  border: var(--border-width-xl) solid var(--color-text);
+  border: var(--border-width-xl) solid var(--color-accent);
+  background: var(--color-accent-muted);
 }
 
 .lab-sizing-content-box {

@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 
 // On narrow screens, the Lab uses the site's own TopBar menu: Docs, then Lab, then the Lab's
-// navigation tree with Layout at the top level.
+// navigation tree, with Layout under its Foundations header.
 for (const fontSize of [16, 32]) {
   test(`Lab navigation works from the site menu at 320px and ${fontSize}px text`, async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 900 })

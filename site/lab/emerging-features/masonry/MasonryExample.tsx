@@ -1,5 +1,6 @@
-// The example for the Lab's Masonry page, in Emerging features.
-import { CssNotes, ExampleFrame, ExampleText, FeatureStatus } from '../../shared/LabParts'
+// The example for the Lab's Masonry page, in Emerging features. The items are Cards of different heights.
+import { Card } from '@decocode/mezzanine'
+import { CssNotes, ExampleText, FeatureStatus, WidthDemo } from '../../shared/LabParts'
 import { supportsCss } from '../../shared/labLogic'
 import { masonryCssNotes } from './masonryContent'
 
@@ -10,11 +11,11 @@ export function MasonryExample() {
   return <>
     <ExampleText>Items of different heights pack into columns with no gaps, like a Pinterest board, using a new display value called grid-lanes. It works without a flag only in Safari 26.4 and later. Elsewhere you’ll see an ordinary grid, with gaps under the shorter items.</ExampleText>
     <FeatureStatus supported={masonry} />
-    <ExampleFrame label="Masonry" initialWidth={900}>
-        <div className="lab-masonry">
-          {heights.map((height, index) => <div key={index} className="lab-block mz-text-body-sm" style={{ blockSize: `${height}rem` }}>Item {index + 1}</div>)}
-        </div>
-    </ExampleFrame>
-    <CssNotes name="Masonry" note={masonryCssNotes.masonry} level={3} />
+    <WidthDemo label="Masonry" code={masonryCssNotes.masonry.code}>
+      <div className="lab-masonry">
+        {heights.map((height, index) => <Card key={index} style={{ blockSize: `${height}rem` }}>{`Item ${String.fromCharCode(65 + index)}`}</Card>)}
+      </div>
+    </WidthDemo>
+    <CssNotes name="Masonry" note={masonryCssNotes.masonry} level={3} showCode={false} />
   </>
 }
