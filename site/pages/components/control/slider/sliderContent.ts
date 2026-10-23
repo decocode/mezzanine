@@ -30,7 +30,7 @@ export const sliderContent: DocsPageContent = {
     {
       key: 'usage',
       body: [
-        'Set `defaultValue`, or `value` with `onChange`. `minValue`, `maxValue` and `step` set the range. An array value makes a range with one thumb for each value; name each with `thumbLabels`.',
+        'Set `defaultValue`, or `value` with `onChange`. `minValue`, `maxValue` and `step` set the range. An array value makes a range with one thumb for each value; name each with `thumbLabels`. `formatOptions` sets a number format; when none fits, `formatValue` words each value instead, for the output and for screen readers.',
         '`orientation="vertical"` stands the slider upright and hides its label and output, so give it an `aria-label`.',
       ],
     },

@@ -1,0 +1,123 @@
+/* The candidate VolumeControl and ZoomControl, scoped to the Lab's lab-media classes. Both share a
+   slim pop-up with one row, with the usual pop-up corners; Volume can also stand upright.
+   Illustrative and unapproved. */
+.lab-media-popover {
+  --dialog-padding: var(--space-1) var(--space-2);
+}
+
+.lab-media-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Upright, the start control sits at the bottom and the level at the top. */
+.lab-media-row[data-orientation='vertical'] {
+  flex-direction: column-reverse;
+  padding-block: var(--space-2);
+}
+
+.lab-media-slider {
+  --slider-vertical-height: var(--space-24);
+  inline-size: var(--width-xs);
+  max-inline-size: 100%;
+}
+
+.lab-media-row[data-orientation='vertical'] .lab-media-slider {
+  inline-size: auto;
+}
+
+/* The level sits at the end of the row, so the slider's own copy of it above the track is hidden. */
+.lab-media-slider .react-aria-SliderOutput {
+  display: none;
+}
+
+.lab-media-level {
+  min-inline-size: 4ch;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+.lab-media-row[data-orientation='vertical'] .lab-media-level {
+  text-align: center;
+}
+
+/* The examples sit side by side. */
+.lab-media-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* Room above for a row that rises out of its button. */
+.lab-media-examples-rising {
+  align-items: end;
+  min-block-size: calc(var(--space-24) * 2);
+}
+
+/* The expanding presentation: the row slides out beside its button rather than opening a pop-up.
+   It reads the library's motion switch, so reduced motion and Wireframe show it straight away. */
+.lab-media-expand {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Closed, the row narrows to nothing and then hides; open, it shows at once and widens. */
+.lab-media-expand-panel {
+  display: grid;
+  grid-template-columns: 0fr;
+  visibility: hidden;
+  /* Visibility switches discretely: it stays visible until the row has finished narrowing. */
+  transition: grid-template-columns calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter), visibility calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
+}
+
+.lab-media-expand[data-expanded] > .lab-media-expand-panel,
+.lab-media-expand[data-reveal='hover']:is(:hover, :focus-within) > .lab-media-expand-panel {
+  grid-template-columns: 1fr;
+  visibility: visible;
+}
+
+/* Clipping hides the row while it's closed; the margin keeps focus rings visible inside it. */
+.lab-media-expand-content {
+  min-inline-size: 0;
+  overflow: clip;
+  overflow-clip-margin: var(--focus-ring-offset);
+}
+
+.lab-media-expand .lab-media-row {
+  padding-inline-start: var(--space-2);
+}
+
+/* Upright, the row rises out of the top of its button and floats over the page, so nothing around it
+   moves; it is as wide as the button, which forms its base. */
+.lab-media-expand[data-orientation='vertical'] {
+  position: relative;
+}
+
+.lab-media-expand[data-orientation='vertical'] > .lab-media-expand-panel {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 100%;
+  z-index: var(--z-index-overlay);
+  grid-template-columns: 1fr;
+  grid-template-rows: 0fr;
+  border-start-start-radius: var(--radius-surface);
+  border-start-end-radius: var(--radius-surface);
+  background: var(--elevation-raised-2-surface);
+  box-shadow: var(--elevation-raised-2);
+  transition: grid-template-rows calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter), visibility calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
+}
+
+.lab-media-expand[data-orientation='vertical'][data-expanded] > .lab-media-expand-panel,
+.lab-media-expand[data-orientation='vertical'][data-reveal='hover']:is(:hover, :focus-within) > .lab-media-expand-panel {
+  grid-template-rows: 1fr;
+}
+
+.lab-media-expand[data-orientation='vertical'] .lab-media-expand-content {
+  min-block-size: 0;
+}
+
+.lab-media-expand[data-orientation='vertical'] .lab-media-row {
+  padding-inline-start: 0;
+}

@@ -3,6 +3,7 @@ import { labBadgeLabel } from './shared/labValues'
 import { layoutStages, stagePagesByStage } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
 import { noticePage } from './notice/noticeContent'
+import { volumeAndZoomPage } from './volume-and-zoom/volumeAndZoomContent'
 
 export const labContent = {
   index: { label: 'Lab', href: '/site/lab' },
@@ -29,4 +30,5 @@ export const labNavigationItems: NavTreeItemData[] = [
     children: futurePages.map((page) => ({ id: `emerging-features-${page.key}`, label: page.title, href: page.href })),
   },
   { id: 'notice', label: noticePage.title, href: noticePage.href, content: <Badge variant="warning">{labBadgeLabel}</Badge> },
+  { id: 'volume-and-zoom', label: volumeAndZoomPage.title, href: volumeAndZoomPage.href, content: <Badge variant="warning">{labBadgeLabel}</Badge> },
 ]

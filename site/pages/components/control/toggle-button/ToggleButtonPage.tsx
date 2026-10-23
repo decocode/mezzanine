@@ -43,22 +43,26 @@ export default function ToggleButtonPage() {
                 <Column id="state" isRowHeader>{stateColumns.state}</Column>
                 <Column id="primary">{stateColumns.primary}</Column>
                 <Column id="secondary">{stateColumns.secondary}</Column>
+                <Column id="tertiary">{stateColumns.tertiary}</Column>
               </TableHeader>
               <TableBody>
                 <Row id="unselected">
                   <Cell><strong>{stateRows.unselected}</strong></Cell>
                   <Cell><ToggleButton>Toggle</ToggleButton></Cell>
                   <Cell><ToggleButton variant="secondary">Toggle</ToggleButton></Cell>
+                  <Cell><ToggleButton variant="tertiary">Toggle</ToggleButton></Cell>
                 </Row>
                 <Row id="selected">
                   <Cell><strong>{stateRows.selected}</strong></Cell>
                   <Cell><ToggleButton defaultSelected>Toggle</ToggleButton></Cell>
                   <Cell><ToggleButton variant="secondary" defaultSelected>Toggle</ToggleButton></Cell>
+                  <Cell><ToggleButton variant="tertiary" defaultSelected>Toggle</ToggleButton></Cell>
                 </Row>
                 <Row id="disabled">
                   <Cell><strong>{stateRows.disabled}</strong></Cell>
                   <Cell><ToggleButton isDisabled>Toggle</ToggleButton></Cell>
                   <Cell><ToggleButton variant="secondary" isDisabled>Toggle</ToggleButton></Cell>
+                  <Cell><ToggleButton variant="tertiary" isDisabled>Toggle</ToggleButton></Cell>
                 </Row>
               </TableBody>
             </Table>

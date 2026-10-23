@@ -2398,6 +2398,26 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-accent)"
     },
     {
+      "name": "--button-tertiary-background",
+      "fallback": "transparent"
+    },
+    {
+      "name": "--button-tertiary-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--button-tertiary-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--button-tertiary-border",
+      "fallback": "transparent"
+    },
+    {
+      "name": "--button-tertiary-foreground",
+      "fallback": "var(--color-accent)"
+    },
+    {
       "name": "--toggle-button-background",
       "fallback": "transparent"
     },
@@ -2468,6 +2488,18 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--toggle-button-selection-indicator-width",
       "fallback": "var(--border-width-md)"
+    },
+    {
+      "name": "--toggle-button-tertiary-background-selected",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--toggle-button-tertiary-background-selected-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--toggle-button-tertiary-background-selected-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
     }
   ],
   "TokenField": [

@@ -10,7 +10,7 @@ export const toggleButtonSizesTable = {
 // Headings and row labels for the States table; each row shows live buttons.
 export const toggleButtonStatesTable = {
   label: 'ToggleButton states',
-  columns: { state: 'State', primary: 'Primary', secondary: 'Secondary' },
+  columns: { state: 'State', primary: 'Primary', secondary: 'Secondary', tertiary: 'Tertiary' },
   rows: { unselected: 'Unselected', selected: 'Selected', disabled: 'Disabled' },
 }
 
@@ -58,7 +58,7 @@ export const toggleButtonContent: DocsPageContent = {
         "Mezzanine's `size` appearance prop supports `xs`, `sm`, `md`, `lg` and `xl`, using the same size tokens as Button. Both default to `md`. Set a group size on ToggleButtonGroup or an individual size on ToggleButton. Use `iconLeading` or `iconTrailing` without children for a square icon-only button, with an accessible name and Tooltip. These appearance props extend React Aria without changing selection or keyboard behaviour.",
         'For an independent toggle, use `defaultSelected` for initial state or `isSelected` with `onChange` for controlled state.',
         'For a group, supply an accessible label and stable button `id` values. Choose `selectionMode="single"` or `selectionMode="multiple"`; use `defaultSelectedKeys` or controlled `selectedKeys` with `onSelectionChange`. Set `disallowEmptySelection` when a selection must remain.',
-        'Set `variant="secondary"` on a ToggleButtonGroup or an individual ToggleButton. This Mezzanine appearance extension preserves React Aria behaviour. The group applies the appearance to its children. Unselected buttons use standard secondary Button colours; selected buttons keep an inset line and a soft fill. Hover deepens the fill, and pressing a selected button strengthens the bottom line. Omitting the variant preserves the existing appearance. Disabled selection stays visible, and forced-colour mode underlines selected labels.',
+        'Set `variant="secondary"` on a ToggleButtonGroup or an individual ToggleButton, or `variant="tertiary"` on an individual ToggleButton for one with no outline, whose selection shows as a soft fill. This Mezzanine appearance extension preserves React Aria behaviour. The group applies the appearance to its children. Unselected buttons use standard secondary Button colours; selected buttons keep an inset line and a soft fill. Hover deepens the fill, and pressing a selected button strengthens the bottom line. Omitting the variant preserves the existing appearance. Disabled selection stays visible, and forced-colour mode underlines selected labels.',
       ],
     },
     {

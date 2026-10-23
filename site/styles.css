@@ -895,7 +895,7 @@ a:focus-visible {
 /* Three equal columns, with local scrolling instead of compressed state examples. */
 .toggle-button-states-table .react-aria-Table { min-inline-size: var(--width-lg); table-layout: fixed; }
 .toggle-button-states-table .react-aria-Column,
-.toggle-button-states-table .react-aria-Cell { width: calc(100% / 3); }
+.toggle-button-states-table .react-aria-Cell { width: calc(100% / 4); }
 
 .button-sizes-table .react-aria-Table { min-inline-size: var(--width-lg); table-layout: fixed; }
 .button-sizes-table .react-aria-Column,

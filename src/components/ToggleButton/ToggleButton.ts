@@ -10,7 +10,8 @@ import {
 } from 'react-aria-components/ToggleButtonGroup'
 
 export interface ToggleButtonProps extends ReactAriaToggleButtonProps {
-  variant?: 'secondary'
+  // Secondary has an outline; tertiary has none until it's hovered or selected, as on Button.
+  variant?: 'secondary' | 'tertiary'
   size?: ButtonSize
   iconLeading?: ReactNode
   iconTrailing?: ReactNode

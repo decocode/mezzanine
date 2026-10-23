@@ -265,7 +265,10 @@ takes `isIndeterminate` while the amount of work is unknown; its moving segment
 stops only for the system's reduced-motion setting, like Button's spinner. A
 `Meter` shows an amount and never animates. `Slider` draws one thumb for each
 value, so an array `defaultValue` makes a range; name the thumbs with
-`thumbLabels`. Without a visible `label`, give each an `aria-label`.
+`thumbLabels`. When a number format can't word the value, such as a zoom kept on
+a logarithmic scale, `formatValue` turns each value into the text the output
+shows and screen readers hear. Without a visible `label`, give each an
+`aria-label`.
 
 ```tsx
 <ProgressBar label="Progress A" value={60} />

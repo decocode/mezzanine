@@ -86,6 +86,20 @@
   --_toggle-button-current-shadow: var(--_toggle-button-selection-shadow, none);
 }
 
+/* Tertiary has no outline, as on Button; selected, it keeps a soft fill rather than a solid one. */
+.react-aria-ToggleButton[data-variant='tertiary'] {
+  --_toggle-button-background: var(--button-tertiary-background, transparent);
+  --_toggle-button-background-hovered: var(--button-tertiary-background-hovered, var(--color-accent-muted-hovered));
+  --_toggle-button-background-pressed: var(--button-tertiary-background-pressed, var(--color-accent-muted-pressed));
+  --_toggle-button-foreground: var(--button-tertiary-foreground, var(--color-accent));
+  --_toggle-button-border: var(--button-tertiary-border, transparent);
+  --_toggle-button-background-selected: var(--toggle-button-tertiary-background-selected, var(--color-accent-muted));
+  --_toggle-button-background-selected-hovered: var(--toggle-button-tertiary-background-selected-hovered, var(--color-accent-muted-hovered));
+  --_toggle-button-background-selected-pressed: var(--toggle-button-tertiary-background-selected-pressed, var(--color-accent-muted-pressed));
+  --_toggle-button-foreground-selected: var(--button-tertiary-foreground, var(--color-accent));
+  --_toggle-button-border-selected: var(--button-tertiary-border, transparent);
+}
+
 .react-aria-ToggleButton[data-selected][data-pressed]:not([data-disabled]) {
   --_toggle-button-current-shadow: var(--_toggle-button-selection-pressed-shadow, none);
 }
@@ -119,7 +133,7 @@
 }
 
 .react-aria-ToggleButtonGroup[data-variant='secondary'] .react-aria-ToggleButton,
-.react-aria-ToggleButton[data-variant='secondary'] {
+.react-aria-ToggleButton:is([data-variant='secondary'], [data-variant='tertiary']) {
   box-sizing: border-box;
   min-width: 0;
   max-width: 100%;

@@ -56,7 +56,7 @@ export const pointerPrefixes = {
   TableOfContents: ['table-of-contents'],
   Tabs: ['tabs', 'tab'],
   TextField: ['input', 'text-field', 'text-area'],
-  ToggleButton: ['toggle-button', 'button-secondary'],
+  ToggleButton: ['toggle-button', 'button-secondary', 'button-tertiary'],
   Tooltip: ['tooltip'],
   TopBar: ['top-bar'],
 }

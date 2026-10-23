@@ -43,12 +43,12 @@ test('secondary selection remains visible in forced colours', async ({ page }) =
   await expect(selected).toHaveCSS('text-decoration-line', 'underline')
 })
 
-// Checks that the states table keeps three equal columns and, on a phone, scrolls inside its own
+// Checks that the states table keeps four equal columns and, on a phone, scrolls inside its own
 // box rather than squashing the buttons or widening the page.
-test('state comparison keeps three readable columns and scrolls locally on narrow screens', async ({ page }) => {
+test('state comparison keeps four readable columns and scrolls locally on narrow screens', async ({ page }) => {
   await page.goto('/toggle-button')
   const table = page.getByRole('grid', { name: 'ToggleButton states', exact: true })
-  await expect(table.getByRole('columnheader')).toHaveText(['State', 'Primary', 'Secondary'])
+  await expect(table.getByRole('columnheader')).toHaveText(['State', 'Primary', 'Secondary', 'Tertiary'])
   const widths = await table.getByRole('columnheader').evaluateAll(headers => headers.map(header => header.getBoundingClientRect().width))
   expect(Math.max(...widths) - Math.min(...widths)).toBeLessThan(2)
   for (const fontSize of textSizes) {
