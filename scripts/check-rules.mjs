@@ -1,14 +1,14 @@
 import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
 import { checkTypographyChoices, checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
-import { checkRoutes, checkTokens, checkTokenValues, declaredTokens, documentedTokenValues, parsePropRows, propMentions } from './docs-rules.mjs'
+import { checkMap, checkRoutes, checkTokens, checkTokenValues, declaredTokens, documentedTokenValues, parsePropRows, propMentions } from './docs-rules.mjs'
 import { appRoutes } from './generate-routes.mjs'
 import { sitePageFile, sitePageFolder, sitePages } from '../site/siteStructure.ts'
 import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
 import { checkColorPointers, checkThemeColors, checkThemesMatch, themeRoles } from './color-rules.mjs'
 import { checkRawLengths } from './length-rules.mjs'
 import { checkComponentPointers, componentPointers } from './pointer-rules.mjs'
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
@@ -527,6 +527,13 @@ function checkGuideTokenValues() {
   for (const problem of checkTokenValues(documentedTokenValues(guide), declared)) report(guideFile, guide, problem.position, 'docs-tokens', problem.message)
 }
 
+// MAP.md's rows must name real paths, and every folder inside a mapped folder needs a row.
+function checkMapFile() {
+  const text = read('MAP.md')
+  const foldersIn = parent => readdirSync(path.join(root, parent), { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => entry.name)
+  for (const problem of checkMap(text, { exists: file => existsSync(path.join(root, file)), foldersIn })) report('MAP.md', text, problem.position, 'map', problem.message)
+}
+
 function checkDocsTokens(update) {
   const tokenFiles = filesIn('src', ['.css']).filter(file => isTokenFile(file) && file !== 'src/tokens.css')
   const publicTokens = declaredTokens(tokenFiles.map(read))
@@ -666,6 +673,7 @@ try {
   checkPropTables(program, checker)
   checkPropMentions(program, checker)
   checkGuideTokenValues()
+  checkMapFile()
 } catch (error) {
   report('scripts/check-rules.mjs', '', 0, 'rule-checker', error.message)
 }

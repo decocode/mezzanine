@@ -1,8 +1,12 @@
-import { Badge, Cell, Column, DemoArea, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Badge, Cell, Column, DemoArea, Row, Table, TableBody, TableHeader, type BadgeVariant } from '@decocode/mezzanine'
 import { badgeContent } from './badgeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
-const variants = ['neutral', 'accent', 'info', 'success', 'warning', 'danger'] as const
+// One label for every BadgeVariant value, so TypeScript reports one that's missing or no longer exists.
+const variantLabels: Record<BadgeVariant, string> = {
+  neutral: 'Neutral', accent: 'Accent', info: 'Info', success: 'Success', warning: 'Warning', danger: 'Danger',
+}
+const variants = Object.keys(variantLabels) as BadgeVariant[]
 
 export default function BadgePage() {
   return (
@@ -21,7 +25,7 @@ export default function BadgePage() {
                 {variants.map((variant) => (
                   <Row id={variant} key={variant}>
                     <Cell><code>{variant}</code></Cell>
-                    <Cell><Badge variant={variant}>{variant[0].toUpperCase() + variant.slice(1)}</Badge></Cell>
+                    <Cell><Badge variant={variant}>{variantLabels[variant]}</Badge></Cell>
                   </Row>
                 ))}
               </TableBody>

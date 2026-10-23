@@ -168,3 +168,42 @@ export function checkTokenValues(rows, declared) {
   }
   return problems
 }
+
+// MAP.md ----------------------------------------------------------------------
+
+// Each MAP.md section describes the folder named in its heading, such as "Library (`src/`)"; "Tests, checks and
+// configuration" describes the repository root, and Commands lists commands, not paths. Every path in a row's first
+// cell must exist, and every folder directly inside a mapped folder must have a row, so the map can't drift. A
+// placeholder such as `<Name>/` stands for any folder, so only the part before it is checked.
+const rootSection = 'Tests, checks and configuration'
+export function checkMap(markdown, { exists, foldersIn }) {
+  const problems = []
+  const headings = [...markdown.matchAll(/^## (.+)$/gm)]
+  const sections = []
+  headings.forEach((heading, index) => {
+    const base = heading[1].match(/\(`([^`]+)`\)/)?.[1] ?? (heading[1] === rootSection ? '' : undefined)
+    if (base !== undefined) sections.push({ base, start: heading.index, end: headings[index + 1]?.index ?? markdown.length })
+  })
+  // Every folder a row lists, with each of its parent folders, such as tests/components and tests.
+  const listed = new Set()
+  for (const section of sections) {
+    for (const row of markdown.slice(section.start, section.end).matchAll(/^\| ([^|]+) \|/gm)) {
+      for (const entry of row[1].matchAll(/`([^`]+)`/g)) {
+        const path = section.base + entry[1].split('<')[0].replace(/^\//, '')
+        if (!exists(path)) problems.push({ position: section.start + row.index, message: `MAP.md lists ${section.base}${entry[1]}, which doesn't exist.` })
+        const segments = path.split('/').filter(Boolean)
+        segments.forEach((_, count) => listed.add(segments.slice(0, count + 1).join('/')))
+      }
+    }
+  }
+  // Folders whose children must all be listed: each mapped folder, and the test folders listed from the root.
+  for (const section of sections) {
+    for (const parent of section.base ? [section.base] : ['tests/']) {
+      for (const folder of foldersIn(parent)) {
+        const path = parent + folder
+        if (!listed.has(path) && !sections.some(other => other.base === `${path}/`)) problems.push({ position: section.start, message: `${path}/ has no row in MAP.md.` })
+      }
+    }
+  }
+  return problems
+}

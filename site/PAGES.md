@@ -175,6 +175,8 @@ Leave out sections that do not apply.
   `hierarchy="secondary"` or `<Button isDisabled>`, must exist on that page's
   component, and a fixed value must be one the prop accepts. The same goes for
   `src/docs/COMPONENTS.md`, where each section covers the components it names.
+- `MAP.md` must name only paths that exist, and every folder inside a folder
+  it maps needs a row.
 - Every value in the tables of `src/docs/TOKENS.md` whose second column is
   headed Value, Stored value or Default must match the token files, and a pixel
   equivalent must match its rem value at 16px.

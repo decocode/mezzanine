@@ -40,7 +40,7 @@ Never do these without the owner's explicit agreement in the conversation:
 
 ## Read the guide for your task
 
-- `MAP.md`: what each folder holds. Read it before adding, moving or removing files. Update it when a folder is added, removed or changes purpose.
+- `MAP.md`: what each folder holds. Read it before adding, moving or removing files. Update it when a folder is added, removed or changes purpose. **[checked]**
 - `src/docs/TOKENS.md`: tokens, themes, colour, layout, stacking and motion.
 - `src/docs/TYPOGRAPHY.md`: text styles.
 - `src/docs/COMPONENTS.md`: how components are built, named and used, including Button and Link. Update it when a component's usage changes.

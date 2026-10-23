@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { checkRoutes, checkTokens, checkTokenValues, declaredTokens, documentedTokenValues, labPaths, parsePropRows, propMentions, templateTokenPatterns } from './docs-rules.mjs'
+import { checkMap, checkRoutes, checkTokens, checkTokenValues, declaredTokens, documentedTokenValues, labPaths, parsePropRows, propMentions, templateTokenPatterns } from './docs-rules.mjs'
 
 test('routes: misplaced page files, stray page files and bad Lighthouse URLs are reported', () => {
   const pages = [{ id: 'button', file: 'site/pages/components/button/ButtonPage.tsx' }, { id: 'link', file: 'site/pages/components/link/LinkPage.tsx' }]
@@ -89,5 +89,19 @@ test('token values: copied values and pixel equivalents are checked against the 
   assert.ok(messages.some(m => m.includes('--width-md is 20rem')))
   assert.ok(messages.some(m => m.includes('--gone')))
   assert.equal(messages.length, 3)
+})
+
+test('MAP.md: listed paths must exist and every mapped folder needs a row', () => {
+  const markdown = [
+    '## Library (`src/`)', '', '| Folder | What |', '| --- | --- |',
+    '| `components/<Name>/` | One per component |', '| `index.ts`, `gone.ts` | Entry |', '',
+    '## Lab (`site/lab/`)', '', '| `notice/` | A candidate |', '',
+    '## Tests, checks and configuration', '', '| `tests/components/` | Browser tests |', '',
+    '## Commands', '', '| `npm run dev` | Start |',
+  ].join('\n')
+  const files = new Set(['src/components/', 'src/index.ts', 'site/lab/notice/', 'tests/components/'])
+  const folders = { 'src/': ['components', 'tokens'], 'site/lab/': ['notice'], 'tests/': ['components', 'site'] }
+  const messages = checkMap(markdown, { exists: path => files.has(path), foldersIn: parent => folders[parent] ?? [] }).map(p => p.message)
+  assert.deepEqual(messages.sort(), ['MAP.md lists src/gone.ts, which doesn\'t exist.', 'src/tokens/ has no row in MAP.md.', 'tests/site/ has no row in MAP.md.'])
 })
 

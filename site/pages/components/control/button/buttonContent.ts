@@ -4,32 +4,16 @@ import { pointerRows } from '../../../../components/pointerRows'
 
 export type ButtonPreviewState = 'enabled' | 'hovered' | 'pressed' | 'focused' | 'pending' | 'disabled'
 
-export const buttonHierarchies: {
-  name: string
-  hierarchy: ButtonHierarchy
-  label: string
-}[] = [
-    {
-      name: 'Primary',
-      hierarchy: 'primary',
-      label: 'Button',
-    },
-    {
-      name: 'Secondary',
-      hierarchy: 'secondary',
-      label: 'Button',
-    },
-    {
-      name: 'Tertiary',
-      hierarchy: 'tertiary',
-      label: 'Button',
-    },
-    {
-      name: 'Destructive',
-      hierarchy: 'destructive',
-      label: 'Delete',
-    },
-  ]
+// One entry for every ButtonHierarchy value, so TypeScript reports one that's missing or no longer exists.
+const hierarchyRows: Record<ButtonHierarchy, { name: string; label: string }> = {
+  primary: { name: 'Primary', label: 'Button' },
+  secondary: { name: 'Secondary', label: 'Button' },
+  tertiary: { name: 'Tertiary', label: 'Button' },
+  destructive: { name: 'Destructive', label: 'Delete' },
+}
+
+export const buttonHierarchies = (Object.keys(hierarchyRows) as ButtonHierarchy[])
+  .map(hierarchy => ({ hierarchy, ...hierarchyRows[hierarchy] }))
 
 export const buttonStates: {
   name: string
@@ -45,17 +29,16 @@ export const buttonStates: {
     { name: 'Disabled', state: 'disabled', reactAriaState: 'isDisabled', description: 'Unavailable for activation, shown faded and skipped by keyboard focus.' },
   ]
 
-export const buttonSizes: {
-  label: string
-  size: ButtonSize
-  usage: string
-}[] = [
-    { label: 'Extra small', size: 'xs', usage: 'Dense areas only, such as toolbars and tables.' },
-    { label: 'Small', size: 'sm', usage: 'Compact interfaces where space is limited.' },
-    { label: 'Medium', size: 'md', usage: 'The default size for most actions.' },
-    { label: 'Large', size: 'lg', usage: 'Prominent actions in forms and page sections.' },
-    { label: 'Extra large', size: 'xl', usage: 'Highly prominent actions in heroes and landing pages.' },
-  ]
+// One entry for every ButtonSize value, so TypeScript reports one that's missing or no longer exists.
+const sizeRows: Record<ButtonSize, { label: string; usage: string }> = {
+  xs: { label: 'Extra small', usage: 'Dense areas only, such as toolbars and tables.' },
+  sm: { label: 'Small', usage: 'Compact interfaces where space is limited.' },
+  md: { label: 'Medium', usage: 'The default size for most actions.' },
+  lg: { label: 'Large', usage: 'Prominent actions in forms and page sections.' },
+  xl: { label: 'Extra large', usage: 'Highly prominent actions in heroes and landing pages.' },
+}
+
+export const buttonSizes = (Object.keys(sizeRows) as ButtonSize[]).map(size => ({ size, ...sizeRows[size] }))
 
 // Rows of the table in Button label and Icon placement; the page renders a live Button in each.
 export const buttonContentOptions: {
