@@ -232,7 +232,6 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'navigation-tree', label: 'Nav Tree', path: '/navigation-tree', status: 'implemented' },
           { id: 'table-of-contents', label: 'Table of contents', path: '/table-of-contents', status: 'implemented' },
           { id: 'tabs', label: 'Tabs', path: '/tabs', status: 'implemented' },
-          { id: 'pagination', label: 'Pagination', path: '/pagination', status: 'empty' },
         ],
       },
       {
