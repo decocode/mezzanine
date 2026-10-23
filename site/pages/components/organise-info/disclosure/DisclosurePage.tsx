@@ -21,11 +21,8 @@ export default function DisclosurePage() {
         ),
         disclosureGroup: (<>
           <Link
-            aria-label={`${disclosureGroupReactAriaLink.label} (opens in a new tab)`}
             className="react-aria-Link react-aria-documentation-link"
             href={disclosureGroupReactAriaLink.href}
-            rel="noreferrer"
-            target="_blank"
           >
             <span>{disclosureGroupReactAriaLink.label}</span>
             <ExternalLinkIcon />

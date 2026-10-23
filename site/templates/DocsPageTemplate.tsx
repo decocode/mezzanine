@@ -44,7 +44,7 @@ export function DocsPageTemplate({ title, description, sections, relatedPages = 
         <ul className="component-reference-links">
           {links.map(({ label, href }) => (
             <li key={href}>
-              <Link href={href} aria-label={external ? `${label} (opens in a new tab)` : undefined} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>
+              <Link href={href}>
                 <span>{label}</span>{external && <ExternalLinkIcon />}
               </Link>
             </li>

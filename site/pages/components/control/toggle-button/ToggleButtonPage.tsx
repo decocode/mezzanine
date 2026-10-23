@@ -70,11 +70,8 @@ export default function ToggleButtonPage() {
         ),
         toggleButtonGroup: (<>
           <Link
-            aria-label={`${documentationLink.label} (opens in a new tab)`}
             className="react-aria-Link react-aria-documentation-link"
             href={documentationLink.href}
-            rel="noreferrer"
-            target="_blank"
           >
             <span>{documentationLink.label}</span>
             <ExternalLinkIcon />

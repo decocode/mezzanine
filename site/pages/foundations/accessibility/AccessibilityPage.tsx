@@ -10,9 +10,6 @@ export default function AccessibilityPage() {
         target: (
           <Button
             href={accessibilityFeedbackButton.href}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${accessibilityFeedbackButton.label} (opens in a new tab)`}
             hierarchy="secondary"
             iconTrailing={<ExternalLinkIcon />}
           >

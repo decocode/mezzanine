@@ -45,8 +45,9 @@ for (const definition of componentPages) {
           expect(sitePages.some(item => item.path === href)).toBe(true)
         } else {
           expect(href).toMatch(/^https:\/\//)
-          await expect(link).toHaveAccessibleName(/opens in a new tab/)
-          await expect(link).not.toHaveText(/opens in a new tab/)
+          // External links open in the same tab; the icon, hidden from screen readers, shows they leave the site.
+          await expect(link).not.toHaveAttribute('target')
+          await expect(link).toHaveAccessibleName((await link.innerText()).trim())
           await expect(link.locator('svg')).toHaveAttribute('aria-hidden', 'true')
         }
       }
@@ -81,10 +82,8 @@ test('TopBar exposes related pages and external references through On this page'
   await expect(references.getByRole('link')).toHaveCount(3)
   for (const link of await references.getByRole('link').all()) {
     await expect(link).toHaveAttribute('href', /^https:\/\/react-aria.adobe.com\//)
-    await expect(link).toHaveAttribute('target', '_blank')
-    await expect(link).toHaveAttribute('rel', 'noreferrer')
-    await expect(link).toHaveAccessibleName(/opens in a new tab/)
-    await expect(link).not.toHaveText(/opens in a new tab/)
+    await expect(link).not.toHaveAttribute('target')
+    await expect(link).toHaveAccessibleName((await link.innerText()).trim())
     await expect(link.locator('svg')).toHaveAttribute('aria-hidden', 'true')
   }
   const footer = related.getByRole('link', { name: 'Footer', exact: true })

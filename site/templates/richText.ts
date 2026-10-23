@@ -24,8 +24,3 @@ export function parseRichText(text: string): RichTextPart[] {
   if (last < text.length) parts.push({ kind: 'text', text: text.slice(last) })
   return parts
 }
-
-// The words of a piece of copy without its markers, for accessible names such as a link's label.
-export function plainText(parts: readonly RichTextPart[]): string {
-  return parts.map((part) => part.kind === 'link' ? plainText(part.label) : part.text).join('')
-}

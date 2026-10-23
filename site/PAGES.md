@@ -22,8 +22,8 @@ formatting:
 
 - `` `code` `` for code, such as a prop or token name.
 - `**strong**` for emphasis.
-- `[label](href)` for a link. A link to another site opens in a new tab and says
-  so, like the References list.
+- `[label](href)` for a link. A link to another site opens in the same tab and
+  shows the external-link icon (owner's decision, 23 October 2026).
 
 A paragraph can also be a short bulleted list: `{ list: ['First item', 'Second item'] }`.
 
@@ -59,8 +59,10 @@ parts:
 
 Every page, in the Docs or the Lab, follows the same order:
 
-1. Also known as, when the page's name is agreed: what Figma, CSS, Tailwind CSS,
-   Bootstrap and Material Design call the same thing, in a closed Disclosure.
+1. Also known as, when the page's name is agreed: what CSS, Tailwind CSS, Figma,
+   Material Design and shadcn/ui call the same thing, in a closed Disclosure.
+   Names are given in the page's own words, with links, never copied text or
+   logos (owner's decision, 23 October 2026).
 2. The page's own sections, such as Example and Variants, or How it works and
    Example in the Lab.
 3. Technical details, where the page has them.
@@ -92,15 +94,15 @@ Each component page has, where they apply:
 1. The example, and any other interactive examples, always visible.
 2. Technical details, in disclosures (see below).
 3. Related pages: links to other Mezzanine pages.
-4. References: links to the React Aria documentation or other sources. Badge is
-   a plain HTML element, so its reference is MDN.
+4. References: links to the React Aria documentation or other sources.
 
 Leave out sections that do not apply. Never add an empty section or describe a
 feature that does not exist.
 
 ### Component Technical details
 
-The Technical details group always uses this order:
+The Technical details group always uses this order (owner's decision, 23 October
+2026):
 
 1. Anatomy: the parts the component is built from.
 2. Behaviour: how it responds and changes. Page-specific extras, such as
@@ -115,20 +117,19 @@ The Technical details group always uses this order:
 6. Props.
 7. CSS tokens.
 
-Do not combine Usage and Accessibility into one section.
-
 ## Related pages and References
 
 Edit the page's content file. Each entry has a `label` and an `href`: a local
 path for Related pages, an external URL for References. External links show a
-trailing icon and announce that they open in a new tab. An empty list produces
+trailing icon and open in the same tab (owner's decision, 23 October 2026). An empty list produces
 no section and no On this page link.
 
 ## Foundations pages
 
 Shared accessibility information (the WCAG target, what React Aria provides,
 what Mezzanine adds and how it is checked) lives on the Foundations
-Accessibility page at `/accessibility`, so other pages do not repeat it.
+Accessibility page at `/accessibility`, so other pages do not repeat it. Agreed by the owner on 15 October
+2026 and confirmed on 23 October 2026.
 
 Foundations pages cover how Mezzanine works, such as accessibility, interaction
 and text, and its visual values, such as color, shape, opacity and motion, many
@@ -136,7 +137,8 @@ of which a theme can change.
 
 Foundations pages open with their own sections, such as a scale or a
 table of states. Their content files use `kind: 'foundation'`, and where they
-have a Technical details group, its sections always appear in this order:
+have a Technical details group, its sections always appear in this order (owner's
+decision, 23 October 2026):
 
 1. CSS properties: the CSS properties the page governs.
 2. Tokens: token names, purposes and values read from the token source.
@@ -146,7 +148,9 @@ have a Technical details group, its sections always appear in this order:
 5. Localisation: direction and text expansion, only once verified.
 
 Do not list the components that use a token or state by hand: such lists go
-out of date. Add them only if they can be generated from the code.
+out of date. Add them only if they can be generated from the code. The "Used by" columns
+in `src/docs/TOKENS.md` are to be generated from the CSS (owner's decision,
+23 October 2026; not built yet).
 
 Leave out sections that do not apply.
 

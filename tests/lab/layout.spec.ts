@@ -79,7 +79,7 @@ test('Lab Layout stages and pages are reachable from the overview and the naviga
   await expect(page.getByRole('heading', { name: 'Example', exact: true, level: 2 })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'The CSS behind Center', level: 3 })).toBeVisible()
   await expect(main.getByRole('heading', { name: 'References', exact: true, level: 2 })).toBeVisible()
-  await expect(main.getByRole('link', { name: 'Bedrock: Center (opens in a new tab)', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/center')
+  await expect(main.getByRole('link', { name: 'Bedrock: Center', exact: true })).toHaveAttribute('href', 'https://github.com/Bedrock-Layouts/Bedrock/tree/main/packages/center')
   await page.goto('/site/lab/layout/not-a-page')
   await expect(page).toHaveTitle('Page not found | Lab')
 })
