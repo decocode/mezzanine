@@ -8,7 +8,9 @@ import { Link as ReactAriaLink, type LinkProps as ReactAriaLinkProps } from 'rea
 import { ProgressBar } from 'react-aria-components/ProgressBar'
 import { Tooltip, TooltipTrigger, type TooltipProps } from '../Tooltip/Tooltip'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'destructive'
+// How much attention a button draws, from the one main action down to quiet ones; destructive marks
+// an action that deletes or can't be undone.
+export type ButtonHierarchy = 'primary' | 'secondary' | 'tertiary' | 'destructive'
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 // Where an icon button shows its label: in a tooltip, or visibly below or above the icon. The label
@@ -18,11 +20,10 @@ export type ButtonLabelPlacement = 'tooltip' | 'below' | 'above'
 interface ButtonAppearanceProps {
   iconLeading?: ReactNode
   iconTrailing?: ReactNode
-  labelPlacement?: ButtonLabelPlacement
   // Where a tooltip label appears; React Aria's Tooltip placement. Only used with labelPlacement="tooltip".
   tooltipPlacement?: TooltipProps['placement']
   size?: ButtonSize
-  variant?: ButtonVariant
+  hierarchy?: ButtonHierarchy
 }
 
 interface ActionButtonProps extends ReactAriaButtonProps, ButtonAppearanceProps {
@@ -36,7 +37,13 @@ interface NavigationButtonProps extends ReactAriaLinkProps, ButtonAppearanceProp
   isPending?: never
 }
 
-export type ButtonProps = ActionButtonProps | NavigationButtonProps
+// A tooltip label must be plain text, because it is also the button's accessible name and the
+// tooltip's words. A label below or above the icon, or a text button's label, can be any content.
+export type ButtonLabelProps =
+  | { labelPlacement: 'tooltip'; children: string }
+  | { labelPlacement?: Exclude<ButtonLabelPlacement, 'tooltip'> }
+
+export type ButtonProps = (ActionButtonProps | NavigationButtonProps) & ButtonLabelProps
 
 export function Button({
   iconLeading,
@@ -44,7 +51,7 @@ export function Button({
   labelPlacement,
   tooltipPlacement,
   size = 'md',
-  variant = 'primary',
+  hierarchy = 'primary',
   ...props
 }: ButtonProps) {
   // A tooltip label is the accessible name; the button itself shows only its icon.
@@ -53,7 +60,7 @@ export function Button({
     'data-icon-only': (labelPlacement === 'tooltip' || (props.children == null && (iconLeading != null || iconTrailing != null))) || undefined,
     'data-label-placement': labelPlacement === 'below' || labelPlacement === 'above' ? labelPlacement : undefined,
     'data-size': size,
-    'data-variant': variant,
+    'data-variant': hierarchy,
     ...(tooltipLabel !== undefined && { 'aria-label': props['aria-label'] ?? tooltipLabel }),
   }
 

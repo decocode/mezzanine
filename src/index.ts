@@ -24,7 +24,7 @@ export type {
   ButtonLabelPlacement,
   ButtonProps,
   ButtonSize,
-  ButtonVariant,
+  ButtonHierarchy,
 } from './components/Button/Button'
 
 export {

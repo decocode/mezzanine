@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
-import { expectNoPageOverflow } from '../display'
+import { expectNoAccessibilityViolations } from '../accessibility'
+import { expectNoPageOverflow, setTheme, themes } from '../display'
 
 // These checks use the Ratio pair docs page, which shows the library class inside a box whose width
 // can be chosen.
@@ -50,5 +51,15 @@ for (const fontSize of [16, 32]) {
         && Math.abs(second.width - pairBox.width) < 1
     }).toBe(true)
     await expectNoPageOverflow(page)
+  })
+}
+
+// Checks that the ratio pair page passes an accessibility scan in each theme.
+for (const theme of themes) {
+  test(`/layout/side-by-side/ratio-pair passes an accessibility scan in ${theme}`, async ({ page }) => {
+    await page.goto('/layout/side-by-side/ratio-pair')
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await setTheme(page, theme)
+    await expectNoAccessibilityViolations(page, 'main')
   })
 }

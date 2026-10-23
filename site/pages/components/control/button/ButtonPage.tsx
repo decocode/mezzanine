@@ -1,5 +1,5 @@
 import {
-  ArrowRightIcon, Button, Cell, Column, DemoArea, DownloadIcon, PlusIcon, Row, Table, TableBody, TableHeader, type ButtonVariant,
+  ArrowRightIcon, Button, Cell, Column, DemoArea, DownloadIcon, PlusIcon, Row, Table, TableBody, TableHeader, type ButtonHierarchy,
 } from '@decocode/mezzanine'
 import { useState, type ReactNode } from 'react'
 import {
@@ -8,7 +8,7 @@ import {
   buttonExampleCopy,
   buttonSizes,
   buttonStates,
-  buttonVariants,
+  buttonHierarchies,
   type ButtonPreviewState,
 } from './buttonContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -16,11 +16,11 @@ import { ContentPage } from '../../../../templates/ContentPage'
 function ButtonStateExample({
   label,
   state,
-  variant,
+  hierarchy,
 }: {
   label: string
   state: ButtonPreviewState
-  variant: ButtonVariant
+  hierarchy: ButtonHierarchy
 }) {
   return (
     <Button
@@ -29,7 +29,7 @@ function ButtonStateExample({
         : state}
       isDisabled={state === 'disabled'}
       isPending={state === 'pending'}
-      variant={variant}
+      hierarchy={hierarchy}
     >
       {label}
     </Button>
@@ -135,17 +135,17 @@ export default function ButtonPage() {
                 ))}
               </TableHeader>
               <TableBody>
-                {buttonVariants.map(({ label, name, variant }) => (
-                  <Row id={variant} key={variant}>
+                {buttonHierarchies.map(({ label, name, hierarchy }) => (
+                  <Row id={hierarchy} key={hierarchy}>
                     <Cell>
                       <span className="table-item-heading">
                         <strong>{name}</strong>
-                        <code>{variant}</code>
+                        <code>{hierarchy}</code>
                       </span>
                     </Cell>
                     {buttonStates.map(({ state }) => (
                       <Cell key={state}>
-                        <ButtonStateExample label={label} state={state} variant={variant} />
+                        <ButtonStateExample label={label} state={state} hierarchy={hierarchy} />
                       </Cell>
                     ))}
                   </Row>

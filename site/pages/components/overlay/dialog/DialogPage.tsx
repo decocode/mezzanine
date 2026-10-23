@@ -33,7 +33,7 @@ export default function DialogPage() {
         confirmationDialog: (
           <DemoArea>
             <DialogTrigger>
-              <Button variant="secondary">Open confirmation</Button>
+              <Button hierarchy="secondary">Open confirmation</Button>
               <ModalOverlay>
                 <Modal>
                   <Dialog role="alertdialog" aria-describedby="dialog-confirmation-description">
@@ -42,7 +42,7 @@ export default function DialogPage() {
                         <Heading slot="title">{dialogExampleCopy.confirmationTitle}</Heading>
                         <p id="dialog-confirmation-description">{dialogExampleCopy.confirmationBody}</p>
                         <footer className="mz-dialog-actions">
-                          <Button autoFocus slot="close" variant="secondary">Cancel</Button>
+                          <Button autoFocus slot="close" hierarchy="secondary">Cancel</Button>
                           <Button onPress={() => {
                             setConfirmationCount((count) => count + 1)
                             close()

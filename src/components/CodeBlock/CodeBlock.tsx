@@ -29,7 +29,7 @@ export function CodeBlock({ className, children, ...preProps }: CodeBlockProps) 
         iconLeading={isCopied ? <CheckIcon /> : <CopyIcon />}
         labelPlacement="tooltip"
         size="sm"
-        variant="tertiary"
+        hierarchy="tertiary"
         onPress={copyCode}
       >
         {isCopied ? 'Copied' : 'Copy code'}

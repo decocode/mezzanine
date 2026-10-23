@@ -11,7 +11,7 @@ function DropZoneExample() {
       <Text slot="label">{dropZoneExampleLabels.label}</Text>
       <p id={helpId}>{dropZoneExampleLabels.help}</p>
       <FileTrigger>
-        <Button variant="secondary" aria-describedby={helpId}>{dropZoneExampleLabels.button}</Button>
+        <Button hierarchy="secondary" aria-describedby={helpId}>{dropZoneExampleLabels.button}</Button>
       </FileTrigger>
     </DropZone>
   )

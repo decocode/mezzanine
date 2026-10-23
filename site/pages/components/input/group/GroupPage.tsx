@@ -12,7 +12,7 @@ export default function GroupPage() {
             <Label htmlFor="group-example-input">{groupExampleLabels.input}</Label>
             <Group>
               <Input id="group-example-input" />
-              <Button variant="secondary">{groupExampleLabels.button}</Button>
+              <Button hierarchy="secondary">{groupExampleLabels.button}</Button>
             </Group>
           </div>
         </DemoArea>,

@@ -9,7 +9,7 @@ export default function PopoverPage() {
       parts={{
         example: <DemoArea>
           <DialogTrigger>
-            <Button variant="secondary">{popoverExampleLabels.trigger}</Button>
+            <Button hierarchy="secondary">{popoverExampleLabels.trigger}</Button>
             <Popover>
               <Dialog aria-label={popoverExampleLabels.trigger}>
                 <Text elementType="p" className="mz-text-body-md">{popoverExampleLabels.content}</Text>

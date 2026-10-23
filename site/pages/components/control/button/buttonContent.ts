@@ -1,32 +1,32 @@
-import type { ButtonSize, ButtonVariant } from '@decocode/mezzanine'
+import type { ButtonSize, ButtonHierarchy } from '@decocode/mezzanine'
 import type { Copy, DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export type ButtonPreviewState = 'enabled' | 'hovered' | 'pressed' | 'focused' | 'pending' | 'disabled'
 
-export const buttonVariants: {
+export const buttonHierarchies: {
   name: string
-  variant: ButtonVariant
+  hierarchy: ButtonHierarchy
   label: string
 }[] = [
     {
       name: 'Primary',
-      variant: 'primary',
+      hierarchy: 'primary',
       label: 'Button',
     },
     {
       name: 'Secondary',
-      variant: 'secondary',
+      hierarchy: 'secondary',
       label: 'Button',
     },
     {
       name: 'Tertiary',
-      variant: 'tertiary',
+      hierarchy: 'tertiary',
       label: 'Button',
     },
     {
       name: 'Destructive',
-      variant: 'destructive',
+      hierarchy: 'destructive',
       label: 'Delete',
     },
   ]
@@ -91,7 +91,7 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
   title: 'Button',
   description: 'A button lets someone do something, such as submit a form, save their work or trigger a dialog. Its label tells them what will happen when they press it.',
   sections: [
-    { key: 'example', intro: ['`Button` defaults to the primary variant and medium size. Pressing it runs its `onPress` handler, which updates the count.'] },
+    { key: 'example', intro: ['`Button` defaults to the primary hierarchy and medium size. Pressing it runs its `onPress` handler, which updates the count.'] },
     {
       key: 'navigationalButtons',
       title: 'Navigational buttons',
@@ -151,7 +151,7 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
     },
     {
       key: 'tokens',
-      intro: ['These component tokens control variant colours, sizes, content spacing, borders, focus and progress indicators. `Button` also uses shared typography, focus colour and disabled-opacity tokens.'],
+      intro: ['These component tokens control hierarchy colours, sizes, content spacing, borders, focus and progress indicators. `Button` also uses shared typography, focus colour and disabled-opacity tokens.'],
       table: {
         label: 'Button CSS tokens',
         nameColumn: 'CSS token',

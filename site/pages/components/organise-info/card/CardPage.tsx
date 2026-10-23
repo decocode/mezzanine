@@ -12,7 +12,7 @@ export default function CardPage() {
             <Card>
               <Heading level={3}>{cardExample.heading}</Heading>
               <p>{cardExample.body}</p>
-              <Button variant="secondary">{cardExample.action}</Button>
+              <Button hierarchy="secondary">{cardExample.action}</Button>
             </Card>
           </DemoArea>
         ),

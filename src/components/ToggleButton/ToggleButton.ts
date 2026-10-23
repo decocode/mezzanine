@@ -1,6 +1,6 @@
 import { createContext, createElement, useContext, type ReactNode, type Ref } from 'react'
 import { composeRenderProps } from 'react-aria-components'
-import type { ButtonLabelPlacement, ButtonSize } from '../Button/Button'
+import type { ButtonLabelProps, ButtonSize } from '../Button/Button'
 import { Tooltip, TooltipTrigger, type TooltipProps } from '../Tooltip/Tooltip'
 import {
   ToggleButton as ReactAriaToggleButton,
@@ -9,20 +9,21 @@ import {
   type ToggleButtonGroupProps as ReactAriaToggleButtonGroupProps,
 } from 'react-aria-components/ToggleButtonGroup'
 
-export interface ToggleButtonProps extends ReactAriaToggleButtonProps {
+interface ToggleButtonAppearanceProps extends ReactAriaToggleButtonProps {
   // Secondary has an outline; tertiary has none until it's hovered or selected, as on Button.
-  variant?: 'secondary' | 'tertiary'
+  hierarchy?: 'secondary' | 'tertiary'
   size?: ButtonSize
   iconLeading?: ReactNode
   iconTrailing?: ReactNode
-  // As on Button: where an icon toggle shows its label (its children).
-  labelPlacement?: ButtonLabelPlacement
   tooltipPlacement?: TooltipProps['placement']
   ref?: Ref<HTMLButtonElement>
 }
 
+// As on Button: where an icon toggle shows its label (its children), which must be plain text in a tooltip.
+export type ToggleButtonProps = ToggleButtonAppearanceProps & ButtonLabelProps
+
 export interface ToggleButtonGroupProps extends ReactAriaToggleButtonGroupProps {
-  variant?: 'secondary'
+  hierarchy?: 'secondary'
   size?: ButtonSize
   ref?: Ref<HTMLDivElement>
 }
@@ -30,7 +31,7 @@ export interface ToggleButtonGroupProps extends ReactAriaToggleButtonGroupProps 
 const ToggleButtonSizeContext = createContext<ButtonSize>('md')
 
 // Appearance only: React Aria retains selection, render props, focus and keyboard behaviour.
-export function ToggleButton({ variant, size, iconLeading, iconTrailing, labelPlacement, tooltipPlacement, children, ...props }: ToggleButtonProps) {
+export function ToggleButton({ hierarchy, size, iconLeading, iconTrailing, labelPlacement, tooltipPlacement, children, ...props }: ToggleButtonProps) {
   const groupSize = useContext(ToggleButtonSizeContext)
   // A tooltip label is the accessible name; the button itself shows only its icon.
   const tooltipLabel = labelPlacement === 'tooltip' && typeof children === 'string' ? children : undefined
@@ -40,7 +41,7 @@ export function ToggleButton({ variant, size, iconLeading, iconTrailing, labelPl
   const appearanceProps = {
     ...props,
     ...(tooltipLabel !== undefined && { 'aria-label': props['aria-label'] ?? tooltipLabel }),
-    'data-variant': variant,
+    'data-variant': hierarchy,
     'data-size': size ?? groupSize,
     'data-icon-only': (labelPlacement === 'tooltip' || (children == null && (iconLeading != null || iconTrailing != null))) || undefined,
     'data-label-placement': isLabelOutside ? labelPlacement : undefined,
@@ -53,8 +54,8 @@ export function ToggleButton({ variant, size, iconLeading, iconTrailing, labelPl
   return tooltipLabel === undefined ? toggle : createElement(TooltipTrigger, null, toggle, createElement(Tooltip, { placement: tooltipPlacement }, tooltipLabel))
 }
 
-export function ToggleButtonGroup({ variant, size = 'md', ...props }: ToggleButtonGroupProps) {
-  const appearanceProps = { ...props, 'data-variant': variant }
+export function ToggleButtonGroup({ hierarchy, size = 'md', ...props }: ToggleButtonGroupProps) {
+  const appearanceProps = { ...props, 'data-variant': hierarchy }
   return createElement(ToggleButtonSizeContext.Provider, { value: size },
     createElement(ReactAriaToggleButtonGroup, appearanceProps),
   )

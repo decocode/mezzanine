@@ -2,7 +2,7 @@
   "name": "@decocode/mezzanine",
   "version": "0.0.0",
   "private": true,
-  "description": "Mezzanine — an accessible, token-themed React Aria design system by DecoCode Ltd.",
+  "description": "Mezzanine \u2014 an accessible, token-themed React Aria design system by DecoCode Ltd.",
   "license": "UNLICENSED",
   "type": "module",
   "files": [
@@ -58,5 +58,8 @@
     "react-dom": "^19.2.8",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
+  },
+  "overrides": {
+    "lighthouse": "13.5.0"
   }
 }

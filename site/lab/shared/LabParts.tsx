@@ -16,7 +16,7 @@ export function ExampleFrame({ label, initialWidth = 720, canOverflow = false, c
       {/* The preset matching the current width shows as selected; none does after a slider drag between presets. */}
       <ToggleButtonGroup
         size="sm"
-        variant="secondary"
+        hierarchy="secondary"
         aria-label="Preset widths"
         selectionMode="single"
         disallowEmptySelection

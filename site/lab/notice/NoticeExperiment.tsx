@@ -20,7 +20,7 @@ export function NoticeExperiment() {
           title={noticeActionsExample.title}
           icon={<PlaceholderIcon />}
           actions={<>
-            <Button size="sm" variant="secondary">{noticeActionsExample.button}</Button>
+            <Button size="sm" hierarchy="secondary">{noticeActionsExample.button}</Button>
             <Link href={noticePage.href}>{noticeActionsExample.link}</Link>
           </>}
         >

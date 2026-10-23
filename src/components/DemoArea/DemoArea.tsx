@@ -45,7 +45,7 @@ export function DemoArea({ children, codeView, endPanel, className }: DemoAreaPr
         <ToggleButtonGroup
           aria-label="Demo theme"
           size="sm"
-          variant="secondary"
+          hierarchy="secondary"
           selectionMode="single"
           disallowEmptySelection
           selectedKeys={[chosenTheme ?? pageTheme]}

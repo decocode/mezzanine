@@ -8,17 +8,21 @@ import { SearchIcon } from '../../icons/Icons'
 import { Badge } from '../Badge/Badge'
 import { Tooltip, TooltipTrigger, type TooltipProps } from '../Tooltip/Tooltip'
 
-export interface SearchTriggerProps extends ReactAriaButtonProps {
+interface SearchTriggerAppearanceProps extends ReactAriaButtonProps {
   // A keyboard shortcut shown in a Badge at the end, such as "⌘ K". Hidden from screen readers,
   // so pair it with aria-keyshortcuts.
   shortcut?: ReactNode
-  // As on Button: "tooltip" shows only the icon, with the label in a tooltip. The label is still the
-  // accessible name, and the shortcut Badge is left out.
-  labelPlacement?: 'tooltip'
   // Where a tooltip label appears; React Aria's Tooltip placement.
   tooltipPlacement?: TooltipProps['placement']
   ref?: Ref<HTMLButtonElement>
 }
+
+// As on Button: "tooltip" shows only the icon, with the label in a tooltip. The label is still the
+// accessible name, so it must be plain text, and the shortcut Badge is left out.
+export type SearchTriggerProps = SearchTriggerAppearanceProps & (
+  | { labelPlacement: 'tooltip'; children: string }
+  | { labelPlacement?: never }
+)
 
 // The button that opens search, such as a DialogTrigger's search dialog. It's a React Aria Button
 // with its own look, separate from Mezzanine's Button. Its children are its visible label and its

@@ -29,7 +29,7 @@ export function ZoomControl({ label, stepDownLabel, stepUpLabel, resetLabel, val
     onChange?.(next)
   }
   const stepButton = (stepLabel: string, icon: ReactNode, next: number) => (
-    <Button variant="tertiary" size="sm" iconLeading={icon} labelPlacement="tooltip" isDisabled={isDisabled} onPress={() => changeZoom(next)}>{stepLabel}</Button>
+    <Button hierarchy="tertiary" size="sm" iconLeading={icon} labelPlacement="tooltip" isDisabled={isDisabled} onPress={() => changeZoom(next)}>{stepLabel}</Button>
   )
 
   return (
@@ -47,7 +47,7 @@ export function ZoomControl({ label, stepDownLabel, stepUpLabel, resetLabel, val
       // The percentage is the reset button; its name keeps the visible percentage, so voice control
       // users can say what they see.
       level={
-        <Button variant="tertiary" size="sm" aria-label={`${resetLabel}, ${zoom}%`} isDisabled={isDisabled} onPress={() => changeZoom(100)}>
+        <Button hierarchy="tertiary" size="sm" aria-label={`${resetLabel}, ${zoom}%`} isDisabled={isDisabled} onPress={() => changeZoom(100)}>
           {`${zoom}%`}
         </Button>
       }

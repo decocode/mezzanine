@@ -11,8 +11,8 @@ export function BoxHasContentExample() {
     <ExampleHeading>A list that counts its items</ExampleHeading>
     <ExampleText>Like the restaurant tables: up to four items, and the list is a single column. With a fifth, the same list spreads out into a grid, and with four again it goes back. It has {count} items now.</ExampleText>
     <div className="lab-controls">
-      <Button size="sm" variant="secondary" onPress={() => setCount((value) => value + 1)}>Add an item</Button>
-      <Button size="sm" variant="secondary" isDisabled={count <= 1} onPress={() => setCount((value) => Math.max(1, value - 1))}>Remove an item</Button>
+      <Button size="sm" hierarchy="secondary" onPress={() => setCount((value) => value + 1)}>Add an item</Button>
+      <Button size="sm" hierarchy="secondary" isDisabled={count <= 1} onPress={() => setCount((value) => Math.max(1, value - 1))}>Remove an item</Button>
     </div>
       <ul className="lab-has-list">
         {Array.from({ length: count }, (_, index) => <li key={index}><div className="lab-block mz-text-body-sm">Item {index + 1}</div></li>)}

@@ -76,7 +76,7 @@ export function Panel({
   const contents = <>
     {(title != null || isCollapsible) && <div className="mz-panel-header">
       {title != null && <Heading id={headingId} level={headingLevel} slot={isDrawer ? 'title' : undefined}>{title}</Heading>}
-      {isCollapsible && <Button iconLeading={<CloseIcon />} labelPlacement="tooltip" size="sm" variant="tertiary" onPress={close}>{closeLabel ?? `Close ${name}`}</Button>}
+      {isCollapsible && <Button iconLeading={<CloseIcon />} labelPlacement="tooltip" size="sm" hierarchy="tertiary" onPress={close}>{closeLabel ?? `Close ${name}`}</Button>}
     </div>}
     <div className="mz-panel-content">{children}</div>
   </>
@@ -215,7 +215,10 @@ function PanelResizeHandle({ id, edge, name, controls, panelRef }: PanelResizeHa
   )
 }
 
-export type PanelTriggerProps = Omit<Extract<ButtonProps, { href?: never }>, 'ref' | 'aria-controls' | 'aria-expanded'> & {
+// Omit each member of a union on its own, so Button's tooltip-label rule survives.
+type OmitFromEach<T, K extends PropertyKey> = T extends unknown ? Omit<T, K> : never
+
+export type PanelTriggerProps = OmitFromEach<Extract<ButtonProps, { href?: never }>, 'ref' | 'aria-controls' | 'aria-expanded'> & {
   // The id of the Panel this button opens and closes.
   panel: string
 }

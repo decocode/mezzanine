@@ -21,7 +21,7 @@ export function SubgridExample() {
         {items.map((item) => <div key={item.title} className="example-subgrid-item">
           <Heading level={3}>{item.title}</Heading>
           <Text elementType="p" className="mz-text-body-sm">{item.text}</Text>
-          <div><Button size="sm" variant="secondary">Action</Button></div>
+          <div><Button size="sm" hierarchy="secondary">Action</Button></div>
         </div>)}
       </div>
     </WidthFrame>

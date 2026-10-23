@@ -9,11 +9,11 @@ export default function SheetPage() {
       parts={{
         example: <DemoArea>
           <SheetTrigger>
-            <Button variant="secondary">{sheetExampleLabels.trigger}</Button>
+            <Button hierarchy="secondary">{sheetExampleLabels.trigger}</Button>
             <Sheet>
               <Heading slot="title">{sheetExampleLabels.title}</Heading>
               <Text elementType="p" className="mz-text-body-md">{sheetExampleLabels.body}</Text>
-              <Button slot="close" variant="secondary">{sheetExampleLabels.close}</Button>
+              <Button slot="close" hierarchy="secondary">{sheetExampleLabels.close}</Button>
             </Sheet>
           </SheetTrigger>
         </DemoArea>,

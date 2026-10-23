@@ -16,7 +16,10 @@ Use the same `Button` for actions and for calls to action that navigate:
 With `href`, Button uses React Aria's Link and accepts its navigation props,
 including `target`, `rel`, `download` and `isDisabled`. Without `href`, it uses
 React Aria's Button, including form behaviour and `isPending`. Both share
-variants, sizes and icons.
+hierarchy, sizes and icons. `hierarchy` sets how much attention a button draws:
+`primary` (the default) for the one main action, `secondary` and `tertiary`
+for quieter ones, and `destructive` for an action that deletes or can't be
+undone. ToggleButton takes `secondary` or `tertiary`.
 
 Button supports text only, text with a leading or trailing icon, and icon
 buttons. An icon button still has a label, its children, and `labelPlacement`
@@ -356,10 +359,10 @@ take its theme.
 
 ## Unstyled React Aria exports
 
-These pass React Aria's components straight through, with no Mezzanine
-styles yet: `CheckboxGroup`, `FileTrigger` and `Group`. Use them as the
+`FileTrigger` passes React Aria's component straight through, with no
+Mezzanine styles yet. Use it as the
 [React Aria documentation](https://react-aria.adobe.com/) describes, and style
-them in the app until Mezzanine designs them.
+it in the app until Mezzanine designs it.
 
 ## Agent and contributor rules
 

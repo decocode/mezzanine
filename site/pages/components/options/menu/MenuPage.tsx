@@ -9,7 +9,7 @@ export default function MenuPage() {
       parts={{
         example: <DemoArea>
           <MenuTrigger>
-            <Button variant="secondary">{menuExampleLabels.trigger}</Button>
+            <Button hierarchy="secondary">{menuExampleLabels.trigger}</Button>
             <Popover>
               <Menu>{menuExampleLabels.items.map((item) => <MenuItem key={item} id={item}>{item}</MenuItem>)}</Menu>
             </Popover>
@@ -17,7 +17,7 @@ export default function MenuPage() {
         </DemoArea>,
         variants: <DemoArea>
           <MenuTrigger>
-            <Button variant="secondary">{menuExampleLabels.selectionTrigger}</Button>
+            <Button hierarchy="secondary">{menuExampleLabels.selectionTrigger}</Button>
             <Popover>
               <Menu selectionMode="single" defaultSelectedKeys={[menuExampleLabels.items[0]]}>
                 {menuExampleLabels.items.map((item) => <MenuItem key={item} id={item}>{item}</MenuItem>)}

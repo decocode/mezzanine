@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
 // Checks that an open Disclosure fits a phone screen at normal and double text size, with its arrow
@@ -96,5 +97,15 @@ for (const fontSize of textSizes) {
     await expect(panel.locator('p').last()).toBeVisible()
     await expect(panel).toHaveCSS('overflow', 'visible')
     await expectNoPageOverflow(page)
+  })
+}
+
+// Checks that the Disclosure page passes an accessibility scan in each theme.
+for (const theme of themes) {
+  test(`/disclosure passes an accessibility scan in ${theme}`, async ({ page }) => {
+    await page.goto('/disclosure')
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    await setTheme(page, theme)
+    await expectNoAccessibilityViolations(page, 'main')
   })
 }

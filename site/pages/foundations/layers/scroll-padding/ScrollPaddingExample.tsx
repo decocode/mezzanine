@@ -12,7 +12,7 @@ export function ScrollPaddingExample() {
     <ExampleText>Without scroll padding, a heading you jump to lands hidden under the sticky header. With it, the heading lands just below. Mezzanine’s docs site hard-codes a 4rem offset today, which can be wrong when text is enlarged.</ExampleText>
     <Checkbox isSelected={padded} onChange={setPadded}>Use scroll padding</Checkbox>
     <div className="layers-controls">
-      {[2, 3, 4].map((index) => <Button key={index} size="sm" variant="secondary" onPress={() => jump(index)}>Jump to section {index}</Button>)}
+      {[2, 3, 4].map((index) => <Button key={index} size="sm" hierarchy="secondary" onPress={() => jump(index)}>Jump to section {index}</Button>)}
     </div>
       <div ref={box} className={`layers-scroll-box${padded ? ' layers-scroll-padded' : ''}`} role="region" aria-label="Scrolling content with a sticky header" tabIndex={0}>
         <div className="layers-sticky-header mz-text-label-md">Sticky header</div>

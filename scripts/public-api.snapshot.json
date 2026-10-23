@@ -84,6 +84,10 @@
     "kind": "value"
   },
   {
+    "name": "ButtonHierarchy",
+    "kind": "type"
+  },
+  {
     "name": "ButtonLabelPlacement",
     "kind": "type"
   },
@@ -93,10 +97,6 @@
   },
   {
     "name": "ButtonSize",
-    "kind": "type"
-  },
-  {
-    "name": "ButtonVariant",
     "kind": "type"
   },
   {

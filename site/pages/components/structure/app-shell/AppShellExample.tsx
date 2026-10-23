@@ -9,9 +9,9 @@ export function AppShellExample() {
         <header className="app-shell-example-header">
           <span className="mz-text-title-sm">{labels.header}</span>
           <span className="app-shell-example-triggers">
-            <PanelTrigger panel="example-start" variant="secondary" size="sm">{labels.startPanel}</PanelTrigger>
-            <PanelTrigger panel="example-end" variant="secondary" size="sm">{labels.endPanel}</PanelTrigger>
-            <PanelTrigger panel="example-bottom" variant="secondary" size="sm">{labels.bottomPanel}</PanelTrigger>
+            <PanelTrigger panel="example-start" hierarchy="secondary" size="sm">{labels.startPanel}</PanelTrigger>
+            <PanelTrigger panel="example-end" hierarchy="secondary" size="sm">{labels.endPanel}</PanelTrigger>
+            <PanelTrigger panel="example-bottom" hierarchy="secondary" size="sm">{labels.bottomPanel}</PanelTrigger>
           </span>
         </header>
         <Panel id="example-start" edge="start" title={labels.startPanel} headingLevel={3} defaultOpen>

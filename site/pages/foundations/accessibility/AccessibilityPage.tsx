@@ -13,7 +13,7 @@ export default function AccessibilityPage() {
             target="_blank"
             rel="noreferrer"
             aria-label={`${accessibilityFeedbackButton.label} (opens in a new tab)`}
-            variant="secondary"
+            hierarchy="secondary"
             iconTrailing={<ExternalLinkIcon />}
           >
             {accessibilityFeedbackButton.label}

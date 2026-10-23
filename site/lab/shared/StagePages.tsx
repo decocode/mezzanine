@@ -35,7 +35,7 @@ export function OverviewPage({ content, cards, showContents = false }: { content
           <Card>
             <Heading level={3} id={card.headingId}>{card.title}</Heading>
             {card.isLab ? <p className="lab-page-badges"><Badge variant="warning">{labBadgeLabel}</Badge></p> : <p>{card.text}</p>}
-            <Button variant="secondary" href={card.href} aria-describedby={card.headingId}>{childPageCardAction}</Button>
+            <Button hierarchy="secondary" href={card.href} aria-describedby={card.headingId}>{childPageCardAction}</Button>
           </Card>
         </li>)}
       </ul>,

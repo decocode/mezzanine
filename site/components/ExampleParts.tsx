@@ -45,7 +45,7 @@ export function ValuePicker<Value extends string>({ label, options, value, onCha
     <span id={labelId} className="mz-text-label-md">{label}</span>
     <ToggleButtonGroup
       size="sm"
-      variant="secondary"
+      hierarchy="secondary"
       aria-labelledby={labelId}
       selectionMode="single"
       disallowEmptySelection

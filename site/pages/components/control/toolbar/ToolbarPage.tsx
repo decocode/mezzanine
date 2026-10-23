@@ -9,12 +9,12 @@ export default function ToolbarPage() {
       parts={{
         example: <DemoArea>
           <Toolbar aria-label={toolbarExampleLabels.toolbar}>
-            <ToggleButtonGroup aria-label={toolbarExampleLabels.toggleGroup} selectionMode="single" size="sm" variant="secondary">
+            <ToggleButtonGroup aria-label={toolbarExampleLabels.toggleGroup} selectionMode="single" size="sm" hierarchy="secondary">
               {toolbarExampleLabels.toggles.map((toggle) => <ToggleButton key={toggle} id={toggle}>{toggle}</ToggleButton>)}
             </ToggleButtonGroup>
             <Separator />
             <Group aria-label={toolbarExampleLabels.actionGroup}>
-              {toolbarExampleLabels.actions.map((action) => <Button key={action} size="sm" variant="secondary">{action}</Button>)}
+              {toolbarExampleLabels.actions.map((action) => <Button key={action} size="sm" hierarchy="secondary">{action}</Button>)}
             </Group>
           </Toolbar>
         </DemoArea>,

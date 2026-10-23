@@ -53,7 +53,7 @@ export function VolumeControl({ label, muteLabel, value, defaultValue = 100, onC
   // below, and the mute button inside the row opens to the side.
   const isUpright = orientation === 'vertical'
   const muteButton = (icon: ReactNode, tooltipPlacement: 'top' | 'bottom' | 'end') => (
-    <ToggleButton variant="tertiary" size="sm" iconLeading={icon} labelPlacement="tooltip" tooltipPlacement={tooltipPlacement} isSelected={muted} isDisabled={isDisabled} onChange={changeMuted}>
+    <ToggleButton hierarchy="tertiary" size="sm" iconLeading={icon} labelPlacement="tooltip" tooltipPlacement={tooltipPlacement} isSelected={muted} isDisabled={isDisabled} onChange={changeMuted}>
       {muteLabel}
     </ToggleButton>
   )
