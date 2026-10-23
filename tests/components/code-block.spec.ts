@@ -89,3 +89,25 @@ test('Code block highlights code with a language', async ({ page }) => {
   await expect(blocks.first().locator('[data-syntax]')).toHaveCount(0)
 })
 
+// Checks that the block is dark in every theme, because it applies the Dark theme to itself, and that inside
+// Wireframe its code is monochrome: a value takes the text colour rather than a syntax colour.
+test('Code block is dark in every theme and monochrome in Wireframe', async ({ page }) => {
+  await page.goto('/code-block')
+  const block = page.locator('main .mz-code-block').nth(1)
+  const value = block.locator('[data-syntax="constant"]').first()
+  await expect(value).toBeVisible()
+  const backgrounds = new Set<string>()
+  for (const theme of themes) {
+    await setTheme(page, theme)
+    await page.evaluate(theme => document.querySelectorAll('main [data-theme]').forEach(element => {
+      if (!element.classList.contains('mz-code-block')) (element as HTMLElement).dataset.theme = theme
+    }), theme)
+    await expect(block).toHaveAttribute('data-theme', 'dark')
+    backgrounds.add(await block.evaluate(element => getComputedStyle(element).backgroundColor))
+    const [valueColour, textColour] = await Promise.all([value, block.locator('pre')].map(item => item.evaluate(element => getComputedStyle(element).color)))
+    if (theme === 'wireframe') expect(valueColour).toBe(textColour)
+    else expect(valueColour).not.toBe(textColour)
+  }
+  expect(backgrounds.size).toBe(1)
+})
+

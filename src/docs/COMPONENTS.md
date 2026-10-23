@@ -332,7 +332,8 @@ its edge. `Form` lays its fields out one above another, with room between them.
 ## CodeBlock
 
 `CodeBlock` shows code passed as its children, keeping line breaks and
-indentation. Long lines scroll sideways, so the code area takes keyboard focus.
+indentation, on a dark surface in every theme: it applies the Dark theme to
+itself, and inside Wireframe it stays dark but monochrome. Long lines scroll sideways, so the code area takes keyboard focus.
 A strip above the code holds the copy button and an optional `title`, such as a
 file name, which also names the code for screen readers. `showLineNumbers`
 numbers the lines from `startLine`, and `highlightedLines`, `addedLines` and

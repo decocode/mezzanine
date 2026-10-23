@@ -72,7 +72,9 @@ function HighlightedContent({ code, language, ...props }: Omit<CodeContentProps,
   return <CodeContent {...props} tokens={use(highlightCode(code, language))} />
 }
 
-// A static block of code. A strip above it holds an optional title and a copy button, so the code never
+// A static block of code, always on a dark surface: the block applies the Dark theme to itself, so its
+// text, syntax colours, copy button and focus ring all use Dark's roles, in every theme. Inside Wireframe it
+// stays monochrome. A strip above the code holds an optional title and a copy button, so the code never
 // wraps around the button. Long lines scroll sideways rather than breaking mid-word, so the code area can
 // take keyboard focus. Code always reads left to right, even on a right-to-left page. The app supplies the
 // code as text; highlighting, line numbers and marked lines need it as a single string.
@@ -99,7 +101,7 @@ export function CodeBlock({
   }
 
   return (
-    <div className={['mz-code-block', className].filter(Boolean).join(' ')}>
+    <div className={['mz-code-block', className].filter(Boolean).join(' ')} data-theme="dark">
       <div className="mz-code-block-header">
         {title != null && <span id={titleId} className="mz-code-block-title">{title}</span>}
         <Button

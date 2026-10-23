@@ -134,3 +134,24 @@
     background-color: var(--nav-item-background-pressed);
   }
 }
+
+/* CodeBlock applies the Dark theme to itself. Inside Wireframe it keeps Dark's lightness but loses its
+   colour: Dark's accent steps become the same neutral steps, and the code is monochrome. */
+:where([data-theme='wireframe']) .mz-code-block[data-theme='dark'] {
+  --color-link-hovered: var(--color-neutral-200);
+  --color-link-pressed: var(--color-neutral-100);
+  --color-accent-emphasis: var(--color-neutral-400);
+  --color-accent-emphasis-hovered: var(--color-neutral-300);
+  --color-accent-emphasis-pressed: var(--color-neutral-200);
+  --color-accent-inverse: var(--color-neutral-950);
+  --color-accent-muted: var(--color-neutral-900);
+  --color-accent-muted-hovered: var(--color-neutral-900);
+  --color-accent-muted-pressed: var(--color-neutral-800);
+  --color-accent: var(--color-neutral-300);
+  --color-syntax-keyword: var(--color-text);
+  --color-syntax-string: var(--color-text);
+  --color-syntax-comment: var(--color-text-muted);
+  --color-syntax-function: var(--color-text);
+  --color-syntax-constant: var(--color-text);
+  --color-syntax-punctuation: var(--color-text-muted);
+}
