@@ -418,21 +418,13 @@ a:focus-visible {
   margin-block-start: var(--space-6);
 }
 
-/* An example's frame of a chosen width (see WidthFrame.tsx), so layouts can be seen wrapping and
+/* An example's frame inside a DemoArea (see WidthFrame.tsx), so layouts can be seen wrapping and
    switching. It is a size container, so its content can measure it with container units such as
    cqi. A frame whose content may stick out scrolls. */
 .width-frame {
   box-sizing: border-box;
   container-type: inline-size;
   inline-size: min(var(--_frame-width), 100%);
-  padding: var(--space-3);
-  border: var(--border-width-baseline) dashed var(--color-text-muted);
-}
-
-/* Inside a DemoArea the demo is already framed, so the frame drops its dashed line and padding. */
-.mz-demo-area .width-frame {
-  padding: 0;
-  border: 0;
 }
 
 .width-frame[role='region'] {
@@ -456,13 +448,6 @@ a:focus-visible {
 
 .example-card-image {
   min-block-size: var(--space-24);
-}
-
-.value-picker {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2);
 }
 
 /* Component examples that need a sensible width inside a DemoArea. */

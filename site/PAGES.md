@@ -42,8 +42,12 @@ or in the wrong folder.
 
 Useful site components:
 
-- The library's `DemoArea` is the standard frame around an example. It takes
-  optional `controls` above the demo, and extra classes for special layouts.
+- The library's `DemoArea` is the standard frame around an example. `codeView`
+  adds a Code tab showing the example's source, `endPanel` holds its controls
+  in a Properties panel beside the preview, and `className` handles special
+  layouts. A layout example sits in `WidthDemo` (`components/WidthFrame.tsx`),
+  a size container that fills the demo, and takes its choices from
+  `PanelPicker` (`components/ExampleParts.tsx`).
 - `DocsTable` shows Anatomy, Props and CSS token entries with Mezzanine's Table.
 - The disclosure group and its anchor-link handling.
 - `SiteTopBar` and `DocsShell`, the site's own top bar and the AppShell frame around docs and Lab pages.

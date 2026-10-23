@@ -1,6 +1,6 @@
 // The example for the Layer groups page, in Foundations › Layers.
 import { useState, type CSSProperties } from 'react'
-import { Checkbox } from '@decocode/mezzanine'
+import { Checkbox, DemoArea } from '@decocode/mezzanine'
 import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
 import { layerGroupsCssNotes } from './layerGroupsContent'
 
@@ -13,20 +13,21 @@ export function LayerGroupsExample() {
   const [grouped, setGrouped] = useState(true)
   return <>
     <ExampleText>Layer group A has three layers. Layer group B has two. Because the z-index of layer group B is higher, it’s placed on top of layer group A. Inside each layer group, the layers are ordered amongst themselves. But if you remove the layer groups, all five layers end up jumbled together, because some share the same z-index values.</ExampleText>
-    <Checkbox isSelected={grouped} onChange={setGrouped}>Group the layers</Checkbox>
-    <div className="layers-groups">
-      <div className={`layers-group ${grouped ? 'layers-group-a-grouped' : 'layers-group-loose'}`}>
-        {grouped ? <p className="mz-text-label-md">Layer group A, z-index: 1</p> : <p className="mz-text-label-md" aria-hidden="true">&nbsp;</p>}
-        <GroupLayer z={1} step={0} />
-        <GroupLayer z={2} step={1} />
-        <GroupLayer z={3} step={2} />
+    <DemoArea codeView={layerGroupsCssNotes.stackingContexts.code} endPanel={<Checkbox isSelected={grouped} onChange={setGrouped}>Group the layers</Checkbox>}>
+      <div className="layers-groups">
+        <div className={`layers-group ${grouped ? 'layers-group-a-grouped' : 'layers-group-loose'}`}>
+          {grouped ? <p className="mz-text-label-md">Layer group A, z-index: 1</p> : <p className="mz-text-label-md" aria-hidden="true">&nbsp;</p>}
+          <GroupLayer z={1} step={0} />
+          <GroupLayer z={2} step={1} />
+          <GroupLayer z={3} step={2} />
+        </div>
+        <div className={`layers-group layers-group-b ${grouped ? 'layers-group-b-grouped' : 'layers-group-loose'}`}>
+          {grouped ? <p className="mz-text-label-md">Layer group B, z-index: 2</p> : <p className="mz-text-label-md" aria-hidden="true">&nbsp;</p>}
+          <GroupLayer z={1} step={0} />
+          <GroupLayer z={2} step={1} />
+        </div>
       </div>
-      <div className={`layers-group layers-group-b ${grouped ? 'layers-group-b-grouped' : 'layers-group-loose'}`}>
-        {grouped ? <p className="mz-text-label-md">Layer group B, z-index: 2</p> : <p className="mz-text-label-md" aria-hidden="true">&nbsp;</p>}
-        <GroupLayer z={1} step={0} />
-        <GroupLayer z={2} step={1} />
-      </div>
-    </div>
-    <CssNotes name="the layer groups" note={layerGroupsCssNotes.stackingContexts} level={3} />
+    </DemoArea>
+    <CssNotes name="the layer groups" note={layerGroupsCssNotes.stackingContexts} level={3} showCode={false} />
   </>
 }

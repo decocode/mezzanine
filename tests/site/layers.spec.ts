@@ -38,7 +38,8 @@ test('Positioning picker sets the second box position', async ({ page }) => {
   await page.goto('/layers/positioning')
   const item = page.locator('.layers-position-item')
   await expect(item).toHaveCSS('position', 'static')
-  await page.getByRole('radio', { name: 'sticky', exact: true }).click()
+  // React Aria hides the radio input itself, so the test presses its label, as a person would.
+  await page.locator('label').filter({ hasText: /^sticky$/ }).click()
   await expect(item).toHaveCSS('position', 'sticky')
 })
 

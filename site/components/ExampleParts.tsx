@@ -1,5 +1,5 @@
-import { useId, type ReactNode } from 'react'
-import { Card, CodeBlock, Heading, Label, RadioButton, RadioField, RadioGroup, SelectionIndicator, Text, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
+import type { ReactNode } from 'react'
+import { Card, CodeBlock, Heading, Label, RadioButton, RadioField, RadioGroup, SelectionIndicator, Text } from '@decocode/mezzanine'
 import { RichText } from './RichText'
 
 // The CSS behind an example: plain-English notes and the rules themselves, quoted from the page's
@@ -50,27 +50,8 @@ export function ExampleCard({ title, text = 'Supporting text for the card.', hea
   </Card>
 }
 
-// Buttons that choose one CSS value for an example, such as position: sticky, with a visible label.
-export function ValuePicker<Value extends string>({ label, options, value, onChange }: { label: string; options: readonly { label: string; value: Value }[]; value: Value; onChange: (value: Value) => void }) {
-  const labelId = useId()
-  return <div className="value-picker">
-    <span id={labelId} className="mz-text-label-md">{label}</span>
-    <ToggleButtonGroup
-      size="sm"
-      hierarchy="secondary"
-      aria-labelledby={labelId}
-      selectionMode="single"
-      disallowEmptySelection
-      selectedKeys={[value]}
-      onSelectionChange={(keys) => { const option = options.find((item) => keys.has(item.value)); if (option) onChange(option.value) }}
-    >
-      {options.map((option) => <ToggleButton key={option.value} id={option.value}>{option.label}</ToggleButton>)}
-    </ToggleButtonGroup>
-  </div>
-}
-
-// The same choice as a radio group, for a DemoArea's Properties panel: the options stack in a short list
-// that fits the narrow panel, all visible at once.
+// A choice of one CSS value for an example, such as position: sticky, as a radio group in a DemoArea's
+// Properties panel: the options stack in a short list that fits the narrow panel, all visible at once.
 export function PanelPicker<Value extends string>({ label, options, value, onChange }: { label: string; options: readonly { label: string; value: Value }[]; value: Value; onChange: (value: Value) => void }) {
   return <RadioGroup value={value} onChange={(next) => { const option = options.find((item) => item.value === next); if (option) onChange(option.value) }}>
     <Label>{label}</Label>
