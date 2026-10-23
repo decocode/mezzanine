@@ -634,6 +634,11 @@ a:focus-visible {
   margin-bottom: var(--space-16);
 }
 
+/* A collapsible section reads as part of the text above it, so it sits a paragraph's gap below. */
+.component-section:has(+ .component-section-collapsible) {
+  margin-bottom: var(--space-4);
+}
+
 .component-section > h2 {
   margin: 0 0 var(--space-4);
   overflow-wrap: anywhere;

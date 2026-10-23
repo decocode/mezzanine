@@ -64,7 +64,7 @@ export function DocsPageTemplate({ title, description, sections, relatedPages = 
           : section.subsections,
       }))} />}
       {pageSections.map(section => !('sections' in section) && section.isCollapsible ? (
-        <section key={section.id} aria-labelledby={section.id} className="component-section">
+        <section key={section.id} aria-labelledby={section.id} className="component-section component-section-collapsible">
           <DocsDisclosureGroup labelledBy={section.id} sections={[section]} headingLevel={2} />
         </section>
       ) : (
