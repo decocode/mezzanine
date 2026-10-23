@@ -99,3 +99,72 @@ export function parsePropRows(names, componentNames) {
   }
   return rows
 }
+
+// Props named in page copy ----------------------------------------------------
+
+// Finds the props that copy names in code, so they can be checked against the real types: `name="value"`,
+// `name={value}`, and each attribute of an element such as `<Button hierarchy="secondary">`. A bare word in
+// backticks is left alone, because it may be a type, a token or a CSS property rather than a prop.
+export function propMentions(text) {
+  const mentions = []
+  // Fenced code examples would throw off which backticks pair up; blank them out, keeping positions.
+  const prose = text.replace(/```[\s\S]*?```/g, block => block.replace(/[^\n]/g, ' '))
+  for (const code of prose.matchAll(/`([^`]+)`/g)) {
+    const span = code[1]
+    const start = code.index + 1
+    const element = span.match(/^<([A-Z][A-Za-z]*)\s+([^>]*?)\/?>?$/)
+    const attributes = element ? element[2] : span
+    if (!element && !/^[a-z][\w-]*=/.test(span)) continue
+    for (const attribute of attributes.matchAll(/(?:^|\s)([a-z][\w-]*)(?:=(?:"([^"]*)"|'([^']*)'|\{[^}]*\}))?/g)) {
+      mentions.push({
+        component: element?.[1],
+        prop: attribute[1],
+        value: attribute[2] ?? attribute[3],
+        position: start + (element ? span.indexOf(element[2]) : 0) + attribute.index,
+      })
+    }
+  }
+  return mentions
+}
+
+// Token values copied into a guide -------------------------------------------
+
+// Rows in a table whose second column is headed Value, Stored value or Default, such as "| `--space-1` | `0.25rem` |
+// 4px |" or "| `--target-size-xs` | 2rem (32px) | ... |": the token, its documented value, and any pixel equivalent.
+// A value written as another token, such as `--space-2`, stands for var(--space-2). A value cell written in words,
+// such as "minus the width", is a description and is skipped.
+const valueHeadings = ['Value', 'Stored value', 'Default']
+export function documentedTokenValues(markdown) {
+  const rows = []
+  let isValueTable = false
+  let position = 0
+  const lines = markdown.split('\n')
+  for (const [index, line] of lines.entries()) {
+    const cells = line.startsWith('|') ? line.split('|').slice(1, -1).map(cell => cell.trim()) : undefined
+    if (cells && /^\|\s*-{3}/.test(lines[index + 1] ?? '')) isValueTable = valueHeadings.includes(cells[1])
+    else if (!cells) isValueTable = false
+    const token = cells?.[0].match(/^`(--[\w-]+)`$/)?.[1]
+    if (isValueTable && token) {
+      const cell = cells[1]
+      const value = cell.match(/^`([^`]+)`$/)?.[1] ?? cell.match(/^(-?[\d.]+[a-z%]*|[a-z-]+)(?: \([\d.]+px\))?$/)?.[1]
+      const px = cell.match(/\(([\d.]+)px\)$/)?.[1] ?? cells[2]?.match(/^([\d.]+)px$/)?.[1]
+      if (value && value !== '—') rows.push({ token, value, px: px === undefined ? undefined : Number(px), position })
+    }
+    position += line.length + 1
+  }
+  return rows
+}
+
+// Each documented value must be one the token files declare, and a pixel equivalent must match its rem value at
+// the browser default of 16px.
+export function checkTokenValues(rows, declared) {
+  const problems = []
+  for (const { token, value, px, position } of rows) {
+    const values = declared.get(token)
+    if (!values) problems.push({ position, message: `The guide documents ${token}, which no token file declares.` })
+    else if (!values.has(value) && !values.has(`var(${value})`)) problems.push({ position, message: `The guide says ${token} is ${value}, but the token files declare ${[...values].join(' or ')}.` })
+    const rem = value.match(/^([\d.]+)rem$/)?.[1]
+    if (px !== undefined && rem !== undefined && Number(rem) * 16 !== px) problems.push({ position, message: `The guide gives ${token} as ${px}px, but ${value} is ${Number(rem) * 16}px.` })
+  }
+  return problems
+}

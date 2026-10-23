@@ -171,6 +171,13 @@ Leave out sections that do not apply.
   declares itself must be documented. Inherited React Aria props may be listed
   selectively. The tables and their types are listed in
   `scripts/check-rules.mjs`; add a new Props table there.
+- Every prop that a component page's copy names in code, such as
+  `hierarchy="secondary"` or `<Button isDisabled>`, must exist on that page's
+  component, and a fixed value must be one the prop accepts. The same goes for
+  `src/docs/COMPONENTS.md`, where each section covers the components it names.
+- Every value in the tables of `src/docs/TOKENS.md` whose second column is
+  headed Value, Stored value or Default must match the token files, and a pixel
+  equivalent must match its rem value at 16px.
 
 ## Other pages
 

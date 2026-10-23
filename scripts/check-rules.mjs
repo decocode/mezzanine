@@ -1,7 +1,7 @@
 import { checkNavTreeCss, checkNavTreeSource } from './nav-tree-rules.mjs'
 import { checkTypographyChoices, checkTypographyCss, checkTypographyTokens } from './typography-rules.mjs'
 import { checkMotionCss, checkMotionSource, motionTokens } from './motion-rules.mjs'
-import { checkRoutes, checkTokens, declaredTokens, parsePropRows } from './docs-rules.mjs'
+import { checkRoutes, checkTokens, checkTokenValues, declaredTokens, documentedTokenValues, parsePropRows, propMentions } from './docs-rules.mjs'
 import { appRoutes } from './generate-routes.mjs'
 import { sitePageFile, sitePageFolder, sitePages } from '../site/siteStructure.ts'
 import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
@@ -455,6 +455,78 @@ function checkPropTables(program, checker) {
   }
 }
 
+// Props that component pages name in their copy, such as `hierarchy="secondary"`, must exist on the page's
+// component, and a fixed value must be one the prop accepts. A page's components are the exported Props types
+// named after its folder: the toggle-button page covers ToggleButtonProps and ToggleButtonGroupProps.
+const pageComponentNames = { 'navigation-tree': 'NavTree' }
+// Attributes every element accepts, which the docs may name on any component's parts.
+const sharedAttributes = new Set(['slot', 'role', 'id', 'className', 'style', 'key', 'children', 'href'])
+function checkPropMentions(program, checker) {
+  const index = program.getSourceFile(path.join(root, 'src/index.ts'))
+  const exports = checker.getExportsOfModule(checker.getSymbolAtLocation(index))
+  const propsTypes = exports.filter(symbol => symbol.name.endsWith('Props') && !symbol.name.endsWith('RenderProps'))
+  const pascal = folder => pageComponentNames[folder] ?? folder.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join('')
+  const typesNamed = base => propsTypes.filter(symbol => new RegExp(`^${base}[A-Za-z]*Props$`).test(symbol.name))
+  const sections = []
+  for (const file of filesIn('site/pages/components', ['.ts']).filter(item => item.endsWith('Content.ts'))) {
+    sections.push({ file, text: read(file), offset: 0, pageTypes: typesNamed(pascal(path.basename(path.dirname(file)))) })
+  }
+  // COMPONENTS.md: each section covers the components it names, such as "AppShell and Panel", including one it
+  // mentions in passing, such as the Panel beside a TopBar.
+  const guideFile = 'src/docs/COMPONENTS.md'
+  const guide = read(guideFile)
+  for (const heading of guide.matchAll(/^## (.+)$/gm)) {
+    const found = guide.indexOf('\n## ', heading.index + 1)
+    const end = found === -1 ? guide.length : found
+    const names = new Set(guide.slice(heading.index, end).match(/\b[A-Z][A-Za-z]+\b/g) ?? [])
+    sections.push({ file: guideFile, text: guide, offset: heading.index, end,
+      pageTypes: propsTypes.filter(symbol => names.has(symbol.name.replace(/Props$/, ''))) })
+  }
+  for (const { file, text, offset, end, pageTypes } of sections) {
+    const scope = end === undefined ? text : text.slice(offset, end)
+    for (const found of propMentions(scope)) {
+      const mention = { ...found, position: found.position + offset }
+      if (sharedAttributes.has(mention.prop) || /^(aria|data)-/.test(mention.prop)) continue
+      const typeSymbols = mention.component
+        ? propsTypes.filter(symbol => symbol.name === `${mention.component}Props`)
+        : pageTypes
+      if (!typeSymbols.length) continue
+      const types = typeSymbols.map(symbol => exportedType(checker, exports, symbol.name)).filter(Boolean)
+      const props = types.flatMap(propertiesOf).filter(symbol => symbol.name === mention.prop)
+      const owner = mention.component ?? typeSymbols.map(symbol => symbol.name).join(' / ')
+      if (!props.length) {
+        report(file, text, mention.position, 'docs-props', `The copy names "${mention.prop}", which ${owner} does not have.`)
+        continue
+      }
+      if (mention.value === undefined) continue
+      const allowed = new Set()
+      let isOpen = false
+      for (const prop of props) {
+        const type = checker.getNonNullableType(checker.getTypeOfSymbolAtLocation(prop, index))
+        for (const member of type.isUnion() ? type.types : [type]) {
+          if (member.isStringLiteral()) allowed.add(member.value)
+          else isOpen = true
+        }
+      }
+      if (!isOpen && !allowed.has(mention.value)) report(file, text, mention.position, 'docs-props', `The copy sets ${mention.prop}="${mention.value}", but ${owner} accepts only ${[...allowed].map(value => `"${value}"`).join(', ')}.`)
+    }
+  }
+}
+
+// The token guide's tables copy values by hand, so each must still match what the token files declare.
+function checkGuideTokenValues() {
+  const declared = new Map()
+  for (const file of filesIn('src', ['.css'])) {
+    for (const match of maskCss(read(file)).matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)) {
+      const value = read(file).slice(match.index, match.index + match[0].length).match(/:\s*([^;]+);/)[1].trim().replace(/\s+/g, ' ')
+      declared.set(match[1], (declared.get(match[1]) ?? new Set()).add(value))
+    }
+  }
+  const guideFile = 'src/docs/TOKENS.md'
+  const guide = read(guideFile)
+  for (const problem of checkTokenValues(documentedTokenValues(guide), declared)) report(guideFile, guide, problem.position, 'docs-tokens', problem.message)
+}
+
 function checkDocsTokens(update) {
   const tokenFiles = filesIn('src', ['.css']).filter(file => isTokenFile(file) && file !== 'src/tokens.css')
   const publicTokens = declaredTokens(tokenFiles.map(read))
@@ -592,6 +664,8 @@ try {
   checkDocsRoutes()
   checkDocsTokens(argumentsList.includes('--update-token-baseline'))
   checkPropTables(program, checker)
+  checkPropMentions(program, checker)
+  checkGuideTokenValues()
 } catch (error) {
   report('scripts/check-rules.mjs', '', 0, 'rule-checker', error.message)
 }
