@@ -379,10 +379,22 @@ a:focus-visible {
   max-inline-size: var(--line-length);
 }
 
+/* The grid's gap alone spaces the heading, paragraphs, lists and code, at the page's paragraph gap.
+   A grid doesn't overlap its children's margins, so they're cleared to stop the space doubling. */
 .css-notes,
 .css-notes-body {
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-4);
+}
+
+.css-notes > *,
+.css-notes-body > * {
+  margin: 0;
+}
+
+/* More space above the heading than below it, so it reads as introducing the notes, not ending the demo. */
+.css-notes {
+  margin-block-start: var(--space-6);
 }
 
 .css-notes-body {
