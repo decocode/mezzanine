@@ -317,3 +317,10 @@ Every named style and every component that uses it must be checked with:
 
 Font sizes use `rem` so they respect browser text settings. Line heights are
 unitless so they continue to scale when a product or user changes the size.
+
+## Agent and contributor rules
+
+Rules for agents and contributors changing this part of Mezzanine. Rules marked **[checked]** are enforced by `npm run check:rules`.
+
+- Component CSS sets one complete role from the Pattern mappings: family, size, weight, letter spacing, line height and text transform. **[checked]** State rules change only the weight, to `--font-weight-default` or `--font-weight-emphasis`.
+- Apps, including the site, use the `mz-text-*` classes in their markup.

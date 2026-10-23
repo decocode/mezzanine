@@ -360,3 +360,50 @@ These pass React Aria's components straight through, with no Mezzanine
 styles yet: `CheckboxGroup`, `FileTrigger` and `Group`. Use them as the
 [React Aria documentation](https://react-aria.adobe.com/) describes, and style
 them in the app until Mezzanine designs them.
+
+## Agent and contributor rules
+
+Rules for agents and contributors changing this part of Mezzanine. Rules marked **[checked]** are enforced by `npm run check:rules`.
+
+### Building components
+
+- Apps supply content and a theme, and position components in their own layout. If an app has to re-add library classes, attach special slots, restyle internals or reimplement behaviour, the recipe belongs in `src/`. New public names still need approval.
+- A thin re-export of a React Aria component is fine until the owner approves its design. Then build the recipe in `src/`.
+- `react`, `react-dom`, `react-aria-components` and `react-aria` (the lower-level hooks, such as `useMove`) are peer dependencies and aren't bundled. List any other direct import in `package.json`.
+- Class names in the library start with `mz-` or `react-aria-`. **[checked]**
+- Keep `.tsx` files for rendering, composition, React Aria wiring and local display state. Keep short, single-use values next to the component that shows them. Avoid a paired `.ts` file for every component.
+- Additions and internal changes aren't automatically breaking changes.
+
+### Following React Aria
+
+- Before building or revising an atomic component (one that matches a single React Aria component), check the resolved React Aria version in `package-lock.json` or the installed package, not the range in `package.json`, and read the matching official documentation. Don't upgrade dependencies unasked.
+- Use the exact React Aria name for the export and the file, such as `ToggleButton`, `Table`, `Switch` or `Slider`.
+- Compose the same documented parts, and follow React Aria's prop names, event names, controlled and uncontrolled conventions, slots, render props, state model, keyboard and focus behaviour, and accessibility semantics. Keep conventions such as `onPress`, `isDisabled` and `onSelectionChange`. Don't add aliases.
+- Use the official Vanilla CSS example as the baseline: its anatomy, selectors, state and placement attributes, interaction states, forced-colour and reduced-motion handling, with Mezzanine tokens for values.
+- Preserve the component's documented states and behaviours. That doesn't mean building a demonstration of every optional feature. If supporting one needs an unresolved design decision, ask the owner.
+- Any deviation from React Aria's name, anatomy, API, selectors or behaviour needs the owner's agreement and a documented reason. Keep agreed deviations, including `TooltipTrigger`'s 500ms hover delay, rather than React Aria's 1500ms, with keyboard focus unchanged.
+- Composed patterns may have purpose-based names the owner approves, such as `NavTree` for Mezzanine's version of React Aria's `NavigationTree`. Their docs name the React Aria component underneath and say when to use which. Their parts still use the matching React Aria components. Keep wrapper props close to the underlying API, and pass `className` through.
+- Treat components migrated from DecoCode projects as input to review, not as a naming authority.
+
+### Button and Link
+
+An agreed deviation; don't undo, split or work around it without the owner's agreement.
+
+"Button" describes an appearance. Appearance and behaviour are separate decisions: navigation supports opening in a new tab and copying the address; actions support form submission and both Enter and Space. One component keeps both by choosing the React Aria component from its props.
+
+| Intended use | Mezzanine component | React Aria component |
+| --- | --- | --- |
+| Action button | `<Button onPress={...}>` | `Button` |
+| Navigation styled as a button | `<Button href="...">` | `Link` |
+| Ordinary text link | `<Link href="...">` | `Link` |
+
+- Anything that looks like a button uses `Button`, including calls to action in the site. Anything that looks like a text link uses `Link`. Never restyle one to imitate the other, and never use a native `<button>` or `<a>` in the site. **[checked]** There's no `IconButton` and no separate navigation button. Button sizes come from Button's own size scale, not from an app's CSS. **[checked]**
+- `Button` supports text only, a leading or trailing icon, and icon buttons. An icon button always has a label, its children, which `labelPlacement` shows in a tooltip, below the icon or above it, so the label is also its accessible name. Agreed by the owner on 19 October 2026. `ToggleButton` works the same way.
+- Button styling is identical whether the element is a button or a link, with no underline in any theme, Wireframe included. In the site, button labels and destinations live in the page's content file.
+- After changing the underlying element, check it renders the right element and works with a keyboard and assistive technology.
+
+### Layout classes and AppShell
+
+Agreed by the owner on 19 October 2026.
+
+- Use the `mz-ratio-pair` class when two areas share a row in a set ratio and should stack when their container is too narrow. Use AppShell to frame an app's screen: its Panels sit at the start, end and bottom edges, share the space, and become drawers when there's no room.

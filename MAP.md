@@ -15,7 +15,7 @@ The `@decocode/mezzanine` package. `npm run build:lib` builds it into `dist/`.
 | `styles/` | Shared styles built from tokens. `typography.css` holds the public `mz-text-*` text styles and `layout.css` the layout classes, such as `mz-ratio-pair`, which apps write in their markup. `scroll.css` adds the soft fade at the edge of a scrolling ListBox, Menu, GridList, Tree or Panel, with nothing for apps to write. |
 | `tokens.css`, `styles.css`, `motion.css` | Entry stylesheets: `tokens.css` gathers the tokens, `styles.css` gathers every stylesheet into the one file apps import, and `motion.css` is the motion policy. |
 | `icons/` | The icons in active use. |
-| `docs/` | How apps use Mezzanine: `COMPONENTS.md`, `TOKENS.md` and `TYPOGRAPHY.md`. |
+| `docs/` | How apps use Mezzanine, and the rules for changing it: `COMPONENTS.md`, `TOKENS.md` and `TYPOGRAPHY.md`. |
 
 ## Documentation site (`site/`)
 

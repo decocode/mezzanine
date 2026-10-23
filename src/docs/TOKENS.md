@@ -384,7 +384,6 @@ token at another level.
 such as AppShell's. Border colours are set by purpose in the colour roles: `--color-border` for
 decorative lines and `--color-border-control` for control borders at 3:1 or more.
 
-
 Two roles sit on top of the radius scale. `--radius-control` sets the corners of
 Button, ToggleButton, Checkbox, text fields, Badge and inline code;
 `--radius-surface` sets the corners of Card, Modal, Tooltip and AppShell's cards.
@@ -475,3 +474,32 @@ Products may override shared durations on their theme boundary. All components i
 that scope use the same speed. Do not override the internal policy controls or
 reintroduce per-component timing. Local motion scope does not yet imply nested
 colour-theme support or overlay theme propagation.
+
+## Agent and contributor rules
+
+Rules for agents and contributors changing this part of Mezzanine. Rules marked **[checked]** are enforced by `npm run check:rules`.
+
+### Token values
+
+- Component CSS takes every design value from tokens: colour, font, size, spacing, radius, border, shadow and motion. Structural values are fine, such as `0`, `100%`, `auto`, `inherit`, `currentColor` and `transparent`. Raw lengths need a listed exception with a reason. **[checked]**
+- Name tokens by purpose, not appearance: `--color-accent`, not `--color-yellow`.
+- Only token files define scales. Themes set the colour roles and nothing else about colour, and every theme sets the same roles. **[checked]** Other roles, such as spacing, corners and borders, are set in token files, and a theme may override them.
+- Colour comes from roles only, never a palette step. Other values come from roles or scales. Component CSS reads both through pointers named `--component-variant-property-state`, each with a fallback that exists. **[checked]** Pointers cover colour, border, radius, focus ring, spacing and sizing, not typography or motion. `npm run check:rules -- --update-pointers` regenerates each component page's pointer list. **[checked]**
+- Never declare a pointer in a token or theme file. The only declared component tokens are layout settings an app may change, such as `--panel-start-width` and `--app-shell-min-main-width`.
+- A component that switches values for its variants or sizes uses private custom properties (`--_name`).
+- When a value has no shared token, add one to a shared set in `src/tokens/`, not to the component.
+- Every token is documented on a site page, and the docs mention only tokens that exist. **[checked]**
+
+### Motion
+
+- Durations, easing, travel distances, entry scale and non-zero rotations come from the shared motion tokens. **[checked]** Plain "none" or "full" endpoints, such as opacity 0 or 1, and static centring offsets can be written directly.
+- Reduced motion has two sources. The end user's system setting applies everywhere, and nothing overrides it. The Wireframe theme also suppresses motion, but only in the area showing Wireframe. An explicitly nested Light, Dark or System area restores motion unless the system setting applies. Reduced-motion conditions live only in `src/motion.css`. **[checked]** Every component with motion honours both sources, and new motion isn't finished until it does.
+- Loading and progress indicators keep their state visible when motion is reduced. Whether one may keep moving is decided with the owner, indicator by indicator.
+
+### Layout and stacking
+
+Agreed by the owner on 18 October 2026.
+
+- Components respond to their container, not the screen. Use container queries for layout changes. Where the rendered structure must change, such as an inline panel becoming a drawer, measure the container with a ref callback or `useSyncExternalStore`. Media queries describe the end user's setup only: preferences such as reduced motion and colour scheme, pointer and hover, display mode, and the layout of the page itself, outside any component.
+- `z-index` comes from the named scale in `src/tokens/z-index.tokens.css`: base, raised, sticky, overlay and toast. **[checked]** Every pop-up, such as a tooltip, popover, drawer or dialog, uses the overlay step, except toasts, which use the toast step.
+- Describe sides as start and end, with CSS logical properties such as `margin-inline-start`. A truly physical side needs a `physical:` comment on the same line or the line before. **[checked]**

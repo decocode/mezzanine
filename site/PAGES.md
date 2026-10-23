@@ -176,3 +176,19 @@ Leave out sections that do not apply.
 
 Pages for subjects that are not implemented yet say Not implemented and are
 marked WIP in the navigation.
+
+## Agent and contributor rules
+
+Rules for agents and contributors changing this part of Mezzanine. Rules marked **[checked]** are enforced by `npm run check:rules`.
+
+- Where Mezzanine exports a React Aria component, import Mezzanine's export. **[checked]** A direct `react-aria-components` import is allowed only while Mezzanine has no export, and it must not be styled to look like a Mezzanine component.
+- Use Mezzanine's `Table` parts for comparison matrices and other tables. Use semantic HTML for static structure.
+- There are two kinds of page. Component, token and class pages match the implementation exactly and stay current. Approach pages describe the owner's approved way of working, whether or not a component uses it yet. An approach page moves from the Lab only with the owner's approval, page by page, and never describes a component, token or class that doesn't exist.
+- Otherwise, document only what is implemented and public. Before documenting, check the implementation and its agreed behaviour. If something is missing or ambiguous, ask the owner. Present something as documented only after it has been agreed, implemented, exported where applicable, and tested.
+- When the implementation and an approved requirement or the written docs disagree, find out which is right before changing either. Never document a bug as intended behaviour.
+- Examples render the real exported components, with no documentation-only replicas, variants, styles or behaviours. Token values come from the token source, never copied by hand.
+- Use teaching labels in examples, such as `Toggle A`, `Column A` or `Current page`. Use realistic product copy only when needed to show agreed behaviour, and never imply an unimplemented feature exists.
+- An empty route the information architecture already includes says `Not implemented`, has no speculative content, and is marked `WIP` in navigation. An empty route isn't evidence that its subject exists.
+- Keep React Aria's exact names in code references and API explanations. Readable labels, such as "Navigation tree", are fine when the page gives the exact name in code and links to React Aria.
+- Lab experiments are described as proposals only, in proposals and on Lab pages.
+- The Lighthouse configs in `config/` list a few sample pages. Update them only when one of those pages is renamed or removed. **[checked]**
