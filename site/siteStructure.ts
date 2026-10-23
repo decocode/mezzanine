@@ -92,33 +92,17 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'layout',
         label: 'Layout',
         path: '/layout',
-        order: ['side-by-side', 'stack', 'grid', 'container-queries'],
+        order: ['stack', 'row', 'row-wrap', 'row-wrap-grow', 'ratio-pair', 'reel', 'grid', 'subgrid', 'container-queries'],
         pages: [
           { id: 'stack', label: 'Stack', path: '/layout/stack', status: 'implemented' },
+          { id: 'row', label: 'Row', path: '/layout/row', status: 'implemented' },
+          { id: 'row-wrap', label: 'Row wrap', path: '/layout/row-wrap', status: 'implemented' },
+          { id: 'row-wrap-grow', label: 'Row wrap grow', path: '/layout/row-wrap-grow', status: 'implemented' },
+          { id: 'ratio-pair', label: 'Ratio pair', path: '/layout/ratio-pair', status: 'implemented' },
+          { id: 'reel', label: 'Reel', path: '/layout/reel', status: 'implemented' },
+          { id: 'grid', label: 'Grid', path: '/layout/grid', status: 'implemented' },
+          { id: 'subgrid', label: 'Subgrid', path: '/layout/subgrid', status: 'implemented' },
           { id: 'container-queries', label: 'Container queries', path: '/layout/container-queries', status: 'implemented' },
-        ],
-        groups: [
-          {
-            id: 'grid',
-            label: 'Grid',
-            path: '/layout/grid',
-            pages: [
-              { id: 'subgrid', label: 'Subgrid', path: '/layout/grid/subgrid', status: 'implemented' },
-            ],
-          },
-          {
-            id: 'side-by-side',
-            label: 'Side by side',
-            path: '/layout/side-by-side',
-            order: ['row', 'row-wrap', 'row-wrap-grow', 'ratio-pair', 'reel'],
-            pages: [
-              { id: 'row', label: 'Row', path: '/layout/side-by-side/row', status: 'implemented' },
-              { id: 'row-wrap', label: 'Row wrap', path: '/layout/side-by-side/row-wrap', status: 'implemented' },
-              { id: 'row-wrap-grow', label: 'Row wrap grow', path: '/layout/side-by-side/row-wrap-grow', status: 'implemented' },
-              { id: 'ratio-pair', label: 'Ratio pair', path: '/layout/side-by-side/ratio-pair', status: 'implemented' },
-              { id: 'reel', label: 'Reel', path: '/layout/side-by-side/reel', status: 'implemented' },
-            ],
-          },
         ],
       },
       {

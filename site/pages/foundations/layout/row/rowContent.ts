@@ -1,7 +1,7 @@
-// The Row page, in Foundations › Layout › Side by side: its explanation and the CSS behind its
+// The Row page, in Foundations › Layout: its explanation and the CSS behind its
 // example, in plain English.
-import type { DocsPageContent } from '../../../../../templates/docsPageContent'
-import type { CssNote } from '../../../../../components/ExampleParts'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
 export const rowContent: DocsPageContent = {
   id: 'row', kind: 'foundation', title: 'Row',

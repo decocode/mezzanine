@@ -25,7 +25,7 @@ test('RatioPair shares the row by fraction or by auto', async ({ page }) => {
   // Wide enough that, beside both Panels and the demo's Properties panel, each area stays above its
   // minimum width.
   await page.setViewportSize({ width: 2560, height: 900 })
-  await page.goto('/layout/side-by-side/ratio-pair')
+  await page.goto('/layout/ratio-pair')
   await chooseFraction(page, '1/3')
   let { first, second } = await areas(page)
   expect(Math.abs(first.y - second.y)).toBeLessThan(1)
@@ -45,7 +45,7 @@ for (const fontSize of [16, 32]) {
   test(`RatioPair stacks its areas in a narrow container at ${fontSize}px text`, async ({ page }) => {
     // A phone-sized window leaves the box too narrow for two 15rem areas.
     await page.setViewportSize({ width: 480, height: 900 })
-    await page.goto('/layout/side-by-side/ratio-pair')
+    await page.goto('/layout/ratio-pair')
     await page.evaluate(size => { document.documentElement.style.fontSize = `${size}px` }, fontSize)
     // Measure inside the wait, so a layout that is still settling can't make the check flaky.
     await expect.poll(async () => {
@@ -61,8 +61,8 @@ for (const fontSize of [16, 32]) {
 
 // Checks that the ratio pair page passes an accessibility scan in each theme.
 for (const theme of themes) {
-  test(`/layout/side-by-side/ratio-pair passes an accessibility scan in ${theme}`, async ({ page }) => {
-    await page.goto('/layout/side-by-side/ratio-pair')
+  test(`/layout/ratio-pair passes an accessibility scan in ${theme}`, async ({ page }) => {
+    await page.goto('/layout/ratio-pair')
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     await setTheme(page, theme)
     await expectNoAccessibilityViolations(page, 'main')

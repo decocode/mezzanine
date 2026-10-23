@@ -1,6 +1,6 @@
 import { reelContent } from './reelContent'
 import { ReelExample } from './ReelExample'
-import { ContentPage } from '../../../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 import '../sideBySide.css'
 
 export default function ReelPage() {

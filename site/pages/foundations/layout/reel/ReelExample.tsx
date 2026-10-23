@@ -1,6 +1,6 @@
-// The example for the Reel page, in Foundations › Layout › Side by side.
+// The example for the Reel page, in Foundations › Layout.
 import { DemoArea } from '@decocode/mezzanine'
-import { CssNotes, ExampleText } from '../../../../../components/ExampleParts'
+import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
 import { reelCssNotes, reelExampleText } from './reelContent'
 
 export function ReelExample() {

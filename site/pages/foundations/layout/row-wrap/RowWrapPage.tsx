@@ -1,6 +1,6 @@
 import { rowWrapContent } from './rowWrapContent'
 import { RowWrapExample } from './RowWrapExample'
-import { ContentPage } from '../../../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 import '../sideBySide.css'
 
 export default function RowWrapPage() {

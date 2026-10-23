@@ -1,7 +1,7 @@
-// The Subgrid page, in Foundations › Layout › Grid: its explanation and the CSS behind its
+// The Subgrid page, in Foundations › Layout: its explanation and the CSS behind its
 // example, in plain English.
-import type { DocsPageContent } from '../../../../../templates/docsPageContent'
-import type { CssNote } from '../../../../../components/ExampleParts'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { CssNote } from '../../../../components/ExampleParts'
 
 export const subgridContent: DocsPageContent = {
   id: 'subgrid', kind: 'foundation', title: 'Subgrid',

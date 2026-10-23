@@ -1,6 +1,6 @@
 import { rowWrapGrowContent } from './rowWrapGrowContent'
 import { RowWrapGrowExample } from './RowWrapGrowExample'
-import { ContentPage } from '../../../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 import '../sideBySide.css'
 
 export default function RowWrapGrowPage() {

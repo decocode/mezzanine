@@ -1,8 +1,8 @@
-// The example for the Row page, in Foundations › Layout › Side by side.
+// The example for the Row page, in Foundations › Layout.
 import { useState } from 'react'
 import { Checkbox } from '@decocode/mezzanine'
-import { CssNotes, ExampleText } from '../../../../../components/ExampleParts'
-import { WidthDemo } from '../../../../../components/WidthFrame'
+import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
+import { WidthDemo } from '../../../../components/WidthFrame'
 import { rowCssNotes } from './rowContent'
 
 export function RowExample() {

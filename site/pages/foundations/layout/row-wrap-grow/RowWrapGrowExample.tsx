@@ -1,6 +1,6 @@
-// The example for the Row wrap grow page, in Foundations › Layout › Side by side.
-import { CssNotes } from '../../../../../components/ExampleParts'
-import { WidthDemo } from '../../../../../components/WidthFrame'
+// The example for the Row wrap grow page, in Foundations › Layout.
+import { CssNotes } from '../../../../components/ExampleParts'
+import { WidthDemo } from '../../../../components/WidthFrame'
 import { rowWrapGrowCssNotes } from './rowWrapGrowContent'
 
 export function RowWrapGrowExample() {

@@ -1,7 +1,7 @@
-// The example for the Row wrap page, in Foundations › Layout › Side by side.
+// The example for the Row wrap page, in Foundations › Layout.
 import { Badge } from '@decocode/mezzanine'
-import { CssNotes } from '../../../../../components/ExampleParts'
-import { WidthDemo } from '../../../../../components/WidthFrame'
+import { CssNotes } from '../../../../components/ExampleParts'
+import { WidthDemo } from '../../../../components/WidthFrame'
 import { rowWrapCssNotes } from './rowWrapContent'
 
 // Tags of different lengths, so the rows end at different places.

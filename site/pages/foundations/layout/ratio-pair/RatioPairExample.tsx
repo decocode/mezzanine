@@ -2,7 +2,7 @@
 // in a dashed box that fills its demo, so resizing the window shows the second area wrapping underneath.
 import { useState, type CSSProperties } from 'react'
 import { DemoArea } from '@decocode/mezzanine'
-import { CssNotes, PanelPicker } from '../../../../../components/ExampleParts'
+import { CssNotes, PanelPicker } from '../../../../components/ExampleParts'
 import { ratioPairCssNotes } from './ratioPairContent'
 
 type RatioPairFraction = '1/4' | '1/3' | '1/2' | 'auto-start'

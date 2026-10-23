@@ -1,8 +1,8 @@
-// The example for the Subgrid page, in Foundations › Layout › Grid.
+// The example for the Subgrid page, in Foundations › Layout.
 import { useState } from 'react'
 import { Button, Checkbox, Heading, Text } from '@decocode/mezzanine'
-import { CssNotes, ExampleText } from '../../../../../components/ExampleParts'
-import { WidthDemo } from '../../../../../components/WidthFrame'
+import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
+import { WidthDemo } from '../../../../components/WidthFrame'
 import { subgridCssNotes } from './subgridContent'
 
 const items = [

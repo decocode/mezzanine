@@ -7,16 +7,16 @@ import { mediaQueriesCssNotes } from '../../site/pages/foundations/interaction/m
 import { safeAreasCssNotes } from '../../site/pages/foundations/interaction/safe-areas/safeAreasContent'
 import { supportsCssNotes } from '../../site/pages/foundations/interaction/supports/supportsContent'
 import { readingOrderCssNotes } from '../../site/pages/foundations/text/reading-order/readingOrderContent'
-import { ratioPairCssNotes } from '../../site/pages/foundations/layout/side-by-side/ratio-pair/ratioPairContent'
-import { rowCssNotes } from '../../site/pages/foundations/layout/side-by-side/row/rowContent'
-import { rowWrapCssNotes } from '../../site/pages/foundations/layout/side-by-side/row-wrap/rowWrapContent'
-import { rowWrapGrowCssNotes } from '../../site/pages/foundations/layout/side-by-side/row-wrap-grow/rowWrapGrowContent'
-import { reelCssNotes } from '../../site/pages/foundations/layout/side-by-side/reel/reelContent'
+import { ratioPairCssNotes } from '../../site/pages/foundations/layout/ratio-pair/ratioPairContent'
+import { rowCssNotes } from '../../site/pages/foundations/layout/row/rowContent'
+import { rowWrapCssNotes } from '../../site/pages/foundations/layout/row-wrap/rowWrapContent'
+import { rowWrapGrowCssNotes } from '../../site/pages/foundations/layout/row-wrap-grow/rowWrapGrowContent'
+import { reelCssNotes } from '../../site/pages/foundations/layout/reel/reelContent'
 import { aspectRatioCssNotes } from '../../site/pages/foundations/dimension/aspect-ratio/aspectRatioContent'
 import { spaceCssNotes } from '../../site/pages/foundations/dimension/space/spaceContent'
 import { stackCssNotes } from '../../site/pages/foundations/layout/stack/stackContent'
 import { gridCssNotes } from '../../site/pages/foundations/layout/grid/gridContent'
-import { subgridCssNotes } from '../../site/pages/foundations/layout/grid/subgrid/subgridContent'
+import { subgridCssNotes } from '../../site/pages/foundations/layout/subgrid/subgridContent'
 import { containerQueriesCssNotes } from '../../site/pages/foundations/layout/container-queries/containerQueriesContent'
 import { unitsCssNotes } from '../../site/pages/foundations/dimension/units/unitsContent'
 import { fluidSizingCssNotes } from '../../site/pages/foundations/dimension/fluid-sizing/fluidSizingContent'
@@ -28,16 +28,16 @@ const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string
   { path: '/interaction/safe-areas', notes: safeAreasCssNotes, stylesheet: 'site/pages/foundations/interaction/safe-areas/safeAreas.css' },
   { path: '/interaction/supports', notes: supportsCssNotes },
   { path: '/text/reading-order', notes: readingOrderCssNotes, stylesheet: 'site/pages/foundations/text/reading-order/readingOrder.css' },
-  { path: '/layout/side-by-side/ratio-pair', notes: ratioPairCssNotes, stylesheet: 'src/styles/layout.css' },
-  { path: '/layout/side-by-side/row', notes: rowCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
-  { path: '/layout/side-by-side/row-wrap', notes: rowWrapCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
-  { path: '/layout/side-by-side/row-wrap-grow', notes: rowWrapGrowCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
-  { path: '/layout/side-by-side/reel', notes: reelCssNotes, stylesheet: 'site/pages/foundations/layout/side-by-side/sideBySide.css' },
+  { path: '/layout/ratio-pair', notes: ratioPairCssNotes, stylesheet: 'src/styles/layout.css' },
+  { path: '/layout/row', notes: rowCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
+  { path: '/layout/row-wrap', notes: rowWrapCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
+  { path: '/layout/row-wrap-grow', notes: rowWrapGrowCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
+  { path: '/layout/reel', notes: reelCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
   { path: '/dimension/aspect-ratio', notes: aspectRatioCssNotes, stylesheet: 'site/pages/foundations/dimension/aspect-ratio/aspectRatio.css' },
   { path: '/dimension/space', notes: spaceCssNotes, stylesheet: 'site/pages/foundations/dimension/space/space.css' },
   { path: '/layout/stack', notes: stackCssNotes, stylesheet: 'site/pages/foundations/layout/stack/stack.css' },
   { path: '/layout/grid', notes: gridCssNotes, stylesheet: 'site/pages/foundations/layout/grid/grid.css' },
-  { path: '/layout/grid/subgrid', notes: subgridCssNotes, stylesheet: 'site/pages/foundations/layout/grid/subgrid/subgrid.css' },
+  { path: '/layout/subgrid', notes: subgridCssNotes, stylesheet: 'site/pages/foundations/layout/subgrid/subgrid.css' },
   { path: '/layout/container-queries', notes: containerQueriesCssNotes, stylesheet: 'site/pages/foundations/layout/container-queries/containerQueries.css' },
   { path: '/dimension/units', notes: unitsCssNotes, stylesheet: 'site/pages/foundations/dimension/units/units.css' },
   { path: '/dimension/fluid-sizing', notes: fluidSizingCssNotes, stylesheet: 'site/pages/foundations/dimension/fluid-sizing/fluidSizing.css' },
@@ -104,7 +104,7 @@ test('Reading order follows the HTML when the row is reversed', async ({ page })
 // Checks that a page's "Also known as" names are the first disclosure in Technical details, start
 // closed, open from their button, and open when their On this page link is followed.
 test('Also known as opens Technical details, starts closed and opens from its button or On this page', async ({ page }) => {
-  await page.goto('/layout/side-by-side/ratio-pair')
+  await page.goto('/layout/ratio-pair')
   const trigger = page.getByRole('button', { name: 'Also known as', exact: true })
   const technicalDetails = page.locator('section[aria-labelledby$="-technical-details"]')
   await expect(technicalDetails.getByRole('button').first()).toHaveAccessibleName('Also known as')
@@ -123,7 +123,7 @@ test('Also known as opens Technical details, starts closed and opens from its bu
 // Checks Row: with the switch, a narrow frame turns the row into a column; without it, the items stay
 // in one row.
 test('Row switches to a column below the lg width', async ({ page }) => {
-  await page.goto('/layout/side-by-side/row')
+  await page.goto('/layout/row')
   const items = page.locator('.example-row > *')
   const rows = () => items.evaluateAll(list => new Set(list.map(item => Math.round(item.getBoundingClientRect().top))).size)
   await expect.poll(rows).toBe(1)

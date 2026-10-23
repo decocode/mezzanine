@@ -1,6 +1,6 @@
 import { rowContent } from './rowContent'
 import { RowExample } from './RowExample'
-import { ContentPage } from '../../../../../templates/ContentPage'
+import { ContentPage } from '../../../../templates/ContentPage'
 import '../sideBySide.css'
 
 export default function RowPage() {
