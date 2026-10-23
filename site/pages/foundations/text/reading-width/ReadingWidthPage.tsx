@@ -9,7 +9,7 @@ export default function ReadingWidthPage() {
     <ContentPage
       content={readingWidthContent}
       parts={{
-        lineLength: <CodeBlock className="docs-code-block">{readingWidthCode}</CodeBlock>,
+        lineLength: <CodeBlock className="docs-code-block" language="css">{readingWidthCode}</CodeBlock>,
         tokens: <DocsTable aria-label="Reading width tokens" nameColumn="Token" rows={readingWidthTokens.map(({ token, label }) => ({ name: token, description: <>{label}. Currently <TokenValue token={token} />.</> }))} />,
       }}
     />

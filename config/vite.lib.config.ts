@@ -1,6 +1,7 @@
 // Builds the publishable package (@decocode/mezzanine) from ../src into ../dist.
 // React, React DOM and React Aria Components are peer dependencies,
-// so they are kept out of the bundle and supplied by each consuming app.
+// so they are kept out of the bundle and supplied by each consuming app. Shiki is a dependency the
+// app's bundler loads on demand, so it stays out of the bundle too.
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'node:path'
@@ -19,7 +20,7 @@ export default defineConfig({
       cssFileName: 'mezzanine',
     },
     rolldownOptions: {
-      external: [/^react($|\/)/, /^react-dom($|\/)/, /^react-aria($|\/)/, /^react-aria-components($|\/)/],
+      external: [/^react($|\/)/, /^react-dom($|\/)/, /^react-aria($|\/)/, /^react-aria-components($|\/)/, /^shiki($|\/)/],
     },
   },
 })

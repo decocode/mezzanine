@@ -329,6 +329,26 @@ its edge. `Form` lays its fields out one above another, with room between them.
 `PreviewTrigger` and `Virtualizer` draw nothing of their own: a preview's
 `Popover` takes the Popover look, and a virtualized collection keeps its own.
 
+## CodeBlock
+
+`CodeBlock` shows code passed as its children, keeping line breaks and
+indentation. Long lines scroll sideways, so the code area takes keyboard focus.
+A strip above the code holds the copy button and an optional `title`, such as a
+file name, which also names the code for screen readers. `showLineNumbers`
+numbers the lines from `startLine`, and `highlightedLines`, `addedLines` and
+`removedLines` mark lines by number. Line numbers and marked lines need the code
+as a single string. The code always reads left to right.
+
+`language` colours the code with the `--color-syntax-*` roles each theme sets.
+It supports `bash`, `css`, `html`, `javascript`, `json`, `jsx`, `tsx` and
+`typescript`. Shiki, which does the highlighting, is a dependency of Mezzanine;
+it and each language load only when a page first shows code in that language,
+and the code shows as plain text until then.
+
+```tsx
+<CodeBlock title="example.css" language="css" showLineNumbers addedLines={[3]}>{code}</CodeBlock>
+```
+
 ## Popover and Menu
 
 `Popover` is the raised surface for content opened from a trigger; it adds no

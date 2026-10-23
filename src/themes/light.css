@@ -15,6 +15,14 @@
   --color-text: var(--color-neutral-900);
   --color-text-muted: var(--color-neutral-700);
 
+  /* Syntax highlighting in CodeBlock: each role colours one kind of code, at 7:1 or more on the surface. */
+  --color-syntax-keyword: var(--color-accent-600);
+  --color-syntax-string: var(--color-success-600);
+  --color-syntax-comment: var(--color-neutral-600);
+  --color-syntax-function: var(--color-info-600);
+  --color-syntax-constant: var(--color-warning-600);
+  --color-syntax-punctuation: var(--color-text-muted);
+
   /* Decorative lines (cards, tables, panels, dividers) are soft. Controls use --color-border-control,
      which keeps the 3:1 contrast people need to find them. */
   --color-border: var(--color-neutral-200);

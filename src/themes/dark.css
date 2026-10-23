@@ -9,6 +9,14 @@
   --color-text: var(--color-neutral-200);
   --color-text-muted: var(--color-neutral-400);
 
+  /* Syntax highlighting in CodeBlock: each role colours one kind of code, at 7:1 or more on the surface. */
+  --color-syntax-keyword: var(--color-accent-400);
+  --color-syntax-string: var(--color-success-400);
+  --color-syntax-comment: var(--color-neutral-400);
+  --color-syntax-function: var(--color-info-400);
+  --color-syntax-constant: var(--color-warning-400);
+  --color-syntax-punctuation: var(--color-text-muted);
+
   /* Decorative lines are soft; controls keep 3:1 borders. */
   --color-border: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
   --color-border-muted: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
@@ -106,6 +114,14 @@
 
     --color-text: var(--color-neutral-200);
     --color-text-muted: var(--color-neutral-400);
+
+  /* Syntax highlighting in CodeBlock: each role colours one kind of code, at 7:1 or more on the surface. */
+  --color-syntax-keyword: var(--color-accent-400);
+  --color-syntax-string: var(--color-success-400);
+  --color-syntax-comment: var(--color-neutral-400);
+  --color-syntax-function: var(--color-info-400);
+  --color-syntax-constant: var(--color-warning-400);
+  --color-syntax-punctuation: var(--color-text-muted);
 
     /* Decorative lines are soft; controls keep 3:1 borders. */
     --color-border: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);

@@ -18,7 +18,7 @@ export function ViewportUnitsExample() {
   const heights = useProbeHeights(container)
   return <>
     <ExampleText>Every page needs this tag in its HTML. Without it, phones pretend to be a wide screen and shrink the whole page to fit, so viewport units would measure that pretend screen instead of the real one.</ExampleText>
-    <CodeBlock>{'<meta name="viewport" content="width=device-width, initial-scale=1">'}</CodeBlock>
+    <CodeBlock language="html">{'<meta name="viewport" content="width=device-width, initial-scale=1">'}</CodeBlock>
     <ExampleText>On a laptop the four heights match. On a phone they differ once the browser’s toolbar hides: svh and lvh stay apart, and dvh changes.</ExampleText>
     <div ref={container} className="example-probes" aria-hidden="true">
       {probes.map((probe) => <div key={probe.label} data-probe={probe.label} className={probe.className} />)}

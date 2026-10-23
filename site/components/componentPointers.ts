@@ -474,16 +474,92 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     },
     {
-      "name": "--code-block-copy-gap",
-      "fallback": "var(--space-gap-control)"
+      "name": "--code-block-comment-foreground",
+      "fallback": "var(--color-syntax-comment)"
+    },
+    {
+      "name": "--code-block-constant-foreground",
+      "fallback": "var(--color-syntax-constant)"
+    },
+    {
+      "name": "--code-block-focus-ring-color",
+      "fallback": "var(--color-focus)"
+    },
+    {
+      "name": "--code-block-focus-ring-offset",
+      "fallback": "var(--focus-ring-offset-inset)"
+    },
+    {
+      "name": "--code-block-focus-ring-width",
+      "fallback": "var(--focus-ring-width)"
     },
     {
       "name": "--code-block-foreground",
       "fallback": "var(--color-text)"
     },
     {
+      "name": "--code-block-function-foreground",
+      "fallback": "var(--color-syntax-function)"
+    },
+    {
+      "name": "--code-block-header-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--code-block-header-padding-block",
+      "fallback": "var(--space-1)"
+    },
+    {
+      "name": "--code-block-header-padding-inline",
+      "fallback": "var(--space-padding-surface)"
+    },
+    {
+      "name": "--code-block-header-padding-inline-end",
+      "fallback": "var(--space-1)"
+    },
+    {
+      "name": "--code-block-keyword-foreground",
+      "fallback": "var(--color-syntax-keyword)"
+    },
+    {
+      "name": "--code-block-line-added-background",
+      "fallback": "var(--color-success-muted)"
+    },
+    {
+      "name": "--code-block-line-highlighted-background",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--code-block-line-number-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--code-block-line-number-gap",
+      "fallback": "var(--space-gap-cluster)"
+    },
+    {
+      "name": "--code-block-line-removed-background",
+      "fallback": "var(--color-danger-muted)"
+    },
+    {
+      "name": "--code-block-marker-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
       "name": "--code-block-padding",
       "fallback": "var(--space-padding-surface)"
+    },
+    {
+      "name": "--code-block-punctuation-foreground",
+      "fallback": "var(--color-syntax-punctuation)"
+    },
+    {
+      "name": "--code-block-string-foreground",
+      "fallback": "var(--color-syntax-string)"
+    },
+    {
+      "name": "--code-block-title-foreground",
+      "fallback": "var(--color-text-muted)"
     }
   ],
   "ComboBox": [

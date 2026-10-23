@@ -1,28 +1,105 @@
-/* Long lines wrap rather than scroll, so narrow screens need no sideways scrolling and
-   the block never needs to take keyboard focus. Indentation and line breaks are kept.
-   The block sets the Body small role; the code element inside takes the shared monospace
-   family from Mezzanine's rule for every code element. The copy button floats at the top
-   end, so the code wraps beside and below it and is never covered. */
+/* A frame holding a strip, with an optional title and the copy button, above the code. Long lines scroll
+   sideways instead of breaking mid-word, so the code area takes keyboard focus and shows the focus ring.
+   Indentation and line breaks are kept. The code element takes the shared monospace family from
+   Mezzanine's rule for every code element. */
 .mz-code-block {
   box-sizing: border-box;
   max-inline-size: 100%;
-  margin: 0;
-  padding: var(--code-block-padding, var(--space-padding-surface));
+  overflow: hidden;
   border: var(--code-block-border-width, var(--border-width-baseline)) solid var(--code-block-border, var(--color-border));
   border-radius: var(--code-block-border-radius, var(--radius-sm));
   background: var(--code-block-background, var(--color-surface));
   color: var(--code-block-foreground, var(--color-text));
-  white-space: pre-wrap;
+}
+
+.mz-code-block-header {
+  display: flex;
+  align-items: center;
+  gap: var(--code-block-header-gap, var(--space-gap-control));
+  padding-block: var(--code-block-header-padding-block, var(--space-1));
+  padding-inline: var(--code-block-header-padding-inline, var(--space-padding-surface)) var(--code-block-header-padding-inline-end, var(--space-1));
+  border-block-end: var(--code-block-border-width, var(--border-width-baseline)) solid var(--code-block-border, var(--color-border));
+}
+
+.mz-code-block-title {
+  min-width: 0;
   overflow-wrap: anywhere;
+  color: var(--code-block-title-foreground, var(--color-text-muted));
   font-family: var(--font-family-body);
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--font-weight-default);
-  letter-spacing: var(--letter-spacing-body);
-  line-height: var(--line-height-body-sm);
-  text-transform: var(--text-transform-body);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-emphasis);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
 }
 
 .mz-code-block-copy {
-  float: inline-end;
-  margin-inline-start: var(--code-block-copy-gap, var(--space-gap-control));
+  margin-inline-start: auto;
 }
+
+.mz-code-block-content {
+  margin: 0;
+  padding: var(--code-block-padding, var(--space-padding-surface));
+  overflow-x: auto;
+  white-space: pre;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-code-block-content[data-focus-visible] {
+  outline: var(--code-block-focus-ring-width, var(--focus-ring-width)) solid var(--code-block-focus-ring-color, var(--color-focus));
+  outline-offset: var(--code-block-focus-ring-offset, var(--focus-ring-offset-inset));
+}
+
+/* With line numbers or marked lines, each line is a row of a grid: the number, the + or − marker, then
+   the text. Each row shares the grid's columns, so numbers line up, and a marked row's background runs
+   the full width, including when the code scrolls. */
+.mz-code-block-content code[data-lines] {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  inline-size: max-content;
+  min-inline-size: 100%;
+}
+
+.mz-code-block-line {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+
+.mz-code-block-line-number {
+  padding-inline-end: var(--code-block-line-number-gap, var(--space-gap-cluster));
+  color: var(--code-block-line-number-foreground, var(--color-text-muted));
+  text-align: end;
+  user-select: none;
+}
+
+.mz-code-block-marker {
+  padding-inline-end: var(--code-block-marker-gap, var(--space-gap-control));
+  user-select: none;
+}
+
+.mz-code-block-line[data-mark='highlighted'] {
+  background: var(--code-block-line-highlighted-background, var(--color-accent-muted));
+}
+
+.mz-code-block-line[data-mark='added'] {
+  background: var(--code-block-line-added-background, var(--color-success-muted));
+}
+
+.mz-code-block-line[data-mark='removed'] {
+  background: var(--code-block-line-removed-background, var(--color-danger-muted));
+}
+
+/* Syntax highlighting: each kind of code takes its colour role, which every theme sets. Wireframe keeps
+   code monochrome, and forced colours use the system text colour. */
+.mz-code-block-content [data-syntax='keyword'] { color: var(--code-block-keyword-foreground, var(--color-syntax-keyword)); }
+.mz-code-block-content [data-syntax='string'] { color: var(--code-block-string-foreground, var(--color-syntax-string)); }
+.mz-code-block-content [data-syntax='comment'] { color: var(--code-block-comment-foreground, var(--color-syntax-comment)); }
+.mz-code-block-content [data-syntax='function'] { color: var(--code-block-function-foreground, var(--color-syntax-function)); }
+.mz-code-block-content [data-syntax='constant'] { color: var(--code-block-constant-foreground, var(--color-syntax-constant)); }
+.mz-code-block-content [data-syntax='punctuation'] { color: var(--code-block-punctuation-foreground, var(--color-syntax-punctuation)); }

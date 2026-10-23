@@ -27,10 +27,10 @@ export default function ReadingDirectionPage() {
               </div>
             </div>
           </DemoArea>
-          <CodeBlock className="docs-code-block">{startAndEndCode}</CodeBlock>
+          <CodeBlock className="docs-code-block" language="css">{startAndEndCode}</CodeBlock>
         </>),
         rightToLeft: (<>
-          <CodeBlock className="docs-code-block">{rightToLeftCode}</CodeBlock>
+          <CodeBlock className="docs-code-block" language="html">{rightToLeftCode}</CodeBlock>
           <DemoArea>
             <ul className="text-language-examples">
               {readingDirectionRightToLeftExamples.map(({ language, lang, text }) => <li key={lang} dir="rtl" lang={lang}>
@@ -43,7 +43,7 @@ export default function ReadingDirectionPage() {
           </DemoArea>
         </>),
         topToBottom: (<>
-          <CodeBlock className="docs-code-block">{topToBottomCode}</CodeBlock>
+          <CodeBlock className="docs-code-block" language="css">{topToBottomCode}</CodeBlock>
           <DemoArea>
             <ul className="text-language-examples">
               {readingDirectionVerticalExamples.map(({ language, lang, text }) => <li key={lang}>

@@ -13,6 +13,13 @@
     --color-surface: Canvas;
     --color-text: CanvasText;
     --color-text-muted: CanvasText;
+
+    --color-syntax-keyword: CanvasText;
+    --color-syntax-string: CanvasText;
+    --color-syntax-comment: CanvasText;
+    --color-syntax-function: CanvasText;
+    --color-syntax-constant: CanvasText;
+    --color-syntax-punctuation: CanvasText;
     --color-border: CanvasText;
     --color-border-muted: CanvasText;
     --color-border-control: ButtonText;

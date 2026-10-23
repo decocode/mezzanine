@@ -24,7 +24,7 @@ export function CssNotesBody({ note }: { note: CssNote }) {
     {note.paragraphs.map((paragraph) => <Text key={paragraph} elementType="p" className="mz-text-body-md">
       <RichText text={paragraph} />
     </Text>)}
-    <CodeBlock>{note.code}</CodeBlock>
+    <CodeBlock language="css">{note.code}</CodeBlock>
   </div>
 }
 

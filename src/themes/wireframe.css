@@ -12,6 +12,14 @@
   --color-text: var(--color-neutral-950);
   --color-text-muted: var(--color-neutral-700);
 
+  /* Syntax highlighting stays monochrome: code is text, and comments and punctuation are muted. */
+  --color-syntax-keyword: var(--color-text);
+  --color-syntax-string: var(--color-text);
+  --color-syntax-comment: var(--color-text-muted);
+  --color-syntax-function: var(--color-text);
+  --color-syntax-constant: var(--color-text);
+  --color-syntax-punctuation: var(--color-text-muted);
+
   --color-border: var(--color-neutral-950);
   --color-border-muted: var(--color-neutral-400);
   --color-border-control: var(--color-neutral-700);

@@ -61,5 +61,8 @@
   },
   "overrides": {
     "lighthouse": "13.5.0"
+  },
+  "dependencies": {
+    "shiki": "^4.5.0"
   }
 }
