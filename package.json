@@ -2,7 +2,7 @@
   "name": "@decocode/mezzanine",
   "version": "0.0.0",
   "private": true,
-  "description": "Mezzanine \u2014 an accessible, token-themed React Aria design system by DecoCode Ltd.",
+  "description": "Mezzanine — an accessible, token-themed React Aria design system by DecoCode Ltd.",
   "license": "UNLICENSED",
   "type": "module",
   "files": [
@@ -44,20 +44,20 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
+    "@axe-core/playwright": "^4.14.0",
     "@lhci/cli": "^0.15.1",
-    "@playwright/test": "^1.63.0",
-    "@types/node": "^24.13.3",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^24.19.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
-    "oxlint": "^1.81.0",
-    "react": "^19.2.8",
+    "@vitejs/plugin-react": "^6.1.2",
+    "oxlint": "^1.89.0",
+    "react": "^19.3.1",
     "react-aria": "^3.53.1",
     "react-aria-components": "^1.22.1",
-    "react-dom": "^19.2.8",
+    "react-dom": "^19.3.1",
     "typescript": "~6.0.2",
-    "vite": "^8.3.0"
+    "vite": "^8.3.5"
   },
   "overrides": {
     "lighthouse": "13.5.0"
