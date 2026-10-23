@@ -1,0 +1,22 @@
+# Dependabot opens a pull request when a dependency or a GitHub Action has a newer version, so CI
+# tests it before anyone merges. Small updates are grouped into one pull request; major updates
+# arrive one at a time, because they can need code changes.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns: ['*']

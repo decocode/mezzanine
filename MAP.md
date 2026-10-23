@@ -51,6 +51,7 @@ An experimental sandbox at `/site/lab`. Nothing here is approved library work.
 | `tests/components/`, `tests/site/`, `tests/lab/` | Playwright browser tests: one file per component, then the site and the Lab. `accessibility.ts` and `display.ts` are shared helpers. |
 | `scripts/` | `check-rules.mjs` and its rule modules (each with a `.test.mjs`), the public API snapshot, the undocumented-token baseline, route generation for nginx, and the Lighthouse runner. |
 | `config/` | Configuration that tools are pointed at by path: the library build, TypeScript projects, nginx and Lighthouse. Configuration that tools find by themselves stays at the root. |
+| `.github/` | The CI workflows (browser tests, Lighthouse and the secret scan) and `dependabot.yml`, which asks Dependabot for weekly update pull requests. |
 | `Dockerfile`, `fly.toml` | The deployment to Fly.io. |
 
 `dist/`, `site-dist/`, `reports/` and `node_modules/` are generated and ignored by Git.
