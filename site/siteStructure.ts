@@ -152,6 +152,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'layers',
         label: 'Layers',
         path: '/layers',
+        order: ['positioning', 'ordering-layers', 'layer-groups', 'scroll-padding'],
         pages: [
           { id: 'positioning', label: 'Positioning', path: '/layers/positioning', status: 'implemented' },
           { id: 'ordering-layers', label: 'Ordering layers', path: '/layers/ordering-layers', status: 'implemented' },
