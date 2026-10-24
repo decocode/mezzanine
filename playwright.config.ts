@@ -4,7 +4,9 @@ export default defineConfig({
   testDir: './tests',
   outputDir: './reports/test-results',
   forbidOnly: !!process.env.CI,
-  workers: process.env.CI ? 1 : undefined,
+  // Tests share no state, so they spread across every core, including within a file.
+  fullyParallel: true,
+  workers: process.env.CI ? '100%' : undefined,
   reporter: [['list'], ['html', { open: 'never', outputFolder: './reports/playwright' }]],
   use: {
     browserName: 'chromium',
