@@ -8,6 +8,7 @@
 @import './styles/typography.css';
 @import './styles/layout.css';
 @import './styles/scroll.css';
+@import './components/Avatar/Avatar.css';
 @import './components/Badge/Badge.css';
 @import './components/Breadcrumbs/Breadcrumbs.css';
 @import './components/Button/Button.css';

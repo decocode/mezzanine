@@ -1,9 +1,9 @@
 // The example for the Aspect ratio page, in Foundations › Dimension › Size.
 import { useState, type CSSProperties } from 'react'
 import { DemoArea } from '@decocode/mezzanine'
-import exampleImage from '../../../../assets/example-picture.svg'
+import { examplePictureAlt, useExamplePicture } from '../../../../components/examplePicture'
 import { CssNotes, ExampleText, PanelPicker } from '../../../../components/ExampleParts'
-import { aspectRatioCssNotes, aspectRatioImageAlt } from './aspectRatioContent'
+import { aspectRatioCssNotes } from './aspectRatioContent'
 
 const ratioOptions = [
   { label: '16:9', value: '16 / 9' },
@@ -12,13 +12,14 @@ const ratioOptions = [
 ] as const
 
 export function AspectRatioExample() {
+  const exampleImage = useExamplePicture()
   const [ratio, setRatio] = useState<(typeof ratioOptions)[number]['value']>('16 / 9')
   return <>
     <ExampleText>Whatever the shape, the picture is cropped to fill it, never squashed.</ExampleText>
     <DemoArea codeView={aspectRatioCssNotes.aspectRatio.code} endPanel={<PanelPicker label="Shape" options={ratioOptions} value={ratio} onChange={setRatio} />}>
       <div className="aspect-ratio-example">
         <div className="aspect-ratio-frame" style={{ '--_aspect-ratio': ratio } as CSSProperties}>
-          <img src={exampleImage} alt={aspectRatioImageAlt} width={480} height={240} />
+          <img src={exampleImage} alt={examplePictureAlt} width={480} height={240} />
         </div>
       </div>
     </DemoArea>

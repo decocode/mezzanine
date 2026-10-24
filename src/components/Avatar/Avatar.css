@@ -1,0 +1,60 @@
+/* A round picture, with an optional name beside it. Initials stand in when there's no picture. */
+.mz-avatar {
+  display: inline-flex;
+  gap: var(--avatar-gap, var(--space-gap-control));
+  align-items: center;
+  min-inline-size: 0;
+  /* Never wider than its container, so a long name wraps instead of sticking out. */
+  max-inline-size: 100%;
+  color: var(--avatar-foreground, var(--color-text-muted));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-avatar[data-size='sm'] {
+  --_avatar-size: var(--avatar-sm-size, var(--picture-size-sm));
+}
+
+.mz-avatar[data-size='md'] {
+  --_avatar-size: var(--avatar-md-size, var(--picture-size-md));
+}
+
+.mz-avatar-picture {
+  display: inline-grid;
+  /* It keeps its size, but can shrink, staying round, when its container is too narrow for it. */
+  flex: 0 1 auto;
+  place-items: center;
+  inline-size: var(--_avatar-size);
+  min-inline-size: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: var(--avatar-border-width, var(--border-width-baseline)) solid var(--avatar-border, var(--color-border));
+  border-radius: var(--avatar-border-radius, var(--radius-full));
+  background: var(--avatar-background, var(--color-neutral-muted));
+}
+
+.mz-avatar-picture > img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* TYPOGRAPHY.md: compact metadata uses label-md. */
+.mz-avatar-initials {
+  color: var(--avatar-initials-foreground, var(--color-text));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-emphasis);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
+}
+
+.mz-avatar-name {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}

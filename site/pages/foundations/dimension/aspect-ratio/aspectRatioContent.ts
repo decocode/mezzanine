@@ -24,9 +24,6 @@ export const aspectRatioContent: DocsPageContent = {
   ],
 }
 
-// The picture's text alternative.
-export const aspectRatioImageAlt = 'Example picture: a dark square and a grey circle on a light background'
-
 // What the example's CSS does. The code is copied from aspectRatio.css, and a browser test checks
 // that it still matches.
 export const aspectRatioCssNotes: Record<string, CssNote> = {

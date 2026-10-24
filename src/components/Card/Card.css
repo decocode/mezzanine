@@ -2,12 +2,17 @@
    content (code, badges, links) keeps its natural size. flow-root keeps the
    children's margins inside the card. */
 .mz-card {
+  /* The padding shrinks with the card's container in very narrow space, such as a phone with enlarged
+     text, so the content keeps room. Elsewhere it's the token's size. */
+  --_card-padding: min(var(--card-padding, var(--space-padding-surface)), 8cqi);
+  --_card-border-width: var(--card-border-width, var(--border-width-baseline));
+  --_card-border-radius: var(--card-border-radius, var(--radius-surface));
   box-sizing: border-box;
   display: flow-root;
   min-width: 0;
-  padding: var(--card-padding, var(--space-padding-surface));
-  border: var(--card-border-width, var(--border-width-baseline)) solid var(--card-border, var(--color-border));
-  border-radius: var(--card-border-radius, var(--radius-surface));
+  padding: var(--_card-padding);
+  border: var(--_card-border-width) solid var(--card-border, var(--color-border));
+  border-radius: var(--_card-border-radius);
   background: var(--card-background, var(--elevation-raised-1-surface));
   box-shadow: var(--card-elevation, var(--elevation-raised-1));
   color: var(--card-foreground, var(--color-text));
@@ -29,8 +34,8 @@
   margin-block-start: var(--card-content-gap, var(--space-gap-cluster));
 }
 
-/* TYPOGRAPHY.md: a heading inside a card or panel uses title-md. */
-.mz-card > .react-aria-Heading {
+/* TYPOGRAPHY.md: a heading inside a card or panel uses title-md, a CardTitle included. */
+.mz-card > :is(.react-aria-Heading, .mz-card-title) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-title-md);
   font-weight: var(--font-weight-emphasis);
@@ -39,22 +44,126 @@
   text-transform: var(--text-transform-title);
 }
 
-/* A card with href is one link: its text keeps the card's colour, and hover and keyboard focus
-   show on the card's edge. Its content stacks so the arrow can sit at the end, however tall the card. */
-a.mz-card {
+/* A linked card, or one with a footer, stacks its parts so the footer or the arrow can sit at its end,
+   however tall the card. Parts keep their natural width, as in normal flow; the picture, the footer and
+   the arrow span the card. */
+.mz-card:has(> .mz-card-footer, > .mz-card-title .mz-card-title-link) {
   display: flex;
   flex-direction: column;
-  text-decoration: none;
-  cursor: pointer;
+  align-items: flex-start;
 }
 
-/* The arrow sits at the card's end corner and nudges toward the end on hover. */
+.mz-card > :is(.mz-card-image, .mz-card-footer, .mz-card-arrow) {
+  align-self: stretch;
+}
+
+/* The picture keeps its shape and crops to fill. As the card's first part it reaches the card's edges,
+   with its top corners following the card's. */
+.mz-card-image {
+  position: relative;
+  aspect-ratio: var(--_card-image-aspect-ratio);
+  overflow: hidden;
+}
+
+.mz-card > .mz-card-image:first-child {
+  margin-block-start: calc(var(--_card-padding) * -1);
+  margin-inline: calc(var(--_card-padding) * -1);
+  border-start-start-radius: calc(var(--_card-border-radius) - var(--_card-border-width));
+  border-start-end-radius: calc(var(--_card-border-radius) - var(--_card-border-width));
+}
+
+.mz-card-image > img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+/* Overlays sit in a row along the picture's top edge: the first at the start, the last at the end. */
+.mz-card-image-overlays {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-image-gap, var(--space-gap-control));
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--card-image-padding, var(--space-gap-cluster));
+}
+
+/* A solid surface behind each overlay, so a see-through Badge or ToggleButton stays readable over any
+   picture. The overlay's own colours, such as hover and selected, still show on top. */
+.mz-card-image-overlay {
+  display: inline-flex;
+  border-radius: var(--card-image-overlay-border-radius, var(--radius-control));
+  background: var(--card-image-overlay-background, var(--color-surface));
+}
+
+/* A linked title keeps the card's colour. Its pressable area stretches over the whole card. */
+.mz-card:has(> .mz-card-title .mz-card-title-link) {
+  position: relative;
+}
+
+.mz-card-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mz-card-title-link::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+}
+
+/* Controls inside a linked card sit above the title's pressable area, so they take their own presses. */
+.mz-card:has(> .mz-card-title .mz-card-title-link) :is(.react-aria-Button, .react-aria-ToggleButton, .react-aria-Link:not(.mz-card-title-link), .react-aria-Checkbox, .react-aria-Switch) {
+  position: relative;
+  z-index: var(--z-index-raised);
+}
+
+/* The bottom row: details at the start and a last Button at the end. In a stacked card it sits at the
+   bottom, so footers line up across a row of cards. */
+.mz-card > .mz-card-footer {
+  margin-block-start: auto;
+  padding-block-start: var(--card-content-gap, var(--space-gap-cluster));
+}
+
+/* The footer's details are supporting text, so they're smaller and muted. TYPOGRAPHY.md: supporting
+   text uses body-sm. A Button keeps its own text style. */
+.mz-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--card-footer-gap, var(--space-gap-control));
+  align-items: center;
+  color: var(--card-footer-foreground, var(--color-text-muted));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-card-footer > .react-aria-Button:last-child {
+  margin-inline-start: auto;
+}
+
+/* The arrow sits at the card's end corner and nudges toward the end on hover. A footer holds the card's
+   actions instead, so a card with one shows no arrow. */
+/* CardTitle renders the arrow straight after the title; order moves it to the end. It's hidden from
+   screen readers, so the reading order is unchanged. */
 .mz-card > .mz-card-arrow {
+  order: 1;
   display: flex;
   justify-content: flex-end;
   margin-block-start: auto;
   padding-block-start: var(--card-content-gap, var(--space-gap-cluster));
   color: var(--card-arrow-color, var(--color-accent));
+}
+
+.mz-card:has(> .mz-card-footer) > .mz-card-arrow {
+  display: none;
 }
 
 .mz-card-arrow svg {
@@ -63,19 +172,24 @@ a.mz-card {
   transition: translate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
-a.mz-card[data-hovered] .mz-card-arrow svg {
+.mz-card:has(.mz-card-title-link[data-hovered]) .mz-card-arrow svg {
   translate: var(--motion-distance-reveal) 0;
 }
 
-a.mz-card[data-hovered] .mz-card-arrow:dir(rtl) svg {
+.mz-card:has(.mz-card-title-link[data-hovered]) .mz-card-arrow:dir(rtl) svg {
   translate: calc(var(--motion-distance-reveal) * -1) 0;
 }
 
-a.mz-card[data-hovered] {
+.mz-card:has(.mz-card-title-link[data-hovered]) {
   border-color: var(--card-border-hovered, var(--color-border-control));
 }
 
-a.mz-card[data-focus-visible] {
+/* Keyboard focus on the title shows on the card's edge, because the whole card is the link's area. */
+.mz-card-title-link[data-focus-visible] {
+  outline: none;
+}
+
+.mz-card:has(.mz-card-title-link[data-focus-visible]) {
   outline: var(--card-focus-ring-width, var(--focus-ring-width)) solid var(--card-focus-ring-color, var(--color-focus));
   outline-offset: var(--card-focus-ring-offset, var(--focus-ring-offset));
 }

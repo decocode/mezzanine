@@ -1,0 +1,6 @@
+/* The Avatar page's example: each Avatar on its own line. */
+.avatar-example {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}

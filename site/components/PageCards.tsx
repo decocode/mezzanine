@@ -1,4 +1,4 @@
-import { Card, Heading } from '@decocode/mezzanine'
+import { Card, CardTitle } from '@decocode/mezzanine'
 
 export interface PageCardItem {
   label: string
@@ -6,14 +6,15 @@ export interface PageCardItem {
   description: string
 }
 
-// An index page's cards: one linked Card for each child page, in navigation order.
+// An index page's cards: one Card for each child page, in navigation order. The title is the card's
+// link, and its pressable area covers the whole card.
 export function PageCards({ items }: { items: readonly PageCardItem[] }) {
   return (
     <ul className="page-cards">
       {items.map(({ label, href, description }) => (
         <li key={href}>
-          <Card href={href}>
-            <Heading level={3}>{label}</Heading>
+          <Card>
+            <CardTitle href={href}>{label}</CardTitle>
             <p>{description}</p>
           </Card>
         </li>

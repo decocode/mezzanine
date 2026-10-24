@@ -8,6 +8,9 @@
   --width-lg: 32rem;
   --width-xl: 48rem;
   --width-2xl: 64rem;
+  /* Picture sizes: a small square picture such as an Avatar, stored in rem so it grows with the text size. */
+  --picture-size-sm: 2rem;
+  --picture-size-md: 3rem;
   /* The shortest a multi-line text field gets, about three lines. */
   --height-text-area-min: 4rem;
   /* The tallest a menu that opens over the page gets, leaving some of the page in view. */

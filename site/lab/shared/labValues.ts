@@ -11,8 +11,6 @@ export const overviewPagesHeading = 'Pages'
 // The label of the Button on each page's Card, which opens that page.
 export const childPageCardAction = 'Read docs'
 
-// The alt text for the example picture used by the Filling the box and Aspect ratio examples.
-export const exampleImageAlt = 'Example picture: a dark square and a grey circle on a light background'
 
 // Where a layout component's idea comes from: Every Layout and Bedrock Layouts.
 export const everyLayout = (name: string, slug: string): LinkItem => ({ label: `Every Layout: ${name}`, href: `https://every-layout.dev/layouts/${slug}/` })

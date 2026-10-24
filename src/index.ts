@@ -7,14 +7,16 @@ export type {
 } from './components/Tabs/Tabs'
 import './mezzanine.css'
 
+export { Avatar } from './components/Avatar/Avatar'
+export type { AvatarProps, AvatarSize } from './components/Avatar/Avatar'
 export { Badge } from './components/Badge/Badge'
 export { DemoArea } from './components/DemoArea/DemoArea'
 export type { DemoAreaProps } from './components/DemoArea/DemoArea'
-export { Card } from './components/Card/Card'
+export { Card, CardImage, CardTitle, CardFooter } from './components/Card/Card'
 export { CodeBlock } from './components/CodeBlock/CodeBlock'
 
 export type { BadgeProps, BadgeVariant } from './components/Badge/Badge'
-export type { CardProps } from './components/Card/Card'
+export type { CardProps, CardImageProps, CardTitleProps, CardFooterProps } from './components/Card/Card'
 export type { CodeBlockProps } from './components/CodeBlock/CodeBlock'
 
 export { Button } from './components/Button/Button'
@@ -181,6 +183,7 @@ export {
   DancePadIcon,
   DrumIcon,
   ExitIcon,
+  HeartIcon,
   FallingIcon,
   FigureIcon,
   MicIcon,

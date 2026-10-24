@@ -5,9 +5,9 @@ export const cardContent: DocsPageContent = {
   id: 'card',
   kind: 'component',
   title: 'Card',
-  description: 'A card groups related content, such as a heading, some text and an action, on its own surface. On its own the card does nothing when pressed; with `href`, the whole card is a link.',
+  description: 'A card groups related content, such as a picture, a heading, some text and actions, on its own surface. With a linked title, pressing anywhere on the card follows the link, while the controls inside it still work on their own.',
   sections: [
-    { key: 'example', intro: ['`Card` renders a surface with a border, a raised shadow and space around its content. Its content is composed from other components.'] },
+    { key: 'example', intro: ['`Card` renders a surface with a border, a raised shadow and space around its content. Its content is composed from the Card parts and other components.'] },
   ],
   technicalDetails: [
     {
@@ -17,25 +17,29 @@ export const cardContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'Card', description: 'Renders a `div` with the card surface, or a React Aria `Link` when given `href`. It adds even space between its direct children.' },
-          { name: 'Heading', description: 'Optional. A `Heading` placed directly inside the card uses the Title medium text style.' },
+          { name: 'Card', description: 'Renders a `div` with the card surface. It adds even space between its direct children.' },
+          { name: 'CardImage', description: 'Optional. A picture that keeps the shape set by `aspectRatio`, `16 / 9` by default, and crops to fill. As the first part it reaches the card’s edges. Its children sit over the picture: the first at the top start, the last at the top end.' },
+          { name: 'CardTitle', description: 'The card’s heading, in the Title medium text style. With `href`, it’s the card’s one link, and its pressable area covers the whole card.' },
+          { name: 'CardFooter', description: 'Optional. The bottom row: details at the start and a last `Button` at the end. It sits at the bottom of the card, so footers line up across a row of cards.' },
         ],
       },
     },
     {
       key: 'usage',
       body: [
-        'Place the content inside `Card` as its children: for example a `Heading`, paragraphs and `Button` or `Link` controls. Card adds the spacing between them.',
-        'Content flows as it does elsewhere on a page: headings and paragraphs fill the width, while inline content such as `code`, a `Badge` or a `Link` keeps its natural size. To put inline content on its own line, place it in a paragraph.',
-        'A card with one destination can be a link: give `Card` an `href`, and the whole card takes people there. An arrow at its end shows that it can be pressed. It accepts React Aria `Link` props, such as `target`. A linked card must not contain other Buttons or Links, so for a card with several actions, leave out `href` and put each action on its own Button or Link.',
+        'Place the parts inside `Card` in the order people should see them, with other components such as `Avatar`, `Text` and `Button`. Card adds the spacing between them.',
+        'Content flows as it does elsewhere on a page: headings and paragraphs fill the width, while inline content such as `code`, a `Badge` or a `Link` keeps its natural size.',
+        '`CardImage` needs `src` and `alt`. Pass `alt=""` when the title already names the card, so the picture is decorative.',
+        'To make the card a link, give `CardTitle` an `href`. Pressing anywhere on the card then follows it, and an arrow at the card’s end shows it can be pressed, unless a `CardFooter` holds the card’s actions. Buttons, toggles and links inside the card stay pressable on their own. `CardTitle` accepts React Aria `Link` props, such as `target`, and `level` sets its heading level, 3 by default.',
         'Pass `className` to position the card in your layout. Card also accepts the other attributes of a `div`.',
       ],
     },
     {
       key: 'accessibility',
       body: [
-        'Card adds no role or accessible name. Give it a `Heading` at the right level so people using a screen reader can find and identify it.',
-        'A card with `href` is a link, and its accessible name is all the text inside it, heading first. The arrow is hidden from screen readers, which announce the link instead. Keep that text short so the link’s name stays easy to listen to.',
+        'Card adds no role or accessible name. `CardTitle` gives it a heading, so people using a screen reader can find and identify it.',
+        'With `href`, the title is the card’s only link, so a screen reader announces just its text, not everything in the card. The arrow is hidden from screen readers. Keyboard focus on the title shows a focus ring around the whole card.',
+        'Keyboard order follows the HTML, which follows what people see: controls over the picture come before the title.',
       ],
     },
     {
@@ -54,6 +58,7 @@ export const cardContent: DocsPageContent = {
     { label: 'Elevation', href: '/elevation' },
     { label: 'Shape', href: '/shape' },
     { label: 'Dialog', href: '/dialog' },
+    { label: 'Avatar', href: '/avatar' },
   ],
   references: [
     { label: 'MDN: HTML div element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div' },
@@ -62,7 +67,12 @@ export const cardContent: DocsPageContent = {
 
 // The teaching labels inside the live card in the Example section.
 export const cardExample = {
+  badge: 'Badge',
+  toggle: 'Favourite',
+  avatar: 'Avatar name',
   heading: 'Card title',
+  href: '/card',
   body: 'Card content describes the item in a sentence or two.',
-  action: 'Action',
+  detail: 'Detail A',
+  action: 'Button',
 } as const

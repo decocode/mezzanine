@@ -12,6 +12,7 @@ export const runtimeProperties = new Set(['--tree-item-level', '--page-width', '
 // look it shares on purpose, such as ToggleButton's secondary Button look.
 export const pointerPrefixes = {
   AppShell: ['app-shell'],
+  Avatar: ['avatar'],
   Badge: ['badge'],
   Breadcrumbs: ['breadcrumbs', 'breadcrumb'],
   Button: ['button'],

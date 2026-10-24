@@ -28,6 +28,44 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "min(var(--radius-surface), var(--radius-sm))"
     }
   ],
+  "Avatar": [
+    {
+      "name": "--avatar-background",
+      "fallback": "var(--color-neutral-muted)"
+    },
+    {
+      "name": "--avatar-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--avatar-border-radius",
+      "fallback": "var(--radius-full)"
+    },
+    {
+      "name": "--avatar-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--avatar-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--avatar-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--avatar-initials-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--avatar-md-size",
+      "fallback": "var(--picture-size-md)"
+    },
+    {
+      "name": "--avatar-sm-size",
+      "fallback": "var(--picture-size-sm)"
+    }
+  ],
   "Badge": [
     {
       "name": "--badge-accent-background",
@@ -356,8 +394,32 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--focus-ring-width)"
     },
     {
+      "name": "--card-footer-foreground",
+      "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--card-footer-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
       "name": "--card-foreground",
       "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--card-image-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--card-image-overlay-background",
+      "fallback": "var(--color-surface)"
+    },
+    {
+      "name": "--card-image-overlay-border-radius",
+      "fallback": "var(--radius-control)"
+    },
+    {
+      "name": "--card-image-padding",
+      "fallback": "var(--space-gap-cluster)"
     },
     {
       "name": "--card-padding",

@@ -10,6 +10,8 @@ const structural = new Set(['0%', '50%', '100%', '1lh', '100vw', '100vh', '100dv
 export const allowedRawLengths = [
   // TopBar's padding shrinks with its container on narrow screens: a fluid unit, capped by a token.
   { file: 'src/components/TopBar/TopBar.css', value: '4cqi' },
+  // Card's padding shrinks with its container in very narrow space, such as a phone with enlarged text: capped by a token.
+  { file: 'src/components/Card/Card.css', value: '8cqi' },
   // ProgressBar's indeterminate segment covers a share of its track, not a design size.
   { file: 'src/components/ProgressBar/ProgressBar.css', value: '40%' },
   // The scroll fade's keyframe positions, just in from each end of the scroll range, not sizes.

@@ -116,6 +116,10 @@ export function SunIcon(iconProps: IconProps) {
   )
 }
 
+export function HeartIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><path d="M12 20 4.2 12.2a4.6 4.6 0 0 1 6.5-6.5L12 7l1.3-1.3a4.6 4.6 0 0 1 6.5 6.5Z" /></StrokeIcon>
+}
+
 export function HomeIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8" /></StrokeIcon>
 }

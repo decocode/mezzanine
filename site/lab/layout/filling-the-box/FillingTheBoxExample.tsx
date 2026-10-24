@@ -1,9 +1,7 @@
 // The example for the Lab's Filling the box page, in Layout.
 import { useState, type CSSProperties } from 'react'
 import { Checkbox, DemoArea } from '@decocode/mezzanine'
-import exampleImage from '../../../assets/example-picture.svg'
-import { CssNotes, ExampleHeading, ExampleText, PanelPicker, WidthDemo } from '../../shared/LabParts'
-import { exampleImageAlt } from '../../shared/labValues'
+import { CssNotes, ExampleHeading, ExampleText, examplePictureAlt, PanelPicker, useExamplePicture, WidthDemo } from '../../shared/LabParts'
 import { fillingTheBoxCssNotes } from './fillingTheBoxContent'
 
 const objectFitOptions = [
@@ -13,6 +11,7 @@ const objectFitOptions = [
 ] as const
 
 export function FillingTheBoxExample() {
+  const exampleImage = useExamplePicture()
   const [fit, setFit] = useState(false)
   const [objectFit, setObjectFit] = useState<(typeof objectFitOptions)[number]['value']>('fill')
   return <>
@@ -22,14 +21,14 @@ export function FillingTheBoxExample() {
     <WidthDemo label="Shrink to fit" className="lab-edge-demo" width="20rem" canOverflow code={fillingTheBoxCssNotes.imageFit.code} controls={
       <Checkbox isSelected={fit} onChange={setFit}>Use max-width: 100%</Checkbox>
     }>
-      <img src={exampleImage} alt={exampleImageAlt} width={480} height={240} className={fit ? 'lab-image-fit' : undefined} />
+      <img src={exampleImage} alt={examplePictureAlt} width={480} height={240} className={fit ? 'lab-image-fit' : undefined} />
     </WidthDemo>
     <CssNotes name="shrinking to fit" note={fillingTheBoxCssNotes.imageFit} showCode={false} />
     <ExampleHeading>Fill a shape</ExampleHeading>
     <ExampleText>The same wide picture in a square box. Each setting fills the square a different way.</ExampleText>
     <DemoArea codeView={fillingTheBoxCssNotes.objectFit.code} endPanel={<PanelPicker label="object-fit" options={objectFitOptions} value={objectFit} onChange={setObjectFit} />}>
       <div className="lab-object-fit-holder">
-        <img src={exampleImage} alt={exampleImageAlt} width={480} height={240} className="lab-object-fit" style={{ '--lab-object-fit': objectFit } as CSSProperties} />
+        <img src={exampleImage} alt={examplePictureAlt} width={480} height={240} className="lab-object-fit" style={{ '--lab-object-fit': objectFit } as CSSProperties} />
       </div>
     </DemoArea>
     <CssNotes name="filling a shape" note={fillingTheBoxCssNotes.objectFit} showCode={false} />

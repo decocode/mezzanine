@@ -59,6 +59,22 @@ shared button tokens in a theme. `npm run check:rules` rejects local overrides o
 button dimensions, padding, text and icon size, and inline button styles. Parent
 containers decide position and available space.
 
+## Card and Avatar
+
+Compose a Card from its parts, in the order people should see them:
+`CardImage` (a picture with overlays such as a `Badge` and a `ToggleButton`),
+`Avatar`, `CardTitle`, `Text` and `CardFooter` (details, then a last `Button`).
+
+- `CardImage` needs `src` and `alt`; pass `alt=""` when the title names the
+  card. `aspectRatio` is `16 / 9` by default. Each overlay sits on a solid
+  surface, so it stays readable over any picture.
+- Give `CardTitle` an `href` to make the card a link: the title is the only
+  link, and its pressable area covers the card. Buttons, toggles and links in
+  the card stay pressable. Card itself has no `href`.
+- `Avatar` takes the name as children, shown beside the picture. Without
+  visible children it needs `alt`. Without `src` it shows the name's initials.
+  `size` is `md` or `sm`.
+
 ## TopBar
 
 `TopBar` supplies the sticky layout and the mobile menu. Pass your branding as

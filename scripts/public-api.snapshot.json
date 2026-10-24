@@ -40,6 +40,18 @@
     "kind": "type"
   },
   {
+    "name": "Avatar",
+    "kind": "value"
+  },
+  {
+    "name": "AvatarProps",
+    "kind": "type"
+  },
+  {
+    "name": "AvatarSize",
+    "kind": "type"
+  },
+  {
     "name": "Badge",
     "kind": "value"
   },
@@ -108,7 +120,31 @@
     "kind": "value"
   },
   {
+    "name": "CardFooter",
+    "kind": "value"
+  },
+  {
+    "name": "CardFooterProps",
+    "kind": "type"
+  },
+  {
+    "name": "CardImage",
+    "kind": "value"
+  },
+  {
+    "name": "CardImageProps",
+    "kind": "type"
+  },
+  {
     "name": "CardProps",
+    "kind": "type"
+  },
+  {
+    "name": "CardTitle",
+    "kind": "value"
+  },
+  {
+    "name": "CardTitleProps",
     "kind": "type"
   },
   {
@@ -442,6 +478,10 @@
   {
     "name": "HeadingProps",
     "kind": "type"
+  },
+  {
+    "name": "HeartIcon",
+    "kind": "value"
   },
   {
     "name": "HomeIcon",

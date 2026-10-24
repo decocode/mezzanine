@@ -230,6 +230,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'code-block', label: 'Code block', path: '/code-block', status: 'implemented' },
           { id: 'disclosure', label: 'Disclosure', path: '/disclosure', status: 'implemented' },
           { id: 'card', label: 'Card', path: '/card', status: 'implemented' },
+          { id: 'avatar', label: 'Avatar', path: '/avatar', status: 'implemented' },
           { id: 'demo-area', label: 'Demo area', path: '/demo-area', status: 'implemented' },
           { id: 'separator', label: 'Separator', path: '/separator', status: 'implemented' },
           { id: 'virtualizer', label: 'Virtualizer', path: '/virtualizer', status: 'implemented' },
