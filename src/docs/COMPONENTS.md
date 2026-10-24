@@ -4,6 +4,26 @@ Notes for apps that use these components: what the component owns, what the app
 supplies, and the props that matter most. The documentation site has a page for
 each component with live examples.
 
+## Styles and the mezzanine layer
+
+An app imports the library's CSS once, from `@decocode/mezzanine/styles.css`.
+All of it, tokens and themes included, sits in one cascade layer named
+`mezzanine`. Any CSS the app writes outside a layer beats the library's, however
+specific the library's selectors are.
+
+- To restyle one part of one component, set its pointer first, such as
+  `--button-primary-background`. Pointers keep the component's states working.
+- For anything a pointer doesn't cover, a single class is enough. No stronger
+  selector or `!important` is needed.
+- An app that uses its own layers lists `mezzanine` among them, with element
+  resets before it, for example `@layer reset, mezzanine, app;`. A reset left
+  outside a layer, such as `button { all: unset; }`, would beat every component.
+  The first `@layer` statement the browser meets sets the order, so put it
+  before any stylesheet loads, for example in a `<style>` at the top of the
+  page's `<head>`. A bundler may load the library's CSS before the app's own.
+- The library's reduced-motion rules use `!important` inside the layer, so they
+  beat an app's own `!important`. The end user's setting always wins.
+
 ## Button
 
 Use the same `Button` for actions and for calls to action that navigate:

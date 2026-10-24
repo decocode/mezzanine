@@ -9,10 +9,12 @@
   min-width: 0;
 }
 
-/* The content of one section of the docs page template. No extra strength, so components such
-   as Card keep their own spacing between children. */
-:where(.lab-section-body) :where(h3, h4, p, ul) {
-  margin: 0;
+/* The content of one section of the docs page template. It sits in the site's base layer, below the
+   library, so components such as Card keep their own spacing between children. */
+@layer base {
+  :where(.lab-section-body) :where(h3, h4, p, ul) {
+    margin: 0;
+  }
 }
 
 .lab-section-body {

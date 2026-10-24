@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Mezzanine — an accessible, token-themed React Aria design system by DecoCode Ltd." />
     <title>Mezzanine — Design System by DecoCode</title>
+    <!-- Sets the cascade layer order before any stylesheet loads: the site's base defaults, then the library. -->
+    <style>@layer base, mezzanine;</style>
   </head>
   <body>
     <div id="root"></div>

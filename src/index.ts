@@ -5,8 +5,7 @@ export type {
   TabsProps, TabsRenderProps, TabListProps, TabListRenderProps,
   TabProps, TabRenderProps, TabPanelProps, TabPanelRenderProps,
 } from './components/Tabs/Tabs'
-import './tokens.css'
-import './styles.css'
+import './mezzanine.css'
 
 export { Badge } from './components/Badge/Badge'
 export { DemoArea } from './components/DemoArea/DemoArea'

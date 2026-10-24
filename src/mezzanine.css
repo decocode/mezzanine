@@ -1,0 +1,9 @@
+/*
+  Mezzanine's CSS entry point. Everything the library styles, tokens and themes included, sits in one
+  cascade layer named mezzanine. Any CSS an app writes outside a layer beats it, however specific the
+  library's selectors are, so an app can restyle a component with a single class. An app that uses its
+  own layers lists mezzanine among them, for example @layer reset, mezzanine, app;
+*/
+
+@import './tokens.css' layer(mezzanine);
+@import './styles.css' layer(mezzanine);

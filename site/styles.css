@@ -1,3 +1,8 @@
+/* The library's CSS sits in the mezzanine cascade layer, and the site's CSS outside any layer beats it,
+   as an app's would. Element defaults that must never restyle a component go in the base layer, which
+   comes before mezzanine. index.html sets that order before any stylesheet loads, because the build
+   can load the library's CSS first. */
+
 :root {
   /* PageHeading: existing page introduction widths and fluid title size. */
   --page-heading-max-width: var(--width-2xl);
@@ -26,23 +31,27 @@ body {
   color: var(--color-text);
 }
 
-a {
-  color: var(--color-link);
-  text-decoration-thickness: var(--border-width-baseline);
-  text-underline-offset: var(--underline-offset);
-}
+/* Plain links' defaults sit in the base layer, below the library, so they never restyle a component
+   that renders a link, such as Link, Card or the navigation. */
+@layer base {
+  a {
+    color: var(--color-link);
+    text-decoration-thickness: var(--border-width-baseline);
+    text-underline-offset: var(--underline-offset);
+  }
 
-a:hover {
-  color: var(--color-link-hovered);
-}
+  a:hover {
+    color: var(--color-link-hovered);
+  }
 
-a:active {
-  color: var(--color-link-pressed);
-}
+  a:active {
+    color: var(--color-link-pressed);
+  }
 
-a:focus-visible {
-  outline: var(--focus-ring-width) solid var(--color-focus);
-  outline-offset: var(--focus-ring-offset);
+  a:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-focus);
+    outline-offset: var(--focus-ring-offset);
+  }
 }
 
 .site-logo {
