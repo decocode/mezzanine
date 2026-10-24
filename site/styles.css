@@ -875,10 +875,6 @@ body {
 
 /* Keep the compact navigation until the layout fits at the current text size. */
 @container showcase (min-width: 48rem) {
-  .theme-toggle-group {
-    margin-inline-start: var(--space-2);
-  }
-
   .site-content {
     width: 100%;
     padding-inline: clamp(2rem, 5vw, 5rem);

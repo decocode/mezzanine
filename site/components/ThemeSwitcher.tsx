@@ -14,7 +14,6 @@ export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherPro
   return (
     <ToggleButtonGroup
       aria-label="Theme"
-      className="theme-toggle-group"
       size="sm"
       hierarchy="secondary"
       disallowEmptySelection
