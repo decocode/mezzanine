@@ -49,7 +49,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
       mainClassName="lab-page-main"
       mainTabIndex={-1}
     >
-        {isIndex ? <div className="lab-index">
+        {isIndex ? <div className="lab-index mz-prose">
           <Heading level={1} className="mz-text-heading-lg">Lab</Heading>
           <Text elementType="p" className="mz-text-body-md">Experimental sandbox. These candidates are illustrative, unapproved and not part of Mezzanine.</Text>
           <ul className="lab-experiment-list">

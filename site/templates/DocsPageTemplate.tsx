@@ -68,7 +68,7 @@ export function DocsPageTemplate({ title, description, sections, relatedPages = 
           <DocsDisclosureGroup labelledBy={section.id} sections={[section]} headingLevel={2} />
         </section>
       ) : (
-        <section key={section.id} aria-labelledby={section.id} className="component-section">
+        <section key={section.id} aria-labelledby={section.id} className="component-section mz-prose">
           <Heading id={section.id} level={2} className="mz-text-heading-md">{section.title}</Heading>
           {'sections' in section
             ? <DocsDisclosureGroup labelledBy={section.id} sections={section.sections} />
@@ -91,12 +91,12 @@ export function PageHeading({ title, description, children, className }: PageHea
   const paragraphs = Array.isArray(description) ? description : [description]
 
   return (
-    <div className={['page-heading-group', className].filter(Boolean).join(' ')}>
+    <div className={['page-heading-group mz-prose', className].filter(Boolean).join(' ')}>
       <Heading className="mz-text-display-md mz-text-emphasis" level={1}>
         {title}
       </Heading>
       {description != null && (
-        <div className="page-description">
+        <div className="page-description mz-prose">
           {paragraphs.map((paragraph, index) => (
             <p className="mz-text-body-lg" key={index}>{paragraph}</p>
           ))}

@@ -424,6 +424,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--card-padding",
       "fallback": "var(--space-padding-surface)"
+    },
+    {
+      "name": "--card-text-gap",
+      "fallback": "var(--space-gap-text)"
     }
   ],
   "Checkbox": [
@@ -768,6 +772,14 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--dialog-padding",
       "fallback": "var(--space-padding-surface)"
+    },
+    {
+      "name": "--dialog-paragraph-gap",
+      "fallback": "var(--space-gap-paragraph)"
+    },
+    {
+      "name": "--dialog-title-gap",
+      "fallback": "var(--space-gap-text)"
     }
   ],
   "Disclosure": [

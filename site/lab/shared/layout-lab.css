@@ -9,41 +9,28 @@
   min-width: 0;
 }
 
-/* The content of one section of the docs page template. It sits in the site's base layer, below the
-   library, so components such as Card keep their own spacing between children. */
+/* The content of one section of the docs page template. Text inside its examples has no margins of
+   its own. The reset sits in the site's base layer, below the library, so components such as Card
+   keep their own spacing between children. */
 @layer base {
   :where(.lab-section-body) :where(h3, h4, p, ul) {
     margin: 0;
   }
 }
 
+/* The body is also an mz-prose container, which spaces its headings, text and examples. */
 .lab-section-body {
   display: grid;
   /* minmax(0, 1fr) lets wide content such as tables scroll inside its wrapper instead of widening the page. */
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-4);
   min-width: 0;
 }
 
 /* How it works paragraphs and Browser support, which ContentPage places straight into the section:
-   the same spacing and line length the Lab's explanations have always had. */
+   the line length the Lab's explanations have always had. */
 .lab-layout .component-section > p,
 .lab-layout .component-section > section > p {
   max-inline-size: 70ch;
-  margin: 0;
-}
-
-.lab-layout .component-section > p + p {
-  margin-block-start: var(--space-3);
-}
-
-.lab-layout .component-section > section {
-  margin-block-start: var(--space-8);
-}
-
-/* Extra space above each example, so one example's frame doesn't run into the next one's heading. */
-.lab-layout .lab-example-heading {
-  margin-block-start: var(--space-8);
 }
 
 /* Child pages as Cards: as many columns as fit, none narrower than 16rem, equal heights per row. */
@@ -58,11 +45,6 @@
 .lab-child-page-cards > li,
 .lab-child-page-cards .mz-card {
   block-size: 100%;
-}
-
-/* A page's second-level headings start a new part, so they get more space above. */
-.lab-layout .css-notes-heading {
-  margin-block-start: var(--space-4);
 }
 
 /* An example with a caption naming it, for side-by-side comparisons. */

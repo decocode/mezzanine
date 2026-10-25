@@ -22,6 +22,15 @@
   --space-gap-control: var(--space-2);
   --space-gap-field: var(--space-2);
   --space-gap-cluster: var(--space-4);
+  /* Text that belongs together, such as a heading and the text it introduces, a label and its help
+     text, or a title and its metadata. Closer than the gap between groups, so the grouping shows. */
+  --space-gap-text: var(--space-2);
+  /* Running text, as mz-prose spaces it: between paragraphs and lists, and above a heading. The space
+     above a heading is always clearly more than below it, so a heading belongs to what follows. */
+  --space-gap-paragraph: var(--space-4);
+  --space-before-heading-sm: var(--space-6);
+  --space-before-heading-md: var(--space-8);
+  --space-before-heading-lg: var(--space-12);
   /* Padding inside a control or row, such as an input, a list row or a table cell, and inside a
      surface, such as a card or dialog. */
   --space-padding-control-block: var(--space-2);

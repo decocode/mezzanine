@@ -1,17 +1,16 @@
 .lab-page-main { overflow-wrap: anywhere; }
 .lab-page-main:focus-visible { outline: var(--focus-ring-width) solid var(--color-focus); outline-offset: var(--focus-ring-offset-inset); }
-.lab-index { display: grid; gap: var(--space-6); }
-.lab-index :where(h1, h2, p) { margin: var(--space-0); }
+/* The index is an mz-prose container, which spaces its title, introduction and list. */
+.lab-experiment-list :where(h2, p) { margin: var(--space-0); }
 .lab-experiment-list {
   display: grid;
   gap: var(--space-6);
-  margin: var(--space-0);
   padding: var(--space-0);
   list-style: none;
 }
 .lab-experiment-list li {
   display: grid;
-  gap: var(--space-3);
+  gap: var(--space-gap-text);
   padding-block: var(--space-5);
   border-block-start: var(--border-width-baseline) solid var(--color-border);
 }

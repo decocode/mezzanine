@@ -64,7 +64,7 @@ export default function RadioGroupPage() {
               </TableBody>
             </Table>
           </div>
-          <section aria-labelledby="radio-group-read-only">
+          <section aria-labelledby="radio-group-read-only" className="mz-prose">
             <h3 id="radio-group-read-only" className="mz-text-heading-sm">{radioGroupStateExamples.readOnly.title}</h3>
             <p className="component-section-description"><RichText text={radioGroupStateExamples.readOnly.description} /></p>
             <DemoArea>
@@ -75,7 +75,7 @@ export default function RadioGroupPage() {
               </RadioGroup>
             </DemoArea>
           </section>
-          <section aria-labelledby="radio-group-validation">
+          <section aria-labelledby="radio-group-validation" className="mz-prose">
             <h3 id="radio-group-validation" className="mz-text-heading-sm">{radioGroupStateExamples.validation.title}</h3>
             <p className="component-section-description"><RichText text={radioGroupStateExamples.validation.description} /></p>
             <DemoArea>

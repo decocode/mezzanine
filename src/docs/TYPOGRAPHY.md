@@ -133,11 +133,34 @@ for normal reading; its `--line-height-body-md` default is `1.5`.
 Other styles, including headings and labels, use their own paired values.
 There is no need to set line height separately.
 
+## Running text: mz-prose
+
+Put `mz-prose` on a container of running text, such as an article or a settings
+description, and its direct children are spaced by how they belong together:
+
+- Paragraphs, lists and other blocks sit `--space-gap-paragraph` apart.
+- A heading sits `--space-gap-text` from the text it introduces.
+- Above a heading there is more space: `--space-before-heading-lg` for an `h2`,
+  `-md` for an `h3` and `-sm` for an `h4` to `h6`.
+- The first and last children add no space outside the container, so it sits
+  cleanly inside a Card, a Disclosure or a page section.
+
+`mz-prose` sets space only. Text styles still come from the `mz-text-*` classes
+or the base text styles, and reading widths and page layout belong to the app.
+
+```tsx
+<div className="mz-prose">
+  <h2>Heading</h2>
+  <p className="mz-text-body-md">Paragraph.</p>
+  <ul className="mz-text-body-md">…</ul>
+</div>
+```
+
 ## Lists
 
-The library supplies body-styled lists and inline code, not a complete prose
-container. Section spacing and reading widths belong to the consuming app;
-importing Mezzanine does not supply a page-layout recipe.
+The library supplies body-styled lists and inline code. For the space between
+them and the text around them, use `mz-prose`. Reading widths belong to the
+consuming app; importing Mezzanine does not supply a page-layout recipe.
 
 Unordered lists use bullet points; ordered lists use numbers. Both share the
 same body typography and spacing.

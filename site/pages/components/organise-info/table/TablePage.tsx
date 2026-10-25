@@ -23,7 +23,7 @@ export default function TablePage() {
       parts={{
         example: (
           <div className="table-example-group">
-            <div>
+            <div className="mz-prose">
               <h3 id="table-single-selection-heading" className="mz-text-heading-sm">{tableExampleGroups.singleSelection}</h3>
               <p className="component-section-description">{tableExampleGroups.disabledRowNote}</p>
               <DemoArea>
@@ -54,7 +54,7 @@ export default function TablePage() {
                 </div>
               </DemoArea>
             </div>
-            <div>
+            <div className="mz-prose">
               <h3 id="table-multiple-selection-heading" className="mz-text-heading-sm">{tableExampleGroups.multipleSelection}</h3>
               <DemoArea>
                 <div className="documentation-table table-example">

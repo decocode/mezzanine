@@ -19,7 +19,8 @@
 }
 
 .mz-dialog .mz-heading[slot='title'] {
-  margin: 0 0 var(--dialog-content-gap, var(--space-gap-cluster));
+  /* The title sits close to the text it introduces; the actions are a separate group further down. */
+  margin: 0 0 var(--dialog-title-gap, var(--space-gap-text));
   font-family: var(--font-family-body);
   font-size: var(--font-size-title-lg);
   font-weight: var(--font-weight-semibold);
@@ -29,7 +30,11 @@
 }
 
 .mz-dialog > p {
-  margin: 0 0 var(--dialog-content-gap, var(--space-gap-cluster));
+  margin: 0;
+}
+
+.mz-dialog > p + p {
+  margin-block-start: var(--dialog-paragraph-gap, var(--space-gap-paragraph));
 }
 
 .mz-dialog-actions {

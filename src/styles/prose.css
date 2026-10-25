@@ -1,0 +1,36 @@
+/*
+  mz-prose: put it on a container of running text, such as an article or a settings description, and
+  everything inside is spaced by how it belongs together. Paragraphs and lists sit a paragraph gap
+  apart. A heading has more space above it than below it, so it belongs to the text it introduces.
+  The first and last elements add no space outside the container, so it sits cleanly in a Card, a
+  Disclosure or a page section. Only direct children are spaced; their own insides keep their spacing.
+*/
+.mz-prose > * {
+  margin-block: 0;
+}
+
+.mz-prose > * + * {
+  margin-block-start: var(--prose-gap, var(--space-gap-paragraph));
+}
+
+.mz-prose > * + :is(h4, h5, h6) {
+  margin-block-start: var(--prose-heading-sm-gap, var(--space-before-heading-sm));
+}
+
+.mz-prose > * + h3 {
+  margin-block-start: var(--prose-heading-md-gap, var(--space-before-heading-md));
+}
+
+.mz-prose > * + h2 {
+  margin-block-start: var(--prose-heading-lg-gap, var(--space-before-heading-lg));
+}
+
+/* What a heading introduces sits closest to it, including a smaller heading straight after it. */
+.mz-prose > :is(h2, h3, h4, h5, h6) + * {
+  margin-block-start: var(--prose-heading-gap, var(--space-gap-text));
+}
+
+/* A hidden template, which React Aria renders for some collections, isn't a neighbour to space from. */
+.mz-prose > template:first-child + * {
+  margin-block-start: 0;
+}

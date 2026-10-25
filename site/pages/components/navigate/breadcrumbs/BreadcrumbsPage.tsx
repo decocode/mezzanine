@@ -11,7 +11,7 @@ export default function BreadcrumbsPage() {
         example: (
           <DemoArea>
             <div className="breadcrumbs-examples">
-              <div>
+              <div className="mz-prose">
                 <h3 className="mz-text-heading-sm">{breadcrumbsExamples.hierarchy.title}</h3>
                 <p className="component-section-description"><RichText text={breadcrumbsExamples.hierarchy.description} /></p>
                 <nav aria-label="Hierarchy example breadcrumbs">
@@ -28,7 +28,7 @@ export default function BreadcrumbsPage() {
                   </Breadcrumbs>
                 </nav>
               </div>
-              <div>
+              <div className="mz-prose">
                 <h3 className="mz-text-heading-sm">{breadcrumbsExamples.disabled.title}</h3>
                 <p className="component-section-description"><RichText text={breadcrumbsExamples.disabled.description} /></p>
                 <nav aria-label="Disabled example breadcrumbs">

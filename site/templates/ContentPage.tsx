@@ -39,7 +39,7 @@ export function ContentPage({ content, parts = {}, showContents }: ContentPagePr
       content: <>
         {section.intro && <Blocks blocks={section.intro} className="component-section-description" />}
         {section.body && <Blocks blocks={section.body} />}
-        {subheadings.map((subheading) => <section key={subheading.key} aria-labelledby={subheading.id}>
+        {subheadings.map((subheading) => <section key={subheading.key} aria-labelledby={subheading.id} className="mz-prose">
           <Heading id={subheading.id} level={3} className="mz-text-heading-sm">{subheading.title}</Heading>
           <Blocks blocks={subheading.body} />
         </section>)}

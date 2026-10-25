@@ -9,7 +9,7 @@ import { childPageCardAction, labBadgeLabel } from './labValues'
 // details, which open with Also known as when the name is agreed. The wrapper gives examples the Lab's spacing.
 export function LabContentPage({ content, parts }: { content: DocsPageContent; parts: Partial<Record<string, ReactNode>> }) {
   return <div className="lab-layout">
-    <ContentPage content={content} parts={Object.fromEntries(Object.entries(parts).map(([key, part]) => [key, <div className="lab-section-body">{part}</div>]))} />
+    <ContentPage content={content} parts={Object.fromEntries(Object.entries(parts).map(([key, part]) => [key, <div className="lab-section-body mz-prose">{part}</div>]))} />
   </div>
 }
 

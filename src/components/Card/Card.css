@@ -34,6 +34,15 @@
   margin-block-start: var(--card-content-gap, var(--space-gap-cluster));
 }
 
+/* Text that belongs together, an Avatar's name, the title and the text it introduces, sits closer than
+   the card's groups, so the grouping shows. */
+/* A linked title renders its arrow straight after it, so the text after the arrow counts too. */
+.mz-card > .mz-avatar + :is(.mz-heading, .mz-card-title),
+.mz-card > :is(.mz-heading, .mz-card-title) + *,
+.mz-card > .mz-card-title + .mz-card-arrow + * {
+  margin-block-start: var(--card-text-gap, var(--space-gap-text));
+}
+
 /* TYPOGRAPHY.md: a heading inside a card or panel uses title-md, a CardTitle included. */
 .mz-card > :is(.mz-heading, .mz-card-title) {
   font-family: var(--font-family-body);

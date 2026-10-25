@@ -17,7 +17,7 @@ export function DocsDisclosureGroup({ labelledBy, sections, headingLevel = 3 }: 
       {sections.map(({ id, title, content }) => (
         <Disclosure key={id} id={id} data-documentation-disclosure={id}>
           <DisclosureHeader id={id} level={headingLevel}>{title}</DisclosureHeader>
-          <DisclosurePanel>{content}</DisclosurePanel>
+          <DisclosurePanel className="mz-prose">{content}</DisclosurePanel>
         </Disclosure>
       ))}
     </DisclosureGroup>

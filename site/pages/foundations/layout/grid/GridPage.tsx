@@ -16,7 +16,7 @@ export default function GridPage() {
       content={gridContent}
       parts={{
         examples: gridExamples.map(({ key, title }) => (
-          <section key={key} aria-labelledby={`grid-examples-${key}`}>
+          <section key={key} aria-labelledby={`grid-examples-${key}`} className="mz-prose">
             <Heading id={`grid-examples-${key}`} level={3} className="mz-text-heading-sm">{title}</Heading>
             <div className="example-stack">{exampleParts[key]}</div>
           </section>

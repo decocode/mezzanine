@@ -38,7 +38,7 @@ export default function TextStylesPage() {
         example: (
           <>
             {textRoles.map((role) => (
-              <section key={role.id} aria-labelledby={`text-styles-${role.id}`}>
+              <section key={role.id} aria-labelledby={`text-styles-${role.id}`} className="mz-prose">
                 <h3 id={`text-styles-${role.id}`} className="mz-text-heading-sm">{role.label}</h3>
                 <p className="mz-text-body-md">{role.purpose}</p>
                 <div className="documentation-table text-style-table">

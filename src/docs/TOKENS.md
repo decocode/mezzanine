@@ -275,11 +275,20 @@ Components point at these roles rather than at the scale, named by how closely
 things belong together: inside a control is closest, then a field, then a cluster
 of components.
 
+Text follows the same idea. Text that belongs together, such as a heading and
+the text it introduces, sits at `--space-gap-text`, closer than the groups around
+it. In running text, the space above a heading is always clearly more than below
+it, so a heading belongs to what follows. The same relationship always gets the
+same role, never a value typed into one component or page.
+
 | Token | Default | Meaning |
 | --- | --- | --- |
 | `--space-gap-control` | `--space-2` | An icon or box and its label, inside one control |
 | `--space-gap-field` | `--space-2` | A label, its input and its help text |
 | `--space-gap-cluster` | `--space-4` | Components in a group, such as the blocks in a card |
+| `--space-gap-text` | `--space-2` | Text that belongs together, such as a heading and the text it introduces |
+| `--space-gap-paragraph` | `--space-4` | Between paragraphs and lists in running text (`mz-prose`) |
+| `--space-before-heading-sm`, `-md`, `-lg` | `--space-6`, `--space-8`, `--space-12` | Above an `h4`–`h6`, an `h3` and an `h2` in running text (`mz-prose`) |
 | `--space-padding-control-block`, `-inline` | `--space-2`, `--space-3` | Inside a control or row: an input, a list row, a table cell |
 | `--space-padding-surface` | `--space-6` | Inside a surface, such as a card or dialog |
 | `--space-padding-area` | `--space-6` | Between the edge of an app area, such as a Panel or the TopBar, and its content |

@@ -27,18 +27,18 @@ export default function TableOfContentsPage() {
       parts={{
         example: (<>
           <DemoArea>
-            <div className="table-of-contents-example">
+            <div className="table-of-contents-example mz-prose">
               <TableOfContents
                 heading="Example contents"
                 headingLevel={3}
                 sections={exampleSections}
               />
               {exampleSections.map(({ id, label, children }) => (
-                <section aria-labelledby={id} key={id}>
+                <section aria-labelledby={id} key={id} className="mz-prose">
                   <h3 className="mz-text-heading-sm" id={id}>{label}</h3>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                   {children.map((child) => (
-                    <section aria-labelledby={child.id} key={child.id}>
+                    <section aria-labelledby={child.id} key={child.id} className="mz-prose">
                       <h4 className="mz-text-title-md" id={child.id}>{child.label}</h4>
                       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </section>

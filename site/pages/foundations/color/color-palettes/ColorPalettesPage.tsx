@@ -88,7 +88,7 @@ function ColorPalette({
 }) {
   return (
     <section className="color-palette" aria-labelledby={`${palette.id}-palette-heading`}>
-      <div className="color-palette-heading">
+      <div className="color-palette-heading mz-prose">
         <h3 id={`${palette.id}-palette-heading`} className="mz-text-title-md">
           {palette.label}
         </h3>
@@ -100,7 +100,7 @@ function ColorPalette({
       {palette.details && (
         <Disclosure className="color-palette-disclosure">
           <DisclosureHeader level={4}>{palette.details.label}</DisclosureHeader>
-          <DisclosurePanel>
+          <DisclosurePanel className="mz-prose">
             {palette.details.content.map((paragraph) => (
               <p className="mz-text-body-sm" key={paragraph}>{paragraph}</p>
             ))}
@@ -135,7 +135,7 @@ export default function ColorPalettesPage() {
                 {palette.details && (
                   <Disclosure className="color-palette-disclosure">
                     <DisclosureHeader level={4}>{palette.details.label}</DisclosureHeader>
-                    <DisclosurePanel>
+                    <DisclosurePanel className="mz-prose">
                       {palette.details.content.map((paragraph) => (
                         <p className="mz-text-body-sm" key={paragraph}>{paragraph}</p>
                       ))}

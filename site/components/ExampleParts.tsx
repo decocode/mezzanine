@@ -21,7 +21,7 @@ export function ExampleText({ children }: { children: ReactNode }) {
 // The notes and code for one CssNote, without a heading. Without showCode, the code is left out, for an
 // example whose DemoArea already shows it in its Code tab.
 export function CssNotesBody({ note, showCode = true }: { note: CssNote; showCode?: boolean }) {
-  return <div className="css-notes-body">
+  return <div className="css-notes-body mz-prose">
     {note.isExample && <Text elementType="p" className="mz-text-body-md">This CSS is for an app to use; the example on this page doesn’t use it.</Text>}
     {note.paragraphs.map((paragraph, index) => typeof paragraph === 'string'
       ? <Text key={index} elementType="p" className="mz-text-body-md"><RichText text={paragraph} /></Text>
@@ -34,7 +34,7 @@ export function CssNotesBody({ note, showCode = true }: { note: CssNote; showCod
 // with a single example under a section heading, or level 2 directly under the page title.
 export function CssNotes({ name, note, level = 4, showCode = true }: { name: string; note: CssNote; level?: 2 | 3 | 4; showCode?: boolean }) {
   const className = level === 2 ? 'css-notes-heading mz-text-heading-md' : level === 3 ? 'css-notes-heading mz-text-heading-sm' : 'mz-text-title-md'
-  return <div className="css-notes">
+  return <div className="css-notes mz-prose">
     <Heading level={level} className={className}>The CSS behind {name}</Heading>
     <CssNotesBody note={note} showCode={showCode} />
   </div>

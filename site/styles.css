@@ -54,6 +54,14 @@ body {
   }
 }
 
+/* The site's lists of cards, samples and links have no margins of their own. The reset sits in the base
+   layer, so an mz-prose container around them can still space them. */
+@layer base {
+  :where(.page-cards, .token-scale, .component-reference-links, .icon-grid) {
+    margin: 0;
+  }
+}
+
 .site-logo {
   display: inline-block;
   flex: none;
@@ -155,7 +163,7 @@ body {
 
 .landing-hero h1 {
   overflow-wrap: anywhere;
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-gap-paragraph);
 }
 
 .landing-hero-description {
@@ -191,7 +199,7 @@ body {
 }
 
 .section-label {
-  margin: 0 0 var(--space-2);
+  margin: 0 0 var(--space-gap-text);
   color: var(--color-text-muted);
 }
 
@@ -201,23 +209,24 @@ body {
 }
 
 .color-palette-category > h3 {
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-gap-text);
 }
 
 .core-color-palettes > .color-palette-category:last-child {
   margin-bottom: 0;
 }
 
+/* Each category opens with its heading, so it takes a heading's space above. */
 .color-palette-category {
-  margin-block-start: var(--space-8);
-  margin-bottom: var(--space-8);
+  margin-block-start: var(--space-before-heading-md);
+  margin-bottom: var(--space-before-heading-md);
 }
 
 .color-palette-list {
   display: grid;
   gap: var(--space-12);
   min-width: 0;
-  margin-block-start: var(--space-8);
+  margin-block-start: var(--space-before-heading-md);
 }
 
 .color-palette {
@@ -228,26 +237,12 @@ body {
   margin-bottom: var(--space-4);
 }
 
-.color-palette-heading h3,
-.color-palette-heading p {
-  margin: 0;
-}
-
 .color-palette-heading p {
   max-width: var(--line-length);
-  margin-top: var(--space-4);
   color: var(--color-text-muted);
 }
 
 .color-palette-disclosure {
-  margin-top: var(--space-2);
-}
-
-.color-palette-disclosure p {
-  margin: 0;
-}
-
-.color-palette-disclosure p + p {
   margin-top: var(--space-2);
 }
 
@@ -313,7 +308,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
   gap: var(--space-4);
-  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -327,7 +321,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
   gap: var(--space-4);
-  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -388,24 +381,8 @@ body {
   max-inline-size: var(--line-length);
 }
 
-/* The grid's gap alone spaces the heading, paragraphs, lists and code, at the page's paragraph gap.
-   A grid doesn't overlap its children's margins, so they're cleared to stop the space doubling. */
-.css-notes,
-.css-notes-body {
-  display: grid;
-  gap: var(--space-4);
-}
-
-.css-notes > *,
-.css-notes-body > * {
-  margin: 0;
-}
-
-/* More space above the heading than below it, so it reads as introducing the notes, not ending the demo. */
-.css-notes {
-  margin-block-start: var(--space-6);
-}
-
+/* The notes and their body are mz-prose containers, so the heading sits close to its notes and the
+   paragraphs, lists and code a paragraph gap apart. */
 .css-notes-body {
   max-inline-size: var(--line-length);
 }
@@ -423,8 +400,14 @@ body {
   margin: 0;
 }
 
-.example-stack > .css-notes {
-  margin-block-start: var(--space-6);
+/* The notes open with a heading, so in an example grid the grid's gap and this margin add up to a
+   heading's space above. */
+:is(.example-stack, .layers-example) > .css-notes:has(> h3) {
+  margin-block-start: calc(var(--space-before-heading-md) - var(--space-4));
+}
+
+:is(.example-stack, .layers-example) > .css-notes:has(> h4) {
+  margin-block-start: calc(var(--space-before-heading-sm) - var(--space-4));
 }
 
 /* An example's frame inside a DemoArea (see WidthFrame.tsx), so layouts can be seen wrapping and
@@ -549,11 +532,6 @@ body {
   width: 50%;
 }
 
-/* Space below a CodeBlock that sits between paragraphs. CodeBlock has no margin of its own. */
-.docs-code-block {
-  margin-block-end: var(--space-4);
-}
-
 .text-style-table {
   container-type: inline-size;
 }
@@ -609,15 +587,11 @@ body {
   line-height: var(--line-height-body-sm);
 }
 
+/* Each group opens with a heading, so the groups sit a heading's space apart. */
 .table-example-group {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-8);
-  margin-block-start: var(--space-8);
-}
-
-.table-example-group h3 {
-  margin: 0 0 var(--space-4);
+  gap: var(--space-before-heading-md);
 }
 
 .table-example-group > div {
@@ -638,89 +612,43 @@ body {
   scroll-margin-top: var(--space-8);
 }
 
-.table-of-contents-example {
-  margin-bottom: var(--space-4);
-}
-
-.table-of-contents-example section + section {
-  margin-top: var(--space-8);
-}
-
-.table-of-contents-example section > :is(h3, h4) {
-  margin: 0 0 var(--space-2);
-}
-
-.table-of-contents-example section > p {
-  margin: 0 0 var(--space-4);
-}
-
 .component-section {
   margin-bottom: var(--space-16);
 }
 
 /* A collapsible section reads as part of the text above it, so it sits a paragraph's gap below. */
 .component-section:has(+ .component-section-collapsible) {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-gap-paragraph);
 }
 
+/* A page section is an mz-prose container, and so are its sub-sections and Technical details panels:
+   mz-prose spaces their text. Only the space between whole page sections is set here. */
 .component-section > h2 {
-  margin: 0 0 var(--space-4);
   overflow-wrap: anywhere;
 }
 
-/* Documentation rhythm: 4rem between major sections, 3rem before topics,
-   2rem before subtopics, and 1rem within groups. Keep component examples untouched. */
-.component-section > h3 {
-  margin: var(--space-12) 0 var(--space-4);
+/* mz-prose spaces headings by the element itself, so a sub-section or CSS notes that open with a
+   heading take that heading's space above, unless they follow a heading. */
+.mz-prose > :not(h2, h3, h4, h5, h6) + :is(section, .css-notes, .table-example-group):has(> h3:first-child, > :first-child > h3:first-child) {
+  margin-block-start: var(--space-before-heading-md);
 }
 
-.component-section > h4 {
-  margin: var(--space-8) 0 var(--space-4);
-}
-
-.component-section > section {
-  margin-block-start: var(--space-12);
-}
-
-/* A sub-section straight under its section's heading sits closer to it than to the sub-sections that
-   follow. (Its margin overlaps the heading's, so this sets the whole gap.) */
-.component-section > h2 + section {
-  margin-block-start: var(--space-6);
-}
-
-.component-section > section > :is(h3, h4) {
-  margin: 0 0 var(--space-4);
-}
-
-.component-section > section > h4:not(:first-child) {
-  margin-block-start: var(--space-8);
-}
-
-.component-section > :last-child,
-.component-section > section > :last-child {
-  margin-block-end: 0;
-}
-
-/* An example or table after a subheading's text belongs to that subheading, so it keeps the
-   within-group gap rather than touching the text. */
-.component-section > section + :not(section) {
-  margin-block-start: var(--space-4);
+.mz-prose > :not(h2, h3, h4, h5, h6) + :is(section, .css-notes):has(> :is(h4, h5, h6):first-child) {
+  margin-block-start: var(--space-before-heading-sm);
 }
 
 /* A section's introduction reads as ordinary body text; only the page subtitle under the h1 is muted. */
 .component-section-description {
   max-width: var(--line-length);
-  margin: 0 0 var(--space-4);
 }
 
 .component-section :where(ul, ol):is(.mz-text-body-lg, .mz-text-body-md, .mz-text-body-sm) {
   max-inline-size: var(--line-length);
 }
 
-/* A page's demos sit below their introduction, up to the wide content width. */
+/* A page's demos reach the wide content width. The text container around them spaces them. */
 .mz-demo-area {
   max-width: var(--docs-wide-content-width);
-  margin-top: var(--space-4);
 }
 
 .top-bar-example {
@@ -735,7 +663,7 @@ body {
 }
 
 .component-example-feedback {
-  margin: var(--space-4) 0 0;
+  margin: var(--space-gap-paragraph) 0 0;
 }
 
 .foundations-page-list {
@@ -755,7 +683,6 @@ body {
   display: grid;
   gap: var(--space-3);
   max-width: var(--line-length);
-  margin: 0;
   padding-inline-start: var(--space-5);
 }
 
@@ -774,14 +701,10 @@ body {
   min-inline-size: 0;
 }
 
+/* Each example opens with a heading, so the examples sit a heading's space apart. */
 .breadcrumbs-examples {
   display: grid;
-  gap: var(--space-8);
-}
-
-.breadcrumbs-examples h3,
-.breadcrumbs-examples p {
-  margin: 0 0 var(--space-4);
+  gap: var(--space-before-heading-md);
 }
 
 .breadcrumbs-examples p {
@@ -798,7 +721,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
   gap: var(--space-4);
-  margin: 0;
   padding: 0;
   list-style: none;
 }
@@ -899,24 +821,15 @@ body {
   margin-bottom: var(--space-16);
 }
 
+/* The group and its description are mz-prose containers, which space the title and paragraphs. */
 .page-heading-group h1 {
   overflow-wrap: anywhere;
-  margin: var(--space-0) var(--space-0) var(--space-4);
   font-size: var(--page-heading-title-font-size);
 }
 
 .page-heading-group .page-description {
   max-width: var(--page-heading-description-max-width);
-  margin: var(--space-0);
   color: var(--color-text-muted);
-}
-
-.page-heading-group .page-description p {
-  margin: var(--space-0);
-}
-
-.page-heading-group .page-description p + p {
-  margin-top: var(--space-4);
 }
 
 /* Settings for an example are grouped separately from the demonstrated component. */
@@ -1001,20 +914,11 @@ body {
   block-size: var(--width-xs);
 }
 
-/* A demo with a heading above it: the heading sits close to its demo, and each pair has room around it. */
+/* A demo with a heading and text above it, in an mz-prose container. Each one opens with its heading,
+   so they sit a heading's space apart. */
 .demo-headed-list {
   display: grid;
-  gap: var(--space-8);
-  margin-block-start: var(--space-4);
-}
-
-.demo-headed {
-  display: grid;
-  gap: var(--space-2);
-}
-
-.demo-headed > :is(h3, p, .mz-demo-area) {
-  margin: 0;
+  gap: var(--space-before-heading-md);
 }
 
 .demo-headed > p {
