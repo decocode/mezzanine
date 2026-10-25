@@ -20,4 +20,5 @@ export const layoutPages = [
   { label: 'Grid', href: '/layout/grid', description: 'When items are arranged in neat rows and columns.' },
   { label: 'Subgrid', href: '/layout/subgrid', description: 'When the parts inside items line up with the items beside them.' },
   { label: 'Container queries', href: '/layout/container-queries', description: 'When a component fits the space its container gives it.' },
+  { label: 'Reading order', href: '/layout/reading-order', description: 'When the order still makes sense to keyboard and screen reader users.' },
 ]

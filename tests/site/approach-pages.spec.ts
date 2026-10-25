@@ -6,7 +6,7 @@ import { expectNoPageOverflow, setTextSize } from '../display'
 import { mediaQueriesCssNotes } from '../../site/pages/foundations/interaction/media-queries/mediaQueriesContent'
 import { safeAreasCssNotes } from '../../site/pages/foundations/interaction/safe-areas/safeAreasContent'
 import { supportsCssNotes } from '../../site/pages/foundations/interaction/supports/supportsContent'
-import { readingOrderCssNotes } from '../../site/pages/foundations/text/reading-order/readingOrderContent'
+import { readingOrderCssNotes } from '../../site/pages/foundations/layout/reading-order/readingOrderContent'
 import { ratioPairCssNotes } from '../../site/pages/foundations/layout/ratio-pair/ratioPairContent'
 import { rowCssNotes } from '../../site/pages/foundations/layout/row/rowContent'
 import { rowWrapCssNotes } from '../../site/pages/foundations/layout/row-wrap/rowWrapContent'
@@ -27,7 +27,7 @@ const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string
   { path: '/interaction/media-queries', notes: mediaQueriesCssNotes },
   { path: '/interaction/safe-areas', notes: safeAreasCssNotes, stylesheet: 'site/pages/foundations/interaction/safe-areas/safeAreas.css' },
   { path: '/interaction/supports', notes: supportsCssNotes },
-  { path: '/text/reading-order', notes: readingOrderCssNotes, stylesheet: 'site/pages/foundations/text/reading-order/readingOrder.css' },
+  { path: '/layout/reading-order', notes: readingOrderCssNotes, stylesheet: 'site/pages/foundations/layout/reading-order/readingOrder.css' },
   { path: '/layout/ratio-pair', notes: ratioPairCssNotes, stylesheet: 'src/styles/layout.css' },
   { path: '/layout/row', notes: rowCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
   { path: '/layout/row-wrap', notes: rowWrapCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
@@ -89,7 +89,7 @@ test('Style priority chips show which rule won', async ({ page }) => {
 
 // Checks that reversing the row changes only what's seen: Tab still follows the HTML.
 test('Reading order follows the HTML when the row is reversed', async ({ page }) => {
-  await page.goto('/text/reading-order')
+  await page.goto('/layout/reading-order')
   const buttons = page.locator('.reading-order-row').getByRole('button')
   await expect(buttons).toHaveCount(3)
   const leftToRight = () => buttons.evaluateAll(items => items.map(item => ({ name: item.textContent, left: item.getBoundingClientRect().left })).sort((a, b) => a.left - b.left).map(item => item.name))

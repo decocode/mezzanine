@@ -41,7 +41,7 @@
   letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-md);
   text-transform: var(--text-transform-body);
-  /* No automatic hyphens (Foundations › Text): words split across lines are harder to read.
+  /* No automatic hyphens (Foundations › Typography): words split across lines are harder to read.
      Components break a word only when it can't fit at all, with overflow-wrap: anywhere. */
   /* macOS draws text heavier by default, and light text on a dark background looks bolder still.
      The thinner rendering keeps text at its intended weight; other systems ignore these lines. */

@@ -59,7 +59,7 @@ export const codeBlockContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'Inline code', href: '/typography/inline-code' },
+    { label: 'Semantic HTML', href: '/typography/semantic-html' },
     { label: 'Shape', href: '/shape' },
     { label: 'Color', href: '/color' },
   ],

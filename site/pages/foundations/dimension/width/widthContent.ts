@@ -41,7 +41,7 @@ export const widthContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Aspect ratio', href: '/dimension/aspect-ratio' },
-    { label: 'Reading width', href: '/text/reading-width' },
+    { label: 'Lines and words', href: '/typography/lines-and-words' },
     { label: 'Accessibility', href: '/accessibility' },
     { label: 'Panel', href: '/panel' },
     { label: 'Tooltip', href: '/tooltip' },

@@ -214,7 +214,7 @@ must now supply their own code-block styles.
 
 Common patterns should reuse the foundation instead of creating new sizes:
 
-<!-- The site's Typography page shows this table from site/pages/foundations/text/typography/typographyContent.ts.
+<!-- The site's Typography page shows this table from site/pages/foundations/typography/typographyContent.ts.
      npm run check:rules fails if the two differ, so change both together. -->
 
 | Text | Style |

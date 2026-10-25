@@ -41,7 +41,7 @@ test('Table of contents indents nested links from the start of the line in right
 // Checks the Reading direction example: in right to left, the logical box's border moves to the right
 // and the physical box's border stays on the left.
 test('Reading direction shows logical sides mirroring and physical sides staying put', async ({ page }) => {
-  await page.goto('/text/reading-direction')
+  await page.goto('/typography/global-and-languages')
   const physical = page.locator('.text-direction-physical')
   const logical = page.locator('.text-direction-logical')
   await expect(logical).toHaveCSS('border-left-style', 'solid')

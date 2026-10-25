@@ -1,4 +1,4 @@
-/* Text tokens: how text behaves, the same in every theme (Foundations › Text). */
+/* Text tokens: how text behaves, the same in every theme (Foundations › Typography). */
 
 :where(:root) {
   /* The longest a line of reading text should get. ch follows the current font, so the limit adapts to each theme's typeface. */
