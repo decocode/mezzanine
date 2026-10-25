@@ -1,0 +1,27 @@
+/* The Lab's Text spacing page. Illustrative and unapproved: the candidate role is scoped to this page
+   and isn't a library token. */
+.lab-text-spacing-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--width-sm)), 1fr));
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.lab-text-spacing-pair > * {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.lab-text-spacing-pair > * > * {
+  margin: 0;
+}
+
+/* The candidate: text that belongs together, the name, the title and the description, sits closer. */
+.lab-text-spacing-candidate {
+  --lab-space-gap-text: var(--space-2);
+}
+
+.lab-text-spacing-candidate .mz-card > .mz-avatar + .mz-card-title,
+.lab-text-spacing-candidate .mz-card > .mz-card-title + * {
+  margin-block-start: var(--lab-space-gap-text);
+}
