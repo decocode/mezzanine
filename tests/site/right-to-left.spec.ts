@@ -11,7 +11,7 @@ async function readRightToLeft(page: Page) {
 test('Checkbox puts its box at the start of the line in right to left', async ({ page }) => {
   await page.goto('/checkbox')
   await readRightToLeft(page)
-  const checkbox = page.locator('main .react-aria-Checkbox').first()
+  const checkbox = page.locator('main .mz-checkbox').first()
   const box = (await checkbox.locator('.mz-checkbox-indicator').boundingBox())!
   const row = (await checkbox.boundingBox())!
   expect(box.x + box.width).toBeGreaterThan(row.x + row.width - 2)
@@ -21,7 +21,7 @@ test('Checkbox puts its box at the start of the line in right to left', async ({
 test('Breadcrumbs runs from the right in right to left', async ({ page }) => {
   await page.goto('/breadcrumbs')
   await readRightToLeft(page)
-  const crumbs = page.locator('main .react-aria-Breadcrumbs').first().locator('.react-aria-Breadcrumb')
+  const crumbs = page.locator('main .mz-breadcrumbs').first().locator('.mz-breadcrumb')
   const first = (await crumbs.first().boundingBox())!
   const last = (await crumbs.last().boundingBox())!
   expect(first.x).toBeGreaterThan(last.x)
@@ -33,7 +33,7 @@ test('Table of contents indents nested links from the start of the line in right
   await page.goto('/button')
   await readRightToLeft(page)
   // A nested link keeps its full-width tint and indents its text from the start, the right.
-  const nested = page.locator('.mz-table-of-contents ul ul .react-aria-Link').first()
+  const nested = page.locator('.mz-table-of-contents ul ul .mz-link').first()
   const padding = await nested.evaluate(element => { const style = getComputedStyle(element); return [Number.parseFloat(style.paddingRight), Number.parseFloat(style.paddingLeft)] })
   expect(padding[0]).toBeGreaterThan(padding[1])
 })

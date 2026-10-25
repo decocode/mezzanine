@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla TagGroup: small tags that wrap onto new lines, each with an optional
    remove button. A selected tag takes the selected ToggleButton's fill. */
-.react-aria-TagGroup {
+.mz-tag-group {
   display: flex;
   flex-direction: column;
   gap: var(--tag-group-gap, var(--space-gap-field));
@@ -14,7 +14,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-TagGroup > .react-aria-Label {
+.mz-tag-group > .mz-label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -23,7 +23,7 @@
   text-transform: var(--text-transform-label);
 }
 
-.react-aria-TagGroup > :is([slot='description'], [slot='errorMessage'], .react-aria-FieldError) {
+.mz-tag-group > :is([slot='description'], [slot='errorMessage'], .mz-field-error) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -32,22 +32,22 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-TagGroup > [slot='description'] {
+.mz-tag-group > [slot='description'] {
   color: var(--tag-group-description-foreground, var(--color-text-muted));
 }
 
-.react-aria-TagGroup > :is([slot='errorMessage'], .react-aria-FieldError) {
+.mz-tag-group > :is([slot='errorMessage'], .mz-field-error) {
   color: var(--tag-group-error-foreground, var(--color-danger));
 }
 
-.react-aria-TagList {
+.mz-tag-list {
   display: flex;
   flex-wrap: wrap;
   gap: var(--tag-group-list-gap, var(--space-gap-control));
   outline: none;
 }
 
-.react-aria-Tag {
+.mz-tag {
   display: inline-flex;
   align-items: center;
   gap: var(--tag-gap, var(--space-1));
@@ -72,35 +72,35 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.react-aria-Tag:has(.mz-tag-remove) {
+.mz-tag:has(.mz-tag-remove) {
   padding-inline-end: var(--space-1);
 }
 
-.react-aria-Tag[data-href] {
+.mz-tag[data-href] {
   text-decoration: none;
   cursor: pointer;
 }
 
-.react-aria-Tag[data-hovered] {
+.mz-tag[data-hovered] {
   background: var(--tag-background-hovered, var(--color-accent-muted-hovered));
 }
 
-.react-aria-Tag[data-pressed] {
+.mz-tag[data-pressed] {
   background: var(--tag-background-pressed, var(--color-accent-muted-pressed));
 }
 
-.react-aria-Tag[data-selected] {
+.mz-tag[data-selected] {
   border-color: var(--tag-background-selected, var(--color-accent-emphasis));
   background: var(--tag-background-selected, var(--color-accent-emphasis));
   color: var(--tag-foreground-selected, var(--color-accent-inverse));
 }
 
-.react-aria-Tag[data-focus-visible] {
+.mz-tag[data-focus-visible] {
   outline: var(--tag-focus-ring-width, var(--focus-ring-width)) solid var(--tag-focus-ring-color, var(--color-focus));
   outline-offset: var(--tag-focus-ring-offset, var(--focus-ring-offset));
 }
 
-.react-aria-Tag[data-disabled] {
+.mz-tag[data-disabled] {
   opacity: var(--tag-opacity-disabled, var(--opacity-disabled));
 }
 
@@ -135,11 +135,11 @@
 }
 
 @media (forced-colors: active) {
-  .react-aria-Tag {
+  .mz-tag {
     border-color: ButtonText;
   }
 
-  .react-aria-Tag[data-selected] {
+  .mz-tag[data-selected] {
     forced-color-adjust: none;
     border-color: Highlight;
     background: Highlight;

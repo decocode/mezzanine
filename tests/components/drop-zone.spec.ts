@@ -8,7 +8,7 @@ for (const theme of themes) {
   test(`drop zone shows its border and focus in ${theme}`, async ({ page }) => {
     await page.goto('/drop-zone')
     await setTheme(page, theme)
-    const zone = page.locator('.react-aria-DropZone')
+    const zone = page.locator('.mz-drop-zone')
     await expect(zone).toHaveCSS('border-top-style', 'dashed')
     await zone.locator('button, [tabindex]').first().focus()
     await page.keyboard.press('Shift+Tab')

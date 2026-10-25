@@ -1,4 +1,5 @@
 import { composeRenderProps } from 'react-aria-components'
+import { composeClassName } from '../composeClassName'
 import {
   SearchField as ReactAriaSearchField,
   type SearchFieldProps as ReactAriaSearchFieldProps,
@@ -14,9 +15,7 @@ export function SearchField({ children, className, ...searchFieldProps }: Search
   return (
     <ReactAriaSearchField
       {...searchFieldProps}
-      className={composeRenderProps(className, (resolvedClassName) => (
-        ['react-aria-SearchField', resolvedClassName].filter(Boolean).join(' ')
-      ))}
+      className={composeClassName('mz-search-field', className)}
     >
       {composeRenderProps(children, (resolvedChildren) => (
         <>

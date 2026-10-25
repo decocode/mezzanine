@@ -23,6 +23,12 @@ specific the library's selectors are.
   page's `<head>`. A bundler may load the library's CSS before the app's own.
 - The library's reduced-motion rules use `!important` inside the layer, so they
   beat an app's own `!important`. The end user's setting always wins.
+- Each component carries its own `mz-` class, named after its React Aria
+  component in kebab case, such as `mz-button` or `mz-list-box-item`. A
+  `className` the app passes is added alongside it. Components imported
+  straight from `react-aria-components` are unstyled, and React Aria's default
+  `react-aria-*` classes are no longer styled. This is a breaking change for
+  apps that styled those classes.
 
 ## Button
 

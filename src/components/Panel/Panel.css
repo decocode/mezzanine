@@ -95,9 +95,9 @@
 }
 
 /* A Panel named only by aria-label keeps its close button at the end. */
-.mz-panel-header > .react-aria-Button:only-child { margin-inline-start: auto; }
+.mz-panel-header > .mz-button:only-child { margin-inline-start: auto; }
 
-.mz-panel-header .react-aria-Heading {
+.mz-panel-header .mz-heading {
   flex: 1 1 auto;
   min-inline-size: 0;
   margin: 0;

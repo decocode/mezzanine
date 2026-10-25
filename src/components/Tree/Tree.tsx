@@ -1,13 +1,20 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, RefAttributes } from 'react'
 import { useLocale } from 'react-aria'
 import {
+  Tree as ReactAriaTree,
+  TreeHeader as ReactAriaTreeHeader,
   TreeItem as ReactAriaTreeItem,
   TreeItemContent as ReactAriaTreeItemContent,
+  TreeSection as ReactAriaTreeSection,
+  type TreeHeaderProps,
   type TreeItemContentProps,
   type TreeItemProps as ReactAriaTreeItemProps,
+  type TreeProps,
+  type TreeSectionProps,
 } from 'react-aria-components/Tree'
 import { Button } from 'react-aria-components/Button'
 import { Checkbox } from '../Checkbox/Checkbox'
+import { composeClassName } from '../composeClassName'
 import { ChevronLeftIcon, ChevronRightIcon, DragHandleIcon } from '../../icons/Icons'
 
 // A row's content. Mezzanine adds the drag handle, the selection checkbox and the expand chevron,
@@ -36,13 +43,23 @@ export interface TreeItemProps<T extends object = object> extends Partial<ReactA
 export function TreeItem<T extends object = object>({ title, children, ...props }: TreeItemProps<T>) {
   const textValue = props.textValue ?? (typeof title === 'string' ? title : '')
   return (
-    <ReactAriaTreeItem {...props} textValue={textValue}>
+    <ReactAriaTreeItem {...props} textValue={textValue} className={composeClassName('mz-tree-item', props.className)}>
       {title != null ? <><TreeItemContent>{title}</TreeItemContent>{children as ReactNode}</> : children}
     </ReactAriaTreeItem>
   )
 }
 
-export { Tree, TreeHeader, TreeSection } from 'react-aria-components/Tree'
+export function Tree<T>(props: TreeProps<T> & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaTree<T> {...props} className={composeClassName('mz-tree', props.className)} />
+}
+
+export function TreeSection<T>(props: TreeSectionProps<T> & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaTreeSection<T> {...props} className={composeClassName('mz-tree-section', props.className)} />
+}
+
+export function TreeHeader(props: TreeHeaderProps) {
+  return <ReactAriaTreeHeader {...props} className={composeClassName('mz-tree-header', props.className)} />
+}
 
 export type {
   TreeHeaderProps,

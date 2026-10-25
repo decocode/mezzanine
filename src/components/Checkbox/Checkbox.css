@@ -1,4 +1,4 @@
-.react-aria-Checkbox {
+.mz-checkbox {
   /* Contains React Aria's hidden input, so focusing it never scrolls the page elsewhere. */
   position: relative;
   display: inline-flex;
@@ -33,48 +33,48 @@
   height: var(--checkbox-icon-size, var(--icon-size-xs));
 }
 
-.react-aria-Checkbox[data-hovered] .mz-checkbox-indicator {
+.mz-checkbox[data-hovered] .mz-checkbox-indicator {
   background: var(--checkbox-background-hovered, var(--color-accent-muted-hovered));
 }
 
-.react-aria-Checkbox[data-selected] .mz-checkbox-indicator,
-.react-aria-Checkbox[data-indeterminate] .mz-checkbox-indicator {
+.mz-checkbox[data-selected] .mz-checkbox-indicator,
+.mz-checkbox[data-indeterminate] .mz-checkbox-indicator {
   border-color: var(--checkbox-background-selected, var(--color-accent-emphasis));
   background: var(--checkbox-background-selected, var(--color-accent-emphasis));
   color: var(--checkbox-foreground-selected, var(--color-accent-inverse));
 }
 
-.react-aria-Checkbox[data-selected][data-hovered] .mz-checkbox-indicator,
-.react-aria-Checkbox[data-indeterminate][data-hovered] .mz-checkbox-indicator {
+.mz-checkbox[data-selected][data-hovered] .mz-checkbox-indicator,
+.mz-checkbox[data-indeterminate][data-hovered] .mz-checkbox-indicator {
   border-color: var(--checkbox-background-selected-hovered, var(--color-accent-emphasis-hovered));
   background: var(--checkbox-background-selected-hovered, var(--color-accent-emphasis-hovered));
 }
 
 /* Invalid shows a heavier border, the md width, as well as the danger colour, so it doesn't rely on
    colour alone. The extra weight is an inner line, so the indicator keeps its size. */
-.react-aria-Checkbox[data-invalid] .mz-checkbox-indicator {
+.mz-checkbox[data-invalid] .mz-checkbox-indicator {
   border-color: var(--checkbox-border-invalid, var(--color-danger));
   box-shadow: inset 0 0 0 calc(var(--border-width-md) - var(--checkbox-border-width, var(--border-width-baseline))) var(--checkbox-border-invalid, var(--color-danger));
 }
 
-.react-aria-Checkbox[data-focus-visible] .mz-checkbox-indicator {
+.mz-checkbox[data-focus-visible] .mz-checkbox-indicator {
   outline: var(--checkbox-focus-ring-width, var(--focus-ring-width)) solid var(--checkbox-focus-ring-color, var(--color-focus));
   outline-offset: var(--checkbox-focus-ring-offset, var(--focus-ring-offset));
 }
 
-.react-aria-Checkbox[data-disabled] {
+.mz-checkbox[data-disabled] {
   opacity: var(--checkbox-opacity-disabled, var(--opacity-disabled));
   cursor: default;
 }
 
-.react-aria-Checkbox[data-readonly] {
+.mz-checkbox[data-readonly] {
   cursor: default;
 }
 
 /* Help and error text in a CheckboxGroup match the fields: small, muted for help and the danger
    colour for errors. */
-.react-aria-CheckboxGroup > [slot='description'],
-.react-aria-CheckboxGroup > .react-aria-FieldError {
+.mz-checkbox-group > [slot='description'],
+.mz-checkbox-group > .mz-field-error {
   color: var(--checkbox-description-foreground, var(--color-text-muted));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
@@ -84,6 +84,6 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-CheckboxGroup > .react-aria-FieldError {
+.mz-checkbox-group > .mz-field-error {
   color: var(--checkbox-error-foreground, var(--color-danger));
 }

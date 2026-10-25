@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla Toolbar: controls in a wrapping row, or a column when vertical, with
    Separators between groups. */
-.react-aria-Toolbar {
+.mz-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -8,20 +8,20 @@
   min-inline-size: 0;
 }
 
-.react-aria-Toolbar[data-orientation='vertical'] {
+.mz-toolbar[data-orientation='vertical'] {
   flex-direction: column;
   align-items: start;
 }
 
 /* A Group only names related controls; they still sit in the toolbar's own row. */
-.react-aria-Toolbar .react-aria-Group {
+.mz-toolbar .mz-group {
   display: contents;
 }
 
-.react-aria-Toolbar > .react-aria-Separator[aria-orientation='vertical'] {
+.mz-toolbar > .mz-separator[aria-orientation='vertical'] {
   margin-inline: var(--toolbar-separator-gap, var(--space-1));
 }
 
-.react-aria-Toolbar > .react-aria-Separator:not([aria-orientation='vertical']) {
+.mz-toolbar > .mz-separator:not([aria-orientation='vertical']) {
   margin-block: var(--toolbar-separator-gap, var(--space-1));
 }

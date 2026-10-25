@@ -1,4 +1,5 @@
 import { composeRenderProps } from 'react-aria-components'
+import { composeClassName } from '../composeClassName'
 import {
   Checkbox as ReactAriaCheckbox,
   type CheckboxProps as ReactAriaCheckboxProps,
@@ -11,9 +12,7 @@ export function Checkbox({ children, className, ...checkboxProps }: CheckboxProp
   return (
     <ReactAriaCheckbox
       {...checkboxProps}
-      className={composeRenderProps(className, (resolvedClassName) => (
-        ['react-aria-Checkbox', resolvedClassName].filter(Boolean).join(' ')
-      ))}
+      className={composeClassName('mz-checkbox', className)}
     >
       {composeRenderProps(children, (resolvedChildren, { isIndeterminate, isSelected }) => (
         <>

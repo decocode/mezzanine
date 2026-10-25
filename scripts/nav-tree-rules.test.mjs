@@ -19,11 +19,11 @@ test('removed hooks and recipe classes are caught', () => {
 })
 test('tree internals cannot be styled by the site', () => {
   assert.ok(checkNavTreeCss('site/style.css', '.sidebar .mz-nav-tree-item { padding: 0; }').length)
-  assert.ok(checkNavTreeCss('site/style.css', '.react-aria-NavigationTreeItem { margin: 0; }').length)
+  assert.ok(checkNavTreeCss('site/style.css', '.mz-navigation-tree-item { margin: 0; }').length)
   assert.deepEqual(checkNavTreeCss('site/style.css', '.page-navigation { min-width: 0; }'), [])
 })
 test('owned tree recipes cannot reach into shared controls or arbitrary icons', () => {
-  for (const selector of ['.react-aria-Link', '.mz-button-content', '.tree svg']) {
+  for (const selector of ['.mz-link', '.mz-button-content', '.tree svg']) {
     assert.ok(checkNavTreeCss('src/components/NavTree/NavTree.css', `${selector} { color: inherit; }`).length)
   }
   assert.deepEqual(checkNavTreeCss('src/components/NavTree/NavTree.css', '.mz-nav-tree-chevron { rotate: var(--motion-rotation-expanded); }'), [])

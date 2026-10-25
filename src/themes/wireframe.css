@@ -105,33 +105,33 @@
   /* Wireframe underlines text links; button-styled links use the shared Button treatment.
      data-no-wireframe-underline opts an element out (e.g. a brand wordmark). data-preview-state is
      internal to the docs' state tables, not part of the public API. */
-  :scope :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])) {
+  :scope :is(a, [role='link']):not(:where(.mz-button, [data-no-wireframe-underline])) {
     text-decoration-line: underline !important;
     text-decoration-thickness: var(--border-width-baseline);
     text-underline-offset: var(--underline-offset);
   }
 
-  :scope :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
+  :scope :is(a, [role='link']):not(:where(.mz-button, [data-no-wireframe-underline])):is([data-hovered], [data-focus-visible], :focus-visible, [data-preview-state='hovered'], [data-preview-state='focused']):not([data-disabled], [aria-disabled='true']) {
     text-decoration-thickness: calc(var(--border-width-baseline) * 2);
   }
 
-  :scope .react-aria-Link:is([data-focus-visible], [data-preview-state='focused']):not(:where([data-disabled], [aria-disabled='true'])) {
+  :scope .mz-link:is([data-focus-visible], [data-preview-state='focused']):not(:where([data-disabled], [aria-disabled='true'])) {
     color: var(--color-link-hovered);
   }
 
   @media (hover: hover) {
-    :scope :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):hover:not([data-disabled], [aria-disabled='true']) {
+    :scope :is(a, [role='link']):not(:where(.mz-button, [data-no-wireframe-underline])):hover:not([data-disabled], [aria-disabled='true']) {
       text-decoration-thickness: calc(var(--border-width-baseline) * 2);
     }
   }
 
-  :scope :is(a, [role='link']):not(:where(.react-aria-Button, [data-no-wireframe-underline])):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
+  :scope :is(a, [role='link']):not(:where(.mz-button, [data-no-wireframe-underline])):is([data-pressed], :active, [data-preview-state='pressed']):not([data-disabled], [aria-disabled='true']) {
     background-color: var(--color-accent-muted-pressed);
     text-decoration-thickness: calc(var(--border-width-baseline) * 2);
   }
 
   /* Nav items keep their own pressed background, a step darker than hover. */
-  :scope :is(.mz-top-bar .mz-top-bar-link, .mz-table-of-contents .react-aria-Link)[data-pressed] {
+  :scope :is(.mz-top-bar .mz-top-bar-link, .mz-table-of-contents .mz-link)[data-pressed] {
     background-color: var(--nav-item-background-pressed);
   }
 }

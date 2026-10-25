@@ -1,12 +1,16 @@
+import type { RefAttributes } from 'react'
 import type { DialogProps } from 'react-aria-components/Dialog'
 import {
   Sheet as ReactAriaSheet,
-  SheetBackdrop,
-  SheetContent,
-  SheetOverlay,
+  SheetBackdrop as ReactAriaSheetBackdrop,
+  SheetContent as ReactAriaSheetContent,
+  SheetOverlay as ReactAriaSheetOverlay,
+  type SheetBackdropProps,
+  type SheetContentProps,
   type SheetOverlayProps,
   type SheetProps as ReactAriaSheetProps,
 } from 'react-aria-components/Sheet'
+import { composeClassName } from '../composeClassName'
 
 export interface SheetProps extends Omit<SheetOverlayProps, 'children'>, Pick<ReactAriaSheetProps, 'swipeAnimation' | 'swipeAnimationRange'> {
   // The sheet's content, shown inside a Dialog.
@@ -23,7 +27,7 @@ export function Sheet({ children, swipeAnimation, swipeAnimationRange, overscrol
     <SheetOverlay {...props}>
       {/* The backdrop fades in as the sheet comes in; with snap points it waits until the last one. */}
       <SheetBackdrop swipeAnimation="mz-sheet-backdrop" swipeAnimationRange={snapPoints ? { start: snapPoints.length - 1 } : undefined} />
-      <ReactAriaSheet overscrollPadding={overscrollPadding} swipeAnimation={swipeAnimation} swipeAnimationRange={swipeAnimationRange} style={style}>
+      <ReactAriaSheet className="mz-sheet" overscrollPadding={overscrollPadding} swipeAnimation={swipeAnimation} swipeAnimationRange={swipeAnimationRange} style={style}>
         {!preventDismissal && <div className="mz-sheet-handle" aria-hidden="true" />}
         <SheetContent>{children}</SheetContent>
       </ReactAriaSheet>
@@ -31,7 +35,19 @@ export function Sheet({ children, swipeAnimation, swipeAnimationRange, overscrol
   )
 }
 
-export { SheetBackdrop, SheetContent, SheetOverlay, SheetTrigger } from 'react-aria-components/Sheet'
+export function SheetOverlay(props: SheetOverlayProps & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaSheetOverlay {...props} className={composeClassName('mz-sheet-overlay', props.className)} />
+}
+
+export function SheetBackdrop(props: SheetBackdropProps & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaSheetBackdrop {...props} className={composeClassName('mz-sheet-backdrop', props.className)} />
+}
+
+export function SheetContent(props: SheetContentProps & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaSheetContent {...props} className={composeClassName('mz-sheet-content', props.className)} />
+}
+
+export { SheetTrigger } from 'react-aria-components/Sheet'
 
 export type {
   SheetBackdropProps,

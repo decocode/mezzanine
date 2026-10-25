@@ -14,7 +14,7 @@ for (const theme of themes) {
     await expect(toolbar.getByRole('radio', { name: 'Toggle B' })).toBeFocused()
     await page.keyboard.press('ArrowRight')
     await expect(toolbar.getByRole('button', { name: 'Action A' })).toBeFocused()
-    await expect(toolbar.locator('.react-aria-Separator')).toHaveAttribute('aria-orientation', 'vertical')
+    await expect(toolbar.locator('.mz-separator')).toHaveAttribute('aria-orientation', 'vertical')
     await expectNoAccessibilityViolations(page, 'main')
     await page.setViewportSize({ width: 320, height: 900 })
     await setTextSize(page, 32)

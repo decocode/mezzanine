@@ -1,5 +1,5 @@
 /* Follows React Aria's vanilla ProgressBar: the label and value text share a row above the track. */
-.react-aria-ProgressBar {
+.mz-progress-bar {
   display: grid;
   grid-template-areas:
     'label value'
@@ -16,7 +16,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-ProgressBar > .react-aria-Label {
+.mz-progress-bar > .mz-label {
   grid-area: label;
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
@@ -50,7 +50,7 @@
 
 /* Indeterminate: a segment travels along the track. Like Button's pending spinner, only the system's
    reduced-motion setting stops it; the segment stays visible at the start. */
-.react-aria-ProgressBar:not([aria-valuenow]) .mz-progress-bar-fill {
+.mz-progress-bar:not([aria-valuenow]) .mz-progress-bar-fill {
   inline-size: 40%;
   animation: mz-progress-bar-indeterminate var(--motion-duration-loading) var(--motion-easing-loading) infinite;
   animation-name: var(--_motion-loading-animation, mz-progress-bar-indeterminate);

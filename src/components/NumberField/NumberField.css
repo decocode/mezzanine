@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla NumberField: the input takes the shared text field look, joined to
    its minus and plus buttons at the end. */
-.react-aria-NumberField {
+.mz-number-field {
   display: flex;
   flex-direction: column;
   gap: var(--number-field-gap, var(--space-gap-field));
@@ -14,7 +14,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-NumberField > .react-aria-Label {
+.mz-number-field > .mz-label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -23,7 +23,7 @@
   text-transform: var(--text-transform-label);
 }
 
-.react-aria-NumberField > :is([slot='description'], [slot='errorMessage'], .react-aria-FieldError) {
+.mz-number-field > :is([slot='description'], [slot='errorMessage'], .mz-field-error) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -32,11 +32,11 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-NumberField > [slot='description'] {
+.mz-number-field > [slot='description'] {
   color: var(--number-field-description-foreground, var(--color-text-muted));
 }
 
-.react-aria-NumberField > :is([slot='errorMessage'], .react-aria-FieldError) {
+.mz-number-field > :is([slot='errorMessage'], .mz-field-error) {
   color: var(--number-field-error-foreground, var(--color-danger));
 }
 
@@ -49,7 +49,7 @@
 }
 
 /* A number is short, so the input is narrow rather than filling the row. */
-.mz-number-field-group > .react-aria-Input {
+.mz-number-field-group > .mz-input {
   flex: 0 1 var(--number-field-input-width, var(--space-24));
   inline-size: var(--number-field-input-width, var(--space-24));
   min-inline-size: 0;
@@ -59,11 +59,11 @@
 
 /* The focus ring goes round the whole field, buttons included, rather than the input alone. Like a
    text field, it shows on mouse focus too. */
-.mz-number-field-group > .react-aria-Input[data-focused] {
+.mz-number-field-group > .mz-input[data-focused] {
   outline: none;
 }
 
-.mz-number-field-group:has(> .react-aria-Input[data-focused]) {
+.mz-number-field-group:has(> .mz-input[data-focused]) {
   outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--input-focus-ring-color, var(--color-focus));
   outline-offset: var(--input-focus-ring-offset, var(--focus-ring-offset));
 }
@@ -115,7 +115,7 @@
   block-size: var(--number-field-step-icon-size, var(--icon-size-sm));
 }
 
-.react-aria-NumberField[data-disabled] {
+.mz-number-field[data-disabled] {
   opacity: var(--number-field-opacity-disabled, var(--opacity-disabled));
 }
 
@@ -124,7 +124,7 @@
     border-color: ButtonText;
   }
 
-  .mz-number-field-group:has(> .react-aria-Input[data-focused]) {
+  .mz-number-field-group:has(> .mz-input[data-focused]) {
     outline-color: Highlight;
   }
 }

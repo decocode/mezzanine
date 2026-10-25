@@ -1,4 +1,4 @@
-.react-aria-Tabs {
+.mz-tabs {
   display: flex;
   gap: var(--tabs-content-gap, var(--space-gap-cluster));
   min-width: 0;
@@ -12,38 +12,38 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-Tabs[data-orientation='horizontal'] {
+.mz-tabs[data-orientation='horizontal'] {
   flex-direction: column;
 }
 
-.react-aria-Tabs[data-orientation='vertical'] {
+.mz-tabs[data-orientation='vertical'] {
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.react-aria-Tabs[data-orientation='vertical'] > .react-aria-TabPanel {
+.mz-tabs[data-orientation='vertical'] > .mz-tab-panel {
   flex-basis: var(--tab-panel-preferred-width, var(--width-xs));
 }
 
-.react-aria-TabList {
+.mz-tab-list {
   display: flex;
   flex-shrink: 0;
   min-width: 0;
   max-width: 100%;
 }
 
-.react-aria-TabList[data-orientation='horizontal'] {
+.mz-tab-list[data-orientation='horizontal'] {
   overflow-x: auto;
   border-block-end: var(--tabs-border-width, var(--border-width-baseline)) solid var(--tabs-border, var(--color-border));
 }
 
-.react-aria-TabList[data-orientation='vertical'] {
+.mz-tab-list[data-orientation='vertical'] {
   flex-direction: column;
   max-width: 100%;
   border-inline-end: var(--tabs-border-width, var(--border-width-baseline)) solid var(--tabs-border, var(--color-border));
 }
 
-.react-aria-Tab {
+.mz-tab {
   position: relative;
   display: flex;
   align-items: center;
@@ -62,19 +62,19 @@
   cursor: default;
 }
 
-.react-aria-Tab[data-hovered] {
+.mz-tab[data-hovered] {
   background: var(--tab-background-hovered, var(--color-accent-muted-hovered));
 }
 
-.react-aria-Tab[data-pressed] {
+.mz-tab[data-pressed] {
   background: var(--tab-background-pressed, var(--color-accent-muted-pressed));
 }
 
-.react-aria-Tab[data-selected] {
+.mz-tab[data-selected] {
   color: var(--tab-foreground-selected, var(--color-text));
 }
 
-.react-aria-Tab > .react-aria-SelectionIndicator {
+.mz-tab > .mz-selection-indicator {
   position: absolute;
   border-radius: var(--tab-indicator-border-radius, var(--indicator-radius));
   background: var(--tab-indicator, var(--color-indicator));
@@ -82,7 +82,7 @@
   transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
 }
 
-.react-aria-TabList[data-orientation='horizontal'] .react-aria-SelectionIndicator {
+.mz-tab-list[data-orientation='horizontal'] .mz-selection-indicator {
   inset-inline-start: var(--indicator-inset);
   inset-block-end: 0;
   width: calc(100% - var(--indicator-inset) * 2);
@@ -90,7 +90,7 @@
   transition-property: translate, width;
 }
 
-.react-aria-TabList[data-orientation='vertical'] .react-aria-SelectionIndicator {
+.mz-tab-list[data-orientation='vertical'] .mz-selection-indicator {
   inset-inline-end: 0;
   inset-block-start: var(--indicator-inset);
   width: var(--tab-indicator-width, var(--indicator-width));
@@ -98,46 +98,46 @@
   transition-property: translate, height;
 }
 
-.react-aria-Tab[data-disabled] {
+.mz-tab[data-disabled] {
   opacity: var(--tab-opacity-disabled, var(--opacity-disabled));
 }
 
-.react-aria-Tab[href] {
+.mz-tab[href] {
   text-decoration: none;
   cursor: pointer;
 }
 
-.react-aria-Tab[href]:not([data-disabled]) {
+.mz-tab[href]:not([data-disabled]) {
   color: var(--color-link);
 }
 
-.react-aria-Tab[href][data-pressed]:not([data-disabled]) {
+.mz-tab[href][data-pressed]:not([data-disabled]) {
   color: var(--color-link-pressed);
 }
 
-.react-aria-TabPanel {
+.mz-tab-panel {
   flex: 1;
   min-width: 0;
   padding: var(--tab-panel-padding, var(--space-padding-surface));
   overflow-wrap: anywhere;
 }
 
-.react-aria-TabPanel[data-inert] {
+.mz-tab-panel[data-inert] {
   display: none;
 }
 
-.react-aria-Tab[data-focus-visible],
-.react-aria-TabPanel[data-focus-visible] {
+.mz-tab[data-focus-visible],
+.mz-tab-panel[data-focus-visible] {
   outline: var(--tabs-focus-ring-width, var(--focus-ring-width)) solid var(--tabs-focus-ring-color, var(--color-focus));
   outline-offset: var(--tabs-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
 @media (forced-colors: active) {
-  .react-aria-Tab > .react-aria-SelectionIndicator {
+  .mz-tab > .mz-selection-indicator {
     forced-color-adjust: none;
     background: Highlight;
   }
-  .react-aria-Tab[data-disabled] {
+  .mz-tab[data-disabled] {
     color: GrayText;
     opacity: 1;
   }

@@ -35,7 +35,7 @@
 }
 
 /* TYPOGRAPHY.md: a heading inside a card or panel uses title-md, a CardTitle included. */
-.mz-card > :is(.react-aria-Heading, .mz-card-title) {
+.mz-card > :is(.mz-heading, .mz-card-title) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-title-md);
   font-weight: var(--font-weight-emphasis);
@@ -117,7 +117,7 @@
 }
 
 /* Controls inside a linked card sit above the title's pressable area, so they take their own presses. */
-.mz-card:has(> .mz-card-title .mz-card-title-link) :is(.react-aria-Button, .react-aria-ToggleButton, .react-aria-Link:not(.mz-card-title-link), .react-aria-Checkbox, .react-aria-Switch) {
+.mz-card:has(> .mz-card-title .mz-card-title-link) :is(.mz-button, .mz-toggle-button, .mz-link:not(.mz-card-title-link), .mz-checkbox, .mz-switch) {
   position: relative;
   z-index: var(--z-index-raised);
 }
@@ -145,7 +145,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.mz-card-footer > .react-aria-Button:last-child {
+.mz-card-footer > .mz-button:last-child {
   margin-inline-start: auto;
 }
 

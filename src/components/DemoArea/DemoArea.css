@@ -98,24 +98,24 @@
 }
 
 /* The tab panels fill the body edge to edge; the preview and code set their own space. */
-.mz-demo-area-body > .react-aria-TabPanel {
+.mz-demo-area-body > .mz-tab-panel {
   padding: 0;
   outline: none;
 }
 
-.mz-demo-area-body > .react-aria-TabPanel[data-focus-visible] {
+.mz-demo-area-body > .mz-tab-panel[data-focus-visible] {
   outline: var(--focus-ring-width) solid var(--demo-area-focus-ring-color, var(--color-focus));
   outline-offset: var(--focus-ring-offset-inset);
 }
 
 /* The code fills the body, without a second frame. */
-.mz-demo-area-body .react-aria-TabPanel > pre {
+.mz-demo-area-body .mz-tab-panel > pre {
   margin: 0;
   border: 0;
   border-radius: 0;
 }
 
 /* The bar's tabs have no line of their own under the bar's border. */
-.mz-demo-area-bar .react-aria-TabList {
+.mz-demo-area-bar .mz-tab-list {
   border-block-end: 0;
 }

@@ -15,7 +15,7 @@ for (const theme of themes) {
     await page.keyboard.press('Enter')
     const list = page.getByRole('listbox')
     await expect(list).toBeVisible()
-    const popover = (await page.locator('.react-aria-Popover').boundingBox())!
+    const popover = (await page.locator('.mz-popover').boundingBox())!
     expect(Math.abs(popover.width - (await trigger.boundingBox())!.width)).toBeLessThan(2)
     await page.keyboard.press('ArrowDown')
     await page.keyboard.press('Enter')

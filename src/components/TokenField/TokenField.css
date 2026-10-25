@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla TokenField: an editable area with the text field's look, holding
    tokens among its text. */
-.react-aria-TokenField {
+.mz-token-field {
   display: flex;
   flex-direction: column;
   gap: var(--token-field-gap, var(--space-gap-field));
@@ -14,7 +14,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-TokenField > .react-aria-Label {
+.mz-token-field > .mz-label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -23,7 +23,7 @@
   text-transform: var(--text-transform-label);
 }
 
-.react-aria-TokenField > :is([slot='description'], [slot='errorMessage'], .react-aria-FieldError) {
+.mz-token-field > :is([slot='description'], [slot='errorMessage'], .mz-field-error) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -32,15 +32,15 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-TokenField > [slot='description'] {
+.mz-token-field > [slot='description'] {
   color: var(--token-field-description-foreground, var(--color-text-muted));
 }
 
-.react-aria-TokenField > :is([slot='errorMessage'], .react-aria-FieldError) {
+.mz-token-field > :is([slot='errorMessage'], .mz-field-error) {
   color: var(--token-field-error-foreground, var(--color-danger));
 }
 
-.react-aria-TokenInput {
+.mz-token-input {
   box-sizing: border-box;
   min-block-size: var(--target-size-md);
   padding: var(--input-padding-block, var(--space-padding-control-block)) var(--input-padding-inline, var(--space-padding-control-inline));
@@ -52,27 +52,27 @@
   overflow-wrap: anywhere;
 }
 
-.react-aria-TokenInput:empty::before {
+.mz-token-input:empty::before {
   content: attr(data-placeholder);
   color: var(--input-placeholder-foreground, var(--color-text-muted));
 }
 
-.react-aria-TokenInput[data-hovered]:not([data-disabled]) {
+.mz-token-input[data-hovered]:not([data-disabled]) {
   border-color: var(--input-border-hovered, var(--color-text));
 }
 
 /* Like the text field, it shows its focus ring on mouse focus too. */
-.react-aria-TokenInput[data-focused] {
+.mz-token-input[data-focused] {
   outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--input-focus-ring-color, var(--color-focus));
   outline-offset: var(--input-focus-ring-offset, var(--focus-ring-offset));
 }
 
-.react-aria-TokenInput[data-disabled] {
+.mz-token-input[data-disabled] {
   opacity: var(--token-field-opacity-disabled, var(--opacity-disabled));
   user-select: none;
 }
 
-.react-aria-Token {
+.mz-token {
   padding-inline: var(--token-padding-inline, var(--space-1));
   border-radius: var(--token-border-radius, var(--radius-control));
   background: var(--token-background, var(--color-accent-muted));
@@ -82,25 +82,25 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.react-aria-Token::selection {
+.mz-token::selection {
   background: transparent;
 }
 
-.react-aria-Token[data-selected] {
+.mz-token[data-selected] {
   background: var(--token-background-selected, var(--color-accent-emphasis));
   color: var(--token-foreground-selected, var(--color-accent-inverse));
 }
 
 @media (forced-colors: active) {
-  .react-aria-TokenInput {
+  .mz-token-input {
     border-color: ButtonText;
   }
 
-  .react-aria-Token {
+  .mz-token {
     border: var(--border-width-baseline) solid CanvasText;
   }
 
-  .react-aria-Token[data-selected] {
+  .mz-token[data-selected] {
     forced-color-adjust: none;
     background: Highlight;
     color: HighlightText;

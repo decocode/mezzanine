@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test'
 // layer, beats the library's stronger selectors.
 test('An app class outside a layer beats the library', async ({ page }) => {
   await page.goto('/button')
-  const button = page.locator('main .react-aria-Button').first()
+  const button = page.locator('main .mz-button').first()
   await expect(button).not.toHaveCSS('background-color', 'rgb(1, 2, 3)')
   await page.addStyleTag({ content: '.app-override { background-color: rgb(1, 2, 3); }' })
   await button.evaluate(element => element.classList.add('app-override'))

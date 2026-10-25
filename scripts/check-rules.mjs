@@ -292,7 +292,7 @@ function checkCss(file) {
 
 // Button dimensions belong to the shared size scale, not consuming selectors.
 // Collect consumer class names too, so statically named consumer classes are checked as well.
-const buttonClasses = new Set(['react-aria-Button', 'react-aria-ToggleButton', 'mz-button-icon', 'mz-button-content'])
+const buttonClasses = new Set(['mz-button', 'mz-toggle-button', 'mz-button-icon', 'mz-button-content'])
 const sizingProperty = /^(?:(?:min-|max-)?(?:width|height|inline-size|block-size)|padding(?:-.+)?|font(?:-.+)?|line-height|letter-spacing|text-transform|zoom|scale|transform)$/
 
 function collectButtonClasses(source) {

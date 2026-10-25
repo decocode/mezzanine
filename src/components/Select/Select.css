@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla Select: a label, a trigger that looks like a text field, help text and
    the list in a Popover. */
-.react-aria-Select {
+.mz-select {
   display: flex;
   flex-direction: column;
   gap: var(--select-gap, var(--space-gap-field));
@@ -14,7 +14,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-Select > .react-aria-Label {
+.mz-select > .mz-label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -23,7 +23,7 @@
   text-transform: var(--text-transform-label);
 }
 
-.react-aria-Select > :is([slot='description'], .react-aria-FieldError) {
+.mz-select > :is([slot='description'], .mz-field-error) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -32,11 +32,11 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-Select > [slot='description'] {
+.mz-select > [slot='description'] {
   color: var(--select-description-foreground, var(--color-text-muted));
 }
 
-.react-aria-Select > .react-aria-FieldError {
+.mz-select > .mz-field-error {
   color: var(--select-error-foreground, var(--color-danger));
 }
 
@@ -70,11 +70,11 @@
   outline-offset: var(--select-focus-ring-offset, var(--focus-ring-offset));
 }
 
-.react-aria-Select[data-invalid] .mz-select-trigger {
+.mz-select[data-invalid] .mz-select-trigger {
   border-color: var(--select-trigger-border-invalid, var(--color-danger));
 }
 
-.react-aria-SelectValue {
+.mz-select-value {
   flex: 1;
   min-inline-size: 0;
   overflow: hidden;
@@ -82,12 +82,12 @@
   white-space: nowrap;
 }
 
-.react-aria-SelectValue[data-placeholder] {
+.mz-select-value[data-placeholder] {
   color: var(--select-placeholder-foreground, var(--color-text-muted));
 }
 
 /* An option's description stays in the list, not in the closed field. */
-.react-aria-SelectValue [slot='description'] {
+.mz-select-value [slot='description'] {
   display: none;
 }
 
@@ -98,7 +98,7 @@
   color: var(--color-chevron);
 }
 
-.react-aria-Select[data-disabled] {
+.mz-select[data-disabled] {
   opacity: var(--select-opacity-disabled, var(--opacity-disabled));
 }
 

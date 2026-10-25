@@ -41,7 +41,7 @@ test('a demo theme changes only that demo and its pop-ups', async ({ page }) => 
   expect(await body.evaluate(element => getComputedStyle(element).backgroundColor)).not.toBe(pageColor)
   expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe(pageColor)
   await demo.getByRole('button', { name: 'Menu trigger', exact: true }).click()
-  const popover = page.locator('.react-aria-Popover')
+  const popover = page.locator('.mz-popover')
   await expect(popover).toBeVisible()
   expect(await popover.evaluate(element => element.closest('[data-theme]')?.getAttribute('data-theme'))).toBe('dark')
   // The menu still sits next to its button.

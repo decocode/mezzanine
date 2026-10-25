@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla Slider: the label and output share a row above the track, and the
    thumbs ride a rail with the fill inside it. */
-.react-aria-Slider {
+.mz-slider {
   display: grid;
   grid-template-areas:
     'label output'
@@ -17,7 +17,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-Slider > .react-aria-Label {
+.mz-slider > .mz-label {
   grid-area: label;
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
@@ -27,13 +27,13 @@
   text-transform: var(--text-transform-label);
 }
 
-.react-aria-SliderOutput {
+.mz-slider-output {
   grid-area: output;
   color: var(--slider-output-foreground, var(--color-text-muted));
 }
 
 /* The track is as tall as a small target, so the thumb is easy to reach. */
-.react-aria-SliderTrack {
+.mz-slider-track {
   position: relative;
   grid-area: track;
   block-size: var(--target-size-xs);
@@ -52,7 +52,7 @@
   background: var(--slider-track-background, var(--color-neutral-muted));
 }
 
-.react-aria-SliderFill {
+.mz-slider-fill {
   block-size: 100%;
   border-radius: inherit;
   background: var(--slider-fill-background, var(--color-accent-emphasis));
@@ -60,7 +60,7 @@
 
 /* React Aria places each thumb along the track and centres it with its own transform; it sits on the
    rail's line here. */
-.react-aria-SliderThumb {
+.mz-slider-thumb {
   box-sizing: border-box;
   inset-block-start: 50%;
   inline-size: var(--slider-thumb-size, var(--icon-size-sm));
@@ -70,38 +70,38 @@
   background: var(--slider-thumb-background, var(--color-page));
 }
 
-.react-aria-SliderThumb[data-hovered] {
+.mz-slider-thumb[data-hovered] {
   background: var(--slider-thumb-background-hovered, var(--color-accent-muted-hovered));
 }
 
-.react-aria-SliderThumb[data-dragging] {
+.mz-slider-thumb[data-dragging] {
   background: var(--slider-thumb-background-pressed, var(--color-accent-muted-pressed));
 }
 
-.react-aria-SliderThumb[data-focus-visible] {
+.mz-slider-thumb[data-focus-visible] {
   outline: var(--slider-focus-ring-width, var(--focus-ring-width)) solid var(--slider-focus-ring-color, var(--color-focus));
   outline-offset: var(--slider-focus-ring-offset, var(--focus-ring-offset));
 }
 
-.react-aria-Slider[data-orientation='vertical'] {
+.mz-slider[data-orientation='vertical'] {
   grid-template-areas: 'track';
   grid-template-columns: auto;
   grid-template-rows: minmax(0, 1fr);
   block-size: var(--slider-vertical-height, var(--width-xs));
 }
 
-.react-aria-Slider[data-orientation='vertical'] > :is(.react-aria-Label, .react-aria-SliderOutput) {
+.mz-slider[data-orientation='vertical'] > :is(.mz-label, .mz-slider-output) {
   display: none;
 }
 
-.react-aria-Slider[data-orientation='vertical'] .react-aria-SliderTrack {
+.mz-slider[data-orientation='vertical'] .mz-slider-track {
   inline-size: var(--target-size-xs);
   block-size: auto;
   margin-inline: 0;
   margin-block: calc(var(--slider-thumb-size, var(--icon-size-sm)) / 2);
 }
 
-.react-aria-Slider[data-orientation='vertical'] .mz-slider-rail {
+.mz-slider[data-orientation='vertical'] .mz-slider-rail {
   inset-block: 0;
   /* physical: a centring offset across the vertical rail, paired with the horizontal translate. */
   left: 50%;
@@ -110,17 +110,17 @@
   translate: -50% 0;
 }
 
-.react-aria-Slider[data-orientation='vertical'] .react-aria-SliderFill {
+.mz-slider[data-orientation='vertical'] .mz-slider-fill {
   inline-size: 100%;
 }
 
-.react-aria-Slider[data-orientation='vertical'] .react-aria-SliderThumb {
+.mz-slider[data-orientation='vertical'] .mz-slider-thumb {
   inset-block-start: auto;
   /* physical: a centring offset across the vertical rail; React Aria's transform does the rest. */
   left: 50%;
 }
 
-.react-aria-Slider[data-disabled] {
+.mz-slider[data-disabled] {
   opacity: var(--slider-opacity-disabled, var(--opacity-disabled));
 }
 
@@ -129,12 +129,12 @@
     border: var(--border-width-baseline) solid CanvasText;
   }
 
-  .react-aria-SliderFill {
+  .mz-slider-fill {
     forced-color-adjust: none;
     background: Highlight;
   }
 
-  .react-aria-SliderThumb {
+  .mz-slider-thumb {
     forced-color-adjust: none;
     border-color: ButtonText;
     background: ButtonFace;

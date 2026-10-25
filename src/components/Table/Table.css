@@ -1,4 +1,4 @@
-.react-aria-Table {
+.mz-table {
   width: 100%;
   border-collapse: collapse;
   color: var(--color-text);
@@ -10,8 +10,8 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-Column,
-.react-aria-Cell {
+.mz-column,
+.mz-cell {
   /* Every row takes its height from the shared target size scale. A table cell's height works as a
      minimum, so longer content still makes its row taller. */
   height: var(--target-size-md);
@@ -23,7 +23,7 @@
   word-break: normal;
 }
 
-.react-aria-Column {
+.mz-column {
   border-block-start: var(--table-border-width, var(--border-width-baseline)) solid var(--color-border);
   background: var(--table-header-background);
   color: var(--table-header-foreground, currentColor);
@@ -35,17 +35,17 @@
   text-transform: var(--text-transform-label);
 }
 
-.react-aria-Column:first-child,
-.react-aria-Cell:first-child {
+.mz-column:first-child,
+.mz-cell:first-child {
   border-inline-start: var(--table-border-width, var(--border-width-baseline)) solid var(--color-border);
 }
 
-.react-aria-Column:last-child,
-.react-aria-Cell:last-child {
+.mz-column:last-child,
+.mz-cell:last-child {
   border-inline-end: var(--table-border-width, var(--border-width-baseline)) solid var(--color-border);
 }
 
-.react-aria-Column[data-allows-sorting] {
+.mz-column[data-allows-sorting] {
   cursor: pointer;
 }
 
@@ -57,46 +57,46 @@
   vertical-align: middle;
 }
 
-.react-aria-TableHeader[data-hovered] .react-aria-Column,
-.react-aria-Column[data-hovered],
-.react-aria-Cell[data-hovered],
-.react-aria-Row[data-hovered] .react-aria-Cell {
+.mz-table-header[data-hovered] .mz-column,
+.mz-column[data-hovered],
+.mz-cell[data-hovered],
+.mz-row[data-hovered] .mz-cell {
   background: var(--table-row-background-hovered, var(--color-accent-muted-hovered));
 }
 
-.react-aria-Column[data-pressed],
-.react-aria-Column[data-resizing],
-.react-aria-Cell[data-pressed],
-.react-aria-Row[data-pressed] .react-aria-Cell {
+.mz-column[data-pressed],
+.mz-column[data-resizing],
+.mz-cell[data-pressed],
+.mz-row[data-pressed] .mz-cell {
   background: var(--table-row-background-pressed, var(--color-accent-muted-pressed));
 }
 
-.react-aria-TableBody[data-empty] {
+.mz-table-body[data-empty] {
   color: var(--color-text-muted);
 }
 
-.react-aria-Row[data-selection-mode] {
+.mz-row[data-selection-mode] {
   cursor: pointer;
 }
 
 /* The whole row is the target, so a selection checkbox inside it needn't add its own target height. */
-.react-aria-Row[data-selection-mode] > .react-aria-Cell > .react-aria-Checkbox {
+.mz-row[data-selection-mode] > .mz-cell > .mz-checkbox {
   min-height: 0;
   vertical-align: top;
 }
 
-.react-aria-Row[data-selected] .react-aria-Cell {
+.mz-row[data-selected] .mz-cell {
   background: var(--table-row-background-selected, var(--color-accent-muted));
   color: var(--table-row-foreground-selected, var(--color-text));
 }
 
 /* A selected row shows the shared indicator bar at its start, so selection doesn't rely on colour
    alone. */
-.react-aria-Row[data-selected] .react-aria-Cell:first-child {
+.mz-row[data-selected] .mz-cell:first-child {
   position: relative;
 }
 
-.react-aria-Row[data-selected] .react-aria-Cell:first-child::before {
+.mz-row[data-selected] .mz-cell:first-child::before {
   content: '';
   position: absolute;
   inset-block: var(--indicator-inset);
@@ -107,41 +107,41 @@
   background: var(--table-row-indicator, var(--color-indicator));
 }
 
-.react-aria-Row[data-selected][data-hovered] .react-aria-Cell {
+.mz-row[data-selected][data-hovered] .mz-cell {
   background: var(--table-row-background-selected-hovered, var(--color-accent-muted-pressed));
 }
 
-.react-aria-Row[data-selected][data-pressed] .react-aria-Cell {
+.mz-row[data-selected][data-pressed] .mz-cell {
   background: var(--table-row-background-selected-pressed, var(--color-accent-muted-pressed));
 }
 
 @media (forced-colors: active) {
-  .react-aria-Row[data-selected] .react-aria-Cell:first-child::before {
+  .mz-row[data-selected] .mz-cell:first-child::before {
     forced-color-adjust: none;
     background: Highlight;
   }
 }
 
-.react-aria-Row[data-disabled] {
+.mz-row[data-disabled] {
   opacity: var(--table-disabled-opacity, var(--opacity-disabled));
 }
 
-.react-aria-Cell[data-disabled] {
+.mz-cell[data-disabled] {
   opacity: var(--table-disabled-opacity, var(--opacity-disabled));
 }
 
-.react-aria-Table[data-focus-visible],
-.react-aria-Column[data-focus-visible],
-.react-aria-Row[data-focus-visible] .react-aria-Cell,
-.react-aria-Row[data-focus-visible-within] .react-aria-Cell,
-.react-aria-Cell[data-focus-visible],
-.react-aria-Cell[data-focus-visible-within-row] {
+.mz-table[data-focus-visible],
+.mz-column[data-focus-visible],
+.mz-row[data-focus-visible] .mz-cell,
+.mz-row[data-focus-visible-within] .mz-cell,
+.mz-cell[data-focus-visible],
+.mz-cell[data-focus-visible-within-row] {
   outline: var(--table-focus-ring-width, var(--focus-ring-width)) solid var(--table-focus-ring-color, var(--color-focus));
   outline-offset: var(--table-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
-.react-aria-Table[data-drop-target],
-.react-aria-TableBody[data-drop-target] {
+.mz-table[data-drop-target],
+.mz-table-body[data-drop-target] {
   outline: var(--table-focus-ring-width, var(--focus-ring-width)) solid var(--table-drop-target-color, var(--color-accent-emphasis));
   outline-offset: var(--table-focus-ring-offset, var(--focus-ring-offset-inset));
 }

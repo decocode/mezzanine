@@ -1,7 +1,11 @@
 import { composeRenderProps } from 'react-aria-components'
+import { composeClassName } from '../composeClassName'
+import type { RefAttributes } from 'react'
 import {
   SwitchButton as ReactAriaSwitchButton,
+  SwitchField as ReactAriaSwitchField,
   type SwitchButtonProps as ReactAriaSwitchButtonProps,
+  type SwitchFieldProps,
 } from 'react-aria-components/Switch'
 
 export interface SwitchButtonProps extends ReactAriaSwitchButtonProps {}
@@ -11,9 +15,7 @@ export function SwitchButton({ children, className, ...switchButtonProps }: Swit
   return (
     <ReactAriaSwitchButton
       {...switchButtonProps}
-      className={composeRenderProps(className, (resolvedClassName) => (
-        ['react-aria-SwitchButton', resolvedClassName].filter(Boolean).join(' ')
-      ))}
+      className={composeClassName('mz-switch-button', className)}
     >
       {composeRenderProps(children, (resolvedChildren) => (
         <>
@@ -27,8 +29,9 @@ export function SwitchButton({ children, className, ...switchButtonProps }: Swit
   )
 }
 
-// SwitchField needs no wrapper: its default react-aria-SwitchField class carries the styles.
-export { SwitchField } from 'react-aria-components/Switch'
+export function SwitchField(props: SwitchFieldProps & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaSwitchField {...props} className={composeClassName('mz-switch-field', props.className)} />
+}
 
 export type {
   SwitchButtonRenderProps,

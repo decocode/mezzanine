@@ -30,7 +30,7 @@ export default function TablePage() {
                 <div className="documentation-table table-example">
                   <Table
                     aria-label="Table with single row selection"
-                    className="react-aria-Table table-selection-example"
+                    className="table-selection-example"
                     disabledKeys={['row-c']}
                     selectionMode="single"
                   >
@@ -60,7 +60,7 @@ export default function TablePage() {
                 <div className="documentation-table table-example">
                   <Table
                     aria-label="Table with multiple row selection"
-                    className="react-aria-Table table-selection-example"
+                    className="table-selection-example"
                     selectionMode="multiple"
                   >
                     <TableHeader>

@@ -9,7 +9,7 @@ for (const theme of themes) {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/switch')
     await setTheme(page, theme)
-    const example = page.locator('.react-aria-SwitchField').first()
+    const example = page.locator('.mz-switch-field').first()
     const control = example.getByRole('switch', { name: 'Switch label', exact: true })
     const track = example.locator('.mz-switch-track')
     const handle = example.locator('.mz-switch-handle')
@@ -35,7 +35,7 @@ test('switch handle moves to the end in right to left', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/switch')
   await page.evaluate(() => { document.documentElement.dir = 'rtl' })
-  const example = page.locator('.react-aria-SwitchField').first()
+  const example = page.locator('.mz-switch-field').first()
   const handle = example.locator('.mz-switch-handle')
   const offStart = (await handle.boundingBox())!.x
   await example.getByRole('switch').focus()

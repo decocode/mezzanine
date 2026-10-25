@@ -70,7 +70,7 @@ export default function ToggleButtonPage() {
         ),
         toggleButtonGroup: (<>
           <Link
-            className="react-aria-Link react-aria-documentation-link"
+            className="react-aria-documentation-link"
             href={documentationLink.href}
           >
             <span>{documentationLink.label}</span>

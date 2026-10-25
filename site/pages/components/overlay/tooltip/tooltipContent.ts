@@ -65,7 +65,7 @@ export const tooltipContent: DocsPageContent = {
           { name: 'TooltipTrigger: isOpen / defaultOpen / onOpenChange', description: 'Control open state, set its initial value, or respond to changes.' },
           { name: 'Tooltip: placement', description: 'Preferred position. Defaults to `top`; this example uses `bottom`.' },
           { name: 'Tooltip: offset / crossOffset / shouldFlip', description: 'Adjust positioning and whether the tooltip may flip to fit the available space.' },
-          { name: 'Tooltip: className', description: 'Accepts a class name or render function. Include `react-aria-Tooltip` to retain Mezzanine styling when supplying your own classes.' },
+          { name: 'Tooltip: className', description: 'Accepts a class name or render function, added alongside the component’s own class.' },
         ],
       },
     },

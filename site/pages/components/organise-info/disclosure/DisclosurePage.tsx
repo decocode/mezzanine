@@ -21,7 +21,7 @@ export default function DisclosurePage() {
         ),
         disclosureGroup: (<>
           <Link
-            className="react-aria-Link react-aria-documentation-link"
+            className="react-aria-documentation-link"
             href={disclosureGroupReactAriaLink.href}
           >
             <span>{disclosureGroupReactAriaLink.label}</span>

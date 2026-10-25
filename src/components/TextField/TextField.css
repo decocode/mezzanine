@@ -1,4 +1,4 @@
-.react-aria-TextField {
+.mz-text-field {
   display: flex;
   flex-direction: column;
   gap: var(--text-field-gap, var(--space-gap-field));
@@ -13,7 +13,7 @@
   overflow-wrap: anywhere;
 }
 
-.react-aria-TextField > .react-aria-Label {
+.mz-text-field > .mz-label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -22,7 +22,7 @@
   text-transform: var(--text-transform-label);
 }
 
-:is(.react-aria-Input, .react-aria-TextArea) {
+:is(.mz-input, .mz-text-area) {
   box-sizing: border-box;
   width: 100%;
   min-width: 0;
@@ -42,28 +42,28 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-:is(.react-aria-Input, .react-aria-TextArea)::placeholder {
+:is(.mz-input, .mz-text-area)::placeholder {
   color: var(--input-placeholder-foreground, var(--color-text-muted));
   opacity: 1;
 }
 
-:is(.react-aria-Input, .react-aria-TextArea)[data-hovered]:not([data-disabled]):not([data-readonly]):not([data-invalid]) {
+:is(.mz-input, .mz-text-area)[data-hovered]:not([data-disabled]):not([data-readonly]):not([data-invalid]) {
   border-color: var(--input-border-hovered, var(--color-text));
 }
 
-:is(.react-aria-Input, .react-aria-TextArea)[data-invalid] {
+:is(.mz-input, .mz-text-area)[data-invalid] {
   border-color: var(--input-border-invalid, var(--color-danger));
 }
 
 /* Text entry shows its focus ring on mouse focus too, not only from the keyboard, so everyone can
    see where typing will go. Decided by the owner on 22 October 2026. */
-:is(.react-aria-Input, .react-aria-TextArea)[data-focused] {
+:is(.mz-input, .mz-text-area)[data-focused] {
   outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--input-focus-ring-color, var(--color-focus));
   outline-offset: var(--input-focus-ring-offset, var(--focus-ring-offset));
 }
 
-.react-aria-TextField > [slot='description'],
-.react-aria-TextField > .react-aria-FieldError {
+.mz-text-field > [slot='description'],
+.mz-text-field > .mz-field-error {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -72,63 +72,63 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-TextField > [slot='description'] {
+.mz-text-field > [slot='description'] {
   color: var(--text-field-description-foreground, var(--color-text-muted));
 }
 
-.react-aria-TextField > .react-aria-FieldError {
+.mz-text-field > .mz-field-error {
   color: var(--text-field-error-foreground, var(--color-danger));
 }
 
-.react-aria-TextField[data-disabled] {
+.mz-text-field[data-disabled] {
   opacity: var(--text-field-opacity-disabled, var(--opacity-disabled));
 }
 
-:is(.react-aria-Input, .react-aria-TextArea)[data-disabled],
-:is(.react-aria-Input, .react-aria-TextArea)[data-readonly] {
+:is(.mz-input, .mz-text-area)[data-disabled],
+:is(.mz-input, .mz-text-area)[data-readonly] {
   cursor: default;
 }
 
 @media (forced-colors: active) {
-  :is(.react-aria-Input, .react-aria-TextArea) {
+  :is(.mz-input, .mz-text-area) {
     background: Field;
     color: FieldText;
     border-color: ButtonBorder;
   }
 
-  :is(.react-aria-Input, .react-aria-TextArea)[data-hovered]:not([data-disabled]):not([data-readonly]):not([data-invalid]) {
+  :is(.mz-input, .mz-text-area)[data-hovered]:not([data-disabled]):not([data-readonly]):not([data-invalid]) {
     border-color: Highlight;
   }
 
-  :is(.react-aria-Input, .react-aria-TextArea)[data-invalid] {
+  :is(.mz-input, .mz-text-area)[data-invalid] {
     border-color: Mark;
   }
 
-  :is(.react-aria-Input, .react-aria-TextArea)[data-focused] {
+  :is(.mz-input, .mz-text-area)[data-focused] {
     outline-color: Highlight;
   }
 
-  .react-aria-TextField[data-disabled] {
+  .mz-text-field[data-disabled] {
     opacity: 1;
     color: GrayText;
   }
 
-  :is(.react-aria-Input, .react-aria-TextArea)[data-disabled] {
+  :is(.mz-input, .mz-text-area)[data-disabled] {
     color: GrayText;
     border-color: GrayText;
   }
 
-  :is(.react-aria-Input, .react-aria-TextArea)[data-disabled]::placeholder {
+  :is(.mz-input, .mz-text-area)[data-disabled]::placeholder {
     color: GrayText;
   }
 
-  .react-aria-TextField > .react-aria-FieldError {
+  .mz-text-field > .mz-field-error {
     color: Mark;
   }
 }
 
 /* Share field appearance and states; only multiline sizing differs. */
-.react-aria-TextArea {
+.mz-text-area {
   min-height: var(--text-area-min-height, var(--height-text-area-min));
   max-width: 100%;
   resize: vertical;

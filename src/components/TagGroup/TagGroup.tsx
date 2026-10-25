@@ -1,16 +1,17 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, RefAttributes } from 'react'
 import { composeRenderProps } from 'react-aria-components'
 import {
   Tag as ReactAriaTag,
   TagGroup as ReactAriaTagGroup,
-  TagList,
+  TagList as ReactAriaTagList,
   type TagGroupProps as ReactAriaTagGroupProps,
   type TagListProps,
   type TagProps,
 } from 'react-aria-components/TagGroup'
 import { Button } from 'react-aria-components/Button'
-import { Label } from 'react-aria-components/Label'
-import { Text } from 'react-aria-components/Text'
+import { composeClassName } from '../composeClassName'
+import { Label } from '../Label/Label'
+import { Text } from '../Text/Text'
 import { CloseIcon } from '../../icons/Icons'
 
 export interface TagGroupProps<T extends object> extends Omit<ReactAriaTagGroupProps, 'children'>, Pick<TagListProps<T>, 'items' | 'children' | 'renderEmptyState'> {
@@ -26,7 +27,7 @@ export interface TagGroupProps<T extends object> extends Omit<ReactAriaTagGroupP
 // Aria's vanilla starter.
 export function TagGroup<T extends object>({ label, description, errorMessage, items, children, renderEmptyState, ...props }: TagGroupProps<T>) {
   return (
-    <ReactAriaTagGroup {...props}>
+    <ReactAriaTagGroup {...props} className={composeClassName('mz-tag-group', props.className)}>
       {label != null && <Label>{label}</Label>}
       <TagList items={items} renderEmptyState={renderEmptyState}>{children}</TagList>
       {description != null && <Text slot="description">{description}</Text>}
@@ -39,7 +40,7 @@ export function TagGroup<T extends object>({ label, description, errorMessage, i
 export function Tag(props: TagProps) {
   const textValue = props.textValue ?? (typeof props.children === 'string' ? props.children : undefined)
   return (
-    <ReactAriaTag {...props} textValue={textValue}>
+    <ReactAriaTag {...props} textValue={textValue} className={composeClassName('mz-tag', props.className)}>
       {composeRenderProps(props.children, (children, { allowsRemoving }) => <>
         {children}
         {allowsRemoving && <Button slot="remove" className="mz-tag-remove"><CloseIcon className="mz-tag-remove-icon" /></Button>}
@@ -48,7 +49,9 @@ export function Tag(props: TagProps) {
   )
 }
 
-export { TagList }
+export function TagList<T>(props: TagListProps<T> & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaTagList<T> {...props} className={composeClassName('mz-tag-list', props.className)} />
+}
 
 export type {
   TagListProps,

@@ -1,5 +1,9 @@
-/* Follows React Aria's vanilla modal layout and viewport variables. */
-.react-aria-ModalOverlay {
+/* Follows React Aria's vanilla modal layout and viewport variables. A Modal used without a
+   ModalOverlay gets an overlay from React Aria that can't take a class, so the overlay is also
+   matched by React Aria's own class when it holds a Mezzanine Modal. :where() keeps the specificity
+   of a single class. */
+.mz-modal-overlay,
+.react-aria-ModalOverlay:where(:has(> .mz-modal)) {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 0;
@@ -16,7 +20,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-Modal {
+.mz-modal {
   position: sticky;
   box-sizing: border-box;
   /* physical: centres against the visible screen height, paired with the vertical translate. */
@@ -34,19 +38,21 @@
   box-shadow: var(--modal-elevation, var(--elevation-raised-3));
 }
 
-.react-aria-ModalOverlay[data-entering] {
+.mz-modal-overlay[data-entering],
+.react-aria-ModalOverlay:where(:has(> .mz-modal))[data-entering] {
   animation: mz-modal-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-modal-fade);
 }
 
-.react-aria-ModalOverlay[data-exiting] {
+.mz-modal-overlay[data-exiting],
+.react-aria-ModalOverlay:where(:has(> .mz-modal))[data-exiting] {
   animation: mz-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-modal-fade-exit);
 }
 
-.react-aria-Modal[data-entering] {
+.mz-modal[data-entering] {
   animation: mz-modal-zoom var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-modal-zoom);
 }
 
-.react-aria-Modal[data-exiting] {
+.mz-modal[data-exiting] {
   animation: mz-modal-zoom-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-modal-zoom-exit);
 }
 

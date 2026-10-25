@@ -13,8 +13,8 @@ for (const theme of themes) {
     const sheet = page.getByRole('dialog', { name: 'Sheet title' })
     await expect(sheet).toBeVisible()
     await expect(page.locator('.mz-sheet-handle')).toBeVisible()
-    await expect(page.locator('.react-aria-SheetBackdrop')).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)')
-    await expectNoAccessibilityViolations(page, '.react-aria-Sheet')
+    await expect(page.locator('.mz-sheet-backdrop')).not.toHaveCSS('background-color', 'rgba(0, 0, 0, 0)')
+    await expectNoAccessibilityViolations(page, '.mz-sheet')
     // The close button is pressed from the keyboard, so the test needn't wait for the sheet's scroll to settle.
     await sheet.getByRole('button', { name: 'Close', exact: true }).focus()
     await page.keyboard.press('Enter')

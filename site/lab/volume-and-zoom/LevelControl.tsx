@@ -73,7 +73,7 @@ export function LevelControl({ label, icon, value, minValue, maxValue, step, onC
       {!revealsOnHover && start}
       <Slider
         aria-label={label}
-        className="react-aria-Slider lab-media-slider"
+        className="lab-media-slider"
         orientation={orientation}
         value={value}
         minValue={minValue}
@@ -139,7 +139,7 @@ export function LevelControl({ label, icon, value, minValue, maxValue, step, onC
   return (
     <DialogTrigger isOpen={isOpen} onOpenChange={changeOpen}>
       <Button hierarchy="secondary" iconLeading={icon} labelPlacement="tooltip" isDisabled={isDisabled}>{label}</Button>
-      <Popover placement="top" className="react-aria-Popover lab-media-popover">
+      <Popover placement="top" className="lab-media-popover">
         <Dialog aria-label={label}>
           {row}
         </Dialog>

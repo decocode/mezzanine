@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla Popover: a raised surface beside its trigger. Its content, such as a
    ListBox, Menu or Dialog, supplies its own padding. */
-.react-aria-Popover {
+.mz-popover {
   box-sizing: border-box;
   max-inline-size: min(var(--popover-max-width, var(--width-md)), calc(100vw - var(--popover-viewport-padding, var(--space-overlay-inset)) * 2));
   overflow: auto;
@@ -20,24 +20,24 @@
 }
 
 /* A Select's or ComboBox's list is as wide as its field. */
-.react-aria-Popover:is([data-trigger='Select'], [data-trigger='ComboBox']) {
+.mz-popover:is([data-trigger='Select'], [data-trigger='ComboBox']) {
   inline-size: var(--trigger-width);
   max-inline-size: none;
 }
 
 /* It fades in and out, with the shared fade that Modal and Panel drawers use. */
-.react-aria-Popover[data-entering] {
+.mz-popover[data-entering] {
   animation: mz-modal-fade var(--motion-duration-interface) var(--motion-easing-enter);
   animation-name: var(--_motion-animation, mz-modal-fade);
 }
 
-.react-aria-Popover[data-exiting] {
+.mz-popover[data-exiting] {
   animation: mz-modal-fade-exit var(--motion-duration-interface) var(--motion-easing-exit);
   animation-name: var(--_motion-animation, mz-modal-fade-exit);
 }
 
 @media (forced-colors: active) {
-  .react-aria-Popover {
+  .mz-popover {
     border-color: CanvasText;
   }
 }

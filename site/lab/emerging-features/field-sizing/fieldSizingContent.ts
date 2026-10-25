@@ -17,7 +17,7 @@ export const fieldSizingCssNotes: Record<string, CssNote> = {
       'The whole feature is one line: `field-sizing: content` lets the text area size itself to what you type, rather than to a fixed number of rows.',
       'Browsers that don’t support it ignore the line, and the field keeps its normal size and scrolls.',
     ],
-    code: `.lab-field-sizing .react-aria-TextArea {
+    code: `.lab-field-sizing .mz-text-area {
   field-sizing: content;
 }`,
   },

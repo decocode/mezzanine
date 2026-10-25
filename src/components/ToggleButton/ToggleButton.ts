@@ -1,6 +1,7 @@
 import { createContext, createElement, useContext, type ReactNode, type Ref } from 'react'
 import { composeRenderProps } from 'react-aria-components'
 import type { ButtonLabelProps, ButtonSize } from '../Button/Button'
+import { composeClassName } from '../composeClassName'
 import { Tooltip, TooltipTrigger, type TooltipProps } from '../Tooltip/Tooltip'
 import {
   ToggleButton as ReactAriaToggleButton,
@@ -40,6 +41,7 @@ export function ToggleButton({ hierarchy, size, iconLeading, iconTrailing, label
   const trailing = iconTrailing != null && createElement('span', { className: 'mz-button-icon', 'aria-hidden': true }, iconTrailing)
   const appearanceProps = {
     ...props,
+    className: composeClassName('mz-toggle-button', props.className),
     ...(tooltipLabel !== undefined && { 'aria-label': props['aria-label'] ?? tooltipLabel }),
     'data-variant': hierarchy,
     'data-size': size ?? groupSize,
@@ -55,7 +57,7 @@ export function ToggleButton({ hierarchy, size, iconLeading, iconTrailing, label
 }
 
 export function ToggleButtonGroup({ hierarchy, size = 'md', ...props }: ToggleButtonGroupProps) {
-  const appearanceProps = { ...props, 'data-variant': hierarchy }
+  const appearanceProps = { ...props, className: composeClassName('mz-toggle-button-group', props.className), 'data-variant': hierarchy }
   return createElement(ToggleButtonSizeContext.Provider, { value: size },
     createElement(ReactAriaToggleButtonGroup, appearanceProps),
   )

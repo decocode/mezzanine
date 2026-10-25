@@ -1,16 +1,18 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, RefAttributes } from 'react'
 import {
   Select as ReactAriaSelect,
-  SelectValue,
+  SelectValue as ReactAriaSelectValue,
   type SelectProps as ReactAriaSelectProps,
+  type SelectValueProps,
 } from 'react-aria-components/Select'
 import { Button } from 'react-aria-components/Button'
-import { FieldError } from 'react-aria-components/FieldError'
-import { Label } from 'react-aria-components/Label'
-import { ListBox } from 'react-aria-components/ListBox'
-import { Popover } from 'react-aria-components/Popover'
-import { Text } from 'react-aria-components/Text'
 import type { ValidationResult } from 'react-aria-components'
+import { composeClassName } from '../composeClassName'
+import { FieldError } from '../FieldError/FieldError'
+import { Label } from '../Label/Label'
+import { ListBox } from '../ListBox/ListBox'
+import { Popover } from '../Popover/Popover'
+import { Text } from '../Text/Text'
 import { ChevronDownIcon } from '../../icons/Icons'
 
 export interface SelectProps<T extends object = object, M extends 'single' | 'multiple' = 'single'> extends Omit<ReactAriaSelectProps<T, M>, 'children'> {
@@ -30,7 +32,7 @@ export interface SelectProps<T extends object = object, M extends 'single' | 'mu
 // help and error text, and the list in a Popover, following React Aria's vanilla starter.
 export function Select<T extends object = object, M extends 'single' | 'multiple' = 'single'>({ label, description, errorMessage, items, children, ...props }: SelectProps<T, M>) {
   return (
-    <ReactAriaSelect<T, M> {...props}>
+    <ReactAriaSelect<T, M> {...props} className={composeClassName('mz-select', props.className)}>
       {label != null && <Label>{label}</Label>}
       <Button className="mz-select-trigger">
         <SelectValue />
@@ -45,7 +47,9 @@ export function Select<T extends object = object, M extends 'single' | 'multiple
   )
 }
 
-export { SelectValue }
+export function SelectValue<T>(props: SelectValueProps<T> & RefAttributes<HTMLSpanElement>) {
+  return <ReactAriaSelectValue<T> {...props} className={composeClassName('mz-select-value', props.className)} />
+}
 
 export type {
   SelectRenderProps,

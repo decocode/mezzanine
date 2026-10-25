@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla Tree: rows like ListBox options, indented by level, with a chevron that
    turns as a row opens, like NavTree's. */
-.react-aria-Tree {
+.mz-tree {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -20,25 +20,25 @@
 
 /* Items keep their height in a long list, and a Virtualizer's tall inner area keeps its full height
    so the list scrolls through every item. */
-.react-aria-Tree > * {
+.mz-tree > * {
   flex-shrink: 0;
 }
 
-.react-aria-Tree[data-focus-visible] {
+.mz-tree[data-focus-visible] {
   outline: var(--tree-focus-ring-width, var(--focus-ring-width)) solid var(--tree-focus-ring-color, var(--color-focus));
   outline-offset: var(--tree-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
-.react-aria-Tree[data-empty] {
+.mz-tree[data-empty] {
   padding: var(--space-padding-control-block) var(--space-padding-control-inline);
   color: var(--tree-empty-foreground, var(--color-text-muted));
 }
 
-.react-aria-TreeSection:not(:first-child) {
+.mz-tree-section:not(:first-child) {
   margin-block-start: var(--tree-section-gap, var(--space-gap-cluster));
 }
 
-.react-aria-TreeHeader {
+.mz-tree-header {
   padding: var(--space-padding-control-block) var(--space-padding-control-inline);
   color: var(--tree-header-foreground, var(--color-accent));
   font-family: var(--font-family-body);
@@ -50,7 +50,7 @@
 }
 
 /* Each level indents the row's content by one step. */
-.react-aria-TreeItem {
+.mz-tree-item {
   position: relative;
   display: flex;
   align-items: center;
@@ -66,25 +66,25 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.react-aria-TreeItem[data-href] {
+.mz-tree-item[data-href] {
   cursor: pointer;
 }
 
-.react-aria-TreeItem[data-hovered] {
+.mz-tree-item[data-hovered] {
   background: var(--tree-item-background-hovered, var(--color-accent-muted-hovered));
 }
 
-.react-aria-TreeItem[data-pressed] {
+.mz-tree-item[data-pressed] {
   background: var(--tree-item-background-pressed, var(--color-accent-muted-pressed));
 }
 
 /* A selected row takes the soft tint and the shared indicator bar, so selection doesn't rely on colour
    alone. */
-.react-aria-TreeItem[data-selected] {
+.mz-tree-item[data-selected] {
   background: var(--tree-item-background-selected, var(--color-accent-muted));
 }
 
-.react-aria-TreeItem[data-selected]::before {
+.mz-tree-item[data-selected]::before {
   content: '';
   position: absolute;
   inset-block: var(--indicator-inset);
@@ -94,20 +94,20 @@
   background: var(--tree-item-indicator, var(--color-indicator));
 }
 
-.react-aria-TreeItem[data-focus-visible] {
+.mz-tree-item[data-focus-visible] {
   outline: var(--tree-item-focus-ring-width, var(--focus-ring-width)) solid var(--tree-item-focus-ring-color, var(--color-focus));
   outline-offset: var(--tree-item-focus-ring-offset, var(--focus-ring-offset-inset));
 }
 
-.react-aria-TreeItem[data-disabled] {
+.mz-tree-item[data-disabled] {
   opacity: var(--tree-item-opacity-disabled, var(--opacity-disabled));
 }
 
-.react-aria-TreeItem[data-dragging] {
+.mz-tree-item[data-dragging] {
   opacity: var(--tree-item-dragging-opacity, var(--opacity-disabled));
 }
 
-.react-aria-TreeItem[data-drop-target] {
+.mz-tree-item[data-drop-target] {
   outline: var(--focus-ring-width) solid var(--tree-item-drop-target-color, var(--color-accent-emphasis));
   outline-offset: var(--focus-ring-offset-inset);
   background: var(--tree-item-background-current, var(--color-accent-muted));
@@ -130,7 +130,7 @@
   visibility: hidden;
 }
 
-.react-aria-TreeItem[data-has-child-items] .mz-tree-chevron {
+.mz-tree-item[data-has-child-items] .mz-tree-chevron {
   visibility: visible;
 }
 
@@ -141,11 +141,11 @@
   transition: rotate calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);
 }
 
-.react-aria-TreeItem[data-expanded] .mz-tree-chevron-icon {
+.mz-tree-item[data-expanded] .mz-tree-chevron-icon {
   rotate: var(--motion-rotation-expanded);
 }
 
-.react-aria-TreeItem[data-expanded]:dir(rtl) .mz-tree-chevron-icon {
+.mz-tree-item[data-expanded]:dir(rtl) .mz-tree-chevron-icon {
   rotate: calc(var(--motion-rotation-expanded) * -1);
 }
 
@@ -176,7 +176,7 @@
 }
 
 @media (forced-colors: active) {
-  .react-aria-TreeItem[data-selected]::before {
+  .mz-tree-item[data-selected]::before {
     forced-color-adjust: none;
     background: Highlight;
   }

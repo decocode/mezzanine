@@ -2,7 +2,7 @@
    one box. Like NumberField, the parts keep their own borders, overlap them where they meet and
    square off their inner corners, and the focus ring goes round the whole group. Inside a Toolbar a
    Group only names its controls, so none of this applies there. */
-.react-aria-Group:not(.react-aria-Toolbar *) {
+.mz-group:not(.mz-toolbar *) {
   display: flex;
   inline-size: fit-content;
   max-inline-size: 100%;
@@ -10,51 +10,51 @@
   border-radius: var(--input-border-radius, var(--radius-control));
 }
 
-.react-aria-Group:not(.react-aria-Toolbar *) > * {
+.mz-group:not(.mz-toolbar *) > * {
   position: relative;
   margin: 0;
 }
 
-.react-aria-Group:not(.react-aria-Toolbar *) > * + * {
+.mz-group:not(.mz-toolbar *) > * + * {
   margin-inline-start: calc(var(--input-border-width, var(--border-width-baseline)) * -1);
 }
 
-.react-aria-Group:not(.react-aria-Toolbar *) > :not(:first-child) {
+.mz-group:not(.mz-toolbar *) > :not(:first-child) {
   border-start-start-radius: 0;
   border-end-start-radius: 0;
 }
 
-.react-aria-Group:not(.react-aria-Toolbar *) > :not(:last-child) {
+.mz-group:not(.mz-toolbar *) > :not(:last-child) {
   border-start-end-radius: 0;
   border-end-end-radius: 0;
 }
 
 /* A hovered part's border sits over its neighbour's, so the whole edge changes. */
-.react-aria-Group:not(.react-aria-Toolbar *) > [data-hovered] {
+.mz-group:not(.mz-toolbar *) > [data-hovered] {
   z-index: var(--z-index-raised);
 }
 
-.react-aria-Group:not(.react-aria-Toolbar *) > .react-aria-Input {
+.mz-group:not(.mz-toolbar *) > .mz-input {
   flex: 1 1 auto;
   inline-size: auto;
   min-inline-size: 0;
 }
 
-.react-aria-Group:not(.react-aria-Toolbar *) > .react-aria-Input[data-focused] {
+.mz-group:not(.mz-toolbar *) > .mz-input[data-focused] {
   outline: none;
 }
 
-.react-aria-Group:not(.react-aria-Toolbar *):has(> .react-aria-Input[data-focused]) {
+.mz-group:not(.mz-toolbar *):has(> .mz-input[data-focused]) {
   outline: var(--input-focus-ring-width, var(--focus-ring-width)) solid var(--input-focus-ring-color, var(--color-focus));
   outline-offset: var(--input-focus-ring-offset, var(--focus-ring-offset));
 }
 
-.react-aria-Group:not(.react-aria-Toolbar *)[data-disabled] {
+.mz-group:not(.mz-toolbar *)[data-disabled] {
   opacity: var(--group-opacity-disabled, var(--opacity-disabled));
 }
 
 @media (forced-colors: active) {
-  .react-aria-Group:not(.react-aria-Toolbar *):has(> .react-aria-Input[data-focused]) {
+  .mz-group:not(.mz-toolbar *):has(> .mz-input[data-focused]) {
     outline-color: Highlight;
   }
 }

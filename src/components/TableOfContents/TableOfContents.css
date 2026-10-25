@@ -38,7 +38,7 @@
 }
 
 /* A nested link keeps its full-width tint and indents its text instead. */
-.mz-table-of-contents ul ul .react-aria-Link {
+.mz-table-of-contents ul ul .mz-link {
   padding-inline-start: calc(var(--nav-item-padding-inline) + var(--_toc-depth) * var(--table-of-contents-indent, var(--space-4)));
 }
 
@@ -47,7 +47,7 @@
 }
 
 /* Each link is a nav item row: the shared nav item style, which wins over Link's own link colours. */
-.mz-table-of-contents .react-aria-Link {
+.mz-table-of-contents .mz-link {
   display: flex;
   align-items: center;
   min-height: var(--target-size-xs);
@@ -70,24 +70,24 @@
   overflow-wrap: anywhere;
 }
 
-.mz-table-of-contents .react-aria-Link[data-hovered] {
+.mz-table-of-contents .mz-link[data-hovered] {
   background: var(--nav-item-background-hovered);
   color: var(--nav-item-foreground);
 }
 
-.mz-table-of-contents .react-aria-Link[data-pressed] {
+.mz-table-of-contents .mz-link[data-pressed] {
   background: var(--nav-item-background-pressed);
   color: var(--nav-item-foreground);
 }
 
 /* The section being read: NavTree's current-page bar. The weight stays the same, so nothing changes
    width or wraps differently as reading moves down the page. */
-.mz-table-of-contents .react-aria-Link[aria-current='location'] {
+.mz-table-of-contents .mz-link[aria-current='location'] {
   background: var(--nav-item-background-current);
   color: var(--nav-item-foreground-current);
 }
 
-.mz-table-of-contents .react-aria-Link[aria-current='location']::before {
+.mz-table-of-contents .mz-link[aria-current='location']::before {
   content: '';
   position: absolute;
   inset-block: var(--indicator-inset);
@@ -99,12 +99,12 @@
 }
 
 /* In a nested link the bar sits on the nearest guide line, centred over it. */
-.mz-table-of-contents ul ul .react-aria-Link[aria-current='location']::before {
+.mz-table-of-contents ul ul .mz-link[aria-current='location']::before {
   inset-inline-start: calc(var(--nav-item-padding-inline) + var(--space-1) + (var(--_toc-depth) - 1) * var(--table-of-contents-indent, var(--space-4)) - (var(--nav-item-current-indicator-width) - var(--table-of-contents-guide-width, var(--border-width-baseline))) / 2);
 }
 
 @media (forced-colors: active) {
-  .mz-table-of-contents .react-aria-Link[aria-current='location']::before {
+  .mz-table-of-contents .mz-link[aria-current='location']::before {
     forced-color-adjust: none;
     background: Highlight;
   }

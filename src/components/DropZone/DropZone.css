@@ -1,7 +1,7 @@
 /* Follows React Aria's vanilla DropZone: a dashed area that tints while something is dragged over it.
    Its content stacks in the middle: an optional icon, the label, help text, an error message and a
    FileTrigger button. */
-.react-aria-DropZone {
+.mz-drop-zone {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,19 +25,19 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-DropZone > svg {
+.mz-drop-zone > svg {
   flex: none;
   inline-size: var(--drop-zone-icon-size, var(--icon-size-xl));
   block-size: var(--drop-zone-icon-size, var(--icon-size-xl));
   color: var(--drop-zone-icon-foreground, var(--color-text-muted));
 }
 
-.react-aria-DropZone > [slot='label'] {
+.mz-drop-zone > [slot='label'] {
   color: var(--drop-zone-label-foreground, var(--color-text));
 }
 
 /* Help text, such as the accepted file types, and an error message, which has role="alert". */
-.react-aria-DropZone > p {
+.mz-drop-zone > p {
   margin: 0;
   color: var(--drop-zone-description-foreground, var(--color-text-muted));
   font-family: var(--font-family-body);
@@ -48,37 +48,37 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-DropZone > p[role='alert'] {
+.mz-drop-zone > p[role='alert'] {
   color: var(--drop-zone-error-foreground, var(--color-danger));
 }
 
 /* The FileTrigger's button sits a little apart from the text above it. */
-.react-aria-DropZone > .react-aria-Button {
+.mz-drop-zone > .mz-button {
   margin-block-start: var(--drop-zone-button-gap, var(--space-gap-control));
 }
 
-.react-aria-DropZone[data-disabled] {
+.mz-drop-zone[data-disabled] {
   opacity: var(--drop-zone-opacity-disabled, var(--opacity-disabled));
 }
 
-.react-aria-DropZone[data-drop-target] {
+.mz-drop-zone[data-drop-target] {
   border-style: solid;
   border-color: var(--drop-zone-border-current, var(--color-accent-emphasis));
   background: var(--drop-zone-background-current, var(--color-accent-muted));
   color: var(--drop-zone-foreground-current, var(--color-text));
 }
 
-.react-aria-DropZone[data-focus-visible] {
+.mz-drop-zone[data-focus-visible] {
   outline: var(--drop-zone-focus-ring-width, var(--focus-ring-width)) solid var(--drop-zone-focus-ring-color, var(--color-focus));
   outline-offset: var(--drop-zone-focus-ring-offset, var(--focus-ring-offset));
 }
 
 @media (forced-colors: active) {
-  .react-aria-DropZone {
+  .mz-drop-zone {
     border-color: ButtonText;
   }
 
-  .react-aria-DropZone[data-drop-target] {
+  .mz-drop-zone[data-drop-target] {
     border-color: Highlight;
   }
 }

@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla CheckboxGroup: a label, the checkboxes, then any help text or error,
    in one column. It matches RadioGroup's spacing and text. */
-.react-aria-CheckboxGroup {
+.mz-checkbox-group {
   display: grid;
   gap: var(--checkbox-group-gap, var(--space-gap-field));
   color: var(--color-text);
@@ -12,7 +12,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-CheckboxGroup > .react-aria-Label {
+.mz-checkbox-group > .mz-label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -21,8 +21,8 @@
   text-transform: var(--text-transform-label);
 }
 
-.react-aria-CheckboxGroup > [slot='description'],
-.react-aria-CheckboxGroup > .react-aria-FieldError {
+.mz-checkbox-group > [slot='description'],
+.mz-checkbox-group > .mz-field-error {
   color: var(--checkbox-group-description-foreground, var(--color-text-muted));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
@@ -32,10 +32,10 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-CheckboxGroup > .react-aria-FieldError {
+.mz-checkbox-group > .mz-field-error {
   color: var(--checkbox-group-error-foreground, var(--color-danger));
 }
 
-.react-aria-CheckboxGroup[data-disabled] > :is(.react-aria-Label, [slot='description']) {
+.mz-checkbox-group[data-disabled] > :is(.mz-label, [slot='description']) {
   opacity: var(--checkbox-group-opacity-disabled, var(--opacity-disabled));
 }

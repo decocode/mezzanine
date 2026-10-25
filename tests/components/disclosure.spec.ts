@@ -29,7 +29,7 @@ for (const theme of themes) {
       await page.goto('/disclosure')
       await setTheme(page, theme)
       const trigger = page.locator('main .mz-disclosure-trigger').first()
-      const panel = page.locator('main .react-aria-DisclosurePanel').first()
+      const panel = page.locator('main .mz-disclosure-panel').first()
       const fullHeight = (await panel.boundingBox())!.height
       await panel.evaluate(element => {
         const link = document.createElement('a')
@@ -57,7 +57,7 @@ for (const theme of themes) {
 test('Disclosure find-in-page opens a closed panel', async ({ page }) => {
   await page.goto('/disclosure')
   const trigger = page.locator('main .mz-disclosure-trigger').first()
-  const panel = page.locator('main .react-aria-DisclosurePanel').first()
+  const panel = page.locator('main .mz-disclosure-panel').first()
   await trigger.click()
   await expect(panel).toHaveAttribute('hidden', 'until-found')
   // Exercise the event dispatched by browser find-in-page, without changing
@@ -72,9 +72,9 @@ test('Disclosure find-in-page opens a closed panel', async ({ page }) => {
 test('Disclosure group swaps panels immediately, including in forced colours', async ({ page }) => {
   await page.emulateMedia({ forcedColors: 'active' })
   await page.goto('/disclosure')
-  const group = page.locator('main .react-aria-DisclosureGroup').first()
+  const group = page.locator('main .mz-disclosure-group').first()
   const triggers = group.locator('.mz-disclosure-trigger')
-  const panels = group.locator('.react-aria-DisclosurePanel')
+  const panels = group.locator('.mz-disclosure-panel')
   await triggers.nth(1).click()
   await expect(panels.nth(0)).toHaveAttribute('hidden', 'until-found')
   await expect(panels.nth(1)).not.toHaveAttribute('hidden')
@@ -88,7 +88,7 @@ for (const fontSize of textSizes) {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.goto('/disclosure')
     await setTextSize(page, fontSize)
-    const panel = page.locator('main .react-aria-DisclosurePanel').first()
+    const panel = page.locator('main .mz-disclosure-panel').first()
     await panel.evaluate(element => {
       const paragraph = document.createElement('p')
       paragraph.textContent = 'Wrapped disclosure content with enough words to wrap across several lines. '.repeat(8)

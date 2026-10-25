@@ -4,12 +4,13 @@ import {
   type NumberFieldProps as ReactAriaNumberFieldProps,
 } from 'react-aria-components/NumberField'
 import { Button } from 'react-aria-components/Button'
-import { FieldError } from 'react-aria-components/FieldError'
 import { Group } from 'react-aria-components/Group'
-import { Input } from 'react-aria-components/Input'
-import { Label } from 'react-aria-components/Label'
-import { Text } from 'react-aria-components/Text'
 import type { ValidationResult } from 'react-aria-components'
+import { composeClassName } from '../composeClassName'
+import { FieldError } from '../FieldError/FieldError'
+import { Label } from '../Label/Label'
+import { Text } from '../Text/Text'
+import { Input } from '../TextField/TextField'
 import { MinusIcon, PlusIcon } from '../../icons/Icons'
 
 export interface NumberFieldProps extends Omit<ReactAriaNumberFieldProps, 'children'> {
@@ -27,7 +28,7 @@ export interface NumberFieldProps extends Omit<ReactAriaNumberFieldProps, 'child
 // the help and error text, following React Aria's vanilla starter.
 export function NumberField({ label, description, errorMessage, placeholder, ...props }: NumberFieldProps) {
   return (
-    <ReactAriaNumberField {...props}>
+    <ReactAriaNumberField {...props} className={composeClassName('mz-number-field', props.className)}>
       {label != null && <Label>{label}</Label>}
       <Group className="mz-number-field-group">
         <Input placeholder={placeholder} />

@@ -1,7 +1,9 @@
 import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { UNSAFE_PortalProvider } from 'react-aria'
 import { CodeBlock } from '../CodeBlock/CodeBlock'
-import { Tab, TabList, TabPanel, Tabs } from '../Tabs/Tabs'
+// The demo frame has its own look, so its Tabs root is React Aria's, without Mezzanine's class.
+import { Tabs } from 'react-aria-components/Tabs'
+import { Tab, TabList, TabPanel } from '../Tabs/Tabs'
 import { ToggleButton, ToggleButtonGroup } from '../ToggleButton/ToggleButton'
 import { LayoutIcon, MoonIcon, SunIcon } from '../../icons/Icons'
 import { getPageTheme, getServerPageTheme, isDemoTheme, subscribeToPageTheme, type DemoTheme } from './demoAreaLogic'

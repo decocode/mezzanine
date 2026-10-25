@@ -25,6 +25,6 @@
 
 /* A link in one of the Footer's lists stands alone rather than inside a sentence, so it takes its
    height from the shared target size. Links in the small print follow the line of text. */
-.mz-footer li > .react-aria-Link {
+.mz-footer li > .mz-link {
   min-height: var(--target-size-xs);
 }

@@ -6,6 +6,7 @@ import {
 } from 'react-aria-components/Button'
 import { Link as ReactAriaLink, type LinkProps as ReactAriaLinkProps } from 'react-aria-components/Link'
 import { ProgressBar } from 'react-aria-components/ProgressBar'
+import { composeClassName } from '../composeClassName'
 import { Tooltip, TooltipTrigger, type TooltipProps } from '../Tooltip/Tooltip'
 
 // How much attention a button draws, from the one main action down to quiet ones; destructive marks
@@ -98,9 +99,7 @@ export function Button({
       <ReactAriaLink
         {...linkProps}
         {...appearance}
-        className={composeRenderProps(className, resolvedClassName => (
-          ['react-aria-Button', resolvedClassName].filter(Boolean).join(' ')
-        ))}
+        className={composeClassName('mz-button', className)}
       >
         {composeRenderProps(children, resolvedChildren => renderContent(resolvedChildren))}
       </ReactAriaLink>,
@@ -112,9 +111,7 @@ export function Button({
     <ReactAriaButton
       {...buttonProps}
       {...appearance}
-      className={composeRenderProps(className, resolvedClassName => (
-        ['react-aria-Button', resolvedClassName].filter(Boolean).join(' ')
-      ))}
+      className={composeClassName('mz-button', className)}
     >
       {composeRenderProps(children, (resolvedChildren, { isPending }) => renderContent(resolvedChildren, isPending))}
     </ReactAriaButton>,

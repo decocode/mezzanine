@@ -1,5 +1,5 @@
 /* Button and ToggleButton share one size scale. Consumers select size via props. */
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-size] {
+:is(.mz-button, .mz-toggle-button)[data-size] {
   box-sizing: border-box;
   min-height: var(--_button-min-height);
   padding: var(--_button-padding-block) var(--_button-padding-inline);
@@ -7,7 +7,7 @@
   line-height: var(--_button-line-height);
 }
 
-.react-aria-Button[data-variant] {
+.mz-button[data-variant] {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -31,7 +31,7 @@
   cursor: pointer;
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xs'] {
+:is(.mz-button, .mz-toggle-button)[data-size='xs'] {
   --_button-min-height: var(--target-size-xs);
   --_button-padding-block: var(--button-xs-padding-block, var(--space-1));
   --_button-padding-inline: var(--button-xs-padding-inline, var(--space-3));
@@ -40,7 +40,7 @@
   --_button-icon-size: var(--button-xs-icon-size, var(--icon-size-xs));
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='sm'] {
+:is(.mz-button, .mz-toggle-button)[data-size='sm'] {
   --_button-min-height: var(--target-size-sm);
   --_button-padding-block: var(--button-sm-padding-block, var(--space-2));
   --_button-padding-inline: var(--button-sm-padding-inline, var(--space-4));
@@ -49,7 +49,7 @@
   --_button-icon-size: var(--button-sm-icon-size, var(--icon-size-sm));
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='md'] {
+:is(.mz-button, .mz-toggle-button)[data-size='md'] {
   --_button-min-height: var(--target-size-md);
   --_button-padding-block: var(--button-md-padding-block, var(--space-2));
   --_button-padding-inline: var(--button-md-padding-inline, var(--space-4));
@@ -58,7 +58,7 @@
   --_button-icon-size: var(--button-md-icon-size, var(--icon-size-md));
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='lg'] {
+:is(.mz-button, .mz-toggle-button)[data-size='lg'] {
   --_button-min-height: var(--target-size-lg);
   --_button-padding-block: var(--button-lg-padding-block, var(--space-2));
   --_button-padding-inline: var(--button-lg-padding-inline, var(--space-5));
@@ -67,7 +67,7 @@
   --_button-icon-size: var(--button-lg-icon-size, var(--icon-size-lg));
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-size='xl'] {
+:is(.mz-button, .mz-toggle-button)[data-size='xl'] {
   --_button-min-height: var(--target-size-xl);
   --_button-padding-block: var(--button-xl-padding-block, var(--space-3));
   --_button-padding-inline: var(--button-xl-padding-inline, var(--space-6));
@@ -99,14 +99,14 @@
   height: var(--_button-icon-size);
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-icon-only] {
+:is(.mz-button, .mz-toggle-button)[data-icon-only] {
   width: var(--_button-min-height);
   padding-inline: 0;
 }
 
 /* An icon with its label below or above it, as in a Rail. The icon sits in the button's box and the
    label sits outside it, but they're one control, so pressing the label presses the button too. */
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement] .mz-button-content {
+:is(.mz-button, .mz-toggle-button)[data-label-placement] .mz-button-content {
   flex-direction: column;
   gap: var(--space-1);
 }
@@ -120,7 +120,7 @@
   block-size: var(--_button-min-height);
 }
 
-.react-aria-Button[data-variant][data-label-placement] {
+.mz-button[data-variant][data-label-placement] {
   min-height: 0;
   padding: 0;
   border-color: transparent;
@@ -128,18 +128,18 @@
   color: var(--color-text);
 }
 
-.react-aria-Button[data-label-placement] .mz-button-icon-box {
+.mz-button[data-label-placement] .mz-button-icon-box {
   border: var(--button-border-width, var(--border-width-baseline)) solid var(--_button-border);
   border-radius: var(--button-border-radius, var(--radius-control));
   background: var(--_button-current-background);
   color: var(--_button-foreground);
 }
 
-:is(.react-aria-Button, .react-aria-ToggleButton)[data-label-placement='above'] .mz-button-content {
+:is(.mz-button, .mz-toggle-button)[data-label-placement='above'] .mz-button-content {
   flex-direction: column-reverse;
 }
 
-.react-aria-Button[data-variant='primary'] {
+.mz-button[data-variant='primary'] {
   --_button-background: var(--button-primary-background, var(--color-accent-emphasis));
   --_button-background-hovered: var(--button-primary-background-hovered, var(--color-accent-emphasis-hovered));
   --_button-background-pressed: var(--button-primary-background-pressed, var(--color-accent-emphasis-pressed));
@@ -147,7 +147,7 @@
   --_button-border: var(--button-primary-border, var(--color-accent-emphasis-pressed));
 }
 
-.react-aria-Button[data-variant='secondary'] {
+.mz-button[data-variant='secondary'] {
   --_button-background: var(--button-secondary-background, transparent);
   --_button-background-hovered: var(--button-secondary-background-hovered, var(--color-accent-muted-hovered));
   --_button-background-pressed: var(--button-secondary-background-pressed, var(--color-accent-muted-pressed));
@@ -155,7 +155,7 @@
   --_button-border: var(--button-secondary-border, var(--color-accent));
 }
 
-.react-aria-Button[data-variant='tertiary'] {
+.mz-button[data-variant='tertiary'] {
   --_button-background: var(--button-tertiary-background, transparent);
   --_button-background-hovered: var(--button-tertiary-background-hovered, var(--color-accent-muted-hovered));
   --_button-background-pressed: var(--button-tertiary-background-pressed, var(--color-accent-muted-pressed));
@@ -163,7 +163,7 @@
   --_button-border: var(--button-tertiary-border, transparent);
 }
 
-.react-aria-Button[data-variant='destructive'] {
+.mz-button[data-variant='destructive'] {
   --_button-background: var(--button-destructive-background, var(--color-danger-emphasis));
   --_button-background-hovered: var(--button-destructive-background-hovered, var(--color-danger-emphasis-hovered));
   --_button-background-pressed: var(--button-destructive-background-pressed, var(--color-danger-emphasis-pressed));
@@ -173,32 +173,32 @@
 
 /* data-preview-state is internal to the docs: it lets a state table show a hovered, pressed or
    focused example without interaction. It isn't part of the public API. */
-.react-aria-Button[data-variant][data-hovered],
-.react-aria-Button[data-variant][data-preview-state='hovered'] {
+.mz-button[data-variant][data-hovered],
+.mz-button[data-variant][data-preview-state='hovered'] {
   --_button-current-background: var(--_button-background-hovered);
 }
 
-.react-aria-Button[data-variant][data-pressed],
-.react-aria-Button[data-variant][data-preview-state='pressed'] {
+.mz-button[data-variant][data-pressed],
+.mz-button[data-variant][data-preview-state='pressed'] {
   --_button-current-background: var(--_button-background-pressed);
 }
 
-.react-aria-Button[data-variant][data-focus-visible],
-.react-aria-Button[data-variant][data-preview-state='focused'] {
+.mz-button[data-variant][data-focus-visible],
+.mz-button[data-variant][data-preview-state='focused'] {
   outline: var(--button-focus-ring-width, var(--focus-ring-width)) solid var(--button-focus-ring-color, var(--color-focus));
   outline-offset: var(--button-focus-ring-offset, var(--focus-ring-offset));
 }
 
-.react-aria-Button[data-variant][data-disabled] {
+.mz-button[data-variant][data-disabled] {
   opacity: var(--button-opacity-disabled, var(--opacity-disabled));
   cursor: default;
 }
 
-.react-aria-Button[data-variant][data-pending] {
+.mz-button[data-variant][data-pending] {
   cursor: progress;
 }
 
-.react-aria-Button[data-variant][data-pending] .mz-button-content {
+.mz-button[data-variant][data-pending] .mz-button-content {
   opacity: 0;
 }
 

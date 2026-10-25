@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla Meter: the label and value text share a row above the track. A meter
    shows an amount, such as storage used, so it never animates. */
-.react-aria-Meter {
+.mz-meter {
   display: grid;
   grid-template-areas:
     'label value'
@@ -17,7 +17,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-Meter > .react-aria-Label {
+.mz-meter > .mz-label {
   grid-area: label;
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);

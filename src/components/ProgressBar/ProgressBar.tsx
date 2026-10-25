@@ -3,7 +3,8 @@ import {
   ProgressBar as ReactAriaProgressBar,
   type ProgressBarProps as ReactAriaProgressBarProps,
 } from 'react-aria-components/ProgressBar'
-import { Label } from 'react-aria-components/Label'
+import { composeClassName } from '../composeClassName'
+import { Label } from '../Label/Label'
 
 export interface ProgressBarProps extends Omit<ReactAriaProgressBarProps, 'children'> {
   // The visible label above the bar. Without one, give the bar an aria-label.
@@ -14,7 +15,7 @@ export interface ProgressBarProps extends Omit<ReactAriaProgressBarProps, 'child
 // following React Aria's vanilla starter.
 export function ProgressBar({ label, ...props }: ProgressBarProps) {
   return (
-    <ReactAriaProgressBar {...props}>
+    <ReactAriaProgressBar {...props} className={composeClassName('mz-progress-bar', props.className)}>
       {({ percentage, valueText, isIndeterminate }) => <>
         {label != null && <Label>{label}</Label>}
         {!isIndeterminate && <span className="mz-progress-bar-value">{valueText}</span>}

@@ -1,4 +1,4 @@
-.react-aria-Tooltip {
+.mz-tooltip {
   box-sizing: border-box;
   max-inline-size: min(var(--tooltip-max-width, var(--width-md)), calc(100vw - var(--tooltip-viewport-padding, var(--space-overlay-inset)) * 2));
   /* A Tooltip is a compact surface, padded like a control. */
@@ -18,11 +18,11 @@
   z-index: var(--z-index-overlay);
 }
 
-.react-aria-Tooltip[data-entering] {
+.mz-tooltip[data-entering] {
   animation: mz-tooltip-fade var(--motion-duration-interface) var(--motion-easing-enter); animation-name: var(--_motion-animation, mz-tooltip-fade);
 }
 
-.react-aria-Tooltip[data-exiting] {
+.mz-tooltip[data-exiting] {
   animation: mz-tooltip-fade-exit var(--motion-duration-interface) var(--motion-easing-exit); animation-name: var(--_motion-animation, mz-tooltip-fade-exit);
 }
 

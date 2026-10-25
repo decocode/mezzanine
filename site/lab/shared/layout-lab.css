@@ -310,7 +310,7 @@
 }
 
 /* Emerging feature: fields that grow with their content. */
-.lab-field-sizing .react-aria-TextArea {
+.lab-field-sizing .mz-text-area {
   field-sizing: content;
 }
 

@@ -1,17 +1,19 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, RefAttributes } from 'react'
 import {
   ComboBox as ReactAriaComboBox,
-  ComboBoxValue,
+  ComboBoxValue as ReactAriaComboBoxValue,
   type ComboBoxProps as ReactAriaComboBoxProps,
+  type ComboBoxValueProps,
 } from 'react-aria-components/ComboBox'
 import { Button } from 'react-aria-components/Button'
-import { FieldError } from 'react-aria-components/FieldError'
-import { Input } from 'react-aria-components/Input'
-import { Label } from 'react-aria-components/Label'
-import { ListBox } from 'react-aria-components/ListBox'
-import { Popover } from 'react-aria-components/Popover'
-import { Text } from 'react-aria-components/Text'
 import type { ValidationResult } from 'react-aria-components'
+import { composeClassName } from '../composeClassName'
+import { FieldError } from '../FieldError/FieldError'
+import { Label } from '../Label/Label'
+import { ListBox } from '../ListBox/ListBox'
+import { Popover } from '../Popover/Popover'
+import { Text } from '../Text/Text'
+import { Input } from '../TextField/TextField'
 import { ChevronDownIcon } from '../../icons/Icons'
 
 export interface ComboBoxProps<T extends object, M extends 'single' | 'multiple' = 'single'> extends Omit<ReactAriaComboBoxProps<T, M>, 'children'> {
@@ -31,7 +33,7 @@ export interface ComboBoxProps<T extends object, M extends 'single' | 'multiple'
 // button, the help and error text, and the list in a Popover, following React Aria's vanilla starter.
 export function ComboBox<T extends object, M extends 'single' | 'multiple' = 'single'>({ label, description, errorMessage, placeholder, children, ...props }: ComboBoxProps<T, M>) {
   return (
-    <ReactAriaComboBox<T, M> {...props}>
+    <ReactAriaComboBox<T, M> {...props} className={composeClassName('mz-combo-box', props.className)}>
       {label != null && <Label>{label}</Label>}
       <div className="mz-combo-box-field">
         <Input placeholder={placeholder} />
@@ -46,7 +48,9 @@ export function ComboBox<T extends object, M extends 'single' | 'multiple' = 'si
   )
 }
 
-export { ComboBoxValue }
+export function ComboBoxValue<T>(props: ComboBoxValueProps<T> & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaComboBoxValue<T> {...props} className={composeClassName('mz-combo-box-value', props.className)} />
+}
 
 export type {
   ComboBoxRenderProps,

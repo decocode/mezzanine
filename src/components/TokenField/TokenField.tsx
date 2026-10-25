@@ -1,13 +1,16 @@
-import type { ReactNode, Ref } from 'react'
+import type { ReactNode, Ref, RefAttributes } from 'react'
 import {
+  Token as ReactAriaToken,
   TokenField as ReactAriaTokenField,
-  TokenInput,
+  TokenInput as ReactAriaTokenInput,
   type TokenFieldProps as ReactAriaTokenFieldProps,
   type TokenFieldValue,
   type TokenInputProps,
+  type TokenProps,
 } from 'react-aria-components/TokenField'
-import { Label } from 'react-aria-components/Label'
-import { Text } from 'react-aria-components/Text'
+import { composeClassName } from '../composeClassName'
+import { Label } from '../Label/Label'
+import { Text } from '../Text/Text'
 
 export interface TokenFieldProps<T extends TokenFieldValue = TokenFieldValue> extends Omit<ReactAriaTokenFieldProps<T>, 'children'> {
   // The visible label. Without one, give the TokenField an aria-label.
@@ -26,7 +29,7 @@ export interface TokenFieldProps<T extends TokenFieldValue = TokenFieldValue> ex
 // text field's look, and the help text, following React Aria's vanilla starter.
 export function TokenField<T extends TokenFieldValue = TokenFieldValue>({ label, description, placeholder, inputRef, children, ...props }: TokenFieldProps<T>) {
   return (
-    <ReactAriaTokenField {...props}>
+    <ReactAriaTokenField {...props} className={composeClassName('mz-token-field', props.className)}>
       {label != null && <Label>{label}</Label>}
       <TokenInput<T> ref={inputRef} data-placeholder={placeholder}>{children}</TokenInput>
       {description != null && <Text slot="description">{description}</Text>}
@@ -34,7 +37,15 @@ export function TokenField<T extends TokenFieldValue = TokenFieldValue>({ label,
   )
 }
 
-export { Token, TokenFieldValue, TokenInput } from 'react-aria-components/TokenField'
+export function TokenInput<T extends TokenFieldValue = TokenFieldValue>(props: TokenInputProps<T> & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaTokenInput<T> {...props} className={composeClassName('mz-token-input', props.className)} />
+}
+
+export function Token(props: TokenProps & RefAttributes<HTMLSpanElement>) {
+  return <ReactAriaToken {...props} className={composeClassName('mz-token', props.className)} />
+}
+
+export { TokenFieldValue } from 'react-aria-components/TokenField'
 
 export type {
   TokenFieldRenderProps,

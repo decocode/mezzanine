@@ -28,7 +28,7 @@
 }
 
 /* The level sits at the end of the row, so the slider's own copy of it above the track is hidden. */
-.lab-media-slider .react-aria-SliderOutput {
+.lab-media-slider .mz-slider-output {
   display: none;
 }
 

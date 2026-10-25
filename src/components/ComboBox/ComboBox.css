@@ -1,6 +1,6 @@
 /* Follows React Aria's vanilla ComboBox: a label, a text field with a chevron button over its end,
    help text and the suggestions in a Popover. The Input takes the shared text field look. */
-.react-aria-ComboBox {
+.mz-combo-box {
   display: flex;
   flex-direction: column;
   gap: var(--combo-box-gap, var(--space-gap-field));
@@ -14,7 +14,7 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-ComboBox > .react-aria-Label {
+.mz-combo-box > .mz-label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
   font-weight: var(--font-weight-semibold);
@@ -23,7 +23,7 @@
   text-transform: var(--text-transform-label);
 }
 
-.react-aria-ComboBox > :is([slot='description'], .react-aria-FieldError) {
+.mz-combo-box > :is([slot='description'], .mz-field-error) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -32,11 +32,11 @@
   text-transform: var(--text-transform-body);
 }
 
-.react-aria-ComboBox > [slot='description'] {
+.mz-combo-box > [slot='description'] {
   color: var(--combo-box-description-foreground, var(--color-text-muted));
 }
 
-.react-aria-ComboBox > .react-aria-FieldError {
+.mz-combo-box > .mz-field-error {
   color: var(--combo-box-error-foreground, var(--color-danger));
 }
 
@@ -47,7 +47,7 @@
   min-inline-size: 0;
 }
 
-.mz-combo-box-field > .react-aria-Input {
+.mz-combo-box-field > .mz-input {
   grid-area: field;
   padding-inline-end: calc(var(--target-size-sm) + var(--input-border-width, var(--border-width-baseline)));
 }
@@ -89,6 +89,6 @@
   block-size: var(--combo-box-chevron-size, var(--icon-size-sm));
 }
 
-.react-aria-ComboBox[data-disabled] {
+.mz-combo-box[data-disabled] {
   opacity: var(--combo-box-opacity-disabled, var(--opacity-disabled));
 }

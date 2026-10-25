@@ -9,7 +9,7 @@ export default function ListBoxPage() {
       parts={{
         example: (
           <DemoArea>
-            <ListBox aria-label="Options" selectionMode="single" className="react-aria-ListBox list-box-example">
+            <ListBox aria-label="Options" selectionMode="single" className="list-box-example">
               {listBoxSections.map((section) => (
                 <ListBoxSection key={section.id} id={section.id}>
                   <Header>{section.label}</Header>

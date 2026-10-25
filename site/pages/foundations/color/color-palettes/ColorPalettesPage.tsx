@@ -54,7 +54,7 @@ function ColorPaletteTokens({
   paletteId: ColorPaletteDefinition['id']
 }) {
   return (
-    <Disclosure className="react-aria-Disclosure color-palette-disclosure">
+    <Disclosure className="color-palette-disclosure">
       <DisclosureHeader level={4}>{colorTokensLabel}</DisclosureHeader>
       <DisclosurePanel>
         <div className="documentation-table">
@@ -98,7 +98,7 @@ function ColorPalette({
       </div>
       <ColorPaletteScale paletteId={palette.id} />
       {palette.details && (
-        <Disclosure className="react-aria-Disclosure color-palette-disclosure">
+        <Disclosure className="color-palette-disclosure">
           <DisclosureHeader level={4}>{palette.details.label}</DisclosureHeader>
           <DisclosurePanel>
             {palette.details.content.map((paragraph) => (
@@ -133,7 +133,7 @@ export default function ColorPalettesPage() {
                 </h3>
                 <ColorPaletteScale paletteId={palette.id} />
                 {palette.details && (
-                  <Disclosure className="react-aria-Disclosure color-palette-disclosure">
+                  <Disclosure className="color-palette-disclosure">
                     <DisclosureHeader level={4}>{palette.details.label}</DisclosureHeader>
                     <DisclosurePanel>
                       {palette.details.content.map((paragraph) => (

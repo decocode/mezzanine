@@ -1,13 +1,18 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, RefAttributes } from 'react'
 import {
   Slider as ReactAriaSlider,
-  SliderFill,
-  SliderOutput,
-  SliderThumb,
-  SliderTrack,
+  SliderFill as ReactAriaSliderFill,
+  SliderOutput as ReactAriaSliderOutput,
+  SliderThumb as ReactAriaSliderThumb,
+  SliderTrack as ReactAriaSliderTrack,
+  type SliderFillProps,
+  type SliderOutputProps,
   type SliderProps as ReactAriaSliderProps,
+  type SliderThumbProps,
+  type SliderTrackProps,
 } from 'react-aria-components/Slider'
-import { Label } from 'react-aria-components/Label'
+import { composeClassName } from '../composeClassName'
+import { Label } from '../Label/Label'
 
 export interface SliderProps<T extends number | number[]> extends Omit<ReactAriaSliderProps<T>, 'children'> {
   // The visible label. Without one, give the slider an aria-label.
@@ -25,7 +30,7 @@ export interface SliderProps<T extends number | number[]> extends Omit<ReactAria
 // and one thumb per value, following React Aria's vanilla starter.
 export function Slider<T extends number | number[]>({ label, thumbLabels, fillOffset, formatValue, ...props }: SliderProps<T>) {
   return (
-    <ReactAriaSlider {...props}>
+    <ReactAriaSlider {...props} className={composeClassName('mz-slider', props.className)}>
       {({ state }) => {
         const parts = <>
           {label != null && <Label>{label}</Label>}
@@ -52,7 +57,21 @@ export function Slider<T extends number | number[]>({ label, thumbLabels, fillOf
   )
 }
 
-export { SliderFill, SliderOutput, SliderThumb, SliderTrack } from 'react-aria-components/Slider'
+export function SliderOutput(props: SliderOutputProps & RefAttributes<HTMLOutputElement>) {
+  return <ReactAriaSliderOutput {...props} className={composeClassName('mz-slider-output', props.className)} />
+}
+
+export function SliderTrack(props: SliderTrackProps & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaSliderTrack {...props} className={composeClassName('mz-slider-track', props.className)} />
+}
+
+export function SliderFill(props: SliderFillProps & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaSliderFill {...props} className={composeClassName('mz-slider-fill', props.className)} />
+}
+
+export function SliderThumb(props: SliderThumbProps & RefAttributes<HTMLDivElement>) {
+  return <ReactAriaSliderThumb {...props} className={composeClassName('mz-slider-thumb', props.className)} />
+}
 
 export type {
   SliderFillProps,

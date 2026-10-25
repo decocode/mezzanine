@@ -1,4 +1,4 @@
-.react-aria-Breadcrumbs {
+.mz-breadcrumbs {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1) var(--space-2);
@@ -14,7 +14,7 @@
   list-style: none;
 }
 
-.react-aria-Breadcrumb {
+.mz-breadcrumb {
   display: inline-flex;
   gap: var(--breadcrumb-gap, var(--space-gap-control));
   align-items: center;
@@ -22,13 +22,13 @@
 }
 
 /* Each link is at least the shared target size tall, so it's easy to tap. */
-.react-aria-Breadcrumb > .react-aria-Link {
+.mz-breadcrumb > .mz-link {
   display: inline-flex;
   align-items: center;
   min-height: var(--target-size-xs);
 }
 
-.react-aria-Breadcrumb + .react-aria-Breadcrumb::before {
+.mz-breadcrumb + .mz-breadcrumb::before {
   color: var(--color-text-muted);
   content: '/';
 }

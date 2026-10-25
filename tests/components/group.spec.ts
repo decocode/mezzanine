@@ -6,7 +6,7 @@ import { expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
 // group, and that Tab still reaches each part.
 test('Group joins its parts and rings them all on focus', async ({ page }) => {
   await page.goto('/group')
-  const group = page.locator('.mz-demo-area .react-aria-Group')
+  const group = page.locator('.mz-demo-area .mz-group')
   const input = page.getByRole('textbox', { name: 'Input A' })
   const button = group.getByRole('button', { name: 'Button A' })
   const inputBox = (await input.boundingBox())!
@@ -26,7 +26,7 @@ for (const theme of themes) {
     await page.goto('/group')
     await setTheme(page, theme)
     await setTextSize(page, 32)
-    await expect(page.locator('.mz-demo-area .react-aria-Group')).toBeVisible()
+    await expect(page.locator('.mz-demo-area .mz-group')).toBeVisible()
     await expectNoPageOverflow(page)
     await expectNoAccessibilityViolations(page, 'main')
   })

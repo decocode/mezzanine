@@ -1,7 +1,8 @@
 import { useRef, useState, type ReactNode } from 'react'
 import { Button } from '../Button/Button'
-import { Heading } from '../Heading/Heading'
-import { Disclosure, DisclosurePanel } from '../Disclosure/Disclosure'
+// The menu has its own look, so it uses React Aria's Disclosure and Heading without Mezzanine's classes.
+import { Disclosure, DisclosurePanel } from 'react-aria-components/DisclosureGroup'
+import { Heading } from 'react-aria-components/Heading'
 import { MenuIcon, CloseIcon } from '../../icons/Icons'
 import { useOptionalAppShell } from '../AppShell/AppShell'
 
