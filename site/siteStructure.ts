@@ -65,11 +65,11 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'typography',
         label: 'Typography',
         path: '/typography',
-        order: ['typeface-and-fonts', 'size-and-scaling', 'weight-and-emphasis', 'spacing-and-rhythm', 'lines-and-words', 'text-styles', 'semantic-html', 'global-and-languages', 'text-rendering'],
+        order: ['typeface-and-fonts', 'size-and-scaling', 'font-weight', 'spacing-and-rhythm', 'lines-and-words', 'text-styles', 'semantic-html', 'global-and-languages', 'text-rendering'],
         pages: [
           { id: 'typeface-and-fonts', label: 'Typeface and fonts', path: '/typography/typeface-and-fonts', status: 'implemented' },
           { id: 'size-and-scaling', label: 'Size and scaling', path: '/typography/size-and-scaling', status: 'implemented' },
-          { id: 'weight-and-emphasis', label: 'Weight and emphasis', path: '/typography/weight-and-emphasis', status: 'implemented' },
+          { id: 'font-weight', label: 'Font weight', path: '/typography/font-weight', status: 'implemented' },
           { id: 'spacing-and-rhythm', label: 'Spacing and rhythm', path: '/typography/spacing-and-rhythm', status: 'implemented' },
           { id: 'lines-and-words', label: 'Lines and words', path: '/typography/lines-and-words', status: 'implemented' },
           { id: 'text-styles', label: 'Text styles', path: '/typography/text-styles', status: 'implemented' },
@@ -251,6 +251,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         label: 'Status',
         pages: [
           { id: 'badge', label: 'Badge', path: '/badge', status: 'implemented' },
+          { id: 'notice', label: 'Notice', path: '/notice', status: 'implemented' },
           { id: 'progress-bar', label: 'Progress bar', path: '/progress-bar', status: 'implemented' },
           { id: 'meter', label: 'Meter', path: '/meter', status: 'implemented' },
         ],

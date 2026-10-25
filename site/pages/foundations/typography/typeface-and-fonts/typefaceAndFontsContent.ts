@@ -45,7 +45,7 @@ export const typefaceAndFontsContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Text styles', href: '/typography/text-styles' },
-    { label: 'Weight and emphasis', href: '/typography/weight-and-emphasis' },
+    { label: 'Font weight', href: '/typography/font-weight' },
     { label: 'Text rendering', href: '/typography/text-rendering' },
   ],
   references: [

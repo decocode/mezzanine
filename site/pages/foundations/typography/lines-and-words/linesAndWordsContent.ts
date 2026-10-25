@@ -19,7 +19,7 @@ export const linesAndWordsContent: DocsPageContent = {
   id: 'lines-and-words',
   kind: 'foundation',
   title: 'Lines and words',
-  description: 'When lines of text stay comfortable to read, however wide the space.',
+  description: 'Lines of text stay comfortable to read, however wide the space.',
   sections: [
     {
       key: 'lineLength',

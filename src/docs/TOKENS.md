@@ -147,7 +147,7 @@ curve. Verify contrast against the actual colors rather than the step number.
 | Token | Meaning |
 | --- | --- |
 | `--color-accent-{50–980}` | The interface color that every accent role reads |
-| `--color-signature-{50–980}` | The brand's second, decorative color. No role reads it yet |
+| `--color-signature-{50–980}` | The brand's second, decorative color, read by the signature roles |
 | `--color-neutral-{50–980}` | Greys for page, surfaces, text and lines |
 | `--color-white`, `--color-black` | Pure white and black, at each end of every palette |
 | `--color-info-{50–980}` | Information, and the keyboard-focus color |
@@ -156,7 +156,7 @@ curve. Verify contrast against the actual colors rather than the step number.
 | `--color-danger-{50–980}` | Errors and destructive actions |
 
 Breaking change: the interface now reads `--color-accent-*`. The Signature
-palette is teal and no longer drives any role.
+palette is teal and drives only the three signature roles.
 
 ### Color families
 
@@ -176,6 +176,16 @@ always carries text and icons from its own palette.
 | Light | 700, 800, 900 | 50 | 100, 100, 200 | 700 |
 | Dark | 400, 300, 200 | 950 | 900, 900, 800 | 300 |
 | Wireframe | As Light; accent has its color removed | 50 | As Light | 700 |
+
+Signature has only three roles, for a soft decorative tone such as a signature
+Notice. Each theme maps them as it maps the same accent roles, and Wireframe
+removes their color.
+
+| Token | Meaning |
+| --- | --- |
+| `--color-signature-muted` | A soft signature fill |
+| `--color-signature-muted-pressed` | The border around a signature fill |
+| `--color-signature` | Text and icons on a signature fill or the page |
 
 ### Page, text and lines
 
@@ -228,12 +238,13 @@ stack. The default requires no font download.
 | `--font-family-body` | Normal reading and interface text |
 | `--font-family-heading` | Display and heading text; the same system family by default |
 | `--font-family-monospace` | Code and technical values |
+| `--font-weight-light` | Light weight, currently 300; used by `mz-text-light` |
 | `--font-weight-regular` | Regular weight, currently 400 |
 | `--font-weight-medium` | Medium weight, currently 500 |
 | `--font-weight-semibold` | Semibold weight, currently 600 |
 | `--font-weight-bold` | Bold weight, currently 700 |
-| `--font-weight-emphasis` | Text-style Emphasis modifier, defaults to `--font-weight-semibold` (600) |
-| `--font-weight-default` | Text-style Default modifier, defaults to `--font-weight-regular` (400); themes may choose any supported weight |
+| `--font-weight-emphasis` | Components' emphasis role for states, defaults to `--font-weight-semibold` (600) |
+| `--font-weight-default` | Components' default role for states, defaults to `--font-weight-regular` (400); themes may choose any supported weight |
 | `--font-size-{role}-{size}` | The size used by one named typography style |
 | `--line-height-{role}-{size}` | The line height paired with that style |
 | `--letter-spacing-{role}` | Tracking shared by a role's three sizes |

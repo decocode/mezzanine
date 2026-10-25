@@ -92,7 +92,7 @@ export function PageHeading({ title, description, children, className }: PageHea
 
   return (
     <div className={['page-heading-group mz-prose', className].filter(Boolean).join(' ')}>
-      <Heading className="mz-text-display-md mz-text-emphasis" level={1}>
+      <Heading className="mz-text-display-md mz-text-semibold" level={1}>
         {title}
       </Heading>
       {description != null && (

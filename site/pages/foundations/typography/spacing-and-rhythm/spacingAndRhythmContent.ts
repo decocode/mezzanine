@@ -41,7 +41,7 @@ export const spacingAndRhythmContent: DocsPageContent = {
   id: 'spacing-and-rhythm',
   kind: 'foundation',
   title: 'Spacing and rhythm',
-  description: 'When text that belongs together sits together.',
+  description: 'Text that belongs together sits together.',
   sections: [
     {
       key: 'howItWorks',

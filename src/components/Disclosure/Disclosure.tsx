@@ -40,7 +40,7 @@ export interface DisclosureHeaderProps extends Omit<HeadingProps, 'children'> {
 export function DisclosureHeader({ children, level = 3, ...headingProps }: DisclosureHeaderProps) {
   return (
     <Heading {...headingProps} level={level}>
-      <ReactAriaButton className="mz-disclosure-trigger mz-text-title-sm mz-text-default" slot="trigger">
+      <ReactAriaButton className="mz-disclosure-trigger mz-text-title-sm mz-text-regular" slot="trigger">
         <span>{children}</span>
         <ChevronRightIcon className="mz-disclosure-chevron" />
       </ReactAriaButton>

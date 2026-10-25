@@ -42,7 +42,7 @@ export const semanticHtmlContent: DocsPageContent = {
       title: 'Inline emphasis',
       intro: [
         '`<strong>` marks words as important, `<em>` stresses them, and `<mark>` highlights them, such as a match in search results. They have no styles of their own yet, so the browser shows `<strong>` bolder, `<em>` in italics, and `<mark>` with a yellow background that doesn’t change with the theme.',
-        'To make text bolder for its look alone, without changing its meaning, use `mz-text-emphasis`: see [Weight and emphasis](/typography/weight-and-emphasis).',
+        'To make text bolder for its look alone, without changing its meaning, use a weight class, such as `mz-text-semibold`: see [Font weight](/typography/font-weight).',
       ],
     },
     {

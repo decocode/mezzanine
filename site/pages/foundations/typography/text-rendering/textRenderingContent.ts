@@ -29,6 +29,6 @@ export const textRenderingContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Typography', href: '/typography' },
-    { label: 'Weight and emphasis', href: '/typography/weight-and-emphasis' },
+    { label: 'Font weight', href: '/typography/font-weight' },
   ],
 }

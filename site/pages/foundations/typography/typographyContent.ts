@@ -28,9 +28,9 @@ export const typographyContent: DocsPageContent = {
 export const typographyPages = [
   { label: 'Typeface and fonts', href: '/typography/typeface-and-fonts', description: 'When text uses each device’s own interface font.' },
   { label: 'Size and scaling', href: '/typography/size-and-scaling', description: 'When text comes in a few set sizes, and headings grow and shrink with the screen.' },
-  { label: 'Weight and emphasis', href: '/typography/weight-and-emphasis', description: 'When text needs to be lighter or bolder.' },
-  { label: 'Spacing and rhythm', href: '/typography/spacing-and-rhythm', description: 'When text that belongs together sits together.' },
-  { label: 'Lines and words', href: '/typography/lines-and-words', description: 'When lines of text stay comfortable to read, however wide the space.' },
+  { label: 'Font weight', href: '/typography/font-weight', description: 'Styling text so that it’s lighter, or bold.' },
+  { label: 'Spacing and rhythm', href: '/typography/spacing-and-rhythm', description: 'Text that belongs together sits together.' },
+  { label: 'Lines and words', href: '/typography/lines-and-words', description: 'Lines of text stay comfortable to read, however wide the space.' },
   { label: 'Text styles', href: '/typography/text-styles', description: 'When every heading, paragraph and label looks consistent, wherever it appears.' },
   { label: 'Semantic HTML', href: '/typography/semantic-html', description: 'When plain HTML elements get a style without a class.' },
   { label: 'Global and languages', href: '/typography/global-and-languages', description: 'Text and layouts that work in every language, whichever direction it’s written in.' },
@@ -39,7 +39,6 @@ export const typographyPages = [
 
 // Copy the pages place around their live parts: after a table, or between a style's class names.
 export const textStylesPartCopy = {
-  afterWeightTable: ['These classes only change appearance. When words are genuinely important, use the `strong` or `em` element so assistive technology knows too.'],
   choiceSeparator: ' or ',
 } satisfies Record<string, Copy | readonly Copy[]>
 
@@ -89,6 +88,7 @@ export const fontTokens: { token: string; purpose: string }[] = [
   { token: '--font-family-body', purpose: 'Font for Title, Body and Label styles and for plain body text.' },
   { token: '--font-family-heading', purpose: 'Font for Display and Heading styles. It uses the body font unless a theme changes it.' },
   { token: '--font-family-monospace', purpose: 'Font for code.' },
+  { token: '--font-weight-light', purpose: 'Light weight. No text style uses it.' },
   { token: '--font-weight-regular', purpose: 'Regular weight, used by Display, Heading and Body styles.' },
   { token: '--font-weight-medium', purpose: 'Medium weight. No text style uses it.' },
   { token: '--font-weight-semibold', purpose: 'Semibold weight, used by Title and Label styles.' },
@@ -123,10 +123,12 @@ export const textStyleChoices: { use: string; classNames: string[] }[] = [
 ]
 
 export const textWeightExamples: { classNames: string; result: string }[] = [
-  { classNames: 'mz-text-label-lg', result: 'Label large on its own' },
-  { classNames: 'mz-text-label-lg mz-text-default', result: 'Label large with Default' },
-  { classNames: 'mz-text-body-md', result: 'Body medium on its own' },
-  { classNames: 'mz-text-body-md mz-text-emphasis', result: 'Body medium with Emphasis' },
+  { classNames: 'mz-text-body-md mz-text-light', result: 'Body medium, light' },
+  { classNames: 'mz-text-body-md', result: 'Body medium on its own, regular' },
+  { classNames: 'mz-text-body-md mz-text-semibold', result: 'Body medium, semibold' },
+  { classNames: 'mz-text-body-md mz-text-bold', result: 'Body medium, bold' },
+  { classNames: 'mz-text-label-lg', result: 'Label large on its own, semibold' },
+  { classNames: 'mz-text-label-lg mz-text-regular', result: 'Label large, regular' },
 ]
 
 export const baseTextElements: { element: string; className: string; label: string }[] = [

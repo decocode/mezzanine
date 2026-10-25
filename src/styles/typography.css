@@ -218,11 +218,20 @@ code:not(pre code) {
   line-height: var(--line-height-label-sm);
 }
 
-/* Apply with a named text style; only the weight changes. */
-.mz-text-default {
-  font-weight: var(--font-weight-default);
+/* Apply with a named text style; only the weight changes, to a genuine font weight. A font without that
+   weight shows the nearest one it has. */
+.mz-text-light {
+  font-weight: var(--font-weight-light);
 }
 
-.mz-text-emphasis {
-  font-weight: var(--font-weight-emphasis);
+.mz-text-regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.mz-text-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.mz-text-bold {
+  font-weight: var(--font-weight-bold);
 }

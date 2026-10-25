@@ -255,42 +255,38 @@ point to Label sizes for Small and Medium and to Title sizes for Large and Extra
 Large. `npm run check:rules` enforces this, so a product theme that changes a
 role's tokens reaches every component that uses it.
 
-## Default and Emphasis
+## Weight classes
 
-All fifteen text styles support two weight modifiers. Apply one alongside the
-style class:
+Four classes give any of the fifteen text styles a genuine font weight. Apply
+one alongside the style class:
 
 ```tsx
-<p className="mz-text-body-md mz-text-default">Default body text</p>
-<p className="mz-text-body-md mz-text-emphasis">Emphasised body text</p>
+<p className="mz-text-body-md mz-text-semibold">Semibold body text</p>
 ```
 
-- `mz-text-default` uses `--font-weight-default`, currently an alias of
-  `--font-weight-regular` (400).
-- `mz-text-emphasis` uses `--font-weight-emphasis`, currently an alias of
-  `--font-weight-semibold` (600).
-- Both preserve the base style's family, size, line height, letter spacing and
-  text transform. Use only one weight modifier on an element.
-- Styles without a modifier keep the defaults listed above. Existing consumers
-  do not need to migrate.
-- Disclosure headers use Title small with the Default modifier.
-
-Default and Emphasis describe intent, not fixed font weights. A brand can set
-`--font-weight-default: 300` and `--font-weight-emphasis: 800` to use Light and
-Extra Bold, provided its font supports those weights. The numeric Regular token
-remains separate from the themeable Default role.
-
-The newly introduced `mz-text-regular` modifier has been renamed to
-`mz-text-default`; update consumers using that modifier. No alias is retained.
+- `mz-text-light` uses `--font-weight-light` (300).
+- `mz-text-regular` uses `--font-weight-regular` (400).
+- `mz-text-semibold` uses `--font-weight-semibold` (600).
+- `mz-text-bold` uses `--font-weight-bold` (700).
+- Each keeps the base style's family, size, line height, letter spacing and
+  text transform. Use only one weight class on an element.
+- Not every font has every weight. A font without the weight shows the nearest
+  one it has; browsers can make text bolder, but not lighter.
+- Disclosure headers use Title small with `mz-text-regular`.
 
 These classes only change appearance. Use semantic `strong` or `em` when the
-content conveys importance or stress; a visual modifier does not add that meaning.
+content conveys importance or stress; a weight class does not add that meaning.
+
+Components don't use these classes for their states. Their state rules use the
+role tokens `--font-weight-default` and `--font-weight-emphasis`, which a theme
+can point at other weights.
 
 ## Weight tokens
 
-Mezzanine provides four numeric weight tokens and two themeable role aliases:
+Mezzanine provides five numeric weight tokens and two themeable role aliases:
 
 ```text
+--font-weight-light
 --font-weight-regular
 --font-weight-medium
 --font-weight-semibold
@@ -299,9 +295,10 @@ Mezzanine provides four numeric weight tokens and two themeable role aliases:
 --font-weight-emphasis
 ```
 
-The named styles choose a default weight; the two shared modifiers provide
-Default and Emphasis without duplicating the fifteen size recipes. Themes can
-override the weight tokens without changing the public classes.
+The named styles choose a default weight, and the four weight classes change it
+without duplicating the fifteen size recipes. Components' state rules use the
+Default and Emphasis roles, which themes can point at other weights. No weight
+class uses medium.
 
 Every weight used by a product must have a corresponding font file. Declaring
 weight 500 does not load that weight.
