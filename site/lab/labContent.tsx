@@ -4,7 +4,6 @@ import { labBadgeLabel } from './shared/labValues'
 import { layoutPages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
 import { noticePage } from './notice/noticeContent'
-import { textSpacingPage } from './text-spacing/textSpacingContent'
 import { volumeAndZoomPage } from './volume-and-zoom/volumeAndZoomContent'
 
 export const labContent = {
@@ -19,7 +18,7 @@ const docsGroupLabel = (id: string) => siteNavigationGroups.find((group) => grou
 
 // The Lab's own navigation tree, shown in its start Panel and the TopBar menu on Lab pages. Like the
 // Docs navigation, it has Foundations and Components sections with headers. Foundations holds Layout,
-// with its pages in reading order, then Emerging features and Text spacing, which carry the Lab
+// with its pages in reading order, then Emerging features, which carries the Lab
 // badge. Components holds the candidate components.
 export const labNavigationItems: NavTreeSectionData[] = [
   { type: 'section', id: 'foundations', label: docsGroupLabel('foundations'), children: [
@@ -32,7 +31,6 @@ export const labNavigationItems: NavTreeSectionData[] = [
       content: <Badge variant="warning">{labBadgeLabel}</Badge>,
       children: futurePages.map((page) => ({ id: `emerging-features-${page.key}`, label: page.title, href: page.href })),
     },
-    { id: 'text-spacing', label: textSpacingPage.title, href: textSpacingPage.href, content: <Badge variant="warning">{labBadgeLabel}</Badge> },
   ] },
   { type: 'section', id: 'components', label: docsGroupLabel('components'), children: [
     { id: 'notice', label: noticePage.title, href: noticePage.href, content: <Badge variant="warning">{labBadgeLabel}</Badge> },
