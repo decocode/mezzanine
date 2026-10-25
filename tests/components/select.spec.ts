@@ -9,7 +9,8 @@ for (const theme of themes) {
   test(`select chooses an option from the keyboard in ${theme}`, async ({ page }) => {
     await page.goto('/select')
     await setTheme(page, theme)
-    const trigger = page.locator('.mz-select-trigger')
+    // The example's Select, not the hierarchy control in the Properties panel.
+    const trigger = page.locator('.mz-demo-area-content .mz-select-trigger')
     await trigger.focus()
     await expect(trigger).toHaveCSS('outline-style', 'solid')
     await page.keyboard.press('Enter')
@@ -20,7 +21,7 @@ for (const theme of themes) {
     await page.keyboard.press('ArrowDown')
     await page.keyboard.press('Enter')
     await expect(list).toBeHidden()
-    await expect(trigger).toContainText('Option B')
+    await expect(trigger).toContainText('Item B')
     await expect(trigger).toBeFocused()
     await expectNoAccessibilityViolations(page, 'main')
     await page.setViewportSize({ width: 320, height: 900 })

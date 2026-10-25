@@ -5,6 +5,8 @@
   flex-direction: column;
   gap: var(--select-gap, var(--space-gap-field));
   min-inline-size: 0;
+  /* A field fills its container up to a comfortable width, so it doesn't stretch across a wide layout. */
+  max-inline-size: var(--select-max-width, var(--width-md));
   color: var(--color-text);
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);
@@ -42,6 +44,7 @@
 
 /* The trigger has the text field's look, with the chevron at the end. */
 .mz-select-trigger {
+  --_select-trigger-border: var(--select-trigger-border, var(--color-border-control));
   display: flex;
   align-items: center;
   gap: var(--select-trigger-gap, var(--space-gap-control));
@@ -51,7 +54,7 @@
   min-block-size: var(--select-trigger-min-height, var(--target-size-md));
   margin: 0;
   padding: var(--select-trigger-padding-block, var(--space-padding-control-block)) var(--select-trigger-padding-inline, var(--space-padding-control-inline));
-  border: var(--select-trigger-border-width, var(--border-width-baseline)) solid var(--select-trigger-border, var(--color-border-control));
+  border: var(--select-trigger-border-width, var(--border-width-baseline)) solid var(--_select-trigger-border);
   border-radius: var(--select-trigger-border-radius, var(--radius-control));
   background: var(--select-trigger-background, var(--color-page));
   color: var(--select-trigger-foreground, var(--color-text));
@@ -62,7 +65,7 @@
 }
 
 .mz-select-trigger[data-hovered] {
-  border-color: var(--select-trigger-border-hovered, var(--color-text));
+  --_select-trigger-border: var(--select-trigger-border-hovered, var(--color-text));
 }
 
 .mz-select-trigger[data-focus-visible] {
@@ -71,7 +74,7 @@
 }
 
 .mz-select[data-invalid] .mz-select-trigger {
-  border-color: var(--select-trigger-border-invalid, var(--color-danger));
+  --_select-trigger-border: var(--select-trigger-border-invalid, var(--color-danger));
 }
 
 .mz-select-value {
@@ -93,9 +96,37 @@
 
 .mz-select-chevron {
   flex: none;
-  inline-size: var(--select-chevron-size, var(--icon-size-sm));
-  block-size: var(--select-chevron-size, var(--icon-size-sm));
-  color: var(--color-chevron);
+  align-self: stretch;
+  box-sizing: border-box;
+  /* The chevron area runs the full height of the trigger and out to its end, so the end of the trigger
+     looks like a button on the side. A line in the border's colour divides it from the value. The icon
+     keeps its size, centred in the taller box. */
+  inline-size: calc(var(--select-chevron-size, var(--icon-size-sm)) + 2 * var(--select-trigger-padding-inline, var(--space-padding-control-inline)) + var(--select-trigger-border-width, var(--border-width-baseline)));
+  block-size: auto;
+  margin-block: calc(-1 * var(--select-trigger-padding-block, var(--space-padding-control-block)));
+  /* The line sits the trigger's inline padding from the value and from the chevron, so the space is
+     even on both sides. */
+  margin-inline: calc(var(--select-trigger-padding-inline, var(--space-padding-control-inline)) - var(--select-trigger-gap, var(--space-gap-control))) calc(-1 * var(--select-trigger-padding-inline, var(--space-padding-control-inline)));
+  padding-inline: var(--select-trigger-padding-inline, var(--space-padding-control-inline));
+  border-inline-start: var(--select-trigger-border-width, var(--border-width-baseline)) solid var(--_select-trigger-border);
+  border-start-end-radius: calc(var(--select-trigger-border-radius, var(--radius-control)) - var(--select-trigger-border-width, var(--border-width-baseline)));
+  border-end-end-radius: calc(var(--select-trigger-border-radius, var(--radius-control)) - var(--select-trigger-border-width, var(--border-width-baseline)));
+  background: var(--_select-chevron-background, transparent);
+  color: var(--_select-chevron-foreground, var(--color-chevron));
+}
+
+/* Primary fills the chevron area like a primary Button. */
+.mz-select-trigger[data-hierarchy='primary'] {
+  --_select-chevron-background: var(--select-primary-chevron-background, var(--color-accent-emphasis));
+  --_select-chevron-foreground: var(--select-primary-chevron-foreground, var(--color-accent-inverse));
+}
+
+.mz-select-trigger[data-hierarchy='primary'][data-hovered] {
+  --_select-chevron-background: var(--select-primary-chevron-background-hovered, var(--color-accent-emphasis-hovered));
+}
+
+.mz-select-trigger[data-hierarchy='primary'][data-pressed] {
+  --_select-chevron-background: var(--select-primary-chevron-background-pressed, var(--color-accent-emphasis-pressed));
 }
 
 .mz-select[data-disabled] {
@@ -104,10 +135,19 @@
 
 @media (forced-colors: active) {
   .mz-select-trigger {
-    border-color: ButtonText;
+    --_select-trigger-border: ButtonText;
   }
 
   .mz-select-trigger[data-focus-visible] {
     outline-color: Highlight;
+  }
+
+  .mz-select-trigger[data-hierarchy='primary'] {
+    --_select-chevron-background: ButtonText;
+    --_select-chevron-foreground: ButtonFace;
+  }
+
+  .mz-select-trigger[data-hierarchy='primary'] .mz-select-chevron {
+    forced-color-adjust: none;
   }
 }

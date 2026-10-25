@@ -6,8 +6,15 @@ export const selectContent: DocsPageContent = {
   kind: 'component',
   title: 'Select',
   description: 'A select picks one option from a list that opens below the field.',
+  alsoKnownAs: [
+    { where: 'Material Design', called: 'Exposed dropdown menu.' },
+    { where: 'Microsoft Fluent', called: 'Dropdown.' },
+    { where: 'IBM Carbon', called: 'Dropdown. Carbon also has a component called Select, which uses the browser’s built-in control.' },
+    { where: 'Apple', called: 'Pop-up button.' },
+    { where: 'Salesforce Lightning', called: 'Picklist.' },
+  ],
   sections: [
-    { key: 'example', intro: ['`Select` shows its `label`, a trigger with the chosen option and a chevron, and opens the options in a popover as wide as the field.'] },
+    { key: 'example', intro: ['`Select` shows its `label`, a trigger with the chosen option and a chevron, and opens the options in a popover as wide as the field.', '`hierarchy` sets how much the chevron area stands out: `primary` fills it with the accent color, and `secondary` keeps it quiet. The default is `secondary`.'] },
   ],
   technicalDetails: [
     {
@@ -59,4 +66,19 @@ export const selectContent: DocsPageContent = {
 }
 
 // The example's label and options.
-export const selectExampleLabels = { label: 'Select A', options: ['Option A', 'Option B', 'Option C'] } as const
+export const selectExampleLabels = { label: 'Select label', options: ['Item A', 'Item B', 'Item C'] } as const
+
+// The Properties panel's controls, and the example's code for the chosen props.
+export const selectHierarchies = ['primary', 'secondary'] as const
+export const selectHierarchyLabel = 'hierarchy'
+export const selectDefaultKeyLabel = 'defaultSelectedKey'
+
+// Without a default key, the prop is left out and the example shows its placeholder.
+export function selectExampleCode(hierarchy: (typeof selectHierarchies)[number], defaultKey: string | null) {
+  const defaultKeyProp = defaultKey == null ? '' : ` defaultSelectedKey="${defaultKey}"`
+  return [
+    `<Select label="${selectExampleLabels.label}" hierarchy=${JSON.stringify(hierarchy)}${defaultKeyProp}>`,
+    ...selectExampleLabels.options.map((option) => `  <ListBoxItem id="${option}">${option}</ListBoxItem>`),
+    '</Select>',
+  ].join('\n')
+}
