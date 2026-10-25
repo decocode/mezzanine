@@ -33,7 +33,7 @@ export const typographyPages = [
   { label: 'Lines and words', href: '/typography/lines-and-words', description: 'When lines of text stay comfortable to read, however wide the space.' },
   { label: 'Text styles', href: '/typography/text-styles', description: 'When every heading, paragraph and label looks consistent, wherever it appears.' },
   { label: 'Semantic HTML', href: '/typography/semantic-html', description: 'When plain HTML elements get a style without a class.' },
-  { label: 'Global and languages', href: '/typography/global-and-languages', description: 'Text that reads right to left as well as left to right.' },
+  { label: 'Global and languages', href: '/typography/global-and-languages', description: 'Text and layouts that work in every language, whichever direction it’s written in.' },
   { label: 'Text rendering', href: '/typography/text-rendering', description: 'When text keeps its intended weight on screen.' },
 ]
 
