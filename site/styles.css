@@ -570,9 +570,12 @@ body {
     border: var(--border-width-baseline) solid var(--color-border);
   }
 
+  /* Table's cell height is a minimum inside a table, but a fixed height once a cell is a block, so it's
+     released here and each cell grows to fit its sample. */
   .text-style-table .mz-cell {
     display: block;
     min-width: 0;
+    height: auto;
     border: 0;
   }
 }
