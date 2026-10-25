@@ -1,6 +1,7 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 // Wording for the Foundations › Text › Text spacing page: spacing text by how it belongs together.
+// {listItemSpacing} and {listIndent} are replaced with the live values of the tokens they follow.
 
 // The spacing roles the page shows; their values are read from the token source.
 export const textSpacingRoles = [
@@ -35,6 +36,12 @@ export const textSpacingExample = {
   fourth: 'Paragraph D is the first text under a small heading.',
 } as const
 
+// The Lists example: two items, the second holding a nested list.
+export const textSpacingList = {
+  items: ['List item A', 'List item B'],
+  nested: ['List item C', 'List item D'],
+} as const
+
 export const textSpacingContent: DocsPageContent = {
   id: 'text-spacing',
   kind: 'foundation',
@@ -57,11 +64,19 @@ export const textSpacingContent: DocsPageContent = {
       key: 'example',
       intro: ['Put `mz-prose` on a container of running text, and everything directly inside it is spaced by these rules. The first and last pieces add no space outside it.'],
     },
+    {
+      key: 'lists',
+      title: 'Lists',
+      intro: ['A list sits in running text like a paragraph. Give it a body text class, such as `mz-text-body-md`, and its items sit `--space-2` apart (currently `{listItemSpacing}`), with each nested level indented by `--space-6` (currently `{listIndent}`).'],
+    },
     { key: 'roles', title: 'Roles' },
+  ],
+  references: [
+    { label: 'MDN: The unordered list element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul' },
+    { label: 'MDN: The ordered list element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol' },
   ],
   relatedPages: [
     { label: 'Spacing roles', href: '/dimension/spacing-roles' },
-    { label: 'Lists', href: '/text/lists' },
     { label: 'Reading width', href: '/text/reading-width' },
   ],
 }

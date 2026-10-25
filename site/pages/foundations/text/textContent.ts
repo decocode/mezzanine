@@ -12,7 +12,6 @@ export const textContent: DocsPageContent = {
 export const textPages = [
   { label: 'Typography', href: '/typography', description: 'How text looks: the shared text styles, their weights and sizes, and inline code.' },
   { label: 'Text spacing', href: '/text/text-spacing', description: 'When text that belongs together sits together.' },
-  { label: 'Lists', href: '/text/lists', description: 'Bullet points and numbered steps.' },
   { label: 'Reading width', href: '/text/reading-width', description: 'How long a line of reading text gets.' },
   { label: 'Reading direction', href: '/text/reading-direction', description: 'Text that reads right to left as well as left to right.' },
   { label: 'Reading order', href: '/text/reading-order', description: 'When the order still makes sense to keyboard and screen reader users.' },

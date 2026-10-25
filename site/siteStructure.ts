@@ -65,10 +65,9 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'text',
         label: 'Text',
         path: '/text',
-        order: ['typography', 'text-spacing', 'lists', 'reading-width', 'reading-direction', 'reading-order'],
+        order: ['typography', 'text-spacing', 'reading-width', 'reading-direction', 'reading-order'],
         pages: [
           { id: 'text-spacing', label: 'Text spacing', path: '/text/text-spacing', status: 'implemented' },
-          { id: 'lists', label: 'Lists', path: '/text/lists', status: 'implemented' },
           { id: 'reading-direction', label: 'Reading direction', path: '/text/reading-direction', status: 'implemented' },
           { id: 'reading-order', label: 'Reading order', path: '/text/reading-order', status: 'implemented' },
           { id: 'reading-width', label: 'Reading width', path: '/text/reading-width', status: 'implemented' },
