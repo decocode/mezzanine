@@ -28,6 +28,8 @@ export const typographyPages = [
   { label: 'Text styles', href: '/typography/text-styles', description: 'The fifteen styles, in five roles.' },
   { label: 'Choosing a style', href: '/typography/choosing-a-style', description: 'Which style suits which text.' },
   { label: 'Weight and emphasis', href: '/typography/weight-and-emphasis', description: 'Making text lighter or bolder.' },
+  { label: 'Fluid text', href: '/typography/fluid-text', description: 'Headings that grow and shrink with the screen.' },
+  { label: 'Inline code', href: '/typography/inline-code', description: 'Technical text inside a sentence.' },
 ]
 
 // Copy the page places around its live parts: after a code sample or table, or in the

@@ -4,7 +4,7 @@ export const textStylesContent: DocsPageContent = {
   id: 'text-styles',
   kind: 'foundation',
   title: 'Text styles',
-  description: 'Text styles keep every heading, paragraph and label looking consistent, wherever they appear.',
+  description: 'When every heading, paragraph and label looks consistent, wherever it appears.',
   sections: [
     {
       key: 'allStyles',

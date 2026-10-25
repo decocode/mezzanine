@@ -1,7 +1,7 @@
 import { DemoArea } from '@decocode/mezzanine'
-import { useTokenValue } from '../../../../components/tokenValueLogic'
-import { ContentPage } from '../../../../templates/ContentPage'
-import { withValues } from '../../../../templates/docsPageContent'
+import { useTokenValue } from '../../../../../components/tokenValueLogic'
+import { ContentPage } from '../../../../../templates/ContentPage'
+import { withValues } from '../../../../../templates/docsPageContent'
 import { inlineCodeContent } from './inlineCodeContent'
 
 export default function InlineCodePage() {

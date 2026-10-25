@@ -20,7 +20,7 @@ export const fluidSizingContent: DocsPageContent = {
     { key: 'fluidWidth', title: 'Fluid width' },
     { key: 'safeMinimum', title: 'Safe minimums' },
   ],
-  relatedPages: [{ label: 'Fluid text', href: '/text/fluid-text' }],
+  relatedPages: [{ label: 'Fluid text', href: '/typography/fluid-text' }],
   references: [
     { label: 'MDN: clamp()', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp' },
     { label: 'MDN: Container size and style queries', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_size_and_style_queries' },

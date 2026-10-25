@@ -1,4 +1,4 @@
-import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../../../templates/docsPageContent'
 
 // Wording for the Foundations › Text › Inline code page. {inlineCodePaddingBlock},
 // {inlineCodePaddingInline} and {inlineCodeBorderRadius} are replaced with the live values of the tokens

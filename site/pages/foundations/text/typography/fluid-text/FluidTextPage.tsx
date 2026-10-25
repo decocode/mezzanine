@@ -1,8 +1,8 @@
 import { DemoArea } from '@decocode/mezzanine'
-import { DocsTable } from '../../../../components/DocsTable'
-import { TokenValue } from '../../../../components/TokenValue'
+import { DocsTable } from '../../../../../components/DocsTable'
+import { TokenValue } from '../../../../../components/TokenValue'
 import { fluidTextContent, fluidTextExample, fluidTextTokens } from './fluidTextContent'
-import { ContentPage } from '../../../../templates/ContentPage'
+import { ContentPage } from '../../../../../templates/ContentPage'
 
 export default function FluidTextPage() {
   return (

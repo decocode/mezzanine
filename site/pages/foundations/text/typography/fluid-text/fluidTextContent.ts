@@ -1,4 +1,4 @@
-import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../../../templates/docsPageContent'
 
 export const fluidTextExample = {
   display: 'Display text',
@@ -20,12 +20,12 @@ export const fluidTextContent: DocsPageContent = {
   id: 'fluid-text',
   kind: 'foundation',
   title: 'Fluid text',
-  description: 'Display and Heading text grows and shrinks smoothly with the width of the screen, between a smallest and a largest size. Title, Body and Label text stays the same size, so reading text is always comfortable.',
+  description: 'When headings grow and shrink with the screen, and reading text stays the same size.',
   sections: [
     {
       key: 'howItWorks',
       title: 'How it works',
-      intro: ['Each Display and Heading size uses CSS `clamp()`. It has three parts: a smallest size in `rem`, a preferred size that adds a share of the screen’s width in `vw`, and a largest size in `rem`. Because both limits are in `rem`, the text still grows when someone enlarges their text.'],
+      intro: ['Display and Heading text grows and shrinks smoothly with the width of the screen, between a smallest and a largest size. Title, Body and Label text stays the same size, so reading text is always comfortable.', 'Each Display and Heading size uses CSS `clamp()`. It has three parts: a smallest size in `rem`, a preferred size that adds a share of the screen’s width in `vw`, and a largest size in `rem`. Because both limits are in `rem`, the text still grows when someone enlarges their text.'],
     },
   ],
   technicalDetails: [

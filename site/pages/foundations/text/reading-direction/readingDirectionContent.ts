@@ -70,7 +70,7 @@ export const readingDirectionContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Text', href: '/text' },
-    { label: 'Fluid text', href: '/text/fluid-text' },
+    { label: 'Fluid text', href: '/typography/fluid-text' },
   ],
   references: [
     { label: 'MDN: Logical properties and values', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Logical_properties_and_values' },
