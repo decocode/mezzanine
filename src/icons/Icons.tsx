@@ -66,6 +66,22 @@ export function EyeOffIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /><path d="M3 21 21 3" /></StrokeIcon>
 }
 
+export function InfoIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7v1.5" /></StrokeIcon>
+}
+
+export function CheckCircleIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><circle cx="12" cy="12" r="9" /><path d="m8 12.5 2.5 2.5L16 9.5" /></StrokeIcon>
+}
+
+export function WarningIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><path d="M12 3.5 2.5 20h19Z" /><path d="M12 9.5v5M12 16.5V18" /></StrokeIcon>
+}
+
+export function ErrorIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><circle cx="12" cy="12" r="9" /><path d="M12 7v6.5M12 15.5V17" /></StrokeIcon>
+}
+
 export function CheckIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><path d="m6 12 4 4 8-8" /></StrokeIcon>
 }

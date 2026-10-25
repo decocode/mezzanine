@@ -713,7 +713,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-area-end-panel-background",
-      "fallback": "var(--elevation-flat-surface)"
+      "fallback": "var(--color-surface)"
     },
     {
       "name": "--demo-area-end-panel-border-radius",
@@ -729,7 +729,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-area-end-panel-label-foreground",
-      "fallback": "var(--color-text)"
+      "fallback": "var(--color-accent)"
     },
     {
       "name": "--demo-area-end-panel-offset",
@@ -737,7 +737,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-area-end-panel-width",
-      "fallback": "var(--width-xs)"
+      "fallback": "var(--width-sm)"
     },
     {
       "name": "--demo-area-focus-ring-color",
@@ -745,7 +745,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-area-padding",
-      "fallback": "var(--space-4)"
+      "fallback": "var(--space-4) var(--space-4) var(--space-8)"
     },
     {
       "name": "--demo-area-preview-background",
@@ -1149,7 +1149,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--list-box-gap",
-      "fallback": "0"
+      "fallback": "var(--space-1)"
     },
     {
       "name": "--list-box-header-foreground",
@@ -1192,6 +1192,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--radius-control)"
     },
     {
+      "name": "--list-box-item-check-size",
+      "fallback": "var(--icon-size-sm)"
+    },
+    {
       "name": "--list-box-item-description-foreground",
       "fallback": "var(--color-text-muted)"
     },
@@ -1210,10 +1214,6 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--list-box-item-indicator",
       "fallback": "var(--color-indicator)"
-    },
-    {
-      "name": "--list-box-item-indicator-width",
-      "fallback": "var(--indicator-width)"
     },
     {
       "name": "--list-box-item-min-height",
@@ -1237,7 +1237,11 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--list-box-section-gap",
-      "fallback": "var(--space-gap-cluster)"
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--list-box-separator-gap",
+      "fallback": "var(--space-1)"
     }
   ],
   "Menu": [
@@ -1472,6 +1476,108 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--nav-item-padding-inline)"
     }
   ],
+  "Notice": [
+    {
+      "name": "--notice-accent-background",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--notice-accent-border",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--notice-accent-foreground",
+      "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--notice-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
+      "name": "--notice-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--notice-danger-background",
+      "fallback": "var(--color-danger-muted)"
+    },
+    {
+      "name": "--notice-danger-border",
+      "fallback": "var(--color-danger-muted-pressed)"
+    },
+    {
+      "name": "--notice-danger-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--notice-info-background",
+      "fallback": "var(--color-info-muted)"
+    },
+    {
+      "name": "--notice-info-border",
+      "fallback": "var(--color-info-muted-pressed)"
+    },
+    {
+      "name": "--notice-info-foreground",
+      "fallback": "var(--color-info)"
+    },
+    {
+      "name": "--notice-neutral-background",
+      "fallback": "var(--color-neutral-muted)"
+    },
+    {
+      "name": "--notice-neutral-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--notice-neutral-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--notice-padding-block",
+      "fallback": "var(--space-4)"
+    },
+    {
+      "name": "--notice-padding-inline",
+      "fallback": "var(--space-padding-surface)"
+    },
+    {
+      "name": "--notice-signature-background",
+      "fallback": "var(--color-signature-muted)"
+    },
+    {
+      "name": "--notice-signature-border",
+      "fallback": "var(--color-signature-muted-pressed)"
+    },
+    {
+      "name": "--notice-signature-foreground",
+      "fallback": "var(--color-signature)"
+    },
+    {
+      "name": "--notice-success-background",
+      "fallback": "var(--color-success-muted)"
+    },
+    {
+      "name": "--notice-success-border",
+      "fallback": "var(--color-success-muted-pressed)"
+    },
+    {
+      "name": "--notice-success-foreground",
+      "fallback": "var(--color-success)"
+    },
+    {
+      "name": "--notice-warning-background",
+      "fallback": "var(--color-warning-muted)"
+    },
+    {
+      "name": "--notice-warning-border",
+      "fallback": "var(--color-warning-muted-pressed)"
+    },
+    {
+      "name": "--notice-warning-foreground",
+      "fallback": "var(--color-warning)"
+    }
+  ],
   "NumberField": [
     {
       "name": "--input-border-radius",
@@ -1597,7 +1703,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--panel-header-foreground",
-      "fallback": "currentColor"
+      "fallback": "var(--color-accent)"
     },
     {
       "name": "--panel-header-gap",
@@ -1656,6 +1762,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--popover-foreground",
       "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--popover-max-height",
+      "fallback": "var(--height-overlay-max)"
     },
     {
       "name": "--popover-max-width",
@@ -1908,12 +2018,32 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-gap-field)"
     },
     {
+      "name": "--select-max-width",
+      "fallback": "var(--width-md)"
+    },
+    {
       "name": "--select-opacity-disabled",
       "fallback": "var(--opacity-disabled)"
     },
     {
       "name": "--select-placeholder-foreground",
       "fallback": "var(--color-text-muted)"
+    },
+    {
+      "name": "--select-primary-chevron-background",
+      "fallback": "var(--color-accent-emphasis)"
+    },
+    {
+      "name": "--select-primary-chevron-background-hovered",
+      "fallback": "var(--color-accent-emphasis-hovered)"
+    },
+    {
+      "name": "--select-primary-chevron-background-pressed",
+      "fallback": "var(--color-accent-emphasis-pressed)"
+    },
+    {
+      "name": "--select-primary-chevron-foreground",
+      "fallback": "var(--color-accent-inverse)"
     },
     {
       "name": "--select-trigger-background",

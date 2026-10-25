@@ -11,13 +11,15 @@ export { Avatar } from './components/Avatar/Avatar'
 export type { AvatarProps, AvatarSize } from './components/Avatar/Avatar'
 export { Badge } from './components/Badge/Badge'
 export { DemoArea } from './components/DemoArea/DemoArea'
-export type { DemoAreaProps } from './components/DemoArea/DemoArea'
+export type { DemoAreaAlign, DemoAreaProps } from './components/DemoArea/DemoArea'
 export { Card, CardImage, CardTitle, CardFooter } from './components/Card/Card'
 export { CodeBlock } from './components/CodeBlock/CodeBlock'
+export { Notice } from './components/Notice/Notice'
 
-export type { BadgeProps, BadgeVariant } from './components/Badge/Badge'
+export type { BadgeProps, BadgePurpose } from './components/Badge/Badge'
 export type { CardProps, CardImageProps, CardTitleProps, CardFooterProps } from './components/Card/Card'
 export type { CodeBlockProps } from './components/CodeBlock/CodeBlock'
+export type { NoticeProps, NoticePurpose } from './components/Notice/Notice'
 
 export { Button } from './components/Button/Button'
 
@@ -179,7 +181,11 @@ export {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
+  CheckCircleIcon,
   CloseIcon,
+  ErrorIcon,
+  InfoIcon,
+  WarningIcon,
   DancePadIcon,
   DrumIcon,
   ExitIcon,
@@ -300,7 +306,7 @@ export { Tag, TagGroup, TagList } from './components/TagGroup/TagGroup'
 export type { TagGroupProps, TagListProps, TagListRenderProps, TagProps, TagRenderProps } from './components/TagGroup/TagGroup'
 
 export { Select, SelectValue } from './components/Select/Select'
-export type { SelectProps, SelectRenderProps, SelectValueProps, SelectValueRenderProps } from './components/Select/Select'
+export type { SelectHierarchy, SelectProps, SelectRenderProps, SelectValueProps, SelectValueRenderProps } from './components/Select/Select'
 
 export {
   Menu,

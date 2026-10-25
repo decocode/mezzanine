@@ -1,30 +1,23 @@
-// The Lab's Notice page: every tone in a demo area, then one note with an icon and actions. Illustrative and unapproved.
-import { Button, DemoArea, Link, PlaceholderIcon } from '@decocode/mezzanine'
+// The Lab's Notice page: one note with an icon and actions. It uses the library's Notice; the page
+// itself is illustrative.
+import { Button, DemoArea, Link, Notice, PlaceholderIcon } from '@decocode/mezzanine'
 import { LabContentPage } from '../shared/StagePages'
-import { Notice } from './Notice'
-import { noticeActionsExample, noticeExamples, noticePage } from './noticeContent'
+import { noticeExample, noticePage } from './noticeContent'
 
 export function NoticeExperiment() {
   return <LabContentPage content={noticePage} parts={{
     example: (
-      <DemoArea>
-        <div className="example-stack">
-          {noticeExamples.map(({ variant, title, content }) => <Notice key={variant} variant={variant} title={title}>{content}</Notice>)}
-        </div>
-      </DemoArea>
-    ),
-    iconAndActions: (
-      <DemoArea>
+      <DemoArea align="stretch">
         <Notice
-          variant="info"
-          title={noticeActionsExample.title}
+          purpose="info"
+          title={noticeExample.title}
           icon={<PlaceholderIcon />}
           actions={<>
-            <Button size="sm" hierarchy="secondary">{noticeActionsExample.button}</Button>
-            <Link href={noticePage.href}>{noticeActionsExample.link}</Link>
+            <Button size="sm" hierarchy="secondary">{noticeExample.button}</Button>
+            <Link href={noticePage.href}>{noticeExample.link}</Link>
           </>}
         >
-          {noticeActionsExample.content}
+          {noticeExample.content}
         </Notice>
       </DemoArea>
     ),

@@ -44,6 +44,12 @@
   --color-accent-muted-pressed: var(--color-accent-800);
   --color-accent: var(--color-accent-300);
 
+  /* The signature tone, from the brand's second palette: text, a soft fill and its border, such as a
+     signature Notice. */
+  --color-signature-muted: var(--color-signature-900);
+  --color-signature-muted-pressed: var(--color-signature-800);
+  --color-signature: var(--color-signature-300);
+
   --color-info-emphasis: var(--color-info-400);
   --color-info-emphasis-hovered: var(--color-info-300);
   --color-info-emphasis-pressed: var(--color-info-200);
@@ -149,6 +155,12 @@
     --color-accent-muted-hovered: var(--color-accent-900);
     --color-accent-muted-pressed: var(--color-accent-800);
     --color-accent: var(--color-accent-300);
+
+    /* The signature tone, from the brand's second palette: text, a soft fill and its border, such as a
+       signature Notice. */
+    --color-signature-muted: var(--color-signature-900);
+    --color-signature-muted-pressed: var(--color-signature-800);
+    --color-signature: var(--color-signature-300);
 
     --color-info-emphasis: var(--color-info-400);
     --color-info-emphasis-hovered: var(--color-info-300);

@@ -48,6 +48,12 @@
   --color-accent-muted-pressed: oklch(from var(--color-accent-300) l 0 h);
   --color-accent: oklch(from var(--color-accent-700) l 0 h);
 
+  /* The signature tone, like accent: the signature palette with its colour removed, one step stronger
+     than Light's wash. */
+  --color-signature-muted: oklch(from var(--color-signature-200) l 0 h);
+  --color-signature-muted-pressed: oklch(from var(--color-signature-300) l 0 h);
+  --color-signature: oklch(from var(--color-signature-700) l 0 h);
+
   --color-info-emphasis: var(--color-info-700);
   --color-info-emphasis-hovered: var(--color-info-800);
   --color-info-emphasis-pressed: var(--color-info-900);

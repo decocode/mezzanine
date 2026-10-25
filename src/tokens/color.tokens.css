@@ -36,7 +36,7 @@
   --color-accent-950: #0A0A26;
   --color-accent-980: #050519;
 
-  /* Signature palette: the brand's second colour, for decorative use. No interface role reads it yet. */
+  /* Signature palette: the brand's second colour, for decorative use. The signature roles read it. */
   --color-signature-50: #F6FBFB;
   --color-signature-100: #E6F5F4;
   --color-signature-200: #C1E5E2;

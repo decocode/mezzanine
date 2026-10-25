@@ -42,6 +42,11 @@
     --color-accent-muted-hovered: Canvas;
     --color-accent-muted-pressed: Canvas;
 
+    /* The signature tone is decorative, so like the status colours it falls back to plain text. */
+    --color-signature: CanvasText;
+    --color-signature-muted: Canvas;
+    --color-signature-muted-pressed: Canvas;
+
     /* System colours have no status hues, so status colours fall back to plain text on the page. */
     --color-info: CanvasText;
     --color-info-emphasis: CanvasText;

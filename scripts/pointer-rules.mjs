@@ -38,6 +38,7 @@ export const pointerPrefixes = {
   Slider: ['slider'],
   ProgressBar: ['progress-bar'],
   Meter: ['meter'],
+  Notice: ['notice'],
   Separator: ['separator'],
   Popover: ['popover'],
   Menu: ['menu'],

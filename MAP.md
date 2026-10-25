@@ -39,7 +39,7 @@ An experimental sandbox at `/site/lab`. Nothing here is approved library work.
 | --- | --- |
 | `layout/<page>/` | The Layout pages, one folder each, all directly under Layout. |
 | `emerging-features/` | The other experiment, one folder per page. |
-| `notice/` | A candidate Notice component: a short note in one of Badge's six tones. |
+| `notice/` | The Notice page: the library's Notice with an icon and actions. |
 | `volume-and-zoom/` | Candidate VolumeControl and ZoomControl: an icon button that opens a slider. |
 | `shared/` | Shared Lab parts, types and values, and `layout-lab.css`, which each page's "The CSS behind" panel quotes. The panel itself, the example text and the panel picker come from the site's `components/ExampleParts.tsx`, shared with promoted docs pages. |
 | `LabPage.tsx`, `labContent.tsx` | The Lab's entry and its navigation. |

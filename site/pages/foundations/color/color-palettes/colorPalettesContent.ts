@@ -55,7 +55,7 @@ export const foundationColorPalettes: ColorPaletteDefinition[] = [
     details: {
       label: 'When to use Signature colors',
       content: [
-        'The Signature palette is a brand\'s second color, for decorative use. No Mezzanine component uses it yet.',
+        'The Signature palette is a brand\'s second color, for decorative use, such as a signature notice.',
       ],
     },
   },

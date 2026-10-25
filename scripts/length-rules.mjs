@@ -12,6 +12,10 @@ export const allowedRawLengths = [
   { file: 'src/components/TopBar/TopBar.css', value: '4cqi' },
   // Card's padding shrinks with its container in very narrow space, such as a phone with enlarged text: capped by a token.
   { file: 'src/components/Card/Card.css', value: '8cqi' },
+  // Notice's padding shrinks the same way as Card's, capped by its tokens.
+  { file: 'src/components/Notice/Notice.css', value: '8cqi' },
+  // The narrowest a Notice's title or content may be beside its icon before wrapping under it, in its own text size.
+  { file: 'src/components/Notice/Notice.css', value: '8em' },
   // ProgressBar's indeterminate segment covers a share of its track, not a design size.
   { file: 'src/components/ProgressBar/ProgressBar.css', value: '40%' },
   // The scroll fade's keyframe positions, just in from each end of the scroll range, not sizes.

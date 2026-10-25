@@ -60,7 +60,7 @@
     "kind": "type"
   },
   {
-    "name": "BadgeVariant",
+    "name": "BadgePurpose",
     "kind": "type"
   },
   {
@@ -158,6 +158,10 @@
   {
     "name": "CellRenderProps",
     "kind": "type"
+  },
+  {
+    "name": "CheckCircleIcon",
+    "kind": "value"
   },
   {
     "name": "CheckIcon",
@@ -260,6 +264,10 @@
     "kind": "value"
   },
   {
+    "name": "DemoAreaAlign",
+    "kind": "type"
+  },
+  {
     "name": "DemoAreaProps",
     "kind": "type"
   },
@@ -349,6 +357,10 @@
   },
   {
     "name": "EmailIcon",
+    "kind": "value"
+  },
+  {
+    "name": "ErrorIcon",
     "kind": "value"
   },
   {
@@ -490,6 +502,10 @@
   {
     "name": "IconProps",
     "kind": "type"
+  },
+  {
+    "name": "InfoIcon",
+    "kind": "value"
   },
   {
     "name": "Input",
@@ -684,6 +700,18 @@
     "kind": "type"
   },
   {
+    "name": "Notice",
+    "kind": "value"
+  },
+  {
+    "name": "NoticeProps",
+    "kind": "type"
+  },
+  {
+    "name": "NoticePurpose",
+    "kind": "type"
+  },
+  {
     "name": "NumberField",
     "kind": "value"
   },
@@ -870,6 +898,10 @@
   {
     "name": "Select",
     "kind": "value"
+  },
+  {
+    "name": "SelectHierarchy",
+    "kind": "type"
   },
   {
     "name": "SelectProps",
@@ -1409,6 +1441,10 @@
   },
   {
     "name": "VolumeOffIcon",
+    "kind": "value"
+  },
+  {
+    "name": "WarningIcon",
     "kind": "value"
   },
   {
