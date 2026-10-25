@@ -19,10 +19,17 @@
   z-index: var(--z-index-overlay);
 }
 
-/* A Select's or ComboBox's list is as wide as its field. */
+/* A Select's or ComboBox's list is at least as wide as its field, and grows to fit its longest option
+   or section header, up to the popover's usual maximum. */
 .mz-popover:is([data-trigger='Select'], [data-trigger='ComboBox']) {
-  inline-size: var(--trigger-width);
-  max-inline-size: none;
+  inline-size: max-content;
+  min-inline-size: var(--trigger-width);
+}
+
+/* A long list stops at the shared overlay height and scrolls, so it never covers the whole page. React
+   Aria also keeps the popover within the space beside its field. */
+.mz-popover:is([data-trigger='Select'], [data-trigger='ComboBox']) > .mz-list-box {
+  max-block-size: var(--popover-max-height, var(--height-overlay-max));
 }
 
 /* It fades in and out, with the shared fade that Modal and Panel drawers use. */

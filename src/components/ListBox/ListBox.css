@@ -2,7 +2,7 @@
 .mz-list-box {
   display: flex;
   flex-direction: column;
-  gap: var(--list-box-gap, 0);
+  gap: var(--list-box-gap, var(--space-1));
   box-sizing: border-box;
   min-width: 0;
   max-height: inherit;
@@ -43,15 +43,22 @@
 .mz-list-box-section {
   display: flex;
   flex-direction: column;
-  gap: var(--list-box-gap, 0);
+  gap: var(--list-box-gap, var(--space-1));
 }
 
+/* Sections sit a control's gap apart, so a list stays compact. */
 .mz-list-box-section:not(:first-child) {
-  margin-block-start: var(--list-box-section-gap, var(--space-gap-cluster));
+  margin-block-start: var(--list-box-section-gap, var(--space-gap-control));
 }
 
+/* A separator between options or sections, as in Menu. */
+.mz-list-box > .mz-separator {
+  margin-block: var(--list-box-separator-gap, var(--space-1));
+}
+
+/* A section header belongs to the options below it, so it has space above and almost none below. */
 .mz-list-box .mz-header {
-  padding: var(--list-box-header-padding-block, var(--space-padding-control-block)) var(--list-box-header-padding-inline, var(--space-padding-control-inline));
+  padding: var(--list-box-header-padding-block, var(--space-padding-control-block)) var(--list-box-header-padding-inline, var(--space-padding-control-inline)) 0;
   color: var(--list-box-header-foreground, var(--color-accent));
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);
@@ -72,7 +79,8 @@
   box-sizing: border-box;
   min-width: 0;
   min-height: var(--list-box-item-min-height, var(--target-size-xs));
-  padding: var(--list-box-item-padding-block, var(--space-padding-control-block)) var(--list-box-item-padding-inline, var(--space-padding-control-inline));
+  /* Compact rows: the minimum height keeps each option an easy target, so little padding is needed. */
+  padding: var(--list-box-item-padding-block, var(--space-1)) var(--list-box-item-padding-inline, var(--space-padding-control-inline));
   border-radius: var(--list-box-item-border-radius, var(--radius-control));
   outline: none;
   background: var(--list-box-item-background, transparent);
@@ -111,17 +119,20 @@
   color: var(--list-box-item-foreground-selected, var(--color-text));
 }
 
-/* A selected option shows the shared indicator bar at its start, so selection doesn't rely on
-   colour alone. */
-.mz-list-box-item[data-selected]::before {
-  content: '';
+/* A selected option shows a checkmark at its end, so selection doesn't rely on colour alone. Every
+   option keeps room for it, so text doesn't move when the selection changes. */
+.mz-list-box-item {
+  padding-inline-end: calc(var(--list-box-item-padding-inline, var(--space-padding-control-inline)) + var(--list-box-item-check-size, var(--icon-size-sm)) + var(--list-box-item-gap, var(--space-gap-control)));
+}
+
+.mz-list-box-item-check {
   position: absolute;
-  inset-block: var(--indicator-inset);
-  /* Centred in the space between the tint's edge and the text. */
-  inset-inline-start: calc((var(--list-box-item-padding-inline, var(--space-padding-control-inline)) - var(--list-box-item-indicator-width, var(--indicator-width))) / 2);
-  inline-size: var(--list-box-item-indicator-width, var(--indicator-width));
-  border-radius: var(--indicator-radius);
-  background: var(--list-box-item-indicator, var(--color-indicator));
+  inset-block-start: 50%;
+  inset-inline-end: var(--list-box-item-padding-inline, var(--space-padding-control-inline));
+  inline-size: var(--list-box-item-check-size, var(--icon-size-sm));
+  block-size: var(--list-box-item-check-size, var(--icon-size-sm));
+  color: var(--list-box-item-indicator, var(--color-indicator));
+  translate: 0 -50%;
 }
 
 .mz-list-box-item[data-selected]:is([data-hovered], [data-focused]) {
