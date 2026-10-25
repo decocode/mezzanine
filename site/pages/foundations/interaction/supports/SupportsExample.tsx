@@ -23,7 +23,7 @@ export function SupportsExample() {
         </TableHeader>
         <TableBody>{supportChecks.map(({ label, check }) => <Row id={label} key={label}>
           <Cell>{label}</Cell>
-          <Cell>{check() ? <Badge variant="success">Yes</Badge> : <Badge>No</Badge>}</Cell>
+          <Cell>{check() ? <Badge purpose="success">Yes</Badge> : <Badge>No</Badge>}</Cell>
         </Row>)}</TableBody>
       </Table>
     </div>

@@ -16,7 +16,7 @@ function groupChildren(group: SiteNavigationGroup): NavTreeItemData[] {
       isWip: page.status === 'empty',
       item: {
         id: page.id, label: page.label, href: page.path,
-        content: page.status === 'empty' ? <Badge variant="info">WIP</Badge> : undefined,
+        content: page.status === 'empty' ? <Badge purpose="info">WIP</Badge> : undefined,
       },
     })),
   ]

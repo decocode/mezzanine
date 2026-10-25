@@ -7,8 +7,8 @@ export const badgeContent: DocsPageContent = {
   title: 'Badge',
   description: 'A badge is a small label that highlights a status or category, such as New, Draft or Complete. It gives extra information about an item rather than acting as a button.',
   sections: [
-    { key: 'example', intro: ['`Badge` defaults to the neutral variant and renders a non-interactive text label.'] },
-    { key: 'variants', intro: ['The `variant` prop selects a core or semantic colour treatment.'] },
+    { key: 'example', intro: ['`Badge` defaults to the neutral purpose and renders a non-interactive text label.'] },
+    { key: 'purposes', title: 'Purposes', intro: ['The `purpose` prop selects a core or semantic colour treatment.'] },
   ],
   technicalDetails: [
     {
@@ -18,14 +18,14 @@ export const badgeContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'Badge', description: 'Renders a non-interactive span containing the status label. The variant controls its colour treatment.' },
+          { name: 'Badge', description: 'Renders a non-interactive span containing the status label. The purpose controls its colour treatment.' },
         ],
       },
     },
     {
       key: 'usage',
       body: [
-        'Supply the label as the children of `Badge`; `variant` defaults to `neutral`. The available variants are shown above.',
+        'Supply the label as the children of `Badge`; `purpose` defaults to `neutral`. The available purposes are shown above.',
         'Badge renders a `span`, not an action control. Use `Button` or `Link` for an action or destination.',
       ],
     },

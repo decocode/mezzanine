@@ -1,12 +1,12 @@
-import { Badge, Cell, Column, DemoArea, Row, Table, TableBody, TableHeader, type BadgeVariant } from '@decocode/mezzanine'
+import { Badge, Cell, Column, DemoArea, Row, Table, TableBody, TableHeader, type BadgePurpose } from '@decocode/mezzanine'
 import { badgeContent } from './badgeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
-// One label for every BadgeVariant value, so TypeScript reports one that's missing or no longer exists.
-const variantLabels: Record<BadgeVariant, string> = {
+// One label for every BadgePurpose value, so TypeScript reports one that's missing or no longer exists.
+const purposeLabels: Record<BadgePurpose, string> = {
   neutral: 'Neutral', accent: 'Accent', info: 'Info', success: 'Success', warning: 'Warning', danger: 'Danger',
 }
-const variants = Object.keys(variantLabels) as BadgeVariant[]
+const purposes = Object.keys(purposeLabels) as BadgePurpose[]
 
 export default function BadgePage() {
   return (
@@ -14,18 +14,18 @@ export default function BadgePage() {
       content={badgeContent}
       parts={{
         example: <DemoArea><Badge>Badge label</Badge></DemoArea>,
-        variants: (
+        purposes: (
           <div className="documentation-table documentation-comparison-table">
-            <Table aria-label="Badge variants">
+            <Table aria-label="Badge purposes">
               <TableHeader>
-                <Column id="variant" isRowHeader>Variant</Column>
+                <Column id="purpose" isRowHeader>Purpose</Column>
                 <Column id="example">Example</Column>
               </TableHeader>
               <TableBody>
-                {variants.map((variant) => (
-                  <Row id={variant} key={variant}>
-                    <Cell><code>{variant}</code></Cell>
-                    <Cell><Badge variant={variant}>{variantLabels[variant]}</Badge></Cell>
+                {purposes.map((purpose) => (
+                  <Row id={purpose} key={purpose}>
+                    <Cell><code>{purpose}</code></Cell>
+                    <Cell><Badge purpose={purpose}>{purposeLabels[purpose]}</Badge></Cell>
                   </Row>
                 ))}
               </TableBody>

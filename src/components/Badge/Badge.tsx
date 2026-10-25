@@ -1,17 +1,17 @@
 import type { ComponentPropsWithoutRef } from 'react'
 
-export type BadgeVariant = 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'danger'
+export type BadgePurpose = 'neutral' | 'accent' | 'info' | 'success' | 'warning' | 'danger'
 
 export interface BadgeProps extends ComponentPropsWithoutRef<'span'> {
-  variant?: BadgeVariant
+  purpose?: BadgePurpose
 }
 
-export function Badge({ children, className, variant = 'neutral', ...badgeProps }: BadgeProps) {
+export function Badge({ children, className, purpose = 'neutral', ...badgeProps }: BadgeProps) {
   return (
     <span
       {...badgeProps}
       className={['mz-badge', className].filter(Boolean).join(' ')}
-      data-variant={variant}
+      data-purpose={purpose}
     >
       <span className="mz-badge-label">{children}</span>
     </span>

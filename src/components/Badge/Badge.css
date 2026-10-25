@@ -20,37 +20,37 @@
   text-decoration: none;
 }
 
-.mz-badge[data-variant='neutral'] {
+.mz-badge[data-purpose='neutral'] {
   --_badge-background: var(--badge-neutral-background, var(--color-neutral-muted));
   --_badge-foreground: var(--badge-neutral-foreground, var(--color-text));
   --_badge-border: var(--badge-neutral-border, var(--color-border));
 }
 
-.mz-badge[data-variant='accent'] {
+.mz-badge[data-purpose='accent'] {
   --_badge-background: var(--badge-accent-background, var(--color-accent-muted));
   --_badge-foreground: var(--badge-accent-foreground, var(--color-accent));
   --_badge-border: var(--badge-accent-border, var(--color-accent-muted-pressed));
 }
 
-.mz-badge[data-variant='info'] {
+.mz-badge[data-purpose='info'] {
   --_badge-background: var(--badge-info-background, var(--color-info-muted));
   --_badge-foreground: var(--badge-info-foreground, var(--color-info));
   --_badge-border: var(--badge-info-border, var(--color-info-muted-pressed));
 }
 
-.mz-badge[data-variant='success'] {
+.mz-badge[data-purpose='success'] {
   --_badge-background: var(--badge-success-background, var(--color-success-muted));
   --_badge-foreground: var(--badge-success-foreground, var(--color-success));
   --_badge-border: var(--badge-success-border, var(--color-success-muted-pressed));
 }
 
-.mz-badge[data-variant='warning'] {
+.mz-badge[data-purpose='warning'] {
   --_badge-background: var(--badge-warning-background, var(--color-warning-muted));
   --_badge-foreground: var(--badge-warning-foreground, var(--color-warning));
   --_badge-border: var(--badge-warning-border, var(--color-warning-muted-pressed));
 }
 
-.mz-badge[data-variant='danger'] {
+.mz-badge[data-purpose='danger'] {
   --_badge-background: var(--badge-danger-background, var(--color-danger-muted));
   --_badge-foreground: var(--badge-danger-foreground, var(--color-danger));
   --_badge-border: var(--badge-danger-border, var(--color-danger-muted-pressed));

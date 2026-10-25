@@ -28,12 +28,12 @@ export const labNavigationItems: NavTreeSectionData[] = [
     },
     {
       id: 'emerging-features', label: emergingFeatures.title, href: emergingFeatures.href,
-      content: <Badge variant="warning">{labBadgeLabel}</Badge>,
+      content: <Badge purpose="warning">{labBadgeLabel}</Badge>,
       children: futurePages.map((page) => ({ id: `emerging-features-${page.key}`, label: page.title, href: page.href })),
     },
   ] },
   { type: 'section', id: 'components', label: docsGroupLabel('components'), children: [
-    { id: 'notice', label: noticePage.title, href: noticePage.href, content: <Badge variant="warning">{labBadgeLabel}</Badge> },
-    { id: 'volume-and-zoom', label: volumeAndZoomPage.title, href: volumeAndZoomPage.href, content: <Badge variant="warning">{labBadgeLabel}</Badge> },
+    { id: 'notice', label: noticePage.title, href: noticePage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'volume-and-zoom', label: volumeAndZoomPage.title, href: volumeAndZoomPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
   ] },
 ]

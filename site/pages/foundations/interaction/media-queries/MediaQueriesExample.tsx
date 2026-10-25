@@ -9,7 +9,7 @@ function EnvironmentRow({ label, query }: { label: string; query: string }) {
   return <Row id={query}>
     <Cell>{label}</Cell>
     <Cell><code>{query}</code></Cell>
-    <Cell>{matches ? <Badge variant="success">Yes</Badge> : <Badge>No</Badge>}</Cell>
+    <Cell>{matches ? <Badge purpose="success">Yes</Badge> : <Badge>No</Badge>}</Cell>
   </Row>
 }
 

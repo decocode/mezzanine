@@ -10,7 +10,7 @@ const tags = ['Fig', 'Watermelon', 'Kiwi', 'Pomegranate', 'Plum', 'Passion fruit
 export function RowWrapExample() {
   return <>
     <WidthDemo label="Row wrap" code={rowWrapCssNotes.rowWrap.code}>
-      <div className="example-row-wrap">{tags.map((tag) => <Badge key={tag} variant="accent">{tag}</Badge>)}</div>
+      <div className="example-row-wrap">{tags.map((tag) => <Badge key={tag} purpose="accent">{tag}</Badge>)}</div>
     </WidthDemo>
     <CssNotes name="Row wrap" note={rowWrapCssNotes.rowWrap} level={3} showCode={false} />
   </>

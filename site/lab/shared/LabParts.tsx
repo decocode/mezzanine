@@ -15,9 +15,9 @@ export { examplePictureAlt, useExamplePicture } from '../../components/examplePi
 // An emerging feature's status: Lab, then whether this browser supports it.
 export function FeatureStatus({ supported }: { supported: boolean }) {
   return <p className="lab-feature-status">
-    <Badge variant="warning">{labBadgeLabel}</Badge>
+    <Badge purpose="warning">{labBadgeLabel}</Badge>
     {supported
-      ? <Badge variant="success">Active in this browser</Badge>
-      : <Badge variant="neutral">Not in this browser</Badge>}
+      ? <Badge purpose="success">Active in this browser</Badge>
+      : <Badge purpose="neutral">Not in this browser</Badge>}
   </p>
 }
