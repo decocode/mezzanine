@@ -1,8 +1,8 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 // Wording for the Foundations › Typography › Spacing and rhythm page: spacing text by how it belongs
-// together, and the space between lines. {listItemSpacing}, {listIndent} and {bodyLineHeight} are
-// replaced with the live values of the tokens they follow.
+// together, and the space between lines. {bodyLineHeight} is replaced with the live value of the token
+// it follows.
 
 // The spacing roles the page shows; their values are read from the token source.
 export const textSpacingRoles = [
@@ -37,12 +37,6 @@ export const textSpacingExample = {
   fourth: 'Paragraph D is the first text under a small heading.',
 } as const
 
-// The Lists example: two items, the second holding a nested list.
-export const textSpacingList = {
-  items: ['List item A', 'List item B'],
-  nested: ['List item C', 'List item D'],
-} as const
-
 export const spacingAndRhythmContent: DocsPageContent = {
   id: 'spacing-and-rhythm',
   kind: 'foundation',
@@ -66,11 +60,6 @@ export const spacingAndRhythmContent: DocsPageContent = {
       intro: ['Put `mz-prose` on a container of running text, and everything directly inside it is spaced by these rules. The first and last pieces add no space outside it.'],
     },
     {
-      key: 'lists',
-      title: 'Lists',
-      intro: ['A list sits in running text like a paragraph. Give it a body text class, such as `mz-text-body-md`, and its items sit `--space-2` apart (currently `{listItemSpacing}`), with each nested level indented by `--space-6` (currently `{listIndent}`).'],
-    },
-    {
       key: 'lineHeight',
       title: 'Line height',
       body: ['Line height multiplies the font size, so Body medium’s `{bodyLineHeight}` turns 16px text into 24px lines, which stay in proportion when text is enlarged.'],
@@ -78,10 +67,6 @@ export const spacingAndRhythmContent: DocsPageContent = {
     { key: 'roles', title: 'Roles' },
   ],
   technicalDetails: [{ key: 'tokens' }],
-  references: [
-    { label: 'MDN: The unordered list element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul' },
-    { label: 'MDN: The ordered list element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol' },
-  ],
   relatedPages: [
     { label: 'Spacing roles', href: '/dimension/spacing-roles' },
     { label: 'Lines and words', href: '/typography/lines-and-words' },

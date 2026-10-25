@@ -26,12 +26,12 @@ export const typographyContent: DocsPageContent = {
 
 // Each card's description is its page's subtitle, except Global and languages, which has none.
 export const typographyPages = [
+  { label: 'Typeface and fonts', href: '/typography/typeface-and-fonts', description: 'When text uses each device’s own interface font.' },
   { label: 'Size and scaling', href: '/typography/size-and-scaling', description: 'When text comes in a few set sizes, and headings grow and shrink with the screen.' },
   { label: 'Weight and emphasis', href: '/typography/weight-and-emphasis', description: 'When text needs to be lighter or bolder.' },
   { label: 'Spacing and rhythm', href: '/typography/spacing-and-rhythm', description: 'When text that belongs together sits together.' },
   { label: 'Lines and words', href: '/typography/lines-and-words', description: 'When lines of text stay comfortable to read, however wide the space.' },
   { label: 'Text styles', href: '/typography/text-styles', description: 'When every heading, paragraph and label looks consistent, wherever it appears.' },
-  { label: 'Choosing a style', href: '/typography/choosing-a-style', description: 'When each piece of text gets the style that suits it.' },
   { label: 'Semantic HTML', href: '/typography/semantic-html', description: 'When plain HTML elements get a style without a class.' },
   { label: 'Global and languages', href: '/typography/global-and-languages', description: 'Text that reads right to left as well as left to right.' },
   { label: 'Text rendering', href: '/typography/text-rendering', description: 'When text keeps its intended weight on screen.' },

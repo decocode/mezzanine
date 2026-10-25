@@ -3,10 +3,12 @@ import { baseTextElements } from '../typographyContent'
 import { useTokenValue } from '../../../../components/tokenValueLogic'
 import { ContentPage } from '../../../../templates/ContentPage'
 import { withValues } from '../../../../templates/docsPageContent'
-import { semanticHtmlContent } from './semanticHtmlContent'
+import { listExample, semanticExamples, semanticHtmlContent } from './semanticHtmlContent'
 
 export default function SemanticHtmlPage() {
   const content = withValues(semanticHtmlContent, {
+    listItemSpacing: useTokenValue('--space-2'),
+    listIndent: useTokenValue('--space-6'),
     inlineCodePaddingBlock: useTokenValue('--inline-code-padding-block'),
     inlineCodePaddingInline: useTokenValue('--inline-code-padding-inline'),
     inlineCodeBorderRadius: useTokenValue('--inline-code-border-radius'),
@@ -34,6 +36,34 @@ export default function SemanticHtmlPage() {
               </TableBody>
             </Table>
           </div>
+        ),
+        lists: (
+          <DemoArea>
+            <ul className="mz-text-body-md">
+              <li>{listExample.items[0]}</li>
+              <li>{listExample.items[1]}
+                <ul>{listExample.nested.map((item) => <li key={item}>{item}</li>)}</ul>
+              </li>
+            </ul>
+          </DemoArea>
+        ),
+        descriptionLists: (
+          <DemoArea>
+            <dl className="mz-text-body-md">
+              {semanticExamples.terms.map(({ term, description }) => <div key={term}><dt>{term}</dt><dd>{description}</dd></div>)}
+            </dl>
+          </DemoArea>
+        ),
+        inlineEmphasis: (
+          <DemoArea>
+            <p className="mz-text-body-md">A sentence with <strong>strong text</strong>, <em>emphasised text</em> and <mark>marked text</mark>.</p>
+          </DemoArea>
+        ),
+        quotes: (
+          <DemoArea>
+            <blockquote className="mz-text-body-md"><p>{semanticExamples.quotation}</p></blockquote>
+            <p className="mz-text-body-md">A sentence with <q>{semanticExamples.inlineQuotation}</q> inside it.</p>
+          </DemoArea>
         ),
         inlineCode: (
           <DemoArea>

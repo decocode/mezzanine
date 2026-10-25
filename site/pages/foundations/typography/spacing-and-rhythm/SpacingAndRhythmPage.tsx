@@ -5,12 +5,10 @@ import { TokenScale } from '../../../../components/TokenScale'
 import { ContentPage } from '../../../../templates/ContentPage'
 import { useTokenValue } from '../../../../components/tokenValueLogic'
 import { withValues } from '../../../../templates/docsPageContent'
-import { spacingAndRhythmContent, textSpacingCode, textSpacingExample, textSpacingList, textSpacingRoles } from './spacingAndRhythmContent'
+import { spacingAndRhythmContent, textSpacingCode, textSpacingExample, textSpacingRoles } from './spacingAndRhythmContent'
 
 export default function SpacingAndRhythmPage() {
   const content = withValues(spacingAndRhythmContent, {
-    listItemSpacing: useTokenValue('--space-2'),
-    listIndent: useTokenValue('--space-6'),
     bodyLineHeight: useTokenValue('--line-height-body-md'),
   })
   return (
@@ -29,16 +27,6 @@ export default function SpacingAndRhythmPage() {
               <h4>{textSpacingExample.headingSmall}</h4>
               <p className="mz-text-body-md">{textSpacingExample.fourth}</p>
             </div>
-          </DemoArea>
-        ),
-        lists: (
-          <DemoArea>
-            <ul className="mz-text-body-md">
-              <li>{textSpacingList.items[0]}</li>
-              <li>{textSpacingList.items[1]}
-                <ul>{textSpacingList.nested.map((item) => <li key={item}>{item}</li>)}</ul>
-              </li>
-            </ul>
           </DemoArea>
         ),
         roles: <TokenScale items={textSpacingRoles} sample="length" />,

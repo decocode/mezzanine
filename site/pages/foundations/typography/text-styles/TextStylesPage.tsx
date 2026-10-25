@@ -1,5 +1,5 @@
 import { Cell, Column, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { fontTokens, textRoles, textRoleTokens, typographyStyles } from '../typographyContent'
+import { fontTokens, textRoles, textRoleTokens, textStyleChoices, textStylesPartCopy, typographyStyles } from '../typographyContent'
 import { textStylesContent } from './textStylesContent'
 import { describeFontSize, useTokenValue } from '../../../../components/tokenValueLogic'
 import { TokenValue } from '../../../../components/TokenValue'
@@ -43,6 +43,28 @@ export default function TextStylesPage() {
               </section>
             ))}
           </>
+        ),
+        choosingAStyle: (
+          <div className="documentation-table">
+            <Table aria-label="Recommended text styles">
+              <TableHeader>
+                <Column id="use" isRowHeader>Text</Column>
+                <Column id="class">Class</Column>
+              </TableHeader>
+              <TableBody>
+                {textStyleChoices.map((choice) => (
+                  <Row id={choice.use} key={choice.use}>
+                    <Cell>{choice.use}</Cell>
+                    <Cell>
+                      {choice.classNames.map((className, index) => (
+                        <span key={className}>{index > 0 && textStylesPartCopy.choiceSeparator}<code>{className}</code></span>
+                      ))}
+                    </Cell>
+                  </Row>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         ),
         tokens: (
           <>
