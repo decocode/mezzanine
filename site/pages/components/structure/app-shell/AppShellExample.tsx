@@ -4,7 +4,7 @@ import { appShellExampleLabels as labels } from './appShellContent'
 // A small AppShell with a Panel at each edge, used on the AppShell and Panel pages.
 export function AppShellExample() {
   return (
-    <DemoArea className="app-shell-example-demo">
+    <DemoArea align="stretch" className="app-shell-example-demo">
       <AppShell className="app-shell-example" bottomPanelSpan="main">
         <header className="app-shell-example-header">
           <span className="mz-text-title-sm">{labels.header}</span>

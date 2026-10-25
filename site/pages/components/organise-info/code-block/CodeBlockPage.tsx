@@ -7,12 +7,12 @@ export default function CodeBlockPage() {
     <ContentPage
       content={codeBlockContent}
       parts={{
-        example: <DemoArea><CodeBlock>{codeBlockExampleCode}</CodeBlock></DemoArea>,
-        language: <DemoArea><CodeBlock language="css">{codeBlockExampleCode}</CodeBlock></DemoArea>,
-        title: <DemoArea><CodeBlock title={codeBlockFeatureExamples.title} language="css">{codeBlockExampleCode}</CodeBlock></DemoArea>,
-        lineNumbers: <DemoArea><CodeBlock showLineNumbers startLine={codeBlockFeatureExamples.lineNumbersStart} language="css">{codeBlockExampleCode}</CodeBlock></DemoArea>,
+        example: <DemoArea align="stretch"><CodeBlock>{codeBlockExampleCode}</CodeBlock></DemoArea>,
+        language: <DemoArea align="stretch"><CodeBlock language="css">{codeBlockExampleCode}</CodeBlock></DemoArea>,
+        title: <DemoArea align="stretch"><CodeBlock title={codeBlockFeatureExamples.title} language="css">{codeBlockExampleCode}</CodeBlock></DemoArea>,
+        lineNumbers: <DemoArea align="stretch"><CodeBlock showLineNumbers startLine={codeBlockFeatureExamples.lineNumbersStart} language="css">{codeBlockExampleCode}</CodeBlock></DemoArea>,
         markedLines: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <CodeBlock showLineNumbers highlightedLines={[1]} removedLines={[3]} addedLines={[4]} language="css">{codeBlockFeatureExamples.markedCode}</CodeBlock>
           </DemoArea>
         ),

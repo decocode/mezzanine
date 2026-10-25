@@ -26,7 +26,7 @@ export default function TablePage() {
             <div className="mz-prose">
               <h3 id="table-single-selection-heading" className="mz-text-heading-sm">{tableExampleGroups.singleSelection}</h3>
               <p className="component-section-description">{tableExampleGroups.disabledRowNote}</p>
-              <DemoArea>
+              <DemoArea align="stretch">
                 <div className="documentation-table table-example">
                   <Table
                     aria-label="Table with single row selection"
@@ -56,7 +56,7 @@ export default function TablePage() {
             </div>
             <div className="mz-prose">
               <h3 id="table-multiple-selection-heading" className="mz-text-heading-sm">{tableExampleGroups.multipleSelection}</h3>
-              <DemoArea>
+              <DemoArea align="stretch">
                 <div className="documentation-table table-example">
                   <Table
                     aria-label="Table with multiple row selection"
@@ -86,7 +86,7 @@ export default function TablePage() {
           </div>
         ),
         sorting: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <div className="documentation-table table-example">
               <Table
                 aria-label="Sortable table"
@@ -112,7 +112,7 @@ export default function TablePage() {
           </DemoArea>
         ),
         emptyState: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <div className="documentation-table table-example">
               <Table aria-label="Empty table">
                 <TableHeader>

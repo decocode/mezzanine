@@ -7,14 +7,14 @@ export default function SeparatorPage() {
     <ContentPage
       content={separatorContent}
       parts={{
-        example: <DemoArea>
+        example: <DemoArea align="stretch">
           <div className="separator-example">
             <Text elementType="p" className="mz-text-body-md">Group A</Text>
             <Separator />
             <Text elementType="p" className="mz-text-body-md">Group B</Text>
           </div>
         </DemoArea>,
-        variants: <DemoArea>
+        variants: <DemoArea align="stretch">
           <div className="separator-example separator-example-row">
             <Text className="mz-text-body-md">Item A</Text>
             <Separator orientation="vertical" />

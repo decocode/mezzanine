@@ -7,12 +7,12 @@ export default function GridListPage() {
     <ContentPage
       content={gridListContent}
       parts={{
-        example: <DemoArea>
+        example: <DemoArea align="stretch">
           <GridList aria-label={gridListExampleLabels.stack} selectionMode="multiple" defaultSelectedKeys={[gridListExampleLabels.items[0]]}>
             {gridListExampleLabels.items.map((item) => <GridListItem key={item} id={item}>{item}</GridListItem>)}
           </GridList>
         </DemoArea>,
-        variants: <DemoArea>
+        variants: <DemoArea align="stretch">
           <GridList aria-label={gridListExampleLabels.grid} layout="grid" selectionMode="single">
             {gridListExampleLabels.items.map((item) => <GridListItem key={item} id={item}>{item}</GridListItem>)}
           </GridList>

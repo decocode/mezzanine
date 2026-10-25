@@ -26,7 +26,7 @@ export function FillingTheBoxExample() {
     <CssNotes name="shrinking to fit" note={fillingTheBoxCssNotes.imageFit} showCode={false} />
     <ExampleHeading>Fill a shape</ExampleHeading>
     <ExampleText>The same wide picture in a square box. Each setting fills the square a different way.</ExampleText>
-    <DemoArea codeView={fillingTheBoxCssNotes.objectFit.code} endPanel={<PanelPicker label="object-fit" options={objectFitOptions} value={objectFit} onChange={setObjectFit} />}>
+    <DemoArea align="stretch" codeView={fillingTheBoxCssNotes.objectFit.code} endPanel={<PanelPicker label="object-fit" options={objectFitOptions} value={objectFit} onChange={setObjectFit} />}>
       <div className="lab-object-fit-holder">
         <img src={exampleImage} alt={examplePictureAlt} width={480} height={240} className="lab-object-fit" style={{ '--lab-object-fit': objectFit } as CSSProperties} />
       </div>

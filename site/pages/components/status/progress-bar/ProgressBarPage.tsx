@@ -7,8 +7,8 @@ export default function ProgressBarPage() {
     <ContentPage
       content={progressBarContent}
       parts={{
-        example: <DemoArea><ProgressBar label="Progress A" value={60} /></DemoArea>,
-        variants: <DemoArea><ProgressBar label="Progress B" isIndeterminate /></DemoArea>,
+        example: <DemoArea align="stretch"><ProgressBar label="Progress A" value={60} /></DemoArea>,
+        variants: <DemoArea align="stretch"><ProgressBar label="Progress B" isIndeterminate /></DemoArea>,
       }}
     />
   )

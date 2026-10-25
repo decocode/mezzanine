@@ -8,7 +8,7 @@ export default function TabsPage() {
       content={tabsContent}
       parts={{
         example: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <Tabs defaultSelectedKey="a">
               <TabList aria-label="Example sections">
                 <Tab id="a">Tab A</Tab>
@@ -24,7 +24,7 @@ export default function TabsPage() {
           </DemoArea>
         ),
         verticalTabs: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <Tabs orientation="vertical" keyboardActivation="manual" defaultSelectedKey="a">
               <TabList aria-label="Vertical example sections">
                 <Tab id="a">Tab A</Tab>

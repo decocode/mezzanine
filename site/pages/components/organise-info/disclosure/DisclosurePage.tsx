@@ -10,7 +10,7 @@ export default function DisclosurePage() {
       content={disclosureContent}
       parts={{
         example: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <Disclosure defaultExpanded>
               <DisclosureHeader>Disclosure A</DisclosureHeader>
               <DisclosurePanel>
@@ -27,7 +27,7 @@ export default function DisclosurePage() {
             <span>{disclosureGroupReactAriaLink.label}</span>
             <ExternalLinkIcon />
           </Link>
-          <DemoArea>
+          <DemoArea align="stretch">
             <DisclosureGroup defaultExpandedKeys={['disclosure-a']}>
               <Disclosure id="disclosure-a">
                 <DisclosureHeader>Disclosure A</DisclosureHeader>

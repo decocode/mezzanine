@@ -76,7 +76,7 @@ export default function ToggleButtonPage() {
             <span>{documentationLink.label}</span>
             <ExternalLinkIcon />
           </Link>
-          <DemoArea>
+          <DemoArea align="stretch">
             <Tabs defaultSelectedKey="single">
               <TabList aria-label="Selection mode">
                 <Tab id="single">Single</Tab>

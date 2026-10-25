@@ -8,7 +8,7 @@ export default function FooterPage() {
       content={footerContent}
       parts={{
         example: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <Footer className="footer-example">
               <p>{labels.smallPrint}</p>
               <nav aria-label={labels.linksLabel}>

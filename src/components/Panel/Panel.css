@@ -97,16 +97,17 @@
 /* A Panel named only by aria-label keeps its close button at the end. */
 .mz-panel-header > .mz-button:only-child { margin-inline-start: auto; }
 
+/* The heading is styled like the navigation's section headers, so it reads as a group heading. */
 .mz-panel-header .mz-heading {
   flex: 1 1 auto;
   min-inline-size: 0;
   margin: 0;
-  color: var(--panel-header-foreground, currentColor);
+  color: var(--panel-header-foreground, var(--color-accent));
   font-family: var(--font-family-body);
-  font-size: var(--font-size-label-lg);
+  font-size: var(--font-size-label-md);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-lg);
+  line-height: var(--line-height-label-md);
   text-transform: var(--text-transform-label);
 }
 

@@ -12,7 +12,7 @@
   color: var(--color-text);
 }
 
-/* The bar keeps the same layout on every demo: Preview and Code tabs at the start, tools at the end. */
+/* The bar keeps the same layout on every demo: Demo and Code tabs at the start, tools at the end. */
 .mz-demo-area-bar {
   display: flex;
   flex-wrap: wrap;
@@ -50,9 +50,34 @@
   flex: 999 1 0;
   /* The narrowest the preview gets beside the end panel; below it, the panel wraps underneath. */
   min-inline-size: min(100%, var(--demo-area-content-min-width, var(--width-md)));
-  padding: var(--demo-area-padding, var(--space-4));
+  /* More space below than above, so the demo doesn't look cramped against the area's bottom edge. */
+  padding: var(--demo-area-padding, var(--space-4) var(--space-4) var(--space-8));
   background-color: var(--demo-area-preview-background, var(--color-page));
   color: var(--color-text);
+}
+
+/* Where the demo sits, as CSS's align-items words: center puts it in the middle both ways, stretch
+   fills the width, and start keeps it at its own size at the start. */
+.mz-demo-area-content[data-align] {
+  display: flex;
+  flex-direction: column;
+}
+
+.mz-demo-area-content[data-align='center'] {
+  align-items: center;
+  justify-content: center;
+}
+
+.mz-demo-area-content[data-align='stretch'] {
+  align-items: stretch;
+}
+
+.mz-demo-area-content[data-align='start'] {
+  align-items: start;
+}
+
+.mz-demo-area-content[data-align] > * {
+  max-inline-size: 100%;
 }
 
 .mz-demo-area-content > :is(p, ul, ol):first-child {
@@ -65,35 +90,38 @@
 
 .mz-demo-area-end-panel {
   display: flex;
-  flex: 1 1 var(--demo-area-end-panel-width, var(--width-xs));
+  flex: 1 1 var(--demo-area-end-panel-width, var(--width-sm));
   flex-direction: column;
   align-items: start;
   gap: var(--demo-area-end-panel-gap, var(--space-gap-control));
-  min-inline-size: 0;
+  /* The panel never gets narrower than its width: without room for that beside the preview, it wraps
+     underneath at full width instead of squashing its controls. */
+  min-inline-size: min(100% - 2 * var(--demo-area-end-panel-offset, var(--surface-gap)), var(--demo-area-end-panel-width, var(--width-sm)));
   /* Like the site's Panels: a card set in by the surface gap, with a header row, then content, both
      starting at the area padding. */
   margin: var(--demo-area-end-panel-offset, var(--surface-gap));
   padding: var(--space-2) var(--space-padding-area) var(--space-4);
   border: var(--demo-area-end-panel-border-width, var(--border-width-hairline)) solid var(--demo-area-border, var(--color-border));
   border-radius: var(--demo-area-end-panel-border-radius, min(var(--radius-surface), var(--radius-sm)));
-  background: var(--demo-area-end-panel-background, var(--elevation-flat-surface));
+  background: var(--demo-area-end-panel-background, var(--color-surface));
 }
 
 .mz-demo-area-end-panel > * {
   max-inline-size: 100%;
 }
 
-/* The panel's label is a header row, like a Panel's heading. */
+/* The panel's label is a header row, styled like the navigation's section headers, so it reads as a
+   group heading rather than one more field label. */
 .mz-demo-area-end-panel-label {
   display: flex;
   align-items: center;
   min-block-size: var(--target-size-xs);
-  color: var(--demo-area-end-panel-label-foreground, var(--color-text));
+  color: var(--demo-area-end-panel-label-foreground, var(--color-accent));
   font-family: var(--font-family-body);
-  font-size: var(--font-size-label-lg);
+  font-size: var(--font-size-label-md);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
-  line-height: var(--line-height-label-lg);
+  line-height: var(--line-height-label-md);
   text-transform: var(--text-transform-label);
 }
 

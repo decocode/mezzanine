@@ -9,7 +9,7 @@ export default function BreadcrumbsPage() {
       content={breadcrumbsContent}
       parts={{
         example: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <div className="breadcrumbs-examples">
               <div className="mz-prose">
                 <h3 className="mz-text-heading-sm">{breadcrumbsExamples.hierarchy.title}</h3>

@@ -10,7 +10,7 @@ export default function SizeAndScalingPage() {
       content={sizeAndScalingContent}
       parts={{
         fluidText: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <p className="mz-text-display-md">{fluidTextExample.display}</p>
             <p className="mz-text-heading-lg">{fluidTextExample.heading}</p>
             <p className="mz-text-body-md">{fluidTextExample.body}</p>

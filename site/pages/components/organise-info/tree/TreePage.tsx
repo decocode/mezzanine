@@ -7,7 +7,7 @@ export default function TreePage() {
     <ContentPage
       content={treeContent}
       parts={{
-        example: <DemoArea>
+        example: <DemoArea align="stretch">
           <Tree aria-label={treeExampleLabels.label} selectionMode="single" selectionBehavior="replace" defaultExpandedKeys={[treeExampleLabels.branches[0].title]}>
             {treeExampleLabels.branches.map((branch) => (
               <TreeItem key={branch.title} id={branch.title} title={branch.title}>

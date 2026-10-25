@@ -8,7 +8,7 @@ import { sizingTheBoxCssNotes } from './sizingTheBoxContent'
 export function SizingTheBoxExample() {
   return <>
     <ExampleText>Both boxes are given the same width. The first ends up wider, because its padding and border are added on top.</ExampleText>
-    <DemoArea codeView={sizingTheBoxCssNotes.boxSizing.code}>
+    <DemoArea align="stretch" codeView={sizingTheBoxCssNotes.boxSizing.code}>
       <Stack>
         <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">box-sizing: content-box</Text><div className="lab-sizing-box lab-sizing-content-box mz-text-body-sm">12rem of content, plus padding and border</div></div>
         <div className="lab-labelled"><Text elementType="p" className="mz-text-label-md">box-sizing: border-box</Text><div className="lab-sizing-box lab-sizing-border-box mz-text-body-sm">12rem in total</div></div>

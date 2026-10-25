@@ -38,7 +38,7 @@ export default function SemanticHtmlPage() {
           </div>
         ),
         lists: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <ul className="mz-text-body-md">
               <li>{listExample.items[0]}</li>
               <li>{listExample.items[1]}
@@ -48,25 +48,25 @@ export default function SemanticHtmlPage() {
           </DemoArea>
         ),
         descriptionLists: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <dl className="mz-text-body-md">
               {semanticExamples.terms.map(({ term, description }) => <div key={term}><dt>{term}</dt><dd>{description}</dd></div>)}
             </dl>
           </DemoArea>
         ),
         inlineEmphasis: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <p className="mz-text-body-md">A sentence with <strong>strong text</strong>, <em>emphasised text</em> and <mark>marked text</mark>.</p>
           </DemoArea>
         ),
         quotes: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <blockquote className="mz-text-body-md"><p>{semanticExamples.quotation}</p></blockquote>
             <p className="mz-text-body-md">A sentence with <q>{semanticExamples.inlineQuotation}</q> inside it.</p>
           </DemoArea>
         ),
         inlineCode: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <p className="mz-text-body-md">The <code>--space-4</code> token stores <code>1rem</code> by default.</p>
           </DemoArea>
         ),

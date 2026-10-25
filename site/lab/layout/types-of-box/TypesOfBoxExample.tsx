@@ -16,7 +16,7 @@ export function TypesOfBoxExample() {
   const [display, setDisplay] = useState<(typeof displayOptions)[number]['value']>('inline')
   return <>
     <ExampleText>Three boxes in a row of text. Block boxes stack, inline and inline-block boxes line up, and none makes them disappear.</ExampleText>
-    <DemoArea codeView={typesOfBoxCssNotes.normalFlow.code} endPanel={<PanelPicker label="display" options={displayOptions} value={display} onChange={setDisplay} />}>
+    <DemoArea align="stretch" codeView={typesOfBoxCssNotes.normalFlow.code} endPanel={<PanelPicker label="display" options={displayOptions} value={display} onChange={setDisplay} />}>
       <Text elementType="p" className="mz-text-body-md" style={{ '--lab-flow-display': display } as CSSProperties}>
         Here is a sentence with <span className="lab-flow-item">Item A</span> inside it, then <span className="lab-flow-item">Item B</span>, and finally <span className="lab-flow-item">Item C</span> near the end of the line.
       </Text>

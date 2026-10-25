@@ -12,7 +12,7 @@ export default function TopBarPage() {
       content={topBarContent}
       parts={{
         example: (
-          <DemoArea className="top-bar-example">
+          <DemoArea align="stretch" className="top-bar-example">
             <RouterProvider navigate={(href) => setDestination(decodeURIComponent(href.slice(1)))}>
               <TopBar aria-label="Example navigation"
                 brand={<Link href="#Home%20link" aria-label="Example home"><span aria-hidden="true" className="site-logo" /></Link>}

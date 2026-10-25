@@ -18,7 +18,7 @@ const fractionOptions: readonly { label: string; value: RatioPairFraction }[] = 
 export function RatioPairExample() {
   const [fraction, setFraction] = useState<RatioPairFraction>('1/3')
   return <>
-    <DemoArea className="ratio-pair-demo" codeView={ratioPairCssNotes.ratioPair.code} endPanel={<PanelPicker label="Fraction" options={fractionOptions} value={fraction} onChange={setFraction} />}>
+    <DemoArea align="stretch" className="ratio-pair-demo" codeView={ratioPairCssNotes.ratioPair.code} endPanel={<PanelPicker label="Fraction" options={fractionOptions} value={fraction} onChange={setFraction} />}>
       <div className="ratio-pair-frame">
         <div className="mz-ratio-pair" data-fraction={fraction} style={{ '--ratio-pair-gap': 'var(--space-3)' } as CSSProperties}>
           <div className="ratio-pair-area mz-text-body-sm">First area</div>

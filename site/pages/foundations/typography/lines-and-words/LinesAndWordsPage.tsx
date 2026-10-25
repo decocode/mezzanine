@@ -11,7 +11,7 @@ export default function LinesAndWordsPage() {
       parts={{
         lineLength: <CodeBlock className="docs-code-block" language="css">{readingWidthCode}</CodeBlock>,
         longWords: (
-          <DemoArea className="text-narrow-example">
+          <DemoArea align="stretch" className="text-narrow-example">
             <Card><p lang="de">{textLongWordsExample}</p></Card>
           </DemoArea>
         ),

@@ -8,13 +8,18 @@ import { ToggleButton, ToggleButtonGroup } from '../ToggleButton/ToggleButton'
 import { LayoutIcon, MoonIcon, SunIcon } from '../../icons/Icons'
 import { getPageTheme, getServerPageTheme, isDemoTheme, subscribeToPageTheme, type DemoTheme } from './demoAreaLogic'
 
+// Where the demo sits in its area, in CSS's alignment words: in the middle, stretched to fill the
+// width, or at the start at its own size.
+export type DemoAreaAlign = 'center' | 'stretch' | 'start'
+
 export interface DemoAreaProps {
   // The live demo.
   children: ReactNode
-  // The demo's source. With it, the bar offers Preview and Code tabs.
+  // The demo's source. With it, the bar offers Demo and Code tabs.
   codeView?: string
   // Controls for the component in the demo, in an area at the end of the preview.
   endPanel?: ReactNode
+  align?: DemoAreaAlign
   className?: string
 }
 
@@ -24,10 +29,10 @@ const themeOptions: { id: DemoTheme; label: string; icon: ReactNode }[] = [
   { id: 'wireframe', label: 'Wireframe theme', icon: <LayoutIcon /> },
 ]
 
-// A framed area that shows a live demo of components. Its bar holds Preview and Code tabs when there
+// A framed area that shows a live demo of components. Its bar holds Demo and Code tabs when there
 // is code to show, and a theme picker that changes only this demo; a heading above it names the demo. React Aria has
 // no matching component, so Mezzanine composes it from Tabs, ToggleButtonGroup and CodeBlock.
-export function DemoArea({ children, codeView, endPanel, className }: DemoAreaProps) {
+export function DemoArea({ children, codeView, endPanel, align = 'center', className }: DemoAreaProps) {
   const pageTheme = useSyncExternalStore(subscribeToPageTheme, getPageTheme, getServerPageTheme)
   // Until someone picks a theme, the demo follows the page's.
   const [chosenTheme, setChosenTheme] = useState<DemoTheme | null>(null)
@@ -39,7 +44,7 @@ export function DemoArea({ children, codeView, endPanel, className }: DemoAreaPr
     <div className="mz-demo-area-bar">
       {codeView != null && (
         <TabList aria-label="Demo view">
-          <Tab id="preview">Preview</Tab>
+          <Tab id="preview">Demo</Tab>
           <Tab id="code">Code</Tab>
         </TabList>
       )}
@@ -69,7 +74,7 @@ export function DemoArea({ children, codeView, endPanel, className }: DemoAreaPr
   const theme = chosenTheme ?? undefined
   const preview = (
     <div className="mz-demo-area-preview">
-      <div className="mz-demo-area-content" data-theme={theme} ref={setPreviewElement}>
+      <div className="mz-demo-area-content" data-align={align} data-theme={theme} ref={setPreviewElement}>
         <UNSAFE_PortalProvider getContainer={() => previewElement}>{children}</UNSAFE_PortalProvider>
       </div>
       {endPanel != null && (

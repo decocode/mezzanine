@@ -14,7 +14,7 @@ export default function GlobalAndLanguagesPage() {
       content={globalAndLanguagesContent}
       parts={{
         startAndEnd: (
-          <DemoArea codeView={startAndEndCode} endPanel={<Checkbox isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</Checkbox>}>
+          <DemoArea align="stretch" codeView={startAndEndCode} endPanel={<Checkbox isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</Checkbox>}>
             <div dir={isRightToLeft ? 'rtl' : 'ltr'} className="mz-ratio-pair text-direction-example" data-fraction="1/2">
               <div>
                 <p className="mz-text-label-md">{startAndEndExample.physicalLabel}</p>
@@ -28,7 +28,7 @@ export default function GlobalAndLanguagesPage() {
           </DemoArea>
         ),
         rightToLeft: (
-          <DemoArea codeView={rightToLeftCode}>
+          <DemoArea align="stretch" codeView={rightToLeftCode}>
             <ul className="text-language-examples">
               {readingDirectionRightToLeftExamples.map(({ language, lang, text }) => <li key={lang} dir="rtl" lang={lang}>
                 <Card>
@@ -40,7 +40,7 @@ export default function GlobalAndLanguagesPage() {
           </DemoArea>
         ),
         topToBottom: (
-          <DemoArea codeView={topToBottomCode}>
+          <DemoArea align="stretch" codeView={topToBottomCode}>
             <ul className="text-language-examples">
               {readingDirectionVerticalExamples.map(({ language, lang, text }) => <li key={lang}>
                 <Card>

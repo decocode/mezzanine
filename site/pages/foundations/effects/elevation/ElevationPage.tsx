@@ -14,7 +14,7 @@ export default function ElevationPage() {
       content={elevationContent}
       parts={{
         levels: (
-          <DemoArea>
+          <DemoArea align="stretch">
             <ol className="elevation-levels">
               {elevationDefinitions.map(({ token, label }) => (
                 <li key={token} className="elevation-level" style={{ '--_elevation-shadow': `var(${token})`, '--_elevation-surface': `var(${token}-surface)` } as CSSProperties}>

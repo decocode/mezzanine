@@ -26,7 +26,7 @@ export default function TableOfContentsPage() {
       content={tableOfContentsContent}
       parts={{
         example: (<>
-          <DemoArea>
+          <DemoArea align="stretch">
             <div className="table-of-contents-example mz-prose">
               <TableOfContents
                 heading="Example contents"

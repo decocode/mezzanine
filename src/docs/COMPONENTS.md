@@ -295,6 +295,25 @@ Put the visible label inside `SwitchButton`, and the `SwitchButton` inside
 React Aria 1.22 deprecated its one-part `Switch`, so Mezzanine doesn't export
 it. The APIs follow [React Aria Switch](https://react-aria.adobe.com/Switch).
 
+## Notice
+
+`Notice` is a short note that stands out from the text around it. Pass the
+note as children, a paragraph or a short list, and an optional `title`, a
+decorative `icon` and `actions`, such as a Button or a Link. `purpose` is one
+of `neutral` (the default), `info`, `success`, `warning` and `danger`, or the
+brand purposes `accent` and `signature`. The title and icon take the purpose's
+color; say the purpose in words too, such as in the title. Notice has the `note`
+role: it's part of the page, and doesn't announce itself as an alert does.
+
+Notice adds no icon of its own. A suggested pairing: `InfoIcon` for info,
+`CheckCircleIcon` for success, `WarningIcon` for warning, `ErrorIcon` for
+danger, `InfoIcon` or none for neutral, and `PlaceholderIcon` for accent and
+signature.
+
+```tsx
+<Notice purpose="info" title="Notice title">Notice A content.</Notice>
+```
+
 ## Footer
 
 `Footer` is a page's closing strip: put small print and links inside, and it
@@ -327,7 +346,9 @@ Both draw their own field, following React Aria's starter: pass a `label`, an
 optional `description` and `errorMessage`, and `ListBoxItem`s as children (or
 `items` with a render function). `Select` shows a trigger with the chosen option
 and a chevron; `ComboBox` is a text field with a chevron button, filtering its
-options as people type. Their lists open in a `Popover` as wide as the field.
+options as people type. Their lists open in a `Popover` as wide as the field. `Select`'s
+`hierarchy` sets how much its chevron area stands out: `primary` fills it with
+the accent color, and `secondary`, the default, keeps it quiet.
 
 ```tsx
 <Select label="Select A" defaultSelectedKey="a">
@@ -408,11 +429,12 @@ layout it sits in. With `orientation="vertical"` it stands upright in a row.
 ## DemoArea
 
 `DemoArea` frames a live demo, such as on a documentation page. Every demo has
-the same bar: a theme picker that changes only this demo, and Preview and Code
+the same bar: a theme picker that changes only this demo, and Demo and Code
 tabs when you pass its source as `codeView`. Put a heading above it to name the demo. Pass
 controls for the component as `endPanel`; they sit under a "Properties" label at
 the end of the preview, or below it when there isn't room. The demo's pop-ups render inside it, so they
-take its theme.
+take its theme. `align` sets where the demo sits: `center`, the default,
+`stretch` for demos that fill the width, such as tables and code, or `start`.
 
 ```tsx
 <DemoArea endPanel={<SwitchField><SwitchButton>Disable</SwitchButton></SwitchField>}>

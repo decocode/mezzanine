@@ -18,7 +18,7 @@ export function WidthDemo({ label, code, controls, width = '100%', canOverflow =
   children: ReactNode
 }) {
   return (
-    <DemoArea className={className} codeView={code} endPanel={controls}>
+    <DemoArea align="stretch" className={className} codeView={code} endPanel={controls}>
       <div
         className="width-frame"
         style={{ '--_frame-width': width } as CSSProperties}

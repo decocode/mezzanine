@@ -16,7 +16,7 @@ export default function SpacingAndRhythmPage() {
       content={content}
       parts={{
         example: (
-          <DemoArea codeView={textSpacingCode}>
+          <DemoArea align="stretch" codeView={textSpacingCode}>
             <div className="mz-prose">
               <h2>{textSpacingExample.headingLarge}</h2>
               <p className="mz-text-body-md">{textSpacingExample.intro}</p>

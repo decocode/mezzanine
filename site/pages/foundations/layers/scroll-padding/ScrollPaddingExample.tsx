@@ -10,7 +10,7 @@ export function ScrollPaddingExample() {
   const jump = (index: number) => box.current?.querySelector<HTMLElement>(`[data-section="${index}"]`)?.scrollIntoView({ block: 'start', inline: 'nearest' })
   return <>
     <ExampleText>Without scroll padding, a heading you jump to lands hidden under the sticky header. With it, the heading lands just below. Mezzanine’s docs site hard-codes a 4rem offset today, which can be wrong when text is enlarged.</ExampleText>
-    <DemoArea codeView={scrollPaddingCssNotes.scrollPadding.code} endPanel={<>
+    <DemoArea align="stretch" codeView={scrollPaddingCssNotes.scrollPadding.code} endPanel={<>
       <Checkbox isSelected={padded} onChange={setPadded}>Use scroll padding</Checkbox>
       <div className="layers-controls">
         {[2, 3, 4].map((index) => <Button key={index} size="sm" hierarchy="secondary" onPress={() => jump(index)}>Jump to section {index}</Button>)}

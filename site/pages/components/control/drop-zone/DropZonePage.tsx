@@ -18,5 +18,5 @@ function DropZoneExample() {
 }
 
 export default function DropZonePage() {
-  return <ContentPage content={dropZoneContent} parts={{ example: <DemoArea><DropZoneExample /></DemoArea> }} />
+  return <ContentPage content={dropZoneContent} parts={{ example: <DemoArea align="stretch"><DropZoneExample /></DemoArea> }} />
 }

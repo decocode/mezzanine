@@ -10,7 +10,7 @@ export function AnchorPositioningExample() {
   return <>
     <ExampleText>CSS places one element next to another anywhere on the page, and falls back to another position when there’s no room. It now works in every major browser. Mezzanine’s tooltips and menus use React Aria’s positioning, though, so adopting this would be a deliberate change for you to approve.</ExampleText>
     <FeatureStatus supported={anchors} />
-    <DemoArea codeView={anchorPositioningCssNotes.anchor.code}>
+    <DemoArea align="stretch" codeView={anchorPositioningCssNotes.anchor.code}>
       <div className="lab-anchor-stage">
         <Button className="lab-anchor-target">Button A</Button>
         <div className="example-item lab-anchor-label mz-text-label-sm">Positioned beside the anchor by CSS alone</div>
