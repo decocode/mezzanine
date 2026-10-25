@@ -1,5 +1,6 @@
-/* The Lab's Text spacing page. Illustrative and unapproved: the candidate role is scoped to this page
-   and isn't a library token. */
+/* The Lab's Text spacing page. Illustrative and unapproved: the candidate values are scoped to this
+   page and aren't library tokens. In the library they'd be --space-gap-text, --space-gap-paragraph and
+   --space-before-heading-sm, -md and -lg, and the prose class would be mz-prose. */
 .lab-text-spacing-pair {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--width-sm)), 1fr));
@@ -10,18 +11,72 @@
 .lab-text-spacing-pair > * {
   display: grid;
   gap: var(--space-2);
+  min-inline-size: 0;
 }
 
 .lab-text-spacing-pair > * > * {
   margin: 0;
 }
 
-/* The candidate: text that belongs together, the name, the title and the description, sits closer. */
 .lab-text-spacing-candidate {
   --lab-space-gap-text: var(--space-2);
+  --lab-space-gap-paragraph: var(--space-4);
+  --lab-space-before-heading-sm: var(--space-6);
+  --lab-space-before-heading-md: var(--space-8);
+  --lab-space-before-heading-lg: var(--space-12);
 }
 
+/* A Dialog shown in place, on a surface like a Modal's. */
+.lab-text-spacing-surface {
+  border: var(--border-width-baseline) solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--elevation-raised-1-surface);
+}
+
+/* Running content without the class gets the browser's own margins, as in an app today. revert undoes
+   the Lab page's own reset. */
+.lab-text-spacing-today > div:not([class]) > * {
+  margin-block: revert;
+}
+
+/* Running content. Every gap comes from the relationship between neighbours: paragraphs and lists sit
+   a paragraph gap apart, a heading sits further from what comes before it, and closest to what it
+   introduces. The first and last elements add no space outside the container. */
+.lab-prose > * {
+  margin-block: 0;
+}
+
+.lab-prose > * + * {
+  margin-block-start: var(--lab-space-gap-paragraph);
+}
+
+.lab-prose > * + :is(h4, h5, h6) {
+  margin-block-start: var(--lab-space-before-heading-sm);
+}
+
+.lab-prose > * + h3 {
+  margin-block-start: var(--lab-space-before-heading-md);
+}
+
+.lab-prose > * + h2 {
+  margin-block-start: var(--lab-space-before-heading-lg);
+}
+
+.lab-prose > :is(h2, h3, h4, h5, h6) + * {
+  margin-block-start: var(--lab-space-gap-text);
+}
+
+/* Card: a name, a title and a description that belong together sit closer. */
 .lab-text-spacing-candidate .mz-card > .mz-avatar + .mz-card-title,
 .lab-text-spacing-candidate .mz-card > .mz-card-title + * {
   margin-block-start: var(--lab-space-gap-text);
+}
+
+/* Dialog: the title sits close to its text, and the actions are one group gap below. */
+.lab-text-spacing-candidate .mz-dialog .mz-heading[slot='title'] {
+  margin-block-end: var(--lab-space-gap-text);
+}
+
+.lab-text-spacing-candidate .mz-dialog > p {
+  margin-block-end: 0;
 }
