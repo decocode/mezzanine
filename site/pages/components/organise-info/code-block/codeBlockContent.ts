@@ -8,7 +8,7 @@ export const codeBlockContent: DocsPageContent = {
   description: 'A code block shows several lines of code, such as an example or a set of instructions, on its own dark surface. It keeps the code’s line breaks and indentation, and long lines scroll sideways rather than breaking in the middle of a word.',
   sections: [
     { key: 'example', intro: ['`CodeBlock` renders the code you pass as its children in a monospace font, on a dark surface in every theme. Its copy button, in a strip above the code, copies the code to the clipboard.'] },
-    { key: 'language', title: 'Syntax highlighting', intro: ['`language` colours the code’s keywords, strings, comments and other parts, using the syntax colour roles each theme sets. The languages are `bash`, `css`, `html`, `javascript`, `json`, `jsx`, `tsx` and `typescript`. The highlighter loads only when a page first shows highlighted code, so pages without it download nothing extra. Inside Wireframe, the block stays dark but the code is monochrome.'] },
+    { key: 'language', title: 'Syntax highlighting', intro: ['`language` colours the code’s keywords, strings, comments and other parts, using the syntax colour roles each theme sets. The languages are `bash`, `css`, `html`, `javascript`, `json`, `jsx`, `tsx` and `typescript`. Inside Wireframe, the block stays dark but the code is monochrome.', '[Shiki](https://shiki.style/) is the open-source syntax highlighter used by Mezzanine, which loads only when a page contains a highlighted Code block.'] },
     { key: 'title', title: 'Title', intro: ['`title` adds a heading to the strip, such as a file name. It also names the code for screen readers.'] },
     { key: 'lineNumbers', title: 'Line numbers', intro: ['`showLineNumbers` numbers each line. `startLine` sets the first number, for an excerpt from further down a file.'] },
     { key: 'markedLines', title: 'Marked lines', intro: ['`highlightedLines`, `addedLines` and `removedLines` mark lines by their number. Added lines show +, and removed lines show −, so the meaning doesn’t rely on colour.'] },
@@ -66,6 +66,7 @@ export const codeBlockContent: DocsPageContent = {
   references: [
     { label: 'MDN: HTML pre element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre' },
     { label: 'MDN: HTML code element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code' },
+    { label: 'Shiki: syntax highlighter', href: 'https://shiki.style/' },
   ],
 }
 
