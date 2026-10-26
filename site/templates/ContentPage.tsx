@@ -80,7 +80,7 @@ export function ContentPage({ content, parts: givenParts = {}, showContents }: C
       showContents={showContents}
       relatedPages={content.relatedPages}
       references={content.references}
-      lead={lead}
+      lead={lead === undefined ? undefined : { id: sectionId(content.id, 'demo'), title: `${content.title} example`, content: lead }}
       sections={[
         ...(content.sections ?? []).filter((section) => section !== exampleSection || lead === undefined || hasCopy(section)).map(toSection),
         ...(technicalDetails.length ? [{ id: sectionId(content.id, 'technicalDetails'), title: technicalDetailsTitle, sections: technicalDetails }] : []),

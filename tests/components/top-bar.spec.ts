@@ -79,7 +79,7 @@ for (const theme of themes) {
 
 // Checks that on a wide screen the TopBar shows its links directly instead of a menu button, and
 // that links keep a visible focus outline in high-contrast mode.
-test('desktop navigation and showcase actions remain accessible', async ({ page }) => {
+test('desktop navigation and top bar actions remain accessible', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 1000 })
   await page.goto('/top-bar')
   const example = page.locator('main .mz-top-bar')

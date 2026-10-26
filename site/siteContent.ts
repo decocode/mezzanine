@@ -5,8 +5,8 @@ export const siteContent = {
   // The docs navigation Panel: its visible heading, its navigation landmark and its tree.
   docsNavigation: {
     title: 'Documentation',
-    label: 'Mezzanine sections',
-    treeLabel: 'Mezzanine documentation',
+    label: 'Documentation pages',
+    treeLabel: 'Index',
   },
   // The page's own sections, in the end Panel on wide screens.
   docsContents: {

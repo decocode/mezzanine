@@ -31,6 +31,6 @@ interface DocsNavigationProps {
   navigationLabel?: string
 }
 
-export function DocsNavigation({ currentPage, 'aria-label': label = 'Mezzanine sections', navigationLabel = 'Mezzanine documentation' }: DocsNavigationProps) {
+export function DocsNavigation({ currentPage, 'aria-label': label = 'Documentation pages', navigationLabel = 'Index' }: DocsNavigationProps) {
   return <NavigationPanel aria-label={label} navigationLabel={navigationLabel} items={docsNavigationItems} selectedRoute={currentPage.path} searchSections={[docsSearchSection]} />
 }

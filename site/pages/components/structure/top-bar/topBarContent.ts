@@ -5,7 +5,7 @@ export const topBarContent: DocsPageContent = {
   id: 'top-bar',
   kind: 'component',
   title: 'Top bar',
-  description: 'A top bar runs across the top of a website and helps people find its main pages. It can include a logo, links and buttons; on smaller screens, the links appear inside a menu and the buttons stay in the bar.',
+  description: '`TopBar` is a component that runs across the top of a page, often holding a logo, links, menus or buttons.',
   sections: [
     { key: 'example', body: ['Home link, Link A and Link B change the current link in this example without navigating away. Button demonstrates an action. Reduce the available width to reveal the mobile menu.'] },
   ],

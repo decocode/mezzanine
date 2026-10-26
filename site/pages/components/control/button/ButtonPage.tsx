@@ -1,5 +1,5 @@
 import {
-  Button, Cell, Column, DemoArea, DownloadIcon, ListBoxItem, Row, Select, Separator, Table, TableBody, TableHeader, type ButtonHierarchy,
+  Button, Cell, Column, DemoArea, DownloadIcon, ListBoxItem, Notice, Row, Select, Separator, Table, TableBody, TableHeader, type ButtonHierarchy,
   type ButtonSize,
 } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
@@ -10,6 +10,7 @@ import {
   buttonExampleCopy,
   buttonExampleLabel,
   buttonFlags,
+  buttonLinkNotice,
   buttonIconPositions,
   buttonLabelPositions,
   buttonTooltipPositions,
@@ -17,6 +18,7 @@ import {
   buttonStates,
   buttonHierarchies,
 } from './buttonContent'
+import { RichText } from '../../../../components/RichText'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function ButtonPage() {
@@ -108,6 +110,11 @@ export default function ButtonPage() {
                 : <Button {...props} icon={flags.icon ? <DownloadIcon /> : undefined} iconPosition={iconPosition === 'trailing' ? 'trailing' : 'leading'} onPress={handlePress}>{buttonExampleLabel}</Button>}
             <p className="component-example-feedback" role="status">{buttonExampleCopy.pressCount} {pressCount}</p>
           </DemoArea>
+        ),
+        about: (
+          <Notice purpose="info" title={buttonLinkNotice.title}>
+            <p><RichText text={buttonLinkNotice.body} /></p>
+          </Notice>
         ),
         states: (
           <div className="documentation-table">

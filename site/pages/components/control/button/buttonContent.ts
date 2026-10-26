@@ -50,13 +50,13 @@ export const buttonContent: DocsPageContent = {
   id: 'button',
   kind: 'component',
   title: 'Button',
-  description: '`Button` is a component that triggers an action.',
+  description: '`Button` is a component that triggers an action when pressed.',
   sections: [
     {
-      key: 'usingAButton',
-      title: 'Using a Button',
+      key: 'about',
+      title: 'About Button',
       body: [
-        'Pressing a button runs its `onPress` handler. The button label should tell people exactly what will happen when they press it. For example, `destructive` buttons identify actions that delete or remove something. Give a Button an `href` and it becomes a link. The default style is a medium-sized primary text-only button.',
+        '`Button` is a component that triggers an action. Its default style is a medium-sized primary text-only button. Pressing a button runs its `onPress` handler. The button label should tell people exactly what will happen when they press it. For example, `destructive` buttons identify actions that delete or remove something.',
       ],
     },
     { key: 'example' },
@@ -142,3 +142,9 @@ export const buttonTooltipPositions = ['top', 'bottom', 'start', 'end'] as const
 export function buttonExampleCode({ icon, ...props }: Record<string, unknown>) {
   return `<Button${icon ? ' icon={<DownloadIcon />}' : ''}${formatJsxProps(props)} onPress={handlePress}>${buttonExampleLabel}</Button>`
 }
+
+// The info Notice in About Button, on how a Button with an href renders.
+export const buttonLinkNotice = {
+  title: 'Link buttons',
+  body: 'The `Button` component renders an HTML `<button>` element. However, if the component is given an `href`, it instead renders as an HTML link, an `<a>` element, styled to look like a button. This is so that browsers, keyboards and screen readers treat it as what it is: a link that takes you somewhere else, rather than a button that performs an action.',
+} as const

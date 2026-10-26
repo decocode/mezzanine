@@ -11,7 +11,7 @@ export const footerContent: DocsPageContent = {
   id: 'footer',
   kind: 'component',
   title: 'Footer',
-  description: 'A footer is the closing strip of a page, holding small print and links, such as company details, a privacy notice and terms.',
+  description: '`Footer` is the closing strip of a page, holding small print, links or business address.',
   sections: [
     { key: 'example', intro: ['Small print and three links. On a narrow screen, they wrap onto new rows.'] },
   ],

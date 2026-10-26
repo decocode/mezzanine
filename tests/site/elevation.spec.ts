@@ -24,19 +24,19 @@ for (const fontSize of [16, 32]) {
         const style = getComputedStyle(element)
         return element.clientWidth - parseFloat(style.paddingInlineStart) - parseFloat(style.paddingInlineEnd)
       })
-      const panelShowing = await page.getByRole('complementary').getByRole('treegrid', { name: 'Mezzanine documentation' }).isVisible()
+      const panelShowing = await page.getByRole('complementary').getByRole('treegrid', { name: 'Index' }).isVisible()
       if (barWidth < 32 * fontSize || !panelShowing) {
         await expect(browse).toBeVisible()
         await browse.focus()
         await page.keyboard.press('Enter')
         await expect(browse).toHaveAttribute('aria-expanded', 'true')
-        await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Mezzanine documentation' })).toBeVisible()
+        await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Index' })).toBeVisible()
         await page.keyboard.press('Enter')
         await expect(browse).toHaveAttribute('aria-expanded', 'false')
         await expect(browse).toBeFocused()
       } else {
         await expect(browse).toBeHidden()
-        await expect(page.getByRole('treegrid', { name: 'Mezzanine documentation' })).toBeVisible()
+        await expect(page.getByRole('treegrid', { name: 'Index' })).toBeVisible()
       }
     })
   }

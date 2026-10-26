@@ -5,7 +5,7 @@ import { CodeBlock } from '../CodeBlock/CodeBlock'
 import { Tabs } from 'react-aria-components/Tabs'
 import { Tab, TabList, TabPanel } from '../Tabs/Tabs'
 import { ToggleButton, ToggleButtonGroup } from '../ToggleButton/ToggleButton'
-import { LayoutIcon, MoonIcon, SunIcon } from '../../icons/Icons'
+import { LayoutIcon, MoonIcon, PanelRightCloseIcon, PanelRightOpenIcon, SunIcon } from '../../icons/Icons'
 import { getPageTheme, getServerPageTheme, isDemoTheme, subscribeToPageTheme, type DemoTheme } from './demoAreaLogic'
 
 // Where the demo sits in its area, in CSS's alignment words: in the middle, stretched to fill the
@@ -30,7 +30,8 @@ const themeOptions: { id: DemoTheme; label: string; icon: ReactNode }[] = [
 ]
 
 // A framed area that shows a live demo of components. Its bar holds Demo and Code tabs when there
-// is code to show, and a theme picker that changes only this demo; a heading above it names the demo. React Aria has
+// is code to show, a theme picker that changes only this demo, and, with an end panel, a toggle that
+// shows or hides it; a heading above it names the demo. React Aria has
 // no matching component, so Mezzanine composes it from Tabs, ToggleButtonGroup and CodeBlock.
 export function DemoArea({ children, codeView, endPanel, align = 'center', className }: DemoAreaProps) {
   const pageTheme = useSyncExternalStore(subscribeToPageTheme, getPageTheme, getServerPageTheme)
@@ -38,6 +39,8 @@ export function DemoArea({ children, codeView, endPanel, align = 'center', class
   const [chosenTheme, setChosenTheme] = useState<DemoTheme | null>(null)
   const [previewElement, setPreviewElement] = useState<HTMLDivElement | null>(null)
   const propertiesLabelId = useId()
+  // The end panel starts open on every page; closing it isn't remembered.
+  const [isEndPanelOpen, setIsEndPanelOpen] = useState(true)
 
   // The tabs sit at the start of the bar, the theme picker at the end.
   const bar = (
@@ -65,6 +68,19 @@ export function DemoArea({ children, codeView, endPanel, align = 'center', class
             <ToggleButton key={option.id} id={option.id} icon={option.icon} iconPosition="iconOnly">{option.label}</ToggleButton>
           ))}
         </ToggleButtonGroup>
+        {endPanel != null && (
+          <ToggleButton
+            size="sm"
+            hierarchy="secondary"
+            // The panel sits at the end, so the icon shows it closing while open, and opening while closed.
+            icon={isEndPanelOpen ? <PanelRightCloseIcon /> : <PanelRightOpenIcon />}
+            iconPosition="iconOnly"
+            isSelected={isEndPanelOpen}
+            onChange={setIsEndPanelOpen}
+          >
+            Properties
+          </ToggleButton>
+        )}
       </div>
     </div>
   )
@@ -78,7 +94,7 @@ export function DemoArea({ children, codeView, endPanel, align = 'center', class
         <UNSAFE_PortalProvider getContainer={() => previewElement}>{children}</UNSAFE_PortalProvider>
       </div>
       {endPanel != null && (
-        <div className="mz-demo-area-end-panel" role="group" aria-labelledby={propertiesLabelId}>
+        <div className="mz-demo-area-end-panel" role="group" aria-labelledby={propertiesLabelId} hidden={!isEndPanelOpen}>
           <span className="mz-demo-area-end-panel-label" id={propertiesLabelId}>Properties</span>
           <div className="mz-demo-area-end-panel-scroll">
             <div className="mz-demo-area-end-panel-controls">{endPanel}</div>

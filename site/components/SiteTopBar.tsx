@@ -24,7 +24,7 @@ export function SiteTopBar({
   const labCurrent = currentPath === '/site/lab' ? 'page' : currentPath.startsWith('/site/lab/') ? true : undefined
 
   return (
-    <TopBar aria-label="Showcase navigation" actions={<ThemeSwitcher onThemeChange={onThemeChange} selectedTheme={selectedTheme} />} brand={(
+    <TopBar aria-label="Primary" actions={<ThemeSwitcher onThemeChange={onThemeChange} selectedTheme={selectedTheme} />} brand={(
       <Link
         aria-current={currentPath === '/' ? 'page' : undefined}
         aria-label="Mezzanine home"

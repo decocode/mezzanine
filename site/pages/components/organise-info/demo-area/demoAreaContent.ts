@@ -18,10 +18,10 @@ export const demoAreaContent: DocsPageContent = {
         className: 'documentation-anatomy-table',
         rows: [
           { name: 'DemoArea', description: 'The frame around the demo.' },
-          { name: 'Bar', description: 'Demo and Code tabs at the start when `codeView` is given, and the theme picker at the end.' },
+          { name: 'Bar', description: 'Demo and Code tabs at the start when `codeView` is given, and the theme picker at the end, followed by a Properties toggle when `endPanel` is given.' },
           { name: 'Theme picker', description: 'Light, Dark and Wireframe. It starts on the page’s theme and changes only this demo, pop-ups included.' },
           { name: 'Demo', description: 'The live components, on the theme’s page colour.' },
-          { name: 'End panel', description: 'Optional, from `endPanel`: controls for the component. It is labelled “Properties”, and screen readers announce it by that name.' },
+          { name: 'End panel', description: 'Optional, from `endPanel`: controls for the component. It is labelled “Properties”, and screen readers announce it by that name. It starts open, and the bar’s Properties toggle hides or shows it.' },
           { name: 'Code', description: 'Optional, from `codeView`: the demo’s source in a CodeBlock.' },
         ],
       },

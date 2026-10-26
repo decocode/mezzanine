@@ -187,7 +187,8 @@ for (const fontSize of [16, 32]) {
     const description = await main.locator('.page-description').boundingBox()
     const contentsBox = await contents.boundingBox()
     expect(contentsBox!.y).toBeGreaterThan(description!.y + description!.height)
-    expect(contentsBox!.y).toBeLessThan((await main.locator('section.component-section').first().boundingBox())!.y)
+    // On this page sits after the component's demo and before the other sections.
+    expect(contentsBox!.y).toBeLessThan((await main.locator('section.component-section:not(.docs-page-lead)').first().boundingBox())!.y)
     await page.screenshot({ path: `reports/test-results/docs-contents-${fontSize}.png` })
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
     await contents.getByRole('link', { name: 'Props', exact: true }).click()

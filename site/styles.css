@@ -23,7 +23,7 @@ html {
 }
 
 #root {
-  container: showcase / inline-size;
+  container: site / inline-size;
 }
 
 body {
@@ -96,7 +96,7 @@ body {
   display: none;
 }
 
-@container showcase (min-width: 48rem) {
+@container site (min-width: 48rem) {
   .site-name-text {
     display: inline;
   }
@@ -795,7 +795,7 @@ body {
 }
 
 /* Keep the compact navigation until the layout fits at the current text size. */
-@container showcase (min-width: 48rem) {
+@container site (min-width: 48rem) {
   .site-content {
     width: 100%;
     /* Modest side padding, so the page's demos keep most of the width. */
@@ -818,11 +818,6 @@ body {
 
 .page-heading-group {
   max-width: var(--page-heading-max-width);
-  margin-bottom: var(--space-16);
-}
-
-/* A component page's demo, straight after its title and description, spaced like a page section. */
-.docs-page-lead {
   margin-bottom: var(--space-16);
 }
 

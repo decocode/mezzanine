@@ -106,8 +106,8 @@ test('Tooltip documentation example supports hover and keyboard focus at narrow 
     await page.getByRole('main').locator('.mz-demo-area').first().evaluate(element => element.scrollIntoView({ block: 'start' }))
     // Let scroll-triggered overlay dismissal finish before focusing the example.
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
-    // Start from the demo's theme picker, then Tab into the actual example.
-    await page.locator('.docs-page-lead [role="radio"][aria-checked="true"]').first().evaluate(element => (element as HTMLElement).focus({ preventScroll: true }))
+    // Start from the demo bar's Properties toggle, its last control, then Tab into the actual example.
+    await page.locator('.docs-page-lead .mz-demo-area-bar').getByRole('button', { name: 'Properties', exact: true }).evaluate(element => (element as HTMLElement).focus({ preventScroll: true }))
     await page.keyboard.press('Tab')
     await expect(button).toBeFocused()
     await expect(tooltip).toBeVisible()

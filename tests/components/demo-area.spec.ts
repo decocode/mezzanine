@@ -51,3 +51,22 @@ test('a demo theme changes only that demo and its pop-ups', async ({ page }) => 
   // It may open above or below, depending on the room.
   expect(Math.min(Math.abs(menu.y - (trigger.y + trigger.height)), Math.abs(menu.y + menu.height - trigger.y))).toBeLessThan(40)
 })
+
+// Checks that the bar's Properties toggle starts pressed with the panel open, closes the panel and lets
+// the demo take the full width, and opens it again.
+test('the Properties toggle hides and shows the end panel', async ({ page }) => {
+  await page.goto('/button')
+  const demo = page.locator('.docs-page-lead .mz-demo-area')
+  const toggle = demo.getByRole('button', { name: 'Properties', exact: true })
+  const panel = demo.getByRole('group', { name: 'Properties', exact: true })
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true')
+  await expect(panel).toBeVisible()
+  await toggle.click()
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false')
+  await expect(panel).toBeHidden()
+  const content = (await demo.locator('.mz-demo-area-content').boundingBox())!
+  const area = (await demo.boundingBox())!
+  expect(area.width - content.width).toBeLessThan(4)
+  await toggle.click()
+  await expect(panel).toBeVisible()
+})

@@ -6,7 +6,7 @@ export const panelContent: DocsPageContent = {
   id: 'panel',
   kind: 'component',
   title: 'Panel',
-  description: 'A Panel is an area at the start, end or bottom of an AppShell that shares the space with the main content. It is open or closed, with an optional minimised version, and a PanelTrigger placed anywhere in the AppShell opens and closes it.',
+  description: '`Panel` is a component that shares the space with the main content, at its start, end or bottom.',
   sections: [
     { key: 'example', intro: ['The same AppShell as on the [AppShell](/app-shell) page: Panels A, B and C, each with its own PanelTrigger in the header.'] },
   ],

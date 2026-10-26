@@ -10,7 +10,7 @@ test('mobile navigation opens from the TopBar menu and retains expanded groups',
   const browse = page.getByRole('banner').getByRole('button', { name: /^(Menu|Close menu)$/ })
   await browse.focus()
   await page.keyboard.press('Enter')
-  const tree = page.getByRole('treegrid', { name: 'Mezzanine documentation' })
+  const tree = page.getByRole('treegrid', { name: 'Index' })
   await expect(tree).toBeVisible()
   const input = tree.getByRole('button', { name: 'Input', exact: true })
   await input.click()
@@ -35,7 +35,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
     await wordmark.hover()
     await expect(wordmark).toHaveCSS('color', neutralText)
     await expect(wordmark).toHaveCSS('text-decoration-line', 'none')
-    const docsLink = page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Docs', exact: true })
+    const docsLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Docs', exact: true })
     await expect(docsLink).toHaveAttribute('aria-current', 'true')
     // The current section's link has a soft tint, with its indicator bar along the bottom inside it.
     expect(await docsLink.evaluate(element => {
@@ -52,8 +52,8 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await menu.click()
       await expect(docsLink).toBeVisible()
       await expect(page.getByRole('banner').getByRole('radiogroup', { name: 'Theme', exact: true })).toBeVisible()
-      await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Mezzanine documentation' })).toBeVisible()
-      await expect(page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Home', exact: true })).toHaveCount(0)
+      await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Index' })).toBeVisible()
+      await expect(page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Home', exact: true })).toHaveCount(0)
       // The menu reads Docs, then Search, then the docs tree, then Lab.
       await page.keyboard.press('Tab')
       await expect(docsLink).toBeFocused()
@@ -63,7 +63,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       await page.keyboard.press('Tab')
       expect(await page.evaluate(() => document.activeElement?.closest('header [role="treegrid"]') != null)).toBe(true)
       await page.keyboard.press('Tab')
-      const labLink = page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Lab', exact: true })
+      const labLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Lab', exact: true })
       await expect(labLink).toBeFocused()
       await expect(labLink).toHaveAttribute('href', '/site/lab')
       expect(await labLink.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('solid')
@@ -83,7 +83,7 @@ test('site TopBar leaves Docs inactive on the landing page and unknown routes', 
   for (const path of ['/', '/not-a-page']) {
     await page.goto(path)
     await page.evaluate(() => document.documentElement.dataset.theme = 'wireframe')
-    const docsLink = page.getByRole('navigation', { name: 'Showcase navigation', exact: true }).getByRole('link', { name: 'Docs', exact: true })
+    const docsLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Docs', exact: true })
     await expect(docsLink).not.toHaveAttribute('aria-current')
     const homeLink = page.getByRole('link', { name: 'Mezzanine home', exact: true })
     await expect(homeLink).toHaveAttribute('href', '/')

@@ -119,6 +119,11 @@
   overflow: auto;
 }
 
+/* Closed from the bar's Properties toggle, the panel leaves the demo the full width. */
+.mz-demo-area-end-panel[hidden] {
+  display: none;
+}
+
 /* The controls sit in a grid of columns at least xs wide: one column beside the preview, and as many
    as fit when the panel moves below it. */
 .mz-demo-area-end-panel-controls {
