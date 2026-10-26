@@ -178,6 +178,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         pages: [
           { id: 'button', label: 'Button', path: '/button', status: 'implemented' },
           { id: 'toggle-button', label: 'Toggle button', path: '/toggle-button', status: 'implemented' },
+          { id: 'toggle-button-group', label: 'Toggle button group', path: '/toggle-button-group', status: 'implemented' },
           { id: 'slider', label: 'Slider', path: '/slider', status: 'implemented' },
           { id: 'switch', label: 'Switch', path: '/switch', status: 'implemented' },
           { id: 'checkbox', label: 'Checkbox', path: '/checkbox', status: 'implemented' },

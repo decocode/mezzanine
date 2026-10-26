@@ -1,24 +1,18 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 
-// Column headings for the Sizes table; its rows come from Button's sizes.
-export const toggleButtonSizesTable = {
-  label: 'ToggleButton sizes',
-  columns: { size: 'Size', text: 'Text', icon: 'Icon buttons, label in a tooltip' },
-}
+// The Properties panels' choices. A default choice is left out of the code. The icon's position needs
+// an icon, and the label's position only applies to an icon on its own.
+export const toggleButtonExample = { label: 'Toggle' } as const
+export const toggleButtonHierarchies = ['primary', 'secondary', 'tertiary'] as const
+export const toggleButtonIconPositions = ['leading', 'trailing', 'only'] as const
+export const toggleButtonLabelPositions = ['tooltip', 'top', 'bottom'] as const
+export const toggleButtonTooltipPositions = ['top', 'bottom', 'start', 'end'] as const
+export const toggleButtonFlags = ['icon', 'defaultSelected', 'isDisabled'] as const
 
-// Headings and row labels for the States table; each row shows live buttons.
-export const toggleButtonStatesTable = {
-  label: 'ToggleButton states',
-  columns: { state: 'State', primary: 'Primary', secondary: 'Secondary', tertiary: 'Tertiary' },
-  rows: { unselected: 'Unselected', selected: 'Selected', disabled: 'Disabled' },
-}
-
-// The documentation link and tab panel text in the Toggle button group example.
-export const toggleButtonGroupExample = {
-  documentationLink: { label: 'View ToggleButtonGroup on React Aria', href: 'https://react-aria.adobe.com/ToggleButtonGroup' },
-  singleSelectionInstruction: 'Choose one option; selecting another replaces the current selection.',
-  multipleSelectionInstruction: 'Choose any number of options; press a selected option again to clear it.',
+export function toggleButtonExampleCode({ icon, ...props }: Record<string, unknown>) {
+  return `<ToggleButton${icon ? ' icon={<BulbIcon />}' : ''}${formatJsxProps(props)}>${toggleButtonExample.label}</ToggleButton>`
 }
 
 export const toggleButtonContent: DocsPageContent = {
@@ -29,14 +23,7 @@ export const toggleButtonContent: DocsPageContent = {
   sections: [
     {
       key: 'example',
-      intro: ['Press the `ToggleButton` to select it, then press it again to clear the selection.'],
-    },
-    { key: 'sizes', title: 'Sizes' },
-    { key: 'states' },
-    {
-      key: 'toggleButtonGroup',
-      title: 'Toggle button group',
-      intro: ['A `ToggleButtonGroup` brings related `ToggleButton` components together and supports either single or multiple selection.'],
+      intro: ['A `ToggleButton` stays selected after a press, and a second press clears it.'],
     },
   ],
   technicalDetails: [
@@ -48,24 +35,22 @@ export const toggleButtonContent: DocsPageContent = {
         className: 'documentation-anatomy-table',
         rows: [
           { name: 'ToggleButton', description: 'A button with a selected state and an accessible pressed state.' },
-          { name: 'ToggleButtonGroup', description: 'Optionally coordinates single or multiple selection among buttons identified by id.' },
         ],
       },
     },
     {
       key: 'usage',
       body: [
-        "Mezzanine's `size` appearance prop supports `xs`, `sm`, `md`, `lg` and `xl`, using the same size tokens as Button. Both default to `md`. Set a group size on ToggleButtonGroup or an individual size on ToggleButton. Use `iconLeading` or `iconTrailing` without children for a square icon-only button, with an accessible name and Tooltip. These appearance props extend React Aria without changing selection or keyboard behaviour.",
+        "Mezzanine's `size` appearance prop supports `xs`, `sm`, `md`, `lg` and `xl`, using the same size tokens as Button. Both default to `md`. A ToggleButton inside a ToggleButtonGroup takes the group’s size unless it sets its own. These appearance props extend React Aria without changing selection or keyboard behaviour.",
         'For an independent toggle, use `defaultSelected` for initial state or `isSelected` with `onChange` for controlled state.',
-        'For a group, supply an accessible label and stable button `id` values. Choose `selectionMode="single"` or `selectionMode="multiple"`; use `defaultSelectedKeys` or controlled `selectedKeys` with `onSelectionChange`. Set `disallowEmptySelection` when a selection must remain.',
-        'Set `hierarchy="secondary"` on a ToggleButtonGroup or an individual ToggleButton, or `hierarchy="tertiary"` on an individual ToggleButton for one with no outline, whose selection shows as a soft fill. This Mezzanine appearance extension preserves React Aria behaviour. The group applies the appearance to its children. Unselected buttons use standard secondary Button colours; selected buttons keep an inset line and a soft fill. Hover deepens the fill, and pressing a selected button strengthens the bottom line. Omitting the variant preserves the existing appearance. Disabled selection stays visible, and forced-colour mode underlines selected labels.',
+        'Set `hierarchy="secondary"` or `hierarchy="tertiary"` on a ToggleButton. Tertiary has no outline, and its selection shows as a soft fill. The default is `primary`. This Mezzanine appearance extension preserves React Aria behaviour. Unselected buttons use standard secondary Button colours; selected buttons keep an inset line and a soft fill. Hover deepens the fill, and pressing a selected button strengthens the bottom line. Omitting the variant preserves the existing appearance. Disabled selection stays visible, and forced-colour mode underlines selected labels.',
       ],
     },
     {
       key: 'accessibility',
       body: [
-        'Use a stable label. For an icon button, `labelPlacement` shows it in a tooltip, below the icon or above it, and it stays the accessible name. The selected state is communicated separately from the name.',
-        'Enter or Space activates a focused toggle. Within a group, arrow keys move between buttons according to its orientation. Disabled buttons cannot be activated.',
+        'Use a stable label. For an icon button, with `iconPosition="only"`, `labelPosition` shows it in a tooltip, the default, or at the top or bottom of the icon, and it stays the accessible name. The selected state is communicated separately from the name.',
+        'Enter or Space activates a focused toggle. Disabled buttons cannot be activated.',
       ],
     },
     {
@@ -76,18 +61,18 @@ export const toggleButtonContent: DocsPageContent = {
         label: 'Toggle button pointers',
         nameColumn: 'Pointer',
         descriptionColumn: 'Falls back to',
-        rows: pointerRows('ToggleButton'),
+        rows: pointerRows('ToggleButton').filter((row) => !row.name.startsWith('--toggle-button-group')),
       },
     },
   ],
   relatedPages: [
     { label: 'Button', href: '/button' },
+    { label: 'Toggle button group', href: '/toggle-button-group' },
     { label: 'Checkbox', href: '/checkbox' },
     { label: 'Radio group', href: '/radio-group' },
     { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
     { label: 'React Aria ToggleButton', href: 'https://react-aria.adobe.com/ToggleButton' },
-    { label: 'React Aria ToggleButtonGroup', href: 'https://react-aria.adobe.com/ToggleButtonGroup' },
   ],
 }

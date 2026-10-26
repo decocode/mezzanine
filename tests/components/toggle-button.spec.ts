@@ -1,33 +1,42 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// Checks, in each theme, that secondary toggle buttons look different when hovered, pressed and
-// selected, switch with the mouse and Space, pass an accessibility scan and fit a phone screen at
-// double text size.
+// Chooses an option in one of the Example's Properties panel Selects.
+async function choose(page: Page, label: string, option: string) {
+  const panel = page.locator('main .mz-demo-area').first().locator('.mz-demo-area-end-panel')
+  await panel.getByRole('button', { name: new RegExp(label) }).click()
+  await page.getByRole('option', { name: option, exact: true }).click()
+}
+
+const exampleToggle = (page: Page) => page.locator('main .mz-demo-area').first().locator('.mz-demo-area-content .mz-toggle-button')
+
+// Checks, in each theme, that a secondary toggle button in the Example looks different when hovered,
+// pressed and selected, switches with the mouse and Space, can be disabled, passes an accessibility
+// scan and fits a phone screen at double text size.
 for (const theme of themes) {
   test(`secondary toggles distinguish interaction and selection in ${theme}`, async ({ page }) => {
     await page.goto('/toggle-button')
     await setTheme(page, theme)
-    const example = page.getByRole('grid', { name: 'ToggleButton states', exact: true })
-    const toggles = example.locator('[data-variant="secondary"]')
-    const selected = toggles.nth(1)
-    const unselected = toggles.nth(0)
-    await expect(selected).toHaveAttribute('aria-pressed', 'true')
-    await expect(toggles.nth(2)).toBeDisabled()
-    await expect(selected).not.toHaveCSS('box-shadow', 'none')
-    await unselected.hover()
-    const hover = await unselected.evaluate(el => getComputedStyle(el).backgroundColor)
+    await choose(page, 'hierarchy', 'secondary')
+    const toggle = exampleToggle(page)
+    await expect(toggle).toHaveAttribute('data-variant', 'secondary')
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false')
+    await toggle.hover()
+    const hover = await toggle.evaluate(el => getComputedStyle(el).backgroundColor)
     await page.mouse.down()
-    await expect(unselected).toHaveAttribute('data-pressed')
-    await expect(unselected).not.toHaveCSS('background-color', hover)
+    await expect(toggle).toHaveAttribute('data-pressed')
+    await expect(toggle).not.toHaveCSS('background-color', hover)
     await page.mouse.up()
-    await expect(unselected).toHaveAttribute('aria-pressed', 'true')
-    await unselected.press('Space')
-    await expect(unselected).toHaveAttribute('aria-pressed', 'false')
-    await expect(unselected).toHaveCSS('outline-style', 'solid')
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true')
+    await expect(toggle).not.toHaveCSS('box-shadow', 'none')
+    await toggle.press('Space')
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false')
+    await expect(toggle).toHaveCSS('outline-style', 'solid')
     await page.mouse.move(0, 0)
-    await expectNoAccessibilityViolations(page, '.toggle-button-states-table')
+    await expectNoAccessibilityViolations(page, 'main')
+    await page.locator('main .mz-demo-area-end-panel').first().locator('label', { hasText: 'isDisabled' }).click()
+    await expect(exampleToggle(page)).toBeDisabled()
     await page.setViewportSize({ width: 320, height: 900 })
     await setTextSize(page, 32)
     await expectNoPageOverflow(page)
@@ -39,63 +48,9 @@ for (const theme of themes) {
 test('secondary selection remains visible in forced colours', async ({ page }) => {
   await page.emulateMedia({ forcedColors: 'active' })
   await page.goto('/toggle-button')
-  const selected = page.getByRole('grid', { name: 'ToggleButton states', exact: true }).locator('[data-variant="secondary"]').nth(1)
-  await expect(selected).toHaveCSS('text-decoration-line', 'underline')
-})
-
-// Checks that the states table keeps four equal columns and, on a phone, scrolls inside its own
-// box rather than squashing the buttons or widening the page.
-test('state comparison keeps four readable columns and scrolls locally on narrow screens', async ({ page }) => {
-  await page.goto('/toggle-button')
-  const table = page.getByRole('grid', { name: 'ToggleButton states', exact: true })
-  await expect(table.getByRole('columnheader')).toHaveText(['State', 'Primary', 'Secondary', 'Tertiary'])
-  const widths = await table.getByRole('columnheader').evaluateAll(headers => headers.map(header => header.getBoundingClientRect().width))
-  expect(Math.max(...widths) - Math.min(...widths)).toBeLessThan(2)
-  for (const fontSize of textSizes) {
-    await page.setViewportSize({ width: 320, height: 900 })
-    await setTextSize(page, fontSize)
-    const secondary = table.locator('[data-variant="secondary"]').first()
-    const box = await secondary.boundingBox()
-    expect(box!.width).toBeGreaterThan(box!.height)
-    await expectNoPageOverflow(page)
-    expect(await page.locator('.toggle-button-states-table').evaluate(el => el.scrollWidth > el.clientWidth)).toBe(true)
-  }
-})
-
-// Checks that a single-selection group can be moved through with the arrow keys and selected with Space.
-test('single-selection group keeps keyboard selection', async ({ page }) => {
-  await page.goto('/toggle-button')
-  const panel = page.getByRole('tabpanel')
-  const first = panel.getByRole('radio', { name: 'Toggle A' })
-  const second = panel.getByRole('radio', { name: 'Toggle B' })
-  await first.focus()
-  await page.keyboard.press('ArrowRight')
-  await expect(second).toBeFocused()
-  await page.keyboard.press('Space')
-  await expect(second).toBeChecked()
-  await expect(first).not.toBeChecked()
-})
-
-// Checks the group example's Single and Multi tabs: Single allows one choice, Multi allows several,
-// and each tab remembers its choices when you switch back.
-test('group example tabs switch selection modes and preserve choices', async ({ page }) => {
-  await page.goto('/toggle-button')
-  const single = page.getByRole('tab', { name: 'Single', exact: true })
-  const multi = page.getByRole('tab', { name: 'Multi', exact: true })
-  const panel = page.getByRole('tabpanel')
-  await expect(single).toHaveAttribute('aria-selected', 'true')
-  await panel.getByRole('radio', { name: 'Toggle B' }).click()
-  await single.focus()
-  await page.keyboard.press('ArrowRight')
-  await expect(multi).toBeFocused()
-  await expect(multi).toHaveAttribute('aria-selected', 'true')
-  await panel.getByRole('button', { name: 'Toggle B' }).click()
-  await expect(panel.getByRole('button', { name: 'Toggle A' })).toHaveAttribute('aria-pressed', 'true')
-  await expect(panel.getByRole('button', { name: 'Toggle B' })).toHaveAttribute('aria-pressed', 'true')
-  await single.click()
-  await expect(panel.getByRole('radio', { name: 'Toggle B' })).toBeChecked()
-  await multi.click()
-  await expect(panel.getByRole('button', { name: 'Toggle B' })).toHaveAttribute('aria-pressed', 'true')
+  await choose(page, 'hierarchy', 'secondary')
+  await exampleToggle(page).click()
+  await expect(exampleToggle(page)).toHaveCSS('text-decoration-line', 'underline')
 })
 
 // Checks, at normal and double text size, that Button and ToggleButton are exactly the same size at
@@ -115,7 +70,21 @@ for (const fontSize of textSizes) {
       }))
     }
     const buttons = await dimensions('/button', 'Button sizes')
-    const toggles = await dimensions('/toggle-button', 'ToggleButton sizes')
+    // The Example shows an icon-only toggle at each size in turn.
+    await page.goto('/toggle-button')
+    await setTextSize(page, fontSize)
+    await page.locator('main .mz-demo-area-end-panel').first().locator('label', { hasText: /^icon$/ }).click()
+    await choose(page, 'iconPosition', 'only')
+    const toggles = []
+    for (const size of ['xs', 'sm', 'md', 'lg', 'xl']) {
+      await choose(page, 'size', size)
+      toggles.push(await exampleToggle(page).evaluate(button => {
+        const style = getComputedStyle(button)
+        const icon = button.querySelector('svg')!
+        return { size: button.getAttribute('data-size'), width: style.width, height: style.height,
+          padding: style.padding, fontSize: style.fontSize, iconWidth: getComputedStyle(icon).width }
+      }))
+    }
     expect(toggles).toEqual(buttons)
     expect(buttons.map(button => button.size)).toEqual(['xs', 'sm', 'md', 'lg', 'xl'])
     expect(buttons.map(button => parseFloat(button.iconWidth))).toEqual([1, 1.25, 1.5, 1.75, 2].map(size => size * fontSize))

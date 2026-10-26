@@ -1,106 +1,93 @@
+import { useState } from 'react'
+import { BulbIcon, Checkbox, DemoArea, ListBoxItem, Select, Separator, ToggleButton, type ButtonSize } from '@decocode/mezzanine'
+import { buttonSizes } from '../button/buttonContent'
 import {
-  Cell, Column, DemoArea, DownloadIcon, ExternalLinkIcon, Link, Row, Tab, Table, TableBody, TableHeader, TabList, TabPanel, Tabs, ToggleButton, ToggleButtonGroup,
-} from '@decocode/mezzanine'
-import { buttonSizes, buttonContent } from '../button/buttonContent'
-import { toggleButtonContent, toggleButtonGroupExample, toggleButtonSizesTable, toggleButtonStatesTable } from './toggleButtonContent'
+  toggleButtonContent, toggleButtonExample, toggleButtonExampleCode, toggleButtonFlags, toggleButtonHierarchies, toggleButtonIconPositions,
+  toggleButtonLabelPositions, toggleButtonTooltipPositions,
+} from './toggleButtonContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function ToggleButtonPage() {
-  const { columns: sizeColumns } = toggleButtonSizesTable
-  const { columns: stateColumns, rows: stateRows } = toggleButtonStatesTable
-  const { documentationLink } = toggleButtonGroupExample
+  const [hierarchy, setHierarchy] = useState<(typeof toggleButtonHierarchies)[number]>('primary')
+  const [size, setSize] = useState<ButtonSize>('md')
+  const [iconPosition, setIconPosition] = useState<(typeof toggleButtonIconPositions)[number]>('leading')
+  const [labelPosition, setLabelPosition] = useState<(typeof toggleButtonLabelPositions)[number]>('tooltip')
+  const [tooltipPosition, setTooltipPosition] = useState<(typeof toggleButtonTooltipPositions)[number]>('top')
+  const [flags, setFlags] = useState<Record<(typeof toggleButtonFlags)[number], boolean>>({ icon: false, defaultSelected: false, isDisabled: false })
+  const flagCheckbox = (name: (typeof toggleButtonFlags)[number]) => (
+    <Checkbox key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Checkbox>
+  )
+  // iconPosition needs an icon; labelPosition only applies to an icon on its own, and tooltipPosition
+  // to a label in a tooltip.
+  const isIconButton = flags.icon && iconPosition === 'only'
+  const hasTooltip = isIconButton && labelPosition === 'tooltip'
+  const props = {
+    hierarchy: hierarchy === 'primary' ? undefined : hierarchy, size: size === 'md' ? undefined : size,
+    defaultSelected: flags.defaultSelected, isDisabled: flags.isDisabled,
+  }
+  const iconProps = flags.icon ? { iconPosition: iconPosition === 'leading' ? undefined : iconPosition } : {}
+  const labelProps = isIconButton ? { labelPosition: hasTooltip ? undefined : labelPosition } : {}
+  const tooltipProps = hasTooltip ? { tooltipPosition: tooltipPosition === 'top' ? undefined : tooltipPosition } : {}
   return (
     <ContentPage
       content={toggleButtonContent}
       parts={{
+        // The Properties panel has a control for each prop that changes what the toggle looks like or does.
         example: (
-          <DemoArea>
-            <ToggleButton>Toggle</ToggleButton>
-          </DemoArea>
-        ),
-        sizes: (
-          <div className="documentation-table button-sizes-table">
-            <Table aria-label={toggleButtonSizesTable.label}>
-              <TableHeader>
-                <Column id="size" isRowHeader>{sizeColumns.size}</Column>
-                <Column id="text">{sizeColumns.text}</Column>
-                <Column id="icon">{sizeColumns.icon}</Column>
-              </TableHeader>
-              <TableBody>
-                {buttonSizes.map(({ label, size }) => <Row id={size} key={size}>
-                  <Cell>{label}</Cell>
-                  <Cell><ToggleButton size={size}>Toggle</ToggleButton></Cell>
-                  <Cell><ToggleButton size={size} iconLeading={<DownloadIcon />} labelPlacement="tooltip">{buttonContent.iconButtonLabel}</ToggleButton></Cell>
-                </Row>)}
-              </TableBody>
-            </Table>
-          </div>
-        ),
-        states: (
-          <div className="documentation-table toggle-button-states-table">
-            <Table aria-label={toggleButtonStatesTable.label}>
-              <TableHeader>
-                <Column id="state" isRowHeader>{stateColumns.state}</Column>
-                <Column id="primary">{stateColumns.primary}</Column>
-                <Column id="secondary">{stateColumns.secondary}</Column>
-                <Column id="tertiary">{stateColumns.tertiary}</Column>
-              </TableHeader>
-              <TableBody>
-                <Row id="unselected">
-                  <Cell><strong>{stateRows.unselected}</strong></Cell>
-                  <Cell><ToggleButton>Toggle</ToggleButton></Cell>
-                  <Cell><ToggleButton hierarchy="secondary">Toggle</ToggleButton></Cell>
-                  <Cell><ToggleButton hierarchy="tertiary">Toggle</ToggleButton></Cell>
-                </Row>
-                <Row id="selected">
-                  <Cell><strong>{stateRows.selected}</strong></Cell>
-                  <Cell><ToggleButton defaultSelected>Toggle</ToggleButton></Cell>
-                  <Cell><ToggleButton hierarchy="secondary" defaultSelected>Toggle</ToggleButton></Cell>
-                  <Cell><ToggleButton hierarchy="tertiary" defaultSelected>Toggle</ToggleButton></Cell>
-                </Row>
-                <Row id="disabled">
-                  <Cell><strong>{stateRows.disabled}</strong></Cell>
-                  <Cell><ToggleButton isDisabled>Toggle</ToggleButton></Cell>
-                  <Cell><ToggleButton hierarchy="secondary" isDisabled>Toggle</ToggleButton></Cell>
-                  <Cell><ToggleButton hierarchy="tertiary" isDisabled>Toggle</ToggleButton></Cell>
-                </Row>
-              </TableBody>
-            </Table>
-          </div>
-        ),
-        toggleButtonGroup: (<>
-          <Link
-            className="react-aria-documentation-link"
-            href={documentationLink.href}
+          <DemoArea
+            codeView={toggleButtonExampleCode({ icon: flags.icon, ...iconProps, ...labelProps, ...tooltipProps, ...props })}
+            endPanel={<>
+              <Select label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as (typeof toggleButtonHierarchies)[number]) }}>
+                {toggleButtonHierarchies.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
+              </Select>
+              <Select label="size" selectedKey={size} onSelectionChange={(key) => { if (key != null) setSize(key as ButtonSize) }}>
+                {buttonSizes.map((option) => <ListBoxItem key={option.size} id={option.size}>{option.size}</ListBoxItem>)}
+              </Select>
+              <Separator />
+              {flagCheckbox('defaultSelected')}
+              {flagCheckbox('isDisabled')}
+              <Separator />
+              {flagCheckbox('icon')}
+              {/* Each setting appears once it applies: iconPosition with an icon, labelPosition for an icon
+                  on its own, and tooltipPosition for a label in a tooltip. */}
+              {flags.icon && (
+                <Select
+                  className="demo-panel-new-row"
+                  label="iconPosition"
+                  selectedKey={iconPosition}
+                  onSelectionChange={(key) => { if (key != null) setIconPosition(key as (typeof toggleButtonIconPositions)[number]) }}
+                >
+                  {toggleButtonIconPositions.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
+                </Select>
+              )}
+              {isIconButton && (
+                <Select
+                  label="labelPosition"
+                  selectedKey={labelPosition}
+                  onSelectionChange={(key) => { if (key != null) setLabelPosition(key as (typeof toggleButtonLabelPositions)[number]) }}
+                >
+                  {toggleButtonLabelPositions.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
+                </Select>
+              )}
+              {hasTooltip && (
+                <Select
+                  label="tooltipPosition"
+                  selectedKey={tooltipPosition}
+                  onSelectionChange={(key) => { if (key != null) setTooltipPosition(key as (typeof toggleButtonTooltipPositions)[number]) }}
+                >
+                  {toggleButtonTooltipPositions.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
+                </Select>
+              )}
+            </>}
           >
-            <span>{documentationLink.label}</span>
-            <ExternalLinkIcon />
-          </Link>
-          <DemoArea align="stretch">
-            <Tabs defaultSelectedKey="single">
-              <TabList aria-label="Selection mode">
-                <Tab id="single">Single</Tab>
-                <Tab id="multiple">Multi</Tab>
-              </TabList>
-              <TabPanel id="single" shouldForceMount>
-                <p>{toggleButtonGroupExample.singleSelectionInstruction}</p>
-                <ToggleButtonGroup aria-label="Single selection example" defaultSelectedKeys={['toggle-a']} disallowEmptySelection selectionMode="single">
-                  <ToggleButton id="toggle-a">Toggle A</ToggleButton>
-                  <ToggleButton id="toggle-b">Toggle B</ToggleButton>
-                  <ToggleButton id="toggle-c">Toggle C</ToggleButton>
-                </ToggleButtonGroup>
-              </TabPanel>
-              <TabPanel id="multiple" shouldForceMount>
-                <p>{toggleButtonGroupExample.multipleSelectionInstruction}</p>
-                <ToggleButtonGroup aria-label="Multiple selection example" defaultSelectedKeys={['toggle-a']} selectionMode="multiple">
-                  <ToggleButton id="toggle-a">Toggle A</ToggleButton>
-                  <ToggleButton id="toggle-b">Toggle B</ToggleButton>
-                  <ToggleButton id="toggle-c">Toggle C</ToggleButton>
-                </ToggleButtonGroup>
-              </TabPanel>
-            </Tabs>
+            {/* A new key starts the example again, because a default only applies when it first appears. */}
+            {isIconButton && !hasTooltip
+              ? <ToggleButton key={String(flags.defaultSelected)} {...props} icon={<BulbIcon />} iconPosition="only" labelPosition={labelPosition as 'top' | 'bottom'}>{toggleButtonExample.label}</ToggleButton>
+              : isIconButton
+                ? <ToggleButton key={String(flags.defaultSelected)} {...props} icon={<BulbIcon />} iconPosition="only" tooltipPosition={tooltipPosition}>{toggleButtonExample.label}</ToggleButton>
+                : <ToggleButton key={String(flags.defaultSelected)} {...props} icon={flags.icon ? <BulbIcon /> : undefined} iconPosition={iconPosition === 'trailing' ? 'trailing' : 'leading'}>{toggleButtonExample.label}</ToggleButton>}
           </DemoArea>
-        </>),
+        ),
       }}
     />
   )
