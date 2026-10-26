@@ -12,7 +12,7 @@ async function choose(page: Page, label: string, option: string) {
 }
 
 // Checks that the Code block example holds its code in a pre element with a code element inside,
-// keeps its line breaks, and fits a 320px screen at normal and doubled text in every theme without
+// keeps its four lines, and fits a 320px screen at normal and doubled text in every theme without
 // accessibility problems. Long lines scroll inside the block, so the page itself never scrolls sideways.
 for (const theme of themes) {
   test(`Code block examples fit 320px and pass accessibility checks in ${theme}`, async ({ page }) => {
@@ -21,7 +21,7 @@ for (const theme of themes) {
     await setTheme(page, theme)
     const first = exampleBlock(page).locator('pre.mz-code-block-content')
     await expect(first.locator('> code')).toHaveCount(1)
-    expect(await first.evaluate(element => element.textContent?.split('\n').length)).toBe(4)
+    await expect(first.locator('.mz-code-block-line')).toHaveCount(4)
     for (const size of textSizes) {
       await setTextSize(page, size)
       await expectNoPageOverflow(page)
@@ -30,8 +30,8 @@ for (const theme of themes) {
   })
 }
 
-// Checks that the copy button, reached with the keyboard, copies the code's text, then says
-// "Copied" in its name and in a polite status message.
+// Checks that the copy button, reached with the keyboard, copies the code's text without its line
+// numbers, then says "Copied" in its name and in a polite status message.
 test('Code block copy button copies the code', async ({ context, page }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write'])
   await page.goto('/code-block')
@@ -42,7 +42,7 @@ test('Code block copy button copies the code', async ({ context, page }) => {
   await page.keyboard.press('Enter')
   await expect(block.getByRole('button', { name: 'Copied' })).toBeVisible()
   await expect(block.getByRole('status')).toHaveText('Copied')
-  const code = await block.locator('pre > code').textContent()
+  const code = (await block.locator('.mz-code-block-line-text').allTextContents()).join('').replace(/\n$/, '')
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(code)
   await expect(block.getByRole('button', { name: 'Copy code' })).toBeVisible({ timeout: 4000 })
 })
@@ -67,7 +67,6 @@ test('Code block code area takes keyboard focus and is named', async ({ page }) 
 test('Code block line numbers and marked lines', async ({ context, page }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write'])
   await page.goto('/code-block')
-  await toggle(page, 'showLineNumbers')
   await choose(page, 'startLine', '12')
   const numbers = exampleBlock(page).locator('.mz-code-block-line-number')
   await expect(numbers).toHaveText(['12', '13', '14', '15'])
@@ -86,26 +85,31 @@ test('Code block line numbers and marked lines', async ({ context, page }) => {
   expect(copied).not.toMatch(/Removed:|Added:|^\s*\d/)
 })
 
-// Checks that a block with a language colours its code once the highlighter loads: a property and a
-// value each take a syntax role, and the text itself is unchanged. Without a language, it stays plain.
+// Checks that the example, which starts in css, colours its code once the highlighter loads: a value
+// takes a syntax role, and the text itself matches the Code tab's.
 test('Code block highlights code with a language', async ({ page }) => {
   await page.goto('/code-block')
-  const plainText = await exampleBlock(page).locator('pre').textContent()
-  await expect(exampleBlock(page).locator('[data-syntax]')).toHaveCount(0)
-  await choose(page, 'language', 'css')
   const highlighted = exampleBlock(page).locator('pre')
-  await expect(highlighted.locator('[data-syntax]').first()).toBeVisible()
   await expect(highlighted.locator('[data-syntax="constant"]').first()).toBeVisible()
   expect(await highlighted.locator('[data-syntax="constant"]').first().evaluate(element => getComputedStyle(element).color))
     .not.toBe(await highlighted.evaluate(element => getComputedStyle(element).color))
-  expect(await highlighted.textContent()).toBe(plainText)
+  expect(await highlighted.locator('.mz-code-block-line-text').first().textContent()).toBe('.example {\n')
+})
+
+// Checks that DemoArea's Code tab highlights its source too: JSX by default, and CSS where a demo sets
+// codeLanguage.
+test('DemoArea Code tabs highlight their source', async ({ page }) => {
+  for (const path of ['/button', '/dimension/space']) {
+    await page.goto(path)
+    await page.locator('.mz-demo-area').first().getByRole('tab', { name: 'Code' }).click()
+    await expect(page.locator('.mz-demo-area').first().locator('.mz-code-block [data-syntax]').first()).toBeVisible()
+  }
 })
 
 // Checks that the block is dark in every theme, because it applies the Dark theme to itself, and that inside
 // Wireframe its code is monochrome: a value takes the text colour rather than a syntax colour.
 test('Code block is dark in every theme and monochrome in Wireframe', async ({ page }) => {
   await page.goto('/code-block')
-  await choose(page, 'language', 'css')
   const block = exampleBlock(page)
   const value = block.locator('[data-syntax="constant"]').first()
   await expect(value).toBeVisible()
@@ -124,3 +128,25 @@ test('Code block is dark in every theme and monochrome in Wireframe', async ({ p
   expect(backgrounds.size).toBe(1)
 })
 
+
+// Checks that the toolbar's "Wrap lines" toggle sits before the copy button, that the arrow keys move
+// between them, and that turning it on wraps long lines so the code no longer scrolls sideways at 320px.
+test('Code block wrap toggle wraps long lines', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 900 })
+  await page.goto('/code-block')
+  const block = exampleBlock(page)
+  const tools = block.getByRole('toolbar', { name: 'Code tools' })
+  const wrap = tools.getByRole('button', { name: 'Wrap lines' })
+  const code = block.locator('pre')
+  const overflow = () => code.evaluate(element => element.scrollWidth - element.clientWidth)
+  expect(await overflow()).toBeGreaterThan(0)
+  await wrap.focus()
+  await page.keyboard.press('ArrowRight')
+  await expect(tools.getByRole('button', { name: 'Copy code' })).toBeFocused()
+  await page.keyboard.press('ArrowLeft')
+  await page.keyboard.press('Enter')
+  await expect(wrap).toHaveAttribute('aria-pressed', 'true')
+  await expect(code).toHaveCSS('white-space', 'pre-wrap')
+  expect(await overflow()).toBe(0)
+  await expectNoAccessibilityViolations(page, 'main .mz-code-block')
+})

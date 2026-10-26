@@ -1,5 +1,5 @@
-/* A frame holding a strip, with an optional title and the copy button, above the code. Long lines scroll
-   sideways instead of breaking mid-word, so the code area takes keyboard focus and shows the focus ring.
+/* A frame holding a strip, with an optional title and a toolbar of wrap and copy buttons, above the code.
+   Long lines scroll sideways instead of breaking mid-word, unless the wrap toggle is on, so the code area takes keyboard focus and shows the focus ring.
    Indentation and line breaks are kept. The code element takes the shared monospace family from
    Mezzanine's rule for every code element. */
 .mz-code-block {
@@ -33,7 +33,8 @@
   text-transform: var(--text-transform-label);
 }
 
-.mz-code-block-copy {
+.mz-code-block-tools {
+  flex-wrap: nowrap;
   margin-inline-start: auto;
 }
 
@@ -50,6 +51,12 @@
   text-transform: var(--text-transform-body);
 }
 
+/* Wrapped, long lines break onto the next line, at any character if a word is longer than the line. */
+.mz-code-block-content[data-wrap] {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .mz-code-block-content[data-focus-visible] {
   outline: var(--code-block-focus-ring-width, var(--focus-ring-width)) solid var(--code-block-focus-ring-color, var(--color-focus));
   outline-offset: var(--code-block-focus-ring-offset, var(--focus-ring-offset-inset));
@@ -63,6 +70,13 @@
   grid-template-columns: auto auto 1fr;
   inline-size: max-content;
   min-inline-size: 100%;
+}
+
+/* Wrapped, the grid fits the block, and a line's text wraps in its own column, so the number stays beside
+   its first row. */
+.mz-code-block-content[data-wrap] code[data-lines] {
+  grid-template-columns: auto auto minmax(0, 1fr);
+  inline-size: auto;
 }
 
 .mz-code-block-line {

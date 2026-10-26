@@ -8,10 +8,10 @@ import {
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function CodeBlockPage() {
-  const [language, setLanguage] = useState<(typeof codeBlockLanguages)[number] | null>(null)
+  const [language, setLanguage] = useState<(typeof codeBlockLanguages)[number] | null>('css')
   const [startLine, setStartLine] = useState<(typeof codeBlockStartLines)[number]>('1')
   const [flags, setFlags] = useState<Record<(typeof codeBlockFlags)[number], boolean>>({
-    title: false, showLineNumbers: false, highlightedLines: false, addedLines: false, removedLines: false,
+    title: false, showLineNumbers: true, highlightedLines: false, addedLines: false, removedLines: false,
   })
   const { code, ...lines } = codeBlockExample(flags, flags.showLineNumbers ? Number(startLine) : 1)
   const flagSwitch = (name: (typeof codeBlockFlags)[number]) => (

@@ -170,6 +170,11 @@ function OutlineCircle({ cx, cy, r }: { cx: number; cy: number; r: number }) {
   return <circle cx={cx} cy={cy} fill="none" r={r} strokeWidth={iconLineWeight} />
 }
 
+// Lines of text, the middle one turning back under itself, as wrapped lines do.
+export function TextWrapIcon(iconProps: IconProps) {
+  return <StrokeIcon {...iconProps}><Outline d="M3 6h18" /><Outline d="M3 12h15a3 3 0 0 1 0 6h-4" /><Outline d="m16 16-2 2 2 2" /><Outline d="M3 18h7" /></StrokeIcon>
+}
+
 export function TrashIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><Outline d="M3.5 6.5h17" /><Outline d="M9 6.5v-3h6v3" /><Outline d="M5.75 6.5l1 14h10.5l1-14" /><Outline d="M10 10.5v6.5M14 10.5v6.5" /></StrokeIcon>
 }

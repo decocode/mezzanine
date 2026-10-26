@@ -1,6 +1,7 @@
 import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { UNSAFE_PortalProvider } from 'react-aria'
 import { CodeBlock } from '../CodeBlock/CodeBlock'
+import type { CodeBlockLanguage } from '../CodeBlock/codeBlockHighlight'
 // The demo frame has its own look, so its Tabs root is React Aria's, without Mezzanine's class.
 import { Tabs } from 'react-aria-components/Tabs'
 import { Tab, TabList, TabPanel } from '../Tabs/Tabs'
@@ -17,6 +18,8 @@ export interface DemoAreaProps {
   children: ReactNode
   // The demo's source. With it, the bar offers Demo and Code tabs.
   codeView?: string
+  // The language codeView is written in, which sets its highlighting. The default is tsx, for JSX.
+  codeLanguage?: CodeBlockLanguage
   // Controls for the component in the demo, in an area at the end of the preview.
   endPanel?: ReactNode
   align?: DemoAreaAlign
@@ -33,7 +36,7 @@ const themeOptions: { id: DemoTheme; label: string; icon: ReactNode }[] = [
 // is code to show, a theme picker that changes only this demo, and, with an end panel, a toggle that
 // shows or hides it; a heading above it names the demo. React Aria has
 // no matching component, so Mezzanine composes it from Tabs, ToggleButtonGroup and CodeBlock.
-export function DemoArea({ children, codeView, endPanel, align = 'center', className }: DemoAreaProps) {
+export function DemoArea({ children, codeView, codeLanguage = 'tsx', endPanel, align = 'center', className }: DemoAreaProps) {
   const pageTheme = useSyncExternalStore(subscribeToPageTheme, getPageTheme, getServerPageTheme)
   // Until someone picks a theme, the demo follows the page's.
   const [chosenTheme, setChosenTheme] = useState<DemoTheme | null>(null)
@@ -114,7 +117,7 @@ export function DemoArea({ children, codeView, endPanel, align = 'center', class
       {bar}
       <div className="mz-demo-area-body">
         <TabPanel id="preview">{preview}</TabPanel>
-        <TabPanel id="code"><CodeBlock>{codeView}</CodeBlock></TabPanel>
+        <TabPanel id="code"><CodeBlock language={codeLanguage}>{codeView}</CodeBlock></TabPanel>
       </div>
     </Tabs>
   )

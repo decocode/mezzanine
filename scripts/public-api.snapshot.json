@@ -1248,6 +1248,10 @@
     "kind": "type"
   },
   {
+    "name": "TextWrapIcon",
+    "kind": "value"
+  },
+  {
     "name": "ToggleButton",
     "kind": "value"
   },

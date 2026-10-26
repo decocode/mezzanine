@@ -398,9 +398,10 @@ its edge. `Form` lays its fields out one above another, with room between them.
 `CodeBlock` shows code passed as its children, keeping line breaks and
 indentation, on a dark surface in every theme: it applies the Dark theme to
 itself, and inside Wireframe it stays dark but monochrome. Long lines scroll sideways, so the code area takes keyboard focus.
-A strip above the code holds the copy button and an optional `title`, such as a
-file name, which also names the code for screen readers. `showLineNumbers`
-numbers the lines from `startLine`, and `highlightedLines`, `addedLines` and
+A strip above the code holds an optional `title` and a toolbar with a
+"Wrap lines" toggle, which wraps long lines, and the copy button. The `title`, such as a
+file name, also names the code for screen readers. `showLineNumbers`,
+on by default, numbers the lines from `startLine`, and `highlightedLines`, `addedLines` and
 `removedLines` mark lines by number. Line numbers and marked lines need the code
 as a single string. The code always reads left to right.
 
@@ -411,7 +412,7 @@ it and each language load only when a page first shows code in that language,
 and the code shows as plain text until then.
 
 ```tsx
-<CodeBlock title="example.css" language="css" showLineNumbers addedLines={[3]}>{code}</CodeBlock>
+<CodeBlock title="example.css" language="css" addedLines={[3]}>{code}</CodeBlock>
 ```
 
 ## Popover and Menu
@@ -431,7 +432,8 @@ layout it sits in. With `orientation="vertical"` it stands upright in a row.
 
 `DemoArea` frames a live demo, such as on a documentation page. Every demo has
 the same bar: a theme picker that changes only this demo, and Demo and Code
-tabs when you pass its source as `codeView`. Put a heading above it to name the demo. Pass
+tabs when you pass its source as `codeView`. The Code tab highlights it as `tsx`, or in the
+language `codeLanguage` sets, such as `css`. Put a heading above it to name the demo. Pass
 controls for the component as `endPanel`; a Properties toggle in the bar hides
 or shows them, open on each page load. They sit under a "Properties" label at
 the end of the preview, or below it when there isn't room. The demo's pop-ups render inside it, so they

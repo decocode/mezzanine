@@ -2,8 +2,10 @@ import { Suspense, use, useId, useRef, useState, type ComponentPropsWithoutRef, 
 import { mergeProps } from 'react-aria/mergeProps'
 import { useFocusRing } from 'react-aria/useFocusRing'
 import { VisuallyHidden } from 'react-aria-components/VisuallyHidden'
-import { CheckIcon, CopyIcon } from '../../icons/Icons'
+import { CheckIcon, CopyIcon, TextWrapIcon } from '../../icons/Icons'
 import { Button } from '../Button/Button'
+import { ToggleButton } from '../ToggleButton/ToggleButton'
+import { Toolbar } from '../Toolbar/Toolbar'
 import { highlightCode, type CodeBlockLanguage, type SyntaxToken } from './codeBlockHighlight'
 import { codeLines, type CodeLine, type LineMark } from './codeBlockLines'
 
@@ -14,7 +16,8 @@ export interface CodeBlockProps extends Omit<ComponentPropsWithoutRef<'pre'>, 't
   // Colours the code's keywords, strings, comments and so on. Shiki, which does the highlighting, and
   // the language's rules load only when a page first shows code in that language.
   language?: CodeBlockLanguage
-  // Shows a number beside each line, starting from startLine. Numbers are hidden from screen readers.
+  // Shows a number beside each line, starting from startLine. On by default. Numbers are hidden from
+  // screen readers.
   showLineNumbers?: boolean
   startLine?: number
   // Line numbers, counted from startLine, to mark. Added and removed lines also show + and −, so the
@@ -73,17 +76,19 @@ function HighlightedContent({ code, language, ...props }: Omit<CodeContentProps,
 }
 
 // A static block of code, always on a dark surface: the block applies the Dark theme to itself, so its
-// text, syntax colours, copy button and focus ring all use Dark's roles, in every theme. Inside Wireframe it
-// stays monochrome. A strip above the code holds an optional title and a copy button, so the code never
-// wraps around the button. Long lines scroll sideways rather than breaking mid-word, so the code area can
-// take keyboard focus. Code always reads left to right, even on a right-to-left page. The app supplies the
+// text, syntax colours, buttons and focus ring all use Dark's roles, in every theme. Inside Wireframe it
+// stays monochrome. A strip above the code holds an optional title and a toolbar with a wrap toggle and a
+// copy button, so the code never wraps around them. Long lines scroll sideways rather than breaking
+// mid-word, so the code area can take keyboard focus; the wrap toggle wraps them instead. Code always reads left to right, even on a right-to-left page. The app supplies the
 // code as text; highlighting, line numbers and marked lines need it as a single string.
 export function CodeBlock({
-  className, children, title, language, showLineNumbers = false, startLine = 1, highlightedLines, addedLines, removedLines, ...preProps
+  className, children, title, language, showLineNumbers = true, startLine = 1, highlightedLines, addedLines, removedLines, ...preProps
 }: CodeBlockProps) {
   const codeRef = useRef<HTMLElement>(null)
   const titleId = useId()
   const [isCopied, setIsCopied] = useState(false)
+  // Lines start unwrapped on every page; wrapping isn't remembered.
+  const [isWrapped, setIsWrapped] = useState(false)
   const { focusProps, isFocusVisible } = useFocusRing()
   const code = typeof children === 'string' ? children : undefined
   const lines = code === undefined ? undefined : codeLines(code, { startLine, highlightedLines, addedLines, removedLines })
@@ -104,16 +109,27 @@ export function CodeBlock({
     <div className={['mz-code-block', className].filter(Boolean).join(' ')} data-theme="dark">
       <div className="mz-code-block-header">
         {title != null && <span id={titleId} className="mz-code-block-title">{title}</span>}
-        <Button
-          className="mz-code-block-copy"
-          icon={isCopied ? <CheckIcon /> : <CopyIcon />}
-          iconPosition="iconOnly"
-          size="sm"
-          hierarchy="tertiary"
-          onPress={copyCode}
-        >
-          {isCopied ? 'Copied' : 'Copy code'}
-        </Button>
+        <Toolbar className="mz-code-block-tools" aria-label="Code tools">
+          <ToggleButton
+            icon={<TextWrapIcon />}
+            iconPosition="iconOnly"
+            size="sm"
+            hierarchy="tertiary"
+            isSelected={isWrapped}
+            onChange={setIsWrapped}
+          >
+            Wrap lines
+          </ToggleButton>
+          <Button
+            icon={isCopied ? <CheckIcon /> : <CopyIcon />}
+            iconPosition="iconOnly"
+            size="sm"
+            hierarchy="tertiary"
+            onPress={copyCode}
+          >
+            {isCopied ? 'Copied' : 'Copy code'}
+          </Button>
+        </Toolbar>
       </div>
       <pre
         tabIndex={0}
@@ -123,7 +139,8 @@ export function CodeBlock({
         dir="ltr"
         className="mz-code-block-content"
         data-focus-visible={isFocusVisible || undefined}
-        data-line-numbers={showLineNumbers || undefined}
+        data-line-numbers={(hasLineParts && showLineNumbers) || undefined}
+        data-wrap={isWrapped || undefined}
       >
         <code ref={codeRef} data-lines={hasLineParts || undefined}>
           {code === undefined

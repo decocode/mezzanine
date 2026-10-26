@@ -13,7 +13,7 @@ export function TheBoxModelExample() {
       <li>Border: the thick line.</li>
       <li>Margin: the empty space between the thick line and the dashed line.</li>
     </ul>
-    <DemoArea align="stretch" codeView={theBoxModelCssNotes.boxAnatomy.code}>
+    <DemoArea align="stretch" codeLanguage="css" codeView={theBoxModelCssNotes.boxAnatomy.code}>
       <div className="lab-box-margin-area">
         <div className="lab-box-anatomy">
           <div className="lab-box-content mz-text-body-md">Content</div>

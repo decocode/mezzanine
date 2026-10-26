@@ -22,14 +22,14 @@ export const demoAreaContent: DocsPageContent = {
           { name: 'Theme picker', description: 'Light, Dark and Wireframe. It starts on the page’s theme and changes only this demo, pop-ups included.' },
           { name: 'Demo', description: 'The live components, on the theme’s page colour.' },
           { name: 'End panel', description: 'Optional, from `endPanel`: controls for the component. It is labelled “Properties”, and screen readers announce it by that name. It starts open, and the bar’s Properties toggle hides or shows it.' },
-          { name: 'Code', description: 'Optional, from `codeView`: the demo’s source in a CodeBlock.' },
+          { name: 'Code', description: 'Optional, from `codeView`: the demo’s source in a CodeBlock, highlighted in the language `codeLanguage` sets.' },
         ],
       },
     },
     {
       key: 'usage',
       body: [
-        'Put the live components inside `DemoArea`, with a heading above it that names the demo. Pass anything that changes them, such as a Switch or ToggleButtonGroup, as `endPanel`, and the demo’s source as `codeView`.',
+        'Put the live components inside `DemoArea`, with a heading above it that names the demo. Pass anything that changes them, such as a Switch or ToggleButtonGroup, as `endPanel`, and the demo’s source as `codeView`.', '`codeLanguage` sets the language `codeView` is highlighted in, using CodeBlock’s languages. The default is `tsx`, for JSX; set `css` or `html` for other code.',
         '`align` sets where the demo sits: `center`, the default, puts it in the middle, `stretch` makes it fill the width, and `start` keeps it at its own size at the start.',
         'The theme picker sets `data-theme` on the demo, and its pop-ups render inside it, so a menu or tooltip opened from the demo takes its theme too.',
         'It frames real components, so a demo shows exactly what an app gets.',

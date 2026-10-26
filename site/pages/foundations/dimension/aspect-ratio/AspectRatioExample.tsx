@@ -16,7 +16,7 @@ export function AspectRatioExample() {
   const [ratio, setRatio] = useState<(typeof ratioOptions)[number]['value']>('16 / 9')
   return <>
     <ExampleText>Whatever the shape, the picture is cropped to fill it, never squashed.</ExampleText>
-    <DemoArea align="stretch" codeView={aspectRatioCssNotes.aspectRatio.code} endPanel={<PanelPicker label="Shape" options={ratioOptions} value={ratio} onChange={setRatio} />}>
+    <DemoArea align="stretch" codeLanguage="css" codeView={aspectRatioCssNotes.aspectRatio.code} endPanel={<PanelPicker label="Shape" options={ratioOptions} value={ratio} onChange={setRatio} />}>
       <div className="aspect-ratio-example">
         <div className="aspect-ratio-frame" style={{ '--_aspect-ratio': ratio } as CSSProperties}>
           <img src={exampleImage} alt={examplePictureAlt} width={480} height={240} />

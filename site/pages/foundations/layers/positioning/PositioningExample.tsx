@@ -15,7 +15,7 @@ export function PositioningExample() {
   const [position, setPosition] = useState<(typeof positionOptions)[number]['value']>('static')
   return <>
     <ExampleText>The second box behaves differently with each position setting, most clearly when the dashed box scrolls.</ExampleText>
-    <DemoArea align="stretch" codeView={positioningCssNotes.positioning.code} endPanel={<PanelPicker label="position" options={positionOptions} value={position} onChange={setPosition} />}>
+    <DemoArea align="stretch" codeLanguage="css" codeView={positioningCssNotes.positioning.code} endPanel={<PanelPicker label="position" options={positionOptions} value={position} onChange={setPosition} />}>
       <div className="layers-position-stage" role="region" aria-label="Scrolling boxes, one of them positioned" tabIndex={0}>
         {[1, 2, 3, 4, 5, 6].map((number) => number === 2
           ? <div key={number} className="layers-block layers-position-item mz-text-body-sm" style={{ '--_position': position } as CSSProperties}>Box 2 is {position}</div>

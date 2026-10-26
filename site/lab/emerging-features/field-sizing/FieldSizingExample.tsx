@@ -9,7 +9,7 @@ export function FieldSizingExample() {
   return <>
     <ExampleText>One line of CSS, field-sizing: content, makes the field grow as you type, instead of scrolling inside itself. It’s been available in every major browser since June 2026. This is the real Mezzanine TextArea with that one Lab rule added.</ExampleText>
     <FeatureStatus supported={fieldSizing} />
-    <DemoArea align="stretch" codeView={fieldSizingCssNotes.fieldSizing.code}>
+    <DemoArea align="stretch" codeLanguage="css" codeView={fieldSizingCssNotes.fieldSizing.code}>
       <TextField className="lab-field-sizing">
         <Label>Type a few lines</Label>
         <TextArea />

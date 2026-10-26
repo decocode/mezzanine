@@ -7,7 +7,7 @@ export function ReelExample() {
   return <>
     <ExampleText>{reelExampleText}</ExampleText>
     {/* A scrolling area is a named region that takes focus, so keyboard users can scroll it. */}
-    <DemoArea align="stretch" codeView={reelCssNotes.reel.code}>
+    <DemoArea align="stretch" codeLanguage="css" codeView={reelCssNotes.reel.code}>
       <div className="example-reel" role="region" aria-label="Example reel" tabIndex={0}>
         {Array.from({ length: 8 }, (_, index) => <ExampleCard key={index} title={`Item ${String.fromCharCode(65 + index)}`} headingLevel={3} />)}
       </div>

@@ -17,7 +17,7 @@ export function OverflowExample() {
   const canScroll = overflow === 'scroll' || overflow === 'auto'
   return <>
     <ExampleText>The box is 6rem tall, which isn’t enough for its text. The overflow setting decides what happens to the rest.</ExampleText>
-    <DemoArea align="stretch" codeView={overflowCssNotes.overflow.code} endPanel={<PanelPicker label="overflow" options={overflowOptions} value={overflow} onChange={setOverflow} />}>
+    <DemoArea align="stretch" codeLanguage="css" codeView={overflowCssNotes.overflow.code} endPanel={<PanelPicker label="overflow" options={overflowOptions} value={overflow} onChange={setOverflow} />}>
       <div className="lab-overflow-stage">
         <div
           className="lab-overflow-box mz-text-body-md"

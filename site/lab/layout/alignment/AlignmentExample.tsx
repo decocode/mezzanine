@@ -31,7 +31,7 @@ export function AlignmentExample() {
   return <>
     <ExampleHeading>Along the row and across it</ExampleHeading>
     <ExampleText>Three boxes in a Flexbox row that’s taller than they need, so they can move along the row and across it.</ExampleText>
-    <DemoArea align="stretch" codeView={alignmentCssNotes.alignment.code} endPanel={<>
+    <DemoArea align="stretch" codeLanguage="css" codeView={alignmentCssNotes.alignment.code} endPanel={<>
       <PanelPicker label="justify-content" options={justifyOptions} value={justify} onChange={setJustify} />
       <PanelPicker label="align-items" options={alignOptions} value={align} onChange={setAlign} />
     </>}>
@@ -42,7 +42,7 @@ export function AlignmentExample() {
     <CssNotes name="alignment" note={alignmentCssNotes.alignment} showCode={false} />
     <ExampleHeading>Centre anything</ExampleHeading>
     <ExampleText>The famous puzzle, solved in two lines.</ExampleText>
-    <DemoArea align="stretch" codeView={alignmentCssNotes.centreAnything.code}>
+    <DemoArea align="stretch" codeLanguage="css" codeView={alignmentCssNotes.centreAnything.code}>
       <div className="lab-centre-anything"><Button>Button A</Button></div>
     </DemoArea>
     <CssNotes name="centring" note={alignmentCssNotes.centreAnything} showCode={false} />

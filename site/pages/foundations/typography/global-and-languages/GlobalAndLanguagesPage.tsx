@@ -15,7 +15,7 @@ export default function GlobalAndLanguagesPage() {
       content={globalAndLanguagesContent}
       parts={{
         startAndEnd: (
-          <DemoArea align="stretch" codeView={startAndEndCode} endPanel={<PanelSwitch isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</PanelSwitch>}>
+          <DemoArea align="stretch" codeLanguage="css" codeView={startAndEndCode} endPanel={<PanelSwitch isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</PanelSwitch>}>
             <div dir={isRightToLeft ? 'rtl' : 'ltr'} className="mz-ratio-pair text-direction-example" data-fraction="1/2">
               <div>
                 <p className="mz-text-label-md">{startAndEndExample.physicalLabel}</p>
@@ -29,7 +29,7 @@ export default function GlobalAndLanguagesPage() {
           </DemoArea>
         ),
         rightToLeft: (
-          <DemoArea align="stretch" codeView={rightToLeftCode}>
+          <DemoArea align="stretch" codeLanguage="html" codeView={rightToLeftCode}>
             <ul className="text-language-examples">
               {readingDirectionRightToLeftExamples.map(({ language, lang, text }) => <li key={lang} dir="rtl" lang={lang}>
                 <Card>
@@ -41,7 +41,7 @@ export default function GlobalAndLanguagesPage() {
           </DemoArea>
         ),
         topToBottom: (
-          <DemoArea align="stretch" codeView={topToBottomCode}>
+          <DemoArea align="stretch" codeLanguage="css" codeView={topToBottomCode}>
             <ul className="text-language-examples">
               {readingDirectionVerticalExamples.map(({ language, lang, text }) => <li key={lang}>
                 <Card>

@@ -8,7 +8,7 @@ export const codeBlockContent: DocsPageContent = {
   title: 'Code block',
   description: 'A code block shows several lines of code, such as an example or a set of instructions, on its own dark surface. It keeps the code’s line breaks and indentation, and long lines scroll sideways rather than breaking in the middle of a word.',
   sections: [
-    { key: 'example', intro: ['`CodeBlock` renders the code you pass as its children in a monospace font, on a dark surface in every theme. Its copy button, in a strip above the code, copies the code to the clipboard.', '`language` colours the code’s keywords, strings, comments and other parts, using the syntax colour roles each theme sets. The languages are `bash`, `css`, `html`, `javascript`, `json`, `jsx`, `tsx` and `typescript`. Inside Wireframe, the block stays dark but the code is monochrome.', '[Shiki](https://shiki.style/) is the open-source syntax highlighter used by Mezzanine, which loads only when a page contains a highlighted Code block.', '`title` adds a heading to the strip, such as a file name. It also names the code for screen readers.', '`showLineNumbers` numbers each line. `startLine` sets the first number, for an excerpt from further down a file.', '`highlightedLines`, `addedLines` and `removedLines` mark lines by their number. Added lines show +, and removed lines show −, so the meaning doesn’t rely on colour.'] },
+    { key: 'example', intro: ['`CodeBlock` renders the code you pass as its children in a monospace font, on a dark surface in every theme. A toolbar in a strip above the code holds a wrap toggle, which wraps long lines so they can be read without scrolling sideways, and a copy button, which copies the code to the clipboard.', '`language` colours the code’s keywords, strings, comments and other parts, using the syntax colour roles each theme sets. The languages are `bash`, `css`, `html`, `javascript`, `json`, `jsx`, `tsx` and `typescript`. Inside Wireframe, the block stays dark but the code is monochrome.', '[Shiki](https://shiki.style/) is the open-source syntax highlighter used by Mezzanine, which loads only when a page contains a highlighted Code block.', '`title` adds a heading to the strip, such as a file name. It also names the code for screen readers.', '`showLineNumbers` numbers each line, and is on by default. `startLine` sets the first number, for an excerpt from further down a file.', '`highlightedLines`, `addedLines` and `removedLines` mark lines by their number. Added lines show +, and removed lines show −, so the meaning doesn’t rely on colour.'] },
   ],
   technicalDetails: [
     {
@@ -18,9 +18,11 @@ export const codeBlockContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'CodeBlock', description: 'Renders the code block surface: a strip with the optional title and the copy button, above a `pre` element holding the code. It sets `data-theme="dark"` on itself, so it is dark in every theme. Long lines scroll sideways, and line breaks and indentation are kept.' },
+          { name: 'CodeBlock', description: 'Renders the code block surface: a strip with the optional title and a toolbar, above a `pre` element holding the code. It sets `data-theme="dark"` on itself, so it is dark in every theme. Long lines scroll sideways unless wrapped, and line breaks and indentation are kept.' },
           { name: 'code', description: 'Added by `CodeBlock` inside the `pre`, so the content is marked up as code. With line numbers or marked lines, each line is a row. With `language`, each kind of code is a span coloured by its syntax role.' },
-          { name: 'Button', description: 'Added by `CodeBlock` at the end of the strip. An icon button labelled “Copy code” that copies the code as written, without line numbers or markers.' },
+          { name: 'Toolbar', description: 'Added by `CodeBlock` at the end of the strip, named “Code tools”. It holds the wrap toggle and the copy button.' },
+          { name: 'ToggleButton', description: 'Added by `CodeBlock` in the toolbar. An icon button labelled “Wrap lines” that wraps long lines while it’s on. Lines start unwrapped.' },
+          { name: 'Button', description: 'Added by `CodeBlock` in the toolbar, after the wrap toggle. An icon button labelled “Copy code” that copies the code as written, without line numbers or markers.' },
         ],
       },
     },
@@ -40,6 +42,7 @@ export const codeBlockContent: DocsPageContent = {
         'The code always reads left to right, even on a right-to-left page.',
         'Line numbers and the + and − markers are hidden from screen readers. Instead, a marked line starts with a word they hear, such as “Added:”.',
         'Screen readers read the code as ordinary text. If the code needs explaining, put the explanation in the text around the block.',
+        'The toolbar is one Tab stop, and the arrow keys move between the wrap toggle and the copy button. The wrap toggle’s label, “Wrap lines”, shows in a tooltip and is its accessible name, and screen readers hear whether it’s on.',
         'The copy button’s label, “Copy code”, shows in a tooltip and is its accessible name. After copying, the label changes to “Copied”, the icon changes to a check mark, and screen readers hear “Copied” through a polite status message. The button returns to “Copy code” after two seconds.',
       ],
     },
@@ -104,12 +107,11 @@ export function codeBlockExample(flags: Record<(typeof codeBlockFlags)[number], 
 
 export function codeBlockExampleCodeView({ language, startLine, flags }: { language: string | null, startLine: number, flags: Record<(typeof codeBlockFlags)[number], boolean> }) {
   const { code, ...lines } = codeBlockExample(flags, flags.showLineNumbers ? startLine : 1)
-  const props = formatJsxProps({
-    language: language ?? undefined,
-    title: flags.title ? codeBlockFeatureExamples.title : undefined,
-    showLineNumbers: flags.showLineNumbers,
-    startLine: flags.showLineNumbers && startLine !== 1 ? startLine : undefined,
-    ...lines,
-  })
+  // Line numbers are on by default, so only turning them off is written out.
+  const props = [
+    formatJsxProps({ language: language ?? undefined, title: flags.title ? codeBlockFeatureExamples.title : undefined }),
+    flags.showLineNumbers ? '' : ' showLineNumbers={false}',
+    formatJsxProps({ startLine: flags.showLineNumbers && startLine !== 1 ? startLine : undefined, ...lines }),
+  ].join('')
   return `<CodeBlock${props}>{\`${code}\`}</CodeBlock>`
 }

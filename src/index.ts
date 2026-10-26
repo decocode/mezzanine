@@ -211,6 +211,7 @@ export {
   RewindToStartIcon,
   RisingIcon,
   SparkleIcon,
+  TextWrapIcon,
   TrashIcon,
   UndoIcon,
   VideoCameraIcon,
