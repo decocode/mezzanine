@@ -25,7 +25,14 @@ interface ContentPageProps {
 
 // Builds a page, in the Docs or the Lab, from its content file: the sections in order, then the Technical
 // details group, which opens with Also known as, then Related pages and References, through DocsPageTemplate.
-export function ContentPage({ content, parts = {}, showContents }: ContentPageProps) {
+// On a component page, the Example's demo comes first, straight after the title and description; the
+// Example section keeps its heading and copy among the sections that follow (owner's decision).
+export function ContentPage({ content, parts: givenParts = {}, showContents }: ContentPageProps) {
+  const exampleSection = content.kind === 'component' ? content.sections?.find((section) => section.key === 'example') : undefined
+  const lead = exampleSection ? givenParts.example : undefined
+  const parts = lead === undefined ? givenParts : { ...givenParts, example: undefined }
+  // An Example section with no copy of its own would only be an empty heading once its demo has moved.
+  const hasCopy = (section: ContentSection) => Boolean(section.intro || section.body || section.subheadings || section.table)
   const toSection = (section: ContentSection): DocumentationSection => {
     const id = sectionId(content.id, section.key)
     const subheadings = (section.subheadings ?? []).map((subheading) => ({ ...subheading, id: sectionId(id, subheading.key) }))
@@ -73,8 +80,9 @@ export function ContentPage({ content, parts = {}, showContents }: ContentPagePr
       showContents={showContents}
       relatedPages={content.relatedPages}
       references={content.references}
+      lead={lead}
       sections={[
-        ...(content.sections ?? []).map(toSection),
+        ...(content.sections ?? []).filter((section) => section !== exampleSection || lead === undefined || hasCopy(section)).map(toSection),
         ...(technicalDetails.length ? [{ id: sectionId(content.id, 'technicalDetails'), title: technicalDetailsTitle, sections: technicalDetails }] : []),
       ]}
     />

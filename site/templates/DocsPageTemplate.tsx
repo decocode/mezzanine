@@ -27,11 +27,14 @@ interface DocsPageTemplateProps {
   references?: readonly { label: string; href: string }[]
   // False for a short index page, where an On this page list would only repeat its one heading.
   showContents?: boolean
+  // Shown straight after the title and description, before On this page and the sections, such as a
+  // component page's demo.
+  lead?: ReactNode
 }
 
 // Each section definition supplies both its visible heading and its On this page link.
 // Pages compose their content and live examples before passing sections here.
-export function DocsPageTemplate({ title, description, sections, relatedPages = [], references = [], referencesId = 'references', showContents = true }: DocsPageTemplateProps) {
+export function DocsPageTemplate({ title, description, sections, relatedPages = [], references = [], referencesId = 'references', showContents = true, lead }: DocsPageTemplateProps) {
   const pageSections: readonly (DocumentationSection | DocumentationSectionGroup)[] = [
     ...sections,
     ...[
@@ -56,6 +59,7 @@ export function DocsPageTemplate({ title, description, sections, relatedPages = 
   return (
     <>
       <PageHeading title={title} description={description} />
+      {lead != null && <div className="docs-page-lead">{lead}</div>}
       {showContents && <DocsTableOfContents heading="On this page" sections={pageSections.map(section => ({
         id: section.id,
         label: section.title,

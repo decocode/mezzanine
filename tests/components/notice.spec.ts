@@ -46,7 +46,7 @@ for (const theme of themes) {
     await page.setViewportSize({ width: 320, height: 900 })
     await page.goto('/notice')
     await setTheme(page, theme)
-    const example = page.locator('section[aria-labelledby="notice-example"]')
+    const example = page.locator('.docs-page-lead')
     const note = example.getByRole('note')
     for (const purpose of purposes) {
       await example.getByRole('button', { name: /purpose/ }).click()
@@ -65,7 +65,7 @@ for (const theme of themes) {
 // the Tab order.
 test('Notice icon is hidden and its actions are reached in order', async ({ page }) => {
   await page.goto('/notice')
-  const example = page.locator('section[aria-labelledby="notice-example"]')
+  const example = page.locator('.docs-page-lead')
   await toggleControl(example, 'icon')
   await toggleControl(example, 'actions')
   const note = example.getByRole('note')
@@ -88,7 +88,7 @@ test('Font weight page has a signature notice', async ({ page }) => {
 // changes the note's purpose and its Code tab.
 test('Notice example follows the purpose Select', async ({ page }) => {
   await page.goto('/notice')
-  const example = page.locator('section[aria-labelledby="notice-example"]')
+  const example = page.locator('.docs-page-lead')
   await expect(example.getByRole('note')).toHaveAttribute('data-purpose', 'accent')
   await example.getByRole('button', { name: /purpose/ }).click()
   await expect(page.getByRole('listbox').getByRole('group')).toHaveCount(2)
@@ -104,14 +104,14 @@ test('Notice example follows the purpose Select', async ({ page }) => {
 // other Properties controls changes the note and its Code tab: an unticked part is left out.
 test('Notice example follows its title, content, icon and actions controls', async ({ page }) => {
   await page.goto('/notice')
-  const example = page.locator('section[aria-labelledby="notice-example"]')
+  const example = page.locator('.docs-page-lead')
   const note = example.getByRole('note')
   const code = example.locator('.mz-code-block')
   const showCode = () => example.getByRole('tab', { name: 'Code' }).click()
   const showPreview = () => example.getByRole('tab', { name: 'Demo' }).click()
 
-  await expect(example.getByRole('checkbox')).toHaveCount(4)
-  await expect(example.locator('.mz-checkbox, label').filter({ hasText: /^(title|content|icon|actions)$/ })).toHaveText(['title', 'content', 'icon', 'actions'])
+  await expect(example.getByRole('switch')).toHaveCount(4)
+  await expect(example.locator('label').filter({ hasText: /^(title|content|icon|actions)$/ })).toHaveText(['title', 'content', 'icon', 'actions'])
   await expect(note.locator('.mz-notice-title')).toHaveText('Notice title')
   await expect(note.locator('.mz-notice-content')).toHaveText('This is the main content of the notice component. By changing the purpose property of a Notice, you can change its color to communicate semantic or brand meaning.')
   await expect(note.locator('.mz-notice-icon')).toHaveCount(0)
@@ -155,7 +155,7 @@ for (const theme of themes) {
       await page.goto('/notice')
       await setTheme(page, theme)
       await setTextSize(page, layout.textSize)
-      const example = page.locator('section[aria-labelledby="notice-example"]')
+      const example = page.locator('.docs-page-lead')
       const note = example.getByRole('note')
       const parts = ['title', 'icon', 'actions', 'content'] as const
       const isOn: Record<(typeof parts)[number], boolean> = { title: true, icon: false, actions: false, content: true }
