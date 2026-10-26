@@ -461,7 +461,7 @@ Button and ToggleButton use the same `--button-xs-*`, `--button-sm-*`, `--button
 `--target-size-*` scale. Both default to `md`.
 Select sizes through `size`; ToggleButtonGroup supplies a size to its children,
 which an individual ToggleButton can override with its own `size`.
-For icon buttons, give the label as children and choose `labelPlacement`: `tooltip`, `below` or `above`.
+For icon buttons, set `iconPosition="only"`, give the label as children, and choose `labelPosition`: `tooltip`, `top` or `bottom`.
 
 ## Shared motion
 

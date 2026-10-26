@@ -24,7 +24,8 @@ export type { NoticeProps, NoticePurpose } from './components/Notice/Notice'
 export { Button } from './components/Button/Button'
 
 export type {
-  ButtonLabelPlacement,
+  ButtonIconPosition,
+  ButtonLabelPosition,
   ButtonProps,
   ButtonSize,
   ButtonHierarchy,

@@ -45,14 +45,15 @@ React Aria's Button, including form behaviour and `isPending`. Both share
 hierarchy, sizes and icons. `hierarchy` sets how much attention a button draws:
 `primary` (the default) for the one main action, `secondary` and `tertiary`
 for quieter ones, and `destructive` for an action that deletes or can't be
-undone. ToggleButton takes `secondary` or `tertiary`.
+undone. ToggleButton takes `primary`, `secondary` or `tertiary`.
 
-Button supports text only, text with a leading or trailing icon, and icon
-buttons. An icon button still has a label, its children, and `labelPlacement`
-chooses where it shows: `tooltip` (only the icon is visible; the label appears
-on hover and keyboard focus), `below` or `above` the icon. The label is always
-the accessible name. `tooltipPlacement` sets where a tooltip label appears.
-ToggleButton has the same two props.
+Button supports text only, text with an icon, and icon buttons. `icon` adds an
+icon, and `iconPosition` puts it `leading`, the default, `trailing` or `only`.
+An icon button, with `iconPosition="only"`, still has a label, its children.
+`labelPosition` shows it in a `tooltip` on hover and keyboard focus, the
+default, or at the `top` or `bottom` of the icon. The label is always the
+accessible name. `tooltipPosition` sets where a tooltip label appears.
+ToggleButton has the same props.
 
 ### Sizes
 
@@ -174,7 +175,7 @@ Compose `TooltipTrigger`, a focusable control and `Tooltip`:
 The trigger waits 500ms on hover before showing the tooltip; change this with
 `delay`. Keyboard focus shows it immediately. Tooltips do not appear on touch,
 so icon buttons keep their label as their accessible name (Button's
-`labelPlacement="tooltip"` does this for you). The fade is removed
+`iconPosition="only"` does this for you). The fade is removed
 when motion is reduced. The API follows the
 [React Aria Tooltip](https://react-aria.adobe.com/Tooltip).
 
@@ -486,7 +487,7 @@ An agreed deviation; don't undo, split or work around it without the owner's agr
 | Ordinary text link | `<Link href="...">` | `Link` |
 
 - Anything that looks like a button uses `Button`, including calls to action in the site. Anything that looks like a text link uses `Link`. Never restyle one to imitate the other, and never use a native `<button>` or `<a>` in the site. **[checked]** There's no `IconButton` and no separate navigation button. Button sizes come from Button's own size scale, not from an app's CSS. **[checked]**
-- `Button` supports text only, a leading or trailing icon, and icon buttons. An icon button always has a label, its children, which `labelPlacement` shows in a tooltip, below the icon or above it, so the label is also its accessible name. Agreed by the owner on 19 October 2026. `ToggleButton` works the same way.
+- `Button` supports text only, a leading or trailing icon, and icon buttons. An icon button always has a label, its children, which `labelPosition` shows in a tooltip, or at the top or bottom of the icon, so the label is also its accessible name. Agreed by the owner on 19 October 2026. `ToggleButton` works the same way.
 - Button styling is identical whether the element is a button or a link, with no underline in any theme, Wireframe included. In the site, button labels and destinations live in the page's content file.
 - After changing the underlying element, check it renders the right element and works with a keyboard and assistive technology.
 

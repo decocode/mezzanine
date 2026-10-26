@@ -106,8 +106,8 @@ export function CodeBlock({
         {title != null && <span id={titleId} className="mz-code-block-title">{title}</span>}
         <Button
           className="mz-code-block-copy"
-          iconLeading={isCopied ? <CheckIcon /> : <CopyIcon />}
-          labelPlacement="tooltip"
+          icon={isCopied ? <CheckIcon /> : <CopyIcon />}
+          iconPosition="only"
           size="sm"
           hierarchy="tertiary"
           onPress={copyCode}

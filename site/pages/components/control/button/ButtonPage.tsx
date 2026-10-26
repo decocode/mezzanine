@@ -38,12 +38,12 @@ function ButtonStateExample({
 
 const contentOptionExamples: Record<(typeof buttonContentOptions)[number]['id'], ReactNode> = {
   'text-only': <Button>Button</Button>,
-  'leading-icon': <Button iconLeading={<PlusIcon />}>Button</Button>,
-  'trailing-icon': <Button iconTrailing={<ArrowRightIcon />}>Button</Button>,
-  'label-tooltip': <Button iconLeading={<DownloadIcon />} labelPlacement="tooltip">{buttonContent.iconButtonLabel}</Button>,
-  'label-below': <Button iconLeading={<DownloadIcon />} labelPlacement="below">{buttonContent.iconButtonLabel}</Button>,
+  'leading-icon': <Button icon={<PlusIcon />}>Button</Button>,
+  'trailing-icon': <Button icon={<ArrowRightIcon />} iconPosition="trailing">Button</Button>,
+  'label-tooltip': <Button icon={<DownloadIcon />} iconPosition="only">{buttonContent.iconButtonLabel}</Button>,
+  'label-below': <Button icon={<DownloadIcon />} iconPosition="only" labelPosition="bottom">{buttonContent.iconButtonLabel}</Button>,
   'label-above': (
-    <Button iconLeading={<DownloadIcon />} labelPlacement="above">{buttonContent.iconButtonLabel}</Button>
+    <Button icon={<DownloadIcon />} iconPosition="only" labelPosition="top">{buttonContent.iconButtonLabel}</Button>
   ),
 }
 
@@ -112,7 +112,7 @@ export default function ButtonPage() {
                     </Cell>
                     <Cell><Button size={size}>Button</Button></Cell>
                     <Cell>
-                      <Button size={size} iconLeading={<DownloadIcon />} labelPlacement="tooltip">{buttonContent.iconButtonLabel}</Button>
+                      <Button size={size} icon={<DownloadIcon />} iconPosition="only">{buttonContent.iconButtonLabel}</Button>
                     </Cell>
                   </Row>
                 ))}

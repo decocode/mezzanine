@@ -10,7 +10,7 @@ export default function TooltipPage() {
         example: (
           <DemoArea>
             <TooltipTrigger>
-              <Button iconLeading={<SettingsIcon />} aria-label="Settings" />
+              <Button icon={<SettingsIcon />} aria-label="Settings" />
               <Tooltip placement="bottom">Settings</Tooltip>
             </TooltipTrigger>
           </DemoArea>

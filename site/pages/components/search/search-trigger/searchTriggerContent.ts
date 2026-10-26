@@ -8,7 +8,7 @@ export const searchTriggerContent: DocsPageContent = {
   description: 'Search trigger is the button that launches Search.',
   sections: [
     { key: 'example', intro: ['The trigger opens a search dialog. Enter or Space opens it from the keyboard, and focus returns to the trigger when the dialog closes.'] },
-    { key: 'iconOnly', title: 'Icon only', intro: ['With `labelPlacement="tooltip"`, only the icon shows. The label appears in a tooltip and is still the accessible name.'] },
+    { key: 'iconOnly', title: 'Icon only', intro: ['With `iconPosition="only"`, only the icon shows. The label appears in a tooltip and is still the accessible name.'] },
   ],
   technicalDetails: [
     {
@@ -27,7 +27,7 @@ export const searchTriggerContent: DocsPageContent = {
       key: 'usage',
       body: [
         'Put `SearchTrigger` first inside a `DialogTrigger`, with the search dialog after it. Its children are its visible label and its accessible name.',
-        'Set `labelPlacement="tooltip"` for an icon-only trigger, as on Button; `tooltipPlacement` sets where the tooltip appears. The shortcut Badge is left out, so keep `aria-keyshortcuts`.',
+        'Set `iconPosition="only"` for an icon-only trigger, as on Button; `tooltipPosition` sets where the tooltip appears. The shortcut Badge is left out, so keep `aria-keyshortcuts`.',
         'For a keyboard shortcut, add `aria-keyshortcuts` and listen for the keys in the app. `shortcut` shows the keys in a Badge at the end, such as `⌘ K`. The Badge is hidden from screen readers, which hear `aria-keyshortcuts` instead. This site opens its search with Cmd+K or Ctrl+K.',
       ],
     },

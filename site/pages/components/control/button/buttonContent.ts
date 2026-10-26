@@ -48,11 +48,11 @@ export const buttonContentOptions: {
   description: string
 }[] = [
     { id: 'text-only', name: 'Text-only', description: 'Buttons use a text label without an icon by default.' },
-    { id: 'leading-icon', name: 'Text + icon leading', prop: 'iconLeading', description: 'Places an icon before the label.' },
-    { id: 'trailing-icon', name: 'Text + icon trailing', prop: 'iconTrailing', description: 'Places an icon after the label.' },
-    { id: 'label-tooltip', name: 'Icon, label in a tooltip', prop: 'labelPlacement="tooltip"', description: 'Shows only the icon. The label appears in a tooltip on hover and keyboard focus, and is the button’s accessible name.' },
-    { id: 'label-below', name: 'Icon, label below', prop: 'labelPlacement="below"', description: 'Shows the label under the icon, as in a Rail.' },
-    { id: 'label-above', name: 'Icon, label above', prop: 'labelPlacement="above"', description: 'Shows the label over the icon.' },
+    { id: 'leading-icon', name: 'Text + icon leading', prop: 'icon', description: 'Places an icon before the label.' },
+    { id: 'trailing-icon', name: 'Text + icon trailing', prop: 'iconPosition="trailing"', description: 'Places an icon after the label.' },
+    { id: 'label-tooltip', name: 'Icon, label in a tooltip', prop: 'iconPosition="only"', description: 'Shows only the icon. The label appears in a tooltip on hover and keyboard focus, and is the button’s accessible name.' },
+    { id: 'label-below', name: 'Icon, label below', prop: 'labelPosition="bottom"', description: 'Shows the label under the icon, as in a Rail.' },
+    { id: 'label-above', name: 'Icon, label above', prop: 'labelPosition="top"', description: 'Shows the label over the icon.' },
   ]
 
 // Copy shown inside the live examples.
@@ -104,7 +104,7 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
   technicalDetails: [
     {
       key: 'anatomy',
-      intro: ['`Button` places its label and icon in six ways: text only; an icon before or after the label, with `iconLeading` or `iconTrailing`; or an icon button, whose label sits in a tooltip, below the icon or above it, with `labelPlacement`. An icon button’s label is always its children, so the visible words and the accessible name match.'],
+      intro: ['`Button` places its label and icon in six ways: text only; an icon before or after the label, with `icon` and `iconPosition`; or an icon button, with `iconPosition="only"`, whose label sits in a tooltip, or at the top or bottom of the icon, with `labelPosition`. An icon button’s label is always its children, so the visible words and the accessible name match.'],
       table: {
         label: 'Button anatomy',
         nameColumn: 'Component',

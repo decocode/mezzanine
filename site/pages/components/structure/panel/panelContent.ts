@@ -71,7 +71,7 @@ export const panelContent: DocsPageContent = {
           { name: 'children', description: 'The Panel’s content.' },
           { name: 'className', description: 'Adds your own class.' },
           { name: 'PanelTrigger: panel', description: 'The `id` of the Panel it opens and closes.' },
-          { name: 'PanelTrigger: hierarchy / size / iconLeading / labelPlacement', description: 'Appearance, as on `Button`. PanelTrigger accepts every other `Button` prop too.' },
+          { name: 'PanelTrigger: hierarchy / size / icon / iconPosition', description: 'Appearance, as on `Button`. PanelTrigger accepts every other `Button` prop too.' },
         ],
       },
     },

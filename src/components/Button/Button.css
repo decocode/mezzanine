@@ -104,9 +104,9 @@
   padding-inline: 0;
 }
 
-/* An icon with its label below or above it, as in a Rail. The icon sits in the button's box and the
+/* An icon with its label at the bottom or top, as in a Rail. The icon sits in the button's box and the
    label sits outside it, but they're one control, so pressing the label presses the button too. */
-:is(.mz-button, .mz-toggle-button)[data-label-placement] .mz-button-content {
+:is(.mz-button, .mz-toggle-button)[data-label-position] .mz-button-content {
   flex-direction: column;
   gap: var(--space-1);
 }
@@ -120,7 +120,7 @@
   block-size: var(--_button-min-height);
 }
 
-.mz-button[data-variant][data-label-placement] {
+.mz-button[data-variant][data-label-position] {
   min-height: 0;
   padding: 0;
   border-color: transparent;
@@ -128,14 +128,14 @@
   color: var(--color-text);
 }
 
-.mz-button[data-label-placement] .mz-button-icon-box {
+.mz-button[data-label-position] .mz-button-icon-box {
   border: var(--button-border-width, var(--border-width-baseline)) solid var(--_button-border);
   border-radius: var(--button-border-radius, var(--radius-control));
   background: var(--_button-current-background);
   color: var(--_button-foreground);
 }
 
-:is(.mz-button, .mz-toggle-button)[data-label-placement='above'] .mz-button-content {
+:is(.mz-button, .mz-toggle-button)[data-label-position='top'] .mz-button-content {
   flex-direction: column-reverse;
 }
 

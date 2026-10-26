@@ -13,24 +13,24 @@ interface SearchTriggerAppearanceProps extends ReactAriaButtonProps {
   // so pair it with aria-keyshortcuts.
   shortcut?: ReactNode
   // Where a tooltip label appears; React Aria's Tooltip placement.
-  tooltipPlacement?: TooltipProps['placement']
+  tooltipPosition?: TooltipProps['placement']
   ref?: Ref<HTMLButtonElement>
 }
 
-// As on Button: "tooltip" shows only the icon, with the label in a tooltip. The label is still the
+// As on Button: iconPosition="only" shows only the icon, with the label in a tooltip. The label is still the
 // accessible name, so it must be plain text, and the shortcut Badge is left out.
 export type SearchTriggerProps = SearchTriggerAppearanceProps & (
-  | { labelPlacement: 'tooltip'; children: string }
-  | { labelPlacement?: never }
+  | { iconPosition: 'only'; children: string }
+  | { iconPosition?: 'leading' }
 )
 
 // The button that opens search, such as a DialogTrigger's search dialog. It's a React Aria Button
 // with its own look, separate from Mezzanine's Button. Its children are its visible label and its
 // accessible name; Mezzanine adds the search icon before them and an optional shortcut Badge after.
-// With labelPlacement="tooltip" it shows only the icon, as an icon Button does.
-export function SearchTrigger({ children, className, shortcut, labelPlacement, tooltipPlacement, ...buttonProps }: SearchTriggerProps) {
+// With iconPosition="only" it shows only the icon, as an icon Button does.
+export function SearchTrigger({ children, className, shortcut, iconPosition, tooltipPosition, ...buttonProps }: SearchTriggerProps) {
   // A tooltip label is the accessible name; the trigger itself shows only its icon.
-  const tooltipLabel = labelPlacement === 'tooltip' && typeof children === 'string' ? children : undefined
+  const tooltipLabel = iconPosition === 'only' && typeof children === 'string' ? children : undefined
   const trigger = (
     <ReactAriaButton
       {...buttonProps}
@@ -52,7 +52,7 @@ export function SearchTrigger({ children, className, shortcut, labelPlacement, t
   return tooltipLabel === undefined ? trigger : (
     <TooltipTrigger>
       {trigger}
-      <Tooltip placement={tooltipPlacement}>{tooltipLabel}</Tooltip>
+      <Tooltip placement={tooltipPosition}>{tooltipLabel}</Tooltip>
     </TooltipTrigger>
   )
 }

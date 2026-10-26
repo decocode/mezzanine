@@ -100,7 +100,11 @@
     "kind": "type"
   },
   {
-    "name": "ButtonLabelPlacement",
+    "name": "ButtonIconPosition",
+    "kind": "type"
+  },
+  {
+    "name": "ButtonLabelPosition",
     "kind": "type"
   },
   {

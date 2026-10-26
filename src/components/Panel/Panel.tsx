@@ -77,7 +77,7 @@ export function Panel({
   const contents = <>
     {(title != null || isCollapsible) && <div className="mz-panel-header">
       {title != null && <Heading id={headingId} level={headingLevel} slot={isDrawer ? 'title' : undefined}>{title}</Heading>}
-      {isCollapsible && <Button iconLeading={<CloseIcon />} labelPlacement="tooltip" size="sm" hierarchy="tertiary" onPress={close}>{closeLabel ?? `Close ${name}`}</Button>}
+      {isCollapsible && <Button icon={<CloseIcon />} iconPosition="only" size="sm" hierarchy="tertiary" onPress={close}>{closeLabel ?? `Close ${name}`}</Button>}
     </div>}
     <div className="mz-panel-content">{children}</div>
   </>

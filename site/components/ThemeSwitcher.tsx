@@ -26,9 +26,9 @@ export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherPro
       selectedKeys={[displayedTheme]}
       selectionMode="single"
     >
-      <ToggleButton id="light" iconLeading={<SunIcon />} labelPlacement="tooltip" tooltipPlacement="bottom">Light theme</ToggleButton>
-      <ToggleButton id="dark" iconLeading={<MoonIcon />} labelPlacement="tooltip" tooltipPlacement="bottom">Dark theme</ToggleButton>
-      <ToggleButton id="wireframe" iconLeading={<LayoutIcon />} labelPlacement="tooltip" tooltipPlacement="bottom">Wireframe theme</ToggleButton>
+      <ToggleButton id="light" icon={<SunIcon />} iconPosition="only" tooltipPosition="bottom">Light theme</ToggleButton>
+      <ToggleButton id="dark" icon={<MoonIcon />} iconPosition="only" tooltipPosition="bottom">Dark theme</ToggleButton>
+      <ToggleButton id="wireframe" icon={<LayoutIcon />} iconPosition="only" tooltipPosition="bottom">Wireframe theme</ToggleButton>
     </ToggleButtonGroup>
   )
 }

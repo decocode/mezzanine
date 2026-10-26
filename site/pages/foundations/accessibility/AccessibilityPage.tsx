@@ -11,7 +11,7 @@ export default function AccessibilityPage() {
           <Button
             href={accessibilityFeedbackButton.href}
             hierarchy="secondary"
-            iconTrailing={<ExternalLinkIcon />}
+            icon={<ExternalLinkIcon />} iconPosition="trailing"
           >
             {accessibilityFeedbackButton.label}
           </Button>

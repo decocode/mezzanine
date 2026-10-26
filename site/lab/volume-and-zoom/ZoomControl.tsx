@@ -29,7 +29,7 @@ export function ZoomControl({ label, stepDownLabel, stepUpLabel, resetLabel, val
     onChange?.(next)
   }
   const stepButton = (stepLabel: string, icon: ReactNode, next: number) => (
-    <Button hierarchy="tertiary" size="sm" iconLeading={icon} labelPlacement="tooltip" isDisabled={isDisabled} onPress={() => changeZoom(next)}>{stepLabel}</Button>
+    <Button hierarchy="tertiary" size="sm" icon={icon} iconPosition="only" isDisabled={isDisabled} onPress={() => changeZoom(next)}>{stepLabel}</Button>
   )
 
   return (

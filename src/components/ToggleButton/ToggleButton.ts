@@ -11,20 +11,23 @@ import {
 } from 'react-aria-components/ToggleButtonGroup'
 
 interface ToggleButtonAppearanceProps extends ReactAriaToggleButtonProps {
-  // Secondary has an outline; tertiary has none until it's hovered or selected, as on Button.
-  hierarchy?: 'secondary' | 'tertiary'
+  // Primary, the default, fills a selected toggle; secondary has an outline; tertiary has none until
+  // it's hovered or selected, as on Button.
+  hierarchy?: 'primary' | 'secondary' | 'tertiary'
   size?: ButtonSize
-  iconLeading?: ReactNode
-  iconTrailing?: ReactNode
-  tooltipPlacement?: TooltipProps['placement']
+  icon?: ReactNode
+  tooltipPosition?: TooltipProps['placement']
   ref?: Ref<HTMLButtonElement>
 }
 
-// As on Button: where an icon toggle shows its label (its children), which must be plain text in a tooltip.
+// As on Button: where the icon sits, and where an icon toggle shows its label (its children), which
+// must be plain text in a tooltip.
 export type ToggleButtonProps = ToggleButtonAppearanceProps & ButtonLabelProps
 
 export interface ToggleButtonGroupProps extends ReactAriaToggleButtonGroupProps {
-  hierarchy?: 'secondary'
+  // Sets every toggle in the group: primary fills the selected one, secondary outlines them all, and
+  // tertiary has no outline until a toggle is hovered or selected.
+  hierarchy?: 'primary' | 'secondary' | 'tertiary'
   size?: ButtonSize
   ref?: Ref<HTMLDivElement>
 }
@@ -32,31 +35,34 @@ export interface ToggleButtonGroupProps extends ReactAriaToggleButtonGroupProps 
 const ToggleButtonSizeContext = createContext<ButtonSize>('md')
 
 // Appearance only: React Aria retains selection, render props, focus and keyboard behaviour.
-export function ToggleButton({ hierarchy, size, iconLeading, iconTrailing, labelPlacement, tooltipPlacement, children, ...props }: ToggleButtonProps) {
+export function ToggleButton({ hierarchy, size, icon, iconPosition = 'leading', labelPosition, tooltipPosition, children, ...props }: ToggleButtonProps) {
   const groupSize = useContext(ToggleButtonSizeContext)
   // A tooltip label is the accessible name; the button itself shows only its icon.
-  const tooltipLabel = labelPlacement === 'tooltip' && typeof children === 'string' ? children : undefined
-  const isLabelOutside = labelPlacement === 'below' || labelPlacement === 'above'
-  const leading = iconLeading != null && createElement('span', { className: 'mz-button-icon', 'aria-hidden': true }, iconLeading)
-  const trailing = iconTrailing != null && createElement('span', { className: 'mz-button-icon', 'aria-hidden': true }, iconTrailing)
+  const isIconButton = icon != null && iconPosition === 'only'
+  const outsideLabel = isIconButton && labelPosition !== undefined && labelPosition !== 'tooltip' ? labelPosition : undefined
+  const tooltipLabel = isIconButton && outsideLabel === undefined && typeof children === 'string' ? children : undefined
+  const isLabelOutside = outsideLabel !== undefined
+  const iconPart = icon != null && createElement('span', { className: 'mz-button-icon', 'aria-hidden': true }, icon)
+  const leading = iconPosition !== 'trailing' && iconPart
+  const trailing = iconPosition === 'trailing' && iconPart
   const appearanceProps = {
     ...props,
     className: composeClassName('mz-toggle-button', props.className),
     ...(tooltipLabel !== undefined && { 'aria-label': props['aria-label'] ?? tooltipLabel }),
     'data-variant': hierarchy,
     'data-size': size ?? groupSize,
-    'data-icon-only': (labelPlacement === 'tooltip' || (children == null && (iconLeading != null || iconTrailing != null))) || undefined,
-    'data-label-placement': isLabelOutside ? labelPlacement : undefined,
-    // As on Button: with the label below or above, the icon sits in the box and the label outside it.
+    'data-icon-only': (tooltipLabel !== undefined || (children == null && icon != null)) || undefined,
+    'data-label-position': outsideLabel,
+    // As on Button: with the label at the top or bottom, the icon sits in the box and the label outside it.
     children: composeRenderProps(children, content => isLabelOutside
       ? createElement('span', { className: 'mz-button-content' }, createElement('span', { className: 'mz-button-icon-box' }, leading, trailing), content)
       : createElement('span', { className: 'mz-button-content' }, leading, tooltipLabel === undefined && content, trailing)),
   }
   const toggle = createElement(ReactAriaToggleButton, appearanceProps)
-  return tooltipLabel === undefined ? toggle : createElement(TooltipTrigger, null, toggle, createElement(Tooltip, { placement: tooltipPlacement }, tooltipLabel))
+  return tooltipLabel === undefined ? toggle : createElement(TooltipTrigger, null, toggle, createElement(Tooltip, { placement: tooltipPosition }, tooltipLabel))
 }
 
-export function ToggleButtonGroup({ hierarchy, size = 'md', ...props }: ToggleButtonGroupProps) {
+export function ToggleButtonGroup({ hierarchy = 'primary', size = 'md', ...props }: ToggleButtonGroupProps) {
   const appearanceProps = { ...props, className: composeClassName('mz-toggle-button-group', props.className), 'data-variant': hierarchy }
   return createElement(ToggleButtonSizeContext.Provider, { value: size },
     createElement(ReactAriaToggleButtonGroup, appearanceProps),

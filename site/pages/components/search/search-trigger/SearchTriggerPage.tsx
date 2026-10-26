@@ -26,7 +26,7 @@ export default function SearchTriggerPage() {
         iconOnly: (
           <DemoArea>
             <DialogTrigger>
-              <SearchTrigger aria-keyshortcuts="Meta+K Control+K" labelPlacement="tooltip">Search</SearchTrigger>
+              <SearchTrigger aria-keyshortcuts="Meta+K Control+K" iconPosition="only">Search</SearchTrigger>
               <ModalOverlay isDismissable>
                 <Modal>
                   <Dialog>

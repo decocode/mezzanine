@@ -14,15 +14,18 @@ import { Tooltip, TooltipTrigger, type TooltipProps } from '../Tooltip/Tooltip'
 export type ButtonHierarchy = 'primary' | 'secondary' | 'tertiary' | 'destructive'
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-// Where an icon button shows its label: in a tooltip, or visibly below or above the icon. The label
-// is always the button's children, so the accessible name and the visible words always match.
-export type ButtonLabelPlacement = 'tooltip' | 'below' | 'above'
+// Where the icon sits: before the label, after it, or on its own, as an icon button.
+export type ButtonIconPosition = 'leading' | 'trailing' | 'only'
+
+// Where an icon button shows its label: in a tooltip, or visibly at the top or bottom, over or under
+// the icon. The label is always the button's children, so the accessible name and the visible words
+// always match.
+export type ButtonLabelPosition = 'tooltip' | 'top' | 'bottom'
 
 interface ButtonAppearanceProps {
-  iconLeading?: ReactNode
-  iconTrailing?: ReactNode
-  // Where a tooltip label appears; React Aria's Tooltip placement. Only used with labelPlacement="tooltip".
-  tooltipPlacement?: TooltipProps['placement']
+  icon?: ReactNode
+  // Where a tooltip label appears; React Aria's Tooltip placement. Only used with a tooltip label.
+  tooltipPosition?: TooltipProps['placement']
   size?: ButtonSize
   hierarchy?: ButtonHierarchy
 }
@@ -38,40 +41,45 @@ interface NavigationButtonProps extends ReactAriaLinkProps, ButtonAppearanceProp
   isPending?: never
 }
 
-// A tooltip label must be plain text, because it is also the button's accessible name and the
-// tooltip's words. A label below or above the icon, or a text button's label, can be any content.
+// An icon button's label goes in a tooltip by default. That label must be plain text, because it is
+// also the button's accessible name and the tooltip's words. A label at the top or bottom of the
+// icon, or a text button's label, can be any content.
 export type ButtonLabelProps =
-  | { labelPlacement: 'tooltip'; children: string }
-  | { labelPlacement?: Exclude<ButtonLabelPlacement, 'tooltip'> }
+  | { iconPosition: 'only'; labelPosition?: 'tooltip'; children: string }
+  | { iconPosition: 'only'; labelPosition: Exclude<ButtonLabelPosition, 'tooltip'> }
+  | { iconPosition?: Exclude<ButtonIconPosition, 'only'>; labelPosition?: never }
 
 export type ButtonProps = (ActionButtonProps | NavigationButtonProps) & ButtonLabelProps
 
 export function Button({
-  iconLeading,
-  iconTrailing,
-  labelPlacement,
-  tooltipPlacement,
+  icon,
+  iconPosition = 'leading',
+  labelPosition,
+  tooltipPosition,
   size = 'md',
   hierarchy = 'primary',
   ...props
 }: ButtonProps) {
   // A tooltip label is the accessible name; the button itself shows only its icon.
-  const tooltipLabel = labelPlacement === 'tooltip' && typeof props.children === 'string' ? props.children : undefined
+  const isIconButton = icon != null && iconPosition === 'only'
+  const outsideLabel = isIconButton && labelPosition !== undefined && labelPosition !== 'tooltip' ? labelPosition : undefined
+  const tooltipLabel = isIconButton && outsideLabel === undefined && typeof props.children === 'string' ? props.children : undefined
   const appearance = {
-    'data-icon-only': (labelPlacement === 'tooltip' || (props.children == null && (iconLeading != null || iconTrailing != null))) || undefined,
-    'data-label-placement': labelPlacement === 'below' || labelPlacement === 'above' ? labelPlacement : undefined,
+    'data-icon-only': (tooltipLabel !== undefined || (props.children == null && icon != null)) || undefined,
+    'data-label-position': outsideLabel,
     'data-size': size,
     'data-variant': hierarchy,
     ...(tooltipLabel !== undefined && { 'aria-label': props['aria-label'] ?? tooltipLabel }),
   }
 
   function renderContent(children: ReactNode, isPending = false) {
-    const leading = iconLeading != null && <span aria-hidden="true" className="mz-button-icon">{iconLeading}</span>
-    const trailing = iconTrailing != null && <span aria-hidden="true" className="mz-button-icon">{iconTrailing}</span>
+    const iconPart = icon != null && <span aria-hidden="true" className="mz-button-icon">{icon}</span>
+    const leading = iconPosition !== 'trailing' && iconPart
+    const trailing = iconPosition === 'trailing' && iconPart
     return (
       <>
         <span className="mz-button-content">
-          {appearance['data-label-placement'] !== undefined
+          {appearance['data-label-position'] !== undefined
             // The icon sits in the button's box and the label sits outside it, below or above.
             ? <><span className="mz-button-icon-box">{leading}{trailing}</span>{children}</>
             : <>{leading}{tooltipLabel === undefined && children}{trailing}</>}
@@ -88,7 +96,7 @@ export function Button({
   const withTooltip = (button: ReactNode) => tooltipLabel === undefined ? button : (
     <TooltipTrigger>
       {button}
-      <Tooltip placement={tooltipPlacement}>{tooltipLabel}</Tooltip>
+      <Tooltip placement={tooltipPosition}>{tooltipLabel}</Tooltip>
     </TooltipTrigger>
   )
 
