@@ -350,7 +350,13 @@ optional `description` and `errorMessage`, and `ListBoxItem`s as children (or
 and a chevron; `ComboBox` is a text field with a chevron button, filtering its
 options as people type. Their lists open in a `Popover` as wide as the field. `Select`'s
 `hierarchy` sets how much its chevron area stands out: `primary` fills it with
-the accent color, and `secondary`, the default, keeps it quiet.
+the accent color, and `secondary`, the default, keeps it quiet. Its `size`
+matches Button's five sizes, `md` by default, since the chevron area works
+like a button. A
+`ListBoxItem`'s `icon` shows before its text, in the list and in `Select`'s
+trigger. `valuePosition="iconOnly"` shows only the chosen option's icon in the
+trigger; without a visible `label`, the `aria-label` shows in a tooltip,
+placed by `tooltipPosition`.
 
 ```tsx
 <Select label="Select A" defaultSelectedKey="a">
@@ -437,9 +443,10 @@ demo. When you pass its source as `codeView`, Demo and Code tabs sit outside
 the frame, and the Code tab shows the code in a CodeBlock, its own frame with
 its own buttons. The Code tab highlights it as `tsx`, or in the
 language `codeLanguage` sets, such as `css`. Put a heading above it to name the demo. Pass
-controls for the component as `endPanel`; a Properties toggle in the strip hides
-or shows them, open on each page load. They sit under a "Properties" label at
-the end of the preview, or below it when there isn't room. The demo's pop-ups render inside it, so they
+controls for the component as `endPanel`. They hang from the top like a shop's
+filters: down the end beside the demo, or above it when there isn't room. A
+"Properties" header stays in place, and its button rolls the controls up into
+it and down again, open on each page load. The demo's pop-ups render inside it, so they
 take its theme. `align` sets where the demo sits: `center`, the default,
 `stretch` for demos that fill the width, such as tables and code, or `start`.
 

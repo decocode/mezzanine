@@ -25,10 +25,10 @@ export default function RadioGroupPage() {
           <DemoArea
             codeView={radioGroupExampleCode({ ...props, errorMessage: showsError })}
             endPanel={<>
-              <Select label={radioGroupExample.defaultValueLabel} selectedKey={defaultValue} onSelectionChange={(key) => { if (key != null) setDefaultValue(String(key)) }}>
+              <Select size="sm" label={radioGroupExample.defaultValueLabel} selectedKey={defaultValue} onSelectionChange={(key) => { if (key != null) setDefaultValue(String(key)) }}>
                 {radioGroupExample.options.map((option) => <ListBoxItem key={option.value} id={option.value}>{option.value}</ListBoxItem>)}
               </Select>
-              <Select label={radioGroupExample.orientationLabel} selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof radioGroupOrientations)[number]) }}>
+              <Select size="sm" label={radioGroupExample.orientationLabel} selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof radioGroupOrientations)[number]) }}>
                 {radioGroupOrientations.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
               {radioGroupFlags.map((name) => (

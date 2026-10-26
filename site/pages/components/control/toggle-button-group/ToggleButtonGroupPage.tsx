@@ -27,16 +27,16 @@ export default function ToggleButtonGroupPage() {
           <DemoArea
             codeView={toggleButtonGroupExampleCode(props)}
             endPanel={<>
-              <Select label="selectionMode" selectedKey={selectionMode} onSelectionChange={(key) => { if (key != null) setSelectionMode(key as (typeof toggleButtonGroupSelectionModes)[number]) }}>
+              <Select size="sm" label="selectionMode" selectedKey={selectionMode} onSelectionChange={(key) => { if (key != null) setSelectionMode(key as (typeof toggleButtonGroupSelectionModes)[number]) }}>
                 {toggleButtonGroupSelectionModes.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
-              <Select label="orientation" selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof toggleButtonGroupOrientations)[number]) }}>
+              <Select size="sm" label="orientation" selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof toggleButtonGroupOrientations)[number]) }}>
                 {toggleButtonGroupOrientations.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
-              <Select label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as (typeof toggleButtonGroupHierarchies)[number]) }}>
+              <Select size="sm" label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as (typeof toggleButtonGroupHierarchies)[number]) }}>
                 {toggleButtonGroupHierarchies.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
-              <Select label="size" selectedKey={size} onSelectionChange={(key) => { if (key != null) setSize(key as ButtonSize) }}>
+              <Select size="sm" label="size" selectedKey={size} onSelectionChange={(key) => { if (key != null) setSize(key as ButtonSize) }}>
                 {buttonSizes.map((option) => <ListBoxItem key={option.size} id={option.size}>{option.size}</ListBoxItem>)}
               </Select>
               {toggleButtonGroupFlags.map((name) => (

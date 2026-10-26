@@ -33,7 +33,7 @@ export const tableContent: DocsPageContent = {
   id: 'table',
   kind: 'component',
   title: 'Table',
-  description: 'A table organises information into rows and columns, with headings explaining what each column contains. It helps people compare items and find details, such as the name, price and availability of a product.',
+  description: '`Table` is a component that organises information into rows and columns, with headings explaining what each column contains. It helps people compare items and find details, such as the name, price and availability of a product.',
   sections: [
     {
       key: 'example',

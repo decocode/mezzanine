@@ -42,6 +42,80 @@
   color: var(--select-error-foreground, var(--color-danger));
 }
 
+/* size matches Button's heights and icon sizes, since the chevron area works like a button. The value
+   takes the body text size that fits each height. md is the default. */
+.mz-select-trigger,
+.mz-select-trigger[data-size='md'] {
+  --_select-min-height: var(--target-size-md);
+  --_select-padding-block: var(--space-padding-control-block);
+  --_select-padding-inline: var(--space-padding-control-inline);
+  --_select-icon-size: var(--icon-size-md);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-select-trigger[data-size='xs'] {
+  --_select-min-height: var(--target-size-xs);
+  --_select-padding-block: var(--space-1);
+  --_select-padding-inline: var(--space-2);
+  --_select-icon-size: var(--icon-size-xs);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-select-trigger[data-size='sm'] {
+  --_select-min-height: var(--target-size-sm);
+  --_select-padding-block: var(--space-1);
+  --_select-padding-inline: var(--space-3);
+  --_select-icon-size: var(--icon-size-sm);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-select-trigger[data-size='lg'] {
+  --_select-min-height: var(--target-size-lg);
+  --_select-padding-block: var(--space-2);
+  --_select-padding-inline: var(--space-4);
+  --_select-icon-size: var(--icon-size-lg);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-lg);
+  text-transform: var(--text-transform-body);
+}
+
+.mz-select-trigger[data-size='xl'] {
+  --_select-min-height: var(--target-size-xl);
+  --_select-padding-block: var(--space-3);
+  --_select-padding-inline: var(--space-5);
+  --_select-icon-size: var(--icon-size-xl);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-lg);
+  text-transform: var(--text-transform-body);
+}
+
+/* An option's icon in the trigger takes the size's icon size, like the chevron. */
+.mz-select-value .mz-list-box-item-icon svg {
+  inline-size: var(--select-chevron-size, var(--_select-icon-size));
+  block-size: var(--select-chevron-size, var(--_select-icon-size));
+}
+
 /* The trigger has the text field's look, with the chevron at the end. */
 .mz-select-trigger {
   --_select-trigger-border: var(--select-trigger-border, var(--color-border-control));
@@ -51,9 +125,9 @@
   box-sizing: border-box;
   inline-size: 100%;
   min-inline-size: 0;
-  min-block-size: var(--select-trigger-min-height, var(--target-size-md));
+  min-block-size: var(--select-trigger-min-height, var(--_select-min-height));
   margin: 0;
-  padding: var(--select-trigger-padding-block, var(--space-padding-control-block)) var(--select-trigger-padding-inline, var(--space-padding-control-inline));
+  padding: var(--select-trigger-padding-block, var(--_select-padding-block)) var(--select-trigger-padding-inline, var(--_select-padding-inline));
   border: var(--select-trigger-border-width, var(--border-width-baseline)) solid var(--_select-trigger-border);
   border-radius: var(--select-trigger-border-radius, var(--radius-control));
   background: var(--select-trigger-background, var(--color-page));
@@ -89,6 +163,27 @@
   color: var(--select-placeholder-foreground, var(--color-text-muted));
 }
 
+/* With valuePosition="iconOnly", the field is as wide as the icon and chevron, and the option's text is
+   hidden from view but still read by screen readers. */
+.mz-select[data-value-position='iconOnly'] {
+  align-self: start;
+  max-inline-size: none;
+}
+
+.mz-select[data-value-position='iconOnly'] .mz-select-value {
+  flex: none;
+  display: inline-flex;
+}
+
+.mz-select[data-value-position='iconOnly'] .mz-select-value .mz-list-box-item-text {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* An option's description stays in the list, not in the closed field. */
 .mz-select-value [slot='description'] {
   display: none;
@@ -101,13 +196,13 @@
   /* The chevron area runs the full height of the trigger and out to its end, so the end of the trigger
      looks like a button on the side. A line in the border's colour divides it from the value. The icon
      keeps its size, centred in the taller box. */
-  inline-size: calc(var(--select-chevron-size, var(--icon-size-sm)) + 2 * var(--select-trigger-padding-inline, var(--space-padding-control-inline)) + var(--select-trigger-border-width, var(--border-width-baseline)));
+  inline-size: calc(var(--select-chevron-size, var(--_select-icon-size)) + 2 * var(--select-trigger-padding-inline, var(--_select-padding-inline)) + var(--select-trigger-border-width, var(--border-width-baseline)));
   block-size: auto;
-  margin-block: calc(-1 * var(--select-trigger-padding-block, var(--space-padding-control-block)));
+  margin-block: calc(-1 * var(--select-trigger-padding-block, var(--_select-padding-block)));
   /* The line sits the trigger's inline padding from the value and from the chevron, so the space is
      even on both sides. */
-  margin-inline: calc(var(--select-trigger-padding-inline, var(--space-padding-control-inline)) - var(--select-trigger-gap, var(--space-gap-control))) calc(-1 * var(--select-trigger-padding-inline, var(--space-padding-control-inline)));
-  padding-inline: var(--select-trigger-padding-inline, var(--space-padding-control-inline));
+  margin-inline: calc(var(--select-trigger-padding-inline, var(--_select-padding-inline)) - var(--select-trigger-gap, var(--space-gap-control))) calc(-1 * var(--select-trigger-padding-inline, var(--_select-padding-inline)));
+  padding-inline: var(--select-trigger-padding-inline, var(--_select-padding-inline));
   border-inline-start: var(--select-trigger-border-width, var(--border-width-baseline)) solid var(--_select-trigger-border);
   border-start-end-radius: calc(var(--select-trigger-border-radius, var(--radius-control)) - var(--select-trigger-border-width, var(--border-width-baseline)));
   border-end-end-radius: calc(var(--select-trigger-border-radius, var(--radius-control)) - var(--select-trigger-border-width, var(--border-width-baseline)));

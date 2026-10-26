@@ -6,7 +6,7 @@ export const gridListContent: DocsPageContent = {
   id: 'grid-list',
   kind: 'component',
   title: 'Grid list',
-  description: 'A grid list shows items that can be chosen, and each item can hold its own controls, such as buttons or links.',
+  description: '`GridList` is a component that shows items that can be chosen, and each item can hold its own controls, such as buttons or links.',
   sections: [
     { key: 'example', intro: ['In the stack layout, items are rows. With `selectionMode="multiple"`, each gets a checkbox, and a chosen item takes the soft tint and the indicator bar.', 'With `layout="grid"`, items are cards that wrap onto as many columns as fit.'] },
   ],

@@ -20,7 +20,7 @@
      and its label) is closest; then a field (label, input and help text); then a cluster of
      components, such as the blocks in a card. */
   --space-gap-control: var(--space-2);
-  --space-gap-field: var(--space-2);
+  --space-gap-field: var(--space-1);
   --space-gap-cluster: var(--space-4);
   /* Text that belongs together, such as a heading and the text it introduces, a label and its help
      text, or a title and its metadata. Closer than the gap between groups, so the grouping shows. */

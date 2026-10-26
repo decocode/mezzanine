@@ -232,16 +232,16 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'search',
         label: 'Search',
         pages: [
-          { id: 'search-field', label: 'SearchField', path: '/search-field', status: 'implemented' },
+          { id: 'search-field', label: 'Search field', path: '/search-field', status: 'implemented' },
           { id: 'autocomplete', label: 'Autocomplete', path: '/autocomplete', status: 'implemented' },
-          { id: 'search-trigger', label: 'SearchTrigger', path: '/search-trigger', status: 'implemented' },
+          { id: 'search-trigger', label: 'Search trigger', path: '/search-trigger', status: 'implemented' },
         ],
       },
       {
         id: 'options',
         label: 'Options',
         pages: [
-          { id: 'list-box', label: 'ListBox', path: '/list-box', status: 'implemented' },
+          { id: 'list-box', label: 'List box', path: '/list-box', status: 'implemented' },
           { id: 'select', label: 'Select', path: '/select', status: 'implemented' },
           { id: 'combo-box', label: 'Combo box', path: '/combo-box', status: 'implemented' },
           { id: 'menu', label: 'Menu', path: '/menu', status: 'implemented' },
@@ -274,7 +274,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'structure',
         label: 'Structure',
         pages: [
-          { id: 'app-shell', label: 'AppShell', path: '/app-shell', status: 'implemented' },
+          { id: 'app-shell', label: 'App shell', path: '/app-shell', status: 'implemented' },
           { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
           { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
           { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },

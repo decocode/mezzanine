@@ -25,13 +25,13 @@ export default function SliderPage() {
             align="stretch"
             codeView={sliderExampleCode({ defaultValue, orientation, step: Number(step), ...flags })}
             endPanel={<>
-              <Select label={sliderExample.defaultValueLabel} selectedKey={defaultValueKey} onSelectionChange={(key) => { if (key != null) setDefaultValueKey(key as DefaultValueKey) }}>
+              <Select size="sm" label={sliderExample.defaultValueLabel} selectedKey={defaultValueKey} onSelectionChange={(key) => { if (key != null) setDefaultValueKey(key as DefaultValueKey) }}>
                 {Object.keys(sliderDefaultValues).map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
-              <Select label={sliderExample.orientationLabel} selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof sliderOrientations)[number]) }}>
+              <Select size="sm" label={sliderExample.orientationLabel} selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof sliderOrientations)[number]) }}>
                 {sliderOrientations.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
-              <Select label={sliderStepLabel} selectedKey={step} onSelectionChange={(key) => { if (key != null) setStep(key as (typeof sliderSteps)[number]) }}>
+              <Select size="sm" label={sliderStepLabel} selectedKey={step} onSelectionChange={(key) => { if (key != null) setStep(key as (typeof sliderSteps)[number]) }}>
                 {sliderSteps.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
               {sliderFlags.map((name) => (

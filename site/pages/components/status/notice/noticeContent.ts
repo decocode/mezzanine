@@ -12,7 +12,7 @@ export const noticeContent: DocsPageContent = {
   id: 'notice',
   kind: 'component',
   title: 'Notice',
-  description: 'When a short note needs to stand out from the text around it.',
+  description: '`Notice` is a component that makes a short note stand out from the text around it.',
   sections: [
     {
       key: 'whatItsFor',

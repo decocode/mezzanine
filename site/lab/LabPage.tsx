@@ -8,6 +8,8 @@ import { LayoutFutureChildPage, LayoutFuturePage, LayoutChildPage, LayoutOvervie
 import { labContent, labNavigationItems } from './labContent'
 import { layoutPages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
+import { panelDemoAreaPage } from './panel-demo-area/panelDemoAreaContent'
+import { PanelDemoAreaExperiment } from './panel-demo-area/PanelDemoAreaExperiment'
 import { volumeAndZoomPage } from './volume-and-zoom/volumeAndZoomContent'
 import { VolumeAndZoomExperiment } from './volume-and-zoom/VolumeAndZoomExperiment'
 import { collectResults, docsSearchSection } from '../components/siteSearchLogic'
@@ -30,7 +32,8 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const isFuture = currentPath === emergingFeatures.href
   const futurePage = futurePages.find((item) => item.href === currentPath)
   const isVolumeAndZoom = currentPath === volumeAndZoomPage.href
-  const pageTitle = layoutPage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title ?? (isVolumeAndZoom ? volumeAndZoomPage.title : undefined))
+  const isPanelDemoArea = currentPath === panelDemoAreaPage.href
+  const pageTitle = layoutPage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title ?? (isVolumeAndZoom ? volumeAndZoomPage.title : isPanelDemoArea ? panelDemoAreaPage.title : undefined))
   const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} searchSections={labSearchSections} />
 
@@ -52,7 +55,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : layoutPage ? <LayoutChildPage page={layoutPage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : isVolumeAndZoom ? <VolumeAndZoomExperiment /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : layoutPage ? <LayoutChildPage page={layoutPage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : isVolumeAndZoom ? <VolumeAndZoomExperiment /> : isPanelDemoArea ? <PanelDemoAreaExperiment /> : <NotFoundPage />}
     </DocsShell>
   </>
 }

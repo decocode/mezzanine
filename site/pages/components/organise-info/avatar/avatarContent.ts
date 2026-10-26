@@ -6,7 +6,7 @@ export const avatarContent: DocsPageContent = {
   id: 'avatar',
   kind: 'component',
   title: 'Avatar',
-  description: 'An avatar is a small round picture of who something is from: a person, a sub-brand or an outside source. With a name, it shows the name beside the picture.',
+  description: '`Avatar` is a component that shows a small round picture of who something is from: a person, a sub-brand or an outside source. With a name, it shows the name beside the picture.',
   sections: [
     { key: 'example', intro: ['`Avatar` shows a picture, or initials when there’s no picture, with an optional name beside it.'] },
   ],

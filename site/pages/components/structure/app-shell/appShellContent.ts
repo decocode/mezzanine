@@ -21,7 +21,7 @@ export const appShellExampleLabels = {
 export const appShellContent: DocsPageContent = {
   id: 'app-shell',
   kind: 'component',
-  title: 'AppShell',
+  title: 'App shell',
   description: '`AppShell` is a component that arranges the frame around the main content, such as a TopBar, Panels and a Footer.',
   sections: [
     { key: 'example', intro: ['A header with three PanelTriggers, and Panels at the start, end and bottom. The bottom Panel shows a minimised version when it isn’t open.'] },

@@ -6,7 +6,7 @@ export const formContent: DocsPageContent = {
   id: 'form',
   kind: 'component',
   title: 'Form',
-  description: 'A form groups fields and the button that sends them, and shows their errors together.',
+  description: '`Form` is a component that groups fields and the button that sends them, and shows their errors together.',
   sections: [
     { key: 'example', intro: ['`Form` lays its fields out one above another, with room between them. Sending it with a required field empty shows that field’s error.'] },
   ],

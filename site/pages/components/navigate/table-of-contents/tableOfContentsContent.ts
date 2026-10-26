@@ -8,7 +8,7 @@ export const tableOfContentsContent: DocsPageContent = {
   id: 'table-of-contents',
   kind: 'component',
   title: 'Table of contents',
-  description: 'A table of contents lists the sections of a page as links. It helps people see what the page covers and jump straight to the part they need.',
+  description: '`TableOfContents` is a component that lists the sections of a page as links. It helps people see what the page covers and jump straight to the part they need.',
   sections: [
     {
       key: 'example',

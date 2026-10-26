@@ -4,7 +4,7 @@ export const virtualizerContent: DocsPageContent = {
   id: 'virtualizer',
   kind: 'component',
   title: 'Virtualizer',
-  description: 'A virtualizer keeps a long list fast by drawing only the items in view, and swapping them as the list scrolls.',
+  description: '`Virtualizer` is a component that keeps a long list fast by drawing only the items in view, and swapping them as the list scrolls.',
   sections: [
     { key: 'example', intro: ['A list box of a thousand options inside a `Virtualizer`. Only the rows in view, and a few either side, are on the page at once.'] },
   ],

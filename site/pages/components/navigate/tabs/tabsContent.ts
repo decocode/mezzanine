@@ -6,7 +6,7 @@ export const tabsContent: DocsPageContent = {
   id: 'tabs',
   kind: 'component',
   title: 'Tabs',
-  description: 'Tabs are a row or column of labelled controls that switch between related sections of content in the same place. Only one section is shown at a time, and the selected tab tells people which section they are viewing.',
+  description: '`Tabs` is a component that shows a row or column of labelled controls, which switch between related sections of content in the same place. Only one section is shown at a time, and the selected tab tells people which section they are viewing.',
   sections: [
     {
       key: 'example',

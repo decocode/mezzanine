@@ -5,11 +5,12 @@ import type { CodeBlockLanguage } from '../CodeBlock/codeBlockHighlight'
 // The demo frame has its own look, so its Tabs root is React Aria's, without Mezzanine's class.
 import { Tabs } from 'react-aria-components/Tabs'
 import { Tab, TabList, TabPanel } from '../Tabs/Tabs'
-import { Separator } from '../Separator/Separator'
-import { ToggleButton, ToggleButtonGroup } from '../ToggleButton/ToggleButton'
-import { Toolbar } from '../Toolbar/Toolbar'
-import { LayoutIcon, MoonIcon, PanelRightCloseIcon, PanelRightOpenIcon, SunIcon } from '../../icons/Icons'
+import { ListBoxItem } from '../ListBox/ListBox'
+import { Select } from '../Select/Select'
+import { Button } from '../Button/Button'
+import { ChevronDownIcon, ChevronUpIcon, LayoutIcon, MoonIcon, SunIcon } from '../../icons/Icons'
 import { getPageTheme, getServerPageTheme, isDemoTheme, subscribeToPageTheme, type DemoTheme } from './demoAreaLogic'
+import { useIsSideBySide } from './demoAreaLayout'
 
 // Where the demo sits in its area, in CSS's alignment words: in the middle, stretched to fill the
 // width, or at the start at its own size.
@@ -29,16 +30,17 @@ export interface DemoAreaProps {
 }
 
 const themeOptions: { id: DemoTheme; label: string; icon: ReactNode }[] = [
-  { id: 'light', label: 'Light theme', icon: <SunIcon /> },
-  { id: 'dark', label: 'Dark theme', icon: <MoonIcon /> },
-  { id: 'wireframe', label: 'Wireframe theme', icon: <LayoutIcon /> },
+  { id: 'light', label: 'Light', icon: <SunIcon /> },
+  { id: 'dark', label: 'Dark', icon: <MoonIcon /> },
+  { id: 'wireframe', label: 'Wireframe', icon: <LayoutIcon /> },
 ]
 
-// A framed area that shows a live demo of components, with a strip of tools above it: a theme picker
-// that changes only this demo, and, with an end panel, a toggle that shows or hides it. With code to
+// A framed area that shows a live demo of components, with a strip above it holding a theme Select that
+// changes only this demo, showing the chosen theme's icon. An end panel of controls hangs from the top:
+// beside the demo on a wide screen, above it on a narrow one, and its header's button rolls it up. With code to
 // show, Demo and Code tabs sit outside the frame, and the Code tab shows a CodeBlock, which is its own
 // frame with its own buttons. A heading above it names the demo. React Aria has
-// no matching component, so Mezzanine composes it from Tabs, ToggleButtonGroup and CodeBlock.
+// no matching component, so Mezzanine composes it from Tabs, Select, Button and CodeBlock.
 export function DemoArea({ children, codeView, codeLanguage = 'tsx', endPanel, align = 'center', className }: DemoAreaProps) {
   const pageTheme = useSyncExternalStore(subscribeToPageTheme, getPageTheme, getServerPageTheme)
   // Until someone picks a theme, the demo follows the page's.
@@ -47,67 +49,77 @@ export function DemoArea({ children, codeView, codeLanguage = 'tsx', endPanel, a
   const propertiesLabelId = useId()
   // The end panel starts open on every page; closing it isn't remembered.
   const [isEndPanelOpen, setIsEndPanelOpen] = useState(true)
+  const endPanelBodyId = useId()
+  const [frameElement, setFrameElement] = useState<HTMLDivElement | null>(null)
+  const isSideBySide = useIsSideBySide(frameElement)
 
-  // The demo's tools, in a toolbar at the end of a strip above it, with a Separator before the
-  // Properties toggle.
-  const tools = (
-    <Toolbar className="mz-demo-area-tools" aria-label="Demo tools">
-      <ToggleButtonGroup
-        aria-label="Demo theme"
-        size="sm"
-        hierarchy="tertiary"
-        selectionMode="single"
-        disallowEmptySelection
-        selectedKeys={[chosenTheme ?? pageTheme]}
-        onSelectionChange={(keys) => {
-          const key = keys.values().next().value
-          if (isDemoTheme(key)) setChosenTheme(key)
-        }}
-      >
-        {themeOptions.map((option) => (
-          <ToggleButton key={option.id} id={option.id} icon={option.icon} iconPosition="iconOnly">{option.label}</ToggleButton>
-        ))}
-      </ToggleButtonGroup>
-      {endPanel != null && <Separator />}
-      {endPanel != null && (
-        <ToggleButton
+  // The theme Select, at the start of the strip across the top.
+  const themeSelect = (
+    <Select
+      aria-label="Demo theme"
+      hierarchy="secondary"
+      size="sm"
+      valuePosition="iconOnly"
+      selectedKey={chosenTheme ?? pageTheme}
+      onSelectionChange={(key) => { if (isDemoTheme(key)) setChosenTheme(key) }}
+    >
+      {themeOptions.map((option) => <ListBoxItem key={option.id} id={option.id} icon={option.icon}>{option.label}</ListBoxItem>)}
+    </Select>
+  )
+
+  // The end panel, like a shop's filters: a header with its title and a button that rolls its controls
+  // up into the header and down again. The header stays, so the button never moves.
+  const panel = endPanel != null && (
+    <div className="mz-demo-area-end-panel" role="group" aria-labelledby={propertiesLabelId} data-open={isEndPanelOpen || undefined}>
+      <div className="mz-demo-area-end-panel-header">
+        <span className="mz-demo-area-end-panel-label" id={propertiesLabelId}>Properties</span>
+        <Button
           size="sm"
           hierarchy="tertiary"
-          // The panel sits at the end, so the icon shows it closing while open, and opening while closed.
-          icon={isEndPanelOpen ? <PanelRightCloseIcon /> : <PanelRightOpenIcon />}
+          icon={isEndPanelOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
           iconPosition="iconOnly"
-          isSelected={isEndPanelOpen}
-          onChange={setIsEndPanelOpen}
+          aria-expanded={isEndPanelOpen}
+          aria-controls={endPanelBodyId}
+          onPress={() => setIsEndPanelOpen(!isEndPanelOpen)}
         >
-          Properties
-        </ToggleButton>
-      )}
-    </Toolbar>
+          {isEndPanelOpen ? 'Hide properties' : 'Show properties'}
+        </Button>
+      </div>
+      <div className="mz-demo-area-end-panel-body" id={endPanelBodyId} hidden={!isEndPanelOpen}>
+        <div className="mz-demo-area-end-panel-clip">
+          <div className="mz-demo-area-end-panel-scroll">
+            <div className="mz-demo-area-end-panel-controls">{endPanel}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 
   // Only the demo takes the chosen theme; the end panel's controls keep the site's. The demo's pop-ups,
   // such as menus and tooltips, render inside it, so they take its theme too.
   const theme = chosenTheme ?? undefined
-  const preview = (
-    <div className="mz-demo-area-preview">
-      <div className="mz-demo-area-content" data-align={align} data-theme={theme} ref={setPreviewElement}>
-        <UNSAFE_PortalProvider getContainer={() => previewElement}>{children}</UNSAFE_PortalProvider>
-      </div>
-      {endPanel != null && (
-        <div className="mz-demo-area-end-panel" role="group" aria-labelledby={propertiesLabelId} hidden={!isEndPanelOpen}>
-          <span className="mz-demo-area-end-panel-label" id={propertiesLabelId}>Properties</span>
-          <div className="mz-demo-area-end-panel-scroll">
-            <div className="mz-demo-area-end-panel-controls">{endPanel}</div>
-          </div>
-        </div>
-      )}
+  const content = (
+    <div className="mz-demo-area-content" data-align={align} data-theme={theme} ref={setPreviewElement}>
+      <UNSAFE_PortalProvider getContainer={() => previewElement}>{children}</UNSAFE_PortalProvider>
     </div>
   )
 
   const classes = ['mz-demo-area', className].filter(Boolean).join(' ')
 
-  // The frame holds the tools' strip and the preview, so the tools leave with it when the Code tab is open.
-  const frame = <div className="mz-demo-area-frame"><div className="mz-demo-area-bar">{tools}</div>{preview}</div>
+  // The frame holds the strip, the end panel and the demo, so they all leave when the Code tab is open.
+  // The panel comes before the demo, as it reads on a narrow screen, where it sits above it.
+  const frame = (
+    <div
+      ref={setFrameElement}
+      className="mz-demo-area-frame"
+      data-end-panel={endPanel != null ? (isEndPanelOpen ? 'open' : 'closed') : undefined}
+      data-side-by-side={(endPanel != null && isSideBySide) || undefined}
+    >
+      <div className="mz-demo-area-bar">{themeSelect}</div>
+      {panel}
+      {content}
+    </div>
+  )
 
   if (codeView == null) {
     return <div className={classes}>{frame}</div>

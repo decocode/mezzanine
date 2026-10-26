@@ -1995,7 +1995,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   "Select": [
     {
       "name": "--select-chevron-size",
-      "fallback": "var(--icon-size-sm)"
+      "fallback": "var(--_select-icon-size)"
     },
     {
       "name": "--select-description-foreground",
@@ -2083,15 +2083,15 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--select-trigger-min-height",
-      "fallback": "var(--target-size-md)"
+      "fallback": "var(--_select-min-height)"
     },
     {
       "name": "--select-trigger-padding-block",
-      "fallback": "var(--space-padding-control-block)"
+      "fallback": "var(--_select-padding-block)"
     },
     {
       "name": "--select-trigger-padding-inline",
-      "fallback": "var(--space-padding-control-inline)"
+      "fallback": "var(--_select-padding-inline)"
     }
   ],
   "Separator": [

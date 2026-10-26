@@ -6,7 +6,7 @@ export const tokenFieldContent: DocsPageContent = {
   id: 'token-field',
   kind: 'component',
   title: 'Token field',
-  description: 'A token field is a text field that can hold tokens, such as people or tags, among its text.',
+  description: '`TokenField` is a component that works like a text field, but can hold tokens, such as people or tags, among its text.',
   sections: [
     { key: 'example', intro: ['`TokenField` shows its `label` and an editable area with the text field’s look. Each token in its value is drawn as a small tinted chip.'] },
   ],

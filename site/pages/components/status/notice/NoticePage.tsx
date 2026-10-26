@@ -27,7 +27,7 @@ export default function NoticePage() {
           <DemoArea align="stretch"
             codeView={noticeExampleCode({ purpose, hasTitle, hasIcon, hasActions, hasContent })}
             endPanel={<>
-              <Select label={noticeExample.purposeLabel} selectedKey={purpose} onSelectionChange={(key) => { if (key != null) setPurpose(key as NoticePurpose) }}>
+              <Select size="sm" label={noticeExample.purposeLabel} selectedKey={purpose} onSelectionChange={(key) => { if (key != null) setPurpose(key as NoticePurpose) }}>
                 {/* A Separator between the two sections, as a direct child of the list. */}
                 {noticePurposeGroups.flatMap((group, index) => [
                   ...(index > 0 ? [<Separator key={`${group.key}-separator`} />] : []),

@@ -295,7 +295,7 @@ same role, never a value typed into one component or page.
 | Token | Default | Meaning |
 | --- | --- | --- |
 | `--space-gap-control` | `--space-2` | An icon or box and its label, inside one control |
-| `--space-gap-field` | `--space-2` | A label, its input and its help text |
+| `--space-gap-field` | `--space-1` | A label, its input and its help text |
 | `--space-gap-cluster` | `--space-4` | Components in a group, such as the blocks in a card |
 | `--space-gap-text` | `--space-2` | Text that belongs together, such as a heading and the text it introduces |
 | `--space-gap-paragraph` | `--space-4` | Between paragraphs and lists in running text (`mz-prose`) |

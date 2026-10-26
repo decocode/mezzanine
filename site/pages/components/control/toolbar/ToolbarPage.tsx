@@ -13,7 +13,7 @@ export default function ToolbarPage() {
           <DemoArea
             codeView={toolbarExampleCode(orientation)}
             endPanel={
-              <Select label={toolbarOrientationLabel} selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof toolbarOrientations)[number]) }}>
+              <Select size="sm" label={toolbarOrientationLabel} selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof toolbarOrientations)[number]) }}>
                 {toolbarOrientations.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
             }

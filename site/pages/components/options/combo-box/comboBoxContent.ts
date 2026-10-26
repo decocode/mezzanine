@@ -6,7 +6,7 @@ export const comboBoxContent: DocsPageContent = {
   id: 'combo-box',
   kind: 'component',
   title: 'Combo box',
-  description: 'A combo box is a text field that suggests options as you type, and opens the full list from its chevron.',
+  description: '`ComboBox` is a component that suggests options as you type into its text field, and opens the full list from its chevron.',
   sections: [
     { key: 'example', intro: ['`ComboBox` shows its `label`, a text field with a chevron button, and the matching options in a popover as wide as the field.'] },
   ],

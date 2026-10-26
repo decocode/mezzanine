@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, Header, ListBox, ListBoxItem, ListBoxSection, Text } from '@decocode/mezzanine'
+import { DemoArea, Header, ListBox, ListBoxItem, ListBoxSection, PlaceholderIcon, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { listBoxContent, listBoxExampleCode, listBoxSections, listBoxSelectionModes } from './listBoxContent'
@@ -9,6 +9,7 @@ export default function ListBoxPage() {
   const [selectionMode, setSelectionMode] = useState<(typeof listBoxSelectionModes)[number]>('single')
   const [disallowEmptySelection, setDisallowEmptySelection] = useState(false)
   const [disabledKeys, setDisabledKeys] = useState(false)
+  const [icon, setIcon] = useState(false)
   const canSelect = selectionMode !== 'none'
   return (
     <ContentPage
@@ -16,11 +17,12 @@ export default function ListBoxPage() {
       parts={{
         example: (
           <DemoArea
-            codeView={listBoxExampleCode({ selectionMode, disallowEmptySelection, disabledKeys })}
+            codeView={listBoxExampleCode({ selectionMode, disallowEmptySelection, disabledKeys, icon })}
             endPanel={<>
               <PanelSelect label="selectionMode" options={listBoxSelectionModes} value={selectionMode} onChange={setSelectionMode} />
               {canSelect && <PanelSwitch isSelected={disallowEmptySelection} onChange={setDisallowEmptySelection}>disallowEmptySelection</PanelSwitch>}
               <PanelSwitch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</PanelSwitch>
+              <PanelSwitch isSelected={icon} onChange={setIcon}>icon</PanelSwitch>
             </>}
           >
             {/* A new key starts the list again, so a change of selection mode clears its choices. */}
@@ -36,7 +38,7 @@ export default function ListBoxPage() {
                 <ListBoxSection key={section.id} id={section.id}>
                   <Header>{section.label}</Header>
                   {section.items.map((item) => (
-                    <ListBoxItem key={item.id} id={item.id} textValue={item.label}>
+                    <ListBoxItem key={item.id} id={item.id} textValue={item.label} icon={icon ? <PlaceholderIcon /> : undefined}>
                       <Text slot="label">{item.label}</Text>
                       <Text slot="description">{item.description}</Text>
                     </ListBoxItem>

@@ -6,7 +6,7 @@ export const tooltipContent: DocsPageContent = {
   id: 'tooltip',
   kind: 'component',
   title: 'Tooltip',
-  description: 'A tooltip is a small text bubble that appears when you hover over a control or reach it with the keyboard. It gives a short label or extra explanation without taking up space on the page.',
+  description: '`Tooltip` is a component that shows a small text bubble when you hover over a control or reach it with the keyboard. It gives a short label or extra explanation without taking up space on the page.',
   sections: [
     {
       key: 'example',

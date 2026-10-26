@@ -6,7 +6,7 @@ export const dialogContent: DocsPageContent = {
   id: 'dialog',
   kind: 'component',
   title: 'Dialog',
-  description: 'A dialog is a box that presents a message or asks someone to complete a small task, such as confirming a decision. When shown over the page as a modal, it must be closed before the person can use the page behind it.',
+  description: '`Dialog` is a component that presents a message or asks someone to complete a small task, such as confirming a decision. When shown over the page as a modal, it must be closed before the person can use the page behind it.',
   sections: [
     { key: 'example', intro: ['A modal dialog blocks interaction with the page behind it. This example can be closed with the Close button, Escape, or a click outside the dialog.', 'Use `Dialog` with `role="alertdialog"` for a confirmation that needs an immediate response. Cancel receives initial focus. Clicking outside does not dismiss this example; Escape still cancels.'] },
   ],

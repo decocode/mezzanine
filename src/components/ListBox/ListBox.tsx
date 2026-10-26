@@ -1,4 +1,4 @@
-import type { RefAttributes } from 'react'
+import type { ReactNode, RefAttributes } from 'react'
 import {
   Header as ReactAriaHeader,
   ListBox as ReactAriaListBox,
@@ -17,9 +17,15 @@ export function ListBox<T>(props: ListBoxProps<T> & RefAttributes<HTMLDivElement
   return <ReactAriaListBox<T> {...props} className={composeClassName('mz-list-box', props.className)} />
 }
 
+export interface ListBoxItemIconProps {
+  // A decorative icon before the option's text, hidden from screen readers. A Select shows it in its
+  // trigger too, with the chosen option's text.
+  icon?: ReactNode
+}
+
 // A selected option shows a checkmark at its end, so selection doesn't rely on colour alone. Plain-text
 // options keep their text for typeahead, because the checkmark makes the children more than a string.
-export function ListBoxItem<T>(props: ListBoxItemProps<T> & RefAttributes<HTMLDivElement>) {
+export function ListBoxItem<T>({ icon, ...props }: ListBoxItemProps<T> & ListBoxItemIconProps & RefAttributes<HTMLDivElement>) {
   const textValue = props.textValue ?? (typeof props.children === 'string' ? props.children : undefined)
   return (
     <ReactAriaListBoxItem<T>
@@ -28,7 +34,12 @@ export function ListBoxItem<T>(props: ListBoxItemProps<T> & RefAttributes<HTMLDi
       className={composeClassName('mz-list-box-item', props.className)}
     >
       {composeRenderProps(props.children, (children, { isSelected }) => <>
-        {children}
+        {icon == null ? children : (
+          <span className="mz-list-box-item-with-icon">
+            <span aria-hidden="true" className="mz-list-box-item-icon">{icon}</span>
+            <span className="mz-list-box-item-text">{children}</span>
+          </span>
+        )}
         {isSelected && <CheckIcon className="mz-list-box-item-check" />}
       </>)}
     </ReactAriaListBoxItem>

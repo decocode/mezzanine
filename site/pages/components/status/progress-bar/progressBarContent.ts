@@ -6,7 +6,7 @@ export const progressBarContent: DocsPageContent = {
   id: 'progress-bar',
   kind: 'component',
   title: 'Progress bar',
-  description: 'A progress bar shows how far a task has got, or that it is still working when the end isn’t known.',
+  description: '`ProgressBar` is a component that shows how far a task has got, or that it is still working when the end isn’t known.',
   sections: [
     { key: 'example', intro: ['`ProgressBar` shows a `label`, the value as a percentage and a filled track.', 'With `isIndeterminate`, a segment travels along the track, and no value is shown. Only the system’s reduced-motion setting stops it, as with Button’s pending spinner.'] },
   ],

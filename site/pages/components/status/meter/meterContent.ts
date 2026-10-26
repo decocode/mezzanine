@@ -6,7 +6,7 @@ export const meterContent: DocsPageContent = {
   id: 'meter',
   kind: 'component',
   title: 'Meter',
-  description: 'A meter shows an amount within a known range, such as storage used or a password’s strength.',
+  description: '`Meter` is a component that shows an amount within a known range, such as storage used or a password’s strength.',
   sections: [
     { key: 'example', intro: ['`Meter` shows a `label`, the value as a percentage and a filled track. Unlike a progress bar, it shows an amount, not a task moving forward, so it never animates.'] },
   ],

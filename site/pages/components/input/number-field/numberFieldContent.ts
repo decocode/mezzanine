@@ -6,7 +6,7 @@ export const numberFieldContent: DocsPageContent = {
   id: 'number-field',
   kind: 'component',
   title: 'Number field',
-  description: 'A number field takes a number, typed in or changed one step at a time with its minus and plus buttons.',
+  description: '`NumberField` is a component that takes a number, typed in or changed one step at a time with its minus and plus buttons.',
   sections: [
     { key: 'example', intro: ['`NumberField` shows its `label` and an input joined to minus and plus buttons. The value is formatted for the reader’s language.'] },
   ],

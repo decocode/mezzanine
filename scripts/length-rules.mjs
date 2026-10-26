@@ -18,6 +18,8 @@ export const allowedRawLengths = [
   { file: 'src/components/Notice/Notice.css', value: '8em' },
   // ProgressBar's indeterminate segment covers a share of its track, not a design size.
   { file: 'src/components/ProgressBar/ProgressBar.css', value: '40%' },
+  // Select's iconOnly value hides its text with the standard visually-hidden box, so screen readers still read it.
+  { file: 'src/components/Select/Select.css', value: '1px' },
   // The scroll fade's keyframe positions, just in from each end of the scroll range, not sizes.
   { file: 'src/styles/scroll.css', value: '1%' },
   { file: 'src/styles/scroll.css', value: '99%' },

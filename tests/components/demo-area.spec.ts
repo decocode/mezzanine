@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
-import { expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
+import { chooseDemoTheme, demoThemeSelect, expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
 
 // Checks, in each theme, that the bar shows the theme picker, a demo theme leaves the end panel in the
 // site's theme, the end panel's controls change the demo, the Code tab shows the source, and the page
@@ -11,11 +11,13 @@ for (const theme of themes) {
     await setTheme(page, theme)
     // The example shows a demo area inside another one.
     const inner = page.locator('.docs-page-lead .mz-demo-area-content .mz-demo-area')
-    await expect(inner.getByRole('radio', { name: 'Light theme' })).toBeVisible()
+    await expect(demoThemeSelect(inner)).toBeVisible()
     const panel = inner.getByRole('group', { name: 'Properties', exact: true })
-    // Choosing Dark for the demo leaves its end panel in the site's theme.
-    await inner.getByRole('radio', { name: 'Dark theme' }).click()
-    await expect(inner.locator('.mz-demo-area-content')).toHaveAttribute('data-theme', 'dark')
+    // Choosing another theme for the demo leaves its end panel in the site's theme. The Select starts on
+    // the page's theme, so it picks one that differs.
+    const [label, chosen] = theme === 'dark' ? ['Light', 'light'] as const : ['Dark', 'dark'] as const
+    await chooseDemoTheme(page, inner, label)
+    await expect(inner.locator('.mz-demo-area-content')).toHaveAttribute('data-theme', chosen)
     expect(await panel.evaluate(element => element.closest('[data-theme]') === document.documentElement)).toBe(true)
     await panel.getByRole('switch').focus()
     await page.keyboard.press('Space')
@@ -36,13 +38,14 @@ test('a demo theme changes only that demo and its pop-ups', async ({ page }) => 
   await setTheme(page, 'light')
   const demo = page.locator('.mz-demo-area').first()
   const pageColor = await page.evaluate(() => getComputedStyle(document.body).backgroundColor)
-  await demo.getByRole('radio', { name: 'Dark theme' }).click()
+  await chooseDemoTheme(page, demo, 'Dark')
   const body = demo.locator('.mz-demo-area-content')
   await expect(body).toHaveAttribute('data-theme', 'dark')
   expect(await body.evaluate(element => getComputedStyle(element).backgroundColor)).not.toBe(pageColor)
   expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe(pageColor)
   await demo.getByRole('button', { name: 'Menu trigger', exact: true }).click()
-  const popover = page.locator('.mz-popover')
+  // The theme list may still be fading out, so this finds the menu's popover.
+  const popover = page.locator('.mz-popover').filter({ has: page.getByRole('menu') })
   await expect(popover).toBeVisible()
   expect(await popover.evaluate(element => element.closest('[data-theme]')?.getAttribute('data-theme'))).toBe('dark')
   // The menu still sits next to its button.
@@ -52,23 +55,27 @@ test('a demo theme changes only that demo and its pop-ups', async ({ page }) => 
   expect(Math.min(Math.abs(menu.y - (trigger.y + trigger.height)), Math.abs(menu.y + menu.height - trigger.y))).toBeLessThan(40)
 })
 
-// Checks that the Properties toggle starts pressed with the panel open, closes the panel and lets
-// the demo take the full width, and opens it again.
-test('the Properties toggle hides and shows the end panel', async ({ page }) => {
+// Checks that the Properties panel's header button starts expanded with the controls showing, rolls
+// them up while the header stays, lets the demo take the full width, and rolls them down again.
+test('the Properties header button hides and shows the controls', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/button')
   const demo = page.locator('.docs-page-lead .mz-demo-area')
-  const toggle = demo.getByRole('button', { name: 'Properties', exact: true })
+  const toggle = demo.getByRole('button', { name: /^(Hide|Show) properties$/ })
   const panel = demo.getByRole('group', { name: 'Properties', exact: true })
-  await expect(toggle).toHaveAttribute('aria-pressed', 'true')
-  await expect(panel).toBeVisible()
+  const controls = panel.locator('.mz-demo-area-end-panel-body')
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  await expect(controls).toBeVisible()
+  const headerBox = (await toggle.boundingBox())!
   await toggle.click()
-  await expect(toggle).toHaveAttribute('aria-pressed', 'false')
-  await expect(panel).toBeHidden()
-  const content = (await demo.locator('.mz-demo-area-content').boundingBox())!
-  const area = (await demo.boundingBox())!
-  expect(area.width - content.width).toBeLessThan(4)
-  await toggle.click()
+  await expect(toggle).toHaveAccessibleName('Show properties')
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(controls).toBeHidden()
   await expect(panel).toBeVisible()
+  expect((await toggle.boundingBox())!.y).toBe(headerBox.y)
+  await expect.poll(async () => (await demo.boundingBox())!.width - (await demo.locator('.mz-demo-area-content').boundingBox())!.width).toBeLessThan(4)
+  await toggle.click()
+  await expect(controls).toBeVisible()
 })
 
 // Checks that the demo's tools belong to the Demo tab: the Code tab shows the code block's own buttons
@@ -76,8 +83,8 @@ test('the Properties toggle hides and shows the end panel', async ({ page }) => 
 test('the demo tools show only on the Demo tab', async ({ page }) => {
   await page.goto('/button')
   const demo = page.locator('.docs-page-lead .mz-demo-area')
-  const themePicker = demo.locator('[aria-label="Demo theme"]')
-  const toggle = demo.getByRole('button', { name: 'Properties', exact: true })
+  const themePicker = demoThemeSelect(demo)
+  const toggle = demo.getByRole('button', { name: /^(Hide|Show) properties$/ })
   await expect(themePicker).toBeVisible()
   await demo.getByRole('tab', { name: 'Code' }).click()
   await expect(themePicker).toHaveCount(0)

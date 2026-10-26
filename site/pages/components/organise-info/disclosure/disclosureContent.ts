@@ -6,7 +6,7 @@ export const disclosureContent: DocsPageContent = {
   id: 'disclosure',
   kind: 'component',
   title: 'Disclosure',
-  description: 'A disclosure is a section that opens and closes when its heading is pressed. It keeps extra information out of the way until someone needs it, as with an answer in a list of frequently asked questions.',
+  description: '`Disclosure` is a component with a heading that opens and closes a section when pressed. It keeps extra information out of the way until someone needs it, as with an answer in a list of frequently asked questions.',
   sections: [
     { key: 'example', intro: ['`DisclosureHeader` shows or hides the `DisclosurePanel`. With `defaultExpanded`, it starts open.'] },
     {

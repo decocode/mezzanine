@@ -6,7 +6,7 @@ export const textAreaContent: DocsPageContent = {
   id: 'text-area',
   kind: 'component',
   title: 'Text area',
-  description: 'A text area is a box for writing several lines of text, such as a message or a description. It gives people room for longer answers and can be made taller by dragging its resize handle where the browser supports one.',
+  description: '`TextArea` is a component for writing several lines of text, such as a message or a description. It gives people room for longer answers and can be made taller by dragging its resize handle where the browser supports one.',
   sections: [
     {
       key: 'example',

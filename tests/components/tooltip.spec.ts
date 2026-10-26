@@ -1,19 +1,20 @@
 import { expect, test, type Page } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
-import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
+import { demoThemeSelect, expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// The theme picker in the Tooltip page's demo, whose buttons show their names in tooltips.
-const demoThemes = (page: Page) => page.locator('.docs-page-lead [aria-label="Demo theme"]')
+// The Tooltip page demo's tools: the theme Select and the Properties panel's button, which show their
+// names in tooltips.
+const demoTools = (page: Page) => page.locator('.docs-page-lead .mz-demo-area-frame')
+const propertiesToggle = (page: Page) => demoTools(page).getByRole('button', { name: /^(Hide|Show) properties$/ })
 
-// Checks that the demo theme picker's tooltips, on the Tooltip page, appear on hover, stay open while the pointer is over
-// the tooltip itself and close with Escape.
-test('theme tooltips support hover, hoverable content and Escape dismissal', async ({ page }) => {
+// Checks that the demo tools' tooltips, on the Tooltip page, appear on hover, stay open while the pointer
+// is over the tooltip itself and close with Escape.
+test('demo tool tooltips support hover, hoverable content and Escape dismissal', async ({ page }) => {
   // A simulated clock lets the test skip past the close delay instead of waiting for it.
   await page.clock.install()
   await page.goto('/tooltip')
   await page.mouse.move(0, 500)
-  for (const name of ['Light theme', 'Dark theme', 'Wireframe theme']) {
-    const control = demoThemes(page).getByRole('radio', { name, exact: true })
+  for (const [name, control] of [['Demo theme', demoThemeSelect(demoTools(page))], ['Hide properties', propertiesToggle(page)]] as const) {
     await control.hover()
     const tooltip = page.getByRole('tooltip', { name, exact: true })
     await expect(tooltip).toBeVisible()
@@ -28,26 +29,25 @@ test('theme tooltips support hover, hoverable content and Escape dismissal', asy
   }
 })
 
-// Checks that moving keyboard focus to a demo theme control on a phone shows its tooltip, that Escape
-// hides the tooltip without moving focus, and that Space still selects the demo's theme.
-test('keyboard focus opens a theme tooltip that Escape closes without blocking the control', async ({ page }) => {
+// Checks that moving keyboard focus to the demo's Properties button on a phone shows its tooltip, that
+// Escape hides the tooltip without moving focus, and that Space still works the button.
+test('keyboard focus opens a tooltip that Escape closes without blocking the control', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/tooltip')
-  const control = demoThemes(page).getByRole('radio', { name: 'Dark theme', exact: true })
+  const control = propertiesToggle(page)
   await page.keyboard.press('Tab')
   await control.focus()
-  const tooltip = page.getByRole('tooltip', { name: 'Dark theme', exact: true })
+  const tooltip = page.getByRole('tooltip', { name: 'Hide properties', exact: true })
   await expect(tooltip).toBeVisible()
   await page.keyboard.press('Escape')
   await expect(tooltip).toBeHidden()
   await expect(control).toBeFocused()
   await page.keyboard.press('Space')
-  await expect(page.locator('.docs-page-lead .mz-demo-area-content')).toHaveAttribute('data-theme', 'dark')
-  await expect(control).toBeChecked()
+  await expect(control).toHaveAttribute('aria-expanded', 'false')
 })
 
-// Checks, in each theme at normal and double text size, that a demo theme tooltip opened with the
+// Checks, in each theme at normal and double text size, that a demo tool's tooltip opened with the
 // keyboard on a phone stays on screen without animating, the control is large enough with a visible
 // focus outline, and both pass an accessibility scan.
 for (const theme of themes) {
@@ -59,12 +59,12 @@ for (const theme of themes) {
       await setTheme(page, theme)
       await setTextSize(page, fontSize)
       // Bring the picker into view first, so focusing it doesn't scroll the page and close the tooltip.
-      await demoThemes(page).evaluate(element => element.scrollIntoView({ block: 'start' }))
+      await demoTools(page).evaluate(element => element.scrollIntoView({ block: 'start' }))
       await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
-      const control = demoThemes(page).getByRole('radio', { name: 'Dark theme', exact: true })
+      const control = propertiesToggle(page)
       await page.keyboard.press('Tab')
       await control.focus()
-      const tooltip = page.getByRole('tooltip', { name: 'Dark theme', exact: true })
+      const tooltip = page.getByRole('tooltip', { name: 'Hide properties', exact: true })
       await expect(tooltip).toBeVisible()
       await expect(tooltip).toHaveCSS('animation-name', 'none')
       const box = (await tooltip.boundingBox())!
@@ -82,8 +82,8 @@ for (const theme of themes) {
 test('theme tooltips remain visible in forced colours', async ({ page }) => {
   await page.emulateMedia({ forcedColors: 'active' })
   await page.goto('/tooltip')
-  await demoThemes(page).getByRole('radio', { name: 'Dark theme', exact: true }).focus()
-  const tooltip = page.getByRole('tooltip', { name: 'Dark theme', exact: true })
+  await propertiesToggle(page).focus()
+  const tooltip = page.getByRole('tooltip', { name: 'Hide properties', exact: true })
   await expect(tooltip).toBeVisible()
   await expect(tooltip).toHaveCSS('border-style', 'solid')
 })
@@ -105,13 +105,13 @@ test('Tooltip documentation example supports hover and keyboard focus at narrow 
   await page.mouse.move(0, 0)
   for (const fontSize of textSizes) {
     await setTextSize(page, fontSize)
-    // Bring the whole demo into view, theme picker and button, so tabbing through them doesn't
-    // scroll the page and close the tooltip the button opens.
-    await page.getByRole('main').locator('.mz-demo-area').first().evaluate(element => element.scrollIntoView({ block: 'start' }))
+    // Bring the demo itself into view, below the Properties panel on a phone, so focusing its button
+    // doesn't scroll the page and close the tooltip the button opens.
+    await page.locator('.docs-page-lead .mz-demo-area-content').evaluate(element => element.scrollIntoView({ block: 'start' }))
     // Let scroll-triggered overlay dismissal finish before focusing the example.
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
-    // Start from the demo bar's Properties toggle, its last control, then Tab into the actual example.
-    await page.locator('.docs-page-lead .mz-demo-area-bar').getByRole('button', { name: 'Properties', exact: true }).evaluate(element => (element as HTMLElement).focus({ preventScroll: true }))
+    // Start from the Properties panel's last control, just before the demo, then Tab into the example.
+    await page.locator('.docs-page-lead .mz-demo-area-end-panel-controls').getByRole('button').last().evaluate(element => (element as HTMLElement).focus({ preventScroll: true }))
     await page.keyboard.press('Tab')
     await expect(button).toBeFocused()
     await expect(tooltip).toBeVisible()

@@ -103,7 +103,7 @@ export const panelContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'AppShell', href: '/app-shell' },
+    { label: 'App shell', href: '/app-shell' },
     { label: 'Button', href: '/button' },
   ],
   references: [

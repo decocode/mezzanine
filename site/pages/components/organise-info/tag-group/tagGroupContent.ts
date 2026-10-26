@@ -6,7 +6,7 @@ export const tagGroupContent: DocsPageContent = {
   id: 'tag-group',
   kind: 'component',
   title: 'Tag group',
-  description: 'A tag group shows a set of small labels, such as categories or filters, that can be chosen or removed.',
+  description: '`TagGroup` is a component that shows a set of small labels, such as categories or filters, that can be chosen or removed.',
   sections: [
     { key: 'example', intro: ['With `selectionMode`, tags can be chosen, and a chosen tag takes the accent fill.', 'With `onRemove`, each tag gets a remove button.'] },
   ],

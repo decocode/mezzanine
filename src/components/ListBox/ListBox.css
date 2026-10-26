@@ -119,6 +119,31 @@
   color: var(--list-box-item-foreground-selected, var(--color-text));
 }
 
+/* An option's icon sits before its text, which keeps its own label and description stacked. */
+.mz-list-box-item-with-icon {
+  display: flex;
+  align-items: center;
+  gap: var(--list-box-item-gap, var(--space-gap-control));
+  min-inline-size: 0;
+}
+
+.mz-list-box-item-icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.mz-list-box-item-icon svg {
+  inline-size: var(--icon-size-sm);
+  block-size: var(--icon-size-sm);
+}
+
+.mz-list-box-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--list-box-item-gap, var(--space-gap-control));
+  min-inline-size: 0;
+}
+
 /* A selected option shows a checkmark at its end, so selection doesn't rely on colour alone. Every
    option keeps room for it, so text doesn't move when the selection changes. */
 .mz-list-box-item {

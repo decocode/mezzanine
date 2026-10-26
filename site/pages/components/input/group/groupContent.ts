@@ -6,7 +6,7 @@ export const groupContent: DocsPageContent = {
   id: 'group',
   kind: 'component',
   title: 'Group',
-  description: 'A group joins related controls, such as an input and a button, into one box.',
+  description: '`Group` is a component that joins related controls, such as an input and a button, into one box.',
   sections: [
     { key: 'example', intro: ['`Group` joins its parts where they meet and puts one focus ring round them all.'] },
   ],

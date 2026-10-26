@@ -6,7 +6,7 @@ export const badgeContent: DocsPageContent = {
   id: 'badge',
   kind: 'component',
   title: 'Badge',
-  description: 'A badge is a small label that highlights a status or category, such as New, Draft or Complete. It gives extra information about an item rather than acting as a button.',
+  description: '`Badge` is a component that highlights a status or category with a small label, such as New, Draft or Complete. It gives extra information about an item rather than acting as a button.',
   sections: [
     { key: 'example', intro: ['`Badge` defaults to the neutral purpose and renders a non-interactive text label.'] },
     { key: 'purposes', title: 'Purposes', intro: ['The `purpose` prop selects a core or semantic colour treatment.'] },

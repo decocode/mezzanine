@@ -3,6 +3,7 @@ import { siteNavigationGroups } from '../siteStructure'
 import { labBadgeLabel } from './shared/labValues'
 import { layoutPages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
+import { panelDemoAreaPage } from './panel-demo-area/panelDemoAreaContent'
 import { volumeAndZoomPage } from './volume-and-zoom/volumeAndZoomContent'
 
 export const labContent = {
@@ -32,6 +33,7 @@ export const labNavigationItems: NavTreeSectionData[] = [
     },
   ] },
   { type: 'section', id: 'components', label: docsGroupLabel('components'), children: [
+    { id: 'panel-demo-area', label: panelDemoAreaPage.title, href: panelDemoAreaPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
     { id: 'volume-and-zoom', label: volumeAndZoomPage.title, href: volumeAndZoomPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
   ] },
 ]

@@ -7,7 +7,7 @@ export const textFieldContent: DocsPageContent = {
   id: 'text-field',
   kind: 'component',
   title: 'Text field',
-  description: 'A text field is a box for entering one line of text, such as a name or an email address. Its label tells people what to enter, and supporting text can explain any requirements or errors.',
+  description: '`TextField` is a component for entering one line of text, such as a name or an email address. Its label tells people what to enter, and supporting text can explain any requirements or errors.',
   sections: [
     { key: 'example', body: ['Read-only text remains selectable; disabled fields are skipped when using Tab.'] },
     {

@@ -29,7 +29,7 @@ export const navigationTreeContent: DocsPageContent = {
   id: 'navigation-tree',
   kind: 'component',
   title: 'Nav Tree',
-  description: 'Nav Tree shows navigation with levels, such as a documentation site’s navigation. You supply the items as data, and Nav Tree supplies the rows, links, expand controls and states. It is built on React Aria’s NavigationTree.',
+  description: '`NavTree` is a component that shows navigation with levels, such as a documentation site’s navigation. You supply the items as data, and `NavTree` supplies the rows, links, expand controls and states. It is built on React Aria’s NavigationTree.',
   sections: [
     { key: 'example', intro: ['Select an item to make it the current page; its parents open automatically. Fruit, Berries and Root vegetables are parents without a page of their own, so their whole label opens and closes them. Vegetables is a page as well as a parent: its label is a link, and a separate control at the end of the row opens and closes it.'] },
   ],

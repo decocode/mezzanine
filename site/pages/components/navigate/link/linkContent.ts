@@ -6,7 +6,7 @@ export const linkContent: DocsPageContent = {
   id: 'link',
   kind: 'component',
   title: 'Link',
-  description: 'A link takes someone to another page, a file or a different part of the current page. Its words or image tell them where it leads.',
+  description: '`Link` is a component that takes someone to another page, a file or a different part of the current page. Its words or image tell them where it leads.',
   sections: [
     { key: 'example', intro: ['This `Link` uses an `href` to navigate to another section on this page.'] },
     { key: 'states' },

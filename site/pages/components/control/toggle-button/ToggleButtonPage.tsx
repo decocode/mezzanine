@@ -38,10 +38,10 @@ export default function ToggleButtonPage() {
           <DemoArea
             codeView={toggleButtonExampleCode({ icon: flags.icon, ...iconProps, ...labelProps, ...tooltipProps, ...props })}
             endPanel={<>
-              <Select label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as (typeof toggleButtonHierarchies)[number]) }}>
+              <Select size="sm" label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as (typeof toggleButtonHierarchies)[number]) }}>
                 {toggleButtonHierarchies.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
-              <Select label="size" selectedKey={size} onSelectionChange={(key) => { if (key != null) setSize(key as ButtonSize) }}>
+              <Select size="sm" label="size" selectedKey={size} onSelectionChange={(key) => { if (key != null) setSize(key as ButtonSize) }}>
                 {buttonSizes.map((option) => <ListBoxItem key={option.size} id={option.size}>{option.size}</ListBoxItem>)}
               </Select>
               <Separator />
@@ -55,6 +55,7 @@ export default function ToggleButtonPage() {
                   on its own, and tooltipPosition for a label in a tooltip. */}
               {flags.icon && (
                 <Select
+                  size="sm"
                   className="demo-panel-new-row"
                   label="iconPosition"
                   selectedKey={iconPosition}
@@ -65,6 +66,7 @@ export default function ToggleButtonPage() {
               )}
               {isIconButton && (
                 <Select
+                  size="sm"
                   className="demo-panel-new-row"
                   label="labelPosition"
                   selectedKey={labelPosition}
@@ -75,6 +77,7 @@ export default function ToggleButtonPage() {
               )}
               {hasTooltip && (
                 <Select
+                  size="sm"
                   label="tooltipPosition"
                   selectedKey={tooltipPosition}
                   onSelectionChange={(key) => { if (key != null) setTooltipPosition(key as (typeof toggleButtonTooltipPositions)[number]) }}

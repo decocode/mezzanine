@@ -71,7 +71,7 @@ export default function CheckboxPage() {
           <DemoArea
             codeView={checkboxGroupExampleCode({ ...groupProps, errorMessage: groupShowsError })}
             endPanel={<>
-              <Select label={checkboxGroupDefaultValueLabel} selectedKey={groupDefault} onSelectionChange={(key) => { if (key != null) setGroupDefault(String(key)) }}>
+              <Select size="sm" label={checkboxGroupDefaultValueLabel} selectedKey={groupDefault} onSelectionChange={(key) => { if (key != null) setGroupDefault(String(key)) }}>
                 {checkboxGroupExampleLabels.checkboxes.map((checkbox) => <ListBoxItem key={checkbox} id={checkbox}>{checkbox}</ListBoxItem>)}
               </Select>
               {checkboxGroupFlags.map((name) => (

@@ -6,7 +6,7 @@ export const sheetContent: DocsPageContent = {
   id: 'sheet',
   kind: 'component',
   title: 'Sheet',
-  description: 'A sheet is a panel that slides in from an edge of the screen and can be swiped away, often from the bottom on a phone.',
+  description: '`Sheet` is a component that slides in from an edge of the screen as a panel, and can be swiped away, often from the bottom on a phone.',
   sections: [
     { key: 'example', intro: ['A `SheetTrigger` opens the `Sheet` from a `Button`. It comes up from the bottom over a dimmed backdrop, with a handle on the side it is swiped from.'] },
   ],

@@ -6,7 +6,7 @@ export const treeContent: DocsPageContent = {
   id: 'tree',
   kind: 'component',
   title: 'Tree',
-  description: 'A tree shows items nested inside one another, such as folders, with each parent opening to show its children.',
+  description: '`Tree` is a component that shows items nested inside one another, such as folders, with each parent opening to show its children.',
   sections: [
     { key: 'example', intro: ['Each level indents its rows, and a parent’s chevron turns as it opens. A chosen row takes the soft tint and the indicator bar.'] },
   ],

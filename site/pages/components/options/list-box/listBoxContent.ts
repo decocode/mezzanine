@@ -5,10 +5,10 @@ import { pointerRows } from '../../../../components/pointerRows'
 export const listBoxContent: DocsPageContent = {
   id: 'list-box',
   kind: 'component',
-  title: 'ListBox',
-  description: 'A list box is a list of options to choose from, optionally grouped into sections.',
+  title: 'List box',
+  description: '`ListBox` is a component that shows a list of options to choose from, optionally grouped into sections.',
   sections: [
-    { key: 'example', intro: ['The arrow keys move between options, and Space or Enter selects one.'] },
+    { key: 'example', intro: ['The arrow keys move between options, and Space or Enter selects one.', '`icon` on a `ListBoxItem` adds a decorative icon before its text.'] },
   ],
   technicalDetails: [
     {
@@ -68,7 +68,8 @@ export const listBoxSections = [
 // disabledKeys turns Option B off.
 export const listBoxSelectionModes = ['none', 'single', 'multiple'] as const
 
-export function listBoxExampleCode({ selectionMode, disallowEmptySelection, disabledKeys }: { selectionMode: string, disallowEmptySelection: boolean, disabledKeys: boolean }) {
+export function listBoxExampleCode({ selectionMode, disallowEmptySelection, disabledKeys, icon = false }: { selectionMode: string, disallowEmptySelection: boolean, disabledKeys: boolean, icon?: boolean }) {
+  const iconProp = icon ? ' icon={<PlaceholderIcon />}' : ''
   const props = formatJsxProps({
     selectionMode: selectionMode === 'none' ? undefined : selectionMode,
     disallowEmptySelection: selectionMode !== 'none' && disallowEmptySelection,
@@ -80,7 +81,7 @@ export function listBoxExampleCode({ selectionMode, disallowEmptySelection, disa
       `  <ListBoxSection id="${section.id}">`,
       `    <Header>${section.label}</Header>`,
       ...section.items.flatMap((item) => [
-        `    <ListBoxItem id="${item.id}" textValue="${item.label}">`,
+        `    <ListBoxItem id="${item.id}" textValue="${item.label}"${iconProp}>`,
         `      <Text slot="label">${item.label}</Text>`,
         `      <Text slot="description">${item.description}</Text>`,
         '    </ListBoxItem>',

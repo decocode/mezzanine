@@ -11,7 +11,7 @@ export const footerContent: DocsPageContent = {
   id: 'footer',
   kind: 'component',
   title: 'Footer',
-  description: '`Footer` is the closing strip of a page, holding small print, links or business address.',
+  description: '`Footer` is a component that forms the closing strip of a page, holding small print, links or business address.',
   sections: [
     { key: 'example', intro: ['Small print and three links. On a narrow screen, they wrap onto new rows.'] },
   ],
@@ -61,7 +61,7 @@ export const footerContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'AppShell', href: '/app-shell' },
+    { label: 'App shell', href: '/app-shell' },
     { label: 'Link', href: '/link' },
     { label: 'Target size', href: '/interaction/target-size' },
   ],

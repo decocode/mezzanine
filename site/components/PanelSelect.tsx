@@ -9,7 +9,7 @@ export function PanelSelect<T extends string>({ label, options, value, onChange,
   className?: string
 }) {
   return (
-    <Select className={className} label={label} selectedKey={value} onSelectionChange={(key) => { if (key != null) onChange(key as T) }}>
+    <Select size="sm" className={className} label={label} selectedKey={value} onSelectionChange={(key) => { if (key != null) onChange(key as T) }}>
       {options.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
     </Select>
   )

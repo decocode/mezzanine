@@ -1,4 +1,4 @@
-import { expect, type Page } from '@playwright/test'
+import { expect, type Locator, type Page } from '@playwright/test'
 
 export const themes = ['light', 'dark', 'wireframe'] as const
 // Normal text and the 200% text size that WCAG reflow requires.
@@ -22,5 +22,13 @@ export const siteThemeSelect = (page: Page) => page.getByRole('banner').getByRol
 
 export async function chooseSiteTheme(page: Page, label: 'Light' | 'Dark' | 'Wireframe') {
   await siteThemeSelect(page).click()
+  await page.getByRole('option', { name: label, exact: true }).click()
+}
+
+// A DemoArea's theme Select, inside the given demo area, which shows the chosen theme's icon.
+export const demoThemeSelect = (demo: Locator) => demo.getByRole('button', { name: /^(Light|Dark|Wireframe) Demo theme$/ }).first()
+
+export async function chooseDemoTheme(page: Page, demo: Locator, label: 'Light' | 'Dark' | 'Wireframe') {
+  await demoThemeSelect(demo).click()
   await page.getByRole('option', { name: label, exact: true }).click()
 }

@@ -5,7 +5,7 @@ export const separatorContent: DocsPageContent = {
   id: 'separator',
   kind: 'component',
   title: 'Separator',
-  description: 'A separator is a thin line that divides groups of content, such as sections of a list or a toolbar.',
+  description: '`Separator` is a component that draws a thin line to divide groups of content, such as sections of a list or a toolbar.',
   sections: [
     { key: 'example', intro: ['`Separator` draws a line across its container. The space around it comes from the layout it sits in.', 'With `orientation="vertical"`, the line runs top to bottom, between items in a row.'] },
   ],

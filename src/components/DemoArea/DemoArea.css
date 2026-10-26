@@ -1,6 +1,7 @@
-/* A live demo in a frame: a strip of tools across the top, then the preview on the page's colour, with
-   optional component controls in an area at its end. With code, Demo and Code tabs sit above, outside
-   the frame, and the Code tab's code block is a frame of its own. */
+/* A live demo in a frame: a strip across the top holding the theme Select, the demo on the page's
+   colour, and optional controls in an end panel that hangs from the top. With room, the panel runs
+   down the end beside the demo; without, it sits between the strip and the demo. With code, Demo and Code tabs sit above, outside the frame, and the Code tab's code
+   block is a frame of its own. */
 .mz-demo-area {
   display: flex;
   flex-direction: column;
@@ -10,8 +11,9 @@
 
 .mz-demo-area-frame {
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'bar' 'panel' 'demo';
   min-inline-size: 0;
   overflow: hidden;
   border: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
@@ -19,37 +21,56 @@
   background: var(--demo-area-background, var(--color-surface));
 }
 
-/* The strip of the demo's tools, at its end, above the preview. */
+/* The strip, with the theme Select at its start. */
 .mz-demo-area-bar {
+  grid-area: bar;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
   gap: var(--demo-area-bar-gap, var(--space-gap-control));
   min-inline-size: 0;
   padding: var(--demo-area-bar-padding-block, var(--space-padding-control-block)) var(--demo-area-bar-padding-inline, var(--space-padding-control-inline));
-  border-block-end: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
 }
 
-.mz-demo-area-tools {
-  margin-inline-start: auto;
+/* With room for the panel beside the demo, it runs down the end of the frame, from the top. Closed, it
+   keeps only its header, beside the strip, and the demo takes the full width once the panel has rolled
+   up. There's room when the frame is at least the demo's narrowest, --demo-area-content-min-width, plus
+   the panel and its offsets; DemoArea measures that, because a container query can't read the
+   pointers. */
+.mz-demo-area-frame[data-side-by-side] {
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: 'bar panel' 'demo panel';
+  /* The layout changes in one step, halfway through its transition: started half a duration early on
+     opening, so the demo makes room at once, and half a duration late on closing, so the demo widens
+     once the panel has rolled up. */
+  transition-property: grid-template-areas;
+  transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
+  transition-timing-function: var(--motion-easing-enter);
+  transition-behavior: allow-discrete;
+  transition-delay: calc(var(--motion-duration-interface) * var(--_motion-enabled) * -0.5);
 }
 
-/* The preview, and the end panel when there is room beside it; without room the panel moves below. */
-.mz-demo-area-preview {
-  display: flex;
-  flex-wrap: wrap;
-  min-inline-size: 0;
-  background: var(--demo-area-preview-background, var(--color-page));
+.mz-demo-area-frame[data-side-by-side][data-end-panel='closed'] {
+  grid-template-areas: 'bar panel' 'demo demo';
+  transition-delay: calc(var(--motion-duration-interface) * var(--_motion-enabled) * 0.5);
+}
+
+.mz-demo-area-frame[data-side-by-side] .mz-demo-area-end-panel {
+  inline-size: var(--demo-area-end-panel-width, var(--width-sm));
+}
+
+.mz-demo-area-frame[data-side-by-side] .mz-demo-area-content {
+  min-inline-size: var(--demo-area-content-min-width, var(--width-md));
 }
 
 /* The demo's own theme applies here, so it sets its colours afresh on the page colour. */
 .mz-demo-area-content {
-  flex: 999 1 0;
-  /* The narrowest the preview gets beside the end panel; below it, the panel wraps underneath. */
-  min-inline-size: min(100%, var(--demo-area-content-min-width, var(--width-md)));
-  /* Generous space above and below, so the demo sits clear of the bar and the area's bottom edge. */
+  grid-area: demo;
+  min-inline-size: 0;
+  /* Generous space above and below, so the demo sits clear of the strip and the area's bottom edge. */
   padding: var(--demo-area-padding, var(--space-8) var(--space-4));
+  border-block-start: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
   background-color: var(--demo-area-preview-background, var(--color-page));
   color: var(--color-text);
 }
@@ -87,43 +108,70 @@
 }
 
 .mz-demo-area-end-panel {
+  grid-area: panel;
   display: flex;
-  flex: 1 1 var(--demo-area-end-panel-width, var(--width-sm));
   flex-direction: column;
-  /* The same space as between a Form's fields. */
-  gap: var(--demo-area-end-panel-gap, var(--space-gap-cluster));
-  /* The panel never gets narrower than its width: without room for that beside the preview, it wraps
-     underneath at full width instead of squashing its controls. */
-  min-inline-size: min(100% - 2 * var(--demo-area-end-panel-offset, var(--surface-gap)), var(--demo-area-end-panel-width, var(--width-sm)));
-  /* A long list of controls scrolls under the label, rather than making the demo very tall. */
+  min-inline-size: 0;
+  /* A long list of controls scrolls under the header, rather than making the demo very tall. */
   max-block-size: var(--demo-area-end-panel-max-height, var(--height-overlay-max));
   /* Like the site's Panels: a card set in by the surface gap, with a header row, then content, both
      starting at the area padding. */
   margin: var(--demo-area-end-panel-offset, var(--surface-gap));
-  padding: var(--space-2) var(--space-padding-area) var(--space-4);
+  padding: var(--space-1) var(--space-padding-area);
   border: var(--demo-area-end-panel-border-width, var(--border-width-hairline)) solid var(--demo-area-border, var(--color-border));
   border-radius: var(--demo-area-end-panel-border-radius, min(var(--radius-surface), var(--radius-sm)));
   background: var(--demo-area-end-panel-background, var(--color-surface));
 }
 
+/* The header: the panel's title, then the button that rolls the controls up and down. It stays put. */
+.mz-demo-area-end-panel-header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-gap-control);
+}
+
+/* The controls roll up into the header and down again, unless motion is reduced. Closed, they leave
+   keyboard and screen reader reach. */
+.mz-demo-area-end-panel-body {
+  display: grid;
+  flex: 0 1 auto;
+  grid-template-rows: 1fr;
+  min-block-size: 0;
+  transition-property: grid-template-rows, opacity, visibility;
+  transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
+  transition-timing-function: var(--motion-easing-enter);
+}
+
+.mz-demo-area-end-panel-body[hidden] {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.mz-demo-area-end-panel-clip {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+  overflow: hidden;
+}
+
 /* The scrolling area for the controls. It fades at an edge with more to see, as scrolling lists do
    (see scroll.css). The controls' grid sits inside it, so the grid's rows still grow to fit what's in
-   them, and a little padding keeps focus rings clear of its edges. */
+   them, and a little padding keeps focus rings clear of its edges. Its margins set the space under
+   the header and at the panel's foot. */
 .mz-demo-area-end-panel-scroll {
   flex: 0 1 auto;
   min-block-size: 0;
-  margin: calc(-1 * var(--focus-ring-width) - var(--focus-ring-offset));
+  margin: calc(var(--space-2) - var(--focus-ring-width) - var(--focus-ring-offset)) calc(-1 * var(--focus-ring-width) - var(--focus-ring-offset)) calc(var(--space-3) - var(--focus-ring-width) - var(--focus-ring-offset));
   padding: calc(var(--focus-ring-width) + var(--focus-ring-offset));
   overflow: auto;
 }
 
-/* Closed from the Properties toggle, the panel leaves the demo the full width. */
-.mz-demo-area-end-panel[hidden] {
-  display: none;
-}
-
-/* The controls sit in a grid of columns at least xs wide: one column beside the preview, and as many
-   as fit when the panel moves below it. */
+/* The controls sit in a grid of columns at least xs wide: one column beside the demo, and as many as
+   fit when the panel sits above it. */
 .mz-demo-area-end-panel-controls {
   display: grid;
   flex: none;
@@ -164,7 +212,7 @@
    group heading rather than one more field label. */
 .mz-demo-area-end-panel-label {
   display: flex;
-  flex: none;
+  flex: 1;
   align-items: center;
   min-block-size: var(--target-size-xs);
   color: var(--demo-area-end-panel-label-foreground, var(--color-accent));

@@ -5,7 +5,7 @@ export const autocompleteContent: DocsPageContent = {
   id: 'autocomplete',
   kind: 'component',
   title: 'Autocomplete',
-  description: 'Autocomplete connects a search field to a list, and filters the list as you type.',
+  description: '`Autocomplete` is a component that connects a search field to a list, and filters the list as you type.',
   sections: [
     { key: 'example', intro: ['Typing filters the options. Focus stays in the field while the arrow keys move through them, and Enter chooses one.'] },
   ],
@@ -35,8 +35,8 @@ export const autocompleteContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'SearchField', href: '/search-field' },
-    { label: 'ListBox', href: '/list-box' },
+    { label: 'Search field', href: '/search-field' },
+    { label: 'List box', href: '/list-box' },
   ],
   references: [
     { label: 'React Aria Autocomplete', href: 'https://react-aria.adobe.com/Autocomplete' },

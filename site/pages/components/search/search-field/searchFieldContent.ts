@@ -5,8 +5,8 @@ import { pointerRows } from '../../../../components/pointerRows'
 export const searchFieldContent: DocsPageContent = {
   id: 'search-field',
   kind: 'component',
-  title: 'SearchField',
-  description: 'A search field is a text box for search terms, with a search icon and a button that clears it.',
+  title: 'Search field',
+  description: '`SearchField` is a component for typing search terms, with a search icon and a button that clears it.',
   sections: [
     { key: 'example', intro: ['The clear button or the Escape key empties the field.'] },
   ],

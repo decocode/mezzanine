@@ -5,7 +5,7 @@ export const breadcrumbsContent: DocsPageContent = {
   id: 'breadcrumbs',
   kind: 'component',
   title: 'Breadcrumbs',
-  description: 'Breadcrumbs are a trail of links showing where you are within a website, such as Home, Products and a product page. They help you return to a broader section without retracing every page you visited.',
+  description: '`Breadcrumbs` is a component that shows a trail of links to where you are within a website, such as Home, Products and a product page. It helps you return to a broader section without retracing every page you visited.',
   sections: [
     { key: 'example', intro: ['Earlier levels are links. The final item identifies the current page and is not a link.', 'A disabled `Breadcrumbs` list shows the hierarchy but none of its links can be used.'] },
   ],

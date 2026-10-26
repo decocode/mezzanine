@@ -6,7 +6,7 @@ export const modalContent: DocsPageContent = {
   id: 'modal',
   kind: 'component',
   title: 'Modal',
-  description: 'A modal shows a dialog over the page, and keeps people in it until they close it.',
+  description: '`Modal` is a component that shows a dialog over the page, and keeps people in it until they close it.',
   sections: [
     { key: 'example', intro: ['A `ModalOverlay` dims the page, and the `Modal` holds a `Dialog` in the middle of the screen. It fades and grows a little as it opens.'] },
   ],

@@ -5,8 +5,8 @@ import { pointerRows } from '../../../../components/pointerRows'
 export const searchTriggerContent: DocsPageContent = {
   id: 'search-trigger',
   kind: 'component',
-  title: 'SearchTrigger',
-  description: 'Search trigger is the button that launches Search.',
+  title: 'Search trigger',
+  description: '`SearchTrigger` is a component that launches Search.',
   sections: [
     { key: 'example', intro: ['The trigger opens a search dialog. Enter or Space opens it from the keyboard, and focus returns to the trigger when the dialog closes.', 'With `iconPosition="iconOnly"`, only the icon shows. The label appears in a tooltip and is still the accessible name.'] },
   ],
@@ -48,7 +48,7 @@ export const searchTriggerContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'SearchField', href: '/search-field' },
+    { label: 'Search field', href: '/search-field' },
     { label: 'Autocomplete', href: '/autocomplete' },
     { label: 'Button', href: '/button' },
     { label: 'Dialog', href: '/dialog' },

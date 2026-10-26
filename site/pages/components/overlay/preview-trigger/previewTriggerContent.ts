@@ -5,7 +5,7 @@ export const previewTriggerContent: DocsPageContent = {
   id: 'preview-trigger',
   kind: 'component',
   title: 'Preview trigger',
-  description: 'A preview trigger shows a small preview of what a link or button leads to, in a popover, while it is hovered or focused.',
+  description: '`PreviewTrigger` is a component that shows a small preview of what a link or button leads to, in a popover, while it is hovered or focused.',
   sections: [
     { key: 'example', intro: ['After a short wait on hover or focus, the preview opens in a `Popover`. Unlike a tooltip, it can hold links and buttons, and Tab moves into it.'] },
   ],

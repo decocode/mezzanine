@@ -57,10 +57,10 @@ export default function ButtonPage() {
           <DemoArea
             codeView={buttonExampleCode(codeProps)}
             endPanel={<>
-              <Select label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as ButtonHierarchy) }}>
+              <Select size="sm" label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as ButtonHierarchy) }}>
                 {buttonHierarchies.map((option) => <ListBoxItem key={option.hierarchy} id={option.hierarchy}>{option.hierarchy}</ListBoxItem>)}
               </Select>
-              <Select label="size" selectedKey={size} onSelectionChange={(key) => { if (key != null) setSize(key as ButtonSize) }}>
+              <Select size="sm" label="size" selectedKey={size} onSelectionChange={(key) => { if (key != null) setSize(key as ButtonSize) }}>
                 {buttonSizes.map((option) => <ListBoxItem key={option.size} id={option.size}>{option.size}</ListBoxItem>)}
               </Select>
               <Separator />
@@ -74,6 +74,7 @@ export default function ButtonPage() {
               {/* Each icon setting appears once it applies. */}
               {flags.icon && (
                 <Select
+                  size="sm"
                   className="demo-panel-new-row"
                   label="iconPosition"
                   selectedKey={iconPosition}
@@ -84,6 +85,7 @@ export default function ButtonPage() {
               )}
               {isIconButton && (
                 <Select
+                  size="sm"
                   className="demo-panel-new-row"
                   label="labelPosition"
                   selectedKey={labelPosition}
@@ -94,6 +96,7 @@ export default function ButtonPage() {
               )}
               {hasTooltip && (
                 <Select
+                  size="sm"
                   label="tooltipPosition"
                   selectedKey={tooltipPosition}
                   onSelectionChange={(key) => { if (key != null) setTooltipPosition(key as (typeof buttonTooltipPositions)[number]) }}

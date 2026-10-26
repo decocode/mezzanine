@@ -6,7 +6,7 @@ export const menuContent: DocsPageContent = {
   id: 'menu',
   kind: 'component',
   title: 'Menu',
-  description: 'A menu lists actions to choose from, in a popover opened by a button.',
+  description: '`Menu` is a component that lists actions to choose from, in a popover opened by a button.',
   sections: [
     { key: 'example', intro: ['A `MenuTrigger` opens the `Menu` in a `Popover` from a `Button`. Its items are rows, like a list box’s options.', 'With `selectionMode`, items can be chosen, and a tick marks each chosen one. A `SubmenuTrigger` opens a further menu, marked with a chevron.'] },
   ],

@@ -6,7 +6,7 @@ export const cardContent: DocsPageContent = {
   id: 'card',
   kind: 'component',
   title: 'Card',
-  description: 'A card groups related content, such as a picture, a heading, some text and actions, on its own surface. With a linked title, pressing anywhere on the card follows the link, while the controls inside it still work on their own.',
+  description: '`Card` is a component that groups related content, such as a picture, a heading, some text and actions, on its own surface. With a linked title, pressing anywhere on the card follows the link, while the controls inside it still work on their own.',
   sections: [
     { key: 'example', intro: ['`Card` renders a surface with a border, a raised shadow and space around its content. Its content is composed from the Card parts and other components.'] },
   ],
