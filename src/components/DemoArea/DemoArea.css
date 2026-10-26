@@ -97,10 +97,8 @@
   /* The panel never gets narrower than its width: without room for that beside the preview, it wraps
      underneath at full width instead of squashing its controls. */
   min-inline-size: min(100% - 2 * var(--demo-area-end-panel-offset, var(--surface-gap)), var(--demo-area-end-panel-width, var(--width-sm)));
-  /* A long list of controls scrolls inside the panel, rather than making the demo very tall. The
-     controls' grid sits inside the scrolling box, so its rows still grow to fit what's in them. */
+  /* A long list of controls scrolls under the label, rather than making the demo very tall. */
   max-block-size: var(--demo-area-end-panel-max-height, var(--height-overlay-max));
-  overflow: auto;
   /* Like the site's Panels: a card set in by the surface gap, with a header row, then content, both
      starting at the area padding. */
   margin: var(--demo-area-end-panel-offset, var(--surface-gap));
@@ -108,6 +106,17 @@
   border: var(--demo-area-end-panel-border-width, var(--border-width-hairline)) solid var(--demo-area-border, var(--color-border));
   border-radius: var(--demo-area-end-panel-border-radius, min(var(--radius-surface), var(--radius-sm)));
   background: var(--demo-area-end-panel-background, var(--color-surface));
+}
+
+/* The scrolling area for the controls. It fades at an edge with more to see, as scrolling lists do
+   (see scroll.css). The controls' grid sits inside it, so the grid's rows still grow to fit what's in
+   them, and a little padding keeps focus rings clear of its edges. */
+.mz-demo-area-end-panel-scroll {
+  flex: 0 1 auto;
+  min-block-size: 0;
+  margin: calc(-1 * var(--focus-ring-width) - var(--focus-ring-offset));
+  padding: calc(var(--focus-ring-width) + var(--focus-ring-offset));
+  overflow: auto;
 }
 
 /* The controls sit in a grid of columns at least xs wide: one column beside the preview, and as many
@@ -131,6 +140,15 @@
    Checkboxes and switches keep their own width. */
 .mz-demo-area-end-panel-controls > :not(.mz-checkbox, .mz-switch-field) {
   justify-self: stretch;
+}
+
+/* A checkbox or switch beside a field lines up with the field's box, not its label: it sits at the
+   bottom of the row, centred on a field's height. */
+.mz-demo-area-end-panel-controls > :is(.mz-checkbox, .mz-switch-field) {
+  align-self: end;
+  display: flex;
+  align-items: center;
+  min-block-size: var(--target-size-md);
 }
 
 /* A Separator between groups of controls runs across every column. */

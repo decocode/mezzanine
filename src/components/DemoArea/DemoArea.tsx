@@ -62,7 +62,7 @@ export function DemoArea({ children, codeView, endPanel, align = 'center', class
           }}
         >
           {themeOptions.map((option) => (
-            <ToggleButton key={option.id} id={option.id} icon={option.icon} iconPosition="only">{option.label}</ToggleButton>
+            <ToggleButton key={option.id} id={option.id} icon={option.icon} iconPosition="iconOnly">{option.label}</ToggleButton>
           ))}
         </ToggleButtonGroup>
       </div>
@@ -80,7 +80,9 @@ export function DemoArea({ children, codeView, endPanel, align = 'center', class
       {endPanel != null && (
         <div className="mz-demo-area-end-panel" role="group" aria-labelledby={propertiesLabelId}>
           <span className="mz-demo-area-end-panel-label" id={propertiesLabelId}>Properties</span>
-          <div className="mz-demo-area-end-panel-controls">{endPanel}</div>
+          <div className="mz-demo-area-end-panel-scroll">
+            <div className="mz-demo-area-end-panel-controls">{endPanel}</div>
+          </div>
         </div>
       )}
     </div>
