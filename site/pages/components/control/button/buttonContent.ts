@@ -1,5 +1,6 @@
 import type { ButtonSize, ButtonHierarchy } from '@decocode/mezzanine'
-import type { Copy, DocsPageContent } from '../../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export type ButtonPreviewState = 'enabled' | 'hovered' | 'pressed' | 'focused' | 'pending' | 'disabled'
@@ -40,71 +41,30 @@ const sizeRows: Record<ButtonSize, { label: string; usage: string }> = {
 
 export const buttonSizes = (Object.keys(sizeRows) as ButtonSize[]).map(size => ({ size, ...sizeRows[size] }))
 
-// Rows of the table in Button label and Icon placement; the page renders a live Button in each.
-export const buttonContentOptions: {
-  id: 'text-only' | 'leading-icon' | 'trailing-icon' | 'label-tooltip' | 'label-below' | 'label-above'
-  name: string
-  prop?: string
-  description: string
-}[] = [
-    { id: 'text-only', name: 'Text-only', description: 'Buttons use a text label without an icon by default.' },
-    { id: 'leading-icon', name: 'Text + icon leading', prop: 'icon', description: 'Places an icon before the label.' },
-    { id: 'trailing-icon', name: 'Text + icon trailing', prop: 'iconPosition="trailing"', description: 'Places an icon after the label.' },
-    { id: 'label-tooltip', name: 'Icon, label in a tooltip', prop: 'iconPosition="only"', description: 'Shows only the icon. The label appears in a tooltip on hover and keyboard focus, and is the button’s accessible name.' },
-    { id: 'label-below', name: 'Icon, label below', prop: 'labelPosition="bottom"', description: 'Shows the label under the icon, as in a Rail.' },
-    { id: 'label-above', name: 'Icon, label above', prop: 'labelPosition="top"', description: 'Shows the label over the icon.' },
-  ]
-
-// Copy shown inside the live examples.
+// Copy shown inside the live example.
 export const buttonExampleCopy = {
   pressCount: 'Press count:',
-  navigation: {
-    lead: 'Want to know how a navigational button works with a keyboard or screen reader?',
-    label: 'Read accessibility details',
-    hint: 'This button is a link to an anchor on this page: its href is #button-accessibility, so it jumps to the Accessibility section in Technical details and opens it.',
-    href: '#button-accessibility',
-  },
 } as const
 
-export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy } = {
+export const buttonContent: DocsPageContent = {
   id: 'button',
   kind: 'component',
-  // Also used by the Toggle button page.
-  iconButtonLabel: 'Download',
   title: 'Button',
-  description: 'A button lets someone do something, such as submit a form, save their work or trigger a dialog. Its label tells them what will happen when they press it.',
+  description: 'A button triggers an action, such as submitting a form.',
   sections: [
-    { key: 'example', intro: ['`Button` defaults to the primary hierarchy and medium size. Pressing it runs its `onPress` handler, which updates the count.'] },
     {
-      key: 'navigationalButtons',
-      title: 'Navigational buttons',
-      intro: [
-        'Most buttons do something, such as saving a form. Sometimes a button needs to take people to another page instead, like a Get started call to action. Give `Button` an `href` and it becomes a link that looks exactly like a button.',
-        'Use this when the button’s main job is to go somewhere. For links within a sentence, use `Link`.',
+      key: 'usingAButton',
+      title: 'Using a Button',
+      body: [
+        'Pressing a button runs its `onPress` handler. The button label should tell people exactly what will happen when they press it. For example, `destructive` buttons identify actions that delete or remove something. Give a Button an `href` and it becomes a link. The default style is a medium-sized primary text-only button.',
       ],
     },
-    { key: 'labelAndIconPlacement', title: 'Button label and Icon placement' },
-    { key: 'sizes', title: 'Button sizes' },
-    {
-      key: 'hierarchy',
-      title: 'Button hierarchy',
-      intro: [
-        'Button hierarchy communicates the relative importance of actions.',
-        {
-          list: [
-            '**Primary:** emphasises the main action.',
-            '**Secondary:** supports the main action.',
-            '**Tertiary:** gives lower-priority actions less visual emphasis.',
-            '**Destructive:** identifies actions that delete or remove something; it communicates purpose rather than another level of importance.',
-          ],
-        },
-      ],
-    },
+    { key: 'example' },
   ],
   technicalDetails: [
     {
       key: 'anatomy',
-      intro: ['`Button` places its label and icon in six ways: text only; an icon before or after the label, with `icon` and `iconPosition`; or an icon button, with `iconPosition="only"`, whose label sits in a tooltip, or at the top or bottom of the icon, with `labelPosition`. An icon button’s label is always its children, so the visible words and the accessible name match.'],
+      intro: ['`Button` places its label and icon in six ways: text only; an icon before or after the label, with `icon` and `iconPosition`; or an icon button, with `iconPosition="iconOnly"`, whose label sits in a tooltip, or at the top or bottom of the icon, with `labelPosition`. An icon button’s label is always its children, so the visible words and the accessible name match.'],
       table: {
         label: 'Button anatomy',
         nameColumn: 'Component',
@@ -129,7 +89,7 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
       intro: [
         'Without `href`, Button is a native `<button>`. Screen readers announce it as a button, and both Enter and Space activate it.',
         'With `href`, Button is a React Aria `Link`. Screen readers announce it as a link, Enter activates it but Space does not, and people can open it in a new tab or copy its address. React Aria keeps Button and Link separate for these reasons; Mezzanine’s Button chooses the right one for you.',
-        'An icon button’s label is its accessible name, wherever it appears. A tooltip label shows on hover and keyboard focus, but not on touch screens, so use `below` or `above` where people need to read the label on touch.',
+        'An icon button’s label is its accessible name, wherever it appears. A tooltip label shows on hover and keyboard focus, but not on touch screens, so use `labelPosition="top"` or `"bottom"` where people need to read the label on touch.',
       ],
     },
     {
@@ -169,4 +129,16 @@ export const buttonContent: DocsPageContent & { readonly iconButtonLabel: Copy }
     { label: 'React Aria Button', href: 'https://react-aria.adobe.com/Button' },
     { label: 'React Aria Link (navigation behaviour)', href: 'https://react-aria.adobe.com/Link' },
   ],
+}
+
+// The Example's Properties panel choices, in panel order. A default choice is left out of the code;
+// the icon settings appear one by one as they apply.
+export const buttonExampleLabel = 'Press'
+export const buttonFlags = ['isPending', 'isDisabled', 'icon'] as const
+export const buttonIconPositions = ['leading', 'trailing', 'iconOnly'] as const
+export const buttonLabelPositions = ['tooltip', 'top', 'bottom'] as const
+export const buttonTooltipPositions = ['top', 'bottom', 'start', 'end'] as const
+
+export function buttonExampleCode({ icon, ...props }: Record<string, unknown>) {
+  return `<Button${icon ? ' icon={<DownloadIcon />}' : ''}${formatJsxProps(props)} onPress={handlePress}>${buttonExampleLabel}</Button>`
 }

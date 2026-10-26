@@ -57,34 +57,26 @@ test('secondary selection remains visible in forced colours', async ({ page }) =
 // each of the five sizes, and that the theme switcher uses the small size.
 for (const fontSize of textSizes) {
   test(`Button and ToggleButton share all size dimensions at ${fontSize}px root text`, async ({ page }) => {
-    const dimensions = async (route: string, tableName: string) => {
+    // Each page's Example shows an icon-only control at each size in turn.
+    const dimensions = async (route: string, selector: string) => {
       await page.goto(route)
       await setTextSize(page, fontSize)
-      const table = page.getByRole('grid', { name: tableName, exact: true })
-      await expect(table.locator('[data-icon-only]')).toHaveCount(5)
-      return table.locator('[data-icon-only]').evaluateAll(buttons => buttons.map(button => {
-        const style = getComputedStyle(button)
-        const icon = button.querySelector('svg')!
-        return { size: button.getAttribute('data-size'), width: style.width, height: style.height,
-          padding: style.padding, fontSize: style.fontSize, iconWidth: getComputedStyle(icon).width }
-      }))
+      await page.locator('main .mz-demo-area-end-panel').first().locator('label', { hasText: /^icon$/ }).click()
+      await choose(page, 'iconPosition', 'iconOnly')
+      const sizes = []
+      for (const size of ['xs', 'sm', 'md', 'lg', 'xl']) {
+        await choose(page, 'size', size)
+        sizes.push(await page.locator('main .mz-demo-area').first().locator(`.mz-demo-area-content ${selector}`).evaluate(button => {
+          const style = getComputedStyle(button)
+          const icon = button.querySelector('svg')!
+          return { size: button.getAttribute('data-size'), width: style.width, height: style.height,
+            padding: style.padding, fontSize: style.fontSize, iconWidth: getComputedStyle(icon).width }
+        }))
+      }
+      return sizes
     }
-    const buttons = await dimensions('/button', 'Button sizes')
-    // The Example shows an icon-only toggle at each size in turn.
-    await page.goto('/toggle-button')
-    await setTextSize(page, fontSize)
-    await page.locator('main .mz-demo-area-end-panel').first().locator('label', { hasText: /^icon$/ }).click()
-    await choose(page, 'iconPosition', 'only')
-    const toggles = []
-    for (const size of ['xs', 'sm', 'md', 'lg', 'xl']) {
-      await choose(page, 'size', size)
-      toggles.push(await exampleToggle(page).evaluate(button => {
-        const style = getComputedStyle(button)
-        const icon = button.querySelector('svg')!
-        return { size: button.getAttribute('data-size'), width: style.width, height: style.height,
-          padding: style.padding, fontSize: style.fontSize, iconWidth: getComputedStyle(icon).width }
-      }))
-    }
+    const buttons = await dimensions('/button', '.mz-button')
+    const toggles = await dimensions('/toggle-button', '.mz-toggle-button')
     expect(toggles).toEqual(buttons)
     expect(buttons.map(button => button.size)).toEqual(['xs', 'sm', 'md', 'lg', 'xl'])
     expect(buttons.map(button => parseFloat(button.iconWidth))).toEqual([1, 1.25, 1.5, 1.75, 2].map(size => size * fontSize))

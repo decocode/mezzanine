@@ -19,7 +19,7 @@ export default function ToggleButtonPage() {
   )
   // iconPosition needs an icon; labelPosition only applies to an icon on its own, and tooltipPosition
   // to a label in a tooltip.
-  const isIconButton = flags.icon && iconPosition === 'only'
+  const isIconButton = flags.icon && iconPosition === 'iconOnly'
   const hasTooltip = isIconButton && labelPosition === 'tooltip'
   const props = {
     hierarchy: hierarchy === 'primary' ? undefined : hierarchy, size: size === 'md' ? undefined : size,
@@ -44,10 +44,12 @@ export default function ToggleButtonPage() {
                 {buttonSizes.map((option) => <ListBoxItem key={option.size} id={option.size}>{option.size}</ListBoxItem>)}
               </Select>
               <Separator />
-              {flagCheckbox('defaultSelected')}
-              {flagCheckbox('isDisabled')}
-              <Separator />
-              {flagCheckbox('icon')}
+              <div className="demo-panel-checkboxes">
+                {flagCheckbox('defaultSelected')}
+                {flagCheckbox('isDisabled')}
+                {flagCheckbox('icon')}
+              </div>
+              {flags.icon && <Separator />}
               {/* Each setting appears once it applies: iconPosition with an icon, labelPosition for an icon
                   on its own, and tooltipPosition for a label in a tooltip. */}
               {flags.icon && (
@@ -62,6 +64,7 @@ export default function ToggleButtonPage() {
               )}
               {isIconButton && (
                 <Select
+                  className="demo-panel-new-row"
                   label="labelPosition"
                   selectedKey={labelPosition}
                   onSelectionChange={(key) => { if (key != null) setLabelPosition(key as (typeof toggleButtonLabelPositions)[number]) }}
@@ -82,9 +85,9 @@ export default function ToggleButtonPage() {
           >
             {/* A new key starts the example again, because a default only applies when it first appears. */}
             {isIconButton && !hasTooltip
-              ? <ToggleButton key={String(flags.defaultSelected)} {...props} icon={<BulbIcon />} iconPosition="only" labelPosition={labelPosition as 'top' | 'bottom'}>{toggleButtonExample.label}</ToggleButton>
+              ? <ToggleButton key={String(flags.defaultSelected)} {...props} icon={<BulbIcon />} iconPosition="iconOnly" labelPosition={labelPosition as 'top' | 'bottom'}>{toggleButtonExample.label}</ToggleButton>
               : isIconButton
-                ? <ToggleButton key={String(flags.defaultSelected)} {...props} icon={<BulbIcon />} iconPosition="only" tooltipPosition={tooltipPosition}>{toggleButtonExample.label}</ToggleButton>
+                ? <ToggleButton key={String(flags.defaultSelected)} {...props} icon={<BulbIcon />} iconPosition="iconOnly" tooltipPosition={tooltipPosition}>{toggleButtonExample.label}</ToggleButton>
                 : <ToggleButton key={String(flags.defaultSelected)} {...props} icon={flags.icon ? <BulbIcon /> : undefined} iconPosition={iconPosition === 'trailing' ? 'trailing' : 'leading'}>{toggleButtonExample.label}</ToggleButton>}
           </DemoArea>
         ),

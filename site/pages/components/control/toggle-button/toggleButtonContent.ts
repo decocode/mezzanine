@@ -6,7 +6,7 @@ import { formatJsxProps } from '../../../../components/formatJsxProps'
 // an icon, and the label's position only applies to an icon on its own.
 export const toggleButtonExample = { label: 'Toggle' } as const
 export const toggleButtonHierarchies = ['primary', 'secondary', 'tertiary'] as const
-export const toggleButtonIconPositions = ['leading', 'trailing', 'only'] as const
+export const toggleButtonIconPositions = ['leading', 'trailing', 'iconOnly'] as const
 export const toggleButtonLabelPositions = ['tooltip', 'top', 'bottom'] as const
 export const toggleButtonTooltipPositions = ['top', 'bottom', 'start', 'end'] as const
 export const toggleButtonFlags = ['icon', 'defaultSelected', 'isDisabled'] as const
@@ -49,7 +49,7 @@ export const toggleButtonContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: [
-        'Use a stable label. For an icon button, with `iconPosition="only"`, `labelPosition` shows it in a tooltip, the default, or at the top or bottom of the icon, and it stays the accessible name. The selected state is communicated separately from the name.',
+        'Use a stable label. For an icon button, with `iconPosition="iconOnly"`, `labelPosition` shows it in a tooltip, the default, or at the top or bottom of the icon, and it stays the accessible name. The selected state is communicated separately from the name.',
         'Enter or Space activates a focused toggle. Disabled buttons cannot be activated.',
       ],
     },
