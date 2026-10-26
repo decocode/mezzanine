@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const badgeContent: DocsPageContent = {
@@ -56,4 +57,12 @@ export const badgeContent: DocsPageContent = {
   references: [
     { label: 'MDN: HTML span element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span' },
   ],
+}
+
+// The Example's label and the Properties panel's purpose choice. The default, neutral, is left out of
+// the code.
+export const badgeExampleLabel = 'Badge label'
+
+export function badgeExampleCode(purpose: string) {
+  return `<Badge${formatJsxProps({ purpose: purpose === 'neutral' ? undefined : purpose })}>${badgeExampleLabel}</Badge>`
 }

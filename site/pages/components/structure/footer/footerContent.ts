@@ -70,3 +70,21 @@ export const footerContent: DocsPageContent = {
     { label: 'WAI-ARIA Authoring Practices: Contentinfo landmark', href: 'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/contentinfo.html' },
   ],
 }
+
+// The Properties panel's choice: what the app puts inside the Footer, which has no props of its own.
+export const footerChildren = ['smallPrint', 'smallPrintAndLinks'] as const
+
+export function footerExampleCode(children: string) {
+  return [
+    '<Footer>',
+    `  <p>${footerExampleLabels.smallPrint}</p>`,
+    ...(children === 'smallPrintAndLinks' ? [
+      `  <nav aria-label="${footerExampleLabels.linksLabel}">`,
+      '    <ul>',
+      ...footerExampleLabels.links.map((label) => `      <li><Link href="#">${label}</Link></li>`),
+      '    </ul>',
+      '  </nav>',
+    ] : []),
+    '</Footer>',
+  ].join('\n')
+}

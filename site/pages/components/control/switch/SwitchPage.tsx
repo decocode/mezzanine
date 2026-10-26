@@ -1,10 +1,14 @@
 import { useState } from 'react'
-import { Cell, Checkbox, Column, DemoArea, Row, SwitchButton, SwitchField, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { switchContent, switchExampleCode, switchExampleLabel, switchFlags, switchStateLabels } from './switchContent'
+import { Cell, Column, DemoArea, FieldError, Row, SwitchButton, SwitchField, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { switchContent, switchExampleCode, switchExampleError, switchExampleLabel, switchFlags, switchStateLabels } from './switchContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function SwitchPage() {
-  const [flags, setFlags] = useState<Record<(typeof switchFlags)[number], boolean>>({ defaultSelected: false, isDisabled: false, isReadOnly: false })
+  const [flags, setFlags] = useState<Record<(typeof switchFlags)[number], boolean>>({ defaultSelected: false, isDisabled: false, isReadOnly: false, isInvalid: false })
+  const [hasErrorMessage, setHasErrorMessage] = useState(false)
+  // errorMessage only shows on an invalid switch, so its control appears with isInvalid.
+  const showsError = flags.isInvalid && hasErrorMessage
   return (
     <ContentPage
       content={switchContent}
@@ -12,13 +16,19 @@ export default function SwitchPage() {
         // The Properties panel has a control for each prop that changes what the switch looks like or does.
         example: (
           <DemoArea
-            codeView={switchExampleCode(flags)}
-            endPanel={switchFlags.map((name) => (
-              <Checkbox key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Checkbox>
-            ))}
+            codeView={switchExampleCode({ ...flags, errorMessage: showsError })}
+            endPanel={<>
+              {switchFlags.map((name) => (
+                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+              ))}
+              {flags.isInvalid && <PanelSwitch isSelected={hasErrorMessage} onChange={setHasErrorMessage}>errorMessage</PanelSwitch>}
+            </>}
           >
             {/* A new key starts the example again, because a default only applies when it first appears. */}
-            <SwitchField key={String(flags.defaultSelected)} {...flags}><SwitchButton>{switchExampleLabel}</SwitchButton></SwitchField>
+            <SwitchField key={String(flags.defaultSelected)} {...flags}>
+              <SwitchButton>{switchExampleLabel}</SwitchButton>
+              {showsError && <FieldError>{switchExampleError}</FieldError>}
+            </SwitchField>
           </DemoArea>
         ),
         states: (

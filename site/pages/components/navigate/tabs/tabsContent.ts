@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const tabsContent: DocsPageContent = {
@@ -9,12 +10,7 @@ export const tabsContent: DocsPageContent = {
   sections: [
     {
       key: 'example',
-      intro: ['Select a `Tab` to show its matching `TabPanel`. Arrow keys move between available tabs and select them automatically. The fourth tab is disabled.'],
-    },
-    {
-      key: 'verticalTabs',
-      title: 'Vertical tabs',
-      intro: ['Set `orientation="vertical"` to stack the tabs. This example also uses `keyboardActivation="manual"`: Up and Down move focus; Enter or Space selects.'],
+      intro: ['Select a `Tab` to show its matching `TabPanel`. Arrow keys move between available tabs and select them automatically. With `disabledKeys`, the fourth tab is disabled.', 'Set `orientation="vertical"` to stack the tabs. With `keyboardActivation="manual"`, the arrow keys move focus, and Enter or Space selects.'],
     },
   ],
   technicalDetails: [
@@ -99,4 +95,30 @@ export const tabsContent: DocsPageContent = {
   references: [
     { label: 'React Aria Tabs', href: 'https://react-aria.adobe.com/Tabs' },
   ],
+}
+
+// The Example's tabs, and the Properties panel's choices. disabledKeys turns the fourth tab off.
+export const tabsExampleTabs = [
+  { id: 'a', label: 'Tab A', panel: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+  { id: 'b', label: 'Tab B', panel: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
+  { id: 'c', label: 'Tab C', panel: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.' },
+  { id: 'd', label: 'Tab D', panel: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.' },
+] as const
+export const tabsOrientations = ['horizontal', 'vertical'] as const
+export const tabsKeyboardActivations = ['automatic', 'manual'] as const
+
+export function tabsExampleCode({ orientation, keyboardActivation, disabledKeys }: { orientation: string, keyboardActivation: string, disabledKeys: boolean }) {
+  const props = formatJsxProps({
+    orientation: orientation === 'horizontal' ? undefined : orientation,
+    keyboardActivation: keyboardActivation === 'automatic' ? undefined : keyboardActivation,
+    disabledKeys: disabledKeys ? ['d'] : undefined,
+  })
+  return [
+    `<Tabs${props}>`,
+    '  <TabList aria-label="Example sections">',
+    ...tabsExampleTabs.map((tab) => `    <Tab id="${tab.id}">${tab.label}</Tab>`),
+    '  </TabList>',
+    ...tabsExampleTabs.map((tab) => `  <TabPanel id="${tab.id}">${tab.panel}</TabPanel>`),
+    '</Tabs>',
+  ].join('\n')
 }

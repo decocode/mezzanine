@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 // Teaching labels for the live example, shared with the Panel page.
@@ -110,4 +111,23 @@ export const appShellContent: DocsPageContent = {
     { label: 'MDN: grid-template-areas', href: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/grid-template-areas' },
     { label: 'WAI-ARIA Authoring Practices: Landmark regions', href: 'https://www.w3.org/WAI/ARIA/apg/practices/landmark-regions/' },
   ],
+}
+
+// The Properties panel's choices: whether each Panel spans the main area only (the default) or the
+// shell's full height or width.
+export const appShellSpans = ['main', 'full'] as const
+export type AppShellSpans = Record<'startPanelSpan' | 'endPanelSpan' | 'bottomPanelSpan', (typeof appShellSpans)[number]>
+
+export function appShellExampleCode(spans: AppShellSpans) {
+  const props = formatJsxProps(Object.fromEntries(Object.entries(spans).map(([name, value]) => [name, value === 'main' ? undefined : value])))
+  return [
+    `<AppShell${props}>`,
+    '  <header>…</header>',
+    `  <Panel id="start" edge="start" title="${appShellExampleLabels.startPanel}" defaultOpen>…</Panel>`,
+    `  <main aria-label="${appShellExampleLabels.main}">…</main>`,
+    `  <Footer>${appShellExampleLabels.footer}</Footer>`,
+    `  <Panel id="end" edge="end" title="${appShellExampleLabels.endPanel}">…</Panel>`,
+    `  <Panel id="bottom" edge="bottom" title="${appShellExampleLabels.bottomPanel}" minimized={…}>…</Panel>`,
+    '</AppShell>',
+  ].join('\n')
 }

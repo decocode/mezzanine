@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const comboBoxContent: DocsPageContent = {
@@ -59,3 +60,17 @@ export const comboBoxContent: DocsPageContent = {
 
 // The example's label and options.
 export const comboBoxExampleLabels = { label: 'Combo box A', options: ['Option A', 'Option B', 'Option C'] } as const
+
+// The Properties panel's choices: when the list opens (as you type, by default), the option chosen at
+// the start, and the field's on/off props, in panel order. errorMessage appears with isInvalid.
+export const comboBoxMenuTriggers = ['input', 'focus', 'manual'] as const
+export const comboBoxExampleText = { description: 'Combo box description', errorMessage: 'Combo box error message' } as const
+export const comboBoxFlags = ['description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
+
+export function comboBoxExampleCode(props: Record<string, unknown>) {
+  return [
+    `<ComboBox label="${comboBoxExampleLabels.label}"${formatJsxProps(props)}>`,
+    ...comboBoxExampleLabels.options.map((option) => `  <ListBoxItem id="${option}">${option}</ListBoxItem>`),
+    '</ComboBox>',
+  ].join('\n')
+}

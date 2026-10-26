@@ -1,7 +1,8 @@
 import {
-  Button, Cell, Checkbox, Column, DemoArea, DownloadIcon, ListBoxItem, Row, Select, Separator, Table, TableBody, TableHeader, type ButtonHierarchy,
+  Button, Cell, Column, DemoArea, DownloadIcon, ListBoxItem, Row, Select, Separator, Table, TableBody, TableHeader, type ButtonHierarchy,
   type ButtonSize,
 } from '@decocode/mezzanine'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { useState } from 'react'
 import {
   buttonContent,
@@ -27,7 +28,7 @@ export default function ButtonPage() {
   const [tooltipPosition, setTooltipPosition] = useState<(typeof buttonTooltipPositions)[number]>('top')
   const [flags, setFlags] = useState<Record<(typeof buttonFlags)[number], boolean>>({ isPending: false, isDisabled: false, icon: false })
   const flagCheckbox = (name: (typeof buttonFlags)[number], isDisabled = false) => (
-    <Checkbox key={name} isDisabled={isDisabled} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Checkbox>
+    <PanelSwitch key={name} isDisabled={isDisabled} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
   )
   // The icon settings apply one after another: iconPosition with an icon, labelPosition for an icon on
   // its own, and tooltipPosition for a label in a tooltip.
@@ -62,7 +63,7 @@ export default function ButtonPage() {
               </Select>
               <Separator />
               {/* A running action isn't an unavailable one, so the two can't be on together. */}
-              <div className="demo-panel-checkboxes">
+              <div className="demo-panel-switches">
                 {flagCheckbox('isPending', flags.isDisabled)}
                 {flagCheckbox('isDisabled', flags.isPending)}
                 {flagCheckbox('icon')}

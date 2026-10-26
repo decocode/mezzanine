@@ -1,4 +1,5 @@
-import type { Copy, DocsPageContent } from '../../../../templates/docsPageContent'
+import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 export const breadcrumbsContent: DocsPageContent = {
   id: 'breadcrumbs',
@@ -6,7 +7,7 @@ export const breadcrumbsContent: DocsPageContent = {
   title: 'Breadcrumbs',
   description: 'Breadcrumbs are a trail of links showing where you are within a website, such as Home, Products and a product page. They help you return to a broader section without retracing every page you visited.',
   sections: [
-    { key: 'example' },
+    { key: 'example', intro: ['Earlier levels are links. The final item identifies the current page and is not a link.', 'A disabled `Breadcrumbs` list shows the hierarchy but none of its links can be used.'] },
   ],
   technicalDetails: [
     {
@@ -47,14 +48,17 @@ export const breadcrumbsContent: DocsPageContent = {
   ],
 }
 
-// The headings and descriptions of the two live examples in the Example section.
-export const breadcrumbsExamples: Record<'hierarchy' | 'disabled', { readonly title: string; readonly description: Copy }> = {
-  hierarchy: {
-    title: 'Hierarchy',
-    description: 'Earlier levels are links. The final item identifies the current page and is not a link.',
-  },
-  disabled: {
-    title: 'Disabled',
-    description: 'A disabled `Breadcrumbs` list shows the hierarchy but none of its links can be used.',
-  },
+// The Example's crumbs, and its code. The last crumb is the current page, so it isn't a link.
+export const breadcrumbsExampleCrumbs = [{ label: 'Homepage', href: '/' }, { label: 'Parent page', href: '/introduction' }, { label: 'Current page' }] as const
+
+export function breadcrumbsExampleCode(isDisabled: boolean) {
+  return [
+    '<nav aria-label="Breadcrumbs">',
+    `  <Breadcrumbs${formatJsxProps({ isDisabled })}>`,
+    ...breadcrumbsExampleCrumbs.map((crumb) => 'href' in crumb
+      ? `    <Breadcrumb><Link href="${crumb.href}">${crumb.label}</Link></Breadcrumb>`
+      : `    <Breadcrumb><span>${crumb.label}</span></Breadcrumb>`),
+    '  </Breadcrumbs>',
+    '</nav>',
+  ].join('\n')
 }

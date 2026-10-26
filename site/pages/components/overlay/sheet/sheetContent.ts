@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const sheetContent: DocsPageContent = {
@@ -59,3 +60,20 @@ export const sheetContent: DocsPageContent = {
 
 // The example's labels and copy.
 export const sheetExampleLabels = { trigger: 'Sheet trigger', title: 'Sheet title', body: 'Sheet content.', close: 'Close' } as const
+
+// The Properties panel's choices: the edge the sheet comes from (bottom by default), whether it can be
+// dismissed, and whether it seems to carry on past the edge when pulled further.
+export const sheetPositions = ['bottom', 'top', 'start', 'end'] as const
+
+export function sheetExampleCode({ position, preventDismissal, overscrollPadding }: { position: string, preventDismissal: boolean, overscrollPadding: boolean }) {
+  return [
+    '<SheetTrigger>',
+    `  <Button hierarchy="secondary">${sheetExampleLabels.trigger}</Button>`,
+    `  <Sheet${formatJsxProps({ position: position === 'bottom' ? undefined : position, preventDismissal })}${overscrollPadding ? '' : ' overscrollPadding={false}'}>`,
+    `    <Heading slot="title">${sheetExampleLabels.title}</Heading>`,
+    `    <Text elementType="p" className="mz-text-body-md">${sheetExampleLabels.body}</Text>`,
+    `    <Button slot="close" hierarchy="secondary">${sheetExampleLabels.close}</Button>`,
+    '  </Sheet>',
+    '</SheetTrigger>',
+  ].join('\n')
+}

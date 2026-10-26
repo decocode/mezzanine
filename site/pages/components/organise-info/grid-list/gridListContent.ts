@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const gridListContent: DocsPageContent = {
@@ -7,8 +8,7 @@ export const gridListContent: DocsPageContent = {
   title: 'Grid list',
   description: 'A grid list shows items that can be chosen, and each item can hold its own controls, such as buttons or links.',
   sections: [
-    { key: 'example', intro: ['In the stack layout, items are rows. With `selectionMode="multiple"`, each gets a checkbox, and a chosen item takes the soft tint and the indicator bar.'] },
-    { key: 'variants', intro: ['With `layout="grid"`, items are cards that wrap onto as many columns as fit.'] },
+    { key: 'example', intro: ['In the stack layout, items are rows. With `selectionMode="multiple"`, each gets a checkbox, and a chosen item takes the soft tint and the indicator bar.', 'With `layout="grid"`, items are cards that wrap onto as many columns as fit.'] },
   ],
   technicalDetails: [
     {
@@ -61,4 +61,21 @@ export const gridListContent: DocsPageContent = {
 }
 
 // The examples' labels and items.
-export const gridListExampleLabels = { stack: 'Grid list A', grid: 'Grid list B', items: ['Item A', 'Item B', 'Item C'] } as const
+export const gridListExampleLabels = { label: 'Grid list A', items: ['Item A', 'Item B', 'Item C'] } as const
+
+// The Properties panel's choices. disabledKeys turns Item C off.
+export const gridListLayouts = ['stack', 'grid'] as const
+export const gridListSelectionModes = ['none', 'single', 'multiple'] as const
+
+export function gridListExampleCode({ layout, selectionMode, disabledKeys }: { layout: string, selectionMode: string, disabledKeys: boolean }) {
+  const props = formatJsxProps({
+    layout: layout === 'stack' ? undefined : layout,
+    selectionMode: selectionMode === 'none' ? undefined : selectionMode,
+    disabledKeys: disabledKeys ? [gridListExampleLabels.items[2]] : undefined,
+  })
+  return [
+    `<GridList aria-label="${gridListExampleLabels.label}"${props}>`,
+    ...gridListExampleLabels.items.map((item) => `  <GridListItem id="${item}">${item}</GridListItem>`),
+    '</GridList>',
+  ].join('\n')
+}

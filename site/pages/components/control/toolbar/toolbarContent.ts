@@ -5,7 +5,7 @@ export const toolbarContent: DocsPageContent = {
   id: 'toolbar',
   kind: 'component',
   title: 'Toolbar',
-  description: 'A toolbar groups related controls, such as formatting buttons, so the arrow keys move between them.',
+  description: '`Toolbar` is a component that groups related controls, such as buttons, toggle buttons or menus.',
   sections: [
     { key: 'example', intro: ['`Toolbar` lays its controls out in a row that wraps, with a `Separator` between groups.'] },
   ],

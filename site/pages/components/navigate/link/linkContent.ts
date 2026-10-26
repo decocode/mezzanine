@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const linkContent: DocsPageContent = {
@@ -80,4 +81,12 @@ export const linkStates: readonly { readonly name: string; readonly state: LinkP
 export const linkContentRows = {
   textOnly: 'Text only',
   trailingIcon: 'Trailing icon',
+}
+
+// The Example's label and the Properties panel's on/off props. aria-current marks the link to the page
+// already open, which has its own look.
+export const linkExampleLabel = 'Link content examples'
+
+export function linkExampleCode({ isDisabled, current }: { isDisabled: boolean, current: boolean }) {
+  return `<Link href="#link-content"${formatJsxProps({ isDisabled, 'aria-current': current ? 'page' : undefined })}>${linkExampleLabel}</Link>`
 }

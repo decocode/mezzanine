@@ -1,41 +1,33 @@
+import { useState } from 'react'
 import { DemoArea, Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
-import { tabsContent } from './tabsContent'
+import { PanelSelect } from '../../../../components/PanelSelect'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { tabsContent, tabsExampleCode, tabsExampleTabs, tabsKeyboardActivations, tabsOrientations } from './tabsContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function TabsPage() {
+  const [orientation, setOrientation] = useState<(typeof tabsOrientations)[number]>('horizontal')
+  const [keyboardActivation, setKeyboardActivation] = useState<(typeof tabsKeyboardActivations)[number]>('automatic')
+  const [disabledKeys, setDisabledKeys] = useState(true)
   return (
     <ContentPage
       content={tabsContent}
       parts={{
         example: (
-          <DemoArea align="stretch">
-            <Tabs defaultSelectedKey="a">
+          <DemoArea
+            align="stretch"
+            codeView={tabsExampleCode({ orientation, keyboardActivation, disabledKeys })}
+            endPanel={<>
+              <PanelSelect label="orientation" options={tabsOrientations} value={orientation} onChange={setOrientation} />
+              <PanelSelect label="keyboardActivation" options={tabsKeyboardActivations} value={keyboardActivation} onChange={setKeyboardActivation} />
+              <PanelSwitch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</PanelSwitch>
+            </>}
+          >
+            <Tabs orientation={orientation} keyboardActivation={keyboardActivation} disabledKeys={disabledKeys ? ['d'] : undefined} defaultSelectedKey="a">
               <TabList aria-label="Example sections">
-                <Tab id="a">Tab A</Tab>
-                <Tab id="b">Tab B</Tab>
-                <Tab id="c">Tab C</Tab>
-                <Tab id="d" isDisabled>Disabled tab</Tab>
+                {tabsExampleTabs.map((tab) => <Tab key={tab.id} id={tab.id}>{tab.label}</Tab>)}
               </TabList>
-              <TabPanel id="a">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</TabPanel>
-              <TabPanel id="b">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</TabPanel>
-              <TabPanel id="c">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</TabPanel>
-              <TabPanel id="d">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</TabPanel>
-            </Tabs>
-          </DemoArea>
-        ),
-        verticalTabs: (
-          <DemoArea align="stretch">
-            <Tabs orientation="vertical" keyboardActivation="manual" defaultSelectedKey="a">
-              <TabList aria-label="Vertical example sections">
-                <Tab id="a">Tab A</Tab>
-                <Tab id="b">Tab B</Tab>
-                <Tab id="c">Tab C</Tab>
-                <Tab id="d" isDisabled>Disabled tab</Tab>
-              </TabList>
-              <TabPanel id="a">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</TabPanel>
-              <TabPanel id="b">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</TabPanel>
-              <TabPanel id="c">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</TabPanel>
-              <TabPanel id="d">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</TabPanel>
+              {tabsExampleTabs.map((tab) => <TabPanel key={tab.id} id={tab.id}>{tab.panel}</TabPanel>)}
             </Tabs>
           </DemoArea>
         ),

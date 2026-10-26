@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const meterContent: DocsPageContent = {
@@ -54,4 +55,13 @@ export const meterContent: DocsPageContent = {
   references: [
     { label: 'React Aria Meter', href: 'https://react-aria.adobe.com/Meter' },
   ],
+}
+
+// The Example's label and the Properties panel's choices. Without a visible label, the code names the
+// meter with aria-label instead.
+export const meterExampleLabel = 'Meter A'
+export const meterValues = ['0', '35', '70', '100'] as const
+
+export function meterExampleCode(value: number, hasLabel: boolean) {
+  return `<Meter${formatJsxProps({ label: hasLabel ? meterExampleLabel : undefined, 'aria-label': hasLabel ? undefined : meterExampleLabel, value })} />`
 }

@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const progressBarContent: DocsPageContent = {
@@ -7,8 +8,7 @@ export const progressBarContent: DocsPageContent = {
   title: 'Progress bar',
   description: 'A progress bar shows how far a task has got, or that it is still working when the end isn’t known.',
   sections: [
-    { key: 'example', intro: ['`ProgressBar` shows a `label`, the value as a percentage and a filled track.'] },
-    { key: 'variants', intro: ['With `isIndeterminate`, a segment travels along the track, and no value is shown. Only the system’s reduced-motion setting stops it, as with Button’s pending spinner.'] },
+    { key: 'example', intro: ['`ProgressBar` shows a `label`, the value as a percentage and a filled track.', 'With `isIndeterminate`, a segment travels along the track, and no value is shown. Only the system’s reduced-motion setting stops it, as with Button’s pending spinner.'] },
   ],
   technicalDetails: [
     {
@@ -56,4 +56,19 @@ export const progressBarContent: DocsPageContent = {
   references: [
     { label: 'React Aria ProgressBar', href: 'https://react-aria.adobe.com/ProgressBar' },
   ],
+}
+
+// The Example's label and the Properties panel's choices. An indeterminate bar has no value, so the
+// value control appears only without isIndeterminate. Without a visible label, the code names the bar
+// with aria-label instead.
+export const progressBarExampleLabel = 'Progress A'
+export const progressBarValues = ['0', '30', '60', '100'] as const
+
+export function progressBarExampleCode({ value, isIndeterminate, hasLabel }: { value: number, isIndeterminate: boolean, hasLabel: boolean }) {
+  return `<ProgressBar${formatJsxProps({
+    label: hasLabel ? progressBarExampleLabel : undefined,
+    'aria-label': hasLabel ? undefined : progressBarExampleLabel,
+    value: isIndeterminate ? undefined : value,
+    isIndeterminate,
+  })} />`
 }

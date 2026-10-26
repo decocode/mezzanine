@@ -1,3 +1,4 @@
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 export const autocompleteContent: DocsPageContent = {
@@ -44,3 +45,20 @@ export const autocompleteContent: DocsPageContent = {
 
 // The options the example filters.
 export const autocompleteOptions = ['Option A', 'Option B', 'Option C', 'Option D'] as const
+
+// The Properties panel's choices: how typing matches the options, and whether the first match is
+// highlighted straight away.
+export const autocompleteFilters = ['contains', 'startsWith'] as const
+
+export function autocompleteExampleCode({ filter, disableAutoFocusFirst }: { filter: string, disableAutoFocusFirst: boolean }) {
+  return [
+    `const { ${filter} } = useFilter({ sensitivity: 'base' })`,
+    '',
+    `<Autocomplete filter={${filter}}${formatJsxProps({ disableAutoFocusFirst })}>`,
+    '  <SearchField aria-label="Search options"><Input /></SearchField>',
+    '  <ListBox aria-label="Options" renderEmptyState={() => \'No results\'}>',
+    ...autocompleteOptions.map((option) => `    <ListBoxItem id="${option}">${option}</ListBoxItem>`),
+    '  </ListBox>',
+    '</Autocomplete>',
+  ].join('\n')
+}

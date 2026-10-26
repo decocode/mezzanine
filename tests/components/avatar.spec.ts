@@ -6,12 +6,15 @@ import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '
 // the name's initials, and that one with no visible name is an image named by alt.
 test('Avatar is read by its name, shows initials without a picture, and names an unlabelled picture', async ({ page }) => {
   await page.goto('/avatar')
-  const avatars = page.locator('main .mz-avatar')
-  await expect(avatars).toHaveCount(4)
-  await expect(avatars.nth(0).locator('.mz-avatar-picture')).toHaveAttribute('aria-hidden', 'true')
-  await expect(avatars.nth(0).getByText('Avatar name', { exact: true })).toBeVisible()
-  await expect(avatars.nth(1).locator('.mz-avatar-initials')).toHaveText('AI')
-  await expect(avatars.nth(3).getByRole('img', { name: 'Avatar without a visible name' })).toBeVisible()
+  const avatar = page.locator('.docs-page-lead .mz-demo-area-content .mz-avatar')
+  const toggle = (name: string) => page.locator('.docs-page-lead .mz-demo-area-end-panel label', { hasText: new RegExp(`^${name}$`) }).click()
+  await expect(avatar.locator('.mz-avatar-picture')).toHaveAttribute('aria-hidden', 'true')
+  await expect(avatar.getByText('Avatar name', { exact: true })).toBeVisible()
+  await toggle('src')
+  await expect(avatar.locator('.mz-avatar-initials')).toHaveText('AN')
+  await toggle('src')
+  await toggle('children')
+  await expect(avatar.getByRole('img', { name: 'Avatar without a visible name' })).toBeVisible()
 })
 
 // Checks that the Avatar example fits 320px at normal and doubled text in every theme without

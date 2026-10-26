@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const dialogContent: DocsPageContent = {
@@ -7,12 +8,7 @@ export const dialogContent: DocsPageContent = {
   title: 'Dialog',
   description: 'A dialog is a box that presents a message or asks someone to complete a small task, such as confirming a decision. When shown over the page as a modal, it must be closed before the person can use the page behind it.',
   sections: [
-    { key: 'example', intro: ['A modal dialog blocks interaction with the page behind it. This example can be closed with the Close button, Escape, or a click outside the dialog.'] },
-    {
-      key: 'confirmationDialog',
-      title: 'Confirmation dialog',
-      intro: ['Use `Dialog` with `role="alertdialog"` for a confirmation that needs an immediate response. Cancel receives initial focus. Clicking outside does not dismiss this example; Escape still cancels. Confirm only updates the message below.'],
-    },
+    { key: 'example', intro: ['A modal dialog blocks interaction with the page behind it. This example can be closed with the Close button, Escape, or a click outside the dialog.', 'Use `Dialog` with `role="alertdialog"` for a confirmation that needs an immediate response. Cancel receives initial focus. Clicking outside does not dismiss this example; Escape still cancels.'] },
   ],
   technicalDetails: [
     {
@@ -95,4 +91,30 @@ export function confirmationFeedback(count: number): string {
   return count === 0
     ? 'No action confirmed.'
     : `Example action confirmed ${count} ${count === 1 ? 'time' : 'times'}.`
+}
+
+// The Properties panel's choices. An alert dialog asks for an answer, so it can't be dismissed by a
+// click outside, and isDismissable only appears for an ordinary dialog.
+export const dialogRoles = ['dialog', 'alertdialog'] as const
+
+export function dialogExampleCode({ role, isDismissable }: { role: string, isDismissable: boolean }) {
+  const isAlert = role === 'alertdialog'
+  return [
+    '<DialogTrigger>',
+    `  <Button>${isAlert ? 'Open confirmation' : 'Open dialog'}</Button>`,
+    `  <ModalOverlay${formatJsxProps({ isDismissable: !isAlert && isDismissable })}>`,
+    '    <Modal>',
+    `      <Dialog${formatJsxProps({ role: isAlert ? role : undefined })}>`,
+    `        <Heading slot="title">${isAlert ? dialogExampleCopy.confirmationTitle : 'Dialog title'}</Heading>`,
+    `        <p>${isAlert ? dialogExampleCopy.confirmationBody : dialogExampleCopy.modalBody}</p>`,
+    '        <footer className="mz-dialog-actions">',
+    ...(isAlert
+      ? ['          <Button autoFocus slot="close" hierarchy="secondary">Cancel</Button>', '          <Button onPress={confirm}>Confirm</Button>']
+      : ['          <Button slot="close">Close</Button>']),
+    '        </footer>',
+    '      </Dialog>',
+    '    </Modal>',
+    '  </ModalOverlay>',
+    '</DialogTrigger>',
+  ].join('\n')
 }

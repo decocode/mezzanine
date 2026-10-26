@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 export const previewTriggerContent: DocsPageContent = {
   id: 'preview-trigger',
@@ -49,3 +50,19 @@ export const previewTriggerContent: DocsPageContent = {
 
 // The example's trigger and preview copy.
 export const previewTriggerExampleLabels = { trigger: 'Link A', preview: 'Preview of Link A.' } as const
+
+// The Properties panel's choices, in milliseconds: the wait before the preview opens (600 by default)
+// and before it closes (200 by default).
+export const previewTriggerDelays = ['0', '300', '600', '1200'] as const
+export const previewTriggerCloseDelays = ['0', '200', '600'] as const
+
+export function previewTriggerExampleCode({ delay, closeDelay }: { delay: number, closeDelay: number }) {
+  return [
+    `<PreviewTrigger${formatJsxProps({ delay: delay === 600 ? undefined : delay, closeDelay: closeDelay === 200 ? undefined : closeDelay })}>`,
+    `  <Link href="/popover">${previewTriggerExampleLabels.trigger}</Link>`,
+    '  <Popover>',
+    `    <Text elementType="p" className="mz-text-body-md">${previewTriggerExampleLabels.preview}</Text>`,
+    '  </Popover>',
+    '</PreviewTrigger>',
+  ].join('\n')
+}

@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const formContent: DocsPageContent = {
@@ -56,3 +57,20 @@ export const formContent: DocsPageContent = {
 
 // The example's labels.
 export const formExampleLabels = { field: 'Field A', submit: 'Submit' } as const
+
+// The Properties panel's choice: whether errors use the browser's own checks (native, the default) or
+// only React Aria's (aria).
+export const formValidationBehaviors = ['native', 'aria'] as const
+
+export function formExampleCode(validationBehavior: string) {
+  return [
+    `<Form${formatJsxProps({ validationBehavior: validationBehavior === 'native' ? undefined : validationBehavior })} onSubmit={handleSubmit}>`,
+    '  <TextField name="field-a" isRequired>',
+    `    <Label>${formExampleLabels.field}</Label>`,
+    '    <Input />',
+    '    <FieldError />',
+    '  </TextField>',
+    `  <Button type="submit">${formExampleLabels.submit}</Button>`,
+    '</Form>',
+  ].join('\n')
+}

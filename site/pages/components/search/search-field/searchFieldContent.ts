@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const searchFieldContent: DocsPageContent = {
@@ -54,4 +55,12 @@ export const searchFieldContent: DocsPageContent = {
   references: [
     { label: 'React Aria SearchField', href: 'https://react-aria.adobe.com/SearchField' },
   ],
+}
+
+// The Example's label and the Properties panel's on/off props, in panel order.
+export const searchFieldExampleLabel = 'Search A'
+export const searchFieldFlags = ['isDisabled', 'isReadOnly', 'isInvalid'] as const
+
+export function searchFieldExampleCode(props: Record<string, unknown>) {
+  return `<SearchField${formatJsxProps(props)}>\n  <Label>${searchFieldExampleLabel}</Label>\n  <Input />\n</SearchField>`
 }

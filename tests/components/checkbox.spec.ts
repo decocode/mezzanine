@@ -6,8 +6,9 @@ import { setTheme, themes } from '../display'
 // hidden input must stay beside the checkbox, so focusing it doesn't scroll somewhere else.
 test('pressing a checkbox keeps the scroll position', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' })
-  await page.goto('/layout/reading-order')
-  const checkbox = page.locator('label', { hasText: 'Reverse on screen' })
+  await page.goto('/checkbox')
+  // The Checkbox group demo, below the fold.
+  const checkbox = page.locator('.mz-checkbox-group label', { hasText: 'Checkbox C' })
   await checkbox.scrollIntoViewIfNeeded()
   const content = page.locator('.mz-app-shell-content')
   const before = await content.evaluate(element => element.scrollTop)

@@ -1,6 +1,7 @@
 // The example for the Subgrid page, in Foundations › Layout.
 import { useState } from 'react'
-import { Button, Card, Checkbox, Heading, Text } from '@decocode/mezzanine'
+import { Button, Card, Heading, Text } from '@decocode/mezzanine'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
 import { WidthDemo } from '../../../../components/WidthFrame'
 import { subgridCssNotes } from './subgridContent'
@@ -15,7 +16,7 @@ export function SubgridExample() {
   const [isAligned, setIsAligned] = useState(true)
   return <>
     <ExampleText>With subgrid, the text in each item starts at the same height and the buttons line up along the bottom, however long each heading is. Without it, they drift apart.</ExampleText>
-    <WidthDemo label="Subgrid" code={subgridCssNotes.subgrid.code} controls={<Checkbox isSelected={isAligned} onChange={setIsAligned}>Use subgrid</Checkbox>}>
+    <WidthDemo label="Subgrid" code={subgridCssNotes.subgrid.code} controls={<PanelSwitch isSelected={isAligned} onChange={setIsAligned}>Use subgrid</PanelSwitch>}>
       <div className={`example-subgrid-list${isAligned ? ' example-subgrid-on' : ''}`}>
         {items.map((item) => <Card key={item.title} className="example-subgrid-item">
           <Heading level={3}>{item.title}</Heading>

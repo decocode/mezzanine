@@ -28,7 +28,11 @@ for (const theme of themes) {
 // Checks that in a menu with selection, the chosen item shows a tick and the others don't.
 test('a selectable menu ticks the chosen item', async ({ page }) => {
   await page.goto('/menu')
-  await page.getByRole('button', { name: 'Menu with selection', exact: true }).click()
+  await page.locator('.docs-page-lead .mz-demo-area-end-panel').getByRole('button', { name: /selectionMode/ }).click()
+  await page.getByRole('option', { name: 'single', exact: true }).click()
+  await page.getByRole('button', { name: 'Menu trigger', exact: true }).click()
+  await page.getByRole('menuitemradio', { name: 'Action A' }).click()
+  await page.getByRole('button', { name: 'Menu trigger', exact: true }).click()
   const menu = page.getByRole('menu')
   await expect(menu.getByRole('menuitemradio', { name: 'Action A' })).toHaveAttribute('aria-checked', 'true')
   await expect(menu.locator('.mz-menu-item-check svg')).toHaveCount(1)

@@ -1,30 +1,35 @@
+import { useState } from 'react'
 import { Button, DemoArea, Menu, MenuItem, MenuTrigger, Popover } from '@decocode/mezzanine'
-import { menuContent, menuExampleLabels } from './menuContent'
+import { PanelSelect } from '../../../../components/PanelSelect'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { menuContent, menuExampleCode, menuExampleLabels, menuSelectionModes } from './menuContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function MenuPage() {
+  const [selectionMode, setSelectionMode] = useState<(typeof menuSelectionModes)[number]>('none')
+  const [disabledKeys, setDisabledKeys] = useState(false)
   return (
     <ContentPage
       content={menuContent}
       parts={{
-        example: <DemoArea>
-          <MenuTrigger>
-            <Button hierarchy="secondary">{menuExampleLabels.trigger}</Button>
-            <Popover>
-              <Menu>{menuExampleLabels.items.map((item) => <MenuItem key={item} id={item}>{item}</MenuItem>)}</Menu>
-            </Popover>
-          </MenuTrigger>
-        </DemoArea>,
-        variants: <DemoArea>
-          <MenuTrigger>
-            <Button hierarchy="secondary">{menuExampleLabels.selectionTrigger}</Button>
-            <Popover>
-              <Menu selectionMode="single" defaultSelectedKeys={[menuExampleLabels.items[0]]}>
-                {menuExampleLabels.items.map((item) => <MenuItem key={item} id={item}>{item}</MenuItem>)}
-              </Menu>
-            </Popover>
-          </MenuTrigger>
-        </DemoArea>,
+        example: (
+          <DemoArea
+            codeView={menuExampleCode({ selectionMode, disabledKeys })}
+            endPanel={<>
+              <PanelSelect label="selectionMode" options={menuSelectionModes} value={selectionMode} onChange={setSelectionMode} />
+              <PanelSwitch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</PanelSwitch>
+            </>}
+          >
+            <MenuTrigger>
+              <Button hierarchy="secondary">{menuExampleLabels.trigger}</Button>
+              <Popover>
+                <Menu key={selectionMode} selectionMode={selectionMode} disabledKeys={disabledKeys ? [menuExampleLabels.items[1]] : undefined}>
+                  {menuExampleLabels.items.map((item) => <MenuItem key={item} id={item}>{item}</MenuItem>)}
+                </Menu>
+              </Popover>
+            </MenuTrigger>
+          </DemoArea>
+        ),
       }}
     />
   )

@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Badge, Cell, Column, DemoArea, Row, Table, TableBody, TableHeader, type BadgePurpose } from '@decocode/mezzanine'
-import { badgeContent } from './badgeContent'
+import { PanelSelect } from '../../../../components/PanelSelect'
+import { badgeContent, badgeExampleCode, badgeExampleLabel } from './badgeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 // One label for every BadgePurpose value, so TypeScript reports one that's missing or no longer exists.
@@ -9,11 +11,16 @@ const purposeLabels: Record<BadgePurpose, string> = {
 const purposes = Object.keys(purposeLabels) as BadgePurpose[]
 
 export default function BadgePage() {
+  const [purpose, setPurpose] = useState<BadgePurpose>('neutral')
   return (
     <ContentPage
       content={badgeContent}
       parts={{
-        example: <DemoArea><Badge>Badge label</Badge></DemoArea>,
+        example: (
+          <DemoArea codeView={badgeExampleCode(purpose)} endPanel={<PanelSelect label="purpose" options={purposes} value={purpose} onChange={setPurpose} />}>
+            <Badge purpose={purpose}>{badgeExampleLabel}</Badge>
+          </DemoArea>
+        ),
         purposes: (
           <div className="documentation-table documentation-comparison-table">
             <Table aria-label="Badge purposes">

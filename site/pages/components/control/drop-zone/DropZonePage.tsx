@@ -1,5 +1,6 @@
 import { useId, useState } from 'react'
-import { Button, Checkbox, DemoArea, DropZone, FileTrigger, PlaceholderIcon, Text } from '@decocode/mezzanine'
+import { Button, DemoArea, DropZone, FileTrigger, PlaceholderIcon, Text } from '@decocode/mezzanine'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { dropZoneContent, dropZoneDisabledLabel, dropZoneExampleCode, dropZoneExampleLabels } from './dropZoneContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -27,7 +28,7 @@ export default function DropZonePage() {
           <DemoArea
             align="stretch"
             codeView={dropZoneExampleCode(isDisabled)}
-            endPanel={<Checkbox isSelected={isDisabled} onChange={setIsDisabled}>{dropZoneDisabledLabel}</Checkbox>}
+            endPanel={<PanelSwitch isSelected={isDisabled} onChange={setIsDisabled}>{dropZoneDisabledLabel}</PanelSwitch>}
           >
             <DropZoneExample isDisabled={isDisabled} />
           </DemoArea>

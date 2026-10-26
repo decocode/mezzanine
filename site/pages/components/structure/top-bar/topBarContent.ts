@@ -98,3 +98,22 @@ export const topBarContent: DocsPageContent = {
     { label: 'React Aria Button', href: 'https://react-aria.adobe.com/Button' },
   ],
 }
+
+// The Properties panel's on/off props: the brand at the start, and the actions at the end.
+export const topBarFlags = ['brand', 'actions'] as const
+
+export function topBarExampleCode(flags: Record<(typeof topBarFlags)[number], boolean>) {
+  return [
+    '<TopBar aria-label="Example navigation"',
+    ...(flags.brand ? ['  brand={<Link href="/" aria-label="Example home">…</Link>}'] : []),
+    ...(flags.actions ? ['  actions={<Button onPress={save}>Button</Button>}'] : []),
+    '>',
+    '  {({ closeMenu }) => <>',
+    '    <Link href="/" aria-current="page" onPress={closeMenu}>Home link</Link>',
+    '    <Link href="/a" onPress={closeMenu}>Link A</Link>',
+    '    <Link href="/b" onPress={closeMenu}>Link B</Link>',
+    '    <Link href="/disabled" isDisabled>Disabled link</Link>',
+    '  </>}',
+    '</TopBar>',
+  ].join('\n')
+}

@@ -3,12 +3,14 @@ import { RouterProvider } from 'react-aria-components'
 import { DemoArea, NavTree } from '@decocode/mezzanine'
 import {
   navigationTreeContent,
+  navigationTreeExampleCode,
   navigationTreeExampleExpandedKeys,
   navigationTreeExampleInitialRoute,
   navigationTreeExampleItems,
   navigationTreeProps,
   navigationTreeUsageTopics,
 } from './navigationTreeContent'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { ContentPage } from '../../../../templates/ContentPage'
 import { DocsTable } from '../../../../components/DocsTable'
 import { RichText } from '../../../../components/RichText'
@@ -21,17 +23,22 @@ function PropsTable({ table }: { table: ContentTable }) {
 
 export default function NavigationTreePage() {
   const [route, setRoute] = useState(navigationTreeExampleInitialRoute)
+  const [isExpanded, setIsExpanded] = useState(true)
   return (
     <ContentPage
       content={navigationTreeContent}
       parts={{
         example: (
-          <DemoArea>
+          <DemoArea
+            codeView={navigationTreeExampleCode(isExpanded)}
+            endPanel={<PanelSwitch isSelected={isExpanded} onChange={setIsExpanded}>defaultExpandedKeys</PanelSwitch>}
+          >
             <div className="navigation-tree-example">
               <RouterProvider navigate={setRoute}>
                 <nav aria-label="Nav Tree example">
-                  <NavTree aria-label="Nav Tree items" items={navigationTreeExampleItems}
-                    defaultExpandedKeys={navigationTreeExampleExpandedKeys} selectedRoute={route} />
+                  {/* A new key starts the tree again, because a default only applies when it first appears. */}
+                  <NavTree key={String(isExpanded)} aria-label="Nav Tree items" items={navigationTreeExampleItems}
+                    defaultExpandedKeys={isExpanded ? navigationTreeExampleExpandedKeys : undefined} selectedRoute={route} />
                 </nav>
               </RouterProvider>
             </div>

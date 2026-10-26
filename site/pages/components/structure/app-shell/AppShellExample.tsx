@@ -1,11 +1,21 @@
+import { useState } from 'react'
 import { AppShell, DemoArea, Footer, Panel, PanelTrigger } from '@decocode/mezzanine'
-import { appShellExampleLabels as labels } from './appShellContent'
+import { PanelSelect } from '../../../../components/PanelSelect'
+import { appShellExampleCode, appShellExampleLabels as labels, appShellSpans, type AppShellSpans } from './appShellContent'
 
-// A small AppShell with a Panel at each edge, used on the AppShell and Panel pages.
+// A small AppShell with a Panel at each edge. The Properties panel sets how far each Panel spans.
 export function AppShellExample() {
+  const [spans, setSpans] = useState<AppShellSpans>({ startPanelSpan: 'main', endPanelSpan: 'main', bottomPanelSpan: 'main' })
   return (
-    <DemoArea align="stretch" className="app-shell-example-demo">
-      <AppShell className="app-shell-example" bottomPanelSpan="main">
+    <DemoArea
+      align="stretch"
+      className="app-shell-example-demo"
+      codeView={appShellExampleCode(spans)}
+      endPanel={(Object.keys(spans) as (keyof AppShellSpans)[]).map((name) => (
+        <PanelSelect key={name} label={name} options={appShellSpans} value={spans[name]} onChange={(value) => setSpans({ ...spans, [name]: value })} />
+      ))}
+    >
+      <AppShell className="app-shell-example" {...spans}>
         <header className="app-shell-example-header">
           <span className="mz-text-title-sm">{labels.header}</span>
           <span className="app-shell-example-triggers">

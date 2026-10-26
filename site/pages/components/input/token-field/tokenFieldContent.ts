@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const tokenFieldContent: DocsPageContent = {
@@ -61,3 +62,15 @@ export const tokenFieldContent: DocsPageContent = {
 
 // The example's label and tokens.
 export const tokenFieldExampleLabels = { label: 'Token field A', tokens: ['Token A', 'Token B'] } as const
+
+// The Properties panel's on/off props, in panel order.
+export const tokenFieldExampleText = { description: 'Token field description', placeholder: 'Type a token' } as const
+export const tokenFieldFlags = ['description', 'isDisabled', 'isReadOnly'] as const
+
+export function tokenFieldExampleCode(props: Record<string, unknown>) {
+  return [
+    `<TokenField label="${tokenFieldExampleLabels.label}" defaultValue={value}${formatJsxProps(props)}>`,
+    '  {(segment) => <Token>{segment.text}</Token>}',
+    '</TokenField>',
+  ].join('\n')
+}

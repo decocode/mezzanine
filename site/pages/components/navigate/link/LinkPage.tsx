@@ -1,17 +1,27 @@
+import { useState } from 'react'
 import {
   Cell, Column, DemoArea, ExternalLinkIcon, Link, Row, Table, TableBody, TableHeader,
 } from '@decocode/mezzanine'
-import { linkContent, linkContentRows, linkStates } from './linkContent'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { linkContent, linkContentRows, linkExampleCode, linkExampleLabel, linkStates } from './linkContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function LinkPage() {
+  const [isDisabled, setIsDisabled] = useState(false)
+  const [current, setCurrent] = useState(false)
   return (
     <ContentPage
       content={linkContent}
       parts={{
         example: (
-          <DemoArea>
-            <Link href="#link-content">Link content examples</Link>
+          <DemoArea
+            codeView={linkExampleCode({ isDisabled, current })}
+            endPanel={<>
+              <PanelSwitch isSelected={isDisabled} onChange={setIsDisabled}>isDisabled</PanelSwitch>
+              <PanelSwitch isSelected={current} onChange={setCurrent}>aria-current</PanelSwitch>
+            </>}
+          >
+            <Link href="#link-content" isDisabled={isDisabled} aria-current={current ? 'page' : undefined}>{linkExampleLabel}</Link>
           </DemoArea>
         ),
         states: (

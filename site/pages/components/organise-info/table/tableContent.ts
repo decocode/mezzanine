@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 interface TableExampleRow {
@@ -22,11 +23,10 @@ export const tableExampleRows: TableExampleRow[] = [
 
 // Headings and the note inside the Example section's two live examples. The note also appears in the intro.
 export const tableExampleGroups = {
-  singleSelection: 'Single selection',
   // The single-selection column's header: visually hidden, so the checkbox column still has header text.
   selectionColumn: 'Select row',
-  multipleSelection: 'Multiple selection',
-  disabledRowNote: 'Row C is disabled in this example.',
+  disabledRowNote: 'With `disabledKeys`, Row C is disabled.',
+  emptyState: 'No rows to display.',
 }
 
 export const tableContent: DocsPageContent = {
@@ -40,14 +40,10 @@ export const tableContent: DocsPageContent = {
       intro: [
         'Tables have no selectable rows by default. Use single selection when one row can be chosen, or multiple selection when several rows can be chosen.',
         tableExampleGroups.disabledRowNote,
-      ],
-      subsections: [
-        { id: 'table-single-selection-heading', label: tableExampleGroups.singleSelection },
-        { id: 'table-multiple-selection-heading', label: tableExampleGroups.multipleSelection },
+        'With `allowsSorting` on its columns, a column heading changes the order of its rows.',
+        'Use an empty state to explain clearly when the table has no rows to display.',
       ],
     },
-    { key: 'sorting', title: 'Sorting', intro: ['Select a column heading to change the order of its rows.'] },
-    { key: 'emptyState', title: 'Empty state', intro: ['Use an empty state to explain clearly when the table has no rows to display.'] },
   ],
   technicalDetails: [
     {
@@ -117,4 +113,37 @@ export const tableContent: DocsPageContent = {
   references: [
     { label: 'React Aria Table', href: 'https://react-aria.adobe.com/Table' },
   ],
+}
+
+// The Properties panel's choices. renderEmptyState shows the table with no rows, and its message.
+export const tableSelectionModes = ['none', 'single', 'multiple'] as const
+export const tableFlags = ['disabledKeys', 'allowsSorting', 'renderEmptyState'] as const
+
+export function tableExampleCode({ selectionMode, flags }: { selectionMode: string, flags: Record<(typeof tableFlags)[number], boolean> }) {
+  const canSelect = selectionMode !== 'none'
+  const props = formatJsxProps({
+    selectionMode: canSelect ? selectionMode : undefined,
+    disabledKeys: flags.disabledKeys ? ['row-c'] : undefined,
+  })
+  const selectionHeader = selectionMode === 'multiple' ? '<Checkbox slot="selection" />' : `<VisuallyHidden>${tableExampleGroups.selectionColumn}</VisuallyHidden>`
+  return [
+    `<Table aria-label="Example table"${props}${flags.allowsSorting ? ' sortDescriptor={sortDescriptor} onSortChange={setSortDescriptor}' : ''}>`,
+    '  <TableHeader>',
+    ...(canSelect ? [`    <Column id="selection">${selectionHeader}</Column>`] : []),
+    ...tableExampleColumns.map(({ id, label, isRowHeader }) => `    <Column id="${id}"${formatJsxProps({ isRowHeader, allowsSorting: flags.allowsSorting })}>${label}</Column>`),
+    '  </TableHeader>',
+    flags.renderEmptyState
+      ? `  <TableBody renderEmptyState={() => '${tableExampleGroups.emptyState}'}>{[]}</TableBody>`
+      : '  <TableBody items={rows}>',
+    ...(flags.renderEmptyState ? [] : [
+      '    {(item) => (',
+      '      <Row id={item.id}>',
+      ...(canSelect ? ['        <Cell><Checkbox slot="selection" /></Cell>'] : []),
+      ...tableExampleColumns.map(({ id }) => `        <Cell>{item.${id}}</Cell>`),
+      '      </Row>',
+      '    )}',
+      '  </TableBody>',
+    ]),
+    '</Table>',
+  ].join('\n')
 }

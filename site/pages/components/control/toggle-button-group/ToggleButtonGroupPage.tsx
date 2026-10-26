@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Checkbox, DemoArea, ListBoxItem, Select, ToggleButton, ToggleButtonGroup, type ButtonSize } from '@decocode/mezzanine'
+import { DemoArea, ListBoxItem, Select, ToggleButton, ToggleButtonGroup, type ButtonSize } from '@decocode/mezzanine'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { buttonSizes } from '../button/buttonContent'
 import {
   toggleButtonGroupContent, toggleButtonGroupExample, toggleButtonGroupExampleCode, toggleButtonGroupFlags, toggleButtonGroupHierarchies,
@@ -39,7 +40,7 @@ export default function ToggleButtonGroupPage() {
                 {buttonSizes.map((option) => <ListBoxItem key={option.size} id={option.size}>{option.size}</ListBoxItem>)}
               </Select>
               {toggleButtonGroupFlags.map((name) => (
-                <Checkbox key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Checkbox>
+                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
               ))}
             </>}
           >

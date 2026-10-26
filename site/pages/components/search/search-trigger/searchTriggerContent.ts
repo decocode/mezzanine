@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const searchTriggerContent: DocsPageContent = {
@@ -7,8 +8,7 @@ export const searchTriggerContent: DocsPageContent = {
   title: 'SearchTrigger',
   description: 'Search trigger is the button that launches Search.',
   sections: [
-    { key: 'example', intro: ['The trigger opens a search dialog. Enter or Space opens it from the keyboard, and focus returns to the trigger when the dialog closes.'] },
-    { key: 'iconOnly', title: 'Icon only', intro: ['With `iconPosition="iconOnly"`, only the icon shows. The label appears in a tooltip and is still the accessible name.'] },
+    { key: 'example', intro: ['The trigger opens a search dialog. Enter or Space opens it from the keyboard, and focus returns to the trigger when the dialog closes.', 'With `iconPosition="iconOnly"`, only the icon shows. The label appears in a tooltip and is still the accessible name.'] },
   ],
   technicalDetails: [
     {
@@ -63,3 +63,21 @@ export const searchTriggerDialogText = {
   title: 'Search',
   description: 'An example dialog. A real search would list its results under the field.',
 } as const
+
+// The Properties panel's choices. The shortcut Badge only shows beside the label, and the tooltip only
+// for an icon on its own, so each control appears once it applies.
+export const searchTriggerExample = { label: 'Search', shortcut: '⌘ K' } as const
+export const searchTriggerIconPositions = ['leading', 'iconOnly'] as const
+export const searchTriggerTooltipPositions = ['top', 'bottom', 'start', 'end'] as const
+
+export function searchTriggerExampleCode({ iconPosition, tooltipPosition, shortcut, isDisabled }: {
+  iconPosition: string, tooltipPosition: string, shortcut: boolean, isDisabled: boolean
+}) {
+  const isIconOnly = iconPosition === 'iconOnly'
+  return `<SearchTrigger aria-keyshortcuts="Meta+K Control+K"${formatJsxProps({
+    iconPosition: isIconOnly ? iconPosition : undefined,
+    tooltipPosition: isIconOnly && tooltipPosition !== 'top' ? tooltipPosition : undefined,
+    shortcut: !isIconOnly && shortcut ? searchTriggerExample.shortcut : undefined,
+    isDisabled,
+  })}>${searchTriggerExample.label}</SearchTrigger>`
+}

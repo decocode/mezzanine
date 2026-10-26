@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const avatarContent: DocsPageContent = {
@@ -64,3 +65,14 @@ export const avatarExample = {
   small: 'Small avatar',
   unnamed: 'Avatar without a visible name',
 } as const
+
+// The Properties panel's choices. Without src the Avatar shows the name's initials; without a visible
+// name, alt names it instead.
+export const avatarSizes = ['md', 'sm'] as const
+export const avatarFlags = ['src', 'children'] as const
+
+export function avatarExampleCode({ size, src, named }: { size: string, src: boolean, named: boolean }) {
+  const props = formatJsxProps({ size: size === 'md' ? undefined : size, alt: named ? undefined : avatarExample.unnamed })
+  const picture = src ? ' src={picture}' : ''
+  return named ? `<Avatar${picture}${props}>${avatarExample.named}</Avatar>` : `<Avatar${picture}${props} />`
+}

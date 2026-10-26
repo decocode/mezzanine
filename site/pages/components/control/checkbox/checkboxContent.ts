@@ -13,7 +13,7 @@ export const checkboxContent: DocsPageContent = {
   id: 'checkbox',
   kind: 'component',
   title: 'Checkbox',
-  description: 'A checkbox is a small box that can be ticked or unticked to turn a choice on or off. Use checkboxes when people can choose several options, or confirm something such as accepting terms.',
+  description: '`Checkbox` is a component that lets people turn an option on or off, or confirm something.',
   sections: [
     { key: 'example', intro: ['Select or clear the `Checkbox` using its label or the Space key when focused.'] },
     { key: 'states' },
@@ -43,7 +43,7 @@ export const checkboxContent: DocsPageContent = {
       key: 'accessibility',
       body: [
         'Tab focuses the checkbox and Space changes its selection.',
-        'Provide visible error guidance and associate it using `aria-describedby`; this wrapper does not insert error text automatically.',
+        '`errorMessage` shows a message under the checkbox when `isInvalid` is set, and screen readers read it with the checkbox.',
       ],
     },
     {
@@ -71,20 +71,23 @@ export const checkboxContent: DocsPageContent = {
 
 // The Properties panels' on/off props, in panel order, and the Example's label.
 export const checkboxExampleLabel = 'Checkbox label'
+export const checkboxExampleError = 'Checkbox error message'
 export const checkboxFlags = ['defaultSelected', 'isIndeterminate', 'isDisabled', 'isInvalid', 'isReadOnly'] as const
-export const checkboxGroupFlags = ['isDisabled', 'isInvalid', 'isReadOnly'] as const
+export const checkboxGroupFlags = ['isDisabled', 'isReadOnly', 'isInvalid'] as const
+export const checkboxGroupExampleError = 'Group A error message'
 export const checkboxGroupDefaultValueLabel = 'defaultValue'
 
 export function checkboxExampleCode(props: Record<string, unknown>) {
   return `<Checkbox${formatJsxProps(props)}>${checkboxExampleLabel}</Checkbox>`
 }
 
-export function checkboxGroupExampleCode(props: Record<string, unknown>) {
+export function checkboxGroupExampleCode({ errorMessage, ...props }: Record<string, unknown>) {
   return [
     `<CheckboxGroup${formatJsxProps(props)}>`,
     `  <Label>${checkboxGroupExampleLabels.group}</Label>`,
     ...checkboxGroupExampleLabels.checkboxes.map((checkbox) => `  <Checkbox value="${checkbox}">${checkbox}</Checkbox>`),
     `  <Text slot="description">${checkboxGroupExampleLabels.description}</Text>`,
+    ...(errorMessage ? [`  <FieldError>${checkboxGroupExampleError}</FieldError>`] : []),
     '</CheckboxGroup>',
   ].join('\n')
 }

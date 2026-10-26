@@ -6,7 +6,7 @@ export const switchContent: DocsPageContent = {
   id: 'switch',
   kind: 'component',
   title: 'Switch',
-  description: 'A switch turns a setting on or off, and the change takes effect straight away.',
+  description: '`SwitchField` is a component that turns a setting or feature on or off, with immediate effect.',
   sections: [
     { key: 'example', intro: ['The `SwitchButton` turns on or off from its label, or with the Space key when focused.'] },
     { key: 'states' },
@@ -68,8 +68,14 @@ export const switchStateLabels = {
 
 // The Example's label, and the Properties panel's on/off props, in panel order.
 export const switchExampleLabel = 'Switch label'
-export const switchFlags = ['defaultSelected', 'isDisabled', 'isReadOnly'] as const
+export const switchFlags = ['defaultSelected', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
+export const switchExampleError = 'Switch error message'
 
-export function switchExampleCode(props: Record<string, unknown>) {
-  return [`<SwitchField${formatJsxProps(props)}>`, `  <SwitchButton>${switchExampleLabel}</SwitchButton>`, '</SwitchField>'].join('\n')
+export function switchExampleCode({ errorMessage, ...props }: Record<string, unknown>) {
+  return [
+    `<SwitchField${formatJsxProps(props)}>`,
+    `  <SwitchButton>${switchExampleLabel}</SwitchButton>`,
+    ...(errorMessage ? [`  <FieldError>${switchExampleError}</FieldError>`] : []),
+    '</SwitchField>',
+  ].join('\n')
 }

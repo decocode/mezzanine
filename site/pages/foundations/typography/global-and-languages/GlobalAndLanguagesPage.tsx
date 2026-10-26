@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Card, Checkbox, DemoArea } from '@decocode/mezzanine'
+import { Card, DemoArea } from '@decocode/mezzanine'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { RichText } from '../../../../components/RichText'
 import {
   globalAndLanguagesContent, readingDirectionRightToLeftExamples, readingDirectionVerticalExamples,
@@ -14,7 +15,7 @@ export default function GlobalAndLanguagesPage() {
       content={globalAndLanguagesContent}
       parts={{
         startAndEnd: (
-          <DemoArea align="stretch" codeView={startAndEndCode} endPanel={<Checkbox isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</Checkbox>}>
+          <DemoArea align="stretch" codeView={startAndEndCode} endPanel={<PanelSwitch isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</PanelSwitch>}>
             <div dir={isRightToLeft ? 'rtl' : 'ltr'} className="mz-ratio-pair text-direction-example" data-fraction="1/2">
               <div>
                 <p className="mz-text-label-md">{startAndEndExample.physicalLabel}</p>

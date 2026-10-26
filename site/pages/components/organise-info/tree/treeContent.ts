@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const treeContent: DocsPageContent = {
@@ -60,3 +61,29 @@ export const treeContent: DocsPageContent = {
 
 // The example's label and rows: each parent with its children.
 export const treeExampleLabels = { label: 'Tree A', branches: [{ title: 'Branch A', leaves: ['Leaf A1', 'Leaf A2'] }, { title: 'Branch B', leaves: ['Leaf B1'] }], leaf: 'Leaf C' } as const
+
+// The Properties panel's choices. selectionBehavior only applies once rows can be chosen; replace swaps
+// the chosen row on a press, and toggle adds or removes it. disabledKeys turns Leaf C off.
+export const treeSelectionModes = ['none', 'single', 'multiple'] as const
+export const treeSelectionBehaviors = ['replace', 'toggle'] as const
+
+export function treeExampleCode({ selectionMode, selectionBehavior, isExpanded, disabledKeys }: {
+  selectionMode: string, selectionBehavior: string, isExpanded: boolean, disabledKeys: boolean
+}) {
+  const props = formatJsxProps({
+    selectionMode: selectionMode === 'none' ? undefined : selectionMode,
+    selectionBehavior: selectionMode === 'none' || selectionBehavior === 'toggle' ? undefined : selectionBehavior,
+    defaultExpandedKeys: isExpanded ? [treeExampleLabels.branches[0].title] : undefined,
+    disabledKeys: disabledKeys ? [treeExampleLabels.leaf] : undefined,
+  })
+  return [
+    `<Tree aria-label="${treeExampleLabels.label}"${props}>`,
+    ...treeExampleLabels.branches.flatMap((branch) => [
+      `  <TreeItem id="${branch.title}" title="${branch.title}">`,
+      ...branch.leaves.map((leaf) => `    <TreeItem id="${leaf}" title="${leaf}" />`),
+      '  </TreeItem>',
+    ]),
+    `  <TreeItem id="${treeExampleLabels.leaf}" title="${treeExampleLabels.leaf}" />`,
+    '</Tree>',
+  ].join('\n')
+}

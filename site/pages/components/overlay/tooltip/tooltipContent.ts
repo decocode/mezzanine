@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const tooltipContent: DocsPageContent = {
@@ -100,4 +101,18 @@ export const tooltipContent: DocsPageContent = {
   references: [
     { label: 'React Aria Tooltip', href: 'https://react-aria.adobe.com/Tooltip' },
   ],
+}
+
+// The Properties panel's choices: where the tooltip appears (top is React Aria's default), and the
+// hover delay in milliseconds (500 by default).
+export const tooltipPlacements = ['top', 'bottom', 'start', 'end'] as const
+export const tooltipDelays = ['0', '500', '1500'] as const
+
+export function tooltipExampleCode({ placement, delay }: { placement: string, delay: number }) {
+  return [
+    `<TooltipTrigger${formatJsxProps({ delay: delay === 500 ? undefined : delay })}>`,
+    '  <Button icon={<SettingsIcon />} aria-label="Settings" />',
+    `  <Tooltip${formatJsxProps({ placement: placement === 'top' ? undefined : placement })}>Settings</Tooltip>`,
+    '</TooltipTrigger>',
+  ].join('\n')
 }

@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 // Field tokens shared by Input and TextArea.
@@ -8,15 +9,11 @@ export const textFieldContent: DocsPageContent = {
   title: 'Text field',
   description: 'A text field is a box for entering one line of text, such as a name or an email address. Its label tells people what to enter, and supporting text can explain any requirements or errors.',
   sections: [
-    { key: 'example' },
-    {
-      key: 'states',
-      body: ['Focus or hover the editable fields to inspect their interaction states. Read-only text remains selectable; disabled fields are skipped when using Tab.'],
-    },
+    { key: 'example', body: ['Read-only text remains selectable; disabled fields are skipped when using Tab.'] },
     {
       key: 'validation',
       title: 'Validation',
-      body: ['Submit an empty or incomplete email address to see validation. This local example does not send data.'],
+      body: ['An empty or incomplete email address fails validation when the form is submitted. This local example does not send data.'],
     },
   ],
   technicalDetails: [
@@ -71,4 +68,38 @@ export const textFieldContent: DocsPageContent = {
   references: [
     { label: 'React Aria TextField', href: 'https://react-aria.adobe.com/TextField' },
   ],
+}
+
+// The Example's copy, and the Properties panel's choices in panel order. errorMessage appears with
+// isInvalid.
+export const textFieldExampleText = {
+  label: 'Field label', placeholder: 'Enter text', description: 'Supporting information about this field.', errorMessage: 'Field error message',
+} as const
+export const textFieldTypes = ['text', 'email', 'password'] as const
+export const textFieldFlags = ['placeholder', 'description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
+export const textFieldValidationBehaviors = ['native', 'aria'] as const
+
+export function textFieldExampleCode({ type, flags, hasErrorMessage }: { type: string, flags: Record<(typeof textFieldFlags)[number], boolean>, hasErrorMessage: boolean }) {
+  return [
+    `<TextField${formatJsxProps({ type: type === 'text' ? undefined : type, isDisabled: flags.isDisabled, isReadOnly: flags.isReadOnly, isInvalid: flags.isInvalid })} value={value} onChange={setValue}>`,
+    `  <Label>${textFieldExampleText.label}</Label>`,
+    `  <Input${formatJsxProps({ placeholder: flags.placeholder ? textFieldExampleText.placeholder : undefined })} />`,
+    ...(flags.description ? [`  <Text slot="description">${textFieldExampleText.description}</Text>`] : []),
+    ...(flags.isInvalid && hasErrorMessage ? [`  <FieldError>${textFieldExampleText.errorMessage}</FieldError>`] : []),
+    '</TextField>',
+  ].join('\n')
+}
+
+export function textFieldValidationCode(validationBehavior: string) {
+  return [
+    `<Form${formatJsxProps({ validationBehavior: validationBehavior === 'native' ? undefined : validationBehavior })} onSubmit={handleSubmit}>`,
+    '  <TextField name="email" type="email" isRequired>',
+    '    <Label>Email address (required)</Label>',
+    '    <Input autoComplete="email" />',
+    '    <Text slot="description">Enter an address such as name@example.com.</Text>',
+    '    <FieldError />',
+    '  </TextField>',
+    '  <Button type="submit">Validate field</Button>',
+    '</Form>',
+  ].join('\n')
 }

@@ -7,8 +7,7 @@ export const separatorContent: DocsPageContent = {
   title: 'Separator',
   description: 'A separator is a thin line that divides groups of content, such as sections of a list or a toolbar.',
   sections: [
-    { key: 'example', intro: ['`Separator` draws a line across its container. The space around it comes from the layout it sits in.'] },
-    { key: 'variants', intro: ['With `orientation="vertical"`, the line runs top to bottom, between items in a row.'] },
+    { key: 'example', intro: ['`Separator` draws a line across its container. The space around it comes from the layout it sits in.', 'With `orientation="vertical"`, the line runs top to bottom, between items in a row.'] },
   ],
   technicalDetails: [
     {
@@ -53,4 +52,13 @@ export const separatorContent: DocsPageContent = {
   references: [
     { label: 'React Aria Separator', href: 'https://react-aria.adobe.com/Separator' },
   ],
+}
+
+// The Properties panel's orientation choice. A vertical line runs between items in a row.
+export const separatorOrientations = ['horizontal', 'vertical'] as const
+
+export function separatorExampleCode(orientation: string) {
+  return orientation === 'vertical'
+    ? ['<div className="row">', '  <Text>Item A</Text>', '  <Separator orientation="vertical" />', '  <Text>Item B</Text>', '</div>'].join('\n')
+    : ['<Text elementType="p">Group A</Text>', '<Separator />', '<Text elementType="p">Group B</Text>'].join('\n')
 }

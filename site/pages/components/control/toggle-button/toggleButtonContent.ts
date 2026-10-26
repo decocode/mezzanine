@@ -19,7 +19,7 @@ export const toggleButtonContent: DocsPageContent = {
   id: 'toggle-button',
   kind: 'component',
   title: 'Toggle button',
-  description: 'A toggle button turns a choice on or off and changes its appearance to show whether it is selected. For example, a Bold button stays selected while bold formatting is switched on.',
+  description: '`ToggleButton` is a component that turns an option on or off, and stays pressed while it’s on.',
   sections: [
     {
       key: 'example',

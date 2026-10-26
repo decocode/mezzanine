@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 // Shown in the Example intro and again after the live example.
 export const tableOfContentsImportParagraph = 'Import `TableOfContents` from `@decocode/mezzanine`. It composes Mezzanine’s React Aria `Heading` and `Link`with a navigation landmark and nested lists.'
@@ -71,4 +72,16 @@ export const tableOfContentsContent: DocsPageContent = {
   references: [
     { label: 'React Aria Link', href: 'https://react-aria.adobe.com/Link' },
   ],
+}
+
+// The Properties panel's on/off prop: the visible heading. Without it, aria-label names the contents.
+export const tableOfContentsExampleHeading = 'Example contents'
+
+export function tableOfContentsExampleCode(hasHeading: boolean) {
+  const props = formatJsxProps({
+    heading: hasHeading ? tableOfContentsExampleHeading : undefined,
+    headingLevel: hasHeading ? 3 : undefined,
+    'aria-label': hasHeading ? undefined : tableOfContentsExampleHeading,
+  })
+  return `<TableOfContents${props} sections={sections} />`
 }

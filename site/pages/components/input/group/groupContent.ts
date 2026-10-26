@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const groupContent: DocsPageContent = {
@@ -59,3 +60,16 @@ export const groupContent: DocsPageContent = {
 
 // The example's labels.
 export const groupExampleLabels = { input: 'Input A', button: 'Button A' } as const
+
+// The Properties panel's on/off props.
+export const groupFlags = ['isDisabled', 'isInvalid'] as const
+
+export function groupExampleCode(props: Record<string, unknown>) {
+  return [
+    `<Label htmlFor="input-a">${groupExampleLabels.input}</Label>`,
+    `<Group${formatJsxProps(props)}>`,
+    `  <Input id="input-a"${formatJsxProps({ disabled: props.isDisabled })} />`,
+    `  <Button hierarchy="secondary"${formatJsxProps({ isDisabled: props.isDisabled })}>${groupExampleLabels.button}</Button>`,
+    '</Group>',
+  ].join('\n')
+}

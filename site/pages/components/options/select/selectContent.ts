@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const selectContent: DocsPageContent = {
@@ -74,10 +75,13 @@ export const selectHierarchyLabel = 'hierarchy'
 export const selectDefaultKeyLabel = 'defaultSelectedKey'
 
 // Without a default key, the prop is left out and the example shows its placeholder.
-export function selectExampleCode(hierarchy: (typeof selectHierarchies)[number], defaultKey: string | null) {
+export const selectExampleText = { description: 'Select description', errorMessage: 'Select error message' } as const
+export const selectFlags = ['description', 'isDisabled', 'isInvalid'] as const
+
+export function selectExampleCode(hierarchy: (typeof selectHierarchies)[number], defaultKey: string | null, fields: Record<string, unknown> = {}) {
   const defaultKeyProp = defaultKey == null ? '' : ` defaultSelectedKey="${defaultKey}"`
   return [
-    `<Select label="${selectExampleLabels.label}" hierarchy=${JSON.stringify(hierarchy)}${defaultKeyProp}>`,
+    `<Select label="${selectExampleLabels.label}" hierarchy=${JSON.stringify(hierarchy)}${defaultKeyProp}${formatJsxProps(fields)}>`,
     ...selectExampleLabels.options.map((option) => `  <ListBoxItem id="${option}">${option}</ListBoxItem>`),
     '</Select>',
   ].join('\n')

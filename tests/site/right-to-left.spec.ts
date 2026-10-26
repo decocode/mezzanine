@@ -46,7 +46,7 @@ test('Reading direction shows logical sides mirroring and physical sides staying
   const logical = page.locator('.text-direction-logical')
   await expect(logical).toHaveCSS('border-left-style', 'solid')
   await page.locator('label').filter({ hasText: 'Show right to left' }).click()
-  await expect(page.getByRole('checkbox', { name: 'Show right to left', exact: true })).toBeChecked()
+  await expect(page.getByRole('switch', { name: 'Show right to left', exact: true })).toBeChecked()
   await expect(logical).toHaveCSS('border-right-style', 'solid')
   await expect(logical).toHaveCSS('border-left-style', 'none')
   await expect(physical).toHaveCSS('border-left-style', 'solid')

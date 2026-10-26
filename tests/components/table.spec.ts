@@ -4,10 +4,10 @@ import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '
 
 // Checks that clicking or pressing Enter on a column heading sorts the rows, that only the sorted
 // column shows an arrow (hidden from screen readers, which announce the sort order instead), and
-// that tables without sorting show no arrow.
+// that without sorting the table shows no arrow.
 test('Table sorting works with pointer and keyboard and supplies one accessible indicator', async ({ page }) => {
   await page.goto('/table')
-  const table = page.getByRole('grid', { name: 'Sortable table', exact: true })
+  const table = page.getByRole('grid', { name: 'Example table', exact: true })
   const firstColumn = table.getByRole('columnheader', { name: 'Column A', exact: true })
   await expect(firstColumn).toHaveAttribute('aria-sort', 'ascending')
   await expect(table.locator('tbody tr')).toHaveText(['Row ACell A2Cell A3', 'Row BCell B2Cell B3', 'Row CCell C2Cell C3'])
@@ -27,7 +27,9 @@ test('Table sorting works with pointer and keyboard and supplies one accessible 
   await expect(indicator).toHaveAttribute('aria-hidden', 'true')
   // Descending shows the down arrow, drawn from the shared icon set.
   await expect(indicator.locator('path')).toHaveAttribute('d', /^M12 4v15\.5/)
-  await expect(page.getByRole('grid', { name: 'Table with single row selection', exact: true }).locator('.mz-table-sort-indicator')).toHaveCount(0)
+  // Without allowsSorting, the columns show no arrow.
+  await page.locator('.docs-page-lead .mz-demo-area-end-panel label', { hasText: /^allowsSorting$/ }).click()
+  await expect(table.locator('.mz-table-sort-indicator')).toHaveCount(0)
 })
 
 // Checks, in each theme at normal and double text size, that the sortable table scrolls inside its
@@ -39,12 +41,12 @@ for (const theme of themes) {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/table')
     await setTheme(page, theme)
-    const table = page.getByRole('grid', { name: 'Sortable table', exact: true })
+    const table = page.getByRole('grid', { name: 'Example table', exact: true })
     for (const fontSize of textSizes) {
       await setTextSize(page, fontSize)
       await table.getByRole('columnheader', { name: 'Column A', exact: true }).click()
       await expectNoPageOverflow(page)
-      await expectNoAccessibilityViolations(page, '[aria-label="Sortable table"]')
+      await expectNoAccessibilityViolations(page, '[aria-label="Example table"]')
     }
     await page.emulateMedia({ forcedColors: 'active' })
     await expect(table.locator('.mz-table-sort-indicator')).toBeVisible()

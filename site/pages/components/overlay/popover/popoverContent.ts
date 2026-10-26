@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const popoverContent: DocsPageContent = {
@@ -60,3 +61,19 @@ export const popoverContent: DocsPageContent = {
 
 // The example's trigger and content, kept here so the page component holds no copy.
 export const popoverExampleLabels = { trigger: 'Popover trigger', content: 'Popover content.' } as const
+
+// The Properties panel's placement choice. bottom is the default.
+export const popoverPlacements = ['bottom', 'top', 'start', 'end'] as const
+
+export function popoverExampleCode(placement: string) {
+  return [
+    '<DialogTrigger>',
+    `  <Button hierarchy="secondary">${popoverExampleLabels.trigger}</Button>`,
+    `  <Popover${formatJsxProps({ placement: placement === 'bottom' ? undefined : placement })}>`,
+    `    <Dialog aria-label="${popoverExampleLabels.trigger}">`,
+    `      <Text elementType="p" className="mz-text-body-md">${popoverExampleLabels.content}</Text>`,
+    '    </Dialog>',
+    '  </Popover>',
+    '</DialogTrigger>',
+  ].join('\n')
+}

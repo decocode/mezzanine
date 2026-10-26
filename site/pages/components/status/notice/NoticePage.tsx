@@ -1,8 +1,9 @@
 import { useState, type ReactNode } from 'react'
 import {
-  Button, Checkbox, CheckCircleIcon, DemoArea, ErrorIcon, Header, InfoIcon, Link, ListBoxItem, ListBoxSection, Notice, PlaceholderIcon,
+  Button, CheckCircleIcon, DemoArea, ErrorIcon, Header, InfoIcon, Link, ListBoxItem, ListBoxSection, Notice, PlaceholderIcon,
   Select, Separator, WarningIcon, type NoticePurpose,
 } from '@decocode/mezzanine'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { noticeContent, noticeExample, noticeExampleCode, noticePurposeGroups } from './noticeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -36,10 +37,10 @@ export default function NoticePage() {
                   </ListBoxSection>,
                 ])}
               </Select>
-              <Checkbox isSelected={hasTitle} onChange={setHasTitle}>{noticeExample.titleLabel}</Checkbox>
-              <Checkbox isSelected={hasContent} onChange={setHasContent}>{noticeExample.contentLabel}</Checkbox>
-              <Checkbox isSelected={hasIcon} onChange={setHasIcon}>{noticeExample.iconLabel}</Checkbox>
-              <Checkbox isSelected={hasActions} onChange={setHasActions}>{noticeExample.actionsLabel}</Checkbox>
+              <PanelSwitch isSelected={hasTitle} onChange={setHasTitle}>{noticeExample.titleLabel}</PanelSwitch>
+              <PanelSwitch isSelected={hasContent} onChange={setHasContent}>{noticeExample.contentLabel}</PanelSwitch>
+              <PanelSwitch isSelected={hasIcon} onChange={setHasIcon}>{noticeExample.iconLabel}</PanelSwitch>
+              <PanelSwitch isSelected={hasActions} onChange={setHasActions}>{noticeExample.actionsLabel}</PanelSwitch>
             </>}
           >
             <Notice

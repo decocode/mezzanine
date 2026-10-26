@@ -6,7 +6,7 @@ export const sliderContent: DocsPageContent = {
   id: 'slider',
   kind: 'component',
   title: 'Slider',
-  description: 'A slider picks a number, or a range, from a track by dragging a thumb or using the arrow keys.',
+  description: '`Slider` is a component for selecting a single value, or a range of values, by moving a thumb along a track.',
   sections: [
     { key: 'example', intro: ['`Slider` shows a `label`, the current value and a thumb on a filled track. An array `defaultValue` gives one thumb for each value, for a range, and `thumbLabels` names each thumb.'] },
   ],
@@ -72,12 +72,16 @@ export const sliderExample = {
 } as const
 export const sliderDefaultValues = { '40': 40, '[20, 70]': [20, 70] } as const
 export const sliderOrientations = ['horizontal', 'vertical'] as const
+// How far each arrow key press moves a thumb. 1 is the default.
+export const sliderSteps = ['1', '5', '10'] as const
+export const sliderStepLabel = 'step'
 export const sliderFlags = ['fillOffset', 'formatValue', 'isDisabled'] as const
 
 // A vertical slider hides its label, so the code names it with aria-label instead.
-export function sliderExampleCode({ defaultValue, orientation, fillOffset, formatValue, isDisabled }: {
+export function sliderExampleCode({ defaultValue, orientation, step, fillOffset, formatValue, isDisabled }: {
   defaultValue: number | readonly number[]
   orientation: (typeof sliderOrientations)[number]
+  step: number
   fillOffset: boolean
   formatValue: boolean
   isDisabled: boolean
@@ -89,6 +93,7 @@ export function sliderExampleCode({ defaultValue, orientation, fillOffset, forma
     defaultValue,
     thumbLabels: Array.isArray(defaultValue) ? sliderExample.rangeThumbLabels : undefined,
     orientation: isVertical ? orientation : undefined,
+    step: step === 1 ? undefined : step,
     fillOffset: fillOffset ? sliderExample.fillOffset : undefined,
   })}${formatValue ? ' formatValue={(value) => `${value}%`}' : ''}${isDisabled ? ' isDisabled' : ''} />`
 }

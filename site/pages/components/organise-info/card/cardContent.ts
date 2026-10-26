@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const cardContent: DocsPageContent = {
@@ -76,3 +77,30 @@ export const cardExample = {
   detail: 'Detail A',
   action: 'Button',
 } as const
+
+// The Properties panel's choices: the picture's shape (16 / 9 by default), and the card's optional
+// parts. With href, the title links and the whole card can be pressed.
+export const cardAspectRatios = ['16 / 9', '4 / 3', '1 / 1'] as const
+export const cardFlags = ['CardImage', 'href', 'CardFooter'] as const
+
+export function cardExampleCode({ aspectRatio, flags }: { aspectRatio: string, flags: Record<(typeof cardFlags)[number], boolean> }) {
+  return [
+    '<Card>',
+    ...(flags.CardImage ? [
+      `  <CardImage src={picture} alt=""${formatJsxProps({ aspectRatio: aspectRatio === '16 / 9' ? undefined : aspectRatio })}>`,
+      `    <Badge>${cardExample.badge}</Badge>`,
+      `    <ToggleButton hierarchy="secondary" size="sm" icon={<HeartIcon />} iconPosition="iconOnly">${cardExample.toggle}</ToggleButton>`,
+      '  </CardImage>',
+    ] : []),
+    `  <Avatar size="sm">${cardExample.avatar}</Avatar>`,
+    `  <CardTitle${formatJsxProps({ href: flags.href ? cardExample.href : undefined })}>${cardExample.heading}</CardTitle>`,
+    `  <Text elementType="p">${cardExample.body}</Text>`,
+    ...(flags.CardFooter ? [
+      '  <CardFooter>',
+      `    <Text>${cardExample.detail}</Text>`,
+      `    <Button hierarchy="secondary">${cardExample.action}</Button>`,
+      '  </CardFooter>',
+    ] : []),
+    '</Card>',
+  ].join('\n')
+}

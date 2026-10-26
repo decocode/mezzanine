@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const menuContent: DocsPageContent = {
@@ -7,8 +8,7 @@ export const menuContent: DocsPageContent = {
   title: 'Menu',
   description: 'A menu lists actions to choose from, in a popover opened by a button.',
   sections: [
-    { key: 'example', intro: ['A `MenuTrigger` opens the `Menu` in a `Popover` from a `Button`. Its items are rows, like a list box’s options.'] },
-    { key: 'variants', intro: ['With `selectionMode`, items can be chosen, and a tick marks each chosen one. A `SubmenuTrigger` opens a further menu, marked with a chevron.'] },
+    { key: 'example', intro: ['A `MenuTrigger` opens the `Menu` in a `Popover` from a `Button`. Its items are rows, like a list box’s options.', 'With `selectionMode`, items can be chosen, and a tick marks each chosen one. A `SubmenuTrigger` opens a further menu, marked with a chevron.'] },
   ],
   technicalDetails: [
     {
@@ -63,4 +63,20 @@ export const menuContent: DocsPageContent = {
 }
 
 // The examples' trigger and item labels.
-export const menuExampleLabels = { trigger: 'Menu trigger', selectionTrigger: 'Menu with selection', items: ['Action A', 'Action B', 'Action C'] } as const
+export const menuExampleLabels = { trigger: 'Menu trigger', items: ['Action A', 'Action B', 'Action C'] } as const
+
+// The Properties panel's choices. disabledKeys turns Action B off.
+export const menuSelectionModes = ['none', 'single', 'multiple'] as const
+
+export function menuExampleCode({ selectionMode, disabledKeys }: { selectionMode: string, disabledKeys: boolean }) {
+  return [
+    '<MenuTrigger>',
+    `  <Button hierarchy="secondary">${menuExampleLabels.trigger}</Button>`,
+    '  <Popover>',
+    `    <Menu${formatJsxProps({ selectionMode: selectionMode === 'none' ? undefined : selectionMode, disabledKeys: disabledKeys ? [menuExampleLabels.items[1]] : undefined })}>`,
+    ...menuExampleLabels.items.map((item) => `      <MenuItem id="${item}">${item}</MenuItem>`),
+    '    </Menu>',
+    '  </Popover>',
+    '</MenuTrigger>',
+  ].join('\n')
+}

@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const modalContent: DocsPageContent = {
@@ -59,3 +60,26 @@ export const modalContent: DocsPageContent = {
 
 // The example's labels and copy.
 export const modalExampleLabels = { trigger: 'Modal trigger', title: 'Modal title', body: 'Modal content.', close: 'Close' } as const
+
+// The Properties panel's on/off props, on ModalOverlay: whether a press outside closes it, and whether
+// Escape is turned off.
+export const modalFlags = ['isDismissable', 'isKeyboardDismissDisabled'] as const
+
+export function modalExampleCode(props: Record<string, unknown>) {
+  return [
+    '<DialogTrigger>',
+    `  <Button hierarchy="secondary">${modalExampleLabels.trigger}</Button>`,
+    `  <ModalOverlay${formatJsxProps(props)}>`,
+    '    <Modal>',
+    '      <Dialog>',
+    `        <Heading slot="title">${modalExampleLabels.title}</Heading>`,
+    `        <Text elementType="p" className="mz-text-body-md">${modalExampleLabels.body}</Text>`,
+    '        <footer className="mz-dialog-actions">',
+    `          <Button slot="close" hierarchy="secondary">${modalExampleLabels.close}</Button>`,
+    '        </footer>',
+    '      </Dialog>',
+    '    </Modal>',
+    '  </ModalOverlay>',
+    '</DialogTrigger>',
+  ].join('\n')
+}

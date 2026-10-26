@@ -50,7 +50,7 @@ export const buttonContent: DocsPageContent = {
   id: 'button',
   kind: 'component',
   title: 'Button',
-  description: 'A button triggers an action, such as submitting a form.',
+  description: '`Button` is a component that triggers an action.',
   sections: [
     {
       key: 'usingAButton',

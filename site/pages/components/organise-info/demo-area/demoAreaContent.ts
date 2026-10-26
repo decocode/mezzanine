@@ -7,8 +7,7 @@ export const demoAreaContent: DocsPageContent = {
   title: 'Demo area',
   description: 'A demo area contains examples of rendered UI components.',
   sections: [
-    { key: 'example', intro: ['Above the demo area is a top bar containing a theme switcher.'] },
-    { key: 'variants' },
+    { key: 'example', intro: ['Above the demo area is a top bar containing a theme switcher.', '`endPanel` adds a control panel for the demo, and `codeView` adds Code and Demo tabs. `align` sets where the demo sits: `center`, the default, `stretch` or `start`.'] },
   ],
   technicalDetails: [
     {
@@ -63,17 +62,22 @@ export const demoAreaContent: DocsPageContent = {
   ],
 }
 
-// The examples' labels.
+// The example's labels, and the Properties panel's choices for the demo area inside it.
 export const demoAreaExampleLabels = {
-  panelHeading: 'End panel',
-  panelDescription: '`endPanel` adds a control panel for the demo.',
-  codeHeading: 'Code view',
-  codeDescription: '`codeView` adds Code and Demo tabs.',
   button: 'Button A',
   switch: 'Disable',
 } as const
+export const demoAreaAligns = ['center', 'stretch', 'start'] as const
+export const demoAreaFlags = ['codeView', 'endPanel'] as const
 
-// The source shown in the Code tab example.
-export const demoAreaExampleCode = `<DemoArea codeView={source}>
-  <Button>Button A</Button>
-</DemoArea>`
+// The demo area inside the example shows this as its Code tab.
+export const demoAreaInnerCode = `<Button>${demoAreaExampleLabels.button}</Button>`
+
+export function demoAreaExampleCode({ align, codeView, endPanel }: { align: string, codeView: boolean, endPanel: boolean }) {
+  const props = [
+    align === 'center' ? '' : ` align="${align}"`,
+    codeView ? ' codeView={source}' : '',
+    endPanel ? ' endPanel={controls}' : '',
+  ].join('')
+  return `<DemoArea${props}>\n  <Button>${demoAreaExampleLabels.button}</Button>\n</DemoArea>`
+}

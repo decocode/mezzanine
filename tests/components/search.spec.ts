@@ -82,6 +82,8 @@ test('SearchTrigger shows its shortcut without changing its name', async ({ page
 // keyboard focus, and has no shortcut Badge.
 test('icon-only SearchTrigger names itself and shows its label in a tooltip', async ({ page }) => {
   await page.goto('/search-trigger')
+  await page.locator('.docs-page-lead .mz-demo-area-end-panel').getByRole('button', { name: /iconPosition/ }).click()
+  await page.getByRole('option', { name: 'iconOnly', exact: true }).click()
   const iconOnly = page.locator('.mz-search-trigger[data-icon-only]')
   await expect(iconOnly).toHaveAccessibleName('Search')
   await expect(iconOnly.locator('.mz-search-trigger-shortcut')).toHaveCount(0)

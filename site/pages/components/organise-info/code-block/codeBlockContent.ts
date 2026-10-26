@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const codeBlockContent: DocsPageContent = {
@@ -7,11 +8,7 @@ export const codeBlockContent: DocsPageContent = {
   title: 'Code block',
   description: 'A code block shows several lines of code, such as an example or a set of instructions, on its own dark surface. It keeps the code’s line breaks and indentation, and long lines scroll sideways rather than breaking in the middle of a word.',
   sections: [
-    { key: 'example', intro: ['`CodeBlock` renders the code you pass as its children in a monospace font, on a dark surface in every theme. Its copy button, in a strip above the code, copies the code to the clipboard.'] },
-    { key: 'language', title: 'Syntax highlighting', intro: ['`language` colours the code’s keywords, strings, comments and other parts, using the syntax colour roles each theme sets. The languages are `bash`, `css`, `html`, `javascript`, `json`, `jsx`, `tsx` and `typescript`. Inside Wireframe, the block stays dark but the code is monochrome.', '[Shiki](https://shiki.style/) is the open-source syntax highlighter used by Mezzanine, which loads only when a page contains a highlighted Code block.'] },
-    { key: 'title', title: 'Title', intro: ['`title` adds a heading to the strip, such as a file name. It also names the code for screen readers.'] },
-    { key: 'lineNumbers', title: 'Line numbers', intro: ['`showLineNumbers` numbers each line. `startLine` sets the first number, for an excerpt from further down a file.'] },
-    { key: 'markedLines', title: 'Marked lines', intro: ['`highlightedLines`, `addedLines` and `removedLines` mark lines by their number. Added lines show +, and removed lines show −, so the meaning doesn’t rely on colour.'] },
+    { key: 'example', intro: ['`CodeBlock` renders the code you pass as its children in a monospace font, on a dark surface in every theme. Its copy button, in a strip above the code, copies the code to the clipboard.', '`language` colours the code’s keywords, strings, comments and other parts, using the syntax colour roles each theme sets. The languages are `bash`, `css`, `html`, `javascript`, `json`, `jsx`, `tsx` and `typescript`. Inside Wireframe, the block stays dark but the code is monochrome.', '[Shiki](https://shiki.style/) is the open-source syntax highlighter used by Mezzanine, which loads only when a page contains a highlighted Code block.', '`title` adds a heading to the strip, such as a file name. It also names the code for screen readers.', '`showLineNumbers` numbers each line. `startLine` sets the first number, for an excerpt from further down a file.', '`highlightedLines`, `addedLines` and `removedLines` mark lines by their number. Added lines show +, and removed lines show −, so the meaning doesn’t rely on colour.'] },
   ],
   technicalDetails: [
     {
@@ -76,7 +73,7 @@ export const codeBlockExampleCode = `.example {
   padding: var(--space-4);
 }`
 
-// The code shown in the Title, Line numbers and Marked lines examples.
+// The Example's title and first line number, and the code it shows once lines are added or removed.
 export const codeBlockFeatureExamples = {
   title: 'example.css',
   lineNumbersStart: 12,
@@ -86,3 +83,33 @@ export const codeBlockFeatureExamples = {
   padding: var(--space-4);
 }`,
 } as const
+
+// The Properties panel's choices, in panel order. startLine appears with showLineNumbers. Adding or
+// removing a line shows the longer sample, which has a line to mark each way.
+export const codeBlockLanguages = ['bash', 'css', 'html', 'javascript', 'json', 'jsx', 'tsx', 'typescript'] as const
+export const codeBlockStartLines = ['1', '12'] as const
+export const codeBlockFlags = ['title', 'showLineNumbers', 'highlightedLines', 'addedLines', 'removedLines'] as const
+
+// Marks count from the first line number shown, so they follow startLine and stay on the same lines.
+export function codeBlockExample(flags: Record<(typeof codeBlockFlags)[number], boolean>, startLine = 1) {
+  const isMarked = flags.addedLines || flags.removedLines
+  const line = (index: number) => [index + startLine - 1]
+  return {
+    code: isMarked ? codeBlockFeatureExamples.markedCode : codeBlockExampleCode,
+    highlightedLines: flags.highlightedLines ? line(1) : undefined,
+    removedLines: flags.removedLines ? line(3) : undefined,
+    addedLines: flags.addedLines ? line(4) : undefined,
+  }
+}
+
+export function codeBlockExampleCodeView({ language, startLine, flags }: { language: string | null, startLine: number, flags: Record<(typeof codeBlockFlags)[number], boolean> }) {
+  const { code, ...lines } = codeBlockExample(flags, flags.showLineNumbers ? startLine : 1)
+  const props = formatJsxProps({
+    language: language ?? undefined,
+    title: flags.title ? codeBlockFeatureExamples.title : undefined,
+    showLineNumbers: flags.showLineNumbers,
+    startLine: flags.showLineNumbers && startLine !== 1 ? startLine : undefined,
+    ...lines,
+  })
+  return `<CodeBlock${props}>{\`${code}\`}</CodeBlock>`
+}

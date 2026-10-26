@@ -2,16 +2,10 @@ import { expect, test } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// Checks typing in a text field, its help text, moving between fields with Tab, that read-only and
-// disabled fields can't be changed, and that the email field shows an error until it holds a valid
-// address.
+// Checks typing in a text field and its help text, that the Example's read-only and disabled controls
+// stop it changing, and that the email field shows an error until it holds a valid address.
 test('text fields support keyboard editing, descriptions and validation', async ({ page }) => {
   await page.goto('/text-field')
-  // Tab on to a field, past any demo's theme picker on the way.
-  const tabTo = async (target: ReturnType<typeof page.getByRole>) => {
-    for (let presses = 0; presses < 4 && !(await target.evaluate(element => element === document.activeElement)); presses += 1) await page.keyboard.press('Tab')
-    await expect(target).toBeFocused()
-  }
   const field = page.getByRole('textbox', { name: 'Field label', exact: true })
   await expect(field).toHaveAccessibleDescription('Supporting information about this field.')
   await field.focus()
@@ -19,13 +13,16 @@ test('text fields support keyboard editing, descriptions and validation', async 
   await expect(page.getByText('Current value: Example value')).toBeVisible()
   await expect(field).toHaveAttribute('data-focused')
   await expect(field).toHaveCSS('outline-style', 'solid')
-  // Tab on to the read-only field in the next demo, past that demo's theme picker.
-  const readOnly = page.getByRole('textbox', { name: 'Read-only field', exact: true })
-  await tabTo(readOnly)
-  await page.keyboard.type('Changed')
-  await expect(page.getByRole('textbox', { name: 'Read-only field', exact: true })).toHaveValue('Read-only value')
-  await tabTo(page.getByRole('textbox', { name: 'Invalid field', exact: true }))
-  await expect(page.getByRole('textbox', { name: 'Disabled field', exact: true })).toBeDisabled()
+  // The Example's isReadOnly and isDisabled controls stop the field changing.
+  const panel = page.locator('.docs-page-lead .mz-demo-area-end-panel')
+  await panel.locator('label', { hasText: /^isReadOnly$/ }).click()
+  await field.focus()
+  await page.keyboard.type(' more')
+  await expect(field).toHaveValue('Example value')
+  await panel.locator('label', { hasText: /^isReadOnly$/ }).click()
+  await panel.locator('label', { hasText: /^isDisabled$/ }).click()
+  await expect(field).toBeDisabled()
+  await panel.locator('label', { hasText: /^isDisabled$/ }).click()
   const email = page.getByRole('textbox', { name: 'Email address (required)', exact: true })
   await page.getByRole('button', { name: 'Validate field' }).click()
   await expect(email).toBeFocused()

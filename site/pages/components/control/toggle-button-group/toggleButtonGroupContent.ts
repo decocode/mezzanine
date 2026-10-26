@@ -22,7 +22,7 @@ export const toggleButtonGroupContent: DocsPageContent = {
   id: 'toggle-button-group',
   kind: 'component',
   title: 'Toggle button group',
-  description: 'A toggle button group brings related toggle buttons together, with either one or several selected at a time.',
+  description: '`ToggleButtonGroup` is a component that groups related toggle buttons, with either one or several selected at a time.',
   sections: [
     { key: 'example', intro: ['A `ToggleButtonGroup` holds `ToggleButton`s, and `selectionMode` sets whether one or several can be selected.'] },
   ],

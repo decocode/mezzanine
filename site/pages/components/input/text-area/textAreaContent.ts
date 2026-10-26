@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const textAreaContent: DocsPageContent = {
@@ -9,11 +10,7 @@ export const textAreaContent: DocsPageContent = {
   sections: [
     {
       key: 'example',
-      body: ['Enter text and press Enter to add a line. Where your browser provides a resize handle, drag it to make the field taller.'],
-    },
-    {
-      key: 'states',
-      body: ['Hover or focus the editable fields to inspect their interaction states. Read-only text remains selectable; disabled fields are skipped when using Tab.'],
+      body: ['Enter adds a line. Where the browser provides a resize handle, it makes the field taller. Read-only text remains selectable; disabled fields are skipped when using Tab.'],
     },
   ],
   technicalDetails: [
@@ -66,4 +63,23 @@ export const textAreaContent: DocsPageContent = {
   references: [
     { label: 'React Aria TextField', href: 'https://react-aria.adobe.com/TextField' },
   ],
+}
+
+// The Example's copy, and the Properties panel's choices in panel order. errorMessage appears with
+// isInvalid.
+export const textAreaExampleText = {
+  label: 'Text area label', placeholder: 'Enter multiple lines of text', description: 'Supporting information about this field.', errorMessage: 'Text area error message',
+} as const
+export const textAreaRows = ['2', '4', '6'] as const
+export const textAreaFlags = ['placeholder', 'description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
+
+export function textAreaExampleCode({ rows, flags, hasErrorMessage }: { rows: number, flags: Record<(typeof textAreaFlags)[number], boolean>, hasErrorMessage: boolean }) {
+  return [
+    `<TextField${formatJsxProps({ isDisabled: flags.isDisabled, isReadOnly: flags.isReadOnly, isInvalid: flags.isInvalid })}>`,
+    `  <Label>${textAreaExampleText.label}</Label>`,
+    `  <TextArea${formatJsxProps({ rows, placeholder: flags.placeholder ? textAreaExampleText.placeholder : undefined })} />`,
+    ...(flags.description ? [`  <Text slot="description">${textAreaExampleText.description}</Text>`] : []),
+    ...(flags.isInvalid && hasErrorMessage ? [`  <FieldError>${textAreaExampleText.errorMessage}</FieldError>`] : []),
+    '</TextField>',
+  ].join('\n')
 }

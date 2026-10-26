@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const panelContent: DocsPageContent = {
@@ -111,4 +112,29 @@ export const panelContent: DocsPageContent = {
     { label: 'WAI-ARIA Authoring Practices: Window splitter', href: 'https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/' },
     { label: 'React Aria: useMove', href: 'https://react-aria.adobe.com/useMove' },
   ],
+}
+
+// The Panel example's labels, and the Properties panel's choices. Only a side Panel can be resized,
+// and minimized and defaultOpen only apply to a Panel that can be closed.
+export const panelExampleLabels = { title: 'Panel A', text: 'A Panel.', minimized: 'Panel A, minimised', header: 'Header', main: 'Main content', mainText: 'The main content shrinks to make room for the Panel.' } as const
+export const panelEdges = ['start', 'end', 'bottom'] as const
+export const panelFlags = ['isCollapsible', 'defaultOpen', 'minimized', 'isResizable'] as const
+
+export function panelExampleCode({ edge, flags }: { edge: string, flags: Record<(typeof panelFlags)[number], boolean> }) {
+  const isSide = edge !== 'bottom'
+  const props = formatJsxProps({
+    isCollapsible: flags.isCollapsible ? undefined : false,
+    defaultOpen: flags.isCollapsible && flags.defaultOpen,
+    isResizable: isSide && flags.isResizable,
+  })
+  const minimized = flags.isCollapsible && flags.minimized ? ` minimized={<p>${panelExampleLabels.minimized}</p>}` : ''
+  return [
+    '<AppShell>',
+    ...(flags.isCollapsible ? [`  <header><PanelTrigger panel="panel-a">${panelExampleLabels.title}</PanelTrigger></header>`] : []),
+    `  <Panel id="panel-a" edge="${edge}" title="${panelExampleLabels.title}"${props}${flags.isCollapsible ? '' : ' isCollapsible={false}'}${minimized}>`,
+    `    <p>${panelExampleLabels.text}</p>`,
+    '  </Panel>',
+    `  <main aria-label="${panelExampleLabels.main}">…</main>`,
+    '</AppShell>',
+  ].join('\n')
 }

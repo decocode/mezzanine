@@ -1,4 +1,5 @@
 import type { DocsPageContent, LinkItem } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const disclosureContent: DocsPageContent = {
@@ -7,7 +8,7 @@ export const disclosureContent: DocsPageContent = {
   title: 'Disclosure',
   description: 'A disclosure is a section that opens and closes when its heading is pressed. It keeps extra information out of the way until someone needs it, as with an answer in a list of frequently asked questions.',
   sections: [
-    { key: 'example', intro: ['Activate `DisclosureHeader` to show or hide the `DisclosurePanel`. This example starts expanded.'] },
+    { key: 'example', intro: ['`DisclosureHeader` shows or hides the `DisclosurePanel`. With `defaultExpanded`, it starts open.'] },
     {
       key: 'disclosureGroup',
       title: 'DisclosureGroup',
@@ -83,4 +84,31 @@ export const disclosureContent: DocsPageContent = {
 export const disclosureGroupReactAriaLink: LinkItem = {
   label: 'View DisclosureGroup on React Aria',
   href: 'https://react-aria.adobe.com/DisclosureGroup',
+}
+
+// The Properties panels' on/off props, in panel order.
+export const disclosureFlags = ['defaultExpanded', 'isDisabled'] as const
+export const disclosureGroupFlags = ['allowsMultipleExpanded', 'isDisabled'] as const
+export const disclosureGroupItems = ['A', 'B', 'C'] as const
+
+export function disclosureExampleCode(props: Record<string, unknown>) {
+  return [
+    `<Disclosure${formatJsxProps(props)}>`,
+    '  <DisclosureHeader>Disclosure A</DisclosureHeader>',
+    '  <DisclosurePanel>DisclosurePanel A content.</DisclosurePanel>',
+    '</Disclosure>',
+  ].join('\n')
+}
+
+export function disclosureGroupExampleCode(props: Record<string, unknown>) {
+  return [
+    `<DisclosureGroup defaultExpandedKeys={['disclosure-a']}${formatJsxProps(props)}>`,
+    ...disclosureGroupItems.flatMap((item) => [
+      `  <Disclosure id="disclosure-${item.toLowerCase()}">`,
+      `    <DisclosureHeader>Disclosure ${item}</DisclosureHeader>`,
+      `    <DisclosurePanel>DisclosurePanel ${item} content.</DisclosurePanel>`,
+      '  </Disclosure>',
+    ]),
+    '</DisclosureGroup>',
+  ].join('\n')
 }

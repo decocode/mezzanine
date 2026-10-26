@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const numberFieldContent: DocsPageContent = {
@@ -59,3 +60,24 @@ export const numberFieldContent: DocsPageContent = {
 
 // The example's label.
 export const numberFieldExampleLabel = 'Number field A'
+
+// The Properties panel's choices, and the field's on/off props in panel order. errorMessage appears
+// with isInvalid.
+export const numberFieldSteps = ['1', '5', '10'] as const
+export const numberFieldFormats = ['number', 'percent', 'currency'] as const
+export const numberFieldExampleText = { description: 'Number field description', errorMessage: 'Number field error message' } as const
+export const numberFieldFlags = ['description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
+
+// The number formats, as Intl.NumberFormat options. A percentage counts in hundredths.
+export const numberFieldFormatOptions = {
+  number: undefined,
+  percent: { style: 'percent' },
+  currency: { style: 'currency', currency: 'GBP' },
+} as const
+
+export function numberFieldExampleCode({ step, format, ...props }: { step: number, format: (typeof numberFieldFormats)[number] } & Record<string, unknown>) {
+  const options = numberFieldFormatOptions[format]
+  const stepProp = formatJsxProps({ step: step === 1 ? undefined : step, ...props })
+  const formatProp = options ? ` formatOptions={${JSON.stringify(options).replaceAll('"', "'").replaceAll(',', ', ').replaceAll(':', ': ')}}` : ''
+  return `<NumberField label="${numberFieldExampleLabel}" defaultValue={4} minValue={0}${stepProp}${formatProp} />`
+}

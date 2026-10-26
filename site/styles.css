@@ -10,7 +10,8 @@
      for a column of names, so they share one edge just beyond the text. */
   --docs-wide-content-width: calc(var(--line-length) + var(--width-xs));
   --page-heading-description-max-width: var(--line-length);
-  --page-heading-title-font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-md));
+  --page-heading-title-font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-sm));
+  --landing-title-font-size: clamp(var(--font-size-heading-lg), calc(1.5rem + 3vw), var(--font-size-display-md));
 }
 
 * {
@@ -183,9 +184,9 @@ body {
   margin-inline: auto;
 }
 
-/* The landing title shares the page heading's fluid typography. */
+/* The landing title grows larger than a docs page's title. */
 .landing-hero h1 {
-  font-size: var(--page-heading-title-font-size);
+  font-size: var(--landing-title-font-size);
 }
 
 .react-aria-documentation-link {
@@ -393,8 +394,8 @@ body {
   gap: var(--space-4);
 }
 
-/* A row of checkboxes in a Properties panel, across its full width: as many to a row as fit. */
-.demo-panel-checkboxes {
+/* A row of switches in a Properties panel, across its full width: as many to a row as fit. */
+.demo-panel-switches {
   display: flex;
   flex-wrap: wrap;
   grid-column: 1 / -1;
@@ -797,7 +798,8 @@ body {
 @container showcase (min-width: 48rem) {
   .site-content {
     width: 100%;
-    padding-inline: clamp(2rem, 5vw, 5rem);
+    /* Modest side padding, so the page's demos keep most of the width. */
+    padding-inline: clamp(var(--space-4), 3vw, var(--space-10));
   }
 
 }
@@ -816,6 +818,11 @@ body {
 
 .page-heading-group {
   max-width: var(--page-heading-max-width);
+  margin-bottom: var(--space-16);
+}
+
+/* A component page's demo, straight after its title and description, spaced like a page section. */
+.docs-page-lead {
   margin-bottom: var(--space-16);
 }
 

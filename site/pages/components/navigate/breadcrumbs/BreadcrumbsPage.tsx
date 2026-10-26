@@ -1,51 +1,27 @@
-import { RichText } from '../../../../components/RichText'
+import { useState } from 'react'
 import { Breadcrumb, Breadcrumbs, DemoArea, Link } from '@decocode/mezzanine'
-import { breadcrumbsContent, breadcrumbsExamples } from './breadcrumbsContent'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { breadcrumbsContent, breadcrumbsExampleCode, breadcrumbsExampleCrumbs } from './breadcrumbsContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function BreadcrumbsPage() {
+  const [isDisabled, setIsDisabled] = useState(false)
   return (
     <ContentPage
       content={breadcrumbsContent}
       parts={{
         example: (
-          <DemoArea align="stretch">
-            <div className="breadcrumbs-examples">
-              <div className="mz-prose">
-                <h3 className="mz-text-heading-sm">{breadcrumbsExamples.hierarchy.title}</h3>
-                <p className="component-section-description"><RichText text={breadcrumbsExamples.hierarchy.description} /></p>
-                <nav aria-label="Hierarchy example breadcrumbs">
-                  <Breadcrumbs>
-                    <Breadcrumb>
-                      <Link href="/">Homepage</Link>
-                    </Breadcrumb>
-                    <Breadcrumb>
-                      <Link href="/introduction">Parent page</Link>
-                    </Breadcrumb>
-                    <Breadcrumb>
-                      <span>Current page</span>
-                    </Breadcrumb>
-                  </Breadcrumbs>
-                </nav>
-              </div>
-              <div className="mz-prose">
-                <h3 className="mz-text-heading-sm">{breadcrumbsExamples.disabled.title}</h3>
-                <p className="component-section-description"><RichText text={breadcrumbsExamples.disabled.description} /></p>
-                <nav aria-label="Disabled example breadcrumbs">
-                  <Breadcrumbs isDisabled>
-                    <Breadcrumb>
-                      <Link href="/">Homepage</Link>
-                    </Breadcrumb>
-                    <Breadcrumb>
-                      <Link href="/introduction">Parent page</Link>
-                    </Breadcrumb>
-                    <Breadcrumb>
-                      <span>Current page</span>
-                    </Breadcrumb>
-                  </Breadcrumbs>
-                </nav>
-              </div>
-            </div>
+          <DemoArea
+            codeView={breadcrumbsExampleCode(isDisabled)}
+            endPanel={<PanelSwitch isSelected={isDisabled} onChange={setIsDisabled}>isDisabled</PanelSwitch>}
+          >
+            <nav aria-label="Breadcrumbs example">
+              <Breadcrumbs isDisabled={isDisabled}>
+                {breadcrumbsExampleCrumbs.map((crumb) => (
+                  <Breadcrumb key={crumb.label}>{'href' in crumb ? <Link href={crumb.href}>{crumb.label}</Link> : <span>{crumb.label}</span>}</Breadcrumb>
+                ))}
+              </Breadcrumbs>
+            </nav>
           </DemoArea>
         ),
       }}

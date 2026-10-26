@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { DemoArea, TableOfContents } from '@decocode/mezzanine'
-import { RichText } from '../../../../components/RichText'
-import { tableOfContentsContent, tableOfContentsImportParagraph } from './tableOfContentsContent'
+import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { tableOfContentsContent, tableOfContentsExampleCode, tableOfContentsExampleHeading } from './tableOfContentsContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 const exampleSections = [
@@ -21,18 +22,21 @@ const exampleSections = [
 ]
 
 export default function TableOfContentsPage() {
+  const [hasHeading, setHasHeading] = useState(true)
   return (
     <ContentPage
       content={tableOfContentsContent}
       parts={{
-        example: (<>
-          <DemoArea align="stretch">
+        example: (
+          <DemoArea
+            align="stretch"
+            codeView={tableOfContentsExampleCode(hasHeading)}
+            endPanel={<PanelSwitch isSelected={hasHeading} onChange={setHasHeading}>heading</PanelSwitch>}
+          >
             <div className="table-of-contents-example mz-prose">
-              <TableOfContents
-                heading="Example contents"
-                headingLevel={3}
-                sections={exampleSections}
-              />
+              {hasHeading
+                ? <TableOfContents heading={tableOfContentsExampleHeading} headingLevel={3} sections={exampleSections} />
+                : <TableOfContents aria-label={tableOfContentsExampleHeading} sections={exampleSections} />}
               {exampleSections.map(({ id, label, children }) => (
                 <section aria-labelledby={id} key={id} className="mz-prose">
                   <h3 className="mz-text-heading-sm" id={id}>{label}</h3>
@@ -47,8 +51,7 @@ export default function TableOfContentsPage() {
               ))}
             </div>
           </DemoArea>
-          <p className="component-section-description"><RichText text={tableOfContentsImportParagraph} /></p>
-        </>),
+        ),
       }}
     />
   )

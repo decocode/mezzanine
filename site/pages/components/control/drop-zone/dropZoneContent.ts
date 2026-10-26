@@ -5,7 +5,7 @@ export const dropZoneContent: DocsPageContent = {
   id: 'drop-zone',
   kind: 'component',
   title: 'Drop zone',
-  description: 'A drop zone is an area that accepts files or other content dragged onto it, and can also be pasted into from the keyboard.',
+  description: '`DropZone` is a component that accepts files or other content dragged or pasted into it.',
   sections: [
     { key: 'example', intro: ['`DropZone` is a dashed area with its content stacked in the middle: an icon, the label, help text and a button that opens the file picker. While something is dragged over it, its border turns solid and it takes the accent tint.'] },
   ],

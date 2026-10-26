@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const listBoxContent: DocsPageContent = {
@@ -62,3 +63,30 @@ export const listBoxSections = [
   { id: 'section-a', label: 'Section A', items: [{ id: 'option-a', label: 'Option A', description: 'Description A' }, { id: 'option-b', label: 'Option B', description: 'Description B' }] },
   { id: 'section-b', label: 'Section B', items: [{ id: 'option-c', label: 'Option C', description: 'Description C' }] },
 ] as const
+
+// The Properties panel's choices. disallowEmptySelection only applies once options can be chosen, and
+// disabledKeys turns Option B off.
+export const listBoxSelectionModes = ['none', 'single', 'multiple'] as const
+
+export function listBoxExampleCode({ selectionMode, disallowEmptySelection, disabledKeys }: { selectionMode: string, disallowEmptySelection: boolean, disabledKeys: boolean }) {
+  const props = formatJsxProps({
+    selectionMode: selectionMode === 'none' ? undefined : selectionMode,
+    disallowEmptySelection: selectionMode !== 'none' && disallowEmptySelection,
+    disabledKeys: disabledKeys ? ['option-b'] : undefined,
+  })
+  return [
+    `<ListBox aria-label="Options"${props}>`,
+    ...listBoxSections.flatMap((section) => [
+      `  <ListBoxSection id="${section.id}">`,
+      `    <Header>${section.label}</Header>`,
+      ...section.items.flatMap((item) => [
+        `    <ListBoxItem id="${item.id}" textValue="${item.label}">`,
+        `      <Text slot="label">${item.label}</Text>`,
+        `      <Text slot="description">${item.description}</Text>`,
+        '    </ListBoxItem>',
+      ]),
+      '  </ListBoxSection>',
+    ]),
+    '</ListBox>',
+  ].join('\n')
+}

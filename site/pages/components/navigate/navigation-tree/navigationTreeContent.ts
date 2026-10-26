@@ -1,5 +1,6 @@
 import type { NavTreeProps } from '@decocode/mezzanine'
 import type { ContentTable, Copy, DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 // Example destinations are page fragments; the example's router turns a press into the current route.
@@ -177,4 +178,15 @@ export const navigationTreeProps: { readonly props: ContentTable; readonly itemP
       { name: 'iconLeading', description: 'Optional, for a section. A decorative icon shown before its label; screen readers skip it.' },
     ],
   },
+}
+
+// The Properties panel's on/off prop: whether Vegetables starts open.
+export function navigationTreeExampleCode(isExpanded: boolean) {
+  return [
+    '<RouterProvider navigate={setRoute}>',
+    '  <nav aria-label="Nav Tree example">',
+    `    <NavTree aria-label="Nav Tree items" items={items}${formatJsxProps({ defaultExpandedKeys: isExpanded ? navigationTreeExampleExpandedKeys : undefined })} selectedRoute={route} />`,
+    '  </nav>',
+    '</RouterProvider>',
+  ].join('\n')
 }

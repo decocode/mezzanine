@@ -1,21 +1,30 @@
+import { useState } from 'react'
 import { DemoArea, Footer, Link } from '@decocode/mezzanine'
-import { footerContent, footerExampleLabels as labels } from './footerContent'
+import { PanelSelect } from '../../../../components/PanelSelect'
+import { footerChildren, footerContent, footerExampleCode, footerExampleLabels as labels } from './footerContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function FooterPage() {
+  const [children, setChildren] = useState<(typeof footerChildren)[number]>('smallPrintAndLinks')
   return (
     <ContentPage
       content={footerContent}
       parts={{
         example: (
-          <DemoArea align="stretch">
+          <DemoArea
+            align="stretch"
+            codeView={footerExampleCode(children)}
+            endPanel={<PanelSelect label="children" options={footerChildren} value={children} onChange={setChildren} />}
+          >
             <Footer className="footer-example">
               <p>{labels.smallPrint}</p>
-              <nav aria-label={labels.linksLabel}>
-                <ul className="footer-example-links">
-                  {labels.links.map((label) => <li key={label}><Link href="#">{label}</Link></li>)}
-                </ul>
-              </nav>
+              {children === 'smallPrintAndLinks' && (
+                <nav aria-label={labels.linksLabel}>
+                  <ul className="footer-example-links">
+                    {labels.links.map((label) => <li key={label}><Link href="#">{label}</Link></li>)}
+                  </ul>
+                </nav>
+              )}
             </Footer>
           </DemoArea>
         ),

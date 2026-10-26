@@ -1,4 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const tagGroupContent: DocsPageContent = {
@@ -7,8 +8,7 @@ export const tagGroupContent: DocsPageContent = {
   title: 'Tag group',
   description: 'A tag group shows a set of small labels, such as categories or filters, that can be chosen or removed.',
   sections: [
-    { key: 'example', intro: ['With `selectionMode`, tags can be chosen, and a chosen tag takes the accent fill.'] },
-    { key: 'variants', intro: ['With `onRemove`, each tag gets a remove button.'] },
+    { key: 'example', intro: ['With `selectionMode`, tags can be chosen, and a chosen tag takes the accent fill.', 'With `onRemove`, each tag gets a remove button.'] },
   ],
   technicalDetails: [
     {
@@ -60,4 +60,21 @@ export const tagGroupContent: DocsPageContent = {
 }
 
 // The examples' labels and tags.
-export const tagGroupExampleLabels = { selectable: 'Tag group A', removable: 'Tag group B', tags: ['Tag A', 'Tag B', 'Tag C'] } as const
+export const tagGroupExampleLabels = { label: 'Tag group A', tags: ['Tag A', 'Tag B', 'Tag C'] } as const
+
+// The Properties panel's choices. onRemove gives each tag a remove button, and description is the
+// group's help text.
+export const tagGroupSelectionModes = ['none', 'single', 'multiple'] as const
+export const tagGroupExampleText = { description: 'Tag group description' } as const
+
+export function tagGroupExampleCode({ selectionMode, removable, description }: { selectionMode: string, removable: boolean, description: boolean }) {
+  const props = formatJsxProps({
+    selectionMode: selectionMode === 'none' ? undefined : selectionMode,
+    description: description ? tagGroupExampleText.description : undefined,
+  })
+  return [
+    `<TagGroup label="${tagGroupExampleLabels.label}"${props}${removable ? ' onRemove={removeTags}' : ''}>`,
+    '  {tags.map((tag) => <Tag key={tag} id={tag}>{tag}</Tag>)}',
+    '</TagGroup>',
+  ].join('\n')
+}

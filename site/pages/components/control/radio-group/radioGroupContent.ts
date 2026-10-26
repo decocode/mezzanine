@@ -6,7 +6,7 @@ export const radioGroupContent: DocsPageContent = {
   id: 'radio-group',
   kind: 'component',
   title: 'Radio group',
-  description: 'A radio group is a set of choices where only one option can be selected at a time, such as a delivery method. Choosing a different option replaces the previous selection.',
+  description: '`RadioGroup` is a component that presents several options, of which only one can be selected.',
   sections: [
     { key: 'example', intro: ['A `RadioGroup` has a label, a description and its options. Option C is disabled on its own `RadioField`.'] },
     {
@@ -95,9 +95,9 @@ export const radioGroupExample = {
   orientationLabel: 'orientation',
 } as const
 export const radioGroupOrientations = ['vertical', 'horizontal'] as const
-export const radioGroupFlags = ['isDisabled', 'isInvalid', 'isReadOnly'] as const
+export const radioGroupFlags = ['isDisabled', 'isReadOnly', 'isInvalid'] as const
 
-export function radioGroupExampleCode(props: Record<string, unknown>) {
+export function radioGroupExampleCode({ errorMessage, ...props }: Record<string, unknown>) {
   return [
     `<RadioGroup${formatJsxProps(props)}>`,
     `  <Label>${radioGroupExample.label}</Label>`,
@@ -108,7 +108,7 @@ export function radioGroupExampleCode(props: Record<string, unknown>) {
       `    <Text slot="description">${option.description}</Text>`,
       '  </RadioField>',
     ]),
-    `  <FieldError>${radioGroupExample.error}</FieldError>`,
+    ...(errorMessage ? [`  <FieldError>${radioGroupExample.error}</FieldError>`] : []),
     '</RadioGroup>',
   ].join('\n')
 }
