@@ -1,34 +1,36 @@
-import { LayoutIcon, MoonIcon, SunIcon, ToggleButton, ToggleButtonGroup } from '@decocode/mezzanine'
+import { ListBoxItem, Select } from '@decocode/mezzanine'
 import { useSyncExternalStore } from 'react'
 import { getDisplayedTheme, isTheme, prefersDarkColorScheme, subscribeToColorScheme, type Theme } from '../themeSwitcherLogic'
 
 interface ThemeSwitcherProps {
   onThemeChange: (selection: Theme) => void
   selectedTheme: Theme
+  // In the narrow-screen menu, the Select shows its "Theme" label; in the bar, the label is for screen
+  // readers only.
+  isMenu?: boolean
 }
 
-export function ThemeSwitcher({ onThemeChange, selectedTheme }: ThemeSwitcherProps) {
+const themeOptions: { id: Theme; label: string }[] = [
+  { id: 'light', label: 'Light' },
+  { id: 'dark', label: 'Dark' },
+  { id: 'wireframe', label: 'Wireframe' },
+]
+
+// A Select, so more themes can join the list.
+export function ThemeSwitcher({ onThemeChange, selectedTheme, isMenu = false }: ThemeSwitcherProps) {
   const prefersDark = useSyncExternalStore(subscribeToColorScheme, prefersDarkColorScheme)
   const displayedTheme = getDisplayedTheme(selectedTheme, prefersDark)
 
   return (
-    <ToggleButtonGroup
-      aria-label="Theme"
-      size="sm"
+    <Select
+      {...(isMenu ? { label: 'Theme' } : { 'aria-label': 'Theme' })}
       hierarchy="secondary"
-      disallowEmptySelection
-      onSelectionChange={(keys) => {
-        const selectedKey = keys.values().next().value
-        if (typeof selectedKey === 'string' && isTheme(selectedKey)) {
-          onThemeChange(selectedKey)
-        }
+      selectedKey={displayedTheme}
+      onSelectionChange={(key) => {
+        if (typeof key === 'string' && isTheme(key)) onThemeChange(key)
       }}
-      selectedKeys={[displayedTheme]}
-      selectionMode="single"
     >
-      <ToggleButton id="light" icon={<SunIcon />} iconPosition="iconOnly" tooltipPosition="bottom">Light theme</ToggleButton>
-      <ToggleButton id="dark" icon={<MoonIcon />} iconPosition="iconOnly" tooltipPosition="bottom">Dark theme</ToggleButton>
-      <ToggleButton id="wireframe" icon={<LayoutIcon />} iconPosition="iconOnly" tooltipPosition="bottom">Wireframe theme</ToggleButton>
-    </ToggleButtonGroup>
+      {themeOptions.map((option) => <ListBoxItem key={option.id} id={option.id}>{option.label}</ListBoxItem>)}
+    </Select>
   )
 }

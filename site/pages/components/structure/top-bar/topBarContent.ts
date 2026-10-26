@@ -22,14 +22,14 @@ export const topBarContent: DocsPageContent = {
           { name: 'Heading', description: 'Contains the mobile trigger.' },
           { name: 'Button', description: 'Icon-only trigger that opens and closes the mobile panel; also supports app-supplied actions.' },
           { name: 'Tooltip', description: 'Shows the trigger’s name, Menu or Close menu, on hover and keyboard focus.' },
-          { name: 'DisclosurePanel', description: 'Contains the links in the compact layout.' },
+          { name: 'DisclosurePanel', description: 'Contains the links, then the actions, in the compact layout.' },
         ],
       },
     },
     {
       key: 'behaviour',
       body: [
-        'Below 32rem of container width, a Menu button replaces the inline navigation. Inside an AppShell whose start Panel can’t be closed (such as an app’s navigation) but is hidden for lack of room, the Menu button stays at every width, so that navigation can always be reached. Actions stay in the bar, between the brand and the Menu button. The Menu button shows only an icon. Its accessible name is Menu, and a Tooltip shows that name on hover and keyboard focus. Opening it changes the icon and the name to Close menu. The panel expands beneath the bar in document flow and scrolls vertically when needed.',
+        'Below 32rem of container width, a Menu button replaces the inline navigation. Inside an AppShell whose start Panel can’t be closed (such as an app’s navigation) but is hidden for lack of room, the Menu button stays at every width, so that navigation can always be reached. Actions move into the menu, after the links, so the bar holds only the brand and the Menu button. The Menu button shows only an icon. Its accessible name is Menu, and a Tooltip shows that name on hover and keyboard focus. Opening it changes the icon and the name to Close menu. The panel expands beneath the bar in document flow and scrolls vertically when needed.',
         'The mobile panel uses [React Aria Disclosure](https://react-aria.adobe.com/Disclosure).',
         'Enter or Space toggles the trigger. Tab moves through the visible links and actions. This Disclosure is not a modal: focus is not trapped, and Escape and outside clicks do not close it. Motion is removed when reduced motion is requested.',
       ],
@@ -38,7 +38,7 @@ export const topBarContent: DocsPageContent = {
       key: 'usage',
       body: [
         'Supply a home Link through `brand`, links through `children`, and optional controls through `actions`. Labels and destinations belong to the consuming app.',
-        '`children` and `actions` accept a function receiving `closeMenu` and `isMenu`. The children render once in the compact menu and once in the bar; `isMenu` is true inside the menu, so content such as a site’s section navigation can appear only there, between links. Call it from a link’s `onPress` to close the compact panel and return focus to its trigger. Override `menuLabel` and `closeLabel` for translated trigger text.',
+        '`children` and `actions` accept a function receiving `closeMenu` and `isMenu`. Both render once in the compact menu and once in the bar; `isMenu` is true inside the menu, so content such as a site’s section navigation can appear only there, between links, and an action can change there, such as showing a visible label. Call it from a link’s `onPress` to close the compact panel and return focus to its trigger. Override `menuLabel` and `closeLabel` for translated trigger text.',
         'The desktop and mobile content are rendered separately; avoid fixed IDs in supplied content. Use React-generated IDs for associated controls. Very long desktop content wraps rather than overflowing. Search is not included.',
         '`TopBar`, `TopBarProps` and `TopBarRenderProps` replace the previous `Navbar` API.',
       ],

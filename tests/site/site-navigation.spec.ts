@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { siteThemeSelect } from '../display'
 import AxeBuilder from '@axe-core/playwright'
 
 test('mobile navigation opens from the TopBar menu and retains expanded groups', async ({ page }) => {
@@ -51,7 +52,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       const menu = page.getByRole('banner').getByRole('button', { name: 'Menu', exact: true })
       await menu.click()
       await expect(docsLink).toBeVisible()
-      await expect(page.getByRole('banner').getByRole('radiogroup', { name: 'Theme', exact: true })).toBeVisible()
+      await expect(siteThemeSelect(page)).toBeVisible()
       await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Index' })).toBeVisible()
       await expect(page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Home', exact: true })).toHaveCount(0)
       // The menu reads Docs, then Search, then the docs tree, then Lab.

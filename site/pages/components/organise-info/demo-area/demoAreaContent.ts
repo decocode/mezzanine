@@ -7,7 +7,7 @@ export const demoAreaContent: DocsPageContent = {
   title: 'Demo area',
   description: 'A demo area contains examples of rendered UI components.',
   sections: [
-    { key: 'example', intro: ['Above the demo area is a top bar containing a theme switcher.', '`endPanel` adds a control panel for the demo, and `codeView` adds Code and Demo tabs. `align` sets where the demo sits: `center`, the default, `stretch` or `start`.'] },
+    { key: 'example', intro: ['The demo sits in a frame, with a strip containing a theme switcher at its top. With `codeView`, Demo and Code tabs sit outside the frame, and the Code tab shows the code in its own code block.', '`endPanel` adds a control panel for the demo, and `codeView` adds Code and Demo tabs. `align` sets where the demo sits: `center`, the default, `stretch` or `start`.'] },
   ],
   technicalDetails: [
     {
@@ -17,12 +17,14 @@ export const demoAreaContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'DemoArea', description: 'The frame around the demo.' },
-          { name: 'Bar', description: 'Demo and Code tabs at the start when `codeView` is given, and the theme picker at the end, followed by a Properties toggle when `endPanel` is given.' },
+          { name: 'DemoArea', description: 'Holds the demo’s frame and, with `codeView`, the tabs.' },
+          { name: 'Tabs', description: 'Optional, from `codeView`: Demo and Code tabs, outside the frame.' },
+          { name: 'Frame', description: 'The border around the strip and the demo.' },
+          { name: 'Strip', description: 'A toolbar named “Demo tools” at the end: the theme picker, then, when `endPanel` is given, a separator and a Properties toggle. It’s part of the frame, so it isn’t shown while the Code tab is open.' },
           { name: 'Theme picker', description: 'Light, Dark and Wireframe. It starts on the page’s theme and changes only this demo, pop-ups included.' },
           { name: 'Demo', description: 'The live components, on the theme’s page colour.' },
-          { name: 'End panel', description: 'Optional, from `endPanel`: controls for the component. It is labelled “Properties”, and screen readers announce it by that name. It starts open, and the bar’s Properties toggle hides or shows it.' },
-          { name: 'Code', description: 'Optional, from `codeView`: the demo’s source in a CodeBlock, highlighted in the language `codeLanguage` sets.' },
+          { name: 'End panel', description: 'Optional, from `endPanel`: controls for the component. It is labelled “Properties”, and screen readers announce it by that name. It starts open, and the strip’s Properties toggle hides or shows it.' },
+          { name: 'Code', description: 'Optional, from `codeView`: the demo’s source in a CodeBlock, highlighted in the language `codeLanguage` sets. The code block is its own frame, with its own buttons.' },
         ],
       },
     },
@@ -38,7 +40,7 @@ export const demoAreaContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: [
-        'The bar comes first, with its Demo and Code tabs and then the theme picker, followed by the demo and then its end panel. The picker is a group of toggle buttons named “Demo theme”, each with its theme as its name.',
+        'The Demo and Code tabs come first, then the Demo tab’s toolbar, then the demo and then its end panel. The toolbar is one Tab stop, and the arrow keys move between the theme picker’s buttons and the Properties toggle. On the Code tab, the code block’s own buttons follow the tabs. The picker is a group of toggle buttons named “Demo theme”, each with its theme as its name.',
       ],
     },
     {

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { chooseSiteTheme, siteThemeSelect } from '../display'
 import AxeBuilder from '@axe-core/playwright'
 
 // On narrow screens, the Lab uses the site's own TopBar menu: Docs, then Lab, then the Lab's
@@ -44,17 +45,17 @@ test('Lab shares the docs frame and the saved theme with Docs', async ({ page })
   await expect(page.getByRole('banner')).toHaveCount(1)
   const navigation = page.locator('.mz-panel[data-edge="start"]')
   await expect(navigation.getByRole('treegrid', { name: 'Lab experiments' })).toBeVisible()
-  await page.getByRole('radio', { name: 'Dark theme', exact: true }).click()
+  await chooseSiteTheme(page, 'Dark')
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
   await navigation.getByRole('link', { name: 'Layout', exact: true }).click()
   await expect(page).toHaveURL(/\/site\/lab\/layout$/)
-  await expect(page.getByRole('radio', { name: 'Dark theme', exact: true })).toBeChecked()
-  await page.getByRole('radio', { name: 'Wireframe theme', exact: true }).click()
+  await expect(siteThemeSelect(page)).toContainText('Dark')
+  await chooseSiteTheme(page, 'Wireframe')
   await page.reload()
-  await expect(page.getByRole('radio', { name: 'Wireframe theme', exact: true })).toBeChecked()
-  await page.getByRole('radio', { name: 'Light theme', exact: true }).click()
+  await expect(siteThemeSelect(page)).toContainText('Wireframe')
+  await chooseSiteTheme(page, 'Light')
   await page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Docs', exact: true }).click()
   await expect(page).toHaveURL(/\/introduction$/)
-  await expect(page.getByRole('radio', { name: 'Light theme', exact: true })).toBeChecked()
+  await expect(siteThemeSelect(page)).toContainText('Light')
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
 })

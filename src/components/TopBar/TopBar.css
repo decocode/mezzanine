@@ -92,7 +92,7 @@
     padding-inline: var(--top-bar-wide-padding-inline, var(--space-padding-area));
   }
 
-  .mz-top-bar:not([data-menu-only]) :is(.mz-top-bar-mobile, .mz-top-bar-bar-actions) {
+  .mz-top-bar:not([data-menu-only]) .mz-top-bar-mobile {
     display: none;
   }
 
@@ -117,6 +117,13 @@
 .mz-top-bar-panel .mz-top-bar-links {
   flex-direction: column;
   align-items: stretch;
+}
+
+/* In the menu, actions follow the links, as a column of their own. */
+.mz-top-bar-panel .mz-top-bar-actions {
+  flex-direction: column;
+  align-items: stretch;
+  margin-block-start: var(--space-3);
 }
 
 .mz-top-bar-links > .mz-link {

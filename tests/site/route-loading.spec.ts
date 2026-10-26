@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { chooseSiteTheme, siteThemeSelect } from '../display'
 import { sitePageFile, sitePages } from '../../site/siteStructure'
 
 // The file name of every page component, such as "ButtonPage". Shared modules whose names also end
@@ -48,7 +49,7 @@ test('delayed loading keeps the shell usable and restores a direct section link'
   await expect(page.getByRole('status')).toHaveText('Loading documentation…')
   await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
   await page.getByRole('button', { name: 'Menu', exact: true }).click()
-  await expect(page.getByRole('radio', { name: 'Dark theme', exact: true })).toBeVisible()
+  await expect(siteThemeSelect(page)).toBeVisible()
   await page.getByRole('button', { name: 'Close menu', exact: true }).click()
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
 
@@ -81,7 +82,7 @@ test('theme changes preserve the loaded page and example state', async ({ page }
   await page.getByRole('button', { name: 'Press', exact: true }).focus()
   await page.keyboard.press('Enter')
   // The page's own theme switcher is in the top bar; each demo has its own too.
-  await page.getByRole('banner').getByRole('radio', { name: 'Dark theme', exact: true }).click()
+  await chooseSiteTheme(page, 'Dark')
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
   await expect(page.getByRole('status')).toHaveText('Press count: 1')
 })

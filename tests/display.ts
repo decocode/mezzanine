@@ -16,3 +16,11 @@ export async function setTextSize(page: Page, fontSize: number) {
 export async function expectNoPageOverflow(page: Page) {
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0)
 }
+
+// The site's theme Select in the top bar, which shows the chosen theme.
+export const siteThemeSelect = (page: Page) => page.getByRole('banner').getByRole('button', { name: /^(Light|Dark|Wireframe) Theme$/ }).filter({ visible: true }).first()
+
+export async function chooseSiteTheme(page: Page, label: 'Light' | 'Dark' | 'Wireframe') {
+  await siteThemeSelect(page).click()
+  await page.getByRole('option', { name: label, exact: true }).click()
+}

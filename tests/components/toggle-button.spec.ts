@@ -54,7 +54,7 @@ test('secondary selection remains visible in forced colours', async ({ page }) =
 })
 
 // Checks, at normal and double text size, that Button and ToggleButton are exactly the same size at
-// each of the five sizes, and that the theme switcher uses the small size.
+// each of the five sizes, and that the demo theme picker uses the small size.
 for (const fontSize of textSizes) {
   test(`Button and ToggleButton share all size dimensions at ${fontSize}px root text`, async ({ page }) => {
     // Each page's Example shows an icon-only control at each size in turn.
@@ -81,8 +81,7 @@ for (const fontSize of textSizes) {
     expect(buttons.map(button => button.size)).toEqual(['xs', 'sm', 'md', 'lg', 'xl'])
     expect(buttons.map(button => parseFloat(button.iconWidth))).toEqual([1, 1.25, 1.5, 1.75, 2].map(size => size * fontSize))
     expect(buttons.map(button => parseFloat(button.height))).toEqual([2, 2.25, 2.75, 3, 3.5].map(size => size * fontSize))
-    const themes = page.getByRole('radiogroup', { name: 'Theme', exact: true }).filter({ visible: true })
-    if (!(await themes.count())) await page.locator('header.mz-top-bar').first().getByRole('button', { name: 'Menu', exact: true }).click()
+    const themes = page.locator('main [aria-label="Demo theme"]').first()
     await expect(themes.getByRole('radio').first()).toHaveAttribute('data-size', 'sm')
     await expect(themes.getByRole('radio').first().locator('svg')).toHaveCSS('width', `${fontSize * 1.25}px`)
   })

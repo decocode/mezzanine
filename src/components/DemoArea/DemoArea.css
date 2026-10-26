@@ -1,6 +1,14 @@
-/* A framed area for a live demo: a bar across the top with the demo's title and tools, then the
-   preview on the page's colour, with optional component controls in an area at its end. */
+/* A live demo in a frame: a strip of tools across the top, then the preview on the page's colour, with
+   optional component controls in an area at its end. With code, Demo and Code tabs sit above, outside
+   the frame, and the Code tab's code block is a frame of its own. */
 .mz-demo-area {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  color: var(--color-text);
+}
+
+.mz-demo-area-frame {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -9,10 +17,9 @@
   border: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
   border-radius: var(--demo-area-border-radius, var(--radius-surface));
   background: var(--demo-area-background, var(--color-surface));
-  color: var(--color-text);
 }
 
-/* The bar keeps the same layout on every demo: Demo and Code tabs at the start, tools at the end. */
+/* The strip of the demo's tools, at its end, above the preview. */
 .mz-demo-area-bar {
   display: flex;
   flex-wrap: wrap;
@@ -21,21 +28,11 @@
   gap: var(--demo-area-bar-gap, var(--space-gap-control));
   min-inline-size: 0;
   padding: var(--demo-area-bar-padding-block, var(--space-padding-control-block)) var(--demo-area-bar-padding-inline, var(--space-padding-control-inline));
+  border-block-end: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
 }
 
 .mz-demo-area-tools {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--demo-area-bar-gap, var(--space-gap-control));
   margin-inline-start: auto;
-}
-
-.mz-demo-area-body {
-  min-inline-size: 0;
-  border-block-start: var(--demo-area-border-width, var(--border-width-baseline)) solid var(--demo-area-border, var(--color-border));
-  background: var(--demo-area-preview-background, var(--color-page));
-  color: var(--color-text);
 }
 
 /* The preview, and the end panel when there is room beside it; without room the panel moves below. */
@@ -43,6 +40,7 @@
   display: flex;
   flex-wrap: wrap;
   min-inline-size: 0;
+  background: var(--demo-area-preview-background, var(--color-page));
 }
 
 /* The demo's own theme applies here, so it sets its colours afresh on the page colour. */
@@ -119,7 +117,7 @@
   overflow: auto;
 }
 
-/* Closed from the bar's Properties toggle, the panel leaves the demo the full width. */
+/* Closed from the Properties toggle, the panel leaves the demo the full width. */
 .mz-demo-area-end-panel[hidden] {
   display: none;
 }
@@ -178,25 +176,20 @@
   text-transform: var(--text-transform-label);
 }
 
-/* The tab panels fill the body edge to edge; the preview and code set their own space. */
-.mz-demo-area-body > .mz-tab-panel {
+/* The tabs sit just above the frame without a line of their own, since the frame's edge follows. */
+.mz-demo-area > .mz-tab-list[data-orientation] {
+  margin-block-end: var(--space-1);
+  border-block-end: 0;
+}
+
+/* Each tab panel is its frame, the demo's or the code block's, with no space of its own. */
+.mz-demo-area > .mz-tab-panel {
   padding: 0;
+  border-radius: var(--demo-area-border-radius, var(--radius-surface));
   outline: none;
 }
 
-.mz-demo-area-body > .mz-tab-panel[data-focus-visible] {
+.mz-demo-area > .mz-tab-panel[data-focus-visible] {
   outline: var(--focus-ring-width) solid var(--demo-area-focus-ring-color, var(--color-focus));
-  outline-offset: var(--focus-ring-offset-inset);
-}
-
-/* The code fills the body, without a second frame. */
-.mz-demo-area-body .mz-tab-panel > pre {
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-}
-
-/* The bar's tabs have no line of their own under the bar's border. */
-.mz-demo-area-bar .mz-tab-list {
-  border-block-end: 0;
+  outline-offset: var(--focus-ring-offset);
 }

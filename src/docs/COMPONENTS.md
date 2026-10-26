@@ -85,10 +85,11 @@ Compose a Card from its parts, in the order people should see them:
 ## TopBar
 
 `TopBar` supplies the sticky layout and the mobile menu. Pass your branding as
-`brand`, your links as children and optional controls as `actions`. Actions
-stay in the bar at every width. The children function receives `isMenu`, which
+`brand`, your links as children and optional controls as `actions`. While the
+menu is in use, actions sit in it after the links, leaving the bar the brand
+and the menu button. The children and actions functions receive `isMenu`, which
 is true inside the narrow-screen menu, so menu-only content such as section
-navigation can sit between links.
+navigation can sit between links, and an action can show a visible label there.
 Below 32rem of its own width, a menu button replaces the links. Inside an
 AppShell whose start Panel has `isCollapsible={false}` but is hidden for lack of
 room, the menu button stays at every width, so that Panel's content (usually
@@ -431,10 +432,12 @@ layout it sits in. With `orientation="vertical"` it stands upright in a row.
 ## DemoArea
 
 `DemoArea` frames a live demo, such as on a documentation page. Every demo has
-the same bar: a theme picker that changes only this demo, and Demo and Code
-tabs when you pass its source as `codeView`. The Code tab highlights it as `tsx`, or in the
+a frame with a strip at its top holding a theme picker that changes only this
+demo. When you pass its source as `codeView`, Demo and Code tabs sit outside
+the frame, and the Code tab shows the code in a CodeBlock, its own frame with
+its own buttons. The Code tab highlights it as `tsx`, or in the
 language `codeLanguage` sets, such as `css`. Put a heading above it to name the demo. Pass
-controls for the component as `endPanel`; a Properties toggle in the bar hides
+controls for the component as `endPanel`; a Properties toggle in the strip hides
 or shows them, open on each page load. They sit under a "Properties" label at
 the end of the preview, or below it when there isn't room. The demo's pop-ups render inside it, so they
 take its theme. `align` sets where the demo sits: `center`, the default,

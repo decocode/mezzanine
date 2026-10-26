@@ -1,16 +1,19 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// Checks that the theme switcher's tooltips appear on hover, stay open while the pointer is over
+// The theme picker in the Tooltip page's demo, whose buttons show their names in tooltips.
+const demoThemes = (page: Page) => page.locator('.docs-page-lead [aria-label="Demo theme"]')
+
+// Checks that the demo theme picker's tooltips, on the Tooltip page, appear on hover, stay open while the pointer is over
 // the tooltip itself and close with Escape.
 test('theme tooltips support hover, hoverable content and Escape dismissal', async ({ page }) => {
   // A simulated clock lets the test skip past the close delay instead of waiting for it.
   await page.clock.install()
-  await page.goto('/')
+  await page.goto('/tooltip')
   await page.mouse.move(0, 500)
   for (const name of ['Light theme', 'Dark theme', 'Wireframe theme']) {
-    const control = page.getByRole('radio', { name, exact: true })
+    const control = demoThemes(page).getByRole('radio', { name, exact: true })
     await control.hover()
     const tooltip = page.getByRole('tooltip', { name, exact: true })
     await expect(tooltip).toBeVisible()
@@ -25,14 +28,13 @@ test('theme tooltips support hover, hoverable content and Escape dismissal', asy
   }
 })
 
-// Checks that moving keyboard focus to a theme control on a phone shows its tooltip, that Escape
-// hides the tooltip without moving focus, and that Space still selects the theme.
+// Checks that moving keyboard focus to a demo theme control on a phone shows its tooltip, that Escape
+// hides the tooltip without moving focus, and that Space still selects the demo's theme.
 test('keyboard focus opens a theme tooltip that Escape closes without blocking the control', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
-  await page.goto('/')
-  await page.getByRole('banner').getByRole('button', { name: 'Menu', exact: true }).click()
-  const control = page.getByRole('radio', { name: 'Dark theme', exact: true })
+  await page.goto('/tooltip')
+  const control = demoThemes(page).getByRole('radio', { name: 'Dark theme', exact: true })
   await page.keyboard.press('Tab')
   await control.focus()
   const tooltip = page.getByRole('tooltip', { name: 'Dark theme', exact: true })
@@ -41,11 +43,11 @@ test('keyboard focus opens a theme tooltip that Escape closes without blocking t
   await expect(tooltip).toBeHidden()
   await expect(control).toBeFocused()
   await page.keyboard.press('Space')
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
+  await expect(page.locator('.docs-page-lead .mz-demo-area-content')).toHaveAttribute('data-theme', 'dark')
   await expect(control).toBeChecked()
 })
 
-// Checks, in each theme at normal and double text size, that a theme tooltip opened with the
+// Checks, in each theme at normal and double text size, that a demo theme tooltip opened with the
 // keyboard on a phone stays on screen without animating, the control is large enough with a visible
 // focus outline, and both pass an accessibility scan.
 for (const theme of themes) {
@@ -53,11 +55,13 @@ for (const theme of themes) {
     test(`${theme} tooltips fit 320px with ${fontSize}px text and reduced motion`, async ({ page }) => {
       await page.setViewportSize({ width: 320, height: 900 })
       await page.emulateMedia({ reducedMotion: 'reduce' })
-      await page.goto('/')
+      await page.goto('/tooltip')
       await setTheme(page, theme)
       await setTextSize(page, fontSize)
-      await page.getByRole('banner').getByRole('button', { name: 'Menu', exact: true }).click()
-      const control = page.getByRole('radio', { name: 'Dark theme', exact: true })
+      // Bring the picker into view first, so focusing it doesn't scroll the page and close the tooltip.
+      await demoThemes(page).evaluate(element => element.scrollIntoView({ block: 'start' }))
+      await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+      const control = demoThemes(page).getByRole('radio', { name: 'Dark theme', exact: true })
       await page.keyboard.press('Tab')
       await control.focus()
       const tooltip = page.getByRole('tooltip', { name: 'Dark theme', exact: true })
@@ -77,8 +81,8 @@ for (const theme of themes) {
 // Checks that tooltips keep a visible border in high-contrast mode.
 test('theme tooltips remain visible in forced colours', async ({ page }) => {
   await page.emulateMedia({ forcedColors: 'active' })
-  await page.goto('/')
-  await page.getByRole('radio', { name: 'Dark theme', exact: true }).focus()
+  await page.goto('/tooltip')
+  await demoThemes(page).getByRole('radio', { name: 'Dark theme', exact: true }).focus()
   const tooltip = page.getByRole('tooltip', { name: 'Dark theme', exact: true })
   await expect(tooltip).toBeVisible()
   await expect(tooltip).toHaveCSS('border-style', 'solid')

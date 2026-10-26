@@ -1,21 +1,21 @@
 import { expect, test } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
-import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
+import { expectNoPageOverflow, setTextSize, setTheme, siteThemeSelect, textSizes, themes } from '../display'
 
 // Checks the TopBar example at phone width with only the keyboard: the menu button opens and closes
-// the menu, links inside it work, focus returns to the menu button, and the action button still
-// works.
+// the menu, links inside it work, focus returns to the menu button, and the action button, in the
+// menu after the links, still works.
 test('TopBar menu works with the keyboard at 320px', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 900 })
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/top-bar')
   const example = page.locator('main .mz-top-bar')
   const trigger = example.getByRole('button', { name: /^(Menu|Close menu)$/ })
-  // Actions stay in the bar on narrow screens, before the menu button.
+  // Actions move into the menu on narrow screens, after the links.
   const action = example.getByRole('button', { name: 'Button', exact: true })
-  await action.focus()
+  await expect(action).toBeHidden()
   await page.keyboard.press('Tab')
-  await expect(trigger).toBeFocused()
+  await trigger.focus()
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   await page.keyboard.press('Enter')
   await expect(trigger).toHaveAccessibleName('Close menu')
@@ -34,7 +34,8 @@ test('TopBar menu works with the keyboard at 320px', async ({ page }) => {
   await page.keyboard.press('Tab')
   await page.keyboard.press('Tab')
   await expect(example.getByRole('link', { name: 'Link B', exact: true })).toBeFocused()
-  await action.focus()
+  await page.keyboard.press('Tab')
+  await expect(action).toBeFocused()
   await page.keyboard.press('Enter')
   await expect(page.getByRole('status')).toHaveText('Changes saved.')
   await trigger.click()
@@ -55,13 +56,13 @@ for (const theme of themes) {
       const example = page.locator('main .mz-top-bar')
       const trigger = example.getByRole('button', { name: /^(Menu|Close menu)$/ })
       const action = example.getByRole('button', { name: 'Button', exact: true })
-      await expect(action).toBeVisible()
-      await action.focus()
       await page.keyboard.press('Tab')
+      await trigger.focus()
       await expect(trigger).toHaveCSS('outline-style', 'solid')
       expect((await trigger.boundingBox())!.height).toBeGreaterThanOrEqual(36)
       await page.keyboard.press('Enter')
       await expect(trigger).toHaveAttribute('aria-expanded', 'true')
+      await expect(action).toBeVisible()
       await expect(example.locator('.mz-top-bar-panel')).toHaveCSS('animation-name', 'none')
       await expectNoPageOverflow(page)
       const technicalDetails = page.getByRole('region', { name: 'Technical details', exact: true })
@@ -85,7 +86,7 @@ test('desktop navigation and top bar actions remain accessible', async ({ page }
   const example = page.locator('main .mz-top-bar')
   await expect(example.getByRole('button', { name: /^(Menu|Close menu)$/ })).toBeHidden()
   await expect(example.getByRole('navigation', { name: 'Example navigation' })).toBeVisible()
-  await expect(page.getByRole('radiogroup', { name: 'Theme', exact: true })).toBeVisible()
+  await expect(siteThemeSelect(page)).toBeVisible()
   await page.emulateMedia({ forcedColors: 'active' })
   const linkA = example.getByRole('link', { name: 'Link A', exact: true })
   await linkA.focus()

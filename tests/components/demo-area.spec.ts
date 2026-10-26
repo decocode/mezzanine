@@ -52,7 +52,7 @@ test('a demo theme changes only that demo and its pop-ups', async ({ page }) => 
   expect(Math.min(Math.abs(menu.y - (trigger.y + trigger.height)), Math.abs(menu.y + menu.height - trigger.y))).toBeLessThan(40)
 })
 
-// Checks that the bar's Properties toggle starts pressed with the panel open, closes the panel and lets
+// Checks that the Properties toggle starts pressed with the panel open, closes the panel and lets
 // the demo take the full width, and opens it again.
 test('the Properties toggle hides and shows the end panel', async ({ page }) => {
   await page.goto('/button')
@@ -69,4 +69,21 @@ test('the Properties toggle hides and shows the end panel', async ({ page }) => 
   expect(area.width - content.width).toBeLessThan(4)
   await toggle.click()
   await expect(panel).toBeVisible()
+})
+
+// Checks that the demo's tools belong to the Demo tab: the Code tab shows the code block's own buttons
+// instead, and going back to Demo brings the tools back.
+test('the demo tools show only on the Demo tab', async ({ page }) => {
+  await page.goto('/button')
+  const demo = page.locator('.docs-page-lead .mz-demo-area')
+  const themePicker = demo.locator('[aria-label="Demo theme"]')
+  const toggle = demo.getByRole('button', { name: 'Properties', exact: true })
+  await expect(themePicker).toBeVisible()
+  await demo.getByRole('tab', { name: 'Code' }).click()
+  await expect(themePicker).toHaveCount(0)
+  await expect(toggle).toHaveCount(0)
+  await expect(demo.getByRole('button', { name: 'Wrap lines' })).toBeVisible()
+  await demo.getByRole('tab', { name: 'Demo' }).click()
+  await expect(themePicker).toBeVisible()
+  await expect(toggle).toBeVisible()
 })
