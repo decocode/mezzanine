@@ -20,7 +20,7 @@
   /* Decorative lines are soft; controls keep 3:1 borders. */
   --color-border: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
   --color-border-muted: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
-  --color-border-control: var(--color-neutral-400);
+  --color-border-control: var(--color-neutral-500);
 
   /* A neutral wash of the text colour darkens (or, in Dark, lightens) whatever it sits on. */
   --color-neutral-muted: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
@@ -84,7 +84,7 @@
   --color-danger-muted: var(--color-danger-900);
   --color-danger-muted-hovered: var(--color-danger-900);
   --color-danger-muted-pressed: var(--color-danger-800);
-  --color-danger: var(--color-danger-300);
+  --color-danger: var(--color-danger-200);
 
   /* Rounded corners. */
   --radius-control: var(--radius-sm);
@@ -132,7 +132,7 @@
     /* Decorative lines are soft; controls keep 3:1 borders. */
     --color-border: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
   --color-border-muted: color-mix(in srgb, var(--color-neutral-50) var(--opacity-12), transparent);
-    --color-border-control: var(--color-neutral-400);
+    --color-border-control: var(--color-neutral-500);
 
     /* A neutral wash of the text colour darkens (or, in Dark, lightens) whatever it sits on. */
     --color-neutral-muted: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
@@ -196,7 +196,7 @@
     --color-danger-muted: var(--color-danger-900);
     --color-danger-muted-hovered: var(--color-danger-900);
     --color-danger-muted-pressed: var(--color-danger-800);
-    --color-danger: var(--color-danger-300);
+    --color-danger: var(--color-danger-200);
 
     /* Rounded corners. */
     --radius-control: var(--radius-sm);

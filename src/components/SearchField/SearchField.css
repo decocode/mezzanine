@@ -1,7 +1,7 @@
 /* Follows React Aria's vanilla SearchField: the icon and clear button sit over the Input, which keeps the shared field appearance. */
 .mz-search-field {
   display: grid;
-  grid-template-areas: 'label' 'input' 'help';
+  grid-template-areas: 'label' 'input' 'help' 'error';
   grid-template-columns: minmax(0, 1fr);
   align-items: center;
   row-gap: var(--search-field-gap, var(--text-field-gap, var(--space-gap-field)));
@@ -60,7 +60,6 @@
 
 .mz-search-field > [slot='description'],
 .mz-search-field > .mz-field-error {
-  grid-area: help;
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -69,11 +68,14 @@
   text-transform: var(--text-transform-body);
 }
 
+/* Help text and an error each take their own row, so both can show at once, as in a TextField. */
 .mz-search-field > [slot='description'] {
+  grid-area: help;
   color: var(--text-field-description-foreground, var(--color-text-muted));
 }
 
 .mz-search-field > .mz-field-error {
+  grid-area: error;
   color: var(--text-field-error-foreground, var(--color-danger));
 }
 

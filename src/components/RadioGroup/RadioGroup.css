@@ -26,11 +26,26 @@
   text-transform: var(--text-transform-label);
 }
 
+/* The first column is as wide as the indicator, so a description lines up with the option's text.
+   The option's row is a full target tall, which already leaves room under its text, so the
+   description follows with no gap of its own. */
 .mz-radio-field {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--radio-field-gap-block, var(--space-gap-field)) var(--radio-content-gap, var(--space-gap-control));
+  grid-template-columns: var(--radio-indicator-size, var(--icon-size-sm)) minmax(0, 1fr);
+  gap: var(--radio-field-gap-block, var(--space-0)) var(--radio-content-gap, var(--space-gap-control));
   align-items: start;
+}
+
+/* An option's row is a full target tall, with its text centred, so the first option moves up by the
+   room its row adds above the text. The group's label or help text then sits as close to it as a
+   field's label to its input. */
+.mz-radio-group:not([data-orientation='horizontal']) > :is(.mz-label, [slot='description']) + .mz-radio-field {
+  margin-block-start: calc((1lh - var(--target-size-sm)) / 2);
+}
+
+/* An option with a description keeps clear of the next one, so each option reads as one group. */
+.mz-radio-group > .mz-radio-field:has(> [slot='description']):not(:last-child) {
+  margin-block-end: var(--radio-group-option-gap, var(--space-gap-control));
 }
 
 .mz-radio-button {

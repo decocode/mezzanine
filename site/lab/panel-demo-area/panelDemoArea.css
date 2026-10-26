@@ -289,6 +289,25 @@
   background: var(--color-surface);
 }
 
+/* The Properties Panel sits flush in the frame, with no gap around it: one line divides it from the
+   demo, beside it or, stacked, below it. */
+.lab-demo-area-host > .lab-demo-area-properties {
+  margin: 0;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.lab-demo-area-host > .lab-demo-area-properties:not([data-collapsed]) {
+  border-inline-start-width: var(--border-width-hairline);
+}
+
+@container lab-panel-host (width < 28rem) {
+  .lab-demo-area-host > .lab-demo-area-properties:not([data-collapsed]) {
+    border-inline-start-width: 0;
+    border-block-end-width: var(--border-width-hairline);
+  }
+}
+
 /* The example's own host, framed so its Panel's placement shows. */
 .lab-panel-example {
   min-block-size: var(--width-xs);

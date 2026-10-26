@@ -1236,6 +1236,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--space-padding-control-inline)"
     },
     {
+      "name": "--list-box-item-text-gap",
+      "fallback": "var(--space-0)"
+    },
+    {
       "name": "--list-box-padding",
       "fallback": "0"
     },
@@ -1841,7 +1845,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--radio-field-gap-block",
-      "fallback": "var(--space-gap-field)"
+      "fallback": "var(--space-0)"
     },
     {
       "name": "--radio-focus-ring-color",
@@ -1862,6 +1866,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--radio-group-horizontal-gap",
       "fallback": "var(--space-gap-cluster)"
+    },
+    {
+      "name": "--radio-group-option-gap",
+      "fallback": "var(--space-gap-control)"
     },
     {
       "name": "--radio-indicator-border-radius",
@@ -2048,6 +2056,14 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--select-primary-chevron-foreground",
       "fallback": "var(--color-accent-inverse)"
+    },
+    {
+      "name": "--select-secondary-chevron-background-hovered",
+      "fallback": "var(--color-accent-muted-hovered)"
+    },
+    {
+      "name": "--select-secondary-chevron-background-pressed",
+      "fallback": "var(--color-accent-muted-pressed)"
     },
     {
       "name": "--select-trigger-background",
@@ -2259,7 +2275,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--switch-field-gap",
-      "fallback": "var(--space-gap-field)"
+      "fallback": "var(--space-0)"
     },
     {
       "name": "--switch-focus-ring-color",

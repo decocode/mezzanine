@@ -48,7 +48,7 @@ export function LabDemoArea({ children, codeView, properties }: LabDemoAreaProps
         >
           {themeOptions.map((option) => <ListBoxItem key={option.id} id={option.id} icon={option.icon}>{option.label}</ListBoxItem>)}
         </Select>
-        {properties != null && <LabPanelToggle panel={propertiesId} placement="end" title="Properties" isExpanded={isPropertiesExpanded} onExpandedChange={setIsPropertiesExpanded} />}
+        {properties != null && <LabPanelToggle panel={propertiesId} placement="end" title="Properties" collapseLabel="Hide properties" expandLabel="Show properties" isExpanded={isPropertiesExpanded} onExpandedChange={setIsPropertiesExpanded} />}
       </div>
       {properties == null ? demo : (
         <LabPanelHost className="lab-demo-area-host">

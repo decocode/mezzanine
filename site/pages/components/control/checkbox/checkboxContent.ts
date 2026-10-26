@@ -17,7 +17,7 @@ export const checkboxContent: DocsPageContent = {
   sections: [
     { key: 'example', intro: ['Select or clear the `Checkbox` using its label or the Space key when focused.'] },
     { key: 'states' },
-    { key: 'checkboxGroup', title: 'Checkbox group', intro: ['`CheckboxGroup` gives related checkboxes one label, with any help text or error message after them.'] },
+    { key: 'checkboxGroup', title: 'Checkbox group', intro: ['`CheckboxGroup` gives related checkboxes one label, with any help text after the label and any error message after the checkboxes.'] },
   ],
   technicalDetails: [
     {
@@ -37,6 +37,7 @@ export const checkboxContent: DocsPageContent = {
         'Place the visible label inside `Checkbox`. Use `defaultSelected` for initial state, or `isSelected` with `onChange` for controlled state. The callback receives a boolean.',
         '`isDisabled` prevents interaction; `isReadOnly` prevents value changes. `isIndeterminate` controls the mixed-state appearance independently of selection; the application must clear it when appropriate.',
         'For form submission, provide `name` and `value`. Use `isRequired` with native validation to require selection, or `isInvalid` to communicate an application validation result.',
+        '`description` adds help text under the checkbox, and `errorMessage` adds a message there while it is invalid. Both line up with the label, and screen readers read them with the checkbox.',
       ],
     },
     {
@@ -72,6 +73,7 @@ export const checkboxContent: DocsPageContent = {
 // The Properties panels' on/off props, in panel order, and the Example's label.
 export const checkboxExampleLabel = 'Checkbox label'
 export const checkboxExampleError = 'Checkbox error message'
+export const checkboxExampleDescription = 'Checkbox description'
 export const checkboxFlags = ['defaultSelected', 'isIndeterminate', 'isDisabled', 'isInvalid', 'isReadOnly'] as const
 export const checkboxGroupFlags = ['isDisabled', 'isReadOnly', 'isInvalid'] as const
 export const checkboxGroupExampleError = 'Group A error message'
@@ -85,8 +87,8 @@ export function checkboxGroupExampleCode({ errorMessage, ...props }: Record<stri
   return [
     `<CheckboxGroup${formatJsxProps(props)}>`,
     `  <Label>${checkboxGroupExampleLabels.group}</Label>`,
-    ...checkboxGroupExampleLabels.checkboxes.map((checkbox) => `  <Checkbox value="${checkbox}">${checkbox}</Checkbox>`),
     `  <Text slot="description">${checkboxGroupExampleLabels.description}</Text>`,
+    ...checkboxGroupExampleLabels.checkboxes.map((checkbox) => `  <Checkbox value="${checkbox}">${checkbox}</Checkbox>`),
     ...(errorMessage ? [`  <FieldError>${checkboxGroupExampleError}</FieldError>`] : []),
     '</CheckboxGroup>',
   ].join('\n')

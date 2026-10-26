@@ -3,7 +3,7 @@ import { DemoArea, ListBoxItem, PlaceholderIcon, Select, type SelectHierarchy } 
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
-  selectContent, selectDefaultKeyLabel, selectSizes, selectExampleCode, selectExampleLabels, selectExampleText, selectFlags, selectHierarchies, selectHierarchyLabel,
+  selectContent, selectDefaultKeyLabel, selectNoDefaultKey, selectSizes, selectExampleCode, selectExampleLabels, selectExampleText, selectFlags, selectHierarchies, selectHierarchyLabel,
 } from './selectContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -37,8 +37,9 @@ export default function SelectPage() {
                 {selectHierarchies.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
               <PanelSelect label="size" options={selectSizes} value={size} onChange={setSize} />
-              <Select size="sm" label={selectDefaultKeyLabel} selectedKey={defaultKey} onSelectionChange={(key) => { if (key != null) setDefaultKey(String(key)) }}>
-                {selectExampleLabels.options.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
+              {/* "none" leaves the prop out, so no item starts selected. */}
+              <Select size="sm" label={selectDefaultKeyLabel} selectedKey={defaultKey ?? selectNoDefaultKey} onSelectionChange={(key) => { if (key != null) setDefaultKey(key === selectNoDefaultKey ? null : String(key)) }}>
+                {[selectNoDefaultKey, ...selectExampleLabels.options].map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
               {selectFlags.map((name) => (
                 <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>

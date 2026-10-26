@@ -210,6 +210,15 @@
   color: var(--_select-chevron-foreground, var(--color-chevron));
 }
 
+/* Secondary tints the chevron area on hover and press, like a secondary Button. */
+.mz-select-trigger[data-hierarchy='secondary'][data-hovered] {
+  --_select-chevron-background: var(--select-secondary-chevron-background-hovered, var(--color-accent-muted-hovered));
+}
+
+.mz-select-trigger[data-hierarchy='secondary'][data-pressed] {
+  --_select-chevron-background: var(--select-secondary-chevron-background-pressed, var(--color-accent-muted-pressed));
+}
+
 /* Primary fills the chevron area like a primary Button. */
 .mz-select-trigger[data-hierarchy='primary'] {
   --_select-chevron-background: var(--select-primary-chevron-background, var(--color-accent-emphasis));

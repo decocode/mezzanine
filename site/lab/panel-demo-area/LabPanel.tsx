@@ -85,13 +85,17 @@ export function LabPanel({ placement, title, isResizable = false, isMinimizable 
 
 // The button that collapses and expands a collapsible Panel, placed outside it, where it stays visible:
 // in a strip, a toolbar or a top bar. Its icon shows what pressing does.
-export function LabPanelToggle({ panel, placement, title, isExpanded, onExpandedChange }: {
+export function LabPanelToggle({ panel, placement, title, isExpanded, onExpandedChange, collapseLabel, expandLabel }: {
   // The Panel's id.
   panel: string
   placement: LabPanelPlacement
   title: string
   isExpanded: boolean
   onExpandedChange: (isExpanded: boolean) => void
+  // The button's name and tooltip, for wording that suits the use, such as "Hide properties". They
+  // default to "Collapse" and "Expand" with the Panel's title.
+  collapseLabel?: string
+  expandLabel?: string
 }) {
   return (
     <Button
@@ -103,7 +107,7 @@ export function LabPanelToggle({ panel, placement, title, isExpanded, onExpanded
       aria-controls={panel}
       onPress={() => onExpandedChange(!isExpanded)}
     >
-      {`${isExpanded ? 'Collapse' : 'Expand'} ${title}`}
+      {isExpanded ? collapseLabel ?? `Collapse ${title}` : expandLabel ?? `Expand ${title}`}
     </Button>
   )
 }

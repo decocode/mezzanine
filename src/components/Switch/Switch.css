@@ -1,7 +1,9 @@
+/* The switch's row is a full target tall, which already leaves room under its label, so help text and
+   errors follow with no gap of their own, as under a Checkbox or a radio option. */
 .mz-switch-field {
   display: flex;
   flex-direction: column;
-  gap: var(--switch-field-gap, var(--space-gap-field));
+  gap: var(--switch-field-gap, var(--space-0));
 }
 
 .mz-switch-button {
@@ -97,6 +99,11 @@
 
 .mz-switch-field > [slot='description'] {
   color: var(--switch-description-foreground, var(--color-text-muted));
+}
+
+/* Help text and errors line up with the label, past the track, as under a Checkbox or a radio option. */
+.mz-switch-field > :is([slot='description'], .mz-field-error) {
+  padding-inline-start: calc(var(--switch-track-width, calc(var(--switch-track-height, var(--icon-size-sm)) * 2)) + var(--switch-content-gap, var(--space-gap-control)));
 }
 
 .mz-switch-field > .mz-field-error {

@@ -27,7 +27,7 @@
      which keeps the 3:1 contrast people need to find them. */
   --color-border: var(--color-neutral-200);
   --color-border-muted: var(--color-neutral-200);
-  --color-border-control: var(--color-neutral-700);
+  --color-border-control: var(--color-neutral-500);
 
   /* A neutral wash of the text colour darkens (or, in Dark, lightens) whatever it sits on. */
   --color-neutral-muted: color-mix(in srgb, var(--color-text) var(--opacity-8), transparent);
@@ -91,7 +91,7 @@
   --color-danger-muted: var(--color-danger-100);
   --color-danger-muted-hovered: var(--color-danger-100);
   --color-danger-muted-pressed: var(--color-danger-200);
-  --color-danger: var(--color-danger-700);
+  --color-danger: var(--color-danger-600);
 
   /* Rounded corners: small on controls, larger on surfaces. Wireframe stays square. */
   --radius-control: var(--radius-sm);

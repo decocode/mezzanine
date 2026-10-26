@@ -8,14 +8,20 @@ import {
 import { CheckIcon, MinusIcon } from '../../icons/Icons'
 
 export interface CheckboxProps extends ReactAriaCheckboxProps {
-  // The message shown under the checkbox when it's invalid. Screen readers read it with the checkbox.
+  // Help text shown under the checkbox, as a Switch's description is. Screen readers read it with the
+  // checkbox.
+  description?: ReactNode
+  // The message shown under the checkbox when it's invalid, after any help text. Screen readers read it
+  // with the checkbox.
   errorMessage?: ReactNode
 }
 
-export function Checkbox({ children, className, errorMessage, ...checkboxProps }: CheckboxProps) {
+export function Checkbox({ children, className, description, errorMessage, ...checkboxProps }: CheckboxProps) {
+  const descriptionId = useId()
   const errorId = useId()
+  const showsDescription = description != null
   const showsError = checkboxProps.isInvalid === true && errorMessage != null
-  const describedBy = [checkboxProps['aria-describedby'], showsError ? errorId : undefined].filter(Boolean).join(' ') || undefined
+  const describedBy = [checkboxProps['aria-describedby'], showsDescription ? descriptionId : undefined, showsError ? errorId : undefined].filter(Boolean).join(' ') || undefined
   const checkbox = (
     <ReactAriaCheckbox
       {...checkboxProps}
@@ -33,12 +39,13 @@ export function Checkbox({ children, className, errorMessage, ...checkboxProps }
       ))}
     </ReactAriaCheckbox>
   )
-  if (!showsError) return checkbox
-  // The message sits outside the checkbox's label, so it isn't part of its name.
+  if (!showsDescription && !showsError) return checkbox
+  // The help text and message sit outside the checkbox's label, so they aren't part of its name.
   return (
     <div className="mz-checkbox-field">
       {checkbox}
-      <span className="mz-checkbox-error" id={errorId}>{errorMessage}</span>
+      {showsDescription && <span className="mz-checkbox-description" id={descriptionId}>{description}</span>}
+      {showsError && <span className="mz-checkbox-error" id={errorId}>{errorMessage}</span>}
     </div>
   )
 }

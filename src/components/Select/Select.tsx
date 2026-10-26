@@ -19,7 +19,7 @@ import { Tooltip, TooltipTrigger } from '../Tooltip/Tooltip'
 import { ChevronDownIcon } from '../../icons/Icons'
 
 // How much the chevron area stands out: primary fills it like a primary Button, secondary keeps it
-// quiet, divided from the value by a line.
+// quiet, divided from the value by a line, and tinted on hover like a secondary Button.
 export type SelectHierarchy = 'primary' | 'secondary'
 
 export interface SelectProps<T extends object = object, M extends 'single' | 'multiple' = 'single'> extends Omit<ReactAriaSelectProps<T, M>, 'children'> {

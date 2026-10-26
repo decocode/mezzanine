@@ -27,3 +27,25 @@ for (const theme of themes) {
     await expectNoAccessibilityViolations(page, 'main')
   })
 }
+
+// Checks that a checkbox's help text and error message sit under it, lined up with its label text,
+// and that screen readers read both with the checkbox.
+test('checkbox help text and error line up with the label and describe it', async ({ page }) => {
+  await page.goto('/checkbox')
+  const demo = page.locator('.docs-page-lead .mz-demo-area')
+  const panel = demo.locator('.mz-demo-area-end-panel')
+  await panel.locator('label', { hasText: /^description$/ }).click()
+  await panel.locator('label', { hasText: /^isInvalid$/ }).click()
+  await panel.locator('label', { hasText: /^errorMessage$/ }).click()
+  const content = demo.locator('.mz-demo-area-content')
+  const checkbox = content.getByRole('checkbox', { name: 'Checkbox label' })
+  await expect(checkbox).toHaveAccessibleDescription('Checkbox description Checkbox error message')
+  const textStart = async (selector: string) => content.locator(selector).evaluate((element) => {
+    const range = document.createRange()
+    range.selectNodeContents(element.lastChild ?? element)
+    return Math.round(range.getBoundingClientRect().left)
+  })
+  const labelStart = await textStart('.mz-checkbox')
+  expect(await textStart('.mz-checkbox-description')).toBe(labelStart)
+  expect(await textStart('.mz-checkbox-error')).toBe(labelStart)
+})

@@ -74,6 +74,8 @@ export const selectHierarchies = ['primary', 'secondary'] as const
 export const selectHierarchyLabel = 'hierarchy'
 export const selectSizes = ['xs', 'sm', 'md', 'lg', 'xl'] as const
 export const selectDefaultKeyLabel = 'defaultSelectedKey'
+// The defaultSelectedKey control's first choice, for leaving the prop out, so no item starts selected.
+export const selectNoDefaultKey = 'none'
 
 // Without a default key, the prop is left out and the example shows its placeholder.
 export const selectExampleText = { description: 'Select description', errorMessage: 'Select error message' } as const

@@ -1,4 +1,4 @@
-/* Follows React Aria's vanilla CheckboxGroup: a label, the checkboxes, then any help text or error,
+/* Follows React Aria's vanilla CheckboxGroup: a label, any help text, the checkboxes, then any error,
    in one column. It matches RadioGroup's spacing and text. */
 .mz-checkbox-group {
   display: grid;
@@ -38,4 +38,11 @@
 
 .mz-checkbox-group[data-disabled] > :is(.mz-label, [slot='description']) {
   opacity: var(--checkbox-group-opacity-disabled, var(--opacity-disabled));
+}
+
+/* A checkbox's row is a full target tall, with its text centred, so the first checkbox moves up by
+   the room its row adds above the text. The group's label or help text then sits as close to it as a
+   field's label to its input. */
+.mz-checkbox-group > :is(.mz-label, [slot='description']) + :is(.mz-checkbox, .mz-checkbox-field) {
+  margin-block-start: calc((1lh - var(--target-size-sm)) / 2);
 }

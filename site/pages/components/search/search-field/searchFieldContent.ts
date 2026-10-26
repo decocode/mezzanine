@@ -59,8 +59,17 @@ export const searchFieldContent: DocsPageContent = {
 
 // The Example's label and the Properties panel's on/off props, in panel order.
 export const searchFieldExampleLabel = 'Search A'
-export const searchFieldFlags = ['isDisabled', 'isReadOnly', 'isInvalid'] as const
+export const searchFieldFlags = ['description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
+export const searchFieldExampleText = { description: 'Search description', errorMessage: 'Search error message' } as const
 
-export function searchFieldExampleCode(props: Record<string, unknown>) {
-  return `<SearchField${formatJsxProps(props)}>\n  <Label>${searchFieldExampleLabel}</Label>\n  <Input />\n</SearchField>`
+// The example's code: the help text and error message appear as the Text and FieldError they are.
+export function searchFieldExampleCode({ description, hasErrorMessage, ...props }: Record<(typeof searchFieldFlags)[number], boolean> & { hasErrorMessage: boolean }) {
+  return [
+    `<SearchField${formatJsxProps(props)}>`,
+    `  <Label>${searchFieldExampleLabel}</Label>`,
+    '  <Input />',
+    ...(description ? [`  <Text slot="description">${searchFieldExampleText.description}</Text>`] : []),
+    ...(props.isInvalid && hasErrorMessage ? [`  <FieldError>${searchFieldExampleText.errorMessage}</FieldError>`] : []),
+    '</SearchField>',
+  ].join('\n')
 }

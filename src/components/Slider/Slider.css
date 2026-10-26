@@ -32,13 +32,13 @@
   color: var(--slider-output-foreground, var(--color-text-muted));
 }
 
-/* The track is as tall as a small target, so the thumb is easy to reach. */
+/* The track is as tall as a small target, so the thumb is easy to reach. It runs the slider's full
+   width, so the rail starts in line with the label; a thumb at either end overhangs it by half its
+   width. */
 .mz-slider-track {
   position: relative;
   grid-area: track;
   block-size: var(--target-size-xs);
-  /* Half a thumb at each end, so a thumb at either end stays inside the slider. */
-  margin-inline: calc(var(--slider-thumb-size, var(--icon-size-sm)) / 2);
 }
 
 .mz-slider-rail {
