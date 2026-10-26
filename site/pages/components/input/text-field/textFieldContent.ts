@@ -37,7 +37,7 @@ export const textFieldContent: DocsPageContent = {
       body: [
         '`TextField` and `Input` expose the React Aria APIs directly.',
         'Use `defaultValue` for an initial value, or `value` with `onChange` for a value managed by your application. Set `isRequired`, `isReadOnly`, `isDisabled` or `isInvalid` on `TextField`.',
-        'The validation example uses React Aria’s `Form` directly; Mezzanine does not yet export Form. Its colours and dimensions can be overridden through tokens.',
+        '`TextField`’s colours and dimensions can be overridden through tokens.',
       ],
     },
     {
@@ -81,7 +81,7 @@ export const textFieldValidationBehaviors = ['native', 'aria'] as const
 
 export function textFieldExampleCode({ type, flags, hasErrorMessage }: { type: string, flags: Record<(typeof textFieldFlags)[number], boolean>, hasErrorMessage: boolean }) {
   return [
-    `<TextField${formatJsxProps({ type: type === 'text' ? undefined : type, isDisabled: flags.isDisabled, isReadOnly: flags.isReadOnly, isInvalid: flags.isInvalid })} value={value} onChange={setValue}>`,
+    `<TextField${formatJsxProps({ type: type === 'text' ? undefined : type, isDisabled: flags.isDisabled, isReadOnly: flags.isReadOnly, isInvalid: flags.isInvalid })} validationBehavior="aria" value={value} onChange={setValue}>`,
     `  <Label>${textFieldExampleText.label}</Label>`,
     `  <Input${formatJsxProps({ placeholder: flags.placeholder ? textFieldExampleText.placeholder : undefined })} />`,
     ...(flags.description ? [`  <Text slot="description">${textFieldExampleText.description}</Text>`] : []),

@@ -25,8 +25,8 @@ for (const theme of ['light', 'dark', 'wireframe']) {
 
 test('nested themes restore finite motion and system reduction wins over speed overrides', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
-  await page.goto('/navigation-tree')
-  const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+  await page.goto('/nav-tree')
+  const tree = page.getByRole('treegrid', { name: 'Nav tree items', exact: true })
   const icon = tree.getByRole('button', { name: 'Fruit', exact: true }).locator('svg')
   await page.evaluate(() => {
     document.documentElement.dataset.theme = 'wireframe'

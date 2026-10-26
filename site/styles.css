@@ -495,16 +495,11 @@ body {
   min-block-size: 0;
 }
 
-/* Documentation controls layout; Mezzanine supplies table appearance and states. */
+/* Documentation controls layout; Mezzanine supplies table appearance, states and sideways scrolling. */
 .documentation-table {
-  /* Contain absolutely positioned hidden inputs, such as Checkbox's, inside the scroll area. */
-  position: relative;
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  overflow-x: auto;
-  /* Keep cell and example focus rings inside the scrollable area. */
-  padding: calc(var(--focus-ring-width) + var(--focus-ring-offset-inset) + var(--space-1));
 }
 
 /* A two-column reference table (a name and its description), and the Technical details group, stop at

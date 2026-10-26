@@ -17,6 +17,12 @@
   column-gap: var(--radio-group-horizontal-gap, var(--space-gap-cluster));
 }
 
+/* Side by side, the options share rows, while the label, help text and error each keep a row of their
+   own, above and below them. */
+.mz-radio-group[data-orientation='horizontal'] > :is(.mz-label, [slot='description'], .mz-field-error) {
+  flex-basis: 100%;
+}
+
 .mz-radio-group > .mz-label {
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-lg);
@@ -43,8 +49,14 @@
   margin-block-start: calc((1lh - var(--target-size-sm)) / 2);
 }
 
-/* An option with a description keeps clear of the next one, so each option reads as one group. */
-.mz-radio-group > .mz-radio-field:has(> [slot='description']):not(:last-child) {
+/* After a last option without a description, the error moves up by the room the option's row adds
+   below its text, so it sits as close as a field's error to its input. */
+.mz-radio-group:not([data-orientation='horizontal']) > .mz-radio-field:not(:has(> [slot='description'])) + .mz-field-error {
+  margin-block-start: calc((var(--line-height-body-md) * var(--font-size-body-md) - var(--target-size-sm)) / 2);
+}
+
+/* An option with a description keeps clear of the next option, so each option reads as one group. */
+.mz-radio-group > .mz-radio-field:has(> [slot='description']):has(+ .mz-radio-field) {
   margin-block-end: var(--radio-group-option-gap, var(--space-gap-control));
 }
 

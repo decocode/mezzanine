@@ -8,7 +8,7 @@ export const panelContent: DocsPageContent = {
   title: 'Panel',
   description: '`Panel` is a component that shares the space with the main content, at its start, end or bottom.',
   sections: [
-    { key: 'example', intro: ['The same AppShell as on the [AppShell](/app-shell) page: Panels A, B and C, each with its own PanelTrigger in the header.'] },
+    { key: 'example', intro: ['An [App shell](/app-shell) with one Panel, Panel A, at the chosen edge, and its PanelTrigger in the header.'] },
   ],
   technicalDetails: [
     {
@@ -31,7 +31,7 @@ export const panelContent: DocsPageContent = {
       key: 'behaviour',
       body: [
         'Opening a Panel makes room for it: the main content gets smaller. A closed Panel shows its minimised version if it has one, and otherwise takes no space.',
-        'A side Panel without room beside the content opens as a drawer in front of the page. The [AppShell](/app-shell) page explains when.',
+        'A side Panel without room beside the content opens as a drawer in front of the page, unless `isCollapsible` is false, when it’s hidden. The [App shell](/app-shell) page explains when.',
         'Closing a Panel with its own close button moves focus back to its PanelTrigger.',
         'A resizable side Panel can be dragged wider or narrower by its inner edge, between `--panel-min-width` and `--panel-max-width`, and never so wide that the main content drops below its minimum. Clicking the edge without dragging steps through its narrowest, usual and widest widths, so it can be resized without dragging. A double click restores its usual width. As a drawer, it keeps its token width.',
       ],
@@ -40,7 +40,7 @@ export const panelContent: DocsPageContent = {
       key: 'usage',
       body: [
         'Give each Panel an `id`, an `edge` (`start`, `end` or `bottom`) and a `title`. A `PanelTrigger` with `panel` set to the same `id` opens and closes it.',
-        'Panels are closed until opened, unless you set `defaultOpen`. To control the state yourself, use `isOpen` and `onOpenChange`.',
+        'Panels are closed until opened, unless you set `defaultOpen`. A Panel that can’t be closed is always open. To control the state yourself, use `isOpen` and `onOpenChange`.',
       ],
     },
     {
@@ -128,13 +128,18 @@ export function panelExampleCode({ edge, flags }: { edge: string, flags: Record<
     isResizable: isSide && flags.isResizable,
   })
   const minimized = flags.isCollapsible && flags.minimized ? ` minimized={<p>${panelExampleLabels.minimized}</p>}` : ''
-  return [
-    '<AppShell>',
-    ...(flags.isCollapsible ? [`  <header><PanelTrigger panel="panel-a">${panelExampleLabels.title}</PanelTrigger></header>`] : []),
+  const panel = [
     `  <Panel id="panel-a" edge="${edge}" title="${panelExampleLabels.title}"${props}${flags.isCollapsible ? '' : ' isCollapsible={false}'}${minimized}>`,
     `    <p>${panelExampleLabels.text}</p>`,
     '  </Panel>',
+  ]
+  return [
+    '<AppShell>',
+    ...(flags.isCollapsible ? [`  <header><PanelTrigger panel="panel-a">${panelExampleLabels.title}</PanelTrigger></header>`] : []),
+    // End and bottom Panels come after the main content, as the demo puts them.
+    ...(edge === 'start' ? panel : []),
     `  <main aria-label="${panelExampleLabels.main}">…</main>`,
+    ...(edge === 'start' ? [] : panel),
     '</AppShell>',
   ].join('\n')
 }

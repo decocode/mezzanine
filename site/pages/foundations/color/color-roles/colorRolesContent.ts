@@ -70,7 +70,7 @@ export const colorTokenGroups: ColorTokenGroup[] = [
       { token: '--color-link-hovered', label: 'Link hovered', description: 'A hovered link.' },
       { token: '--color-link-pressed', label: 'Link pressed', description: 'A pressed link.' },
       { token: '--color-focus', label: 'Focus', description: 'The keyboard-focus indicator color.' },
-      { token: '--color-chevron', label: 'Chevron', description: 'Expand and collapse chevrons in Disclosure and Nav Tree.' },
+      { token: '--color-chevron', label: 'Chevron', description: 'Expand and collapse chevrons in Disclosure and Nav tree.' },
       { token: '--color-indicator', label: 'Indicator', description: 'The bar that marks the current page, section or tab, and a selected row.' },
     ],
   },

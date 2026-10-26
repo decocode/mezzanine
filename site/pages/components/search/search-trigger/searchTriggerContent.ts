@@ -33,7 +33,7 @@ export const searchTriggerContent: DocsPageContent = {
     },
     {
       key: 'accessibility',
-      body: ['It is a real button, so screen readers announce it as one and it takes all of React Aria’s press handling. Keep its label visible.'],
+      body: ['It is a real button, so screen readers announce it as one and it takes all of React Aria’s press handling. Keep its label visible where there’s room, and use the icon-only trigger only where space is tight.'],
     },
     {
       key: 'pointers',

@@ -21,7 +21,7 @@ export const sliderContent: DocsPageContent = {
           { name: 'Slider', description: 'Holds the value. Mezzanine draws the label, output, rail, fill and thumbs inside it.' },
           { name: 'Label', description: 'The visible label, from the `label` prop.' },
           { name: 'SliderOutput', description: 'Shows the current value.' },
-          { name: 'SliderTrack', description: 'The area the thumbs move along. It is as tall as a small target.' },
+          { name: 'SliderTrack', description: 'The area the thumbs move along. It is as tall as an extra-small target.' },
           { name: 'SliderFill', description: 'The filled part of the rail, from `fillOffset` to the value.' },
           { name: 'SliderThumb', description: 'One draggable handle for each value.' },
         ],

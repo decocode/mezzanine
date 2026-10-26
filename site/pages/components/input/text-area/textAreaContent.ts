@@ -33,7 +33,7 @@ export const textAreaContent: DocsPageContent = {
       key: 'usage',
       body: [
         '`TextArea` replaces `Input` inside `TextField`.',
-        'Set `defaultValue` on `TextField` for an initial value, or use `value` and `onChange` to manage its value in your application. Set `isRequired`, `isReadOnly`, `isDisabled` and `isInvalid` on `TextField`. The invalid example above remains invalid while you edit it.',
+        'Set `defaultValue` on `TextField` for an initial value, or use `value` and `onChange` to manage its value in your application. Set `isRequired`, `isReadOnly`, `isDisabled` and `isInvalid` on `TextField`. An invalid text area stays invalid while it’s edited.',
         'Set `rows` on `TextArea` to choose its initial visible line count. The field permits vertical resizing and stays within its container width. `--height-text-area-min` sets its minimum height; otherwise it looks and behaves like a text field.',
         'Put `placeholder` on `TextArea`.',
       ],
@@ -75,7 +75,7 @@ export const textAreaFlags = ['placeholder', 'description', 'isDisabled', 'isRea
 
 export function textAreaExampleCode({ rows, flags, hasErrorMessage }: { rows: number, flags: Record<(typeof textAreaFlags)[number], boolean>, hasErrorMessage: boolean }) {
   return [
-    `<TextField${formatJsxProps({ isDisabled: flags.isDisabled, isReadOnly: flags.isReadOnly, isInvalid: flags.isInvalid })}>`,
+    `<TextField${formatJsxProps({ isDisabled: flags.isDisabled, isReadOnly: flags.isReadOnly, isInvalid: flags.isInvalid })} validationBehavior="aria">`,
     `  <Label>${textAreaExampleText.label}</Label>`,
     `  <TextArea${formatJsxProps({ rows, placeholder: flags.placeholder ? textAreaExampleText.placeholder : undefined })} />`,
     ...(flags.description ? [`  <Text slot="description">${textAreaExampleText.description}</Text>`] : []),

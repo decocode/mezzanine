@@ -24,7 +24,7 @@ export default function AutocompletePage() {
             <div className="autocomplete-example">
               <Autocomplete filter={filters[filter]} disableAutoFocusFirst={disableAutoFocusFirst}>
                 <SearchField aria-label="Search options"><Input /></SearchField>
-                <ListBox aria-label="Options" renderEmptyState={() => 'No results'}>
+                <ListBox aria-label="Options" selectionMode="single" renderEmptyState={() => 'No results'}>
                   {autocompleteOptions.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
                 </ListBox>
               </Autocomplete>

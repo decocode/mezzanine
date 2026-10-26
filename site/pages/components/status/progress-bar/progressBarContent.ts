@@ -33,7 +33,7 @@ export const progressBarContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: [
-        'Screen readers announce the bar as a progress bar, with its label and current value. An indeterminate bar is announced as busy, without a value.',
+        'Screen readers announce the bar as a progress bar, with its label and current value. An indeterminate bar is announced without a value.',
       ],
     },
     {

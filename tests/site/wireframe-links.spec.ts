@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-for (const path of ['/', '/navigation-tree', '/link', '/top-bar', '/tabs', '/breadcrumbs']) {
+for (const path of ['/', '/nav-tree', '/link', '/top-bar', '/tabs', '/breadcrumbs']) {
   test(`Wireframe underlines text links except the wordmark and button-style links on ${path}`, async ({ page }) => {
     await page.addInitScript(() => localStorage.setItem('mezzanine-theme', 'wireframe'))
     await page.setViewportSize({ width: 320, height: 900 })
@@ -29,8 +29,8 @@ for (const path of ['/', '/navigation-tree', '/link', '/top-bar', '/tabs', '/bre
 }
 
 test('NavigationTree links retain underlines through hover and keyboard focus in Wireframe only', async ({ page }) => {
-  await page.goto('/navigation-tree')
-  const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+  await page.goto('/nav-tree')
+  const tree = page.getByRole('treegrid', { name: 'Nav tree items', exact: true })
   const link = tree.getByRole('link', { name: 'Apples', exact: true })
   for (const theme of ['light', 'dark', 'wireframe']) {
     await page.evaluate(theme => document.documentElement.dataset.theme = theme, theme)

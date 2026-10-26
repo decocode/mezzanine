@@ -206,7 +206,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         pages: [
           { id: 'link', label: 'Link', path: '/link', status: 'implemented' },
           { id: 'breadcrumbs', label: 'Breadcrumbs', path: '/breadcrumbs', status: 'implemented' },
-          { id: 'navigation-tree', label: 'Nav Tree', path: '/navigation-tree', status: 'implemented' },
+          { id: 'navigation-tree', label: 'Nav tree', path: '/nav-tree', status: 'implemented' },
           { id: 'table-of-contents', label: 'Table of contents', path: '/table-of-contents', status: 'implemented' },
           { id: 'tabs', label: 'Tabs', path: '/tabs', status: 'implemented' },
         ],

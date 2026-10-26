@@ -8,7 +8,7 @@ export const popoverContent: DocsPageContent = {
   title: 'Popover',
   description: '`Popover` is a component that shows extra content beside the control that opened it, such as a menu, a list of options or a short form.',
   sections: [
-    { key: 'example', intro: ['A `DialogTrigger` opens the `Popover` from a `Button`. It fades in from the side it opens on, and closes with Escape or a press outside it.'] },
+    { key: 'example', intro: ['A `DialogTrigger` opens the `Popover` from a `Button`. It fades in, and closes with Escape or a press outside it.'] },
   ],
   technicalDetails: [
     {

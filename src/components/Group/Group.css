@@ -29,6 +29,11 @@
   border-end-end-radius: 0;
 }
 
+/* A secondary button joined to an input takes the input's border color, so the group has one edge. */
+.mz-group:not(.mz-toolbar *) > .mz-button[data-variant='secondary'] {
+  --_button-border: var(--group-border, var(--color-border-control));
+}
+
 /* A hovered part's border sits over its neighbour's, so the whole edge changes. */
 .mz-group:not(.mz-toolbar *) > [data-hovered] {
   z-index: var(--z-index-raised);

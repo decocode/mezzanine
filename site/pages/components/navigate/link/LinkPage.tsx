@@ -73,7 +73,7 @@ export default function LinkPage() {
                   <Cell><strong>{linkContentRows.trailingIcon}</strong></Cell>
                   <Cell>
                     <Link
-                      aria-label="Example external Link"
+                      aria-label="External Link, opens in a new tab"
                     >
                       <span>External Link</span>
                       <ExternalLinkIcon />

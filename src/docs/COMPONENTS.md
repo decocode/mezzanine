@@ -48,7 +48,7 @@ for quieter ones, and `destructive` for an action that deletes or can't be
 undone. ToggleButton takes `primary`, `secondary` or `tertiary`.
 
 Button supports text only, text with an icon, and icon buttons. `icon` adds an
-icon, and `iconPosition` puts it `leading`, the default, `trailing` or `only`.
+icon, and `iconPosition` puts it `leading`, the default, `trailing` or `iconOnly`.
 An icon button, with `iconPosition="iconOnly"`, still has a label, its children.
 `labelPosition` shows it in a `tooltip` on hover and keyboard focus, the
 default, or at the `top` or `bottom` of the icon. The label is always the
@@ -348,7 +348,7 @@ Both draw their own field, following React Aria's starter: pass a `label`, an
 optional `description` and `errorMessage`, and `ListBoxItem`s as children (or
 `items` with a render function). `Select` shows a trigger with the chosen option
 and a chevron; `ComboBox` is a text field with a chevron button, filtering its
-options as people type. Their lists open in a `Popover` as wide as the field. `Select`'s
+options as people type. Their lists open in a `Popover` at least as wide as the field. `Select`'s
 `hierarchy` sets how much its chevron area stands out: `primary` fills it with
 the accent color, and `secondary`, the default, keeps it quiet. Its `size`
 matches Button's five sizes, `md` by default, since the chevron area works

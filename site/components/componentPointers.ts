@@ -1076,6 +1076,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   ],
   "Group": [
     {
+      "name": "--group-border",
+      "fallback": "var(--color-border-control)"
+    },
+    {
       "name": "--group-opacity-disabled",
       "fallback": "var(--opacity-disabled)"
     },
@@ -2406,6 +2410,10 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--table-row-indicator-width",
       "fallback": "var(--indicator-width)"
+    },
+    {
+      "name": "--table-scroll-padding",
+      "fallback": "calc(var(--focus-ring-width) + var(--focus-ring-offset-inset) + var(--space-1))"
     },
     {
       "name": "--table-sort-indicator-size",

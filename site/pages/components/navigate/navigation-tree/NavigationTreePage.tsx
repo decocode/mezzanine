@@ -35,9 +35,9 @@ export default function NavigationTreePage() {
           >
             <div className="navigation-tree-example">
               <RouterProvider navigate={setRoute}>
-                <nav aria-label="Nav Tree example">
+                <nav aria-label="Nav tree example">
                   {/* A new key starts the tree again, because a default only applies when it first appears. */}
-                  <NavTree key={String(isExpanded)} aria-label="Nav Tree items" items={navigationTreeExampleItems}
+                  <NavTree key={String(isExpanded)} aria-label="Nav tree items" items={navigationTreeExampleItems}
                     defaultExpandedKeys={isExpanded ? navigationTreeExampleExpandedKeys : undefined} selectedRoute={route} />
                 </nav>
               </RouterProvider>

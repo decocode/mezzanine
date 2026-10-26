@@ -40,7 +40,7 @@ export const breadcrumbsContent: DocsPageContent = {
   relatedPages: [
     { label: 'Link', href: '/link' },
     { label: 'Top bar', href: '/top-bar' },
-    { label: 'Navigation tree', href: '/navigation-tree' },
+    { label: 'Nav tree', href: '/nav-tree' },
     { label: 'Target size', href: '/interaction/target-size' },
   ],
   references: [
@@ -53,7 +53,7 @@ export const breadcrumbsExampleCrumbs = [{ label: 'Homepage', href: '/' }, { lab
 
 export function breadcrumbsExampleCode(isDisabled: boolean) {
   return [
-    '<nav aria-label="Breadcrumbs">',
+    '<nav aria-label="Breadcrumbs example">',
     `  <Breadcrumbs${formatJsxProps({ isDisabled })}>`,
     ...breadcrumbsExampleCrumbs.map((crumb) => 'href' in crumb
       ? `    <Breadcrumb><Link href="${crumb.href}">${crumb.label}</Link></Breadcrumb>`

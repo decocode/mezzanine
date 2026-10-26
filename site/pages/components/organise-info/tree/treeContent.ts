@@ -29,7 +29,7 @@ export const treeContent: DocsPageContent = {
       key: 'usage',
       body: [
         'Give each `TreeItem` an `id` and a `title`, and nest its children inside it. Use `defaultExpandedKeys`, or `expandedKeys` with `onExpandedChange`. `selectionMode` lets people choose rows.',
-        'For navigation between pages, use Nav Tree instead, which marks the current page.',
+        'For navigation between pages, use Nav tree instead, which marks the current page.',
       ],
     },
     {
@@ -51,7 +51,7 @@ export const treeContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'Nav Tree', href: '/navigation-tree' },
+    { label: 'Nav tree', href: '/nav-tree' },
     { label: 'Grid list', href: '/grid-list' },
   ],
   references: [

@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Button, DemoArea, SettingsIcon, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
+import { Button, DemoArea, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { tooltipContent, tooltipDelays, tooltipExampleCode, tooltipPlacements } from './tooltipContent'
+import { tooltipContent, tooltipDelays, tooltipExampleCode, tooltipExampleLabels, tooltipPlacements } from './tooltipContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function TooltipPage() {
@@ -20,8 +20,8 @@ export default function TooltipPage() {
             </>}
           >
             <TooltipTrigger delay={Number(delay)}>
-              <Button icon={<SettingsIcon />} aria-label="Settings" />
-              <Tooltip placement={placement}>Settings</Tooltip>
+              <Button>{tooltipExampleLabels.button}</Button>
+              <Tooltip placement={placement}>{tooltipExampleLabels.tooltip}</Tooltip>
             </TooltipTrigger>
           </DemoArea>
         ),

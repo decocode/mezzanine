@@ -46,3 +46,10 @@
 .mz-checkbox-group > :is(.mz-label, [slot='description']) + :is(.mz-checkbox, .mz-checkbox-field) {
   margin-block-start: calc((1lh - var(--target-size-sm)) / 2);
 }
+
+/* After the last checkbox, the error moves up by the room the checkbox's row adds below its text, so it
+   sits as close as a field's error to its input. A checkbox with its own help or error text has no
+   such room. */
+.mz-checkbox-group > .mz-checkbox + .mz-field-error {
+  margin-block-start: calc((var(--line-height-body-md) * var(--font-size-body-md) - var(--target-size-sm)) / 2);
+}

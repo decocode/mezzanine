@@ -15,7 +15,7 @@ export const selectContent: DocsPageContent = {
     { where: 'Salesforce Lightning', called: 'Picklist.' },
   ],
   sections: [
-    { key: 'example', intro: ['`Select` shows its `label`, a trigger with the chosen option and a chevron, and opens the options in a popover as wide as the field.', '`hierarchy` sets how much the chevron area stands out: `primary` fills it with the accent color, and `secondary` keeps it quiet. The default is `secondary`.', '`size` matches Button’s five sizes, from `xs` to `xl`, since the chevron area works like a button. The default is `md`.', 'An option’s `icon` shows before its text in the list and in the trigger. `valuePosition="iconOnly"` shows only the chosen option’s icon in the trigger; screen readers still hear its text. Without a visible `label`, the `aria-label` shows in a tooltip, placed by `tooltipPosition`.'] },
+    { key: 'example', intro: ['`Select` shows its `label`, a trigger with the chosen option and a chevron, and opens the options in a popover at least as wide as the field.', '`hierarchy` sets how much the chevron area stands out: `primary` fills it with the accent color, and `secondary` keeps it quiet. The default is `secondary`.', '`size` matches Button’s five sizes, from `xs` to `xl`, since the chevron area works like a button. The default is `md`.', 'An option’s `icon` shows before its text in the list and in the trigger. `valuePosition="iconOnly"` shows only the chosen option’s icon in the trigger; screen readers still hear its text. Without a visible `label`, the `aria-label` shows in a tooltip, placed by `tooltipPosition`.'] },
   ],
   technicalDetails: [
     {

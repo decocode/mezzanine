@@ -32,7 +32,7 @@
   color: var(--slider-output-foreground, var(--color-text-muted));
 }
 
-/* The track is as tall as a small target, so the thumb is easy to reach. It runs the slider's full
+/* The track is as tall as an extra-small target, so the thumb is easy to reach. It runs the slider's full
    width, so the rail starts in line with the label; a thumb at either end overhangs it by half its
    width. */
 .mz-slider-track {

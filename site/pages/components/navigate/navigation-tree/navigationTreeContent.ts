@@ -28,7 +28,7 @@ export const navigationTreeExampleItems: NavTreeProps['items'] = [
 export const navigationTreeContent: DocsPageContent = {
   id: 'navigation-tree',
   kind: 'component',
-  title: 'Nav Tree',
+  title: 'Nav tree',
   description: '`NavTree` is a component that shows navigation with levels, such as a documentation site’s navigation. You supply the items as data, and `NavTree` supplies the rows, links, expand controls and states. It is built on React Aria’s NavigationTree.',
   sections: [
     { key: 'example', intro: ['Select an item to make it the current page; its parents open automatically. Fruit, Berries and Root vegetables are parents without a page of their own, so their whole label opens and closes them. Vegetables is a page as well as a parent: its label is a link, and a separate control at the end of the row opens and closes it.'] },
@@ -37,7 +37,7 @@ export const navigationTreeContent: DocsPageContent = {
     {
       key: 'anatomy',
       table: {
-        label: 'Nav Tree anatomy',
+        label: 'Nav tree anatomy',
         nameColumn: 'Part',
         namesAreCode: false,
         className: 'documentation-anatomy-table',
@@ -83,9 +83,9 @@ export const navigationTreeContent: DocsPageContent = {
     { key: 'props' },
     {
       key: 'tokens',
-      body: ['Override these tokens in a product theme. Nav Tree also uses `--color-chevron`, shared with Disclosure, for its chevron, the shared small-button sizing for its expand control, and the shared motion tokens for the chevron’s turn.'],
+      body: ['Override these tokens in a product theme. Nav tree also uses `--color-chevron`, shared with Disclosure, for its chevron, the shared small-button sizing for its expand control, and the shared motion tokens for the chevron’s turn.'],
       table: {
-        label: 'Nav Tree tokens',
+        label: 'Nav tree tokens',
         nameColumn: 'CSS token',
         rows: [
           { name: '--nav-item-current-indicator-width', description: 'Width of the current page bar. Shared with TopBar links and Table of contents links.' },
@@ -107,7 +107,7 @@ export const navigationTreeContent: DocsPageContent = {
       title: 'Pointers',
       intro: ['Set one of these on the component, or on any element around it, to restyle that part alone. When it isn’t set, the part uses the shared token shown.'],
       table: {
-        label: 'Nav Tree pointers',
+        label: 'Nav tree pointers',
         nameColumn: 'Pointer',
         descriptionColumn: 'Falls back to',
         rows: pointerRows('NavTree'),
@@ -134,27 +134,27 @@ export const navigationTreeUsageTopics: readonly { readonly title: string; reado
   ] },
   { title: 'Open and closed parents', paragraphs: [
     'Use `defaultExpandedKeys` to choose which parents start open. To control this yourself, pass `expandedKeys` and update it in `onExpandedChange`.',
-    'When the current page changes, Nav Tree opens that page\'s parents and leaves everything else as the person left it. A parent they closed stays closed until the current page moves. If you control the open parents, apply the changes Nav Tree asks for in `onExpandedChange`, or the current page can stay hidden.',
+    'When the current page changes, Nav tree opens that page\'s parents and leaves everything else as the person left it. A parent they closed stays closed until the current page moves. If you control the open parents, apply the changes Nav tree asks for in `onExpandedChange`, or the current page can stay hidden.',
   ] },
   { title: 'Item data', paragraphs: [
     'Every `id` must be unique across the whole tree.',
     'An item with no `href` and no children is disabled, because there is nothing to do with it.',
-    'When your items change, pass new arrays and objects rather than editing the old ones, so Nav Tree notices the change.',
-    'Nav Tree is Mezzanine\'s only tree. For a different kind of tree, use React Aria\'s NavigationTree parts directly from `react-aria-components`.',
+    'When your items change, pass new arrays and objects rather than editing the old ones, so Nav tree notices the change.',
+    'Nav tree is Mezzanine\'s only tree. For a different kind of tree, use React Aria\'s NavigationTree parts directly from `react-aria-components`.',
   ] },
 ]
 
 // The Props section's two tables; the second sits under its own small heading.
 export const navigationTreeProps: { readonly props: ContentTable; readonly itemPropsTitle: string; readonly itemProps: ContentTable } = {
   props: {
-    label: 'Nav Tree props',
+    label: 'Nav tree props',
     nameColumn: 'Prop',
     className: 'documentation-props-table',
     rows: [
       { name: 'items', description: 'Required. The items and sections to show, in order.' },
       { name: 'aria-label', description: 'Required unless you use `aria-labelledby`. The tree\'s accessible name.' },
       { name: 'selectedRoute', description: 'The current page\'s address. The item with a matching `href` is marked current and its parents open.' },
-      { name: 'defaultExpandedKeys', description: 'The ids of parents that start open, when Nav Tree manages this itself.' },
+      { name: 'defaultExpandedKeys', description: 'The ids of parents that start open, when Nav tree manages this itself.' },
       { name: 'expandedKeys', description: 'The ids of open parents, when you manage this yourself. Use with `onExpandedChange`.' },
       { name: 'onExpandedChange', description: 'Called with the new set of open parent ids when a parent opens or closes, or when the current page needs its parents opened.' },
       { name: 'getToggleLabel', description: 'Optional function `(item, isExpanded) => string` that names a parent\'s expand control.' },
@@ -163,7 +163,7 @@ export const navigationTreeProps: { readonly props: ContentTable; readonly itemP
   },
   itemPropsTitle: 'Item and section data',
   itemProps: {
-    label: 'Nav Tree item and section data',
+    label: 'Nav tree item and section data',
     nameColumn: 'Field',
     className: 'documentation-props-table',
     rows: [
@@ -184,8 +184,8 @@ export const navigationTreeProps: { readonly props: ContentTable; readonly itemP
 export function navigationTreeExampleCode(isExpanded: boolean) {
   return [
     '<RouterProvider navigate={setRoute}>',
-    '  <nav aria-label="Nav Tree example">',
-    `    <NavTree aria-label="Nav Tree items" items={items}${formatJsxProps({ defaultExpandedKeys: isExpanded ? navigationTreeExampleExpandedKeys : undefined })} selectedRoute={route} />`,
+    '  <nav aria-label="Nav tree example">',
+    `    <NavTree aria-label="Nav tree items" items={items}${formatJsxProps({ defaultExpandedKeys: isExpanded ? navigationTreeExampleExpandedKeys : undefined })} selectedRoute={route} />`,
     '  </nav>',
     '</RouterProvider>',
   ].join('\n')

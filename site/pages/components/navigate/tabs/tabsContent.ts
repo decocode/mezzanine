@@ -22,7 +22,7 @@ export const tabsContent: DocsPageContent = {
         rows: [
           { name: 'Tabs', description: 'Manages selection, orientation and keyboard activation.' },
           { name: 'TabList', description: 'Groups the tabs and gives the collection an accessible name.' },
-          { name: 'Tab', description: 'Selects a panel. Includes React Aria’s `SelectionIndicator` for the selected underline.' },
+          { name: 'Tab', description: 'Selects a panel. Includes React Aria’s `SelectionIndicator` for the selected bar.' },
           { name: 'TabPanel', description: 'Contains the content for the `Tab` with the matching `id`.' },
         ],
       },
@@ -42,7 +42,7 @@ export const tabsContent: DocsPageContent = {
         list: [
           'React Aria supplies tab/panel relationships, roving focus and keyboard selection. Do not add custom arrow-key handlers.',
           'Tab moves into the selected tab, then into its panel. Arrow keys follow the orientation; Home and End move to the first and last available tabs.',
-          'An underline marks the selected tab.',
+          'A bar marks the selected tab: under it, or beside it when the tabs are vertical.',
         ],
       }],
     },

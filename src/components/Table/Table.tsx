@@ -17,8 +17,15 @@ import type { RefAttributes } from 'react'
 import { composeClassName } from '../composeClassName'
 import { ArrowDownIcon, ArrowUpIcon } from '../../icons/Icons'
 
+// A table wider than the space it has scrolls sideways inside its own container, so the page never does.
+// The table's rows take keyboard focus, and focus scrolls them into view, so the container needs no
+// focus of its own.
 export function Table(props: TableProps & RefAttributes<HTMLDivElement | HTMLTableElement>) {
-  return <ReactAriaTable {...props} className={composeClassName('mz-table', props.className)} />
+  return (
+    <div className="mz-table-scroll">
+      <ReactAriaTable {...props} className={composeClassName('mz-table', props.className)} />
+    </div>
+  )
 }
 
 export function TableHeader<T>(props: TableHeaderProps<T> & RefAttributes<HTMLDivElement | HTMLTableSectionElement>) {

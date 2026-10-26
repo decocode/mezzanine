@@ -43,7 +43,7 @@ export const toggleButtonContent: DocsPageContent = {
       body: [
         "Mezzanine's `size` appearance prop supports `xs`, `sm`, `md`, `lg` and `xl`, using the same size tokens as Button. Both default to `md`. A ToggleButton inside a ToggleButtonGroup takes the group’s size unless it sets its own. These appearance props extend React Aria without changing selection or keyboard behaviour.",
         'For an independent toggle, use `defaultSelected` for initial state or `isSelected` with `onChange` for controlled state.',
-        'Set `hierarchy="secondary"` or `hierarchy="tertiary"` on a ToggleButton. Tertiary has no outline, and its selection shows as a soft fill. The default is `primary`. This Mezzanine appearance extension preserves React Aria behaviour. Unselected buttons use standard secondary Button colours; selected buttons keep an inset line and a soft fill. Hover deepens the fill, and pressing a selected button strengthens the bottom line. Omitting the variant preserves the existing appearance. Disabled selection stays visible, and forced-colour mode underlines selected labels.',
+        'Set `hierarchy="secondary"` or `hierarchy="tertiary"` on a ToggleButton. Tertiary has no outline, and its selection shows as a soft fill. The default is `primary`. This Mezzanine appearance extension preserves React Aria behaviour. Selected, a primary toggle fills with the accent color. A secondary toggle keeps a soft fill with a line along its bottom, which strengthens while a selected one is pressed. Hover deepens the fill. Omitting the variant preserves the existing appearance. Disabled selection stays visible, and forced-colour mode underlines selected labels.',
       ],
     },
     {

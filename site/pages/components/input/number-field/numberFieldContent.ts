@@ -77,7 +77,10 @@ export const numberFieldFormatOptions = {
 
 export function numberFieldExampleCode({ step, format, ...props }: { step: number, format: (typeof numberFieldFormats)[number] } & Record<string, unknown>) {
   const options = numberFieldFormatOptions[format]
-  const stepProp = formatJsxProps({ step: step === 1 ? undefined : step, ...props })
+  // A percentage counts in hundredths, as the demo does: 4% is 0.04, and each step is a hundredth.
+  const isPercent = format === 'percent'
+  const codeStep = isPercent ? step / 100 : step
+  const stepProp = formatJsxProps({ step: codeStep === 1 ? undefined : codeStep, ...props })
   const formatProp = options ? ` formatOptions={${JSON.stringify(options).replaceAll('"', "'").replaceAll(',', ', ').replaceAll(':', ': ')}}` : ''
-  return `<NumberField label="${numberFieldExampleLabel}" defaultValue={4} minValue={0}${stepProp}${formatProp} />`
+  return `<NumberField label="${numberFieldExampleLabel}" defaultValue={${isPercent ? 0.04 : 4}} minValue={0}${stepProp}${formatProp} />`
 }

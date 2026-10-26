@@ -56,7 +56,7 @@ export const topBarContent: DocsPageContent = {
         rows: [
           { name: 'brand', description: 'Required branding content. Supply a Link for a home destination.' },
           { name: 'children', description: 'Required navigation content, or a function receiving closeMenu and isMenu. TopBar supplies the nav element.' },
-          { name: 'actions', description: 'Optional action controls, or a function receiving closeMenu. Shown in the bar at every width.' },
+          { name: 'actions', description: 'Optional action controls, or a function receiving closeMenu and isMenu. In the compact layout they move into the menu, after the links.' },
           { name: 'aria-label', description: 'Required accessible name for the navigation.' },
           { name: 'menuLabel', description: 'Closed trigger’s accessible name and tooltip. Defaults to Menu.' },
           { name: 'closeLabel', description: 'Expanded trigger’s accessible name and tooltip. Defaults to Close menu.' },

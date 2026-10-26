@@ -24,7 +24,7 @@ export const virtualizerContent: DocsPageContent = {
     {
       key: 'usage',
       body: [
-        'Wrap a `ListBox`, `GridList`, `Tree` or `Table` in `Virtualizer`, with `layout={ListLayout}` and `layoutOptions` such as `rowHeight` for rows of one height, or `estimatedRowHeight` to measure each row. Give the list a height, so it scrolls.',
+        'Wrap a `ListBox`, `GridList` or `Tree` in `Virtualizer`, with `layout={ListLayout}` and `layoutOptions` such as `rowHeight` for rows of one height, or `estimatedRowHeight` to measure each row. Give the list a height, so it scrolls.',
         'It draws nothing of its own, so the collection keeps its usual look.',
       ],
     },

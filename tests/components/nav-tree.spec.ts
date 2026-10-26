@@ -4,7 +4,7 @@ import { resolve } from 'node:path'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// These tests put the Nav Tree on its own test page, without any documentation site styles, to
+// These tests put the Nav tree on its own test page, without any documentation site styles, to
 // check the library component by itself.
 test.describe('isolated recipe', () => {
   let fixtureHtml: string
@@ -17,7 +17,7 @@ test.describe('isolated recipe', () => {
     const files = (Array.isArray(output) ? output[0] : output).output
     const script = files.filter(file => file.type === 'chunk').map(file => file.code).join('\n')
     const css = files.filter(file => file.type === 'asset' && file.fileName.endsWith('.css')).map(file => file.source).join('\n')
-    fixtureHtml = `<html lang="en" data-theme="light"><head><title>Nav Tree test</title><style>body { background: var(--color-page); color: var(--color-text); } ${css}</style></head><body><main><div id="root"></div></main><script type="module">${script.replaceAll('</script', '<\\/script')}</script></body></html>`
+    fixtureHtml = `<html lang="en" data-theme="light"><head><title>Nav tree test</title><style>body { background: var(--color-page); color: var(--color-text); } ${css}</style></head><body><main><div id="root"></div></main><script type="module">${script.replaceAll('</script', '<\\/script')}</script></body></html>`
   })
   test.beforeEach(async ({ page }) => {
     await page.route('**/__nav-tree-test', route => route.fulfill({ contentType: 'text/html', body: fixtureHtml }))
@@ -163,16 +163,16 @@ test.describe('isolated recipe', () => {
   })
 })
 
-// These tests use the Nav Tree example on the documentation site.
+// These tests use the Nav tree example on the documentation site.
 test.describe('documentation example', () => {
   // Checks, with and without reduced motion, that rows appear and disappear instantly with the
   // keyboard, and that only the arrow icon rotates, and not at all with reduced motion.
   for (const reducedMotion of ['no-preference', 'reduce'] as const) {
-    test(`Nav Tree immediate rows and chevron respect ${reducedMotion}`, async ({ page }) => {
+    test(`Nav tree immediate rows and chevron respect ${reducedMotion}`, async ({ page }) => {
       await page.emulateMedia({ reducedMotion })
-      await page.goto('/navigation-tree')
+      await page.goto('/nav-tree')
       await page.evaluate(() => document.documentElement.style.setProperty('--motion-duration-interface', '800ms'))
-      const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+      const tree = page.getByRole('treegrid', { name: 'Nav tree items', exact: true })
       const trigger = tree.getByRole('button', { name: 'Fruit', exact: true })
       const child = tree.getByRole('row', { name: 'Apples', exact: true })
       const parent = tree.getByRole('row', { name: 'Fruit', exact: true })
@@ -194,8 +194,8 @@ test.describe('documentation example', () => {
   // state, whatever the theme and motion speed.
   test('rapid toggles leave truthful immediate rows', async ({ page }) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' })
-    await page.goto('/navigation-tree')
-    const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+    await page.goto('/nav-tree')
+    const tree = page.getByRole('treegrid', { name: 'Nav tree items', exact: true })
     const trigger = tree.getByRole('button', { name: 'Fruit', exact: true })
     const child = tree.getByRole('row', { name: 'Apples', exact: true })
     await tree.evaluate(element => { element.style.setProperty('--motion-duration-interface', '10s') })
@@ -215,9 +215,9 @@ test.describe('documentation example', () => {
   })
 
   // Checks that clicking a branch several times quickly leaves it in the state of the last click.
-  test('rapid Nav Tree toggles retain the last requested expansion', async ({ page }) => {
-    await page.goto('/navigation-tree')
-    const tree = page.getByRole('treegrid', { name: 'Nav Tree items', exact: true })
+  test('rapid Nav tree toggles retain the last requested expansion', async ({ page }) => {
+    await page.goto('/nav-tree')
+    const tree = page.getByRole('treegrid', { name: 'Nav tree items', exact: true })
     const trigger = tree.getByRole('button', { name: 'Fruit', exact: true })
     await tree.evaluate(element => { element.style.setProperty('--motion-duration-interface', '800ms') })
     await trigger.click()

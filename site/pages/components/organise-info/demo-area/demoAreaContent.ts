@@ -19,7 +19,7 @@ export const demoAreaContent: DocsPageContent = {
         rows: [
           { name: 'DemoArea', description: 'Holds the demo’s frame and, with `codeView`, the tabs.' },
           { name: 'Tabs', description: 'Optional, from `codeView`: Demo and Code tabs, outside the frame.' },
-          { name: 'Frame', description: 'The border around the strip and the demo.' },
+          { name: 'Frame', description: 'The border around the strip, the end panel and the demo.' },
           { name: 'Strip', description: 'The theme picker, at the start. It’s part of the frame, so it isn’t shown while the Code tab is open.' },
           { name: 'Theme picker', description: 'A Select of Light, Dark and Wireframe, showing the chosen theme’s icon. It starts on the page’s theme and changes only this demo, pop-ups included.' },
           { name: 'Demo', description: 'The live components, on the theme’s page colour.' },

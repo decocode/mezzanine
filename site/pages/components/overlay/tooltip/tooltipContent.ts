@@ -24,7 +24,7 @@ export const tooltipContent: DocsPageContent = {
         nameColumn: 'Component',
         rows: [
           { name: 'TooltipTrigger', description: 'Connects the control and tooltip, managing when the tooltip opens and closes.' },
-          { name: 'Button', description: 'Mezzanine’s icon-only `Button` with a cog icon and the accessible name Settings in this example. Other focusable React Aria controls, such as `ToggleButton` and `Link`, can also act as triggers.' },
+          { name: 'Button', description: 'A text `Button` in this example. Other focusable React Aria controls, such as `ToggleButton` and `Link`, can also act as triggers. An icon-only Button shows its label in a tooltip of its own, without a separate Tooltip.' },
           { name: 'Tooltip', description: 'The text bubble, positioned relative to its trigger and associated with it through `aria-describedby`.' },
         ],
       },
@@ -108,11 +108,15 @@ export const tooltipContent: DocsPageContent = {
 export const tooltipPlacements = ['top', 'bottom', 'start', 'end'] as const
 export const tooltipDelays = ['0', '500', '1500'] as const
 
+// The example's labels. The button says what shows the tooltip, an agreed exception to the rule that
+// demo copy gives no instructions (owner, 26 October 2026).
+export const tooltipExampleLabels = { button: 'Hover or focus', tooltip: 'This is a tooltip' } as const
+
 export function tooltipExampleCode({ placement, delay }: { placement: string, delay: number }) {
   return [
     `<TooltipTrigger${formatJsxProps({ delay: delay === 500 ? undefined : delay })}>`,
-    '  <Button icon={<SettingsIcon />} aria-label="Settings" />',
-    `  <Tooltip${formatJsxProps({ placement: placement === 'top' ? undefined : placement })}>Settings</Tooltip>`,
+    `  <Button>${tooltipExampleLabels.button}</Button>`,
+    `  <Tooltip${formatJsxProps({ placement: placement === 'top' ? undefined : placement })}>${tooltipExampleLabels.tooltip}</Tooltip>`,
     '</TooltipTrigger>',
   ].join('\n')
 }
