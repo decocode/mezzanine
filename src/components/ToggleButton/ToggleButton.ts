@@ -38,7 +38,7 @@ const ToggleButtonSizeContext = createContext<ButtonSize>('md')
 export function ToggleButton({ hierarchy, size, icon, iconPosition = 'leading', labelPosition, tooltipPosition, children, ...props }: ToggleButtonProps) {
   const groupSize = useContext(ToggleButtonSizeContext)
   // A tooltip label is the accessible name; the button itself shows only its icon.
-  const isIconButton = icon != null && iconPosition === 'only'
+  const isIconButton = icon != null && iconPosition === 'iconOnly'
   const outsideLabel = isIconButton && labelPosition !== undefined && labelPosition !== 'tooltip' ? labelPosition : undefined
   const tooltipLabel = isIconButton && outsideLabel === undefined && typeof children === 'string' ? children : undefined
   const isLabelOutside = outsideLabel !== undefined

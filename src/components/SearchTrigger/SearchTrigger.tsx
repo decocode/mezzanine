@@ -17,20 +17,20 @@ interface SearchTriggerAppearanceProps extends ReactAriaButtonProps {
   ref?: Ref<HTMLButtonElement>
 }
 
-// As on Button: iconPosition="only" shows only the icon, with the label in a tooltip. The label is still the
+// As on Button: iconPosition="iconOnly" shows only the icon, with the label in a tooltip. The label is still the
 // accessible name, so it must be plain text, and the shortcut Badge is left out.
 export type SearchTriggerProps = SearchTriggerAppearanceProps & (
-  | { iconPosition: 'only'; children: string }
+  | { iconPosition: 'iconOnly'; children: string }
   | { iconPosition?: 'leading' }
 )
 
 // The button that opens search, such as a DialogTrigger's search dialog. It's a React Aria Button
 // with its own look, separate from Mezzanine's Button. Its children are its visible label and its
 // accessible name; Mezzanine adds the search icon before them and an optional shortcut Badge after.
-// With iconPosition="only" it shows only the icon, as an icon Button does.
+// With iconPosition="iconOnly" it shows only the icon, as an icon Button does.
 export function SearchTrigger({ children, className, shortcut, iconPosition, tooltipPosition, ...buttonProps }: SearchTriggerProps) {
   // A tooltip label is the accessible name; the trigger itself shows only its icon.
-  const tooltipLabel = iconPosition === 'only' && typeof children === 'string' ? children : undefined
+  const tooltipLabel = iconPosition === 'iconOnly' && typeof children === 'string' ? children : undefined
   const trigger = (
     <ReactAriaButton
       {...buttonProps}

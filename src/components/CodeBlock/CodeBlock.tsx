@@ -107,7 +107,7 @@ export function CodeBlock({
         <Button
           className="mz-code-block-copy"
           icon={isCopied ? <CheckIcon /> : <CopyIcon />}
-          iconPosition="only"
+          iconPosition="iconOnly"
           size="sm"
           hierarchy="tertiary"
           onPress={copyCode}

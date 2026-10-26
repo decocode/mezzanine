@@ -15,7 +15,7 @@ export default function CardPage() {
             <Card className="card-example">
               <CardImage src={examplePicture} alt="">
                 <Badge>{cardExample.badge}</Badge>
-                <ToggleButton hierarchy="secondary" size="sm" icon={<HeartIcon />} iconPosition="only">{cardExample.toggle}</ToggleButton>
+                <ToggleButton hierarchy="secondary" size="sm" icon={<HeartIcon />} iconPosition="iconOnly">{cardExample.toggle}</ToggleButton>
               </CardImage>
               <Avatar size="sm">{cardExample.avatar}</Avatar>
               <CardTitle href={cardExample.href}>{cardExample.heading}</CardTitle>

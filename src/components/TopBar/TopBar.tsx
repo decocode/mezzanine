@@ -53,7 +53,7 @@ export function TopBar({ brand, children, actions, 'aria-label': label, menuLabe
         <Disclosure className="mz-top-bar-mobile" isExpanded={isExpanded} onExpandedChange={setIsExpanded}>
           <Heading className="mz-top-bar-heading" level={2}>
             {/* Its label shows in a tooltip, to leave room for actions. */}
-            <Button ref={triggerRef} className="mz-top-bar-trigger" size="sm" icon={isExpanded ? <CloseIcon /> : <MenuIcon />} iconPosition="only" slot="trigger" hierarchy="secondary">
+            <Button ref={triggerRef} className="mz-top-bar-trigger" size="sm" icon={isExpanded ? <CloseIcon /> : <MenuIcon />} iconPosition="iconOnly" slot="trigger" hierarchy="secondary">
               {isExpanded ? closeLabel : menuLabel}
             </Button>
           </Heading>

@@ -14,8 +14,8 @@ import { Tooltip, TooltipTrigger, type TooltipProps } from '../Tooltip/Tooltip'
 export type ButtonHierarchy = 'primary' | 'secondary' | 'tertiary' | 'destructive'
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
-// Where the icon sits: before the label, after it, or on its own, as an icon button.
-export type ButtonIconPosition = 'leading' | 'trailing' | 'only'
+// Where the icon sits: before the label, after it, or on its own, as an icon-only button.
+export type ButtonIconPosition = 'leading' | 'trailing' | 'iconOnly'
 
 // Where an icon button shows its label: in a tooltip, or visibly at the top or bottom, over or under
 // the icon. The label is always the button's children, so the accessible name and the visible words
@@ -45,9 +45,9 @@ interface NavigationButtonProps extends ReactAriaLinkProps, ButtonAppearanceProp
 // also the button's accessible name and the tooltip's words. A label at the top or bottom of the
 // icon, or a text button's label, can be any content.
 export type ButtonLabelProps =
-  | { iconPosition: 'only'; labelPosition?: 'tooltip'; children: string }
-  | { iconPosition: 'only'; labelPosition: Exclude<ButtonLabelPosition, 'tooltip'> }
-  | { iconPosition?: Exclude<ButtonIconPosition, 'only'>; labelPosition?: never }
+  | { iconPosition: 'iconOnly'; labelPosition?: 'tooltip'; children: string }
+  | { iconPosition: 'iconOnly'; labelPosition: Exclude<ButtonLabelPosition, 'tooltip'> }
+  | { iconPosition?: Exclude<ButtonIconPosition, 'iconOnly'>; labelPosition?: never }
 
 export type ButtonProps = (ActionButtonProps | NavigationButtonProps) & ButtonLabelProps
 
@@ -61,7 +61,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   // A tooltip label is the accessible name; the button itself shows only its icon.
-  const isIconButton = icon != null && iconPosition === 'only'
+  const isIconButton = icon != null && iconPosition === 'iconOnly'
   const outsideLabel = isIconButton && labelPosition !== undefined && labelPosition !== 'tooltip' ? labelPosition : undefined
   const tooltipLabel = isIconButton && outsideLabel === undefined && typeof props.children === 'string' ? props.children : undefined
   const appearance = {

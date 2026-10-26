@@ -49,7 +49,7 @@ undone. ToggleButton takes `primary`, `secondary` or `tertiary`.
 
 Button supports text only, text with an icon, and icon buttons. `icon` adds an
 icon, and `iconPosition` puts it `leading`, the default, `trailing` or `only`.
-An icon button, with `iconPosition="only"`, still has a label, its children.
+An icon button, with `iconPosition="iconOnly"`, still has a label, its children.
 `labelPosition` shows it in a `tooltip` on hover and keyboard focus, the
 default, or at the `top` or `bottom` of the icon. The label is always the
 accessible name. `tooltipPosition` sets where a tooltip label appears.
@@ -175,7 +175,7 @@ Compose `TooltipTrigger`, a focusable control and `Tooltip`:
 The trigger waits 500ms on hover before showing the tooltip; change this with
 `delay`. Keyboard focus shows it immediately. Tooltips do not appear on touch,
 so icon buttons keep their label as their accessible name (Button's
-`iconPosition="only"` does this for you). The fade is removed
+`iconPosition="iconOnly"` does this for you). The fade is removed
 when motion is reduced. The API follows the
 [React Aria Tooltip](https://react-aria.adobe.com/Tooltip).
 

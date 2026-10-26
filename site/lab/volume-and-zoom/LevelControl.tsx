@@ -111,7 +111,7 @@ export function LevelControl({ label, icon, value, minValue, maxValue, step, onC
           ref={buttonRef}
           hierarchy="secondary"
           icon={icon}
-          iconPosition="only"
+          iconPosition="iconOnly"
           // Upright, the row rises above the button, so the tooltip opens below to stay clear of it.
           tooltipPosition={orientation === 'vertical' ? 'bottom' : 'top'}
           aria-expanded={isOpen}
@@ -138,7 +138,7 @@ export function LevelControl({ label, icon, value, minValue, maxValue, step, onC
 
   return (
     <DialogTrigger isOpen={isOpen} onOpenChange={changeOpen}>
-      <Button hierarchy="secondary" icon={icon} iconPosition="only" isDisabled={isDisabled}>{label}</Button>
+      <Button hierarchy="secondary" icon={icon} iconPosition="iconOnly" isDisabled={isDisabled}>{label}</Button>
       <Popover placement="top" className="lab-media-popover">
         <Dialog aria-label={label}>
           {row}
