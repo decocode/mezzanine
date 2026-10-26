@@ -725,11 +725,15 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-area-end-panel-gap",
-      "fallback": "var(--space-gap-control)"
+      "fallback": "var(--space-gap-cluster)"
     },
     {
       "name": "--demo-area-end-panel-label-foreground",
       "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--demo-area-end-panel-max-height",
+      "fallback": "var(--height-overlay-max)"
     },
     {
       "name": "--demo-area-end-panel-offset",
@@ -745,7 +749,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-area-padding",
-      "fallback": "var(--space-4) var(--space-4) var(--space-8)"
+      "fallback": "var(--space-8) var(--space-4)"
     },
     {
       "name": "--demo-area-preview-background",

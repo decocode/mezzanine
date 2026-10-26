@@ -393,6 +393,11 @@ body {
   gap: var(--space-4);
 }
 
+/* A control in a Properties panel that starts a new row of the panel's grid. */
+.demo-panel-new-row {
+  grid-column-start: 1;
+}
+
 /* The gap alone spaces an example's text, demo and notes. A grid doesn't overlap its children's
    margins, so they're cleared to stop the space doubling; the notes keep their larger space above. */
 .example-stack > *,
@@ -840,10 +845,6 @@ body {
 .docs-contents-inline { margin-block-end: var(--space-8); }
 
 /* Three equal columns, with local scrolling instead of compressed state examples. */
-.toggle-button-states-table .mz-table { min-inline-size: var(--width-lg); table-layout: fixed; }
-.toggle-button-states-table .mz-column,
-.toggle-button-states-table .mz-cell { width: calc(100% / 4); }
-
 .button-sizes-table .mz-table { min-inline-size: var(--width-lg); table-layout: fixed; }
 .button-sizes-table .mz-column,
 .button-sizes-table .mz-cell { width: calc(100% / 3); }

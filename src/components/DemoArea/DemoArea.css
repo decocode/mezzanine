@@ -50,8 +50,8 @@
   flex: 999 1 0;
   /* The narrowest the preview gets beside the end panel; below it, the panel wraps underneath. */
   min-inline-size: min(100%, var(--demo-area-content-min-width, var(--width-md)));
-  /* More space below than above, so the demo doesn't look cramped against the area's bottom edge. */
-  padding: var(--demo-area-padding, var(--space-4) var(--space-4) var(--space-8));
+  /* Generous space above and below, so the demo sits clear of the bar and the area's bottom edge. */
+  padding: var(--demo-area-padding, var(--space-8) var(--space-4));
   background-color: var(--demo-area-preview-background, var(--color-page));
   color: var(--color-text);
 }
@@ -92,11 +92,15 @@
   display: flex;
   flex: 1 1 var(--demo-area-end-panel-width, var(--width-sm));
   flex-direction: column;
-  align-items: start;
-  gap: var(--demo-area-end-panel-gap, var(--space-gap-control));
+  /* The same space as between a Form's fields. */
+  gap: var(--demo-area-end-panel-gap, var(--space-gap-cluster));
   /* The panel never gets narrower than its width: without room for that beside the preview, it wraps
      underneath at full width instead of squashing its controls. */
   min-inline-size: min(100% - 2 * var(--demo-area-end-panel-offset, var(--surface-gap)), var(--demo-area-end-panel-width, var(--width-sm)));
+  /* A long list of controls scrolls inside the panel, rather than making the demo very tall. The
+     controls' grid sits inside the scrolling box, so its rows still grow to fit what's in them. */
+  max-block-size: var(--demo-area-end-panel-max-height, var(--height-overlay-max));
+  overflow: auto;
   /* Like the site's Panels: a card set in by the surface gap, with a header row, then content, both
      starting at the area padding. */
   margin: var(--demo-area-end-panel-offset, var(--surface-gap));
@@ -106,14 +110,40 @@
   background: var(--demo-area-end-panel-background, var(--color-surface));
 }
 
-.mz-demo-area-end-panel > * {
+/* The controls sit in a grid of columns at least xs wide: one column beside the preview, and as many
+   as fit when the panel moves below it. */
+.mz-demo-area-end-panel-controls {
+  display: grid;
+  flex: none;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
+  align-items: start;
+  justify-items: start;
+  gap: var(--demo-area-end-panel-gap, var(--space-gap-cluster));
+}
+
+/* No control is wider than the panel. :where() keeps this weaker than a control's own maximum, such
+   as Select's. */
+:where(.mz-demo-area-end-panel-controls > *) {
   max-inline-size: 100%;
+}
+
+/* Fields, and groups of controls, fill their column, so they line up at one width, as in a form.
+   Checkboxes and switches keep their own width. */
+.mz-demo-area-end-panel-controls > :not(.mz-checkbox, .mz-switch-field) {
+  justify-self: stretch;
+}
+
+/* A Separator between groups of controls runs across every column. */
+.mz-demo-area-end-panel-controls > .mz-separator {
+  grid-column: 1 / -1;
+  justify-self: stretch;
 }
 
 /* The panel's label is a header row, styled like the navigation's section headers, so it reads as a
    group heading rather than one more field label. */
 .mz-demo-area-end-panel-label {
   display: flex;
+  flex: none;
   align-items: center;
   min-block-size: var(--target-size-xs);
   color: var(--demo-area-end-panel-label-foreground, var(--color-accent));

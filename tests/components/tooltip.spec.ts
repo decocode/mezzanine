@@ -101,7 +101,9 @@ test('Tooltip documentation example supports hover and keyboard focus at narrow 
   await page.mouse.move(0, 0)
   for (const fontSize of textSizes) {
     await setTextSize(page, fontSize)
-    await button.scrollIntoViewIfNeeded()
+    // Bring the whole demo into view, theme picker and button, so tabbing through them doesn't
+    // scroll the page and close the tooltip the button opens.
+    await page.getByRole('main').locator('.mz-demo-area').first().evaluate(element => element.scrollIntoView({ block: 'start' }))
     // Let scroll-triggered overlay dismissal finish before focusing the example.
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
     // At narrow widths On this page sits inline before the example. Start from
