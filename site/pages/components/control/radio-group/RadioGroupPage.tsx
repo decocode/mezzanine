@@ -1,48 +1,55 @@
-import {
-  Cell, Column, DemoArea, FieldError, Label, RadioButton, RadioField, RadioGroup, Row, SelectionIndicator, Table, TableBody, TableHeader, Text,
-} from '@decocode/mezzanine'
 import { useState } from 'react'
-import { radioGroupContent, radioGroupStateExamples, radioGroupStates } from './radioGroupContent'
+import {
+  Cell, Checkbox, Column, DemoArea, FieldError, Label, ListBoxItem, RadioButton, RadioField, RadioGroup, Row, Select, SelectionIndicator, Table, TableBody,
+  TableHeader, Text,
+} from '@decocode/mezzanine'
+import { radioGroupContent, radioGroupExample, radioGroupExampleCode, radioGroupFlags, radioGroupOrientations, radioGroupStates } from './radioGroupContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 import { RichText } from '../../../../components/RichText'
 
 export default function RadioGroupPage() {
-  const [validationValue, setValidationValue] = useState<string | null>(null)
+  const [defaultValue, setDefaultValue] = useState<string | null>(null)
+  const [orientation, setOrientation] = useState<(typeof radioGroupOrientations)[number]>('vertical')
+  const [flags, setFlags] = useState<Record<(typeof radioGroupFlags)[number], boolean>>({ isDisabled: false, isInvalid: false, isReadOnly: false })
+  const props = { defaultValue: defaultValue ?? undefined, orientation: orientation === 'vertical' ? undefined : orientation, ...flags }
   return (
     <ContentPage
       content={radioGroupContent}
       parts={{
+        // The Properties panel has a control for each prop that changes what the group looks like or does.
         example: (
-          <DemoArea>
-            <RadioGroup defaultValue="option-a">
-              <Label>RadioGroup label</Label>
-              <Text slot="description">RadioGroup description</Text>
-              <RadioField value="option-a">
-                <RadioButton>
-                  <SelectionIndicator />
-                  Option A
-                </RadioButton>
-                <Text slot="description">RadioField A description</Text>
-              </RadioField>
-              <RadioField value="option-b">
-                <RadioButton>
-                  <SelectionIndicator />
-                  Option B
-                </RadioButton>
-                <Text slot="description">RadioField B description</Text>
-              </RadioField>
-              <RadioField isDisabled value="option-c">
-                <RadioButton>
-                  <SelectionIndicator />
-                  Option C
-                </RadioButton>
-                <Text slot="description">Disabled RadioField description</Text>
-              </RadioField>
-              <FieldError />
+          <DemoArea
+            codeView={radioGroupExampleCode(props)}
+            endPanel={<>
+              <Select label={radioGroupExample.defaultValueLabel} selectedKey={defaultValue} onSelectionChange={(key) => { if (key != null) setDefaultValue(String(key)) }}>
+                {radioGroupExample.options.map((option) => <ListBoxItem key={option.value} id={option.value}>{option.value}</ListBoxItem>)}
+              </Select>
+              <Select label={radioGroupExample.orientationLabel} selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof radioGroupOrientations)[number]) }}>
+                {radioGroupOrientations.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
+              </Select>
+              {radioGroupFlags.map((name) => (
+                <Checkbox key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Checkbox>
+              ))}
+            </>}
+          >
+            {/* A new key starts the example again, because a default only applies when it first appears. */}
+            <RadioGroup key={defaultValue ?? ''} {...props}>
+              <Label>{radioGroupExample.label}</Label>
+              <Text slot="description">{radioGroupExample.description}</Text>
+              {radioGroupExample.options.map((option) => (
+                <RadioField key={option.value} value={option.value} isDisabled={'isDisabled' in option}>
+                  <RadioButton>
+                    <SelectionIndicator />
+                    {option.label}
+                  </RadioButton>
+                  <Text slot="description">{option.description}</Text>
+                </RadioField>
+              ))}
+              <FieldError>{radioGroupExample.error}</FieldError>
             </RadioGroup>
           </DemoArea>
         ),
-        states: (<>
+        states: (
           <div className="documentation-table">
             <Table aria-label="RadioGroup states">
               <TableHeader>
@@ -64,31 +71,7 @@ export default function RadioGroupPage() {
               </TableBody>
             </Table>
           </div>
-          <section aria-labelledby="radio-group-read-only" className="mz-prose">
-            <h3 id="radio-group-read-only" className="mz-text-heading-sm">{radioGroupStateExamples.readOnly.title}</h3>
-            <p className="component-section-description"><RichText text={radioGroupStateExamples.readOnly.description} /></p>
-            <DemoArea>
-              <RadioGroup defaultValue="option-a" isReadOnly>
-                <Label>Read-only options</Label>
-                <RadioField value="option-a"><RadioButton><SelectionIndicator />Option A</RadioButton></RadioField>
-                <RadioField value="option-b"><RadioButton><SelectionIndicator />Option B</RadioButton></RadioField>
-              </RadioGroup>
-            </DemoArea>
-          </section>
-          <section aria-labelledby="radio-group-validation" className="mz-prose">
-            <h3 id="radio-group-validation" className="mz-text-heading-sm">{radioGroupStateExamples.validation.title}</h3>
-            <p className="component-section-description"><RichText text={radioGroupStateExamples.validation.description} /></p>
-            <DemoArea>
-              <RadioGroup value={validationValue} onChange={setValidationValue} isRequired isInvalid={validationValue === null} validationBehavior="aria">
-                <Label>Required options</Label>
-                <Text slot="description">Choose one option.</Text>
-                <RadioField value="option-a"><RadioButton><SelectionIndicator />Option A</RadioButton></RadioField>
-                <RadioField value="option-b"><RadioButton><SelectionIndicator />Option B</RadioButton></RadioField>
-                <FieldError>Select an option to continue.</FieldError>
-              </RadioGroup>
-            </DemoArea>
-          </section>
-        </>),
+        ),
       }}
     />
   )

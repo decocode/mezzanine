@@ -1,13 +1,26 @@
-import { Cell, Column, DemoArea, Row, SwitchButton, SwitchField, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { switchContent, switchStateLabels } from './switchContent'
+import { useState } from 'react'
+import { Cell, Checkbox, Column, DemoArea, Row, SwitchButton, SwitchField, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { switchContent, switchExampleCode, switchExampleLabel, switchFlags, switchStateLabels } from './switchContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function SwitchPage() {
+  const [flags, setFlags] = useState<Record<(typeof switchFlags)[number], boolean>>({ defaultSelected: false, isDisabled: false, isReadOnly: false })
   return (
     <ContentPage
       content={switchContent}
       parts={{
-        example: <DemoArea><SwitchField><SwitchButton>Switch label</SwitchButton></SwitchField></DemoArea>,
+        // The Properties panel has a control for each prop that changes what the switch looks like or does.
+        example: (
+          <DemoArea
+            codeView={switchExampleCode(flags)}
+            endPanel={switchFlags.map((name) => (
+              <Checkbox key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Checkbox>
+            ))}
+          >
+            {/* A new key starts the example again, because a default only applies when it first appears. */}
+            <SwitchField key={String(flags.defaultSelected)} {...flags}><SwitchButton>{switchExampleLabel}</SwitchButton></SwitchField>
+          </DemoArea>
+        ),
         states: (
           <div className="documentation-table documentation-comparison-table">
             <Table aria-label="Switch states">

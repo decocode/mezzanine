@@ -61,3 +61,19 @@ export const dropZoneContent: DocsPageContent = {
 
 // The example's labels and copy.
 export const dropZoneExampleLabels = { label: 'Drop zone A', help: 'Help text A.', button: 'Button A' } as const
+
+// The Properties panel's on/off prop, and the example's code.
+export const dropZoneDisabledLabel = 'isDisabled'
+
+export function dropZoneExampleCode(isDisabled: boolean) {
+  return [
+    `<DropZone${isDisabled ? ' isDisabled' : ''} aria-describedby="drop-zone-help">`,
+    '  <PlaceholderIcon aria-hidden="true" />',
+    `  <Text slot="label">${dropZoneExampleLabels.label}</Text>`,
+    `  <p id="drop-zone-help">${dropZoneExampleLabels.help}</p>`,
+    '  <FileTrigger>',
+    `    <Button hierarchy="secondary" aria-describedby="drop-zone-help">${dropZoneExampleLabels.button}</Button>`,
+    '  </FileTrigger>',
+    '</DropZone>',
+  ].join('\n')
+}

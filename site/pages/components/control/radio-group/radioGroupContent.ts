@@ -1,5 +1,6 @@
 import type { Copy, DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 export const radioGroupContent: DocsPageContent = {
   id: 'radio-group',
@@ -7,14 +8,11 @@ export const radioGroupContent: DocsPageContent = {
   title: 'Radio group',
   description: 'A radio group is a set of choices where only one option can be selected at a time, such as a delivery method. Choosing a different option replaces the previous selection.',
   sections: [
-    { key: 'example', intro: ['Option A starts selected. Choose Option B to change the selection; Option C is disabled.'] },
+    { key: 'example', intro: ['A `RadioGroup` has a label, a description and its options. Option C is disabled on its own `RadioField`.'] },
     {
       key: 'states',
-      subsections: [{ id: 'radio-group-read-only', label: 'Read only' }, { id: 'radio-group-validation', label: 'Validation' }],
       intro: [
-        'Selection belongs to the group. Pointer and keyboard states follow the `RadioButton`being used. Try selection, hover and keyboard focus in the Example above; read-only and invalid states have working examples below.',
-        'The selected option can receive focus, but the selection cannot change.',
-        'This required group starts invalid. Select an option to clear the validation feedback.',
+        'Selection belongs to the group. Pointer and keyboard states follow the `RadioButton` being used.',
       ],
     },
   ],
@@ -73,8 +71,8 @@ export const radioGroupContent: DocsPageContent = {
 
 // Rows of the States table, which shows each state's name with its React Aria property.
 export const radioGroupStates: readonly { readonly name: string; readonly property: string; readonly description: Copy }[] = [
-  { name: 'Unselected', property: 'value', description: 'An option whose value does not match the group selection. Option B starts unselected in the example.' },
-  { name: 'Selected', property: 'value / defaultValue', description: 'The option matching the group selection. Option A starts selected in the example; choosing Option B moves the selection.' },
+  { name: 'Unselected', property: 'value', description: 'An option whose value does not match the group selection.' },
+  { name: 'Selected', property: 'value / defaultValue', description: 'The option matching the group selection.' },
   { name: 'Hover', property: 'data-hovered', description: 'Moving the pointer over an available `RadioButton` changes its indicator background.' },
   { name: 'Pressed', property: 'data-pressed', description: 'React Aria tracks a press on `RadioButton`. Mezzanine does not add a separate pressed appearance.' },
   { name: 'Focused', property: 'data-focus-visible', description: 'Keyboard focus adds an outline around the `RadioButton` indicator.' },
@@ -83,8 +81,34 @@ export const radioGroupStates: readonly { readonly name: string; readonly proper
   { name: 'Invalid', property: 'isInvalid', description: 'Uses the invalid indicator border. `FieldError` provides the associated validation message.' },
 ]
 
-// The States section's two smaller headed examples. Their descriptions repeat the second and third States paragraphs.
-export const radioGroupStateExamples: Record<'readOnly' | 'validation', { readonly title: string; readonly description: Copy }> = {
-  readOnly: { title: 'Read only', description: 'The selected option can receive focus, but the selection cannot change.' },
-  validation: { title: 'Validation', description: 'This required group starts invalid. Select an option to clear the validation feedback.' },
+// The Example's options and error message, and the Properties panel's props, in panel order.
+export const radioGroupExample = {
+  label: 'RadioGroup label',
+  description: 'RadioGroup description',
+  options: [
+    { value: 'option-a', label: 'Option A', description: 'RadioField A description' },
+    { value: 'option-b', label: 'Option B', description: 'RadioField B description' },
+    { value: 'option-c', label: 'Option C', description: 'Disabled RadioField description', isDisabled: true },
+  ],
+  error: 'Select an option to continue.',
+  defaultValueLabel: 'defaultValue',
+  orientationLabel: 'orientation',
+} as const
+export const radioGroupOrientations = ['vertical', 'horizontal'] as const
+export const radioGroupFlags = ['isDisabled', 'isInvalid', 'isReadOnly'] as const
+
+export function radioGroupExampleCode(props: Record<string, unknown>) {
+  return [
+    `<RadioGroup${formatJsxProps(props)}>`,
+    `  <Label>${radioGroupExample.label}</Label>`,
+    `  <Text slot="description">${radioGroupExample.description}</Text>`,
+    ...radioGroupExample.options.flatMap((option) => [
+      `  <RadioField value="${option.value}"${'isDisabled' in option ? ' isDisabled' : ''}>`,
+      `    <RadioButton><SelectionIndicator />${option.label}</RadioButton>`,
+      `    <Text slot="description">${option.description}</Text>`,
+      '  </RadioField>',
+    ]),
+    `  <FieldError>${radioGroupExample.error}</FieldError>`,
+    '</RadioGroup>',
+  ].join('\n')
 }

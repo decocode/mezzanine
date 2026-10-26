@@ -8,7 +8,7 @@ for (const theme of themes) {
   test(`slider moves with the arrow keys in ${theme}`, async ({ page }) => {
     await page.goto('/slider')
     await setTheme(page, theme)
-    const slider = page.locator('.mz-slider').first()
+    const slider = page.locator('.mz-demo-area-content .mz-slider')
     const thumb = slider.getByRole('slider', { name: 'Slider A', exact: true })
     const fill = slider.locator('.mz-slider-fill')
     const before = (await fill.boundingBox())!.width
@@ -28,7 +28,10 @@ for (const theme of themes) {
 // Checks that a range has one named thumb for each value, and the fill runs between them.
 test('a range slider has two named thumbs with the fill between them', async ({ page }) => {
   await page.goto('/slider')
-  const range = page.locator('.mz-slider').nth(1)
+  // The Example's defaultValue control switches it to a range.
+  await page.locator('.mz-demo-area-end-panel').getByRole('button', { name: /defaultValue/ }).click()
+  await page.getByRole('option', { name: '[20, 70]' }).click()
+  const range = page.locator('.mz-demo-area-content .mz-slider')
   await expect(range.getByRole('slider', { name: 'Minimum' })).toHaveValue('20')
   await expect(range.getByRole('slider', { name: 'Maximum' })).toHaveValue('70')
   const fill = (await range.locator('.mz-slider-fill').boundingBox())!

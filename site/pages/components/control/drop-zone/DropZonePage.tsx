@@ -1,12 +1,12 @@
-import { useId } from 'react'
-import { Button, DemoArea, DropZone, FileTrigger, PlaceholderIcon, Text } from '@decocode/mezzanine'
-import { dropZoneContent, dropZoneExampleLabels } from './dropZoneContent'
+import { useId, useState } from 'react'
+import { Button, Checkbox, DemoArea, DropZone, FileTrigger, PlaceholderIcon, Text } from '@decocode/mezzanine'
+import { dropZoneContent, dropZoneDisabledLabel, dropZoneExampleCode, dropZoneExampleLabels } from './dropZoneContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
-function DropZoneExample() {
+function DropZoneExample({ isDisabled }: { isDisabled: boolean }) {
   const helpId = useId()
   return (
-    <DropZone aria-describedby={helpId}>
+    <DropZone isDisabled={isDisabled} aria-describedby={helpId}>
       <PlaceholderIcon aria-hidden="true" />
       <Text slot="label">{dropZoneExampleLabels.label}</Text>
       <p id={helpId}>{dropZoneExampleLabels.help}</p>
@@ -18,5 +18,21 @@ function DropZoneExample() {
 }
 
 export default function DropZonePage() {
-  return <ContentPage content={dropZoneContent} parts={{ example: <DemoArea align="stretch"><DropZoneExample /></DemoArea> }} />
+  const [isDisabled, setIsDisabled] = useState(false)
+  return (
+    <ContentPage
+      content={dropZoneContent}
+      parts={{
+        example: (
+          <DemoArea
+            align="stretch"
+            codeView={dropZoneExampleCode(isDisabled)}
+            endPanel={<Checkbox isSelected={isDisabled} onChange={setIsDisabled}>{dropZoneDisabledLabel}</Checkbox>}
+          >
+            <DropZoneExample isDisabled={isDisabled} />
+          </DemoArea>
+        ),
+      }}
+    />
+  )
 }

@@ -1,5 +1,6 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 export const sliderContent: DocsPageContent = {
   id: 'slider',
@@ -7,8 +8,7 @@ export const sliderContent: DocsPageContent = {
   title: 'Slider',
   description: 'A slider picks a number, or a range, from a track by dragging a thumb or using the arrow keys.',
   sections: [
-    { key: 'example', intro: ['`Slider` shows a `label`, the current value and a thumb on a filled track.'] },
-    { key: 'variants', intro: ['An array `defaultValue` gives one thumb for each value, for a range. `thumbLabels` names each thumb.'] },
+    { key: 'example', intro: ['`Slider` shows a `label`, the current value and a thumb on a filled track. An array `defaultValue` gives one thumb for each value, for a range, and `thumbLabels` names each thumb.'] },
   ],
   technicalDetails: [
     {
@@ -59,4 +59,36 @@ export const sliderContent: DocsPageContent = {
   references: [
     { label: 'React Aria Slider', href: 'https://react-aria.adobe.com/Slider' },
   ],
+}
+
+// The Example's label, and the Properties panel's choices, in panel order. A range value names its
+// two thumbs, and the fill offset and value format are on or off.
+export const sliderExample = {
+  label: 'Slider A',
+  rangeThumbLabels: ['Minimum', 'Maximum'],
+  defaultValueLabel: 'defaultValue',
+  orientationLabel: 'orientation',
+  fillOffset: 50,
+} as const
+export const sliderDefaultValues = { '40': 40, '[20, 70]': [20, 70] } as const
+export const sliderOrientations = ['horizontal', 'vertical'] as const
+export const sliderFlags = ['fillOffset', 'formatValue', 'isDisabled'] as const
+
+// A vertical slider hides its label, so the code names it with aria-label instead.
+export function sliderExampleCode({ defaultValue, orientation, fillOffset, formatValue, isDisabled }: {
+  defaultValue: number | readonly number[]
+  orientation: (typeof sliderOrientations)[number]
+  fillOffset: boolean
+  formatValue: boolean
+  isDisabled: boolean
+}) {
+  const isVertical = orientation === 'vertical'
+  return `<Slider${formatJsxProps({
+    label: isVertical ? undefined : sliderExample.label,
+    'aria-label': isVertical ? sliderExample.label : undefined,
+    defaultValue,
+    thumbLabels: Array.isArray(defaultValue) ? sliderExample.rangeThumbLabels : undefined,
+    orientation: isVertical ? orientation : undefined,
+    fillOffset: fillOffset ? sliderExample.fillOffset : undefined,
+  })}${formatValue ? ' formatValue={(value) => `${value}%`}' : ''}${isDisabled ? ' isDisabled' : ''} />`
 }

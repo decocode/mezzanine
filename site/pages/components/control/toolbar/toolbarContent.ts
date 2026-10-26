@@ -59,3 +59,22 @@ export const toolbarContent: DocsPageContent = {
 
 // The example's labels.
 export const toolbarExampleLabels = { toolbar: 'Toolbar A', toggleGroup: 'Group A', toggles: ['Toggle A', 'Toggle B'], actionGroup: 'Group B', actions: ['Action A', 'Action B'] } as const
+
+// The Properties panel's orientation choices, and the example's code.
+export const toolbarOrientationLabel = 'orientation'
+export const toolbarOrientations = ['horizontal', 'vertical'] as const
+
+export function toolbarExampleCode(orientation: (typeof toolbarOrientations)[number]) {
+  const labels = toolbarExampleLabels
+  return [
+    `<Toolbar aria-label="${labels.toolbar}"${orientation === 'vertical' ? ' orientation="vertical"' : ''}>`,
+    `  <ToggleButtonGroup aria-label="${labels.toggleGroup}" selectionMode="single" size="sm" hierarchy="secondary">`,
+    ...labels.toggles.map((toggle) => `    <ToggleButton id="${toggle}">${toggle}</ToggleButton>`),
+    '  </ToggleButtonGroup>',
+    '  <Separator />',
+    `  <Group aria-label="${labels.actionGroup}">`,
+    ...labels.actions.map((action) => `    <Button size="sm" hierarchy="secondary">${action}</Button>`),
+    '  </Group>',
+    '</Toolbar>',
+  ].join('\n')
+}

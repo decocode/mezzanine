@@ -1,5 +1,6 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 // The Checkbox group example's teaching labels.
 export const checkboxGroupExampleLabels = {
@@ -66,6 +67,26 @@ export const checkboxContent: DocsPageContent = {
   references: [
     { label: 'React Aria Checkbox', href: 'https://react-aria.adobe.com/Checkbox' },
   ],
+}
+
+// The Properties panels' on/off props, in panel order, and the Example's label.
+export const checkboxExampleLabel = 'Checkbox label'
+export const checkboxFlags = ['defaultSelected', 'isIndeterminate', 'isDisabled', 'isInvalid', 'isReadOnly'] as const
+export const checkboxGroupFlags = ['isDisabled', 'isInvalid', 'isReadOnly'] as const
+export const checkboxGroupDefaultValueLabel = 'defaultValue'
+
+export function checkboxExampleCode(props: Record<string, unknown>) {
+  return `<Checkbox${formatJsxProps(props)}>${checkboxExampleLabel}</Checkbox>`
+}
+
+export function checkboxGroupExampleCode(props: Record<string, unknown>) {
+  return [
+    `<CheckboxGroup${formatJsxProps(props)}>`,
+    `  <Label>${checkboxGroupExampleLabels.group}</Label>`,
+    ...checkboxGroupExampleLabels.checkboxes.map((checkbox) => `  <Checkbox value="${checkbox}">${checkbox}</Checkbox>`),
+    `  <Text slot="description">${checkboxGroupExampleLabels.description}</Text>`,
+    '</CheckboxGroup>',
+  ].join('\n')
 }
 
 // Row labels for the States table; the page renders a live checkbox in each state.

@@ -1,5 +1,6 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
+import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 export const switchContent: DocsPageContent = {
   id: 'switch',
@@ -64,3 +65,11 @@ export const switchStateLabels = {
   selected: 'On',
   disabled: 'Disabled',
 } as const
+
+// The Example's label, and the Properties panel's on/off props, in panel order.
+export const switchExampleLabel = 'Switch label'
+export const switchFlags = ['defaultSelected', 'isDisabled', 'isReadOnly'] as const
+
+export function switchExampleCode(props: Record<string, unknown>) {
+  return [`<SwitchField${formatJsxProps(props)}>`, `  <SwitchButton>${switchExampleLabel}</SwitchButton>`, '</SwitchField>'].join('\n')
+}
