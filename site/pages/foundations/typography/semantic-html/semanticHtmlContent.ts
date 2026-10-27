@@ -59,10 +59,19 @@ export const semanticHtmlContent: DocsPageContent = {
         'Code inside `<pre>` retains the monospace font without the inline background or padding. For a block of code, use the [Code block](/code-block) component.',
       ],
     },
+    {
+      key: 'keys',
+      title: 'Keyboard keys',
+      body: [
+        '`<kbd>` marks a key on the keyboard, such as Enter, in a small, softly filled box on the line with the text, as `<code>` marks code. It needs no component.',
+        'For keys pressed together, write them as HTML does: a `<kbd>` holding a `<kbd>` for each key. Each key keeps its own box, side by side, with no “+” between them. In forced colours, a line keeps each key’s edge.',
+      ],
+    },
   ],
   references: [
     { label: 'MDN: The description list element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dl' },
     { label: 'MDN: The mark text element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/mark' },
+    { label: 'MDN: The keyboard input element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd' },
     { label: 'MDN: The block quotation element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/blockquote' },
     { label: 'MDN: The unordered list element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul' },
     { label: 'MDN: The ordered list element', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol' },

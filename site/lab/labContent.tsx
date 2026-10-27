@@ -4,6 +4,7 @@ import { labBadgeLabel } from './shared/labValues'
 import { layoutPages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
 import { demoBlockPage, panelHostPage, panelPage } from './panel-demo-block/panelDemoBlockContent'
+import { itemPage } from './item/itemContent'
 import { expandingControlsPage, volumePage, zoomPage } from './volume-and-zoom/volumeAndZoomContent'
 
 export const labContent = {
@@ -33,6 +34,7 @@ export const labNavigationItems: NavTreeSectionData[] = [
     },
   ] },
   { type: 'section', id: 'components', label: docsGroupLabel('components'), children: [
+    { id: 'item', label: itemPage.title, href: itemPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
     { id: 'panel', label: panelPage.title, href: panelPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
     { id: 'panel-host', label: panelHostPage.title, href: panelHostPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
     { id: 'demo-block', label: demoBlockPage.title, href: demoBlockPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },

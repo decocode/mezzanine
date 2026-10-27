@@ -70,6 +70,11 @@ export default function SemanticHtmlPage() {
             <p className="mz-text-body-md">The <code>--space-4</code> token stores <code>1rem</code> by default.</p>
           </DemoBlock>
         ),
+        keys: (
+          <DemoBlock align="stretch">
+            <p className="mz-text-body-md"><kbd>Esc</kbd> closes the dialog, and <kbd><kbd>⌘</kbd><kbd>K</kbd></kbd> or <kbd><kbd>Ctrl</kbd><kbd>K</kbd></kbd> opens the search.</p>
+          </DemoBlock>
+        ),
       }}
     />
   )

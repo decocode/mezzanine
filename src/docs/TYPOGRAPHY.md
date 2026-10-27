@@ -105,13 +105,14 @@ product does not inherit the browser's defaults:
 | `mark` | The `--color-highlight` tint behind the text, with the text colour |
 | `dl` | Terms (`dt`) semibold; descriptions (`dd`) under them with no indent, and a new term `--space-gap-text` below the description before it |
 | `blockquote` | No indent on either side; a `--border-width-md` line in `--color-border` along its start edge, with `--space-4` inside it |
+| `kbd` | A key: Label medium in `--color-text-muted` on `--color-neutral-muted`, in a box `--icon-size-sm` tall with `--radius-xs` corners. A `kbd` holding `kbd`s, a combination, draws no box and sets its keys `--space-1` apart. A line in forced colours |
 
 `q` keeps the browser's quotation marks, which follow the page's language.
 
 These rules use `:where()`, which gives them zero specificity, so any class,
 including a named style or a component's own recipe, overrides them. The
 heading and body rules set typography only, not colour or margins; `mark`,
-`dl` and `blockquote` also set the colour, space and line shown.
+`dl`, `blockquote` and `kbd` also set the colour, space and line shown.
 
 ## Responsive sizes
 

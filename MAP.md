@@ -40,6 +40,7 @@ An experimental sandbox at `/site/lab`. Nothing here is approved library work.
 | `layout/<page>/` | The Layout pages, one folder each, all directly under Layout. |
 | `emerging-features/` | The other experiment, one folder per page. |
 | `panel-demo-block/` | A candidate Panel that works in any container, its host, and a demo block rebuilt from them, on the Lab's Panel, Panel host and Demo block pages. |
+| `item/` | A candidate Item, from shadcn/ui's React Aria Item, rebuilt in Mezzanine's CSS with its own properties and optional parts. |
 | `volume-and-zoom/` | Candidate VolumeControl and ZoomControl, each on its own Lab page: an icon button that opens a slider. They share the slider row, styles and timers. The Expanding controls page holds the experiment that slides the row out of the button instead. |
 | `shared/` | Shared Lab parts, types and values, and `layout-lab.css`, which each page's "The CSS behind" panel quotes. The panel itself, the example text and the panel picker come from the site's `components/ExampleParts.tsx`, shared with promoted docs pages. |
 | `LabPage.tsx`, `labContent.tsx` | The Lab's entry and its navigation. |

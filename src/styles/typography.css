@@ -121,6 +121,44 @@
   border-inline-start: var(--border-width-md) solid var(--color-border);
 }
 
+/* A key on the keyboard, such as <kbd>Enter</kbd>: a small, softly filled box on the line with the text.
+   A combination is written as HTML writes it, a <kbd> holding a <kbd> for each key; the outer one
+   draws nothing, and sets its keys side by side. In forced colours a line keeps each key's edge. */
+:where(kbd) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-inline-size: var(--icon-size-sm);
+  block-size: var(--icon-size-sm);
+  padding-inline: var(--space-1);
+  border-radius: var(--radius-xs);
+  background: var(--color-neutral-muted);
+  color: var(--color-text-muted);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+:where(kbd:has(> kbd)) {
+  gap: var(--space-1);
+  min-inline-size: 0;
+  block-size: auto;
+  padding: 0;
+  background: none;
+}
+
+@media (forced-colors: active) {
+  :where(kbd:not(:has(> kbd))) {
+    border: var(--border-width-baseline) solid CanvasText;
+  }
+}
+
 code {
   font-family: var(--font-family-monospace);
 }

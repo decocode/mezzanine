@@ -1,0 +1,190 @@
+/* The candidate Item, scoped to the Lab's own classes. The header and footer take full rows; the media,
+   content and actions share the row between them, the content taking the room. Illustrative and
+   unapproved. */
+.lab-item {
+  --_lab-item-padding: var(--space-4);
+  --_lab-item-gap: var(--space-3);
+  --_lab-item-media-size: var(--target-size-md);
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: 'header header header' 'media content actions' 'footer footer footer';
+  align-items: center;
+  column-gap: var(--_lab-item-gap);
+  padding: var(--_lab-item-padding);
+  border: var(--border-width-baseline) solid transparent;
+  border-radius: var(--radius-surface);
+  color: var(--color-text);
+}
+
+.lab-item[data-size='sm'] {
+  --_lab-item-padding: var(--space-3);
+  --_lab-item-gap: var(--space-2);
+  --_lab-item-media-size: var(--target-size-sm);
+}
+
+.lab-item[data-size='xs'] {
+  --_lab-item-padding: var(--space-2);
+  --_lab-item-gap: var(--space-2);
+  --_lab-item-media-size: var(--target-size-xs);
+}
+
+/* The purpose sets the colours the variants use. */
+.lab-item[data-purpose='neutral'] {
+  --_lab-item-border: var(--color-border);
+  --_lab-item-fill: var(--color-neutral-muted);
+  --_lab-item-media: var(--color-text-muted);
+}
+
+.lab-item[data-purpose='accent'] {
+  --_lab-item-border: var(--color-accent-muted-pressed);
+  --_lab-item-fill: var(--color-accent-muted);
+  --_lab-item-media: var(--color-accent);
+}
+
+.lab-item[data-purpose='signature'] {
+  --_lab-item-border: var(--color-signature-muted-pressed);
+  --_lab-item-fill: var(--color-signature-muted);
+  --_lab-item-media: var(--color-signature);
+}
+
+.lab-item[data-variant='outline'] {
+  border-color: var(--_lab-item-border);
+}
+
+.lab-item[data-variant='muted'] {
+  background: var(--_lab-item-fill);
+}
+
+.lab-item-content {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-field);
+  min-inline-size: 0;
+}
+
+.lab-item-title {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-title-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-sm);
+  text-transform: var(--text-transform-title);
+}
+
+.lab-item-description {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-sm);
+  text-transform: var(--text-transform-body);
+}
+
+.lab-item[data-size='xs'] .lab-item-title {
+  font-size: var(--font-size-label-lg);
+  line-height: var(--line-height-label-lg);
+}
+
+.lab-item-media {
+  grid-area: media;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* With a description, the media lines up with the title rather than the middle. */
+.lab-item:has(.lab-item-description) .lab-item-media {
+  align-self: start;
+}
+
+.lab-item-media[data-variant='icon'] {
+  color: var(--_lab-item-media);
+}
+
+.lab-item-media[data-variant='icon'] > svg {
+  inline-size: var(--icon-size-md);
+  block-size: var(--icon-size-md);
+}
+
+.lab-item-media[data-variant='image'] {
+  inline-size: var(--_lab-item-media-size);
+  block-size: var(--_lab-item-media-size);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.lab-item-media[data-variant='image'] > img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.lab-item-actions {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  gap: var(--space-gap-control);
+}
+
+.lab-item-header,
+.lab-item-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-gap-control);
+}
+
+.lab-item-header {
+  grid-area: header;
+  margin-block-end: var(--_lab-item-gap);
+}
+
+.lab-item-footer {
+  grid-area: footer;
+  margin-block-start: var(--_lab-item-gap);
+}
+
+/* A linked title keeps the text colour, and its pressable area covers the whole Item. Controls in the
+   Item sit above that area, so they take their own presses. */
+.lab-item-link {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.lab-item-link::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  content: '';
+}
+
+.lab-item:has(.lab-item-link) :is(.mz-button, .mz-toggle-button, .mz-link:not(.lab-item-link), .mz-checkbox, .mz-switch) {
+  position: relative;
+  z-index: var(--z-index-raised);
+}
+
+.lab-item:has(.lab-item-link[data-hovered]) {
+  background: var(--_lab-item-fill);
+}
+
+.lab-item:has(.lab-item-link[data-hovered]) .lab-item-title {
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
+}
+
+/* Keyboard focus on the title shows on the Item's edge, because the whole Item is the link's area. */
+.lab-item:has(.lab-item-link[data-focus-visible]) {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* The example keeps a list row's width rather than filling the demo area. */
+.lab-item-example {
+  inline-size: min(100%, var(--width-md));
+}

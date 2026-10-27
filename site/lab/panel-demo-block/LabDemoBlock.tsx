@@ -2,7 +2,7 @@
 // LabPanelHost, rather than a hand-built copy of one. Illustrative and unapproved.
 import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { UNSAFE_PortalProvider } from 'react-aria'
-import { CodeBlock, Tab, TabList, TabPanel, Tabs, ThemeSwitcher, Toolbar, type ThemeName } from '@decocode/mezzanine'
+import { CodeBlock, Tab, TabList, TabPanel, Tabs, ThemeSwitcher, Toolbar, type DemoBlockAlign, type ThemeName } from '@decocode/mezzanine'
 import { LabPanel, LabPanelHost, LabPanelToggle } from './LabPanel'
 import { getPageTheme, getServerPageTheme, subscribeToPageTheme } from './labPageTheme'
 
@@ -17,9 +17,12 @@ export interface LabDemoBlockProps {
   // Switches that add or remove the demo's optional parts, such as a Card's CardImage, in their own
   // Parts group below the properties. Shown only when the component has optional parts.
   parts?: ReactNode
+  // Where the demo sits in the demo area, as on the library's DemoBlock: stretch, the default here,
+  // fills the width; center keeps a small component at its own size in the middle; start at the start.
+  align?: DemoBlockAlign
 }
 
-export function LabDemoBlock({ children, codeView, properties, parts }: LabDemoBlockProps) {
+export function LabDemoBlock({ children, codeView, properties, parts, align = 'stretch' }: LabDemoBlockProps) {
   const pageTheme = useSyncExternalStore(subscribeToPageTheme, getPageTheme, getServerPageTheme)
   // Until someone picks a theme, the demo follows the page's.
   // System is a theme of its own here: data-theme="system" follows the device inside the demo too.
@@ -32,7 +35,7 @@ export function LabDemoBlock({ children, codeView, properties, parts }: LabDemoB
 
   // Only the demo takes the chosen theme; its pop-ups render inside it, so they take it too.
   const demo = (
-    <div className="lab-demo-block-area" data-theme={chosenTheme ?? undefined} ref={setPreviewElement}>
+    <div className="lab-demo-block-area" data-align={align} data-theme={chosenTheme ?? undefined} ref={setPreviewElement}>
       <UNSAFE_PortalProvider getContainer={() => previewElement}>{children}</UNSAFE_PortalProvider>
     </div>
   )

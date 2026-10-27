@@ -284,6 +284,14 @@
   color: var(--color-text);
 }
 
+.lab-demo-block-area[data-align='center'] {
+  align-items: center;
+}
+
+.lab-demo-block-area[data-align='start'] {
+  align-items: start;
+}
+
 /* The demo fills the space beside the Properties Panel, on the page's colour. */
 .lab-demo-block-host {
   background: var(--color-surface);

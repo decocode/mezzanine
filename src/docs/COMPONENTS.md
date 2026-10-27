@@ -475,6 +475,7 @@ Rules for agents and contributors changing this part of Mezzanine. Rules marked 
 - Class names in the library start with `mz-` or `react-aria-`. **[checked]**
 - Keep `.tsx` files for rendering, composition, React Aria wiring and local display state. Keep short, single-use values next to the component that shows them. Avoid a paired `.ts` file for every component.
 - Additions and internal changes aren't automatically breaking changes.
+- In real-time components, such as a media player's progress bar, a timeline or an audio visualisation, values that change every frame, such as a playhead's position, a waveform's progress or an audio level, never go through React state. Move them from an animation loop (`requestAnimationFrame`), reading the clock that drives them, such as Web Audio's, and update only the element that moves, for example its transform or one CSS custom property, through a ref. Use React state for real changes, such as playing or paused, or the chosen track. Otherwise React redraws the whole component every frame, and it stutters.
 
 ### Following React Aria
 
