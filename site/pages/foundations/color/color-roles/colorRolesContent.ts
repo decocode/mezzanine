@@ -60,6 +60,7 @@ export const colorTokenGroups: ColorTokenGroup[] = [
       { token: '--color-border', label: 'Border', description: 'Outlines and dividing lines.' },
       { token: '--color-border-muted', label: 'Muted border', description: 'Quieter lines that guide the eye, such as NavTree’s guide lines.' },
       { token: '--color-border-control', label: 'Control border', description: 'Borders of controls, such as checkboxes and inputs.' },
+      { token: '--color-highlight', label: 'Highlight', description: 'The tint behind highlighted text, such as a match in search results.' },
     ],
   },
   {

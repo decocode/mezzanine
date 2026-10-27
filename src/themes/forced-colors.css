@@ -70,6 +70,8 @@
     --color-warning-emphasis-pressed: CanvasText;
     --color-warning-inverse: Canvas;
     --color-warning-muted: Canvas;
+
+    --color-highlight: Mark;
     --color-warning-muted-hovered: Canvas;
     --color-warning-muted-pressed: Canvas;
     --color-danger: CanvasText;

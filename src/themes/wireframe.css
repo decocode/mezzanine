@@ -77,6 +77,8 @@
   --color-warning-emphasis-pressed: var(--color-warning-900);
   --color-warning-inverse: var(--color-warning-50);
   --color-warning-muted: var(--color-warning-100);
+
+  --color-highlight: var(--color-warning-100);
   --color-warning-muted-hovered: var(--color-warning-100);
   --color-warning-muted-pressed: var(--color-warning-200);
   --color-warning: var(--color-warning-700);

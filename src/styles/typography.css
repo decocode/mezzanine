@@ -71,6 +71,56 @@
 :where(h5) { font-size: var(--font-size-title-md); line-height: var(--line-height-title-md); }
 :where(h6) { font-size: var(--font-size-title-sm); line-height: var(--line-height-title-sm); }
 
+/* Plain HTML text elements, so they never fall back to the browser's defaults. Like the base text
+   above, :where() keeps each at zero specificity, so any class overrides it. */
+
+/* <strong> marks words as important, in the semibold weight the other strong text uses. <em> stresses
+   them, in italics. */
+:where(strong, b) {
+  font-weight: var(--font-weight-semibold);
+}
+
+:where(em, i) {
+  font-style: italic;
+}
+
+/* <mark> highlights words, such as a match in search results, with a tint that follows the theme. */
+:where(mark) {
+  padding-inline: var(--space-1);
+  border-radius: var(--radius-xs);
+  background: var(--color-highlight);
+  color: var(--color-text);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* A description list pairs each term with its description, which sits under it with no indent. A new
+   term starts clear of the description before it, so each pair reads as one. */
+:where(dl) {
+  margin-inline: 0;
+}
+
+:where(dt) {
+  font-weight: var(--font-weight-semibold);
+}
+
+:where(dd) {
+  margin: 0;
+}
+
+/* Pairs can also each sit in a <div>, which HTML allows for styling them as groups. */
+:where(dd + dt, dl > div + div) {
+  margin-block-start: var(--space-gap-text);
+}
+
+/* A blockquote is set apart by a line along its start edge rather than an indent on both sides. <q>
+   keeps the browser's quotation marks, which follow the page's language. */
+:where(blockquote) {
+  margin-inline: 0;
+  padding-inline-start: var(--space-4);
+  border-inline-start: var(--border-width-md) solid var(--color-border);
+}
+
 code {
   font-family: var(--font-family-monospace);
 }

@@ -16,9 +16,9 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  /* Spacing roles, named by how closely things belong together. Inside a control (an icon or box
-     and its label) is closest; then a field (label, input and help text); then a cluster of
-     components, such as the blocks in a card. */
+  /* Spacing roles, named by how closely things belong together. A field (label, input and help text)
+     is closest; then inside a control (an icon or box and its label); then a cluster of components,
+     such as the blocks in a card. */
   --space-gap-control: var(--space-2);
   --space-gap-field: var(--space-1);
   --space-gap-cluster: var(--space-4);

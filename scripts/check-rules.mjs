@@ -8,6 +8,7 @@ import { checkAllowedEffectFiles, checkEffectSource } from './effect-rules.mjs'
 import { checkColorPointers, checkThemeColors, checkThemesMatch, themeRoles } from './color-rules.mjs'
 import { checkRawLengths } from './length-rules.mjs'
 import { checkComponentPointers, componentPointers } from './pointer-rules.mjs'
+import { tokenReferences, tokensUsedBy, withUsedBy } from './used-by-rules.mjs'
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -596,6 +597,22 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   else if (read(pointersFile) !== generated) report(pointersFile, '', 0, 'pointers', 'The pointer list is out of date; run check:rules with --update-pointers.')
 }
 
+// TOKENS.md's Used by columns, generated from which components read each token; --update-used-by
+// rewrites them.
+const tokensGuideFile = 'src/docs/TOKENS.md'
+function checkUsedBy(update) {
+  const references = tokenReferences(filesIn('src', ['.css']).filter(isTokenFile).map(read))
+  const componentCss = new Map()
+  for (const file of filesIn('src/components', ['.css']).filter(file => !file.endsWith('.tokens.css'))) {
+    const component = file.split('/')[2]
+    componentCss.set(component, `${componentCss.get(component) ?? ''}\n${read(file)}`)
+  }
+  const guide = read(tokensGuideFile)
+  const generated = withUsedBy(guide, tokensUsedBy(componentCss, references))
+  if (update) writeFileSync(path.join(root, tokensGuideFile), generated)
+  else if (generated !== guide) report(tokensGuideFile, '', 0, 'used-by', 'A Used by column in TOKENS.md is out of date; run check:rules with --update-used-by.')
+}
+
 function checkColors() {
   const themeFiles = ['src/themes/light.css', 'src/themes/dark.css', 'src/themes/wireframe.css']
   const themes = themeFiles.map(file => ({ file, text: read(file) }))
@@ -623,7 +640,7 @@ function checkColors() {
 
 try {
   const argumentsList = process.argv.slice(2)
-  if (argumentsList.some(argument => !['--update-api', '--update-token-baseline', '--update-pointers'].includes(argument))) throw new Error('Only --update-api, --update-token-baseline and --update-pointers are supported.')
+  if (argumentsList.some(argument => !['--update-api', '--update-token-baseline', '--update-pointers', '--update-used-by'].includes(argument))) throw new Error('Only --update-api, --update-token-baseline, --update-pointers and --update-used-by are supported.')
   const configFile = ts.readConfigFile(path.join(root, 'config/tsconfig.app.json'), ts.sys.readFile)
   if (configFile.error) throw new Error(ts.flattenDiagnosticMessageText(configFile.error.messageText, '\n'))
   const config = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.join(root, 'config'))
@@ -667,6 +684,7 @@ try {
   }
   checkColors()
   checkPointers(argumentsList.includes('--update-pointers'))
+  checkUsedBy(argumentsList.includes('--update-used-by'))
   checkSnapshot(api, argumentsList.includes('--update-api'))
   checkDocsRoutes()
   checkDocsTokens(argumentsList.includes('--update-token-baseline'))

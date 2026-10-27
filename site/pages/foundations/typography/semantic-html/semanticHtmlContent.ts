@@ -35,20 +35,20 @@ export const semanticHtmlContent: DocsPageContent = {
     {
       key: 'descriptionLists',
       title: 'Description lists',
-      intro: ['A description list, `<dl>`, pairs terms (`<dt>`) with their descriptions (`<dd>`), as in a glossary or a set of details. It has no style of its own yet, so it uses the browser’s defaults: each description sits indented under its term.'],
+      intro: ['A description list, `<dl>`, pairs terms (`<dt>`) with their descriptions (`<dd>`), as in a glossary or a set of details. Each term is semibold, with its description under it and no indent, and a new term starts clear of the description before it, so each pair reads as one.'],
     },
     {
       key: 'inlineEmphasis',
       title: 'Inline emphasis',
       intro: [
-        '`<strong>` marks words as important, `<em>` stresses them, and `<mark>` highlights them, such as a match in search results. They have no styles of their own yet, so the browser shows `<strong>` bolder, `<em>` in italics, and `<mark>` with a yellow background that doesn’t change with the theme.',
+        '`<strong>` marks words as important, in the semibold weight, and `<em>` stresses them, in italics. `<mark>` highlights them, such as a match in search results, with a tint that follows the theme.',
         'To make text bolder for its look alone, without changing its meaning, use a weight class, such as `mz-text-semibold`: see [Font weight](/typography/font-weight).',
       ],
     },
     {
       key: 'quotes',
       title: 'Quotes',
-      intro: ['`<blockquote>` holds a quotation set apart from the text around it, and `<q>` holds a short quotation inside a sentence. They have no styles of their own yet: the browser indents a blockquote on both sides, and puts quotation marks around `<q>`, choosing marks that suit the page’s language.'],
+      intro: ['`<blockquote>` holds a quotation set apart from the text around it, and `<q>` holds a short quotation inside a sentence. A line along its start edge sets a blockquote apart, and the browser puts quotation marks around `<q>`, choosing marks that suit the page’s language.'],
     },
     {
       key: 'inlineCode',

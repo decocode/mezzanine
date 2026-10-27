@@ -100,10 +100,18 @@ product does not inherit the browser's defaults:
 | `h4` | Title large |
 | `h5` | Title medium |
 | `h6` | Title small |
+| `strong`, `b` | Semibold |
+| `em`, `i` | Italic |
+| `mark` | The `--color-highlight` tint behind the text, with the text colour |
+| `dl` | Terms (`dt`) semibold; descriptions (`dd`) under them with no indent, and a new term `--space-gap-text` below the description before it |
+| `blockquote` | No indent on either side; a `--border-width-md` line in `--color-border` along its start edge, with `--space-4` inside it |
+
+`q` keeps the browser's quotation marks, which follow the page's language.
 
 These rules use `:where()`, which gives them zero specificity, so any class,
-including a named style or a component's own recipe, overrides them. They set
-typography only, not colour or margins.
+including a named style or a component's own recipe, overrides them. The
+heading and body rules set typography only, not colour or margins; `mark`,
+`dl` and `blockquote` also set the colour, space and line shown.
 
 ## Responsive sizes
 

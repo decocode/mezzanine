@@ -20,6 +20,6 @@ export const spacingRolesContent: DocsPageContent = {
   id: 'spacing-roles',
   kind: 'foundation',
   title: 'Spacing roles',
-  description: 'Components take their spacing from shared roles, which point at the [spacing scale](/dimension/spacing-scale). Roles are named by how closely things belong together: inside a control is closest, then a field, then a cluster of components.',
+  description: 'Components take their spacing from shared roles, which point at the [spacing scale](/dimension/spacing-scale). Roles are named by how closely things belong together: a field’s label, input and help text sit closest, then the parts inside a control, then a cluster of components.',
   sections: [{ key: 'spacingRoles', title: 'Roles' }],
 }

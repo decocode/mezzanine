@@ -177,6 +177,8 @@ always carries text and icons from its own palette.
 | Dark | 400, 300, 200 | 950 | 900, 900, 800 | 300 |
 | Wireframe | As Light; accent has its color removed | 50 | As Light | 700 |
 
+Danger's plain role is brighter: 600 in Light and Wireframe, and 400 in Dark.
+
 Signature has only three roles, for a soft decorative tone such as a signature
 Notice. Each theme maps them as it maps the same accent roles, and Wireframe
 removes their color.
@@ -198,6 +200,7 @@ removes their color.
 | `--color-border` | Decorative outlines and dividing lines |
 | `--color-border-muted` | Quieter lines that guide the eye, such as NavTree's guide lines |
 | `--color-border-control` | Borders of controls such as checkboxes and inputs, at 3:1 or more |
+| `--color-highlight` | The tint behind highlighted text, `<mark>`, from the Warning palette; stronger in Dark so it stands out |
 | `--color-neutral-muted` | A see-through wash of the text color that darkens or lightens whatever it sits on |
 | `--color-backdrop` | The dimmed layer behind Modals and Panel drawers |
 
@@ -283,8 +286,8 @@ only as a familiar reference.
 ### Spacing roles
 
 Components point at these roles rather than at the scale, named by how closely
-things belong together: inside a control is closest, then a field, then a cluster
-of components.
+things belong together: a field's label, input and help text sit closest, then
+the parts inside a control, then a cluster of components.
 
 Text follows the same idea. Text that belongs together, such as a heading and
 the text it introduces, sits at `--space-gap-text`, closer than the groups around
@@ -312,12 +315,12 @@ widths from.
 
 | Token | Value | Used by |
 | --- | --- | --- |
-| `--width-xs` | `12rem` | Tab panel's preferred width |
-| `--width-sm` | `15rem` | Ratio pair's minimum area width |
-| `--width-md` | `20rem` | Panel width, Tooltip's maximum width |
-| `--width-lg` | `32rem` | Modal's maximum width |
-| `--width-xl` | `48rem` | Wide page areas, such as the docs landing hero |
-| `--width-2xl` | `64rem` | The widest page areas, such as docs page headings |
+| `--width-xs` | `12rem` | DemoArea, GridList, Menu, Slider, Tabs |
+| `--width-sm` | `15rem` | DemoArea |
+| `--width-md` | `20rem` | AppShell, DemoArea, Panel, Popover, Select, Sheet, Tooltip |
+| `--width-lg` | `32rem` | Modal |
+| `--width-xl` | `48rem` | Sheet |
+| `--width-2xl` | `64rem` | Not used by components |
 
 ## Current icon size inventory
 
@@ -447,12 +450,12 @@ target at once. Every step is above the WCAG 2.2 AA minimum. For an app that nee
 
 | Token | Value | Used by |
 | --- | --- | --- |
-| `--target-size-min` | 1.5rem (24px) | The WCAG 2.2 AA minimum; not used by components |
-| `--target-size-xs` | 2rem (32px) | Button and ToggleButton `size="xs"`, NavTree rows and expand buttons, Table of contents links, ListBox options, Breadcrumbs, links in a Footer list |
-| `--target-size-sm` | 2.25rem (36px) | Button and ToggleButton `size="sm"`, Checkbox, Radio, SearchField's clear button |
-| `--target-size-md` | 2.75rem (44px) | Button and ToggleButton `size="md"` (the default), text fields, Tabs, Disclosure triggers, TopBar links and brand, Table rows and headers |
-| `--target-size-lg` | 3rem (48px) | Button and ToggleButton `size="lg"` |
-| `--target-size-xl` | 3.5rem (56px) | Button and ToggleButton `size="xl"` |
+| `--target-size-min` | 1.5rem (24px) | GridList, TagGroup, Tree |
+| `--target-size-xs` | 2rem (32px) | Breadcrumbs, Button, DemoArea, Footer, GridList, ListBox, Menu, NavTree, Panel, Select, Slider, TableOfContents, TagGroup, Tree |
+| `--target-size-sm` | 2.25rem (36px) | Button, Checkbox, CheckboxGroup, ComboBox, RadioGroup, SearchField, SearchTrigger, Select, Switch |
+| `--target-size-md` | 2.75rem (44px) | Button, DemoArea, Disclosure, NumberField, Select, Table, Tabs, TextField, TokenField, TopBar |
+| `--target-size-lg` | 3rem (48px) | Button, Select |
+| `--target-size-xl` | 3.5rem (56px) | Button, Select |
 
 ### Shared button sizing
 
@@ -505,6 +508,7 @@ Rules for agents and contributors changing this part of Mezzanine. Rules marked 
 - Name tokens by purpose, not appearance: `--color-accent`, not `--color-yellow`.
 - Only token files define scales. Themes set the colour roles and nothing else about colour, and every theme sets the same roles. **[checked]** Other roles, such as spacing, corners and borders, are set in token files, and a theme may override them.
 - Colour comes from roles only, never a palette step. Other values come from roles or scales. Component CSS reads both through pointers named `--component-variant-property-state`, each with a fallback that exists. **[checked]** Pointers cover colour, border, radius, focus ring, spacing and sizing, not typography or motion. `npm run check:rules -- --update-pointers` regenerates each component page's pointer list. **[checked]**
+- The Used by columns in this file's value tables are generated: they list each component whose CSS reads the token, directly or through another token. `npm run check:rules -- --update-used-by` rewrites them. **[checked]**
 - Never declare a pointer in a token or theme file. The only declared component tokens are layout settings an app may change, such as `--panel-start-width` and `--app-shell-min-main-width`.
 - A component that switches values for its variants or sizes uses private custom properties (`--_name`).
 - When a value has no shared token, add one to a shared set in `src/tokens/`, not to the component.
