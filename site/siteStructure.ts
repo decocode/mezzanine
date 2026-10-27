@@ -65,7 +65,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'typography',
         label: 'Typography',
         path: '/typography',
-        order: ['typeface-and-fonts', 'size-and-scaling', 'font-weight', 'spacing-and-rhythm', 'lines-and-words', 'text-styles', 'semantic-html', 'global-and-languages', 'text-rendering'],
+        order: ['typeface-and-fonts', 'size-and-scaling', 'font-weight', 'spacing-and-rhythm', 'lines-and-words', 'links-and-decoration', 'characters-and-glyphs', 'color-and-contrast', 'text-styles', 'semantic-html', 'global-and-languages', 'text-rendering', 'text-accessibility'],
         pages: [
           { id: 'typeface-and-fonts', label: 'Typeface and fonts', path: '/typography/typeface-and-fonts', status: 'implemented' },
           { id: 'size-and-scaling', label: 'Size and scaling', path: '/typography/size-and-scaling', status: 'implemented' },
@@ -76,6 +76,10 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'semantic-html', label: 'Semantic HTML', path: '/typography/semantic-html', status: 'implemented' },
           { id: 'global-and-languages', label: 'Global and languages', path: '/typography/global-and-languages', status: 'implemented' },
           { id: 'text-rendering', label: 'Text rendering', path: '/typography/text-rendering', status: 'implemented' },
+          { id: 'links-and-decoration', label: 'Links and decoration', path: '/typography/links-and-decoration', status: 'implemented' },
+          { id: 'characters-and-glyphs', label: 'Characters and glyphs', path: '/typography/characters-and-glyphs', status: 'implemented' },
+          { id: 'color-and-contrast', label: 'Color and contrast', path: '/typography/color-and-contrast', status: 'implemented' },
+          { id: 'text-accessibility', label: 'Text accessibility', path: '/typography/text-accessibility', status: 'implemented' },
         ],
       },
       {

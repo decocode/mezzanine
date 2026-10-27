@@ -20,6 +20,11 @@ export const fontWeightContent: DocsPageContent = {
         'Each class is a genuine font weight, so `mz-text-bold` is always bold.',
       ],
     },
+    {
+      key: 'italics',
+      title: 'Italics',
+      body: ['`<em>` and `<i>` are shown in italics. If the typeface has a true italic, that’s what appears. If it doesn’t, the browser slants the regular letters instead, which is called oblique.'],
+    },
   ],
   technicalDetails: [{ key: 'tokens' }],
   relatedPages: [

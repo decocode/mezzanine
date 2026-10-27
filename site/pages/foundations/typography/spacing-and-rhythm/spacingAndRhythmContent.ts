@@ -64,6 +64,11 @@ export const spacingAndRhythmContent: DocsPageContent = {
       title: 'Line height',
       body: ['Line height multiplies the font size, so Body medium’s `{bodyLineHeight}` turns 16px text into 24px lines, which stay in proportion when text is enlarged.'],
     },
+    {
+      key: 'letterAndWordSpacing',
+      title: 'Letter and word spacing',
+      body: ['Each text role has a `--letter-spacing-*` token, such as `--letter-spacing-body`. All of them are `normal`, the spacing the typeface was designed with. A theme can tighten large headings or loosen small labels by changing one. Word spacing isn’t set, so it’s the typeface’s own.'],
+    },
     { key: 'roles', title: 'Roles' },
   ],
   technicalDetails: [{ key: 'tokens' }],

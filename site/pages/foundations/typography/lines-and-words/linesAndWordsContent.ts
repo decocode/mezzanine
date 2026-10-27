@@ -35,6 +35,21 @@ export const linesAndWordsContent: DocsPageContent = {
       title: 'Long words',
       intro: ['Components break any word that doesn’t fit, with `overflow-wrap: anywhere`, so nothing sticks out of its box.'],
     },
+    {
+      key: 'alignment',
+      title: 'Alignment',
+      body: ['Text lines up at the start edge: the left in left-to-right languages, and the right in right-to-left ones. It isn’t justified, because stretching the spaces to fill each line leaves uneven gaps that are harder to read.'],
+    },
+    {
+      key: 'hyphenation',
+      title: 'Hyphenation',
+      body: ['Words aren’t hyphenated automatically, because a word split across two lines is harder to read. A word that can’t fit at all breaks instead, as described under Long words.'],
+    },
+    {
+      key: 'truncation',
+      title: 'Truncation',
+      body: ['Text is shown in full, wrapping onto more lines as needed. The one exception is a Select’s chosen value, which is cut short with an ellipsis when the field is too narrow; the whole value is still in its list.'],
+    },
   ],
   technicalDetails: [
     {
