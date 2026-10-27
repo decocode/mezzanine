@@ -26,6 +26,11 @@ export const sizeAndScalingContent: DocsPageContent = {
       body: ['Text sizes are in `rem`, so they follow the size people set in their browser. Line length is in `ch`, the width of a zero in the current font, so it adapts to each theme’s typeface. Neither uses `px`, which would ignore people’s text size setting.'],
     },
     {
+      key: 'zoom',
+      title: 'Zoom',
+      body: ['Zooming the page makes everything bigger, text included. Making only the browser’s text bigger works too, because text sizes are in `rem`. How the pages are tested is on [Text accessibility](/typography/text-accessibility).'],
+    },
+    {
       key: 'fluidText',
       title: 'Fluid text',
       intro: ['Display and Heading text grows and shrinks smoothly with the width of the screen, between a smallest and a largest size. Title, Body and Label text stays the same size, so reading text is always comfortable.', 'Each Display and Heading size uses CSS `clamp()`. It has three parts: a smallest size in `rem`, a preferred size that adds a share of the screen’s width in `vw`, and a largest size in `rem`. Because both limits are in `rem`, the text still grows when someone enlarges their text.'],

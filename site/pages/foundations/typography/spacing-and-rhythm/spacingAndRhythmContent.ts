@@ -67,7 +67,12 @@ export const spacingAndRhythmContent: DocsPageContent = {
     {
       key: 'letterAndWordSpacing',
       title: 'Letter and word spacing',
-      body: ['Each text role has a `--letter-spacing-*` token, such as `--letter-spacing-body`. All of them are `normal`, the spacing the typeface was designed with. A theme can tighten large headings or loosen small labels by changing one. Word spacing isn’t set, so it’s the typeface’s own.'],
+      body: ['Each text role has a `--letter-spacing-*` token, such as `--letter-spacing-body`. All of them are `normal`, the spacing the typeface was designed with. A theme can tighten large headings or loosen small labels by changing one. Word spacing isn’t set, so it’s the typeface’s own.', 'Text still fits when people set wider spacing of their own: see [Text accessibility](/typography/text-accessibility).'],
+    },
+    {
+      key: 'baselineGrid',
+      title: 'Baseline grid',
+      body: ['Text isn’t lined up on a baseline grid, a fixed set of lines that every line of text sits on. Each text style has its own line height, and the space between blocks comes from the space scale.'],
     },
     { key: 'roles', title: 'Roles' },
   ],

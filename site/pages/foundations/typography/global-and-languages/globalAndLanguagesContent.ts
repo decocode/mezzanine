@@ -68,6 +68,11 @@ export const globalAndLanguagesContent: DocsPageContent = {
       title: 'Top to bottom',
       intro: ['Text can also run top to bottom, as in Japanese novels, with `writing-mode: vertical-rl`. Lines run downwards and stack from right to left. Body text and Cards follow it; other components haven’t been designed for vertical writing.'],
     },
+    {
+      key: 'fontsForEachLanguage',
+      title: 'Fonts for each language',
+      body: ['No font changes with the language. Setting `lang` on the page, or on a passage in another language, lets the browser choose fonts with the right characters. Chinese, Japanese and Korean share many characters but draw some of them differently, and `lang` picks the right form.'],
+    },
   ],
   relatedPages: [
     { label: 'Typography', href: '/typography' },

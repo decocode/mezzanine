@@ -14,6 +14,11 @@ export const textRenderingContent: DocsPageContent = {
         'In the Dark theme, text is a soft light grey rather than pure white. Very bright text on a near-black background seems to glow, which makes it harder to read for long.',
       ],
     },
+    {
+      key: 'subpixelRendering',
+      title: 'Subpixel rendering',
+      body: ['Some systems sharpen text by lighting the red, green and blue parts of each pixel separately, which is called subpixel rendering. It’s left to the operating system: Windows uses it, and macOS stopped in 2018. The thinner rendering setting only affects macOS.'],
+    },
   ],
   technicalDetails: [
     {
