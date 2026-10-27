@@ -2,7 +2,7 @@ import type { DocsPageContent } from '../../../../templates/docsPageContent'
 
 export const widthLevels = [
   { token: '--width-xs', label: 'Width xs', description: 'Used for components such as [Tabs](/tabs).' },
-  { token: '--width-sm', label: 'Width sm', description: 'Used for layouts such as [Ratio pair](/layout/ratio-pair).' },
+  { token: '--width-sm', label: 'Width sm', description: 'Used for layouts such as [Split](/layout/split).' },
   { token: '--width-md', label: 'Width md', description: 'Used for components such as [Tooltip](/tooltip) and [Panel](/panel).' },
   { token: '--width-lg', label: 'Width lg', description: 'Used for components such as Modal.' },
   { token: '--width-xl', label: 'Width xl', description: 'Used for wide page areas, such as a hero.' },

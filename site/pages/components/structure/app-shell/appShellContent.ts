@@ -87,7 +87,7 @@ export const appShellContent: DocsPageContent = {
         label: 'AppShell CSS tokens',
         nameColumn: 'CSS token',
         rows: [
-          { name: '--app-shell-min-main-width', description: 'The narrowest the main content gets before a side Panel becomes a drawer. Defaults to `--ratio-pair-min-area-width`.' },
+          { name: '--app-shell-min-main-width', description: 'The narrowest the main content gets before a side Panel becomes a drawer. Defaults to `--split-min-area-width`.' },
         ],
       },
     },

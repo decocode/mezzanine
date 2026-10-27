@@ -16,7 +16,7 @@ export default function GlobalAndLanguagesPage() {
       parts={{
         startAndEnd: (
           <DemoBlock align="stretch" codeLanguage="css" codeView={startAndEndCode} endPanel={<PanelSwitch isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</PanelSwitch>}>
-            <div dir={isRightToLeft ? 'rtl' : 'ltr'} className="mz-ratio-pair text-direction-example" data-fraction="1/2">
+            <div dir={isRightToLeft ? 'rtl' : 'ltr'} className="mz-split text-direction-example" data-fraction="1/2">
               <div>
                 <p className="mz-text-label-md">{startAndEndExample.physicalLabel}</p>
                 <p className="text-direction-physical mz-text-body-md"><RichText text={startAndEndExample.physicalText} /></p>

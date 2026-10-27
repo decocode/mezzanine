@@ -2,5 +2,5 @@
    becomes a drawer. */
 
 :where(:root) {
-  --app-shell-min-main-width: var(--ratio-pair-min-area-width);
+  --app-shell-min-main-width: var(--split-min-area-width);
 }

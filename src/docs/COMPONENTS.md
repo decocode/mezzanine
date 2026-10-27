@@ -212,13 +212,13 @@ The APIs follow [React Aria SearchField](https://react-aria.adobe.com/SearchFiel
 vertical stack layout; horizontal and grid layouts and drag and drop are not
 styled yet.
 
-## Ratio pair (layout class)
+## Split (layout class)
 
-`mz-ratio-pair` puts two areas side by side, sharing the row in a set ratio. It's a
+`mz-split` puts two areas side by side, sharing the row in a set ratio. It's a
 class, not a component: put it on your own element, with exactly two children.
 
 ```html
-<div class="mz-ratio-pair" data-fraction="1/3">
+<div class="mz-split" data-fraction="1/3">
   <section aria-label="Area A">…</section>
   <section aria-label="Area B">…</section>
 </div>
@@ -229,10 +229,10 @@ class, not a component: put it on your own element, with exactly two children.
   its content needs, and the other fills the rest.
 - When the areas can't both have their minimum width, the second wraps
   underneath and each takes the full width.
-- To change one pair's spacing or minimum, set `--ratio-pair-gap` (a spacing
-  token, such as `var(--space-6)`) or `--ratio-pair-min-area-width` on it.
+- To change one pair's spacing or minimum, set `--split-gap` (a spacing
+  token, such as `var(--space-6)`) or `--split-min-area-width` on it.
 
-It follows its container, not the screen. The site's Foundations › Layout › Ratio pair page shows it.
+It follows its container, not the screen. The site's Foundations › Layout › Split page shows it.
 
 ## AppShell and Panel
 
@@ -509,4 +509,4 @@ An agreed deviation; don't undo, split or work around it without the owner's agr
 
 Agreed by the owner on 19 October 2026.
 
-- Use the `mz-ratio-pair` class when two areas share a row in a set ratio and should stack when their container is too narrow. Use AppShell to frame an app's screen: its Panels sit at the start, end and bottom edges, share the space, and become drawers when there's no room.
+- Use the `mz-split` class when two areas share a row in a set ratio and should stack when their container is too narrow. Use AppShell to frame an app's screen: its Panels sit at the start, end and bottom edges, share the space, and become drawers when there's no room.

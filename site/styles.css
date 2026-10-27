@@ -890,7 +890,7 @@ body {
    its menu. */
 .docs-app-shell { --panel-start-width: var(--width-sm); --panel-end-width: var(--width-xs); --app-shell-min-main-width: var(--width-lg); }
 /* Custom properties inherit, so an AppShell shown as an example inside the docs keeps the library's own minimum. */
-.docs-app-shell .mz-app-shell { --app-shell-min-main-width: var(--ratio-pair-min-area-width); }
+.docs-app-shell .mz-app-shell { --app-shell-min-main-width: var(--split-min-area-width); }
 .docs-app-shell:has(> .mz-panel[data-edge='end'][data-state='open']) .docs-contents-inline { display: none; }
 
 /* The Separator page's examples: groups one above another, and items in a row. */

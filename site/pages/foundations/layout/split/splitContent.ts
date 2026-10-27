@@ -1,9 +1,9 @@
-// The Ratio pair page, in Foundations › Layout: its explanation and the CSS behind its example, in plain English.
+// The Split page, in Foundations › Layout: its explanation and the CSS behind its example, in plain English.
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 import type { CssNote } from '../../../../components/ExampleParts'
 
-export const ratioPairContent: DocsPageContent = {
-  id: 'ratio-pair', kind: 'foundation', title: 'Ratio pair',
+export const splitContent: DocsPageContent = {
+  id: 'split', kind: 'foundation', title: 'Split',
   description: 'When two items agree to divvy up their shared space.',
   alsoKnownAs: [
     { where: 'Figma', called: 'Auto layout, horizontal, with Wrap. One child is set to Fill container.' },
@@ -14,9 +14,9 @@ export const ratioPairContent: DocsPageContent = {
   sections: [
     {
       key: 'howItWorks',
-      title: 'How a Ratio pair works',
+      title: 'How a Split works',
       body: [
-        'When two items need to be placed side by side, like an image next to text or a form next to its preview, Ratio pair controls how they share their row.',
+        'When two items need to be placed side by side, like an image next to text or a form next to its preview, Split controls how they share their row.',
         'It can split the row by a fraction, such as 1/3 and 2/3, with each item at least 15rem wide. Or it can use Auto start, where the first item fits its content and the second, at least 15rem wide, fills whatever space is left.',
         'If their container is too narrow for that, they stack, one above the other.',
       ],
@@ -32,12 +32,12 @@ export const ratioPairContent: DocsPageContent = {
   ],
 }
 
-// What the example's CSS does: the library's own mz-ratio-pair rules, quoted from src/styles/layout.css.
+// What the example's CSS does: the library's own mz-split rules, quoted from src/styles/layout.css.
 // A browser test checks that they still match.
-export const ratioPairCssNotes: Record<string, CssNote> = {
-  ratioPair: {
+export const splitCssNotes: Record<string, CssNote> = {
+  split: {
     paragraphs: [
-      'A Ratio pair puts two items side by side using CSS Flexbox:',
+      'A Split puts two items side by side using CSS Flexbox:',
       { list: [
         '`display: flex` places them side by side, `gap` adds space between them, and `flex-wrap: wrap` lets them stack, one above the other, when space runs out.',
         '`flex-grow` sets their width ratio. Both items start from no width (`flex-basis: 0`), so a ratio of `1` and `2` gives you a 1/3 and 2/3 split.',
@@ -45,32 +45,32 @@ export const ratioPairCssNotes: Record<string, CssNote> = {
         'Auto start: the first item sizes itself to its content (`flex-basis: auto`, with no minimum width), while the second uses a high `flex-grow: 999` to take the remaining space. The second item keeps its minimum width, so it moves underneath when there isn’t room.',
       ] },
     ],
-    code: `.mz-ratio-pair {
+    code: `.mz-split {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--ratio-pair-gap);
+  gap: var(--split-gap);
   min-inline-size: 0;
 }
 
-.mz-ratio-pair[data-fraction] > * {
+.mz-split[data-fraction] > * {
   flex-basis: 0;
   flex-grow: 1;
-  min-inline-size: min(100%, var(--ratio-pair-min-area-width));
+  min-inline-size: min(100%, var(--split-min-area-width));
 }
 
-.mz-ratio-pair[data-fraction='1/4'] > :last-child { flex-grow: 3; }
-.mz-ratio-pair[data-fraction='1/3'] > :last-child { flex-grow: 2; }
-.mz-ratio-pair[data-fraction='2/3'] > :first-child { flex-grow: 2; }
-.mz-ratio-pair[data-fraction='3/4'] > :first-child { flex-grow: 3; }
+.mz-split[data-fraction='1/4'] > :last-child { flex-grow: 3; }
+.mz-split[data-fraction='1/3'] > :last-child { flex-grow: 2; }
+.mz-split[data-fraction='2/3'] > :first-child { flex-grow: 2; }
+.mz-split[data-fraction='3/4'] > :first-child { flex-grow: 3; }
 
-.mz-ratio-pair[data-fraction='auto-start'] > :first-child,
-.mz-ratio-pair[data-fraction='auto-end'] > :last-child {
+.mz-split[data-fraction='auto-start'] > :first-child,
+.mz-split[data-fraction='auto-end'] > :last-child {
   flex-basis: auto;
   min-inline-size: 0;
 }
 
-.mz-ratio-pair[data-fraction='auto-start'] > :last-child,
-.mz-ratio-pair[data-fraction='auto-end'] > :first-child {
+.mz-split[data-fraction='auto-start'] > :last-child,
+.mz-split[data-fraction='auto-end'] > :first-child {
   flex-grow: 999;
 }`,
   },

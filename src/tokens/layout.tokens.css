@@ -1,8 +1,8 @@
-/* Layout tokens: the shared sizes that layout patterns (rows, reels, grids, ratio pairs) take their
+/* Layout tokens: the shared sizes that layout patterns (rows, reels, grids, splits) take their
    measurements from, the same in every theme. */
 
 :where(:root) {
-  /* Ratio pair: the space between its two areas, and the narrowest each area may be before they stack. */
-  --ratio-pair-gap: var(--space-4);
-  --ratio-pair-min-area-width: var(--width-sm);
+  /* Split: the space between its two areas, and the narrowest each area may be before they stack. */
+  --split-gap: var(--space-4);
+  --split-min-area-width: var(--width-sm);
 }

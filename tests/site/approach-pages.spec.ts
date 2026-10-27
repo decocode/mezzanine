@@ -7,7 +7,7 @@ import { mediaQueriesCssNotes } from '../../site/pages/foundations/interaction/m
 import { safeAreasCssNotes } from '../../site/pages/foundations/interaction/safe-areas/safeAreasContent'
 import { supportsCssNotes } from '../../site/pages/foundations/interaction/supports/supportsContent'
 import { readingOrderCssNotes } from '../../site/pages/foundations/layout/reading-order/readingOrderContent'
-import { ratioPairCssNotes } from '../../site/pages/foundations/layout/ratio-pair/ratioPairContent'
+import { splitCssNotes } from '../../site/pages/foundations/layout/split/splitContent'
 import { rowCssNotes } from '../../site/pages/foundations/layout/row/rowContent'
 import { rowWrapCssNotes } from '../../site/pages/foundations/layout/row-wrap/rowWrapContent'
 import { rowWrapGrowCssNotes } from '../../site/pages/foundations/layout/row-wrap-grow/rowWrapGrowContent'
@@ -28,7 +28,7 @@ const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string
   { path: '/interaction/safe-areas', notes: safeAreasCssNotes, stylesheet: 'site/pages/foundations/interaction/safe-areas/safeAreas.css' },
   { path: '/interaction/supports', notes: supportsCssNotes },
   { path: '/layout/reading-order', notes: readingOrderCssNotes, stylesheet: 'site/pages/foundations/layout/reading-order/readingOrder.css' },
-  { path: '/layout/ratio-pair', notes: ratioPairCssNotes, stylesheet: 'src/styles/layout.css' },
+  { path: '/layout/split', notes: splitCssNotes, stylesheet: 'src/styles/layout.css' },
   { path: '/layout/row', notes: rowCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
   { path: '/layout/row-wrap', notes: rowWrapCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
   { path: '/layout/row-wrap-grow', notes: rowWrapGrowCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
@@ -104,11 +104,11 @@ test('Reading order follows the HTML when the row is reversed', async ({ page })
 // Checks that a page's "Also known as" names are the first disclosure in Technical details, start
 // closed, open from their button, and open when their On this page link is followed.
 test('Also known as opens Technical details, starts closed and opens from its button or On this page', async ({ page }) => {
-  await page.goto('/layout/ratio-pair')
+  await page.goto('/layout/split')
   const trigger = page.getByRole('button', { name: 'Also known as', exact: true })
   const technicalDetails = page.locator('section[aria-labelledby$="-technical-details"]')
   await expect(technicalDetails.getByRole('button').first()).toHaveAccessibleName('Also known as')
-  const names = page.getByRole('grid', { name: 'Other names for Ratio pair' })
+  const names = page.getByRole('grid', { name: 'Other names for Split' })
   await expect(trigger).toHaveAttribute('aria-expanded', 'false')
   await expect(names).toBeHidden()
   await trigger.click()

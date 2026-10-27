@@ -15,7 +15,7 @@ export const layoutPages = [
   { label: 'Row', href: '/layout/row', description: 'When items stay together in one row.' },
   { label: 'Row wrap', href: '/layout/row-wrap', description: 'When squeezed items move onto a spacious new row.' },
   { label: 'Row wrap grow', href: '/layout/row-wrap-grow', description: 'When items on a new row stretch to fill it.' },
-  { label: 'Ratio pair', href: '/layout/ratio-pair', description: 'When two items agree to divvy up their shared space.' },
+  { label: 'Split', href: '/layout/split', description: 'When two items agree to divvy up their shared space.' },
   { label: 'Reel', href: '/layout/reel', description: 'When a row scrolls sideways.' },
   { label: 'Grid', href: '/layout/grid', description: 'When items are arranged in neat rows and columns.' },
   { label: 'Subgrid', href: '/layout/subgrid', description: 'When the parts inside items line up with the items beside them.' },
