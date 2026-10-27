@@ -8,7 +8,7 @@ for (const theme of themes) {
   test(`combo box filters and chooses a suggestion in ${theme}`, async ({ page }) => {
     await page.goto('/combo-box')
     await setTheme(page, theme)
-    const input = page.getByRole('combobox', { name: 'Combo box A', exact: true })
+    const input = page.getByRole('combobox', { name: 'Combo box', exact: true })
     // Bring the field into view first: scrolling closes an open list, which clears an unchosen value.
     await input.evaluate((element) => element.scrollIntoView({ block: 'center' }))
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))

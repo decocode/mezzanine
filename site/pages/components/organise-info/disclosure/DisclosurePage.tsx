@@ -25,9 +25,9 @@ export default function DisclosurePage() {
           >
             {/* A new key starts the disclosure again, because a default only applies when it first appears. */}
             <Disclosure key={String(flags.defaultExpanded)} {...flags}>
-              <DisclosureHeader>Disclosure A</DisclosureHeader>
+              <DisclosureHeader>Disclosure</DisclosureHeader>
               <DisclosurePanel>
-                DisclosurePanel A content.
+                DisclosurePanel content.
               </DisclosurePanel>
             </Disclosure>
           </DemoBlock>

@@ -8,7 +8,7 @@ for (const theme of themes) {
   test(`toolbar moves between controls with the arrow keys in ${theme}`, async ({ page }) => {
     await page.goto('/toolbar')
     await setTheme(page, theme)
-    const toolbar = page.getByRole('toolbar', { name: 'Toolbar A', exact: true })
+    const toolbar = page.getByRole('toolbar', { name: 'Toolbar', exact: true })
     await toolbar.getByRole('radio', { name: 'Toggle A' }).focus()
     await page.keyboard.press('ArrowRight')
     await expect(toolbar.getByRole('radio', { name: 'Toggle B' })).toBeFocused()

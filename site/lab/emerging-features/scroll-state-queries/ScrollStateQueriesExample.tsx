@@ -19,8 +19,8 @@ export function ScrollStateQueriesExample() {
     <CssNotes name="the stuck header" note={scrollStateQueriesCssNotes.scrollState} level={3} showCode={false} />
     <ExampleText>A heading over a list, as in a Panel. Its divider appears only once the list has scrolled, so until then the heading reads as part of the list. Browsers without scroll-state queries show the divider all the time.</ExampleText>
     <DemoBlock align="stretch" codeLanguage="css" codeView={scrollStateQueriesCssNotes.scrollStateDivider.code}>
-      <div className="lab-scroll-box lab-divider-box" role="region" aria-label="Scrolling list under Heading A" tabIndex={0}>
-        <div className="lab-sticky-header lab-divider-heading mz-text-label-md"><span>Heading A</span></div>
+      <div className="lab-scroll-box lab-divider-box" role="region" aria-label="Scrolling list under Heading" tabIndex={0}>
+        <div className="lab-sticky-header lab-divider-heading mz-text-label-md"><span>Heading</span></div>
         {['A', 'B', 'C'].map((letter) => <Text key={letter} elementType="p" className="lab-scroll-section mz-text-body-sm">{`Item ${letter}`}</Text>)}
       </div>
     </DemoBlock>

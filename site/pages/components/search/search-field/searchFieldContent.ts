@@ -58,7 +58,7 @@ export const searchFieldContent: DocsPageContent = {
 }
 
 // The Example's label and the Properties panel's on/off props, in panel order.
-export const searchFieldExampleLabel = 'Search A'
+export const searchFieldExampleLabel = 'Search'
 export const searchFieldFlags = ['description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
 export const searchFieldExampleText = { description: 'Search description', errorMessage: 'Search error message' } as const
 

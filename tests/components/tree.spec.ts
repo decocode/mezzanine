@@ -10,7 +10,7 @@ for (const theme of themes) {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/tree')
     await setTheme(page, theme)
-    const tree = page.getByRole('treegrid', { name: 'Tree A', exact: true })
+    const tree = page.getByRole('treegrid', { name: 'Tree', exact: true })
     const branchB = tree.getByRole('row', { name: 'Branch B' })
     await expect(branchB).toHaveAttribute('aria-expanded', 'false')
     await branchB.focus()

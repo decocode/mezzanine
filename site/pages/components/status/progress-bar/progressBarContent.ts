@@ -61,7 +61,7 @@ export const progressBarContent: DocsPageContent = {
 // The Example's label and the Properties panel's choices. An indeterminate bar has no value, so the
 // value control appears only without isIndeterminate. Without a visible label, the code names the bar
 // with aria-label instead.
-export const progressBarExampleLabel = 'Progress A'
+export const progressBarExampleLabel = 'Progress'
 export const progressBarValues = ['0', '30', '60', '100'] as const
 
 export function progressBarExampleCode({ value, isIndeterminate, hasLabel }: { value: number, isIndeterminate: boolean, hasLabel: boolean }) {

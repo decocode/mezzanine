@@ -9,7 +9,7 @@ for (const theme of themes) {
     await page.goto('/slider')
     await setTheme(page, theme)
     const slider = page.locator('.mz-demo-block-area .mz-slider')
-    const thumb = slider.getByRole('slider', { name: 'Slider A', exact: true })
+    const thumb = slider.getByRole('slider', { name: 'Slider', exact: true })
     const fill = slider.locator('.mz-slider-fill')
     const before = (await fill.boundingBox())!.width
     await thumb.focus()

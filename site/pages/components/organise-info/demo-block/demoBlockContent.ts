@@ -66,7 +66,7 @@ export const demoBlockContent: DocsPageContent = {
 
 // The example's labels, and the Properties panel's choices for the demo block inside it.
 export const demoBlockExampleLabels = {
-  button: 'Button A',
+  button: 'Button',
   switch: 'Disable',
 } as const
 export const demoBlockAligns = ['center', 'stretch', 'start'] as const

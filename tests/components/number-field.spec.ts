@@ -9,7 +9,7 @@ for (const theme of themes) {
   test(`number field steps its value in ${theme}`, async ({ page }) => {
     await page.goto('/number-field')
     await setTheme(page, theme)
-    const input = page.getByRole('textbox', { name: 'Number field A', exact: true })
+    const input = page.getByRole('textbox', { name: 'Number field', exact: true })
     await input.focus()
     await page.keyboard.press('ArrowUp')
     await expect(input).toHaveValue('5')

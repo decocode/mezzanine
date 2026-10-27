@@ -5,7 +5,7 @@ import { WidthDemo } from '../../../../components/WidthFrame'
 import { containerQueriesCssNotes } from './containerQueriesContent'
 
 // The same item adapts to whichever container it is placed in. Its title can name the container.
-function QueryItem({ title = 'Item A' }: { title?: string }) {
+function QueryItem({ title = 'Item' }: { title?: string }) {
   return <div className="example-container">
     <Card>
       <div className="example-item-layout">

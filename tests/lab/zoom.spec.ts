@@ -7,8 +7,8 @@ import { setTheme, themes } from '../display'
 // level on one line as plain text, not a button.
 test('ZoomControl is logarithmic, steps through zoom stops, and shows its level', async ({ page }) => {
   await page.goto('/site/lab/zoom')
-  await page.getByRole('button', { name: 'Zoom A' }).click()
-  const slider = page.getByRole('slider', { name: 'Zoom A' })
+  await page.getByRole('button', { name: 'Zoom' }).click()
+  const slider = page.getByRole('slider', { name: 'Zoom' })
   await expect(slider).toHaveAttribute('aria-valuetext', '100%')
   const min = Number(await slider.getAttribute('min'))
   const max = Number(await slider.getAttribute('max'))
@@ -35,8 +35,8 @@ test('ZoomControl is logarithmic, steps through zoom stops, and shows its level'
 // away doesn't, and that a double-press of the handle returns to it.
 test('ZoomControl marks 100% and snaps a nearby drag onto it', async ({ page }) => {
   await page.goto('/site/lab/zoom')
-  await page.getByRole('button', { name: 'Zoom A' }).click()
-  const slider = page.getByRole('slider', { name: 'Zoom A' })
+  await page.getByRole('button', { name: 'Zoom' }).click()
+  const slider = page.getByRole('slider', { name: 'Zoom' })
   const track = page.locator('.lab-media-popover .mz-slider-track')
   expect(await track.evaluate((element) => getComputedStyle(element, '::before').content)).toBe('""')
   await page.getByRole('button', { name: 'Zoom out' }).click()
@@ -64,9 +64,9 @@ test('ZoomControl marks 100% and snaps a nearby drag onto it', async ({ page }) 
 // in, and that keyboard focus inside holds the pop-up open past its 2-second countdown.
 test('ZoomControl opens on its handle and stays open while keyboard focus is inside', async ({ page }) => {
   await page.goto('/site/lab/zoom')
-  await page.getByRole('button', { name: 'Zoom A' }).focus()
+  await page.getByRole('button', { name: 'Zoom' }).focus()
   await page.keyboard.press('Enter')
-  const slider = page.getByRole('slider', { name: 'Zoom A' })
+  const slider = page.getByRole('slider', { name: 'Zoom' })
   await expect(slider).toBeFocused()
   await page.keyboard.press('Shift+Tab')
   await expect(page.getByRole('button', { name: 'Zoom out' })).toBeFocused()
@@ -80,15 +80,15 @@ test('ZoomControl opens on its handle and stays open while keyboard focus is ins
   await expect(slider).toBeFocused()
   await page.keyboard.press('Escape')
   await expect(slider).toBeHidden()
-  await expect(page.getByRole('button', { name: 'Zoom A' })).toBeFocused()
+  await expect(page.getByRole('button', { name: 'Zoom' })).toBeFocused()
 })
 
 // Checks that every arrow key press moves the zoom, all the way to 400% and back down to 25%.
 test('ZoomControl arrow keys move on every press, end to end', async ({ page }) => {
   await page.goto('/site/lab/zoom')
-  await page.getByRole('button', { name: 'Zoom A' }).focus()
+  await page.getByRole('button', { name: 'Zoom' }).focus()
   await page.keyboard.press('Enter')
-  const slider = page.getByRole('slider', { name: 'Zoom A' })
+  const slider = page.getByRole('slider', { name: 'Zoom' })
   await expect(slider).toBeFocused()
   const zoom = async () => parseInt((await slider.getAttribute('aria-valuetext'))!)
   for (const [key, end, isUp] of [['ArrowRight', 400, true], ['ArrowLeft', 25, false]] as const) {
@@ -106,9 +106,9 @@ test('ZoomControl arrow keys move on every press, end to end', async ({ page }) 
 // move after them, as in 100%, Page Down to 76%, then down and back up.
 test('ZoomControl Page Up and Page Down move on every press, and arrows follow on', async ({ page }) => {
   await page.goto('/site/lab/zoom')
-  await page.getByRole('button', { name: 'Zoom A' }).focus()
+  await page.getByRole('button', { name: 'Zoom' }).focus()
   await page.keyboard.press('Enter')
-  const slider = page.getByRole('slider', { name: 'Zoom A' })
+  const slider = page.getByRole('slider', { name: 'Zoom' })
   await expect(slider).toBeFocused()
   const zoom = async () => parseInt((await slider.getAttribute('aria-valuetext'))!)
   for (const [key, end, isUp] of [['PageUp', 400, true], ['PageDown', 25, false]] as const) {
@@ -136,8 +136,8 @@ test('ZoomControl Page Up and Page Down move on every press, and arrows follow o
 test('ZoomControl buttons step through every stop, both ways', async ({ page }) => {
   const stops = [25, 33, 50, 67, 75, 80, 90, 100, 110, 125, 150, 175, 200, 250, 300, 400]
   await page.goto('/site/lab/zoom')
-  await page.getByRole('button', { name: 'Zoom A' }).click()
-  const slider = page.getByRole('slider', { name: 'Zoom A' })
+  await page.getByRole('button', { name: 'Zoom' }).click()
+  const slider = page.getByRole('slider', { name: 'Zoom' })
   const zoom = async () => parseInt((await slider.getAttribute('aria-valuetext'))!)
   const zoomIn = page.getByRole('button', { name: 'Zoom in' })
   const zoomOut = page.getByRole('button', { name: 'Zoom out' })
@@ -156,9 +156,9 @@ for (const theme of themes) {
   test(`${theme} Zoom candidate passes a scan`, async ({ page }) => {
     await page.goto('/site/lab/zoom')
     await setTheme(page, theme)
-    await expect(page.getByRole('button', { name: 'Zoom A' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Zoom' })).toBeVisible()
     await expectNoAccessibilityViolations(page, 'main')
-    await page.getByRole('button', { name: 'Zoom A' }).click()
+    await page.getByRole('button', { name: 'Zoom' }).click()
     // Scan once the pop-up has finished fading in, so its colours are final.
     await expect(page.locator('.lab-media-popover')).not.toHaveAttribute('data-entering')
     await expectNoAccessibilityViolations(page, '.lab-media-popover')

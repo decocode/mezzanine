@@ -60,7 +60,7 @@ export const dropZoneContent: DocsPageContent = {
 }
 
 // The example's labels and copy.
-export const dropZoneExampleLabels = { label: 'Drop zone A', help: 'Help text A.', button: 'Button A' } as const
+export const dropZoneExampleLabels = { label: 'Drop zone', help: 'Help text.', button: 'Button' } as const
 
 // The Properties panel's on/off prop, and the example's code.
 export const dropZoneDisabledLabel = 'isDisabled'

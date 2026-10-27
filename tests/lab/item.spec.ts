@@ -15,10 +15,10 @@ test('the Lab Item adds and removes its parts', async ({ page }) => {
   const parts = demo.getByRole('region', { name: 'Parts', exact: true })
   await parts.locator('label', { hasText: /^ItemHeader$/ }).click()
   await parts.locator('label', { hasText: /^ItemMedia$/ }).click()
-  await expect(item.locator('.lab-item-header')).toHaveText('Header A')
+  await expect(item.locator('.lab-item-header')).toHaveText('Header')
   await expect(item.locator('.lab-item-media')).toHaveCount(0)
   await demo.getByRole('tab', { name: 'Code' }).click()
-  await expect(demo.locator('.mz-code-block')).toContainText('<ItemHeader>Header A</ItemHeader>')
+  await expect(demo.locator('.mz-code-block')).toContainText('<ItemHeader>Header</ItemHeader>')
   await expect(demo.locator('.mz-code-block')).not.toContainText('ItemMedia')
 })
 
@@ -31,8 +31,8 @@ test('a linked Lab Item keeps its action pressable', async ({ page }) => {
   await demo.locator('.lab-demo-block-properties label', { hasText: /^href$/ }).click()
   const item = demo.locator('.lab-item')
   await expect(item.getByRole('link')).toHaveCount(1)
-  await expect(item.getByRole('link')).toHaveAccessibleName('Item A')
-  await item.getByRole('button', { name: 'Button A' }).click()
+  await expect(item.getByRole('link')).toHaveAccessibleName('Item')
+  await item.getByRole('button', { name: 'Button' }).click()
   await expect(page).toHaveURL(/\/site\/lab\/item$/)
   const box = (await item.boundingBox())!
   await page.mouse.click(box.x + box.width / 2, box.y + box.height - 4)

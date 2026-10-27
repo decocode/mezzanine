@@ -8,7 +8,7 @@ for (const theme of themes) {
   test(`tag group chooses and removes tags in ${theme}`, async ({ page }) => {
     await page.goto('/tag-group')
     await setTheme(page, theme)
-    const selectable = page.getByRole('grid', { name: 'Tag group A', exact: true })
+    const selectable = page.getByRole('grid', { name: 'Tag group', exact: true })
     const tagB = selectable.getByRole('row', { name: 'Tag B', exact: true })
     const unchosen = await tagB.evaluate(element => getComputedStyle(element).backgroundColor)
     await tagB.focus()
@@ -17,7 +17,7 @@ for (const theme of themes) {
     await expect(tagB).not.toHaveCSS('background-color', unchosen)
     // The Example's onRemove control gives each tag a remove button.
     await page.locator('.docs-page-lead .mz-demo-block-end-panel label', { hasText: /^onRemove$/ }).click()
-    const removable = page.getByRole('grid', { name: 'Tag group A', exact: true })
+    const removable = page.getByRole('grid', { name: 'Tag group', exact: true })
     await removable.getByRole('row', { name: 'Tag A' }).getByRole('button').click()
     await expect(removable.getByRole('row')).toHaveCount(2)
     await removable.getByRole('row', { name: 'Tag B' }).focus()

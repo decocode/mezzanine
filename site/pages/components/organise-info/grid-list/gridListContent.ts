@@ -61,7 +61,7 @@ export const gridListContent: DocsPageContent = {
 }
 
 // The examples' labels and items.
-export const gridListExampleLabels = { label: 'Grid list A', items: ['Item A', 'Item B', 'Item C'] } as const
+export const gridListExampleLabels = { label: 'Grid list', items: ['Item A', 'Item B', 'Item C'] } as const
 
 // The Properties panel's choices. disabledKeys turns Item C off.
 export const gridListLayouts = ['stack', 'grid'] as const

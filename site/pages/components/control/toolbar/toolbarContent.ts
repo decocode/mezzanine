@@ -58,7 +58,7 @@ export const toolbarContent: DocsPageContent = {
 }
 
 // The example's labels.
-export const toolbarExampleLabels = { toolbar: 'Toolbar A', toggleGroup: 'Group A', toggles: ['Toggle A', 'Toggle B'], actionGroup: 'Group B', actions: ['Action A', 'Action B'] } as const
+export const toolbarExampleLabels = { toolbar: 'Toolbar', toggleGroup: 'Group A', toggles: ['Toggle A', 'Toggle B'], actionGroup: 'Group B', actions: ['Action A', 'Action B'] } as const
 
 // The Properties panel's orientation choices, and the example's code.
 export const toolbarOrientationLabel = 'orientation'

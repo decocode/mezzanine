@@ -12,7 +12,7 @@ export const listExample = {
 // The teaching labels in the description list, emphasis and quote examples.
 export const semanticExamples = {
   terms: [{ term: 'Term A', description: 'Description A explains term A.' }, { term: 'Term B', description: 'Description B explains term B.' }],
-  quotation: 'Quotation A is set apart from the text around it.',
+  quotation: 'A quotation is set apart from the text around it.',
   inlineQuotation: 'quotation B',
 } as const
 

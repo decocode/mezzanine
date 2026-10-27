@@ -17,7 +17,7 @@ for (const theme of themes) {
     // Its content stacks: the icon above the label, the label above the help text and button.
     const icon = (await zone.locator('svg').boundingBox())!
     const label = (await zone.locator('[slot="label"]').boundingBox())!
-    const button = (await zone.getByRole('button', { name: 'Button A' }).boundingBox())!
+    const button = (await zone.getByRole('button', { name: 'Button' }).boundingBox())!
     expect(label.y).toBeGreaterThan(icon.y + icon.height - 1)
     expect(button.y).toBeGreaterThan(label.y + label.height - 1)
     await expectNoAccessibilityViolations(page, 'main')

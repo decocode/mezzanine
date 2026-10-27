@@ -201,7 +201,7 @@ export const volumeLabels = {
 
 // The Zoom example's teaching labels.
 export const zoomLabels = {
-  zoom: 'Zoom A',
+  zoom: 'Zoom',
   zoomOut: 'Zoom out',
   zoomIn: 'Zoom in',
 }

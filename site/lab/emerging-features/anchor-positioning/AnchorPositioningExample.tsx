@@ -12,7 +12,7 @@ export function AnchorPositioningExample() {
     <FeatureStatus supported={anchors} />
     <DemoBlock align="stretch" codeLanguage="css" codeView={anchorPositioningCssNotes.anchor.code}>
       <div className="lab-anchor-stage">
-        <Button className="lab-anchor-target">Button A</Button>
+        <Button className="lab-anchor-target">Button</Button>
         <div className="example-item lab-anchor-label mz-text-label-sm">Positioned beside the anchor by CSS alone</div>
       </div>
     </DemoBlock>

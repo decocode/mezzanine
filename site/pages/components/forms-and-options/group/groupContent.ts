@@ -59,7 +59,7 @@ export const groupContent: DocsPageContent = {
 }
 
 // The example's labels.
-export const groupExampleLabels = { input: 'Input A', button: 'Button A' } as const
+export const groupExampleLabels = { input: 'Input', button: 'Button' } as const
 
 // The Properties panel's on/off props.
 export const groupFlags = ['isDisabled', 'isInvalid'] as const

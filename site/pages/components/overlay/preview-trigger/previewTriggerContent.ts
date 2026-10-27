@@ -49,7 +49,7 @@ export const previewTriggerContent: DocsPageContent = {
 }
 
 // The example's trigger and preview copy.
-export const previewTriggerExampleLabels = { trigger: 'Link A', preview: 'Preview of Link A.' } as const
+export const previewTriggerExampleLabels = { trigger: 'Link', preview: 'Preview of Link.' } as const
 
 // The Properties panel's choices, in milliseconds: the wait before the preview opens (600 by default)
 // and before it closes (200 by default).

@@ -60,7 +60,7 @@ export const tagGroupContent: DocsPageContent = {
 }
 
 // The examples' labels and tags.
-export const tagGroupExampleLabels = { label: 'Tag group A', tags: ['Tag A', 'Tag B', 'Tag C'] } as const
+export const tagGroupExampleLabels = { label: 'Tag group', tags: ['Tag A', 'Tag B', 'Tag C'] } as const
 
 // The Properties panel's choices. onRemove gives each tag a remove button, and description is the
 // group's help text.

@@ -4,9 +4,9 @@ import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 // The Checkbox group example's teaching labels.
 export const checkboxGroupExampleLabels = {
-  group: 'Group A',
+  group: 'Group',
   checkboxes: ['Checkbox A', 'Checkbox B', 'Checkbox C'],
-  description: 'Group A help text.',
+  description: 'Group help text.',
 }
 
 export const checkboxContent: DocsPageContent = {
@@ -76,7 +76,7 @@ export const checkboxExampleError = 'Checkbox error message'
 export const checkboxExampleDescription = 'Checkbox description'
 export const checkboxFlags = ['defaultSelected', 'isIndeterminate', 'isDisabled', 'isInvalid', 'isReadOnly'] as const
 export const checkboxGroupFlags = ['isDisabled', 'isReadOnly', 'isInvalid'] as const
-export const checkboxGroupExampleError = 'Group A error message'
+export const checkboxGroupExampleError = 'Group error message'
 export const checkboxGroupDefaultValueLabel = 'defaultValue'
 
 export function checkboxExampleCode(props: Record<string, unknown>) {

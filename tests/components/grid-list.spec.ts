@@ -9,7 +9,7 @@ for (const theme of themes) {
   test(`grid list chooses items in ${theme}`, async ({ page }) => {
     await page.goto('/grid-list')
     await setTheme(page, theme)
-    const list = page.getByRole('grid', { name: 'Grid list A', exact: true })
+    const list = page.getByRole('grid', { name: 'Grid list', exact: true })
     await expect(list.getByRole('checkbox')).toHaveCount(3)
     const itemB = list.getByRole('row', { name: 'Item B' })
     await itemB.focus()

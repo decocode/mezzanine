@@ -74,7 +74,7 @@ export const cardExample = {
   heading: 'Card title',
   href: '/card',
   body: 'Card content describes the item in a sentence or two.',
-  detail: 'Detail A',
+  detail: 'Detail',
   action: 'Button',
 } as const
 

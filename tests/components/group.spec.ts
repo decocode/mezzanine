@@ -7,8 +7,8 @@ import { expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
 test('Group joins its parts and rings them all on focus', async ({ page }) => {
   await page.goto('/group')
   const group = page.locator('.mz-demo-block .mz-group')
-  const input = page.getByRole('textbox', { name: 'Input A' })
-  const button = group.getByRole('button', { name: 'Button A' })
+  const input = page.getByRole('textbox', { name: 'Input' })
+  const button = group.getByRole('button', { name: 'Button' })
   const inputBox = (await input.boundingBox())!
   const buttonBox = (await button.boundingBox())!
   expect(buttonBox.x).toBeLessThan(inputBox.x + inputBox.width)

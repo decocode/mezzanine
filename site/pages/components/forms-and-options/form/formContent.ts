@@ -56,7 +56,7 @@ export const formContent: DocsPageContent = {
 }
 
 // The example's labels.
-export const formExampleLabels = { field: 'Field A', submit: 'Submit' } as const
+export const formExampleLabels = { field: 'Field', submit: 'Submit' } as const
 
 // The Properties panel's choice: whether errors use the browser's own checks (native, the default) or
 // only React Aria's (aria).

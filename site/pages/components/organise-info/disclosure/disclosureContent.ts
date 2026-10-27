@@ -94,8 +94,8 @@ export const disclosureGroupItems = ['A', 'B', 'C'] as const
 export function disclosureExampleCode(props: Record<string, unknown>) {
   return [
     `<Disclosure${formatJsxProps(props)}>`,
-    '  <DisclosureHeader>Disclosure A</DisclosureHeader>',
-    '  <DisclosurePanel>DisclosurePanel A content.</DisclosurePanel>',
+    '  <DisclosureHeader>Disclosure</DisclosureHeader>',
+    '  <DisclosurePanel>DisclosurePanel content.</DisclosurePanel>',
     '</Disclosure>',
   ].join('\n')
 }

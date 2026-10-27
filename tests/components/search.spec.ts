@@ -21,7 +21,7 @@ for (const path of ['/search-field', '/autocomplete', '/list-box', '/search-trig
 // Checks that Escape empties the search field.
 test('SearchField clears with Escape', async ({ page }) => {
   await page.goto('/search-field')
-  const field = page.getByRole('searchbox', { name: 'Search A', exact: true })
+  const field = page.getByRole('searchbox', { name: 'Search', exact: true })
   await field.fill('Term A')
   await field.press('Escape')
   await expect(field).toHaveValue('')

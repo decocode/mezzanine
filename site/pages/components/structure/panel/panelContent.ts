@@ -8,7 +8,7 @@ export const panelContent: DocsPageContent = {
   title: 'Panel',
   description: '`Panel` is a component that shares the space with the main content, at its start, end or bottom.',
   sections: [
-    { key: 'example', intro: ['An [App shell](/app-shell) with one Panel, Panel A, at the chosen edge, and its PanelTrigger in the header.'] },
+    { key: 'example', intro: ['An [App shell](/app-shell) with one Panel, Panel, at the chosen edge, and its PanelTrigger in the header.'] },
   ],
   technicalDetails: [
     {
@@ -116,7 +116,7 @@ export const panelContent: DocsPageContent = {
 
 // The Panel example's labels, and the Properties panel's choices. Only a side Panel can be resized,
 // and minimized and defaultOpen only apply to a Panel that can be closed.
-export const panelExampleLabels = { title: 'Panel A', text: 'A Panel.', minimized: 'Panel A, minimised', header: 'Header', main: 'Main content', mainText: 'The main content shrinks to make room for the Panel.' } as const
+export const panelExampleLabels = { title: 'Panel', text: 'A Panel.', minimized: 'Panel, minimised', header: 'Header', main: 'Main content', mainText: 'The main content shrinks to make room for the Panel.' } as const
 export const panelEdges = ['start', 'end', 'bottom'] as const
 export const panelFlags = ['isCollapsible', 'defaultOpen', 'minimized', 'isResizable'] as const
 

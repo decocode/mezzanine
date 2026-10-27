@@ -17,10 +17,11 @@ test('modal opens and closes back to its trigger', async ({ page }) => {
 // Checks that focusing the trigger opens its preview in a popover after the wait, and Escape closes it.
 test('preview trigger opens its preview on focus', async ({ page }) => {
   await page.goto('/preview-trigger')
-  const trigger = page.getByRole('link', { name: 'Link A', exact: true })
+  // Inside the demo: the Related pages list also has a link named "Link".
+  const trigger = page.locator('.mz-demo-block').first().getByRole('link', { name: 'Link', exact: true })
   await trigger.focus()
   const preview = page.locator('.mz-popover')
-  await expect(preview).toContainText('Preview of Link A.')
+  await expect(preview).toContainText('Preview of Link.')
   await page.keyboard.press('Escape')
   await expect(preview).toBeHidden()
 })
@@ -30,7 +31,7 @@ test('preview trigger opens its preview on focus', async ({ page }) => {
 test('form shows a required field error on submit', async ({ page }) => {
   await page.goto('/form')
   await page.getByRole('button', { name: 'Submit', exact: true }).click()
-  const field = page.getByRole('textbox', { name: 'Field A' })
+  const field = page.getByRole('textbox', { name: 'Field' })
   await expect(field).toBeFocused()
   await expect(field).toHaveAttribute('aria-invalid', 'true')
   await expectNoAccessibilityViolations(page, 'main')
@@ -40,7 +41,7 @@ test('form shows a required field error on submit', async ({ page }) => {
 // after scrolling.
 test('virtualizer draws only the options in view', async ({ page }) => {
   await page.goto('/virtualizer')
-  const list = page.getByRole('listbox', { name: 'List box A', exact: true })
+  const list = page.getByRole('listbox', { name: 'List box', exact: true })
   await expect(list.getByRole('option').first()).toBeVisible()
   expect(await list.getByRole('option').count()).toBeLessThan(50)
   await list.evaluate(element => { element.scrollTop = 16000 })

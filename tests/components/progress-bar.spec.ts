@@ -8,7 +8,7 @@ for (const theme of themes) {
   test(`progress bar shows its value in ${theme}`, async ({ page }) => {
     await page.goto('/progress-bar')
     await setTheme(page, theme)
-    const bar = page.getByRole('progressbar', { name: 'Progress A', exact: true })
+    const bar = page.getByRole('progressbar', { name: 'Progress', exact: true })
     await expect(bar).toHaveAttribute('aria-valuenow', '60')
     await expect(bar.locator('.mz-progress-bar-value')).toHaveText('60%')
     const track = (await bar.locator('.mz-progress-bar-track').boundingBox())!
@@ -16,7 +16,7 @@ for (const theme of themes) {
     expect(Math.abs(fill.width / track.width - 0.6)).toBeLessThan(0.02)
     // The Example's isIndeterminate control takes the value away.
     await page.locator('.docs-page-lead label', { hasText: 'isIndeterminate' }).click()
-    const busy = page.getByRole('progressbar', { name: 'Progress A', exact: true })
+    const busy = page.getByRole('progressbar', { name: 'Progress', exact: true })
     await expect(busy).not.toHaveAttribute('aria-valuenow')
     await expect(busy.locator('.mz-progress-bar-value')).toHaveCount(0)
     await expectNoAccessibilityViolations(page, 'main')
@@ -30,7 +30,7 @@ for (const theme of themes) {
 test('the indeterminate segment stops only for reduced motion', async ({ page }) => {
   await page.goto('/progress-bar')
   await page.locator('.docs-page-lead label', { hasText: 'isIndeterminate' }).click()
-  const segment = page.getByRole('progressbar', { name: 'Progress A', exact: true }).locator('.mz-progress-bar-fill')
+  const segment = page.getByRole('progressbar', { name: 'Progress', exact: true }).locator('.mz-progress-bar-fill')
   await expect(segment).not.toHaveCSS('animation-name', 'none')
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await expect(segment).toHaveCSS('animation-name', 'none')

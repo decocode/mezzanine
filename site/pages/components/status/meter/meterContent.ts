@@ -59,7 +59,7 @@ export const meterContent: DocsPageContent = {
 
 // The Example's label and the Properties panel's choices. Without a visible label, the code names the
 // meter with aria-label instead.
-export const meterExampleLabel = 'Meter A'
+export const meterExampleLabel = 'Meter'
 export const meterValues = ['0', '35', '70', '100'] as const
 
 export function meterExampleCode(value: number, hasLabel: boolean) {

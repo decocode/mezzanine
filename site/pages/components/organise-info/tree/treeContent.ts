@@ -60,7 +60,7 @@ export const treeContent: DocsPageContent = {
 }
 
 // The example's label and rows: each parent with its children.
-export const treeExampleLabels = { label: 'Tree A', branches: [{ title: 'Branch A', leaves: ['Leaf A1', 'Leaf A2'] }, { title: 'Branch B', leaves: ['Leaf B1'] }], leaf: 'Leaf C' } as const
+export const treeExampleLabels = { label: 'Tree', branches: [{ title: 'Branch A', leaves: ['Leaf A1', 'Leaf A2'] }, { title: 'Branch B', leaves: ['Leaf B1'] }], leaf: 'Leaf C' } as const
 
 // The Properties panel's choices. selectionBehavior only applies once rows can be chosen; replace swaps
 // the chosen row on a press, and toggle adds or removes it. disabledKeys turns Leaf C off.

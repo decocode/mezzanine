@@ -64,7 +64,7 @@ export const sliderContent: DocsPageContent = {
 // The Example's label, and the Properties panel's choices, in panel order. A range value names its
 // two thumbs, and the fill offset and value format are on or off.
 export const sliderExample = {
-  label: 'Slider A',
+  label: 'Slider',
   rangeThumbLabels: ['Minimum', 'Maximum'],
   defaultValueLabel: 'defaultValue',
   orientationLabel: 'orientation',

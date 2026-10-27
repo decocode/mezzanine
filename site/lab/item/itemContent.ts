@@ -56,7 +56,7 @@ export const itemPage: LabPage = {
 }
 
 // The example's labels, and the Properties panel's choices.
-export const itemLabels = { title: 'Item A', description: 'Item A’s description, in a sentence.', href: '/card', action: 'Button A', header: 'Header A', footer: 'Footer A' } as const
+export const itemLabels = { title: 'Item', description: 'Item’s description, in a sentence.', href: '/card', action: 'Button', header: 'Header', footer: 'Footer' } as const
 export const itemVariants = ['default', 'outline', 'muted'] as const
 export const itemPurposes = ['neutral', 'accent', 'signature'] as const
 export const itemSizes = ['md', 'sm', 'xs'] as const

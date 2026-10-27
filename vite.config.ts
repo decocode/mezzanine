@@ -1,4 +1,4 @@
-// Builds the showcase site (mezzanine.fly.dev) from ./site.
+// Builds the docs site (mezzanine.fly.dev) from ./site.
 // The site imports the library exactly as consuming apps will:
 //   import { Button } from '@decocode/mezzanine'
 // but the alias points it at the live source in ./src.

@@ -61,7 +61,7 @@ export const tokenFieldContent: DocsPageContent = {
 }
 
 // The example's label and tokens.
-export const tokenFieldExampleLabels = { label: 'Token field A', tokens: ['Token A', 'Token B'] } as const
+export const tokenFieldExampleLabels = { label: 'Token field', tokens: ['Token A', 'Token B'] } as const
 
 // The Properties panel's on/off props, in panel order.
 export const tokenFieldExampleText = { description: 'Token field description', placeholder: 'Type a token' } as const

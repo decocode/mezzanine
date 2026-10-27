@@ -4,7 +4,7 @@ import { formatJsxProps } from '../../../../components/formatJsxProps'
 
 // The example's label and toggles, and the Properties panel's choices. A default choice is left out of
 // the code.
-export const toggleButtonGroupExample = { label: 'Group A', toggles: ['Toggle A', 'Toggle B', 'Toggle C'] } as const
+export const toggleButtonGroupExample = { label: 'Group', toggles: ['Toggle A', 'Toggle B', 'Toggle C'] } as const
 export const toggleButtonGroupSelectionModes = ['single', 'multiple'] as const
 export const toggleButtonGroupOrientations = ['horizontal', 'vertical'] as const
 export const toggleButtonGroupHierarchies = ['primary', 'secondary', 'tertiary'] as const

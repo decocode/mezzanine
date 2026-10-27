@@ -8,7 +8,7 @@ for (const theme of themes) {
   test(`meter shows its value in ${theme}`, async ({ page }) => {
     await page.goto('/meter')
     await setTheme(page, theme)
-    const meter = page.getByRole('meter', { name: 'Meter A', exact: true })
+    const meter = page.getByRole('meter', { name: 'Meter', exact: true })
     await expect(meter).toHaveAttribute('aria-valuenow', '35')
     await expect(meter.locator('.mz-meter-value')).toHaveText('35%')
     const track = (await meter.locator('.mz-meter-track').boundingBox())!

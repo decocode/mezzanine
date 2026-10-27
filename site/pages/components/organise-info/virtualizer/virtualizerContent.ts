@@ -46,7 +46,7 @@ export const virtualizerContent: DocsPageContent = {
 }
 
 // The example's label, and a thousand option labels.
-export const virtualizerExampleLabel = 'List box A'
+export const virtualizerExampleLabel = 'List box'
 export const virtualizerExampleItems = Array.from({ length: 1000 }, (_, index) => ({ id: index + 1, name: `Option ${index + 1}` }))
 
 // The Properties panel's choice: the gap between rows, in pixels, set in the layout's options.

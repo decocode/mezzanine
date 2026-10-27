@@ -59,7 +59,7 @@ export const numberFieldContent: DocsPageContent = {
 }
 
 // The example's label.
-export const numberFieldExampleLabel = 'Number field A'
+export const numberFieldExampleLabel = 'Number field'
 
 // The Properties panel's choices, and the field's on/off props in panel order. errorMessage appears
 // with isInvalid.
