@@ -1,0 +1,348 @@
+/* The candidate Panel, its host and the demo block rebuilt from them, scoped to the Lab's own classes.
+   Illustrative and unapproved. */
+
+/* The host lays out its Panels around the main content, which is every other child. */
+.lab-panel-host {
+  container: lab-panel-host / inline-size;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas: 'top top top' 'start main end' 'bottom bottom bottom';
+  min-inline-size: 0;
+}
+
+.lab-panel-host > :not(.lab-panel) {
+  grid-area: main;
+  min-inline-size: 0;
+}
+
+/* A card set in from the host's edge, with a header row, then the content. */
+.lab-panel {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: 1fr;
+  min-inline-size: 0;
+  min-block-size: 0;
+  margin: var(--surface-gap);
+  padding: var(--space-1) var(--space-padding-area);
+  border: var(--border-width-hairline) solid var(--color-border);
+  border-radius: min(var(--radius-surface), var(--radius-sm));
+  background: var(--color-surface);
+  color: var(--color-text);
+  /* Collapsing and expanding, the Panel's space closes or opens while it fades, unless motion is
+     reduced. */
+  transition-property: inline-size, grid-template-rows, margin, padding, border-width, opacity, visibility;
+  transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
+  transition-timing-function: var(--motion-easing-enter);
+}
+
+.lab-panel-inner {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+/* Collapsed, the whole Panel closes, leaving the main content the room, and it leaves keyboard and
+   screen reader reach. Its toggle sits outside it, so it stays visible. */
+.lab-panel[data-collapsed] {
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  border-width: 0;
+}
+
+/* A side Panel closes its width. Its contents keep theirs while it closes, so they're covered rather
+   than squeezed. */
+.lab-panel:is([data-placement='start'], [data-placement='end'])[data-collapsed] {
+  inline-size: 0;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
+.lab-panel:is([data-placement='start'], [data-placement='end'])[data-collapsed] > .lab-panel-inner {
+  min-inline-size: calc(var(--width-sm) - 2 * var(--space-padding-area));
+}
+
+/* A top or bottom Panel closes its height. */
+.lab-panel:is([data-placement='top'], [data-placement='bottom'])[data-collapsed] {
+  grid-template-rows: 0fr;
+  margin-block: 0;
+  padding-block: 0;
+}
+
+.lab-panel[data-placement='start'] { grid-area: start; inline-size: var(--_lab-panel-size, var(--width-sm)); }
+.lab-panel[data-placement='end'] { grid-area: end; inline-size: var(--_lab-panel-size, var(--width-sm)); }
+.lab-panel[data-placement='top'] { grid-area: top; block-size: var(--_lab-panel-size, auto); }
+.lab-panel[data-placement='bottom'] { grid-area: bottom; block-size: var(--_lab-panel-size, auto); }
+
+/* A minimized side Panel keeps only its header, at the top of its side. */
+.lab-panel[data-placement='start']:not([data-maximized]),
+.lab-panel[data-placement='end']:not([data-maximized]) {
+  align-self: start;
+}
+
+/* Without room beside the content for its side Panels, the host stacks everything in reading order:
+   top, start, end, the content, then bottom, each at full width. One side Panel needs the content's
+   narrowest, xs, plus the Panel, sm, and two gaps, space-2: 28rem. Two need another sm and two more
+   gaps: 44rem. */
+@container lab-panel-host (width < 28rem) {
+  .lab-panel-host > :is(.lab-panel[data-placement], :not(.lab-panel)) {
+    grid-area: auto;
+    grid-column: 1 / -1;
+  }
+
+  .lab-panel-host > .lab-panel[data-placement='top'] { order: 1; }
+  .lab-panel-host > .lab-panel[data-placement='start'] { order: 2; }
+  .lab-panel-host > .lab-panel[data-placement='end'] { order: 3; }
+  .lab-panel-host > :not(.lab-panel) { order: 4; }
+  .lab-panel-host > .lab-panel[data-placement='bottom'] { order: 5; }
+
+  .lab-panel-host > .lab-panel:is([data-placement='start'], [data-placement='end']) {
+    inline-size: auto;
+  }
+
+  /* Stacked, a collapsed side Panel closes its height instead. */
+  .lab-panel-host > .lab-panel:is([data-placement='start'], [data-placement='end'])[data-collapsed] {
+    grid-template-rows: 0fr;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lab-panel-host > .lab-panel[data-collapsed] > .lab-panel-inner {
+    min-inline-size: 0;
+  }
+
+  .lab-panel-host > .lab-panel:is([data-placement='start'], [data-placement='end']) > .lab-panel-resize-handle {
+    display: none;
+  }
+}
+
+@container lab-panel-host (width < 44rem) {
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > :is(.lab-panel[data-placement], :not(.lab-panel)) {
+    grid-area: auto;
+    grid-column: 1 / -1;
+  }
+
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > .lab-panel[data-placement='top'] { order: 1; }
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > .lab-panel[data-placement='start'] { order: 2; }
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > .lab-panel[data-placement='end'] { order: 3; }
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > :not(.lab-panel) { order: 4; }
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > .lab-panel[data-placement='bottom'] { order: 5; }
+
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > .lab-panel:is([data-placement='start'], [data-placement='end']) {
+    inline-size: auto;
+  }
+
+  /* Stacked, a collapsed side Panel closes its height instead. */
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > .lab-panel:is([data-placement='start'], [data-placement='end'])[data-collapsed] {
+    grid-template-rows: 0fr;
+    margin: 0;
+    padding: 0;
+  }
+
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > .lab-panel[data-collapsed] > .lab-panel-inner {
+    min-inline-size: 0;
+  }
+
+  .lab-panel-host:has(> .lab-panel[data-placement='start']):has(> .lab-panel[data-placement='end']) > .lab-panel:is([data-placement='start'], [data-placement='end']) > .lab-panel-resize-handle {
+    display: none;
+  }
+}
+
+.lab-panel-header {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-gap-control);
+  min-block-size: var(--target-size-sm);
+}
+
+/* Styled like the navigation's section headers, so it reads as a group heading. */
+.lab-panel-title {
+  margin: 0;
+  color: var(--color-accent);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-md);
+  text-transform: var(--text-transform-label);
+}
+
+/* Minimizing rolls the content up into the header, and maximizing rolls it down again, unless motion
+   is reduced. Minimized, it leaves keyboard and screen reader reach. */
+.lab-panel-body {
+  display: grid;
+  flex: 1 1 auto;
+  grid-template-rows: 1fr;
+  min-block-size: 0;
+  transition-property: grid-template-rows, opacity, visibility;
+  transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
+  transition-timing-function: var(--motion-easing-enter);
+}
+
+.lab-panel-body[hidden] {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.lab-panel-clip {
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.lab-panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-cluster);
+  padding-block: var(--space-2) var(--space-3);
+}
+
+.lab-panel-content > :is(p, ul, ol) {
+  margin: 0;
+}
+
+/* The inner edge, between the Panel and the content. A line along it shows on hover and focus. */
+.lab-panel-resize-handle {
+  position: absolute;
+  z-index: 1;
+  touch-action: none;
+  outline: none;
+}
+
+.lab-panel-resize-handle[data-placement='start'],
+.lab-panel-resize-handle[data-placement='end'] {
+  inset-block: 0;
+  inline-size: var(--space-2);
+  cursor: col-resize;
+}
+
+.lab-panel-resize-handle[data-placement='start'] { inset-inline-end: calc(-1 * var(--space-2)); }
+.lab-panel-resize-handle[data-placement='end'] { inset-inline-start: calc(-1 * var(--space-2)); }
+
+.lab-panel-resize-handle[data-placement='top'],
+.lab-panel-resize-handle[data-placement='bottom'] {
+  inset-inline: 0;
+  block-size: var(--space-2);
+  cursor: row-resize;
+}
+
+.lab-panel-resize-handle[data-placement='top'] { inset-block-end: calc(-1 * var(--space-2)); }
+.lab-panel-resize-handle[data-placement='bottom'] { inset-block-start: calc(-1 * var(--space-2)); }
+
+.lab-panel-resize-handle:is(:hover, :focus-visible) {
+  background: var(--color-focus);
+}
+
+/* The rebuilt demo block: tabs above a frame holding the theme strip, then the host with the
+   Properties Panel and the demo. */
+.lab-demo-block {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.lab-demo-block > .mz-tab-list[data-orientation] {
+  margin-block-end: var(--space-1);
+  border-block-end: 0;
+}
+
+.lab-demo-block > .mz-tab-panel {
+  padding: 0;
+}
+
+.lab-demo-block-frame {
+  overflow: hidden;
+  border: var(--border-width-baseline) solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--color-surface);
+}
+
+.lab-demo-block-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-gap-control);
+  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
+  border-block-end: var(--border-width-baseline) solid var(--color-border);
+}
+
+.lab-demo-block-area {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  min-inline-size: 0;
+  padding: var(--space-8) var(--space-4);
+  background-color: var(--color-page);
+  color: var(--color-text);
+}
+
+/* The demo fills the space beside the Properties Panel, on the page's colour. */
+.lab-demo-block-host {
+  background: var(--color-surface);
+}
+
+/* The Properties Panel sits flush in the frame, with no gap around it: one line divides it from the
+   demo, beside it or, stacked, below it. */
+/* The example Card keeps a card's width, rather than filling the demo area. */
+.lab-demo-block-card {
+  inline-size: min(100%, var(--width-md));
+}
+
+/* The Parts group sits below the properties, divided from them by a line, with its heading styled like
+   the Panel's own. */
+.lab-demo-block-parts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-cluster);
+  padding-block-start: var(--space-3);
+  border-block-start: var(--border-width-hairline) solid var(--color-border);
+}
+
+.lab-demo-block-parts:first-child {
+  padding-block-start: 0;
+  border-block-start-width: 0;
+}
+
+.lab-demo-block-host > .lab-demo-block-properties {
+  margin: 0;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.lab-demo-block-host > .lab-demo-block-properties:not([data-collapsed]) {
+  border-inline-start-width: var(--border-width-hairline);
+}
+
+@container lab-panel-host (width < 28rem) {
+  .lab-demo-block-host > .lab-demo-block-properties:not([data-collapsed]) {
+    border-inline-start-width: 0;
+    border-block-end-width: var(--border-width-hairline);
+  }
+}
+
+/* The example's own host, framed so its Panel's placement shows. */
+.lab-panel-example {
+  min-block-size: var(--width-xs);
+  border: var(--border-width-hairline) dashed var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.lab-panel-example-main {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.lab-panel-example-main > p {
+  margin: 0;
+}

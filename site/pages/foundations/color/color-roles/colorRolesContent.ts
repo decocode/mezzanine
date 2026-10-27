@@ -89,7 +89,7 @@ export const colorTokenGroups: ColorTokenGroup[] = [
     id: 'signature',
     label: 'Signature',
     tokens: [
-      { token: '--color-signature-muted', label: 'Signature muted', description: 'A soft signature fill, such as a signature notice.' },
+      { token: '--color-signature-muted', label: 'Signature muted', description: 'A soft signature fill, such as a signature alert.' },
       { token: '--color-signature-muted-pressed', label: 'Signature muted pressed', description: 'The border around a signature fill.' },
       { token: '--color-signature', label: 'Signature', description: 'Text and icons on a signature fill or the page.' },
     ],

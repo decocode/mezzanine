@@ -1,4 +1,4 @@
-/* The Card page's example: one card at a typical width inside its DemoArea. */
+/* The Card page's example: one card at a typical width inside its DemoBlock. */
 .card-example {
   inline-size: min(var(--width-md), 100%);
 }

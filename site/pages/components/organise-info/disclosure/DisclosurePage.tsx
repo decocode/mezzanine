@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {
-  DemoArea, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel, ExternalLinkIcon, Link,
+  DemoBlock, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel, ExternalLinkIcon, Link,
 } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
@@ -16,7 +16,7 @@ export default function DisclosurePage() {
       content={disclosureContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={disclosureExampleCode(flags)}
             endPanel={disclosureFlags.map((name) => (
@@ -30,7 +30,7 @@ export default function DisclosurePage() {
                 DisclosurePanel A content.
               </DisclosurePanel>
             </Disclosure>
-          </DemoArea>
+          </DemoBlock>
         ),
         disclosureGroup: (<>
           <Link
@@ -40,7 +40,7 @@ export default function DisclosurePage() {
             <span>{disclosureGroupReactAriaLink.label}</span>
             <ExternalLinkIcon />
           </Link>
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={disclosureGroupExampleCode(groupFlags)}
             endPanel={disclosureGroupFlags.map((name) => (
@@ -55,7 +55,7 @@ export default function DisclosurePage() {
                 </Disclosure>
               ))}
             </DisclosureGroup>
-          </DemoArea>
+          </DemoBlock>
         </>),
       }}
     />

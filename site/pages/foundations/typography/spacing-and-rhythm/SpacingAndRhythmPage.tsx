@@ -1,4 +1,4 @@
-import { Cell, Column, DemoArea, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Cell, Column, DemoBlock, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { typographyStyleTokens } from '../typographyContent'
 import { TokenValue } from '../../../../components/TokenValue'
 import { TokenScale } from '../../../../components/TokenScale'
@@ -16,7 +16,7 @@ export default function SpacingAndRhythmPage() {
       content={content}
       parts={{
         example: (
-          <DemoArea align="stretch" codeLanguage="html" codeView={textSpacingCode}>
+          <DemoBlock align="stretch" codeLanguage="html" codeView={textSpacingCode}>
             <div className="mz-prose">
               <h2>{textSpacingExample.headingLarge}</h2>
               <p className="mz-text-body-md">{textSpacingExample.intro}</p>
@@ -27,7 +27,7 @@ export default function SpacingAndRhythmPage() {
               <h4>{textSpacingExample.headingSmall}</h4>
               <p className="mz-text-body-md">{textSpacingExample.fourth}</p>
             </div>
-          </DemoArea>
+          </DemoBlock>
         ),
         roles: <TokenScale items={textSpacingRoles} sample="length" />,
         tokens: (

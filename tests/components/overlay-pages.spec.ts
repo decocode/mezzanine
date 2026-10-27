@@ -6,7 +6,7 @@ test('modal opens and closes back to its trigger', async ({ page }) => {
   await page.goto('/modal')
   const trigger = page.getByRole('button', { name: 'Modal trigger', exact: true })
   await trigger.click()
-  const dialog = page.getByRole('dialog', { name: 'Modal title' })
+  const dialog = page.getByRole('dialog', { name: 'Example' })
   await expect(dialog).toBeVisible()
   await expectNoAccessibilityViolations(page, '.mz-modal')
   await page.keyboard.press('Escape')

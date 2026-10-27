@@ -17,7 +17,7 @@ for (const theme of themes) {
     await expect(itemB).toHaveAttribute('aria-selected', 'true')
     expect(await itemB.evaluate(element => getComputedStyle(element, '::before').content)).not.toBe('none')
     // The Example's layout control wraps the items into columns.
-    await page.locator('.docs-page-lead .mz-demo-area-end-panel').getByRole('button', { name: /layout/ }).click()
+    await page.locator('.docs-page-lead .mz-demo-block-end-panel').getByRole('button', { name: /layout/ }).click()
     await page.getByRole('option', { name: 'grid', exact: true }).click()
     const cards = list.getByRole('row')
     const first = (await cards.nth(0).boundingBox())!

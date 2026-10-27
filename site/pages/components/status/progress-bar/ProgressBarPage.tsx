@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, ProgressBar } from '@decocode/mezzanine'
+import { DemoBlock, ProgressBar } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { progressBarContent, progressBarExampleCode, progressBarExampleLabel, progressBarValues } from './progressBarContent'
@@ -14,7 +14,7 @@ export default function ProgressBarPage() {
       content={progressBarContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={progressBarExampleCode({ value: Number(value), isIndeterminate, hasLabel })}
             endPanel={<>
@@ -29,7 +29,7 @@ export default function ProgressBarPage() {
               value={Number(value)}
               isIndeterminate={isIndeterminate}
             />
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

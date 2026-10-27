@@ -143,8 +143,8 @@ export function buttonExampleCode({ icon, ...props }: Record<string, unknown>) {
   return `<Button${icon ? ' icon={<DownloadIcon />}' : ''}${formatJsxProps(props)} onPress={handlePress}>${buttonExampleLabel}</Button>`
 }
 
-// The info Notice in About Button, on how a Button with an href renders.
-export const buttonLinkNotice = {
+// The info Alert in About Button, on how a Button with an href renders.
+export const buttonLinkAlert = {
   title: 'Link buttons',
   body: 'The `Button` component renders an HTML `<button>` element. However, if the component is given an `href`, it instead renders as an HTML link, an `<a>` element, styled to look like a button. This is so that browsers, keyboards and screen readers treat it as what it is: a link that takes you somewhere else, rather than a button that performs an action.',
 } as const

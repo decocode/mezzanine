@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, Separator, Text } from '@decocode/mezzanine'
+import { DemoBlock, Separator, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { separatorContent, separatorExampleCode, separatorOrientations } from './separatorContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -11,7 +11,7 @@ export default function SeparatorPage() {
       content={separatorContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={separatorExampleCode(orientation)}
             endPanel={<PanelSelect label="orientation" options={separatorOrientations} value={orientation} onChange={setOrientation} />}
@@ -27,7 +27,7 @@ export default function SeparatorPage() {
                 <Separator />
                 <Text elementType="p" className="mz-text-body-md">Group B</Text>
               </div>}
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

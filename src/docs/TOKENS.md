@@ -180,7 +180,7 @@ always carries text and icons from its own palette.
 Danger's plain role is brighter: 600 in Light and Wireframe, and 400 in Dark.
 
 Signature has only three roles, for a soft decorative tone such as a signature
-Notice. Each theme maps them as it maps the same accent roles, and Wireframe
+Alert. Each theme maps them as it maps the same accent roles, and Wireframe
 removes their color.
 
 | Token | Meaning |
@@ -315,9 +315,9 @@ widths from.
 
 | Token | Value | Used by |
 | --- | --- | --- |
-| `--width-xs` | `12rem` | DemoArea, GridList, Menu, Slider, Tabs |
-| `--width-sm` | `15rem` | DemoArea |
-| `--width-md` | `20rem` | AppShell, DemoArea, Panel, Popover, Select, Sheet, Tooltip |
+| `--width-xs` | `12rem` | DemoBlock, GridList, Menu, Slider, Tabs |
+| `--width-sm` | `15rem` | DemoBlock |
+| `--width-md` | `20rem` | AppShell, DemoBlock, Panel, Popover, Select, Sheet, Tooltip |
 | `--width-lg` | `32rem` | Modal |
 | `--width-xl` | `48rem` | Sheet |
 | `--width-2xl` | `64rem` | Not used by components |
@@ -451,9 +451,9 @@ target at once. Every step is above the WCAG 2.2 AA minimum. For an app that nee
 | Token | Value | Used by |
 | --- | --- | --- |
 | `--target-size-min` | 1.5rem (24px) | GridList, TagGroup, Tree |
-| `--target-size-xs` | 2rem (32px) | Breadcrumbs, Button, DemoArea, Footer, GridList, ListBox, Menu, NavTree, Panel, Select, Slider, TableOfContents, TagGroup, Tree |
+| `--target-size-xs` | 2rem (32px) | Breadcrumbs, Button, DemoBlock, Footer, GridList, ListBox, Menu, NavTree, Panel, Select, Slider, TableOfContents, TagGroup, Tree |
 | `--target-size-sm` | 2.25rem (36px) | Button, Checkbox, CheckboxGroup, ComboBox, RadioGroup, SearchField, SearchTrigger, Select, Switch |
-| `--target-size-md` | 2.75rem (44px) | Button, DemoArea, Disclosure, NumberField, Select, Table, Tabs, TextField, TokenField, TopBar |
+| `--target-size-md` | 2.75rem (44px) | Button, DemoBlock, Disclosure, NumberField, Select, Table, Tabs, TextField, TokenField, TopBar |
 | `--target-size-lg` | 3rem (48px) | Button, Select |
 | `--target-size-xl` | 3.5rem (56px) | Button, Select |
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, Tag, TagGroup } from '@decocode/mezzanine'
+import { DemoBlock, Tag, TagGroup } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { tagGroupContent, tagGroupExampleCode, tagGroupExampleLabels, tagGroupExampleText, tagGroupSelectionModes } from './tagGroupContent'
@@ -15,7 +15,7 @@ export default function TagGroupPage() {
       content={tagGroupContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={tagGroupExampleCode({ selectionMode, removable, description })}
             endPanel={<>
               <PanelSelect label="selectionMode" options={tagGroupSelectionModes} value={selectionMode} onChange={setSelectionMode} />
@@ -33,7 +33,7 @@ export default function TagGroupPage() {
             >
               {tags.map((tag) => <Tag key={tag} id={tag}>{tag}</Tag>)}
             </TagGroup>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

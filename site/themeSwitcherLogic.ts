@@ -36,17 +36,8 @@ export function applyTheme(theme: Theme) {
 
 const darkColorScheme = '(prefers-color-scheme: dark)'
 
-export function prefersDarkColorScheme() {
-  return window.matchMedia(darkColorScheme).matches
-}
-
 export function subscribeToColorScheme(notify: () => void) {
   const preference = window.matchMedia(darkColorScheme)
   preference.addEventListener('change', notify)
   return () => preference.removeEventListener('change', notify)
-}
-
-export function getDisplayedTheme(selectedTheme: Theme, prefersDark: boolean) {
-  if (selectedTheme !== 'system') return selectedTheme
-  return prefersDark ? 'dark' : 'light'
 }

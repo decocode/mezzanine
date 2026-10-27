@@ -365,10 +365,10 @@ function checkSnapshot(api, update) {
 // component name, or following a row that is only that name, use its type.
 const propTables = [
   { file: 'site/pages/components/structure/top-bar/topBarContent.ts', key: 'props', types: ['TopBarProps'] },
-  { file: 'site/pages/components/navigate/navigation-tree/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
-  { file: 'site/pages/components/navigate/navigation-tree/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
-  { file: 'site/pages/components/navigate/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
-  { file: 'site/pages/components/navigate/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
+  { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'props', types: ['NavTreeProps'] },
+  { file: 'site/pages/components/navigation/navigation-tree/navigationTreeContent.ts', key: 'itemProps', types: ['NavTreeItemData', 'NavTreeSectionData'] },
+  { file: 'site/pages/components/organise-info/tabs/tabsContent.ts', key: 'props', types: ['TabsProps', 'TabListProps', 'TabProps', 'TabPanelProps'] },
+  { file: 'site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
   { file: 'site/pages/components/structure/app-shell/appShellContent.ts', key: 'props', types: ['AppShellProps'] },
   { file: 'site/pages/components/structure/footer/footerContent.ts', key: 'props', types: ['FooterProps'] },
   { file: 'site/pages/components/structure/panel/panelContent.ts', key: 'props', types: ['PanelProps'],

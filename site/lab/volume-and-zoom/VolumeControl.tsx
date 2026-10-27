@@ -73,7 +73,7 @@ export function VolumeControl({ label, muteLabel, value, defaultValue = 100, onC
       // Expanding with a mouse, as on YouTube, the speaker itself mutes and shows the level.
       hoverTrigger={presentation === 'expand' ? muteButton(volumeIcon(level, muted), isUpright ? 'bottom' : 'top') : undefined}
       // The slider already says its level, so screen readers skip this copy of it.
-      level={<span className="lab-media-level mz-text-label-md" aria-hidden="true">{percent(shown)}</span>}
+      level={<span className="lab-media-level mz-text-label-md" aria-hidden="true"><span>{percent(shown)}</span></span>}
       orientation={orientation}
       presentation={presentation}
       isDisabled={isDisabled}

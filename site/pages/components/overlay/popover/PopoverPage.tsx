@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, DemoArea, Dialog, DialogTrigger, Popover, Text } from '@decocode/mezzanine'
+import { Button, DemoBlock, Dialog, DialogTrigger, Popover, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { popoverContent, popoverExampleCode, popoverExampleLabels, popoverPlacements } from './popoverContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -11,7 +11,7 @@ export default function PopoverPage() {
       content={popoverContent}
       parts={{
         example: (
-          <DemoArea codeView={popoverExampleCode(placement)} endPanel={<PanelSelect label="placement" options={popoverPlacements} value={placement} onChange={setPlacement} />}>
+          <DemoBlock codeView={popoverExampleCode(placement)} endPanel={<PanelSelect label="placement" options={popoverPlacements} value={placement} onChange={setPlacement} />}>
             <DialogTrigger>
               <Button hierarchy="secondary">{popoverExampleLabels.trigger}</Button>
               <Popover placement={placement}>
@@ -20,7 +20,7 @@ export default function PopoverPage() {
                 </Dialog>
               </Popover>
             </DialogTrigger>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

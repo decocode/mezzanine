@@ -1,4 +1,4 @@
-import { Button, DemoArea, Link, TopBar } from '@decocode/mezzanine'
+import { Button, DemoBlock, Link, TopBar } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
@@ -14,7 +14,7 @@ export default function TopBarPage() {
       content={topBarContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             className="top-bar-example"
             codeView={topBarExampleCode(flags)}
@@ -33,7 +33,7 @@ export default function TopBarPage() {
               </TopBar>
             </RouterProvider>
             <p role="status">{isSaved ? 'Changes saved.' : ''}</p>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

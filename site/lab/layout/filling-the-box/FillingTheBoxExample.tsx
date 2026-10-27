@@ -1,6 +1,6 @@
 // The example for the Lab's Filling the box page, in Layout.
 import { useState, type CSSProperties } from 'react'
-import { Checkbox, DemoArea } from '@decocode/mezzanine'
+import { Checkbox, DemoBlock } from '@decocode/mezzanine'
 import { CssNotes, ExampleHeading, ExampleText, examplePictureAlt, PanelPicker, useExamplePicture, WidthDemo } from '../../shared/LabParts'
 import { fillingTheBoxCssNotes } from './fillingTheBoxContent'
 
@@ -26,11 +26,11 @@ export function FillingTheBoxExample() {
     <CssNotes name="shrinking to fit" note={fillingTheBoxCssNotes.imageFit} showCode={false} />
     <ExampleHeading>Fill a shape</ExampleHeading>
     <ExampleText>The same wide picture in a square box. Each setting fills the square a different way.</ExampleText>
-    <DemoArea align="stretch" codeLanguage="css" codeView={fillingTheBoxCssNotes.objectFit.code} endPanel={<PanelPicker label="object-fit" options={objectFitOptions} value={objectFit} onChange={setObjectFit} />}>
+    <DemoBlock align="stretch" codeLanguage="css" codeView={fillingTheBoxCssNotes.objectFit.code} endPanel={<PanelPicker label="object-fit" options={objectFitOptions} value={objectFit} onChange={setObjectFit} />}>
       <div className="lab-object-fit-holder">
         <img src={exampleImage} alt={examplePictureAlt} width={480} height={240} className="lab-object-fit" style={{ '--lab-object-fit': objectFit } as CSSProperties} />
       </div>
-    </DemoArea>
+    </DemoBlock>
     <CssNotes name="filling a shape" note={fillingTheBoxCssNotes.objectFit} showCode={false} />
   </>
 }

@@ -2,6 +2,108 @@
 // The parts of each component an app can restyle on its own, with the shared token each falls back to.
 
 export const componentPointers: Record<string, readonly { name: string; fallback: string }[]> = {
+  "Alert": [
+    {
+      "name": "--alert-accent-background",
+      "fallback": "var(--color-accent-muted)"
+    },
+    {
+      "name": "--alert-accent-border",
+      "fallback": "var(--color-accent-muted-pressed)"
+    },
+    {
+      "name": "--alert-accent-foreground",
+      "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--alert-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
+      "name": "--alert-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--alert-danger-background",
+      "fallback": "var(--color-danger-muted)"
+    },
+    {
+      "name": "--alert-danger-border",
+      "fallback": "var(--color-danger-muted-pressed)"
+    },
+    {
+      "name": "--alert-danger-foreground",
+      "fallback": "var(--color-danger)"
+    },
+    {
+      "name": "--alert-info-background",
+      "fallback": "var(--color-info-muted)"
+    },
+    {
+      "name": "--alert-info-border",
+      "fallback": "var(--color-info-muted-pressed)"
+    },
+    {
+      "name": "--alert-info-foreground",
+      "fallback": "var(--color-info)"
+    },
+    {
+      "name": "--alert-neutral-background",
+      "fallback": "var(--color-neutral-muted)"
+    },
+    {
+      "name": "--alert-neutral-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--alert-neutral-foreground",
+      "fallback": "var(--color-text)"
+    },
+    {
+      "name": "--alert-padding-block",
+      "fallback": "var(--space-4)"
+    },
+    {
+      "name": "--alert-padding-inline",
+      "fallback": "var(--space-padding-surface)"
+    },
+    {
+      "name": "--alert-signature-background",
+      "fallback": "var(--color-signature-muted)"
+    },
+    {
+      "name": "--alert-signature-border",
+      "fallback": "var(--color-signature-muted-pressed)"
+    },
+    {
+      "name": "--alert-signature-foreground",
+      "fallback": "var(--color-signature)"
+    },
+    {
+      "name": "--alert-success-background",
+      "fallback": "var(--color-success-muted)"
+    },
+    {
+      "name": "--alert-success-border",
+      "fallback": "var(--color-success-muted-pressed)"
+    },
+    {
+      "name": "--alert-success-foreground",
+      "fallback": "var(--color-success)"
+    },
+    {
+      "name": "--alert-warning-background",
+      "fallback": "var(--color-warning-muted)"
+    },
+    {
+      "name": "--alert-warning-border",
+      "fallback": "var(--color-warning-muted-pressed)"
+    },
+    {
+      "name": "--alert-warning-foreground",
+      "fallback": "var(--color-warning)"
+    }
+  ],
   "AppShell": [
     {
       "name": "--app-shell-background",
@@ -678,82 +780,82 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--border-width-baseline)"
     }
   ],
-  "DemoArea": [
+  "DemoBlock": [
     {
-      "name": "--demo-area-background",
-      "fallback": "var(--color-surface)"
+      "name": "--demo-block-area-background",
+      "fallback": "var(--color-page)"
     },
     {
-      "name": "--demo-area-bar-gap",
-      "fallback": "var(--space-gap-control)"
-    },
-    {
-      "name": "--demo-area-bar-padding-block",
-      "fallback": "var(--space-padding-control-block)"
-    },
-    {
-      "name": "--demo-area-bar-padding-inline",
-      "fallback": "var(--space-padding-control-inline)"
-    },
-    {
-      "name": "--demo-area-border",
-      "fallback": "var(--color-border)"
-    },
-    {
-      "name": "--demo-area-border-radius",
-      "fallback": "var(--radius-surface)"
-    },
-    {
-      "name": "--demo-area-border-width",
-      "fallback": "var(--border-width-baseline)"
-    },
-    {
-      "name": "--demo-area-content-min-width",
+      "name": "--demo-block-area-min-width",
       "fallback": "var(--width-md)"
     },
     {
-      "name": "--demo-area-end-panel-background",
-      "fallback": "var(--color-surface)"
-    },
-    {
-      "name": "--demo-area-end-panel-border-radius",
-      "fallback": "min(var(--radius-surface), var(--radius-sm))"
-    },
-    {
-      "name": "--demo-area-end-panel-border-width",
-      "fallback": "var(--border-width-hairline)"
-    },
-    {
-      "name": "--demo-area-end-panel-gap",
-      "fallback": "var(--space-gap-cluster)"
-    },
-    {
-      "name": "--demo-area-end-panel-label-foreground",
-      "fallback": "var(--color-accent)"
-    },
-    {
-      "name": "--demo-area-end-panel-max-height",
-      "fallback": "var(--height-overlay-max)"
-    },
-    {
-      "name": "--demo-area-end-panel-offset",
-      "fallback": "var(--surface-gap)"
-    },
-    {
-      "name": "--demo-area-end-panel-width",
-      "fallback": "var(--width-sm)"
-    },
-    {
-      "name": "--demo-area-focus-ring-color",
-      "fallback": "var(--color-focus)"
-    },
-    {
-      "name": "--demo-area-padding",
+      "name": "--demo-block-area-padding",
       "fallback": "var(--space-8) var(--space-4)"
     },
     {
-      "name": "--demo-area-preview-background",
-      "fallback": "var(--color-page)"
+      "name": "--demo-block-background",
+      "fallback": "var(--color-surface)"
+    },
+    {
+      "name": "--demo-block-bar-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--demo-block-bar-padding-block",
+      "fallback": "var(--space-padding-control-block)"
+    },
+    {
+      "name": "--demo-block-bar-padding-inline",
+      "fallback": "var(--space-padding-control-inline)"
+    },
+    {
+      "name": "--demo-block-border",
+      "fallback": "var(--color-border)"
+    },
+    {
+      "name": "--demo-block-border-radius",
+      "fallback": "var(--radius-surface)"
+    },
+    {
+      "name": "--demo-block-border-width",
+      "fallback": "var(--border-width-baseline)"
+    },
+    {
+      "name": "--demo-block-end-panel-background",
+      "fallback": "var(--color-surface)"
+    },
+    {
+      "name": "--demo-block-end-panel-border-radius",
+      "fallback": "min(var(--radius-surface), var(--radius-sm))"
+    },
+    {
+      "name": "--demo-block-end-panel-border-width",
+      "fallback": "var(--border-width-hairline)"
+    },
+    {
+      "name": "--demo-block-end-panel-gap",
+      "fallback": "var(--space-gap-cluster)"
+    },
+    {
+      "name": "--demo-block-end-panel-label-foreground",
+      "fallback": "var(--color-accent)"
+    },
+    {
+      "name": "--demo-block-end-panel-max-height",
+      "fallback": "var(--height-overlay-max)"
+    },
+    {
+      "name": "--demo-block-end-panel-offset",
+      "fallback": "var(--surface-gap)"
+    },
+    {
+      "name": "--demo-block-end-panel-width",
+      "fallback": "var(--width-sm)"
+    },
+    {
+      "name": "--demo-block-focus-ring-color",
+      "fallback": "var(--color-focus)"
     }
   ],
   "Dialog": [
@@ -1486,108 +1588,6 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--navigation-tree-item-padding-inline",
       "fallback": "var(--nav-item-padding-inline)"
-    }
-  ],
-  "Notice": [
-    {
-      "name": "--notice-accent-background",
-      "fallback": "var(--color-accent-muted)"
-    },
-    {
-      "name": "--notice-accent-border",
-      "fallback": "var(--color-accent-muted-pressed)"
-    },
-    {
-      "name": "--notice-accent-foreground",
-      "fallback": "var(--color-accent)"
-    },
-    {
-      "name": "--notice-border-radius",
-      "fallback": "var(--radius-surface)"
-    },
-    {
-      "name": "--notice-border-width",
-      "fallback": "var(--border-width-baseline)"
-    },
-    {
-      "name": "--notice-danger-background",
-      "fallback": "var(--color-danger-muted)"
-    },
-    {
-      "name": "--notice-danger-border",
-      "fallback": "var(--color-danger-muted-pressed)"
-    },
-    {
-      "name": "--notice-danger-foreground",
-      "fallback": "var(--color-danger)"
-    },
-    {
-      "name": "--notice-info-background",
-      "fallback": "var(--color-info-muted)"
-    },
-    {
-      "name": "--notice-info-border",
-      "fallback": "var(--color-info-muted-pressed)"
-    },
-    {
-      "name": "--notice-info-foreground",
-      "fallback": "var(--color-info)"
-    },
-    {
-      "name": "--notice-neutral-background",
-      "fallback": "var(--color-neutral-muted)"
-    },
-    {
-      "name": "--notice-neutral-border",
-      "fallback": "var(--color-border)"
-    },
-    {
-      "name": "--notice-neutral-foreground",
-      "fallback": "var(--color-text)"
-    },
-    {
-      "name": "--notice-padding-block",
-      "fallback": "var(--space-4)"
-    },
-    {
-      "name": "--notice-padding-inline",
-      "fallback": "var(--space-padding-surface)"
-    },
-    {
-      "name": "--notice-signature-background",
-      "fallback": "var(--color-signature-muted)"
-    },
-    {
-      "name": "--notice-signature-border",
-      "fallback": "var(--color-signature-muted-pressed)"
-    },
-    {
-      "name": "--notice-signature-foreground",
-      "fallback": "var(--color-signature)"
-    },
-    {
-      "name": "--notice-success-background",
-      "fallback": "var(--color-success-muted)"
-    },
-    {
-      "name": "--notice-success-border",
-      "fallback": "var(--color-success-muted-pressed)"
-    },
-    {
-      "name": "--notice-success-foreground",
-      "fallback": "var(--color-success)"
-    },
-    {
-      "name": "--notice-warning-background",
-      "fallback": "var(--color-warning-muted)"
-    },
-    {
-      "name": "--notice-warning-border",
-      "fallback": "var(--color-warning-muted-pressed)"
-    },
-    {
-      "name": "--notice-warning-foreground",
-      "fallback": "var(--color-warning)"
     }
   ],
   "NumberField": [
@@ -2686,6 +2686,16 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     {
       "name": "--text-field-opacity-disabled",
       "fallback": "var(--opacity-disabled)"
+    }
+  ],
+  "ThemeSwitcher": [
+    {
+      "name": "--theme-switcher-option-gap",
+      "fallback": "var(--space-gap-control)"
+    },
+    {
+      "name": "--theme-switcher-option-icon-size",
+      "fallback": "var(--icon-size-sm)"
     }
   ],
   "ToggleButton": [

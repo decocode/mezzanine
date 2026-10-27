@@ -16,7 +16,7 @@ for (const theme of themes) {
     await expect(tagB).toHaveAttribute('aria-selected', 'true')
     await expect(tagB).not.toHaveCSS('background-color', unchosen)
     // The Example's onRemove control gives each tag a remove button.
-    await page.locator('.docs-page-lead .mz-demo-area-end-panel label', { hasText: /^onRemove$/ }).click()
+    await page.locator('.docs-page-lead .mz-demo-block-end-panel label', { hasText: /^onRemove$/ }).click()
     const removable = page.getByRole('grid', { name: 'Tag group A', exact: true })
     await removable.getByRole('row', { name: 'Tag A' }).getByRole('button').click()
     await expect(removable.getByRole('row')).toHaveCount(2)

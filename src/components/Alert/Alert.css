@@ -1,0 +1,142 @@
+/* A short note: a pale wash in its purpose's colour with a thin border all round, like Badge, so rounded corners
+   stay even. The title and icon take that colour; the content stays in the text colour. */
+.mz-alert {
+  /* The icon sits in the first row, beside the title, or beside the content when there's no title.
+     Everything after that starts at the alert's start edge and uses the full width. When there isn't
+     room beside the icon, the title or content wraps under it. */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: var(--space-1) var(--space-3);
+  /* Like Card, the padding shrinks with the container in very narrow space, such as a phone with
+     enlarged text, so the content keeps room. */
+  padding: min(var(--alert-padding-block, var(--space-4)), 8cqi) min(var(--alert-padding-inline, var(--space-padding-surface)), 8cqi);
+  border: var(--alert-border-width, var(--border-width-baseline)) solid var(--_alert-border);
+  border-radius: var(--alert-border-radius, var(--radius-surface));
+  /* Some washes are see-through, so they sit on the page colour to hide what's behind. */
+  background: linear-gradient(var(--_alert-background), var(--_alert-background)), var(--color-page);
+  color: var(--color-text);
+}
+
+.mz-alert[data-purpose='neutral'] {
+  --_alert-background: var(--alert-neutral-background, var(--color-neutral-muted));
+  --_alert-foreground: var(--alert-neutral-foreground, var(--color-text));
+  --_alert-border: var(--alert-neutral-border, var(--color-border));
+}
+
+.mz-alert[data-purpose='accent'] {
+  --_alert-background: var(--alert-accent-background, var(--color-accent-muted));
+  --_alert-foreground: var(--alert-accent-foreground, var(--color-accent));
+  --_alert-border: var(--alert-accent-border, var(--color-accent-muted-pressed));
+}
+
+.mz-alert[data-purpose='signature'] {
+  --_alert-background: var(--alert-signature-background, var(--color-signature-muted));
+  --_alert-foreground: var(--alert-signature-foreground, var(--color-signature));
+  --_alert-border: var(--alert-signature-border, var(--color-signature-muted-pressed));
+}
+
+.mz-alert[data-purpose='info'] {
+  --_alert-background: var(--alert-info-background, var(--color-info-muted));
+  --_alert-foreground: var(--alert-info-foreground, var(--color-info));
+  --_alert-border: var(--alert-info-border, var(--color-info-muted-pressed));
+}
+
+.mz-alert[data-purpose='success'] {
+  --_alert-background: var(--alert-success-background, var(--color-success-muted));
+  --_alert-foreground: var(--alert-success-foreground, var(--color-success));
+  --_alert-border: var(--alert-success-border, var(--color-success-muted-pressed));
+}
+
+.mz-alert[data-purpose='warning'] {
+  --_alert-background: var(--alert-warning-background, var(--color-warning-muted));
+  --_alert-foreground: var(--alert-warning-foreground, var(--color-warning));
+  --_alert-border: var(--alert-warning-border, var(--color-warning-muted-pressed));
+}
+
+.mz-alert[data-purpose='danger'] {
+  --_alert-background: var(--alert-danger-background, var(--color-danger-muted));
+  --_alert-foreground: var(--alert-danger-foreground, var(--color-danger));
+  --_alert-border: var(--alert-danger-border, var(--color-danger-muted-pressed));
+}
+
+/* Without colour, the brand purposes would look like Neutral, so in Wireframe they take a darker wash and
+   border, and Neutral a lighter border. */
+@scope ([data-theme='wireframe']) to ([data-theme]:not([data-theme='wireframe'])) {
+  .mz-alert[data-purpose='neutral'] {
+    --_alert-border: var(--alert-neutral-border, var(--color-border-muted));
+  }
+
+  .mz-alert[data-purpose='accent'] {
+    --_alert-background: var(--alert-accent-background, var(--color-accent-muted-pressed));
+    --_alert-border: var(--alert-accent-border, var(--color-accent));
+  }
+
+  .mz-alert[data-purpose='signature'] {
+    --_alert-background: var(--alert-signature-background, var(--color-signature-muted-pressed));
+    --_alert-border: var(--alert-signature-border, var(--color-signature));
+  }
+}
+
+.mz-alert > * {
+  flex: 1 1 100%;
+  min-inline-size: 0;
+}
+
+.mz-alert > .mz-alert-icon {
+  display: flex;
+  flex: none;
+  color: var(--_alert-foreground);
+}
+
+.mz-alert-icon svg {
+  inline-size: var(--icon-size-md);
+  block-size: var(--icon-size-md);
+}
+
+.mz-alert > .mz-alert-icon + :is(.mz-alert-title, .mz-alert-content) {
+  flex: 1 1 8em;
+}
+
+/* The icon and title centre on each other, whichever is taller. */
+.mz-alert > .mz-alert-icon:has(+ .mz-alert-title),
+.mz-alert-icon + .mz-alert-title {
+  align-self: center;
+}
+
+/* TYPOGRAPHY.md: a heading inside a card or panel uses title-md. */
+.mz-alert-title {
+  color: var(--_alert-foreground);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-title-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-title);
+  line-height: var(--line-height-title-md);
+  text-transform: var(--text-transform-title);
+}
+
+.mz-alert-content {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-default);
+  letter-spacing: var(--letter-spacing-body);
+  line-height: var(--line-height-body-md);
+  text-transform: var(--text-transform-body);
+}
+
+/* Paragraphs and lists in the content sit a paragraph gap apart, with no space outside. */
+.mz-alert-content > * {
+  margin-block: 0;
+}
+
+.mz-alert-content > * + * {
+  margin-block-start: var(--space-gap-paragraph);
+}
+
+.mz-alert-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-block-start: var(--space-2);
+}

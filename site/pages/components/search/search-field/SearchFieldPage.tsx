@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, FieldError, Input, Label, SearchField, Text } from '@decocode/mezzanine'
+import { DemoBlock, FieldError, Input, Label, SearchField, Text } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { searchFieldContent, searchFieldExampleCode, searchFieldExampleLabel, searchFieldExampleText, searchFieldFlags } from './searchFieldContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -14,7 +14,7 @@ export default function SearchFieldPage() {
       content={searchFieldContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={searchFieldExampleCode({ ...flags, hasErrorMessage })}
             endPanel={<>
               {searchFieldFlags.map((name) => (
@@ -29,7 +29,7 @@ export default function SearchFieldPage() {
               {description && <Text slot="description">{searchFieldExampleText.description}</Text>}
               {flags.isInvalid && hasErrorMessage && <FieldError>{searchFieldExampleText.errorMessage}</FieldError>}
             </SearchField>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

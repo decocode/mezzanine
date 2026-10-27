@@ -1,0 +1,18 @@
+/* Each theme in the menu: its icon, then its name, on one line. */
+.mz-theme-switcher-option {
+  display: flex;
+  align-items: center;
+  gap: var(--theme-switcher-option-gap, var(--space-gap-control));
+}
+
+.mz-theme-switcher-option-icon {
+  display: inline-flex;
+  flex: none;
+  inline-size: var(--theme-switcher-option-icon-size, var(--icon-size-sm));
+  block-size: var(--theme-switcher-option-icon-size, var(--icon-size-sm));
+}
+
+.mz-theme-switcher-option-icon > svg {
+  inline-size: 100%;
+  block-size: 100%;
+}

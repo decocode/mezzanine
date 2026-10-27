@@ -1,0 +1,11 @@
+/* The example's box takes the chosen theme, so the switcher shows its effect. */
+.theme-switcher-example {
+  display: grid;
+  place-items: center;
+  min-block-size: var(--space-24);
+  padding: var(--space-4);
+  border: var(--border-width-baseline) solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--color-page);
+  color: var(--color-text);
+}

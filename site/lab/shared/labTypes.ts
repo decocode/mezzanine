@@ -3,9 +3,8 @@ import type { JSX } from 'react'
 import type { DocsPageContent } from '../../templates/docsPageContent'
 
 // A Lab page's content: the docs site's shared page shape, so ContentPage builds Lab and Docs pages
-// alike, plus its address in the Lab.
+// alike, plus its address in the Lab. A candidate component's page follows the component page pattern.
 export interface LabPage extends DocsPageContent {
-  readonly kind: 'foundation'
   readonly href: string
 }
 

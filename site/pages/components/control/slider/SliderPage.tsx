@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, ListBoxItem, Select, Slider } from '@decocode/mezzanine'
+import { DemoBlock, ListBoxItem, Select, Slider } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { sliderContent, sliderDefaultValues, sliderExample, sliderExampleCode, sliderFlags, sliderOrientations, sliderStepLabel, sliderSteps } from './sliderContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -21,7 +21,7 @@ export default function SliderPage() {
       parts={{
         // The Properties panel has a control for each prop that changes what the slider looks like or does.
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={sliderExampleCode({ defaultValue, orientation, step: Number(step), ...flags })}
             endPanel={<>
@@ -52,7 +52,7 @@ export default function SliderPage() {
               formatValue={flags.formatValue ? (value) => `${value}%` : undefined}
               isDisabled={flags.isDisabled}
             />
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

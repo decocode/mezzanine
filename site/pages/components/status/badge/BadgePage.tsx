@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Badge, Cell, Column, DemoArea, Row, Table, TableBody, TableHeader, type BadgePurpose } from '@decocode/mezzanine'
+import { Badge, Cell, Column, DemoBlock, Row, Table, TableBody, TableHeader, type BadgePurpose } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { badgeContent, badgeExampleCode, badgeExampleLabel } from './badgeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -17,9 +17,9 @@ export default function BadgePage() {
       content={badgeContent}
       parts={{
         example: (
-          <DemoArea codeView={badgeExampleCode(purpose)} endPanel={<PanelSelect label="purpose" options={purposes} value={purpose} onChange={setPurpose} />}>
+          <DemoBlock codeView={badgeExampleCode(purpose)} endPanel={<PanelSelect label="purpose" options={purposes} value={purpose} onChange={setPurpose} />}>
             <Badge purpose={purpose}>{badgeExampleLabel}</Badge>
-          </DemoArea>
+          </DemoBlock>
         ),
         purposes: (
           <div className="documentation-table documentation-comparison-table">

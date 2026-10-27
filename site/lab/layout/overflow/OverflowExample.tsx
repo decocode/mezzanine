@@ -1,7 +1,7 @@
 // The example for the Lab's Overflow page, in Layout. A plain item is the concept here, so it
 // keeps the accent styling, whose shading shows where the item ends.
 import { useState, type CSSProperties } from 'react'
-import { DemoArea } from '@decocode/mezzanine'
+import { DemoBlock } from '@decocode/mezzanine'
 import { CssNotes, ExampleText, PanelPicker } from '../../shared/LabParts'
 import { overflowCssNotes } from './overflowContent'
 
@@ -17,7 +17,7 @@ export function OverflowExample() {
   const canScroll = overflow === 'scroll' || overflow === 'auto'
   return <>
     <ExampleText>The box is 6rem tall, which isn’t enough for its text. The overflow setting decides what happens to the rest.</ExampleText>
-    <DemoArea align="stretch" codeLanguage="css" codeView={overflowCssNotes.overflow.code} endPanel={<PanelPicker label="overflow" options={overflowOptions} value={overflow} onChange={setOverflow} />}>
+    <DemoBlock align="stretch" codeLanguage="css" codeView={overflowCssNotes.overflow.code} endPanel={<PanelPicker label="overflow" options={overflowOptions} value={overflow} onChange={setOverflow} />}>
       <div className="lab-overflow-stage">
         <div
           className="lab-overflow-box mz-text-body-md"
@@ -27,7 +27,7 @@ export function OverflowExample() {
           This box is only 6rem tall, but this text needs more room than that. With visible, the rest spills out over whatever comes next. With hidden, it’s cut off and nobody can reach it. With scroll or auto, you can scroll to read it.
         </div>
       </div>
-    </DemoArea>
+    </DemoBlock>
     <CssNotes name="the box" note={overflowCssNotes.overflow} level={3} showCode={false} />
   </>
 }

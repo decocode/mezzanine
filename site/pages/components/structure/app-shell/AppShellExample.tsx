@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AppShell, DemoArea, Footer, Panel, PanelTrigger } from '@decocode/mezzanine'
+import { AppShell, DemoBlock, Footer, Panel, PanelTrigger } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { appShellExampleCode, appShellExampleLabels as labels, appShellSpans, type AppShellSpans } from './appShellContent'
 
@@ -7,7 +7,7 @@ import { appShellExampleCode, appShellExampleLabels as labels, appShellSpans, ty
 export function AppShellExample() {
   const [spans, setSpans] = useState<AppShellSpans>({ startPanelSpan: 'main', endPanelSpan: 'main', bottomPanelSpan: 'main' })
   return (
-    <DemoArea
+    <DemoBlock
       align="stretch"
       className="app-shell-example-demo"
       codeView={appShellExampleCode(spans)}
@@ -39,6 +39,6 @@ export function AppShellExample() {
           <p className="app-shell-example-panel-text">{labels.bottomPanelText}</p>
         </Panel>
       </AppShell>
-    </DemoArea>
+    </DemoBlock>
   )
 }

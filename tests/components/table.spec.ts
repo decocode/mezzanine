@@ -28,7 +28,7 @@ test('Table sorting works with pointer and keyboard and supplies one accessible 
   // Descending shows the down arrow, drawn from the shared icon set.
   await expect(indicator.locator('path')).toHaveAttribute('d', /^M12 4v15\.5/)
   // Without allowsSorting, the columns show no arrow.
-  await page.locator('.docs-page-lead .mz-demo-area-end-panel label', { hasText: /^allowsSorting$/ }).click()
+  await page.locator('.docs-page-lead .mz-demo-block-end-panel label', { hasText: /^allowsSorting$/ }).click()
   await expect(table.locator('.mz-table-sort-indicator')).toHaveCount(0)
 })
 

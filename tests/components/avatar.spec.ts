@@ -6,8 +6,8 @@ import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '
 // the name's initials, and that one with no visible name is an image named by alt.
 test('Avatar is read by its name, shows initials without a picture, and names an unlabelled picture', async ({ page }) => {
   await page.goto('/avatar')
-  const avatar = page.locator('.docs-page-lead .mz-demo-area-content .mz-avatar')
-  const toggle = (name: string) => page.locator('.docs-page-lead .mz-demo-area-end-panel label', { hasText: new RegExp(`^${name}$`) }).click()
+  const avatar = page.locator('.docs-page-lead .mz-demo-block-area .mz-avatar')
+  const toggle = (name: string) => page.locator('.docs-page-lead .mz-demo-block-end-panel label', { hasText: new RegExp(`^${name}$`) }).click()
   await expect(avatar.locator('.mz-avatar-picture')).toHaveAttribute('aria-hidden', 'true')
   await expect(avatar.getByText('Avatar name', { exact: true })).toBeVisible()
   await toggle('src')

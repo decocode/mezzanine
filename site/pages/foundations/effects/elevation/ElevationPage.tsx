@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import { Cell, Column, DemoArea, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Cell, Column, DemoBlock, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { RichText } from '../../../../components/RichText'
 import { TokenValue } from '../../../../components/TokenValue'
 import {
@@ -14,7 +14,7 @@ export default function ElevationPage() {
       content={elevationContent}
       parts={{
         levels: (
-          <DemoArea align="stretch">
+          <DemoBlock align="stretch">
             <ol className="elevation-levels">
               {elevationDefinitions.map(({ token, label }) => (
                 <li key={token} className="elevation-level" style={{ '--_elevation-shadow': `var(${token})`, '--_elevation-surface': `var(${token}-surface)` } as CSSProperties}>
@@ -23,7 +23,7 @@ export default function ElevationPage() {
                 </li>
               ))}
             </ol>
-          </DemoArea>
+          </DemoBlock>
         ),
         tokens: (<>
           <div className="documentation-table">

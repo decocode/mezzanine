@@ -1,6 +1,6 @@
 // The example for the Lab's The box model page, in Layout. A plain item is the concept here, so it
 // keeps the accent styling, and the dashed line marks where its margin ends.
-import { DemoArea } from '@decocode/mezzanine'
+import { DemoBlock } from '@decocode/mezzanine'
 import { CssNotes, ExampleText } from '../../shared/LabParts'
 import { theBoxModelCssNotes } from './theBoxModelContent'
 
@@ -13,13 +13,13 @@ export function TheBoxModelExample() {
       <li>Border: the thick line.</li>
       <li>Margin: the empty space between the thick line and the dashed line.</li>
     </ul>
-    <DemoArea align="stretch" codeLanguage="css" codeView={theBoxModelCssNotes.boxAnatomy.code}>
+    <DemoBlock align="stretch" codeLanguage="css" codeView={theBoxModelCssNotes.boxAnatomy.code}>
       <div className="lab-box-margin-area">
         <div className="lab-box-anatomy">
           <div className="lab-box-content mz-text-body-md">Content</div>
         </div>
       </div>
-    </DemoArea>
+    </DemoBlock>
     <CssNotes name="the four parts" note={theBoxModelCssNotes.boxAnatomy} level={3} showCode={false} />
   </>
 }

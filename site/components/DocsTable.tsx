@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react'
-import { Table, TableHeader, Column, TableBody, Row, Cell } from '@decocode/mezzanine'
+import { Cell, Column, Link, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 
 interface DocsTableProps {
   'aria-label': string
   nameColumn: string
-  rows: readonly { name: string; description: ReactNode }[]
+  // A row with an href links its name, such as a part that has its own docs page.
+  rows: readonly { name: string; description: ReactNode; href?: string }[]
   className?: string
   descriptionColumn?: string
   // Part names such as "Section header" are plain text; API names default to code.
@@ -21,12 +22,13 @@ export function DocsTable({ 'aria-label': label, nameColumn, rows, className, de
           <Column>{descriptionColumn}</Column>
         </TableHeader>
         <TableBody>
-          {rows.map(({ name, description }) => (
-            <Row id={name} key={name}>
-              <Cell>{namesAreCode ? <code>{name}</code> : name}</Cell>
+          {rows.map(({ name, description, href }) => {
+            const label = namesAreCode ? <code>{name}</code> : name
+            return <Row id={name} key={name}>
+              <Cell>{href ? <Link href={href}>{label}</Link> : label}</Cell>
               <Cell>{description}</Cell>
             </Row>
-          ))}
+          })}
         </TableBody>
       </Table>
     </div>

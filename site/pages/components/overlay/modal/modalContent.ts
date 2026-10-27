@@ -6,9 +6,16 @@ export const modalContent: DocsPageContent = {
   id: 'modal',
   kind: 'component',
   title: 'Modal',
-  description: '`Modal` is a component that shows a dialog over the page, and keeps people in it until they close it.',
+  description: '`Modal` places a component in the centre of the screen, in front of the page content, so it becomes the focus of attention.',
   sections: [
-    { key: 'example', intro: ['A `ModalOverlay` dims the page, and the `Modal` holds a `Dialog` in the middle of the screen. It fades and grows a little as it opens.'] },
+    {
+      key: 'about',
+      title: 'About Modal',
+      body: [
+        '`Modal` places a component in the centre of the screen, in front of the page content, so it becomes the focus of attention. `ModalOverlay` dims the page behind it. `Modal` is used to display components such as Dialog and Search.',
+      ],
+    },
+    { key: 'example' },
   ],
   technicalDetails: [
     {
@@ -23,6 +30,10 @@ export const modalContent: DocsPageContent = {
           { name: 'Dialog', description: 'The content, with its title.' },
         ],
       },
+    },
+    {
+      key: 'behaviour',
+      body: ['It fades and grows a little as it opens.'],
     },
     {
       key: 'usage',
@@ -59,7 +70,7 @@ export const modalContent: DocsPageContent = {
 }
 
 // The example's labels and copy.
-export const modalExampleLabels = { trigger: 'Modal trigger', title: 'Modal title', body: 'Modal content.', close: 'Close' } as const
+export const modalExampleLabels = { trigger: 'Modal trigger', title: 'Example', body: 'This component is a Dialog. It has been placed in the centre of the screen by Modal.', close: 'Close' } as const
 
 // The Properties panel's on/off props, on ModalOverlay: whether a press outside closes it, and whether
 // Escape is turned off.

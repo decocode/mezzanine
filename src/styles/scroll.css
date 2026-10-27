@@ -15,7 +15,7 @@
 }
 
 @supports (animation-timeline: scroll()) {
-  :is(.mz-list-box, .mz-menu, .mz-grid-list, .mz-tree, .mz-panel-content, .mz-demo-area-end-panel-scroll) {
+  :is(.mz-list-box, .mz-menu, .mz-grid-list, .mz-tree, .mz-panel-content, .mz-demo-block-end-panel-scroll) {
     mask-image: linear-gradient(to bottom, transparent, currentColor var(--_scroll-fade-start), currentColor calc(100% - var(--_scroll-fade-end)), transparent);
     animation: mz-scroll-fade linear both;
     animation-timeline: scroll(self block);

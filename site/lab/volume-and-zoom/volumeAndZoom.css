@@ -11,6 +11,11 @@
   gap: var(--space-2);
 }
 
+/* The buttons and the level keep their size; only the slider gives way. */
+.lab-media-row > :not(.lab-media-slider) {
+  flex-shrink: 0;
+}
+
 /* Upright, the start control sits at the bottom and the level at the top. */
 .lab-media-row[data-orientation='vertical'] {
   flex-direction: column-reverse;
@@ -23,8 +28,28 @@
   max-inline-size: 100%;
 }
 
+/* The slider has no visible label, and its output is hidden, so its track is its only row. Otherwise
+   the empty row's gap pushes the track below the buttons' centre line. */
+.lab-media-slider:not([data-orientation='vertical']) {
+  grid-template-areas: 'track';
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .lab-media-row[data-orientation='vertical'] .lab-media-slider {
   inline-size: auto;
+}
+
+/* A marked value, such as 100% zoom, is a short line across the rail, under the thumb. */
+.lab-media-slider-marked .mz-slider-track::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--_lab-media-mark);
+  inline-size: var(--border-width-md);
+  block-size: var(--space-4);
+  translate: -50% -50%;
+  border-radius: var(--radius-full);
+  background: var(--color-border-control);
 }
 
 /* The level sits at the end of the row, so the slider's own copy of it above the track is hidden. */
@@ -32,15 +57,34 @@
   display: none;
 }
 
+/* The level is as wide as "100%", which an invisible copy behind it sets, so the row doesn't shift as
+   the number changes. The digits are all one width, so "400%" fits too. */
 .lab-media-level {
-  min-inline-size: 4ch;
+  display: grid;
+  justify-items: end;
+  white-space: nowrap;
   color: var(--color-text-muted);
   font-variant-numeric: tabular-nums;
-  text-align: end;
+}
+
+/* Lying flat, the level ends as far from the pop-up's edge as the icon at the start begins: a small
+   icon button's icon sits inset by half the difference between the button and the icon. */
+.lab-media-row:not([data-orientation='vertical']) .lab-media-level {
+  padding-inline-end: calc((var(--target-size-sm) - var(--icon-size-sm)) / 2);
+}
+
+.lab-media-level > *,
+.lab-media-level::after {
+  grid-area: 1 / 1;
+}
+
+.lab-media-level::after {
+  content: '100%';
+  visibility: hidden;
 }
 
 .lab-media-row[data-orientation='vertical'] .lab-media-level {
-  text-align: center;
+  justify-items: center;
 }
 
 /* The examples sit side by side. */

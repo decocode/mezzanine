@@ -1,4 +1,4 @@
-import { Cell, Column, DemoArea, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Cell, Column, DemoBlock, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { baseTextElements } from '../typographyContent'
 import { useTokenValue } from '../../../../components/tokenValueLogic'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -38,37 +38,37 @@ export default function SemanticHtmlPage() {
           </div>
         ),
         lists: (
-          <DemoArea align="stretch">
+          <DemoBlock align="stretch">
             <ul className="mz-text-body-md">
               <li>{listExample.items[0]}</li>
               <li>{listExample.items[1]}
                 <ul>{listExample.nested.map((item) => <li key={item}>{item}</li>)}</ul>
               </li>
             </ul>
-          </DemoArea>
+          </DemoBlock>
         ),
         descriptionLists: (
-          <DemoArea align="stretch">
+          <DemoBlock align="stretch">
             <dl className="mz-text-body-md">
               {semanticExamples.terms.map(({ term, description }) => <div key={term}><dt>{term}</dt><dd>{description}</dd></div>)}
             </dl>
-          </DemoArea>
+          </DemoBlock>
         ),
         inlineEmphasis: (
-          <DemoArea align="stretch">
+          <DemoBlock align="stretch">
             <p className="mz-text-body-md">A sentence with <strong>strong text</strong>, <em>emphasised text</em> and <mark>marked text</mark>.</p>
-          </DemoArea>
+          </DemoBlock>
         ),
         quotes: (
-          <DemoArea align="stretch">
+          <DemoBlock align="stretch">
             <blockquote className="mz-text-body-md"><p>{semanticExamples.quotation}</p></blockquote>
             <p className="mz-text-body-md">A sentence with <q>{semanticExamples.inlineQuotation}</q> inside it.</p>
-          </DemoArea>
+          </DemoBlock>
         ),
         inlineCode: (
-          <DemoArea align="stretch">
+          <DemoBlock align="stretch">
             <p className="mz-text-body-md">The <code>--space-4</code> token stores <code>1rem</code> by default.</p>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

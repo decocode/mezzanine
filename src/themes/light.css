@@ -52,7 +52,7 @@
   --color-accent: var(--color-accent-700);
 
   /* The signature tone, from the brand's second palette: text, a soft fill and its border, such as a
-     signature Notice. */
+     signature Alert. */
   --color-signature-muted: var(--color-signature-100);
   --color-signature-muted-pressed: var(--color-signature-200);
   --color-signature: var(--color-signature-700);

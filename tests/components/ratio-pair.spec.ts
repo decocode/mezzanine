@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTheme, themes } from '../display'
 
-// These checks use the Ratio pair docs page, which shows the library class inside a DemoArea. Its box
+// These checks use the Ratio pair docs page, which shows the library class inside a DemoBlock. Its box
 // fills the demo, so the window's width decides whether the areas share a row.
 
 async function areas(page: Page) {

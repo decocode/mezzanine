@@ -27,7 +27,7 @@ The website for mezzanine.fly.dev. It imports the library as `@decocode/mezzanin
 | `AppShell.tsx`, `main.tsx`, `PageLoader.tsx`, `pageRegistry.ts` | Route selection, theme state, and loading each page separately. |
 | `pages/<group>/<page>/` | One folder per page, mirroring the information architecture. Each has a `<Name>Page.tsx` and a `<name>Content.ts` holding its copy. See `PAGES.md`. |
 | `templates/` | `ContentPage`, which builds a page from its content file, and the content shape every page follows. |
-| `components/` | The site's own parts: `DocsShell` (the AppShell frame around docs and Lab pages), `SiteTopBar`, navigation, `TokenScale`, `PageCards` (an index page's linked cards), `SiteSearch`, the example parts shared with the Lab (`ExampleParts.tsx`, with `ExampleCard` and `PanelPicker`, and `browserLogic.ts`), `WidthFrame.tsx` (`WidthDemo`, a layout example's frame inside a DemoArea) and similar. |
+| `components/` | The site's own parts: `DocsShell` (the AppShell frame around docs and Lab pages), `SiteTopBar`, navigation, `TokenScale`, `PageCards` (an index page's linked cards), `SiteSearch`, the example parts shared with the Lab (`ExampleParts.tsx`, with `ExampleCard` and `PanelPicker`, and `browserLogic.ts`), `WidthFrame.tsx` (`WidthDemo`, a layout example's frame inside a DemoBlock) and similar. |
 | `styles.css` | The site's own styles. |
 | `assets/`, `public/` | Images and static files. |
 
@@ -39,8 +39,8 @@ An experimental sandbox at `/site/lab`. Nothing here is approved library work.
 | --- | --- |
 | `layout/<page>/` | The Layout pages, one folder each, all directly under Layout. |
 | `emerging-features/` | The other experiment, one folder per page. |
-| `panel-demo-area/` | A candidate Panel that works in any container, its host, and a demo area rebuilt from them. |
-| `volume-and-zoom/` | Candidate VolumeControl and ZoomControl: an icon button that opens a slider. |
+| `panel-demo-block/` | A candidate Panel that works in any container, its host, and a demo block rebuilt from them, on the Lab's Panel, Panel host and Demo block pages. |
+| `volume-and-zoom/` | Candidate VolumeControl and ZoomControl, each on its own Lab page: an icon button that opens a slider. They share the slider row, styles and timers. The Expanding controls page holds the experiment that slides the row out of the button instead. |
 | `shared/` | Shared Lab parts, types and values, and `layout-lab.css`, which each page's "The CSS behind" panel quotes. The panel itself, the example text and the panel picker come from the site's `components/ExampleParts.tsx`, shared with promoted docs pages. |
 | `LabPage.tsx`, `labContent.tsx` | The Lab's entry and its navigation. |
 

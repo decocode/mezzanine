@@ -34,8 +34,8 @@ export const fontWeightContent: DocsPageContent = {
   ],
 }
 
-// The signature notice after the examples table, as a bulleted list.
-export const fontWeightNotice = [
+// The signature alert after the examples table, as a bulleted list.
+export const fontWeightAlert = [
   'Not every font has every weight: a font without a light weight shows regular instead.',
   'Font weight classes change only how text looks. To add semantic meaning to the text, `<strong>` and `<em>` should be used: see [Semantic HTML](/typography/semantic-html).',
 ]

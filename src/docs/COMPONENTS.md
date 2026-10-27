@@ -297,23 +297,23 @@ Put the visible label inside `SwitchButton`, and the `SwitchButton` inside
 React Aria 1.22 deprecated its one-part `Switch`, so Mezzanine doesn't export
 it. The APIs follow [React Aria Switch](https://react-aria.adobe.com/Switch).
 
-## Notice
+## Alert
 
-`Notice` is a short note that stands out from the text around it. Pass the
+`Alert` is a short note that stands out from the text around it. Pass the
 note as children, a paragraph or a short list, and an optional `title`, a
 decorative `icon` and `actions`, such as a Button or a Link. `purpose` is one
 of `neutral` (the default), `info`, `success`, `warning` and `danger`, or the
 brand purposes `accent` and `signature`. The title and icon take the purpose's
-color; say the purpose in words too, such as in the title. Notice has the `note`
+color; say the purpose in words too, such as in the title. Alert has the `note`
 role: it's part of the page, and doesn't announce itself as an alert does.
 
-Notice adds no icon of its own. A suggested pairing: `InfoIcon` for info,
+Alert adds no icon of its own. A suggested pairing: `InfoIcon` for info,
 `CheckCircleIcon` for success, `WarningIcon` for warning, `ErrorIcon` for
 danger, `InfoIcon` or none for neutral, and `PlaceholderIcon` for accent and
 signature.
 
 ```tsx
-<Notice purpose="info" title="Notice title">Notice A content.</Notice>
+<Alert purpose="info" title="Alert title">Alert A content.</Alert>
 ```
 
 ## Footer
@@ -435,10 +435,10 @@ the `Menu`. `MenuItem` adds a tick for chosen items when the menu has a
 `Separator` draws a line between groups; the space around it comes from the
 layout it sits in. With `orientation="vertical"` it stands upright in a row.
 
-## DemoArea
+## DemoBlock
 
-`DemoArea` frames a live demo, such as on a documentation page. Every demo has
-a frame with a strip at its top holding a theme picker that changes only this
+`DemoBlock` frames a live demo, such as on a documentation page. Every demo has
+a frame with a strip at its top holding a theme switcher that changes only this
 demo. When you pass its source as `codeView`, Demo and Code tabs sit outside
 the frame, and the Code tab shows the code in a CodeBlock, its own frame with
 its own buttons. The Code tab highlights it as `tsx`, or in the
@@ -451,9 +451,9 @@ take its theme. `align` sets where the demo sits: `center`, the default,
 `stretch` for demos that fill the width, such as tables and code, or `start`.
 
 ```tsx
-<DemoArea endPanel={<SwitchField><SwitchButton>Disable</SwitchButton></SwitchField>}>
+<DemoBlock endPanel={<SwitchField><SwitchButton>Disable</SwitchButton></SwitchField>}>
   <Button>Button A</Button>
-</DemoArea>
+</DemoBlock>
 ```
 
 ## Unstyled React Aria exports

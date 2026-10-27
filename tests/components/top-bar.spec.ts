@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
-import { expectNoPageOverflow, setTextSize, setTheme, siteThemeSelect, textSizes, themes } from '../display'
+import { expectNoPageOverflow, setTextSize, setTheme, siteThemeSwitcher, textSizes, themes } from '../display'
 
 // Checks the TopBar example at phone width with only the keyboard: the menu button opens and closes
 // the menu, links inside it work, focus returns to the menu button, and the action button, in the
@@ -86,7 +86,7 @@ test('desktop navigation and top bar actions remain accessible', async ({ page }
   const example = page.locator('main .mz-top-bar')
   await expect(example.getByRole('button', { name: /^(Menu|Close menu)$/ })).toBeHidden()
   await expect(example.getByRole('navigation', { name: 'Example navigation' })).toBeVisible()
-  await expect(siteThemeSelect(page)).toBeVisible()
+  await expect(siteThemeSwitcher(page)).toBeVisible()
   await page.emulateMedia({ forcedColors: 'active' })
   const linkA = example.getByRole('link', { name: 'Link A', exact: true })
   await linkA.focus()

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, ListBox, ListBoxItem, ListLayout, Virtualizer } from '@decocode/mezzanine'
+import { DemoBlock, ListBox, ListBoxItem, ListLayout, Virtualizer } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { virtualizerContent, virtualizerExampleCode, virtualizerExampleItems, virtualizerExampleLabel, virtualizerGaps } from './virtualizerContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -11,7 +11,7 @@ export default function VirtualizerPage() {
       content={virtualizerContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={virtualizerExampleCode(Number(gap))}
             endPanel={<PanelSelect label="layoutOptions.gap" options={virtualizerGaps} value={gap} onChange={setGap} />}
@@ -23,7 +23,7 @@ export default function VirtualizerPage() {
                 </ListBox>
               </Virtualizer>
             </div>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

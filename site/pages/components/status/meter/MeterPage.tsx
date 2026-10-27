@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, Meter } from '@decocode/mezzanine'
+import { DemoBlock, Meter } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { meterContent, meterExampleCode, meterExampleLabel, meterValues } from './meterContent'
@@ -13,7 +13,7 @@ export default function MeterPage() {
       content={meterContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={meterExampleCode(Number(value), hasLabel)}
             endPanel={<>
@@ -22,7 +22,7 @@ export default function MeterPage() {
             </>}
           >
             <Meter label={hasLabel ? meterExampleLabel : undefined} aria-label={hasLabel ? undefined : meterExampleLabel} value={Number(value)} />
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

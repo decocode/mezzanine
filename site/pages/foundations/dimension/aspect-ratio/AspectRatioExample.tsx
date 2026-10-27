@@ -1,6 +1,6 @@
 // The example for the Aspect ratio page, in Foundations › Dimension › Size.
 import { useState, type CSSProperties } from 'react'
-import { DemoArea } from '@decocode/mezzanine'
+import { DemoBlock } from '@decocode/mezzanine'
 import { examplePictureAlt, useExamplePicture } from '../../../../components/examplePicture'
 import { CssNotes, ExampleText, PanelPicker } from '../../../../components/ExampleParts'
 import { aspectRatioCssNotes } from './aspectRatioContent'
@@ -16,13 +16,13 @@ export function AspectRatioExample() {
   const [ratio, setRatio] = useState<(typeof ratioOptions)[number]['value']>('16 / 9')
   return <>
     <ExampleText>Whatever the shape, the picture is cropped to fill it, never squashed.</ExampleText>
-    <DemoArea align="stretch" codeLanguage="css" codeView={aspectRatioCssNotes.aspectRatio.code} endPanel={<PanelPicker label="Shape" options={ratioOptions} value={ratio} onChange={setRatio} />}>
+    <DemoBlock align="stretch" codeLanguage="css" codeView={aspectRatioCssNotes.aspectRatio.code} endPanel={<PanelPicker label="Shape" options={ratioOptions} value={ratio} onChange={setRatio} />}>
       <div className="aspect-ratio-example">
         <div className="aspect-ratio-frame" style={{ '--_aspect-ratio': ratio } as CSSProperties}>
           <img src={exampleImage} alt={examplePictureAlt} width={480} height={240} />
         </div>
       </div>
-    </DemoArea>
+    </DemoBlock>
     <CssNotes name="Aspect ratio" note={aspectRatioCssNotes.aspectRatio} level={3} showCode={false} />
   </>
 }

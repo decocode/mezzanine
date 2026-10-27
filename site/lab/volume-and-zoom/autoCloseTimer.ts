@@ -2,6 +2,9 @@
 // effect. Lab only: illustrative and unapproved.
 import { useCallback, useRef } from 'react'
 
+// How long the Volume and Zoom pages' pop-ups stay open after their last use.
+export const autoCloseAfterMs = 2000
+
 export function useAutoCloseTimer(delayMs: number, close: () => void) {
   const timer = useRef<number | undefined>(undefined)
   const cancel = useCallback(() => window.clearTimeout(timer.current), [])

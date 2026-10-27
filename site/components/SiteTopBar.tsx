@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { TopBar, Link } from '@decocode/mezzanine'
 import { findSitePage } from '../siteStructure'
 import type { Theme } from '../themeSwitcherLogic'
-import { ThemeSwitcher } from './ThemeSwitcher'
+import { SiteThemeSwitcher } from './SiteThemeSwitcher'
 import { DocsNavigation } from './NavigationPanel'
 
 interface SiteTopBarProps {
@@ -24,7 +24,7 @@ export function SiteTopBar({
   const labCurrent = currentPath === '/site/lab' ? 'page' : currentPath.startsWith('/site/lab/') ? true : undefined
 
   return (
-    <TopBar aria-label="Primary" actions={({ isMenu }) => <ThemeSwitcher isMenu={isMenu} onThemeChange={onThemeChange} selectedTheme={selectedTheme} />} brand={(
+    <TopBar aria-label="Primary" actions={({ isMenu }) => <SiteThemeSwitcher isMenu={isMenu} onThemeChange={onThemeChange} selectedTheme={selectedTheme} />} brand={(
       <Link
         aria-current={currentPath === '/' ? 'page' : undefined}
         aria-label="Mezzanine home"

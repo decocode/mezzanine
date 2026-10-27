@@ -4,7 +4,7 @@ import { expectNoPageOverflow, setTextSize, themes } from '../display'
 
 // Opens the Button Example's icon settings and chooses an option in one of its Selects.
 async function choose(page: Page, label: string, option: string) {
-  await page.locator('main .mz-demo-area-end-panel').first().getByRole('button', { name: new RegExp(label) }).click()
+  await page.locator('main .mz-demo-block-end-panel').first().getByRole('button', { name: new RegExp(label) }).click()
   await page.getByRole('option', { name: option, exact: true }).click()
 }
 
@@ -13,19 +13,19 @@ async function choose(page: Page, label: string, option: string) {
 // shows under the icon.
 test('Button Example names icon buttons by their label', async ({ page }) => {
   await page.goto('/button')
-  const demo = page.locator('main .mz-demo-area').first()
-  await demo.locator('.mz-demo-area-end-panel label', { hasText: /^icon$/ }).click()
+  const demo = page.locator('main .mz-demo-block').first()
+  await demo.locator('.mz-demo-block-end-panel label', { hasText: /^icon$/ }).click()
   await choose(page, 'iconPosition', 'iconOnly')
-  const button = demo.locator('.mz-demo-area-content').getByRole('button', { name: 'Press', exact: true })
+  const button = demo.locator('.mz-demo-block-area').getByRole('button', { name: 'Press', exact: true })
   await expect(button).toHaveAttribute('data-icon-only', 'true')
-  await expect(demo.locator('.mz-demo-area-content').getByText('Press', { exact: true })).toHaveCount(0)
+  await expect(demo.locator('.mz-demo-block-area').getByText('Press', { exact: true })).toHaveCount(0)
   await button.focus()
   await expect(page.getByRole('tooltip')).toHaveText('Press')
   await page.keyboard.press('Escape')
   await expect(page.getByRole('tooltip')).toHaveCount(0)
   await choose(page, 'labelPosition', 'bottom')
   await expect(button).toHaveAttribute('data-label-position', 'bottom')
-  await expect(demo.locator('.mz-demo-area-content').getByText('Press', { exact: true })).toBeVisible()
+  await expect(demo.locator('.mz-demo-block-area').getByText('Press', { exact: true })).toBeVisible()
 })
 
 // Checks that a Button with an href behaves like a link (Enter follows it, Space does not), that an
@@ -43,7 +43,7 @@ test('Button href preserves navigation and action behaviour', async ({ page }) =
   await expect(page.getByRole('status')).toHaveText('Press count: 1')
   await page.keyboard.press('Enter')
   await expect(page.getByRole('status')).toHaveText('Press count: 2')
-  await page.locator('main .mz-demo-area-end-panel').first().locator('label', { hasText: 'isPending' }).click()
+  await page.locator('main .mz-demo-block-end-panel').first().locator('label', { hasText: 'isPending' }).click()
   await expect(page.locator('button[data-pending]').first().getByRole('progressbar')).toHaveAttribute('aria-label', 'Loading')
 })
 
@@ -94,7 +94,7 @@ for (const theme of themes) {
 test('pending Button ring stays visible when the system stops rotation', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/button')
-  await page.locator('main .mz-demo-area-end-panel').first().locator('label', { hasText: 'isPending' }).click()
+  await page.locator('main .mz-demo-block-end-panel').first().locator('label', { hasText: 'isPending' }).click()
   const ring = page.locator('.mz-button-progress-indicator').first()
   await page.evaluate(() => { document.documentElement.dataset.theme = 'wireframe' })
   await expect(ring).toBeVisible()

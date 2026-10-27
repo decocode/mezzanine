@@ -45,7 +45,7 @@
   --color-accent: var(--color-accent-300);
 
   /* The signature tone, from the brand's second palette: text, a soft fill and its border, such as a
-     signature Notice. */
+     signature Alert. */
   --color-signature-muted: var(--color-signature-900);
   --color-signature-muted-pressed: var(--color-signature-800);
   --color-signature: var(--color-signature-300);
@@ -159,7 +159,7 @@
     --color-accent: var(--color-accent-300);
 
     /* The signature tone, from the brand's second palette: text, a soft fill and its border, such as a
-       signature Notice. */
+       signature Alert. */
     --color-signature-muted: var(--color-signature-900);
     --color-signature-muted-pressed: var(--color-signature-800);
     --color-signature: var(--color-signature-300);

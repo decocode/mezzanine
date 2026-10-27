@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, GridList, GridListItem } from '@decocode/mezzanine'
+import { DemoBlock, GridList, GridListItem } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { gridListContent, gridListExampleCode, gridListExampleLabels, gridListLayouts, gridListSelectionModes } from './gridListContent'
@@ -14,7 +14,7 @@ export default function GridListPage() {
       content={gridListContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={gridListExampleCode({ layout, selectionMode, disabledKeys })}
             endPanel={<>
@@ -33,7 +33,7 @@ export default function GridListPage() {
             >
               {gridListExampleLabels.items.map((item) => <GridListItem key={item} id={item}>{item}</GridListItem>)}
             </GridList>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

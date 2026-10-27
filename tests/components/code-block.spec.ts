@@ -3,8 +3,8 @@ import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
 // The Example's Code block, and its Properties panel controls.
-const exampleBlock = (page: Page) => page.locator('.docs-page-lead .mz-demo-area-content .mz-code-block')
-const panel = (page: Page) => page.locator('.docs-page-lead .mz-demo-area-end-panel')
+const exampleBlock = (page: Page) => page.locator('.docs-page-lead .mz-demo-block-area .mz-code-block')
+const panel = (page: Page) => page.locator('.docs-page-lead .mz-demo-block-end-panel')
 const toggle = (page: Page, name: string) => panel(page).locator('label', { hasText: new RegExp(`^${name}$`) }).click()
 async function choose(page: Page, label: string, option: string) {
   await panel(page).getByRole('button', { name: new RegExp(label) }).click()
@@ -96,13 +96,13 @@ test('Code block highlights code with a language', async ({ page }) => {
   expect(await highlighted.locator('.mz-code-block-line-text').first().textContent()).toBe('.example {\n')
 })
 
-// Checks that DemoArea's Code tab highlights its source too: JSX by default, and CSS where a demo sets
+// Checks that DemoBlock's Code tab highlights its source too: JSX by default, and CSS where a demo sets
 // codeLanguage.
-test('DemoArea Code tabs highlight their source', async ({ page }) => {
+test('DemoBlock Code tabs highlight their source', async ({ page }) => {
   for (const path of ['/button', '/dimension/space']) {
     await page.goto(path)
-    await page.locator('.mz-demo-area').first().getByRole('tab', { name: 'Code' }).click()
-    await expect(page.locator('.mz-demo-area').first().locator('.mz-code-block [data-syntax]').first()).toBeVisible()
+    await page.locator('.mz-demo-block').first().getByRole('tab', { name: 'Code' }).click()
+    await expect(page.locator('.mz-demo-block').first().locator('.mz-code-block [data-syntax]').first()).toBeVisible()
   }
 })
 

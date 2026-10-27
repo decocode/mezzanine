@@ -50,8 +50,8 @@
 }
 
 /* Room for the row: the lg width it switches at, plus the demo's padding. Where that doesn't fit beside
-   the Properties panel, DemoArea moves the panel underneath. */
+   the Properties panel, DemoBlock moves the panel underneath. */
 .row-demo {
-  --demo-area-content-min-width: calc(var(--width-lg) + var(--space-4) * 2);
+  --demo-block-area-min-width: calc(var(--width-lg) + var(--space-4) * 2);
 }
 

@@ -10,16 +10,18 @@ import './mezzanine.css'
 export { Avatar } from './components/Avatar/Avatar'
 export type { AvatarProps, AvatarSize } from './components/Avatar/Avatar'
 export { Badge } from './components/Badge/Badge'
-export { DemoArea } from './components/DemoArea/DemoArea'
-export type { DemoAreaAlign, DemoAreaProps } from './components/DemoArea/DemoArea'
+export { DemoBlock } from './components/DemoBlock/DemoBlock'
+export type { DemoBlockAlign, DemoBlockProps } from './components/DemoBlock/DemoBlock'
 export { Card, CardImage, CardTitle, CardFooter } from './components/Card/Card'
 export { CodeBlock } from './components/CodeBlock/CodeBlock'
-export { Notice } from './components/Notice/Notice'
+export { Alert } from './components/Alert/Alert'
+export { ThemeSwitcher } from './components/ThemeSwitcher/ThemeSwitcher'
+export type { ThemeName, ThemeSwitcherProps } from './components/ThemeSwitcher/ThemeSwitcher'
 
 export type { BadgeProps, BadgePurpose } from './components/Badge/Badge'
 export type { CardProps, CardImageProps, CardTitleProps, CardFooterProps } from './components/Card/Card'
 export type { CodeBlockProps } from './components/CodeBlock/CodeBlock'
-export type { NoticeProps, NoticePurpose } from './components/Notice/Notice'
+export type { AlertProps, AlertPurpose } from './components/Alert/Alert'
 
 export { Button } from './components/Button/Button'
 
@@ -155,6 +157,7 @@ export {
   ExternalLinkIcon,
   EyeIcon,
   EyeOffIcon,
+  ContrastIcon,
   LayoutIcon,
   LinkedInIcon,
   LoadingIcon,

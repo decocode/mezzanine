@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, DemoArea, Group, ListBoxItem, Select, Separator, ToggleButton, ToggleButtonGroup, Toolbar } from '@decocode/mezzanine'
+import { Button, DemoBlock, Group, ListBoxItem, Select, Separator, ToggleButton, ToggleButtonGroup, Toolbar } from '@decocode/mezzanine'
 import { toolbarContent, toolbarExampleCode, toolbarExampleLabels, toolbarOrientationLabel, toolbarOrientations } from './toolbarContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -10,7 +10,7 @@ export default function ToolbarPage() {
       content={toolbarContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={toolbarExampleCode(orientation)}
             endPanel={
               <Select size="sm" label={toolbarOrientationLabel} selectedKey={orientation} onSelectionChange={(key) => { if (key != null) setOrientation(key as (typeof toolbarOrientations)[number]) }}>
@@ -27,7 +27,7 @@ export default function ToolbarPage() {
                 {toolbarExampleLabels.actions.map((action) => <Button key={action} size="sm" hierarchy="secondary">{action}</Button>)}
               </Group>
             </Toolbar>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

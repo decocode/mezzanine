@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { siteThemeSelect } from '../display'
+import { siteThemeSwitcher } from '../display'
 import AxeBuilder from '@axe-core/playwright'
 
 test('mobile navigation opens from the TopBar menu and retains expanded groups', async ({ page }) => {
@@ -13,7 +13,7 @@ test('mobile navigation opens from the TopBar menu and retains expanded groups',
   await page.keyboard.press('Enter')
   const tree = page.getByRole('treegrid', { name: 'Index' })
   await expect(tree).toBeVisible()
-  const input = tree.getByRole('button', { name: 'Input', exact: true })
+  const input = tree.getByRole('button', { name: 'Forms and options', exact: true })
   await input.click()
   await expect(tree.getByRole('link', { name: 'Text field', exact: true })).toBeVisible()
   await browse.click()
@@ -52,7 +52,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
       const menu = page.getByRole('banner').getByRole('button', { name: 'Menu', exact: true })
       await menu.click()
       await expect(docsLink).toBeVisible()
-      await expect(siteThemeSelect(page)).toBeVisible()
+      await expect(siteThemeSwitcher(page)).toBeVisible()
       await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Index' })).toBeVisible()
       await expect(page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Home', exact: true })).toHaveCount(0)
       // The menu reads Docs, then Search, then the docs tree, then Lab.

@@ -1,4 +1,4 @@
-import { Cell, Column, DemoArea, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Cell, Column, DemoBlock, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { typographyStyleTokens } from '../typographyContent'
 import { TokenValue } from '../../../../components/TokenValue'
 import { fluidTextExample, sizeAndScalingContent } from './sizeAndScalingContent'
@@ -10,11 +10,11 @@ export default function SizeAndScalingPage() {
       content={sizeAndScalingContent}
       parts={{
         fluidText: (
-          <DemoArea align="stretch">
+          <DemoBlock align="stretch">
             <p className="mz-text-display-md">{fluidTextExample.display}</p>
             <p className="mz-text-heading-lg">{fluidTextExample.heading}</p>
             <p className="mz-text-body-md">{fluidTextExample.body}</p>
-          </DemoArea>
+          </DemoBlock>
         ),
         tokens: (
           <div className="documentation-table">

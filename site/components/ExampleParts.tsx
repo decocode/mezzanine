@@ -19,7 +19,7 @@ export function ExampleText({ children }: { children: ReactNode }) {
 }
 
 // The notes and code for one CssNote, without a heading. Without showCode, the code is left out, for an
-// example whose DemoArea already shows it in its Code tab.
+// example whose DemoBlock already shows it in its Code tab.
 export function CssNotesBody({ note, showCode = true }: { note: CssNote; showCode?: boolean }) {
   return <div className="css-notes-body mz-prose">
     {note.isExample && <Text elementType="p" className="mz-text-body-md">This CSS is for an app to use; the example on this page doesn’t use it.</Text>}
@@ -50,7 +50,7 @@ export function ExampleCard({ title, text = 'Supporting text for the card.', hea
   </Card>
 }
 
-// A choice of one CSS value for an example, such as position: sticky, as a radio group in a DemoArea's
+// A choice of one CSS value for an example, such as position: sticky, as a radio group in a DemoBlock's
 // Properties panel: the options stack in a short list that fits the narrow panel, all visible at once.
 export function PanelPicker<Value extends string>({ label, options, value, onChange }: { label: string; options: readonly { label: string; value: Value }[]; value: Value; onChange: (value: Value) => void }) {
   return <RadioGroup value={value} onChange={(next) => { const option = options.find((item) => item.value === next); if (option) onChange(option.value) }}>

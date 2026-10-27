@@ -9,7 +9,7 @@ for (const theme of themes) {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/switch')
     await setTheme(page, theme)
-    const example = page.locator('.docs-page-lead .mz-demo-area-content .mz-switch-field').first()
+    const example = page.locator('.docs-page-lead .mz-demo-block-area .mz-switch-field').first()
     const control = example.getByRole('switch', { name: 'Switch label', exact: true })
     const track = example.locator('.mz-switch-track')
     const handle = example.locator('.mz-switch-handle')

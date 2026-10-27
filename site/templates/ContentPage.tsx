@@ -2,8 +2,11 @@ import type { ReactNode } from 'react'
 import { Heading } from '@decocode/mezzanine'
 import { DocsTable } from '../components/DocsTable'
 import { RichText } from '../components/RichText'
+import { TableDescription } from '../components/TableDescription'
+import { componentPagePath } from '../components/componentPageLinks'
+import { sitePages } from '../siteStructure'
 import { DocsPageTemplate, type DocumentationSection } from './DocsPageTemplate'
-import { sectionId, sectionTitle, technicalDetailsTitle, type Block, type ContentSection, type DocsPageContent } from './docsPageContent'
+import { sectionId, sectionTitle, technicalDetailsTitle, type Block, type ContentSection, type ContentTable, type DocsPageContent } from './docsPageContent'
 
 // Lists in body text use the body text style; intro lists share the muted description style.
 function Blocks({ blocks, className }: { blocks: readonly Block[]; className?: string }) {
@@ -27,7 +30,16 @@ interface ContentPageProps {
 // details group, which opens with Also known as, then Related pages and References, through DocsPageTemplate.
 // On a component page, the Example's demo comes first, straight after the title and description; the
 // Example section keeps its heading and copy among the sections that follow (owner's decision).
+// An anatomy table links each part named after a component with its own docs page, except the page's
+// own component.
+const isAnatomy = (table: ContentTable) => table.className?.split(' ').includes('documentation-anatomy-table') ?? false
+
 export function ContentPage({ content, parts: givenParts = {}, showContents }: ContentPageProps) {
+  const ownPath = sitePages.find((page) => page.id === content.id)?.path ?? ('href' in content && typeof content.href === 'string' ? content.href : undefined)
+  const linkedPart = (name: string) => {
+    const path = componentPagePath(name)
+    return path === ownPath ? undefined : path
+  }
   const exampleSection = content.kind === 'component' ? content.sections?.find((section) => section.key === 'example') : undefined
   const lead = exampleSection ? givenParts.example : undefined
   const parts = lead === undefined ? givenParts : { ...givenParts, example: undefined }
@@ -57,7 +69,7 @@ export function ContentPage({ content, parts: givenParts = {}, showContents }: C
           descriptionColumn={section.table.descriptionColumn}
           namesAreCode={section.table.namesAreCode}
           className={section.table.className}
-          rows={section.table.rows.map(({ name, description }) => ({ name, description: <RichText text={description} /> }))}
+          rows={section.table.rows.map(({ name, description, href }) => ({ name, description: <TableDescription description={description} />, href: href ?? (isAnatomy(section.table!) ? linkedPart(name) : undefined) }))}
         />}
       </>,
     }

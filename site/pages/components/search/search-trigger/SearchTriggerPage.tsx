@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, Dialog, DialogTrigger, Heading, Input, Modal, ModalOverlay, SearchField, SearchTrigger, Text } from '@decocode/mezzanine'
+import { DemoBlock, Dialog, DialogTrigger, Heading, Input, Modal, ModalOverlay, SearchField, SearchTrigger, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
@@ -18,7 +18,7 @@ export default function SearchTriggerPage() {
       content={searchTriggerContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={searchTriggerExampleCode({ iconPosition, tooltipPosition, shortcut, isDisabled })}
             endPanel={<>
               <PanelSelect label="iconPosition" options={searchTriggerIconPositions} value={iconPosition} onChange={setIconPosition} />
@@ -42,7 +42,7 @@ export default function SearchTriggerPage() {
                 </Modal>
               </ModalOverlay>
             </DialogTrigger>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

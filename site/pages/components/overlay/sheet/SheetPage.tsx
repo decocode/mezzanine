@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, DemoArea, Heading, Sheet, SheetTrigger, Text } from '@decocode/mezzanine'
+import { Button, DemoBlock, Heading, Sheet, SheetTrigger, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { sheetContent, sheetExampleCode, sheetExampleLabels, sheetPositions } from './sheetContent'
@@ -14,7 +14,7 @@ export default function SheetPage() {
       content={sheetContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={sheetExampleCode({ position, preventDismissal, overscrollPadding })}
             endPanel={<>
               <PanelSelect label="position" options={sheetPositions} value={position} onChange={setPosition} />
@@ -30,7 +30,7 @@ export default function SheetPage() {
                 <Button slot="close" hierarchy="secondary">{sheetExampleLabels.close}</Button>
               </Sheet>
             </SheetTrigger>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

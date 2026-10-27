@@ -1,5 +1,5 @@
 import {
-  Button, DemoArea, Dialog, DialogTrigger, Heading, Modal, ModalOverlay,
+  Button, DemoBlock, Dialog, DialogTrigger, Heading, Modal, ModalOverlay,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { PanelSelect } from '../../../../components/PanelSelect'
@@ -18,7 +18,7 @@ export default function DialogPage() {
       content={dialogContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={dialogExampleCode({ role, isDismissable })}
             endPanel={<>
               <PanelSelect label="role" options={dialogRoles} value={role} onChange={setRole} />
@@ -65,7 +65,7 @@ export default function DialogPage() {
                   </Modal>
                 </ModalOverlay>
               </DialogTrigger>}
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

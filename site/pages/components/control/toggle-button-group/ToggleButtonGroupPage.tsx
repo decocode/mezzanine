@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, ListBoxItem, Select, ToggleButton, ToggleButtonGroup, type ButtonSize } from '@decocode/mezzanine'
+import { DemoBlock, ListBoxItem, Select, ToggleButton, ToggleButtonGroup, type ButtonSize } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { buttonSizes } from '../button/buttonContent'
 import {
@@ -24,7 +24,7 @@ export default function ToggleButtonGroupPage() {
       parts={{
         // The Properties panel has a control for each prop that changes what the group looks like or does.
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={toggleButtonGroupExampleCode(props)}
             endPanel={<>
               <Select size="sm" label="selectionMode" selectedKey={selectionMode} onSelectionChange={(key) => { if (key != null) setSelectionMode(key as (typeof toggleButtonGroupSelectionModes)[number]) }}>
@@ -48,7 +48,7 @@ export default function ToggleButtonGroupPage() {
             <ToggleButtonGroup key={selectionMode} aria-label={toggleButtonGroupExample.label} {...props}>
               {toggleButtonGroupExample.toggles.map((toggle) => <ToggleButton key={toggle} id={toggle}>{toggle}</ToggleButton>)}
             </ToggleButtonGroup>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

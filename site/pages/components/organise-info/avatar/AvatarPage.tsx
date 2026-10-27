@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Avatar, DemoArea } from '@decocode/mezzanine'
+import { Avatar, DemoBlock } from '@decocode/mezzanine'
 import { useExamplePicture } from '../../../../components/examplePicture'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
@@ -18,7 +18,7 @@ export default function AvatarPage() {
       content={avatarContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={avatarExampleCode({ size, src, named })}
             endPanel={<>
               <PanelSelect label="size" options={avatarSizes} value={size} onChange={setSize} />
@@ -29,7 +29,7 @@ export default function AvatarPage() {
             {named
               ? <Avatar size={size} src={picture}>{avatarExample.named}</Avatar>
               : <Avatar size={size} src={picture} alt={avatarExample.unnamed} />}
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

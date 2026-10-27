@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, Link, Popover, PreviewTrigger, Text } from '@decocode/mezzanine'
+import { DemoBlock, Link, Popover, PreviewTrigger, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import {
   previewTriggerCloseDelays, previewTriggerContent, previewTriggerDelays, previewTriggerExampleCode, previewTriggerExampleLabels,
@@ -14,7 +14,7 @@ export default function PreviewTriggerPage() {
       content={previewTriggerContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={previewTriggerExampleCode({ delay: Number(delay), closeDelay: Number(closeDelay) })}
             endPanel={<>
               <PanelSelect label="delay" options={previewTriggerDelays} value={delay} onChange={setDelay} />
@@ -29,7 +29,7 @@ export default function PreviewTriggerPage() {
                 </div>
               </Popover>
             </PreviewTrigger>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

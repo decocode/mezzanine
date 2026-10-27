@@ -132,6 +132,16 @@ export function SunIcon(iconProps: IconProps) {
   )
 }
 
+// A circle, half filled: light or dark, whichever the device is set to.
+export function ContrastIcon(iconProps: IconProps) {
+  return (
+    <StrokeIcon {...iconProps}>
+      <circle cx="12" cy="12" r="8" />
+      <path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" />
+    </StrokeIcon>
+  )
+}
+
 export function HeartIcon(iconProps: IconProps) {
   return <StrokeIcon {...iconProps}><path d="M12 20 4.2 12.2a4.6 4.6 0 0 1 6.5-6.5L12 7l1.3-1.3a4.6 4.6 0 0 1 6.5 6.5Z" /></StrokeIcon>
 }

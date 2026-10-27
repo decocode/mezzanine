@@ -1,6 +1,6 @@
-import { Cell, Column, Notice, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Cell, Column, Alert, Row, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { textWeightExamples } from '../typographyContent'
-import { fontWeightContent, fontWeightNotice } from './fontWeightContent'
+import { fontWeightContent, fontWeightAlert } from './fontWeightContent'
 import { RichText } from '../../../../components/RichText'
 import { TokenValue } from '../../../../components/TokenValue'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -30,11 +30,11 @@ export default function FontWeightPage() {
               </TableBody>
             </Table>
           </div>
-          <Notice purpose="signature">
+          <Alert purpose="signature">
             <ul className="mz-text-body-md">
-              {fontWeightNotice.map((item) => <li key={item}><RichText text={item} /></li>)}
+              {fontWeightAlert.map((item) => <li key={item}><RichText text={item} /></li>)}
             </ul>
-          </Notice>
+          </Alert>
         </>),
         tokens: (
           <div className="documentation-table">

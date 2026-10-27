@@ -14,7 +14,7 @@ test('text fields support keyboard editing, descriptions and validation', async 
   await expect(field).toHaveAttribute('data-focused')
   await expect(field).toHaveCSS('outline-style', 'solid')
   // The Example's isReadOnly and isDisabled controls stop the field changing.
-  const panel = page.locator('.docs-page-lead .mz-demo-area-end-panel')
+  const panel = page.locator('.docs-page-lead .mz-demo-block-end-panel')
   await panel.locator('label', { hasText: /^isReadOnly$/ }).click()
   await field.focus()
   await page.keyboard.type(' more')

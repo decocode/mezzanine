@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, Footer, Link } from '@decocode/mezzanine'
+import { DemoBlock, Footer, Link } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { footerChildren, footerContent, footerExampleCode, footerExampleLabels as labels } from './footerContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -11,7 +11,7 @@ export default function FooterPage() {
       content={footerContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={footerExampleCode(children)}
             endPanel={<PanelSelect label="children" options={footerChildren} value={children} onChange={setChildren} />}
@@ -26,7 +26,7 @@ export default function FooterPage() {
                 </nav>
               )}
             </Footer>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

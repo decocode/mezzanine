@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { chooseSiteTheme, siteThemeSelect } from '../display'
+import { chooseSiteTheme, siteThemeSwitcher } from '../display'
 import AxeBuilder from '@axe-core/playwright'
 
 // On narrow screens, the Lab uses the site's own TopBar menu: Docs, then Lab, then the Lab's
@@ -49,13 +49,19 @@ test('Lab shares the docs frame and the saved theme with Docs', async ({ page })
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
   await navigation.getByRole('link', { name: 'Layout', exact: true }).click()
   await expect(page).toHaveURL(/\/site\/lab\/layout$/)
-  await expect(siteThemeSelect(page)).toContainText('Dark')
+  await siteThemeSwitcher(page).click()
+  await expect(page.getByRole('menuitemradio', { name: 'Dark', exact: true })).toHaveAttribute('aria-checked', 'true')
+  await page.keyboard.press('Escape')
   await chooseSiteTheme(page, 'Wireframe')
   await page.reload()
-  await expect(siteThemeSelect(page)).toContainText('Wireframe')
+  await siteThemeSwitcher(page).click()
+  await expect(page.getByRole('menuitemradio', { name: 'Wireframe', exact: true })).toHaveAttribute('aria-checked', 'true')
+  await page.keyboard.press('Escape')
   await chooseSiteTheme(page, 'Light')
   await page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Docs', exact: true }).click()
   await expect(page).toHaveURL(/\/introduction$/)
-  await expect(siteThemeSelect(page)).toContainText('Light')
+  await siteThemeSwitcher(page).click()
+  await expect(page.getByRole('menuitemradio', { name: 'Light', exact: true })).toHaveAttribute('aria-checked', 'true')
+  await page.keyboard.press('Escape')
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light')
 })

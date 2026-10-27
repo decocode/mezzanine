@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, DemoArea, Dialog, DialogTrigger, Heading, Modal, ModalOverlay, Text } from '@decocode/mezzanine'
+import { Button, DemoBlock, Dialog, DialogTrigger, Heading, Modal, ModalOverlay, Text } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { modalContent, modalExampleCode, modalExampleLabels, modalFlags } from './modalContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -11,7 +11,7 @@ export default function ModalPage() {
       content={modalContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={modalExampleCode(flags)}
             endPanel={modalFlags.map((name) => (
               <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
@@ -31,7 +31,7 @@ export default function ModalPage() {
                 </Modal>
               </ModalOverlay>
             </DialogTrigger>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

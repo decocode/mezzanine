@@ -4,7 +4,7 @@ import { demoThemeSelect, expectNoPageOverflow, setTextSize, setTheme, textSizes
 
 // The Tooltip page demo's tools: the theme Select and the Properties panel's button, which show their
 // names in tooltips.
-const demoTools = (page: Page) => page.locator('.docs-page-lead .mz-demo-area-frame')
+const demoTools = (page: Page) => page.locator('.docs-page-lead .mz-demo-block-frame')
 const propertiesToggle = (page: Page) => demoTools(page).getByRole('button', { name: /^(Hide|Show) properties$/ })
 
 // Checks that the demo tools' tooltips, on the Tooltip page, appear on hover, stay open while the pointer
@@ -107,11 +107,11 @@ test('Tooltip documentation example supports hover and keyboard focus at narrow 
     await setTextSize(page, fontSize)
     // Bring the demo itself into view, below the Properties panel on a phone, so focusing its button
     // doesn't scroll the page and close the tooltip the button opens.
-    await page.locator('.docs-page-lead .mz-demo-area-content').evaluate(element => element.scrollIntoView({ block: 'start' }))
+    await page.locator('.docs-page-lead .mz-demo-block-area').evaluate(element => element.scrollIntoView({ block: 'start' }))
     // Let scroll-triggered overlay dismissal finish before focusing the example.
     await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
     // Start from the Properties panel's last control, just before the demo, then Tab into the example.
-    await page.locator('.docs-page-lead .mz-demo-area-end-panel-controls').getByRole('button').last().evaluate(element => (element as HTMLElement).focus({ preventScroll: true }))
+    await page.locator('.docs-page-lead .mz-demo-block-end-panel-controls').getByRole('button').last().evaluate(element => (element as HTMLElement).focus({ preventScroll: true }))
     await page.keyboard.press('Tab')
     await expect(button).toBeFocused()
     await expect(tooltip).toBeVisible()

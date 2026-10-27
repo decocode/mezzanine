@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AppShell, DemoArea, Panel, PanelTrigger } from '@decocode/mezzanine'
+import { AppShell, DemoBlock, Panel, PanelTrigger } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { panelContent, panelEdges, panelExampleCode, panelExampleLabels as labels, panelFlags } from './panelContent'
@@ -16,7 +16,7 @@ export default function PanelPage() {
       content={panelContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             className="app-shell-example-demo"
             codeView={panelExampleCode({ edge, flags })}
@@ -39,7 +39,7 @@ export default function PanelPage() {
               </main>
               {edge !== 'start' && <PanelExample edge={edge} flags={flags} />}
             </AppShell>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

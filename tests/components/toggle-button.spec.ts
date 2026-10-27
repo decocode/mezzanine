@@ -4,12 +4,12 @@ import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '
 
 // Chooses an option in one of the Example's Properties panel Selects.
 async function choose(page: Page, label: string, option: string) {
-  const panel = page.locator('main .mz-demo-area').first().locator('.mz-demo-area-end-panel')
+  const panel = page.locator('main .mz-demo-block').first().locator('.mz-demo-block-end-panel')
   await panel.getByRole('button', { name: new RegExp(label) }).click()
   await page.getByRole('option', { name: option, exact: true }).click()
 }
 
-const exampleToggle = (page: Page) => page.locator('main .mz-demo-area').first().locator('.mz-demo-area-content .mz-toggle-button')
+const exampleToggle = (page: Page) => page.locator('main .mz-demo-block').first().locator('.mz-demo-block-area .mz-toggle-button')
 
 // Checks, in each theme, that a secondary toggle button in the Example looks different when hovered,
 // pressed and selected, switches with the mouse and Space, can be disabled, passes an accessibility
@@ -35,7 +35,7 @@ for (const theme of themes) {
     await expect(toggle).toHaveCSS('outline-style', 'solid')
     await page.mouse.move(0, 0)
     await expectNoAccessibilityViolations(page, 'main')
-    await page.locator('main .mz-demo-area-end-panel').first().locator('label', { hasText: 'isDisabled' }).click()
+    await page.locator('main .mz-demo-block-end-panel').first().locator('label', { hasText: 'isDisabled' }).click()
     await expect(exampleToggle(page)).toBeDisabled()
     await page.setViewportSize({ width: 320, height: 900 })
     await setTextSize(page, 32)
@@ -61,12 +61,12 @@ for (const fontSize of textSizes) {
     const dimensions = async (route: string, selector: string) => {
       await page.goto(route)
       await setTextSize(page, fontSize)
-      await page.locator('main .mz-demo-area-end-panel').first().locator('label', { hasText: /^icon$/ }).click()
+      await page.locator('main .mz-demo-block-end-panel').first().locator('label', { hasText: /^icon$/ }).click()
       await choose(page, 'iconPosition', 'iconOnly')
       const sizes = []
       for (const size of ['xs', 'sm', 'md', 'lg', 'xl']) {
         await choose(page, 'size', size)
-        sizes.push(await page.locator('main .mz-demo-area').first().locator(`.mz-demo-area-content ${selector}`).evaluate(button => {
+        sizes.push(await page.locator('main .mz-demo-block').first().locator(`.mz-demo-block-area ${selector}`).evaluate(button => {
           const style = getComputedStyle(button)
           const icon = button.querySelector('svg')!
           return { size: button.getAttribute('data-size'), width: style.width, height: style.height,
@@ -81,7 +81,7 @@ for (const fontSize of textSizes) {
     expect(buttons.map(button => button.size)).toEqual(['xs', 'sm', 'md', 'lg', 'xl'])
     expect(buttons.map(button => parseFloat(button.iconWidth))).toEqual([1, 1.25, 1.5, 1.75, 2].map(size => size * fontSize))
     expect(buttons.map(button => parseFloat(button.height))).toEqual([2, 2.25, 2.75, 3, 3.5].map(size => size * fontSize))
-    const properties = page.locator('main .mz-demo-area').first().getByRole('button', { name: 'Hide properties', exact: true })
+    const properties = page.locator('main .mz-demo-block').first().getByRole('button', { name: 'Hide properties', exact: true })
     await expect(properties).toHaveAttribute('data-size', 'sm')
     await expect(properties.locator('svg')).toHaveCSS('width', `${fontSize * 1.25}px`)
   })

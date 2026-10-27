@@ -123,8 +123,8 @@
 }
 
 /* Layout: filling the box. The picture sticks out of the frame's edge, so this frame keeps
-   its dashed line inside the DemoArea. */
-.lab-edge-demo.mz-demo-area .width-frame {
+   its dashed line inside the DemoBlock. */
+.lab-edge-demo.mz-demo-block .width-frame {
   border: var(--border-width-baseline) dashed var(--color-text-muted);
 }
 

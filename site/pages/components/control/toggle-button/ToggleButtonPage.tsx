@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BulbIcon, DemoArea, ListBoxItem, Select, Separator, ToggleButton, type ButtonSize } from '@decocode/mezzanine'
+import { BulbIcon, DemoBlock, ListBoxItem, Select, Separator, ToggleButton, type ButtonSize } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { buttonSizes } from '../button/buttonContent'
 import {
@@ -35,7 +35,7 @@ export default function ToggleButtonPage() {
       parts={{
         // The Properties panel has a control for each prop that changes what the toggle looks like or does.
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={toggleButtonExampleCode({ icon: flags.icon, ...iconProps, ...labelProps, ...tooltipProps, ...props })}
             endPanel={<>
               <Select size="sm" label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as (typeof toggleButtonHierarchies)[number]) }}>
@@ -93,7 +93,7 @@ export default function ToggleButtonPage() {
               : isIconButton
                 ? <ToggleButton key={String(flags.defaultSelected)} {...props} icon={<BulbIcon />} iconPosition="iconOnly" tooltipPosition={tooltipPosition}>{toggleButtonExample.label}</ToggleButton>
                 : <ToggleButton key={String(flags.defaultSelected)} {...props} icon={flags.icon ? <BulbIcon /> : undefined} iconPosition={iconPosition === 'trailing' ? 'trailing' : 'leading'}>{toggleButtonExample.label}</ToggleButton>}
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

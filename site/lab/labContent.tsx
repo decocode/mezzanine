@@ -3,8 +3,8 @@ import { siteNavigationGroups } from '../siteStructure'
 import { labBadgeLabel } from './shared/labValues'
 import { layoutPages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
-import { panelDemoAreaPage } from './panel-demo-area/panelDemoAreaContent'
-import { volumeAndZoomPage } from './volume-and-zoom/volumeAndZoomContent'
+import { demoBlockPage, panelHostPage, panelPage } from './panel-demo-block/panelDemoBlockContent'
+import { expandingControlsPage, volumePage, zoomPage } from './volume-and-zoom/volumeAndZoomContent'
 
 export const labContent = {
   index: { label: 'Lab', href: '/site/lab' },
@@ -33,7 +33,11 @@ export const labNavigationItems: NavTreeSectionData[] = [
     },
   ] },
   { type: 'section', id: 'components', label: docsGroupLabel('components'), children: [
-    { id: 'panel-demo-area', label: panelDemoAreaPage.title, href: panelDemoAreaPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
-    { id: 'volume-and-zoom', label: volumeAndZoomPage.title, href: volumeAndZoomPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'panel', label: panelPage.title, href: panelPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'panel-host', label: panelHostPage.title, href: panelHostPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'demo-block', label: demoBlockPage.title, href: demoBlockPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'volume', label: volumePage.title, href: volumePage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'zoom', label: zoomPage.title, href: zoomPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'expanding-controls', label: expandingControlsPage.title, href: expandingControlsPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
   ] },
 ]

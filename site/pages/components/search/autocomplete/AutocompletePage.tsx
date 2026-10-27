@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Autocomplete, DemoArea, Input, ListBox, ListBoxItem, SearchField, useFilter } from '@decocode/mezzanine'
+import { Autocomplete, DemoBlock, Input, ListBox, ListBoxItem, SearchField, useFilter } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { autocompleteContent, autocompleteExampleCode, autocompleteFilters, autocompleteOptions } from './autocompleteContent'
@@ -14,7 +14,7 @@ export default function AutocompletePage() {
       content={autocompleteContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={autocompleteExampleCode({ filter, disableAutoFocusFirst })}
             endPanel={<>
               <PanelSelect label="filter" options={autocompleteFilters} value={filter} onChange={setFilter} />
@@ -29,7 +29,7 @@ export default function AutocompletePage() {
                 </ListBox>
               </Autocomplete>
             </div>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

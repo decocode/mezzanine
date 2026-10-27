@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { chooseSiteTheme, siteThemeSelect } from '../display'
+import { chooseSiteTheme, siteThemeSwitcher } from '../display'
 import { sitePageFile, sitePages } from '../../site/siteStructure'
 
 // The file name of every page component, such as "ButtonPage". Shared modules whose names also end
@@ -49,7 +49,7 @@ test('delayed loading keeps the shell usable and restores a direct section link'
   await expect(page.getByRole('status')).toHaveText('Loading documentation…')
   await page.evaluate(() => { document.documentElement.style.fontSize = '32px' })
   await page.getByRole('button', { name: 'Menu', exact: true }).click()
-  await expect(siteThemeSelect(page)).toBeVisible()
+  await expect(siteThemeSwitcher(page)).toBeVisible()
   await page.getByRole('button', { name: 'Close menu', exact: true }).click()
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320)
 
@@ -92,7 +92,7 @@ test('theme changes preserve the loaded page and example state', async ({ page }
 test('switching theme keeps content in the same place', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 })
   await page.goto('/button')
-  const selectors = ['main', 'main h1', '.mz-demo-area', '.mz-top-bar', '.mz-panel']
+  const selectors = ['main', 'main h1', '.mz-demo-block', '.mz-top-bar', '.mz-panel']
   for (const selector of selectors) await expect(page.locator(selector).first()).toBeVisible()
   const boxes = async () => page.evaluate(selectors => selectors.map(selector => {
     const { x, y, width, height } = document.querySelector(selector)!.getBoundingClientRect()

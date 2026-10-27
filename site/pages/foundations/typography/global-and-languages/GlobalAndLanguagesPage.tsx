@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card, DemoArea } from '@decocode/mezzanine'
+import { Card, DemoBlock } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { RichText } from '../../../../components/RichText'
 import {
@@ -15,7 +15,7 @@ export default function GlobalAndLanguagesPage() {
       content={globalAndLanguagesContent}
       parts={{
         startAndEnd: (
-          <DemoArea align="stretch" codeLanguage="css" codeView={startAndEndCode} endPanel={<PanelSwitch isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</PanelSwitch>}>
+          <DemoBlock align="stretch" codeLanguage="css" codeView={startAndEndCode} endPanel={<PanelSwitch isSelected={isRightToLeft} onChange={setRightToLeft}>{startAndEndExample.toggle}</PanelSwitch>}>
             <div dir={isRightToLeft ? 'rtl' : 'ltr'} className="mz-ratio-pair text-direction-example" data-fraction="1/2">
               <div>
                 <p className="mz-text-label-md">{startAndEndExample.physicalLabel}</p>
@@ -26,10 +26,10 @@ export default function GlobalAndLanguagesPage() {
                 <p className="text-direction-logical mz-text-body-md"><RichText text={startAndEndExample.logicalText} /></p>
               </div>
             </div>
-          </DemoArea>
+          </DemoBlock>
         ),
         rightToLeft: (
-          <DemoArea align="stretch" codeLanguage="html" codeView={rightToLeftCode}>
+          <DemoBlock align="stretch" codeLanguage="html" codeView={rightToLeftCode}>
             <ul className="text-language-examples">
               {readingDirectionRightToLeftExamples.map(({ language, lang, text }) => <li key={lang} dir="rtl" lang={lang}>
                 <Card>
@@ -38,10 +38,10 @@ export default function GlobalAndLanguagesPage() {
                 </Card>
               </li>)}
             </ul>
-          </DemoArea>
+          </DemoBlock>
         ),
         topToBottom: (
-          <DemoArea align="stretch" codeLanguage="css" codeView={topToBottomCode}>
+          <DemoBlock align="stretch" codeLanguage="css" codeView={topToBottomCode}>
             <ul className="text-language-examples">
               {readingDirectionVerticalExamples.map(({ language, lang, text }) => <li key={lang}>
                 <Card>
@@ -50,7 +50,7 @@ export default function GlobalAndLanguagesPage() {
                 </Card>
               </li>)}
             </ul>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

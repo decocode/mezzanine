@@ -15,7 +15,7 @@
 @import './components/Button/Button.css';
 @import './components/Card/Card.css';
 @import './components/CodeBlock/CodeBlock.css';
-@import './components/Notice/Notice.css';
+@import './components/Alert/Alert.css';
 @import './components/Checkbox/Checkbox.css';
 @import './components/CheckboxGroup/CheckboxGroup.css';
 @import './components/Switch/Switch.css';
@@ -26,6 +26,7 @@
 @import './components/Popover/Popover.css';
 @import './components/Menu/Menu.css';
 @import './components/Select/Select.css';
+@import './components/ThemeSwitcher/ThemeSwitcher.css';
 @import './components/ComboBox/ComboBox.css';
 @import './components/NumberField/NumberField.css';
 @import './components/TagGroup/TagGroup.css';
@@ -37,7 +38,7 @@
 @import './components/Toolbar/Toolbar.css';
 @import './components/Sheet/Sheet.css';
 @import './components/Form/Form.css';
-@import './components/DemoArea/DemoArea.css';
+@import './components/DemoBlock/DemoBlock.css';
 @import './components/Dialog/Dialog.css';
 @import './components/Disclosure/Disclosure.css';
 @import './components/TopBar/TopBar.css';

@@ -4,6 +4,18 @@
     "kind": "value"
   },
   {
+    "name": "Alert",
+    "kind": "value"
+  },
+  {
+    "name": "AlertProps",
+    "kind": "type"
+  },
+  {
+    "name": "AlertPurpose",
+    "kind": "type"
+  },
+  {
     "name": "AppShell",
     "kind": "value"
   },
@@ -256,6 +268,10 @@
     "kind": "type"
   },
   {
+    "name": "ContrastIcon",
+    "kind": "value"
+  },
+  {
     "name": "CopyIcon",
     "kind": "value"
   },
@@ -264,15 +280,15 @@
     "kind": "value"
   },
   {
-    "name": "DemoArea",
+    "name": "DemoBlock",
     "kind": "value"
   },
   {
-    "name": "DemoAreaAlign",
+    "name": "DemoBlockAlign",
     "kind": "type"
   },
   {
-    "name": "DemoAreaProps",
+    "name": "DemoBlockProps",
     "kind": "type"
   },
   {
@@ -701,18 +717,6 @@
   },
   {
     "name": "NavTreeSectionData",
-    "kind": "type"
-  },
-  {
-    "name": "Notice",
-    "kind": "value"
-  },
-  {
-    "name": "NoticeProps",
-    "kind": "type"
-  },
-  {
-    "name": "NoticePurpose",
     "kind": "type"
   },
   {
@@ -1250,6 +1254,18 @@
   {
     "name": "TextWrapIcon",
     "kind": "value"
+  },
+  {
+    "name": "ThemeName",
+    "kind": "type"
+  },
+  {
+    "name": "ThemeSwitcher",
+    "kind": "value"
+  },
+  {
+    "name": "ThemeSwitcherProps",
+    "kind": "type"
   },
   {
     "name": "ToggleButton",

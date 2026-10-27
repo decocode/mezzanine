@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, DemoArea, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
+import { Button, DemoBlock, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { tooltipContent, tooltipDelays, tooltipExampleCode, tooltipExampleLabels, tooltipPlacements } from './tooltipContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -12,7 +12,7 @@ export default function TooltipPage() {
       content={tooltipContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={tooltipExampleCode({ placement, delay: Number(delay) })}
             endPanel={<>
               <PanelSelect label="placement" options={tooltipPlacements} value={placement} onChange={setPlacement} />
@@ -23,7 +23,7 @@ export default function TooltipPage() {
               <Button>{tooltipExampleLabels.button}</Button>
               <Tooltip placement={placement}>{tooltipExampleLabels.tooltip}</Tooltip>
             </TooltipTrigger>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

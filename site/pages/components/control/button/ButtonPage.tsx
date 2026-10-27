@@ -1,5 +1,5 @@
 import {
-  Button, Cell, Column, DemoArea, DownloadIcon, ListBoxItem, Notice, Row, Select, Separator, Table, TableBody, TableHeader, type ButtonHierarchy,
+  Button, Cell, Column, DemoBlock, DownloadIcon, ListBoxItem, Alert, Row, Select, Separator, Table, TableBody, TableHeader, type ButtonHierarchy,
   type ButtonSize,
 } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
@@ -10,7 +10,7 @@ import {
   buttonExampleCopy,
   buttonExampleLabel,
   buttonFlags,
-  buttonLinkNotice,
+  buttonLinkAlert,
   buttonIconPositions,
   buttonLabelPositions,
   buttonTooltipPositions,
@@ -54,7 +54,7 @@ export default function ButtonPage() {
       content={buttonContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={buttonExampleCode(codeProps)}
             endPanel={<>
               <Select size="sm" label="hierarchy" selectedKey={hierarchy} onSelectionChange={(key) => { if (key != null) setHierarchy(key as ButtonHierarchy) }}>
@@ -112,12 +112,12 @@ export default function ButtonPage() {
                 ? <Button {...props} icon={<DownloadIcon />} iconPosition="iconOnly" tooltipPosition={tooltipPosition} onPress={handlePress}>{buttonExampleLabel}</Button>
                 : <Button {...props} icon={flags.icon ? <DownloadIcon /> : undefined} iconPosition={iconPosition === 'trailing' ? 'trailing' : 'leading'} onPress={handlePress}>{buttonExampleLabel}</Button>}
             <p className="component-example-feedback" role="status">{buttonExampleCopy.pressCount} {pressCount}</p>
-          </DemoArea>
+          </DemoBlock>
         ),
         about: (
-          <Notice purpose="info" title={buttonLinkNotice.title}>
-            <p><RichText text={buttonLinkNotice.body} /></p>
-          </Notice>
+          <Alert purpose="info" title={buttonLinkAlert.title}>
+            <p><RichText text={buttonLinkAlert.body} /></p>
+          </Alert>
         ),
         states: (
           <div className="documentation-table">

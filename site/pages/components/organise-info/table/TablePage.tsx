@@ -1,5 +1,5 @@
 import {
-  Cell, Checkbox, Column, DemoArea, Row, Table, TableBody, TableHeader, type SortDescriptor,
+  Cell, Checkbox, Column, DemoBlock, Row, Table, TableBody, TableHeader, type SortDescriptor,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { VisuallyHidden } from 'react-aria-components/VisuallyHidden'
@@ -29,7 +29,7 @@ export default function TablePage() {
       content={tableContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={tableExampleCode({ selectionMode, flags })}
             endPanel={<>
@@ -74,7 +74,7 @@ export default function TablePage() {
                   </TableBody>}
               </Table>
             </div>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

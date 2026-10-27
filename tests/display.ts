@@ -17,15 +17,15 @@ export async function expectNoPageOverflow(page: Page) {
   await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0)
 }
 
-// The site's theme Select in the top bar, which shows the chosen theme.
-export const siteThemeSelect = (page: Page) => page.getByRole('banner').getByRole('button', { name: /^(Light|Dark|Wireframe) Theme$/ }).filter({ visible: true }).first()
+// The site's ThemeSwitcher in the top bar, a menu button named "Switch theme".
+export const siteThemeSwitcher = (page: Page) => page.getByRole('banner').getByRole('button', { name: 'Switch theme', exact: true }).filter({ visible: true }).first()
 
 export async function chooseSiteTheme(page: Page, label: 'Light' | 'Dark' | 'Wireframe') {
-  await siteThemeSelect(page).click()
-  await page.getByRole('option', { name: label, exact: true }).click()
+  await siteThemeSwitcher(page).click()
+  await page.getByRole('menuitemradio', { name: label, exact: true }).click()
 }
 
-// A DemoArea's theme Select, inside the given demo area, which shows the chosen theme's icon.
+// A DemoBlock's theme Select, inside the given demo block, which shows the chosen theme's icon.
 export const demoThemeSelect = (demo: Locator) => demo.getByRole('button', { name: /^(Light|Dark|Wireframe) Demo theme$/ }).first()
 
 export async function chooseDemoTheme(page: Page, demo: Locator, label: 'Light' | 'Dark' | 'Wireframe') {

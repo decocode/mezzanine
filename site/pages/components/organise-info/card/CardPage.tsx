@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Avatar, Badge, Button, Card, CardFooter, CardImage, CardTitle, DemoArea, HeartIcon, Text, ToggleButton } from '@decocode/mezzanine'
+import { Avatar, Badge, Button, Card, CardFooter, CardImage, CardTitle, DemoBlock, HeartIcon, Text, ToggleButton } from '@decocode/mezzanine'
 import { useExamplePicture } from '../../../../components/examplePicture'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
@@ -16,7 +16,7 @@ export default function CardPage() {
       content={cardContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             codeView={cardExampleCode({ aspectRatio, flags })}
             endPanel={<>
               {cardFlags.map((name) => (
@@ -42,7 +42,7 @@ export default function CardPage() {
                 </CardFooter>
               )}
             </Card>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

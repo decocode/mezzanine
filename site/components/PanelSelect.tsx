@@ -1,6 +1,6 @@
 import { ListBoxItem, Select } from '@decocode/mezzanine'
 
-// A choice in a DemoArea's Properties panel: a Select named after the prop, listing its values.
+// A choice in a DemoBlock's Properties panel: a Select named after the prop, listing its values.
 export function PanelSelect<T extends string>({ label, options, value, onChange, className }: {
   label: string
   options: readonly T[]

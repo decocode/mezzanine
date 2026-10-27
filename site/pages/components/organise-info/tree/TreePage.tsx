@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoArea, Tree, TreeItem } from '@decocode/mezzanine'
+import { DemoBlock, Tree, TreeItem } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { treeContent, treeExampleCode, treeExampleLabels, treeSelectionBehaviors, treeSelectionModes } from './treeContent'
@@ -16,7 +16,7 @@ export default function TreePage() {
       content={treeContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={treeExampleCode({ selectionMode, selectionBehavior, isExpanded, disabledKeys })}
             endPanel={<>
@@ -42,7 +42,7 @@ export default function TreePage() {
               ))}
               <TreeItem id={treeExampleLabels.leaf} title={treeExampleLabels.leaf} />
             </Tree>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />

@@ -42,7 +42,7 @@ or in the wrong folder.
 
 Useful site components:
 
-- The library's `DemoArea` is the standard frame around an example. `codeView`
+- The library's `DemoBlock` is the standard frame around an example. `codeView`
   adds a Code tab showing the example's source, `endPanel` holds its controls
   in a Properties panel beside the preview, and `className` handles special
   layouts. A layout example sits in `WidthDemo` (`components/WidthFrame.tsx`),
@@ -58,7 +58,7 @@ Every page uses `ContentPage`. The page passes its content file and any live
 parts:
 
 ```tsx
-<ContentPage content={badgeContent} parts={{ example: <DemoArea>…</DemoArea> }} />
+<ContentPage content={badgeContent} parts={{ example: <DemoBlock>…</DemoBlock> }} />
 ```
 
 Every page, in the Docs or the Lab, follows the same order:
@@ -110,7 +110,15 @@ The Technical details group always uses this order (owner's decision, 23 October
 2026):
 
 1. Also known as, when the page has it.
-2. Anatomy: the parts the component is built from.
+2. Anatomy: the parts the component is built from. The Component column names
+   each part, and the Purpose column says its job in this component (owner's
+   decision, 27 October 2026). A part built from a library component is named
+   after that component, such as Button or Slider, not after its job, such as
+   "Trigger"; its name then links to that component's page, which
+   `ContentPage` finds from `site/siteStructure.ts`. A part that isn't a
+   component, such as a header or a strip, keeps a plain name. A component used
+   more than once is listed once, with one Purpose entry for each use, shown one
+   under another.
 3. Behaviour: how it responds and changes. Page-specific extras, such as
    Table's Responsive behaviour, sit next to it.
 4. States: when a page lists them inside Technical details.

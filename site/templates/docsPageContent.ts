@@ -20,7 +20,11 @@ export interface ContentTable {
   // Part names such as "Section header" are plain text; API names default to code.
   readonly namesAreCode?: boolean
   readonly className?: string
-  readonly rows: readonly { readonly name: string; readonly description: Copy }[]
+  // href links a row's name. In an anatomy table, a part named after a component with its own docs
+  // page links to it without one.
+  // A description with several entries lists them one under another, divided by lines: one entry for
+  // each job a part does, when the same component is used more than once.
+  readonly rows: readonly { readonly name: string; readonly description: Copy | readonly Copy[]; readonly href?: string }[]
 }
 
 export interface ContentSection {

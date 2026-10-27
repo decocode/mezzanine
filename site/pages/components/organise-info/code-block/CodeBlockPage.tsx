@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CodeBlock, DemoArea } from '@decocode/mezzanine'
+import { CodeBlock, DemoBlock } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
@@ -22,7 +22,7 @@ export default function CodeBlockPage() {
       content={codeBlockContent}
       parts={{
         example: (
-          <DemoArea
+          <DemoBlock
             align="stretch"
             codeView={codeBlockExampleCodeView({ language, startLine: Number(startLine), flags })}
             endPanel={<>
@@ -44,7 +44,7 @@ export default function CodeBlockPage() {
             >
               {code}
             </CodeBlock>
-          </DemoArea>
+          </DemoBlock>
         ),
       }}
     />
