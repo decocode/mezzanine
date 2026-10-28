@@ -1,9 +1,9 @@
 import { Button, DemoBlock, Link, TopBar } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { PanelSwitch } from '../../../components/PanelSwitch'
 import { topBarContent, topBarExampleCode, topBarFlags } from './topBarContent'
-import { ContentPage } from '../../../../templates/ContentPage'
+import { ContentPage } from '../../../templates/ContentPage'
 
 export default function TopBarPage() {
   const [destination, setDestination] = useState('Home link')

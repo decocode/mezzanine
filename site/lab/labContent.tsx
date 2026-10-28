@@ -18,9 +18,9 @@ export const labContent = {
 const docsGroupLabel = (id: string) => siteNavigationGroups.find((group) => group.id === id)?.label
 
 // The Lab's own navigation tree, shown in its start Panel and the TopBar menu on Lab pages. Like the
-// Docs navigation, it has Foundations and Components sections with headers. Foundations holds Layout,
+// Docs navigation, it has Foundations, Components and Structure sections with headers. Foundations holds Layout,
 // with its pages in reading order, then Emerging features, which carries the Lab
-// badge. Components holds the candidate components.
+// badge. Components and Structure hold the candidate components.
 export const labNavigationItems: NavTreeSectionData[] = [
   { type: 'section', id: 'foundations', label: docsGroupLabel('foundations'), children: [
     {
@@ -35,11 +35,13 @@ export const labNavigationItems: NavTreeSectionData[] = [
   ] },
   { type: 'section', id: 'components', label: docsGroupLabel('components'), children: [
     { id: 'item', label: itemPage.title, href: itemPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
-    { id: 'panel', label: panelPage.title, href: panelPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
-    { id: 'panel-host', label: panelHostPage.title, href: panelHostPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
     { id: 'demo-block', label: demoBlockPage.title, href: demoBlockPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
     { id: 'volume', label: volumePage.title, href: volumePage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
     { id: 'zoom', label: zoomPage.title, href: zoomPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
     { id: 'expanding-controls', label: expandingControlsPage.title, href: expandingControlsPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+  ] },
+  { type: 'section', id: 'structure', label: docsGroupLabel('structure'), children: [
+    { id: 'panel', label: panelPage.title, href: panelPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'panel-host', label: panelHostPage.title, href: panelHostPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
   ] },
 ]

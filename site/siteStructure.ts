@@ -270,18 +270,19 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
           { id: 'sheet', label: 'Sheet', path: '/sheet', status: 'implemented' },
         ],
       },
-      {
-        // The components that frame an app's screen. Last, because it may move out of Components.
-        id: 'structure',
-        label: 'Structure',
-        pages: [
-          { id: 'app-shell', label: 'App shell', path: '/app-shell', status: 'implemented' },
-          { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
-          { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
-          { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
-          { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
-        ],
-      },
+    ],
+  },
+  {
+    // The components that frame an app's screen, a section of its own beside Foundations and Components
+    // (owner, 28 October 2026).
+    id: 'structure',
+    label: 'Structure',
+    pages: [
+      { id: 'app-shell', label: 'App shell', path: '/app-shell', status: 'implemented' },
+      { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
+      { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
+      { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
+      { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },
     ],
   },
 ]

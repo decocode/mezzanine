@@ -1,6 +1,6 @@
-import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
-import { pointerRows } from '../../../../components/pointerRows'
+import type { DocsPageContent } from '../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../components/formatJsxProps'
+import { pointerRows } from '../../../components/pointerRows'
 
 // Teaching labels for the live example, shared with the Panel page.
 export const appShellExampleLabels = {

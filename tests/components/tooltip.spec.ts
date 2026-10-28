@@ -2,7 +2,7 @@ import { expect, test, type Page } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { demoThemeSelect, expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// The Tooltip page demo's tools: the theme Select and the Properties panel's button, which show their
+// The Tooltip page demo's tools: the ThemeSwitcher and the Properties panel's button, which show their
 // names in tooltips.
 const demoTools = (page: Page) => page.locator('.docs-page-lead .mz-demo-block-frame')
 const propertiesToggle = (page: Page) => demoTools(page).getByRole('button', { name: /^(Hide|Show) properties$/ })
@@ -14,7 +14,7 @@ test('demo tool tooltips support hover, hoverable content and Escape dismissal',
   await page.clock.install()
   await page.goto('/tooltip')
   await page.mouse.move(0, 500)
-  for (const [name, control] of [['Demo theme', demoThemeSelect(demoTools(page))], ['Hide properties', propertiesToggle(page)]] as const) {
+  for (const [name, control] of [['Switch demo theme', demoThemeSelect(demoTools(page))], ['Hide properties', propertiesToggle(page)]] as const) {
     await control.hover()
     const tooltip = page.getByRole('tooltip', { name, exact: true })
     await expect(tooltip).toBeVisible()

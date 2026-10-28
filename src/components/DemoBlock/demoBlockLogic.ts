@@ -1,32 +1,20 @@
 // Which theme the page around a DemoBlock shows, so the demo's theme switcher starts there and follows it.
+import type { ThemeName } from '../ThemeSwitcher/ThemeSwitcher'
 
-export type DemoTheme = 'light' | 'dark' | 'wireframe'
+const themeNames: readonly ThemeName[] = ['light', 'dark', 'system', 'wireframe']
 
-export const demoThemes: readonly DemoTheme[] = ['light', 'dark', 'wireframe']
-
-export function isDemoTheme(value: unknown): value is DemoTheme {
-  return typeof value === 'string' && (demoThemes as readonly string[]).includes(value)
-}
-
-// The page's theme: its root element's data-theme, or the device's light or dark setting when it is
-// "system" or not set.
-export function getPageTheme(): DemoTheme {
+// The page's theme: its root element's data-theme, or System, which follows the device, when it isn't set.
+export function getPageTheme(): ThemeName {
   const theme = document.documentElement.dataset.theme
-  if (isDemoTheme(theme)) return theme
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return themeNames.find((name) => name === theme) ?? 'system'
 }
 
-export function getServerPageTheme(): DemoTheme {
-  return 'light'
+export function getServerPageTheme(): ThemeName {
+  return 'system'
 }
 
 export function subscribeToPageTheme(onChange: () => void) {
   const observer = new MutationObserver(onChange)
   observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] })
-  const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-  colorScheme.addEventListener('change', onChange)
-  return () => {
-    observer.disconnect()
-    colorScheme.removeEventListener('change', onChange)
-  }
+  return () => observer.disconnect()
 }

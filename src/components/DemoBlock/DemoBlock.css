@@ -1,4 +1,4 @@
-/* A live demo in a frame: a strip across the top holding the theme Select, the demo on the page's
+/* A live demo in a frame: a strip across the top holding the ThemeSwitcher, the demo on the page's
    colour, and optional controls in an end panel that hangs from the top. With room, the panel runs
    down the end beside the demo; without, it sits between the strip and the demo. With code, Demo and Code tabs sit above, outside the frame, and the Code tab's code
    block is a frame of its own. */
@@ -21,7 +21,7 @@
   background: var(--demo-block-background, var(--color-surface));
 }
 
-/* The strip, with the theme Select at its start. */
+/* The strip, with the ThemeSwitcher at its start. */
 .mz-demo-block-bar {
   grid-area: bar;
   display: flex;

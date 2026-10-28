@@ -538,6 +538,14 @@ body {
   border-block-start: var(--border-width-hairline) solid var(--color-border);
 }
 
+/* Props that work together each get their own line in the name cell. */
+.documentation-name-list {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--space-1);
+}
+
 :is(.documentation-props-table, .documentation-anatomy-table) .mz-table {
   /* Scroll on narrow screens instead of crushing names or descriptions. */
   min-inline-size: var(--width-lg);

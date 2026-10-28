@@ -12,6 +12,15 @@ interface DocsTableProps {
   namesAreCode?: boolean
 }
 
+// A row can name several props that work together, such as "isOpen / defaultOpen" or "className, style",
+// with an optional component in front, such as "Tooltip: offset / crossOffset". Each is shown as its
+// own code, on its own line, with the component in front of each.
+function splitNames(name: string): string[] {
+  const prefixed = name.match(/^([A-Z][A-Za-z]*): (.+)$/)
+  const names = (prefixed ? prefixed[2] : name).split(/\s*(?:\/|,)\s+/).filter(Boolean)
+  return prefixed ? names.map((each) => `${prefixed[1]}: ${each}`) : names
+}
+
 // Shared presentation for Anatomy, Props and CSS token reference data.
 export function DocsTable({ 'aria-label': label, nameColumn, rows, className, descriptionColumn = 'Purpose', namesAreCode = true }: DocsTableProps) {
   return (
@@ -23,7 +32,10 @@ export function DocsTable({ 'aria-label': label, nameColumn, rows, className, de
         </TableHeader>
         <TableBody>
           {rows.map(({ name, description, href }) => {
-            const label = namesAreCode ? <code>{name}</code> : name
+            const names = namesAreCode ? splitNames(name) : [name]
+            const label = !namesAreCode ? name
+              : names.length === 1 ? <code>{name}</code>
+              : <span className="documentation-name-list">{names.map((each) => <code key={each}>{each}</code>)}</span>
             return <Row id={name} key={name}>
               <Cell>{href ? <Link href={href}>{label}</Link> : label}</Cell>
               <Cell>{description}</Cell>

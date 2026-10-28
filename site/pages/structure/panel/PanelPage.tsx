@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { AppShell, DemoBlock, Panel, PanelTrigger } from '@decocode/mezzanine'
-import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { PanelSelect } from '../../../components/PanelSelect'
+import { PanelSwitch } from '../../../components/PanelSwitch'
 import { panelContent, panelEdges, panelExampleCode, panelExampleLabels as labels, panelFlags } from './panelContent'
-import { ContentPage } from '../../../../templates/ContentPage'
+import { ContentPage } from '../../../templates/ContentPage'
 
 export default function PanelPage() {
   const [edge, setEdge] = useState<(typeof panelEdges)[number]>('start')

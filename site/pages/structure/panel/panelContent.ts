@@ -1,6 +1,6 @@
-import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
-import { pointerRows } from '../../../../components/pointerRows'
+import type { DocsPageContent } from '../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../components/formatJsxProps'
+import { pointerRows } from '../../../components/pointerRows'
 
 export const panelContent: DocsPageContent = {
   id: 'panel',

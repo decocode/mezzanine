@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { findSiteNavigationGroups, sitePages } from '../../site/siteStructure'
 
 const componentPages = sitePages.filter(page => page.status === 'implemented'
-  && findSiteNavigationGroups(page.id).some(group => group.id === 'components'))
+  && findSiteNavigationGroups(page.id).some(group => group.id === 'components' || group.id === 'structure'))
 
 for (const definition of componentPages) {
   test(`${definition.path} uses consistent sections and matching On this page links`, async ({ page }) => {

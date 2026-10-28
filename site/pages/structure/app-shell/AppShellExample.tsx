@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AppShell, DemoBlock, Footer, Panel, PanelTrigger } from '@decocode/mezzanine'
-import { PanelSelect } from '../../../../components/PanelSelect'
+import { PanelSelect } from '../../../components/PanelSelect'
 import { appShellExampleCode, appShellExampleLabels as labels, appShellSpans, type AppShellSpans } from './appShellContent'
 
 // A small AppShell with a Panel at each edge. The Properties panel sets how far each Panel spans.

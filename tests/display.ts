@@ -25,10 +25,10 @@ export async function chooseSiteTheme(page: Page, label: 'Light' | 'Dark' | 'Wir
   await page.getByRole('menuitemradio', { name: label, exact: true }).click()
 }
 
-// A DemoBlock's theme Select, inside the given demo block, which shows the chosen theme's icon.
-export const demoThemeSelect = (demo: Locator) => demo.getByRole('button', { name: /^(Light|Dark|Wireframe) Demo theme$/ }).first()
+// A DemoBlock's ThemeSwitcher, inside the given demo block, which shows the chosen theme's icon.
+export const demoThemeSelect = (demo: Locator) => demo.getByRole('button', { name: 'Switch demo theme', exact: true }).first()
 
 export async function chooseDemoTheme(page: Page, demo: Locator, label: 'Light' | 'Dark' | 'Wireframe') {
   await demoThemeSelect(demo).click()
-  await page.getByRole('option', { name: label, exact: true }).click()
+  await page.getByRole('menuitemradio', { name: label, exact: true }).click()
 }

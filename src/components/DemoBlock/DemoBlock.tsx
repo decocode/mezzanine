@@ -5,11 +5,10 @@ import type { CodeBlockLanguage } from '../CodeBlock/codeBlockHighlight'
 // The demo frame has its own look, so its Tabs root is React Aria's, without Mezzanine's class.
 import { Tabs } from 'react-aria-components/Tabs'
 import { Tab, TabList, TabPanel } from '../Tabs/Tabs'
-import { ListBoxItem } from '../ListBox/ListBox'
-import { Select } from '../Select/Select'
+import { ThemeSwitcher, type ThemeName } from '../ThemeSwitcher/ThemeSwitcher'
 import { Button } from '../Button/Button'
-import { ChevronDownIcon, ChevronUpIcon, LayoutIcon, MoonIcon, SunIcon } from '../../icons/Icons'
-import { getPageTheme, getServerPageTheme, isDemoTheme, subscribeToPageTheme, type DemoTheme } from './demoBlockLogic'
+import { ChevronDownIcon, ChevronUpIcon } from '../../icons/Icons'
+import { getPageTheme, getServerPageTheme, subscribeToPageTheme } from './demoBlockLogic'
 import { useIsSideBySide } from './demoBlockLayout'
 
 // Where the demo sits in its area, in CSS's alignment words: in the middle, stretched to fill the
@@ -29,22 +28,17 @@ export interface DemoBlockProps {
   className?: string
 }
 
-const themeOptions: { id: DemoTheme; label: string; icon: ReactNode }[] = [
-  { id: 'light', label: 'Light', icon: <SunIcon /> },
-  { id: 'dark', label: 'Dark', icon: <MoonIcon /> },
-  { id: 'wireframe', label: 'Wireframe', icon: <LayoutIcon /> },
-]
-
-// A framed area that shows a live demo of components, with a strip above it holding a theme Select that
+// A framed area that shows a live demo of components, with a strip above it holding a ThemeSwitcher that
 // changes only this demo, showing the chosen theme's icon. An end panel of controls hangs from the top:
 // beside the demo on a wide screen, above it on a narrow one, and its header's button rolls it up. With code to
 // show, Demo and Code tabs sit outside the frame, and the Code tab shows a CodeBlock, which is its own
 // frame with its own buttons. A heading above it names the demo. React Aria has
-// no matching component, so Mezzanine composes it from Tabs, Select, Button and CodeBlock.
+// no matching component, so Mezzanine composes it from Tabs, ThemeSwitcher, Button and CodeBlock.
 export function DemoBlock({ children, codeView, codeLanguage = 'tsx', endPanel, align = 'center', className }: DemoBlockProps) {
   const pageTheme = useSyncExternalStore(subscribeToPageTheme, getPageTheme, getServerPageTheme)
-  // Until someone picks a theme, the demo follows the page's.
-  const [chosenTheme, setChosenTheme] = useState<DemoTheme | null>(null)
+  // Until someone picks a theme, the demo follows the page's. System is a theme of its own here:
+  // data-theme="system" follows the device inside the demo too.
+  const [chosenTheme, setChosenTheme] = useState<ThemeName | null>(null)
   const [previewElement, setPreviewElement] = useState<HTMLDivElement | null>(null)
   const propertiesLabelId = useId()
   // The end panel starts open on every page; closing it isn't remembered.
@@ -53,19 +47,8 @@ export function DemoBlock({ children, codeView, codeLanguage = 'tsx', endPanel, 
   const [frameElement, setFrameElement] = useState<HTMLDivElement | null>(null)
   const isSideBySide = useIsSideBySide(frameElement)
 
-  // The theme Select, at the start of the strip across the top.
-  const themeSelect = (
-    <Select
-      aria-label="Demo theme"
-      hierarchy="secondary"
-      size="sm"
-      valuePosition="iconOnly"
-      selectedKey={chosenTheme ?? pageTheme}
-      onSelectionChange={(key) => { if (isDemoTheme(key)) setChosenTheme(key) }}
-    >
-      {themeOptions.map((option) => <ListBoxItem key={option.id} id={option.id} icon={option.icon}>{option.label}</ListBoxItem>)}
-    </Select>
-  )
+  // The ThemeSwitcher, at the start of the strip across the top.
+  const themeSwitcher = <ThemeSwitcher label="Demo theme" selectedTheme={chosenTheme ?? pageTheme} onThemeChange={setChosenTheme} />
 
   // The end panel, like a shop's filters: a header with its title and a button that rolls its controls
   // up into the header and down again. The header stays, so the button never moves.
@@ -115,7 +98,7 @@ export function DemoBlock({ children, codeView, codeLanguage = 'tsx', endPanel, 
       data-end-panel={endPanel != null ? (isEndPanelOpen ? 'open' : 'closed') : undefined}
       data-side-by-side={(endPanel != null && isSideBySide) || undefined}
     >
-      <div className="mz-demo-block-bar">{themeSelect}</div>
+      <div className="mz-demo-block-bar">{themeSwitcher}</div>
       {panel}
       {content}
     </div>

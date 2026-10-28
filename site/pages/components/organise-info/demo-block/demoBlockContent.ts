@@ -21,7 +21,7 @@ export const demoBlockContent: DocsPageContent = {
           { name: 'Tabs', description: 'Optional, from `codeView`: Demo and Code tabs, outside the frame.' },
           { name: 'Frame', description: 'The border around the strip, the end panel and the demo area.' },
           { name: 'Strip', description: 'The theme switcher, at the start. It’s part of the frame, so it isn’t shown while the Code tab is open.' },
-          { name: 'Select', description: 'The theme switcher: Light, Dark and Wireframe, showing the chosen theme’s icon. It starts on the page’s theme and changes only this demo, pop-ups included.' },
+          { name: 'ThemeSwitcher', description: 'The theme switcher: System, Light, Dark and Wireframe, showing the chosen theme’s icon. It starts on the page’s theme and changes only this demo, pop-ups included.' },
           { name: 'Demo area', description: 'The space where the live components are shown, on the theme’s page colour.' },
           { name: 'End panel', description: 'Optional, from `endPanel`: controls for the component, hanging from the top like a shop’s filters. On a wide area it runs down the end beside the demo; on a narrow one it sits above the demo. Its header holds the title “Properties”, which names it for screen readers, and a button that rolls the controls up into the header and down again. It starts open.' },
           { name: 'CodeBlock', description: 'Optional, from `codeView`: the demo’s source, highlighted in the language `codeLanguage` sets. The code block is its own frame, with its own buttons.' },
@@ -40,7 +40,7 @@ export const demoBlockContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: [
-        'The Demo and Code tabs come first, then the theme Select, the end panel’s button and controls, and then the demo. The button is named “Hide properties” or “Show properties”, and says whether the controls are expanded. On the Code tab, the code block’s own buttons follow the tabs. The theme Select is named “Demo theme”, shows the chosen theme’s icon, and shows its name in a tooltip; screen readers hear the theme too.',
+        'The Demo and Code tabs come first, then the ThemeSwitcher, the end panel’s button and controls, and then the demo. The button is named “Hide properties” or “Show properties”, and says whether the controls are expanded. On the Code tab, the code block’s own buttons follow the tabs. The ThemeSwitcher is named “Switch demo theme”, shows the chosen theme’s icon and its name in a tooltip, and its menu, headed “Demo theme”, ticks the chosen theme.',
       ],
     },
     {
