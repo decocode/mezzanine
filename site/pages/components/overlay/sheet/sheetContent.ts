@@ -51,7 +51,6 @@ export const sheetContent: DocsPageContent = {
   ],
   relatedPages: [
     { label: 'Modal', href: '/modal' },
-    { label: 'Panel', href: '/panel' },
   ],
   references: [
     { label: 'React Aria Sheet', href: 'https://react-aria.adobe.com/Sheet' },

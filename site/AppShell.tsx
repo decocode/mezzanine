@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState } from 'react'
-import { Link } from '@decocode/mezzanine'
+// The library's AppShell, named apart from this file's own AppShell, the site's top level.
+import { AppShell as LibraryAppShell, Link } from '@decocode/mezzanine'
 import { SiteTopBar } from './components/SiteTopBar'
 import { docsSearchSection } from './components/siteSearchLogic'
 import { docsNavigationItems } from './components/docsNavigationItems'
@@ -38,14 +39,17 @@ export function AppShell({ initialTheme }: AppShellProps) {
     return (
       <>
         <title>{`${siteContent.notFound.title} | ${siteContent.name}`}</title>
-        <SiteTopBar
-          currentPath={currentPath}
-          onThemeChange={changeTheme}
-          selectedTheme={selectedTheme}
-        />
-        <main className="not-found-page" id="main-content">
-          <NotFoundPage />
-        </main>
+        {/* The same frame and header as every other page. */}
+        <LibraryAppShell className="docs-app-shell">
+          <SiteTopBar
+            currentPath={currentPath}
+            onThemeChange={changeTheme}
+            selectedTheme={selectedTheme}
+          />
+          <main className="not-found-page" id="main-content">
+            <NotFoundPage />
+          </main>
+        </LibraryAppShell>
       </>
     )
   }
@@ -55,14 +59,17 @@ export function AppShell({ initialTheme }: AppShellProps) {
       <>
         <title>{siteContent.name}</title>
         <Link className="skip-link" href="#main-content">{siteContent.skipLink}</Link>
-        <SiteTopBar
-          currentPath={currentPath}
-          onThemeChange={changeTheme}
-          selectedTheme={selectedTheme}
-        />
-        <main className="landing-page" id="main-content">
-          <PageLoader page={currentPage} />
-        </main>
+        {/* The same frame and header as every other page. */}
+        <LibraryAppShell className="docs-app-shell">
+          <SiteTopBar
+            currentPath={currentPath}
+            onThemeChange={changeTheme}
+            selectedTheme={selectedTheme}
+          />
+          <main className="landing-page" id="main-content">
+            <PageLoader page={currentPage} />
+          </main>
+        </LibraryAppShell>
       </>
     )
   }

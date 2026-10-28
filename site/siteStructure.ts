@@ -279,7 +279,7 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
     label: 'Structure',
     pages: [
       { id: 'app-shell', label: 'App shell', path: '/app-shell', status: 'implemented' },
-      { id: 'panel', label: 'Panel', path: '/panel', status: 'implemented' },
+      { id: 'panel', label: 'Panel', path: '/panel', status: 'empty' },
       { id: 'top-bar', label: 'Top bar', path: '/top-bar', status: 'implemented' },
       { id: 'footer', label: 'Footer', path: '/footer', status: 'implemented' },
       { id: 'rail', label: 'Rail', path: '/rail', status: 'empty' },

@@ -371,8 +371,6 @@ const propTables = [
   { file: 'site/pages/components/navigation/table-of-contents/tableOfContentsContent.ts', key: 'props', types: ['TableOfContentsProps'] },
   { file: 'site/pages/structure/app-shell/appShellContent.ts', key: 'props', types: ['AppShellProps'] },
   { file: 'site/pages/structure/footer/footerContent.ts', key: 'props', types: ['FooterProps'] },
-  { file: 'site/pages/structure/panel/panelContent.ts', key: 'props', types: ['PanelProps'],
-    components: { PanelTrigger: ['PanelTriggerProps'] } },
   { file: 'site/pages/components/overlay/tooltip/tooltipContent.ts', key: 'props', types: [],
     components: { TooltipTrigger: ['TooltipTriggerComponentProps'], Tooltip: ['TooltipProps'] } },
 ]

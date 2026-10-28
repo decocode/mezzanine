@@ -36,7 +36,7 @@ export const appShellContent: DocsPageContent = {
         rows: [
           { name: 'AppShell', description: 'The frame. It lays out its children in a grid that responds to its own size.' },
           { name: 'header', description: 'The app’s own `<header>`, across the top, such as one holding a `TopBar`.' },
-          { name: 'Panel', description: 'An area at the start, end or bottom edge. See [Panel](/panel).' },
+          { name: 'Panel', description: 'An area at the start, end or bottom edge.' },
           { name: 'main', description: 'The app’s own `<main>`, in the middle. It keeps a minimum width.' },
           { name: 'Footer', description: 'Optional. It follows the main content, and the two scroll together. See [Footer](/footer).' },
         ],
@@ -104,7 +104,6 @@ export const appShellContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'Panel', href: '/panel' },
     { label: 'Top bar', href: '/top-bar' },
   ],
   references: [

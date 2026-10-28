@@ -3,7 +3,7 @@ import type { DocsPageContent } from '../../../../templates/docsPageContent'
 export const widthLevels = [
   { token: '--width-xs', label: 'Width xs', description: 'Used for components such as [Tabs](/tabs).' },
   { token: '--width-sm', label: 'Width sm', description: 'Used for layouts such as [Split](/layout/split).' },
-  { token: '--width-md', label: 'Width md', description: 'Used for components such as [Tooltip](/tooltip) and [Panel](/panel).' },
+  { token: '--width-md', label: 'Width md', description: 'Used for components such as [Tooltip](/tooltip) and Panel.' },
   { token: '--width-lg', label: 'Width lg', description: 'Used for components such as Modal.' },
   { token: '--width-xl', label: 'Width xl', description: 'Used for wide page areas, such as a hero.' },
   { token: '--width-2xl', label: 'Width 2xl', description: 'Used for the widest page areas, such as a page heading.' },
@@ -43,7 +43,6 @@ export const widthContent: DocsPageContent = {
     { label: 'Aspect ratio', href: '/dimension/aspect-ratio' },
     { label: 'Lines and words', href: '/typography/lines-and-words' },
     { label: 'Accessibility', href: '/accessibility' },
-    { label: 'Panel', href: '/panel' },
     { label: 'Tooltip', href: '/tooltip' },
   ],
   references: [
