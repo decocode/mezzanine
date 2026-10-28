@@ -9,6 +9,7 @@ import { supportsCssNotes } from '../../site/pages/foundations/interaction/suppo
 import { readingOrderCssNotes } from '../../site/pages/foundations/layout/reading-order/readingOrderContent'
 import { splitCssNotes } from '../../site/pages/foundations/layout/split/splitContent'
 import { rowCssNotes } from '../../site/pages/foundations/layout/row/rowContent'
+import { rowSwitchCssNotes } from '../../site/pages/foundations/layout/row-switch/rowSwitchContent'
 import { rowWrapCssNotes } from '../../site/pages/foundations/layout/row-wrap/rowWrapContent'
 import { rowWrapGrowCssNotes } from '../../site/pages/foundations/layout/row-wrap-grow/rowWrapGrowContent'
 import { reelCssNotes } from '../../site/pages/foundations/layout/reel/reelContent'
@@ -27,9 +28,10 @@ const pages: { path: string; notes: Record<string, CssNote>; stylesheet?: string
   { path: '/interaction/media-queries', notes: mediaQueriesCssNotes },
   { path: '/interaction/safe-areas', notes: safeAreasCssNotes, stylesheet: 'site/pages/foundations/interaction/safe-areas/safeAreas.css' },
   { path: '/interaction/supports', notes: supportsCssNotes },
-  { path: '/layout/reading-order', notes: readingOrderCssNotes, stylesheet: 'site/pages/foundations/layout/reading-order/readingOrder.css' },
+  { path: '/layout/reading-order', notes: readingOrderCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
   { path: '/layout/split', notes: splitCssNotes, stylesheet: 'src/styles/layout.css' },
   { path: '/layout/row', notes: rowCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
+  { path: '/layout/row-switch', notes: rowSwitchCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
   { path: '/layout/row-wrap', notes: rowWrapCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
   { path: '/layout/row-wrap-grow', notes: rowWrapGrowCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
   { path: '/layout/reel', notes: reelCssNotes, stylesheet: 'site/pages/foundations/layout/sideBySide.css' },
@@ -90,7 +92,7 @@ test('Style priority chips show which rule won', async ({ page }) => {
 // Checks that reversing the row changes only what's seen: Tab still follows the HTML.
 test('Reading order follows the HTML when the row is reversed', async ({ page }) => {
   await page.goto('/layout/reading-order')
-  const buttons = page.locator('.reading-order-row').getByRole('button')
+  const buttons = page.locator('.row').getByRole('button')
   await expect(buttons).toHaveCount(3)
   const leftToRight = () => buttons.evaluateAll(items => items.map(item => ({ name: item.textContent, left: item.getBoundingClientRect().left })).sort((a, b) => a.left - b.left).map(item => item.name))
   expect(await leftToRight()).toEqual(['Button 1', 'Button 2', 'Button 3'])
@@ -120,11 +122,11 @@ test('Also known as opens Technical details, starts closed and opens from its bu
   await expect(names).toBeVisible()
 })
 
-// Checks Row: with the switch, a narrow frame turns the row into a column; without it, the items stay
+// Checks Row switch: with the switch, a narrow frame turns the row into a column; without it, the items stay
 // in one row.
-test('Row switches to a column below the lg width', async ({ page }) => {
-  await page.goto('/layout/row')
-  const items = page.locator('.example-row > *')
+test('Row switch becomes a column below the lg width', async ({ page }) => {
+  await page.goto('/layout/row-switch')
+  const items = page.locator(':is(.row, .row-switch) > *')
   const rows = () => items.evaluateAll(list => new Set(list.map(item => Math.round(item.getBoundingClientRect().top))).size)
   await expect.poll(rows).toBe(1)
   // The frame fills its demo, so a phone-sized window makes it narrower than the lg width.

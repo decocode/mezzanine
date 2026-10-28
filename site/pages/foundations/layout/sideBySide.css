@@ -1,57 +1,65 @@
-/* The examples for the Row, Row wrap, Row wrap grow and Reel pages. The pages' CSS notes quote the pattern rules, and a browser test checks
+/* The examples for the Row, Row switch, Row wrap, Row wrap grow, Reel and Reading order pages. The pages' CSS notes quote the pattern rules, and a browser test checks
    that they still match. */
 
-.example-reel:focus-visible {
+.reel:focus-visible {
   outline: var(--focus-ring-width) solid var(--color-focus);
   outline-offset: var(--space-1);
 }
 
-.example-row {
+.row {
   display: flex;
   align-items: center;
   gap: var(--space-3);
 }
 
-.example-row-switch {
+.row-switch {
+  display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
 }
 
-.example-row-switch > * {
+.row-switch > * {
   flex-grow: 1;
   flex-basis: calc((var(--width-lg) - 100%) * 999);
 }
 
-.example-row-wrap {
+.row-wrap {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-2);
 }
 
-.example-row-wrap-grow {
+.row-wrap-grow {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
 }
 
-.example-row-wrap-grow > * {
+.row-wrap-grow > * {
   flex: 1 1 var(--width-xs);
 }
 
-.example-reel {
+.row-reverse {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.reel {
   display: flex;
   gap: var(--space-3);
   overflow-x: auto;
   padding-block-end: var(--space-2);
 }
 
-.example-reel > * {
+.reel > * {
   flex: 0 0 var(--width-xs);
 }
 
-/* Room for the row: the lg width it switches at, plus the demo's padding. Where that doesn't fit beside
+/* Room for the Row switch example: the lg width it switches at, plus the demo's padding. Where that doesn't fit beside
    the Properties panel, DemoBlock moves the panel underneath. */
-.row-demo {
+.row-switch-demo {
   --demo-block-area-min-width: calc(var(--width-lg) + var(--space-4) * 2);
 }
 

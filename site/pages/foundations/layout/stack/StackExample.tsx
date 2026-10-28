@@ -7,7 +7,7 @@ export function StackExample() {
   return <>
     <ExampleText>Three items, one above another, with the same space between each.</ExampleText>
     <WidthDemo label="Stack" code={stackCssNotes.stack.code}>
-      <div className="example-stack-pattern">
+      <div className="stack">
         {['Item A', 'Item B', 'Item C'].map((item) => <ExampleCard key={item} title={item} headingLevel={3} />)}
       </div>
     </WidthDemo>

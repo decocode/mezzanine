@@ -25,8 +25,8 @@ export function GridExample() {
   return <>
     <ExampleText>Six items in a grid, with the first spanning two cells. Whatever the columns, it keeps both.</ExampleText>
     <WidthDemo label="Grid" code={gridCssNotes.grid.code} controls={<PanelPicker label="Columns" options={columnOptions} value={columns} onChange={setColumns} />}>
-      <div className="example-grid" style={{ '--_grid-columns': columns } as CSSProperties}>
-        <ExampleCard className="example-grid-wide" title="Item A" text="This card spans two columns." headingLevel={4} />
+      <div className="grid" style={{ '--_grid-columns': columns } as CSSProperties}>
+        <ExampleCard className="grid-wide" title="Item A" text="This card spans two columns." headingLevel={4} />
         {otherItems.map((item) => <ExampleCard key={item} title={item} headingLevel={4} />)}
       </div>
     </WidthDemo>
@@ -40,7 +40,7 @@ export function SetNumberOfColumnsExample() {
     <ExampleText>The grid always has the same number of columns, each an equal share, however wide or narrow the space.</ExampleText>
     <WidthDemo label="A set number of columns" code={gridCssNotes.setNumberOfColumns.code} controls={<PanelPicker label="Columns" options={columnCountOptions} value={count} onChange={setCount} />}>
       <div className="example-fixed-column-grid" style={{ '--_column-count': count } as CSSProperties}>
-        <ExampleCard className="example-grid-wide" title="Item A" text="This card spans two columns." headingLevel={4} />
+        <ExampleCard className="grid-wide" title="Item A" text="This card spans two columns." headingLevel={4} />
         {otherItems.map((item) => <ExampleCard key={item} title={item} headingLevel={4} />)}
       </div>
     </WidthDemo>

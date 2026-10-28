@@ -86,10 +86,11 @@ export const siteNavigationGroups: SiteNavigationGroup[] = [
         id: 'layout',
         label: 'Layout',
         path: '/layout',
-        order: ['stack', 'row', 'row-wrap', 'row-wrap-grow', 'split', 'reel', 'grid', 'subgrid', 'container-queries', 'reading-order'],
+        order: ['stack', 'row', 'row-switch', 'row-wrap', 'row-wrap-grow', 'split', 'reel', 'grid', 'subgrid', 'container-queries', 'reading-order'],
         pages: [
           { id: 'stack', label: 'Stack', path: '/layout/stack', status: 'implemented' },
           { id: 'row', label: 'Row', path: '/layout/row', status: 'implemented' },
+          { id: 'row-switch', label: 'Row switch', path: '/layout/row-switch', status: 'implemented' },
           { id: 'row-wrap', label: 'Row wrap', path: '/layout/row-wrap', status: 'implemented' },
           { id: 'row-wrap-grow', label: 'Row wrap grow', path: '/layout/row-wrap-grow', status: 'implemented' },
           { id: 'split', label: 'Split', path: '/layout/split', status: 'implemented' },

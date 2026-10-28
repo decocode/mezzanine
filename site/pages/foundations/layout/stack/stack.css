@@ -1,5 +1,5 @@
 /* The Stack page's example: items one below another, evenly spaced. */
-.example-stack-pattern {
+.stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);

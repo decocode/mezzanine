@@ -1,22 +1,22 @@
 /* The Subgrid page's example: the parts inside items line up across a row. The items are Cards, which
    become grids here so their parts can share the list's rows. */
-.example-subgrid-list {
+.subgrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
   gap: var(--space-4);
 }
 
-.example-subgrid-item {
+.subgrid-item {
   display: grid;
   align-content: start;
   gap: var(--space-3);
 }
 
-.example-subgrid-item > * {
+.subgrid-item > * {
   margin: 0;
 }
 
-.example-subgrid-on .example-subgrid-item {
+.subgrid-on .subgrid-item {
   grid-row: span 3;
   grid-template-rows: subgrid;
 }
