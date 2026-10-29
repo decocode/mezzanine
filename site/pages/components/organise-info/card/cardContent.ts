@@ -31,7 +31,7 @@ export const cardContent: DocsPageContent = {
         'Place the parts inside `Card` in the order people should see them, with other components such as `Avatar`, `Text` and `Button`. Card adds the spacing between them.',
         'Content flows as it does elsewhere on a page: headings and paragraphs fill the width, while inline content such as `code`, a `Badge` or a `Link` keeps its natural size.',
         '`CardImage` needs `src` and `alt`. Pass `alt=""` when the title already names the card, so the picture is decorative.',
-        'To make the card a link, give `CardTitle` an `href`. Pressing anywhere on the card then follows it, and an arrow at the card’s end shows it can be pressed, unless a `CardFooter` holds the card’s actions. Buttons, toggles and links inside the card stay pressable on their own. `CardTitle` accepts React Aria `Link` props, such as `target`, and `level` sets its heading level, 3 by default.',
+        'To make the card a link, give `CardTitle` an `href`. Pressing anywhere on the card then follows it, and an arrow at the card’s end shows it can be pressed. With a `CardFooter`, the arrow sits at the end of the footer. Buttons, toggles and links inside the card stay pressable on their own. `CardTitle` accepts React Aria `Link` props, such as `target`, and `level` sets its heading level, 3 by default.',
         'Pass `className` to position the card in your layout. Card also accepts the other attributes of a `div`.',
       ],
     },
@@ -81,24 +81,36 @@ export const cardExample = {
 // The Properties panel's choices: the picture's shape (16 / 9 by default), and the card's optional
 // parts. With href, the title links and the whole card can be pressed.
 export const cardAspectRatios = ['16 / 9', '4 / 3', '1 / 1'] as const
-export const cardFlags = ['CardImage', 'href', 'CardFooter'] as const
+// The example's switches, in the order of the Card's anatomy.
+export const cardFlags = ['CardImage', 'Badge', 'ToggleButton', 'Avatar', 'href', 'CardFooter', 'Detail', 'Button'] as const
+
+// Badge and ToggleButton sit on the picture, so they need it. A footer Button only goes in a card
+// without href, because a linked card's footer ends with its arrow. Detail, the footer's text, needs the
+// footer.
+export function isCardFlagShown(name: (typeof cardFlags)[number], flags: Record<(typeof cardFlags)[number], boolean>) {
+  if (name === 'Badge' || name === 'ToggleButton') return flags.CardImage
+  if (name === 'Detail') return flags.CardFooter
+  if (name === 'Button') return flags.CardFooter && !flags.href
+  return true
+}
 
 export function cardExampleCode({ aspectRatio, flags }: { aspectRatio: string, flags: Record<(typeof cardFlags)[number], boolean> }) {
+  const shown = (name: (typeof cardFlags)[number]) => flags[name] && isCardFlagShown(name, flags)
+  const image = `<CardImage src={picture} alt=""${formatJsxProps(aspectRatio === '16 / 9' ? {} : { aspectRatio })}`
+  const overlays = [
+    ...(shown('Badge') ? [`    <Badge>${cardExample.badge}</Badge>`] : []),
+    ...(shown('ToggleButton') ? [`    <ToggleButton hierarchy="secondary" size="sm" icon={<HeartIcon />} iconPosition="iconOnly">${cardExample.toggle}</ToggleButton>`] : []),
+  ]
   return [
     '<Card>',
-    ...(flags.CardImage ? [
-      `  <CardImage src={picture} alt=""${formatJsxProps({ aspectRatio: aspectRatio === '16 / 9' ? undefined : aspectRatio })}>`,
-      `    <Badge>${cardExample.badge}</Badge>`,
-      `    <ToggleButton hierarchy="secondary" size="sm" icon={<HeartIcon />} iconPosition="iconOnly">${cardExample.toggle}</ToggleButton>`,
-      '  </CardImage>',
-    ] : []),
-    `  <Avatar size="sm">${cardExample.avatar}</Avatar>`,
+    ...(flags.CardImage ? overlays.length === 0 ? [`  ${image} />`] : [`  ${image}>`, ...overlays, '  </CardImage>'] : []),
+    ...(flags.Avatar ? [`  <Avatar size="sm">${cardExample.avatar}</Avatar>`] : []),
     `  <CardTitle${formatJsxProps({ href: flags.href ? cardExample.href : undefined })}>${cardExample.heading}</CardTitle>`,
     `  <Text elementType="p">${cardExample.body}</Text>`,
     ...(flags.CardFooter ? [
       '  <CardFooter>',
-      `    <Text>${cardExample.detail}</Text>`,
-      `    <Button hierarchy="secondary">${cardExample.action}</Button>`,
+      ...(shown('Detail') ? [`    <Text>${cardExample.detail}</Text>`] : []),
+      ...(shown('Button') ? [`    <Button hierarchy="secondary">${cardExample.action}</Button>`] : []),
       '  </CardFooter>',
     ] : []),
     '</Card>',

@@ -154,12 +154,12 @@
   text-transform: var(--text-transform-body);
 }
 
-.mz-card-footer > .mz-button:last-child {
+.mz-card-footer > .mz-button:nth-last-child(2) {
   margin-inline-start: auto;
 }
 
-/* The arrow sits at the card's end corner and nudges toward the end on hover. A footer holds the card's
-   actions instead, so a card with one shows no arrow. */
+/* The arrow sits at the card's end corner and nudges toward the end on hover. With a footer, it sits at
+   the footer's end, after the footer's details, and the title's own arrow row is hidden. */
 /* CardTitle renders the arrow straight after the title; order moves it to the end. It's hidden from
    screen readers, so the reading order is unchanged. */
 .mz-card > .mz-card-arrow {
@@ -173,6 +173,22 @@
 
 .mz-card:has(> .mz-card-footer) > .mz-card-arrow {
   display: none;
+}
+
+/* The footer's arrow shows only in a linked card. */
+.mz-card-footer > .mz-card-arrow {
+  display: none;
+}
+
+.mz-card:has(> .mz-card-title .mz-card-title-link) > .mz-card-footer > .mz-card-arrow {
+  display: flex;
+  margin-inline-start: auto;
+  color: var(--card-arrow-color, var(--color-accent));
+}
+
+/* After a footer Button, which already sits at the end, the arrow follows it. */
+.mz-card:has(> .mz-card-title .mz-card-title-link) > .mz-card-footer > .mz-button + .mz-card-arrow {
+  margin-inline-start: 0;
 }
 
 .mz-card-arrow svg {

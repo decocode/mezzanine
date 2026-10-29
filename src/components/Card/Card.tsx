@@ -51,12 +51,17 @@ export interface CardTitleProps extends Omit<ReactAriaLinkProps, 'children' | 'c
   children: ReactNode
 }
 
-// The card's heading. With href, its link's pressable area covers the whole card, while controls in the
-// card stay pressable on their own. An arrow at the card's end shows it can be pressed, unless a
-// CardFooter holds the card's actions; screen readers hear the link instead.
-export function CardTitle({ href, level = 3, className, children, ...linkProps }: CardTitleProps) {
-  // The arrow points toward the end of the line, which is left in right-to-left text.
+// The arrow that shows a linked card can be pressed. It points toward the end of the line, which is left
+// in right-to-left text. Screen readers hear the link instead.
+function CardArrow() {
   const { direction } = useLocale()
+  return <span aria-hidden="true" className="mz-card-arrow">{direction === 'rtl' ? <ArrowLeftIcon /> : <ArrowRightIcon />}</span>
+}
+
+// The card's heading. With href, its link's pressable area covers the whole card, while controls in the
+// card stay pressable on their own. An arrow at the card's end shows it can be pressed: in the
+// CardFooter, at its end, or on its own row when the card has no footer.
+export function CardTitle({ href, level = 3, className, children, ...linkProps }: CardTitleProps) {
   const heading = (
     <Heading level={level} className={['mz-card-title', className].filter(Boolean).join(' ')}>
       {href === undefined ? children : <ReactAriaLink {...linkProps} href={href} className="mz-card-title-link">{children}</ReactAriaLink>}
@@ -65,14 +70,19 @@ export function CardTitle({ href, level = 3, className, children, ...linkProps }
   if (href === undefined) return heading
   return <>
     {heading}
-    <span aria-hidden="true" className="mz-card-arrow">{direction === 'rtl' ? <ArrowLeftIcon /> : <ArrowRightIcon />}</span>
+    <CardArrow />
   </>
 }
 
 export type CardFooterProps = ComponentPropsWithoutRef<'div'>
 
 // The card's bottom row: details at the start, and a last Button at the end. It sits at the bottom of
-// the card, so footers line up across a row of cards.
-export function CardFooter({ className, ...footerProps }: CardFooterProps) {
-  return <div {...footerProps} className={['mz-card-footer', className].filter(Boolean).join(' ')} />
+// the card, so footers line up across a row of cards. In a linked card, the arrow sits at its end.
+export function CardFooter({ className, children, ...footerProps }: CardFooterProps) {
+  return (
+    <div {...footerProps} className={['mz-card-footer', className].filter(Boolean).join(' ')}>
+      {children}
+      <CardArrow />
+    </div>
+  )
 }
