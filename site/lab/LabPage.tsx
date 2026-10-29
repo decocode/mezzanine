@@ -46,14 +46,14 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const isExpandingControls = currentPath === expandingControlsPage.href
   const pageTitle = layoutPage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title ?? (isVolume ? volumePage.title : isZoom ? zoomPage.title : isPanel ? panelPage.title : isDemoBlock ? demoBlockPage.title : isPanelHost ? panelHostPage.title : isItem ? itemPage.title : isExpandingControls ? expandingControlsPage.title : undefined))
   const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
-  const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} searchSections={labSearchSections} />
+  const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} />
 
   return <>
     <title>{title}</title>
     <Link className="skip-link" href="#main-content">Skip to main content</Link>
     <DocsShell
-      topBar={<SiteTopBar currentPath={currentPath} onThemeChange={onThemeChange} selectedTheme={selectedTheme} labNavigation={navigation} />}
-      navigation={{ title: labContent.navigationTitle, 'aria-label': 'Lab sections', navigationLabel: 'Lab experiments', items: labNavigationItems, selectedRoute: currentPath, searchSections: labSearchSections }}
+      topBar={<SiteTopBar currentPath={currentPath} onThemeChange={onThemeChange} selectedTheme={selectedTheme} labNavigation={navigation} searchSections={labSearchSections} />}
+      navigation={{ title: labContent.navigationTitle, 'aria-label': 'Lab sections', navigationLabel: 'Lab experiments', items: labNavigationItems, selectedRoute: currentPath }}
       mainClassName="lab-page-main"
       mainTabIndex={-1}
     >

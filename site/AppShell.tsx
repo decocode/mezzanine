@@ -2,7 +2,6 @@ import { lazy, Suspense, useState } from 'react'
 // The library's AppShell, named apart from this file's own AppShell, the site's top level.
 import { AppShell as LibraryAppShell, Link } from '@decocode/mezzanine'
 import { SiteTopBar } from './components/SiteTopBar'
-import { docsSearchSection } from './components/siteSearchLogic'
 import { docsNavigationItems } from './components/docsNavigationItems'
 import { DocsShell } from './components/DocsShell'
 import { PageLoader } from './PageLoader'
@@ -86,7 +85,6 @@ export function AppShell({ initialTheme }: AppShellProps) {
           navigationLabel: siteContent.docsNavigation.treeLabel,
           items: docsNavigationItems,
           selectedRoute: currentPage.path,
-          searchSections: [docsSearchSection],
         }}
       >
         {currentPage.status === 'implemented'

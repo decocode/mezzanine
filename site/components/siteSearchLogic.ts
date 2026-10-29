@@ -44,9 +44,3 @@ export const docsSearchSection: SearchSection = { id: 'docs', label: 'Docs', res
 export function isSearchShortcut(event: KeyboardEvent) {
   return event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey) && !event.altKey && !event.shiftKey
 }
-
-// The shortcut as people expect to see it on their device: the Command key on Apple devices.
-export function searchShortcutLabel() {
-  const platform = typeof navigator === 'undefined' ? '' : navigator.platform
-  return /Mac|iPhone|iPad/.test(platform) ? '⌘ K' : 'Ctrl K'
-}

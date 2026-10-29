@@ -19,14 +19,14 @@ for (const fontSize of [16, 32]) {
     const tree = page.getByRole('banner').getByRole('treegrid', { name: 'Lab experiments' })
     await expect(tree).toBeVisible()
     await expect(page.getByRole('banner').getByRole('treegrid', { name: 'Index' })).toHaveCount(0)
-    // The menu reads Docs, then Lab, then Search, then the Lab tree.
+    // The menu reads Docs, then Lab, then the Lab tree, then Search.
     await primaryNav.getByRole('link', { name: 'Docs', exact: true }).focus()
     await page.keyboard.press('Tab')
     await expect(primaryNav.getByRole('link', { name: 'Lab', exact: true })).toBeFocused()
     await page.keyboard.press('Tab')
-    await expect(page.getByRole('banner').getByRole('button', { name: 'Search docs', exact: true })).toBeFocused()
-    await page.keyboard.press('Tab')
     expect(await page.evaluate(() => document.activeElement?.closest('header [role="treegrid"]') != null)).toBe(true)
+    await page.keyboard.press('Tab')
+    await expect(page.getByRole('banner').locator('.mz-search-trigger').filter({ visible: true })).toBeFocused()
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
     expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([])
     await tree.getByRole('link', { name: 'Layout', exact: true }).click()

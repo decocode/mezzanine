@@ -3,7 +3,7 @@ import {
   Autocomplete, Dialog, DialogTrigger, Header, Input, ListBox, ListBoxItem, ListBoxSection,
   Modal, ModalOverlay, SearchField, SearchTrigger, Text, useFilter,
 } from '@decocode/mezzanine'
-import { isSearchShortcut, searchShortcutLabel, type SearchSection } from './siteSearchLogic'
+import { isSearchShortcut, type SearchSection } from './siteSearchLogic'
 
 // The site search: SearchField and ListBox joined by Autocomplete, in a modal Dialog, following
 // React Aria's command palette example. Focus stays in the field while the arrow keys move through
@@ -25,7 +25,7 @@ export function SiteSearch({ sections }: { sections: readonly SearchSection[] })
   }, [])
   return (
     <DialogTrigger isOpen={isOpen} onOpenChange={setOpen}>
-      <SearchTrigger ref={listenForShortcut} aria-keyshortcuts="Meta+K Control+K" shortcut={searchShortcutLabel()}>Search docs</SearchTrigger>
+      <SearchTrigger ref={listenForShortcut} aria-keyshortcuts="Meta+K Control+K">Search</SearchTrigger>
       <ModalOverlay isDismissable>
         <Modal>
           <Dialog aria-label="Search" className="site-search-dialog">

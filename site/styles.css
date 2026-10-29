@@ -80,37 +80,6 @@ body {
   mask: url('./assets/mezzanine-logo.svg') center / contain no-repeat;
 }
 
-.site-name {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  color: var(--color-text);
-  font-size: var(--font-size-title-md);
-  font-weight: var(--font-weight-bold);
-  text-decoration: none;
-}
-
-/* Narrow screens show the logo only; the link keeps its "Mezzanine home" name. */
-.site-name-text {
-  display: none;
-}
-
-@container site (min-width: 48rem) {
-  .site-name-text {
-    display: inline;
-  }
-}
-
-.site-name:is(:hover, :active, [data-hovered], [data-pressed]) {
-  color: var(--color-text);
-}
-
-/* The brand text stands in for an SVG wordmark, including in Wireframe. */
-:root[data-theme='wireframe'] .site-name {
-  text-decoration-line: none;
-}
-
 .skip-link {
   position: absolute;
   width: 1px;
@@ -471,14 +440,6 @@ body {
 .navigation-panel {
   display: grid;
   gap: var(--space-3);
-}
-
-/* Inset like the navigation items' text, so the Search button lines up with them, and set down a
-   little so its middle lines up with the TopBar's content beside it. */
-.navigation-panel-search {
-  display: grid;
-  padding-block-start: var(--space-1);
-  padding-inline: var(--space-padding-area);
 }
 
 /* The site search dialog. A fixed height stops it jumping as the results change. */
