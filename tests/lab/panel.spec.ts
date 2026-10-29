@@ -1,41 +1,31 @@
-import { expect, test, type Locator } from '@playwright/test'
+import { expect, test } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize } from '../display'
 
 // The Lab's candidate Panel, in a LabPanelLayout in the candidate demo block. Illustrative and unapproved.
 
-// Twin toggles sit in the same spot, give or take the half pixel a hairline border rounds to.
-async function expectSameSpot(toggle: Locator, spot: { x: number; y: number } | null) {
-  const box = await toggle.boundingBox()
-  expect(Math.abs(box!.x - spot!.x)).toBeLessThanOrEqual(1)
-  expect(Math.abs(box!.y - spot!.y)).toBeLessThanOrEqual(1)
-}
-
-// Checks that a collapsible Panel with a collapse button holds its toggle in its header row, and that
-// collapsing hands the toggle, and focus, to a twin in the same spot in the content's header.
-test('a collapsible Lab Panel hands its toggle to the content', async ({ page }) => {
+// Checks that a collapsible Panel with a collapse button holds a toggle in its header row, that its twin
+// stays in the bar across the top of the layout, and that collapsing hands focus to the bar's toggle.
+test('a collapsible Lab Panel hands focus to the bar', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 })
   await page.goto('/site/lab/panel')
   const demo = page.locator('.lab-demo-block').first()
-  const properties = demo.locator('.lab-demo-block-controls')
-  await properties.locator('label', { hasText: /^isCollapsible$/ }).click()
+  // The example starts collapsible, with its toggle in the bar.
   const panel = demo.locator('.lab-panel-example > .lab-panel')
-  const panelToggle = panel.getByRole('button', { name: 'Hide panel' })
-  const mainToggle = demo.locator('.lab-panel-example-header').getByRole('button', { name: 'Show panel' })
+  const panelToggle = panel.getByRole('button', { name: 'Collapse Start panel' })
+  const barToggle = demo.locator('.lab-panel-layout-bar').getByRole('button', { name: 'Start panel' })
   await expect(panelToggle).toHaveAttribute('aria-expanded', 'true')
-  await expect(mainToggle).toHaveCount(0)
-  const spot = await panelToggle.boundingBox()
+  await expect(barToggle).toHaveAttribute('aria-expanded', 'true')
 
   await panelToggle.focus()
   await page.keyboard.press('Enter')
   await expect(panel).toBeHidden()
-  await expect(mainToggle).toBeFocused()
-  await expect(mainToggle).toHaveAttribute('aria-expanded', 'false')
-  await expectSameSpot(mainToggle, spot)
+  await expect(barToggle).toBeFocused()
+  await expect(barToggle).toHaveAttribute('aria-expanded', 'false')
 
   await page.keyboard.press('Enter')
   await expect(panel).toBeVisible()
-  await expect(panel.getByRole('button', { name: 'Hide panel' })).toBeFocused()
+  await expect(barToggle).toHaveAttribute('aria-expanded', 'true')
   await page.keyboard.press('Escape')
   await expect(page.getByRole('tooltip')).toHaveCount(0)
   await expectNoAccessibilityViolations(page, 'main')
@@ -53,7 +43,7 @@ test('a Lab Panel header and footer are parts', async ({ page }) => {
   await expect(header).toHaveText('Panel header')
   await expect(footer).toHaveText('Panel footer')
   await demo.locator('.lab-demo-block-controls label', { hasText: /^LabPanelHeader$/ }).click()
-  await expect(panel.locator('.lab-panel-header')).toHaveCount(0)
+  await expect(header).toHaveCount(0)
   await demo.locator('.lab-demo-block-controls label', { hasText: /^LabPanelHeader$/ }).click()
   await expect(header).toBeVisible()
 
@@ -69,7 +59,7 @@ test('a resizable Lab Panel resizes from the keyboard', async ({ page }) => {
   await page.goto('/site/lab/panel')
   const demo = page.locator('.lab-demo-block').first()
   await demo.locator('.lab-demo-block-controls label', { hasText: /^isResizable$/ }).click()
-  const handle = demo.locator('.lab-panel-example').getByRole('separator', { name: 'Resize panel' })
+  const handle = demo.locator('.lab-panel-example').getByRole('separator', { name: 'Resize Start panel' })
   const panel = demo.locator('.lab-panel-example > .lab-panel')
   const width = async () => (await panel.boundingBox())!.width
   const before = await width()
@@ -87,11 +77,10 @@ test('a Lab Panel without room opens as an overlay', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 })
   await page.goto('/site/lab/panel')
   const demo = page.locator('.lab-demo-block').first()
-  await demo.locator('.lab-demo-block-controls label', { hasText: /^isCollapsible$/ }).click()
   // Narrow the layout so the Panel no longer fits beside the content.
   await demo.locator('.lab-panel-example').evaluate((layout) => { layout.style.inlineSize = '18rem' })
   const panel = demo.locator('.lab-panel-example > .lab-panel')
-  const toggle = demo.locator('.lab-panel-example-header').getByRole('button', { name: 'Show panel' })
+  const toggle = demo.locator('.lab-panel-layout-bar').getByRole('button', { name: 'Start panel' })
   await expect(panel).toBeHidden()
   const main = demo.locator('.lab-panel-example-main')
   const mainBefore = await main.boundingBox()
@@ -101,7 +90,7 @@ test('a Lab Panel without room opens as an overlay', async ({ page }) => {
   expect(await main.boundingBox()).toEqual(mainBefore)
   await page.keyboard.press('Escape')
   await expect(panel).toBeHidden()
-  await expect(demo.locator('.lab-panel-example-header').getByRole('button', { name: 'Show panel' })).toBeFocused()
+  await expect(toggle).toBeFocused()
 })
 
 // Checks that, at 320px and double text size, the page doesn't scroll sideways.

@@ -64,7 +64,7 @@
   padding: var(--space-3) var(--space-padding-area) var(--space-1);
   border: var(--border-width-hairline) solid var(--color-border);
   border-radius: min(var(--radius-surface), var(--radius-sm));
-  background: var(--color-surface);
+  background: var(--elevation-flat-surface);
   color: var(--color-text);
   transition-property: opacity, visibility;
   transition-duration: calc(var(--motion-duration-interface) * var(--_motion-enabled));
@@ -150,6 +150,11 @@
    as its twin in the main content's header. */
 .lab-panel-header > button {
   align-self: start;
+}
+
+/* Alone in the row, an end or bottom Panel's collapse button keeps to the end. */
+.lab-panel:not([data-placement='start']) > .lab-panel-inner > .lab-panel-header > button:only-child {
+  margin-inline-start: auto;
 }
 
 /* LabPanelHeader takes the row's spare room, beside the title and the toggle. */
@@ -265,10 +270,12 @@
   overflow: hidden;
   border: var(--border-width-baseline) solid var(--color-border);
   border-radius: var(--radius-surface);
-  background: var(--color-surface);
+  background: var(--elevation-flat-surface);
 }
 
+/* The strip is a muted area, a step quieter than the demo and its panel. */
 .lab-demo-block-bar {
+  background: var(--color-surface);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -296,9 +303,9 @@
   align-items: start;
 }
 
-/* The demo fills the space beside the Properties Panel, on the page's colour. */
+/* The demo fills the space beside the demo panel, on the page's colour. */
 .lab-demo-block-layout {
-  background: var(--color-surface);
+  background: var(--elevation-flat-surface);
 }
 
 /* The example Card keeps a card's width, rather than filling the demo area. */
@@ -346,13 +353,15 @@
   border-inline-start-width: var(--border-width-hairline);
 }
 
-/* The example's own LabPanelLayout, framed so its Panel's placement shows. */
+/* The example's own LabPanelLayout, styled as a finished surface: the page's background, a hairline edge
+   and the surface corners, so its Panels and bar look as they would in an app. */
 /* Tall enough for the Panel's content and footer, so collapsing the Panel doesn't shrink the example and
    move its toggle. */
 .lab-panel-example {
   min-block-size: var(--width-md);
-  border: var(--border-width-baseline) dashed var(--color-border-control);
-  border-radius: var(--radius-sm);
+  border: var(--border-width-hairline) solid var(--color-border);
+  border-radius: var(--radius-surface);
+  background: var(--elevation-flat-surface);
 }
 
 .lab-panel-example-main {
@@ -372,7 +381,7 @@
   place-items: center;
   padding: var(--space-4);
   border: var(--border-width-baseline) dashed var(--color-border-control);
-  border-radius: var(--radius-sm);
+  border-radius: min(var(--radius-surface), var(--radius-sm));
   text-align: center;
 }
 
@@ -385,24 +394,15 @@
   margin: 0;
 }
 
+/* The Panel layout example's text sits in the middle of its Panel, like the Panel example's text in its
+   empty areas. */
+.lab-panel-example .lab-panel-content > p {
+  margin-block: auto;
+  text-align: center;
+}
+
 /* With a collapsible Panel, the main content starts with a header row lined up with the Panel's, so a
    twin toggle sits in the same spot in either header. */
-.lab-panel-example-main:has(> .lab-panel-example-header) {
-  padding-block-start: calc(var(--surface-gap) + var(--border-width-hairline) + var(--space-3));
-  padding-inline: calc(var(--surface-gap) + var(--border-width-hairline) + var(--space-padding-area));
-}
-
-.lab-panel-example-header {
-  display: flex;
-  align-items: center;
-  align-self: stretch;
-  min-block-size: var(--target-size-sm);
-}
-
-.lab-panel-example-header[data-placement='end'] {
-  justify-content: end;
-}
-
 .lab-panel-example-main > p {
   margin: 0;
 }
@@ -421,4 +421,9 @@
 /* The start Panel's toggle sits at the start of the bar, on its own side; the others sit at the end. */
 .lab-panel-layout-bar > [aria-controls$='-start'] + * {
   margin-inline-start: auto;
+}
+
+/* A bar with one toggle, for an end or bottom Panel, puts it at the end. */
+.lab-panel-layout-bar:is([data-placement='end'], [data-placement='bottom']) {
+  justify-content: end;
 }

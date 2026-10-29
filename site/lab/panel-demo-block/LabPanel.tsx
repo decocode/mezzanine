@@ -22,7 +22,7 @@ export interface LabPanelLayoutProps {
 // Holds one or more LabPanels and the content beside them, and decides how they share the room. It keeps
 // every Panel's expanded state and size, measures its own width, and without room for a side Panel,
 // shows it as an overlay inside the layout. It can go on any element.
-export function LabPanelLayout({ children, header, minContentWidth = 'var(--width-xs)', className }: LabPanelLayoutProps) {
+export function LabPanelLayout({ children, header, minContentWidth = 'var(--width-md)', className }: LabPanelLayoutProps) {
   const { state, elementProps } = useLabPanelLayoutState()
   const isPanel = (child: ReactNode) => isValidElement(child) && child.type === LabPanel
   const childList = Children.toArray(children)
@@ -48,6 +48,8 @@ export interface LabPanelProps {
   // makes the Panel a region named by it. Without one, the Panel isn't a landmark, and its content names
   // itself.
   title?: string
+  // A name for a Panel without a visible title, which makes it a region and names its buttons.
+  'aria-label'?: string
   // People can change the Panel's size by dragging its inner edge, or with the arrow keys.
   isResizable?: boolean
   // The whole Panel can be collapsed and expanded by a LabPanelToggle outside it, which stays visible.
@@ -68,7 +70,7 @@ export interface LabPanelProps {
   className?: string
 }
 
-export function LabPanel({ placement, title, isResizable = false, isCollapsible = false, isExpanded, onExpandedChange, hasCollapseButton = false, collapseIcon = 'collapse', id, children, className }: LabPanelProps) {
+export function LabPanel({ placement, title, 'aria-label': ariaLabel, isResizable = false, isCollapsible = false, isExpanded, onExpandedChange, hasCollapseButton = false, collapseIcon = 'collapse', id, children, className }: LabPanelProps) {
   const { store, presentation } = useLabPanelLayout('LabPanel')
   useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
   const headingId = useId()
@@ -90,14 +92,16 @@ export function LabPanel({ placement, title, isResizable = false, isCollapsible 
   const header = parts.find((child) => isValidElement(child) && child.type === LabPanelHeader)
   const footer = parts.find((child) => isValidElement(child) && child.type === LabPanelFooter)
   const content = parts.filter((child) => child !== header && child !== footer)
+  // The Panel's name: its visible title, or its aria-label without one.
+  const name = title ?? ariaLabel
   const collapseButton = isCollapsible && hasCollapseButton && (
     collapseIcon === 'close'
-      ? <LabPanelToggle panel={id} placement={placement} title={title} icon={<CloseIcon />} collapseLabel={title === undefined ? 'Close panel' : `Close ${title}`} />
-      : <LabPanelToggle panel={id} placement={placement} title={title} />
+      ? <LabPanelToggle panel={id} placement={placement} title={name} icon={<CloseIcon />} collapseLabel={name === undefined ? 'Close panel' : `Close ${name}`} />
+      : <LabPanelToggle panel={id} placement={placement} title={name} />
   )
   const hasHeaderRow = header !== undefined || title !== undefined || Boolean(collapseButton)
-  // Only a titled Panel is a region; otherwise it's a plain layout container. Typed as a div for the ref.
-  const Element = (title === undefined ? 'div' : 'section') as 'div'
+  // Only a named Panel is a region; otherwise it's a plain layout container. Typed as a div for the ref.
+  const Element = (name === undefined ? 'div' : 'section') as 'div'
 
   return (
     <Element
@@ -109,6 +113,7 @@ export function LabPanel({ placement, title, isResizable = false, isCollapsible 
       data-overlay={isOverlay || undefined}
       data-collapse-button={Boolean(collapseButton) || undefined}
       aria-labelledby={title === undefined ? undefined : headingId}
+      aria-label={title === undefined ? ariaLabel : undefined}
       inert={!isShown}
       // An overlay closes with Escape, and focus goes back to the toggle outside it.
       onKeyDown={isOverlay && isShown && isCollapsible ? (event) => {
@@ -131,7 +136,7 @@ export function LabPanel({ placement, title, isResizable = false, isCollapsible 
           </div>
         </div>
       </div>
-      {isResizable && isShown && !isOverlay && <LabPanelResizeHandle id={id} placement={placement} title={title} panelRef={panelRef} />}
+      {isResizable && isShown && !isOverlay && <LabPanelResizeHandle id={id} placement={placement} title={name} panelRef={panelRef} />}
     </Element>
   )
 }

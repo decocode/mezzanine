@@ -19,7 +19,7 @@ export const panelPage: LabPage = {
         { name: 'LabPanelHeader', description: 'Optional, in the header row, for what introduces the Panel or acts on all of it. It stays put while the content below it scrolls.' },
         { name: 'LabPanelFooter', description: 'Optional, at the bottom, for what should always be within reach. It stays put while the content above it scrolls.' },
         { name: 'Resize handle', description: 'Optional, on the inner edge, a separator that changes the Panel’s size.' },
-        { name: 'LabPanelToggle', description: 'A button outside the Panel that collapses and expands it. With `hasCollapseButton`, the Panel holds a twin in its header row, and the one outside shows only while the Panel is collapsed.' },
+        { name: 'LabPanelToggle', description: 'A button outside the Panel that collapses and expands it. With `hasCollapseButton`, the Panel also holds a twin in its header row.' },
       ],
     } },
     { key: 'behaviour', body: [{ list: [
@@ -119,7 +119,7 @@ export const panelLayoutPage: LabPage = {
       rows: [
         { name: 'children', description: 'The Panels and the content.' },
         { name: 'header', description: 'A row across the top, above the Panels and the content.' },
-        { name: 'minContentWidth', description: 'The narrowest the content gets before a side Panel becomes an overlay, as a CSS length. `--width-xs` by default.' },
+        { name: 'minContentWidth', description: 'The narrowest the content gets before a side Panel becomes an overlay, as a CSS length. `--width-md` by default.' },
         { name: 'className', description: 'Adds your own class.' },
       ],
     } },
@@ -173,7 +173,7 @@ export const demoBlockPage: LabPage = {
       rows: [
         { name: 'children', description: 'The live components.' },
         { name: 'properties', description: 'Controls for the component’s own settings, such as its size, listed first in the demo panel.' },
-        { name: 'parts', description: 'The component’s parts, after `properties`, in the order of its anatomy: a switch for each optional part, such as a Card’s CardImage, or the part’s name when it’s always there, with that part’s own settings beneath it. Without `properties` or `parts`, there’s no demo panel or toggle.' },
+        { name: 'parts', description: 'The component’s parts, after `properties`, in the order of its anatomy: a switch for each optional part, such as a Card’s CardImage, with that part’s own settings and the parts placed inside it beneath it, such as CardImage’s Badge. Without `properties` or `parts`, there’s no demo panel or toggle.' },
         { name: 'codeView', description: 'The demo’s source, in a Code tab. Without it, there are no tabs.' },
       ],
     } },
@@ -201,24 +201,50 @@ export const demoBlockPage: LabPage = {
 export const demoBlockLabels = {
   heading: 'Card component',
   href: '/card',
+  badge: 'Badge',
+  toggle: 'Favourite',
+  avatar: 'Avatar name',
   // Backticks mark inline code, as in the rest of the copy.
   body: 'This is a `Card` inside the demo area of a `DemoBlock`',
   detail: 'Footer details',
   action: 'Button',
 } as const
 
-// The Card's properties, its own settings, and its parts, the optional components placed inside it.
+// The Card's parts, the optional components placed inside it, in the order of its anatomy, each followed
+// by the parts placed inside it. All start switched off, so the demo opens as the bare Card.
 export const demoBlockAspectRatios = ['16 / 9', '4 / 3', '1 / 1'] as const
-export const demoBlockParts = ['CardImage', 'CardFooter'] as const
+export const demoBlockParts = ['CardImage', 'Badge', 'ToggleButton', 'Avatar', 'CardFooter', 'Detail', 'Button'] as const
+export type DemoBlockParts = Record<(typeof demoBlockParts)[number], boolean>
 
-export function demoBlockCode({ aspectRatio, href, parts }: { aspectRatio: string; href: boolean; parts: Record<(typeof demoBlockParts)[number], boolean> }) {
-  const ratio = aspectRatio === '16 / 9' ? '' : ` aspectRatio="${aspectRatio}"`
+// Badge and ToggleButton sit on the picture, so they need CardImage. Detail, the footer's text, needs
+// CardFooter. A footer Button only goes in a card without href, because a linked card's footer ends with
+// its arrow.
+export function isDemoBlockPartShown(name: (typeof demoBlockParts)[number], parts: DemoBlockParts, href: boolean) {
+  if (name === 'Badge' || name === 'ToggleButton') return parts.CardImage
+  if (name === 'Detail') return parts.CardFooter
+  if (name === 'Button') return parts.CardFooter && !href
+  return true
+}
+
+export function demoBlockCode({ aspectRatio, href, parts }: { aspectRatio: string; href: boolean; parts: DemoBlockParts }) {
+  const shown = (name: (typeof demoBlockParts)[number]) => parts[name] && isDemoBlockPartShown(name, parts, href)
+  const image = `<CardImage src={picture} alt=""${aspectRatio === '16 / 9' ? '' : ` aspectRatio="${aspectRatio}"`}`
+  const overlays = [
+    ...(shown('Badge') ? [`    <Badge>${demoBlockLabels.badge}</Badge>`] : []),
+    ...(shown('ToggleButton') ? [`    <ToggleButton hierarchy="secondary" size="sm" icon={<HeartIcon />} iconPosition="iconOnly">${demoBlockLabels.toggle}</ToggleButton>`] : []),
+  ]
   return [
     `<Card${href ? ` href="${demoBlockLabels.href}"` : ''}>`,
-    ...(parts.CardImage ? [`  <CardImage src={picture} alt=""${ratio} />`] : []),
+    ...(parts.CardImage ? overlays.length === 0 ? [`  ${image} />`] : [`  ${image}>`, ...overlays, '  </CardImage>'] : []),
+    ...(shown('Avatar') ? [`  <Avatar size="sm">${demoBlockLabels.avatar}</Avatar>`] : []),
     `  <CardTitle>${demoBlockLabels.heading}</CardTitle>`,
     `  <Text elementType="p">${demoBlockLabels.body.replace(/`([^`]+)`/g, '<code>$1</code>')}</Text>`,
-    ...(parts.CardFooter ? ['  <CardFooter>', `    <Text>${demoBlockLabels.detail}</Text>`, `    <Button hierarchy="secondary">${demoBlockLabels.action}</Button>`, '  </CardFooter>'] : []),
+    ...(parts.CardFooter ? [
+      '  <CardFooter>',
+      ...(shown('Detail') ? [`    <Text>${demoBlockLabels.detail}</Text>`] : []),
+      ...(shown('Button') ? [`    <Button hierarchy="secondary">${demoBlockLabels.action}</Button>`] : []),
+      '  </CardFooter>',
+    ] : []),
     '</Card>',
   ].join('\n')
 }
@@ -231,17 +257,23 @@ export const panelDemoBlockLabels = {
 export const panelPlacements: readonly LabPanelPlacement[] = ['start', 'end', 'bottom']
 
 export function panelDemoBlockCode({ placement, isResizable, isCollapsible, hasCollapseButton, hasHeader, hasFooter }: { placement: LabPanelPlacement; isResizable: boolean; isCollapsible: boolean; hasCollapseButton: boolean; hasHeader: boolean; hasFooter: boolean }) {
-  const flags = [isResizable ? ' isResizable' : '', isCollapsible ? ' isCollapsible' : '', hasCollapseButton ? ' hasCollapseButton' : ''].join('')
-  const toggle = `<LabPanelToggle panel="panel" placement="${placement}" />`
+  const flags = [isResizable ? ' isResizable' : '', isCollapsible ? ' isCollapsible' : '', hasCollapseButton ? ' hasCollapseButton' : '', hasCollapseButton && placement !== 'start' ? ' collapseIcon="close"' : ''].join('')
+  const name = severalPanelsLabels.panels[placement]
+  const toggle = placement === 'start'
+    ? `<LabPanelToggle panel="panel" placement="start" collapseLabel="${name}" expandLabel="${name}" />`
+    : `<LabPanelToggle panel="panel" placement="${placement}" tooltip="${name}">${severalPanelsLabels.toggles[placement]}</LabPanelToggle>`
   return [
-    '<LabPanelLayout>',
-    `  <LabPanel id="panel" placement="${placement}"${flags}>`,
+    '<LabPanelLayout header={',
+    '  <Toolbar aria-label="Panels">',
+    ...(isCollapsible ? [`    ${toggle}`] : []),
+    '  </Toolbar>',
+    '}>',
+    `  <LabPanel id="panel" placement="${placement}" aria-label="${name}"${flags}>`,
+    `    <p>${severalPanelsLabels.panelText[placement]}</p>`,
     ...(hasHeader ? ['    <LabPanelHeader>', `      <p>${panelDemoBlockLabels.headerText}</p>`, '    </LabPanelHeader>'] : []),
     ...(hasFooter ? ['    <LabPanelFooter>', `      <p>${panelDemoBlockLabels.footerText}</p>`, '    </LabPanelFooter>'] : []),
     '  </LabPanel>',
-    '  <div>',
-    ...(hasCollapseButton ? [`    {!isPanelShown && ${toggle}}`] : isCollapsible ? [`    ${toggle}`] : []),
-    '  </div>',
+    '  <div />',
     '</LabPanelLayout>',
   ].join('\n')
 }

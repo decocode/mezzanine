@@ -53,7 +53,7 @@ export function LabDemoBlock({ children, codeView, properties, parts, align = 's
   const frame = (
     <div className="lab-demo-block-frame">
       {!hasPanel ? <>{strip}{demo}</> : (
-        <LabPanelLayout className="lab-demo-block-layout" header={strip} minContentWidth="var(--width-md)">
+        <LabPanelLayout className="lab-demo-block-layout" header={strip}>
           <LabPanel id={panelId} placement="end" isCollapsible isResizable className="lab-demo-block-panel">
             {/* One list that follows the component's anatomy: its own settings first, then each part in
                 order, with that part's own settings beneath it, each divided from the next by a line. */}

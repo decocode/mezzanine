@@ -10,11 +10,14 @@ test('the Lab demo block collapses its demo panel from the strip', async ({ page
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/demo-block')
   const demo = page.locator('.lab-demo-block').first()
-  // The controls follow the Card's anatomy; the CardFooter switch removes its footer.
+  // The controls follow the Card's anatomy and start off; the footer's Detail switch appears beneath
+  // CardFooter once it's in.
   const controls = demo.locator('.lab-demo-block-controls')
   await expect(controls).toBeVisible()
+  await expect(controls.locator('label', { hasText: /^Detail$/ })).toHaveCount(0)
   await controls.locator('label', { hasText: /^CardFooter$/ }).click()
-  await expect(demo.getByText('Footer details')).toHaveCount(0)
+  await controls.locator('label', { hasText: /^Detail$/ }).click()
+  await expect(demo.getByText('Footer details')).toBeVisible()
   const toggle = demo.getByRole('button', { name: 'Hide demo panel' })
   await expect(toggle).toHaveAttribute('aria-expanded', 'true')
   await toggle.click()
