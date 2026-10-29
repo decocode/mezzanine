@@ -40,7 +40,7 @@ export const demoBlockContent: DocsPageContent = {
     {
       key: 'accessibility',
       body: [
-        'The Demo and Code tabs come first, then the ThemeSwitcher, the end panel’s button and controls, and then the demo. The button is named “Hide properties” or “Show properties”, and says whether the controls are expanded. On the Code tab, the code block’s own buttons follow the tabs. The ThemeSwitcher is named “Switch demo theme”, shows the chosen theme’s icon and its name in a tooltip, and its menu, headed “Demo theme”, ticks the chosen theme.',
+        'The Demo and Code tabs come first, then the ThemeSwitcher, the end panel’s button and controls, and then the demo. The button is named “Hide properties” or “Show properties”, and says whether the controls are expanded. On the Code tab, the code block’s own buttons follow the tabs. The ThemeSwitcher is named “Change demo theme”, shows the chosen theme’s icon and its name in a tooltip, and its menu, headed “Demo theme”, ticks the chosen theme.',
       ],
     },
     {

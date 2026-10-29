@@ -2,12 +2,12 @@ import { expect, test } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
 
-// Checks that the ThemeSwitcher's button, named "Switch theme", opens a menu headed "Theme" with a tick
+// Checks that the ThemeSwitcher's button, named "Change theme", opens a menu headed "Theme" with a tick
 // by the current theme, applies the chosen theme to the example, and closes again.
 test('ThemeSwitcher chooses a theme from its menu', async ({ page }) => {
   await page.goto('/theme-switcher')
   const example = page.locator('.theme-switcher-example')
-  const button = example.getByRole('button', { name: 'Switch theme', exact: true })
+  const button = example.getByRole('button', { name: 'Change theme', exact: true })
   await button.click()
   const items = page.getByRole('menuitemradio')
   await expect(items).toHaveCount(4)
@@ -47,7 +47,7 @@ test('ThemeSwitcher shows its name as text with iconPosition leading', async ({ 
   const demo = page.locator('.mz-demo-block').first()
   await demo.getByRole('button', { name: /iconPosition/ }).click()
   await page.getByRole('option', { name: 'leading', exact: true }).click()
-  await expect(demo.locator('.theme-switcher-example').getByRole('button')).toHaveText('Switch theme')
+  await expect(demo.locator('.theme-switcher-example').getByRole('button')).toHaveText('Change theme')
 })
 
 // Checks the page in each theme and size, at 320px, with an open menu, against an accessibility scan.

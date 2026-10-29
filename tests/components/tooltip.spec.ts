@@ -14,7 +14,7 @@ test('demo tool tooltips support hover, hoverable content and Escape dismissal',
   await page.clock.install()
   await page.goto('/tooltip')
   await page.mouse.move(0, 500)
-  for (const [name, control] of [['Switch demo theme', demoThemeSelect(demoTools(page))], ['Hide properties', propertiesToggle(page)]] as const) {
+  for (const [name, control] of [['Change demo theme', demoThemeSelect(demoTools(page))], ['Hide properties', propertiesToggle(page)]] as const) {
     await control.hover()
     const tooltip = page.getByRole('tooltip', { name, exact: true })
     await expect(tooltip).toBeVisible()
