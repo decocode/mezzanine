@@ -56,8 +56,8 @@ test('Lab Layout pages are reachable from the overview and the navigation', asyn
   for (const layoutPage of layoutChildPaths) {
     await expect(tree.getByRole('link', { name: layoutPage.title, exact: true })).toHaveAttribute('href', layoutPage.path)
   }
-  // Emerging features carries a Lab badge, which is part of its link's name.
-  await expect(tree.getByRole('link', { name: `${emergingFeatures.title} Lab`, exact: true })).toHaveAttribute('href', futureOverviewPage.path)
+  // The Lab tree has no Lab badges, so Emerging features' link is named by its title alone.
+  await expect(tree.getByRole('link', { name: emergingFeatures.title, exact: true })).toHaveAttribute('href', futureOverviewPage.path)
 
   // A Layout page explains how it works, then shows an example with the CSS behind it. A building
   // block page also links to its sources.

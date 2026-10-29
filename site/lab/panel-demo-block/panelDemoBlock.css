@@ -48,6 +48,25 @@
   min-block-size: 0;
 }
 
+/* Styled like AppShell: the layout is a muted frame, its header row and side Panels sit on it with no
+   card of their own, and the content is the one inset surface, on the page's colour. */
+.lab-panel-layout {
+  background: var(--color-surface);
+}
+
+.lab-panel-layout-content {
+  margin: var(--surface-gap);
+  border: var(--border-width-hairline) solid var(--color-border);
+  border-radius: min(var(--radius-surface), var(--radius-sm));
+  background: var(--elevation-flat-surface);
+}
+
+.lab-panel-layout > .lab-panel:not([data-overlay]) {
+  margin: 0;
+  border-color: transparent;
+  background: transparent;
+}
+
 .lab-panel[data-placement='start'] { grid-area: start; }
 .lab-panel[data-placement='end'] { grid-area: end; }
 .lab-panel[data-placement='bottom'] { grid-area: bottom; }
@@ -270,18 +289,17 @@
   overflow: hidden;
   border: var(--border-width-baseline) solid var(--color-border);
   border-radius: var(--radius-surface);
-  background: var(--elevation-flat-surface);
+  background: var(--color-surface);
 }
 
-/* The strip is a muted area, a step quieter than the demo and its panel. */
+/* The strip sits on the layout's muted frame, like a LabPanelLayout's header row. Its controls sit together
+   at the end: the theme switcher, then the demo panel's toggle. */
 .lab-demo-block-bar {
-  background: var(--color-surface);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
   gap: var(--space-gap-control);
   padding: var(--space-padding-control-block) var(--space-padding-control-inline);
-  border-block-end: var(--border-width-baseline) solid var(--color-border);
 }
 
 .lab-demo-block-area {
@@ -301,11 +319,6 @@
 
 .lab-demo-block-area[data-align='start'] {
   align-items: start;
-}
-
-/* The demo fills the space beside the demo panel, on the page's colour. */
-.lab-demo-block-layout {
-  background: var(--elevation-flat-surface);
 }
 
 /* The example Card keeps a card's width, rather than filling the demo area. */
@@ -343,25 +356,22 @@
 
 /* The demo panel sits flush in the frame, with no gap around it: one line divides it from the
    demo. As an overlay, it keeps its raised look instead. */
-.lab-demo-block-layout > .lab-demo-block-panel:not([data-overlay]) {
-  margin: 0;
-  border-width: 0;
-  border-radius: 0;
+/* The demo area is the layout's inset surface: it keeps the surface's corners, and its own theme's page
+   colour fills it. */
+.lab-demo-block-layout > .lab-panel-layout-content > .lab-demo-block-area {
+  box-sizing: border-box;
+  min-block-size: 100%;
+  border-radius: inherit;
 }
 
-.lab-demo-block-layout > .lab-demo-block-panel[data-state='open']:not([data-overlay]) {
-  border-inline-start-width: var(--border-width-hairline);
-}
-
-/* The example's own LabPanelLayout, styled as a finished surface: the page's background, a hairline edge
-   and the surface corners, so its Panels and bar look as they would in an app. */
+/* The example's own LabPanelLayout, with a hairline edge and the surface corners, so it looks as it would
+   in an app. */
 /* Tall enough for the Panel's content and footer, so collapsing the Panel doesn't shrink the example and
    move its toggle. */
 .lab-panel-example {
   min-block-size: var(--width-md);
   border: var(--border-width-hairline) solid var(--color-border);
   border-radius: var(--radius-surface);
-  background: var(--elevation-flat-surface);
 }
 
 .lab-panel-example-main {
@@ -415,7 +425,6 @@
   align-items: center;
   gap: var(--space-gap-control);
   padding: var(--space-padding-control-block) var(--space-padding-control-inline);
-  border-block-end: var(--border-width-hairline) solid var(--color-border);
 }
 
 /* The start Panel's toggle sits at the start of the bar, on its own side; the others sit at the end. */

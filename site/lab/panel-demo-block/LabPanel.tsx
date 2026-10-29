@@ -58,8 +58,8 @@ export interface LabPanelProps {
   // Without isExpanded, the Panel starts expanded.
   isExpanded?: boolean
   onExpandedChange?: (isExpanded: boolean) => void
-  // A collapsible Panel holds a LabPanelToggle in its header row that collapses it. Placeholder name; the
-  // owner is still to confirm it.
+  // A collapsible Panel holds a LabPanelToggle in its header row that collapses it, while it's an overlay.
+  // Placeholder name; the owner is still to confirm it.
   hasCollapseButton?: boolean
   // The collapse button's icon, which the app chooses by context: a panel collapse icon, the default, such
   // as for navigation, or an × to close, such as for filters or a supplementary Panel. Placeholder name.
@@ -94,7 +94,9 @@ export function LabPanel({ placement, title, 'aria-label': ariaLabel, isResizabl
   const content = parts.filter((child) => child !== header && child !== footer)
   // The Panel's name: its visible title, or its aria-label without one.
   const name = title ?? ariaLabel
-  const collapseButton = isCollapsible && hasCollapseButton && (
+  // The collapse button only shows while the Panel is an overlay: beside the content, the toggle outside it
+  // is enough (owner, 29 October 2026).
+  const collapseButton = isCollapsible && hasCollapseButton && isOverlay && (
     collapseIcon === 'close'
       ? <LabPanelToggle panel={id} placement={placement} title={name} icon={<CloseIcon />} collapseLabel={name === undefined ? 'Close panel' : `Close ${name}`} />
       : <LabPanelToggle panel={id} placement={placement} title={name} />

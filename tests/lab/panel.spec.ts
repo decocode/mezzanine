@@ -4,29 +4,30 @@ import { expectNoPageOverflow, setTextSize } from '../display'
 
 // The Lab's candidate Panel, in a LabPanelLayout in the candidate demo block. Illustrative and unapproved.
 
-// Checks that a collapsible Panel with a collapse button holds a toggle in its header row, that its twin
-// stays in the bar across the top of the layout, and that collapsing hands focus to the bar's toggle.
-test('a collapsible Lab Panel hands focus to the bar', async ({ page }) => {
+// Checks that beside the content a collapsible Panel has no collapse button of its own, only the toggle in
+// the bar, and that as an overlay it gains one, which hands focus back to the bar's toggle.
+test('a Lab Panel holds a collapse button only as an overlay', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 })
   await page.goto('/site/lab/panel')
   const demo = page.locator('.lab-demo-block').first()
-  // The example starts collapsible, with its toggle in the bar.
   const panel = demo.locator('.lab-panel-example > .lab-panel')
   const panelToggle = panel.getByRole('button', { name: 'Collapse Start panel' })
   const barToggle = demo.locator('.lab-panel-layout-bar').getByRole('button', { name: 'Start panel' })
-  await expect(panelToggle).toHaveAttribute('aria-expanded', 'true')
   await expect(barToggle).toHaveAttribute('aria-expanded', 'true')
+  await expect(panelToggle).toHaveCount(0)
 
+  // Narrow the layout so the Panel becomes an overlay, opened from the bar.
+  await demo.locator('.lab-panel-example').evaluate((layout) => { layout.style.inlineSize = '18rem' })
+  await expect(panel).toBeHidden()
+  await barToggle.click()
+  await expect(panel).toHaveAttribute('data-overlay', 'true')
   await panelToggle.focus()
   await page.keyboard.press('Enter')
   await expect(panel).toBeHidden()
   await expect(barToggle).toBeFocused()
   await expect(barToggle).toHaveAttribute('aria-expanded', 'false')
-
-  await page.keyboard.press('Enter')
-  await expect(panel).toBeVisible()
-  await expect(barToggle).toHaveAttribute('aria-expanded', 'true')
   await page.keyboard.press('Escape')
+  await page.mouse.move(0, 0)
   await expect(page.getByRole('tooltip')).toHaveCount(0)
   await expectNoAccessibilityViolations(page, 'main')
 })

@@ -43,18 +43,18 @@ export function LabDemoBlock({ children, codeView, properties, parts, align = 's
   const strip = (
     <Toolbar className="lab-demo-block-bar" aria-label="Demo tools">
       <ThemeSwitcher label="Demo theme" selectedTheme={chosenTheme ?? pageTheme} onThemeChange={setChosenTheme} />
-      {hasPanel && <LabPanelToggle panel={panelId} placement="end" collapseLabel="Hide demo panel" expandLabel="Show demo panel" />}
+      {hasPanel && <LabPanelToggle panel={panelId} placement="end" collapseLabel="Hide demo settings" expandLabel="Show demo settings" />}
     </Toolbar>
   )
 
   // The strip sits in the layout's header row, so its toggle shares the layout's state with the Panel.
-  // The demo panel has no heading of its own, so it isn't a landmark: each control names itself. It has no
-  // collapse button either: its toggle in the strip always stays visible.
+  // The demo panel's title, "Demo settings", makes it a region named by it. It has no collapse button: its
+  // toggle in the strip always stays visible.
   const frame = (
     <div className="lab-demo-block-frame">
       {!hasPanel ? <>{strip}{demo}</> : (
         <LabPanelLayout className="lab-demo-block-layout" header={strip}>
-          <LabPanel id={panelId} placement="end" isCollapsible isResizable className="lab-demo-block-panel">
+          <LabPanel id={panelId} placement="end" title="Demo settings" isCollapsible isResizable className="lab-demo-block-panel">
             {/* One list that follows the component's anatomy: its own settings first, then each part in
                 order, with that part's own settings beneath it, each divided from the next by a line. */}
             <div className="lab-demo-block-controls">
