@@ -1,7 +1,7 @@
 // The Lab's Item page: the candidate Item in the Lab demo block, with its properties and its parts in
 // separate groups. Illustrative and unapproved.
 import { useState } from 'react'
-import { Button, PlaceholderIcon } from '@decocode/mezzanine'
+import { Button, CodeBlock, PlaceholderIcon } from '@decocode/mezzanine'
 import { PanelSelect } from '../../components/PanelSelect'
 import { PanelSwitch } from '../../components/PanelSwitch'
 import { LabDemoBlock } from '../panel-demo-block/LabDemoBlock'
@@ -20,7 +20,6 @@ export function ItemExperiment() {
   return <LabContentPage content={itemPage} parts={{
     example: (
       <LabDemoBlock
-        codeView={itemCode({ variant, purpose, size, description, href, parts })}
         properties={<>
           <PanelSelect label="variant" options={itemVariants} value={variant} onChange={setVariant} />
           <PanelSelect label="purpose" options={itemPurposes} value={purpose} onChange={setPurpose} />
@@ -42,5 +41,7 @@ export function ItemExperiment() {
         </div>
       </LabDemoBlock>
     ),
+    // The code shows in its own section under the example, and follows the demo settings.
+    code: <CodeBlock language="tsx">{itemCode({ variant, purpose, size, description, href, parts })}</CodeBlock>,
   }} />
 }

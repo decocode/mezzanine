@@ -20,8 +20,12 @@ test('the Lab demo block collapses its demo panel from the strip', async ({ page
   await expect(demo.getByText('Footer details')).toBeVisible()
   const toggle = demo.getByRole('button', { name: 'Hide demo settings' })
   await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  const area = demo.locator('.lab-demo-block-area')
+  const openHeight = (await area.boundingBox())!.height
   await toggle.click()
   await expect(controls).toBeHidden()
+  // The collapsed panel's controls don't stretch the demo area taller.
+  await expect.poll(async () => (await area.boundingBox())!.height).toBeLessThanOrEqual(openHeight)
   const showToggle = demo.getByRole('button', { name: 'Show demo settings' })
   await expect(showToggle).toHaveAttribute('aria-expanded', 'false')
   await showToggle.click()

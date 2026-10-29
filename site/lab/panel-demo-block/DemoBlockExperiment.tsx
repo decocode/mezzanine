@@ -3,7 +3,7 @@
 // inside it beneath it. Every switch starts off, so the demo opens as the bare Card.
 // Illustrative and unapproved.
 import { useState } from 'react'
-import { Avatar, Badge, Button, Card, CardFooter, CardImage, CardTitle, HeartIcon, Text, ToggleButton } from '@decocode/mezzanine'
+import { Avatar, Badge, Button, Card, CodeBlock, CardFooter, CardImage, CardTitle, HeartIcon, Text, ToggleButton } from '@decocode/mezzanine'
 import { useExamplePicture } from '../../components/examplePicture'
 import { PanelSelect } from '../../components/PanelSelect'
 import { PanelSwitch } from '../../components/PanelSwitch'
@@ -28,7 +28,6 @@ export function DemoBlockExperiment() {
   return <LabContentPage content={demoBlockPage} parts={{
     example: (
       <LabDemoBlock
-        codeView={demoBlockCode({ aspectRatio, href, parts })}
         properties={<PanelSwitch isSelected={href} onChange={setHref}>href</PanelSwitch>}
         parts={<>
           {/* CardImage's own setting and the parts placed on it appear beneath it once it's in. */}
@@ -70,5 +69,7 @@ export function DemoBlockExperiment() {
         </Card>
       </LabDemoBlock>
     ),
+    // The code shows in its own section under the example, and follows the demo settings.
+    code: <CodeBlock language="tsx">{demoBlockCode({ aspectRatio, href, parts })}</CodeBlock>,
   }} />
 }

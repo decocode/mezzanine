@@ -2,15 +2,13 @@
 // LabPanelLayout, rather than a hand-built copy of one. Illustrative and unapproved.
 import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { UNSAFE_PortalProvider } from 'react-aria'
-import { CodeBlock, Tab, TabList, TabPanel, Tabs, ThemeSwitcher, Toolbar, type DemoBlockAlign, type ThemeName } from '@decocode/mezzanine'
+import { ThemeSwitcher, Toolbar, type DemoBlockAlign, type ThemeName } from '@decocode/mezzanine'
 import { LabPanel, LabPanelLayout, LabPanelToggle } from './LabPanel'
 import { getPageTheme, getServerPageTheme, subscribeToPageTheme } from './labPageTheme'
 
 
 export interface LabDemoBlockProps {
   children: ReactNode
-  // The demo's source, shown in a Code tab.
-  codeView?: string
   // Controls for the demo's component's own settings, first in a collapsible, resizable demo panel at the
   // end, whose toggle sits at the end of the strip, so it stays visible. Without room beside the demo, the
   // panel opens over it.
@@ -18,12 +16,12 @@ export interface LabDemoBlockProps {
   // The component's parts, after its own settings, in the order of its anatomy: a switch for each optional
   // part, such as a Card's CardImage, or its name when it's always there, with its own settings beneath.
   parts?: ReactNode
-  // Where the demo sits in the demo area, as on the library's DemoBlock: stretch, the default here,
-  // fills the width; center keeps a small component at its own size in the middle; start at the start.
+  // Where the demo sits in the demo area, as on the library's DemoBlock: center, the default, keeps the
+  // demo at its own size in the middle; stretch fills the width; start puts it at the start.
   align?: DemoBlockAlign
 }
 
-export function LabDemoBlock({ children, codeView, properties, parts, align = 'stretch' }: LabDemoBlockProps) {
+export function LabDemoBlock({ children, properties, parts, align = 'center' }: LabDemoBlockProps) {
   const pageTheme = useSyncExternalStore(subscribeToPageTheme, getPageTheme, getServerPageTheme)
   // Until someone picks a theme, the demo follows the page's.
   // System is a theme of its own here: data-theme="system" follows the device inside the demo too.
@@ -68,15 +66,7 @@ export function LabDemoBlock({ children, codeView, properties, parts, align = 's
     </div>
   )
 
-  if (codeView == null) return <div className="lab-demo-block">{frame}</div>
-  return (
-    <Tabs className="lab-demo-block">
-      <TabList aria-label="Demo view">
-        <Tab id="demo">Demo</Tab>
-        <Tab id="code">Code</Tab>
-      </TabList>
-      <TabPanel id="demo">{frame}</TabPanel>
-      <TabPanel id="code"><CodeBlock language="tsx">{codeView}</CodeBlock></TabPanel>
-    </Tabs>
-  )
+  // The demo's code isn't part of the demo block: each page shows it in its own Code section, under the
+  // example, where it's always on the page.
+  return <div className="lab-demo-block">{frame}</div>
 }

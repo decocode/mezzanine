@@ -4,7 +4,7 @@ import { expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
 
 // The Lab's candidate Item, from shadcn/ui's React Aria Item. Illustrative and unapproved.
 
-// Checks that the demo panel's switches add and removes the Item's optional parts, and the Code tab follows.
+// Checks that the demo panel's switches add and removes the Item's optional parts, and the code in the Code section follows.
 test('the Lab Item adds and removes its parts', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/item')
@@ -17,9 +17,8 @@ test('the Lab Item adds and removes its parts', async ({ page }) => {
   await parts.locator('label', { hasText: /^ItemMedia$/ }).click()
   await expect(item.locator('.lab-item-header')).toHaveText('Header')
   await expect(item.locator('.lab-item-media')).toHaveCount(0)
-  await demo.getByRole('tab', { name: 'Code' }).click()
-  await expect(demo.locator('.mz-code-block')).toContainText('<ItemHeader>Header</ItemHeader>')
-  await expect(demo.locator('.mz-code-block')).not.toContainText('ItemMedia')
+  await expect(page.locator('main .mz-code-block')).toContainText('<ItemHeader>Header</ItemHeader>')
+  await expect(page.locator('main .mz-code-block')).not.toContainText('ItemMedia')
 })
 
 // Checks that with href the title is the Item's one link, covering the Item, while its action button

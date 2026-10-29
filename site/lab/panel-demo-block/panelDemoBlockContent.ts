@@ -7,6 +7,7 @@ export const panelPage: LabPage = {
   id: 'lab-panel', kind: 'component', title: 'Panel', href: '/site/lab/panel',
   description: '`LabPanel` is a component that can be placed at the start, end, or bottom of a `LabPanelLayout`.',
   sections: [
+    { key: 'code', title: 'Code' },
     { key: 'about', title: 'About Panel', body: [] },
     { key: 'example' },
   ],
@@ -93,6 +94,7 @@ export const panelLayoutPage: LabPage = {
   id: 'lab-panel-layout', kind: 'component', title: 'Panel layout', href: '/site/lab/panel-layout',
   description: '`LabPanelLayout` is a component that contains one `LabPanel` or several.',
   sections: [
+    { key: 'code', title: 'Code' },
     { key: 'about', title: 'About Panel layout', body: [] },
     { key: 'example' },
   ],
@@ -134,8 +136,9 @@ export const demoBlockPage: LabPage = {
   id: 'lab-demo-block', kind: 'component', title: 'Demo block', href: '/site/lab/demo-block',
   description: '`LabDemoBlock` is a component that contains examples of rendered UI components, rebuilt from the candidate Panel.',
   sections: [
+    { key: 'code', title: 'Code' },
     { key: 'about', title: 'About Demo block', body: [
-      '`LabDemoBlock` is a component that contains examples of rendered UI components, rebuilt from the candidate Panel. It’s the library’s DemoBlock with its hand-built Properties area replaced by a real `LabPanel`, the demo panel: collapsible and resizable, at the end, with the toggle that hides and shows it at the end of the toolbar, where it stays visible. Put the live components inside it, pass controls for the component’s own settings as `properties`, its parts as `parts`, and the demo’s source as `codeView`. The demo panel lists them in the order of the component’s anatomy: its own settings first, then each part, with that part’s settings beneath it. It frames real components, so a demo shows exactly what an app gets.',
+      '`LabDemoBlock` is a component that contains examples of rendered UI components, rebuilt from the candidate Panel. It’s the library’s DemoBlock with its hand-built Properties area replaced by a real `LabPanel`, the demo panel: collapsible and resizable, at the end, with the toggle that hides and shows it at the end of the toolbar, where it stays visible. Put the live components inside it, pass controls for the component’s own settings as `properties`, and its parts as `parts`. The demo panel lists them in the order of the component’s anatomy: its own settings first, then each part, with that part’s settings beneath it. It frames real components, so a demo shows exactly what an app gets.',
     ] },
     { key: 'example' },
   ],
@@ -143,14 +146,12 @@ export const demoBlockPage: LabPage = {
     { key: 'anatomy', table: {
       label: 'Demo block anatomy', nameColumn: 'Component', className: 'documentation-anatomy-table', namesAreCode: false,
       rows: [
-        { name: 'LabDemoBlock', description: 'Holds the demo’s frame and, with `codeView`, the tabs.' },
-        { name: 'Tabs', description: 'Optional, from `codeView`: Demo and Code tabs, outside the frame.' },
+        { name: 'LabDemoBlock', description: 'Holds the demo’s frame. The demo’s code isn’t part of it: the page shows it in a Code section under the example.' },
         { name: 'Frame', description: 'The border around the toolbar, the demo panel and the demo area.' },
-        { name: 'Toolbar', description: 'Named “Demo tools”: the theme switcher and the demo panel’s toggle, together at the end. It’s part of the frame, so it isn’t shown while the Code tab is open.' },
+        { name: 'Toolbar', description: 'Named “Demo tools”: the theme switcher and the demo panel’s toggle, together at the end.' },
         { name: 'ThemeSwitcher', description: 'The theme switcher: System, Light, Dark and Wireframe, showing the chosen theme’s icon. It starts on the page’s theme and changes only this demo, pop-ups included.' },
         { name: 'Demo area', description: 'The space where the live components are shown, on the theme’s page colour.' },
         { name: 'LabPanel', description: 'The demo panel: optional, from `properties` or `parts`, collapsible and resizable, at the end, titled “Demo settings”. It holds one list of controls, in the order of the component’s anatomy.', href: '/site/lab/panel' },
-        { name: 'CodeBlock', description: 'Optional, from `codeView`: the demo’s source. The code block is its own frame, with its own buttons.' },
       ],
     } },
     { key: 'behaviour', body: [{ list: [
@@ -158,13 +159,13 @@ export const demoBlockPage: LabPage = {
       'Hiding the demo panel gives the demo area the whole width.',
       'The demo panel can be resized by its inner edge.',
     ] }] },
-    { key: 'states', body: ['Demo panel shown or hidden; Demo tab or Code tab.'] },
+    { key: 'states', body: ['Demo panel shown or hidden.'] },
     { key: 'usage', body: [
       'The theme switcher sets `data-theme` on the demo, and its pop-ups render inside it, so a menu or tooltip opened from the demo takes its theme too.',
       'Not yet in the candidate: `align` and `codeLanguage`; the code is always highlighted as `tsx`.',
     ] },
     { key: 'accessibility', body: [{ list: [
-      'The Demo and Code tabs come first, then the toolbar, named “Demo tools”, then the demo panel and the demo. Tab reaches the toolbar once, and the arrow keys move between the theme switcher and the demo panel’s toggle.',
+      'The toolbar, named “Demo tools”, comes first, then the demo panel and the demo. Tab reaches the toolbar once, and the arrow keys move between the theme switcher and the demo panel’s toggle.',
       'The toggle is named “Hide demo settings” or “Show demo settings”, and says whether the panel is expanded. The demo panel is a region named by its title, “Demo settings”. Each control is named by its visible label, and each part with settings of its own is a group named after the part.',
       'The theme switcher is named “Change demo theme” and shows the chosen theme’s icon, with its name in a tooltip.',
     ] }] },
@@ -174,7 +175,6 @@ export const demoBlockPage: LabPage = {
         { name: 'children', description: 'The live components.' },
         { name: 'properties', description: 'Controls for the component’s own settings, such as its size, listed first in the demo panel.' },
         { name: 'parts', description: 'The component’s parts, after `properties`, in the order of its anatomy: a switch for each optional part, such as a Card’s CardImage, with that part’s own settings and the parts placed inside it beneath it, such as CardImage’s Badge. Without `properties` or `parts`, there’s no demo panel or toggle.' },
-        { name: 'codeView', description: 'The demo’s source, in a Code tab. Without it, there are no tabs.' },
       ],
     } },
     { key: 'tokens', table: {

@@ -1,16 +1,15 @@
 // The Lab's several-Panels example: one candidate Panel at each placement of a LabPanelLayout at once. Each
 // is collapsible, with a text toggle in a shared bar across the top of the layout, so without room beside
 // the content a side Panel collapses and its toggle opens it as an overlay. Illustrative and unapproved.
-import { useState } from 'react'
 import { Toolbar } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../components/PanelSwitch'
 import { LabDemoBlock } from './LabDemoBlock'
 import { LabPanel, LabPanelLayout, LabPanelToggle } from './LabPanel'
 import type { LabPanelPlacement } from './labPanelSize'
-import { panelPlacements, severalPanelsCode, severalPanelsLabels as labels } from './panelDemoBlockContent'
+import { panelPlacements, severalPanelsLabels as labels } from './panelDemoBlockContent'
 
-export function SeveralPanelsExample() {
-  const [shown, setShown] = useState<Record<LabPanelPlacement, boolean>>({ start: true, end: true, bottom: true })
+// Which Panels show comes from the page, which also shows their code in its own section.
+export function SeveralPanelsExample({ shown, onShownChange }: { shown: Record<LabPanelPlacement, boolean>; onShownChange: (shown: Record<LabPanelPlacement, boolean>) => void }) {
   const placements = panelPlacements.filter((placement) => shown[placement])
   // The bar is a Toolbar holding a text toggle for each Panel shown, in the order of the placements: Tab
   // reaches it once, and the arrow keys move between its toggles.
@@ -28,10 +27,9 @@ export function SeveralPanelsExample() {
 
   return (
     <LabDemoBlock
-      codeView={severalPanelsCode(placements)}
       // The switches add and remove whole Panels, which are the LabPanelLayout's parts.
       parts={panelPlacements.map((placement) => (
-        <PanelSwitch key={placement} isSelected={shown[placement]} onChange={(isSelected) => setShown({ ...shown, [placement]: isSelected })}>{placement}</PanelSwitch>
+        <PanelSwitch key={placement} isSelected={shown[placement]} onChange={(isSelected) => onShownChange({ ...shown, [placement]: isSelected })}>{placement}</PanelSwitch>
       ))}
     >
       <LabPanelLayout className="lab-panel-example" header={bar}>

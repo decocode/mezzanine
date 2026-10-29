@@ -1,7 +1,7 @@
 // The Lab's Panel page: a candidate Panel in a LabPanelLayout, in the candidate demo block, whose
 // Properties Panel changes it. Illustrative and unapproved.
 import { useState } from 'react'
-import { Toolbar } from '@decocode/mezzanine'
+import { CodeBlock, Toolbar } from '@decocode/mezzanine'
 import { PanelSelect } from '../../components/PanelSelect'
 import { PanelSwitch } from '../../components/PanelSwitch'
 import { LabContentPage } from '../shared/StagePages'
@@ -26,7 +26,6 @@ export function PanelExperiment() {
   return <LabContentPage content={panelPage} parts={{
     example: (
       <LabDemoBlock
-        codeView={panelDemoBlockCode({ placement, isResizable, isCollapsible, hasCollapseButton: isCollapsible && hasCollapseButton, hasHeader, hasFooter })}
         properties={<>
           <PanelSelect label="placement" options={panelPlacements} value={placement} onChange={setPlacement} />
           <PanelSwitch isSelected={isResizable} onChange={setIsResizable}>isResizable</PanelSwitch>
@@ -62,5 +61,7 @@ export function PanelExperiment() {
         </LabPanelLayout>
       </LabDemoBlock>
     ),
+    // The code shows in its own section under the example, and follows the demo settings.
+    code: <CodeBlock language="tsx">{panelDemoBlockCode({ placement, isResizable, isCollapsible, hasCollapseButton: isCollapsible && hasCollapseButton, hasHeader, hasFooter })}</CodeBlock>,
   }} />
 }

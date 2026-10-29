@@ -106,6 +106,12 @@
   visibility: hidden;
 }
 
+/* Its content doesn't set the row's height either: squeezed into a closing track, it would wrap into a
+   tall column and stretch the content beside it. */
+.lab-panel[data-state='closed']:not([data-overlay]) {
+  contain: size;
+}
+
 /* Without room beside the content, a side Panel becomes an overlay that fills the layout, full width and full
    height, raised above the content (owner, 29 October 2026). It's placed within the grid rows below the
    header, so it never changes their size. */
@@ -369,6 +375,8 @@
 /* Tall enough for the Panel's content and footer, so collapsing the Panel doesn't shrink the example and
    move its toggle. */
 .lab-panel-example {
+  /* A layout fills the demo area's width, even with the demo centred. */
+  inline-size: 100%;
   min-block-size: var(--width-md);
   border: var(--border-width-hairline) solid var(--color-border);
   border-radius: var(--radius-surface);
