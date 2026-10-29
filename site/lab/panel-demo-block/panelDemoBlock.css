@@ -334,12 +334,6 @@
   gap: var(--space-gap-cluster);
 }
 
-.lab-demo-block-part-name {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-body-md);
-  line-height: var(--line-height-body-md);
-}
-
 /* The demo panel sits flush in the frame, with no gap around it: one line divides it from the
    demo. As an overlay, it keeps its raised look instead. */
 .lab-demo-block-layout > .lab-demo-block-panel:not([data-overlay]) {

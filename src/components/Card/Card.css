@@ -36,10 +36,8 @@
 
 /* Text that belongs together, an Avatar's name, the title and the text it introduces, sits closer than
    the card's groups, so the grouping shows. */
-/* A linked title renders its arrow straight after it, so the text after the arrow counts too. */
 .mz-card > .mz-avatar + :is(.mz-heading, .mz-card-title),
-.mz-card > :is(.mz-heading, .mz-card-title) + *,
-.mz-card > .mz-card-title + .mz-card-arrow + * {
+.mz-card > :is(.mz-heading, .mz-card-title) + * {
   margin-block-start: var(--card-text-gap, var(--space-gap-text));
 }
 
@@ -154,16 +152,14 @@
   text-transform: var(--text-transform-body);
 }
 
-.mz-card-footer > .mz-button:nth-last-child(2) {
+.mz-card-footer > .mz-button:last-child,
+.mz-card-footer > .mz-button:nth-last-child(2):has(+ .mz-card-arrow) {
   margin-inline-start: auto;
 }
 
 /* The arrow sits at the card's end corner and nudges toward the end on hover. With a footer, it sits at
-   the footer's end, after the footer's details, and the title's own arrow row is hidden. */
-/* CardTitle renders the arrow straight after the title; order moves it to the end. It's hidden from
-   screen readers, so the reading order is unchanged. */
+   the footer's end, after the footer's details, and the card's own arrow row is hidden. */
 .mz-card > .mz-card-arrow {
-  order: 1;
   display: flex;
   justify-content: flex-end;
   margin-block-start: auto;
@@ -175,19 +171,14 @@
   display: none;
 }
 
-/* The footer's arrow shows only in a linked card. */
 .mz-card-footer > .mz-card-arrow {
-  display: none;
-}
-
-.mz-card:has(> .mz-card-title .mz-card-title-link) > .mz-card-footer > .mz-card-arrow {
   display: flex;
   margin-inline-start: auto;
   color: var(--card-arrow-color, var(--color-accent));
 }
 
 /* After a footer Button, which already sits at the end, the arrow follows it. */
-.mz-card:has(> .mz-card-title .mz-card-title-link) > .mz-card-footer > .mz-button + .mz-card-arrow {
+.mz-card-footer > .mz-button + .mz-card-arrow {
   margin-inline-start: 0;
 }
 

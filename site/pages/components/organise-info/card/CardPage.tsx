@@ -27,7 +27,7 @@ export default function CardPage() {
               </Fragment>)}
             </>}
           >
-            <Card className="card-example">
+            <Card className="card-example" href={flags.href ? cardExample.href : undefined}>
               {flags.CardImage && (
                 <CardImage src={examplePicture} alt="" aspectRatio={aspectRatio}>
                   {shown('Badge') && <Badge>{cardExample.badge}</Badge>}
@@ -35,7 +35,7 @@ export default function CardPage() {
                 </CardImage>
               )}
               {shown('Avatar') && <Avatar size="sm">{cardExample.avatar}</Avatar>}
-              <CardTitle href={flags.href ? cardExample.href : undefined}>{cardExample.heading}</CardTitle>
+              <CardTitle>{cardExample.heading}</CardTitle>
               <Text elementType="p">{cardExample.body}</Text>
               {flags.CardFooter && (
                 <CardFooter>

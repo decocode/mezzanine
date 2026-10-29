@@ -20,7 +20,7 @@ export const cardContent: DocsPageContent = {
         rows: [
           { name: 'Card', description: 'Renders a `div` with the card surface. It adds even space between its direct children.' },
           { name: 'CardImage', description: 'Optional. A picture that keeps the shape set by `aspectRatio`, `16 / 9` by default, and crops to fill. As the first part it reaches the card’s edges. Its children sit over the picture: the first at the top start, the last at the top end.' },
-          { name: 'CardTitle', description: 'The card’s heading, in the Title medium text style. With `href`, it’s the card’s one link, and its pressable area covers the whole card.' },
+          { name: 'CardTitle', description: 'The card’s heading, in the Title medium text style. In a card with `href`, it’s the card’s one link, and its pressable area covers the whole card.' },
           { name: 'CardFooter', description: 'Optional. The bottom row: details at the start and a last `Button` at the end. It sits at the bottom of the card, so footers line up across a row of cards.' },
         ],
       },
@@ -31,7 +31,7 @@ export const cardContent: DocsPageContent = {
         'Place the parts inside `Card` in the order people should see them, with other components such as `Avatar`, `Text` and `Button`. Card adds the spacing between them.',
         'Content flows as it does elsewhere on a page: headings and paragraphs fill the width, while inline content such as `code`, a `Badge` or a `Link` keeps its natural size.',
         '`CardImage` needs `src` and `alt`. Pass `alt=""` when the title already names the card, so the picture is decorative.',
-        'To make the card a link, give `CardTitle` an `href`. Pressing anywhere on the card then follows it, and an arrow at the card’s end shows it can be pressed. With a `CardFooter`, the arrow sits at the end of the footer. Buttons, toggles and links inside the card stay pressable on their own. `CardTitle` accepts React Aria `Link` props, such as `target`, and `level` sets its heading level, 3 by default.',
+        'To make the card a link, give `Card` an `href`. Pressing anywhere on the card then follows it, and an arrow at the card’s end shows it can be pressed. With a `CardFooter`, the arrow sits at the end of the footer. Buttons, toggles and links inside the card stay pressable on their own. `Card` also accepts React Aria `Link`’s link settings, such as `target`. `CardTitle`’s `level` sets its heading level, 3 by default.',
         'Pass `className` to position the card in your layout. Card also accepts the other attributes of a `div`.',
       ],
     },
@@ -81,8 +81,8 @@ export const cardExample = {
 // The Properties panel's choices: the picture's shape (16 / 9 by default), and the card's optional
 // parts. With href, the title links and the whole card can be pressed.
 export const cardAspectRatios = ['16 / 9', '4 / 3', '1 / 1'] as const
-// The example's switches, in the order of the Card's anatomy.
-export const cardFlags = ['CardImage', 'Badge', 'ToggleButton', 'Avatar', 'href', 'CardFooter', 'Detail', 'Button'] as const
+// The example's switches: the Card's own href first, then its parts in the order of its anatomy.
+export const cardFlags = ['href', 'CardImage', 'Badge', 'ToggleButton', 'Avatar', 'CardFooter', 'Detail', 'Button'] as const
 
 // Badge and ToggleButton sit on the picture, so they need it. A footer Button only goes in a card
 // without href, because a linked card's footer ends with its arrow. Detail, the footer's text, needs the
@@ -102,10 +102,10 @@ export function cardExampleCode({ aspectRatio, flags }: { aspectRatio: string, f
     ...(shown('ToggleButton') ? [`    <ToggleButton hierarchy="secondary" size="sm" icon={<HeartIcon />} iconPosition="iconOnly">${cardExample.toggle}</ToggleButton>`] : []),
   ]
   return [
-    '<Card>',
+    `<Card${formatJsxProps({ href: flags.href ? cardExample.href : undefined })}>`,
     ...(flags.CardImage ? overlays.length === 0 ? [`  ${image} />`] : [`  ${image}>`, ...overlays, '  </CardImage>'] : []),
     ...(flags.Avatar ? [`  <Avatar size="sm">${cardExample.avatar}</Avatar>`] : []),
-    `  <CardTitle${formatJsxProps({ href: flags.href ? cardExample.href : undefined })}>${cardExample.heading}</CardTitle>`,
+    `  <CardTitle>${cardExample.heading}</CardTitle>`,
     `  <Text elementType="p">${cardExample.body}</Text>`,
     ...(flags.CardFooter ? [
       '  <CardFooter>',

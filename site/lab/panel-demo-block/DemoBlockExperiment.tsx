@@ -1,5 +1,5 @@
-// The Lab's Demo block page: the candidate demo block, showing a Card. Card has no settings of its own, so
-// its demo panel has only a Parts group, where each part lists its own settings beneath it.
+// The Lab's Demo block page: the candidate demo block, showing a Card. Its demo panel lists the Card's own
+// href first, then its parts, each with its own settings beneath it.
 // Illustrative and unapproved.
 import { useState } from 'react'
 import { Button, Card, CardFooter, CardImage, CardTitle, Text } from '@decocode/mezzanine'
@@ -21,6 +21,7 @@ export function DemoBlockExperiment() {
     example: (
       <LabDemoBlock
         codeView={demoBlockCode({ aspectRatio, href, parts })}
+        properties={<PanelSwitch isSelected={href} onChange={setHref}>href</PanelSwitch>}
         parts={<>
           {/* CardImage's own setting appears beneath it once the part is in. */}
           <div className="lab-demo-block-part" role="group" aria-label="CardImage">
@@ -29,19 +30,12 @@ export function DemoBlockExperiment() {
               <PanelSelect label="aspectRatio" options={demoBlockAspectRatios} value={aspectRatio} onChange={setAspectRatio} />
             </div>}
           </div>
-          {/* CardTitle is always there, so it has no switch, only its own setting. */}
-          <div className="lab-demo-block-part" role="group" aria-label="CardTitle">
-            <span className="lab-demo-block-part-name" aria-hidden="true">CardTitle</span>
-            <div className="lab-demo-block-part-settings">
-              <PanelSwitch isSelected={href} onChange={setHref}>href</PanelSwitch>
-            </div>
-          </div>
           <PanelSwitch isSelected={parts.CardFooter} onChange={(isSelected) => setParts({ ...parts, CardFooter: isSelected })}>CardFooter</PanelSwitch>
         </>}
       >
-        <Card className="lab-demo-block-card">
+        <Card className="lab-demo-block-card" href={href ? labels.href : undefined}>
           {parts.CardImage && <CardImage src={picture} alt="" aspectRatio={aspectRatio} />}
-          <CardTitle href={href ? labels.href : undefined}>{labels.heading}</CardTitle>
+          <CardTitle>{labels.heading}</CardTitle>
           <Text elementType="p"><RichText text={labels.body} /></Text>
           {parts.CardFooter && (
             <CardFooter>

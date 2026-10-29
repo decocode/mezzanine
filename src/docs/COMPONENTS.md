@@ -75,9 +75,11 @@ Compose a Card from its parts, in the order people should see them:
 - `CardImage` needs `src` and `alt`; pass `alt=""` when the title names the
   card. `aspectRatio` is `16 / 9` by default. Each overlay sits on a solid
   surface, so it stays readable over any picture.
-- Give `CardTitle` an `href` to make the card a link: the title is the only
-  link, and its pressable area covers the card. Buttons, toggles and links in
-  the card stay pressable. Card itself has no `href`.
+- Give `Card` an `href` to make the card a link: its `CardTitle` is the only
+  link, and its pressable area covers the card. An arrow shows it can be
+  pressed, at the end of the `CardFooter` if there is one. A linked card's
+  footer holds no `Button`. Buttons, toggles and links in the card stay
+  pressable.
 - `Avatar` takes the name as children, shown beside the picture. Without
   visible children it needs `alt`. Without `src` it shows the name's initials.
   `size` is `md` or `sm`.

@@ -214,9 +214,9 @@ export const demoBlockParts = ['CardImage', 'CardFooter'] as const
 export function demoBlockCode({ aspectRatio, href, parts }: { aspectRatio: string; href: boolean; parts: Record<(typeof demoBlockParts)[number], boolean> }) {
   const ratio = aspectRatio === '16 / 9' ? '' : ` aspectRatio="${aspectRatio}"`
   return [
-    '<Card>',
+    `<Card${href ? ` href="${demoBlockLabels.href}"` : ''}>`,
     ...(parts.CardImage ? [`  <CardImage src={picture} alt=""${ratio} />`] : []),
-    `  <CardTitle${href ? ` href="${demoBlockLabels.href}"` : ''}>${demoBlockLabels.heading}</CardTitle>`,
+    `  <CardTitle>${demoBlockLabels.heading}</CardTitle>`,
     `  <Text elementType="p">${demoBlockLabels.body.replace(/`([^`]+)`/g, '<code>$1</code>')}</Text>`,
     ...(parts.CardFooter ? ['  <CardFooter>', `    <Text>${demoBlockLabels.detail}</Text>`, `    <Button hierarchy="secondary">${demoBlockLabels.action}</Button>`, '  </CardFooter>'] : []),
     '</Card>',
