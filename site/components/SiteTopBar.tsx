@@ -45,7 +45,7 @@ export function SiteTopBar({
         return (
           <>
             <Link className="mz-top-bar-link" aria-current={currentPath === '/' ? 'page' : undefined} href="/" onPress={closeMenu}>Home</Link>
-            <Link className="mz-top-bar-link" aria-current={currentPath === '/introduction' ? 'page' : isDocsPage ? true : undefined} href="/introduction" onPress={closeMenu}>Docs</Link>
+            <Link className="mz-top-bar-link" aria-current={currentPath === '/introduction' ? 'page' : isDocsPage ? true : undefined} href="/introduction" onPress={closeMenu}>Documentation</Link>
             {isMenu && currentPage && inMenu(<DocsNavigation currentPage={currentPage} />)}
             <Link className="mz-top-bar-link" aria-current={labCurrent} href="/site/lab" onPress={closeMenu}>Lab</Link>
             {isMenu && labNavigation != null && inMenu(labNavigation)}

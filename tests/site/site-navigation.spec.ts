@@ -27,7 +27,7 @@ for (const theme of ['light', 'dark', 'wireframe']) {
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await page.goto('/tooltip')
     await page.evaluate(theme => document.documentElement.dataset.theme = theme, theme)
-    const docsLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Docs', exact: true })
+    const docsLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Documentation', exact: true })
     await expect(docsLink).toHaveAttribute('aria-current', 'true')
     // The current section's link has a soft tint, with its indicator bar along the bottom inside it.
     expect(await docsLink.evaluate(element => {
@@ -77,7 +77,7 @@ test('site TopBar leaves Docs inactive on the landing page and unknown routes', 
   for (const path of ['/', '/not-a-page']) {
     await page.goto(path)
     await page.evaluate(() => document.documentElement.dataset.theme = 'wireframe')
-    const docsLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Docs', exact: true })
+    const docsLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Documentation', exact: true })
     await expect(docsLink).not.toHaveAttribute('aria-current')
     // The Home link comes before Docs and Lab, and marks the landing page as current.
     const homeNavLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Home', exact: true })
