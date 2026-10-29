@@ -8,10 +8,10 @@ import { LayoutFutureChildPage, LayoutFuturePage, LayoutChildPage, LayoutOvervie
 import { labContent, labNavigationItems } from './labContent'
 import { layoutPages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
-import { demoBlockPage, panelHostPage, panelPage } from './panel-demo-block/panelDemoBlockContent'
+import { demoBlockPage, panelLayoutPage, panelPage } from './panel-demo-block/panelDemoBlockContent'
 import { DemoBlockExperiment } from './panel-demo-block/DemoBlockExperiment'
 import { PanelExperiment } from './panel-demo-block/PanelExperiment'
-import { PanelHostExperiment } from './panel-demo-block/PanelHostExperiment'
+import { PanelLayoutExperiment } from './panel-demo-block/PanelLayoutExperiment'
 import { itemPage } from './item/itemContent'
 import { ItemExperiment } from './item/ItemExperiment'
 import { expandingControlsPage, volumePage, zoomPage } from './volume-and-zoom/volumeAndZoomContent'
@@ -41,10 +41,10 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
   const isZoom = currentPath === zoomPage.href
   const isPanel = currentPath === panelPage.href
   const isDemoBlock = currentPath === demoBlockPage.href
-  const isPanelHost = currentPath === panelHostPage.href
+  const isPanelLayout = currentPath === panelLayoutPage.href
   const isItem = currentPath === itemPage.href
   const isExpandingControls = currentPath === expandingControlsPage.href
-  const pageTitle = layoutPage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title ?? (isVolume ? volumePage.title : isZoom ? zoomPage.title : isPanel ? panelPage.title : isDemoBlock ? demoBlockPage.title : isPanelHost ? panelHostPage.title : isItem ? itemPage.title : isExpandingControls ? expandingControlsPage.title : undefined))
+  const pageTitle = layoutPage?.title ?? (isFuture ? emergingFeatures.title : futurePage?.title ?? (isVolume ? volumePage.title : isZoom ? zoomPage.title : isPanel ? panelPage.title : isDemoBlock ? demoBlockPage.title : isPanelLayout ? panelLayoutPage.title : isItem ? itemPage.title : isExpandingControls ? expandingControlsPage.title : undefined))
   const title = isIndex ? 'Lab | Mezzanine' : isLayout ? 'Layout | Lab' : pageTitle ? `${pageTitle} | Lab` : 'Page not found | Lab'
   const navigation = <NavigationPanel aria-label="Lab sections" navigationLabel="Lab experiments" items={labNavigationItems} selectedRoute={currentPath} />
 
@@ -66,7 +66,7 @@ export default function LabPage({ currentPath, onThemeChange, selectedTheme }: L
               <Text elementType="p" className="mz-text-body-md">{experiment.description}</Text>
             </li>)}
           </ul>
-        </div> : isLayout ? <LayoutOverviewPage /> : layoutPage ? <LayoutChildPage page={layoutPage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : isVolume ? <VolumeExperiment /> : isZoom ? <ZoomExperiment /> : isPanel ? <PanelExperiment /> : isDemoBlock ? <DemoBlockExperiment /> : isPanelHost ? <PanelHostExperiment /> : isItem ? <ItemExperiment /> : isExpandingControls ? <ExpandingControlsExperiment /> : <NotFoundPage />}
+        </div> : isLayout ? <LayoutOverviewPage /> : layoutPage ? <LayoutChildPage page={layoutPage} /> : isFuture ? <LayoutFuturePage /> : futurePage ? <LayoutFutureChildPage page={futurePage} /> : isVolume ? <VolumeExperiment /> : isZoom ? <ZoomExperiment /> : isPanel ? <PanelExperiment /> : isDemoBlock ? <DemoBlockExperiment /> : isPanelLayout ? <PanelLayoutExperiment /> : isItem ? <ItemExperiment /> : isExpandingControls ? <ExpandingControlsExperiment /> : <NotFoundPage />}
     </DocsShell>
   </>
 }

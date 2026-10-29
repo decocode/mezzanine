@@ -1,139 +1,240 @@
-// A candidate Panel that works in any container, and the host that lays Panels out around its main
-// content. Illustrative and unapproved: the library's Panel only works inside AppShell.
-import { useId, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode, type RefObject } from 'react'
+// A candidate Panel that works in any container, and the LabPanelLayout that holds one or more of them
+// beside its content. Illustrative and unapproved.
+import { Children, isValidElement, useCallback, useId, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent, type ReactNode, type RefObject } from 'react'
 import { useLocale } from 'react-aria-components'
 import { useMove } from 'react-aria'
 import { Button } from '@decocode/mezzanine'
 import { labPanelIcon } from './LabPanelIcons'
-import { clampSize, panelSizeLimits, type LabPanelPlacement } from './labPanelSize'
+import { LabPanelLayoutContext, lengthOnElement, useLabPanelLayout, useLabPanelLayoutState } from './labPanelLayoutState'
+import type { LabPanelPlacement } from './labPanelSize'
 
-// Lays out its Panels at the start, end, top and bottom of its main content, which is every other child.
-// Without room for a side Panel beside the content, the side Panel moves above it.
-export function LabPanelHost({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={['lab-panel-host', className].filter(Boolean).join(' ')}>{children}</div>
+export interface LabPanelLayoutProps {
+  // LabPanels, and the content they sit beside, which is every other child.
+  children: ReactNode
+  // A row across the top, above the Panels and the content, such as a toolbar holding a LabPanelToggle.
+  header?: ReactNode
+  // The narrowest the content gets before a side Panel stops sharing the space and becomes an overlay,
+  // as a CSS length. The xs width unless given.
+  minContentWidth?: string
+  className?: string
+}
+
+// Holds one or more LabPanels and the content beside them, and decides how they share the room. It keeps
+// every Panel's expanded state and size, measures its own width, and without room for a side Panel,
+// shows it as an overlay inside the layout. It can go on any element.
+export function LabPanelLayout({ children, header, minContentWidth = 'var(--width-xs)', className }: LabPanelLayoutProps) {
+  const { state, elementProps } = useLabPanelLayoutState()
+  const isPanel = (child: ReactNode) => isValidElement(child) && child.type === LabPanel
+  const childList = Children.toArray(children)
+  const content = childList.filter((child) => !isPanel(child))
+  return (
+    <LabPanelLayoutContext value={state}>
+      <div
+        {...elementProps}
+        className={['lab-panel-layout', className].filter(Boolean).join(' ')}
+        style={{ '--_lab-panel-layout-min-content-width': minContentWidth, ...elementProps.style } as CSSProperties}
+      >
+        {header != null && <div className="lab-panel-layout-header">{header}</div>}
+        {childList.filter(isPanel)}
+        {content.length > 0 && <div className="lab-panel-layout-content">{content}</div>}
+      </div>
+    </LabPanelLayoutContext>
+  )
 }
 
 export interface LabPanelProps {
   placement: LabPanelPlacement
-  // A visible heading in the Panel's header, which also names it for screen readers.
-  title: string
+  // An optional visible heading in the Panel's header row, for when the content needs introducing. It
+  // makes the Panel a region named by it. Without one, the Panel isn't a landmark, and its content names
+  // itself.
+  title?: string
   // People can change the Panel's size by dragging its inner edge, or with the arrow keys.
   isResizable?: boolean
-  // A button in the header minimizes the Panel to its header, and maximizes it again.
-  isMinimizable?: boolean
   // The whole Panel can be collapsed and expanded by a LabPanelToggle outside it, which stays visible.
-  // A Panel is collapsible or minimizable, not both, so this switches minimizing off.
   isCollapsible?: boolean
-  // Whether a collapsible Panel is expanded. It is unless this is false.
+  // Whether a collapsible Panel is expanded, for an app that controls it, and a response to changes.
+  // Without isExpanded, the Panel starts expanded.
   isExpanded?: boolean
+  onExpandedChange?: (isExpanded: boolean) => void
+  // A collapsible Panel holds a LabPanelToggle in its header row that collapses it. Placeholder name; the
+  // owner is still to confirm it.
+  hasCollapseButton?: boolean
   // The Panel's id, which its LabPanelToggle names.
-  id?: string
-  children: ReactNode
+  id: string
+  children?: ReactNode
   className?: string
 }
 
-export function LabPanel({ placement, title, isResizable = false, isMinimizable = false, isCollapsible = false, isExpanded = true, id, children, className }: LabPanelProps) {
-  const [isMaximized, setIsMaximized] = useState(true)
-  // A size someone dragged the Panel to, in pixels, or undefined for its usual size.
-  const [size, setSize] = useState<number | undefined>(undefined)
-  const panelRef = useRef<HTMLElement>(null)
+export function LabPanel({ placement, title, isResizable = false, isCollapsible = false, isExpanded, onExpandedChange, hasCollapseButton = false, id, children, className }: LabPanelProps) {
+  const { store, presentation } = useLabPanelLayout('LabPanel')
+  useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
   const headingId = useId()
-  const bodyId = useId()
-  const canMinimize = isMinimizable && !isCollapsible
-  const isShown = !isCollapsible || isExpanded
-  const isOpen = isShown && (!canMinimize || isMaximized)
+  const panelRef = useRef<HTMLDivElement | null>(null)
+  const isOverlay = presentation(placement) === 'overlay'
+  // A Panel that can't collapse has no toggle to open it as an overlay, so without room it's hidden.
+  const isShown = isCollapsible ? store.isShown(id, isOverlay) : !isOverlay
+
+  // Register from a ref callback, so toggles can find this Panel without an effect.
+  const register = useCallback((element: HTMLDivElement | null) => {
+    panelRef.current = element
+    if (!element) return
+    return store.register(id, { placement, isExpanded: isCollapsible ? isExpanded : true, isCollapsible, onExpandedChange })
+  }, [store, id, placement, isCollapsible, isExpanded, onExpandedChange])
+
+  // A LabPanelHeader among the children shares the header row with the title and the collapse button, and
+  // a LabPanelFooter sits at the bottom, with the content scrolling between them.
+  const parts = Children.toArray(children)
+  const header = parts.find((child) => isValidElement(child) && child.type === LabPanelHeader)
+  const footer = parts.find((child) => isValidElement(child) && child.type === LabPanelFooter)
+  const content = parts.filter((child) => child !== header && child !== footer)
+  const collapseButton = isCollapsible && hasCollapseButton && <LabPanelToggle panel={id} placement={placement} title={title} />
+  const hasHeaderRow = header !== undefined || title !== undefined || Boolean(collapseButton)
+  // Only a titled Panel is a region; otherwise it's a plain layout container. Typed as a div for the ref.
+  const Element = (title === undefined ? 'div' : 'section') as 'div'
 
   return (
-    <section
-      ref={panelRef}
+    <Element
+      ref={register}
       id={id}
       className={['lab-panel', className].filter(Boolean).join(' ')}
       data-placement={placement}
-      data-maximized={isOpen || undefined}
-      data-collapsed={!isShown || undefined}
-      aria-labelledby={headingId}
-      // A collapsed Panel keeps its size for when it expands, but doesn't apply it.
-      style={size === undefined || !isShown ? undefined : { '--_lab-panel-size': `${size}px` } as CSSProperties}
+      data-state={isShown ? 'open' : 'closed'}
+      data-overlay={isOverlay || undefined}
+      aria-labelledby={title === undefined ? undefined : headingId}
+      inert={!isShown}
+      // An overlay closes with Escape, and focus goes back to the toggle outside it.
+      onKeyDown={isOverlay && isShown && isCollapsible ? (event) => {
+        if (event.key !== 'Escape') return
+        store.setExpanded(id, false, true)
+        handFocusToTwin(id, false)
+      } : undefined}
     >
       <div className="lab-panel-inner">
-        <div className="lab-panel-header">
-          <h3 className="lab-panel-title" id={headingId}>{title}</h3>
-          {canMinimize && (
-            <Button
-              size="sm"
-              hierarchy="tertiary"
-              icon={labPanelIcon(placement, isMaximized)}
-              iconPosition="iconOnly"
-              aria-expanded={isMaximized}
-              aria-controls={bodyId}
-              onPress={() => setIsMaximized(!isMaximized)}
-            >
-              {`${isMaximized ? 'Minimize' : 'Maximize'} ${title}`}
-            </Button>
-          )}
-        </div>
-        <div className="lab-panel-body" id={bodyId} hidden={!isOpen}>
+        {hasHeaderRow && <div className="lab-panel-header">
+          {placement === 'start' && collapseButton}
+          {title !== undefined && <h3 className="lab-panel-title" id={headingId}>{title}</h3>}
+          {header}
+          {placement !== 'start' && collapseButton}
+        </div>}
+        <div className="lab-panel-body">
           <div className="lab-panel-clip">
-            <div className="lab-panel-content">{children}</div>
+            <div className="lab-panel-content">{content}</div>
+            {footer}
           </div>
         </div>
       </div>
-      {isResizable && isOpen && <LabPanelResizeHandle placement={placement} title={title} controls={bodyId} panelRef={panelRef} size={size} onResize={setSize} />}
-    </section>
+      {isResizable && isShown && !isOverlay && <LabPanelResizeHandle id={id} placement={placement} title={title} panelRef={panelRef} />}
+    </Element>
   )
 }
 
-// The button that collapses and expands a collapsible Panel, placed outside it, where it stays visible:
-// in a strip, a toolbar or a top bar. Its icon shows what pressing does.
-export function LabPanelToggle({ panel, placement, title, isExpanded, onExpandedChange, collapseLabel, expandLabel }: {
+// An optional part at the top of a Panel, for what introduces it or acts on all of it, such as a heading
+// or a few buttons. It shares its row with the Panel's title and collapse button, and stays put while the
+// content below it scrolls.
+export function LabPanelHeader({ children }: { children: ReactNode }) {
+  return <div className="lab-panel-header-content">{children}</div>
+}
+
+// An optional part at the bottom of a Panel, for what should always be within reach, such as an account
+// menu or a message box. It stays put while the content above it scrolls.
+export function LabPanelFooter({ children }: { children: ReactNode }) {
+  return <div className="lab-panel-footer">{children}</div>
+}
+
+// When a toggle disappears with what it changed, focus moves to the twin that stays: the one inside the
+// Panel once it expands, or one outside it once it collapses. It tries each frame until the change has
+// rendered and the twin takes focus, for up to ten frames.
+function handFocusToTwin(panel: string, isExpanding: boolean) {
+  let frames = 10
+  const handOver = () => {
+    const twin = [...document.querySelectorAll<HTMLElement>(`[aria-controls="${CSS.escape(panel)}"]`)]
+      .find((toggle) => Boolean(toggle.closest(`#${CSS.escape(panel)}`)) === isExpanding)
+    if (!twin || twin === document.activeElement) return
+    twin.focus()
+    if (twin !== document.activeElement && --frames > 0) requestAnimationFrame(handOver)
+  }
+  requestAnimationFrame(handOver)
+}
+
+// The button that collapses and expands a collapsible Panel. Outside the Panel, it stays visible: in a
+// strip, a toolbar or the content's header. With hasCollapseButton, a Panel also holds one in its header
+// row. Its icon shows what pressing does.
+export function LabPanelToggle({ panel, placement, title, collapseLabel, expandLabel }: {
   // The Panel's id.
   panel: string
   placement: LabPanelPlacement
-  title: string
-  isExpanded: boolean
-  onExpandedChange: (isExpanded: boolean) => void
+  // The Panel's title, if it has one, for the button's name.
+  title?: string
   // The button's name and tooltip, for wording that suits the use, such as "Hide properties". They
-  // default to "Collapse" and "Expand" with the Panel's title.
+  // default to "Collapse" and "Expand" with the Panel's title, or "Hide panel" and "Show panel" without one.
   collapseLabel?: string
   expandLabel?: string
 }) {
+  const { store, presentation } = useLabPanelLayout('LabPanelToggle')
+  useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
+  const isOverlay = presentation(placement) === 'overlay'
+  const isShown = store.isShown(panel, isOverlay)
   return (
     <Button
       size="sm"
       hierarchy="tertiary"
-      icon={labPanelIcon(placement, isExpanded)}
+      icon={labPanelIcon(placement, isShown)}
       iconPosition="iconOnly"
-      aria-expanded={isExpanded}
+      aria-expanded={isShown}
       aria-controls={panel}
-      onPress={() => onExpandedChange(!isExpanded)}
+      onPress={() => {
+        store.setExpanded(panel, !isShown, isOverlay)
+        handFocusToTwin(panel, !isShown)
+      }}
     >
-      {isExpanded ? collapseLabel ?? `Collapse ${title}` : expandLabel ?? `Expand ${title}`}
+      {isShown
+        ? collapseLabel ?? (title === undefined ? 'Hide panel' : `Collapse ${title}`)
+        : expandLabel ?? (title === undefined ? 'Show panel' : `Expand ${title}`)}
     </Button>
   )
 }
 
 interface ResizeHandleProps {
+  id: string
   placement: LabPanelPlacement
-  title: string
-  controls: string
+  title: string | undefined
   panelRef: RefObject<HTMLElement | null>
-  size: number | undefined
-  onResize: (size: number | undefined) => void
 }
 
-// The Panel's inner edge, following the window splitter pattern: a focusable separator that pointer,
-// touch and arrow keys move with React Aria's useMove. Home and End go to the limits, and a double
-// click restores the usual size.
-function LabPanelResizeHandle({ placement, title, controls, panelRef, size, onResize }: ResizeHandleProps) {
+// The Panel's inner edge, following the window splitter pattern: a focusable separator that pointer, touch
+// and arrow keys move with React Aria's useMove. Home and End go to the limits, and a double click restores
+// the usual size. A side Panel resizes between the xs and md widths, never so wide that the content drops
+// below its minimum; a bottom one between the xs and sm widths, as heights.
+function LabPanelResizeHandle({ id, placement, title, panelRef }: ResizeHandleProps) {
+  const { store, maxPanelSize } = useLabPanelLayout('LabPanel')
   const { direction } = useLocale()
   const dragStart = useRef(0)
-  const isSide = placement === 'start' || placement === 'end'
-  // Moving toward the main content makes the Panel bigger; which way that is depends on its placement
-  // and, for a side Panel, the reading direction.
-  const growing = isSide ? ((placement === 'start') === (direction === 'ltr') ? 1 : -1) : placement === 'top' ? 1 : -1
-  const current = () => size ?? (isSide ? panelRef.current?.offsetWidth : panelRef.current?.offsetHeight) ?? 0
-  const limits = () => panelSizeLimits(panelRef.current, placement)
-  const resize = (next: number) => onResize(clampSize(next, limits()))
+  const [isMoving, setMoving] = useState(false)
+  const isSide = placement !== 'bottom'
+  // Moving toward the content makes the Panel bigger; which way that is depends on its placement and, for
+  // a side Panel, the reading direction.
+  const growing = isSide ? ((placement === 'start') === (direction === 'ltr') ? 1 : -1) : -1
+  const limits = () => {
+    const panel = panelRef.current
+    const min = lengthOnElement(panel, '--_lab-panel-min-width')
+    const largest = lengthOnElement(panel, isSide ? '--_lab-panel-max-width' : '--_lab-panel-max-height')
+    const max = Math.max(min, isSide ? Math.min(largest, maxPanelSize(placement)) : largest)
+    return { min, max, step: lengthOnElement(panel, '--space-4') }
+  }
+  // The size of the Panel's track: what someone resized it to, its usual width, or, for a bottom Panel, its
+  // height with the space around it.
+  const current = () => {
+    const panel = panelRef.current
+    if (store.size(id) !== undefined) return store.size(id)!
+    if (isSide) return lengthOnElement(panel, `--_lab-panel-${placement}-width`)
+    if (!panel) return 0
+    const styles = getComputedStyle(panel)
+    return panel.offsetHeight + parseFloat(styles.marginBlockStart) + parseFloat(styles.marginBlockEnd)
+  }
+  const resize = (next: number) => {
+    const { min, max } = limits()
+    store.setSize(id, Math.min(max, Math.max(min, next)))
+  }
 
   const { moveProps } = useMove({
     onMoveStart() {
@@ -141,11 +242,20 @@ function LabPanelResizeHandle({ placement, title, controls, panelRef, size, onRe
     },
     onMove({ deltaX, deltaY, pointerType }) {
       const delta = (isSide ? deltaX : deltaY) * growing
-      if (pointerType === 'keyboard') resize(current() + Math.sign(delta) * limits().step)
-      else {
-        dragStart.current += delta
-        resize(dragStart.current)
+      if (pointerType === 'keyboard') {
+        resize(current() + Math.sign(delta) * limits().step)
+        return
       }
+      if (!isMoving) {
+        setMoving(true)
+        store.setResizing(true)
+      }
+      dragStart.current += delta
+      resize(dragStart.current)
+    },
+    onMoveEnd() {
+      setMoving(false)
+      store.setResizing(false)
     },
   })
 
@@ -161,13 +271,13 @@ function LabPanelResizeHandle({ placement, title, controls, panelRef, size, onRe
     <div
       {...moveProps}
       onKeyDown={(event) => { moveProps.onKeyDown?.(event); onKeyDown(event) }}
-      onDoubleClick={() => onResize(undefined)}
+      onDoubleClick={() => store.setSize(id, undefined)}
       className="lab-panel-resize-handle"
       data-placement={placement}
       role="separator"
       aria-orientation={isSide ? 'vertical' : 'horizontal'}
-      aria-label={`Resize ${title}`}
-      aria-controls={controls}
+      aria-label={`Resize ${title ?? 'panel'}`}
+      aria-controls={id}
       aria-valuenow={Math.round(current())}
       aria-valuemin={Math.round(min)}
       aria-valuemax={Math.round(max)}

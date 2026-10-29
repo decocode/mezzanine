@@ -1,9 +1,9 @@
 // A candidate DemoBlock rebuilt from the candidate Panel: its Properties area is a LabPanel in a
-// LabPanelHost, rather than a hand-built copy of one. Illustrative and unapproved.
+// LabPanelLayout, rather than a hand-built copy of one. Illustrative and unapproved.
 import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { UNSAFE_PortalProvider } from 'react-aria'
 import { CodeBlock, Tab, TabList, TabPanel, Tabs, ThemeSwitcher, Toolbar, type DemoBlockAlign, type ThemeName } from '@decocode/mezzanine'
-import { LabPanel, LabPanelHost, LabPanelToggle } from './LabPanel'
+import { LabPanel, LabPanelLayout, LabPanelToggle } from './LabPanel'
 import { getPageTheme, getServerPageTheme, subscribeToPageTheme } from './labPageTheme'
 
 
@@ -12,7 +12,7 @@ export interface LabDemoBlockProps {
   // The demo's source, shown in a Code tab.
   codeView?: string
   // Controls for the demo, in a collapsible, resizable Properties Panel at the end, whose toggle sits at
-  // the end of the strip, so it stays visible.
+  // the end of the strip, so it stays visible. Without room beside the demo, the Panel opens over it.
   properties?: ReactNode
   // Switches that add or remove the demo's optional parts, such as a Card's CardImage, in their own
   // Parts group below the properties. Shown only when the component has optional parts.
@@ -28,7 +28,6 @@ export function LabDemoBlock({ children, codeView, properties, parts, align = 's
   // System is a theme of its own here: data-theme="system" follows the device inside the demo too.
   const [chosenTheme, setChosenTheme] = useState<ThemeName | null>(null)
   const [previewElement, setPreviewElement] = useState<HTMLDivElement | null>(null)
-  const [isPropertiesExpanded, setIsPropertiesExpanded] = useState(true)
   const propertiesId = useId()
   const partsHeadingId = useId()
   const hasPanel = properties != null || parts != null
@@ -40,16 +39,21 @@ export function LabDemoBlock({ children, codeView, properties, parts, align = 's
     </div>
   )
 
+  // The strip is a Toolbar: Tab reaches it once, and the arrow keys move between its controls.
+  const strip = (
+    <Toolbar className="lab-demo-block-bar" aria-label="Demo tools">
+      <ThemeSwitcher label="Demo theme" selectedTheme={chosenTheme ?? pageTheme} onThemeChange={setChosenTheme} />
+      {hasPanel && <LabPanelToggle panel={propertiesId} placement="end" title="Properties" collapseLabel="Hide properties" expandLabel="Show properties" />}
+    </Toolbar>
+  )
+
+  // The strip sits in the layout's header row, so its toggle shares the layout's state with the Panel.
+  // The Properties Panel has no collapse button of its own: its toggle in the strip always stays visible.
   const frame = (
     <div className="lab-demo-block-frame">
-      {/* The strip is a Toolbar: Tab reaches it once, and the arrow keys move between its controls. */}
-      <Toolbar className="lab-demo-block-bar" aria-label="Demo tools">
-        <ThemeSwitcher label="Demo theme" selectedTheme={chosenTheme ?? pageTheme} onThemeChange={setChosenTheme} />
-        {hasPanel && <LabPanelToggle panel={propertiesId} placement="end" title="Properties" collapseLabel="Hide properties" expandLabel="Show properties" isExpanded={isPropertiesExpanded} onExpandedChange={setIsPropertiesExpanded} />}
-      </Toolbar>
-      {!hasPanel ? demo : (
-        <LabPanelHost className="lab-demo-block-host">
-          <LabPanel id={propertiesId} placement="end" title="Properties" isCollapsible isExpanded={isPropertiesExpanded} isResizable className="lab-demo-block-properties">
+      {!hasPanel ? <>{strip}{demo}</> : (
+        <LabPanelLayout className="lab-demo-block-layout" header={strip} minContentWidth="var(--width-md)">
+          <LabPanel id={propertiesId} placement="end" title="Properties" isCollapsible isResizable className="lab-demo-block-properties">
             {properties}
             {/* Parts are smaller components placed inside the demo's component, so they get their own
                 group, divided from the properties, which are the component's own settings. */}
@@ -59,7 +63,7 @@ export function LabDemoBlock({ children, codeView, properties, parts, align = 's
             </section>}
           </LabPanel>
           {demo}
-        </LabPanelHost>
+        </LabPanelLayout>
       )}
     </div>
   )

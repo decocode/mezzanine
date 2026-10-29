@@ -3,7 +3,7 @@ import { siteNavigationGroups } from '../siteStructure'
 import { labBadgeLabel } from './shared/labValues'
 import { layoutPages } from './layout/layoutContent'
 import { emergingFeatures, futurePages } from './emerging-features/emergingFeaturesContent'
-import { demoBlockPage, panelHostPage, panelPage } from './panel-demo-block/panelDemoBlockContent'
+import { demoBlockPage, panelLayoutPage, panelPage } from './panel-demo-block/panelDemoBlockContent'
 import { itemPage } from './item/itemContent'
 import { expandingControlsPage, volumePage, zoomPage } from './volume-and-zoom/volumeAndZoomContent'
 
@@ -42,6 +42,6 @@ export const labNavigationItems: NavTreeSectionData[] = [
   ] },
   { type: 'section', id: 'structure', label: docsGroupLabel('structure'), children: [
     { id: 'panel', label: panelPage.title, href: panelPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
-    { id: 'panel-host', label: panelHostPage.title, href: panelHostPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
+    { id: 'panel-layout', label: panelLayoutPage.title, href: panelLayoutPage.href, content: <Badge purpose="warning">{labBadgeLabel}</Badge> },
   ] },
 ]
