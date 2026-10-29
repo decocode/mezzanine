@@ -1,5 +1,6 @@
-// The Lab's Demo block page: the candidate demo block, showing a Card, with its properties and its
-// optional parts in separate groups. Illustrative and unapproved.
+// The Lab's Demo block page: the candidate demo block, showing a Card. Card has no settings of its own, so
+// its demo panel has only a Parts group, where each part lists its own settings beneath it.
+// Illustrative and unapproved.
 import { useState } from 'react'
 import { Button, Card, CardFooter, CardImage, CardTitle, Text } from '@decocode/mezzanine'
 import { useExamplePicture } from '../../components/examplePicture'
@@ -20,14 +21,23 @@ export function DemoBlockExperiment() {
     example: (
       <LabDemoBlock
         codeView={demoBlockCode({ aspectRatio, href, parts })}
-        properties={<>
-          <PanelSwitch isSelected={href} onChange={setHref}>href</PanelSwitch>
-          {/* aspectRatio belongs to CardImage, so it appears once that part is in. */}
-          {parts.CardImage && <PanelSelect label="aspectRatio" options={demoBlockAspectRatios} value={aspectRatio} onChange={setAspectRatio} />}
+        parts={<>
+          {/* CardImage's own setting appears beneath it once the part is in. */}
+          <div className="lab-demo-block-part" role="group" aria-label="CardImage">
+            <PanelSwitch isSelected={parts.CardImage} onChange={(isSelected) => setParts({ ...parts, CardImage: isSelected })}>CardImage</PanelSwitch>
+            {parts.CardImage && <div className="lab-demo-block-part-settings">
+              <PanelSelect label="aspectRatio" options={demoBlockAspectRatios} value={aspectRatio} onChange={setAspectRatio} />
+            </div>}
+          </div>
+          {/* CardTitle is always there, so it has no switch, only its own setting. */}
+          <div className="lab-demo-block-part" role="group" aria-label="CardTitle">
+            <span className="lab-demo-block-part-name" aria-hidden="true">CardTitle</span>
+            <div className="lab-demo-block-part-settings">
+              <PanelSwitch isSelected={href} onChange={setHref}>href</PanelSwitch>
+            </div>
+          </div>
+          <PanelSwitch isSelected={parts.CardFooter} onChange={(isSelected) => setParts({ ...parts, CardFooter: isSelected })}>CardFooter</PanelSwitch>
         </>}
-        parts={demoBlockParts.map((name) => (
-          <PanelSwitch key={name} isSelected={parts[name]} onChange={(isSelected) => setParts({ ...parts, [name]: isSelected })}>{name}</PanelSwitch>
-        ))}
       >
         <Card className="lab-demo-block-card">
           {parts.CardImage && <CardImage src={picture} alt="" aspectRatio={aspectRatio} />}

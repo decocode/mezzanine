@@ -4,7 +4,7 @@ import { expectNoPageOverflow, setTextSize, setTheme, themes } from '../display'
 
 // The Lab's candidate Item, from shadcn/ui's React Aria Item. Illustrative and unapproved.
 
-// Checks that the Parts group adds and removes the Item's optional parts, and the Code tab follows.
+// Checks that the demo panel's switches add and removes the Item's optional parts, and the Code tab follows.
 test('the Lab Item adds and removes its parts', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/item')
@@ -12,7 +12,7 @@ test('the Lab Item adds and removes its parts', async ({ page }) => {
   const item = demo.locator('.lab-item')
   await expect(item.locator('.lab-item-media')).toHaveCount(1)
   await expect(item.locator('.lab-item-header')).toHaveCount(0)
-  const parts = demo.getByRole('region', { name: 'Parts', exact: true })
+  const parts = demo.locator('.lab-demo-block-controls')
   await parts.locator('label', { hasText: /^ItemHeader$/ }).click()
   await parts.locator('label', { hasText: /^ItemMedia$/ }).click()
   await expect(item.locator('.lab-item-header')).toHaveText('Header')
@@ -28,7 +28,7 @@ test('a linked Lab Item keeps its action pressable', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/item')
   const demo = page.locator('.lab-demo-block').first()
-  await demo.locator('.lab-demo-block-properties label', { hasText: /^href$/ }).click()
+  await demo.locator('.lab-demo-block-controls label', { hasText: /^href$/ }).click()
   const item = demo.locator('.lab-item')
   await expect(item.getByRole('link')).toHaveCount(1)
   await expect(item.getByRole('link')).toHaveAccessibleName('Item')

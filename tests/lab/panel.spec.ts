@@ -17,7 +17,7 @@ test('a collapsible Lab Panel hands its toggle to the content', async ({ page })
   await page.setViewportSize({ width: 1600, height: 900 })
   await page.goto('/site/lab/panel')
   const demo = page.locator('.lab-demo-block').first()
-  const properties = demo.locator('.lab-demo-block-properties')
+  const properties = demo.locator('.lab-demo-block-controls')
   await properties.locator('label', { hasText: /^isCollapsible$/ }).click()
   const panel = demo.locator('.lab-panel-example > .lab-panel')
   const panelToggle = panel.getByRole('button', { name: 'Hide panel' })
@@ -41,7 +41,7 @@ test('a collapsible Lab Panel hands its toggle to the content', async ({ page })
   await expectNoAccessibilityViolations(page, 'main')
 })
 
-// Checks that LabPanelHeader and LabPanelFooter come and go from the Parts group, and that the footer sits
+// Checks that LabPanelHeader and LabPanelFooter come and go from the demo panel, and that the footer sits
 // at the bottom of the Panel.
 test('a Lab Panel header and footer are parts', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 })
@@ -52,9 +52,9 @@ test('a Lab Panel header and footer are parts', async ({ page }) => {
   const footer = panel.locator('.lab-panel-footer')
   await expect(header).toHaveText('Panel header')
   await expect(footer).toHaveText('Panel footer')
-  await demo.locator('.lab-demo-block-parts label', { hasText: /^LabPanelHeader$/ }).click()
+  await demo.locator('.lab-demo-block-controls label', { hasText: /^LabPanelHeader$/ }).click()
   await expect(panel.locator('.lab-panel-header')).toHaveCount(0)
-  await demo.locator('.lab-demo-block-parts label', { hasText: /^LabPanelHeader$/ }).click()
+  await demo.locator('.lab-demo-block-controls label', { hasText: /^LabPanelHeader$/ }).click()
   await expect(header).toBeVisible()
 
   // The footer sits at the bottom of the Panel, with the empty content between it and the header.
@@ -68,7 +68,7 @@ test('a resizable Lab Panel resizes from the keyboard', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 })
   await page.goto('/site/lab/panel')
   const demo = page.locator('.lab-demo-block').first()
-  await demo.locator('.lab-demo-block-properties label', { hasText: /^isResizable$/ }).click()
+  await demo.locator('.lab-demo-block-controls label', { hasText: /^isResizable$/ }).click()
   const handle = demo.locator('.lab-panel-example').getByRole('separator', { name: 'Resize panel' })
   const panel = demo.locator('.lab-panel-example > .lab-panel')
   const width = async () => (await panel.boundingBox())!.width
@@ -87,7 +87,7 @@ test('a Lab Panel without room opens as an overlay', async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 })
   await page.goto('/site/lab/panel')
   const demo = page.locator('.lab-demo-block').first()
-  await demo.locator('.lab-demo-block-properties label', { hasText: /^isCollapsible$/ }).click()
+  await demo.locator('.lab-demo-block-controls label', { hasText: /^isCollapsible$/ }).click()
   // Narrow the layout so the Panel no longer fits beside the content.
   await demo.locator('.lab-panel-example').evaluate((layout) => { layout.style.inlineSize = '18rem' })
   const panel = demo.locator('.lab-panel-example > .lab-panel')

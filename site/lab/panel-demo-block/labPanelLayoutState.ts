@@ -84,7 +84,8 @@ export function useLabPanelLayoutState() {
     hasEnd: end != null,
     isStartExpanded: start != null && store.isExpanded(start[0]),
   })
-  const presentation = (placement: LabPanelPlacement): LabPanelPresentation => placement === 'bottom' ? 'inline' : presentations[placement]
+  // A bottom Panel is always a drawer (owner, 29 October 2026): it opens over the content, never squashing it.
+  const presentation = (placement: LabPanelPlacement): LabPanelPresentation => placement === 'bottom' ? 'overlay' : presentations[placement]
   const isInlineShown = (panel: typeof start, placement: 'start' | 'end') => panel != null && store.isExpanded(panel[0]) && presentations[placement] === 'inline'
   const maxPanelSize = (placement: 'start' | 'end') => layoutSize - minContentSize - (placement === 'start' ? (isInlineShown(end, 'end') ? endSize : 0) : (isInlineShown(start, 'start') ? startSize : 0))
   // Resized sizes reach the tracks through the layout, in place of the usual sizes.

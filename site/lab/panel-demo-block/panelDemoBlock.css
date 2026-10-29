@@ -61,7 +61,7 @@
   min-inline-size: 0;
   min-block-size: 0;
   margin: var(--surface-gap);
-  padding: var(--space-1) var(--space-padding-area);
+  padding: var(--space-3) var(--space-padding-area) var(--space-1);
   border: var(--border-width-hairline) solid var(--color-border);
   border-radius: min(var(--radius-surface), var(--radius-sm));
   background: var(--color-surface);
@@ -87,31 +87,45 @@
   visibility: hidden;
 }
 
-/* Without room beside the content, an expanded side Panel floats over the content below the header row,
-   raised above it, at its usual width. With a touch pointer it rises from the bottom instead, across the
-   layout's width, within reach of a thumb. It's placed within the grid rows below the header, so it never
-   changes their size. */
-.lab-panel-layout > .lab-panel[data-overlay][data-state='open'] {
+/* Without room beside the content, a side Panel becomes an overlay that fills the layout, full width and full
+   height, raised above the content (owner, 29 October 2026). It's placed within the grid rows below the
+   header, so it never changes their size. */
+.lab-panel-layout > .lab-panel[data-overlay] {
   position: absolute;
   z-index: var(--z-index-overlay);
   grid-row: 2 / -1;
   grid-column: 1 / -1;
-  inset-block: 0;
-  inline-size: min(var(--_lab-panel-overlay-width), calc(100% - 2 * var(--surface-gap)));
+  inset: 0;
+  margin: 0;
   background: var(--elevation-raised-3-surface);
   box-shadow: var(--elevation-raised-3);
+  transition-property: transform, opacity, visibility;
 }
 
-.lab-panel-layout > .lab-panel[data-overlay][data-placement='start'] { --_lab-panel-overlay-width: var(--_lab-panel-start-width); inset-inline-start: 0; }
-.lab-panel-layout > .lab-panel[data-overlay][data-placement='end'] { --_lab-panel-overlay-width: var(--_lab-panel-end-width); inset-inline-end: 0; }
+/* With its own collapse button, its twin toggle travels with it, so the overlay can cover the header row
+   too and fill the whole layout. Without one, it stays below the header row, where its toggle is. */
+.lab-panel-layout > .lab-panel[data-overlay][data-collapse-button] {
+  grid-row: 1 / -1;
+}
 
-@media (pointer: coarse) {
-  .lab-panel-layout > .lab-panel[data-overlay][data-state='open'] {
-    inset-block: auto 0;
-    inset-inline: 0;
-    inline-size: auto;
-    max-block-size: var(--_lab-panel-max-height);
-  }
+/* An overlay slides in from its own placement and back out again: a start Panel from the start edge, an end
+   Panel from the end edge, mirrored in right-to-left text, and a bottom Panel up from the bottom. Collapsed, it waits just outside the layout,
+   which clips it. It moves at once when motion is reduced. */
+.lab-panel-layout:has(> .lab-panel[data-overlay]) {
+  overflow: clip;
+}
+
+.lab-panel-layout > .lab-panel[data-overlay][data-state='closed']:is([data-placement='start']:dir(ltr), [data-placement='end']:dir(rtl)) {
+  transform: translateX(calc(-1 * var(--motion-distance-offscreen)));
+}
+
+.lab-panel-layout > .lab-panel[data-overlay][data-state='closed']:is([data-placement='end']:dir(ltr), [data-placement='start']:dir(rtl)) {
+  transform: translateX(var(--motion-distance-offscreen));
+}
+
+/* A bottom Panel is always a drawer: it slides up from the bottom edge and back down. */
+.lab-panel-layout > .lab-panel[data-overlay][data-state='closed'][data-placement='bottom'] {
+  transform: translateY(var(--motion-distance-offscreen));
 }
 
 .lab-panel-header {
@@ -292,30 +306,49 @@
   inline-size: min(100%, var(--width-md));
 }
 
-/* The Parts group sits below the properties, divided from them by a line, with its heading styled like
-   the Panel's own. */
-.lab-demo-block-parts {
+/* The demo panel's controls: one list in the order of the component's anatomy. */
+.lab-demo-block-controls {
   display: flex;
   flex-direction: column;
-  gap: var(--space-gap-cluster);
+  gap: var(--space-3);
+}
+
+/* A line divides the component's own settings and each part from the next, with equal space above and
+   below it. */
+.lab-demo-block-controls > * + * {
   padding-block-start: var(--space-3);
   border-block-start: var(--border-width-hairline) solid var(--color-border);
 }
 
-.lab-demo-block-parts:first-child {
-  padding-block-start: 0;
-  border-block-start-width: 0;
+/* A part with settings of its own: its switch, or its name when it's always there, then its settings set
+   in beneath it, so they read as belonging to it. */
+.lab-demo-block-part {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-cluster);
 }
 
-/* The Properties Panel sits flush in the frame, with no gap around it: one line divides it from the
+.lab-demo-block-part-settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-cluster);
+}
+
+.lab-demo-block-part-name {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body-md);
+}
+
+/* The demo panel sits flush in the frame, with no gap around it: one line divides it from the
    demo. As an overlay, it keeps its raised look instead. */
-.lab-demo-block-layout > .lab-demo-block-properties:not([data-overlay]) {
+.lab-demo-block-layout > .lab-demo-block-panel:not([data-overlay]) {
   margin: 0;
   border-width: 0;
   border-radius: 0;
 }
 
-.lab-demo-block-layout > .lab-demo-block-properties[data-state='open']:not([data-overlay]) {
+.lab-demo-block-layout > .lab-demo-block-panel[data-state='open']:not([data-overlay]) {
   border-inline-start-width: var(--border-width-hairline);
 }
 
@@ -361,7 +394,7 @@
 /* With a collapsible Panel, the main content starts with a header row lined up with the Panel's, so a
    twin toggle sits in the same spot in either header. */
 .lab-panel-example-main:has(> .lab-panel-example-header) {
-  padding-block-start: calc(var(--surface-gap) + var(--border-width-hairline) + var(--space-1));
+  padding-block-start: calc(var(--surface-gap) + var(--border-width-hairline) + var(--space-3));
   padding-inline: calc(var(--surface-gap) + var(--border-width-hairline) + var(--space-padding-area));
 }
 
@@ -378,4 +411,20 @@
 
 .lab-panel-example-main > p {
   margin: 0;
+}
+
+/* A bar of toggles across the top of a LabPanelLayout, one for each of its Panels, divided from the
+   Panels and content below by a line. Its padding matches the demo block's strip. */
+.lab-panel-layout-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-gap-control);
+  padding: var(--space-padding-control-block) var(--space-padding-control-inline);
+  border-block-end: var(--border-width-hairline) solid var(--color-border);
+}
+
+/* The start Panel's toggle sits at the start of the bar, on its own side; the others sit at the end. */
+.lab-panel-layout-bar > [aria-controls$='-start'] + * {
+  margin-inline-start: auto;
 }

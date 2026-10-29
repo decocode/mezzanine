@@ -4,26 +4,25 @@ import { expectNoPageOverflow, setTextSize } from '../display'
 
 // The Lab's candidate demo block, rebuilt from the candidate Panel. Illustrative and unapproved.
 
-// Checks that the Properties Panel collapses and expands from its toggle in the strip, which stays
-// visible and says whether the Panel is expanded, and that its control changes the demo.
-test('the Lab demo block collapses its Properties Panel from the strip', async ({ page }) => {
+// Checks that the demo panel collapses and expands from its toggle in the strip, which stays visible
+// and says whether the panel is expanded, and that its controls change the demo.
+test('the Lab demo block collapses its demo panel from the strip', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/demo-block')
   const demo = page.locator('.lab-demo-block').first()
-  const properties = demo.getByRole('region', { name: 'Properties', exact: true })
-  // The Parts group's switch removes the Card's footer, and the Code tab follows.
-  const parts = demo.getByRole('region', { name: 'Parts', exact: true })
-  await expect(parts).toBeVisible()
-  await parts.locator('label', { hasText: /^CardFooter$/ }).click()
+  // The controls follow the Card's anatomy; the CardFooter switch removes its footer.
+  const controls = demo.locator('.lab-demo-block-controls')
+  await expect(controls).toBeVisible()
+  await controls.locator('label', { hasText: /^CardFooter$/ }).click()
   await expect(demo.getByText('Footer details')).toHaveCount(0)
-  const toggle = demo.getByRole('button', { name: 'Hide properties' })
+  const toggle = demo.getByRole('button', { name: 'Hide demo panel' })
   await expect(toggle).toHaveAttribute('aria-expanded', 'true')
   await toggle.click()
-  await expect(properties).toBeHidden()
-  const showToggle = demo.getByRole('button', { name: 'Show properties' })
+  await expect(controls).toBeHidden()
+  const showToggle = demo.getByRole('button', { name: 'Show demo panel' })
   await expect(showToggle).toHaveAttribute('aria-expanded', 'false')
   await showToggle.click()
-  await expect(properties).toBeVisible()
+  await expect(controls).toBeVisible()
   // Let the toggle's tooltip fade out before the scan.
   await page.mouse.move(0, 0)
   await expect(page.getByRole('tooltip')).toHaveCount(0)
@@ -31,14 +30,14 @@ test('the Lab demo block collapses its Properties Panel from the strip', async (
 })
 
 // Checks that the strip is a toolbar named "Demo tools": Tab reaches it once, at the theme Select, the
-// arrow keys move to the Properties toggle and back, and Tab then leaves the strip.
+// arrow keys move to the demo panel's toggle and back, and Tab then leaves the strip.
 test('the Lab demo block strip is a toolbar the arrow keys move through', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/site/lab/demo-block')
   const demo = page.locator('.lab-demo-block').first()
   const strip = demo.getByRole('toolbar', { name: 'Demo tools' })
   const theme = strip.getByRole('button', { name: /demo theme$/ })
-  const toggle = strip.getByRole('button', { name: 'Hide properties' })
+  const toggle = strip.getByRole('button', { name: 'Hide demo panel' })
   await theme.focus()
   await page.keyboard.press('ArrowRight')
   await expect(toggle).toBeFocused()

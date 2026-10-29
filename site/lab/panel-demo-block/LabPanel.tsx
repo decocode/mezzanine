@@ -3,7 +3,7 @@
 import { Children, isValidElement, useCallback, useId, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent, type ReactNode, type RefObject } from 'react'
 import { useLocale } from 'react-aria-components'
 import { useMove } from 'react-aria'
-import { Button } from '@decocode/mezzanine'
+import { Button, CloseIcon, Tooltip, TooltipTrigger } from '@decocode/mezzanine'
 import { labPanelIcon } from './LabPanelIcons'
 import { LabPanelLayoutContext, lengthOnElement, useLabPanelLayout, useLabPanelLayoutState } from './labPanelLayoutState'
 import type { LabPanelPlacement } from './labPanelSize'
@@ -59,13 +59,16 @@ export interface LabPanelProps {
   // A collapsible Panel holds a LabPanelToggle in its header row that collapses it. Placeholder name; the
   // owner is still to confirm it.
   hasCollapseButton?: boolean
+  // The collapse button's icon, which the app chooses by context: a panel collapse icon, the default, such
+  // as for navigation, or an × to close, such as for filters or a supplementary Panel. Placeholder name.
+  collapseIcon?: 'collapse' | 'close'
   // The Panel's id, which its LabPanelToggle names.
   id: string
   children?: ReactNode
   className?: string
 }
 
-export function LabPanel({ placement, title, isResizable = false, isCollapsible = false, isExpanded, onExpandedChange, hasCollapseButton = false, id, children, className }: LabPanelProps) {
+export function LabPanel({ placement, title, isResizable = false, isCollapsible = false, isExpanded, onExpandedChange, hasCollapseButton = false, collapseIcon = 'collapse', id, children, className }: LabPanelProps) {
   const { store, presentation } = useLabPanelLayout('LabPanel')
   useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
   const headingId = useId()
@@ -87,7 +90,11 @@ export function LabPanel({ placement, title, isResizable = false, isCollapsible 
   const header = parts.find((child) => isValidElement(child) && child.type === LabPanelHeader)
   const footer = parts.find((child) => isValidElement(child) && child.type === LabPanelFooter)
   const content = parts.filter((child) => child !== header && child !== footer)
-  const collapseButton = isCollapsible && hasCollapseButton && <LabPanelToggle panel={id} placement={placement} title={title} />
+  const collapseButton = isCollapsible && hasCollapseButton && (
+    collapseIcon === 'close'
+      ? <LabPanelToggle panel={id} placement={placement} title={title} icon={<CloseIcon />} collapseLabel={title === undefined ? 'Close panel' : `Close ${title}`} />
+      : <LabPanelToggle panel={id} placement={placement} title={title} />
+  )
   const hasHeaderRow = header !== undefined || title !== undefined || Boolean(collapseButton)
   // Only a titled Panel is a region; otherwise it's a plain layout container. Typed as a div for the ref.
   const Element = (title === undefined ? 'div' : 'section') as 'div'
@@ -100,6 +107,7 @@ export function LabPanel({ placement, title, isResizable = false, isCollapsible 
       data-placement={placement}
       data-state={isShown ? 'open' : 'closed'}
       data-overlay={isOverlay || undefined}
+      data-collapse-button={Boolean(collapseButton) || undefined}
       aria-labelledby={title === undefined ? undefined : headingId}
       inert={!isShown}
       // An overlay closes with Escape, and focus goes back to the toggle outside it.
@@ -157,9 +165,9 @@ function handFocusToTwin(panel: string, isExpanding: boolean) {
 }
 
 // The button that collapses and expands a collapsible Panel. Outside the Panel, it stays visible: in a
-// strip, a toolbar or the content's header. With hasCollapseButton, a Panel also holds one in its header
-// row. Its icon shows what pressing does.
-export function LabPanelToggle({ panel, placement, title, collapseLabel, expandLabel }: {
+// strip, a toolbar, a bar of toggles or the content's header. With hasCollapseButton, a Panel also holds
+// one in its header row. Its icon shows what pressing does; with children, it shows that text instead.
+export function LabPanelToggle({ panel, placement, title, collapseLabel, expandLabel, children, icon, tooltip }: {
   // The Panel's id.
   panel: string
   placement: LabPanelPlacement
@@ -169,23 +177,35 @@ export function LabPanelToggle({ panel, placement, title, collapseLabel, expandL
   // default to "Collapse" and "Expand" with the Panel's title, or "Hide panel" and "Show panel" without one.
   collapseLabel?: string
   expandLabel?: string
+  // A visible text label in place of the icon, such as "Start" in a bar of toggles. It names the button,
+  // and aria-expanded says whether its Panel is expanded.
+  children?: ReactNode
+  // An icon in place of the panel icons, such as an × for a collapse button that closes the Panel.
+  icon?: ReactNode
+  // With children, a tooltip that adds to the text on hover and focus, such as "End panel" for "End".
+  tooltip?: string
 }) {
   const { store, presentation } = useLabPanelLayout('LabPanelToggle')
   useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
   const isOverlay = presentation(placement) === 'overlay'
   const isShown = store.isShown(panel, isOverlay)
+  const onPress = () => {
+    store.setExpanded(panel, !isShown, isOverlay)
+    handFocusToTwin(panel, !isShown)
+  }
+  if (children != null) {
+    const button = <Button size="sm" hierarchy="tertiary" aria-expanded={isShown} aria-controls={panel} onPress={onPress}>{children}</Button>
+    return tooltip === undefined ? button : <TooltipTrigger>{button}<Tooltip>{tooltip}</Tooltip></TooltipTrigger>
+  }
   return (
     <Button
       size="sm"
       hierarchy="tertiary"
-      icon={labPanelIcon(placement, isShown)}
+      icon={icon ?? labPanelIcon(placement, isShown)}
       iconPosition="iconOnly"
       aria-expanded={isShown}
       aria-controls={panel}
-      onPress={() => {
-        store.setExpanded(panel, !isShown, isOverlay)
-        handFocusToTwin(panel, !isShown)
-      }}
+      onPress={onPress}
     >
       {isShown
         ? collapseLabel ?? (title === undefined ? 'Hide panel' : `Collapse ${title}`)
