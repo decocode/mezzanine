@@ -34,14 +34,16 @@
   /* Centres the handle with equal space on every side. */
   padding-inline: calc((var(--switch-track-height, var(--icon-size-sm)) - var(--switch-handle-size, var(--icon-size-xs))) / 2 - var(--switch-border-width, var(--border-width-baseline)));
   border: var(--switch-border-width, var(--border-width-baseline)) solid var(--switch-track-border, var(--color-border-control));
-  border-radius: var(--switch-border-radius, var(--radius-full));
+  /* Round ends, unless the theme's controls have square corners, as in Wireframe: multiplying the controls'
+     corner radius by a large number gives a pill for any rounding at all, and zero for none. */
+  border-radius: var(--switch-border-radius, min(var(--radius-full), calc(var(--radius-control) * 9999)));
   background: var(--switch-track-background, var(--color-page));
 }
 
 .mz-switch-handle {
   width: var(--switch-handle-size, var(--icon-size-xs));
   height: var(--switch-handle-size, var(--icon-size-xs));
-  border-radius: var(--switch-border-radius, var(--radius-full));
+  border-radius: var(--switch-border-radius, min(var(--radius-full), calc(var(--radius-control) * 9999)));
   background: var(--switch-handle-background, var(--color-border-control));
   /* A logical margin slides the handle towards the end in either reading direction. */
   transition: margin-inline-start calc(var(--motion-duration-interface) * var(--_motion-enabled)) var(--motion-easing-enter);

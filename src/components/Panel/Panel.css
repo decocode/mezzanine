@@ -6,7 +6,7 @@
   min-inline-size: 0;
   min-block-size: 0;
   overflow: hidden;
-  background: var(--panel-background, var(--color-surface));
+  background: var(--panel-background, var(--elevation-flat-surface));
   color: var(--panel-foreground, var(--color-text));
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-md);

@@ -18,12 +18,13 @@
   overflow: hidden;
   border: var(--demo-block-border-width, var(--border-width-baseline)) solid var(--demo-block-border, var(--color-border));
   border-radius: var(--demo-block-border-radius, var(--radius-surface));
-  background: var(--demo-block-background, var(--color-surface));
+  background: var(--demo-block-background, var(--elevation-flat-surface));
 }
 
-/* The strip, with the ThemeSwitcher at its start. */
+/* The strip, with the ThemeSwitcher at its start: a muted area, a step quieter than the demo. */
 .mz-demo-block-bar {
   grid-area: bar;
+  background: var(--color-surface);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -120,7 +121,7 @@
   padding: var(--space-1) var(--space-padding-area);
   border: var(--demo-block-end-panel-border-width, var(--border-width-hairline)) solid var(--demo-block-border, var(--color-border));
   border-radius: var(--demo-block-end-panel-border-radius, min(var(--radius-surface), var(--radius-sm)));
-  background: var(--demo-block-end-panel-background, var(--color-surface));
+  background: var(--demo-block-end-panel-background, var(--elevation-flat-surface));
 }
 
 /* The header: the panel's title, then the button that rolls the controls up and down. It stays put. */

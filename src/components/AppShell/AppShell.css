@@ -19,13 +19,20 @@
   --_app-shell-overlap: max(0px, var(--app-shell-surface-border-width, var(--border-width-hairline)) - var(--app-shell-gap, var(--surface-gap)));
   --_app-shell-join: calc(var(--app-shell-gap, var(--surface-gap)) - var(--_app-shell-overlap));
   padding: var(--app-shell-gap, var(--surface-gap));
-  background: var(--app-shell-background, var(--elevation-sunken-1-surface));
+  /* The frame is a muted surface, and the header and side Panels sit on it directly. */
+  background: var(--app-shell-background, var(--color-surface));
   clip-path: inset(var(--_app-shell-overlap));
 }
 
-/* Each area is a card. */
+/* The header and side Panels sit on the frame, with no card of their own. */
 .mz-app-shell > header,
-.mz-app-shell > .mz-panel[data-edge],
+.mz-app-shell > .mz-panel[data-edge] {
+  box-sizing: border-box;
+  border-color: transparent;
+  background: transparent;
+}
+
+/* The main content is the one inset surface, on the page's colour. */
 .mz-app-shell-content {
   box-sizing: border-box;
   border: var(--app-shell-surface-border-width, var(--border-width-hairline)) solid var(--app-shell-surface-border, var(--color-border));
