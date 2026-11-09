@@ -45,24 +45,24 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
-    "@lhci/cli": "^0.15.1",
-    "@playwright/test": "^1.64.1",
+    "@lhci/cli": "^0.16.0",
+    "@playwright/test": "^1.65.0",
     "@types/node": "^24.19.2",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.2",
-    "oxlint": "^1.89.0",
+    "@vitejs/plugin-react": "^6.2.1",
+    "oxlint": "^1.92.0",
     "react": "^19.3.1",
     "react-aria": "^3.53.1",
     "react-aria-components": "^1.22.1",
     "react-dom": "^19.3.1",
     "typescript": "~6.0.2",
-    "vite": "^8.3.5"
+    "vite": "^8.3.6"
   },
   "overrides": {
     "lighthouse": "13.5.0"
   },
   "dependencies": {
-    "shiki": "^4.5.0"
+    "shiki": "^4.6.0"
   }
 }
