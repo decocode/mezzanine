@@ -54,7 +54,8 @@
 /* A linked card, or one with a footer, stacks its parts so the footer or the arrow can sit at its end,
    however tall the card. Parts keep their natural width, as in normal flow; the picture, the footer and
    the arrow span the card. */
-.mz-card:has(> .mz-card-footer, > .mz-card-title .mz-card-title-link) {
+.mz-card:has(> .mz-card-footer),
+.mz-card-linked {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -108,7 +109,7 @@
 }
 
 /* A linked title keeps the card's colour. Its pressable area stretches over the whole card. */
-.mz-card:has(> .mz-card-title .mz-card-title-link) {
+.mz-card-linked {
   position: relative;
 }
 
@@ -123,8 +124,9 @@
   content: '';
 }
 
-/* Controls inside a linked card sit above the title's pressable area, so they take their own presses. */
-.mz-card:has(> .mz-card-title .mz-card-title-link) :is(.mz-button, .mz-toggle-button, .mz-link:not(.mz-card-title-link), .mz-checkbox, .mz-switch) {
+/* Anything pressable or focusable inside a linked card sits above the title's pressable area, so it takes
+   its own presses. */
+.mz-card-linked :is(a, button, input, select, textarea, [tabindex]):not(.mz-card-title-link) {
   position: relative;
   z-index: var(--z-index-raised);
 }

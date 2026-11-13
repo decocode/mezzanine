@@ -20,13 +20,20 @@ const CardLinkContext = createContext<CardLinkProps | undefined>(undefined)
 export function Card({ href, hrefLang, target, rel, download, ping, referrerPolicy, routerOptions, className, children, ...cardProps }: CardProps) {
   const link = href === undefined ? undefined : { href, hrefLang, target, rel, download, ping, referrerPolicy, routerOptions }
   return (
-    <div {...cardProps} className={['mz-card', className].filter(Boolean).join(' ')}>
+    <div {...cardProps} className={['mz-card', link !== undefined && 'mz-card-linked', className].filter(Boolean).join(' ')}>
       <CardLinkContext.Provider value={link}>
         {children}
         {link !== undefined && <CardArrow />}
       </CardLinkContext.Provider>
     </div>
   )
+}
+
+// The arrow that shows a linked card can be pressed. It points toward the end of the line, which is left
+// in right-to-left text. Screen readers hear the link instead.
+function CardArrow() {
+  const { direction } = useLocale()
+  return <span aria-hidden="true" className="mz-card-arrow">{direction === 'rtl' ? <ArrowLeftIcon /> : <ArrowRightIcon />}</span>
 }
 
 export interface CardImageProps extends Omit<ComponentPropsWithoutRef<'div'>, 'children'> {
@@ -64,13 +71,6 @@ export interface CardTitleProps {
   level?: number
   className?: string
   children: ReactNode
-}
-
-// The arrow that shows a linked card can be pressed. It points toward the end of the line, which is left
-// in right-to-left text. Screen readers hear the link instead.
-function CardArrow() {
-  const { direction } = useLocale()
-  return <span aria-hidden="true" className="mz-card-arrow">{direction === 'rtl' ? <ArrowLeftIcon /> : <ArrowRightIcon />}</span>
 }
 
 // The card's heading. In a card with href, it's the card's one link.
