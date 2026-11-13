@@ -81,15 +81,14 @@ test.describe('isolated recipe', () => {
     await expect(page.getByRole('button', { name: 'Late parent', exact: true })).toHaveCount(0)
   })
 
-  // Checks that when the app decides which branches are open, the tree asks only once to open the
-  // current page's branch and never overrides the app's answer.
-  test('controlled route requests are deduplicated and never override the caller', async ({ page }) => {
-    await page.evaluate(() => { const h = (window as any).navTreeHarness; h.setAccept(false); h.setControlled(true); h.setRoute('#b') })
-    await expect.poll(() => page.evaluate(() => (window as any).navTreeHarness.requests.filter((keys: string[]) => keys.includes('b')).length)).toBe(1)
-    await expect(page.getByRole('link', { name: 'Leaf B', exact: true })).toHaveCount(0)
+  // Checks that when the app decides which branches are open, a route change neither asks it to
+  // open the current page's branch nor overrides its keys.
+  test('controlled expansion is left to the caller on route changes', async ({ page }) => {
+    await page.evaluate(() => { const h = (window as any).navTreeHarness; h.setControlled(true); h.setRoute('#b') })
     await page.evaluate(() => (window as any).navTreeHarness.setVersion(2))
-    expect(await page.evaluate(() => (window as any).navTreeHarness.requests.filter((keys: string[]) => keys.includes('b')).length)).toBe(1)
-    await page.evaluate(() => { const h = (window as any).navTreeHarness; h.setAccept(true); h.setKeys(new Set(['b'])) })
+    await expect(page.getByRole('link', { name: 'Leaf B', exact: true })).toHaveCount(0)
+    expect(await page.evaluate(() => (window as any).navTreeHarness.requests.length)).toBe(0)
+    await page.evaluate(() => (window as any).navTreeHarness.setKeys(new Set(['b'])))
     await expect(page.getByRole('link', { name: 'Leaf B', exact: true })).toBeVisible()
   })
 

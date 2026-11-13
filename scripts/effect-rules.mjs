@@ -4,7 +4,6 @@ const effectHooks = new Set(['useEffect', 'useLayoutEffect', 'useInsertionEffect
 
 // Each entry allows one effect call. Adding an entry needs the owner's agreement.
 export const allowedEffects = [
-  { file: 'src/components/NavTree/navTreeLogic.ts', hook: 'useEffect', reason: 'Tells the application about a route reveal; React does not allow calling its callback while rendering.' },
   { file: 'site/PageLoader.tsx', hook: 'useEffect', reason: 'Scrolls to the section in the URL once the lazily loaded page has rendered.' },
 ]
 

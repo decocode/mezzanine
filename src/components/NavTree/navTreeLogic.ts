@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useEffectEvent, useMemo, useRef, useState, type Ref, type RefCallback } from 'react'
+import { useCallback, useMemo, useRef, useState, type Ref, type RefCallback } from 'react'
 import type { Key } from 'react-aria-components'
 import type { NavTreeItemData, NavTreeProps } from './NavTree'
 
@@ -19,49 +19,28 @@ function indexNavTree(items: NavTreeProps['items'], route: NavTreeProps['selecte
   return { keys, paths, ancestors: match?.ancestors ?? [], routeIdentity: JSON.stringify([route ?? null, match ?? null]) }
 }
 
-function equalKeys(left: Set<Key>, right: Set<Key>) {
-  return left.size === right.size && [...left].every(key => right.has(key))
-}
-
-// Route changes add ancestors once. Re-renders cannot undo a manual collapse.
-// Controlled callers receive requests, never an invisible override of their keys.
+// An uncontrolled tree opens the route's ancestors when the route, or where it sits
+// in the items, changes; re-renders cannot undo a manual collapse. It also drops
+// keys for removed items. A controlled tree's keys belong to the caller, as in React Aria.
 export function useNavTreeExpansion({ items, selectedRoute, expandedKeys, defaultExpandedKeys, onExpandedChange }: Pick<NavTreeProps,
   'items' | 'selectedRoute' | 'expandedKeys' | 'defaultExpandedKeys' | 'onExpandedChange'>) {
   const index = useMemo(() => indexNavTree(items, selectedRoute), [items, selectedRoute])
   const [internalKeys, setInternalKeys] = useState(() => new Set([
     ...[...(defaultExpandedKeys ?? [])].filter(key => index.keys.has(key)), ...index.ancestors,
   ]))
-  const [revealedRoute, setRevealedRoute] = useState<string | undefined>(undefined)
-  const [request, setRequest] = useState<{ keys: Set<Key>; identity: string } | undefined>(undefined)
-  const currentKeys = useMemo(() => expandedKeys === undefined ? internalKeys : new Set(expandedKeys), [expandedKeys, internalKeys])
-
-  // Reconcile while rendering: drop keys for removed items and add the route's ancestors once.
-  const next = new Set([...currentKeys].filter(key => index.keys.has(key)))
-  if (revealedRoute !== index.routeIdentity) {
-    setRevealedRoute(index.routeIdentity)
-    index.ancestors.forEach(key => next.add(key))
+  const [reconciledIndex, setReconciledIndex] = useState(index)
+  if (expandedKeys === undefined && reconciledIndex !== index) {
+    setReconciledIndex(index)
+    const next = new Set([...internalKeys].filter(key => index.keys.has(key)))
+    if (reconciledIndex.routeIdentity !== index.routeIdentity) index.ancestors.forEach(key => next.add(key))
+    setInternalKeys(next)
   }
-  if (!equalKeys(currentKeys, next)) {
-    const identity = JSON.stringify([index.routeIdentity, [...currentKeys], [...next]])
-    if (identity !== request?.identity) {
-      if (expandedKeys === undefined) setInternalKeys(next)
-      setRequest({ keys: next, identity })
-    }
-  }
-
-  // React does not allow calling the application's callback while rendering,
-  // so telling it about a reconciled change is the one step left to an effect.
-  const notifyExpandedChange = useEffectEvent((keys: Set<Key>) => onExpandedChange?.(keys))
-  useEffect(() => {
-    if (request) notifyExpandedChange(request.keys)
-  }, [request])
 
   const changeExpansion = useCallback((keys: Set<Key>) => {
-    setRequest(undefined)
     if (expandedKeys === undefined) setInternalKeys(new Set(keys))
     onExpandedChange?.(new Set(keys))
   }, [expandedKeys, onExpandedChange])
-  return { expandedKeys: currentKeys, onExpandedChange: changeExpansion }
+  return { expandedKeys: expandedKeys ?? internalKeys, onExpandedChange: changeExpansion }
 }
 
 // React Aria handles normal keyboard collapse. Controlled changes or data removal

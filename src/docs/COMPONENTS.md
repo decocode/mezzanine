@@ -134,20 +134,21 @@ non-interactive badge `content` and optional child items. A section uses
 `iconLeading` before the label, and child items. Sections cannot sit inside
 items.
 
-- A parent with `href` has a link and a separate expand control. A parent
-  without one uses its label as the expand control's name and announces its
-  state with `aria-expanded`. `getToggleLabel` lets you customise or translate
-  control names.
+- A parent with `href` has a link and a separate expand control, named
+  "Expand" or "Collapse" plus its label by React Aria, translated for the
+  app's locale. A parent without one uses its label as the expand control's
+  name and announces its state with `aria-expanded`.
 - An item with no destination and no children is disabled.
 - IDs must be unique across the whole tree. When data changes, replace the
   changed item and its ancestors rather than editing them in place.
 
 Use `defaultExpandedKeys` to set the starting state, or `expandedKeys` with
-`onExpandedChange` to control it. When the route changes, NavTree expands only
-the current page's ancestors and leaves other branches as the user left them.
-A branch the user collapsed stays collapsed until the route or its ancestors
-change. In controlled mode, accept these expansion requests; NavTree never
-overrides the keys you supply. Removed items have their expansion keys pruned.
+`onExpandedChange` to control it. When the route changes, an uncontrolled
+NavTree expands only the current page's ancestors and leaves other branches as
+the user left them. A branch the user collapsed stays collapsed until the route
+or its ancestors change. Removed items have their expansion keys pruned. In
+controlled mode the keys are yours, as in React Aria: NavTree never changes
+them, so expand the current page's ancestors yourself.
 
 Rows appear and disappear immediately; only the chevron animates, and it follows
 the shared motion policy. If a collapse or removal takes away the focused item,
