@@ -15,12 +15,12 @@ export const panelPage: LabPage = {
     { key: 'anatomy', table: {
       label: 'Panel anatomy', nameColumn: 'Component', className: 'documentation-anatomy-table', namesAreCode: false,
       rows: [
-        { name: 'LabPanel', description: 'A `<section>` named by its title, or a plain `<div>` without one, at its placement, holding a header row and the content.' },
-        { name: 'Header row', description: 'Optional: the Panel’s title as a heading, any LabPanelHeader, and, with `hasCollapseButton`, a LabPanelToggle while the Panel is an overlay.' },
+        { name: 'LabPanel', description: 'A `<section>` named by its `panelTitle` or `aria-label`, or a plain `<div>` without either, at its placement, holding a header row and the content.' },
+        { name: 'Header row', description: 'Optional: the Panel’s title as a heading, any LabPanelHeader, and, while the Panel is an overlay, a LabPanelToggle that collapses it.' },
         { name: 'LabPanelHeader', description: 'Optional, in the header row, for what introduces the Panel or acts on all of it. It stays put while the content below it scrolls.' },
         { name: 'LabPanelFooter', description: 'Optional, at the bottom, for what should always be within reach. It stays put while the content above it scrolls.' },
         { name: 'Resize handle', description: 'Optional, on the inner edge, a separator that changes the Panel’s size.' },
-        { name: 'LabPanelToggle', description: 'A button outside the Panel that collapses and expands it. With `hasCollapseButton`, the Panel also holds a twin in its header row while it’s an overlay.' },
+        { name: 'LabPanelToggle', description: 'A button outside the Panel that collapses and expands it. As an overlay, the Panel also holds a twin in its header row.' },
       ],
     } },
     { key: 'behaviour', body: [{ list: [
@@ -42,10 +42,10 @@ export const panelPage: LabPage = {
       ],
     } },
     { key: 'usage', body: [
-      'Put the Panels and the content inside a `LabPanelLayout`, at most one Panel at each placement, and give each an `id`. Choose `isCollapsible` when the Panel should get out of the way completely, and put its LabPanelToggle somewhere that stays visible. Use `isResizable` when people need more or less room for the Panel’s content. A side Panel resizes between `--width-xs` and `--width-md`, and a bottom one between `--width-xs` and `--width-sm`.',
+      'Put the Panels and the content inside a `LabPanelLayout`, at most one Panel at each placement, and give each an `id`. Choose `isCollapsible` when the Panel should get out of the way completely, even with room. Without room, every Panel can collapse anyway, so put its LabPanelToggle somewhere that stays visible. Use `isResizable` when people need more or less room for the Panel’s content. A side Panel resizes between `--width-xs` and `--width-md`, and a bottom one between `--width-xs` and `--width-sm`.',
     ] },
     { key: 'accessibility', body: [{ list: [
-      'A Panel with a title is a region named by it. Without one, it isn’t a landmark, and its content names itself.',
+      'A Panel with a `panelTitle` or `aria-label` is a region named by it. Without either, it isn’t a landmark, and its content names itself.',
       'LabPanelToggle says whether the Panel is expanded (`aria-expanded`), and which element it controls (`aria-controls`). Its name shows in a tooltip.',
       'The resize handle follows the window splitter pattern: a focusable separator named “Resize” and the Panel’s title, which announces its size. The arrow keys change the size, and Home and End take it to its smallest and largest.',
     ] }] },
@@ -53,13 +53,14 @@ export const panelPage: LabPage = {
       label: 'Panel props', nameColumn: 'Prop', className: 'documentation-props-table',
       rows: [
         { name: 'placement', description: '`start`, `end` or `bottom`.' },
-        { name: 'title', description: 'Optional. A visible heading, which makes the Panel a region named by it.' },
-        { name: 'isResizable / isCollapsible', description: 'Both false by default.' },
+        { name: 'panelTitle', description: 'Optional. A visible heading, which makes the Panel a region named by it. Its toggles take their names from it. Not `title`, which in HTML is a tooltip.' },
+        { name: 'aria-label', description: 'Optional. A name for a Panel without a visible heading, which makes it a region and names its toggles.' },
+        { name: 'isResizable / isCollapsible', description: 'Both false by default. A bottom Panel, or a side Panel without room beside the content, can always collapse, whatever `isCollapsible` says.' },
         { name: 'isExpanded / onExpandedChange', description: 'Control whether a collapsible Panel is expanded, or respond to changes. It starts expanded.' },
-        { name: 'hasCollapseButton', description: 'A placeholder name. A collapsible Panel holds a LabPanelToggle in its header row while it’s an overlay. Beside the content, the toggle outside it is enough.' },
+        { name: 'collapseIcon', description: 'A placeholder name. The icon of the collapse button an overlay holds in its header row: `collapse`, the default at the start, or `close`, an ×, the default at the end and bottom.' },
         { name: 'id', description: 'The id its toggle names.' },
-        { name: 'LabPanelToggle: panel / placement / title', description: 'The Panel it controls, and its title, for the button’s name.' },
-        { name: 'LabPanelToggle: collapseLabel / expandLabel', description: 'Wording such as “Hide demo settings”. “Hide panel” and “Show panel” without a title.' },
+        { name: 'LabPanelToggle: panel / placement', description: 'The Panel it controls, and where that Panel sits. The toggle takes its name from the Panel, so it needs no title of its own.' },
+        { name: 'LabPanelToggle: collapseLabel / expandLabel', description: 'Wording such as “Hide demo settings”. Without them, “Collapse” or “Expand” and the Panel’s name, or “Hide panel” and “Show panel” for a Panel with no name.' },
       ],
     } },
     { key: 'tokens', table: {
@@ -256,8 +257,8 @@ export const panelDemoBlockLabels = {
 } as const
 export const panelPlacements: readonly LabPanelPlacement[] = ['start', 'end', 'bottom']
 
-export function panelDemoBlockCode({ placement, isResizable, isCollapsible, hasCollapseButton, hasHeader, hasFooter }: { placement: LabPanelPlacement; isResizable: boolean; isCollapsible: boolean; hasCollapseButton: boolean; hasHeader: boolean; hasFooter: boolean }) {
-  const flags = [isResizable ? ' isResizable' : '', isCollapsible ? ' isCollapsible' : '', hasCollapseButton ? ' hasCollapseButton' : '', hasCollapseButton && placement !== 'start' ? ' collapseIcon="close"' : ''].join('')
+export function panelDemoBlockCode({ placement, isResizable, isCollapsible, hasHeader, hasFooter }: { placement: LabPanelPlacement; isResizable: boolean; isCollapsible: boolean; hasHeader: boolean; hasFooter: boolean }) {
+  const flags = [isResizable ? ' isResizable' : '', isCollapsible ? ' isCollapsible' : ''].join('')
   const name = severalPanelsLabels.panels[placement]
   const toggle = placement === 'start'
     ? `<LabPanelToggle panel="panel" placement="start" collapseLabel="${name}" expandLabel="${name}" />`
@@ -265,7 +266,8 @@ export function panelDemoBlockCode({ placement, isResizable, isCollapsible, hasC
   return [
     '<LabPanelLayout header={',
     '  <Toolbar aria-label="Panels">',
-    ...(isCollapsible ? [`    ${toggle}`] : []),
+    // The toggle is always there: in a narrow layout, every Panel can collapse.
+    `    ${toggle}`,
     '  </Toolbar>',
     '}>',
     `  <LabPanel id="panel" placement="${placement}" aria-label="${name}"${flags}>`,
@@ -295,7 +297,7 @@ export function severalPanelsCode(placements: readonly LabPanelPlacement[]) {
     '  </Toolbar>',
     '}>',
     ...placements.flatMap((placement) => [
-      `  <LabPanel id="${placement}" placement="${placement}" aria-label="${severalPanelsLabels.panels[placement]}" isCollapsible hasCollapseButton${placement === 'start' ? '' : ' collapseIcon="close"'}>`,
+      `  <LabPanel id="${placement}" placement="${placement}" aria-label="${severalPanelsLabels.panels[placement]}" isCollapsible>`,
       `    <p>${severalPanelsLabels.panelText[placement]}</p>`,
       '  </LabPanel>',
     ]),

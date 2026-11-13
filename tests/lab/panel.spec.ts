@@ -16,9 +16,14 @@ test('a Lab Panel holds a collapse button only as an overlay', async ({ page }) 
   await expect(barToggle).toHaveAttribute('aria-expanded', 'true')
   await expect(panelToggle).toHaveCount(0)
 
-  // Narrow the layout so the Panel becomes an overlay, opened from the bar.
+  // Narrow the layout so the Panel becomes an overlay, opened from the bar. It can collapse whatever
+  // isCollapsible says, so that switch is disabled, with the reason beneath it.
+  const collapsible = demo.getByRole('switch', { name: 'isCollapsible' })
+  await expect(collapsible).toBeEnabled()
   await demo.locator('.lab-panel-example').evaluate((layout) => { layout.style.inlineSize = '18rem' })
   await expect(panel).toBeHidden()
+  await expect(collapsible).toBeDisabled()
+  await expect(collapsible).toHaveAccessibleDescription('In a narrow layout, panels are always collapsible.')
   await barToggle.click()
   await expect(panel).toHaveAttribute('data-overlay', 'true')
   await panelToggle.focus()

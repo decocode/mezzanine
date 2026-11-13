@@ -8,6 +8,8 @@ export interface LabPanelEntry {
   // Whether the app controls the Panel's expanded state; undefined leaves it to the store.
   isExpanded?: boolean
   isCollapsible: boolean
+  // The Panel's name, its panelTitle or aria-label, which its toggles use for their own names.
+  name?: string
   onExpandedChange?: (isExpanded: boolean) => void
 }
 

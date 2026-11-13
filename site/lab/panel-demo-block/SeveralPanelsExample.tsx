@@ -37,7 +37,7 @@ export function SeveralPanelsExample({ shown, onShownChange }: { shown: Record<L
           // Each Panel has a collapse button in its header row: the Start Panel's shows the panel collapse
           // icon, at the start; the End and Bottom Panels' show an ×, at the end. The bar's toggles open them
           // again. The Panels have no visible title; each is named for screen readers.
-          <LabPanel key={placement} id={`several-${placement}`} placement={placement} aria-label={labels.panels[placement]} isCollapsible hasCollapseButton collapseIcon={placement === 'start' ? 'collapse' : 'close'}>
+          <LabPanel key={placement} id={`several-${placement}`} placement={placement} aria-label={labels.panels[placement]} isCollapsible>
             <p>{labels.panelText[placement]}</p>
           </LabPanel>
         ))}

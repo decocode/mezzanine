@@ -81,7 +81,9 @@
   cursor: default;
 }
 
-.mz-switch-field[data-disabled] {
+/* Disabled, the switch and its label fade, but a description stays readable, because it may explain why
+   the switch is disabled. */
+.mz-switch-field[data-disabled] > .mz-switch-button {
   opacity: var(--switch-opacity-disabled, var(--opacity-disabled));
 }
 
@@ -101,11 +103,6 @@
 
 .mz-switch-field > [slot='description'] {
   color: var(--switch-description-foreground, var(--color-text-muted));
-}
-
-/* Help text and errors line up with the label, past the track, as under a Checkbox or a radio option. */
-.mz-switch-field > :is([slot='description'], .mz-field-error) {
-  padding-inline-start: calc(var(--switch-track-width, calc(var(--switch-track-height, var(--icon-size-sm)) * 2)) + var(--switch-content-gap, var(--space-gap-control)));
 }
 
 .mz-switch-field > .mz-field-error {
@@ -134,7 +131,7 @@
     background: HighlightText;
   }
 
-  .mz-switch-field[data-disabled] {
+  .mz-switch-field[data-disabled] > .mz-switch-button {
     opacity: 1;
     color: GrayText;
   }

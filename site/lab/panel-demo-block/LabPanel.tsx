@@ -14,16 +14,21 @@ export interface LabPanelLayoutProps {
   // A row across the top, above the Panels and the content, such as a toolbar holding a LabPanelToggle.
   header?: ReactNode
   // The narrowest the content gets before a side Panel stops sharing the space and becomes an overlay,
-  // as a CSS length. The xs width unless given.
+  // as a CSS length. The md width unless given.
   minContentWidth?: string
+  // The layout's state from useLabPanelLayoutState, for a page that needs to know how the layout shares
+  // its room, such as whether a Panel has become an overlay. Placeholder name. Without it, the layout
+  // keeps its own.
+  layoutState?: ReturnType<typeof useLabPanelLayoutState>
   className?: string
 }
 
 // Holds one or more LabPanels and the content beside them, and decides how they share the room. It keeps
 // every Panel's expanded state and size, measures its own width, and without room for a side Panel,
 // shows it as an overlay inside the layout. It can go on any element.
-export function LabPanelLayout({ children, header, minContentWidth = 'var(--width-md)', className }: LabPanelLayoutProps) {
-  const { state, elementProps } = useLabPanelLayoutState()
+export function LabPanelLayout({ children, header, minContentWidth = 'var(--width-md)', layoutState, className }: LabPanelLayoutProps) {
+  const ownState = useLabPanelLayoutState()
+  const { state, elementProps } = layoutState ?? ownState
   const isPanel = (child: ReactNode) => isValidElement(child) && child.type === LabPanel
   const childList = Children.toArray(children)
   const content = childList.filter((child) => !isPanel(child))
@@ -45,9 +50,9 @@ export function LabPanelLayout({ children, header, minContentWidth = 'var(--widt
 export interface LabPanelProps {
   placement: LabPanelPlacement
   // An optional visible heading in the Panel's header row, for when the content needs introducing. It
-  // makes the Panel a region named by it. Without one, the Panel isn't a landmark, and its content names
-  // itself.
-  title?: string
+  // makes the Panel a region named by it, and its toggles take their names from it. Without one, the
+  // Panel isn't a landmark, and its content names itself. Not "title", which in HTML is a tooltip.
+  panelTitle?: string
   // A name for a Panel without a visible title, which makes it a region and names its buttons.
   'aria-label'?: string
   // People can change the Panel's size by dragging its inner edge, or with the arrow keys.
@@ -58,11 +63,9 @@ export interface LabPanelProps {
   // Without isExpanded, the Panel starts expanded.
   isExpanded?: boolean
   onExpandedChange?: (isExpanded: boolean) => void
-  // A collapsible Panel holds a LabPanelToggle in its header row that collapses it, while it's an overlay.
-  // Placeholder name; the owner is still to confirm it.
-  hasCollapseButton?: boolean
-  // The collapse button's icon, which the app chooses by context: a panel collapse icon, the default, such
-  // as for navigation, or an × to close, such as for filters or a supplementary Panel. Placeholder name.
+  // The icon of the collapse button an overlay holds in its header row: a panel collapse icon, the default
+  // at the start, such as for navigation, or an ×, the default at the end and bottom, such as for filters
+  // or a supplementary Panel. The app can choose either by context. Placeholder name.
   collapseIcon?: 'collapse' | 'close'
   // The Panel's id, which its LabPanelToggle names.
   id: string
@@ -70,21 +73,23 @@ export interface LabPanelProps {
   className?: string
 }
 
-export function LabPanel({ placement, title, 'aria-label': ariaLabel, isResizable = false, isCollapsible = false, isExpanded, onExpandedChange, hasCollapseButton = false, collapseIcon = 'collapse', id, children, className }: LabPanelProps) {
+export function LabPanel({ placement, panelTitle, 'aria-label': ariaLabel, isResizable = false, isCollapsible = false, isExpanded, onExpandedChange, collapseIcon = placement === 'start' ? 'collapse' : 'close', id, children, className }: LabPanelProps) {
   const { store, presentation } = useLabPanelLayout('LabPanel')
   useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
   const headingId = useId()
   const panelRef = useRef<HTMLDivElement | null>(null)
   const isOverlay = presentation(placement) === 'overlay'
-  // A Panel that can't collapse has no toggle to open it as an overlay, so without room it's hidden.
-  const isShown = isCollapsible ? store.isShown(id, isOverlay) : !isOverlay
+  // Without room beside the content, every Panel can collapse, whatever isCollapsible says: it becomes an
+  // overlay its toggle opens, so it never just disappears (owner, 29 October 2026).
+  const canCollapse = isCollapsible || isOverlay
+  const isShown = canCollapse ? store.isShown(id, isOverlay) : true
 
   // Register from a ref callback, so toggles can find this Panel without an effect.
   const register = useCallback((element: HTMLDivElement | null) => {
     panelRef.current = element
     if (!element) return
-    return store.register(id, { placement, isExpanded: isCollapsible ? isExpanded : true, isCollapsible, onExpandedChange })
-  }, [store, id, placement, isCollapsible, isExpanded, onExpandedChange])
+    return store.register(id, { placement, isExpanded: isCollapsible ? isExpanded : true, isCollapsible, name: panelTitle ?? ariaLabel, onExpandedChange })
+  }, [store, id, placement, isCollapsible, isExpanded, panelTitle, ariaLabel, onExpandedChange])
 
   // A LabPanelHeader among the children shares the header row with the title and the collapse button, and
   // a LabPanelFooter sits at the bottom, with the content scrolling between them.
@@ -93,15 +98,15 @@ export function LabPanel({ placement, title, 'aria-label': ariaLabel, isResizabl
   const footer = parts.find((child) => isValidElement(child) && child.type === LabPanelFooter)
   const content = parts.filter((child) => child !== header && child !== footer)
   // The Panel's name: its visible title, or its aria-label without one.
-  const name = title ?? ariaLabel
-  // The collapse button only shows while the Panel is an overlay: beside the content, the toggle outside it
-  // is enough (owner, 29 October 2026).
-  const collapseButton = isCollapsible && hasCollapseButton && isOverlay && (
+  const name = panelTitle ?? ariaLabel
+  // Every overlay has its own collapse button, so it can always be closed from inside, with or without a
+  // keyboard. Beside the content, the toggle outside it is enough (owner, 29 October 2026).
+  const collapseButton = canCollapse && isOverlay && (
     collapseIcon === 'close'
-      ? <LabPanelToggle panel={id} placement={placement} title={name} icon={<CloseIcon />} collapseLabel={name === undefined ? 'Close panel' : `Close ${name}`} />
-      : <LabPanelToggle panel={id} placement={placement} title={name} />
+      ? <LabPanelToggle panel={id} placement={placement} icon={<CloseIcon />} collapseLabel={name === undefined ? 'Close panel' : `Close ${name}`} />
+      : <LabPanelToggle panel={id} placement={placement} />
   )
-  const hasHeaderRow = header !== undefined || title !== undefined || Boolean(collapseButton)
+  const hasHeaderRow = header !== undefined || panelTitle !== undefined || Boolean(collapseButton)
   // Only a named Panel is a region; otherwise it's a plain layout container. Typed as a div for the ref.
   const Element = (name === undefined ? 'div' : 'section') as 'div'
 
@@ -114,11 +119,11 @@ export function LabPanel({ placement, title, 'aria-label': ariaLabel, isResizabl
       data-state={isShown ? 'open' : 'closed'}
       data-overlay={isOverlay || undefined}
       data-collapse-button={Boolean(collapseButton) || undefined}
-      aria-labelledby={title === undefined ? undefined : headingId}
-      aria-label={title === undefined ? ariaLabel : undefined}
+      aria-labelledby={panelTitle === undefined ? undefined : headingId}
+      aria-label={panelTitle === undefined ? ariaLabel : undefined}
       inert={!isShown}
       // An overlay closes with Escape, and focus goes back to the toggle outside it.
-      onKeyDown={isOverlay && isShown && isCollapsible ? (event) => {
+      onKeyDown={isOverlay && isShown && canCollapse ? (event) => {
         if (event.key !== 'Escape') return
         store.setExpanded(id, false, true)
         handFocusToTwin(id, false)
@@ -127,7 +132,7 @@ export function LabPanel({ placement, title, 'aria-label': ariaLabel, isResizabl
       <div className="lab-panel-inner">
         {hasHeaderRow && <div className="lab-panel-header">
           {placement === 'start' && collapseButton}
-          {title !== undefined && <h3 className="lab-panel-title" id={headingId}>{title}</h3>}
+          {panelTitle !== undefined && <h3 className="lab-panel-title" id={headingId}>{panelTitle}</h3>}
           {header}
           {placement !== 'start' && collapseButton}
         </div>}
@@ -172,16 +177,15 @@ function handFocusToTwin(panel: string, isExpanding: boolean) {
 }
 
 // The button that collapses and expands a collapsible Panel. Outside the Panel, it stays visible: in a
-// strip, a toolbar, a bar of toggles or the content's header. With hasCollapseButton, a Panel also holds
-// one in its header row. Its icon shows what pressing does; with children, it shows that text instead.
-export function LabPanelToggle({ panel, placement, title, collapseLabel, expandLabel, children, icon, tooltip }: {
+// strip, a toolbar, a bar of toggles or the content's header. As an overlay, a Panel also holds one in
+// its header row. Its icon shows what pressing does; with children, it shows that text instead.
+export function LabPanelToggle({ panel, placement, collapseLabel, expandLabel, children, icon, tooltip }: {
   // The Panel's id.
   panel: string
   placement: LabPanelPlacement
-  // The Panel's title, if it has one, for the button's name.
-  title?: string
-  // The button's name and tooltip, for wording that suits the use, such as "Hide properties". They
-  // default to "Collapse" and "Expand" with the Panel's title, or "Hide panel" and "Show panel" without one.
+  // The button's name and tooltip, for wording that suits the use, such as "Hide demo settings". They
+  // default to "Collapse" and "Expand" with the Panel's own name, its panelTitle or aria-label, which the
+  // toggle reads from the layout, or "Hide panel" and "Show panel" without one.
   collapseLabel?: string
   expandLabel?: string
   // A visible text label in place of the icon, such as "Start" in a bar of toggles. It names the button,
@@ -196,6 +200,7 @@ export function LabPanelToggle({ panel, placement, title, collapseLabel, expandL
   useSyncExternalStore(store.subscribe, store.getVersion, store.getVersion)
   const isOverlay = presentation(placement) === 'overlay'
   const isShown = store.isShown(panel, isOverlay)
+  const title = store.entry(panel)?.name
   const onPress = () => {
     store.setExpanded(panel, !isShown, isOverlay)
     handFocusToTwin(panel, !isShown)

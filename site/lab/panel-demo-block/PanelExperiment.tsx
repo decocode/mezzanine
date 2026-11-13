@@ -7,42 +7,47 @@ import { PanelSwitch } from '../../components/PanelSwitch'
 import { LabContentPage } from '../shared/StagePages'
 import { LabDemoBlock } from './LabDemoBlock'
 import { LabPanel, LabPanelFooter, LabPanelHeader, LabPanelLayout, LabPanelToggle } from './LabPanel'
+import { useLabPanelLayoutState } from './labPanelLayoutState'
 import type { LabPanelPlacement } from './labPanelSize'
 import { panelDemoBlockCode, panelDemoBlockLabels as labels, panelPage, panelPlacements, severalPanelsLabels } from './panelDemoBlockContent'
 import './panelDemoBlock.css'
-
-const panelId = 'lab-panel-example'
 
 export function PanelExperiment() {
   const [placement, setPlacement] = useState<LabPanelPlacement>('start')
   const [isResizable, setIsResizable] = useState(false)
   const [isCollapsibleSetting, setIsCollapsible] = useState(true)
-  const [hasCollapseButton, setHasCollapseButton] = useState(true)
   const [hasHeader, setHasHeader] = useState(true)
   const [hasFooter, setHasFooter] = useState(true)
-  // A bottom Panel is always a drawer, so it's always collapsible: its toggle is the only way to open it.
-  const isCollapsible = placement === 'bottom' || isCollapsibleSetting
+  // The page holds the example layout's state, so the demo settings know when the Panel has no room.
+  const layoutState = useLabPanelLayoutState()
+  const hasRoom = layoutState.state.presentation(placement) === 'inline'
+  // A bottom Panel is always a drawer, and a side Panel without room becomes an overlay: either way it can
+  // always collapse, because its toggle is the only way to open it. isCollapsible then has no say, so its
+  // switch is disabled, with the reason beneath it.
+  const isCollapsible = isCollapsibleSetting || !hasRoom
+  const collapsibleReason = placement === 'bottom'
+    ? 'A bottom Panel is a drawer, so it can always collapse.'
+    : hasRoom ? undefined : 'In a narrow layout, panels are always collapsible.'
   const name = severalPanelsLabels.panels[placement]
+  // Each placement has its own id, so a size dragged for one placement doesn't carry over to another.
+  const panelId = `lab-panel-example-${placement}`
   return <LabContentPage content={panelPage} parts={{
     example: (
       <LabDemoBlock
         properties={<>
           <PanelSelect label="placement" options={panelPlacements} value={placement} onChange={setPlacement} />
           <PanelSwitch isSelected={isResizable} onChange={setIsResizable}>isResizable</PanelSwitch>
-          {placement !== 'bottom' && <PanelSwitch isSelected={isCollapsibleSetting} onChange={setIsCollapsible}>isCollapsible</PanelSwitch>}
-          {/* The collapse button only applies to a collapsible Panel, so its switch appears with it. */}
-          {isCollapsible && <PanelSwitch isSelected={hasCollapseButton} onChange={setHasCollapseButton}>hasCollapseButton</PanelSwitch>}
+          <PanelSwitch isSelected={isCollapsible} onChange={setIsCollapsible} isDisabled={collapsibleReason !== undefined} description={collapsibleReason}>isCollapsible</PanelSwitch>
         </>}
         parts={<>
           <PanelSwitch isSelected={hasHeader} onChange={setHasHeader}>LabPanelHeader</PanelSwitch>
           <PanelSwitch isSelected={hasFooter} onChange={setHasFooter}>LabPanelFooter</PanelSwitch>
         </>}
       >
-        {/* A new key starts the layout again, so a size dragged for one placement doesn't carry over. */}
         {/* A bar across the top of the layout holds the Panel's toggle, as in the Panel layout example, so it
             stays visible however narrow the layout: the Start toggle is icon-only, and End and Bottom show
             text, each with the Panel's name in a tooltip. */}
-        <LabPanelLayout key={`${placement}-${isCollapsible}`} className="lab-panel-example" header={
+        <LabPanelLayout layoutState={layoutState} className="lab-panel-example" header={
           <Toolbar className="lab-panel-layout-bar" aria-label="Panels" data-placement={placement}>
             {isCollapsible && (placement === 'start'
               ? <LabPanelToggle panel={panelId} placement={placement} collapseLabel={name} expandLabel={name} />
@@ -51,7 +56,7 @@ export function PanelExperiment() {
         }>
           {/* As in the Panel layout example, the Start Panel's collapse button shows the panel collapse icon,
               and the End and Bottom Panels' show an ×. */}
-          <LabPanel id={panelId} placement={placement} aria-label={name} isResizable={isResizable} isCollapsible={isCollapsible} hasCollapseButton={hasCollapseButton} collapseIcon={placement === 'start' ? 'collapse' : 'close'}>
+          <LabPanel id={panelId} placement={placement} aria-label={name} isResizable={isResizable} isCollapsible={isCollapsible}>
             <p>{severalPanelsLabels.panelText[placement]}</p>
             {/* Empty areas standing in for whatever each part holds. */}
             {hasHeader && <LabPanelHeader><div className="lab-panel-example-content"><p>{labels.headerText}</p></div></LabPanelHeader>}
@@ -62,6 +67,6 @@ export function PanelExperiment() {
       </LabDemoBlock>
     ),
     // The code shows in its own section under the example, and follows the demo settings.
-    code: <CodeBlock language="tsx">{panelDemoBlockCode({ placement, isResizable, isCollapsible, hasCollapseButton: isCollapsible && hasCollapseButton, hasHeader, hasFooter })}</CodeBlock>,
+    code: <CodeBlock language="tsx">{panelDemoBlockCode({ placement, isResizable, isCollapsible, hasHeader, hasFooter })}</CodeBlock>,
   }} />
 }
