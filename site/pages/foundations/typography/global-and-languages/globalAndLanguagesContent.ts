@@ -11,12 +11,12 @@ export const startAndEndExample = {
 }
 
 export const startAndEndCode = `.physical {
-  border-left: var(--space-2) solid var(--color-warning-600);
+  border-left: var(--border-width-xl) solid var(--color-warning-600);
   padding-left: var(--space-4);
 }
 
 .logical {
-  border-inline-start: var(--space-2) solid var(--color-warning-600);
+  border-inline-start: var(--border-width-xl) solid var(--color-warning-600);
   padding-inline-start: var(--space-4);
 }`
 

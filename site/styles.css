@@ -32,29 +32,6 @@ body {
   color: var(--color-text);
 }
 
-/* Plain links' defaults sit in the base layer, below the library, so they never restyle a component
-   that renders a link, such as Link, Card or the navigation. */
-@layer base {
-  a {
-    color: var(--color-link);
-    text-decoration-thickness: var(--border-width-baseline);
-    text-underline-offset: var(--underline-offset);
-  }
-
-  a:hover {
-    color: var(--color-link-hovered);
-  }
-
-  a:active {
-    color: var(--color-link-pressed);
-  }
-
-  a:focus-visible {
-    outline: var(--focus-ring-width) solid var(--color-focus);
-    outline-offset: var(--focus-ring-offset);
-  }
-}
-
 /* The site's lists of cards, samples and links have no margins of their own. The reset sits in the base
    layer, so an mz-prose container around them can still space them. */
 @layer base {

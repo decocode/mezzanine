@@ -24,17 +24,21 @@ export const typographyContent: DocsPageContent = {
   sections: [{ key: 'pages', title: 'Using typography' }],
 }
 
-// Each card's description is its page's subtitle, except Global and languages, which has none.
+// Each card's description is its page's subtitle.
 export const typographyPages = [
   { label: 'Typeface and fonts', href: '/typography/typeface-and-fonts', description: 'When text uses each device’s own interface font.' },
   { label: 'Size and scaling', href: '/typography/size-and-scaling', description: 'When text comes in a few set sizes, and headings grow and shrink with the screen.' },
   { label: 'Font weight', href: '/typography/font-weight', description: 'Styling text so that it’s lighter, or bold.' },
   { label: 'Spacing and rhythm', href: '/typography/spacing-and-rhythm', description: 'Text that belongs together sits together.' },
   { label: 'Lines and words', href: '/typography/lines-and-words', description: 'Lines of text stay comfortable to read, however wide the space.' },
-  { label: 'Text styles', href: '/typography/text-styles', description: 'When every heading, paragraph and label looks consistent, wherever it appears.' },
+  { label: 'Text styles', href: '/typography/text-styles', description: 'Ready-to-use text styles, to keep copy looking consistent, wherever it appears.' },
   { label: 'Semantic HTML', href: '/typography/semantic-html', description: 'When plain HTML elements get a style without a class.' },
   { label: 'Global and languages', href: '/typography/global-and-languages', description: 'Text and layouts that work in every language, whichever direction it’s written in.' },
   { label: 'Text rendering', href: '/typography/text-rendering', description: 'When text keeps its intended weight on screen.' },
+  { label: 'Links and decoration', href: '/typography/links-and-decoration', description: 'Links are underlined and in the link color, so they stand out without relying on color alone.' },
+  { label: 'Characters and glyphs', href: '/typography/characters-and-glyphs', description: 'Letters keep the case they’re written in, and numbers and special characters come from the typeface.' },
+  { label: 'Color and contrast', href: '/typography/color-and-contrast', description: 'Text takes its color from roles that keep it readable on every theme’s backgrounds.' },
+  { label: 'Text accessibility', href: '/typography/text-accessibility', description: 'Text stays readable when people make it bigger or the window narrower.' },
 ]
 
 // Copy the pages place around their live parts: after a table, or between a style's class names.

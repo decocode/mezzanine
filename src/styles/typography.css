@@ -84,6 +84,28 @@
   font-style: italic;
 }
 
+/* A plain <a>, such as a link in Markdown or CMS text, looks like the Link component: the link color,
+   underlined, darker on hover and when pressed, with the focus ring. A component that renders a link,
+   such as Link, Button or Card, uses its own class, which overrides this. */
+:where(a) {
+  color: var(--color-link);
+  text-decoration-thickness: var(--border-width-baseline);
+  text-underline-offset: var(--underline-offset);
+}
+
+:where(a:hover) {
+  color: var(--color-link-hovered);
+}
+
+:where(a:active) {
+  color: var(--color-link-pressed);
+}
+
+:where(a:focus-visible) {
+  outline: var(--focus-ring-width) solid var(--color-focus);
+  outline-offset: var(--focus-ring-offset);
+}
+
 /* <mark> highlights words, such as a match in search results, with a tint that follows the theme. */
 :where(mark) {
   padding-inline: var(--space-1);

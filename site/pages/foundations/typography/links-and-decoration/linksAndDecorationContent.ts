@@ -10,14 +10,14 @@ export const linksAndDecorationContent: DocsPageContent = {
       key: 'links',
       title: 'Links',
       body: [
-        'A link uses the link color, `--color-link`, and an underline. The underline is the baseline border width thick, and sits `--underline-offset` below the text, so it clears the letters that hang below the line. A hovered link darkens to `--color-link-hovered`, and a pressed one to `--color-link-pressed`. A link to the current page drops its underline and turns semibold, so it reads as “you are here”. Visited links look the same as unvisited ones.',
-        'In Wireframe, every text link is underlined, and the underline thickens on hover and keyboard focus, so links stay clear without color.',
+        'A link uses the link color, `--color-link`, and an underline. The underline is the baseline border width thick, and sits `--underline-offset` below the text, so it clears the letters that hang below the line. A hovered link turns to `--color-link-hovered`, and a pressed one to `--color-link-pressed`: darker on a light background, and lighter on a dark one. A link to the current page drops its underline and turns semibold, so it reads as “you are here”. Visited links look the same as unvisited ones. This applies to the Link component and to plain `<a>` elements, such as links in Markdown.',
+        'In Wireframe, every text link is underlined. The underline thickens on hover, keyboard focus and press, and a pressed link also gets a tinted background, so links stay clear without color.',
       ],
     },
     {
       key: 'otherLines',
       title: 'Other lines',
-      body: ['No other text decoration is set. Strikethrough (`text-decoration-line: line-through`), overlines, and line styles such as dashed or wavy (`text-decoration-style`) use the browser’s defaults.'],
+      body: ['No other text decoration is set, apart from an underline on a selected Toggle button when forced colors are on. Strikethrough (`text-decoration-line: line-through`), overlines, and line styles such as dashed or wavy (`text-decoration-style`) use the browser’s defaults.'],
     },
   ],
   relatedPages: [

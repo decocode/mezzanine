@@ -25,7 +25,7 @@ export const semanticHtmlContent: DocsPageContent = {
     {
       key: 'plainHtmlElements',
       title: 'Plain HTML elements',
-      intro: ["Text without a style class still gets a style, so it never falls back to the browser's defaults. Any class you add replaces it."],
+      intro: ["The elements on this page get a style even without a class, so they don't fall back to the browser's defaults. Any class you add replaces it. Their spacing is the exception: outside `mz-prose`, headings, paragraphs, lists, description lists and quotes keep the browser's margins."],
     },
     {
       key: 'lists',

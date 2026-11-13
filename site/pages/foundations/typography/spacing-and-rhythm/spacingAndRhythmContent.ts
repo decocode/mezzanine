@@ -16,13 +16,13 @@ export const textSpacingRoles = [
 // The example's markup, shown in its Code tab.
 export const textSpacingCode = `<div class="mz-prose">
   <h2>Heading A</h2>
-  <p>Paragraph A…</p>
-  <p>Paragraph B…</p>
+  <p class="mz-text-body-md">Paragraph A…</p>
+  <p class="mz-text-body-md">Paragraph B…</p>
   <h3>Heading B</h3>
-  <p>Paragraph C…</p>
-  <ul>…</ul>
+  <p class="mz-text-body-md">Paragraph C…</p>
+  <ul class="mz-text-body-md">…</ul>
   <h4>Heading C</h4>
-  <p>Paragraph D…</p>
+  <p class="mz-text-body-md">Paragraph D…</p>
 </div>`
 
 // The example's teaching labels.

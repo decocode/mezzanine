@@ -36,8 +36,8 @@ literal values.
 
 ### Wireframe link identification
 
-Wireframe underlines all links, including navigation, current and disabled links,
-and links styled as buttons. Its theme rule deliberately overrides component
+Wireframe underlines all text links, including navigation, current and disabled
+links. Links styled as buttons keep the Button's look, with no underline. Its theme rule deliberately overrides component
 rules that remove underlines; current-item indicators and focus outlines remain.
 Hovering or visibly focusing an enabled link doubles its underline thickness;
 disabled links keep the normal thickness. Standard Link keyboard focus uses the
@@ -69,7 +69,7 @@ theme:
 }
 ```
 
-Every primary Button, selected Checkbox, Switch and tab now uses the product
+Every primary Button, selected Checkbox, Switch and tab then uses the product
 blue.
 
 **Pointers restyle one part of one component.** Each component reads its shared
@@ -94,12 +94,9 @@ Mezzanine component CSS must not depend on product palette names such as
 ## Naming rule
 
 Size segments use `xs`, `sm`, `md`, `lg` and `xl` where those levels exist.
-Typography currently uses `sm`, `md` and `lg`; Button uses `xs`, `sm`, `md`, `lg` and `xl`.
-This replaces the spelled-out size segments in those public token names; consumers
-must update their references and overrides. Typography CSS classes use the same
-abbreviations: for example, `mz-text-body-md`. This also replaces the previous
-spelled-out class suffixes; consuming apps must update their class names.
-Values are unchanged. `--font-weight-medium` remains a weight name, not a size level.
+Typography uses `sm`, `md` and `lg`; Button uses `xs`, `sm`, `md`, `lg` and `xl`.
+Typography CSS classes use the same abbreviations: for example, `mz-text-body-md`.
+`--font-weight-medium` is a weight name, not a size level.
 
 Foundation token names use this pattern where applicable:
 
@@ -155,8 +152,8 @@ curve. Verify contrast against the actual colors rather than the step number.
 | `--color-warning-{50–980}` | Caution and warnings |
 | `--color-danger-{50–980}` | Errors and destructive actions |
 
-Breaking change: the interface now reads `--color-accent-*`. The Signature
-palette is teal and drives only the three signature roles.
+The interface reads `--color-accent-*`. The Signature palette is teal and drives
+only the three signature roles.
 
 ### Color families
 
@@ -459,8 +456,9 @@ target at once. Every step is above the WCAG 2.2 AA minimum. For an app that nee
 
 ### Shared button sizing
 
-Button and ToggleButton use the same `--button-xs-*`, `--button-sm-*`, `--button-md-*`,
-`--button-lg-*` and `--button-xl-*` size tokens. Their minimum heights come from the shared
+Button and ToggleButton share the same pointers for each size, from
+`--button-xs-*` to `--button-xl-*`: `padding-block`, `padding-inline` and
+`icon-size`. Their text comes from a text style for each size, which is private. Their minimum heights come from the shared
 `--target-size-*` scale. Both default to `md`.
 Select sizes through `size`; ToggleButtonGroup supplies a size to its children,
 which an individual ToggleButton can override with its own `size`.

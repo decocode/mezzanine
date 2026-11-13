@@ -10,7 +10,7 @@ export const colorAndContrastContent: DocsPageContent = {
       key: 'textColors',
       title: 'Text colors',
       body: [
-        'Four roles color text:',
+        'Four main roles color text:',
         { list: [
           '`--color-text`, for normal reading and interface text.',
           '`--color-text-muted`, for supporting text, such as help text under a field.',

@@ -7,7 +7,7 @@
   color: var(--_badge-foreground);
   font-family: var(--font-family-body);
   font-size: var(--font-size-label-md);
-  font-weight: var(--font-weight-default);
+  font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-label);
   line-height: var(--line-height-label-md);
   text-transform: var(--text-transform-label);

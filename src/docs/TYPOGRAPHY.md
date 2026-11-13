@@ -88,8 +88,10 @@ apply the visual style.
 
 ## Base text
 
-The library stylesheet also styles elements that have no named style, so a
-product does not inherit the browser's defaults:
+The library stylesheet also styles the elements below when they have no named
+style, so they don't fall back to the browser's defaults. Their spacing is the
+exception: outside `mz-prose`, headings, paragraphs, lists, description lists
+and quotes keep the browser's margins.
 
 | Element | Style |
 | --- | --- |
@@ -102,6 +104,7 @@ product does not inherit the browser's defaults:
 | `h6` | Title small |
 | `strong`, `b` | Semibold |
 | `em`, `i` | Italic |
+| `a` | The Link component's look: `--color-link`, underlined `--underline-offset` below the text, `--color-link-hovered` and `--color-link-pressed`, and the focus ring |
 | `mark` | The `--color-highlight` tint behind the text, with the text colour |
 | `dl` | Terms (`dt`) semibold; descriptions (`dd`) under them with no indent, and a new term `--space-gap-text` below the description before it |
 | `blockquote` | No indent on either side; a `--border-width-md` line in `--color-border` along its start edge, with `--space-4` inside it |
@@ -215,9 +218,7 @@ is important or stressed but is not technical code.
 
 Code inside `pre` retains the monospace font but does not receive the inline
 background, padding, radius, wrapping, font size or line-height treatment.
-Code-block layout belongs to the consuming app. This corrects the previous
-global `code` rule: consumers that relied on its box styling inside `pre`
-must now supply their own code-block styles.
+Code-block layout belongs to the consuming app, or to the CodeBlock component.
 
 ## Pattern mappings
 
@@ -258,10 +259,10 @@ demonstrates that it needs a distinct, stable treatment.
 Library components follow the same roles as the named styles. Each rule that
 sets text sets one complete role: family, size, weight, letter spacing, line
 height and text transform. A state rule may change only the weight, using
-`--font-weight-default` or `--font-weight-emphasis`. Button and ToggleButton take
-their size from the `--button-{size}-font-size` and `-line-height` tokens, which
-point to Label sizes for Small and Medium and to Title sizes for Large and Extra
-Large. `npm run check:rules` enforces this, so a product theme that changes a
+`--font-weight-default` or `--font-weight-emphasis`. Button and ToggleButton set
+their text from a text style for each size: extra small uses Label small, small
+Label medium, medium Label large, large Title small and extra large Title
+medium. These values are private. `npm run check:rules` enforces this, so a product theme that changes a
 role's tokens reaches every component that uses it.
 
 ## Weight classes
