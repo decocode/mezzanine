@@ -17,8 +17,8 @@ export function SubgridExample() {
   return <>
     <ExampleText>With subgrid, the text in each item starts at the same height and the buttons line up along the bottom, however long each heading is. Without it, they drift apart.</ExampleText>
     <WidthDemo label="Subgrid" code={subgridCssNotes.subgrid.code} controls={<PanelSwitch isSelected={isAligned} onChange={setIsAligned}>Use subgrid</PanelSwitch>}>
-      <div className={`example-subgrid-list${isAligned ? ' example-subgrid-on' : ''}`}>
-        {items.map((item) => <Card key={item.title} className="example-subgrid-item">
+      <div className={`subgrid${isAligned ? ' subgrid-on' : ''}`}>
+        {items.map((item) => <Card key={item.title} className="subgrid-item">
           <Heading level={3}>{item.title}</Heading>
           <Text elementType="p" className="mz-text-body-sm">{item.text}</Text>
           <div><Button size="sm" hierarchy="secondary">Action</Button></div>

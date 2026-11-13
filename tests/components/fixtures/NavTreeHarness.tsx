@@ -20,17 +20,16 @@ function Harness() {
   const [route, setRoute] = useState<string | null>('#a')
   const [keys, setKeys] = useState<Set<string | number>>(new Set())
   const [controlled, setControlled] = useState(false)
-  const [accept, setAccept] = useState(true)
   const [requests, setRequests] = useState<(string | number)[][]>([])
   const [version, setVersion] = useState(0)
   Object.assign(window, { navTreeHarness: {
-    setItems, setRoute, setKeys, setControlled, setAccept, setVersion,
+    setItems, setRoute, setKeys, setControlled, setVersion,
     initialItems, requests,
   } })
   return <><NavTree aria-label="Isolated navigation" items={items} selectedRoute={route}
     className={() => `consumer-tree version-${version}`} style={() => ({ maxWidth: '100%' })}
     expandedKeys={controlled ? keys : undefined}
-    onExpandedChange={next => { setRequests(current => [...current, [...next]]); if (accept) setKeys(next) }}
+    onExpandedChange={next => { setRequests(current => [...current, [...next]]); setKeys(next) }}
   /><button>After tree</button></>
 }
 createRoot(document.getElementById('root')!).render(<StrictMode><Harness /></StrictMode>)

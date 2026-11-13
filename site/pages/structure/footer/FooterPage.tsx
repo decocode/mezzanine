@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { DemoBlock, Footer, Link } from '@decocode/mezzanine'
-import { PanelSelect } from '../../../../components/PanelSelect'
+import { PanelSelect } from '../../../components/PanelSelect'
 import { footerChildren, footerContent, footerExampleCode, footerExampleLabels as labels } from './footerContent'
-import { ContentPage } from '../../../../templates/ContentPage'
+import { ContentPage } from '../../../templates/ContentPage'
 
 export default function FooterPage() {
   const [children, setChildren] = useState<(typeof footerChildren)[number]>('smallPrintAndLinks')

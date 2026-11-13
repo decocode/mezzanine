@@ -10,7 +10,7 @@
 
   /* A pure white page, so surfaces and cards separate cleanly. */
   --color-page: var(--color-white);
-  --color-surface: var(--color-neutral-100);
+  --color-surface: var(--color-neutral-50);
 
   --color-text: var(--color-neutral-900);
   --color-text-muted: var(--color-neutral-700);

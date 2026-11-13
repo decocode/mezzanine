@@ -40,7 +40,7 @@ export const rowWrapCssNotes: Record<string, CssNote> = {
       'The rule `display: flex` makes the container a Flexbox row. The key line is `flex-wrap: wrap`: when the row runs out of room, the next item moves onto a new line instead of squashing or overflowing, just like words in a sentence.',
       'Setting `align-items: center` lines up items of different heights, and `gap` spaces them both along each line and between lines.',
     ],
-    code: `.example-row-wrap {
+    code: `.row-wrap {
   display: flex;
   flex-wrap: wrap;
   align-items: center;

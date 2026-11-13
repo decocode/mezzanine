@@ -14,9 +14,9 @@ export interface ThemeSwitcherProps {
   // The theme shown now. The app applies it, for example as data-theme on the page.
   selectedTheme: ThemeName
   onThemeChange: (theme: ThemeName) => void
-  // The menu's heading, and the end of the button's name and tooltip, such as "Theme" in "Switch theme".
+  // The menu's heading, and the end of the button's name and tooltip, such as "Theme" in "Change theme".
   label?: string
-  // iconOnly, the default, shows only the theme's icon, with "Switch theme" in a tooltip. leading shows
+  // iconOnly, the default, shows only the theme's icon, with "Change theme" in a tooltip. leading shows
   // those words after the icon, for places with room, such as a narrow screen's menu.
   iconPosition?: 'iconOnly' | 'leading'
   size?: ButtonSize
@@ -48,10 +48,10 @@ const isThemeName = (key: unknown): key is ThemeName => themes.some((theme) => t
 // Chooses a theme. It's a control, so it's a menu button rather than a form field: pressing the button,
 // which shows the current theme's icon, opens a menu headed "Theme", with a tick by the current theme.
 // System comes first, and names the theme it shows now.
-export function ThemeSwitcher({ selectedTheme, onThemeChange, label = 'Theme', iconPosition = 'iconOnly', size = 'sm', hierarchy = 'secondary', tooltipPosition, className }: ThemeSwitcherProps) {
+export function ThemeSwitcher({ selectedTheme, onThemeChange, label = 'Theme', iconPosition = 'iconOnly', size = 'sm', hierarchy = 'tertiary', tooltipPosition, className }: ThemeSwitcherProps) {
   const current = themes.find((theme) => theme.id === selectedTheme) ?? themes[0]
   const isDark = useSyncExternalStore(subscribeToDarkScheme, prefersDark, prefersDarkOnServer)
-  const name = `Switch ${label.toLowerCase()}`
+  const name = `Change ${label.toLowerCase()}`
   const optionLabel = (theme: (typeof themes)[number]) => theme.id === 'system' ? `${theme.label} (${isDark ? 'Dark' : 'Light'})` : theme.label
   return (
     <MenuTrigger>

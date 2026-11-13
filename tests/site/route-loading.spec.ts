@@ -26,7 +26,7 @@ for (const sitePage of sitePages) {
       ? [expectedPage]
       : [])
     expect(errors).toEqual([])
-    const docsLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Docs', exact: true })
+    const docsLink = page.getByRole('navigation', { name: 'Primary', exact: true }).getByRole('link', { name: 'Documentation', exact: true })
     if (sitePage.id === 'home') {
       await expect(docsLink).not.toHaveAttribute('aria-current')
     } else {

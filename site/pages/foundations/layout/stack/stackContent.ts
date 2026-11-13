@@ -31,7 +31,7 @@ export const stackCssNotes: Record<string, CssNote> = {
       'The rule `display: flex` makes the container a Flexbox, which lines its items up in one direction. That direction is a row unless `flex-direction` changes it, and `column` makes it top to bottom, so the items sit one above another.',
       'The `gap` property sets the space between items. It never adds space before the first item or after the last, and because the parent sets it, the items themselves need no margins. The space is a step from the spacing scale.',
     ],
-    code: `.example-stack-pattern {
+    code: `.stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);

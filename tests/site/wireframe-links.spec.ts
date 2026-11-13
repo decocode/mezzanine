@@ -10,11 +10,10 @@ for (const path of ['/', '/nav-tree', '/link', '/top-bar', '/tabs', '/breadcrumb
     for (const fontSize of [16, 32]) {
       await page.evaluate(size => document.documentElement.style.fontSize = `${size}px`, fontSize)
       const missingUnderlines = await page.locator('a, [role="link"]').evaluateAll(elements => elements
-        .filter(element => !element.matches('.site-name, .mz-button'))
+        .filter(element => !element.matches('.mz-button'))
         .filter(element => !getComputedStyle(element).textDecorationLine.includes('underline'))
         .map(element => element.textContent))
       expect(missingUnderlines).toEqual([])
-      await expect(page.getByRole('link', { name: 'Mezzanine home', exact: true })).toHaveCSS('text-decoration-line', 'none')
       if (path === '/') {
         const readDocs = page.getByRole('link', { name: 'Read docs', exact: true })
         await expect(readDocs).toHaveCSS('text-decoration-line', 'none')

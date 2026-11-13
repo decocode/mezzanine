@@ -6,7 +6,7 @@ import { rowWrapGrowCssNotes } from './rowWrapGrowContent'
 export function RowWrapGrowExample() {
   return <>
     <WidthDemo label="Row wrap grow" code={rowWrapGrowCssNotes.rowWrapGrow.code}>
-      <div className="example-row-wrap-grow">
+      <div className="row-wrap-grow">
         {['A', 'B', 'C', 'D'].map((letter) => <ExampleCard key={letter} title={`Item ${letter}`} headingLevel={3} />)}
       </div>
     </WidthDemo>

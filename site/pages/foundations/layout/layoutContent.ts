@@ -13,6 +13,7 @@ export const layoutContent: DocsPageContent = {
 export const layoutPages = [
   { label: 'Stack', href: '/layout/stack', description: 'When items sit one below another, evenly spaced.' },
   { label: 'Row', href: '/layout/row', description: 'When items stay together in one row.' },
+  { label: 'Row switch', href: '/layout/row-switch', description: 'When a row becomes a column in narrow space.' },
   { label: 'Row wrap', href: '/layout/row-wrap', description: 'When squeezed items move onto a spacious new row.' },
   { label: 'Row wrap grow', href: '/layout/row-wrap-grow', description: 'When items on a new row stretch to fill it.' },
   { label: 'Split', href: '/layout/split', description: 'When two items agree to divvy up their shared space.' },

@@ -76,7 +76,7 @@ export const navigationTreeContent: DocsPageContent = {
       key: 'accessibility',
       body: [
         'Give the tree an accessible name with `aria-label`. When it is the page\'s navigation, put it inside a `nav` element with its own label.',
-        '`getToggleLabel` sets the expand control\'s accessible name, for example to translate it. By default, a parent with a link is named “Expand” or “Collapse” plus its label, and a parent without one uses its label.',
+        'A parent with a link has a separate expand control, named “Expand” or “Collapse” plus its label in the app\'s language, from React Aria. A parent without a link uses its label as the control\'s name.',
       ],
     },
     // The page renders both Props tables from navigationTreeProps, because the second has its own small heading.
@@ -134,7 +134,7 @@ export const navigationTreeUsageTopics: readonly { readonly title: string; reado
   ] },
   { title: 'Open and closed parents', paragraphs: [
     'Use `defaultExpandedKeys` to choose which parents start open. To control this yourself, pass `expandedKeys` and update it in `onExpandedChange`.',
-    'When the current page changes, Nav tree opens that page\'s parents and leaves everything else as the person left it. A parent they closed stays closed until the current page moves. If you control the open parents, apply the changes Nav tree asks for in `onExpandedChange`, or the current page can stay hidden.',
+    'When the current page changes, Nav tree opens that page\'s parents and leaves everything else as the person left it. A parent they closed stays closed until the current page moves. If you control the open parents, Nav tree leaves them to you, so open the current page\'s parents yourself.',
   ] },
   { title: 'Item data', paragraphs: [
     'Every `id` must be unique across the whole tree.',
@@ -156,8 +156,7 @@ export const navigationTreeProps: { readonly props: ContentTable; readonly itemP
       { name: 'selectedRoute', description: 'The current page\'s address. The item with a matching `href` is marked current and its parents open.' },
       { name: 'defaultExpandedKeys', description: 'The ids of parents that start open, when Nav tree manages this itself.' },
       { name: 'expandedKeys', description: 'The ids of open parents, when you manage this yourself. Use with `onExpandedChange`.' },
-      { name: 'onExpandedChange', description: 'Called with the new set of open parent ids when a parent opens or closes, or when the current page needs its parents opened.' },
-      { name: 'getToggleLabel', description: 'Optional function `(item, isExpanded) => string` that names a parent\'s expand control.' },
+      { name: 'onExpandedChange', description: 'Called with the new set of open parent ids when a parent opens or closes.' },
       { name: 'className, style', description: 'Added to the tree for your own layout. The rows keep Mezzanine’s styling.' },
     ],
   },

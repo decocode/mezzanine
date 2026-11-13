@@ -140,12 +140,15 @@
   overflow-wrap: anywhere;
 }
 
-/* The current page's bar sits along the bottom of the link, inside its tint, short of its sides. */
+/* The current page's bar is a short dash centred along the bottom of the link, inside its tint, so a long
+   label such as Documentation isn't underlined end to end. */
 .mz-top-bar-links > .mz-link[aria-current]:where(:not([aria-current='false']))::after,
 .mz-top-bar .mz-top-bar-link[aria-current]:where(:not([aria-current='false']))::after {
   content: '';
   position: absolute;
-  inset-inline: var(--indicator-inset);
+  inset-inline: 0;
+  inline-size: min(var(--space-6), calc(100% - var(--indicator-inset) * 2));
+  margin-inline: auto;
   /* Centred in the space between the tint's bottom edge and the text. */
   inset-block-end: calc((var(--top-bar-link-padding-block, var(--space-padding-control-block)) - var(--nav-item-current-indicator-width)) / 2);
   block-size: var(--nav-item-current-indicator-width);

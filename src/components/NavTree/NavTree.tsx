@@ -36,48 +36,36 @@ export interface NavTreeSectionData extends Pick<NavigationTreeSectionProps<NavT
 
 export interface NavTreeProps extends Omit<NavigationTreeProps<NavTreeItemData | NavTreeSectionData>, 'items' | 'children'> {
   items: readonly (NavTreeItemData | NavTreeSectionData)[]
-  getToggleLabel?: (item: NavTreeItemData, isExpanded: boolean) => string
   ref?: Ref<HTMLDivElement>
 }
 
-function NavTreeRow({ item, state, getToggleLabel }: {
-  item: NavTreeItemData
-  state: NavigationTreeItemContentRenderProps
-  getToggleLabel: NavTreeProps['getToggleLabel']
-}) {
+// The chevron slot takes React Aria's translated "Expand" or "Collapse" name plus the row's label.
+function NavTreeRow({ item, state }: { item: NavTreeItemData; state: NavigationTreeItemContentRenderProps }) {
   const labelId = useId()
-  const toggleId = useId()
   const label = <><span id={labelId}>{item.label}</span>{item.content != null && <span className="mz-nav-tree-content">{item.content}</span>}</>
   const icon = <ChevronRightIcon className="mz-nav-tree-chevron" />
-  const toggleLabel = getToggleLabel?.(item, state.isExpanded)
   if (item.href) return <>
     <ReactAriaLink className="mz-nav-tree-label">{label}</ReactAriaLink>
-    {state.hasChildItems && <ReactAriaButton
-      id={toggleId} slot="chevron" className="mz-nav-tree-toggle"
-      aria-labelledby={toggleId} aria-expanded={state.isExpanded}
-      aria-label={toggleLabel ?? `${state.isExpanded ? 'Collapse' : 'Expand'} ${item.label}`}
-    >{icon}</ReactAriaButton>}
+    {state.hasChildItems && <ReactAriaButton slot="chevron" className="mz-nav-tree-toggle" aria-expanded={state.isExpanded}>{icon}</ReactAriaButton>}
   </>
-  if (state.hasChildItems) return <ReactAriaButton
-    id={toggleId} slot="chevron" className="mz-nav-tree-label mz-nav-tree-toggle"
-    aria-labelledby={toggleLabel ? toggleId : labelId}
-    aria-label={toggleLabel} aria-expanded={state.isExpanded}
-  >{label}{icon}</ReactAriaButton>
+  // A parent without a link is a disclosure button named by its label alone; aria-expanded gives its state.
+  if (state.hasChildItems) return <ReactAriaButton slot="chevron" className="mz-nav-tree-label mz-nav-tree-toggle"
+    aria-labelledby={labelId} aria-expanded={state.isExpanded}>{label}{icon}</ReactAriaButton>
   return <span className="mz-nav-tree-label">{label}</span>
 }
 
 // Private renderer returns the real collection parts, with no DOM wrappers.
-function renderNavTreeItem(item: NavTreeItemData, getToggleLabel: NavTreeProps['getToggleLabel']): ReactNode {
+function renderNavTreeItem(item: NavTreeItemData): ReactNode {
   const { type: _type, label, textValue, content: _content, children, className, ...props } = item
   return <NavigationTreeItem {...props} key={item.id} textValue={textValue ?? label}
     isDisabled={item.isDisabled || (!item.href && !children?.length)}
     className={composeRenderProps(className, value => ['mz-nav-tree-item', value].filter(Boolean).join(' '))}>
-    <NavigationTreeItemContent>{state => <NavTreeRow item={item} state={state} getToggleLabel={getToggleLabel} />}</NavigationTreeItemContent>
-    {children?.map(child => renderNavTreeItem(child, getToggleLabel))}
+    <NavigationTreeItemContent>{state => <NavTreeRow item={item} state={state} />}</NavigationTreeItemContent>
+    {children?.map(child => renderNavTreeItem(child))}
   </NavigationTreeItem>
 }
 
-export function NavTree({ items, selectedRoute, expandedKeys, defaultExpandedKeys, onExpandedChange, getToggleLabel, className, ref, ...props }: NavTreeProps) {
+export function NavTree({ items, selectedRoute, expandedKeys, defaultExpandedKeys, onExpandedChange, className, ref, ...props }: NavTreeProps) {
   const expansion = useNavTreeExpansion({ items, selectedRoute, expandedKeys, defaultExpandedKeys, onExpandedChange })
   const focusRef = useNavTreeElement(items, ref)
   return <NavigationTree {...props} ref={focusRef} selectedRoute={selectedRoute} {...expansion}
@@ -89,8 +77,8 @@ export function NavTree({ items, selectedRoute, expandedKeys, defaultExpandedKey
             {item.iconLeading != null && <span className="mz-nav-tree-header-icon" aria-hidden="true">{item.iconLeading}</span>}
             {item.label}
           </NavigationTreeHeader>}
-          {item.children.map(child => renderNavTreeItem(child, getToggleLabel))}
+          {item.children.map(child => renderNavTreeItem(child))}
         </NavigationTreeSection>
-      : renderNavTreeItem(item, getToggleLabel))}
+      : renderNavTreeItem(item))}
   </NavigationTree>
 }

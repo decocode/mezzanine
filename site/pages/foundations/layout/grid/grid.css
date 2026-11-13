@@ -1,11 +1,11 @@
 /* The Grid page's examples: items in rows and columns at once. */
-.example-grid {
+.grid {
   display: grid;
   grid-template-columns: var(--_grid-columns);
   gap: var(--space-3);
 }
 
-.example-grid-wide {
+.grid-wide {
   grid-column: span 2;
 }
 

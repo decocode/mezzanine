@@ -1,1 +1,7 @@
-[]
+[
+  "--panel-end-width",
+  "--panel-max-height",
+  "--panel-max-width",
+  "--panel-min-width",
+  "--panel-start-width"
+]

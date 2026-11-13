@@ -1,9 +1,15 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
 import { expectNoAccessibilityViolations } from '../accessibility'
 import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '../display'
 
-// Checks that the Card example is a plain container (no role of its own) with its picture, heading,
-// text and footer action inside, and that it fits a 320px screen at normal and doubled text in every
+// The example starts with every switch off; this turns the named ones on, in order.
+async function switchOn(page: Page, names: string[]) {
+  for (const name of names) await page.locator('main .mz-demo-block label', { hasText: new RegExp(`^${name}$`) }).click()
+}
+
+// Checks that the Card example starts with only its title and text, and that, with every part
+// switched on, it's a plain container (no role of its own) with its picture, heading, text and controls
+// inside, and that it fits a 320px screen at normal and doubled text in every
 // theme without accessibility problems.
 for (const theme of themes) {
   test(`Card example fits 320px and passes accessibility checks in ${theme}`, async ({ page }) => {
@@ -12,8 +18,11 @@ for (const theme of themes) {
     await setTheme(page, theme)
     const card = page.locator('main .mz-card')
     await expect(card).toHaveCount(1)
+    await expect(card.locator('.mz-card-image, .mz-avatar, .mz-card-footer')).toHaveCount(0)
+    await switchOn(page, ['CardImage', 'Badge', 'ToggleButton', 'Avatar', 'CardFooter', 'Detail', 'Button'])
     await expect(card).not.toHaveAttribute('role')
     await expect(card.getByRole('heading', { name: 'Card title', level: 3 })).toBeVisible()
+    await expect(card.getByRole('button', { name: 'Favourite', exact: true })).toBeVisible()
     await expect(card.getByRole('button', { name: 'Button', exact: true })).toBeVisible()
     for (const size of textSizes) {
       await setTextSize(page, size)
@@ -28,7 +37,9 @@ for (const theme of themes) {
 // the title, that pressing the card's text follows it, and that a control inside the card takes its
 // own press instead.
 test('a linked CardTitle covers the card, and controls inside it stay pressable', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/card')
+  await switchOn(page, ['CardImage', 'ToggleButton', 'href'])
   const card = page.locator('main .mz-card')
   await expect(card.getByRole('link')).toHaveCount(1)
   await expect(card.getByRole('link')).toHaveAccessibleName('Card title')
@@ -59,4 +70,15 @@ test('a linked Card shows its focus ring on the card and keyboard users can foll
   await page.keyboard.press('Enter')
   await expect(page).toHaveURL(/\/dimension\/width$/)
   await expectNoAccessibilityViolations(page, 'main')
+})
+
+// Checks that a linked card with a footer shows its arrow at the footer's end, and its title's own
+// arrow row is hidden.
+test('a linked Card with a footer shows its arrow in the footer', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.goto('/card')
+  await switchOn(page, ['href', 'CardFooter'])
+  const card = page.locator('main .mz-demo-block .mz-card').first()
+  await expect(card.locator('.mz-card-footer > .mz-card-arrow')).toBeVisible()
+  await expect(card.locator('> .mz-card-arrow')).toBeHidden()
 })

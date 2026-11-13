@@ -3,7 +3,6 @@ import { AppShell, Panel, TableOfContents, type NavTreeProps } from '@decocode/m
 import { DocsContentsContext, DocsContentsStore } from './docsContentsContext'
 import { NavigationPanel } from './NavigationPanel'
 import { siteContent } from '../siteContent'
-import type { SearchSection } from './siteSearchLogic'
 
 interface DocsShellProps {
   // The site TopBar, which renders the shell's <header>.
@@ -15,7 +14,6 @@ interface DocsShellProps {
     navigationLabel: string
     items: NavTreeProps['items']
     selectedRoute: string
-    searchSections: readonly SearchSection[]
   }
   mainClassName?: string
   mainTabIndex?: number
@@ -32,7 +30,7 @@ export function DocsShell({ topBar, navigation, mainClassName, mainTabIndex, chi
 
   return (
     <DocsContentsContext.Provider value={contentsStore}>
-      <AppShell className="docs-app-shell" startPanelSpan="full">
+      <AppShell className="docs-app-shell">
         {topBar}
         <Panel id="docs-navigation" edge="start" aria-label={title} isCollapsible={false} isResizable>
           <NavigationPanel {...navigationProps} />

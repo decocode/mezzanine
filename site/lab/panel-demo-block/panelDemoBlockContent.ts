@@ -1,63 +1,66 @@
-// The Lab's Panel, Panel host and Demo block pages: a candidate Panel that works in any container, its
-// host, and a demo block rebuilt from them. Illustrative and unapproved.
+// The Lab's Panel, Panel layout and Demo block pages: a candidate Panel that works in any container, the
+// LabPanelLayout that holds it, and a demo block rebuilt from them. Illustrative and unapproved.
 import type { LabPage } from '../shared/labTypes'
 import type { LabPanelPlacement } from './labPanelSize'
 
 export const panelPage: LabPage = {
   id: 'lab-panel', kind: 'component', title: 'Panel', href: '/site/lab/panel',
-  description: '`LabPanel` is a component that shares a container’s space with its main content, at the start, end, top or bottom.',
+  description: '`LabPanel` is a component that can be placed at the start, end, or bottom of a `LabPanelLayout`.',
   sections: [
-    { key: 'about', title: 'About Panel', body: [
-      '`LabPanel` is a component that shares a container’s space with its main content, at the start, end, top or bottom. The library’s Panel only works inside an AppShell; this candidate works in any container that hosts it, so the same Panel can sit beside a page, inside a card or around a demo. The demo block’s Properties area is one. Put the Panels and the main content inside a `LabPanelHost`, and give each Panel a `placement` and a `title`. A Panel can be resizable, minimizable or collapsible. A collapsed Panel disappears completely, so the `LabPanelToggle` that collapses and expands it goes somewhere that stays visible, such as a toolbar, a top bar or the main content.',
-    ] },
+    { key: 'code', title: 'Code' },
+    { key: 'about', title: 'About Panel', body: [] },
     { key: 'example' },
   ],
   technicalDetails: [
     { key: 'anatomy', table: {
       label: 'Panel anatomy', nameColumn: 'Component', className: 'documentation-anatomy-table', namesAreCode: false,
       rows: [
-        { name: 'LabPanel', description: 'A labelled section at its side, holding a header and the content.' },
-        { name: 'Header', description: 'The Panel’s title as a heading, and, with `isMinimizable`, a button that minimizes and maximizes it.' },
+        { name: 'LabPanel', description: 'A `<section>` named by its `panelTitle` or `aria-label`, or a plain `<div>` without either, at its placement, holding a header row and the content.' },
+        { name: 'Header row', description: 'Optional: the Panel’s title as a heading, any LabPanelHeader, and, while the Panel is an overlay, a LabPanelToggle that collapses it.' },
+        { name: 'LabPanelHeader', description: 'Optional, in the header row, for what introduces the Panel or acts on all of it. It stays put while the content below it scrolls.' },
+        { name: 'LabPanelFooter', description: 'Optional, at the bottom, for what should always be within reach. It stays put while the content above it scrolls.' },
         { name: 'Resize handle', description: 'Optional, on the inner edge, a separator that changes the Panel’s size.' },
-        { name: 'LabPanelToggle', description: 'A button outside the Panel that collapses and expands it.' },
+        { name: 'LabPanelToggle', description: 'A button outside the Panel that collapses and expands it. As an overlay, the Panel also holds a twin in its header row.' },
       ],
     } },
     { key: 'behaviour', body: [{ list: [
-      'Top and bottom Panels run the host’s full width, with the side Panels between them.',
-      'Without room beside the content, a side Panel moves above it.',
-      'A minimized Panel shrinks to its header.',
+      'A bottom Panel is a drawer: its toggle opens it over the content, sliding up from the bottom, so the content is never squashed.',
+      'Without room beside the content, a side Panel collapses, and its toggle opens it as an overlay inside the LabPanelLayout, from its own side, or from the bottom with a touch pointer. Escape closes it.',
       'A collapsed Panel takes no space, and can’t be reached by keyboard or screen reader.',
+      'When the content is taller than the Panel, it scrolls between the header row and any LabPanelFooter.',
+      'When a toggle disappears as the Panel collapses or expands, focus moves to its twin.',
       'A resizable Panel’s inner edge can be dragged; a double click restores its usual size.',
-      'Collapsing and expanding, and minimizing and maximizing, animate the Panel’s space opening or closing while it fades, unless motion is reduced.',
+      'Collapsing and expanding animate the Panel’s space opening or closing while it fades, unless motion is reduced.',
     ] }] },
     { key: 'states', table: {
       label: 'Panel states', nameColumn: 'State', descriptionColumn: 'What it looks like', namesAreCode: false,
       rows: [
         { name: 'Expanded', description: 'The whole Panel shows. The default.' },
-        { name: 'Collapsed', description: 'With `isCollapsible` and `isExpanded={false}`: the Panel takes no space, and its LabPanelToggle stays visible outside it.' },
-        { name: 'Maximized', description: 'With `isMinimizable`: the Panel shows its header and content. The default.' },
-        { name: 'Minimized', description: 'With `isMinimizable`: only the header shows.' },
+        { name: 'Collapsed', description: 'With `isCollapsible`: the Panel takes no space, and its LabPanelToggle stays visible outside it.' },
+        { name: 'Overlay', description: 'Without room beside the content, once its toggle opens it: the Panel floats over the content, raised above it.' },
         { name: 'Resize handle hovered or focused', description: 'With `isResizable`: the inner edge shows a line in the focus colour.' },
       ],
     } },
     { key: 'usage', body: [
-      'Put the Panels and the main content inside a `LabPanelHost`, at most one Panel at each side. Choose `isCollapsible` when the Panel should get out of the way completely, and put its LabPanelToggle somewhere that stays visible; choose `isMinimizable` when its header should stay as a reminder. Use `isResizable` when people need more or less room for the Panel’s content. A side Panel resizes between `--width-xs` and `--width-md`, and a top or bottom one between `--width-xs` and `--width-sm`.',
+      'Put the Panels and the content inside a `LabPanelLayout`, at most one Panel at each placement, and give each an `id`. Choose `isCollapsible` when the Panel should get out of the way completely, even with room. Without room, every Panel can collapse anyway, so put its LabPanelToggle somewhere that stays visible. Use `isResizable` when people need more or less room for the Panel’s content. A side Panel resizes between `--width-xs` and `--width-md`, and a bottom one between `--width-xs` and `--width-sm`.',
     ] },
     { key: 'accessibility', body: [{ list: [
-      'A Panel is a region named by its title.',
-      'The minimize button and LabPanelToggle say whether the Panel is expanded (`aria-expanded`), and which element they control (`aria-controls`). Each icon button’s name shows in a tooltip.',
+      'A Panel with a `panelTitle` or `aria-label` is a region named by it. Without either, it isn’t a landmark, and its content names itself.',
+      'LabPanelToggle says whether the Panel is expanded (`aria-expanded`), and which element it controls (`aria-controls`). Its name shows in a tooltip.',
       'The resize handle follows the window splitter pattern: a focusable separator named “Resize” and the Panel’s title, which announces its size. The arrow keys change the size, and Home and End take it to its smallest and largest.',
     ] }] },
     { key: 'props', table: {
       label: 'Panel props', nameColumn: 'Prop', className: 'documentation-props-table',
       rows: [
-        { name: 'placement', description: '`start`, `end`, `top` or `bottom`.' },
-        { name: 'title', description: 'The visible heading, which also names the Panel.' },
-        { name: 'isResizable / isMinimizable / isCollapsible', description: 'All false by default. A Panel is minimizable or collapsible, not both.' },
-        { name: 'isExpanded', description: 'Whether a collapsible Panel is expanded.' },
+        { name: 'placement', description: '`start`, `end` or `bottom`.' },
+        { name: 'panelTitle', description: 'Optional. A visible heading, which makes the Panel a region named by it. Its toggles take their names from it. Not `title`, which in HTML is a tooltip.' },
+        { name: 'aria-label', description: 'Optional. A name for a Panel without a visible heading, which makes it a region and names its toggles.' },
+        { name: 'isResizable / isCollapsible', description: 'Both false by default. A bottom Panel, or a side Panel without room beside the content, can always collapse, whatever `isCollapsible` says.' },
+        { name: 'isExpanded / onExpandedChange', description: 'Control whether a collapsible Panel is expanded, or respond to changes. It starts expanded.' },
+        { name: 'collapseIcon', description: 'A placeholder name. The icon of the collapse button an overlay holds in its header row: `collapse`, the default at the start, or `close`, an ×, the default at the end and bottom.' },
         { name: 'id', description: 'The id its toggle names.' },
-        { name: 'LabPanelToggle: panel / placement / title / isExpanded / onExpandedChange', description: 'The Panel it controls, and whether that Panel is expanded.' },
-        { name: 'LabPanelToggle: collapseLabel / expandLabel', description: 'Wording such as “Hide properties”.' },
+        { name: 'LabPanelToggle: panel / placement', description: 'The Panel it controls, and where that Panel sits. The toggle takes its name from the Panel, so it needs no title of its own.' },
+        { name: 'LabPanelToggle: collapseLabel / expandLabel', description: 'Wording such as “Hide demo settings”. Without them, “Collapse” or “Expand” and the Panel’s name, or “Hide panel” and “Show panel” for a Panel with no name.' },
       ],
     } },
     { key: 'tokens', table: {
@@ -72,14 +75,13 @@ export const panelPage: LabPage = {
         { name: '--width-xs, --width-sm, --width-md', description: 'How small and large it can be resized.' },
         { name: '--space-4', description: 'How far one arrow key press resizes it.' },
         { name: '--color-focus', description: 'The resize handle’s line.' },
-        { name: '--motion-duration-interface, --motion-easing-enter', description: 'Collapsing, expanding, minimizing and maximizing.' },
+        { name: '--motion-duration-interface, --motion-easing-enter', description: 'Collapsing and expanding.' },
       ],
     } },
   ],
   relatedPages: [
-    { label: 'Panel host', href: '/site/lab/panel-host' },
+    { label: 'Panel layout', href: '/site/lab/panel-layout' },
     { label: 'Panel', href: '/panel' },
-    { label: 'App shell', href: '/app-shell' },
     { label: 'Demo block', href: '/site/lab/demo-block' },
   ],
   references: [
@@ -89,36 +91,38 @@ export const panelPage: LabPage = {
   ],
 }
 
-export const panelHostPage: LabPage = {
-  id: 'lab-panel-host', kind: 'component', title: 'Panel host', href: '/site/lab/panel-host',
-  description: '`LabPanelHost` is a component that lays out Panels around its main content, one at each side.',
+export const panelLayoutPage: LabPage = {
+  id: 'lab-panel-layout', kind: 'component', title: 'Panel layout', href: '/site/lab/panel-layout',
+  description: '`LabPanelLayout` is a component that contains one `LabPanel` or several.',
   sections: [
-    { key: 'about', title: 'About Panel host', body: [
-      '`LabPanelHost` is a component that lays out Panels around its main content, one at each side. Everything inside it that isn’t a Panel is the main content. It takes one Panel at each side at once: start, end, top and bottom. Top and bottom Panels run its full width, with the side Panels between them. Without room for its side Panels beside the content, the host stacks everything in reading order: top, start, end, the content, then bottom. It can be any container, such as a page, a card or a demo block.',
-    ] },
+    { key: 'code', title: 'Code' },
+    { key: 'about', title: 'About Panel layout', body: [] },
     { key: 'example' },
   ],
   technicalDetails: [
     { key: 'anatomy', table: {
-      label: 'Panel host anatomy', nameColumn: 'Component', className: 'documentation-anatomy-table', namesAreCode: false,
+      label: 'Panel layout anatomy', nameColumn: 'Component', className: 'documentation-anatomy-table', namesAreCode: false,
       rows: [
-        { name: 'LabPanelHost', description: 'The container.' },
-        { name: 'LabPanel', description: 'Up to one at each side.', href: '/site/lab/panel' },
-        { name: 'Main content', description: 'Every other child.' },
+        { name: 'LabPanelLayout', description: 'The container.' },
+        { name: 'Header row', description: 'Optional, from `header`: a row across the top, such as a toolbar.' },
+        { name: 'LabPanel', description: 'Up to one at each placement.', href: '/site/lab/panel' },
+        { name: 'Content', description: 'Every other child.' },
       ],
     } },
     { key: 'behaviour', body: [{ list: [
-      'The main content takes the space the Panels leave.',
-      'The host measures its own width, not the window’s, so it works the same in a page, a card or a demo block.',
-      'Below 28rem wide, or below 44rem with both side Panels, everything stacks in reading order: top, start, end, the content, then bottom. Stacked, side Panels can’t be resized.',
+      'The content takes the space the Panels leave.',
+      'It measures its own width, not the window’s, so it works the same in a page, a card or a demo block.',
+      'It keeps the content at least as wide as `minContentWidth`. Without room for a side Panel as well, the Panel becomes an overlay inside the layout; the end Panel gives way first. A bottom Panel is always an overlay, a drawer.',
     ] }] },
-    { key: 'states', body: ['Side by side, and stacked.'] },
-    { key: 'usage', body: ['Wrap the content and its Panels in one `LabPanelHost`. Write the Panels in reading order around the content, because that’s the order they stack in.'] },
-    { key: 'accessibility', body: ['The host adds no role of its own. Each Panel is a region named by its title, and reading order follows the stacked order, so people using a screen reader meet the Panels in the order they’re written.'] },
+    { key: 'states', body: ['Side by side, and with a side Panel as an overlay.'] },
+    { key: 'usage', body: ['Wrap the content and its Panels in one `LabPanelLayout`. Put anything that toggles a Panel inside it too, such as in its `header`, so they share its state.'] },
+    { key: 'accessibility', body: ['It adds no role of its own. Its header row comes first, then the Panels, then the content, so a toggle in the header is followed by the Panel it opens.'] },
     { key: 'props', table: {
-      label: 'Panel host props', nameColumn: 'Prop', className: 'documentation-props-table',
+      label: 'Panel layout props', nameColumn: 'Prop', className: 'documentation-props-table',
       rows: [
-        { name: 'children', description: 'The Panels and the main content.' },
+        { name: 'children', description: 'The Panels and the content.' },
+        { name: 'header', description: 'A row across the top, above the Panels and the content.' },
+        { name: 'minContentWidth', description: 'The narrowest the content gets before a side Panel becomes an overlay, as a CSS length. `--width-md` by default.' },
         { name: 'className', description: 'Adds your own class.' },
       ],
     } },
@@ -126,7 +130,6 @@ export const panelHostPage: LabPage = {
   ],
   relatedPages: [
     { label: 'Panel', href: '/site/lab/panel' },
-    { label: 'App shell', href: '/app-shell' },
   ],
 }
 
@@ -134,8 +137,9 @@ export const demoBlockPage: LabPage = {
   id: 'lab-demo-block', kind: 'component', title: 'Demo block', href: '/site/lab/demo-block',
   description: '`LabDemoBlock` is a component that contains examples of rendered UI components, rebuilt from the candidate Panel.',
   sections: [
+    { key: 'code', title: 'Code' },
     { key: 'about', title: 'About Demo block', body: [
-      '`LabDemoBlock` is a component that contains examples of rendered UI components, rebuilt from the candidate Panel. It’s the library’s DemoBlock with its hand-built Properties area replaced by a real `LabPanel`: collapsible and resizable, at the end, with the toggle that hides and shows it at the end of the toolbar, where it stays visible. Put the live components inside it, pass controls for the component’s own settings as `properties`, switches that add or remove its optional parts as `parts`, and the demo’s source as `codeView`. It frames real components, so a demo shows exactly what an app gets.',
+      '`LabDemoBlock` is a component that contains examples of rendered UI components, rebuilt from the candidate Panel. It’s the library’s DemoBlock with its hand-built Properties area replaced by a real `LabPanel`, the demo panel: collapsible and resizable, at the end, with the toggle that hides and shows it at the end of the toolbar, where it stays visible. Put the live components inside it, pass controls for the component’s own settings as `properties`, and its parts as `parts`. The demo panel lists them in the order of the component’s anatomy: its own settings first, then each part, with that part’s settings beneath it. It frames real components, so a demo shows exactly what an app gets.',
     ] },
     { key: 'example' },
   ],
@@ -143,45 +147,42 @@ export const demoBlockPage: LabPage = {
     { key: 'anatomy', table: {
       label: 'Demo block anatomy', nameColumn: 'Component', className: 'documentation-anatomy-table', namesAreCode: false,
       rows: [
-        { name: 'LabDemoBlock', description: 'Holds the demo’s frame and, with `codeView`, the tabs.' },
-        { name: 'Tabs', description: 'Optional, from `codeView`: Demo and Code tabs, outside the frame.' },
-        { name: 'Frame', description: 'The border around the toolbar, the Properties panel and the demo area.' },
-        { name: 'Toolbar', description: 'Named “Demo tools”: the theme switcher at the start, and the Properties toggle at the end. It’s part of the frame, so it isn’t shown while the Code tab is open.' },
-        { name: 'Select', description: 'The theme switcher: Light, Dark and Wireframe, showing the chosen theme’s icon. It starts on the page’s theme and changes only this demo, pop-ups included.' },
+        { name: 'LabDemoBlock', description: 'Holds the demo’s frame. The demo’s code isn’t part of it: the page shows it in a Code section under the example.' },
+        { name: 'Frame', description: 'The border around the toolbar, the demo panel and the demo area.' },
+        { name: 'Toolbar', description: 'Named “Demo tools”: the theme switcher and the demo panel’s toggle, together at the end.' },
+        { name: 'ThemeSwitcher', description: 'The theme switcher: System, Light, Dark and Wireframe, showing the chosen theme’s icon. It starts on the page’s theme and changes only this demo, pop-ups included.' },
         { name: 'Demo area', description: 'The space where the live components are shown, on the theme’s page colour.' },
-        { name: 'LabPanel', description: 'The Properties panel: optional, from `properties` or `parts`, collapsible and resizable, titled “Properties”, at the end. With `parts`, a second group titled “Parts” sits below the properties, divided by a line.', href: '/site/lab/panel' },
-        { name: 'CodeBlock', description: 'Optional, from `codeView`: the demo’s source. The code block is its own frame, with its own buttons.' },
+        { name: 'LabPanel', description: 'The demo panel: optional, from `properties` or `parts`, collapsible and resizable, at the end, titled “Demo settings”. It holds one list of controls, in the order of the component’s anatomy.', href: '/site/lab/panel' },
       ],
     } },
     { key: 'behaviour', body: [{ list: [
-      'The Properties panel sits at the end, beside the demo area, and moves above it when the demo block is narrower than 28rem.',
-      'Hiding the Properties panel gives the demo area the whole width.',
-      'The Properties panel can be resized by its inner edge.',
+      'The demo panel sits at the end, beside the demo area. Without room beside it, the demo panel collapses, and its toggle opens it over the demo area.',
+      'Hiding the demo panel gives the demo area the whole width.',
+      'The demo panel can be resized by its inner edge.',
     ] }] },
-    { key: 'states', body: ['Properties shown or hidden; Demo tab or Code tab.'] },
+    { key: 'states', body: ['Demo panel shown or hidden.'] },
     { key: 'usage', body: [
       'The theme switcher sets `data-theme` on the demo, and its pop-ups render inside it, so a menu or tooltip opened from the demo takes its theme too.',
       'Not yet in the candidate: `align` and `codeLanguage`; the code is always highlighted as `tsx`.',
     ] },
     { key: 'accessibility', body: [{ list: [
-      'The Demo and Code tabs come first, then the toolbar, named “Demo tools”, then the Properties panel and the demo. Tab reaches the toolbar once, and the arrow keys move between the theme Select and the Properties toggle.',
-      'The toggle is named “Hide properties” or “Show properties”, and says whether the panel is expanded.',
-      'The theme Select is named “Demo theme” and shows the chosen theme’s icon, with its name in a tooltip.',
+      'The toolbar, named “Demo tools”, comes first, then the demo panel and the demo. Tab reaches the toolbar once, and the arrow keys move between the theme switcher and the demo panel’s toggle.',
+      'The toggle is named “Hide demo settings” or “Show demo settings”, and says whether the panel is expanded. The demo panel is a region named by its title, “Demo settings”. Each control is named by its visible label, and each part with settings of its own is a group named after the part.',
+      'The theme switcher is named “Change demo theme” and shows the chosen theme’s icon, with its name in a tooltip.',
     ] }] },
     { key: 'props', table: {
       label: 'Demo block props', nameColumn: 'Prop', className: 'documentation-props-table',
       rows: [
         { name: 'children', description: 'The live components.' },
-        { name: 'properties', description: 'Controls for the component’s own settings, such as its size, in the Properties panel.' },
-        { name: 'parts', description: 'Switches that add or remove the component’s optional parts, such as a Card’s CardImage, in a Parts group below the properties. Without `properties` or `parts`, there’s no panel or toggle.' },
-        { name: 'codeView', description: 'The demo’s source, in a Code tab. Without it, there are no tabs.' },
+        { name: 'properties', description: 'Controls for the component’s own settings, such as its size, listed first in the demo panel.' },
+        { name: 'parts', description: 'The component’s parts, after `properties`, in the order of its anatomy: a switch for each optional part, such as a Card’s CardImage, with that part’s own settings and the parts placed inside it beneath it, such as CardImage’s Badge. Without `properties` or `parts`, there’s no demo panel or toggle.' },
       ],
     } },
     { key: 'tokens', table: {
       label: 'Demo block CSS tokens', nameColumn: 'CSS token',
       rows: [
         { name: '--color-border, --border-width-baseline, --radius-surface', description: 'The frame.' },
-        { name: '--color-surface', description: 'The toolbar and the Properties panel.' },
+        { name: '--color-surface', description: 'The toolbar and the demo panel.' },
         { name: '--color-page, --space-8, --space-4', description: 'The demo area’s background and padding.' },
         { name: '--space-padding-control-block, --space-padding-control-inline, --space-gap-control', description: 'The toolbar.' },
       ],
@@ -201,68 +202,106 @@ export const demoBlockPage: LabPage = {
 export const demoBlockLabels = {
   heading: 'Card component',
   href: '/card',
+  badge: 'Badge',
+  toggle: 'Favourite',
+  avatar: 'Avatar name',
   // Backticks mark inline code, as in the rest of the copy.
   body: 'This is a `Card` inside the demo area of a `DemoBlock`',
   detail: 'Footer details',
   action: 'Button',
 } as const
 
-// The Card's properties, its own settings, and its parts, the optional components placed inside it.
+// The Card's parts, the optional components placed inside it, in the order of its anatomy, each followed
+// by the parts placed inside it. All start switched off, so the demo opens as the bare Card.
 export const demoBlockAspectRatios = ['16 / 9', '4 / 3', '1 / 1'] as const
-export const demoBlockProperties = ['href'] as const
-export const demoBlockParts = ['CardImage', 'CardFooter'] as const
+export const demoBlockParts = ['CardImage', 'Badge', 'ToggleButton', 'Avatar', 'CardFooter', 'Detail', 'Button'] as const
+export type DemoBlockParts = Record<(typeof demoBlockParts)[number], boolean>
 
-export function demoBlockCode({ aspectRatio, href, parts }: { aspectRatio: string; href: boolean; parts: Record<(typeof demoBlockParts)[number], boolean> }) {
-  const ratio = aspectRatio === '16 / 9' ? '' : ` aspectRatio="${aspectRatio}"`
+// Badge and ToggleButton sit on the picture, so they need CardImage. Detail, the footer's text, needs
+// CardFooter. A footer Button only goes in a card without href, because a linked card's footer ends with
+// its arrow.
+export function isDemoBlockPartShown(name: (typeof demoBlockParts)[number], parts: DemoBlockParts, href: boolean) {
+  if (name === 'Badge' || name === 'ToggleButton') return parts.CardImage
+  if (name === 'Detail') return parts.CardFooter
+  if (name === 'Button') return parts.CardFooter && !href
+  return true
+}
+
+export function demoBlockCode({ aspectRatio, href, parts }: { aspectRatio: string; href: boolean; parts: DemoBlockParts }) {
+  const shown = (name: (typeof demoBlockParts)[number]) => parts[name] && isDemoBlockPartShown(name, parts, href)
+  const image = `<CardImage src={picture} alt=""${aspectRatio === '16 / 9' ? '' : ` aspectRatio="${aspectRatio}"`}`
+  const overlays = [
+    ...(shown('Badge') ? [`    <Badge>${demoBlockLabels.badge}</Badge>`] : []),
+    ...(shown('ToggleButton') ? [`    <ToggleButton hierarchy="secondary" size="sm" icon={<HeartIcon />} iconPosition="iconOnly">${demoBlockLabels.toggle}</ToggleButton>`] : []),
+  ]
   return [
-    '<Card>',
-    ...(parts.CardImage ? [`  <CardImage src={picture} alt=""${ratio} />`] : []),
-    `  <CardTitle${href ? ` href="${demoBlockLabels.href}"` : ''}>${demoBlockLabels.heading}</CardTitle>`,
+    `<Card${href ? ` href="${demoBlockLabels.href}"` : ''}>`,
+    ...(parts.CardImage ? overlays.length === 0 ? [`  ${image} />`] : [`  ${image}>`, ...overlays, '  </CardImage>'] : []),
+    ...(shown('Avatar') ? [`  <Avatar size="sm">${demoBlockLabels.avatar}</Avatar>`] : []),
+    `  <CardTitle>${demoBlockLabels.heading}</CardTitle>`,
     `  <Text elementType="p">${demoBlockLabels.body.replace(/`([^`]+)`/g, '<code>$1</code>')}</Text>`,
-    ...(parts.CardFooter ? ['  <CardFooter>', `    <Text>${demoBlockLabels.detail}</Text>`, `    <Button hierarchy="secondary">${demoBlockLabels.action}</Button>`, '  </CardFooter>'] : []),
+    ...(parts.CardFooter ? [
+      '  <CardFooter>',
+      ...(shown('Detail') ? [`    <Text>${demoBlockLabels.detail}</Text>`] : []),
+      ...(shown('Button') ? [`    <Button hierarchy="secondary">${demoBlockLabels.action}</Button>`] : []),
+      '  </CardFooter>',
+    ] : []),
     '</Card>',
   ].join('\n')
 }
 
-// The Panel example's labels, and the Properties panel's choices.
+// The Panel example's labels, and the demo panel's choices.
 export const panelDemoBlockLabels = {
-  panel: 'Panel',
-  panelText: 'Panel content.',
-  main: 'This is the main content area.',
+  headerText: 'Panel header',
+  footerText: 'Panel footer',
 } as const
-export const panelPlacements: readonly LabPanelPlacement[] = ['start', 'end', 'top', 'bottom']
+export const panelPlacements: readonly LabPanelPlacement[] = ['start', 'end', 'bottom']
 
-export function panelDemoBlockCode({ placement, isResizable, isMinimizable, isCollapsible }: { placement: LabPanelPlacement; isResizable: boolean; isMinimizable: boolean; isCollapsible: boolean }) {
-  const flags = [isResizable ? ' isResizable' : '', isMinimizable ? ' isMinimizable' : '', isCollapsible ? ' isCollapsible isExpanded={isExpanded}' : ''].join('')
+export function panelDemoBlockCode({ placement, isResizable, isCollapsible, hasHeader, hasFooter }: { placement: LabPanelPlacement; isResizable: boolean; isCollapsible: boolean; hasHeader: boolean; hasFooter: boolean }) {
+  const flags = [isResizable ? ' isResizable' : '', isCollapsible ? ' isCollapsible' : ''].join('')
+  const name = severalPanelsLabels.panels[placement]
+  const toggle = placement === 'start'
+    ? `<LabPanelToggle panel="panel" placement="start" collapseLabel="${name}" expandLabel="${name}" />`
+    : `<LabPanelToggle panel="panel" placement="${placement}" tooltip="${name}">${severalPanelsLabels.toggles[placement]}</LabPanelToggle>`
   return [
-    '<LabPanelHost>',
-    `  <LabPanel${isCollapsible ? ' id="panel"' : ''} placement="${placement}" title="${panelDemoBlockLabels.panel}"${flags}>`,
-    `    <p>${panelDemoBlockLabels.panelText}</p>`,
+    '<LabPanelLayout header={',
+    '  <Toolbar aria-label="Panels">',
+    // The toggle is always there: in a narrow layout, every Panel can collapse.
+    `    ${toggle}`,
+    '  </Toolbar>',
+    '}>',
+    `  <LabPanel id="panel" placement="${placement}" aria-label="${name}"${flags}>`,
+    `    <p>${severalPanelsLabels.panelText[placement]}</p>`,
+    ...(hasHeader ? ['    <LabPanelHeader>', `      <p>${panelDemoBlockLabels.headerText}</p>`, '    </LabPanelHeader>'] : []),
+    ...(hasFooter ? ['    <LabPanelFooter>', `      <p>${panelDemoBlockLabels.footerText}</p>`, '    </LabPanelFooter>'] : []),
     '  </LabPanel>',
-    '  <div>',
-    ...(isCollapsible ? [`    <LabPanelToggle panel="panel" placement="${placement}" title="${panelDemoBlockLabels.panel}" isExpanded={isExpanded} onExpandedChange={setIsExpanded} />`] : []),
-    `    <p>${panelDemoBlockLabels.main}</p>`,
-    '  </div>',
-    '</LabPanelHost>',
+    '  <div />',
+    '</LabPanelLayout>',
   ].join('\n')
 }
 
-// The several-Panels example's labels: one Panel at each side.
+// The several-Panels example's labels: one Panel at each placement.
 export const severalPanelsLabels = {
-  panels: { start: 'Start panel', end: 'End panel', top: 'Top panel', bottom: 'Bottom panel' } as Record<LabPanelPlacement, string>,
-  panelText: { start: 'Start panel content.', end: 'End panel content.', top: 'Top panel content.', bottom: 'Bottom panel content.' } as Record<LabPanelPlacement, string>,
-  main: 'This is the main content area.',
+  panels: { start: 'Start panel', end: 'End panel', bottom: 'Bottom panel' } as Record<LabPanelPlacement, string>,
+  toggles: { end: 'End', bottom: 'Bottom' } as Record<Exclude<LabPanelPlacement, 'start'>, string>,
+  panelText: { start: 'This is the start panel', end: 'This is the end panel', bottom: 'This is the bottom panel' } as Record<LabPanelPlacement, string>,
 } as const
 
 export function severalPanelsCode(placements: readonly LabPanelPlacement[]) {
   return [
-    '<LabPanelHost>',
+    '<LabPanelLayout header={',
+    '  <Toolbar aria-label="Panels">',
+    ...placements.map((placement) => placement === 'start'
+      ? `    <LabPanelToggle panel="start" placement="start" collapseLabel="${severalPanelsLabels.panels.start}" expandLabel="${severalPanelsLabels.panels.start}" />`
+      : `    <LabPanelToggle panel="${placement}" placement="${placement}" tooltip="${severalPanelsLabels.panels[placement]}">${severalPanelsLabels.toggles[placement]}</LabPanelToggle>`),
+    '  </Toolbar>',
+    '}>',
     ...placements.flatMap((placement) => [
-      `  <LabPanel placement="${placement}" title="${severalPanelsLabels.panels[placement]}">`,
+      `  <LabPanel id="${placement}" placement="${placement}" aria-label="${severalPanelsLabels.panels[placement]}" isCollapsible>`,
       `    <p>${severalPanelsLabels.panelText[placement]}</p>`,
       '  </LabPanel>',
     ]),
-    `  <p>${severalPanelsLabels.main}</p>`,
-    '</LabPanelHost>',
+    '  <div />',
+    '</LabPanelLayout>',
   ].join('\n')
 }

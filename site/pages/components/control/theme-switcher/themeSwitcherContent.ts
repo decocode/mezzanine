@@ -45,14 +45,14 @@ export const themeSwitcherContent: DocsPageContent = {
       key: 'usage',
       body: [
         'Keep the current theme in the app’s state, pass it as `selectedTheme`, and apply the new one in `onThemeChange`, for example with `document.documentElement.dataset.theme = theme`.',
-        'In a narrow space, such as a TopBar’s menu on a phone, set `iconPosition="leading"` to show “Switch theme” as text beside the icon.',
+        'In a narrow space, such as a TopBar’s menu on a phone, set `iconPosition="leading"` to show “Change theme” as text beside the icon.',
         'Start with `system`, so the page follows the device until someone chooses, and apply it as `data-theme="system"`. This site does that, and remembers the choice for the next visit.',
       ],
     },
     {
       key: 'accessibility',
       body: [
-        'The button is named “Switch theme”, and with `iconPosition="iconOnly"` the same words show in a tooltip. The current theme is the one marked as chosen in the menu.',
+        'The button is named “Change theme”, and with `iconPosition="iconOnly"` the same words show in a tooltip. The current theme is the one marked as chosen in the menu.',
         'The menu marks the current theme as chosen. The arrow keys move between themes, Enter or Space chooses one, and Escape closes the menu and returns focus to its button.',
       ],
     },
@@ -65,10 +65,10 @@ export const themeSwitcherContent: DocsPageContent = {
         rows: [
           { name: 'selectedTheme', description: 'The theme chosen now: `light`, `dark`, `system` or `wireframe`.' },
           { name: 'onThemeChange', description: 'Called with the chosen theme’s name.' },
-          { name: 'label', description: 'The menu’s heading, and the end of the button’s name and tooltip, such as “theme” in “Switch theme”. Defaults to “Theme”.' },
+          { name: 'label', description: 'The menu’s heading, and the end of the button’s name and tooltip, such as “theme” in “Change theme”. Defaults to “Theme”.' },
           { name: 'iconPosition', description: '`iconOnly`, the default, shows only the icon; `leading` shows the name after it.' },
           { name: 'size', description: 'The button’s size, as on Button. Defaults to `sm`.' },
-          { name: 'hierarchy', description: 'The button’s emphasis, as on Button. Defaults to `secondary`.' },
+          { name: 'hierarchy', description: 'The button’s emphasis, as on Button. Defaults to `tertiary`.' },
           { name: 'tooltipPosition', description: 'Where the tooltip appears, with `iconPosition="iconOnly"`.' },
           { name: 'className', description: 'Adds your own class.' },
         ],
@@ -108,7 +108,7 @@ export function themeSwitcherExampleCode({ label, iconPosition, size, hierarchy,
     label: label === 'Theme' ? undefined : label,
     iconPosition: iconPosition === 'iconOnly' ? undefined : iconPosition,
     size: size === 'sm' ? undefined : size,
-    hierarchy: hierarchy === 'secondary' ? undefined : hierarchy,
+    hierarchy: hierarchy === 'tertiary' ? undefined : hierarchy,
     tooltipPosition: iconPosition === 'iconOnly' && tooltipPosition !== 'top' ? tooltipPosition : undefined,
   })
   return `<ThemeSwitcher selectedTheme={theme} onThemeChange={setTheme}${props} />`

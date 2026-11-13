@@ -1,6 +1,6 @@
-import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
-import { pointerRows } from '../../../../components/pointerRows'
+import type { DocsPageContent } from '../../../templates/docsPageContent'
+import { formatJsxProps } from '../../../components/formatJsxProps'
+import { pointerRows } from '../../../components/pointerRows'
 
 // Teaching labels for the live example, shared with the Panel page.
 export const appShellExampleLabels = {
@@ -22,9 +22,8 @@ export const appShellContent: DocsPageContent = {
   id: 'app-shell',
   kind: 'component',
   title: 'App shell',
-  description: '`AppShell` is a component that arranges the frame around the main content, such as a TopBar, Panels and a Footer.',
   sections: [
-    { key: 'example', intro: ['A header with three PanelTriggers, and Panels at the start, end and bottom. The bottom Panel shows a minimised version when it isn’t open.'] },
+    { key: 'example' },
   ],
   technicalDetails: [
     {
@@ -36,7 +35,7 @@ export const appShellContent: DocsPageContent = {
         rows: [
           { name: 'AppShell', description: 'The frame. It lays out its children in a grid that responds to its own size.' },
           { name: 'header', description: 'The app’s own `<header>`, across the top, such as one holding a `TopBar`.' },
-          { name: 'Panel', description: 'An area at the start, end or bottom edge. See [Panel](/panel).' },
+          { name: 'Panel', description: 'An area at the start, end or bottom edge.' },
           { name: 'main', description: 'The app’s own `<main>`, in the middle. It keeps a minimum width.' },
           { name: 'Footer', description: 'Optional. It follows the main content, and the two scroll together. See [Footer](/footer).' },
         ],
@@ -104,7 +103,6 @@ export const appShellContent: DocsPageContent = {
     },
   ],
   relatedPages: [
-    { label: 'Panel', href: '/panel' },
     { label: 'Top bar', href: '/top-bar' },
   ],
   references: [

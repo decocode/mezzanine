@@ -23,19 +23,20 @@ export const readingOrderContent: DocsPageContent = {
 }
 
 // What the example's CSS does. Unless marked as an example, the code is copied from
-// readingOrder.css, and a browser test checks that it still matches.
+// sideBySide.css, and a browser test checks that it still matches.
 export const readingOrderCssNotes: Record<string, CssNote> = {
   readingOrder: {
     paragraphs: [
       'The rule `flex-direction: row-reverse` lays the row out from the other end, so the last button in the HTML appears first on screen.',
       'Only the picture changes. The keyboard and screen readers still follow the HTML.',
     ],
-    code: `.reading-order-row {
+    code: `.row {
   display: flex;
-  gap: var(--space-2);
+  align-items: center;
+  gap: var(--space-3);
 }
 
-.reading-order-reversed {
+.row-reverse {
   flex-direction: row-reverse;
   justify-content: flex-end;
 }`,

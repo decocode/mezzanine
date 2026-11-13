@@ -29,13 +29,13 @@ export const subgridCssNotes: Record<string, CssNote> = {
       'The list is an ordinary [grid with as many columns as fit](/layout/grid). With subgrid on, each item spans three of the list’s rows, written `grid-row: span 3`, one each for the heading, the text and the button.',
       'Then `grid-template-rows: subgrid` tells the item to use those shared rows instead of its own. Every item in a row now has the same three rows, sized to fit the tallest heading and the longest text.',
     ],
-    code: `.example-subgrid-list {
+    code: `.subgrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--width-xs)), 1fr));
   gap: var(--space-4);
 }
 
-.example-subgrid-on .example-subgrid-item {
+.subgrid-on .subgrid-item {
   grid-row: span 3;
   grid-template-rows: subgrid;
 }`,

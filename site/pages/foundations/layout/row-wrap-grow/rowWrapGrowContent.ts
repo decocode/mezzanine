@@ -31,13 +31,13 @@ export const rowWrapGrowCssNotes: Record<string, CssNote> = {
       'Row wrap grow is a Flexbox row, from `display: flex`, that may wrap, from `flex-wrap: wrap`. Each item has `flex: 1 1 var(--width-xs)`, which sets `flex-grow`, `flex-shrink` and `flex-basis` at once: it starts at the xs width, can shrink, and grows to share the spare room.',
       'When the items no longer fit, the last one wraps onto a new row, and its `flex-grow` makes it grow across the full width.',
     ],
-    code: `.example-row-wrap-grow {
+    code: `.row-wrap-grow {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3);
 }
 
-.example-row-wrap-grow > * {
+.row-wrap-grow > * {
   flex: 1 1 var(--width-xs);
 }`,
   },

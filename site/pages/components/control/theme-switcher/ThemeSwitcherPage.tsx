@@ -14,7 +14,7 @@ export default function ThemeSwitcherPage() {
   const [label, setLabel] = useState<(typeof themeSwitcherLabels)[number]>('Theme')
   const [iconPosition, setIconPosition] = useState<(typeof themeSwitcherIconPositions)[number]>('iconOnly')
   const [size, setSize] = useState<ButtonSize>('sm')
-  const [hierarchy, setHierarchy] = useState<ButtonHierarchy>('secondary')
+  const [hierarchy, setHierarchy] = useState<ButtonHierarchy>('tertiary')
   const [tooltipPosition, setTooltipPosition] = useState<(typeof themeSwitcherTooltipPositions)[number]>('top')
   return (
     <ContentPage

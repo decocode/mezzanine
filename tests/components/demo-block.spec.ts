@@ -44,8 +44,8 @@ test('a demo theme changes only that demo and its pop-ups', async ({ page }) => 
   expect(await body.evaluate(element => getComputedStyle(element).backgroundColor)).not.toBe(pageColor)
   expect(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe(pageColor)
   await demo.getByRole('button', { name: 'Menu trigger', exact: true }).click()
-  // The theme list may still be fading out, so this finds the menu's popover.
-  const popover = page.locator('.mz-popover').filter({ has: page.getByRole('menu') })
+  // The theme menu may still be fading out, so this finds the example menu's popover.
+  const popover = page.locator('.mz-popover').filter({ has: page.getByRole('menu') }).filter({ hasNot: page.getByRole('menu', { name: 'Demo theme' }) })
   await expect(popover).toBeVisible()
   expect(await popover.evaluate(element => element.closest('[data-theme]')?.getAttribute('data-theme'))).toBe('dark')
   // The menu still sits next to its button.

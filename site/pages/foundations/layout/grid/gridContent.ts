@@ -50,13 +50,13 @@ export const gridCssNotes: Record<string, CssNote> = {
         '`gap` sets the space between the rows and the columns.',
       ] },
     ],
-    code: `.example-grid {
+    code: `.grid {
   display: grid;
   grid-template-columns: var(--_grid-columns);
   gap: var(--space-3);
 }
 
-.example-grid-wide {
+.grid-wide {
   grid-column: span 2;
 }`,
   },

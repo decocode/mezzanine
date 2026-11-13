@@ -1,5 +1,5 @@
-import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { pointerRows } from '../../../../components/pointerRows'
+import type { DocsPageContent } from '../../../templates/docsPageContent'
+import { pointerRows } from '../../../components/pointerRows'
 
 export const topBarContent: DocsPageContent = {
   id: 'top-bar',

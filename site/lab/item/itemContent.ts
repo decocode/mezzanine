@@ -7,6 +7,7 @@ export const itemPage: LabPage = {
   id: 'lab-item', kind: 'component', title: 'Item', href: '/site/lab/item',
   description: '`Item` is a component that shows one thing in a list: a picture, a title and description, and actions.',
   sections: [
+    { key: 'code', title: 'Code' },
     { key: 'about', title: 'About Item', body: [
       '`Item` is a component that shows one thing in a list: a picture, a title and description, and actions. Use it for rows such as people in a team, files, songs or settings. It shows content; for a form input, use the field components instead.',
       'Its own qualities are properties: `title`, `description`, how its box looks, its colour and its size. The optional pieces placed inside it are parts: `ItemMedia` before the content, `ItemActions` after it, and `ItemHeader` and `ItemFooter` as full rows above and below.',

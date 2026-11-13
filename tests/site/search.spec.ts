@@ -8,7 +8,7 @@ import { expectNoPageOverflow, setTextSize, setTheme, textSizes, themes } from '
 
 async function openSearch(page: Page, path = '/introduction') {
   await page.goto(path)
-  const trigger = page.getByRole('complementary').getByRole('button', { name: 'Search docs', exact: true })
+  const trigger = page.getByRole('banner').locator('.mz-search-trigger').filter({ visible: true })
   await trigger.focus()
   await page.keyboard.press('Enter')
   const field = page.getByRole('dialog', { name: 'Search' }).getByRole('searchbox', { name: 'Search', exact: true })
@@ -91,7 +91,7 @@ for (const theme of themes) {
       await setTheme(page, theme)
       await setTextSize(page, fontSize)
       await page.getByRole('button', { name: 'Menu', exact: true }).click()
-      await page.getByRole('banner').getByRole('button', { name: 'Search docs', exact: true }).click()
+      await page.getByRole('banner').locator('.mz-search-trigger').filter({ visible: true }).click()
       const dialog = page.getByRole('dialog', { name: 'Search' })
       const field = dialog.getByRole('searchbox', { name: 'Search', exact: true })
       await field.fill('a long search phrase that should stay inside the field')
@@ -146,11 +146,3 @@ for (const shortcut of ['Meta+k', 'Control+k']) {
     await expect(page.getByRole('dialog', { name: 'Search' }).getByRole('searchbox', { name: 'Search', exact: true })).toBeFocused()
   })
 }
-
-// Checks that the Search button lines up with the navigation items' text.
-test('the Search button lines up with the navigation items', async ({ page }) => {
-  await page.goto('/introduction')
-  const button = (await page.getByRole('complementary').getByRole('button', { name: 'Search docs', exact: true }).boundingBox())!
-  const text = (await page.getByRole('complementary').getByText('Introduction', { exact: true }).boundingBox())!
-  expect(Math.abs(button.x - text.x)).toBeLessThan(2)
-})

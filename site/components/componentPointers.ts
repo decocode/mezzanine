@@ -107,7 +107,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   "AppShell": [
     {
       "name": "--app-shell-background",
-      "fallback": "var(--elevation-sunken-1-surface)"
+      "fallback": "var(--color-surface)"
     },
     {
       "name": "--app-shell-gap",
@@ -795,7 +795,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-block-background",
-      "fallback": "var(--color-surface)"
+      "fallback": "var(--elevation-flat-surface)"
     },
     {
       "name": "--demo-block-bar-gap",
@@ -823,7 +823,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--demo-block-end-panel-background",
-      "fallback": "var(--color-surface)"
+      "fallback": "var(--elevation-flat-surface)"
     },
     {
       "name": "--demo-block-end-panel-border-radius",
@@ -1683,7 +1683,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--panel-background",
-      "fallback": "var(--color-surface)"
+      "fallback": "var(--elevation-flat-surface)"
     },
     {
       "name": "--panel-border",
@@ -2259,7 +2259,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   "Switch": [
     {
       "name": "--switch-border-radius",
-      "fallback": "var(--radius-full)"
+      "fallback": "min(var(--radius-full), calc(var(--radius-control) * 9999))"
     },
     {
       "name": "--switch-border-width",
