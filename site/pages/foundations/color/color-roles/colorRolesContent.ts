@@ -46,7 +46,7 @@ export const colorTokenGroups: ColorTokenGroup[] = [
     label: 'Surfaces',
     tokens: [
       { token: '--color-page', label: 'Page', description: 'The background behind the page.' },
-      { token: '--color-surface', label: 'Surface', description: 'Content placed on the page.' },
+      { token: '--color-page-muted', label: 'Page muted', description: 'A quieter page background, for areas set back from the page, such as a code block.' },
       { token: '--color-neutral-muted', label: 'Neutral muted', description: 'A faint wash of the text color, such as a neutral badge.' },
       { token: '--color-backdrop', label: 'Backdrop', description: 'The dimmed layer behind modals and drawers.' },
     ],

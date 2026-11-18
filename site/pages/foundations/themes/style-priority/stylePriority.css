@@ -19,7 +19,7 @@
 }
 
 .example-cascade-unlayered .example-chip.example-chip {
-  background: var(--color-surface);
+  background: var(--color-page-muted);
 }
 
 .example-cascade-unlayered .example-chip.example-chip::after {
@@ -28,7 +28,7 @@
 
 @layer example-library {
   .example-cascade-layered .example-chip.example-chip {
-    background: var(--color-surface);
+    background: var(--color-page-muted);
   }
 
   .example-cascade-layered .example-chip.example-chip::after {

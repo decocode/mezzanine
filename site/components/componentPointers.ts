@@ -107,7 +107,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   "AppShell": [
     {
       "name": "--app-shell-background",
-      "fallback": "var(--color-surface)"
+      "fallback": "var(--color-page-muted)"
     },
     {
       "name": "--app-shell-gap",
@@ -513,7 +513,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
     },
     {
       "name": "--card-image-overlay-background",
-      "fallback": "var(--color-surface)"
+      "fallback": "var(--color-page-muted)"
     },
     {
       "name": "--card-image-overlay-border-radius",
@@ -627,7 +627,7 @@ export const componentPointers: Record<string, readonly { name: string; fallback
   "CodeBlock": [
     {
       "name": "--code-block-background",
-      "fallback": "var(--color-surface)"
+      "fallback": "var(--color-page-muted)"
     },
     {
       "name": "--code-block-border",

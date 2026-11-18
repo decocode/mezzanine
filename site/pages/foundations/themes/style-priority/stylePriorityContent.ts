@@ -35,12 +35,12 @@ export const stylePriorityCssNotes: Record<string, CssNote> = {
       'Inside `@layer`, the same rule loses to any CSS that isn’t in a layer, however strong its selector. So the app’s simple `.example-app-style` rule wins against the layered library rule.',
     ],
     code: `.example-cascade-unlayered .example-chip.example-chip {
-  background: var(--color-surface);
+  background: var(--color-page-muted);
 }
 
 @layer example-library {
   .example-cascade-layered .example-chip.example-chip {
-    background: var(--color-surface);
+    background: var(--color-page-muted);
   }
 
   .example-cascade-layered .example-chip.example-chip::after {

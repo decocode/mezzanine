@@ -32,8 +32,15 @@
   color: var(--drop-zone-icon-foreground, var(--color-text-muted));
 }
 
+/* The label uses Label large, as every field's label does (owner, 18 November 2026). */
 .mz-drop-zone > [slot='label'] {
   color: var(--drop-zone-label-foreground, var(--color-text));
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label-lg);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-label);
+  line-height: var(--line-height-label-lg);
+  text-transform: var(--text-transform-label);
 }
 
 /* Help text, such as the accepted file types, and an error message, which has role="alert". */

@@ -191,7 +191,7 @@ removes their color.
 | Token | Meaning |
 | --- | --- |
 | `--color-page` | The background behind the page |
-| `--color-surface` | Content placed on the page, such as a panel |
+| `--color-page-muted` | A quieter page background, for areas set back from the page, such as AppShell's frame, CodeBlock and DemoBlock's strip |
 | `--color-text` | Normal reading and interface text |
 | `--color-text-muted` | Supporting and secondary text |
 | `--color-border` | Decorative outlines and dividing lines |

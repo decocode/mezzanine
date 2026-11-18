@@ -40,7 +40,7 @@ export const scrollPaddingCssNotes: Record<string, CssNote> = {
   min-block-size: var(--layers-sticky-height);
   padding: var(--space-3);
   border-block-end: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-surface);
+  background: var(--color-page-muted);
 }`,
   },
 }

@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test'
 
 // The Color and contrast page says the text roles are chosen to meet WCAG 2.2 AA, 4.5 to 1 for normal
-// text, on the page and on surfaces, in every theme. Each pair is measured from the theme's real colors.
+// text, on the page and on its muted version, in every theme. Each pair is measured from the theme's real colors.
 const themes = ['light', 'dark', 'wireframe']
 const textRoles = ['--color-text', '--color-text-muted', '--color-link', '--color-danger']
-const backgrounds = ['--color-page', '--color-surface']
+const backgrounds = ['--color-page', '--color-page-muted']
 
 for (const theme of themes) {
   test(`text roles meet AA on the page and surfaces in ${theme}`, async ({ page }) => {

@@ -105,7 +105,7 @@
 .mz-card-image-overlay {
   display: inline-flex;
   border-radius: var(--card-image-overlay-border-radius, var(--radius-control));
-  background: var(--card-image-overlay-background, var(--color-surface));
+  background: var(--card-image-overlay-background, var(--color-page-muted));
 }
 
 /* A linked title keeps the card's colour. Its pressable area stretches over the whole card. */

@@ -51,7 +51,7 @@
 /* Styled like AppShell: the layout is a muted frame, its header row and side Panels sit on it with no
    card of their own, and the content is the one inset surface, on the page's colour. */
 .lab-panel-layout {
-  background: var(--color-surface);
+  background: var(--color-page-muted);
 }
 
 .lab-panel-layout-content {
@@ -295,7 +295,7 @@
   overflow: hidden;
   border: var(--border-width-baseline) solid var(--color-border);
   border-radius: var(--radius-surface);
-  background: var(--color-surface);
+  background: var(--color-page-muted);
 }
 
 /* The strip sits on the layout's muted frame, like a LabPanelLayout's header row. Its controls sit together

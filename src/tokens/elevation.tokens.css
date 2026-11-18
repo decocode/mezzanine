@@ -11,7 +11,7 @@
   /* Each level's surface colour. In Light and Wireframe the shadow shows the height, so raised
      surfaces match the page and sunken ones the surface beneath. Dark sets lighter surfaces for higher
      levels, because a shadow barely shows on a dark page. */
-  --elevation-sunken-1-surface: var(--color-surface);
+  --elevation-sunken-1-surface: var(--color-page-muted);
   --elevation-flat-surface: var(--color-page);
   --elevation-raised-1-surface: var(--color-page);
   --elevation-raised-2-surface: var(--color-page);
@@ -27,7 +27,7 @@
 /* These tokens point at values a theme sets, so a themed area works them out again from its own
    theme. Other tokens are left alone, so an app's overrides above a themed area still apply. */
 :where([data-theme]) {
-  --elevation-sunken-1-surface: var(--color-surface);
+  --elevation-sunken-1-surface: var(--color-page-muted);
   --elevation-flat-surface: var(--color-page);
   --elevation-raised-1-surface: var(--color-page);
   --elevation-raised-2-surface: var(--color-page);

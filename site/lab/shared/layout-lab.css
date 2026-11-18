@@ -317,7 +317,7 @@
   min-block-size: var(--lab-sticky-height);
   padding: var(--space-3);
   border-block-end: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-surface);
+  background: var(--color-page-muted);
 }
 
 .lab-scroll-section {

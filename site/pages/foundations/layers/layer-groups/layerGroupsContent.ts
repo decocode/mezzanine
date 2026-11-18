@@ -60,7 +60,7 @@ export const layerGroupsCssNotes: Record<string, CssNote> = {
   min-height: 4rem;
   padding: var(--space-1) var(--space-2);
   border: var(--border-width-baseline) solid var(--color-text);
-  background: var(--color-surface);
+  background: var(--color-page-muted);
   box-shadow: var(--elevation-raised-1);
 }`,
   },

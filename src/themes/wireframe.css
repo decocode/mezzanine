@@ -7,7 +7,7 @@
   color-scheme: light;
 
   --color-page: var(--color-neutral-50);
-  --color-surface: var(--color-neutral-50);
+  --color-page-muted: var(--color-neutral-50);
 
   --color-text: var(--color-neutral-950);
   --color-text-muted: var(--color-neutral-700);

@@ -68,7 +68,7 @@ export const panelPage: LabPage = {
       rows: [
         { name: '--surface-gap', description: 'The space around the Panel.' },
         { name: '--space-padding-area', description: 'The Panel’s padding.' },
-        { name: '--color-surface, --color-border, --border-width-hairline', description: 'Its background and edge.' },
+        { name: '--color-page-muted, --color-border, --border-width-hairline', description: 'Its background and edge.' },
         { name: '--radius-sm', description: 'Its corners.' },
         { name: '--color-accent', description: 'Its title, with the Label medium text style’s tokens.' },
         { name: '--target-size-sm', description: 'The header’s height.' },
@@ -182,7 +182,7 @@ export const demoBlockPage: LabPage = {
       label: 'Demo block CSS tokens', nameColumn: 'CSS token',
       rows: [
         { name: '--color-border, --border-width-baseline, --radius-surface', description: 'The frame.' },
-        { name: '--color-surface', description: 'The toolbar and the demo panel.' },
+        { name: '--color-page-muted', description: 'The toolbar and the demo panel.' },
         { name: '--color-page, --space-8, --space-4', description: 'The demo area’s background and padding.' },
         { name: '--space-padding-control-block, --space-padding-control-inline, --space-gap-control', description: 'The toolbar.' },
       ],

@@ -59,7 +59,7 @@ export const spaceCssNotes: Record<string, CssNote> = {
     code: `.space-padding {
   padding: var(--_padding);
   border: var(--border-width-xl) solid var(--color-text);
-  background: var(--color-surface);
+  background: var(--color-page-muted);
 }`,
   },
   gap: {

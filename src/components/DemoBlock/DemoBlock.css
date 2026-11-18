@@ -24,7 +24,7 @@
 /* The strip, with the ThemeSwitcher at its start: a muted area, a step quieter than the demo. */
 .mz-demo-block-bar {
   grid-area: bar;
-  background: var(--color-surface);
+  background: var(--color-page-muted);
   display: flex;
   flex-wrap: wrap;
   align-items: center;

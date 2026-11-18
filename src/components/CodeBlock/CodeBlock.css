@@ -8,7 +8,7 @@
   overflow: hidden;
   border: var(--code-block-border-width, var(--border-width-baseline)) solid var(--code-block-border, var(--color-border));
   border-radius: var(--code-block-border-radius, var(--radius-sm));
-  background: var(--code-block-background, var(--color-surface));
+  background: var(--code-block-background, var(--color-page-muted));
   color: var(--code-block-foreground, var(--color-text));
 }
 

@@ -20,7 +20,7 @@
   --_app-shell-join: calc(var(--app-shell-gap, var(--surface-gap)) - var(--_app-shell-overlap));
   padding: var(--app-shell-gap, var(--surface-gap));
   /* The frame is a muted surface, and the header and side Panels sit on it directly. */
-  background: var(--app-shell-background, var(--color-surface));
+  background: var(--app-shell-background, var(--color-page-muted));
   clip-path: inset(var(--_app-shell-overlap));
 }
 

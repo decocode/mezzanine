@@ -10,7 +10,7 @@
   :root,
   [data-theme] {
     --color-page: Canvas;
-    --color-surface: Canvas;
+    --color-page-muted: Canvas;
     --color-text: CanvasText;
     --color-text-muted: CanvasText;
 

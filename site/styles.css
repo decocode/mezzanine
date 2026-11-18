@@ -75,7 +75,7 @@ body {
   height: auto;
   padding: var(--space-3);
   clip-path: none;
-  background: var(--color-surface);
+  background: var(--color-page-muted);
   color: var(--color-text);
 }
 
@@ -283,7 +283,7 @@ body {
   inline-size: 100%;
   block-size: var(--space-24);
   border: var(--border-width-baseline) solid var(--color-border);
-  background: var(--color-surface);
+  background: var(--color-page-muted);
 }
 
 .token-scale[data-sample='radius'] .token-scale-sample { border-radius: var(--_token-scale-value); }
