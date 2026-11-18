@@ -36,7 +36,7 @@ Never do these without the owner's explicit agreement in the conversation:
 - Run the browser tests (`npm run test:e2e`) that cover what you changed. Run the whole suite when shared foundations change, such as tokens, motion or shared styles. An edit to copy or Markdown only doesn't need them.
 - Fix failures your change caused. Report any remaining failures, any checks you couldn't run and why, and anything no test covers.
 - Run Lighthouse only when asked, once. Then remove only the reports that run made.
-- Leave unrelated changes alone. The pre-commit hook scans staged changes with `gitleaks`.
+- Don't undo or reformat changes you didn't make, such as someone else's uncommitted work. The pre-commit hook scans staged changes with `gitleaks`.
 
 ## Read the guide for your task
 
@@ -51,6 +51,9 @@ Never do these without the owner's explicit agreement in the conversation:
 ## Working with the owner
 
 - Do routine implementation, investigation and checking within an agreed task without asking. Fix your own mistakes and mention them.
+- Finish what you start. Check the result, in the browser when it shows there, and iterate until it works and looks right. Don't hand back loose ends.
+- While working in an area, fix the small problems you find there in the same change, such as a misaligned label, an outdated comment or a doc that no longer matches, when they need no decision from the owner. Before working on a component, check its entry in `docs/proposals/proposal-small-component-notes.md`, fix what you can and delete what you fixed.
+- Don't add backlog items for leftovers. Finish them, or tell the owner and ask.
 - Ask about unresolved design decisions, public names, changes to agreed rules and conflicting requirements. Keep working on anything that doesn't depend on the answer.
 - A request or approved proposal covers what it names. Don't ask for the same approval twice. A broad request doesn't waive a specific approval.
 - If rules seem to conflict, honour approved exceptions. If a real conflict remains, explain it and ask.
@@ -68,7 +71,7 @@ Never do these without the owner's explicit agreement in the conversation:
 ## Stack
 
 - React with TypeScript and `react-aria-components`. Use React Aria wherever it has the pattern, and don't recreate its keyboard, focus, pointer or accessibility behaviour.
-- Make only the requested change, and the smallest changes needed to make it work.
+- Keep each change focused on the requested work and the area it touches, and choose the simplest change that fully works.
 - Use npm, and keep `package-lock.json` in sync. Keep configuration minimal, following the existing Vite and Oxlint setup. Create a new folder or shared module only when the current work needs it.
 - Give each file one responsibility and a literal name. Keep `.tsx` files for rendering, and put non-trivial or reused logic in clearly named `.ts` files, with no generic `utils.ts`.
 - Call out removals, renames and incompatible changes to public names as breaking changes, with a `BREAKING CHANGE:` footer in the commit message.
