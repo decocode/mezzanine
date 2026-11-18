@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Button, DemoBlock, Heading, Sheet, SheetTrigger, Text } from '@decocode/mezzanine'
+import { Button, DemoBlock, Heading, Sheet, SheetTrigger, Switch, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { sheetContent, sheetExampleCode, sheetExampleLabels, sheetPositions } from './sheetContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -18,8 +17,8 @@ export default function SheetPage() {
             codeView={sheetExampleCode({ position, preventDismissal, overscrollPadding })}
             endPanel={<>
               <PanelSelect label="position" options={sheetPositions} value={position} onChange={setPosition} />
-              <PanelSwitch isSelected={preventDismissal} onChange={setPreventDismissal}>preventDismissal</PanelSwitch>
-              <PanelSwitch isSelected={overscrollPadding} onChange={setOverscrollPadding}>overscrollPadding</PanelSwitch>
+              <Switch isSelected={preventDismissal} onChange={setPreventDismissal}>preventDismissal</Switch>
+              <Switch isSelected={overscrollPadding} onChange={setOverscrollPadding}>overscrollPadding</Switch>
             </>}
           >
             <SheetTrigger>

@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Breadcrumb, Breadcrumbs, DemoBlock, Link } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { Breadcrumb, Breadcrumbs, DemoBlock, Link, Switch } from '@decocode/mezzanine'
 import { breadcrumbsContent, breadcrumbsExampleCode, breadcrumbsExampleCrumbs } from './breadcrumbsContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -13,7 +12,7 @@ export default function BreadcrumbsPage() {
         example: (
           <DemoBlock
             codeView={breadcrumbsExampleCode(isDisabled)}
-            endPanel={<PanelSwitch isSelected={isDisabled} onChange={setIsDisabled}>isDisabled</PanelSwitch>}
+            endPanel={<Switch isSelected={isDisabled} onChange={setIsDisabled}>isDisabled</Switch>}
           >
             <nav aria-label="Breadcrumbs example">
               <Breadcrumbs isDisabled={isDisabled}>

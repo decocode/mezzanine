@@ -1,8 +1,7 @@
 // The Lab's several-Panels example: one candidate Panel at each placement of a LabPanelLayout at once. Each
 // is collapsible, with a text toggle in a shared bar across the top of the layout, so without room beside
 // the content a side Panel collapses and its toggle opens it as an overlay. Illustrative and unapproved.
-import { Toolbar } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../components/PanelSwitch'
+import { Switch, Toolbar } from '@decocode/mezzanine'
 import { LabDemoBlock } from './LabDemoBlock'
 import { LabPanel, LabPanelLayout, LabPanelToggle } from './LabPanel'
 import type { LabPanelPlacement } from './labPanelSize'
@@ -29,7 +28,7 @@ export function SeveralPanelsExample({ shown, onShownChange }: { shown: Record<L
     <LabDemoBlock
       // The switches add and remove whole Panels, which are the LabPanelLayout's parts.
       parts={panelPlacements.map((placement) => (
-        <PanelSwitch key={placement} isSelected={shown[placement]} onChange={(isSelected) => onShownChange({ ...shown, [placement]: isSelected })}>{placement}</PanelSwitch>
+        <Switch key={placement} isSelected={shown[placement]} onChange={(isSelected) => onShownChange({ ...shown, [placement]: isSelected })}>{placement}</Switch>
       ))}
     >
       <LabPanelLayout className="lab-panel-example" header={bar}>

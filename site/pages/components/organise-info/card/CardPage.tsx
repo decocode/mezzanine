@@ -1,8 +1,7 @@
 import { Fragment, useState } from 'react'
-import { Avatar, Badge, Button, Card, CardFooter, CardImage, CardTitle, DemoBlock, HeartIcon, Text, ToggleButton } from '@decocode/mezzanine'
+import { Avatar, Badge, Button, Card, CardFooter, CardImage, CardTitle, DemoBlock, HeartIcon, Switch, Text, ToggleButton } from '@decocode/mezzanine'
 import { useExamplePicture } from '../../../../components/examplePicture'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { cardAspectRatios, cardContent, cardExample, cardExampleCode, cardFlags, isCardFlagShown } from './cardContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 import './card.css'
@@ -22,7 +21,7 @@ export default function CardPage() {
             endPanel={<>
               {/* Each switch appears once it applies; aspectRatio follows CardImage. */}
               {cardFlags.filter((name) => isCardFlagShown(name, flags)).map((name) => <Fragment key={name}>
-                <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+                <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
                 {name === 'CardImage' && flags.CardImage && <PanelSelect label="aspectRatio" options={cardAspectRatios} value={aspectRatio} onChange={setAspectRatio} />}
               </Fragment>)}
             </>}

@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
-import { DemoBlock, NavTree } from '@decocode/mezzanine'
+import { DemoBlock, NavTree, Switch } from '@decocode/mezzanine'
 import {
   navigationTreeContent,
   navigationTreeExampleCode,
@@ -10,7 +10,6 @@ import {
   navigationTreeProps,
   navigationTreeUsageTopics,
 } from './navigationTreeContent'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { ContentPage } from '../../../../templates/ContentPage'
 import { DocsTable } from '../../../../components/DocsTable'
 import { RichText } from '../../../../components/RichText'
@@ -32,7 +31,7 @@ export default function NavigationTreePage() {
         example: (
           <DemoBlock
             codeView={navigationTreeExampleCode(isExpanded)}
-            endPanel={<PanelSwitch isSelected={isExpanded} onChange={setIsExpanded}>defaultExpandedKeys</PanelSwitch>}
+            endPanel={<Switch isSelected={isExpanded} onChange={setIsExpanded}>defaultExpandedKeys</Switch>}
           >
             <div className="navigation-tree-example">
               <RouterProvider navigate={setRoute}>

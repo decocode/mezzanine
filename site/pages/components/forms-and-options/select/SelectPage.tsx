@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, ListBoxItem, PlaceholderIcon, Select, type SelectHierarchy } from '@decocode/mezzanine'
+import { DemoBlock, ListBoxItem, PlaceholderIcon, Select, type SelectHierarchy, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
   selectContent, selectDefaultKeyLabel, selectNoDefaultKey, selectSizes, selectExampleCode, selectExampleLabels, selectExampleText, selectFlags, selectHierarchies, selectHierarchyLabel,
 } from './selectContent'
@@ -24,7 +23,7 @@ export default function SelectPage() {
     isDisabled: flags.isDisabled,
   }
   const panelSwitch = (name: (typeof selectFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage
@@ -46,8 +45,8 @@ export default function SelectPage() {
                   is either disabled or invalid, so each of those switches hides while the other is on. */}
               {panelSwitch('description')}
               {!flags.isDisabled && panelSwitch('isInvalid')}
-              <PanelSwitch isSelected={icon} onChange={setIcon}>icon</PanelSwitch>
-              {icon && <PanelSwitch isSelected={isIconOnly} onChange={setIsIconOnly}>valuePosition</PanelSwitch>}
+              <Switch isSelected={icon} onChange={setIcon}>icon</Switch>
+              {icon && <Switch isSelected={isIconOnly} onChange={setIsIconOnly}>valuePosition</Switch>}
               {!flags.isInvalid && panelSwitch('isDisabled')}
             </>}
           >

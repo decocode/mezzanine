@@ -3,10 +3,9 @@
 // inside it beneath it. Every switch starts off, so the demo opens as the bare Card.
 // Illustrative and unapproved.
 import { useState } from 'react'
-import { Avatar, Badge, Button, Card, CodeBlock, CardFooter, CardImage, CardTitle, HeartIcon, Text, ToggleButton } from '@decocode/mezzanine'
+import { Avatar, Badge, Button, Card, CodeBlock, CardFooter, CardImage, CardTitle, HeartIcon, Switch, Text, ToggleButton } from '@decocode/mezzanine'
 import { useExamplePicture } from '../../components/examplePicture'
 import { PanelSelect } from '../../components/PanelSelect'
-import { PanelSwitch } from '../../components/PanelSwitch'
 import { RichText } from '../../components/RichText'
 import { LabContentPage } from '../shared/StagePages'
 import { LabDemoBlock } from './LabDemoBlock'
@@ -23,12 +22,12 @@ export function DemoBlockExperiment() {
   const shown = (name: (typeof demoBlockParts)[number]) => parts[name] && isDemoBlockPartShown(name, parts, href)
   // A part's switch, shown once it applies.
   const partSwitch = (name: (typeof demoBlockParts)[number]) => isDemoBlockPartShown(name, parts, href) && (
-    <PanelSwitch isSelected={parts[name]} onChange={(isSelected) => setParts({ ...parts, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={parts[name]} onChange={(isSelected) => setParts({ ...parts, [name]: isSelected })}>{name}</Switch>
   )
   return <LabContentPage content={demoBlockPage} parts={{
     example: (
       <LabDemoBlock
-        properties={<PanelSwitch isSelected={href} onChange={setHref}>href</PanelSwitch>}
+        properties={<Switch isSelected={href} onChange={setHref}>href</Switch>}
         parts={<>
           {/* CardImage's own setting and the parts placed on it appear beneath it once it's in. */}
           <div className="lab-demo-block-part" role="group" aria-label="CardImage">

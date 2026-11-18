@@ -1,10 +1,9 @@
 import {
-  Cell, Checkbox, Column, DemoBlock, Row, Table, TableBody, TableHeader, type SortDescriptor,
+  Cell, Checkbox, Column, DemoBlock, Row, Switch, Table, TableBody, TableHeader, type SortDescriptor,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { VisuallyHidden } from 'react-aria-components/VisuallyHidden'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { tableContent, tableExampleCode, tableExampleColumns, tableExampleGroups, tableExampleRows, tableFlags, tableSelectionModes } from './tableContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -35,7 +34,7 @@ export default function TablePage() {
             endPanel={<>
               <PanelSelect label="selectionMode" options={tableSelectionModes} value={selectionMode} onChange={setSelectionMode} />
               {tableFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+                <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
               ))}
             </>}
           >

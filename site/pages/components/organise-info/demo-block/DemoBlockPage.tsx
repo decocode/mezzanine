@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Button, DemoBlock, type DemoBlockAlign } from '@decocode/mezzanine'
+import { Button, DemoBlock, type DemoBlockAlign, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { demoBlockAligns, demoBlockContent, demoBlockExampleCode, demoBlockExampleLabels, demoBlockFlags, demoBlockInnerCode } from './demoBlockContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -22,14 +21,14 @@ export default function DemoBlockPage() {
             endPanel={<>
               <PanelSelect label="align" options={demoBlockAligns} value={align} onChange={setAlign} />
               {demoBlockFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+                <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
               ))}
             </>}
           >
             <DemoBlock
               align={align}
               codeView={flags.codeView ? demoBlockInnerCode : undefined}
-              endPanel={flags.endPanel ? <PanelSwitch isSelected={isDisabled} onChange={setIsDisabled}>{demoBlockExampleLabels.switch}</PanelSwitch> : undefined}
+              endPanel={flags.endPanel ? <Switch isSelected={isDisabled} onChange={setIsDisabled}>{demoBlockExampleLabels.switch}</Switch> : undefined}
             >
               <Button isDisabled={isDisabled}>{demoBlockExampleLabels.button}</Button>
             </DemoBlock>

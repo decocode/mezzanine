@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, Header, ListBox, ListBoxItem, ListBoxSection, PlaceholderIcon, Text } from '@decocode/mezzanine'
+import { DemoBlock, Header, ListBox, ListBoxItem, ListBoxSection, PlaceholderIcon, Switch, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { listBoxContent, listBoxExampleCode, listBoxSections, listBoxSelectionModes } from './listBoxContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -20,9 +19,9 @@ export default function ListBoxPage() {
             codeView={listBoxExampleCode({ selectionMode, disallowEmptySelection, disabledKeys, icon })}
             endPanel={<>
               <PanelSelect label="selectionMode" options={listBoxSelectionModes} value={selectionMode} onChange={setSelectionMode} />
-              {canSelect && <PanelSwitch isSelected={disallowEmptySelection} onChange={setDisallowEmptySelection}>disallowEmptySelection</PanelSwitch>}
-              <PanelSwitch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</PanelSwitch>
-              <PanelSwitch isSelected={icon} onChange={setIcon}>icon</PanelSwitch>
+              {canSelect && <Switch isSelected={disallowEmptySelection} onChange={setDisallowEmptySelection}>disallowEmptySelection</Switch>}
+              <Switch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</Switch>
+              <Switch isSelected={icon} onChange={setIcon}>icon</Switch>
             </>}
           >
             {/* A new key starts the list again, so a change of selection mode clears its choices. */}

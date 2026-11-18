@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import {
-  Cell, Column, DemoBlock, ExternalLinkIcon, Link, Row, Table, TableBody, TableHeader,
+  Cell, Column, DemoBlock, ExternalLinkIcon, Link, Row, Switch, Table, TableBody, TableHeader,
 } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { linkContent, linkContentRows, linkExampleCode, linkExampleLabel, linkStates } from './linkContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -17,8 +16,8 @@ export default function LinkPage() {
           <DemoBlock
             codeView={linkExampleCode({ isDisabled, current })}
             endPanel={<>
-              <PanelSwitch isSelected={isDisabled} onChange={setIsDisabled}>isDisabled</PanelSwitch>
-              <PanelSwitch isSelected={current} onChange={setCurrent}>aria-current</PanelSwitch>
+              <Switch isSelected={isDisabled} onChange={setIsDisabled}>isDisabled</Switch>
+              <Switch isSelected={current} onChange={setCurrent}>aria-current</Switch>
             </>}
           >
             <Link href="#link-content" isDisabled={isDisabled} aria-current={current ? 'page' : undefined}>{linkExampleLabel}</Link>

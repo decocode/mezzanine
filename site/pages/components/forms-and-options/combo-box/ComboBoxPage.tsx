@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { ComboBox, DemoBlock, ListBoxItem } from '@decocode/mezzanine'
+import { ComboBox, DemoBlock, ListBoxItem, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { comboBoxContent, comboBoxExampleCode, comboBoxExampleLabels, comboBoxExampleText, comboBoxFlags, comboBoxMenuTriggers } from './comboBoxContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -19,7 +18,7 @@ export default function ComboBoxPage() {
     isDisabled: flags.isDisabled,
   }
   const panelSwitch = (name: (typeof comboBoxFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage

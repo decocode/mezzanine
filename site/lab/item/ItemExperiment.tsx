@@ -1,9 +1,8 @@
 // The Lab's Item page: the candidate Item in the Lab demo block, with its properties and its parts in
 // separate groups. Illustrative and unapproved.
 import { useState } from 'react'
-import { Button, CodeBlock, PlaceholderIcon } from '@decocode/mezzanine'
+import { Button, CodeBlock, PlaceholderIcon, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../components/PanelSelect'
-import { PanelSwitch } from '../../components/PanelSwitch'
 import { LabDemoBlock } from '../panel-demo-block/LabDemoBlock'
 import { LabContentPage } from '../shared/StagePages'
 import { Item, ItemActions, ItemFooter, ItemHeader, ItemMedia, type ItemPurpose, type ItemSize, type ItemVariant } from './Item'
@@ -24,11 +23,11 @@ export function ItemExperiment() {
           <PanelSelect label="variant" options={itemVariants} value={variant} onChange={setVariant} />
           <PanelSelect label="purpose" options={itemPurposes} value={purpose} onChange={setPurpose} />
           <PanelSelect label="size" options={itemSizes} value={size} onChange={setSize} />
-          <PanelSwitch isSelected={description} onChange={setDescription}>description</PanelSwitch>
-          <PanelSwitch isSelected={href} onChange={setHref}>href</PanelSwitch>
+          <Switch isSelected={description} onChange={setDescription}>description</Switch>
+          <Switch isSelected={href} onChange={setHref}>href</Switch>
         </>}
         parts={itemParts.map((name) => (
-          <PanelSwitch key={name} isSelected={parts[name]} onChange={(isSelected) => setParts({ ...parts, [name]: isSelected })}>{name}</PanelSwitch>
+          <Switch key={name} isSelected={parts[name]} onChange={(isSelected) => setParts({ ...parts, [name]: isSelected })}>{name}</Switch>
         ))}
       >
         <div className="lab-item-example">

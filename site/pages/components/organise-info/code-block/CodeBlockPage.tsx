@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { CodeBlock, DemoBlock } from '@decocode/mezzanine'
+import { CodeBlock, DemoBlock, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
   codeBlockContent, codeBlockExample, codeBlockExampleCodeView, codeBlockFeatureExamples, codeBlockFlags, codeBlockLanguages, codeBlockStartLines,
 } from './codeBlockContent'
@@ -15,7 +14,7 @@ export default function CodeBlockPage() {
   })
   const { code, ...lines } = codeBlockExample(flags, flags.showLineNumbers ? Number(startLine) : 1)
   const flagSwitch = (name: (typeof codeBlockFlags)[number]) => (
-    <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage

@@ -1,8 +1,7 @@
 import {
-  Button, Cell, Column, DemoBlock, DownloadIcon, ListBoxItem, Alert, Row, Select, Separator, Table, TableBody, TableHeader, type ButtonHierarchy,
+  Button, Cell, Column, DemoBlock, DownloadIcon, ListBoxItem, Alert, Row, Select, Separator, Switch, Table, TableBody, TableHeader, type ButtonHierarchy,
   type ButtonSize,
 } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { useState } from 'react'
 import {
   buttonContent,
@@ -30,7 +29,7 @@ export default function ButtonPage() {
   const [tooltipPosition, setTooltipPosition] = useState<(typeof buttonTooltipPositions)[number]>('top')
   const [flags, setFlags] = useState<Record<(typeof buttonFlags)[number], boolean>>({ isPending: false, isDisabled: false, icon: false })
   const flagCheckbox = (name: (typeof buttonFlags)[number], isDisabled = false) => (
-    <PanelSwitch key={name} isDisabled={isDisabled} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch key={name} isDisabled={isDisabled} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   // The icon settings apply one after another: iconPosition with an icon, labelPosition for an icon on
   // its own, and tooltipPosition for a label in a tooltip.

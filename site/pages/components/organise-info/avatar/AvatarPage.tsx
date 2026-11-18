@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Avatar, DemoBlock } from '@decocode/mezzanine'
+import { Avatar, DemoBlock, Switch } from '@decocode/mezzanine'
 import { useExamplePicture } from '../../../../components/examplePicture'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { avatarContent, avatarExample, avatarExampleCode, avatarSizes } from './avatarContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 import './avatar.css'
@@ -22,8 +21,8 @@ export default function AvatarPage() {
             codeView={avatarExampleCode({ size, src, named })}
             endPanel={<>
               <PanelSelect label="size" options={avatarSizes} value={size} onChange={setSize} />
-              <PanelSwitch isSelected={src} onChange={setSrc}>src</PanelSwitch>
-              <PanelSwitch isSelected={named} onChange={setNamed}>children</PanelSwitch>
+              <Switch isSelected={src} onChange={setSrc}>src</Switch>
+              <Switch isSelected={named} onChange={setNamed}>children</Switch>
             </>}
           >
             {named

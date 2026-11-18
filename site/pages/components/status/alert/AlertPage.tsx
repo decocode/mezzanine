@@ -1,9 +1,8 @@
 import { useState, type ReactNode } from 'react'
 import {
   Button, CheckCircleIcon, DemoBlock, ErrorIcon, Header, InfoIcon, Link, ListBoxItem, ListBoxSection, Alert, PlaceholderIcon,
-  Select, Separator, WarningIcon, type AlertPurpose,
+  Select, Separator, Switch, WarningIcon, type AlertPurpose,
 } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { alertContent, alertExample, alertExampleCode, alertPurposeGroups } from './alertContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -37,10 +36,10 @@ export default function AlertPage() {
                   </ListBoxSection>,
                 ])}
               </Select>
-              <PanelSwitch isSelected={hasTitle} onChange={setHasTitle}>{alertExample.titleLabel}</PanelSwitch>
-              <PanelSwitch isSelected={hasContent} onChange={setHasContent}>{alertExample.contentLabel}</PanelSwitch>
-              <PanelSwitch isSelected={hasIcon} onChange={setHasIcon}>{alertExample.iconLabel}</PanelSwitch>
-              <PanelSwitch isSelected={hasActions} onChange={setHasActions}>{alertExample.actionsLabel}</PanelSwitch>
+              <Switch isSelected={hasTitle} onChange={setHasTitle}>{alertExample.titleLabel}</Switch>
+              <Switch isSelected={hasContent} onChange={setHasContent}>{alertExample.contentLabel}</Switch>
+              <Switch isSelected={hasIcon} onChange={setHasIcon}>{alertExample.iconLabel}</Switch>
+              <Switch isSelected={hasActions} onChange={setHasActions}>{alertExample.actionsLabel}</Switch>
             </>}
           >
             <Alert

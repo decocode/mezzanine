@@ -1,7 +1,6 @@
 // The example for the Scroll padding page, in Foundations › Layers.
 import { useRef, useState } from 'react'
-import { Button, DemoBlock, Heading, Text } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { Button, DemoBlock, Heading, Switch, Text } from '@decocode/mezzanine'
 import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
 import { scrollPaddingCssNotes } from './scrollPaddingContent'
 
@@ -12,7 +11,7 @@ export function ScrollPaddingExample() {
   return <>
     <ExampleText>Without scroll padding, a heading you jump to lands hidden under the sticky header. With it, the heading lands just below. Mezzanine’s docs site hard-codes a 4rem offset today, which can be wrong when text is enlarged.</ExampleText>
     <DemoBlock align="stretch" codeLanguage="css" codeView={scrollPaddingCssNotes.scrollPadding.code} endPanel={<>
-      <PanelSwitch isSelected={padded} onChange={setPadded}>Use scroll padding</PanelSwitch>
+      <Switch isSelected={padded} onChange={setPadded}>Use scroll padding</Switch>
       <div className="layers-controls">
         {[2, 3, 4].map((index) => <Button key={index} size="sm" hierarchy="secondary" onPress={() => jump(index)}>Jump to section {index}</Button>)}
       </div>

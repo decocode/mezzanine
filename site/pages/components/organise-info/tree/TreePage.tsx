@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, Tree, TreeItem } from '@decocode/mezzanine'
+import { DemoBlock, Switch, Tree, TreeItem } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { treeContent, treeExampleCode, treeExampleLabels, treeSelectionBehaviors, treeSelectionModes } from './treeContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -22,8 +21,8 @@ export default function TreePage() {
             endPanel={<>
               <PanelSelect label="selectionMode" options={treeSelectionModes} value={selectionMode} onChange={setSelectionMode} />
               {canSelect && <PanelSelect label="selectionBehavior" options={treeSelectionBehaviors} value={selectionBehavior} onChange={setSelectionBehavior} />}
-              <PanelSwitch isSelected={isExpanded} onChange={setIsExpanded}>defaultExpandedKeys</PanelSwitch>
-              <PanelSwitch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</PanelSwitch>
+              <Switch isSelected={isExpanded} onChange={setIsExpanded}>defaultExpandedKeys</Switch>
+              <Switch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</Switch>
             </>}
           >
             {/* A new key starts the tree again, because its defaults only apply when it first appears. */}

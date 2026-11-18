@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
+import { DemoBlock, Switch, Tab, TabList, TabPanel, Tabs } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { tabsContent, tabsExampleCode, tabsExampleTabs, tabsKeyboardActivations, tabsOrientations } from './tabsContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -20,7 +19,7 @@ export default function TabsPage() {
             endPanel={<>
               <PanelSelect label="orientation" options={tabsOrientations} value={orientation} onChange={setOrientation} />
               <PanelSelect label="keyboardActivation" options={tabsKeyboardActivations} value={keyboardActivation} onChange={setKeyboardActivation} />
-              <PanelSwitch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</PanelSwitch>
+              <Switch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</Switch>
             </>}
           >
             <Tabs orientation={orientation} keyboardActivation={keyboardActivation} disabledKeys={disabledKeys ? ['d'] : undefined} defaultSelectedKey="a">

@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, NumberField } from '@decocode/mezzanine'
+import { DemoBlock, NumberField, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
   numberFieldContent, numberFieldExampleCode, numberFieldExampleLabel, numberFieldExampleText, numberFieldFlags, numberFieldFormatOptions, numberFieldFormats,
   numberFieldSteps,
@@ -20,7 +19,7 @@ export default function NumberFieldPage() {
     isDisabled: flags.isDisabled,
   }
   const panelSwitch = (name: (typeof numberFieldFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage

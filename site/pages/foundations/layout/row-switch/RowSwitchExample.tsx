@@ -1,7 +1,6 @@
 // The example for the Row switch page, in Foundations › Layout. The items are Buttons.
 import { useState } from 'react'
-import { Button } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { Button, Switch } from '@decocode/mezzanine'
 import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
 import { WidthDemo } from '../../../../components/WidthFrame'
 import { rowSwitchCssNotes } from './rowSwitchContent'
@@ -19,7 +18,7 @@ export function RowSwitchExample() {
     <ExampleText>Below the lg width, with the switch, the row becomes a column. Without it, the row squashes, then sticks out of the frame.</ExampleText>
     {/* Without the switch, the row can stick out of the frame, so the frame scrolls. */}
     <WidthDemo label="Row switch" className="row-switch-demo" canOverflow code={rowSwitchCssNotes.rowSwitch.code} controls={
-      <PanelSwitch isSelected={isSwitching} onChange={setIsSwitching}>Switch to a column below the lg width</PanelSwitch>
+      <Switch isSelected={isSwitching} onChange={setIsSwitching}>Switch to a column below the lg width</Switch>
     }>
       <div className={isSwitching ? 'row-switch' : 'row'}>
         {buttons.map((button) => <Button key={button.hierarchy} hierarchy={button.hierarchy}>{button.label}</Button>)}

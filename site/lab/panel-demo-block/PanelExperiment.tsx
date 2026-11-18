@@ -1,9 +1,8 @@
 // The Lab's Panel page: a candidate Panel in a LabPanelLayout, in the candidate demo block, whose
 // Properties Panel changes it. Illustrative and unapproved.
 import { useState } from 'react'
-import { CodeBlock, Toolbar } from '@decocode/mezzanine'
+import { CodeBlock, Switch, Toolbar } from '@decocode/mezzanine'
 import { PanelSelect } from '../../components/PanelSelect'
-import { PanelSwitch } from '../../components/PanelSwitch'
 import { LabContentPage } from '../shared/StagePages'
 import { LabDemoBlock } from './LabDemoBlock'
 import { LabPanel, LabPanelFooter, LabPanelHeader, LabPanelLayout, LabPanelToggle } from './LabPanel'
@@ -36,12 +35,12 @@ export function PanelExperiment() {
       <LabDemoBlock
         properties={<>
           <PanelSelect label="placement" options={panelPlacements} value={placement} onChange={setPlacement} />
-          <PanelSwitch isSelected={isResizable} onChange={setIsResizable}>isResizable</PanelSwitch>
-          <PanelSwitch isSelected={isCollapsible} onChange={setIsCollapsible} isDisabled={collapsibleReason !== undefined} description={collapsibleReason}>isCollapsible</PanelSwitch>
+          <Switch isSelected={isResizable} onChange={setIsResizable}>isResizable</Switch>
+          <Switch isSelected={isCollapsible} onChange={setIsCollapsible} isDisabled={collapsibleReason !== undefined} description={collapsibleReason}>isCollapsible</Switch>
         </>}
         parts={<>
-          <PanelSwitch isSelected={hasHeader} onChange={setHasHeader}>LabPanelHeader</PanelSwitch>
-          <PanelSwitch isSelected={hasFooter} onChange={setHasFooter}>LabPanelFooter</PanelSwitch>
+          <Switch isSelected={hasHeader} onChange={setHasHeader}>LabPanelHeader</Switch>
+          <Switch isSelected={hasFooter} onChange={setHasFooter}>LabPanelFooter</Switch>
         </>}
       >
         {/* A bar across the top of the layout holds the Panel's toggle, as in the Panel layout example, so it

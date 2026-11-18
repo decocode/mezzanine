@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, TextArea } from '@decocode/mezzanine'
+import { DemoBlock, Switch, TextArea } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { textAreaContent, textAreaExampleCode, textAreaExampleText, textAreaFlags, textAreaRows } from './textAreaContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -11,7 +10,7 @@ export default function TextAreaPage() {
     placeholder: true, description: true, isDisabled: false, isReadOnly: false, isInvalid: false,
   })
   const panelSwitch = (name: (typeof textAreaFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage

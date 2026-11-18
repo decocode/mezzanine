@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, ProgressBar } from '@decocode/mezzanine'
+import { DemoBlock, ProgressBar, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { progressBarContent, progressBarExampleCode, progressBarExampleLabel, progressBarValues } from './progressBarContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -19,8 +18,8 @@ export default function ProgressBarPage() {
             codeView={progressBarExampleCode({ value: Number(value), isIndeterminate, hasLabel })}
             endPanel={<>
               {!isIndeterminate && <PanelSelect label="value" options={progressBarValues} value={value} onChange={setValue} />}
-              <PanelSwitch isSelected={isIndeterminate} onChange={setIsIndeterminate}>isIndeterminate</PanelSwitch>
-              <PanelSwitch isSelected={hasLabel} onChange={setHasLabel}>label</PanelSwitch>
+              <Switch isSelected={isIndeterminate} onChange={setIsIndeterminate}>isIndeterminate</Switch>
+              <Switch isSelected={hasLabel} onChange={setHasLabel}>label</Switch>
             </>}
           >
             <ProgressBar

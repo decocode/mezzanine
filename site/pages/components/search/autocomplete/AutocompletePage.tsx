@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Autocomplete, DemoBlock, ListBox, ListBoxItem, SearchField, useFilter } from '@decocode/mezzanine'
+import { Autocomplete, DemoBlock, ListBox, ListBoxItem, SearchField, Switch, useFilter } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { autocompleteContent, autocompleteExampleCode, autocompleteFilters, autocompleteOptions } from './autocompleteContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -18,7 +17,7 @@ export default function AutocompletePage() {
             codeView={autocompleteExampleCode({ filter, disableAutoFocusFirst })}
             endPanel={<>
               <PanelSelect label="filter" options={autocompleteFilters} value={filter} onChange={setFilter} />
-              <PanelSwitch isSelected={disableAutoFocusFirst} onChange={setDisableAutoFocusFirst}>disableAutoFocusFirst</PanelSwitch>
+              <Switch isSelected={disableAutoFocusFirst} onChange={setDisableAutoFocusFirst}>disableAutoFocusFirst</Switch>
             </>}
           >
             <div className="autocomplete-example">

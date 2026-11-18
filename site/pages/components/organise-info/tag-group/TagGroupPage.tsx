@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, Tag, TagGroup } from '@decocode/mezzanine'
+import { DemoBlock, Switch, Tag, TagGroup } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { tagGroupContent, tagGroupExampleCode, tagGroupExampleLabels, tagGroupExampleText, tagGroupSelectionModes } from './tagGroupContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -22,9 +21,9 @@ export default function TagGroupPage() {
               <PanelSelect label="selectionMode" options={tagGroupSelectionModes} value={selectionMode} onChange={setSelectionMode} />
               {/* The group's parts in their own order: help text, error, then the tags. React Aria's TagGroup
                   has no invalid state, so the error message has its own switch. */}
-              <PanelSwitch isSelected={description} onChange={setDescription}>description</PanelSwitch>
-              <PanelSwitch isSelected={errorMessage} onChange={setErrorMessage}>errorMessage</PanelSwitch>
-              <PanelSwitch isSelected={removable} onChange={(isSelected) => { setRemovable(isSelected); setTags([...tagGroupExampleLabels.tags]) }}>onRemove</PanelSwitch>
+              <Switch isSelected={description} onChange={setDescription}>description</Switch>
+              <Switch isSelected={errorMessage} onChange={setErrorMessage}>errorMessage</Switch>
+              <Switch isSelected={removable} onChange={(isSelected) => { setRemovable(isSelected); setTags([...tagGroupExampleLabels.tags]) }}>onRemove</Switch>
             </>}
           >
             {/* A new key starts the group again, so a change of selection mode clears its choices. */}

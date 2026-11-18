@@ -1,7 +1,6 @@
 // The example for the Layer groups page, in Foundations › Layers.
 import { useState, type CSSProperties } from 'react'
-import { DemoBlock } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { DemoBlock, Switch } from '@decocode/mezzanine'
 import { CssNotes, ExampleText } from '../../../../components/ExampleParts'
 import { layerGroupsCssNotes } from './layerGroupsContent'
 
@@ -14,7 +13,7 @@ export function LayerGroupsExample() {
   const [grouped, setGrouped] = useState(true)
   return <>
     <ExampleText>Layer group A has three layers. Layer group B has two. Because the z-index of layer group B is higher, it’s placed on top of layer group A. Inside each layer group, the layers are ordered amongst themselves. But if you remove the layer groups, all five layers end up jumbled together, because some share the same z-index values.</ExampleText>
-    <DemoBlock align="stretch" codeLanguage="css" codeView={layerGroupsCssNotes.stackingContexts.code} endPanel={<PanelSwitch isSelected={grouped} onChange={setGrouped}>Group the layers</PanelSwitch>}>
+    <DemoBlock align="stretch" codeLanguage="css" codeView={layerGroupsCssNotes.stackingContexts.code} endPanel={<Switch isSelected={grouped} onChange={setGrouped}>Group the layers</Switch>}>
       <div className="layers-groups">
         <div className={`layers-group ${grouped ? 'layers-group-a-grouped' : 'layers-group-loose'}`}>
           {grouped ? <p className="mz-text-label-md">Layer group A, z-index: 1</p> : <p className="mz-text-label-md" aria-hidden="true">&nbsp;</p>}

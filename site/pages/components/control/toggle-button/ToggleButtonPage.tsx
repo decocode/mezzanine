@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { BulbIcon, DemoBlock, ListBoxItem, Select, Separator, ToggleButton, type ButtonSize } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { BulbIcon, DemoBlock, ListBoxItem, Select, Separator, Switch, ToggleButton, type ButtonSize } from '@decocode/mezzanine'
 import { buttonSizes } from '../button/buttonContent'
 import {
   toggleButtonContent, toggleButtonExample, toggleButtonExampleCode, toggleButtonFlags, toggleButtonHierarchies, toggleButtonIconPositions,
@@ -16,7 +15,7 @@ export default function ToggleButtonPage() {
   const [tooltipPosition, setTooltipPosition] = useState<(typeof toggleButtonTooltipPositions)[number]>('top')
   const [flags, setFlags] = useState<Record<(typeof toggleButtonFlags)[number], boolean>>({ icon: false, defaultSelected: false, isDisabled: false })
   const flagCheckbox = (name: (typeof toggleButtonFlags)[number]) => (
-    <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   // iconPosition needs an icon; labelPosition only applies to an icon on its own, and tooltipPosition
   // to a label in a tooltip.

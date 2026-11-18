@@ -1,7 +1,6 @@
-import { Button, DemoBlock, Link, TopBar } from '@decocode/mezzanine'
+import { Button, DemoBlock, Link, Switch, TopBar } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { RouterProvider } from 'react-aria-components'
-import { PanelSwitch } from '../../../components/PanelSwitch'
 import { topBarContent, topBarExampleCode, topBarFlags } from './topBarContent'
 import { ContentPage } from '../../../templates/ContentPage'
 
@@ -19,7 +18,7 @@ export default function TopBarPage() {
             className="top-bar-example"
             codeView={topBarExampleCode(flags)}
             endPanel={topBarFlags.map((name) => (
-              <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+              <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
             ))}
           >
             <RouterProvider navigate={(href) => setDestination(decodeURIComponent(href.slice(1)))}>

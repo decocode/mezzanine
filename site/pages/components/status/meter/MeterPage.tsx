@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, Meter } from '@decocode/mezzanine'
+import { DemoBlock, Meter, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { meterContent, meterExampleCode, meterExampleLabel, meterValues } from './meterContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -18,7 +17,7 @@ export default function MeterPage() {
             codeView={meterExampleCode(Number(value), hasLabel)}
             endPanel={<>
               <PanelSelect label="value" options={meterValues} value={value} onChange={setValue} />
-              <PanelSwitch isSelected={hasLabel} onChange={setHasLabel}>label</PanelSwitch>
+              <Switch isSelected={hasLabel} onChange={setHasLabel}>label</Switch>
             </>}
           >
             <Meter label={hasLabel ? meterExampleLabel : undefined} aria-label={hasLabel ? undefined : meterExampleLabel} value={Number(value)} />

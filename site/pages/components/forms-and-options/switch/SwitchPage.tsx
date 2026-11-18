@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { Cell, Column, DemoBlock, Row, Switch, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { switchContent, switchExampleCode, switchExampleProps, switchExampleText, switchFlags, switchStateLabels } from './switchContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function SwitchPage() {
   const [flags, setFlags] = useState<Record<(typeof switchFlags)[number], boolean>>({ isInvalid: false, defaultSelected: false, description: false, isReadOnly: false, isDisabled: false })
   const panelSwitch = (name: (typeof switchFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage

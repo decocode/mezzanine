@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { DemoBlock, Token, TokenField, TokenFieldValue } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { DemoBlock, Switch, Token, TokenField, TokenFieldValue } from '@decocode/mezzanine'
 import { tokenFieldContent, tokenFieldExampleCode, tokenFieldExampleLabels, tokenFieldExampleText, tokenFieldFlags } from './tokenFieldContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -18,7 +17,7 @@ export default function TokenFieldPage() {
           <DemoBlock
             codeView={tokenFieldExampleCode(props)}
             endPanel={tokenFieldFlags.map((name) => (
-              <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+              <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
             ))}
           >
             <TokenField label={tokenFieldExampleLabels.label} defaultValue={exampleValue} {...props}>

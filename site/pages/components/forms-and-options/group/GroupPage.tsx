@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Button, DemoBlock, Group, Input, Label } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { Button, DemoBlock, Group, Input, Label, Switch } from '@decocode/mezzanine'
 import { groupContent, groupExampleCode, groupExampleLabels, groupFlags } from './groupContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -14,7 +13,7 @@ export default function GroupPage() {
           <DemoBlock
             codeView={groupExampleCode(flags)}
             endPanel={groupFlags.map((name) => (
-              <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+              <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
             ))}
           >
             <div className="example-stack">

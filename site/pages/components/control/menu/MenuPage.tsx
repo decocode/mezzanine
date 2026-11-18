@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Button, DemoBlock, Menu, MenuItem, MenuTrigger, Popover } from '@decocode/mezzanine'
+import { Button, DemoBlock, Menu, MenuItem, MenuTrigger, Popover, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { menuContent, menuExampleCode, menuExampleLabels, menuSelectionModes } from './menuContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -17,7 +16,7 @@ export default function MenuPage() {
             codeView={menuExampleCode({ selectionMode, disabledKeys })}
             endPanel={<>
               <PanelSelect label="selectionMode" options={menuSelectionModes} value={selectionMode} onChange={setSelectionMode} />
-              <PanelSwitch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</PanelSwitch>
+              <Switch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</Switch>
             </>}
           >
             <MenuTrigger>

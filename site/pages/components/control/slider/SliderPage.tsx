@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { DemoBlock, ListBoxItem, Select, Slider } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { DemoBlock, ListBoxItem, Select, Slider, Switch } from '@decocode/mezzanine'
 import { sliderContent, sliderDefaultValues, sliderExample, sliderExampleCode, sliderFlags, sliderOrientations, sliderStepLabel, sliderSteps } from './sliderContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -35,7 +34,7 @@ export default function SliderPage() {
                 {sliderSteps.map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
               {sliderFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+                <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
               ))}
             </>}
           >

@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import {
-  DemoBlock, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel, ExternalLinkIcon, Link,
+  DemoBlock, Disclosure, DisclosureGroup, DisclosureHeader, DisclosurePanel, ExternalLinkIcon, Link, Switch,
 } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
   disclosureContent, disclosureExampleCode, disclosureFlags, disclosureGroupExampleCode, disclosureGroupFlags, disclosureGroupItems, disclosureGroupReactAriaLink,
 } from './disclosureContent'
@@ -20,7 +19,7 @@ export default function DisclosurePage() {
             align="stretch"
             codeView={disclosureExampleCode(flags)}
             endPanel={disclosureFlags.map((name) => (
-              <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+              <Switch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
             ))}
           >
             {/* A new key starts the disclosure again, because a default only applies when it first appears. */}
@@ -44,7 +43,7 @@ export default function DisclosurePage() {
             align="stretch"
             codeView={disclosureGroupExampleCode(groupFlags)}
             endPanel={disclosureGroupFlags.map((name) => (
-              <PanelSwitch key={name} isSelected={groupFlags[name]} onChange={(isSelected) => setGroupFlags({ ...groupFlags, [name]: isSelected })}>{name}</PanelSwitch>
+              <Switch key={name} isSelected={groupFlags[name]} onChange={(isSelected) => setGroupFlags({ ...groupFlags, [name]: isSelected })}>{name}</Switch>
             ))}
           >
             <DisclosureGroup defaultExpandedKeys={['disclosure-a']} {...groupFlags}>

@@ -1,9 +1,8 @@
 import {
-  Button, DemoBlock, Dialog, DialogTrigger, Heading, Modal, ModalOverlay,
+  Button, DemoBlock, Dialog, DialogTrigger, Heading, Modal, ModalOverlay, Switch,
 } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { confirmationFeedback, dialogContent, dialogExampleCode, dialogExampleCopy, dialogRoles } from './dialogContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -22,7 +21,7 @@ export default function DialogPage() {
             codeView={dialogExampleCode({ role, isDismissable })}
             endPanel={<>
               <PanelSelect label="role" options={dialogRoles} value={role} onChange={setRole} />
-              {!isAlert && <PanelSwitch isSelected={isDismissable} onChange={setIsDismissable}>isDismissable</PanelSwitch>}
+              {!isAlert && <Switch isSelected={isDismissable} onChange={setIsDismissable}>isDismissable</Switch>}
             </>}
           >
             {isAlert

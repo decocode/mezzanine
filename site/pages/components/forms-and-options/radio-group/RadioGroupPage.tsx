@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import {
-  Cell, Column, DemoBlock, ListBoxItem, RadioButton, RadioField, RadioGroup, Row, Select, SelectionIndicator, Table, TableBody, TableHeader, Text,
+  Cell, Column, DemoBlock, ListBoxItem, RadioButton, RadioField, RadioGroup, Row, Select, SelectionIndicator, Switch, Table, TableBody, TableHeader, Text,
 } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { radioGroupContent, radioGroupExample, radioGroupExampleCode, radioGroupExampleProps, radioGroupFlags, radioGroupOrientations, radioGroupStates } from './radioGroupContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 import { RichText } from '../../../../components/RichText'
@@ -13,7 +12,7 @@ export default function RadioGroupPage() {
   const [flags, setFlags] = useState<Record<(typeof radioGroupFlags)[number], boolean>>({ description: false, isInvalid: false, isReadOnly: false, isDisabled: false })
   const props = radioGroupExampleProps(defaultValue, orientation, flags)
   const panelSwitch = (name: (typeof radioGroupFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage

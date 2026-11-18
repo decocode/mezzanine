@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Cell, Checkbox, CheckboxGroup, Column, DemoBlock, ListBoxItem, Row, Select, Table, TableBody, TableHeader } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { Cell, Checkbox, CheckboxGroup, Column, DemoBlock, ListBoxItem, Row, Select, Switch, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import {
   checkboxContent, checkboxExampleCode, checkboxExampleProps, checkboxExampleText, checkboxFlags, checkboxGroupDefaultValueLabel, checkboxGroupExampleCode, checkboxGroupExampleLabels,
   checkboxGroupExampleProps, checkboxGroupFlags, checkboxStateLabels,
@@ -15,10 +14,10 @@ export default function CheckboxPage() {
   const [groupFlags, setGroupFlags] = useState(allOff(checkboxGroupFlags))
   const [groupDefault, setGroupDefault] = useState<string | null>(null)
   const panelSwitch = (name: (typeof checkboxFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
-  const groupPanelSwitch = (name: (typeof checkboxGroupFlags)[number]) => (
-    <PanelSwitch isSelected={groupFlags[name]} onChange={(isSelected) => setGroupFlags({ ...groupFlags, [name]: isSelected })}>{name}</PanelSwitch>
+  const groupSwitch = (name: (typeof checkboxGroupFlags)[number]) => (
+    <Switch isSelected={groupFlags[name]} onChange={(isSelected) => setGroupFlags({ ...groupFlags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage
@@ -78,10 +77,10 @@ export default function CheckboxPage() {
               <Select size="sm" label={checkboxGroupDefaultValueLabel} selectedKey={groupDefault} onSelectionChange={(key) => { if (key != null) setGroupDefault(String(key)) }}>
                 {checkboxGroupExampleLabels.checkboxes.map((checkbox) => <ListBoxItem key={checkbox} id={checkbox}>{checkbox}</ListBoxItem>)}
               </Select>
-              {groupPanelSwitch('description')}
-              {!groupFlags.isDisabled && groupPanelSwitch('isInvalid')}
-              {groupPanelSwitch('isReadOnly')}
-              {!groupFlags.isInvalid && groupPanelSwitch('isDisabled')}
+              {groupSwitch('description')}
+              {!groupFlags.isDisabled && groupSwitch('isInvalid')}
+              {groupSwitch('isReadOnly')}
+              {!groupFlags.isInvalid && groupSwitch('isDisabled')}
             </>}
           >
             <CheckboxGroup key={groupDefault ?? ''} {...checkboxGroupExampleProps(groupDefault, groupFlags)}>

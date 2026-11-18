@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { DemoBlock, SearchField } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { DemoBlock, SearchField, Switch } from '@decocode/mezzanine'
 import { searchFieldContent, searchFieldExampleCode, searchFieldExampleProps, searchFieldFlags } from './searchFieldContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function SearchFieldPage() {
   const [flags, setFlags] = useState<Record<(typeof searchFieldFlags)[number], boolean>>({ description: false, isInvalid: false, isReadOnly: false, isDisabled: false })
   const panelSwitch = (name: (typeof searchFieldFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage

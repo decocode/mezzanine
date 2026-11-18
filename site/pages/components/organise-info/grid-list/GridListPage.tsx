@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, GridList, GridListItem } from '@decocode/mezzanine'
+import { DemoBlock, GridList, GridListItem, Switch } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import { gridListContent, gridListExampleCode, gridListExampleLabels, gridListLayouts, gridListSelectionModes } from './gridListContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -20,7 +19,7 @@ export default function GridListPage() {
             endPanel={<>
               <PanelSelect label="layout" options={gridListLayouts} value={layout} onChange={setLayout} />
               <PanelSelect label="selectionMode" options={gridListSelectionModes} value={selectionMode} onChange={setSelectionMode} />
-              <PanelSwitch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</PanelSwitch>
+              <Switch isSelected={disabledKeys} onChange={setDisabledKeys}>disabledKeys</Switch>
             </>}
           >
             {/* A new key starts the list again, so a change of selection mode clears its choices. */}

@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { DemoBlock, TableOfContents } from '@decocode/mezzanine'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
+import { DemoBlock, Switch, TableOfContents } from '@decocode/mezzanine'
 import { tableOfContentsContent, tableOfContentsExampleCode, tableOfContentsExampleHeading } from './tableOfContentsContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -31,7 +30,7 @@ export default function TableOfContentsPage() {
           <DemoBlock
             align="stretch"
             codeView={tableOfContentsExampleCode(hasHeading)}
-            endPanel={<PanelSwitch isSelected={hasHeading} onChange={setHasHeading}>heading</PanelSwitch>}
+            endPanel={<Switch isSelected={hasHeading} onChange={setHasHeading}>heading</Switch>}
           >
             <div className="table-of-contents-example mz-prose">
               {hasHeading

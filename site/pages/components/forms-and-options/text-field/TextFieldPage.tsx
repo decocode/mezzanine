@@ -1,7 +1,6 @@
-import { Button, DemoBlock, Form, TextField } from '@decocode/mezzanine'
+import { Button, DemoBlock, Form, Switch, TextField } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
   textFieldContent, textFieldExampleCode, textFieldExampleText, textFieldFlags, textFieldTypes, textFieldValidationBehaviors, textFieldValidationCode,
 } from './textFieldContent'
@@ -17,7 +16,7 @@ export default function TextFieldPage() {
   const [validationBehavior, setValidationBehavior] = useState<(typeof textFieldValidationBehaviors)[number]>('native')
 
   const panelSwitch = (name: (typeof textFieldFlags)[number]) => (
-    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+    <Switch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</Switch>
   )
   return (
     <ContentPage

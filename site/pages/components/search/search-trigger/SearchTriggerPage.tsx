@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { DemoBlock, Dialog, DialogTrigger, Heading, Modal, ModalOverlay, SearchField, SearchTrigger, Text } from '@decocode/mezzanine'
+import { DemoBlock, Dialog, DialogTrigger, Heading, Modal, ModalOverlay, SearchField, SearchTrigger, Switch, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
-import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
   searchTriggerContent, searchTriggerDialogText, searchTriggerExample, searchTriggerExampleCode, searchTriggerIconPositions, searchTriggerTooltipPositions,
 } from './searchTriggerContent'
@@ -24,8 +23,8 @@ export default function SearchTriggerPage() {
               <PanelSelect label="iconPosition" options={searchTriggerIconPositions} value={iconPosition} onChange={setIconPosition} />
               {isIconOnly
                 ? <PanelSelect label="tooltipPosition" options={searchTriggerTooltipPositions} value={tooltipPosition} onChange={setTooltipPosition} />
-                : <PanelSwitch isSelected={shortcut} onChange={setShortcut}>shortcut</PanelSwitch>}
-              <PanelSwitch isSelected={isDisabled} onChange={setIsDisabled}>isDisabled</PanelSwitch>
+                : <Switch isSelected={shortcut} onChange={setShortcut}>shortcut</Switch>}
+              <Switch isSelected={isDisabled} onChange={setIsDisabled}>isDisabled</Switch>
             </>}
           >
             <DialogTrigger>
