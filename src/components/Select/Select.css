@@ -1,5 +1,5 @@
-/* Follows React Aria's vanilla Select: a label, a trigger that looks like a text field, help text and
-   the list in a Popover. */
+/* Follows React Aria's starter Select: a label, help text, error, then a trigger that looks like a text
+   field, with the list in a Popover. */
 .mz-select {
   display: flex;
   flex-direction: column;
@@ -40,6 +40,12 @@
 
 .mz-select > .mz-field-error {
   color: var(--select-error-foreground, var(--color-danger));
+}
+
+/* The label, help text and error sit close together as one block of text, and the trigger sits further
+   below them, at space-2, so it reads as separate from the text. */
+.mz-select > .mz-select-trigger:not(:first-child) {
+  margin-block-start: calc(var(--space-2) - var(--select-gap, var(--space-gap-field)));
 }
 
 /* size matches Button's heights and icon sizes, since the chevron area works like a button. The value
@@ -238,6 +244,10 @@
 }
 
 @media (forced-colors: active) {
+  .mz-select > .mz-field-error {
+    color: Mark;
+  }
+
   .mz-select-trigger {
     --_select-trigger-border: ButtonText;
   }

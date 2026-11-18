@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, DemoBlock, FieldError, Form, Input, Label, TextField } from '@decocode/mezzanine'
+import { Button, DemoBlock, Form, TextField } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { formContent, formExampleCode, formExampleLabels, formValidationBehaviors } from './formContent'
 import { ContentPage } from '../../../../templates/ContentPage'
@@ -17,11 +17,7 @@ export default function FormPage() {
           >
             {/* A new key starts the form again, so a change of behaviour clears its errors. */}
             <Form key={validationBehavior} validationBehavior={validationBehavior} onSubmit={(event) => event.preventDefault()}>
-              <TextField name="field-a" isRequired>
-                <Label>{formExampleLabels.field}</Label>
-                <Input />
-                <FieldError />
-              </TextField>
+              <TextField label={formExampleLabels.field} name="field-a" isRequired />
               <Button type="submit">{formExampleLabels.submit}</Button>
             </Form>
           </DemoBlock>

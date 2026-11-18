@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DemoBlock, Dialog, DialogTrigger, Heading, Input, Modal, ModalOverlay, SearchField, SearchTrigger, Text } from '@decocode/mezzanine'
+import { DemoBlock, Dialog, DialogTrigger, Heading, Modal, ModalOverlay, SearchField, SearchTrigger, Text } from '@decocode/mezzanine'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
@@ -37,7 +37,7 @@ export default function SearchTriggerPage() {
                   <Dialog>
                     <Heading slot="title">{searchTriggerDialogText.title}</Heading>
                     <Text elementType="p">{searchTriggerDialogText.description}</Text>
-                    <SearchField aria-label="Search" autoFocus><Input /></SearchField>
+                    <SearchField aria-label="Search" autoFocus />
                   </Dialog>
                 </Modal>
               </ModalOverlay>

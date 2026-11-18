@@ -17,21 +17,22 @@ import { CloseIcon } from '../../icons/Icons'
 export interface TagGroupProps<T extends object> extends Omit<ReactAriaTagGroupProps, 'children'>, Pick<TagListProps<T>, 'items' | 'children' | 'renderEmptyState'> {
   // The visible label. Without one, give the TagGroup an aria-label.
   label?: ReactNode
-  // Help text under the tags.
+  // Help text, under the label.
   description?: ReactNode
-  // The message shown when the group is invalid.
-  errorMessage?: ReactNode
+  // A message about a problem with the tags. React Aria's TagGroup has no validation, so it shows
+  // whenever it's given, as in React Aria's starter.
+  errorMessage?: string
 }
 
-// A group of tags. Mezzanine draws the label, the list and the help and error text, following React
-// Aria's vanilla starter.
+// A group of tags, following React Aria's starter TagGroup. Mezzanine draws the label, help text, error,
+// then the tags.
 export function TagGroup<T extends object>({ label, description, errorMessage, items, children, renderEmptyState, ...props }: TagGroupProps<T>) {
   return (
     <ReactAriaTagGroup {...props} className={composeClassName('mz-tag-group', props.className)}>
       {label != null && <Label>{label}</Label>}
-      <TagList items={items} renderEmptyState={renderEmptyState}>{children}</TagList>
       {description != null && <Text slot="description">{description}</Text>}
-      {errorMessage != null && <Text slot="errorMessage">{errorMessage}</Text>}
+      {errorMessage != null && <Text slot="errorMessage" className="mz-field-error">{errorMessage}</Text>}
+      <TagList items={items} renderEmptyState={renderEmptyState}>{children}</TagList>
     </ReactAriaTagGroup>
   )
 }

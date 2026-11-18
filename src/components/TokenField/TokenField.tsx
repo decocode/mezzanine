@@ -15,7 +15,7 @@ import { Text } from '../Text/Text'
 export interface TokenFieldProps<T extends TokenFieldValue = TokenFieldValue> extends Omit<ReactAriaTokenFieldProps<T>, 'children'> {
   // The visible label. Without one, give the TokenField an aria-label.
   label?: ReactNode
-  // Help text under the field.
+  // Help text, under the label.
   description?: ReactNode
   // Text shown while the field is empty.
   placeholder?: string
@@ -25,14 +25,15 @@ export interface TokenFieldProps<T extends TokenFieldValue = TokenFieldValue> ex
   children: TokenInputProps<T>['children']
 }
 
-// A text field that holds tokens among its text. Mezzanine draws the label, the editable area with the
-// text field's look, and the help text, following React Aria's vanilla starter.
+// A text field that holds tokens among its text, following React Aria's starter TokenField. Mezzanine
+// draws the label, help text, then the editable area with the text field's look. It has no error
+// message yet, because React Aria's TokenField has no validation.
 export function TokenField<T extends TokenFieldValue = TokenFieldValue>({ label, description, placeholder, inputRef, children, ...props }: TokenFieldProps<T>) {
   return (
     <ReactAriaTokenField {...props} className={composeClassName('mz-token-field', props.className)}>
       {label != null && <Label>{label}</Label>}
-      <TokenInput<T> ref={inputRef} data-placeholder={placeholder}>{children}</TokenInput>
       {description != null && <Text slot="description">{description}</Text>}
+      <TokenInput<T> ref={inputRef} data-placeholder={placeholder}>{children}</TokenInput>
     </ReactAriaTokenField>
   )
 }

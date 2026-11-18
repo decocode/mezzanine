@@ -10,17 +10,25 @@
   text-transform: var(--text-transform-body);
 }
 
-.mz-radio-group[data-orientation='horizontal'] {
+/* Follows React Aria's starter RadioGroup: a label, any help text, any error, then the options. */
+.mz-radio-group-options {
+  display: grid;
+  gap: var(--radio-group-gap, var(--space-gap-field));
+}
+
+/* Side by side, the options share rows. */
+.mz-radio-group[data-orientation='horizontal'] > .mz-radio-group-options {
   display: flex;
   flex-wrap: wrap;
   align-items: start;
   column-gap: var(--radio-group-horizontal-gap, var(--space-gap-cluster));
 }
 
-/* Side by side, the options share rows, while the label, help text and error each keep a row of their
-   own, above and below them. */
-.mz-radio-group[data-orientation='horizontal'] > :is(.mz-label, [slot='description'], .mz-field-error) {
-  flex-basis: 100%;
+/* The label, help text and error sit close together as one block of text, and the first option's ring
+   sits space-2 below them, as a field's input does. An option's row is a full target tall with the ring
+   centred, so the options move up by the room the row adds above the ring. */
+.mz-radio-group > .mz-radio-group-options:not(:first-child) {
+  margin-block-start: calc(var(--space-2) - var(--radio-group-gap, var(--space-gap-field)) - (var(--target-size-sm) - var(--radio-indicator-size, var(--icon-size-sm))) / 2);
 }
 
 .mz-radio-group > .mz-label {
@@ -42,21 +50,8 @@
   align-items: start;
 }
 
-/* An option's row is a full target tall, with its text centred, so the first option moves up by the
-   room its row adds above the text. The group's label or help text then sits as close to it as a
-   field's label to its input. */
-.mz-radio-group:not([data-orientation='horizontal']) > :is(.mz-label, [slot='description']) + .mz-radio-field {
-  margin-block-start: calc((1lh - var(--target-size-sm)) / 2);
-}
-
-/* After a last option without a description, the error moves up by the room the option's row adds
-   below its text, so it sits as close as a field's error to its input. */
-.mz-radio-group:not([data-orientation='horizontal']) > .mz-radio-field:not(:has(> [slot='description'])) + .mz-field-error {
-  margin-block-start: calc((var(--line-height-body-md) * var(--font-size-body-md) - var(--target-size-sm)) / 2);
-}
-
 /* An option with a description keeps clear of the next option, so each option reads as one group. */
-.mz-radio-group > .mz-radio-field:has(> [slot='description']):has(+ .mz-radio-field) {
+.mz-radio-group-options > .mz-radio-field:has(> [slot='description']):has(+ .mz-radio-field) {
   margin-block-end: var(--radio-group-option-gap, var(--space-gap-control));
 }
 
@@ -157,5 +152,9 @@
 
   .mz-radio-button[data-disabled] > .mz-selection-indicator {
     background: GrayText;
+  }
+
+  .mz-radio-group > .mz-field-error {
+    color: Mark;
   }
 }

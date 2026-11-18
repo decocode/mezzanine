@@ -79,7 +79,8 @@ export const selectNoDefaultKey = 'none'
 
 // Without a default key, the prop is left out and the example shows its placeholder.
 export const selectExampleText = { description: 'Select description', errorMessage: 'Select error message' } as const
-export const selectFlags = ['description', 'isDisabled', 'isInvalid'] as const
+// The on/off props in panel order. The error message shows whenever isInvalid is on.
+export const selectFlags = ['description', 'isInvalid', 'isDisabled'] as const
 
 export function selectExampleCode(hierarchy: (typeof selectHierarchies)[number], defaultKey: string | null, fields: Record<string, unknown> = {}, icon = false) {
   const defaultKeyProp = defaultKey == null ? '' : ` defaultSelectedKey="${defaultKey}"`

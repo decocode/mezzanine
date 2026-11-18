@@ -65,11 +65,7 @@ export const formValidationBehaviors = ['native', 'aria'] as const
 export function formExampleCode(validationBehavior: string) {
   return [
     `<Form${formatJsxProps({ validationBehavior: validationBehavior === 'native' ? undefined : validationBehavior })} onSubmit={handleSubmit}>`,
-    '  <TextField name="field-a" isRequired>',
-    `    <Label>${formExampleLabels.field}</Label>`,
-    '    <Input />',
-    '    <FieldError />',
-    '  </TextField>',
+    `  <TextField label="${formExampleLabels.field}" name="field-a" isRequired />`,
     `  <Button type="submit">${formExampleLabels.submit}</Button>`,
     '</Form>',
   ].join('\n')

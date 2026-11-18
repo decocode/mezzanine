@@ -42,6 +42,12 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* The label, help text and error sit close together as one block of text, and the box sits further
+   below them, at space-2, so it reads as separate from the text. */
+.mz-text-field > :is(.mz-input, .mz-text-area):not(:first-child) {
+  margin-block-start: calc(var(--space-2) - var(--text-field-gap, var(--space-gap-field)));
+}
+
 :is(.mz-input, .mz-text-area)::placeholder {
   color: var(--input-placeholder-foreground, var(--color-text-muted));
   opacity: 1;

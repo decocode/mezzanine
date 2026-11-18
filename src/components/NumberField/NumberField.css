@@ -1,4 +1,4 @@
-/* Follows React Aria's vanilla NumberField: the input takes the shared text field look, joined to
+/* Follows React Aria's starter NumberField: the input takes the shared text field look, joined to
    its minus and plus buttons at the end. */
 .mz-number-field {
   display: flex;
@@ -23,7 +23,7 @@
   text-transform: var(--text-transform-label);
 }
 
-.mz-number-field > :is([slot='description'], [slot='errorMessage'], .mz-field-error) {
+.mz-number-field > :is([slot='description'], .mz-field-error) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -36,8 +36,14 @@
   color: var(--number-field-description-foreground, var(--color-text-muted));
 }
 
-.mz-number-field > :is([slot='errorMessage'], .mz-field-error) {
+.mz-number-field > .mz-field-error {
   color: var(--number-field-error-foreground, var(--color-danger));
+}
+
+/* The label, help text and error sit close together as one block of text, and the input sits further
+   below them, at space-2, so it reads as separate from the text. */
+.mz-number-field > .mz-number-field-group:not(:first-child) {
+  margin-block-start: calc(var(--space-2) - var(--number-field-gap, var(--space-gap-field)));
 }
 
 .mz-number-field-group {
@@ -120,6 +126,10 @@
 }
 
 @media (forced-colors: active) {
+  .mz-number-field > .mz-field-error {
+    color: Mark;
+  }
+
   .mz-number-field-step {
     border-color: ButtonText;
   }

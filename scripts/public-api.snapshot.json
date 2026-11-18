@@ -1076,27 +1076,15 @@
     "kind": "value"
   },
   {
-    "name": "SwitchButton",
+    "name": "Switch",
     "kind": "value"
-  },
-  {
-    "name": "SwitchButtonProps",
-    "kind": "type"
-  },
-  {
-    "name": "SwitchButtonRenderProps",
-    "kind": "type"
-  },
-  {
-    "name": "SwitchField",
-    "kind": "value"
-  },
-  {
-    "name": "SwitchFieldProps",
-    "kind": "type"
   },
   {
     "name": "SwitchFieldRenderProps",
+    "kind": "type"
+  },
+  {
+    "name": "SwitchProps",
     "kind": "type"
   },
   {

@@ -55,7 +55,7 @@ export function autocompleteExampleCode({ filter, disableAutoFocusFirst }: { fil
     `const { ${filter} } = useFilter({ sensitivity: 'base' })`,
     '',
     `<Autocomplete filter={${filter}}${formatJsxProps({ disableAutoFocusFirst })}>`,
-    '  <SearchField aria-label="Search options"><Input /></SearchField>',
+    '  <SearchField aria-label="Search options" />',
     '  <ListBox aria-label="Options" selectionMode="single" renderEmptyState={() => \'No results\'}>',
     ...autocompleteOptions.map((option) => `    <ListBoxItem id="${option}">${option}</ListBoxItem>`),
     '  </ListBox>',

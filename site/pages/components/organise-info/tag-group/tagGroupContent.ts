@@ -1,5 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
+import { formatJsxElementLines, formatJsxPropLines } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const tagGroupContent: DocsPageContent = {
@@ -62,19 +62,19 @@ export const tagGroupContent: DocsPageContent = {
 // The examples' labels and tags.
 export const tagGroupExampleLabels = { label: 'Tag group', tags: ['Tag A', 'Tag B', 'Tag C'] } as const
 
-// The Properties panel's choices. onRemove gives each tag a remove button, and description is the
-// group's help text.
+// The Properties panel's choices, in panel order. description is the group's help text, errorMessage a
+// message about a problem with the tags, and onRemove gives each tag a remove button.
 export const tagGroupSelectionModes = ['none', 'single', 'multiple'] as const
-export const tagGroupExampleText = { description: 'Tag group description' } as const
+export const tagGroupExampleText = { description: 'Tag group description', errorMessage: 'Tag group error message' } as const
 
-export function tagGroupExampleCode({ selectionMode, removable, description }: { selectionMode: string, removable: boolean, description: boolean }) {
-  const props = formatJsxProps({
-    selectionMode: selectionMode === 'none' ? undefined : selectionMode,
-    description: description ? tagGroupExampleText.description : undefined,
-  })
-  return [
-    `<TagGroup label="${tagGroupExampleLabels.label}"${props}${removable ? ' onRemove={removeTags}' : ''}>`,
-    '  {tags.map((tag) => <Tag key={tag} id={tag}>{tag}</Tag>)}',
-    '</TagGroup>',
-  ].join('\n')
+export function tagGroupExampleCode({ selectionMode, description, errorMessage, removable }: { selectionMode: string, description: boolean, errorMessage: boolean, removable: boolean }) {
+  return formatJsxElementLines('TagGroup', [
+    ...formatJsxPropLines({
+      label: tagGroupExampleLabels.label,
+      selectionMode: selectionMode === 'none' ? undefined : selectionMode,
+      description: description ? tagGroupExampleText.description : undefined,
+      errorMessage: errorMessage ? tagGroupExampleText.errorMessage : undefined,
+    }),
+    ...(removable ? ['onRemove={removeTags}'] : []),
+  ], ['{tags.map((tag) => <Tag key={tag} id={tag}>{tag}</Tag>)}'])
 }

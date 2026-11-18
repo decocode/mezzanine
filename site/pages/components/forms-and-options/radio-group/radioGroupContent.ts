@@ -1,6 +1,6 @@
 import type { Copy, DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
+import { formatJsxElementLines, formatJsxPropLines, formatJsxProps } from '../../../../components/formatJsxProps'
 
 export const radioGroupContent: DocsPageContent = {
   id: 'radio-group',
@@ -19,31 +19,32 @@ export const radioGroupContent: DocsPageContent = {
   technicalDetails: [
     {
       key: 'anatomy',
-      intro: ['Compose these exported parts inside a `RadioGroup`. Each `RadioField` supplies the value for its `RadioButton`; descriptions and validation feedback are optional.'],
+      intro: ['Put a `RadioField` inside the `RadioGroup` for each option. Each `RadioField` supplies the value for its `RadioButton`, and can have its own description.'],
       table: {
         label: 'RadioGroup anatomy',
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'RadioGroup', description: 'Contains the options and manages their shared selection.' },
-          { name: 'Label', description: 'Gives the `RadioGroup` a visible, accessible name.' },
+          { name: 'RadioGroup', description: 'Manages the options’ shared selection and its validation. Mezzanine draws the label, help text, error, then the options.' },
           { name: 'RadioField', description: 'Defines an option with a unique value and an optional description.' },
           { name: 'RadioButton', description: 'Contains the option label and its interactive indicator.' },
           { name: 'SelectionIndicator', description: 'Displays the mark inside the selected `RadioButton`.' },
-          { name: 'Text', description: 'Provides supporting text using `slot="description"`, for the group or an option.' },
-          { name: 'FieldError', description: 'Displays validation feedback when the `RadioGroup` is invalid.' },
+          { name: 'Text', description: 'An option’s supporting text, using `slot="description"`.' },
         ],
       },
     },
     {
       key: 'usage',
-      intro: ['Give each `RadioField` a unique `value`. Use `defaultValue` for an initial selection, or `value` with `onChange` to control it from your app.'],
+      intro: [
+        'Give each `RadioField` a unique `value`. Use `defaultValue` for an initial selection, or `value` with `onChange` to control it from your app.',
+        '`label` names the group. `description` adds help text and `errorMessage` the message shown when the group is invalid. Both sit under the label, above the options.',
+      ],
     },
     {
       key: 'accessibility',
       intro: [
-        'Use a visible `Label` for the group and a clear label inside each `RadioButton`.',
-        'Tab moves into the group and arrow keys move between available options. Disabled options cannot be selected. Use a description or `FieldError` to explain an option or validation problem in text.',
+        'Give the group a visible `label` and a clear label inside each `RadioButton`.',
+        'Tab moves into the group and arrow keys move between available options. Disabled options cannot be selected. Use a description or `errorMessage` to explain an option or validation problem in text.',
       ],
     },
     {
@@ -78,10 +79,11 @@ export const radioGroupStates: readonly { readonly name: string; readonly proper
   { name: 'Focused', property: 'data-focus-visible', description: 'Keyboard focus adds an outline around the `RadioButton` indicator.' },
   { name: 'Disabled', property: 'isDisabled', description: 'Disables the whole `RadioGroup` or an individual `RadioField`. Option C is disabled in the example.' },
   { name: 'Read only', property: 'isReadOnly', description: 'Keeps the selection available to inspect but prevents changing it.' },
-  { name: 'Invalid', property: 'isInvalid', description: 'Uses the invalid indicator border. `FieldError` provides the associated validation message.' },
+  { name: 'Invalid', property: 'isInvalid', description: 'Uses the invalid indicator border. `errorMessage` gives the message shown above the options.' },
 ]
 
-// The Example's options and error message, and the Properties panel's props, in panel order.
+// The Example's text and options, and the Properties panel's props, in panel order. The error message
+// shows whenever isInvalid is on.
 export const radioGroupExample = {
   label: 'RadioGroup label',
   description: 'RadioGroup description',
@@ -90,25 +92,32 @@ export const radioGroupExample = {
     { value: 'option-b', label: 'Option B', description: 'RadioField B description' },
     { value: 'option-c', label: 'Option C', description: 'Disabled RadioField description', isDisabled: true },
   ],
-  error: 'Select an option to continue.',
+  errorMessage: 'Select an option to continue.',
   defaultValueLabel: 'defaultValue',
   orientationLabel: 'orientation',
 } as const
 export const radioGroupOrientations = ['vertical', 'horizontal'] as const
-export const radioGroupFlags = ['isDisabled', 'isReadOnly', 'isInvalid'] as const
+export const radioGroupFlags = ['description', 'isInvalid', 'isReadOnly', 'isDisabled'] as const
 
-export function radioGroupExampleCode({ errorMessage, ...props }: Record<string, unknown>) {
-  return [
-    `<RadioGroup${formatJsxProps(props)}>`,
-    `  <Label>${radioGroupExample.label}</Label>`,
-    `  <Text slot="description">${radioGroupExample.description}</Text>`,
-    ...radioGroupExample.options.flatMap((option) => [
-      `  <RadioField value="${option.value}"${'isDisabled' in option ? ' isDisabled' : ''}>`,
-      `    <RadioButton><SelectionIndicator />${option.label}</RadioButton>`,
-      `    <Text slot="description">${option.description}</Text>`,
-      '  </RadioField>',
-    ]),
-    ...(errorMessage ? [`  <FieldError>${radioGroupExample.error}</FieldError>`] : []),
-    '</RadioGroup>',
-  ].join('\n')
+// The example's props, in panel order, shared by the demo and its code.
+export function radioGroupExampleProps(defaultValue: string | null, orientation: (typeof radioGroupOrientations)[number], flags: Record<(typeof radioGroupFlags)[number], boolean>) {
+  return {
+    label: radioGroupExample.label,
+    defaultValue: defaultValue ?? undefined,
+    orientation: orientation === 'vertical' ? undefined : orientation,
+    description: flags.description ? radioGroupExample.description : undefined,
+    isInvalid: flags.isInvalid,
+    errorMessage: flags.isInvalid ? radioGroupExample.errorMessage : undefined,
+    isReadOnly: flags.isReadOnly,
+    isDisabled: flags.isDisabled,
+  }
+}
+
+export function radioGroupExampleCode(props: ReturnType<typeof radioGroupExampleProps>) {
+  return formatJsxElementLines('RadioGroup', formatJsxPropLines(props), radioGroupExample.options.flatMap((option) => [
+    `<RadioField${formatJsxProps({ value: option.value, isDisabled: 'isDisabled' in option })}>`,
+    `  <RadioButton><SelectionIndicator />${option.label}</RadioButton>`,
+    `  <Text slot="description">${option.description}</Text>`,
+    '</RadioField>',
+  ]))
 }

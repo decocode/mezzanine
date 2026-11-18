@@ -25,9 +25,9 @@ export type SelectHierarchy = 'primary' | 'secondary'
 export interface SelectProps<T extends object = object, M extends 'single' | 'multiple' = 'single'> extends Omit<ReactAriaSelectProps<T, M>, 'children'> {
   // The visible label. Without one, give the Select an aria-label.
   label?: ReactNode
-  // Help text under the field.
+  // Help text, under the label.
   description?: ReactNode
-  // The message shown when the field is invalid.
+  // The message shown when the field is invalid. Without one, the browser's own message shows.
   errorMessage?: string | ((validation: ValidationResult) => string)
   // The options, when they come from data.
   items?: Iterable<T>
@@ -42,8 +42,8 @@ export interface SelectProps<T extends object = object, M extends 'single' | 'mu
   tooltipPosition?: TooltipProps['placement']
 }
 
-// A field that picks from a list. Mezzanine draws the label, the trigger with its value and chevron, the
-// help and error text, and the list in a Popover, following React Aria's vanilla starter.
+// A field that picks from a list, following React Aria's starter Select. Mezzanine draws the label, help
+// text, error, then the trigger with its value and chevron, and the list in a Popover.
 export function Select<T extends object = object, M extends 'single' | 'multiple' = 'single'>({ label, description, errorMessage, items, children, hierarchy = 'secondary', size = 'md', valuePosition, tooltipPosition, ...props }: SelectProps<T, M>) {
   const trigger = (
     <Button className="mz-select-trigger" data-hierarchy={hierarchy} data-size={size}>
@@ -55,14 +55,14 @@ export function Select<T extends object = object, M extends 'single' | 'multiple
   return (
     <ReactAriaSelect<T, M> {...props} className={composeClassName('mz-select', props.className)} data-value-position={valuePosition}>
       {label != null && <Label>{label}</Label>}
+      {description != null && <Text slot="description">{description}</Text>}
+      <FieldError>{errorMessage}</FieldError>
       {tooltipLabel === undefined ? trigger : (
         <TooltipTrigger>
           {trigger}
           <Tooltip placement={tooltipPosition}>{tooltipLabel}</Tooltip>
         </TooltipTrigger>
       )}
-      {description != null && <Text slot="description">{description}</Text>}
-      <FieldError>{errorMessage}</FieldError>
       <Popover>
         <ListBox items={items}>{children}</ListBox>
       </Popover>

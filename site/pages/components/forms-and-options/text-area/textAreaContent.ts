@@ -1,5 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
+import { formatJsxElementLines, formatJsxPropLines } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const textAreaContent: DocsPageContent = {
@@ -21,27 +21,22 @@ export const textAreaContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'TextField', description: 'Manages value, validation and associations between field parts.' },
-          { name: 'Label', description: 'Provides the visible field label.' },
-          { name: 'TextArea', description: 'Renders a multiline input with vertical resizing.' },
-          { name: 'Text slot="description"', description: 'Provides optional supporting text.' },
-          { name: 'FieldError', description: 'Displays validation feedback.' },
+          { name: 'TextArea', description: 'Holds the value and its validation. Mezzanine draws the label, help text, error and a multiline box with vertical resizing, in that order.' },
         ],
       },
     },
     {
       key: 'usage',
       body: [
-        '`TextArea` replaces `Input` inside `TextField`.',
-        'Set `defaultValue` on `TextField` for an initial value, or use `value` and `onChange` to manage its value in your application. Set `isRequired`, `isReadOnly`, `isDisabled` and `isInvalid` on `TextField`. An invalid text area stays invalid while it’s edited.',
-        'Set `rows` on `TextArea` to choose its initial visible line count. The field permits vertical resizing and stays within its container width. `--height-text-area-min` sets its minimum height; otherwise it looks and behaves like a text field.',
-        'Put `placeholder` on `TextArea`.',
+        'Set `defaultValue` for an initial value, or use `value` and `onChange` to manage its value in your application. Set `isRequired`, `isReadOnly`, `isDisabled` and `isInvalid`. An invalid text area stays invalid while it’s edited.',
+        '`description` adds help text and `errorMessage` the message shown when the field is invalid. Both sit under the label, above the box.',
+        '`rows` chooses its initial visible line count. The field permits vertical resizing and stays within its container width. `--height-text-area-min` sets its minimum height; otherwise it looks and behaves like a text field.',
       ],
     },
     {
       key: 'accessibility',
       body: [
-        'Use Mezzanine’s `Label`, `Text slot="description"` and `FieldError` for automatically associated labels, supporting text and errors.',
+        'Screen readers announce the `label`, the help text and any error with the box.',
         'Keep a visible label: a placeholder disappears when someone enters text.',
       ],
     },
@@ -65,21 +60,25 @@ export const textAreaContent: DocsPageContent = {
   ],
 }
 
-// The Example's copy, and the Properties panel's choices in panel order. errorMessage appears with
-// isInvalid.
+// The Example's copy, and the Properties panel's choices in panel order. The error message shows
+// whenever isInvalid is on.
 export const textAreaExampleText = {
   label: 'Text area label', placeholder: 'Enter multiple lines of text', description: 'Supporting information about this field.', errorMessage: 'Text area error message',
 } as const
 export const textAreaRows = ['2', '4', '6'] as const
-export const textAreaFlags = ['placeholder', 'description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
+export const textAreaFlags = ['description', 'isInvalid', 'placeholder', 'isReadOnly', 'isDisabled'] as const
 
-export function textAreaExampleCode({ rows, flags, hasErrorMessage }: { rows: number, flags: Record<(typeof textAreaFlags)[number], boolean>, hasErrorMessage: boolean }) {
-  return [
-    `<TextField${formatJsxProps({ isDisabled: flags.isDisabled, isReadOnly: flags.isReadOnly, isInvalid: flags.isInvalid })} validationBehavior="aria">`,
-    `  <Label>${textAreaExampleText.label}</Label>`,
-    `  <TextArea${formatJsxProps({ rows, placeholder: flags.placeholder ? textAreaExampleText.placeholder : undefined })} />`,
-    ...(flags.description ? [`  <Text slot="description">${textAreaExampleText.description}</Text>`] : []),
-    ...(flags.isInvalid && hasErrorMessage ? [`  <FieldError>${textAreaExampleText.errorMessage}</FieldError>`] : []),
-    '</TextField>',
-  ].join('\n')
+// The props in the Properties panel's order, one to a line.
+export function textAreaExampleCode({ rows, flags }: { rows: number, flags: Record<(typeof textAreaFlags)[number], boolean> }) {
+  const props = {
+    rows: rows,
+    description: flags.description ? textAreaExampleText.description : undefined,
+    isInvalid: flags.isInvalid,
+    errorMessage: flags.isInvalid ? textAreaExampleText.errorMessage : undefined,
+    placeholder: flags.placeholder ? textAreaExampleText.placeholder : undefined,
+    isReadOnly: flags.isReadOnly,
+    isDisabled: flags.isDisabled,
+    validationBehavior: 'aria',
+  }
+  return formatJsxElementLines('TextArea', formatJsxPropLines({ label: textAreaExampleText.label, ...props }))
 }

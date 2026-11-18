@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Cell, Checkbox, CheckboxGroup, Column, DemoBlock, FieldError, Label, ListBoxItem, Row, Select, Table, TableBody, TableHeader, Text } from '@decocode/mezzanine'
+import { Cell, Checkbox, CheckboxGroup, Column, DemoBlock, ListBoxItem, Row, Select, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
 import {
-  checkboxContent, checkboxExampleCode, checkboxExampleDescription, checkboxExampleError, checkboxExampleLabel, checkboxFlags, checkboxGroupDefaultValueLabel, checkboxGroupExampleCode, checkboxGroupExampleError,
-  checkboxGroupExampleLabels, checkboxGroupFlags, checkboxStateLabels,
+  checkboxContent, checkboxExampleCode, checkboxExampleProps, checkboxExampleText, checkboxFlags, checkboxGroupDefaultValueLabel, checkboxGroupExampleCode, checkboxGroupExampleLabels,
+  checkboxGroupExampleProps, checkboxGroupFlags, checkboxStateLabels,
 } from './checkboxContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
@@ -12,33 +12,35 @@ const allOff = <T extends readonly string[]>(names: T) => Object.fromEntries(nam
 
 export default function CheckboxPage() {
   const [flags, setFlags] = useState(allOff(checkboxFlags))
-  const [hasDescription, setHasDescription] = useState(false)
-  const description = hasDescription ? checkboxExampleDescription : undefined
-  const [hasErrorMessage, setHasErrorMessage] = useState(false)
-  // errorMessage only shows on an invalid checkbox, so its control appears with isInvalid.
-  const errorMessage = flags.isInvalid && hasErrorMessage ? checkboxExampleError : undefined
   const [groupFlags, setGroupFlags] = useState(allOff(checkboxGroupFlags))
   const [groupDefault, setGroupDefault] = useState<string | null>(null)
-  const [groupHasErrorMessage, setGroupHasErrorMessage] = useState(false)
-  const groupShowsError = groupFlags.isInvalid && groupHasErrorMessage
-  const groupProps = { defaultValue: groupDefault == null ? undefined : [groupDefault], ...groupFlags }
+  const panelSwitch = (name: (typeof checkboxFlags)[number]) => (
+    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+  )
+  const groupPanelSwitch = (name: (typeof checkboxGroupFlags)[number]) => (
+    <PanelSwitch isSelected={groupFlags[name]} onChange={(isSelected) => setGroupFlags({ ...groupFlags, [name]: isSelected })}>{name}</PanelSwitch>
+  )
   return (
     <ContentPage
       content={checkboxContent}
       parts={{
-        // The Properties panel has a control for each prop that changes what the checkbox looks like or does.
         example: (
           <DemoBlock
-            codeView={checkboxExampleCode({ description, ...flags, errorMessage })}
-            endPanel={[<PanelSwitch key="description" isSelected={hasDescription} onChange={setHasDescription}>description</PanelSwitch>, ...checkboxFlags.flatMap((name) => [
-              <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>,
-              ...(name === 'isInvalid' && flags.isInvalid
-                ? [<PanelSwitch key="errorMessage" isSelected={hasErrorMessage} onChange={setHasErrorMessage}>errorMessage</PanelSwitch>]
-                : []),
-            ])]}
+            codeView={checkboxExampleCode(flags)}
+            endPanel={<>
+              {/* The checkbox's parts in their own order, top to bottom, then the states that affect the
+                  whole checkbox. It's either disabled or invalid, so each of those switches hides while
+                  the other is on. */}
+              {!flags.isDisabled && panelSwitch('isInvalid')}
+              {panelSwitch('defaultSelected')}
+              {panelSwitch('isIndeterminate')}
+              {panelSwitch('description')}
+              {panelSwitch('isReadOnly')}
+              {!flags.isInvalid && panelSwitch('isDisabled')}
+            </>}
           >
             {/* A new key starts the example again, because a default only applies when it first appears. */}
-            <Checkbox key={String(flags.defaultSelected)} {...flags} description={description} errorMessage={errorMessage}>{checkboxExampleLabel}</Checkbox>
+            <Checkbox key={String(flags.defaultSelected)} {...checkboxExampleProps(flags)}>{checkboxExampleText.label}</Checkbox>
           </DemoBlock>
         ),
         states: (
@@ -71,23 +73,19 @@ export default function CheckboxPage() {
         ),
         checkboxGroup: (
           <DemoBlock
-            codeView={checkboxGroupExampleCode({ ...groupProps, errorMessage: groupShowsError })}
+            codeView={checkboxGroupExampleCode(groupDefault, groupFlags)}
             endPanel={<>
               <Select size="sm" label={checkboxGroupDefaultValueLabel} selectedKey={groupDefault} onSelectionChange={(key) => { if (key != null) setGroupDefault(String(key)) }}>
                 {checkboxGroupExampleLabels.checkboxes.map((checkbox) => <ListBoxItem key={checkbox} id={checkbox}>{checkbox}</ListBoxItem>)}
               </Select>
-              {checkboxGroupFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={groupFlags[name]} onChange={(isSelected) => setGroupFlags({ ...groupFlags, [name]: isSelected })}>{name}</PanelSwitch>
-              ))}
-              {groupFlags.isInvalid && <PanelSwitch isSelected={groupHasErrorMessage} onChange={setGroupHasErrorMessage}>errorMessage</PanelSwitch>}
+              {groupPanelSwitch('description')}
+              {!groupFlags.isDisabled && groupPanelSwitch('isInvalid')}
+              {groupPanelSwitch('isReadOnly')}
+              {!groupFlags.isInvalid && groupPanelSwitch('isDisabled')}
             </>}
           >
-            <CheckboxGroup key={groupDefault ?? ''} {...groupProps}>
-              {/* The help text comes after the label, so people read it before choosing. */}
-              <Label>{checkboxGroupExampleLabels.group}</Label>
-              <Text slot="description">{checkboxGroupExampleLabels.description}</Text>
+            <CheckboxGroup key={groupDefault ?? ''} {...checkboxGroupExampleProps(groupDefault, groupFlags)}>
               {checkboxGroupExampleLabels.checkboxes.map((checkbox) => <Checkbox key={checkbox} value={checkbox}>{checkbox}</Checkbox>)}
-              {groupShowsError && <FieldError>{checkboxGroupExampleError}</FieldError>}
             </CheckboxGroup>
           </DemoBlock>
         ),

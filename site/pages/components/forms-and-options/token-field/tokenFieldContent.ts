@@ -18,7 +18,7 @@ export const tokenFieldContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'TokenField', description: 'Holds the value, a sequence of text and tokens. Mezzanine draws the label, the editable area and the help text.' },
+          { name: 'TokenField', description: 'Holds the value, a sequence of text and tokens. Mezzanine draws the label, the help text, then the editable area.' },
           { name: 'TokenInput', description: 'The editable area. It renders a `Token` for each token in the value.' },
           { name: 'Token', description: 'One token.' },
           { name: 'TokenFieldValue', description: 'The value object. Extend it to decide how typed text becomes tokens.' },
@@ -65,7 +65,7 @@ export const tokenFieldExampleLabels = { label: 'Token field', tokens: ['Token A
 
 // The Properties panel's on/off props, in panel order.
 export const tokenFieldExampleText = { description: 'Token field description', placeholder: 'Type a token' } as const
-export const tokenFieldFlags = ['description', 'isDisabled', 'isReadOnly'] as const
+export const tokenFieldFlags = ['description', 'isReadOnly', 'isDisabled'] as const
 
 export function tokenFieldExampleCode(props: Record<string, unknown>) {
   return [

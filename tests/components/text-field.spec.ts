@@ -23,6 +23,15 @@ test('text fields support keyboard editing, descriptions and validation', async 
   await panel.locator('label', { hasText: /^isDisabled$/ }).click()
   await expect(field).toBeDisabled()
   await panel.locator('label', { hasText: /^isDisabled$/ }).click()
+  // The label, help text and error come before the input, so people read them before they type. An
+  // invalid field always shows its message, and can't also be disabled.
+  await panel.locator('label', { hasText: /^isInvalid$/ }).click()
+  await expect(panel.locator('label', { hasText: /^isDisabled$/ })).toHaveCount(0)
+  const parts = page.locator('.docs-page-lead .mz-text-field > *')
+  await expect(parts).toHaveClass([/mz-label/, /mz-text/, /mz-field-error/, /mz-input/])
+  await expect(page.locator('.docs-page-lead .mz-field-error')).toHaveText('Field error message')
+  await expect(field).toHaveAccessibleDescription('Supporting information about this field. Field error message')
+  await panel.locator('label', { hasText: /^isInvalid$/ }).click()
   const email = page.getByRole('textbox', { name: 'Email address (required)', exact: true })
   await page.getByRole('button', { name: 'Validate field' }).click()
   await expect(email).toBeFocused()

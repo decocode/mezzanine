@@ -1,14 +1,14 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
 import { pointerRows } from '../../../../components/pointerRows'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
+import { formatJsxElementLines, formatJsxPropLines } from '../../../../components/formatJsxProps'
 
 export const switchContent: DocsPageContent = {
   id: 'switch',
   kind: 'component',
   title: 'Switch',
-  description: '`SwitchField` is a component that turns a setting or feature on or off, with immediate effect.',
+  description: '`Switch` is a component that turns a setting or feature on or off, with immediate effect.',
   sections: [
-    { key: 'example', intro: ['The `SwitchButton` turns on or off from its label, or with the Space key when focused.'] },
+    { key: 'example', intro: ['The `Switch` turns on or off from its label, or with the Space key when focused.'] },
     { key: 'states' },
   ],
   technicalDetails: [
@@ -19,18 +19,16 @@ export const switchContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'SwitchField', description: 'Holds the switch state, its optional description and its error message.' },
-          { name: 'SwitchButton', description: 'The clickable label, with the native input. Mezzanine adds a decorative track and handle internally.' },
-          { name: 'Text', description: 'Optional description, with `slot="description"`.' },
-          { name: 'FieldError', description: 'Optional error message, shown when the field is invalid.' },
+          { name: 'Switch', description: 'Holds the switch state and its validation. Mezzanine draws any error, then the decorative track and handle with the clickable label, then any help text.' },
         ],
       },
     },
     {
       key: 'usage',
       body: [
-        'Put the visible label inside `SwitchButton`, and the `SwitchButton` inside `SwitchField`. Use `defaultSelected` on `SwitchField` for its starting state, or `isSelected` with `onChange` to control it.',
-        '`isDisabled` prevents interaction; `isReadOnly` prevents changes. For forms, give `SwitchField` a `name` and `value`.',
+        'Put the visible label inside `Switch`. Use `defaultSelected` for its starting state, or `isSelected` with `onChange` to control it.',
+        '`description` adds help text under the label, lined up with it. `errorMessage` is the message shown above the switch while it is invalid.',
+        '`isDisabled` prevents interaction; `isReadOnly` prevents changes. For forms, give `Switch` a `name` and `value`.',
       ],
     },
     {
@@ -66,16 +64,23 @@ export const switchStateLabels = {
   disabled: 'Disabled',
 } as const
 
-// The Example's label, and the Properties panel's on/off props, in panel order.
-export const switchExampleLabel = 'Switch label'
-export const switchFlags = ['defaultSelected', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
-export const switchExampleError = 'Switch error message'
+// The Example's text, and the Properties panel's on/off props, in panel order. The error message shows
+// whenever isInvalid is on.
+export const switchExampleText = { label: 'Switch label', description: 'Switch description', errorMessage: 'Switch error message' } as const
+export const switchFlags = ['isInvalid', 'defaultSelected', 'description', 'isReadOnly', 'isDisabled'] as const
 
-export function switchExampleCode({ errorMessage, ...props }: Record<string, unknown>) {
-  return [
-    `<SwitchField${formatJsxProps(props)}>`,
-    `  <SwitchButton>${switchExampleLabel}</SwitchButton>`,
-    ...(errorMessage ? [`  <FieldError>${switchExampleError}</FieldError>`] : []),
-    '</SwitchField>',
-  ].join('\n')
+// The example's props, in panel order, shared by the demo and its code.
+export function switchExampleProps(flags: Record<(typeof switchFlags)[number], boolean>) {
+  return {
+    isInvalid: flags.isInvalid,
+    errorMessage: flags.isInvalid ? switchExampleText.errorMessage : undefined,
+    defaultSelected: flags.defaultSelected,
+    description: flags.description ? switchExampleText.description : undefined,
+    isReadOnly: flags.isReadOnly,
+    isDisabled: flags.isDisabled,
+  }
+}
+
+export function switchExampleCode(flags: Record<(typeof switchFlags)[number], boolean>) {
+  return formatJsxElementLines('Switch', formatJsxPropLines(switchExampleProps(flags)), [switchExampleText.label])
 }

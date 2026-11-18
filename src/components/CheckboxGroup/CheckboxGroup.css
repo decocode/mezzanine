@@ -1,5 +1,5 @@
-/* Follows React Aria's vanilla CheckboxGroup: a label, any help text, the checkboxes, then any error,
-   in one column. It matches RadioGroup's spacing and text. */
+/* Follows React Aria's starter CheckboxGroup: a label, any help text, any error, then the checkboxes, in
+   one column. It matches RadioGroup's spacing and text. */
 .mz-checkbox-group {
   display: grid;
   gap: var(--checkbox-group-gap, var(--space-gap-field));
@@ -40,16 +40,20 @@
   opacity: var(--checkbox-group-opacity-disabled, var(--opacity-disabled));
 }
 
-/* A checkbox's row is a full target tall, with its text centred, so the first checkbox moves up by
-   the room its row adds above the text. The group's label or help text then sits as close to it as a
-   field's label to its input. */
-.mz-checkbox-group > :is(.mz-label, [slot='description']) + :is(.mz-checkbox, .mz-checkbox-field) {
-  margin-block-start: calc((1lh - var(--target-size-sm)) / 2);
+.mz-checkbox-group-options {
+  display: grid;
+  gap: var(--checkbox-group-gap, var(--space-gap-field));
 }
 
-/* After the last checkbox, the error moves up by the room the checkbox's row adds below its text, so it
-   sits as close as a field's error to its input. A checkbox with its own help or error text has no
-   such room. */
-.mz-checkbox-group > .mz-checkbox + .mz-field-error {
-  margin-block-start: calc((var(--line-height-body-md) * var(--font-size-body-md) - var(--target-size-sm)) / 2);
+/* The label, help text and error sit close together as one block of text, and the first box sits
+   space-2 below them, as a field's input does. A checkbox's row is a full target tall with the box
+   centred, so the options move up by the room the row adds above the box. */
+.mz-checkbox-group > .mz-checkbox-group-options:not(:first-child) {
+  margin-block-start: calc(var(--space-2) - var(--checkbox-group-gap, var(--space-gap-field)) - (var(--target-size-sm) - var(--icon-size-sm)) / 2);
+}
+
+@media (forced-colors: active) {
+  .mz-checkbox-group > .mz-field-error {
+    color: Mark;
+  }
 }

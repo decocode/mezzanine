@@ -8,8 +8,8 @@ import { ContentPage } from '../../../../templates/ContentPage'
 const exampleValue = new TokenFieldValue(tokenFieldExampleLabels.tokens.flatMap((token) => [{ type: 'token' as const, text: token }, { type: 'text' as const, text: ' ' }]))
 
 export default function TokenFieldPage() {
-  const [flags, setFlags] = useState<Record<(typeof tokenFieldFlags)[number], boolean>>({ description: false, isDisabled: false, isReadOnly: false })
-  const props = { description: flags.description ? tokenFieldExampleText.description : undefined, isDisabled: flags.isDisabled, isReadOnly: flags.isReadOnly }
+  const [flags, setFlags] = useState<Record<(typeof tokenFieldFlags)[number], boolean>>({ description: false, isReadOnly: false, isDisabled: false })
+  const props = { description: flags.description ? tokenFieldExampleText.description : undefined, isReadOnly: flags.isReadOnly, isDisabled: flags.isDisabled }
   return (
     <ContentPage
       content={tokenFieldContent}

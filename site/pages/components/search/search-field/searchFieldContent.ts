@@ -1,5 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
+import { formatJsxElementLines, formatJsxPropLines } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const searchFieldContent: DocsPageContent = {
@@ -18,18 +18,15 @@ export const searchFieldContent: DocsPageContent = {
         nameColumn: 'Component',
         className: 'documentation-anatomy-table',
         rows: [
-          { name: 'SearchField', description: 'Holds the value. Mezzanine adds a decorative search icon and a clear button internally.' },
-          { name: 'Label', description: 'The visible name. Use `aria-label` on SearchField instead when the purpose is already clear.' },
-          { name: 'Input', description: 'The text box.' },
-          { name: 'Text', description: 'Optional description, with `slot="description"`.' },
-          { name: 'FieldError', description: 'Optional error message, shown when the field is invalid.' },
+          { name: 'SearchField', description: 'Holds the value and its validation. Mezzanine draws the label, help text, error, then the input with a decorative search icon and a clear button.' },
         ],
       },
     },
     {
       key: 'usage',
       body: [
-        'Put a `Label` and an `Input` inside `SearchField`, as with TextField. Use `defaultValue` for a starting value, or `value` with `onChange` to control it. `onSubmit` runs when Enter is pressed.',
+        'Give `SearchField` a `label`, or an `aria-label` when the purpose is already clear. Use `defaultValue` for a starting value, or `value` with `onChange` to control it. `onSubmit` runs when Enter is pressed.',
+        '`description` adds help text and `errorMessage` the message shown when the field is invalid. Both sit under the label, above the input.',
       ],
     },
     {
@@ -57,19 +54,22 @@ export const searchFieldContent: DocsPageContent = {
   ],
 }
 
-// The Example's label and the Properties panel's on/off props, in panel order.
-export const searchFieldExampleLabel = 'Search'
-export const searchFieldFlags = ['description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
-export const searchFieldExampleText = { description: 'Search description', errorMessage: 'Search error message' } as const
+// The Properties panel's switches, in panel order. The error message shows whenever isInvalid is on.
+export const searchFieldFlags = ['description', 'isInvalid', 'isReadOnly', 'isDisabled'] as const
+const searchFieldExampleText = { label: 'Search', description: 'Search description', errorMessage: 'Search error message' } as const
 
-// The example's code: the help text and error message appear as the Text and FieldError they are.
-export function searchFieldExampleCode({ description, hasErrorMessage, ...props }: Record<(typeof searchFieldFlags)[number], boolean> & { hasErrorMessage: boolean }) {
-  return [
-    `<SearchField${formatJsxProps(props)}>`,
-    `  <Label>${searchFieldExampleLabel}</Label>`,
-    '  <Input />',
-    ...(description ? [`  <Text slot="description">${searchFieldExampleText.description}</Text>`] : []),
-    ...(props.isInvalid && hasErrorMessage ? [`  <FieldError>${searchFieldExampleText.errorMessage}</FieldError>`] : []),
-    '</SearchField>',
-  ].join('\n')
+// The example's props, in panel order, shared by the demo and its code.
+export function searchFieldExampleProps(flags: Record<(typeof searchFieldFlags)[number], boolean>) {
+  return {
+    label: searchFieldExampleText.label,
+    description: flags.description ? searchFieldExampleText.description : undefined,
+    isInvalid: flags.isInvalid,
+    errorMessage: flags.isInvalid ? searchFieldExampleText.errorMessage : undefined,
+    isReadOnly: flags.isReadOnly,
+    isDisabled: flags.isDisabled,
+  }
+}
+
+export function searchFieldExampleCode(flags: Record<(typeof searchFieldFlags)[number], boolean>) {
+  return formatJsxElementLines('SearchField', formatJsxPropLines(searchFieldExampleProps(flags)))
 }

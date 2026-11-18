@@ -1,5 +1,6 @@
-/* Follows React Aria's vanilla TagGroup: small tags that wrap onto new lines, each with an optional
-   remove button. A selected tag takes the selected ToggleButton's fill. */
+/* Follows React Aria's starter TagGroup: a label, help text and any error, then small tags that wrap
+   onto new lines, each with an optional remove button. A selected tag takes the selected ToggleButton's
+   fill. */
 .mz-tag-group {
   display: flex;
   flex-direction: column;
@@ -23,7 +24,7 @@
   text-transform: var(--text-transform-label);
 }
 
-.mz-tag-group > :is([slot='description'], [slot='errorMessage'], .mz-field-error) {
+.mz-tag-group > :is([slot='description'], .mz-field-error) {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
@@ -36,8 +37,14 @@
   color: var(--tag-group-description-foreground, var(--color-text-muted));
 }
 
-.mz-tag-group > :is([slot='errorMessage'], .mz-field-error) {
+.mz-tag-group > .mz-field-error {
   color: var(--tag-group-error-foreground, var(--color-danger));
+}
+
+/* The label, help text and error sit close together as one block of text, and the list of tags sits further
+   below them, at space-2, so it reads as separate from the text. */
+.mz-tag-group > .mz-tag-list:not(:first-child) {
+  margin-block-start: calc(var(--space-2) - var(--tag-group-gap, var(--space-gap-field)));
 }
 
 .mz-tag-list {
@@ -135,6 +142,10 @@
 }
 
 @media (forced-colors: active) {
+  .mz-tag-group > .mz-field-error {
+    color: Mark;
+  }
+
   .mz-tag {
     border-color: ButtonText;
   }

@@ -28,24 +28,24 @@ for (const theme of themes) {
   })
 }
 
-// Checks that a checkbox's help text and error message sit under it, lined up with its label text,
-// and that screen readers read both with the checkbox.
-test('checkbox help text and error line up with the label and describe it', async ({ page }) => {
+// Checks that a checkbox's error sits above its box, starting at the same edge, and its help text under
+// it, lined up with its label text, and that screen readers read both with the checkbox.
+test('checkbox error sits above the box and help text lines up with the label', async ({ page }) => {
   await page.goto('/checkbox')
   const demo = page.locator('.docs-page-lead .mz-demo-block')
   const panel = demo.locator('.mz-demo-block-end-panel')
   await panel.locator('label', { hasText: /^description$/ }).click()
   await panel.locator('label', { hasText: /^isInvalid$/ }).click()
-  await panel.locator('label', { hasText: /^errorMessage$/ }).click()
   const content = demo.locator('.mz-demo-block-area')
   const checkbox = content.getByRole('checkbox', { name: 'Checkbox label' })
   await expect(checkbox).toHaveAccessibleDescription('Checkbox description Checkbox error message')
+  await expect(content.locator('.mz-checkbox-field > *')).toHaveClass([/mz-field-error/, /mz-checkbox/, /mz-text/])
   const textStart = async (selector: string) => content.locator(selector).evaluate((element) => {
     const range = document.createRange()
     range.selectNodeContents(element.lastChild ?? element)
     return Math.round(range.getBoundingClientRect().left)
   })
-  const labelStart = await textStart('.mz-checkbox')
-  expect(await textStart('.mz-checkbox-description')).toBe(labelStart)
-  expect(await textStart('.mz-checkbox-error')).toBe(labelStart)
+  const boxStart = await content.locator('.mz-checkbox-indicator').evaluate((element) => Math.round(element.getBoundingClientRect().left))
+  expect(await textStart('.mz-field-error')).toBe(boxStart)
+  expect(await textStart('[slot="description"]')).toBe(await textStart('.mz-checkbox'))
 })

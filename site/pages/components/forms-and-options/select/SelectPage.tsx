@@ -11,20 +11,21 @@ export default function SelectPage() {
   const [hierarchy, setHierarchy] = useState<SelectHierarchy>('primary')
   const [size, setSize] = useState<(typeof selectSizes)[number]>('md')
   const [defaultKey, setDefaultKey] = useState<string | null>(null)
-  const [flags, setFlags] = useState<Record<(typeof selectFlags)[number], boolean>>({ description: false, isDisabled: false, isInvalid: false })
-  const [hasErrorMessage, setHasErrorMessage] = useState(false)
+  const [flags, setFlags] = useState<Record<(typeof selectFlags)[number], boolean>>({ description: false, isInvalid: false, isDisabled: false })
   const [icon, setIcon] = useState(false)
   const [isIconOnly, setIsIconOnly] = useState(false)
-  // errorMessage only shows on an invalid field, so its control appears with isInvalid.
   const fields = {
     size: size === 'md' ? undefined : size,
     description: flags.description ? selectExampleText.description : undefined,
-    isDisabled: flags.isDisabled,
     isInvalid: flags.isInvalid,
-    errorMessage: flags.isInvalid && hasErrorMessage ? selectExampleText.errorMessage : undefined,
+    errorMessage: flags.isInvalid ? selectExampleText.errorMessage : undefined,
     // valuePosition applies once the options have icons, so its control appears with icon.
     valuePosition: icon && isIconOnly ? 'iconOnly' as const : undefined,
+    isDisabled: flags.isDisabled,
   }
+  const panelSwitch = (name: (typeof selectFlags)[number]) => (
+    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+  )
   return (
     <ContentPage
       content={selectContent}
@@ -41,12 +42,13 @@ export default function SelectPage() {
               <Select size="sm" label={selectDefaultKeyLabel} selectedKey={defaultKey ?? selectNoDefaultKey} onSelectionChange={(key) => { if (key != null) setDefaultKey(key === selectNoDefaultKey ? null : String(key)) }}>
                 {[selectNoDefaultKey, ...selectExampleLabels.options].map((option) => <ListBoxItem key={option} id={option}>{option}</ListBoxItem>)}
               </Select>
-              {selectFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
-              ))}
-              {flags.isInvalid && <PanelSwitch isSelected={hasErrorMessage} onChange={setHasErrorMessage}>errorMessage</PanelSwitch>}
+              {/* The field's parts in their own order, then the state that affects the whole field. A field
+                  is either disabled or invalid, so each of those switches hides while the other is on. */}
+              {panelSwitch('description')}
+              {!flags.isDisabled && panelSwitch('isInvalid')}
               <PanelSwitch isSelected={icon} onChange={setIcon}>icon</PanelSwitch>
               {icon && <PanelSwitch isSelected={isIconOnly} onChange={setIsIconOnly}>valuePosition</PanelSwitch>}
+              {!flags.isInvalid && panelSwitch('isDisabled')}
             </>}
           >
             {/* A new key starts the example again, because a default only applies when it first appears. */}

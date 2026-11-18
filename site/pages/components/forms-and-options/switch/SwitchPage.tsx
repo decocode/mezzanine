@@ -1,34 +1,34 @@
 import { useState } from 'react'
-import { Cell, Column, DemoBlock, FieldError, Row, SwitchButton, SwitchField, Table, TableBody, TableHeader } from '@decocode/mezzanine'
+import { Cell, Column, DemoBlock, Row, Switch, Table, TableBody, TableHeader } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
-import { switchContent, switchExampleCode, switchExampleError, switchExampleLabel, switchFlags, switchStateLabels } from './switchContent'
+import { switchContent, switchExampleCode, switchExampleProps, switchExampleText, switchFlags, switchStateLabels } from './switchContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function SwitchPage() {
-  const [flags, setFlags] = useState<Record<(typeof switchFlags)[number], boolean>>({ defaultSelected: false, isDisabled: false, isReadOnly: false, isInvalid: false })
-  const [hasErrorMessage, setHasErrorMessage] = useState(false)
-  // errorMessage only shows on an invalid switch, so its control appears with isInvalid.
-  const showsError = flags.isInvalid && hasErrorMessage
+  const [flags, setFlags] = useState<Record<(typeof switchFlags)[number], boolean>>({ isInvalid: false, defaultSelected: false, description: false, isReadOnly: false, isDisabled: false })
+  const panelSwitch = (name: (typeof switchFlags)[number]) => (
+    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+  )
   return (
     <ContentPage
       content={switchContent}
       parts={{
-        // The Properties panel has a control for each prop that changes what the switch looks like or does.
         example: (
           <DemoBlock
-            codeView={switchExampleCode({ ...flags, errorMessage: showsError })}
+            codeView={switchExampleCode(flags)}
             endPanel={<>
-              {switchFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
-              ))}
-              {flags.isInvalid && <PanelSwitch isSelected={hasErrorMessage} onChange={setHasErrorMessage}>errorMessage</PanelSwitch>}
+              {/* The switch's parts in their own order, top to bottom, then the states that affect the
+                  whole switch. It's either disabled or invalid, so each of those switches hides while the
+                  other is on. */}
+              {!flags.isDisabled && panelSwitch('isInvalid')}
+              {panelSwitch('defaultSelected')}
+              {panelSwitch('description')}
+              {panelSwitch('isReadOnly')}
+              {!flags.isInvalid && panelSwitch('isDisabled')}
             </>}
           >
             {/* A new key starts the example again, because a default only applies when it first appears. */}
-            <SwitchField key={String(flags.defaultSelected)} {...flags}>
-              <SwitchButton>{switchExampleLabel}</SwitchButton>
-              {showsError && <FieldError>{switchExampleError}</FieldError>}
-            </SwitchField>
+            <Switch key={String(flags.defaultSelected)} {...switchExampleProps(flags)}>{switchExampleText.label}</Switch>
           </DemoBlock>
         ),
         states: (
@@ -41,15 +41,15 @@ export default function SwitchPage() {
               <TableBody>
                 <Row id="unselected">
                   <Cell><strong>{switchStateLabels.unselected}</strong></Cell>
-                  <Cell><SwitchField><SwitchButton>Switch</SwitchButton></SwitchField></Cell>
+                  <Cell><Switch>Switch</Switch></Cell>
                 </Row>
                 <Row id="selected">
                   <Cell><strong>{switchStateLabels.selected}</strong></Cell>
-                  <Cell><SwitchField defaultSelected><SwitchButton>Switch</SwitchButton></SwitchField></Cell>
+                  <Cell><Switch defaultSelected>Switch</Switch></Cell>
                 </Row>
                 <Row id="disabled">
                   <Cell><strong>{switchStateLabels.disabled}</strong></Cell>
-                  <Cell><SwitchField isDisabled><SwitchButton>Switch</SwitchButton></SwitchField></Cell>
+                  <Cell><Switch isDisabled>Switch</Switch></Cell>
                 </Row>
               </TableBody>
             </Table>

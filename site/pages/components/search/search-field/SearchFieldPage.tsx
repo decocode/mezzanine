@@ -1,34 +1,31 @@
 import { useState } from 'react'
-import { DemoBlock, FieldError, Input, Label, SearchField, Text } from '@decocode/mezzanine'
+import { DemoBlock, SearchField } from '@decocode/mezzanine'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
-import { searchFieldContent, searchFieldExampleCode, searchFieldExampleLabel, searchFieldExampleText, searchFieldFlags } from './searchFieldContent'
+import { searchFieldContent, searchFieldExampleCode, searchFieldExampleProps, searchFieldFlags } from './searchFieldContent'
 import { ContentPage } from '../../../../templates/ContentPage'
 
 export default function SearchFieldPage() {
-  const [flags, setFlags] = useState<Record<(typeof searchFieldFlags)[number], boolean>>({ description: false, isDisabled: false, isReadOnly: false, isInvalid: false })
-  // errorMessage only shows on an invalid field, so its control appears with isInvalid.
-  const [hasErrorMessage, setHasErrorMessage] = useState(false)
-  const { description, ...props } = flags
+  const [flags, setFlags] = useState<Record<(typeof searchFieldFlags)[number], boolean>>({ description: false, isInvalid: false, isReadOnly: false, isDisabled: false })
+  const panelSwitch = (name: (typeof searchFieldFlags)[number]) => (
+    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+  )
   return (
     <ContentPage
       content={searchFieldContent}
       parts={{
         example: (
           <DemoBlock
-            codeView={searchFieldExampleCode({ ...flags, hasErrorMessage })}
+            codeView={searchFieldExampleCode(flags)}
             endPanel={<>
-              {searchFieldFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
-              ))}
-              {flags.isInvalid && <PanelSwitch isSelected={hasErrorMessage} onChange={setHasErrorMessage}>errorMessage</PanelSwitch>}
+              {/* The field's parts in their own order, then the states that affect the whole field. A
+                  field is either disabled or invalid, so each of those switches hides while the other is on. */}
+              {panelSwitch('description')}
+              {!flags.isDisabled && panelSwitch('isInvalid')}
+              {panelSwitch('isReadOnly')}
+              {!flags.isInvalid && panelSwitch('isDisabled')}
             </>}
           >
-            <SearchField {...props}>
-              <Label>{searchFieldExampleLabel}</Label>
-              <Input />
-              {description && <Text slot="description">{searchFieldExampleText.description}</Text>}
-              {flags.isInvalid && hasErrorMessage && <FieldError>{searchFieldExampleText.errorMessage}</FieldError>}
-            </SearchField>
+            <SearchField {...searchFieldExampleProps(flags)} />
           </DemoBlock>
         ),
       }}

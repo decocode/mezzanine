@@ -19,28 +19,28 @@ import { ChevronDownIcon } from '../../icons/Icons'
 export interface ComboBoxProps<T extends object, M extends 'single' | 'multiple' = 'single'> extends Omit<ReactAriaComboBoxProps<T, M>, 'children'> {
   // The visible label. Without one, give the ComboBox an aria-label.
   label?: ReactNode
-  // Help text under the field.
+  // Help text, under the label.
   description?: ReactNode
-  // The message shown when the field is invalid.
+  // The message shown when the field is invalid. Without one, the browser's own message shows.
   errorMessage?: string | ((validation: ValidationResult) => string)
-  // Placeholder text in the input.
+  // Placeholder text in the input. It doesn't replace a label.
   placeholder?: string
   // ListBoxItems, or a function that renders one for each item.
   children: ReactNode | ((item: T) => ReactNode)
 }
 
-// A text field with a list of suggestions. Mezzanine draws the label, the input with its chevron
-// button, the help and error text, and the list in a Popover, following React Aria's vanilla starter.
+// A text field with a list of suggestions, following React Aria's starter ComboBox. Mezzanine draws the
+// label, help text, error, then the input with its chevron button, and the list in a Popover.
 export function ComboBox<T extends object, M extends 'single' | 'multiple' = 'single'>({ label, description, errorMessage, placeholder, children, ...props }: ComboBoxProps<T, M>) {
   return (
     <ReactAriaComboBox<T, M> {...props} className={composeClassName('mz-combo-box', props.className)}>
       {label != null && <Label>{label}</Label>}
+      {description != null && <Text slot="description">{description}</Text>}
+      <FieldError>{errorMessage}</FieldError>
       <div className="mz-combo-box-field">
         <Input placeholder={placeholder} />
         <Button className="mz-combo-box-trigger"><ChevronDownIcon className="mz-combo-box-chevron" /></Button>
       </div>
-      {description != null && <Text slot="description">{description}</Text>}
-      <FieldError>{errorMessage}</FieldError>
       <Popover>
         <ListBox>{children}</ListBox>
       </Popover>

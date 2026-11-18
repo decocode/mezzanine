@@ -1,5 +1,5 @@
 import type { DocsPageContent } from '../../../../templates/docsPageContent'
-import { formatJsxProps } from '../../../../components/formatJsxProps'
+import { formatJsxElementLines, formatJsxPropLines } from '../../../../components/formatJsxProps'
 import { pointerRows } from '../../../../components/pointerRows'
 
 export const numberFieldContent: DocsPageContent = {
@@ -61,12 +61,12 @@ export const numberFieldContent: DocsPageContent = {
 // The example's label.
 export const numberFieldExampleLabel = 'Number field'
 
-// The Properties panel's choices, and the field's on/off props in panel order. errorMessage appears
-// with isInvalid.
+// The Properties panel's choices, and the field's on/off props in panel order. The error message shows
+// whenever isInvalid is on.
 export const numberFieldSteps = ['1', '5', '10'] as const
 export const numberFieldFormats = ['number', 'percent', 'currency'] as const
 export const numberFieldExampleText = { description: 'Number field description', errorMessage: 'Number field error message' } as const
-export const numberFieldFlags = ['description', 'isDisabled', 'isReadOnly', 'isInvalid'] as const
+export const numberFieldFlags = ['description', 'isInvalid', 'isReadOnly', 'isDisabled'] as const
 
 // The number formats, as Intl.NumberFormat options. A percentage counts in hundredths.
 export const numberFieldFormatOptions = {
@@ -80,7 +80,13 @@ export function numberFieldExampleCode({ step, format, ...props }: { step: numbe
   // A percentage counts in hundredths, as the demo does: 4% is 0.04, and each step is a hundredth.
   const isPercent = format === 'percent'
   const codeStep = isPercent ? step / 100 : step
-  const stepProp = formatJsxProps({ step: codeStep === 1 ? undefined : codeStep, ...props })
-  const formatProp = options ? ` formatOptions={${JSON.stringify(options).replaceAll('"', "'").replaceAll(',', ', ').replaceAll(':', ': ')}}` : ''
-  return `<NumberField label="${numberFieldExampleLabel}" defaultValue={${isPercent ? 0.04 : 4}} minValue={0}${stepProp}${formatProp} />`
+  const formatOptions = options ? [`formatOptions={${JSON.stringify(options).replaceAll('"', "'").replaceAll(',', ', ').replaceAll(':', ': ')}}`] : []
+  return formatJsxElementLines('NumberField', [
+    `label="${numberFieldExampleLabel}"`,
+    `defaultValue={${isPercent ? 0.04 : 4}}`,
+    'minValue={0}',
+    ...(codeStep === 1 ? [] : [`step={${codeStep}}`]),
+    ...formatOptions,
+    ...formatJsxPropLines(props),
+  ])
 }

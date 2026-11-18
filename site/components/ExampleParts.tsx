@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Card, CodeBlock, Heading, Label, RadioButton, RadioField, RadioGroup, SelectionIndicator, Text } from '@decocode/mezzanine'
+import { Card, CodeBlock, Heading, RadioButton, RadioField, RadioGroup, SelectionIndicator, Text } from '@decocode/mezzanine'
 import { RichText } from './RichText'
 
 // The CSS behind an example: plain-English notes and the rules themselves, quoted from the page's
@@ -53,8 +53,7 @@ export function ExampleCard({ title, text = 'Supporting text for the card.', hea
 // A choice of one CSS value for an example, such as position: sticky, as a radio group in a DemoBlock's
 // Properties panel: the options stack in a short list that fits the narrow panel, all visible at once.
 export function PanelPicker<Value extends string>({ label, options, value, onChange }: { label: string; options: readonly { label: string; value: Value }[]; value: Value; onChange: (value: Value) => void }) {
-  return <RadioGroup value={value} onChange={(next) => { const option = options.find((item) => item.value === next); if (option) onChange(option.value) }}>
-    <Label>{label}</Label>
+  return <RadioGroup label={label} value={value} onChange={(next) => { const option = options.find((item) => item.value === next); if (option) onChange(option.value) }}>
     {options.map((option) => <RadioField key={option.value} value={option.value}>
       <RadioButton><SelectionIndicator />{option.label}</RadioButton>
     </RadioField>)}

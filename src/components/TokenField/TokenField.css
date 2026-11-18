@@ -1,4 +1,4 @@
-/* Follows React Aria's vanilla TokenField: an editable area with the text field's look, holding
+/* Follows React Aria's starter TokenField: an editable area with the text field's look, holding
    tokens among its text. */
 .mz-token-field {
   display: flex;
@@ -23,21 +23,20 @@
   text-transform: var(--text-transform-label);
 }
 
-.mz-token-field > :is([slot='description'], [slot='errorMessage'], .mz-field-error) {
+.mz-token-field > [slot='description'] {
   font-family: var(--font-family-body);
   font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-regular);
   letter-spacing: var(--letter-spacing-body);
   line-height: var(--line-height-body-sm);
   text-transform: var(--text-transform-body);
-}
-
-.mz-token-field > [slot='description'] {
   color: var(--token-field-description-foreground, var(--color-text-muted));
 }
 
-.mz-token-field > :is([slot='errorMessage'], .mz-field-error) {
-  color: var(--token-field-error-foreground, var(--color-danger));
+/* The label and help text sit close together as one block of text, and the input sits further below
+   them, at space-2, so it reads as separate from the text. */
+.mz-token-field > .mz-token-input:not(:first-child) {
+  margin-block-start: calc(var(--space-2) - var(--token-field-gap, var(--space-gap-field)));
 }
 
 .mz-token-input {

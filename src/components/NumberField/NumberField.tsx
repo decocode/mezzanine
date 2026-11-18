@@ -16,27 +16,27 @@ import { MinusIcon, PlusIcon } from '../../icons/Icons'
 export interface NumberFieldProps extends Omit<ReactAriaNumberFieldProps, 'children'> {
   // The visible label. Without one, give the NumberField an aria-label.
   label?: ReactNode
-  // Help text under the field.
+  // Help text, under the label.
   description?: ReactNode
-  // The message shown when the field is invalid.
+  // The message shown when the field is invalid. Without one, the browser's own message shows.
   errorMessage?: string | ((validation: ValidationResult) => string)
-  // Placeholder text in the input.
+  // Placeholder text in the input. It doesn't replace a label.
   placeholder?: string
 }
 
-// A field for a number. Mezzanine draws the label, the input joined to its minus and plus buttons, and
-// the help and error text, following React Aria's vanilla starter.
+// A field for a number, following React Aria's starter NumberField. Mezzanine draws the label, help text,
+// error, then the input joined to its minus and plus buttons.
 export function NumberField({ label, description, errorMessage, placeholder, ...props }: NumberFieldProps) {
   return (
     <ReactAriaNumberField {...props} className={composeClassName('mz-number-field', props.className)}>
       {label != null && <Label>{label}</Label>}
+      {description != null && <Text slot="description">{description}</Text>}
+      <FieldError>{errorMessage}</FieldError>
       <Group className="mz-number-field-group">
         <Input placeholder={placeholder} />
         <Button slot="decrement" className="mz-number-field-step"><MinusIcon className="mz-number-field-step-icon" /></Button>
         <Button slot="increment" className="mz-number-field-step"><PlusIcon className="mz-number-field-step-icon" /></Button>
       </Group>
-      {description != null && <Text slot="description">{description}</Text>}
-      <FieldError>{errorMessage}</FieldError>
     </ReactAriaNumberField>
   )
 }

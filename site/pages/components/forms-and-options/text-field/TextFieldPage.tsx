@@ -1,4 +1,4 @@
-import { Button, DemoBlock, FieldError, Form, Input, Label, Text, TextField } from '@decocode/mezzanine'
+import { Button, DemoBlock, Form, TextField } from '@decocode/mezzanine'
 import { useState } from 'react'
 import { PanelSelect } from '../../../../components/PanelSelect'
 import { PanelSwitch } from '../../../../components/PanelSwitch'
@@ -14,30 +14,37 @@ export default function TextFieldPage() {
   const [flags, setFlags] = useState<Record<(typeof textFieldFlags)[number], boolean>>({
     placeholder: true, description: true, isDisabled: false, isReadOnly: false, isInvalid: false,
   })
-  const [hasErrorMessage, setHasErrorMessage] = useState(false)
   const [validationBehavior, setValidationBehavior] = useState<(typeof textFieldValidationBehaviors)[number]>('native')
 
+  const panelSwitch = (name: (typeof textFieldFlags)[number]) => (
+    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+  )
   return (
     <ContentPage
       content={textFieldContent}
       parts={{
         example: (
           <DemoBlock
-            codeView={textFieldExampleCode({ type, flags, hasErrorMessage })}
+            codeView={textFieldExampleCode({ type, flags })}
             endPanel={<>
+              {/* The field's kind first, then its parts in their own order, top to bottom: help text, error,
+                  then the box. The states that affect the whole field come last. A field is either disabled or invalid, so each of
+                  those switches hides while the other is on. */}
               <PanelSelect label="type" options={textFieldTypes} value={type} onChange={setType} />
-              {textFieldFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
-              ))}
-              {flags.isInvalid && <PanelSwitch isSelected={hasErrorMessage} onChange={setHasErrorMessage}>errorMessage</PanelSwitch>}
+              {panelSwitch('description')}
+              {!flags.isDisabled && panelSwitch('isInvalid')}
+              {panelSwitch('placeholder')}
+              {panelSwitch('isReadOnly')}
+              {!flags.isInvalid && panelSwitch('isDisabled')}
             </>}
           >
-            <TextField type={type} isDisabled={flags.isDisabled} isReadOnly={flags.isReadOnly} isInvalid={flags.isInvalid} validationBehavior="aria" value={value} onChange={setValue}>
-              <Label>{textFieldExampleText.label}</Label>
-              <Input placeholder={flags.placeholder ? textFieldExampleText.placeholder : undefined} />
-              {flags.description && <Text slot="description">{textFieldExampleText.description}</Text>}
-              {flags.isInvalid && hasErrorMessage && <FieldError>{textFieldExampleText.errorMessage}</FieldError>}
-            </TextField>
+            <TextField
+              label={textFieldExampleText.label}
+              description={flags.description ? textFieldExampleText.description : undefined}
+              errorMessage={flags.isInvalid ? textFieldExampleText.errorMessage : undefined}
+              placeholder={flags.placeholder ? textFieldExampleText.placeholder : undefined}
+              type={type} isDisabled={flags.isDisabled} isReadOnly={flags.isReadOnly} isInvalid={flags.isInvalid} validationBehavior="aria" value={value} onChange={setValue}
+            />
             <p>Current value: {value || 'Empty'}</p>
           </DemoBlock>
         ),
@@ -48,12 +55,11 @@ export default function TextFieldPage() {
           >
             {/* A new key starts the form again, so a change of behaviour clears its errors. */}
             <Form key={validationBehavior} validationBehavior={validationBehavior} onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}>
-              <TextField name="email" type="email" isRequired onChange={() => setSubmitted(false)}>
-                <Label>Email address (required)</Label>
-                <Input autoComplete="email" />
-                <Text slot="description">Enter an address such as name@example.com.</Text>
-                <FieldError />
-              </TextField>
+              <TextField
+                label="Email address (required)"
+                description="Enter an address such as name@example.com."
+                name="email" type="email" autoComplete="email" isRequired onChange={() => setSubmitted(false)}
+              />
               <p><Button type="submit">Validate field</Button></p>
               <p role="status">{submitted ? 'The email address passed validation.' : ''}</p>
             </Form>

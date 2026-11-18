@@ -1,51 +1,43 @@
-import { useId, type ReactNode } from 'react'
-import { composeRenderProps } from 'react-aria-components'
+import type { ReactNode } from 'react'
+import { composeRenderProps, type ValidationResult } from 'react-aria-components'
 import { composeClassName } from '../composeClassName'
 import {
-  Checkbox as ReactAriaCheckbox,
-  type CheckboxProps as ReactAriaCheckboxProps,
+  CheckboxButton as ReactAriaCheckboxButton,
+  CheckboxField as ReactAriaCheckboxField,
+  type CheckboxButtonProps,
+  type CheckboxFieldProps,
 } from 'react-aria-components/Checkbox'
+import { FieldError } from '../FieldError/FieldError'
+import { Text } from '../Text/Text'
 import { CheckIcon, MinusIcon } from '../../icons/Icons'
 
-export interface CheckboxProps extends ReactAriaCheckboxProps {
-  // Help text shown under the checkbox, as a Switch's description is. Screen readers read it with the
-  // checkbox.
+export interface CheckboxProps extends Omit<CheckboxFieldProps, 'children'> {
+  // The label beside the box.
+  children?: CheckboxButtonProps['children']
+  // Help text, under the label and lined up with it.
   description?: ReactNode
-  // The message shown under the checkbox when it's invalid, after any help text. Screen readers read it
-  // with the checkbox.
-  errorMessage?: ReactNode
+  // The message shown above the box when it's invalid. Without one, the browser's own message shows.
+  errorMessage?: string | ((validation: ValidationResult) => string)
 }
 
-export function Checkbox({ children, className, description, errorMessage, ...checkboxProps }: CheckboxProps) {
-  const descriptionId = useId()
-  const errorId = useId()
-  const showsDescription = description != null
-  const showsError = checkboxProps.isInvalid === true && errorMessage != null
-  const describedBy = [checkboxProps['aria-describedby'], showsDescription ? descriptionId : undefined, showsError ? errorId : undefined].filter(Boolean).join(' ') || undefined
-  const checkbox = (
-    <ReactAriaCheckbox
-      {...checkboxProps}
-      aria-describedby={describedBy}
-      className={composeClassName('mz-checkbox', className)}
-    >
-      {composeRenderProps(children, (resolvedChildren, { isIndeterminate, isSelected }) => (
-        <>
-          <span aria-hidden="true" className="mz-checkbox-indicator">
-            {isIndeterminate && <MinusIcon />}
-            {!isIndeterminate && isSelected && <CheckIcon />}
-          </span>
-          {resolvedChildren}
-        </>
-      ))}
-    </ReactAriaCheckbox>
-  )
-  if (!showsDescription && !showsError) return checkbox
-  // The help text and message sit outside the checkbox's label, so they aren't part of its name.
+// A checkbox, following React Aria's starter Checkbox. Mezzanine draws any error above the box, so it's
+// read before the choice, then the box with its label, then any help text under the label.
+export function Checkbox({ children, description, errorMessage, ...props }: CheckboxProps) {
   return (
-    <div className="mz-checkbox-field">
-      {checkbox}
-      {showsDescription && <span className="mz-checkbox-description" id={descriptionId}>{description}</span>}
-      {showsError && <span className="mz-checkbox-error" id={errorId}>{errorMessage}</span>}
-    </div>
+    <ReactAriaCheckboxField {...props} className={composeClassName('mz-checkbox-field', props.className)}>
+      <FieldError>{errorMessage}</FieldError>
+      <ReactAriaCheckboxButton className="mz-checkbox">
+        {composeRenderProps(children, (resolvedChildren, { isIndeterminate, isSelected }) => (
+          <>
+            <span aria-hidden="true" className="mz-checkbox-indicator">
+              {isIndeterminate && <MinusIcon />}
+              {!isIndeterminate && isSelected && <CheckIcon />}
+            </span>
+            {resolvedChildren}
+          </>
+        ))}
+      </ReactAriaCheckboxButton>
+      {description != null && <Text slot="description">{description}</Text>}
+    </ReactAriaCheckboxField>
   )
 }

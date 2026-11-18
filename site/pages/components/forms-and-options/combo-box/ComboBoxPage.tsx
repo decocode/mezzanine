@@ -8,17 +8,19 @@ import { ContentPage } from '../../../../templates/ContentPage'
 export default function ComboBoxPage() {
   const [menuTrigger, setMenuTrigger] = useState<(typeof comboBoxMenuTriggers)[number]>('input')
   const [defaultKey, setDefaultKey] = useState<(typeof comboBoxExampleLabels.options)[number] | null>(null)
-  const [flags, setFlags] = useState<Record<(typeof comboBoxFlags)[number], boolean>>({ description: false, isDisabled: false, isReadOnly: false, isInvalid: false })
-  const [hasErrorMessage, setHasErrorMessage] = useState(false)
+  const [flags, setFlags] = useState<Record<(typeof comboBoxFlags)[number], boolean>>({ description: false, isInvalid: false, isReadOnly: false, isDisabled: false })
   const props = {
     menuTrigger: menuTrigger === 'input' ? undefined : menuTrigger,
     defaultSelectedKey: defaultKey ?? undefined,
     description: flags.description ? comboBoxExampleText.description : undefined,
-    isDisabled: flags.isDisabled,
-    isReadOnly: flags.isReadOnly,
     isInvalid: flags.isInvalid,
-    errorMessage: flags.isInvalid && hasErrorMessage ? comboBoxExampleText.errorMessage : undefined,
+    errorMessage: flags.isInvalid ? comboBoxExampleText.errorMessage : undefined,
+    isReadOnly: flags.isReadOnly,
+    isDisabled: flags.isDisabled,
   }
+  const panelSwitch = (name: (typeof comboBoxFlags)[number]) => (
+    <PanelSwitch isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
+  )
   return (
     <ContentPage
       content={comboBoxContent}
@@ -29,10 +31,12 @@ export default function ComboBoxPage() {
             endPanel={<>
               <PanelSelect label="menuTrigger" options={comboBoxMenuTriggers} value={menuTrigger} onChange={setMenuTrigger} />
               <PanelSelect label="defaultSelectedKey" options={comboBoxExampleLabels.options} value={defaultKey} onChange={setDefaultKey} />
-              {comboBoxFlags.map((name) => (
-                <PanelSwitch key={name} isSelected={flags[name]} onChange={(isSelected) => setFlags({ ...flags, [name]: isSelected })}>{name}</PanelSwitch>
-              ))}
-              {flags.isInvalid && <PanelSwitch isSelected={hasErrorMessage} onChange={setHasErrorMessage}>errorMessage</PanelSwitch>}
+              {/* The field's parts in their own order, then the states that affect the whole field. A
+                  field is either disabled or invalid, so each of those switches hides while the other is on. */}
+              {panelSwitch('description')}
+              {!flags.isDisabled && panelSwitch('isInvalid')}
+              {panelSwitch('isReadOnly')}
+              {!flags.isInvalid && panelSwitch('isDisabled')}
             </>}
           >
             {/* A new key starts the example again, because a default only applies when it first appears. */}

@@ -2890,10 +2890,6 @@ export const componentPointers: Record<string, readonly { name: string; fallback
       "fallback": "var(--color-text-muted)"
     },
     {
-      "name": "--token-field-error-foreground",
-      "fallback": "var(--color-danger)"
-    },
-    {
       "name": "--token-field-gap",
       "fallback": "var(--space-gap-field)"
     },

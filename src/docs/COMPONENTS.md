@@ -183,12 +183,41 @@ so icon buttons keep their label as their accessible name (Button's
 when motion is reduced. The API follows the
 [React Aria Tooltip](https://react-aria.adobe.com/Tooltip).
 
+## Fields
+
+Every field draws its own parts, following React Aria's starter: a `label`, an
+optional `description` and an `errorMessage`, then the control. TextField,
+TextArea, SearchField, NumberField, Select, ComboBox, TokenField, TagGroup,
+CheckboxGroup and RadioGroup lay them out in this order: label, help text,
+error, then the control, so people read the help and any error before they
+answer. The text sits close together at the field gap, and the control sits
+`space-2` below it.
+
+`errorMessage` shows only while the field is invalid, from `isInvalid` or from
+rules such as `isRequired` or `validate`. It can be text, or a function of the
+validation result. Without one, the browser's own message shows. The error and
+the control's border use the danger color.
+
+`Checkbox` and `Switch` take their label as children, beside the control. Their
+error sits above the control, starting at the same edge, and their help text
+sits under the label, lined up with it.
+
+React Aria's TagGroup has no validation, so its `errorMessage` shows whenever
+it's given. Slider has no error state, because it always has a value; DropZone
+isn't a form field; TokenField has none until React Aria adds validation.
+`Input` and `FieldError` stay exported for building a field of your own.
+
+```tsx
+<TextField label="Email" description="We reply to this address." errorMessage="Enter an email address" isRequired />
+<Switch description="Uses more battery.">Wi-Fi</Switch>
+```
+
 ## SearchField, ListBox and Autocomplete
 
-`SearchField` follows TextField: supply a `Label` (or `aria-label`) and an
-`Input`. The field adds its search icon and a clear button. React Aria names the
-clear button, keeps it out of the Tab order, and clears the field when it or
-Escape is pressed.
+`SearchField` is a field like TextField: give it a `label` (or an `aria-label`).
+It adds its search icon and a clear button. React Aria names the clear button,
+keeps it out of the Tab order, and clears the field when it or Escape is
+pressed.
 
 `ListBox` shows a vertical list of `ListBoxItem` options, optionally grouped in
 `ListBoxSection` with a `Header`. Put `Text slot="label"` and
@@ -202,7 +231,7 @@ Focus stays in the field while the arrow keys move through the options:
 const { contains } = useFilter({ sensitivity: 'base' })
 
 <Autocomplete filter={contains}>
-  <SearchField aria-label="Search"><Input /></SearchField>
+  <SearchField aria-label="Search" />
   <ListBox aria-label="Results" renderEmptyState={() => 'No results'}>
     <ListBoxItem href="/page-a">Page A</ListBoxItem>
   </ListBox>
@@ -284,21 +313,18 @@ Panel opens as a modal drawer instead, end Panels first. A drawer only opens
 when someone opens it. `bottomPanelSpan="full"` runs a bottom Panel under the
 side Panels too.
 
-## SwitchField and SwitchButton
+## Switch
 
-Put the visible label inside `SwitchButton`, and the `SwitchButton` inside
-`SwitchField`. The SwitchButton draws the track and handle itself. Set
-`defaultSelected`, or `isSelected` with `onChange`, on the SwitchField. A
-`Text slot="description"` and a `FieldError` can follow the SwitchButton.
+Put the visible label inside `Switch`; it draws the track and handle itself.
+Set `defaultSelected`, or `isSelected` with `onChange`. Like React Aria's starter
+Switch, it's built from React Aria's `SwitchField` and `SwitchButton`, which
+replaced React Aria's one-part `Switch` in 1.22.
 
 ```tsx
-<SwitchField defaultSelected>
-  <SwitchButton>Switch A</SwitchButton>
-</SwitchField>
+<Switch defaultSelected>Switch A</Switch>
 ```
 
-React Aria 1.22 deprecated its one-part `Switch`, so Mezzanine doesn't export
-it. The APIs follow [React Aria Switch](https://react-aria.adobe.com/Switch).
+The APIs follow [React Aria Switch](https://react-aria.adobe.com/Switch).
 
 ## Alert
 
@@ -347,9 +373,8 @@ shows and screen readers hear. Without a visible `label`, give each an
 
 ## Select and ComboBox
 
-Both draw their own field, following React Aria's starter: pass a `label`, an
-optional `description` and `errorMessage`, and `ListBoxItem`s as children (or
-`items` with a render function). `Select` shows a trigger with the chosen option
+Both are fields: pass a `label`, an optional `description` and `errorMessage`,
+and `ListBoxItem`s as children (or `items` with a render function). `Select` shows a trigger with the chosen option
 and a chevron; `ComboBox` is a text field with a chevron button, filtering its
 options as people type. Their lists open in a `Popover` at least as wide as the field. `Select`'s
 `hierarchy` sets how much its chevron area stands out: `primary` fills it with
@@ -370,8 +395,8 @@ placed by `tooltipPosition`.
 
 ## NumberField, TagGroup and TokenField
 
-These also draw their own field, with a `label` and optional `description` (and
-`errorMessage` for NumberField and TagGroup). `NumberField` joins its input to
+These are fields too, with a `label`, an optional `description`, and an
+`errorMessage` on NumberField and TagGroup. `NumberField` joins its input to
 minus and plus buttons. `TagGroup` takes `Tag`s as children; `selectionMode`
 lets people choose them, and `onRemove` adds a remove button to each.
 `TokenField` takes a function that renders a `Token` for each token in its
@@ -454,7 +479,7 @@ take its theme. `align` sets where the demo sits: `center`, the default,
 `stretch` for demos that fill the width, such as tables and code, or `start`.
 
 ```tsx
-<DemoBlock endPanel={<SwitchField><SwitchButton>Disable</SwitchButton></SwitchField>}>
+<DemoBlock endPanel={<Switch>Disable</Switch>}>
   <Button>Button A</Button>
 </DemoBlock>
 ```

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import {
-  Autocomplete, Dialog, DialogTrigger, Header, Input, ListBox, ListBoxItem, ListBoxSection,
+  Autocomplete, Dialog, DialogTrigger, Header, ListBox, ListBoxItem, ListBoxSection,
   Modal, ModalOverlay, SearchField, SearchTrigger, Text, useFilter,
 } from '@decocode/mezzanine'
 import { isSearchShortcut, type SearchSection } from './siteSearchLogic'
@@ -30,9 +30,7 @@ export function SiteSearch({ sections }: { sections: readonly SearchSection[] })
         <Modal>
           <Dialog aria-label="Search" className="site-search-dialog">
             <Autocomplete filter={contains}>
-              <SearchField aria-label="Search" autoFocus>
-                <Input />
-              </SearchField>
+              <SearchField aria-label="Search" autoFocus />
               <ListBox aria-label="Results" renderEmptyState={() => 'No results'}>
                 {sections.map(section => (
                   <ListBoxSection key={section.id} id={section.id}>
